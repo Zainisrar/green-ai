@@ -1,0 +1,849 @@
+/* Home Page - D6 */
+.home-page-d6 {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  background: #F5F5F5;
+  overflow: visible;
+}
+
+/* Layer ordering */
+.home-page-d6 [class^="vector-"] {
+  z-index: 1;
+}
+
+.home-page-d6 [class*="image-"],
+.home-page-d6 [class*="-image"],
+.home-page-d6 .dji-0444,
+.home-page-d6 .dji-0870,
+.home-page-d6 .img-20241019 {
+  z-index: 2;
+}
+
+.home-page-d6 h2,
+.home-page-d6 p,
+.home-page-d6 [class*="element-"],
+.home-page-d6 nav,
+.home-page-d6 [class*="green-"],
+.home-page-d6 [class*="frame-"],
+.home-page-d6 [class*="group-"],
+.home-page-d6 [class*="rectangle-"],
+.home-page-d6 [class*="arrow-"],
+.home-page-d6 [class*="lets-"],
+.home-page-d6 [class*="company-"],
+.home-page-d6 [class*="renewable-"],
+.home-page-d6 [class*="products-"],
+.home-page-d6 [class*="epc-"],
+.home-page-d6 [class*="projects-"] {
+  z-index: 10;
+}
+
+/* Mask group */
+.mask-group {
+  position: absolute;
+  width: 847px;
+  height: 970px;
+  left: 936px;
+  top: 0px;
+}
+
+
+/* Vector 7349 */
+.vector-7349 {
+  position: absolute;
+  width: 847px;
+  height: 970px;
+  left: 936px;
+  top: 0px;
+  background: #D9D9D9;
+  z-index: 1;
+}
+
+/* IMG-20241019-WA0018 (1) 1 */
+.img-20241019 {
+  position: absolute;
+  width: 2120px;
+  height: 1006px;
+  left: 383px;
+  top: -364px;
+  background: url('/images/home/IMG-20241019-WA0018 (1) 1.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 2;
+}
+
+/* WhatsApp Image 2023-10-12 at 9.08.49 AM (6) 1 */
+.whatsapp-image-2023 {
+  position: absolute;
+  width: 1297px;
+  height: 973px;
+  left: 569px;
+  top: -1px;
+  background: linear-gradient(39.95deg, rgba(35, 209, 75, 0.608) 24.12%, rgba(0, 0, 0, 0.16) 68.16%, rgba(255, 229, 0, 0.464) 79.45%), url('/images/home/WhatsApp Image 2023-10-12 at 9.08.49 AM (6) 1.png');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Group 2 */
+.group-2 {
+  position: absolute;
+  width: 1021.22px;
+  height: 976px;
+  left: 85.12px;
+  top: -2px;
+}
+
+/* Mask group (duplicate) */
+.mask-group-duplicate {
+  position: absolute;
+  width: 1021.22px;
+  height: 976px;
+  left: 85.12px;
+  top: -2px;
+}
+
+/* Vector 7345 */
+.vector-7345 {
+  position: absolute;
+  width: 1021.22px;
+  height: 976px;
+  left: 85.12px;
+  top: -2px;
+  background: #23B14D;
+  z-index: 1;
+}
+
+/* DJI_0444 1 */
+.dji-0444 {
+  position: absolute;
+  width: 1134px;
+  height: 1135px;
+  left: -84px;
+  top: -2px;
+  background: url('/images/home/DJI_0444 1.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 2;
+}
+
+/* Frame 685 */
+.frame-685 {
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 20px;
+  position: absolute;
+  width: 358.26px;
+  height: 110px;
+  left: 400.67px;
+  top: 446px;
+}
+
+/* Renewables: Providing cleaner energy to our world. Renewable energy is at the core of the solutions we provide to address our clients' varied requirements. Thus, sustaiablity assured, the green way! */
+.renewables-desc {
+  width: 358.26px;
+  height: 110px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 13px;
+  line-height: 22px;
+  /* or 169% */
+  color: #FFFFFF;
+  text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+/* Renewable Energy The Core */
+.renewable-energy-core {
+  position: absolute;
+  width: 454px;
+  height: 98px;
+  left: 400.67px;
+  top: calc(50% - 98px/2 - 103px);
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 49px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+/* Products and Solutions */
+.products-solutions {
+  position: absolute;
+  width: 213px;
+  height: 108px;
+  left: 927px;
+  top: 365px;
+  font-family: 'Montserrat';
+  font-style: italic;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 36px;
+  /* or 112% */
+  color: #FFFFFF;
+  text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Frame 1171277904 */
+.frame-1171277904 {
+  position: absolute;
+  width: 827px;
+  height: 969px;
+  left: 569px;
+  top: -1px;
+}
+
+/* Group 1171276627 */
+.group-1171276627 {
+  position: absolute;
+  width: 827px;
+  height: 969px;
+  left: 0px;
+  top: 0px;
+}
+
+/* Mask group */
+.mask-group-3 {
+  position: absolute;
+  width: 827px;
+  height: 969px;
+  left: 0px;
+  top: 0px;
+}
+
+/* Vector 7347 */
+.vector-7347 {
+  position: absolute;
+  width: 827px;
+  height: 969px;
+  left: 0px;
+  top: 0px;
+  background: #D9D9D9;
+  z-index: 1;
+}
+
+/* DJI_0870 1 */
+.dji-0870 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 2627.13px;
+  height: 1477.76px;
+  left: -1611.48px;
+  top: -810.78px;
+  background: url('/images/home/DJI_0870 1.png');
+  background-size: cover;
+  background-position: center;
+  transform: rotate(23.16deg);
+  z-index: 2;
+}
+
+/* 3_E */
+.element-3-e {
+  position: absolute;
+  width: 193px;
+  height: 144px;
+  left: calc(50% - 193px/2 - 89px);
+  top: calc(50% - 144px/2 + 191.5px);
+  background: #FFFFFF;
+  box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Products and Solutions */
+.products-solutions-2 {
+  position: absolute;
+  width: 213px;
+  height: 108px;
+  left: 358px;
+  top: 366px;
+  font-family: 'Montserrat';
+  font-style: italic;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 36px;
+  /* or 112% */
+  color: #FFFFFF;
+  text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Group 1171276628 */
+.group-1171276628 {
+  position: absolute;
+  width: 336px;
+  height: 383px;
+  left: 1159px;
+  top: 365px;
+}
+
+/* 4_E */
+.element-4-e {
+  position: absolute;
+  width: 194px;
+  height: 145px;
+  left: calc(50% - 194px/2 + 296px);
+  top: calc(50% - 145px/2 + 190.5px);
+  background: #FFFFFF;
+  box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* EPC Energy Services */
+.epc-energy-services {
+  position: absolute;
+  width: 221px;
+  height: 108px;
+  left: 1274px;
+  top: 365px;
+  font-family: 'Montserrat';
+  font-style: italic;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 36px;
+  /* or 112% */
+  color: #FFFFFF;
+  text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Group 1171276629 */
+.group-1171276629 {
+  position: absolute;
+  width: 827px;
+  height: 972px;
+  left: 1316px;
+  top: 1px;
+}
+
+/* Mask group */
+.mask-group-4 {
+  position: absolute;
+  width: 827px;
+  height: 972px;
+  left: 1316px;
+  top: 1px;
+}
+
+/* Vector 7350 */
+.vector-7350 {
+  position: absolute;
+  width: 827px;
+  height: 972px;
+  left: 1316px;
+  top: 1px;
+  background: #D9D9D9;
+  border: 1px solid #000000;
+}
+
+/* 2149675040 1 */
+.image-2149675040 {
+  position: absolute;
+  width: 696px;
+  height: 1007px;
+  left: 1265px;
+  top: 1px;
+  background: url('/images/home/2149675040 1.png');
+  background-size: cover;
+  background-position: center;
+}
+
+/* WhatsApp Image 2025-01-11 at 1.57.04 PM 1 */
+.whatsapp-image-2025 {
+  position: absolute;
+  visibility: hidden;
+  width: 2560px;
+  height: 1440px;
+  left: 620px;
+  top: -400px;
+  background: linear-gradient(39.31deg, rgba(35, 209, 75, 0.608) 20.72%, rgba(0, 0, 0, 0.16) 48.04%, rgba(255, 229, 0, 0.464) 60.03%);
+}
+
+/* 5_N */
+.element-5-n {
+  position: absolute;
+  width: 218px;
+  height: 144px;
+  left: calc(50% - 218px/2 + 692px);
+  top: calc(50% - 144px/2 + 193px);
+  background: #FFFFFF;
+  box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Projects and Services */
+.projects-and-services {
+  position: absolute;
+  width: 221px;
+  height: 108px;
+  left: 1648px;
+  top: 369px;
+  font-family: 'Montserrat';
+  font-style: italic;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 36px;
+  /* or 112% */
+  color: #FFFFFF;
+  text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Group 1171276626 */
+.group-1171276626 {
+  position: absolute;
+  width: 828px;
+  height: 978.11px;
+  left: -282.37px;
+  top: 0px;
+}
+
+/* Mask group */
+.mask-group-5 {
+  position: absolute;
+  width: 828px;
+  height: 978.11px;
+  left: -282.37px;
+  top: 0px;
+}
+
+/* Vector 7348 */
+.vector-7348 {
+  position: absolute;
+  width: 828px;
+  height: 978.11px;
+  left: -282.37px;
+  top: 0px;
+  background: #D9D9D9;
+}
+
+/* 20240416_202146 1 */
+.image-20240416 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 4096px;
+  height: 3072px;
+  left: -2299.37px;
+  top: -1086px;
+  background: url('/images/home/20240416_202146 1.png');
+  background-size: cover;
+  background-position: center;
+}
+
+/* darmau-hYfOeNvDXWg-unsplash 1 */
+.image-darmau {
+  position: absolute;
+  width: 2779px;
+  height: 1852px;
+  left: -1686.37px;
+  top: -228px;
+  background: url('/images/home/darmau-hYfOeNvDXWg-unsplash 1.png');
+  background-size: cover;
+  background-position: center;
+}
+
+/* download (1) 1 */
+.image-download {
+  position: absolute;
+  width: 1024px;
+  height: 1024px;
+  left: -282.37px;
+  top: -32px;
+  background: url('/images/home/download (1) 1.png');
+  background-size: cover;
+  background-position: center;
+}
+
+/* gREEN Future envisionEd */
+.green-future-envisioned {
+  position: absolute;
+  width: 247.23px;
+  height: 108px;
+  left: 51.17px;
+  top: 372px;
+  font-family: 'Montserrat';
+  font-style: italic;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 36px;
+  /* or 112% */
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Vector 7351 */
+.vector-7351 {
+  position: absolute;
+  width: 478px;
+  height: 968.5px;
+  left: 1305px;
+  top: 1px;
+  background: #464444;
+}
+
+/* Vector 7352 */
+.vector-7352 {
+  position: absolute;
+  width: 478px;
+  height: 968.5px;
+  left: 920px;
+  top: 1px;
+  background: #464444;
+}
+
+/* Vector 7353 */
+.vector-7353 {
+  position: absolute;
+  width: 478px;
+  height: 968.5px;
+  left: 558px;
+  top: 1px;
+  background: #464444;
+}
+
+/* Vector 7354 */
+.vector-7354 {
+  position: absolute;
+  width: 478px;
+  height: 968.5px;
+  left: 71.63px;
+  top: 2px;
+  background: #464444;
+}
+
+/* 2_R */
+.element-2-r {
+  position: absolute;
+  width: 207px;
+  height: 144px;
+  left: calc(50% - 207px/2 - 477.48px);
+  top: calc(50% - 144px/2 + 190px);
+  background: #FFFFFF;
+  box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* 1_G */
+.element-1-g {
+  position: absolute;
+  width: 204px;
+  height: 152px;
+  left: calc(50% - 204px/2 - 858px);
+  top: calc(50% - 152px/2 + 194px);
+  background: #FFFFFF;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Rectangle 34624681 */
+.rectangle-34624681 {
+  position: absolute;
+  width: 319.77px;
+  height: 668.01px;
+  left: -60.62px;
+  top: -160.8px;
+  background: linear-gradient(69.29deg, rgba(255, 229, 0, 0.623) -78.63%, rgba(35, 209, 75, 0.21) 238.3%);
+  box-shadow: 0px 0px 36px rgba(0, 0, 0, 0.1);
+}
+
+/* Group 1171280893 */
+.group-1171280893 {
+  position: absolute;
+  width: 107px;
+  height: 66px;
+  left: 1786px;
+  top: 818px;
+}
+
+/* company Snapshots IN 90 SEC */
+.company-snapshots {
+  position: absolute;
+  width: 106px;
+  height: 59px;
+  left: 1787px;
+  top: 825px;
+  font-family: 'Montserrat';
+  font-style: italic;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
+  text-transform: uppercase;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  color: #000000;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Arrow 1 */
+.arrow-1 {
+  box-sizing: border-box;
+  position: absolute;
+  width: 92.01px;
+  height: 0px;
+  left: 1786px;
+  top: 818px;
+  border: 2px solid #23B14D;
+  transform: rotate(-0.62deg);
+}
+
+/* Group 1171276641 */
+.group-1171276641 {
+  position: absolute;
+  width: 418px;
+  height: 62px;
+  left: 1498px;
+  top: 899px;
+}
+
+/* Vector 7367 */
+.vector-7367 {
+  position: absolute;
+  width: 272px;
+  height: 52px;
+  left: 1599px;
+  top: 899px;
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 4px 4px 20px rgba(255, 229, 0, 0.89);
+  backdrop-filter: blur(7.5px);
+  /* Note: backdrop-filter has minimal browser support */
+}
+
+/* Vector 7366 */
+.vector-7366 {
+  position: absolute;
+  width: 418px;
+  height: 52px;
+  left: 1498px;
+  top: 899px;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 4px 4px 20px rgba(93, 223, 60, 0.25);
+  backdrop-filter: blur(7.5px);
+  /* Note: backdrop-filter has minimal browser support */
+}
+
+/* Let's Talk Energy */
+.lets-talk-energy {
+  position: absolute;
+  width: 159px;
+  height: 57px;
+  left: 1527px;
+  top: 904px;
+  font-family: 'Montserrat';
+  font-style: italic;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 40px;
+  /* or 308% */
+  text-align: center;
+  color: #717171;
+}
+
+/* Vector (Stroke) */
+.vector-stroke {
+  position: absolute;
+  width: 18px;
+  height: 23px;
+  left: 1862px;
+  top: 913px;
+  background: #C7C3C3;
+  transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+/* Component 530 */
+.component-530 {
+  position: absolute;
+  visibility: hidden;
+  width: 644px;
+  height: 1081px;
+  left: 1277px;
+  top: -242px;
+}
+
+/* GREEN Logo - High 5 */
+.green-logo-high {
+  position: absolute;
+  width: 235px;
+  height: 68px;
+  left: 25px;
+  top: 25px;
+  background: url('/images/home/GREEN Logo - High 5.png');
+}
+
+/* Component */
+.component {
+  position: absolute;
+  width: 1668px;
+  height: 116px;
+  left: 262px;
+  top: 0px;
+}
+
+/* Vector 7362 */
+.vector-7362 {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+}
+
+/* Group 1171277911 */
+.group-1171277911 {
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  left: 1574px;
+  top: 16px;
+}
+
+/* Rectangle 34624747 */
+.rectangle-34624747 {
+  position: absolute;
+  width: 81px;
+  height: 83px;
+  left: 1576px;
+  top: 18px;
+}
+
+/* bolt 1 */
+.bolt-1 {
+  position: absolute;
+  height: 85px;
+  left: 94.36%;
+  right: 0.54%;
+  top: 16px;
+  background: url('/images/heroSection/lighting.svg');
+}
+
+/* Frame 1171277914 */
+.frame-1171277914 {
+  /* Auto layout */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 30px;
+  position: absolute;
+  left: 48.8%;
+  right: 5.22%;
+  top: 40.52%;
+  bottom: 40.52%;
+}
+
+/* Explore */
+.nav-explore {
+  width: 97px;
+  height: 24px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  text-transform: uppercase;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  color: #303030;
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+/* Energy */
+.nav-energy {
+  width: 86px;
+  height: 24px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  text-transform: uppercase;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  color: #303030;
+  /* Inside auto layout */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+/* Elements */
+.nav-elements {
+  width: 112px;
+  height: 24px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  text-transform: uppercase;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  color: #303030;
+  /* Inside auto layout */
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
+/* Expertise */
+.nav-expertise {
+  width: 153px;
+  height: 37px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  text-transform: uppercase;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  color: #303030;
+  /* Inside auto layout */
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+}
+
+/* Projects */
+.nav-projects {
+  width: 51px;
+  height: 19px;
+  /* Inside auto layout */
+  flex: none;
+  order: 4;
+  flex-grow: 0;
+}
+
+/* Enlist */
+.nav-enlist {
+  position: absolute;
+  width: 72px;
+  height: 24px;
+  left: -36px;
+  top: 0px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  text-transform: uppercase;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  color: #303030;
+}
+
+/* Engage */
+.nav-engage {
+  width: 89px;
+  height: 24px;
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  text-transform: uppercase;
+  font-feature-settings: 'pnum' on, 'lnum' on;
+  color: #303030;
+  /* Inside auto layout */
+  flex: none;
+  order: 5;
+  flex-grow: 0;
+}
