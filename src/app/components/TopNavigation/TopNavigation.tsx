@@ -102,7 +102,7 @@ const TopNavigation = () => {
                 <img
                   src="/images/heroSection/logo.png"
                   alt="logo"
-                  className="md:w-40 lg:w-64  pt-4"
+                  className="md:w-52 lg:w-80  pt-4"
                 />
               </a>
             </div>

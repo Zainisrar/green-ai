@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { notFound } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import Chatbot from "../Chatbot";
 import ProductNavigation from "../TopNavigation/ProductNavigation";
 import { useProductBySlug } from "../../../hooks/useProducts";
@@ -10,6 +10,7 @@ interface ProductProps {
 }
 
 const Product = ({ slug }: ProductProps) => {
+  const router = useRouter();
   const { data: currentProduct, isLoading, isError } = useProductBySlug(slug);
   const [active, setActive] = React.useState(0);
   const [isDesktop, setIsDesktop] = React.useState(false);
@@ -23,10 +24,22 @@ const Product = ({ slug }: ProductProps) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Deliver Cloudinary images optimized + right-sized so they stay crisp.
+  // f_auto = best format, q_auto = smart quality, c_limit/w = downscale to the
+  // display size (never upscales past the source) at 2x for retina sharpness.
+  const optimizeImage = (url: string, width: number) => {
+    if (!url?.includes("/upload/")) return url;
+    return url.replace(
+      "/upload/",
+      `/upload/f_auto,q_auto,c_limit,w_${width},dpr_2.0/`
+    );
+  };
+
   // Transform API images to match component structure
   const activeImg = currentProduct?.imgs?.map((img: any, index: number) => ({
     id: index + 1,
-    imgSrc: img.src,
+    imgSrc: optimizeImage(img.src, 600),
+    thumbSrc: optimizeImage(img.src, 160),
     altText: img.alt || `Product View ${index + 1}`,
   }));
 
@@ -93,12 +106,7 @@ const Product = ({ slug }: ProductProps) => {
             {/* Left Column - Product Showcase */}
             <div className="lg:w-1/2">
               {/* Main Product Image */}
-              <div className="lg:mb-6">
-                {/* <img
-                  src="/images/product/featuredProduct1.png"
-                  alt="Solar Kit Components"
-                  className="w-full max-w-lg"
-                /> */}
+              <div className="lg:mb-6 flex items-center justify-center">
                 <img
                   src={
                     // @ts-expect-error
@@ -108,7 +116,7 @@ const Product = ({ slug }: ProductProps) => {
                     // @ts-expect-error
                     activeImg[active].altText
                   }
-                  className="w-full h-full lg:max-w-lg"
+                  className="w-full h-auto object-contain max-h-[420px] lg:max-w-lg"
                 />
               </div>
 
@@ -119,12 +127,12 @@ const Product = ({ slug }: ProductProps) => {
                   activeImg.map((img, index) => (
                     <img
                       key={img.id}
-                      src={img.imgSrc}
+                      src={img.thumbSrc}
                       alt={img.altText}
-                      className={`lg:w-20 w-12 aspect-square lg:h-20 rounded-md cursor-pointer ${
+                      className={`lg:w-20 w-12 aspect-square lg:h-20 rounded-md object-cover cursor-pointer transition-opacity ${
                         active === index
-                          ? "border-2 border-[#23B14D]"
-                          : "opacity-70"
+                          ? "border-2 border-[#23B14D] opacity-100"
+                          : "opacity-70 hover:opacity-100"
                       }`}
                       onClick={() => handleImageClick(index)}
                     />
@@ -133,21 +141,26 @@ const Product = ({ slug }: ProductProps) => {
               </div>
 
               {/* Enquiry Button */}
-              <div className="cursor-pointer flex justify-end lg:w-[71%]">
-                {currentProduct?.ctaButton ? (
-                  <button
-                    className=" cursor-pointer"
-                    onClick={() => {
-                      if (currentProduct.ctaButton.href) {
-                        window.open(currentProduct.ctaButton.href, "_blank");
-                      }
-                    }}
-                  >
-                    <img src="/images/product/enquiry.png" alt="Enquiry" />
-                  </button>
-                ) : (
-                  <img src="/images/product/enquiry.png" alt="Enquiry" />
-                )}
+              <div className="flex justify-end lg:w-[71%]">
+                <button
+                  type="button"
+                  className="cursor-pointer"
+                  onClick={() => {
+                    const href = currentProduct?.ctaButton?.href;
+                    if (href) {
+                      // External/explicit CMS link opens in a new tab.
+                      window.open(href, "_blank");
+                    } else {
+                      // No CMS link yet — route to the contact page so it never dead-clicks.
+                      router.push("/engage/contact-us");
+                    }
+                  }}
+                >
+                  <img
+                    src="/images/product/enquiry.png"
+                    alt={currentProduct?.ctaButton?.text || "Enquiry"}
+                  />
+                </button>
               </div>
             </div>
 
@@ -159,11 +172,10 @@ const Product = ({ slug }: ProductProps) => {
                   style={{
                     transform:"skewX(-12deg)"
                   }}
-                  className="text-xl ml-20 mt-4   lg:max-w-xs lg:ml-32 lg:text-3xl  lg:tracking-wider lg:leading-10  lg:leading-auto font-bold text-gray-800 mb-2 lg:mb-4">
-                    {/* {currentProduct?.title}  */}
-                    Lighting Up <br /> and Lifting Up <br /> Living Standards
+                  className="text-xl mt-4 text-center lg:text-left lg:max-w-xs lg:ml-32 lg:text-3xl  lg:tracking-wider lg:leading-10 font-bold text-gray-800 mb-2 lg:mb-4">
+                    {currentProduct?.title}
                   </h3>
-                  <p className="text-gray-600 text-sm lg:block hidden px-16  lg:text-xl">
+                  <p className="text-gray-600 text-sm text-center lg:text-left px-4 lg:px-16 lg:text-xl">
                     {currentProduct?.description ||
                       "To lift up living standards sustainably, it is crucial to invest in infrastructure that supports a better quality of life."}
                   </p>
@@ -180,13 +192,16 @@ const Product = ({ slug }: ProductProps) => {
                    style={{
                   transform:isDesktop?"skewX(16deg)":"none"
                 }}
-                  className="grid grid-cols-3 text-center lg:text-left lg:flex  space-x-8 space-y-8 justify-center  lg:flex-wrap  text-xs">
+                  className="grid grid-cols-3 gap-4 text-center text-xs lg:flex lg:flex-wrap lg:justify-start lg:gap-6 lg:text-left">
                     {currentProduct?.keys.map((key: any, index: number) => (
-                      <div key={index} className="flex flex-col items-center">
+                      <div
+                        key={index}
+                        className="flex flex-col items-center lg:items-start lg:w-28"
+                      >
                         <img
                           src={key.icon.src}
                           alt={key.icon.alt}
-                          className="w-24  mb-2"
+                          className="w-14 lg:w-24 mb-2"
                         />
                         <p className="font-semibold">{key.title}</p>
                         <p className="text-gray-600">{key.description}</p>

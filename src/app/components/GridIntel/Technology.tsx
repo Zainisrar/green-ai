@@ -110,7 +110,7 @@ const Technology = ({
     <>
       {/* Title Section */}
       <div className="mb-8">
-        <h2 className="text-3xl font-black text-gray-800 mb-4">
+        <h2 className="text-3xl lg:text-4xl font-black text-gray-800 mb-4 leading-tight">
           {data?.title || "Technology Stack Overview"}
         </h2>
         <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
@@ -204,7 +204,7 @@ const Technology = ({
             {/* Modal Content */}
             <div
              style={{
-              transform:"skewX(6deg)"
+              transform:"skewX(12deg)"
              }}
             className="transform  max-w-5xl mx-auto">
               {renderContent()}

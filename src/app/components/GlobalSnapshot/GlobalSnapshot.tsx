@@ -153,7 +153,7 @@ const GlobalSnapshot = () => {
       <div className="relative z-[99999999999999999999]  ">
       <TopNavigation />
         {/* Background Image */}
-        <div className="absolute top-0  left-4/12">
+        <div className="absolute top-0 left-1/3 -z-10 hidden lg:block pointer-events-none">
           <img
             src="/images/global-snapshot/mainImg.png"
             className="h-[70vh]"
@@ -205,15 +205,14 @@ const GlobalSnapshot = () => {
 
           {/* Explore Button */}
           <div className="flex justify-center mb-6">
-            <Link href={ctaButtons[0]?.link || "#"} className="relative ">
+            <Link href={ctaButtons[0]?.link || "#"} className="relative inline-block">
               <img
                 src="/images/global-snapshot/exploreBtn.png"
                 alt="explore"
-                className="w-32"
+                className="w-40"
               />
-              <div className="absolute top-2 left-6 font-bold">
-                {ctaButtons[0]?.text || "Explore More"}
-                {" >"}
+              <div className="absolute inset-0 flex items-center justify-center px-3 font-bold text-sm whitespace-nowrap">
+                {(ctaButtons[0]?.text || "Explore More") + " >"}
               </div>
             </Link>
           </div>
@@ -341,26 +340,30 @@ const GlobalSnapshot = () => {
 
           {/* Bottom Buttons */}
           <div className="mb-20 flex flex-col items-center space-y-8">
-            <Link href={ctaButtons[1]?.link || "#"} className=" relative ">
+            <Link
+              href={ctaButtons[1]?.link || "#"}
+              className="relative inline-block w-full max-w-[300px]"
+            >
               <img
                 src="/images/global-snapshot/consulation.png"
                 alt="consultation"
-                // className="w-20"
+                className="w-full"
               />
-              <div className=" absolute top-3 font-bold text-xl  left-8">
+              <div className="absolute inset-0 flex items-center justify-center px-4 font-bold text-sm sm:text-base whitespace-nowrap">
                 {ctaButtons[1]?.text || "Request a Consultation"} {">"}
               </div>
             </Link>
-            <Link href={ctaButtons[2]?.link || "#"} className=" relative "
+            <Link
+              href={ctaButtons[2]?.link || "#"}
+              className="relative inline-block w-full max-w-[340px]"
             >
               <img
                 src="/images/global-snapshot/globalprojectportfolioBtn.png"
                 alt="project portfolio"
-                // className="w-20"
+                className="w-full"
               />
-              <div className=" absolute top-3 font-bold text-lg  left-6">
-                {ctaButtons[2]?.text || "View Global Project Portfolio"}{" "}
-
+              <div className="absolute inset-0 flex items-center justify-center px-4 font-bold text-sm sm:text-base whitespace-nowrap">
+                {ctaButtons[2]?.text || "View Global Project Portfolio"} {">"}
               </div>
             </Link>
           </div>
@@ -380,10 +383,10 @@ const GlobalSnapshot = () => {
           </div>
 
           {/* Main Content Area */}
-          <div className="flex flex-col w-full lg:w-auto">
+          <div className="flex flex-col flex-1 min-w-0 px-10 2xl:px-16 pb-24">
             {/* Header Section */}
-            <div className="mb-8 pl-20">
-              <h1 className="text-2xl lg:text-3xl">
+            <div className="mb-8">
+              <h1 className="text-3xl 2xl:text-4xl">
                 <span className="text-[#23B14D] font-black">
                   {title.highlight}
                 </span>{" "}
@@ -392,23 +395,25 @@ const GlobalSnapshot = () => {
                 </span>
               </h1>
 
-              <p className="text-[#23B14D]">{subtitle}</p>
-              <h2 className="my-2 text-2xl font-bold">{headline}</h2>
-              <p className="text-gray-600 text-sm">{description.join(" ")}</p>
+              <p className="text-[#23B14D] mt-1">{subtitle}</p>
+              <h2 className="my-2 text-2xl 2xl:text-3xl font-bold">{headline}</h2>
+              <p className="text-gray-600 text-sm max-w-3xl">
+                {description.join(" ")}
+              </p>
             </div>
 
-            <div className="lg:flex relative z-50">
+            <div className="relative z-50">
               <div className="w-full space-y-6">
-                <div className="grid grid-cols-[1fr_2fr]">
-                  <div className="space-y-4 lg:my-4 lg:ml-10">
+                <div className="grid grid-cols-[1fr_2fr] gap-6">
+                  <div className="space-y-4 my-4 min-w-0">
                     {points.map((item, index) => {
                       return (
                         <div
                           key={item.id}
                           className={`flex items-center space-x-4 ${
-                            index == 1 ? "-ml-12" : ""
-                          } ${index == 2 ? "-ml-20" : ""} ${
-                            index == 3 ? "-ml-28" : ""
+                            index == 1 ? "2xl:-ml-12" : ""
+                          } ${index == 2 ? "2xl:-ml-20" : ""} ${
+                            index == 3 ? "2xl:-ml-28" : ""
                           }`}
                         >
                           <div>
@@ -431,49 +436,49 @@ const GlobalSnapshot = () => {
                     })}
                     <Link
                       href={ctaButtons[0]?.link || "#"}
-                      className="my-4 relative  cursor-pointer "
+                      className="my-4 relative inline-block cursor-pointer"
                     >
                       <img
                         src="/images/global-snapshot/exploreBtn.png"
                         alt="explore"
-                        className="w-38 lg:w-auto"
+                        className="w-auto"
                       />
-                      <div className="absolute top-3  left-10 font-bold text-xl">
+                      <div className="absolute inset-0 flex items-center justify-center px-4 font-bold text-base lg:text-lg whitespace-nowrap">
                         {(ctaButtons[0]?.text || "Explore More") + " >"}
                       </div>
                     </Link>
                   </div>
-                  <div className="flex flex-col">
-                    <div className="flex my-6 relative">
+                  <div className="flex flex-col min-w-0">
+                    <div className="flex my-6 relative items-center">
                       <img
-                        className="ml-0"
+                        className="ml-0 flex-shrink-0 w-12 2xl:w-auto"
                         src="/images/global-snapshot/sh1.png"
                         alt="shape"
                       />
-                      <div className="text-lg capitalize font-bold">
+                      <div className="text-base 2xl:text-lg capitalize font-bold">
                         {highlightLines.map((line, index) => (
                           <p key={index}>{line}</p>
                         ))}
                       </div>
                       <img
-                        className="-ml-8"
+                        className="-ml-8 flex-shrink-0 w-12 2xl:w-auto"
                         src="/images/global-snapshot/sh2.png"
                         alt="shape"
                       />
                     </div>
-                    <div className="m-8 mx-20">
-                      <div className="text-[#23B14D] md:text-xl 2xl:text-3xl font-black italic">
+                    <div className="my-6 2xl:mx-12">
+                      <div className="text-[#23B14D] text-xl 2xl:text-3xl font-black italic">
                         {locationsSection?.title || "Global Delivery Sites"}
                       </div>
                       {locations.map((location, index) => (
                         <div
                           key={index}
-                          className={`md:text-xl 2xl:text-3xl font-bold text-gray-800 italic ${
+                          className={`text-xl 2xl:text-3xl font-bold text-gray-800 italic ${
                             index === 0
-                              ? "lg:-ml-4 2xl:-ml-10"
+                              ? "2xl:-ml-10"
                               : index === 1
-                              ? "lg:-ml-6 2xl:-ml-12"
-                              : "lg:-ml-8 2xl:-ml-14"
+                              ? "2xl:-ml-12"
+                              : "2xl:-ml-14"
                           }`}
                         >
                           {location}
@@ -483,8 +488,8 @@ const GlobalSnapshot = () => {
                   </div>
                 </div>
               </div>
-              <div className="-mt-20">
-                <div className="font-semibold italic text-gray-800">
+              <div className="mt-10">
+                <div className="font-semibold italic text-gray-800 text-lg mb-4">
                   {frameworkSection?.title ? (
                     <>
                       The{" "}
@@ -509,18 +514,22 @@ const GlobalSnapshot = () => {
                         key={index}
                         className={`flex space-x-4 items-center ${
                           index === 1
-                            ? "lg:-ml-4 2xl:-ml-6"
+                            ? "2xl:-ml-6"
                             : index === 2
-                            ? "lg:-ml-6 2xl:-ml-8"
+                            ? "2xl:-ml-8"
                             : index === 3
-                            ? "lg:-ml-8 2xl:-ml-10"
+                            ? "2xl:-ml-10"
                             : index === 4
-                            ? "lg:-ml-10 2xl:-ml-14"
+                            ? "2xl:-ml-14"
                             : ""
                         }`}
                       >
                         <div>
-                          <img src={feature.icon.src} alt={feature.icon.alt} />
+                          <img
+                            src={feature.icon.src}
+                            alt={feature.icon.alt}
+                            className="w-6 flex-shrink-0"
+                          />
                         </div>
                         <div>{feature.text}</div>
                       </div>
@@ -533,6 +542,7 @@ const GlobalSnapshot = () => {
                           <img
                             src="/images/global-snapshot/lighting.png"
                             alt="spark"
+                            className="w-6 flex-shrink-0"
                           />
                         </div>
                         <div>
@@ -540,11 +550,12 @@ const GlobalSnapshot = () => {
                           commissioning.
                         </div>
                       </div>
-                      <div className="flex lg:-ml-4 2xl:-ml-6 space-x-4 items-center">
+                      <div className="flex 2xl:-ml-6 space-x-4 items-center">
                         <div>
                           <img
                             src="/images/global-snapshot/lighting.png"
                             alt="spark"
+                            className="w-6 flex-shrink-0"
                           />
                         </div>
                         <div>
@@ -552,11 +563,12 @@ const GlobalSnapshot = () => {
                           engineered for deployment in weeks.
                         </div>
                       </div>
-                      <div className="flex lg:-ml-6 2xl:-ml-8 space-x-4 items-center">
+                      <div className="flex 2xl:-ml-8 space-x-4 items-center">
                         <div>
                           <img
                             src="/images/global-snapshot/lighting.png"
                             alt="spark"
+                            className="w-6 flex-shrink-0"
                           />
                         </div>
                         <div>
@@ -564,11 +576,12 @@ const GlobalSnapshot = () => {
                           networks.
                         </div>
                       </div>
-                      <div className="flex lg:-ml-8 2xl:-ml-10 space-x-4 items-center">
+                      <div className="flex 2xl:-ml-10 space-x-4 items-center">
                         <div>
                           <img
                             src="/images/global-snapshot/lighting.png"
                             alt="spark"
+                            className="w-6 flex-shrink-0"
                           />
                         </div>
                         <div>
@@ -576,11 +589,12 @@ const GlobalSnapshot = () => {
                           long-term asset performance.
                         </div>
                       </div>
-                      <div className="flex lg:-ml-10 2xl:-ml-14 space-x-4 items-center">
+                      <div className="flex 2xl:-ml-14 space-x-4 items-center">
                         <div>
                           <img
                             src="/images/global-snapshot/lighting.png"
                             alt="spark"
+                            className="w-6 flex-shrink-0"
                           />
                         </div>
                         <div>
@@ -595,33 +609,35 @@ const GlobalSnapshot = () => {
             </div>
 
             {/* Desktop Bottom Content */}
-            <div className="flex justify-center relative z-50 -mt-24 ml-10">
-              <div className="w-[400px]">{locationDescription}</div>
+            <div className="relative z-50 mt-12 ml-10">
+              <div className="max-w-xl text-sm text-gray-700 leading-relaxed">
+                {locationDescription}
+              </div>
             </div>
 
-            <div className="absolute bottom-24 right-10 space-y-8 z-50">
+            <div className="mt-10 mr-10 flex flex-col items-end space-y-8 z-50">
               <Link
                 href={ctaButtons[1]?.link || "#"}
-                className="flex relative justify-end cursor-pointer"
+                className="relative inline-block cursor-pointer"
               >
                 <img
                   src="/images/global-snapshot/consulation.png"
                   alt="consultation"
                 />
-                <div className="absolute top-3 text-lg font-bold left-24">
+                <div className="absolute inset-0 flex items-center justify-center px-6 text-base lg:text-lg font-bold whitespace-nowrap">
                   {ctaButtons[1]?.text || "Request a Consultation"} {` >`}
                 </div>
               </Link>
               <Link
                 href={ctaButtons[2]?.link || "#"}
-                className="flex relative justify-end cursor-pointer"
+                className="relative inline-block cursor-pointer"
               >
                 <img
                   src="/images/global-snapshot/globalprojectportfolioBtn.png"
                   alt="project portfolio"
                 />
-                <div className="absolute top-3  font-black left-4 ">
-                  {ctaButtons[2]?.text || "View Global Project Portfolio"}
+                <div className="absolute inset-0 flex items-center justify-center px-6 text-base lg:text-lg font-bold whitespace-nowrap">
+                  {ctaButtons[2]?.text || "View Global Project Portfolio"} {` >`}
                 </div>
               </Link>
             </div>

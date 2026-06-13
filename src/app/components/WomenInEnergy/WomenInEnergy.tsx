@@ -130,7 +130,7 @@ const WomenInEnergy = () => {
                 className="w-[250px] relative cursor-pointer"
                 onClick={() => setOpenModal("whyThisMatters")}
               >
-                <h3 className="text-lg font-bold flex justify-center">
+                <h3 className="text-lg lg:text-xl font-bold flex justify-center">
                   {data.modal.whyThisMatters.title}
                 </h3>
                 <div>
@@ -171,7 +171,7 @@ const WomenInEnergy = () => {
                 className="w-[250px] relative cursor-pointer"
                 onClick={() => setOpenModal("initiativesUnderway")}
               >
-                <h3 className="text-lg font-bold flex justify-center">
+                <h3 className="text-lg lg:text-xl font-bold flex justify-center">
                   {data.modal.initiativesUnderway.title}
                 </h3>
                 <div>
@@ -212,7 +212,7 @@ const WomenInEnergy = () => {
                 className="w-[250px] relative cursor-pointer"
                 onClick={() => setOpenModal("voicesOfPower")}
               >
-                <h3 className="text-lg font-bold flex justify-center">
+                <h3 className="text-lg lg:text-xl font-bold flex justify-center">
                   {data.modal.voicesOfPower.title}
                 </h3>
                 <div>
@@ -253,7 +253,7 @@ const WomenInEnergy = () => {
                 className="w-[250px] relative cursor-pointer"
                 onClick={() => setOpenModal("partnerWithUs")}
               >
-                <h3 className="text-lg font-bold flex justify-center">
+                <h3 className="text-lg lg:text-xl font-bold flex justify-center">
                   {data.modal.partnerWithUs.title}
                 </h3>
                 <div>

@@ -22,13 +22,17 @@ const page = () => {
   });
 
   const slides = insightsData?.data?.map((item: Insight) => {
-    // Generate slug from headline (lowercase, replace spaces with hyphens, remove special chars)
-    const slug = item.headline
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .trim();
+    // The detail route slug comes from the API-provided "Read more" link
+    // (e.g. "/insights/solar-mining"), which matches the insight-details slugs.
+    // Fall back to a headline-derived slug if no insights link is present.
+    const slug = item.cta1?.link?.includes('/insights/')
+      ? item.cta1.link.split('/insights/')[1]
+      : item.headline
+          .toLowerCase()
+          .replace(/[^a-z0-9\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-')
+          .trim();
 
     return {
       slug, // Add slug to slide data

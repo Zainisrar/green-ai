@@ -107,7 +107,7 @@ const CollaborationInnovation = () => {
                   </div>
                   <div>
                     {quote0 ? (
-                      <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                         "{quote0.text.split(quote0.highlighted)[0]}
                         <span className="text-[#23B14D]">
                           {quote0.highlighted}
@@ -115,7 +115,7 @@ const CollaborationInnovation = () => {
                         {quote0.text.split(quote0.highlighted)[1]}"
                       </h3>
                     ) : (
-                      <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                         "OPEN CALL: Tech Startups for Tropicalized{" "}
                         <span className="text-[#23B14D]">BESS 2025</span>"
                       </h3>
@@ -218,7 +218,7 @@ const CollaborationInnovation = () => {
                 style={{
                   transform:"skewX(16deg)"
                 }}
-                className="text-lg font-bold text-gray-800 mb-4">
+                className="text-lg lg:text-xl font-bold text-gray-800 mb-4">
                   {spotlight?.title || "Innovation Spotlight"}
                 </h3>
                 <img
@@ -260,7 +260,7 @@ const CollaborationInnovation = () => {
                   </div>
                   <div>
                     {quote1 ? (
-                      <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                         "{quote1.text.split(quote1.highlighted)[0]}
                         <span className="text-[#23B14D]">
                           {quote1.highlighted}
@@ -268,7 +268,7 @@ const CollaborationInnovation = () => {
                         {quote1.text.split(quote1.highlighted)[1]}"
                       </h3>
                     ) : (
-                      <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                         "OPEN CALL: Tech Startups for Tropicalized{" "}
                         <span className="text-[#23B14D]">BESS 2025</span>"
                       </h3>

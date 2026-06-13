@@ -80,7 +80,7 @@ const Navigation = ({ isOpen, onClose,
           return isHighlighted ? (
             <span
               key={index}
-              className="text-green-600 font-semibold not-italic capitalize"
+              className="text-[#23B14D] font-semibold not-italic capitalize"
             >
               {part}
             </span>
@@ -109,20 +109,40 @@ const currentPath = usePathname();
       return (
         <li key={item.id}>
           {hasChildren ? (
-            <div 
-              onClick={() => handleItemClick(item)}
-              className={`font-semibold flex justify-between items-center text-sm lg:text-lg capitalize cursor-pointer transition-colors ${
-                isSelected ? 'text-green-600' : 'text-gray-800 hover:text-green-600'
+            <div
+              className={`font-semibold flex justify-between items-center text-sm lg:text-lg capitalize transition-colors ${
+                isSelected || isCurrentPath ? 'text-[#23B14D]' : 'text-gray-800'
               }`}
             >
-              <span>{item.name}</span>
-              <span className="ml-2">›</span>
+              {item.slug ? (
+                <a
+                  href={item.slug}
+                  className="flex-1 cursor-pointer hover:text-[#23B14D]"
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <span
+                  onClick={() => handleItemClick(item)}
+                  className="flex-1 cursor-pointer hover:text-[#23B14D]"
+                >
+                  {item.name}
+                </span>
+              )}
+              <button
+                type="button"
+                aria-label={`Show ${item.name} items`}
+                onClick={() => handleItemClick(item)}
+                className="ml-2 cursor-pointer hover:text-[#23B14D]"
+              >
+                ›
+              </button>
             </div>
           ) : (
             <a
               href={item.slug}
-              className={`font-semibold transition-colors block text-sm lg:text-lg hover:text-green-600 capitalize ${
-                isCurrentPath ? 'text-green-600' : 'text-gray-800'
+              className={`font-semibold transition-colors block text-sm lg:text-lg hover:text-[#23B14D] capitalize ${
+                isCurrentPath ? 'text-[#23B14D]' : 'text-gray-800'
               }`}
             >
               {item.name}
@@ -143,8 +163,8 @@ const currentPath = usePathname();
         <li key={item.id}>
           <a
             href={item.slug}
-            className={`transition-colors block font-semibold text-sm lg:text-base hover:text-green-600 capitalize ${
-              isCurrentPath ? 'text-green-600' : 'text-gray-800'
+            className={`transition-colors block font-semibold text-sm lg:text-base hover:text-[#23B14D] capitalize ${
+              isCurrentPath ? 'text-[#23B14D]' : 'text-gray-800'
             }`}
           >
             {item.name}
@@ -171,10 +191,23 @@ const currentPath = usePathname();
           <div className="flex-1 flex">
             {/* Left Column - Sub Navigation Items and Image */}
             <div className="flex-1 p-4 pt-16 overflow-y-auto">
-              <div className="border-r-2 border-green-500 pr-4 mb-6">
+              <div className="border-r-2 border-[#23B14D] pr-4 mb-6">
                 {selectedParent ? (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedParent(null)}
+                      className="mb-3 flex items-center gap-1 text-sm font-semibold text-[#23B14D] cursor-pointer"
+                    >
+                      ‹ Back
+                    </button>
+                    <ul className="space-y-3 text-base">
+                      {renderSubNavigationItems()}
+                    </ul>
+                  </>
+                ) : activeSection?.children && activeSection.children.length > 0 ? (
                   <ul className="space-y-3 text-base">
-                    {renderSubNavigationItems()}
+                    {renderMainNavigationItems(activeSection.children)}
                   </ul>
                 ) : (
                   <p className="text-gray-500 text-sm italic">Select an item to view details</p>
@@ -215,11 +248,14 @@ const currentPath = usePathname();
                   {[...navigationData].sort((a, b) => a.id - b.id).map((section) => (
                     <button
                       key={section.id}
-                      onClick={() => setActiveSection(section)}
+                      onClick={() => {
+                        setActiveSection(section);
+                        setSelectedParent(null);
+                      }}
                       className={`block text-left text-sm cursor-pointer font-bold transition-colors w-full ${
                         activeSection?.id === section.id
-                          ? "text-green-600"
-                          : "text-gray-800 hover:text-green-600"
+                          ? "text-[#23B14D]"
+                          : "text-gray-800 hover:text-[#23B14D]"
                       }`}
                     >
                       {section.name}
@@ -251,19 +287,19 @@ const currentPath = usePathname();
         {/* Desktop Layout */}
         <div className="h-full hidden md:flex">
           {/* Left section - Sub-items and Image */}
-          <div className="flex-1 p-16 relative overflow-y-auto">
+          <div className="flex-1 p-12 flex flex-col overflow-y-auto overflow-x-hidden">
             <div className="flex gap-6 mb-8">
               {/* Left side - Image */}
-              <div className="w-80">
+              <div className="w-56 shrink-0">
                 {/* Image with green vertical line */}
                 {featuredChild?.image && (
-                  <div className="w-72 h-44 relative mb-12">
+                  <div className="w-full h-44 relative mb-10">
                     <img
                       src={featuredChild.image.src}
                       alt={featuredChild.image.alt}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute -right-3 top-0 w-1 h-full bg-green-500"></div>
+                    <div className="absolute -right-3 top-0 w-1 h-full bg-[#23B14D]"></div>
                   </div>
                 )}
 
@@ -278,8 +314,8 @@ const currentPath = usePathname();
               </div>
 
               {/* Right side - Main menu items */}
-              <div className="flex-1 pt-2">
-                <ul className="space-y-5 text-lg">
+              <div className="flex-1 min-w-0 pt-2">
+                <ul className="space-y-5 text-base lg:text-lg">
                   {activeSection &&
                     renderMainNavigationItems(activeSection.children || [])}
                 </ul>
@@ -287,8 +323,8 @@ const currentPath = usePathname();
             </div>
 
             {/* Quote */}
-            <div className="absolute bottom-2 left-16 right-16">
-              <blockquote className="text-3xl italic text-gray-700 leading-relaxed">
+            <div className="mt-auto pt-6">
+              <blockquote className="text-2xl 2xl:text-3xl italic text-gray-700 leading-relaxed">
                 {featuredChild?.text ? (
                   <>"{getHighlightedText(featuredChild.text)}"</>
                 ) : (
@@ -306,8 +342,8 @@ const currentPath = usePathname();
           </div>
 
           {/* Right section - Top-level navigation */}
-          <div className="w-80 flex flex-col">
-            <div className="flex-1 p-16 pb-8">
+          <div className="w-60 2xl:w-72 shrink-0 flex flex-col">
+            <div className="flex-1 p-10 2xl:p-16 pb-8">
               <nav className="space-y-10 pt-8">
                 {[...navigationData].sort((a, b) => a.id - b.id).map((section) => (
                   <button
@@ -318,8 +354,8 @@ const currentPath = usePathname();
                     }}
                     className={`block text-left text-xl cursor-pointer font-bold transition-colors ${
                       activeSection?.id === section.id
-                        ? "text-green-600"
-                        : "text-gray-800 hover:text-green-600"
+                        ? "text-[#23B14D]"
+                        : "text-gray-800 hover:text-[#23B14D]"
                     }`}
                   >
                     {section.name}
@@ -329,7 +365,7 @@ const currentPath = usePathname();
             </div>
 
             {/* Desktop Action buttons */}
-            <div className="px-16 pb-16 flex flex-col gap-4 items-end">
+            <div className="px-10 2xl:px-16 pb-12 flex flex-col gap-4 items-end">
               <button className="hover:scale-105 transition-transform">
                 <img
                   src="/images/nav/enquiry.png"

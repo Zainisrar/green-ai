@@ -9,6 +9,7 @@ const ReachUs = () => {
   const [currentMapIndex, setCurrentMapIndex] = useState(0);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const { getContainerProps } = useInteractiveZIndex();
+  const enquiryProps = getContainerProps();
 
   const openForm = () => {
     setIsFormOpen(true);
@@ -33,56 +34,61 @@ const ReachUs = () => {
     <React.Fragment>
       <div className="">
         <TopNavigation />
-        <div className="lg:flex h-full">
-          <div className=" lg:w-1/7 hidden lg:flex items-center justify-center">
-            <div className="fixed top-1/4 left-4 lg:left-14">
-              <img
-                src="/images/reach-us/reach-us.png"
-                className="w-4 lg:w-16"
-                alt="reach-us"
-              />
-            </div>
-          </div>
 
-          {/* Main Content Area */}
-          <div className="  flex flex-col lg:mt-10  md:pl-38 md:mr-4  md:my-10 lg:my-0 lg:pl-8 lg:px-8  lg:mr-8 ml-4 rounded-lg">
-            <div className="">
-              {/* Header Text */}
-              <div className="pl-20 lg:pl-0 space-y-4 lg:space-y-0 mb-6 lg:flex justify-between">
-                <p className="text-gray-700 text-lg">
-                  Are you prepared to get started on your Energy Deployment
-                  right away? Let's connect!
-                </p>
-              <div {...getContainerProps()} onClick={openForm}>
+        {/* Side watermark icon (desktop only, fixed — does not affect layout) */}
+        <div className="fixed top-1/4 left-6 lg:left-14 z-20 hidden lg:block">
+          <img
+            src="/images/reach-us/reach-us.png"
+            className="w-12 lg:w-16"
+            alt="reach-us"
+          />
+        </div>
+
+        {/* Main Content Area */}
+        <div className="relative w-full px-6 py-8 lg:py-10 lg:pl-32 lg:pr-10">
+          <div className="relative">
+            {/* Header Text + Enquiry Button (top right) */}
+            <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+              <p className="text-gray-700 text-lg max-w-xl">
+                Are you prepared to get started on your Energy Deployment right
+                away? Let&apos;s connect!
+              </p>
+              <div
+                {...enquiryProps}
+                onClick={openForm}
+                className={`${enquiryProps.className} shrink-0 cursor-pointer self-start lg:self-auto`}
+              >
                 <img
                   src="/images/reach-us/enquiry.png"
                   alt="Enquiry Button"
                   className="cursor-pointer"
                 />
               </div>
-              </div>
+            </div>
 
-              {/* Enquiry Button - Top Right */}
-
-              {/* World Map with Animation */}
-              <div className="relative  mb-6 lg:pt-20">
-                <div className="relative lg:w-[75%]">
-                  <img
-                    src={mapImages[currentMapIndex]}
-                    alt={`World Map ${currentMapIndex + 1}`}
-                    className="w-full transition-opacity  duration-500 ease-in-out"
-                  />
-                </div>
-              </div>
-
-              {/* Sidebar Elements */}
-              <div className="lg:absolute pb-40 lg:pb-0 lg:right-8 lg:top-1/2 lg:transform lg:-translate-y-1/2 space-y-8 lg:space-y-16">
+            {/* World Map with Animation */}
+            <div className="relative mb-6 lg:pt-10">
+              <div className="relative w-full lg:w-[72%]">
                 <img
-                  src="/images/reach-us/transformation.png"
-                  alt="Transformation Card"
+                  src={mapImages[currentMapIndex]}
+                  alt={`World Map ${currentMapIndex + 1}`}
+                  className="w-full transition-opacity duration-500 ease-in-out"
                 />
-                <img src="/images/reach-us/join-us.png" alt="Join Us Card" />
               </div>
+            </div>
+
+            {/* Sidebar cards — stacked & centered on mobile, floated right on desktop */}
+            <div className="flex flex-col items-center gap-8 pb-10 lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:items-end lg:gap-12 lg:pb-0">
+              <img
+                src="/images/reach-us/transformation.png"
+                alt="Transformation Card"
+                className="w-64 lg:w-72"
+              />
+              <img
+                src="/images/reach-us/join-us.png"
+                alt="Join Us Card"
+                className="w-64 lg:w-72"
+              />
             </div>
           </div>
         </div>

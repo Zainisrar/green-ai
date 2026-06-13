@@ -50,10 +50,10 @@ const OsmMonitoring = () => {
           </div>
 
           {/* Main Content Area */}
-          <div className="w-full px-8 pt-8">
+          <div className="w-full min-w-0 px-4 lg:px-8 pt-8">
             {/* Main Title */}
-            <div className="mb-8 ml-8 lg:ml-0 lg:w-2/3">
-              <h1 className="text-3xl font-black text-gray-800 mb-4">
+            <div className="mb-8 lg:w-2/3">
+              <h1 className="text-3xl lg:text-4xl 2xl:text-5xl font-black text-gray-800 mb-4 leading-tight">
                 {omData?.header?.title?.replace("MONITORING", "") || "O&M &"}{" "}
                 <span className="text-[#23B14D]">MONITORING</span>
               </h1>
@@ -77,12 +77,12 @@ const OsmMonitoring = () => {
             <div className="flex lg:flex-row flex-col  lg:space-x-8">
               {/* Left Column - O&M Philosophy */}
               <div className="w-full">
-                <h3 className="text-2xl font-bold text-gray-800 mb-6">
+                <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-6">
                   {omData?.philosophy?.heading || "Our O&M Philosophy"}
                 </h3>
 
-                <div className="grid lg:gap-10 gap-x-0 lg:grid-cols-[.5fr_1fr_1fr]">
-                  <div className="lg:-ml-20">
+                <div className="grid gap-8 lg:gap-10 lg:grid-cols-[1.3fr_1fr_auto]">
+                  <div className="min-w-0 2xl:-ml-20">
                     <div className="space-y-8 ">
                       {omData?.philosophy?.items?.map((item, index) => (
                         <div
@@ -91,8 +91,8 @@ const OsmMonitoring = () => {
                             index === 0
                               ? "ml-4"
                               : index === 1
-                              ? "lg:-ml-20"
-                              : "lg:-ml-30"
+                              ? "2xl:-ml-20"
+                              : "2xl:-ml-24"
                           }`}
                         >
                           <div className="flex-shrink-0">
@@ -103,7 +103,7 @@ const OsmMonitoring = () => {
                             />
                           </div>
                           <div>
-                            <h4 className="text-lg font-bold text-gray-800 mb-2">
+                            <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                               {item.title}
                             </h4>
                             <p className="text-gray-600 text-sm">
@@ -122,7 +122,7 @@ const OsmMonitoring = () => {
                               />
                             </div>
                             <div>
-                              <h4 className="text-lg font-bold text-gray-800 mb-2">
+                              <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                                 Predict. Prevent. Perform.
                               </h4>
                               <p className="text-gray-600 text-sm">
@@ -135,7 +135,7 @@ const OsmMonitoring = () => {
                             </div>
                           </div>
 
-                          <div className="flex space-x-4 lg:-ml-20">
+                          <div className="flex space-x-4 2xl:-ml-20">
                             <div className="flex-shrink-0">
                               <img
                                 src="/images/osm-monitoring/lighting.png"
@@ -144,7 +144,7 @@ const OsmMonitoring = () => {
                               />
                             </div>
                             <div>
-                              <h4 className="text-lg font-bold text-gray-800 mb-2">
+                              <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                                 Standardized. Yet Site-Specific.
                               </h4>
                               <p className="text-gray-600 text-sm">
@@ -155,7 +155,7 @@ const OsmMonitoring = () => {
                             </div>
                           </div>
 
-                          <div className="flex space-x-4 lg:-ml-30">
+                          <div className="flex space-x-4 2xl:-ml-24">
                             <div className="flex-shrink-0">
                               <img
                                 src="/images/osm-monitoring/lighting.png"
@@ -164,7 +164,7 @@ const OsmMonitoring = () => {
                               />
                             </div>
                             <div>
-                              <h4 className="text-lg font-bold text-gray-800 mb-2">
+                              <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                                 Contracted for Clarity. Delivered with
                                 Discipline.
                               </h4>
@@ -179,18 +179,18 @@ const OsmMonitoring = () => {
                       )}
                     </div>
                   </div>
-                  <div className="lg:ml-20">
-                    <div className="  ">
-                      <div className="mt-20 mb-10 lg:my-0 flex space-x-4">
-                        <div className="">
+                  <div className="min-w-0 2xl:ml-20">
+                    <div>
+                      <div className="mt-20 mb-10 lg:my-0 flex items-center space-x-4">
+                        <div className="flex-shrink-0">
                           <img
                             src="/images/osm-monitoring/shape.png"
                             alt="shape"
                             className="w-16"
                           />
                         </div>
-                        <div className="-ml-4 -mt-10">
-                          <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                        <div className="min-w-0">
+                          <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                             <span className="text-[#23B14D]">Sustaining</span>{" "}
                             Systems.
                             <br />
@@ -206,11 +206,11 @@ const OsmMonitoring = () => {
                       </div>
                     </div>
 
-                    <div className="lg:mt-8 text-center lg:text-left  lg:ml-10">
-                      <h4 className="text-2xl font-black italic text-gray-800 mb-4">
+                    <div className="lg:mt-8 text-center lg:text-left min-w-0">
+                      <h4 className="text-xl lg:text-2xl font-bold italic text-gray-800 mb-4">
                         {omData?.whyMatters?.heading || "Why This Matters"}
                       </h4>
-                      <div className="space-y-2 text-xl w-3/4">
+                      <div className="space-y-2 text-base lg:text-lg max-w-md">
                         {omData?.whyMatters?.points?.map((point, index) => (
                           <p key={index} className="text-gray-600">
                             —{" "}
@@ -242,33 +242,26 @@ const OsmMonitoring = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="space-y-8 mt-10 lg:mt-0 flex flex-col items-end mb-10   justify-end">
-                    <Link
-                      href={omData?.callToActions[0].href || "#"}
-                      className="flex justify-end relative cursor-pointer"
-                    >
-                      <img
-                        src="/images/osm-monitoring/request.png"
-                        alt="Request an Osm Proposal"
-                      />
-                      <div className="absolute top-3 right-8 text-lg font-bold">
-                        {omData?.callToActions[0].text + " >" ||
-                          "Request an O&M Proposal >"}
-                      </div>
-                    </Link>
-                    <Link
-                      href={omData?.callToActions[1].href || "#"}
-                      className="flex justify-end relative cursor-pointer"
-                    >
-                      <img
-                        src="/images/osm-monitoring/book.png"
-                        alt="Book a Live Demo of Green POC"
-                      />
-                      <div className="absolute top-3 right-6 text-lg font-bold">
-                        {omData?.callToActions[1].text + " >" ||
-                          "Request an O&M Proposal >"}
-                      </div>
-                    </Link>
+                  <div className="mt-10 lg:mt-0 mb-10 flex flex-col items-center lg:items-end gap-6 justify-end">
+                    {[
+                      { i: 0, fallback: "Request an O&M Proposal" },
+                      { i: 1, fallback: "Book a Live Demo of GREEN POC" },
+                    ].map(({ i, fallback }) => (
+                      <Link
+                        key={i}
+                        href={omData?.callToActions[i]?.href || "#"}
+                        className="inline-block cursor-pointer"
+                      >
+                        <div
+                          style={{ transform: "skewX(-16deg)" }}
+                          className="bg-gradient-to-r from-[#54b85a] to-[#e6f24d] px-8 py-3 shadow-md"
+                        >
+                          <span className="block text-sm lg:text-base font-bold text-gray-900 whitespace-nowrap">
+                            {(omData?.callToActions[i]?.text || fallback) + " >"}
+                          </span>
+                        </div>
+                      </Link>
+                    ))}
                   </div>
                 </div>
               </div>

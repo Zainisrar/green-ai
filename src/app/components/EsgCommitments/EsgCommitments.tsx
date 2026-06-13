@@ -34,9 +34,9 @@ const EsgCommitments = () => {
 
         {/* Main Layout - Responsive */}
         <div className="px-4  lg:ml-52 mt-8 lg:mt-20">
-          <div className="lg:flex  space-x-20">
-            <div>
-              <h1 className="text-2xl pl-20 lg:pl-0 lg:text-3xl uppercase font-black mb-6">
+          <div className="lg:flex lg:space-x-20">
+            <div className="shrink-0">
+              <h1 className="text-3xl lg:text-4xl 2xl:text-5xl lg:mt-10 uppercase font-black leading-tight mb-6 text-center lg:text-left">
                 {sustainabilityData?.header?.title?.split(' & ')[0] || "Sustainability"} <br /> & ESG
                 <br />
                 <span className="text-[#23B14D]">
@@ -44,10 +44,10 @@ const EsgCommitments = () => {
                 </span>
               </h1>
             </div>
-            <div className="w-full">
+            <div className="w-full min-w-0">
               {/* Header */}
               <div className="mb-6">
-                <h2 className="text-3xl font-black text-gray-800 mb-3">
+                <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-3">
                   A Greener Mission, A Lasting Impact
                 </h2>
                 <p className="text-base font-semibold text-gray-700">
@@ -73,7 +73,7 @@ const EsgCommitments = () => {
                           </div>
                         </div>
                         <div className="flex flex-col space-y-1">
-                          <h3 className="text-xl font-black text-gray-800">
+                          <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
                             {section.heading}
                           </h3>
                           <p className="text-sm text-gray-700 mb-2">
@@ -105,7 +105,7 @@ const EsgCommitments = () => {
                             </div>
                           </div>
                           <div className="flex flex-col space-y-1">
-                            <h3 className="text-xl font-black text-gray-800">
+                            <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
                               Environmental Stewardship
                             </h3>
                             <p className="text-sm text-gray-700 mb-2">
@@ -134,7 +134,7 @@ const EsgCommitments = () => {
                             </div>
                           </div>
                           <div className="flex flex-col space-y-1">
-                            <h3 className="text-xl font-black text-gray-800">
+                            <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
                               Social Responsibility
                             </h3>
                             <p className="text-sm text-gray-700 mb-2">
@@ -168,7 +168,7 @@ const EsgCommitments = () => {
                           </div>
                         </div>
                         <div className="flex flex-col space-y-1">
-                          <h3 className="text-xl font-black text-gray-800">
+                          <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
                             {sustainabilityData.sections[2].heading}
                           </h3>
                           <p className="text-sm text-gray-700 mb-2">
@@ -195,7 +195,7 @@ const EsgCommitments = () => {
                           </div>
                         </div>
                         <div className="flex flex-col space-y-1">
-                          <h3 className="text-xl font-black text-gray-800">
+                          <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
                             Ethical Governance
                           </h3>
                           <p className="text-sm text-gray-700 mb-2">

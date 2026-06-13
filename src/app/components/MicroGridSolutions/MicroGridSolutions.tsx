@@ -39,8 +39,8 @@ const MicroGridSolutions = () => {
         {/* Mobile Layout */}
         <div className="lg:hidden px-4 py-6 relative z-50 ">
           {/* Title */}
-          <div className="mb-4 ml-20">
-            <h1 className="text-3xl font-black text-gray-800 leading-tight">
+          <div className="mb-4">
+            <h1 className="text-3xl sm:text-4xl font-black text-gray-800 leading-tight">
               {microgridData?.header?.title?.split(" ")[0] || "HYBRID"} &
               <br />
               {microgridData?.header?.title?.split(" ")[2] || "MICROGRID"}
@@ -56,7 +56,7 @@ const MicroGridSolutions = () => {
 
           {/* Subtitle */}
           <div className="mb-4">
-            <h2 className="text-lg font-bold text-gray-800 mb-2">
+            <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
               {microgridData?.header?.subtitle ||
                 "This Is Power, Engineered to Stay On"}
             </h2>
@@ -76,7 +76,7 @@ const MicroGridSolutions = () => {
 
           {/* Hybrid Systems */}
           <div className="mb-6">
-            <h3 className="text-lg font-bold text-gray-800 mb-3">
+            <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-3">
               {hybridSolution?.heading || "Hybrid Systems"}
             </h3>
             <ul className="space-y-2 text-sm text-gray-700">
@@ -106,7 +106,7 @@ const MicroGridSolutions = () => {
 
           {/* Microgrids */}
           <div className="mb-6">
-            <h3 className="text-lg font-bold text-gray-800 mb-3">
+            <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-3">
               {microgridSolution?.heading || "Microgrids"}
               <span className="text-xs text-[#23B14D] italic ml-2">
                 Let's Talk Energy
@@ -147,8 +147,9 @@ const MicroGridSolutions = () => {
             style={{
               transform:"skewX(-16deg)"
             }}
-            className="bg-[#f8f9d9] w-[300px] mx-auto p-4 rounded">
-              <h3 className="text-lg font-bold text-gray-800 mb-3">
+            className="bg-[#f8f9d9] w-full max-w-[300px] mx-auto p-4 rounded">
+              <div>
+              <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-3">
                 {microgridData?.useCases?.heading ||
                   "Use-Cases We've Engineered"}
               </h3>
@@ -183,6 +184,7 @@ const MicroGridSolutions = () => {
                   </>
                 )}
               </ul>
+              </div>
             </div>
           </div>
 
@@ -200,37 +202,39 @@ const MicroGridSolutions = () => {
           </div>
 
           {/* Call to Action Buttons */}
-          <div className="space-y-8">
+          <div className="flex flex-col items-center gap-6">
             <Link
               href={microgridData?.callToActions[0].href || "#"}
-              className="flex justify-end relative cursor-pointer"
+              className="relative inline-block cursor-pointer w-64 sm:w-72"
             >
               <img
                 src="/images/microgrid-solutions/systemarchitect.png"
                 alt="system architect"
+                className="w-full"
               />
-              <div className="absolute top-3 right-8 text-lg font-bold">
+              <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
                 {microgridData?.callToActions[0].text} {` >`}
               </div>
             </Link>
             <Link
               href={microgridData?.callToActions[1].href || "#"}
-              className="flex relative justify-end cursor-pointer"
+              className="relative inline-block cursor-pointer w-64 sm:w-72"
             >
-              <img src="/images/microgrid-solutions/book.png" alt="book" />
-              <div className="absolute top-3 right-10  text-lg font-bold">
+              <img src="/images/microgrid-solutions/book.png" alt="book" className="w-full" />
+              <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
                 {microgridData?.callToActions[1].text} {` >`}
               </div>
             </Link>
             <Link
               href={microgridData?.callToActions[2].href || "#"}
-              className="flex relative justify-end cursor-pointer"
+              className="relative inline-block cursor-pointer w-64 sm:w-72"
             >
               <img
                 src="/images/microgrid-solutions/downloadhybrid.png"
                 alt="downloadhybrid"
+                className="w-full"
               />
-              <div className="absolute top-3 right-5  font-bold">
+              <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
                 {microgridData?.callToActions[2].text}
               </div>
             </Link>
@@ -241,7 +245,7 @@ const MicroGridSolutions = () => {
         <div className="hidden lg:flex h-full">
           {/* Left Side  */}
           <div className="w-1/6 flex items-center justify-center">
-            <div className="fixed top-1/5 left-14">
+            <div className="fixed top-1/4 left-14">
               <img
                 src="/images/microgrid-solutions/hybridLogo.png"
                 alt="hybridLogo"
@@ -254,7 +258,7 @@ const MicroGridSolutions = () => {
           <div className="lg:w-2/4 flex flex-col pt-8">
             {/* Main Title */}
             <div className="mb-8">
-              <h1 className="text-3xl font-black text-gray-800 mb-4">
+              <h1 className="text-3xl lg:text-4xl 2xl:text-5xl font-black text-gray-800 mb-4 leading-tight">
                 {microgridData?.header?.title &&
                   (() => {
                     const title = microgridData.header.title;
@@ -271,7 +275,7 @@ const MicroGridSolutions = () => {
                     );
                   })()}
               </h1>
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">
+              <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                 {microgridData?.header?.subtitle ||
                   "This Is Power, Engineered to Stay On"}
               </h2>
@@ -285,7 +289,7 @@ const MicroGridSolutions = () => {
             <div className="flex space-x-8 mb-8">
               {/* Hybrid Systems Column */}
               <div className="w-1/2">
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                   {hybridSolution?.heading || "Hybrid Systems"}
                 </h3>
                 <ul className="space-y-2 text-gray-700">
@@ -315,7 +319,7 @@ const MicroGridSolutions = () => {
 
               {/* Microgrids Column */}
               <div className="w-1/2">
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                   {microgridSolution?.heading || "Microgrids"}
                 </h3>
                 <ul className="space-y-2 text-gray-700">
@@ -357,7 +361,8 @@ const MicroGridSolutions = () => {
                 transform:"skewX(-16deg)"
               }}
               className="bg-[#f8f9d9]/80 p-6 shadow-lg">
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                <div>
+                <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                   {microgridData?.useCases?.heading ||
                     "Use-Cases We've Engineered"}
                 </h3>
@@ -411,14 +416,15 @@ const MicroGridSolutions = () => {
                     )}
                   </ul>
                 </div>
+                </div>
               </div>
             </div>
 
             {/* Bottom Description */}
           </div>
         </div>
-        <div className=" flex lg:flex-row flex-col space-y-8 lg:justify-between lg:pl-20 lg:pr-4 mb-10 px-4 lg:mb-32">
-          <div className="mb-8">
+        <div className=" flex lg:flex-row flex-col space-y-8 lg:space-y-0 lg:justify-between lg:items-end px-4 lg:px-14 mb-10 lg:mb-32">
+          <div className="lg:mb-8 min-w-0 lg:max-w-xl">
             <p className="text-xl text-gray-800 mb-2">
               {microgridData?.statement?.text?.split("—")[0]?.trim() ||
                 "We design complete hybrid and microgrid systems that balance solar, battery, diesel, and grid"}
@@ -429,37 +435,37 @@ const MicroGridSolutions = () => {
                 "with zero disruption, and full intelligence."}
             </p>
           </div>
-          <div className="space-y-8 lg:block hidden">
+          <div className="lg:flex flex-col items-end gap-6 hidden">
             <Link
               href={microgridData?.callToActions[0].href || "#"}
-              className="flex justify-end relative cursor-pointer"
+              className="relative inline-block cursor-pointer"
             >
               <img
                 src="/images/microgrid-solutions/systemarchitect.png"
                 alt="system architect"
               />
-              <div className="absolute top-3 right-8  text-lg font-bold">
+              <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
                 {microgridData?.callToActions[0].text} {` >`}
               </div>
             </Link>
             <Link
               href={microgridData?.callToActions[1].href || "#"}
-              className="flex relative justify-end cursor-pointer"
+              className="relative inline-block cursor-pointer"
             >
               <img src="/images/microgrid-solutions/book.png" alt="book" />
-              <div className="absolute top-3 right-10 text-lg font-bold">
+              <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
                 {microgridData?.callToActions[1].text} {` >`}
               </div>
             </Link>
             <Link
               href={microgridData?.callToActions[2].href || "#"}
-              className="flex relative justify-end cursor-pointer"
+              className="relative inline-block cursor-pointer"
             >
               <img
                 src="/images/microgrid-solutions/downloadhybrid.png"
                 alt="downloadhybrid"
               />
-              <div className="absolute top-3 right-8 lg:text-lg font-bold">
+              <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
                 {microgridData?.callToActions[2].text}
               </div>
             </Link>
@@ -472,7 +478,7 @@ const MicroGridSolutions = () => {
               <div className="mt-8 relative top-4 left-0">
                 <img
                   src="/images/microgrid-solutions/vector.png"
-                  className="w-22 lg:block"
+                  className="w-20 lg:block"
                   alt="shape"
                 />
               </div>

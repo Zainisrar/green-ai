@@ -29,7 +29,7 @@ const RequestProposal = () => {
               </h1>
 
               {/* Subtitle */}
-              <p className="text-lg text-[#23B14D] italic font-semibold mb-2">
+              <p className="text-xl lg:text-2xl text-[#23B14D] italic font-semibold mb-2">
                 Let’s Build Your Energy Project — From Vision to Reality.
               </p>
 
@@ -43,7 +43,7 @@ const RequestProposal = () => {
               </p>
 
               {/* Who Should Use This Section */}
-              <h2 className="text-xl font-black mb-4">Who Should Use This</h2>
+              <h2 className="text-xl lg:text-2xl font-bold mb-4">Who Should Use This</h2>
 
               <div className="flex justify-between">
                 <div className="  mb-16 ">
@@ -102,7 +102,7 @@ const RequestProposal = () => {
                 />
               </div>
               {/* What GREEN Delivers in Every Proposal */}
-              <h2 className="text-xl font-bold mb-4">
+              <h2 className="text-xl lg:text-2xl font-bold mb-4">
                 What GREEN Delivers in Every Proposal
               </h2>
 
@@ -181,7 +181,7 @@ const RequestProposal = () => {
                       />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold ">
+                      <h3 className="text-xl lg:text-2xl font-bold ">
                         “Proposals shouldn’t be generic.
                       </h3>
                       <p className="text-gray-700 font-bold text-lg mb-4">

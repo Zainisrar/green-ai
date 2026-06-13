@@ -117,7 +117,7 @@ const Product = ({ isOpen, onClose, data }: Props) => {
               <div className="transform  mx-auto">
                 {/* Title Section */}
                 <div className="mb-8">
-                  <h2 className="text-3xl font-black text-gray-800 mb-4">
+                  <h2 className="text-3xl lg:text-4xl font-black text-gray-800 mb-4 leading-tight">
                     {data?.title || "Product Integration"}
                   </h2>
                   <div className="flex items-center">
@@ -189,12 +189,12 @@ const Product = ({ isOpen, onClose, data }: Props) => {
               {/* Modal Content */}
               <div
               style={{
-                transform:"skewX(6deg)"
+                transform:"skewX(12deg)"
               }}
               className="transform  max-w-5xl mx-auto">
                 {/* Title Section */}
                 <div className="mb-8">
-                  <h2 className="text-3xl font-black text-gray-800 mb-4">
+                  <h2 className="text-3xl lg:text-4xl font-black text-gray-800 mb-4 leading-tight">
                     {data?.title || "Product Integration"}
                   </h2>
                   <div className="flex items-center">

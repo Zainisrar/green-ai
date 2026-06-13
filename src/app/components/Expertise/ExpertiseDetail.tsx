@@ -10,11 +10,39 @@ interface ExpertiseDetailProps {
 }
 
 const ExpertiseDetail = ({ slug }: ExpertiseDetailProps) => {
-  const { data: expertise } = useExpertiseBySlug(slug);
+  const { data: expertise, isLoading, isError } = useExpertiseBySlug(slug);
 
-  if (!expertise) {
-    return null;
+  if (isLoading) {
+    return (
+      <React.Fragment>
+        <TopNavigation />
+        <div className="flex min-h-[60vh] items-center justify-center text-lg font-medium text-gray-600">
+          Loading…
+        </div>
+      </React.Fragment>
+    );
   }
+
+  if (isError || !expertise) {
+    return (
+      <React.Fragment>
+        <TopNavigation />
+        <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 px-8 text-center">
+          <h1 className="text-2xl font-bold">Solution not found</h1>
+          <p className="text-gray-600">
+            We couldn&apos;t find the expertise you were looking for.
+          </p>
+          <Link
+            href="/expertise"
+            className="font-semibold text-[#23B14D] hover:underline"
+          >
+            ← Back to all solutions
+          </Link>
+        </div>
+      </React.Fragment>
+    );
+  }
+
   return (
     <React.Fragment>
       <div className="relative lg:mb-0 mb-40">
@@ -54,7 +82,7 @@ const ExpertiseDetail = ({ slug }: ExpertiseDetailProps) => {
                   {expertise.highlightedTitle}
                 </span>
               </div>
-              <div className="text-[#23B14D] font-medium text-xl lg:text-2xl mt-4">
+              <div className="text-[#23B14D] font-bold text-xl lg:text-2xl mt-4">
                 {expertise.subtitlePage}
               </div>
               <div className="mt-6 text-base lg:text-lg font-light">

@@ -20,8 +20,8 @@ const SmartGrid = () => {
         {/* Mobile Layout */}
         <div className="lg:hidden px-4 py-6 relative z-50 ">
           {/* Title */}
-          <div className="mb-4 ml-20">
-            <h1 className="text-2xl font-black text-gray-800 leading-tight">
+          <div className="mb-4">
+            <h1 className="text-3xl sm:text-4xl font-black text-gray-800 leading-tight">
               {smartGridData?.header?.title?.split(" & ")[0] ||
                 "ENERGY STORAGE"}
               <br />
@@ -36,11 +36,11 @@ const SmartGrid = () => {
 
           {/* Subtitle */}
           <div className="mb-4">
-            <h2 className=" font-bold text-[#23B14D] mb-2">
+            <h2 className="text-lg font-bold text-[#23B14D] mb-2">
               {smartGridData?.header?.subtitle ||
                 "Power That Thinks. Systems That React. Continuity Without Compromise."}
             </h2>
-            <p className=" text-gray-600">
+            <p className="text-base text-gray-600">
               {smartGridData?.header?.description ||
                 "At GREEN, we don't build systems that wait for problems. We build systems that predict, protect, and perform — before failure strikes."}
             </p>
@@ -51,10 +51,12 @@ const SmartGrid = () => {
           style={{
             transform:"skewX(-16deg)"
           }}
-          className="mb-6 w-[200px] mx-auto  shadow-lg bg-[#f8f9d9] p-4 rounded">
-            <h3 className="text-xl font-bold text-gray-800 mb-2">
-              {smartGridData?.quote?.text || "Where Energy Stops, We Store."}
-            </h3>
+          className="mb-6 w-[220px] mx-auto shadow-lg bg-[#f8f9d9] p-4 rounded">
+            <div>
+              <h3 className="text-xl font-bold text-gray-800">
+                {smartGridData?.quote?.text || "Where Energy Stops, We Store."}
+              </h3>
+            </div>
           </div>
 
           {/* Main Quote */}
@@ -75,7 +77,7 @@ const SmartGrid = () => {
 
           {/* Our Storage Architecture */}
           <div className="mb-6">
-            <h3 className="text-lg font-bold text-gray-800 mb-3">
+            <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-3">
               {smartGridData?.architecture?.heading ||
                 "Our Storage Architecture"}
             </h3>
@@ -148,55 +150,35 @@ const SmartGrid = () => {
 
           {/* Bottom Description */}
           <div className="mb-6 text-center">
-            <h3 className=" font-bold text-gray-800 mb-2">
+            <h3 className="text-lg font-bold text-gray-800 mb-2">
               {smartGridData?.statement?.heading ||
                 "Engineered for the Real World. Built to Hold When Everything Else Doesn't."}
             </h3>
-            <p className="text-[#23B14D]  italic font-semibold">
+            <p className="text-[#23B14D] italic font-semibold">
               —{" "}
               {smartGridData?.statement?.description ||
                 "From hospitals in blackout zones to island grids stretched to the edge."}
             </p>
           </div>
 
-        <div className="space-y-8 lg:hidden ">
-                  <Link
-                    href={smartGridData?.callToActions[0]?.href || "#"}
-                    className="flex relative justify-end cursor-pointer"
-                  >
-                    <img
-                      src="/images/smart-grid/talk.png"
-                      alt="Talk to our Dispatch Architects"
-                    />
-                    <div className="absolute top-3 right-8 text-lg font-bold">
-                      {smartGridData?.callToActions[0].text} {` >`}
-                    </div>
-                  </Link>
-                  <Link
-                    href={smartGridData?.callToActions[1]?.href || "#"}
-                    className="flex relative justify-end cursor-pointer"
-                  >
-                    <img
-                      src="/images/smart-grid/book.png"
-                      alt="Book System Review"
-                    />
-                    <div className=" absolute top-3 right-10 text-lg font-bold">
-                      {smartGridData?.callToActions[1]?.text} {` >`}
-                    </div>
-                  </Link>
-                  <Link
-                    href={smartGridData?.callToActions[2]?.href || "#"}
-                    className="flex relative justify-end cursor-pointer"
-                  >
-                    <img
-                      src="/images/smart-grid/download.png"
-                      alt="Download Our Smart Grid Dossier"
-                    />
-                    <div className=" absolute top-3 right-8  font-bold">
-                      {smartGridData?.callToActions[2]?.text}{" "}
-                    </div>
-                  </Link>
+          <div className="flex flex-col items-center gap-5 lg:hidden">
+            {[0, 1, 2].map((i) => (
+              <Link
+                key={i}
+                href={smartGridData?.callToActions[i]?.href || "#"}
+                className="inline-block cursor-pointer"
+              >
+                <div
+                  style={{ transform: "skewX(-16deg)" }}
+                  className="bg-gradient-to-r from-[#54b85a] to-[#e6f24d] px-8 py-3 shadow-md"
+                >
+                  <span className="block text-sm font-bold text-gray-900 whitespace-nowrap">
+                    {smartGridData?.callToActions[i]?.text} {`>`}
+                  </span>
                 </div>
+              </Link>
+            ))}
+          </div>
         </div>
 
         {/* Desktop Layout */}
@@ -211,7 +193,7 @@ const SmartGrid = () => {
           <div className="flex h-full">
             {/* Left Side - GLOBAL SNAPSHOT Text */}
             <div className="w-1/6 flex items-center justify-center">
-              <div className="fixed top-1/5 left-8">
+              <div className="fixed top-1/4 left-8">
                 <img
                   src="/images/smart-grid/smard-grid.png"
                   className="w-8"
@@ -224,7 +206,7 @@ const SmartGrid = () => {
             <div className="w-full px-2 pt-8">
               {/* Main Title */}
               <div className="mb-8">
-                <h1 className="text-3xl font-black text-gray-800 mb-4">
+                <h1 className="text-3xl lg:text-4xl 2xl:text-5xl font-black text-gray-800 mb-4 leading-tight">
                   {smartGridData?.header?.title?.split(" & ")[0] ||
                     "ENERGY STORAGE"}
                   {` `}
@@ -233,7 +215,7 @@ const SmartGrid = () => {
                       "SMART GRID"}
                   </span>
                 </h1>
-                <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                   {smartGridData?.header?.subtitle ||
                     "Power That Thinks. Systems That React. Continuity Without Compromise."}
                 </h2>
@@ -246,7 +228,7 @@ const SmartGrid = () => {
               {/* Storage Architecture Section */}
               <div className="flex justify-end w-3/4">
                 <div className="mb-8">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                     {smartGridData?.architecture?.heading ||
                       "Our Storage Architecture"}
                   </h3>
@@ -308,19 +290,21 @@ const SmartGrid = () => {
                   style={{
                     transform:"skewX(-16deg)"
                   }}
-                  className="bg-[#f8f9d9]/80 p-6  shadow-lg">
-                    <h3 className="text-3xl font-bold text-gray-800">
-                      {smartGridData?.quote?.text ||
-                        "Where Energy Stops, We Store."}
-                    </h3>
+                  className="bg-[#f8f9d9]/80 p-6 shadow-lg">
+                    <div>
+                      <h3 className="text-2xl 2xl:text-3xl font-bold text-gray-800">
+                        {smartGridData?.quote?.text ||
+                          "Where Energy Stops, We Store."}
+                      </h3>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Bottom Description */}
-              <div className="flex mb-24 items-center my-10 space-x-20 -ml-20">
+              <div className="flex mb-24 items-center my-10 gap-10 2xl:gap-20 2xl:-ml-20">
                 {/* Right - Quote */}
-                <div className="">
+                <div className="min-w-0">
                   <div className="">
                     <p className="text-xl font-bold italic text-gray-700">
                       "Where Grids Fail, We{" "}
@@ -342,8 +326,8 @@ const SmartGrid = () => {
                     </p>
                   </div>
                 </div>
-                <div className="w-4/12">
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">
+                <div className="w-4/12 min-w-0">
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                     {smartGridData?.statement?.heading ||
                       "Engineered for the Real World. Built to Hold When Everything Else Doesn't."}
                   </h3>
@@ -353,43 +337,23 @@ const SmartGrid = () => {
                       "From hospitals in blackout zones to island grids stretched to the edge"}
                   </p>
                 </div>
-                <div className="space-y-8 lg:block hidden ">
-                  <Link
-                    href={smartGridData?.callToActions[0]?.href || "#"}
-                    className="flex relative justify-end cursor-pointer"
-                  >
-                    <img
-                      src="/images/smart-grid/talk.png"
-                      alt="Talk to our Dispatch Architects"
-                    />
-                    <div className="absolute top-3 right-8 text-lg font-bold">
-                      {smartGridData?.callToActions[0].text} {` >`}
-                    </div>
-                  </Link>
-                  <Link
-                    href={smartGridData?.callToActions[1]?.href || "#"}
-                    className="flex relative justify-end cursor-pointer"
-                  >
-                    <img
-                      src="/images/smart-grid/book.png"
-                      alt="Book System Review"
-                    />
-                    <div className=" absolute top-3 right-10 text-lg font-bold">
-                      {smartGridData?.callToActions[1]?.text} {` >`}
-                    </div>
-                  </Link>
-                  <Link
-                    href={smartGridData?.callToActions[2]?.href || "#"}
-                    className="flex relative justify-end cursor-pointer"
-                  >
-                    <img
-                      src="/images/smart-grid/download.png"
-                      alt="Download Our Smart Grid Dossier"
-                    />
-                    <div className=" absolute top-3 right-8  font-bold">
-                      {smartGridData?.callToActions[2]?.text}{" "}
-                    </div>
-                  </Link>
+                <div className="hidden lg:flex flex-col items-end gap-6 min-w-0">
+                  {[0, 1, 2].map((i) => (
+                    <Link
+                      key={i}
+                      href={smartGridData?.callToActions[i]?.href || "#"}
+                      className="inline-block cursor-pointer"
+                    >
+                      <div
+                        style={{ transform: "skewX(-16deg)" }}
+                        className="bg-gradient-to-r from-[#54b85a] to-[#e6f24d] px-10 py-3 shadow-md"
+                      >
+                        <span className="block text-sm lg:text-base font-bold text-gray-900 whitespace-nowrap">
+                          {smartGridData?.callToActions[i]?.text} {`>`}
+                        </span>
+                      </div>
+                    </Link>
+                  ))}
                 </div>
               </div>
             </div>

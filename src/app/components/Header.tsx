@@ -36,17 +36,29 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
   const nextButtonProps = useInteractiveZIndex();
   const cta1Props = useInteractiveZIndex();
   const cta2Props = useInteractiveZIndex();
+  const [paused, setPaused] = React.useState(false);
 
   const goPrev = () =>
     setCurrent((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   const goNext = () =>
     setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
 
+  // Auto-advance the carousel; pause on hover.
+  React.useEffect(() => {
+    if (paused || !slides || slides.length <= 1) return;
+    const id = setInterval(() => {
+      setCurrent((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    }, 5000);
+    return () => clearInterval(id);
+  }, [paused, slides]);
+
   if (!slide) return null;
 
   return (
     <div
-      className="relative w-full min-h-screen  flex flex-col justify-between text-white"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      className="relative w-full min-h-screen  flex flex-col justify-between text-white transition-[background-image] duration-700"
       style={{
         backgroundImage: `url("${slide.backgroundImage}")`,
         backgroundRepeat: "no-repeat",
@@ -56,7 +68,7 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
     >
       {/* add the background black shadow layer also */}
       <div className="absolute inset-0 bg-black/50 lg:bg-black/70 z-0"></div>
-      <div className="relative w-full h-full flex flex-col justify-between z-10">
+      <div key={current} className="relative w-full h-full flex flex-col justify-between z-10 animate-fadeIn">
         <div className="absolute lg:top-8 md:top-6 lg:right-12 z-10 top-4 left-4  lg:left-auto">
           <a href="/">
             <img

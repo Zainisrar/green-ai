@@ -35,16 +35,16 @@ const WhyIntel = ({ isOpen, onClose }: Props) => {
             </div>
 
             {/* Modal Content */}
-            <div 
+            <div
             style={{
-              transform:"skewX(6deg)"
+              transform:"skewX(12deg)"
             }}
             className="transform  max-w-5xl mx-auto">
               {/* Title Section */}
               <div className="mb-8">
-                <h2 className="text-4xl font-bold text-gray-800 mb-2">
+                <h2 className="text-3xl lg:text-4xl font-black text-gray-800 mb-2 leading-tight">
                   Why GRID-INTEL™{" "}
-                  <span className="text-[#4CAF50] text-2xl">
+                  <span className="text-[#4CAF50] text-xl lg:text-2xl">
                     - Is Different
                   </span>
                 </h2>

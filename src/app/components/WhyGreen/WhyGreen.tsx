@@ -57,7 +57,7 @@ const WhyGreen = () => {
             </div>
           </div>
           <div className=" lg:w-1/4 md:ml-44 lg:-ml-20 2xl:w-1/4 ml-16 lg:my-32  2xl:-ml-28 my-12 flex">
-            <h1 className="lg:text-3xl text-2xl 2xl:text-6xl uppercase font-black">
+            <h1 className="text-4xl lg:text-5xl 2xl:text-7xl uppercase font-black leading-tight">
               {key.slice(0, key.indexOf(" "))}
               {` `}
               <span className="text-[#23B14D]">
@@ -71,7 +71,7 @@ const WhyGreen = () => {
               {parsedContent?.subtitle ||
                 "- A Sustainable Living and Frontrunner in Renewable Energy Solution Provider"}
             </p>
-            <h2 className=" lg:text-3xl text-xl md:ml-4 lg:ml-0 md:block flex justify-end 2xl:text-5xl font-black text-gray-800 mb-4">
+            <h2 className=" lg:text-3xl text-xl md:ml-4 lg:ml-0 md:block flex justify-end 2xl:text-5xl font-bold text-gray-800 mb-4">
               {parsedContent?.companyName || "GREEN Limited"}
             </h2>
             <p className="text-[#23B14D]  lg:block hidden lg:text-base 2xl:text-xl font-semibold mb-4 2xl:mb-6 italic">
@@ -79,7 +79,7 @@ const WhyGreen = () => {
                 "- A Sustainable Living and Frontrunner in Renewable Energy Solution Provider"}
             </p>
 
-            <div className="space-y-4 md:ml-4 lg:ml-0  text-gray-700 text-xs leading-relaxed mb-4">
+            <div className="space-y-4 md:ml-4 lg:ml-0  text-gray-700 text-sm 2xl:text-base leading-relaxed mb-4">
               {parsedContent?.paragraphs.map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               )) || (
@@ -126,14 +126,14 @@ const WhyGreen = () => {
                         <img
                           src={icon.img.src}
                           alt={icon.img.alt}
-                          className="lg:w-42"
+                          className="w-16 lg:w-20 object-contain"
                         />
                       </div>
                       <div className="flex flex-col space-y-2">
-                        <h4 className="text-lg font-bold text-gray-800 mb-2">
+                        <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                           {icon.text}
                         </h4>
-                        <p className="text-xs text-gray-600">
+                        <p className="text-sm text-gray-600">
                           {icon.description}
                         </p>
                       </div>
@@ -147,14 +147,14 @@ const WhyGreen = () => {
                         <img
                           src="/images/why-green/envirornment.png"
                           alt="Environment"
-                          className="lg:w-42"
+                          className="w-16 lg:w-20 object-contain"
                         />
                       </div>
                       <div className="flex flex-col space-y-2">
-                        <h4 className="text-lg font-bold text-gray-800 mb-2">
+                        <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                           Environment
                         </h4>
-                        <p className="text-xs text-gray-600">
+                        <p className="text-sm text-gray-600">
                           Renewable Energy reduces the devastating impacts of
                           fossil fuels on the ecosystem.
                         </p>
@@ -165,14 +165,14 @@ const WhyGreen = () => {
                         <img
                           src="/images/why-green/health.png"
                           alt="health"
-                          className="lg:w-42"
+                          className="w-16 lg:w-20 object-contain"
                         />
                       </div>
                       <div className="flex flex-col space-y-2">
-                        <h4 className="text-lg font-bold text-gray-800 mb-2">
+                        <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                           Health
                         </h4>
-                        <p className="text-xs text-gray-600">
+                        <p className="text-sm text-gray-600">
                           Renewable energy emits no or low air
                           pollutants.Healthcares can rely on renewable energy
                         </p>
@@ -183,14 +183,14 @@ const WhyGreen = () => {
                         <img
                           src="/images/why-green/economy.png"
                           alt="Economy"
-                          className="lg:w-42"
+                          className="w-16 lg:w-20 object-contain"
                         />
                       </div>
                       <div className="flex flex-col space-y-2">
-                        <h4 className="text-lg font-bold text-gray-800 mb-2">
+                        <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                           Economy
                         </h4>
-                        <p className="text-xs text-gray-600">
+                        <p className="text-sm text-gray-600">
                           Renewable Energy comes with low costs.Energy prices
                           are affordable at all levels.
                         </p>
@@ -201,14 +201,14 @@ const WhyGreen = () => {
                         <img
                           src="/images/why-green/application.png"
                           alt="Application"
-                          className="lg:w-42"
+                          className="w-16 lg:w-20 object-contain"
                         />
                       </div>
                       <div className="flex flex-col space-y-2">
-                        <h4 className="text-lg font-bold text-gray-800 mb-2">
+                        <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                           Application
                         </h4>
-                        <p className="text-xs text-gray-600">
+                        <p className="text-sm text-gray-600">
                           Residential applications, industrial, remote and
                           transportation applications.
                         </p>
@@ -219,14 +219,14 @@ const WhyGreen = () => {
                         <img
                           src="/images/why-green/independence.png"
                           alt="Independence"
-                          className="lg:w-42"
+                          className="w-16 lg:w-20 object-contain"
                         />
                       </div>
                       <div className="flex flex-col space-y-2">
-                        <h4 className="text-lg font-bold text-gray-800 mb-2">
+                        <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                           Independence
                         </h4>
-                        <p className="text-xs text-gray-600">
+                        <p className="text-sm text-gray-600">
                           Unaffected by the failure of the conventional
                           electrical grid
                         </p>
@@ -237,14 +237,14 @@ const WhyGreen = () => {
                         <img
                           src="/images/why-green/efficiency.png"
                           alt="Efficiency"
-                          className="lg:w-42"
+                          className="w-16 lg:w-20 object-contain"
                         />
                       </div>
                       <div className="flex flex-col space-y-2">
-                        <h4 className="text-lg font-bold text-gray-800 mb-2">
+                        <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                           Efficiency
                         </h4>
-                        <p className="text-xs text-gray-600">
+                        <p className="text-sm text-gray-600">
                           Enhance energy security and lower risk of fuel spill,
                           reduce the need for imported fuels
                         </p>

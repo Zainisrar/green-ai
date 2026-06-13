@@ -135,8 +135,8 @@ const CareerGreen = () => {
               <div className="space-y-3 my-3 lg:my-0 lg:w-5/12">
                 <div className="flex relative space-x-4 items-center capitalize">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800 ">
-                      {careersData?.data?.mainPage?.quote1 ? 
+                    <h3 className="text-xl lg:text-2xl font-bold text-gray-800 ">
+                      {careersData?.data?.mainPage?.quote1 ?
                         renderHighlightedText(careersData.data.mainPage.quote1.text, careersData.data.mainPage.quote1.highlighted) :
                         <>We engineer{` `} <span className="text-[#23B14D]">energy.</span></>
                       }
@@ -145,7 +145,7 @@ const CareerGreen = () => {
                 </div>
                 <div className="flex relative space-x-4 items-center capitalize">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800 ">
+                    <h3 className="text-xl lg:text-2xl font-bold text-gray-800 ">
                       But our real asset is
                       {` `} <span className="text-[#23B14D]">people.</span>
                     </h3>
@@ -170,7 +170,7 @@ const CareerGreen = () => {
             </div>
             {/* Bottom Quote */}
             <div className="my-12 mb-20">
-              <h3 className="text-2xl font-bold text-gray-800 capitalize">
+              <h3 className="text-xl lg:text-2xl font-bold text-gray-800 capitalize">
                 {careersData?.data?.mainPage?.quote2 ? 
                   renderHighlightedText(careersData.data.mainPage.quote2.text, careersData.data.mainPage.quote2.highlighted) :
                   <>

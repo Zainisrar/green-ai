@@ -293,7 +293,7 @@ const [isDesktop, setIsDesktop]=useState(false);
               <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
                 {data?.mainPage?.title?.toUpperCase() || "SUPPLY PARTNERS"}
               </h1>
-              <h2 className="lg:text-2xl font-medium text-[#23B14D] italic mb-4">
+              <h2 className="lg:text-2xl font-bold text-[#23B14D] italic mb-4">
                 {data?.mainPage?.subHeadline ||
                   "Technology You Can Trust. Partners Who Deliver."}
               </h2>
@@ -435,7 +435,7 @@ const [isDesktop, setIsDesktop]=useState(false);
                  style={{
                 transform:isDesktop?"skewX(12deg)":"none"
               }}
-                className="text-xl font-bold text-[#23B14D] mb-4 ">
+                className="text-xl lg:text-2xl font-bold text-[#23B14D] mb-4 ">
                   Partner Spotlight
                 </h4>
                 <p

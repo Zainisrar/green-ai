@@ -81,7 +81,7 @@ const BecomeSupplier = () => {
                       className="h-20 lg:h-auto"
                     />
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                         Supplier Login & Registration Panel
                       </h3>
                       <p className="text-sm text-gray-600 mb-3">
@@ -122,7 +122,7 @@ const BecomeSupplier = () => {
                       className="lg:h-auto h-20"
                     />
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                         What You'll Need
                       </h3>
                       <p className="text-sm text-gray-600 mb-3">
@@ -164,7 +164,7 @@ const BecomeSupplier = () => {
                       className="lg:h-auto h-20"
                     />
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                         Why GREEN?
                       </h3>
                       <p className="text-sm text-gray-600 mb-3">

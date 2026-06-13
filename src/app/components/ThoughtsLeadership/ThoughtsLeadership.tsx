@@ -284,7 +284,7 @@ const ThoughtsLeadership = () => {
 
             {/* Featured Editorials / Speeches Section */}
             <div className="mb-8">
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">
+              <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-6">
                 {selectedCategory
                   ? getCategoryTitle(selectedCategory)
                   : apiData?.mainPage.editorialsTitle ||
@@ -395,7 +395,7 @@ const ThoughtsLeadership = () => {
           <div className={`hidden lg:block w-1/4 px-4 pt-8 ${nav.isNavigationOpen ? "pointer-events-none z-0" : "z-[999999999999999999999999999999999999999999]"}`}>
             {/* Categories */}
             <div className={`mb-8 space-y-4 ${nav.isNavigationOpen ? "z-0" : "z-[999999999999999999999999999999999999999999]"}`}>
-              <h4 className="text-lg font-bold text-gray-800 mb-4">
+              <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-4">
                 Browse by Category
               </h4>
 

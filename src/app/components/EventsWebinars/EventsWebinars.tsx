@@ -269,7 +269,7 @@ const EventsWebinars = () => {
                         }}
                       />
                       <div className="p-4">
-                        <h4 className="font-bold text-gray-800 text-lg mb-2">
+                        <h4 className="font-bold text-gray-800 text-lg lg:text-xl mb-2">
                           {event.title}
                         </h4>
                         <p className="text-sm text-gray-600 mb-3">
@@ -347,7 +347,7 @@ const EventsWebinars = () => {
           <div className="hidden lg:block w-1/4 px-4 pt-8">
             {/* Years Filter */}
             <div className="mb-8">
-              <h4 className="text-lg font-bold text-gray-800 mb-4">
+              <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-4">
                 Filter by Year
               </h4>
               <div className="space-y-2">
@@ -408,7 +408,7 @@ const EventsWebinars = () => {
                 />
               </div>
               <div className="">
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                   {
                     apiData?.mainPage.quote.text.split(
                       apiData.mainPage.quote.highlighted

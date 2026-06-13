@@ -88,7 +88,7 @@ const PublicEventVolunteering = () => {
               </h1>
 
               {/* Subtitle */}
-              <p className="text-lg text-[#23B14D] font-semibold mb-6 italic">
+              <p className="text-xl lg:text-2xl text-[#23B14D] font-semibold mb-6 italic">
                 Be Part of the Energy Transition. On the Ground. In the
                 Community.
               </p>
@@ -106,7 +106,7 @@ const PublicEventVolunteering = () => {
                 {/* Why We Engage */}
                 <div className="flex border-b border-[#23B14D] items-center justify-between  pb-4">
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Why We Engage</h3>
+                    <h3 className="text-xl lg:text-2xl font-bold mb-2">Why We Engage</h3>
                     <p className="text-gray-600 italic">
                       Our mission isn't just to install systems — it's to shift
                       systems.
@@ -126,7 +126,7 @@ const PublicEventVolunteering = () => {
                 {/* Ways to Get Involved */}
                 <div className="-ml-16 flex border-b border-[#23B14D] items-center justify-between  pb-4">
                   <div>
-                    <h3 className="text-xl font-bold mb-2">
+                    <h3 className="text-xl lg:text-2xl font-bold mb-2">
                       Ways to Get Involved
                     </h3>
                     <p className="text-gray-600 italic">
@@ -147,7 +147,7 @@ const PublicEventVolunteering = () => {
                 {/* Who Can Join */}
                 <div className="-ml-32 flex border-b border-[#23B14D] items-center justify-between  pb-4">
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Who Can Join?</h3>
+                    <h3 className="text-xl lg:text-2xl font-bold mb-2">Who Can Join?</h3>
                     <p className="text-gray-600 italic">
                       No prior experience needed. Just willingness to act.
                     </p>
@@ -166,7 +166,7 @@ const PublicEventVolunteering = () => {
                 {/* Volunteer Sign-Up */}
                 <div className="-ml-52 flex border-b border-[#23B14D] items-center justify-between  pb-4">
                   <div>
-                    <h3 className="text-xl font-bold mb-2">
+                    <h3 className="text-xl lg:text-2xl font-bold mb-2">
                       Volunteer Sign-Up
                     </h3>
                     <p className="text-gray-600 italic">
@@ -187,7 +187,7 @@ const PublicEventVolunteering = () => {
                 {/* Past Highlights */}
                 <div className="-ml-72 flex border-b border-[#23B14D] items-center justify-between  pb-4">
                   <div>
-                    <h3 className="text-xl font-bold mb-2">Past Highlights</h3>
+                    <h3 className="text-xl lg:text-2xl font-bold mb-2">Past Highlights</h3>
                     <p className="text-gray-600 italic">
                       All Events and stories
                     </p>

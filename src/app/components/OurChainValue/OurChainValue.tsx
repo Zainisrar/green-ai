@@ -118,7 +118,7 @@ const OurChainValue = () => {
                     style={{
                       transform:"skewX(16deg)"
                     }}
-                    className="text-2xl capitalize font-bold text-gray-800  ">
+                    className="text-xl lg:text-2xl capitalize font-bold text-gray-800  ">
                       {data?.quote?.[0]?.highlighted ? (
                         <>
                           {data?.quote?.[0]?.text
@@ -199,7 +199,7 @@ const OurChainValue = () => {
                   </>
                 )}
               </div>
-              <h3 className="text-2xl font-bold text-gray-800 mb-6">
+              <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-6">
                 Value Chain Strip
               </h3>
 
@@ -220,7 +220,7 @@ const OurChainValue = () => {
                         />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-gray-800 ">
+                        <h4 className="text-lg lg:text-xl font-bold text-gray-800 ">
                           {item.title}
                         </h4>
                         <div className="text-sm text-gray-900 ">

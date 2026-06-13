@@ -137,7 +137,7 @@ const IndustryAffiliationsCertifications = () => {
                    style={{
                     transform:"skewX(16deg)"
                    }}
-                  className="text-xl font-bold  text-gray-800">
+                  className="text-xl lg:text-2xl font-bold  text-gray-800">
                     Why Certification & Affiliation Matter
                   </h3>
                   <button
@@ -159,7 +159,7 @@ const IndustryAffiliationsCertifications = () => {
                   style={{
                     transform:"skewX(16deg)"
                   }}
-                  className="text-xl font-bold  text-gray-800">
+                  className="text-xl lg:text-2xl font-bold  text-gray-800">
                     Our Current Certifications
                   </h3>
                   <button
@@ -181,7 +181,7 @@ const IndustryAffiliationsCertifications = () => {
                   style={{
                     transform:"skewX(16deg)"
                   }}
-                  className="text-xl font-bold  text-gray-800">
+                  className="text-xl lg:text-2xl font-bold  text-gray-800">
                     Industry Affiliations
                   </h3>
                   <button
@@ -203,7 +203,7 @@ const IndustryAffiliationsCertifications = () => {
                     style={{
                       transform:"skewX(16deg)"
                     }}
-                  className="text-xl font-bold  text-gray-800">
+                  className="text-xl lg:text-2xl font-bold  text-gray-800">
                     What This Means for Clients
                   </h3>
                   <button
@@ -249,7 +249,7 @@ const IndustryAffiliationsCertifications = () => {
         <div className="lg:flex justify-between px-4 lg:px-0 lg:pl-32 my-20">
           <div className="lg:max-w-3xl">
             {whyCertificationAffiliationMatter?.quote?.text && (
-              <h3 className="text-2xl font-bold text-gray-800">
+              <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
                 {whyCertificationAffiliationMatter.quote.text}
               </h3>
             )}

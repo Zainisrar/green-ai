@@ -100,7 +100,7 @@ const OurProcurementPhilosophy = () => {
                   className="w-52 h-32"
                 />
                 <div className="">
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                     {apiData?.corePrinciples?.title || "Core Principles"}
                   </h3>
                   <p className="text-sm text-gray-600 mb-3">
@@ -126,7 +126,7 @@ const OurProcurementPhilosophy = () => {
                   className="w-52 h-32"
                 />
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                     {apiData?.whatWeWontCompromise?.title || "What We Won't Compromise"}
                   </h3>
                   <p className="text-sm text-gray-600 mb-3">
@@ -158,7 +158,7 @@ const OurProcurementPhilosophy = () => {
                   className="w-52 h-32"
                 />
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                     {apiData?.procurementAlignedImpact?.title || "Procurement Aligned with Impact"}
                   </h3>
                   <p className="text-sm text-gray-600 mb-3">
@@ -182,7 +182,7 @@ const OurProcurementPhilosophy = () => {
                   className="w-52 h-32"
                 />
                 <div className="flex-1">
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                     {apiData?.strategicVendorRelationships?.title || "Strategic Vendor Relationships"}
                   </h3>
                   <p className="text-sm text-gray-600 mb-3">

@@ -46,8 +46,8 @@ const OurStory = () => {
           <div className="lg:w-5/6  flex flex-col  lg:px-8  lg:mr-8 p-8 lg:ml-4 rounded-lg">
             <div className="lg:flex">
               {/* Left Content Section */}
-              <div className="lg:w-1/2 flex justify-center lg:block lg:text-left text-center   pr-8">
-                <h1 className=" text-2xl lg:text-3xl lg:absolute top-1/4 left-1/8 font-black mb-6">
+              <div className="lg:w-1/2 flex justify-center lg:block lg:text-left text-center pr-8">
+                <h1 className="text-4xl lg:text-5xl 2xl:text-6xl lg:mt-24 uppercase font-black leading-tight mb-6">
                   {ourStoryData?.key.split(" & ")[0]+ ` &` || "OUR STORY &"}
                   <br />
                   <span className="text-[#23B14D]">
@@ -58,7 +58,7 @@ const OurStory = () => {
 
               {/* Right Content Section */}
               <div className="w-full z-10  relative">
-                <h2 className="text-2xl lg:text-3xl  font-black text-gray-800 mb-4">
+                <h2 className="text-2xl lg:text-3xl  font-bold text-gray-800 mb-4">
                   {ourStoryData?.title || "Our Story"}
                 </h2>
                 <p className="text-gray-700 lg:text-lg leading-relaxed mb-8">
@@ -66,7 +66,7 @@ const OurStory = () => {
                     "GREEN Limited renewable energy solutions and services are predominantly targeted at rural areas that lack access to conventional energy sources and utilities. Our products and services are primarily designed to empower rural communities for economic and social growth, thereby improving their quality of life in a sustainable and healthful manner. Our delivery of solutions, products, and services ensures environmental value addition."}
                 </p>
 
-                <h3 className="text-2xl lg:text-3xl font-black text-gray-800 mb-6">
+                <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-6">
                   {ourStoryData?.ourMilestone?.title || "Our Milestones"}
                 </h3>
 

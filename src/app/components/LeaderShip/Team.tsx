@@ -54,7 +54,7 @@ const Team = () => {
           />
         </div>
         <div className="text-center -ml-20">
-          <h3 className="text-lg font-bold text-gray-800">
+          <h3 className="text-lg lg:text-xl font-bold text-gray-800">
             {member?.name || "Bernard George"}
           </h3>
           <p className="text-sm text-green-600 font-semibold">
@@ -93,7 +93,7 @@ const Team = () => {
             <div className="lg:flex">
               {/* Left Content Section */}
               <div className="lg:w-1/2  flex justify-center text-center lg:block ">
-                <h1 className="text-2xl lg:text-3xl lg:mt-20 font-black mb-6">
+                <h1 className="text-4xl lg:text-5xl 2xl:text-6xl lg:mt-24 uppercase font-black leading-tight mb-6">
                   {key?.split("LEADERSHIP")[0] || "Leadership"}
                   <br />
                   <span className="text-[#23B14D]">

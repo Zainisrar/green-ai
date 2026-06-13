@@ -31,25 +31,23 @@ const JoinUs = () => {
       <div className="">
         <TopNavigation />
 
+        {/* Side watermark icon (fixed, does not affect layout) */}
+        <div className="fixed top-1/4 lg:top-1/5 left-3 lg:left-14 z-20">
+          <img
+            src="/images/join-us/industry-affiliations-certifications.png"
+            alt="industry-affiliations-certifications"
+            className="w-5 lg:w-6"
+          />
+        </div>
+
         {/* Main Content */}
         <div className="flex h-full">
-          {/* Left Side  */}
-          <div className=" w-1/8  flex items-center justify-center">
-            <div className="fixed top-1/4 lg:top-1/5 left-4 lg:left-14">
-              <img
-                src="/images/join-us/industry-affiliations-certifications.png"
-                alt="industry-affiliations-certifications"
-                className="w-5 lg:w-6"
-              />
-            </div>
-          </div>
-
           {/* Center Content Area */}
-          <div className="flex-1   relative z-10">
-            <div className="">
+          <div className="flex-1 relative z-10">
+            <div className="px-6 pl-12 lg:pl-24 lg:pr-10">
               {/* Main Title */}
-              <div className="mb-8 pl-20">
-                <h1 className="lg:text-3xl font-black text-gray-800 mb-4">
+              <div className="mb-8 max-w-3xl">
+                <h1 className="text-2xl lg:text-4xl font-black text-gray-800 mb-4">
                   {joinUsData?.data?.title || "JOIN US LOGIN"}
                 </h1>
                 <p className="text-xl lg:text-2xl font-bold text-[#4CAF50] italic mb-6">
@@ -69,7 +67,7 @@ const JoinUs = () => {
                 />
               </div>
               {/* Login Buttons */}
-              <div className="flex space-x-4 lg:mx-20 mb-12">
+              <div className="flex flex-wrap gap-4 mb-12">
                 <button
                   onClick={() => setIsExistingUsersOpen(true)}
                   className="cursor-pointer"
@@ -77,25 +75,30 @@ const JoinUs = () => {
                   <img
                     src="/images/join-us/existing-users.png"
                     alt="Existing User"
+                    className="w-36 sm:w-44 lg:w-auto"
                   />
                 </button>
                 <button
                   onClick={() => setIsNewUsersOpen(true)}
                   className="cursor-pointer"
                 >
-                  <img src="/images/join-us/new-users.png" alt="New Users" />
+                  <img
+                    src="/images/join-us/new-users.png"
+                    alt="New Users"
+                    className="w-36 sm:w-44 lg:w-auto"
+                  />
                 </button>
               </div>
 
               {/* Features Section */}
               <div className="mb-8">
-                <h3 className="text-xl font-black text-gray-800 mb-6">
+                <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-6">
                   What You'll Access After Logging In:
                 </h3>
                 <div className="mb-14">
-                  <hr className="w-[67%] text-[#4CAF50]" />
+                  <hr className="w-2/3 border-t-2 border-[#4CAF50]" />
                 </div>
-                <div className="lg:flex justify-between space-x-10">
+                <div className="lg:flex justify-between lg:space-x-10">
                   <div className="grid md:grid-cols-2 max-w-6xl gap-8 mb-8">
                     {/* Left Column */}
                     <div className="space-y-4">
@@ -106,7 +109,7 @@ const JoinUs = () => {
                           className="w-14"
                         />
                         <div>
-                          <h4 className="font-bold text-xl italic text-gray-800">
+                          <h4 className="font-bold text-xl lg:text-2xl italic text-gray-800">
                             Application Tracker
                           </h4>
                           <p className="text-sm text-gray-600 font-bold">
@@ -122,7 +125,7 @@ const JoinUs = () => {
                           className="w-14"
                         />
                         <div>
-                          <h4 className="font-bold text-xl italic text-gray-800">
+                          <h4 className="font-bold text-xl lg:text-2xl italic text-gray-800">
                             Access The GREEN Career Toolkit
                           </h4>
                           <p className="text-sm text-gray-600 font-bold">
@@ -141,7 +144,7 @@ const JoinUs = () => {
                           className="w-14"
                         />
                         <div>
-                          <h4 className="font-bold text-xl italic text-gray-800">
+                          <h4 className="font-bold text-xl lg:text-2xl italic text-gray-800">
                             Save Jobs & Internship Openings
                           </h4>
                         </div>
@@ -154,7 +157,7 @@ const JoinUs = () => {
                           className="w-14"
                         />
                         <div>
-                          <h4 className="font-bold text-xl italic text-gray-800">
+                          <h4 className="font-bold text-xl lg:text-2xl italic text-gray-800">
                             Schedule Technical Assessments
                           </h4>
                           <p className="text-sm font-bold text-gray-600">
@@ -205,7 +208,7 @@ const JoinUs = () => {
               {/* Data Policy Section */}
               <div className="lg:flex justify-between mb-32 lg:mb-20">
                 <div className="mb-8">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                     {joinUsData?.data?.dataPolicyEthics?.title ||
                       "Data Policy & Ethics"}
                   </h3>
@@ -245,60 +248,27 @@ const JoinUs = () => {
                     </div>
                   </div>
                 </div>
-                <div className="space-y-8">
-                  {joinUsData && joinUsData?.data?.cta?.length > 0 ? (
-                    <>
-                      <div className="flex justify-end cursor-pointer z-50">
-                        <Link
-                          href={joinUsData?.data.cta[0].href || "#"}
-                          className="cursor-pointer"
-                        >
-                          <button>
-                           <img
-              src="/images/join-us/view-current-vacancies.png"
-              alt="view-current-vacancies"
-              className="cursor-pointer"
-            />
-                          </button>
-                        </Link>
-                      </div>
-                      <div className="flex justify-end cursor-pointer z-50">
-                        <Link
-                          href={joinUsData?.data.cta[1].href || "#"}
-                          className="cursor-pointer"
-                        >
-                          <button>
-                              <img
-                            src="/images/join-us/view-our-recruitment-privacy-policy.png"
-                            alt="view-our-recruitment-privacy-policy"
-                            className="cursor-pointer"
-                          />
-                          </button>
-                        </Link>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="flex justify-end cursor-pointer z-50">
-                        <button className="cursor-pointer">
-                           <img
-              src="/images/join-us/view-current-vacancies.png"
-              alt="view-current-vacancies"
-              className="cursor-pointer"
-            />
-                        </button>
-                      </div>
-                      <div className="flex justify-end cursor-pointer z-50">
-                        <button className="cursor-pointer">
-                          <img
-                            src="/images/join-us/view-our-recruitment-privacy-policy.png"
-                            alt="view-our-recruitment-privacy-policy"
-                            className="cursor-pointer"
-                          />
-                        </button>
-                      </div>
-                    </>
-                  )}
+                <div className="flex flex-col items-start lg:items-end gap-6 shrink-0">
+                  <Link
+                    href={joinUsData?.data?.cta?.[0]?.href || "#"}
+                    className="cursor-pointer"
+                  >
+                    <img
+                      src="/images/join-us/view-current-vacancies.png"
+                      alt="view-current-vacancies"
+                      className="w-60 lg:w-auto cursor-pointer"
+                    />
+                  </Link>
+                  <Link
+                    href={joinUsData?.data?.cta?.[1]?.href || "#"}
+                    className="cursor-pointer"
+                  >
+                    <img
+                      src="/images/join-us/view-our-recruitment-privacy-policy.png"
+                      alt="view-our-recruitment-privacy-policy"
+                      className="w-60 lg:w-auto cursor-pointer"
+                    />
+                  </Link>
                 </div>
               </div>
             </div>

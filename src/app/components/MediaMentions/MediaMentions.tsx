@@ -239,7 +239,7 @@ const MediaMentions: React.FC = () => {
         <div className="hidden lg:block w-1/4 px-4 pt-8">
           {/* Years Filter */}
           <div className="mb-8">
-            <h4 className="text-lg font-bold text-gray-800 mb-4">Filter by Year</h4>
+            <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-4">Filter by Year</h4>
             <div className="space-y-2">
               {mockMediaData.map((yearData) => (
                 <div key={yearData.year}>

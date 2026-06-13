@@ -22,7 +22,7 @@ const GreenTalentIncubator = () => {
     data: (
       <div className="">
         <div className="mb-8">
-          <h3 className="text-2xl font-black text-gray-800 mb-4">
+          <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
             Why We Built This
           </h3>
           <p className="text-gray-900 font-semibold mb-4">
@@ -43,7 +43,7 @@ const GreenTalentIncubator = () => {
         return (
           <div className="">
             <div className="mb-8">
-              <h3 className="text-xl lg:text-2xl font-black text-gray-800 mb-4">
+              <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                 {why?.title ?? "Why We Built This"}
               </h3>
               <p className="ont-semibold mb-4 italic text-[#23B14D]">
@@ -82,7 +82,7 @@ const GreenTalentIncubator = () => {
       case 1:
         return (
           <div>
-            <h3 className="text-xl lg:text-2xl font-black text-gray-800 mb-4">
+            <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
               {offer?.title ?? "What We Offer"}
             </h3>
             {(offer?.items ?? []).map((item, idx) => (
@@ -110,7 +110,7 @@ const GreenTalentIncubator = () => {
       case 2:
         return (
           <div>
-            <h3 className="text-xl lg:text-2xl font-black text-gray-800 mb-4">
+            <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
               Our Model
             </h3>
             <h4 className="text-xl font-bold text-[#23B14D] mb-6">
@@ -148,7 +148,7 @@ const GreenTalentIncubator = () => {
       case 3:
         return (
           <div>
-            <h3 className="text-xl lg:text-2xl font-black text-gray-800 mb-4">
+            <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
               {partner?.title ?? "Partner With Us"}
             </h3>
             <p className="text-lg text-gray-700 mb-6 italic">
@@ -166,7 +166,7 @@ const GreenTalentIncubator = () => {
       case 4:
         return (
           <div>
-            <h3 className="text-xl lg:text-2xl font-black text-gray-800 mb-6">
+            <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-6">
               {alumni?.title ?? "Alumni Voices"}
             </h3>
             <div className="space-y-6">
@@ -264,10 +264,10 @@ const GreenTalentIncubator = () => {
                   />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">
+                  <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                     Energy transformation
                   </h3>
-                  <h3 className="text-lg font-bold text-gray-800">
+                  <h3 className="text-lg lg:text-xl font-bold text-gray-800">
                     needs talent transformation.
                   </h3>
                 </div>
@@ -293,7 +293,7 @@ const GreenTalentIncubator = () => {
                     }}
                   >
                     <h3
-                      className={`text-lg font-black ${
+                      className={`text-lg lg:text-xl font-bold ${
                         active.activeIndex === 0 ? "text-[#23B14D]" : "text-gray-800"
                       } mb-2`}
                     >
@@ -312,7 +312,7 @@ const GreenTalentIncubator = () => {
                     }}
                   >
                     <h3
-                      className={`text-lg font-black ${
+                      className={`text-lg lg:text-xl font-bold ${
                         active.activeIndex === 1 ? "text-[#23B14D]" : "text-gray-800"
                       } mb-2`}
                     >
@@ -331,7 +331,7 @@ const GreenTalentIncubator = () => {
                     }}
                   >
                     <h3
-                      className={`text-lg font-black ${
+                      className={`text-lg lg:text-xl font-bold ${
                         active.activeIndex === 2 ? "text-[#23B14D]" : "text-gray-800"
                       } mb-2`}
                     >
@@ -350,7 +350,7 @@ const GreenTalentIncubator = () => {
                     }}
                   >
                     <h3
-                      className={`text-lg font-black ${
+                      className={`text-lg lg:text-xl font-bold ${
                         active.activeIndex === 3 ? "text-[#23B14D]" : "text-gray-800"
                       } mb-2`}
                     >
@@ -369,7 +369,7 @@ const GreenTalentIncubator = () => {
                     }}
                   >
                     <h3
-                      className={`text-lg font-black ${
+                      className={`text-lg lg:text-xl font-bold ${
                         active.activeIndex === 4 ? "text-[#23B14D]" : "text-gray-800"
                       } mb-2`}
                     >
@@ -387,10 +387,10 @@ const GreenTalentIncubator = () => {
                     />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-800 mb-2 italic">
+                    <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2 italic">
                       Energy transformation
                     </h3>
-                    <h3 className="text-lg font-bold text-gray-800 italic">
+                    <h3 className="text-lg lg:text-xl font-bold text-gray-800 italic">
                       needs talent transformation.
                     </h3>
                   </div>
@@ -407,7 +407,7 @@ const GreenTalentIncubator = () => {
             </div>
 
             <div className="mt-12">
-              <h3 className="text-xl max-w-xl capitalize leading-9 font-bold text-gray-800">
+              <h3 className="text-xl lg:text-2xl max-w-xl capitalize leading-9 font-bold text-gray-800">
                 "The <span className="text-[#23B14D]">Incubator</span> Gave Me Confidence — Now I
                 Lead Installs Across Three Provinces."
                 <br />— O&M Lead, <span className="text-[#23B14D]">GREEN</span> Projects

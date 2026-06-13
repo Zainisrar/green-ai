@@ -88,168 +88,142 @@ const Project = () => {
               />
             </div>
 
-            {/* Left Project Card */}
-            <div className=" hidden lg:block lg:fixed top-1/2  left-32 transform -translate-y-1/2 z-50">
+            {/* Left (previous) preview */}
+            <button
+              type="button"
+              onClick={prevProject}
+              aria-label="Previous project"
+              className="group fixed left-4 top-1/2 z-50 hidden -translate-y-1/2 cursor-pointer items-center gap-3 lg:flex xl:left-10"
+            >
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/90 text-[#23B14D] shadow-lg transition group-hover:scale-110 group-hover:bg-white">
+                <svg
+                  className="h-6 w-6"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M15 18L9 12L15 6" />
+                </svg>
+              </span>
               <div
-                className="relative cursor-pointer group"
-                onClick={prevProject}
+                style={{ transform: "skewX(-10deg)" }}
+                className="relative h-44 w-40 overflow-hidden shadow-2xl ring-1 ring-white/30 xl:w-48"
               >
+                <img
+                  src={getPrevProject().image}
+                  alt={getPrevProject().title}
+                  className="h-full w-full scale-110 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                 <div
-                  style={{
-                    transform: "skewX(-20deg)",
-                  }}
-                  className="w-52 h-48  overflow-hidden shadow-2xl"
+                  style={{ transform: "skewX(10deg)" }}
+                  className="absolute inset-x-0 bottom-0 p-3"
                 >
-                  <img
-                    src={getPrevProject().image}
-                    alt={getPrevProject().title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div
-                  style={{
-                    transform: "skewX(-20deg)",
-                  }}
-                  className="w-44  absolute top-0 left-10 h-48  overflow-hidden shadow-2xl"
-                >
-                  <div className="absolute inset-0 bg-gray-300 p-4  flex items-center justify-center">
-                    <div
-                      style={{
-                        transform: "skewX(20deg)",
-                      }}
-                      className="text-black text-center "
-                    >
-                      <div className="text-xl font-bold">
-                        {(() => {
-                          const title = getPrevProject().title || "";
-                          const words = title.trim().split(/\s+/);
-
-                          // If more than 6 words, don't render
-                          if (words.length > 6) return null;
-
-                          // Limit to 3 words per line, 2 lines max
-                          const firstLine = words.slice(0, 3).join(" ");
-                          const secondLine = words.slice(3, 6).join(" ");
-
-                          return (
-                            <div className="text-center leading-tight">
-                              <div>{firstLine}</div>
-                              {secondLine && <div>{secondLine}</div>}
-                            </div>
-                          );
-                        })()}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="absolute -left-8 top-1/2 transform -translate-y-1/2">
-                  <svg
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M15 18L9 12L15 6"
-                      stroke="#22c55e"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+                  <span className="line-clamp-2 block text-center text-sm font-bold leading-tight text-white drop-shadow">
+                    {getPrevProject().title}
+                  </span>
                 </div>
               </div>
-            </div>
+            </button>
           </div>
-          <div
-            onClick={() => {
-              prevProject();
-            }}
-            className="absolute z-50 lg:hidden left-0  cursor-pointer top-8/12 transform -translate-y-1/2"
+          <button
+            type="button"
+            onClick={prevProject}
+            aria-label="Previous project"
+            className="fixed left-2 top-1/2 z-50 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[#23B14D] shadow-lg lg:hidden"
           >
             <svg
-              width="52"
-              height="52"
+              className="h-6 w-6"
               viewBox="0 0 24 24"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <path
-                d="M15 18L9 12L15 6"
-                stroke="#22c55e"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+              <path d="M15 18L9 12L15 6" />
             </svg>
-          </div>
-          <div className=" ">
-            <div
-              style={{
-                transform: isDesktop ? "skewX(-4deg)" : "skewX(-20deg)",
-              }}
-              className=" absolute lg:top-0 mt-20 lg:left-1/8 z-10   "
-            >
-              <div>
+          </button>
+          {/* Center Stage */}
+          <div className="relative flex-1 flex flex-col items-center justify-center min-h-screen px-4 py-24 lg:py-12">
+            {/* Background project image — kept behind the content */}
+            <div className="absolute inset-y-6 inset-x-2 lg:inset-y-10 lg:inset-x-[12%] -z-10 flex">
+              <div
+                style={{ transform: isDesktop ? "skewX(-4deg)" : "skewX(-8deg)" }}
+                className="relative w-full overflow-hidden shadow-2xl"
+              >
                 <img
                   src={currentProject.image}
-                  alt="project"
-                  className={`lg:w-[60%] w-[80%]  mx-auto  lg:px-0   lg:h-screen ${
-                    isProjectsOpen ? "h-[120vh]" : " h-[60vh]"
-                  } `}
+                  alt={currentProject.title}
+                  className="h-full w-full object-cover"
                 />
+                <div className="absolute inset-0 bg-black/50" />
               </div>
             </div>
-            <div className=" relative top-44  lg:top-auto  lg:ml-52  z-50">
-              <div className="lg:my-10 ">
-                <div className=" text-white w-[70%] ml-20 lg:w-[80%] mx-auto">
-                  <div
-                    style={{
-                      transform: "skewX(-16deg)",
-                    }}
-                    className=" bg-white/60  p-3 text-center  text-black  text-xl lg:text-3xl font-black"
-                  >
-                    {(() => {
-                      const words = String(currentProject.title ?? "")
-                        .trim()
-                        .split(/\s+/)
-                        .filter(Boolean);
-                      const lines: string[] = [];
-                      for (let i = 0; i < words.length; i += 3) {
-                        lines.push(words.slice(i, i + 3).join(" "));
-                      }
-                      return lines.map((line, i) => (
-                        <React.Fragment key={i}>
-                          {line}
-                          {i < lines.length - 1 && <br />}
-                        </React.Fragment>
-                      ));
-                    })()}
-                  </div>
-                  <div
-                    onClick={toggleProjects}
-                    className="flex justify-center mt-8 z-40 absolute lg:top-20  left-52 top-14 lg:left-72 cursor-pointer"
-                  >
-                    {isProjectsOpen ? (
-                      <img
-                        src="/images/projects/openingTag.png"
-                        alt="openTag"
-                      />
-                    ) : (
-                      <img
-                        src="/images/projects/closingTag.png"
-                        alt="closeTag"
-                      />
-                    )}
-                  </div>
+
+            {/* Foreground content */}
+            <div className="relative z-10 flex w-full max-w-3xl flex-col items-center">
+              {/* Title */}
+              <div
+                style={{ transform: "skewX(-12deg)" }}
+                className="bg-white/25 px-6 lg:px-10 py-3 shadow-lg backdrop-blur-sm"
+              >
+                <div
+                  style={{ transform: "skewX(12deg)" }}
+                  className="text-center text-2xl font-black leading-tight text-white lg:text-4xl"
+                >
+                  {(() => {
+                    const words = String(currentProject.title ?? "")
+                      .trim()
+                      .split(/\s+/)
+                      .filter(Boolean);
+                    const lines: string[] = [];
+                    for (let i = 0; i < words.length; i += 3) {
+                      lines.push(words.slice(i, i + 3).join(" "));
+                    }
+                    return lines.map((line, i) => (
+                      <React.Fragment key={i}>
+                        {line}
+                        {i < lines.length - 1 && <br />}
+                      </React.Fragment>
+                    ));
+                  })()}
+                </div>
+              </div>
+              {/* Expand / collapse toggle */}
+              <button
+                type="button"
+                onClick={toggleProjects}
+                aria-label={
+                  isProjectsOpen
+                    ? "Collapse project details"
+                    : "Expand project details"
+                }
+                className="my-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-gray-800 shadow-lg transition hover:scale-110 hover:bg-white"
+              >
+                <svg
+                  className={`h-6 w-6 transition-transform duration-300 ${
+                    isProjectsOpen ? "" : "rotate-180"
+                  }`}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M18 15L12 9L6 15" />
+                </svg>
+              </button>
                   {isProjectsOpen && (
                     <div
                       style={{
-                        transform: isDesktop ? "skewX(-8deg)" : "skewX(-20deg)",
+                        transform: isDesktop ? "skewX(-8deg)" : "skewX(-10deg)",
                       }}
-                      className="flex  flex-col top-14 -left-8 p-8 lg:top-20    bg-black/60   lg:-left-42 lg:p-10  relative z-50  space-y-4"
+                      className="mt-2 w-full flex flex-col bg-black/60 p-6 lg:p-10 relative z-50 space-y-6 shadow-2xl text-white"
                     >
                       <div
                         style={{
@@ -471,107 +445,67 @@ const Project = () => {
                       </div>
                     </div>
                   )}
-                </div>
               </div>
             </div>
-          </div>
-          <div
-            onClick={() => {
-              nextProject();
-            }}
-            className="absolute z-50 lg:hidden right-0 cursor-pointer top-8/12 transform -translate-y-1/2"
+          <button
+            type="button"
+            onClick={nextProject}
+            aria-label="Next project"
+            className="fixed right-2 top-1/2 z-50 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[#23B14D] shadow-lg lg:hidden"
           >
             <svg
-              width="52"
-              height="52"
+              className="h-6 w-6"
               viewBox="0 0 24 24"
               fill="none"
-              xmlns="http://www.w3.org/2000/svg"
+              stroke="currentColor"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
-              <path
-                d="M9 18L15 12L9 6"
-                stroke="#22c55e"
+              <path d="M9 18L15 12L9 6" />
+            </svg>
+          </button>
+
+          {/* Right (next) preview */}
+          <button
+            type="button"
+            onClick={nextProject}
+            aria-label="Next project"
+            className="group fixed right-4 top-1/2 z-50 hidden -translate-y-1/2 cursor-pointer items-center gap-3 lg:flex xl:right-10"
+          >
+            <div
+              style={{ transform: "skewX(-10deg)" }}
+              className="relative h-44 w-40 overflow-hidden shadow-2xl ring-1 ring-white/30 xl:w-48"
+            >
+              <img
+                src={getNextProject().image}
+                alt={getNextProject().title}
+                className="h-full w-full scale-110 object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+              <div
+                style={{ transform: "skewX(10deg)" }}
+                className="absolute inset-x-0 bottom-0 p-3"
+              >
+                <span className="line-clamp-2 block text-center text-sm font-bold leading-tight text-white drop-shadow">
+                  {getNextProject().title}
+                </span>
+              </div>
+            </div>
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/90 text-[#23B14D] shadow-lg transition group-hover:scale-110 group-hover:bg-white">
+              <svg
+                className="h-6 w-6"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
                 strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-
-          {/* Right Side Project Card and Navigation */}
-          <div className="hidden lg:block lg:fixed top-1/2  right-32 transform -translate-y-1/2 z-50">
-            <div
-              className="relative cursor-pointer group"
-              onClick={nextProject}
-            >
-              <div
-                style={{
-                  transform: "skewX(-20deg)",
-                }}
-                className="w-52 h-48  overflow-hidden shadow-2xl"
               >
-                <img
-                  src={getNextProject().image}
-                  alt={getNextProject().title}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div
-                style={{
-                  transform: "skewX(-20deg)",
-                }}
-                className="w-44  absolute top-0 left-10 h-48  overflow-hidden shadow-2xl"
-              >
-                <div className="absolute inset-0 bg-gray-300 p-4  flex items-center justify-center">
-                  <div
-                    style={{
-                      transform: "skewX(20deg)",
-                    }}
-                    className="text-black text-center "
-                  >
-                    <div className="text-xl font-bold">
-                      {(() => {
-                        const title = getNextProject().title || "";
-                        const words = title.trim().split(/\s+/);
-
-                        // If more than 6 words, don't render
-                        if (words.length > 6) return null;
-
-                        // Limit to 3 words per line, 2 lines max
-                        const firstLine = words.slice(0, 3).join(" ");
-                        const secondLine = words.slice(3, 6).join(" ");
-
-                        return (
-                          <div className="text-center leading-tight">
-                            <div>{firstLine}</div>
-                            {secondLine && <div>{secondLine}</div>}
-                          </div>
-                        );
-                      })()}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute -right-12 top-1/2 transform -translate-y-1/2">
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M9 18L15 12L9 6"
-                    stroke="#22c55e"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-            </div>
-          </div>
+                <path d="M9 18L15 12L9 6" />
+              </svg>
+            </span>
+          </button>
         </div>
 
         <div className="hidden lg:block lg:fixed right-2 bottom-28 z-40 cursor-pointer">

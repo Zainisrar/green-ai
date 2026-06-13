@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useEnergyServices } from "../../../hooks/useEnergyServices";
 
 const Services = () => {
+  const router = useRouter();
   const { energyData } = useEnergyServices();
   const [activeServiceIndex, setActiveServiceIndex] = useState(0);
 
@@ -310,7 +312,7 @@ const Services = () => {
             />
           </div>
           <div className=" flex flex-col items-end w-full  lg:hidden">
-            <h3 className="text-3xl font-black text-gray-800 mb-2">
+            <h3 className="text-3xl font-bold text-gray-800 mb-2">
               {energyData?.headline || "EPCM"}
             </h3>
             <p className="text-[#23B14D] pt-2 lg:text-xl text-right 2xl:text-2xl font-semibold">
@@ -320,7 +322,7 @@ const Services = () => {
           </div>
           <div className=" flex flex-col justify-center  max-w-[450px]  ml-auto">
             <div className="flex lg:block space-x-4 justify-between lg:mb-0 mb-8">
-              <h1 className=" text-gray-800 text-2xl lg:text-3xl  mb-4 font-bold">
+              <h1 className=" text-gray-800 text-2xl lg:text-3xl  mb-4 font-black">
                 {data.find((item) => item.active)?.title}
               </h1>
               <div
@@ -393,7 +395,7 @@ const Services = () => {
         </div>
         <div className="lg:flex  space-x-20">
           <div className="lg:block hidden">
-            <h3 className="text-3xl font-black text-gray-800 mb-2">
+            <h3 className="text-3xl font-bold text-gray-800 mb-2">
               {energyData?.headline || "EPCM"}
             </h3>
             <p className="text-[#23B14D] pt-2 lg:text-xl 2xl:text-2xl font-semibold">
@@ -445,8 +447,23 @@ const Services = () => {
         </div>
 
         <div className="flex  justify-end mb-20">
-          <button className="">
-            <img src="/images/service/enquiry.svg" alt="Enquiry" className="" />
+          <button
+            type="button"
+            className="cursor-pointer"
+            onClick={() => {
+              // Honor the CMS value, but route the non-existent "/contact"
+              // alias to the real contact page so the link never 404s.
+              const href = energyData?.cta?.href;
+              router.push(
+                !href || href === "/contact" ? "/engage/contact-us" : href
+              );
+            }}
+          >
+            <img
+              src="/images/service/enquiry.svg"
+              alt={energyData?.cta?.text || "Enquiry"}
+              className=""
+            />
           </button>
         </div>
 

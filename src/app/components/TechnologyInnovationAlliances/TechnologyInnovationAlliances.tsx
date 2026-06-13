@@ -99,7 +99,7 @@ const TechnologyInnovationAlliances = () => {
                   className="lg:w-62 h-20 lg:h-32"
                 />
                 <div className="flex-1">
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">
+                  <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                     {modal0?.title.trim() || "Why We Partner"}
                   </h3>
                   <p className="text-sm">
@@ -125,7 +125,7 @@ const TechnologyInnovationAlliances = () => {
                   className="lg:w-62 h-20 lg:h-32"
                 />
                 <div className="flex-1">
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">
+                  <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                     {modal1?.title.trim() || "Current Technology Collaborators"}
                   </h3>
                   <p className="text-sm">
@@ -151,7 +151,7 @@ const TechnologyInnovationAlliances = () => {
                   className="lg:w-62 h-20 lg:h-32"
                 />
                 <div className="flex-1">
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">
+                  <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                     {modal2?.title.trim() || "Research & Co-Development"}
                   </h3>
                   <p className="text-sm">
@@ -177,7 +177,7 @@ const TechnologyInnovationAlliances = () => {
                   className="lg:w-62 h-20 lg:h-32"
                 />
                 <div className="flex-1">
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">
+                  <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                     {modal3?.title.trim() || "Become an Innovation Partner"}
                   </h3>
                   <p className="text-sm">

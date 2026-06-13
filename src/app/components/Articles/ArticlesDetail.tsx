@@ -37,7 +37,7 @@ const ArticlesDetail = ({ slug }: ArticlesDetailProps) => {
             {/* Article Header */}
             <div className="mb-8 pl-10 lg:pl-0">
               <div className="flex items-center justify-between">
-                <h1 className=" text-xl lg:text-3xl font-bold text-gray-800 mb-4">
+                <h1 className=" text-2xl lg:text-3xl font-black text-gray-800 mb-4">
                   {article.title}
                 </h1>
                 <div >
@@ -97,7 +97,7 @@ const ArticlesDetail = ({ slug }: ArticlesDetailProps) => {
                 
                 return (
                   <div key={index} className="mb-8">
-                    <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                    <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                       {sectionTitle}
                     </h2>
                     <div className="lg:flex justify-between items-start ">
@@ -118,7 +118,7 @@ const ArticlesDetail = ({ slug }: ArticlesDetailProps) => {
 
             {/* Bottom Section - Quote */}
             <div className="mt-12 mb-8">
-              <h3 className="text-2xl font-bold text-gray-800 mb-4">
+              <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                 {article.quote.text.split('—')[0].trim()}
                 <br />
                 —{" "}

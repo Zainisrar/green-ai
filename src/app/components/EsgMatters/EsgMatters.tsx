@@ -16,7 +16,7 @@ const EsgMatters = () => {
       <div className="mt-8 lg:ml-4 ">
         {/* Why ESG Matters Box */}
         <div className="">
-          <h3 className="text-2xl lg:ml-8 font-bold text-gray-800 mb-4">
+          <h3 className="text-xl lg:text-2xl lg:ml-8 font-bold text-gray-800 mb-4">
             Why ESG Matters to GREEN
           </h3>
           <p className="lg:ml-6 text-[#23B14D] text-lg font-semibold italic mb-4">
@@ -103,7 +103,7 @@ const EsgMatters = () => {
           data: (
             <div className="mt-8 lg:ml-4 ">
               <div className="">
-                <h3 className="text-2xl lg:ml-8 font-bold text-gray-800 mb-4">
+                <h3 className="text-xl lg:text-2xl lg:ml-8 font-bold text-gray-800 mb-4">
                   {data.whyEsgMattersGreen.title}
                 </h3>
                 <p className="ml-6 text-[#23B14D] text-lg font-semibold italic mb-4">
@@ -150,7 +150,7 @@ const EsgMatters = () => {
           index: 1,
           data: (
             <div className="mt-8 lg:ml-4 lg:w-[40%]">
-              <h3 className="text-2xl ml-8 font-bold text-gray-800 mb-6">
+              <h3 className="text-xl lg:text-2xl ml-8 font-bold text-gray-800 mb-6">
                 How We Measure Impact
               </h3>
 
@@ -195,7 +195,7 @@ const EsgMatters = () => {
           index: 2,
           data: (
             <div className="mt-8 lg:ml-4">
-              <h3 className="text-2xl lg:ml-8 font-bold text-gray-800 mb-6">
+              <h3 className="text-xl lg:text-2xl lg:ml-8 font-bold text-gray-800 mb-6">
                 {data.esgIntegrationProjectLifeCycle.title}
               </h3>
 
@@ -204,7 +204,7 @@ const EsgMatters = () => {
                 {data.esgIntegrationProjectLifeCycle.items.map((item, idx) => (
                   <div key={idx} className="flex items-start gap-6">
                     <div className="w-32">
-                      <h4 className="font-bold text-gray-800 italic text-lg">
+                      <h4 className="font-bold text-gray-800 italic text-lg lg:text-xl">
                         {item.title}
                       </h4>
                     </div>
@@ -223,7 +223,7 @@ const EsgMatters = () => {
           index: 3,
           data: (
             <div className="mt-8 lg:ml-4">
-              <h3 className="text-2xl lg:ml-8 font-bold text-gray-800 mb-6">
+              <h3 className="text-xl lg:text-2xl lg:ml-8 font-bold text-gray-800 mb-6">
                 {data.trustSignals.title}
               </h3>
 
@@ -255,7 +255,7 @@ const EsgMatters = () => {
           index: 4,
           data: (
             <div className="mt-8 lg:ml-4">
-              <h3 className="text-2xl lg:ml-8 font-bold text-gray-800 mb-6">
+              <h3 className="text-xl lg:text-2xl lg:ml-8 font-bold text-gray-800 mb-6">
                 {data.sampleMetricsSnapshot.title}
               </h3>
 
@@ -381,7 +381,7 @@ const EsgMatters = () => {
                 {/* Why ESG Matters to GREEN */}
                 <div className="cursor-pointer" onClick={() => handleActive(0)}>
                   <h3
-                    className={`text-xl font-black mb-2 ${
+                    className={`text-xl lg:text-2xl font-bold mb-2 ${
                       active.index === 0 ? "text-[#23B14D]" : "text-gray-800"
                     }`}
                   >
@@ -392,7 +392,7 @@ const EsgMatters = () => {
                 {/* How We Measure Impact */}
                 <div className="cursor-pointer" onClick={() => handleActive(1)}>
                   <h3
-                    className={`text-xl font-black mb-2 ${
+                    className={`text-xl lg:text-2xl font-bold mb-2 ${
                       active.index === 1 ? "text-[#23B14D]" : "text-gray-800"
                     }`}
                   >
@@ -403,7 +403,7 @@ const EsgMatters = () => {
                 {/* ESG Integration in Project Lifecycle */}
                 <div className="cursor-pointer" onClick={() => handleActive(2)}>
                   <h3
-                    className={`text-xl font-black mb-2 ${
+                    className={`text-xl lg:text-2xl font-bold mb-2 ${
                       active.index === 2 ? "text-[#23B14D]" : "text-gray-800"
                     }`}
                   >
@@ -414,7 +414,7 @@ const EsgMatters = () => {
                 {/* Trust Signals */}
                 <div className="cursor-pointer" onClick={() => handleActive(3)}>
                   <h3
-                    className={`text-xl font-black mb-2 ${
+                    className={`text-xl lg:text-2xl font-bold mb-2 ${
                       active.index === 3 ? "text-[#23B14D]" : "text-gray-800"
                     }`}
                   >
@@ -425,7 +425,7 @@ const EsgMatters = () => {
                 {/* Sample Metrics Snapshot */}
                 <div className="cursor-pointer" onClick={() => handleActive(4)}>
                   <h3
-                    className={`text-xl font-black mb-2 ${
+                    className={`text-xl lg:text-2xl font-bold mb-2 ${
                       active.index === 4 ? "text-[#23B14D]" : "text-gray-800"
                     }`}
                   >
@@ -476,7 +476,7 @@ const EsgMatters = () => {
 
         {/* Bottom Statement */}
         <div className="z-[20] px-10 my-10 lg:relative flex justify-center  ">
-          <h3 className="text-2xl font-bold text-gray-800">
+          <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
             <span className="text-[#23B14D]">GREEN</span> Doesn't Just Talk{" "}
             <span className="text-[#23B14D]">ESG</span>.<br />
             We Operationalize It, Measure It, And Report It —{" "}

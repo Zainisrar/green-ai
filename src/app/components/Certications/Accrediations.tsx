@@ -47,10 +47,10 @@ const Accrediations = () => {
         <div className="lg:hidden px-4 py-6 relative z-50">
           {/* Title */}
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-black text-gray-800">
+            <h1 className="text-2xl lg:text-3xl font-black text-gray-800">
               {certificationsData?.title?.split(" & ")[0] || "CERTIFICATIONS"} &
             </h1>
-            <h1 className="text-2xl font-black text-[#23B14D]">
+            <h1 className="text-2xl lg:text-3xl font-black text-[#23B14D]">
               {certificationsData?.title?.split(" & ")[1] || "ACCREDITATIONS"}
             </h1>
           </div>
@@ -78,7 +78,7 @@ const Accrediations = () => {
               }
               className="mx-auto mb-4 w-24"
             />
-            <h3 className="text-lg font-bold mb-2">
+            <h3 className="text-lg lg:text-xl font-bold mb-2">
               {certificationsData?.cleanEnergySection?.heading ||
                 "Clean Energy Council"}
             </h3>
@@ -90,7 +90,7 @@ const Accrediations = () => {
 
           {/* ESG Section */}
           <div className="mb-8">
-            <h2 className="text-xl font-bold text-gray-800 mb-4 text-center">
+            <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4 text-center">
               {certificationsData?.esgSection?.heading ||
                 "Environmental, Social, and Governance (ESG)"}
             </h2>
@@ -127,7 +127,7 @@ const Accrediations = () => {
 
           {/* ISO Standards */}
           <div className="mb-8">
-            <h2 className="text-xl font-bold text-gray-800 mb-4 text-center">
+            <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4 text-center">
               {certificationsData?.isoSection?.heading || "ISO Standards"}
             </h2>
             <p className="text-gray-700 mb-6 text-sm">
@@ -194,7 +194,7 @@ const Accrediations = () => {
                 src="/images/certifications-accredication/letstart.png"
                 alt="call to action"
               />
-              <div className=" absolute top-3 italic text-lg left-10 font-bold">
+              <div className="absolute inset-0 flex items-center justify-center px-4 italic text-base lg:text-lg font-bold whitespace-nowrap">
                 {certificationsData?.cta.text}
               </div>
             </Link>
@@ -215,22 +215,23 @@ const Accrediations = () => {
           </div>
           <div className="grid my-8 gap-x-8 pr-10 grid-cols-[1fr_2fr]">
             {/* Header Section */}
-            <div className="ml-40">
-              <div className="text-3xl font-bold mb-2">
-                <div className="text-gray-800 font-black">
+            <div className="lg:ml-20 2xl:ml-40">
+              <h1 className="text-3xl 2xl:text-4xl font-black leading-tight mb-2">
+                <span className="text-gray-800">
                   {certificationsData?.title?.split(" & ")[0] ||
-                    "Certifications"}{" "}
-                  &
-                  <div className="text-[#23B14D] font-black">
-                    {certificationsData?.title?.split(" & ")[1] ||
-                      "Accreditations"}
-                  </div>
-                </div>
-              </div>
+                    "Certifications"}
+                </span>{" "}
+                &
+                <br />
+                <span className="text-[#23B14D]">
+                  {certificationsData?.title?.split(" & ")[1] ||
+                    "Accreditations"}
+                </span>
+              </h1>
             </div>
             <div className="">
               <div className="mb-4">
-                <h2 className="text-3xl font-bold text-gray-800 mb-2">
+                <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                   {certificationsData?.esgSection?.heading ||
                     "Environmental, Social, and Governance (ESG)"}
                 </h2>
@@ -266,7 +267,7 @@ const Accrediations = () => {
               </div>
 
               <div>
-                <h2 className="text-3xl my-2 font-bold text-gray-800 mb-2">
+                <h2 className="text-xl lg:text-2xl my-2 font-bold text-gray-800 mb-2">
                   {certificationsData?.isoSection?.heading || "ISO Standards"}
                 </h2>
                 <p className="text-gray-700 mb-3">
@@ -311,10 +312,10 @@ const Accrediations = () => {
                     </>
                   )}
                 </div>
-                   <div className="flex justify-between ">
-            <div className="flex space-x-8 justify-center cursor-pointer">
+                   <div className="flex items-center justify-between gap-6 mb-24">
+            <div className="flex space-x-8 items-center">
               <div className="flex flex-col space-y-2">
-                <div className="text-2xl font-bold">
+                <div className="text-xl lg:text-2xl font-bold">
                   {certificationsData?.cleanEnergySection?.heading ||
                     "Clean Energy Council"}
                 </div>
@@ -323,7 +324,7 @@ const Accrediations = () => {
                     "Australian industry association that represents businesses involved in renewable energy and energy storage"}
                 </div>
               </div>
-              <div className="mb-8">
+              <div className="shrink-0">
                 <img
                   src={
                     certificationsData?.cleanEnergySection?.logo?.src ||
@@ -333,19 +334,20 @@ const Accrediations = () => {
                     certificationsData?.cleanEnergySection?.logo?.alt ||
                     "clean energy certification"
                   }
+                  className="w-44 2xl:w-56 object-contain"
                 />
               </div>
             </div>
             <Link
-              href={certificationsData?.cta.link || "#"} 
-              className=" cursor-pointer relative"
+              href={certificationsData?.cta.link || "#"}
+              className="relative inline-block shrink-0 cursor-pointer"
             >
               <img
                 src="/images/certifications-accredication/letstart.png"
                 alt="call to action"
               />
-              <div className=" absolute top-3 italic text-lg left-10 font-bold">
-                {certificationsData?.cta.text}
+              <div className="absolute inset-0 flex items-center justify-center px-4 italic text-base lg:text-lg font-bold whitespace-nowrap">
+                {certificationsData?.cta.text || "Let's Start"}
               </div>
             </Link>
           </div>
@@ -356,14 +358,14 @@ const Accrediations = () => {
 
         {/* Desktop Only Elements */}
         <div className="hidden lg:block">
-          <div 
+          <div
             style={{
               transform: "skewX(-16deg)",
             }}
-          className="w-[300px]  shadow shadow-2xl absolute left-32 top-7/12">
+          className="w-[300px]  shadow shadow-2xl absolute left-32 top-1/2">
             <div
             style={{
-              transform:"skweX(16deg)"
+              transform:"skewX(16deg)"
             }}
             className="text-xl font-bold p-4 px-14 tracking-wider bg-[#f0f9da]/80">
               "

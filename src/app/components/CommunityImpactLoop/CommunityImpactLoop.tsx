@@ -21,7 +21,7 @@ const CommunityImpactLoop = () => {
       <div className=" ">
         {/* Impact Description Box */}
         <div className="mb-8">
-          <h3 className="text-2xl font-black text-gray-800 mb-4">
+          <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
             {"What is the GREEN Community Impact Loop?"}
           </h3>
 
@@ -123,7 +123,7 @@ const CommunityImpactLoop = () => {
           <div className=" ">
             {/* Impact Description Box */}
             <div className="mb-8">
-              <h3 className=" text-xl lg:text-2xl font-black text-gray-800 mb-4">
+              <h3 className=" text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                 {gcil?.title ?? "What is the GREEN Community Impact Loop?"}
               </h3>
               {gcil?.description?.text1 ? (
@@ -171,7 +171,7 @@ const CommunityImpactLoop = () => {
       case 1:
         return (
           <div>
-            <h3 className=" text-xl lg:text-2xl font-black text-gray-800 mb-2">
+            <h3 className=" text-xl lg:text-2xl font-bold text-gray-800 mb-2">
               {loop?.title ?? "How the Loop Works"}
             </h3>
             {(
@@ -225,7 +225,7 @@ const CommunityImpactLoop = () => {
       case 2:
         return (
           <div>
-            <h3 className=" text-xl lg:text-2xl font-black text-gray-800 mb-6">
+            <h3 className=" text-xl lg:text-2xl font-bold text-gray-800 mb-6">
               {measured?.title ?? "Measured Impact"}
             </h3>
 
@@ -315,7 +315,7 @@ const CommunityImpactLoop = () => {
       case 3:
         return (
           <div className="flex flex-col lg:w-96 items-center">
-            <h3 className="lg:text-2xl text-xl text-center font-black text-gray-800 mb-6">
+            <h3 className="lg:text-2xl text-xl text-center font-bold text-gray-800 mb-6">
               {join?.title ?? "Join the Loop"}
             </h3>
 
@@ -444,11 +444,11 @@ const CommunityImpactLoop = () => {
                     />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-800 mb-2">
+                    <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                       <span className="text-[#23B14D]">Technology</span> You Can
                       Trust.
                     </h3>
-                    <h3 className="text-lg font-bold text-gray-800">
+                    <h3 className="text-lg lg:text-xl font-bold text-gray-800">
                       Partners Who Deliver.
                     </h3>
                   </div>
@@ -476,7 +476,7 @@ const CommunityImpactLoop = () => {
                     }}
                   >
                     <h3
-                      className={`text-lg font-black ${
+                      className={`text-lg lg:text-xl font-bold ${
                         active.activeIndex === 0
                           ? "text-[#23B14D]"
                           : "text-gray-800"
@@ -499,7 +499,7 @@ const CommunityImpactLoop = () => {
                     }}
                   >
                     <h3
-                      className={`text-lg font-black ${
+                      className={`text-lg lg:text-xl font-bold ${
                         active.activeIndex === 1
                           ? "text-[#23B14D]"
                           : "text-gray-800"
@@ -521,7 +521,7 @@ const CommunityImpactLoop = () => {
                     }}
                   >
                     <h3
-                      className={`text-lg font-black ${
+                      className={`text-lg lg:text-xl font-bold ${
                         active.activeIndex === 2
                           ? "text-[#23B14D]"
                           : "text-gray-800"
@@ -543,7 +543,7 @@ const CommunityImpactLoop = () => {
                     }}
                   >
                     <h3
-                      className={`text-lg font-black ${
+                      className={`text-lg lg:text-xl font-bold ${
                         active.activeIndex === 3
                           ? "text-[#23B14D]"
                           : "text-gray-800"
@@ -563,11 +563,11 @@ const CommunityImpactLoop = () => {
                     />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-800 mb-2">
+                    <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                       <span className="text-[#23B14D]">Technology</span> You Can
                       Trust.
                     </h3>
-                    <h3 className="text-lg font-bold text-gray-800">
+                    <h3 className="text-lg lg:text-xl font-bold text-gray-800">
                       Partners Who Deliver.
                     </h3>
                   </div>
@@ -586,7 +586,7 @@ const CommunityImpactLoop = () => {
             {/* Bottom Flow Statement */}
             <div className="mt-12  ">
               {main?.quote ? (
-                <h3 className="text-xl max-w-xl  capitalize leading-9  font-bold text-gray-800">
+                <h3 className="text-xl lg:text-2xl max-w-xl  capitalize leading-9  font-bold text-gray-800">
                   {main.quote.text
                     .split(main.quote.highlighted)
                     .map((part, i, arr) => (
@@ -601,7 +601,7 @@ const CommunityImpactLoop = () => {
                     ))}
                 </h3>
               ) : (
-                <h3 className="text-xl font-bold text-gray-800">
+                <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
                   <span className="text-[#23B14D]">Clean Energy</span> → Enables
                   Activity → Builds Income →{" "}
                   <span className="text-[#23B14D]">Fuels Demand</span> →<br />

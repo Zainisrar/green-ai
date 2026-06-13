@@ -83,7 +83,7 @@ if (!data) return null;
         <div className="w-full lg:px-8 pt-8 pb-20">
           {/* Header Section */}
           <div className="mb-12">
-            <h1 className="lg:text-5xl text-3xl font-black text-gray-900 mb-4">
+            <h1 className="text-2xl lg:text-3xl font-black text-gray-900 mb-4">
               {data.mainPage.title.toUpperCase().split(" ")[0]}{" "}
               <span className="text-[#23B14D]">
                 {data.mainPage.title.toUpperCase().split(" ")[1]}

@@ -77,8 +77,26 @@ const FastFactStats = () => {
 
   return (
     <React.Fragment>
-      <div className=" ">
+      <div className="relative overflow-x-hidden">
         <TopNavigation />
+
+        {/* Right-side diagonal background watermark (desktop) */}
+        <div className="absolute right-0 top-0 -z-10 hidden lg:block pointer-events-none">
+          <img
+            src="/images/facts/lgImage.png"
+            alt=""
+            className="h-screen object-contain"
+          />
+        </div>
+        {/* Background watermark (mobile / tablet) */}
+        <div className="absolute right-0 top-0 -z-10 lg:hidden pointer-events-none">
+          <img
+            src="/images/facts/fast-facts-stats-mbImg.png"
+            alt=""
+            className="w-2/3 object-contain opacity-60"
+          />
+        </div>
+
         <div className=" absolute z-[9999] left-4 top-40 md:top-30  md:right-4 md:hidden">
           <img
             src="/images/facts/fast-facts-stats.png"
@@ -98,10 +116,10 @@ const FastFactStats = () => {
             </div>
           </div>
 
-          <div className="lg:w-5/4 lg:pl-16 mt-10 2xl:pl-10 flex flex-col  rounded-lg">
-            <div className="2xl:mb-8 ml-10  py-10 lg:py-0 lg:pl-0 pl-16 lg:flex space-x-10">
+          <div className="w-full lg:pl-16 mt-10 2xl:pl-10 flex flex-col  rounded-lg">
+            <div className="mb-8 px-4 lg:px-0 py-10 lg:py-0 lg:flex lg:items-start lg:space-x-10">
               <div>
-                <h1 className=" text-3xl lg:text-left text-center 2xl:text-5xl font-bold mb-4">
+                <h1 className=" text-3xl lg:text-3xl 2xl:text-4xl lg:text-left text-center font-black mb-4">
                   {
                     sectionData.title.split(" " )[0]
                   }{` `}
@@ -123,8 +141,8 @@ const FastFactStats = () => {
               </div>
             </div>
 
-            <div className="  lg:flex ml-4">
-              <div className=" 2xl:ml-0 lg:-ml-20 space-y-8">
+            <div className="lg:flex gap-10 px-4 lg:px-0">
+              <div className="space-y-8 w-full min-w-0">
                 <div className="hidden lg:grid  lg:grid-cols-2 gap-8">
                   {sectionData.blocks?.slice(0, 2).map((block, index) => (
                     <div key={index} className="flex space-x-4 ">
@@ -136,7 +154,7 @@ const FastFactStats = () => {
                         />
                       </div>
                       <div>
-                        <h3 className="lg:text-xl 2xl:text-2xl font-black text-gray-800">
+                        <h3 className="lg:text-xl 2xl:text-2xl font-bold text-gray-800">
                           {block.title}
                         </h3>
                         <div className="space-y-1 lg:text-base 2xl:text-lg mt-2 font-semibold">
@@ -200,7 +218,7 @@ const FastFactStats = () => {
                         />
                       </div>
                       <div>
-                        <h3 className="lg:text-xl 2xl:text-2xl font-black text-gray-800">
+                        <h3 className="lg:text-xl 2xl:text-2xl font-bold text-gray-800">
                           {block.title}
                         </h3>
                         <div className="space-y-1 lg:text-base 2xl:text-lg mt-2 font-semibold">
@@ -244,8 +262,11 @@ const FastFactStats = () => {
                   style={{
                     transform:"skewX(-12deg)"
                   }}
-                  className="  text-center mb-8 bg-[#e6f7bc]/50 shadow-lg md:p-8 p-2 md:w-auto w-[60%]  ">
-                    <div className=" font-bold mb-2 md:text-3xl">
+                  className="  text-center mb-8 bg-[#e6f7bc]/70 shadow-lg md:p-8 p-2 md:w-auto w-[60%]  ">
+                    <div
+                      style={{ transform: "skewX(12deg)" }}
+                      className=" font-bold mb-2 md:text-3xl"
+                    >
                       {
                         quote?.headline.split(" " )[0]
                       }
@@ -276,8 +297,11 @@ const FastFactStats = () => {
                 style={{
                   transform:"skewX(-12deg)"
                 }}
-                className="text-center mb-8 bg-[#e6f7bc]/50 p-4 py-6  shadow-lg  w-96">
-                  <div className="text-4xl font-bold mb-2">
+                className="text-center mb-8 bg-[#e6f7bc]/70 p-4 py-6  shadow-lg  w-96">
+                  <div
+                    style={{ transform: "skewX(12deg)" }}
+                    className="text-4xl font-bold mb-2"
+                  >
                      {
                         quote?.headline.split(" " )[0]
                       } <span className="text-[#23B14D]">  {quote?.headline.split(" " )[1]}</span>
@@ -320,7 +344,7 @@ const FastFactStats = () => {
                       />
                     </div>
                     <div className={index === 0 ? "" : ""}>
-                      <h3 className="mb-4 lg:my-0 text-xl lg:text-xl 2xl:text-2xl font-black text-gray-800">
+                      <h3 className="mb-4 lg:my-0 text-xl lg:text-2xl font-bold text-gray-800">
                         {block.title}
                       </h3>
                       <div className="space-y-1 lg:text-base 2xl:text-lg mt-2 font-semibold">
@@ -385,7 +409,7 @@ const FastFactStats = () => {
                       />
                     </div>
                     <div>
-                      <h3 className="mb-4 lg:my-0 text-xl lg:text-xl 2xl:text-2xl font-black text-gray-800">
+                      <h3 className="mb-4 lg:my-0 text-xl lg:text-2xl font-bold text-gray-800">
                         {block.title}
                       </h3>
                       <div className="space-y-1 lg:text-base 2xl:text-lg mt-2 font-semibold">
@@ -427,14 +451,15 @@ const FastFactStats = () => {
             </div>
           </div>
         </div>
-        <div className=" lg:my-4 mb-32  flex-col lg:flex-row space-y-4 lg:space-y-0 overflow-hidden flex justify-between    ">
-          <div className="grid grid-cols-2 lg:grid-cols-4  gap-8 ml-10 text-center">
+        <div className="lg:my-4 mb-32 gap-8 lg:gap-4 flex-col lg:flex-row space-y-8 lg:space-y-0 overflow-hidden flex lg:justify-between px-4 lg:px-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 text-center">
             {impactData.cards?.map((card, index) => (
               <div
                style={{
                 transform:"skewX(-16deg)"
                }}
-              key={index} className=" border-[#bcea7e]   lg:py-4 2xl:py-10 border-4 ">
+              key={index} className=" border-[#bcea7e] py-4 2xl:py-10 px-2 border-4 ">
+                <div style={{ transform: "skewX(16deg)" }} className="px-2">
                 <p className={`${index === 1 ? 'text-xl lg:text-3xl' : index === 3 ? 'lg:text-2xl 2xl:text-3xl' : ' lg:text-xl 2xl:text-3xl'} ${index === 1 ? 'mb-1' : index === 3 ? 'leading-6' : 'mb-2'} font-black text-gray-800`}>
                   {card.title}
                 </p>
@@ -461,38 +486,35 @@ const FastFactStats = () => {
                     </span>
                   ))}
                 </p>
+                </div>
               </div>
             ))}
           </div>
-          <div className=" space-y-8">
+          <div className="flex flex-col items-center lg:items-end gap-8 lg:mr-10 shrink-0">
             <Link
-            href={
-               ctaButtons?.[0]?.link || "#"
-            }
-            className=" flex relative justify-end cursor-pointer">
+              href={ctaButtons?.[0]?.link || "#"}
+              className="relative inline-block cursor-pointer"
+            >
               <img
                 src="/images/facts/connectwithgreen.png"
                 alt="Connect with Green"
+                className="w-64 sm:w-72 lg:w-auto"
               />
-              <div className="absolute top-3 lg:left-16 right-6 text-lg font-bold">
-                 {
-                  ctaButtons?.[0]?.text
-                 }{` >`}
+              <div className="absolute inset-0 flex items-center justify-center px-6 text-base lg:text-lg font-bold whitespace-nowrap">
+                {ctaButtons?.[0]?.text || "Connect with GREEN"} {` >`}
               </div>
             </Link>
             <Link
-            href={
-               ctaButtons?.[1]?.link || "#"
-            }
-            className=" flex relative justify-end cursor-pointer">
+              href={ctaButtons?.[1]?.link || "#"}
+              className="relative inline-block cursor-pointer"
+            >
               <img
                 src="/images/facts/downloadimpactsummary.png"
                 alt="Download Impact Summary"
+                className="w-64 sm:w-72 lg:w-auto"
               />
-              <div className="absolute top-3 right-6 lg:left-8 text-lg font-bold">
-                 {
-                  ctaButtons?.[1]?.text
-                 }
+              <div className="absolute inset-0 flex items-center justify-center px-6 text-base lg:text-lg font-bold whitespace-nowrap">
+                {ctaButtons?.[1]?.text || "Download Impact Summary"} {` >`}
               </div>
             </Link>
            

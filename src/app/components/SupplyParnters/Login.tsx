@@ -28,7 +28,7 @@ const nav=useNavigationState()
               {/* Left Content */}
               <div className="lg:w-1/2 mt-20 px-4 lg:px-8">
                 <div className="mb-8">
-                  <h1 className="text-2xl lg:text-3xl font-bold mb-2">
+                  <h1 className="text-2xl lg:text-3xl font-black mb-2">
                     <span className="text-[#4CAF50]">SUPPLY</span>{" "}
                     <span className="text-black">PARTNER</span>
                   </h1>
@@ -81,7 +81,7 @@ const nav=useNavigationState()
                     transform:"skewX(16deg)"
                   }}
                   className="text-center mb-6 ">
-                    <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                    <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                       LOGIN
                     </h2>
                     <p className="text-gray-600 text-sm">

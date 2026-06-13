@@ -34,7 +34,7 @@ if(aboutUsData){
         <div className="md:hidden px-4 py-6 relative z-50">
           {/* Clean Lean Green Title */}
           <div className="text-center mb-8">
-            <h1 className=" text-3xl lg:text-3xl font-black text-gray-800 leading-tight">
+            <h1 className=" text-2xl lg:text-3xl font-black text-gray-800 leading-tight">
               {aboutUsData?.key.split(' ').map((word, index) => (
                 <React.Fragment key={index}>
                   {index === 2 ? (
@@ -58,10 +58,10 @@ if(aboutUsData){
 
           {/* About GREEN Section */}
           <div className="mb-8">
-            <h2 className="text-xl font-black text-gray-800 mb-4 text-center">
+            <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4 text-center">
               {aboutUsData?.title || "About GREEN"}
             </h2>
-            <p className="text-base font-medium mb-4 italic text-center">
+            <p className="text-base font-bold mb-4 italic text-center">
               {parsedContent?.subtitle.toUpperCase() || "ENLIGHTENING OUR LIVES THROUGH SUSTAINABLE ENERGY SOLUTIONS"}
             </p>
 
@@ -97,10 +97,10 @@ if(aboutUsData){
 
           {/* What does GREEN do Section */}
           <div className="mb-8">
-            <h3 className="text-xl font-black text-gray-800 mb-4 text-center">
+            <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4 text-center">
               {parsedContent?.whatDoesGreenTitle || "What does GREEN Do"}
             </h3>
-            <p className="text-base font-medium mb-4 italic text-center">
+            <p className="text-base font-bold mb-4 italic text-center">
               {parsedContent?.whatDoesGreenSubtitle.toUpperCase() || "TRANSFORMING LIVES WITH ENERGY INDEPENDENCE"}
             </p>
 
@@ -166,16 +166,15 @@ if(aboutUsData){
           </div>
 
           {/* Right Side - About Content */}
-          <div className="md:w-[60%] 2xl:w-7/12 lg:w-9/12 flex flex-col lg:my-10 mt-78 mx-10 md:mx-4 md:pl-10 lg:mx-auto lg:mt-2 lg:pl-36 lg:pr-8">
-            <h2 className="lg:text-2xl 2xl:text-3xl text-xl font-black flex justify-end lg:block mb-4 text-gray-800 lg:mb-2 2xl:mb-4">
+          <div className="md:w-[60%] 2xl:w-7/12 lg:w-9/12 flex flex-col justify-center py-10 md:mx-4 md:pl-10 lg:mx-auto lg:pl-36 lg:pr-8">
+            <h2 className="lg:text-2xl 2xl:text-3xl text-xl font-bold flex justify-end lg:block mb-2 text-gray-800">
               {aboutUsData?.title || "About GREEN"}
             </h2>
-            <p className="2xl:text-lg md:text-base text-base lg:text-base font-medium mb-6 italic">
+            <p className="2xl:text-lg md:text-base text-base lg:text-base font-bold mb-4 italic">
               {parsedContent?.subtitle || "Enlightening Our Lives through Sustainable Energy Solutions"}
             </p>
 
-        
-              <div className="space-y-4 text-gray-700 text-sm 2xl:text-base leading-relaxed">
+              <div className="space-y-3 text-gray-700 text-sm 2xl:text-base leading-relaxed">
                 {parsedContent?.aboutGreenParagraphs.map((paragraph, index) => (
                   <p key={index}>
                     {paragraph}
@@ -208,10 +207,10 @@ if(aboutUsData){
                 )}
               </div>
 
-            <h3 className="lg:text-2xl 2xl:text-3xl font-black my-10 flex justify-end lg:justify-start text-xl text-gray-800 lg:my-2 2xl:mt-8 mb-4">
+            <h3 className="lg:text-2xl 2xl:text-3xl font-bold mt-6 mb-2 flex justify-end lg:justify-start text-xl text-gray-800">
               {parsedContent?.whatDoesGreenTitle || "What does GREEN do"}
             </h3>
-            <p className="2xl:text-lg md:text-base font-medium mb-4 italic">
+            <p className="2xl:text-lg md:text-base font-bold mb-4 italic">
               {parsedContent?.whatDoesGreenSubtitle || "Transforming Lives with Energy Independence"}
             </p>
 
@@ -231,7 +230,7 @@ if(aboutUsData){
               </p>
             )}
 
-            <div className="2xl:mt-2">
+            <div className="mt-6">
               <p className="md:text-2xl text-2xl 2xl:text-4xl italic text-gray-700 mb-2">
                 {parsedQuote?.firstQuote || "A Transformation - That's"}{" "}
                 <span className="text-[#23B14D] font-bold">GREEN!</span>

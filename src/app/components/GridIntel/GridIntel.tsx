@@ -68,8 +68,8 @@ const GridIntel = () => {
         {/* Mobile Layout */}
         <div className="lg:hidden  px-4 py-6 relative z-50 ">
           {/* Title */}
-          <div className="ml-20 mb-4">
-            <h1 className="text-2xl font-black text-[#23B14D] leading-tight">
+          <div className="mb-4">
+            <h1 className="text-3xl sm:text-4xl font-black text-[#23B14D] leading-tight">
               {gridIntelData?.mainPage?.title?.replace("-INTEL", "-") ||
                 "GRID-"}
               <span className="text-black">INTEL</span>
@@ -77,8 +77,8 @@ const GridIntel = () => {
           </div>
 
           {/* Subtitle */}
-          <div className="mb-4 ml-10">
-            <h2 className=" font-bold text-lg text-[#23B14D] italic mb-2">
+          <div className="mb-4">
+            <h2 className=" font-bold text-xl lg:text-2xl text-[#23B14D] italic mb-2">
               {gridIntelData?.mainPage?.subtitle ||
                 "The Intelligence Layer Powering Energy Systems with Precision and Foresight"}
             </h2>
@@ -90,7 +90,7 @@ const GridIntel = () => {
 
           {/* Built for Intelligence */}
           <div className="mb-6 text-center">
-            <h3 className="text-2xl font-bold text-gray-800">
+            <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
               {gridIntelData?.mainPage?.builtForIntelligence?.title ||
                 "Built for Intelligence."}
               <br />
@@ -101,7 +101,7 @@ const GridIntel = () => {
 
           {/* Energy Intelligence Platform */}
           <div className="mb-6">
-            <h3 className="text-2xl font-bold text-gray-800 mb-3">
+            <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-3">
               {gridIntelData?.mainPage?.energyIntelligencePlatform?.title ||
                 "Energy Intelligence Platform"}
             </h3>
@@ -217,7 +217,7 @@ const GridIntel = () => {
 
           {/* Energy You Can Count On */}
           <div className="mb-6">
-            <h3 className="text-2xl font-bold text-gray-800 mb-3">
+            <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-3">
               {gridIntelData?.mainPage?.energyYouCanCountOn?.title ||
                 "Energy You Can Count On"}
             </h3>
@@ -249,43 +249,23 @@ const GridIntel = () => {
             </div>
           </div>
 
-          <div className=" space-y-8 mb-10">
-            <Link
-              href={gridIntelData?.mainPage.ctaButtons[0].href || "#"}
-              className="flex justify-end relative cursor-pointer"
-            >
-              <img
-                src="/images/grid-intel/schedule.png"
-                alt="Schedule a Technical Deep-Dive"
-              />
-              <div className="absolute top-3 right-12  font-bold">
-                {gridIntelData?.mainPage.ctaButtons[0].text + " >"}
-              </div>
-            </Link>
-            <Link
-              href={gridIntelData?.mainPage.ctaButtons[1].href || "#"}
-              className="flex justify-end relative cursor-pointer"
-            >
-              <img
-                src="/images/grid-intel/engage.png"
-                alt="Engage our System Architecture Team"
-              />
-              <div className="absolute top-3 right-8  font-bold">
-                {gridIntelData?.mainPage.ctaButtons[1].text + " >"}
-              </div>
-            </Link>
-            <Link
-              href={gridIntelData?.mainPage.ctaButtons[2].href || "#"}
-              className="flex justify-end relative cursor-pointer"
-            >
-              <img
-                src="/images/grid-intel/download.png"
-                alt="Download Grid Intel Product Dossier"
-              />
-              <div className="absolute top-3 right-4    font-bold">
-                {gridIntelData?.mainPage.ctaButtons[2].text}
-              </div>
-            </Link>
+          <div className="mb-10 flex flex-col items-center gap-6">
+            {[0, 1, 2].map((i) => (
+              <Link
+                key={i}
+                href={gridIntelData?.mainPage.ctaButtons[i]?.href || "#"}
+                className="inline-block cursor-pointer max-w-full"
+              >
+                <div
+                  style={{ transform: "skewX(-16deg)" }}
+                  className="bg-gradient-to-r from-[#54b85a] to-[#e6f24d] px-8 py-3 shadow-md"
+                >
+                  <span className="block text-sm font-bold text-gray-900 whitespace-nowrap">
+                    {gridIntelData?.mainPage.ctaButtons[i]?.text} {`>`}
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
 
@@ -304,15 +284,15 @@ const GridIntel = () => {
             </div>
 
             {/* Main Content Area */}
-            <div className="lg:px-20 pb-10 pt-8">
+            <div className="px-6 lg:px-20 pb-10 pt-8 min-w-0">
               {/* Main Title */}
               <div className="mb-8">
-                <h1 className="text-3xl font-black text-[#23B14D] mb-4">
+                <h1 className="text-4xl lg:text-5xl 2xl:text-6xl font-black text-[#23B14D] mb-4 leading-tight">
                   {gridIntelData?.mainPage?.title?.replace("INTEL", "") ||
                     "GRID-"}{" "}
                   <span className="text-black">INTEL</span>
                 </h1>
-                <h2 className="text-2xl font-bold text-[#23B14D] italic mb-4">
+                <h2 className="text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-4">
                   {gridIntelData?.mainPage?.subtitle ||
                     "The Intelligence Layer Powering Energy Systems with Precision and Foresight"}
                 </h2>
@@ -323,12 +303,12 @@ const GridIntel = () => {
               </div>
 
               {/* Content Layout */}
-              <div className="flex">
+              <div className="flex gap-8">
                 {/* Left Column */}
-                <div className="w-1/3">
+                <div className="w-1/3 min-w-0">
                   {/* Energy Intelligence Platform */}
                   <div className="mb-8">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                    <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                       {gridIntelData?.mainPage?.energyIntelligencePlatform
                         ?.title || "Energy Intelligence Platform"}
                     </h3>
@@ -358,7 +338,7 @@ const GridIntel = () => {
 
                   {/* Energy You Can Count On */}
                   <div className="mb-8">
-                    <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                    <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                       {gridIntelData?.mainPage?.energyYouCanCountOn?.title ||
                         "Energy You Can Count On"}
                     </h3>
@@ -374,7 +354,7 @@ const GridIntel = () => {
                   </div>
                 </div>
 
-                <div className="w-1/2">
+                <div className="w-1/2 min-w-0">
                   {/* Built for Intelligence Box */}
                   <div className="mb-8">
                     <div className="flex space-x-4">
@@ -382,7 +362,7 @@ const GridIntel = () => {
                         <img src="/images/grid-intel/shape1.png" alt="shape1" />
                       </div>
                       <div className="mt-4 -ml-14">
-                        <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                        <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
                           {gridIntelData?.mainPage?.builtForIntelligence
                             ?.title || "Built for Intelligence."}
                           <br />
@@ -432,7 +412,7 @@ const GridIntel = () => {
                       </button>
                     </div>
 
-                    <div className="flex space-x-4 -ml-14">
+                    <div className="flex space-x-4 2xl:-ml-14">
                       <div>
                         <img src="/images/grid-intel/shape3.png" alt="shape3" />
                       </div>
@@ -446,7 +426,7 @@ const GridIntel = () => {
                       </button>
                     </div>
 
-                    <div className="flex space-x-4 -ml-24">
+                    <div className="flex space-x-4 2xl:-ml-24">
                       <div>
                         <img src="/images/grid-intel/shape3.png" alt="shape3" />
                       </div>
@@ -460,7 +440,7 @@ const GridIntel = () => {
                       </button>
                     </div>
 
-                    <div className="flex space-x-4 -ml-34">
+                    <div className="flex space-x-4 2xl:-ml-32">
                       <div>
                         <img src="/images/grid-intel/shape3.png" alt="shape3" />
                       </div>
@@ -474,7 +454,7 @@ const GridIntel = () => {
                       </div>
                     </div>
 
-                    <div className="flex space-x-4 -ml-44">
+                    <div className="flex space-x-4 2xl:-ml-44">
                       <div>
                         <img src="/images/grid-intel/shape3.png" alt="shape3" />
                       </div>
@@ -487,7 +467,7 @@ const GridIntel = () => {
                         </button>
                       </div>
                     </div>
-                    <div className="flex space-x-4 -ml-54">
+                    <div className="flex space-x-4 2xl:-ml-52">
                       <div>
                         <img src="/images/grid-intel/shape3.png" alt="shape3" />
                       </div>
@@ -505,43 +485,23 @@ const GridIntel = () => {
               </div>
             </div>
           </div>
-          <div className=" space-y-8 mb-20">
-            <Link
-              href={gridIntelData?.mainPage.ctaButtons[0].href || "#"}
-              className="flex justify-end relative cursor-pointer"
-            >
-              <img
-                src="/images/grid-intel/schedule.png"
-                alt="Schedule a Technical Deep-Dive"
-              />
-              <div className="absolute top-3 right-8 text-lg font-bold">
-                {gridIntelData?.mainPage.ctaButtons[0].text + " >"}
-              </div>
-            </Link>
-            <Link
-              href={gridIntelData?.mainPage.ctaButtons[1].href || "#"}
-              className="flex justify-end relative cursor-pointer"
-            >
-              <img
-                src="/images/grid-intel/engage.png"
-                alt="Engage our System Architecture Team"
-              />
-              <div className="absolute top-3 right-6 text-lg font-bold">
-                {gridIntelData?.mainPage.ctaButtons[1].text + " >"}
-              </div>
-            </Link>
-            <Link
-              href={gridIntelData?.mainPage.ctaButtons[2].href || "#"}
-              className="flex justify-end relative cursor-pointer"
-            >
-              <img
-                src="/images/grid-intel/download.png"
-                alt="Download Grid Intel Product Dossier"
-              />
-              <div className="absolute top-3 right-8 text-lg font-bold">
-                {gridIntelData?.mainPage.ctaButtons[2].text}
-              </div>
-            </Link>
+          <div className="mb-20 pr-8 flex flex-col items-end gap-6">
+            {[0, 1, 2].map((i) => (
+              <Link
+                key={i}
+                href={gridIntelData?.mainPage.ctaButtons[i]?.href || "#"}
+                className="inline-block cursor-pointer"
+              >
+                <div
+                  style={{ transform: "skewX(-16deg)" }}
+                  className="bg-gradient-to-r from-[#54b85a] to-[#e6f24d] px-10 py-3 shadow-md"
+                >
+                  <span className="block text-sm lg:text-base font-bold text-gray-900 whitespace-nowrap">
+                    {gridIntelData?.mainPage.ctaButtons[i]?.text} {`>`}
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
           <div className="lg:block hidden">
             <Chatbot />

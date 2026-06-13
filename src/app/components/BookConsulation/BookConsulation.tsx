@@ -31,7 +31,7 @@ const BookConsulation = () => {
               </h1>
 
               {/* Subtitle */}
-              <p className="text-lg text-[#23B14D] italic font-semibold mb-2">
+              <p className="text-xl lg:text-2xl text-[#23B14D] italic font-semibold mb-2">
                 Let's Solve Energy, Together.
               </p>
 
@@ -45,7 +45,7 @@ const BookConsulation = () => {
               </p>
 
               {/* Consultation Focus Areas */}
-              <h2 className="text-xl font-black mb-4">
+              <h2 className="text-xl lg:text-2xl font-bold mb-4">
                 Consultation Focus Areas
               </h2>
 
@@ -110,7 +110,7 @@ const BookConsulation = () => {
               </div>
 
               {/* Booking Details */}
-              <h2 className="text-xl font-bold mb-4">Booking Details</h2>
+              <h2 className="text-xl lg:text-2xl font-bold mb-4">Booking Details</h2>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 <div className="flex items-center space-x-3">
@@ -221,7 +221,7 @@ const BookConsulation = () => {
                 />
               </div>
               <div>
-                <h3 className="text-lg font-bold ">
+                <h3 className="text-lg lg:text-xl font-bold ">
                   You Don't Need To Navigate Energy Decisions Alone.
                 </h3>
                 <p className="text-lg font-bold mb-4">

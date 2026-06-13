@@ -1,5 +1,7 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useExpertise } from "../../../hooks/useExpertise";
@@ -18,8 +20,49 @@ interface DataProps {
   }[];
 }
 
+// Reusable segmented control for switching between Grid and Slider views.
+const ViewTabs = ({
+  view,
+  onChange,
+  className = "",
+}: {
+  view: "grid" | "slider";
+  onChange: (v: "grid" | "slider") => void;
+  className?: string;
+}) => {
+  const tabs: { key: "grid" | "slider"; label: string }[] = [
+    { key: "grid", label: "Grid" },
+    { key: "slider", label: "Slider" },
+  ];
+  return (
+    <div
+      className={`inline-flex items-center gap-1 rounded-full border border-[#70ac82]/40 bg-white/80 p-1 shadow-sm backdrop-blur ${className}`}
+    >
+      {tabs.map((tab) => {
+        const active = view === tab.key;
+        return (
+          <button
+            key={tab.key}
+            type="button"
+            onClick={() => onChange(tab.key)}
+            aria-pressed={active}
+            className={`cursor-pointer rounded-full px-5 py-2 text-sm font-bold transition-all lg:px-7 lg:text-base ${
+              active
+                ? "bg-[#23B14D] text-white shadow"
+                : "text-gray-600 hover:text-[#23B14D]"
+            }`}
+          >
+            {tab.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+};
+
 const Expertise = () => {
   const { data: apiExpertise } = useExpertise();
+  const router = useRouter();
 
   // All hooks must be called before any conditional returns
   const [view, setView] = useState<"grid" | "slider">("grid");
@@ -87,44 +130,31 @@ const Expertise = () => {
     setView(viewType);
   };
 
+  // Continuous marquee-style auto-scroll for the slider. The cards are
+  // rendered twice (see render below), so once we've scrolled past the first
+  // copy we can reset to the start seamlessly. This works even when the cards
+  // would otherwise fit on screen, which is why the old interval never moved.
   useEffect(() => {
+    if (view !== "slider") return;
     const container = sliderRef.current;
     if (!container) return;
-    let interval: number | undefined;
-    const slide = container.querySelector("[data-slide]") as HTMLElement | null;
-    const computeGap = () => {
-      const cs = window.getComputedStyle(container);
-      const gap = cs.gap || cs.columnGap || cs.rowGap || "0px";
-      return parseInt(gap || "0", 10) || 0;
-    };
 
-    const scrollOnce = () => {
-      if (!container) return;
-      const firstSlide = container.querySelector(
-        "[data-slide]"
-      ) as HTMLElement | null;
-      if (!firstSlide) return;
-      const gap = computeGap();
-      const step = firstSlide.offsetWidth + gap;
-      const maxScroll = container.scrollWidth - container.clientWidth;
-      const next = Math.min(container.scrollLeft + step, container.scrollWidth);
-      if (container.scrollLeft + step > maxScroll) {
-        container.scrollTo({ left: 0, behavior: "smooth" });
-      } else {
-        container.scrollTo({
-          left: container.scrollLeft + step,
-          behavior: "smooth",
-        });
+    let raf = 0;
+    const speed = 0.6; // pixels per frame
+
+    const tick = () => {
+      if (!paused) {
+        const half = container.scrollWidth / 2;
+        let next = container.scrollLeft + speed;
+        if (half > 0 && next >= half) next -= half;
+        container.scrollLeft = next;
       }
+      raf = window.requestAnimationFrame(tick);
     };
 
-    if (!paused) {
-      interval = window.setInterval(scrollOnce, 1000);
-    }
-    return () => {
-      if (interval) window.clearInterval(interval);
-    };
-  }, [data, paused]);
+    raf = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(raf);
+  }, [view, paused, apiExpertise]);
 
   if (data.length === 0) {
     return null;
@@ -160,12 +190,11 @@ const Expertise = () => {
                   {data.filter((item) => item.active)[0].description}
                 </div>
               </div>
-              <div className="flex justify-end  lg:justify-center lg:absolute lg:right-82 pt-6 lg:pt-10">
+              <div className="flex justify-end lg:justify-start lg:ml-20 pt-6 lg:pt-10">
                 <img
                   onClick={() => {
-                    window.location.href = data.filter(
-                      (item) => item.active
-                    )[0].cta;
+                    const cta = data.filter((item) => item.active)[0]?.cta;
+                    if (cta) router.push(cta);
                   }}
                   src="/images/expertise/exploreBtn.svg"
                   className="w-32 lg:w-40 cursor-pointer"
@@ -203,40 +232,56 @@ const Expertise = () => {
                   );
                 })()}
               </div>
-              <div className="relative lg:hidden flex justify-center mb-8 lg:mt-0">
-                <div className="text-center flex  pt-6 lg:pt-10 absolute pb-10">
-                  <div
-                    onClick={() => handleViewChange("grid")}
-                    className="bg-[#70ac82] cursor-pointer text-sm lg:text-lg p-2 px-3 lg:px-4 w-auto font-bold"
-                  >
-                    Grid
-                  </div>
-                  <div
-                    onClick={() => handleViewChange("slider")}
-                    className="bg-[#DDEBE1] cursor-pointer text-sm lg:text-lg p-2 px-3 lg:px-4 w-auto font-bold"
-                  >
-                    Slider
-                  </div>
-                </div>
+              <div className="lg:hidden flex justify-center mt-6 mb-2">
+                <ViewTabs view={view} onChange={handleViewChange} />
               </div>
             </div>
           </div>
 
-          <div className="relative lg:flex hidden justify-center mt-8 lg:mt-0">
-            <div className="text-center flex pt-6 lg:pt-10 absolute pb-10">
-              <div
-                onClick={() => handleViewChange("grid")}
-                className="bg-[#70ac82] cursor-pointer text-sm lg:text-lg p-2 px-3 lg:px-4 w-auto font-bold"
-              >
-                Grid
-              </div>
-              <div
-                onClick={() => handleViewChange("slider")}
-                className="bg-[#DDEBE1] cursor-pointer text-sm lg:text-lg p-2 px-3 lg:px-4 w-auto font-bold"
-              >
-                Slider
-              </div>
+          {/* All solution cards — click a card to feature it, or use its
+              "View" link to open the detail page. */}
+          <div className="px-4 lg:px-32 mt-10 lg:mt-16">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+              {data.map((item, index) => {
+                const thumb = item.imgs[0]?.path;
+                return (
+                  <div
+                    key={index}
+                    onClick={() => handleActiveSolution(index)}
+                    className={`group relative cursor-pointer overflow-hidden rounded-lg border-2 transition-all ${
+                      item.active
+                        ? "border-[#23B14D] shadow-lg"
+                        : "border-transparent hover:border-[#70ac82]"
+                    }`}
+                  >
+                    {thumb && (
+                      <img
+                        src={thumb}
+                        alt={`${item.name1} ${item.name2}`}
+                        className="h-28 lg:h-36 w-full object-cover"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-3">
+                      <span className="text-xs lg:text-sm font-bold uppercase text-white drop-shadow">
+                        {item.name1} {item.name2}
+                      </span>
+                      <Link
+                        href={item.cta}
+                        onClick={(e) => e.stopPropagation()}
+                        className="shrink-0 text-xs font-semibold text-[#23B14D] underline-offset-2 hover:underline"
+                      >
+                        View →
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
+          </div>
+
+          <div className="lg:flex hidden justify-center mt-12 lg:mt-16 pb-10">
+            <ViewTabs view={view} onChange={handleViewChange} />
           </div>
           <div className="fixed lg:block hidden bottom-4 left-2 lg:left-8">
             <img
@@ -264,8 +309,17 @@ const Expertise = () => {
             />
           </div>
 
+          {/* Vertical page watermark */}
+          <div className="pointer-events-none fixed left-2 top-1/2 z-10 hidden -translate-y-1/2 md:block lg:left-6">
+            <img
+              src="/images/expertise/sliderSolution.png"
+              alt="solution"
+              className="w-24 lg:w-28 -rotate-90 object-contain opacity-80"
+            />
+          </div>
+
           {/* Header Section */}
-          <div className="z-[99999999999999999] relative px-8 lg:px-52 font-bold mt-20">
+          <div className="relative z-10 px-8 lg:px-52 font-bold mt-20">
             <div className="text-4xl lg:text-5xl uppercase text-center lg:text-left">
               {data.filter((item) => item.active)[0].name1}{" "}
               <span className="text-[#23B14D]">
@@ -277,78 +331,59 @@ const Expertise = () => {
             </div>
           </div>
 
-          {/* Slider Section - Clean horizontal layout */}
-          <div className="mt-16 relative z-[99999999999999999]">
+          {/* Slider Section - continuous auto-scrolling marquee */}
+          <div className="mt-16 relative z-10">
             <div
               ref={sliderRef}
               onMouseEnter={() => setPaused(true)}
               onMouseLeave={() => setPaused(false)}
-              className="flex flex-row items-center justify-start gap-2 overflow-x-auto pb-8 scrollbar-hide px-8"
+              className="flex flex-row items-center justify-start gap-6 overflow-x-hidden pb-8 px-8"
               style={{
-                scrollSnapType: "x mandatory",
                 scrollbarWidth: "none",
                 msOverflowStyle: "none",
               }}
             >
-              {/* Clean slider cards from API data */}
-              {apiExpertise?.map((item, idx) => (
-                <div
-                  key={idx}
-                  data-slide
-                  className="cursor-pointer flex-shrink-0 w-80 lg:w-96 snap-start relative"
-                  style={{ scrollSnapAlign: "start" }}
-                  onClick={() => {
-                    window.location.href = item.slug;
-                  }}
-                >
-                  {/* Direct image without any card wrapper */}
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-48 lg:h-64 object-cover"
-                    style={{
-                      display: "block",
-                      border: "none",
-                      outline: "none",
-                      boxShadow: "none",
-                    }}
-                  />
-                  {/* Text overlay directly on image */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-white font-bold text-xl lg:text-2xl drop-shadow-lg">
-                      {item.title}
-                    </h3>
+              {/* Cards rendered twice so the marquee can loop seamlessly */}
+              {[...(apiExpertise ?? []), ...(apiExpertise ?? [])].map(
+                (item, idx) => (
+                  <div
+                    key={idx}
+                    data-slide
+                    className="flex-shrink-0 w-80 lg:w-96 relative"
+                  >
+                    {/* Whole card (heading included) links to the expertise page */}
+                    <Link
+                      href={item.slug}
+                      className="block cursor-pointer group"
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-48 lg:h-64 object-cover"
+                        style={{
+                          display: "block",
+                          border: "none",
+                          outline: "none",
+                          boxShadow: "none",
+                        }}
+                      />
+                      {/* Text overlay directly on image */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <h3 className="text-white font-bold text-xl lg:text-2xl drop-shadow-lg group-hover:text-[#23B14D] transition-colors">
+                          {item.title}
+                        </h3>
+                      </div>
+                    </Link>
                   </div>
-                </div>
-              ))}
+                )
+              )}
             </div>
           </div>
 
           {/* Bottom Section */}
-          <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-10 px-8 pb-20 mt-16">
-            <div className="mb-8 md:block hidden lg:mb-0">
-              <img
-                src="/images/expertise/sliderSolution.png"
-                alt="solution"
-                className="w-20 lg:w-28 object-contain"
-              />
-            </div>
-
-            <div className="text-center flex">
-              <div
-                onClick={() => handleViewChange("grid")}
-                className="bg-[#DDEBE1] cursor-pointer text-lg p-2 px-4 font-bold"
-              >
-                Grid
-              </div>
-              <div
-                onClick={() => handleViewChange("slider")}
-                className="bg-[#70ac82] cursor-pointer text-lg p-2 px-4 font-bold"
-              >
-                Slider
-              </div>
-            </div>
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-10 px-8 pb-20 mt-16">
+            <ViewTabs view={view} onChange={handleViewChange} />
 
             <Chatbot />
           </div>

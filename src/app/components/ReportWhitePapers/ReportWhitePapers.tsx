@@ -155,7 +155,7 @@ const ReportWhitePapers = () => {
           
         <div className="flex h-full lg:mb-0 mb-20">
           {/* Left Side */}
-          <div className="w-1/6 flex items-center justify-center">
+          <div className="hidden lg:flex w-1/6 items-center justify-center">
             <div className="fixed top-1/4 left-4 lg:left-24">
               <img
                 className="w-5 lg:w-8"
@@ -166,17 +166,17 @@ const ReportWhitePapers = () => {
           </div>
 
           {/* Main Content Area */}
-         
-          <div className="lg:w-2/3  lg:px-8 pt-8">
+
+          <div className="w-full lg:flex-1 lg:min-w-0 px-4 lg:px-8 pt-8">
             {/* Main Title */}
-            <div className="mb-8 pl-20 lg:pl-0">
+            <div className="mb-8">
               <h1 className="text-2xl lg:text-3xl font-black text-[#23B14D] mb-4">
                 REPORTS & <span className="text-black">WHITEPAPERS</span>
               </h1>
               <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                 Research that powers policy, investment, and innovation.
               </h2>
-              <p className="text-gray-600 text-sm mb-6">
+              <p className="text-gray-600 text-base mb-6">
                 From remote microgrids to intelligent hybrid architectures — our
                 work in the field is driving data-based insights, engineering
                 frameworks, and decision-grade research.{" "}
@@ -238,7 +238,7 @@ const ReportWhitePapers = () => {
               <div className={`flex items-center px-6 ${grid ? "justify-between" : "justify-end"}`}>
                 
                 {grid && (
-                  <h3 className="text-lg font-bold text-gray-800">Title</h3>
+                  <h3 className="text-lg lg:text-xl font-bold text-gray-800">Title</h3>
                 )}
                 <div className="flex items-center space-x-4">
                   <div
@@ -261,16 +261,16 @@ const ReportWhitePapers = () => {
                 {grid ? (
                   // List View
                   currentReports.map((report) => (
-                    <div key={report.id} className="flex lg:flex-row flex-col space-y-4 lg:space-y-0 items-center justify-between px-6 py-4 hover:bg-gray-50 transition-colors">
-                      <div className="flex space-x-5">
-                        <h4 className="font-semibold text-gray-800 mb-1">
+                    <div key={report.id} className="flex lg:flex-row flex-col gap-4 items-start lg:items-center justify-between px-6 py-4 hover:bg-gray-50 transition-colors">
+                      <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 min-w-0 flex-1">
+                        <h4 className="font-semibold text-gray-800 break-words">
                           {report.title}
                         </h4>
-                        <span className="text-sm text-[#23B14D]">
+                        <span className="text-sm text-[#23B14D] shrink-0">
                           {report.subTitle}
                         </span>
                       </div>
-                      <div className="flex items-center space-x-3">
+                      <div className="flex items-center space-x-3 shrink-0">
                         <a 
                           href={"https://g-stack.green.com.pg/"+report.href} 
                           download
@@ -300,7 +300,7 @@ const ReportWhitePapers = () => {
                         key={report.id}
                         className="border border-gray-200 rounded-md p-4 hover:shadow-lg transition-shadow"
                       >
-                        <h3 className="text-lg font-bold text-gray-800 mb-2">
+                        <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
                           {report.title}
                         </h3>
                         <h4 className="text-base font-semibold mb-3 text-[#23B14D]">
@@ -394,30 +394,21 @@ const ReportWhitePapers = () => {
             </div>
 
             {/* Quote Box */}
-            <div className="italic flex relative">
-              <div>
-                <img
-                  src="/images/reports/shape1.png"
-                  alt="Shape"
-                  className="absolute -left-16 top-10 w-16"
-                />
-              </div>
-              <div className="w-full">
-                <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                  We Don't Just <span className="text-[#23B14D]">Build</span>
-                  <br />
-                  Systems. We Build
-                  <br />
-                  <span className="text-[#23B14D]">Evidence.</span>
-                </h3>
-              </div>
-              <div>
-                <img
-                  src="/images/reports/shape2.png"
-                  alt="Shape"
-                  className="-mt-4 -ml-4"
-                />
-              </div>
+            <div className="italic relative mt-6 px-8 py-10">
+              <img
+                src="/images/reports/shape1.png"
+                alt=""
+                className="absolute top-0 left-0 w-10 h-auto"
+              />
+              <h3 className="relative z-10 text-lg lg:text-xl font-bold leading-relaxed text-gray-800">
+                We Don't Just <span className="text-[#23B14D]">Build</span> Systems.
+                We Build <span className="text-[#23B14D]">Evidence.</span>
+              </h3>
+              <img
+                src="/images/reports/shape2.png"
+                alt=""
+                className="absolute bottom-0 right-0 w-10 h-auto"
+              />
             </div>
           </div>
         </div>

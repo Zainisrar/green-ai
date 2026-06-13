@@ -64,7 +64,7 @@ const NewsLetterSignUp = () => {
               <div className="flex flex-col space-y-8">
                 {/* Left Column - Why Subscribe */}
                 <div>
-                  <h2 className="text-2xl font-black mb-4">Why Subscribe?</h2>
+                  <h2 className="text-xl lg:text-2xl font-bold mb-4">Why Subscribe?</h2>
 
                   <div className="overflow-x-auto">
                     <table className="w-full border-collapse">
@@ -120,7 +120,7 @@ const NewsLetterSignUp = () => {
 
                 {/* Right Column - What You'll Receive */}
                 <div className="mt-10">
-                  <h2 className="text-2xl font-black mb-8">
+                  <h2 className="text-xl lg:text-2xl font-bold mb-8">
                     What You'll <span className="text-green-600">Receive</span>
                   </h2>
 
@@ -176,7 +176,7 @@ const NewsLetterSignUp = () => {
                 <img src="/images/newsletter/shape.png" className="w-14" alt="shape" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold mb-2">Contact</h3>
+                <h3 className="text-xl lg:text-2xl font-bold mb-2">Contact</h3>
                 <p className="text-green-600 text-lg font-semibold">
                   —{" "}
                   <span className="italic">

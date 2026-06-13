@@ -132,7 +132,7 @@ const KeySupplyCategories = () => {
                   
                   return (
                     <div key={index} className="flex items-center justify-between border-b border-[#23B14D] pb-4">
-                      <h3 className="text-xl font-bold text-gray-800">
+                      <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
                         {modal.title}
                       </h3>
                       <button onClick={modalHandlers[index]} className="cursor-pointer">
@@ -147,7 +147,7 @@ const KeySupplyCategories = () => {
 
                 {/* Supply Chain & Procurement Notes - Static */}
                 <div className="flex items-center justify-between border-b border-[#23B14D] pb-4">
-                  <h3 className="text-xl font-bold text-gray-800">
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
                     Supply Chain & Procurement Notes
                   </h3>
                   <button

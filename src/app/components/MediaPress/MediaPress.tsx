@@ -90,7 +90,7 @@ const MediaPress = () => {
             <div className="space-y-8 max-w-4xl ">
               {/* Latest Press Releases */}
               <div className="border-b pb-2 border-[#23B14D] flex items-center justify-between ">
-                <h3 className="text-lg font-bold text-gray-800">
+                <h3 className="text-lg lg:text-xl font-bold text-gray-800">
                   Latest Press Releases
                 </h3>
                 <button className="cursor-pointer"
@@ -102,7 +102,7 @@ const MediaPress = () => {
 
               {/* Media Contact & Interview Requests */}
               <div className="border-b  pb-2 border-[#23B14D] flex items-center justify-between ">
-                <h3 className="text-lg font-bold text-gray-800">
+                <h3 className="text-lg lg:text-xl font-bold text-gray-800">
                   Media Contact & Interview Requests
                 </h3>
                 <button className="cursor-pointer"
@@ -114,7 +114,7 @@ const MediaPress = () => {
 
               {/* Media Kit Download */}
               <div className="border-b  pb-2 border-[#23B14D] flex items-center justify-between ">
-                <h3 className="text-lg font-bold text-gray-800">
+                <h3 className="text-lg lg:text-xl font-bold text-gray-800">
                   Media Kit Download
                 </h3>
                  <button className="cursor-pointer"
@@ -126,7 +126,7 @@ const MediaPress = () => {
 
               {/* GREEN in the News */}
               <div className="border-b  pb-2 border-[#23B14D] flex items-center justify-between ">
-                <h3 className="text-lg font-bold text-gray-800">
+                <h3 className="text-lg lg:text-xl font-bold text-gray-800">
                   GREEN in the News
                 </h3>
                 <button className="cursor-pointer"
@@ -138,7 +138,7 @@ const MediaPress = () => {
 
               {/* Official Spokes people */}
               <div className="border-b  pb-2 border-[#23B14D] flex items-center justify-between ">
-                <h3 className="text-lg font-bold text-gray-800">
+                <h3 className="text-lg lg:text-xl font-bold text-gray-800">
                   Official Spokes people
                 </h3>
                 <button className="cursor-pointer"

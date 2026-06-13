@@ -62,7 +62,7 @@ const ClientPartnerships = () => {
               <h1 className=" text-xl lg:text-3xl font-black text-gray-800 mb-4">
                 {data?.mainPage?.title?.toUpperCase() ?? "CLIENT PARTNERSHIPS"}
               </h1>
-              <h2 className=" text-xl lg:text-2xl font-medium text-[#23B14D] italic mb-4">
+              <h2 className=" text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-4">
                 {data?.mainPage?.subHeadline ?? "We Don't Just Serve Clients. We Scale Their Missions."}
               </h2>
               <p className="text-gray-600 text-lg mb-8 max-w-5xl">
@@ -96,7 +96,7 @@ const ClientPartnerships = () => {
                 {/* Who We Partner With */}
                 <div className="flex items-center justify-between border-b border-[#4CAF50] pb-4">
                   <div>
-                    <h3 className="text-lg font-black text-gray-800">
+                    <h3 className="text-lg lg:text-xl font-bold text-gray-800">
                       {data?.whoWePartnerWith?.title ?? "Who We Partner With"}
                     </h3>
                     <p className="text-sm text-gray-600">
@@ -114,7 +114,7 @@ const ClientPartnerships = () => {
                 {/* Our Client Partnership Model */}
                 <div className="flex items-center justify-between border-b border-[#4CAF50] pb-4">
                   <div>
-                    <h3 className="text-lg font-black text-gray-800">
+                    <h3 className="text-lg lg:text-xl font-bold text-gray-800">
                       {data?.ourClientPartnership?.title ?? "Our Client Partnership Model"}
                     </h3>
                     <p className="text-sm text-gray-600">
@@ -135,7 +135,7 @@ const ClientPartnerships = () => {
                 {/* What Sets GREEN Apart */}
                 <div className="flex items-center justify-between border-b border-[#4CAF50] pb-4">
                   <div>
-                    <h3 className="text-lg font-black text-gray-800">
+                    <h3 className="text-lg lg:text-xl font-bold text-gray-800">
                       {data?.whatSetsGreenApart?.title ?? "What Sets GREEN Apart"}
                     </h3>
                     <p className="text-sm text-gray-600">
@@ -156,7 +156,7 @@ const ClientPartnerships = () => {
                 {/* Client Testimonials / Use Cases */}
                 <div className="flex items-center justify-between border-b border-[#4CAF50] pb-4">
                   <div>
-                    <h3 className="text-lg font-black text-gray-800">
+                    <h3 className="text-lg lg:text-xl font-bold text-gray-800">
                       {data?.useCases?.title ?? "Client Testimonials / Use Cases"}
                     </h3>
                     <p className="text-sm text-gray-600">
@@ -177,7 +177,7 @@ const ClientPartnerships = () => {
                 {/* Partnership Onboarding */}
                 <div className="flex items-center justify-between border-b border-[#4CAF50] pb-4">
                   <div>
-                    <h3 className="text-lg font-black text-gray-800">
+                    <h3 className="text-lg lg:text-xl font-bold text-gray-800">
                       Partnership Onboarding
                     </h3>
                     <p className="text-sm text-gray-600">
@@ -198,7 +198,7 @@ const ClientPartnerships = () => {
                 {/* CLIENT PARTNER LOGIN */}
                 <div className="flex items-center justify-between border-b border-[#4CAF50] pb-4">
                   <div>
-                    <h3 className="text-lg font-bold text-gray-800">
+                    <h3 className="text-lg lg:text-xl font-bold text-gray-800">
                       CLIENT PARTNER LOGIN
                     </h3>
                     <p className="text-sm text-gray-600">

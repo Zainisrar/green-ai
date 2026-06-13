@@ -103,7 +103,7 @@ const Challenge = ({ isOpen, onClose, data }: Props) => {
     <>
       {/* Title Section */}
       <div className="mb-8">
-        <h2 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
+        <h2 className="text-3xl lg:text-4xl font-black text-gray-800 mb-4 leading-tight">
           {data?.title || "The Challenge"}
         </h2>
         <div className="lg:flex items-center">
@@ -201,7 +201,7 @@ const Challenge = ({ isOpen, onClose, data }: Props) => {
               {/* Modal Content */}
               <div
                style={{
-                transform:"skewX(6deg)"
+                transform:"skewX(12deg)"
                }}
               className="transform  max-w-5xl mx-auto">
                 {renderContent()}

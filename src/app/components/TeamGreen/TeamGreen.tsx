@@ -99,7 +99,7 @@ const TeamGreen = () => {
               </p>
             </div>
     <div className="lg:hidden my-12 ">
-              <h3 className="text-2xl font-bold text-gray-800">
+              <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
                 {data?.mainPage.quote2 ? 
                   renderHighlightedText(data.mainPage.quote2.text, data.mainPage.quote2.highlighted) :
                   <>"Team <span className="text-[#23B14D]">GREEN</span> doesn't clock in. We show up — because lives depend on it."</>
@@ -120,7 +120,7 @@ const TeamGreen = () => {
                   <div key={index} className="lg:flex lg:flex-row flex-col    lg:space-x-8 border-b  border-green-600 pb-4 lg:items-center lg:w-9/12 lg:justify-between">
                     <div className="flex space-x-6 lg:space-x-10 ">
                       <div>
-                        <h3 className="text-lg font-bold text-gray-800 mb-1">
+                        <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-1">
                           {key.title}
                         </h3>
                       </div>
@@ -154,8 +154,8 @@ const TeamGreen = () => {
                   <img src="/images/handbook/shape.png" className="w-14" alt="shape" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-4">
-                    
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
+
                     “A Day with Team
                     {` `} <span className="text-[#23B14D]">GREEN.</span>
                   </h3>
@@ -191,7 +191,7 @@ const TeamGreen = () => {
             </div>
             {/* Bottom Quote */}
             <div className="lg:block hidden lg:my-0 my-12 mb-20">
-              <h3 className="text-2xl font-bold text-gray-800">
+              <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
                 {data?.mainPage.quote2 ? 
                   renderHighlightedText(data.mainPage.quote2.text, data.mainPage.quote2.highlighted) :
                   <>"Team <span className="text-[#23B14D]">GREEN</span> doesn't clock in. We show up — because lives depend on it."</>
