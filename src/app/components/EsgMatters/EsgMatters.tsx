@@ -150,7 +150,7 @@ const EsgMatters = () => {
           index: 1,
           data: (
             <div className="mt-8 lg:ml-4 lg:w-[40%]">
-              <h3 className="text-xl lg:text-2xl ml-8 font-bold text-gray-800 mb-6">
+              <h3 className="text-xl lg:text-2xl lg:ml-8 font-bold text-gray-800 mb-6">
                 How We Measure Impact
               </h3>
 
@@ -309,7 +309,7 @@ const EsgMatters = () => {
 
   return (
     <React.Fragment>
-      <div className="">
+      <div className='bg-fixed bg-cover bg-center bg-no-repeat lg:bg-[url("/images/why-esg-matters-to-green/bg.jpg")]'>
         <TopNavigation />
         <div className="flex h-full z-[20] relative">
           {/* Left Side  */}
@@ -483,15 +483,13 @@ const EsgMatters = () => {
             <span className="text-[#23B14D]">Project By Project</span>.
           </h3>
         </div>
-        <div className=" z-[20] relative flex justify-end my-8 cursor-pointer">
+        <div className="z-[20] relative flex flex-col items-end gap-6 mt-4 mb-20 cursor-pointer">
           <a href={data.mainPage.cta[0]?.href || "#"} target="_blank" rel="noopener noreferrer">
             <img
               src="/images/why-esg-matters-to-green/green.png"
               alt={data.mainPage.cta[0]?.text || "GREEN ESG Policy Brief"}
             />
           </a>
-        </div>
-        <div className="  flex justify-end mb-32 my-8 cursor-pointer">
           <a href={data.mainPage.cta[1]?.href || "#"} target="_blank" rel="noopener noreferrer">
             <img
               src="/images/why-esg-matters-to-green/sample.png"

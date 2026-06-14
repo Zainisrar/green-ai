@@ -95,7 +95,7 @@ const WomenInEnergy = () => {
       <TopNavigation />
       <div className="flex h-full">
         <div className="w-1/6 flex items-center justify-center">
-          <div className="fixed top-4/12 lg:top-1/3 left-4 lg:left-14">
+          <div className="fixed top-1/3 left-4 lg:left-14">
             <img
               src="/images/women-in-energy/women-in-energy.png"
               alt="women-in-energy"
@@ -107,13 +107,13 @@ const WomenInEnergy = () => {
         <div className="w-full lg:px-8  pt-8 ">
           {/* Main Title */}
           <div className="mb-8 ">
-            <h1 className="lg:text-3xl text-2xl font-black text-gray-800 mb-4">
+            <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
               {data.mainPage.title.toUpperCase()}
             </h1>
             <h2 className=" text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-4">
               {data.mainPage.subHeadline}
             </h2>
-            <div className="text-gray-600 lg:text-lg mb-10">
+            <div className="text-gray-600 text-base lg:text-lg mb-10">
               <p className="mb-2">
                 {highlightText(
                   data.mainPage.description.text,
@@ -322,7 +322,7 @@ const WomenInEnergy = () => {
                       src="/images/women-in-energy/womenBtn.png"
                       alt={"submit interest"}
                     />
-                    <div className="absolute top-3 left-8 text-sm lg:text-lg font-semibold ">
+                    <div className="absolute inset-0 flex items-center pl-8 lg:pl-10 pr-12 lg:pr-16 text-sm lg:text-base font-semibold leading-tight">
                       {data.mainPage.cta[0].text}
                     </div>
                   </Link>
@@ -336,7 +336,7 @@ const WomenInEnergy = () => {
                       src="/images/women-in-energy/joinNetworkBtn.png"
                       alt={"submit interest"}
                     />
-                    <div className="absolute top-3 lg:top-4 lg:text-base text-xs left-4 lg:left-10  font-semibold ">
+                    <div className="absolute inset-0 flex items-center pl-8 lg:pl-10 pr-12 lg:pr-16 text-xs lg:text-sm font-semibold leading-tight">
                       {data.mainPage.cta[1].text}
                     </div>
                   </Link>

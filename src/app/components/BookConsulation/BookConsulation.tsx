@@ -26,17 +26,17 @@ const BookConsulation = () => {
           <div className="  flex flex-col   md:pl-38 md:mr-4  md:my-10  lg:my-0 lg:pl-8 lg:px-8  lg:mr-8 ml-4 rounded-lg">
             <div className="ml-10">
               {/* Main Heading */}
-              <h1 className="text-2xl lg:text-3xl font-black mb-4">
+              <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
                 BOOK A <span className="text-[#23B14D]">CONSULTATION</span>
               </h1>
 
               {/* Subtitle */}
-              <p className="text-xl lg:text-2xl text-[#23B14D] italic font-semibold mb-2">
+              <p className="text-xl lg:text-2xl text-[#23B14D] italic font-bold mb-2">
                 Let's Solve Energy, Together.
               </p>
 
               {/* Description */}
-              <p className="text-gray-700 max-w-7xl mb-4 leading-relaxed">
+              <p className="text-gray-700 text-base lg:text-lg max-w-7xl mb-4 leading-relaxed">
                 Whether you're developing a project, designing a grant, or
                 planning a regional rollout — schedule a tailored consultation
                 with <span className="font-bold text-[#23B14D]">GREEN's</span>{" "}
@@ -45,7 +45,7 @@ const BookConsulation = () => {
               </p>
 
               {/* Consultation Focus Areas */}
-              <h2 className="text-xl lg:text-2xl font-bold mb-4">
+              <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                 Consultation Focus Areas
               </h2>
 
@@ -53,10 +53,10 @@ const BookConsulation = () => {
                 <table className="w-full border-collapse">
                   <thead>
                     <tr className="">
-                      <th className=" px-4 py-3 text-left font-bold text-[#23B14D]">
+                      <th className=" px-4 py-3 text-left text-lg font-bold text-[#23B14D]">
                         Benefit
                       </th>
-                      <th className=" px-4 py-3 text-left font-bold text-[#23B14D]">
+                      <th className=" px-4 py-3 text-left text-lg font-bold text-[#23B14D]">
                         Description
                       </th>
                     </tr>
@@ -110,7 +110,7 @@ const BookConsulation = () => {
               </div>
 
               {/* Booking Details */}
-              <h2 className="text-xl lg:text-2xl font-bold mb-4">Booking Details</h2>
+              <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">Booking Details</h2>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 <div className="flex items-center space-x-3">

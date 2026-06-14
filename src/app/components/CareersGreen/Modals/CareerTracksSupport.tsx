@@ -91,9 +91,8 @@ const CareerTracksSupport = ({ isOpen, onClose, data }: Props) => {
           ) : (
             /* Desktop Layout - Skewed design */
             <div
-              className="bg-white transform py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-              style={{ 
-                clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
+              className="bg-white transform py-10 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
+              style={{
                 transform:"skewX(-12deg)"
                }}
             >

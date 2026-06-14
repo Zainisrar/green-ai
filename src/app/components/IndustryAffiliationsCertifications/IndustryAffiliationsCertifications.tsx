@@ -78,7 +78,7 @@ const IndustryAffiliationsCertifications = () => {
         <div className="flex h-full">
           {/* Left Side  */}
           <div className="w-1/6 flex items-center justify-center">
-            <div className="fixed top-1/5 left-4 lg:left-14">
+            <div className="fixed top-1/4 left-4 lg:left-14">
               <img
                 src="/images/industry-affiliations-certifications/industry-affiliations-certifications.png"
                 alt="Industry Affiliations & Certifications"
@@ -96,7 +96,7 @@ const IndustryAffiliationsCertifications = () => {
               <h2 className=" text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-4">
                 {mainPage?.subHeadline?.trim()}
               </h2>
-              <p className="text-gray-600  lg:text-lg mb-8 whitespace-pre-line">
+              <p className="text-gray-600 text-base lg:text-lg mb-8 lg:max-w-3xl whitespace-pre-line">
                 {mainPage?.description?.text}
               </p>
             </div>
@@ -219,26 +219,24 @@ const IndustryAffiliationsCertifications = () => {
               </div>
 
               {/* Right Column - Quote Box */}
-              <div className="lg:block  hidden lg:mt-20">
-                <div className="">
-                  <div className="">
-                    {mainPage?.quote && (
-                      <div>
-                        {mainPage.quote.map((q, idx) => (
-                          <p
-                            key={idx}
-                            className={`text-2xl ${
-                              q.highlighted
-                                ? "text-[#23B14D] font-semibold italic"
-                                : "font-bold text-gray-800"
-                            }`}
-                          >
-                            {q.text}
-                          </p>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+              <div className="lg:block hidden lg:mt-20 relative z-10">
+                <div className="max-w-md">
+                  {mainPage?.quote && (
+                    <div>
+                      {mainPage.quote.map((q, idx) => (
+                        <p
+                          key={idx}
+                          className={`text-xl lg:text-2xl ${
+                            q.highlighted
+                              ? "text-[#23B14D] font-semibold italic"
+                              : "font-bold text-gray-800"
+                          }`}
+                        >
+                          {q.text}
+                        </p>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

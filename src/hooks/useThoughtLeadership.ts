@@ -10,10 +10,15 @@ interface EditorialCTA {
   text: string;
 }
 
+interface EditorialWriter {
+  name?: string;
+  email?: string;
+}
+
 interface Editorial {
   cta: EditorialCTA;
   title: string;
-  writer: number;
+  writer: EditorialWriter | number;
   categories: string[];
   description: string;
   featuredImg: EditorialImage;

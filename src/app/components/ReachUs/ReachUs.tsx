@@ -48,7 +48,7 @@ const ReachUs = () => {
         <div className="relative w-full px-6 py-8 lg:py-10 lg:pl-32 lg:pr-10">
           <div className="relative">
             {/* Header Text + Enquiry Button (top right) */}
-            <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+            <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <p className="text-gray-700 text-lg max-w-xl">
                 Are you prepared to get started on your Energy Deployment right
                 away? Let&apos;s connect!

@@ -18,7 +18,7 @@ const MediaContactInterviewRequests = ({ isOpen, onClose }: Props) => {
           {/* Skewed Modal Background */}
           <div
             className="bg-gray-100 transform  py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-            style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
+            style={{
               transform:"skewX(-12deg)"
              }}
           >
@@ -37,7 +37,7 @@ const MediaContactInterviewRequests = ({ isOpen, onClose }: Props) => {
             {/* Modal Content */}
             <div
             style={{
-              transform:"skewX(6deg)"
+              transform:"skewX(12deg)"
             }}  
             className="transform  max-w-5xl mx-auto">
               <h2 className="text-2xl font-bold  mb-6">

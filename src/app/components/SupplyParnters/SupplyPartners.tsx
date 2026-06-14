@@ -179,26 +179,28 @@ const [isDesktop, setIsDesktop]=useState(false);
                     )}
                   </div>
                 </ul>
-                <ul className="text-gray-900 text-lg lg:text-xl italic  mt-10 space-y-3 ">
-                  <li className="lg:text-lg font-semibold text-[#23B14D] text-center">
+                <ul className="mt-10 space-y-2">
+                  <li className="text-lg lg:text-xl font-semibold text-[#23B14D] text-center">
                     Examples
                   </li>
-                  {data?.whatWeProcure?.item?.map(
-                    (item: ProcurementItem, index: number) => (
-                      <li key={index}>{item.example}</li>
-                    )
-                  ) || (
-                    <>
-                      <li>Mono PERC, Bifacial, Flexible PV</li>
-                      <li>On-grid, Hybrid, Off-grid, Microinverters</li>
-                      <li>Grid-scale BESS, LFP, Lead-carbon, Flow</li>
-                      <li>MPPT, Smart Load Controllers, ATS units</li>
-                      <li>Fixed, Tracker, Modular Kits</li>
-                      <li>
-                        Smart meters, SCADA, <br /> GRID-INTEL™-compatible
-                      </li>
-                    </>
-                  )}
+                  <div className="italic flex flex-col mt-4 space-y-2 text-base lg:text-lg font-semibold text-gray-900">
+                    {data?.whatWeProcure?.item?.map(
+                      (item: ProcurementItem, index: number) => (
+                        <li key={index}>{item.example}</li>
+                      )
+                    ) || (
+                      <>
+                        <li>Mono PERC, Bifacial, Flexible PV</li>
+                        <li>On-grid, Hybrid, Off-grid, Microinverters</li>
+                        <li>Grid-scale BESS, LFP, Lead-carbon, Flow</li>
+                        <li>MPPT, Smart Load Controllers, ATS units</li>
+                        <li>Fixed, Tracker, Modular Kits</li>
+                        <li>
+                          Smart meters, SCADA, <br /> GRID-INTEL™-compatible
+                        </li>
+                      </>
+                    )}
+                  </div>
                 </ul>
               </div>
             </div>
@@ -213,14 +215,16 @@ const [isDesktop, setIsDesktop]=useState(false);
                 {data?.howBecomeGreenSupplier?.title ||
                   "How to Become a GREEN Supplier"}
               </h4>
-              <h5 className="text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-4">
+              <h5 className="text-lg lg:text-2xl font-bold text-[#23B14D] italic mb-4">
                 {data?.howBecomeGreenSupplier?.subHeadline ||
                   "Join the Network That Builds the Future."}
               </h5>
               <div className="flex space-x-10 ">
                 <ul className="text-base mt-4 space-y-2">
-                  <li className="text-xl font-semibold text-[#23B14D]">Step</li>
-                  <div className="italic flex -ml-4 flex-col mt-4 space-y-2 lg:text-lg  font-semibold text-black">
+                  <li className="text-lg lg:text-xl font-semibold text-[#23B14D]">
+                    Step
+                  </li>
+                  <div className="italic flex -ml-4 flex-col mt-4 space-y-2 text-base lg:text-lg font-semibold text-black">
                     {data?.howBecomeGreenSupplier?.item?.map(
                       (item: SupplierStep, index: number) => (
                         <li key={index}>Step {item.step}</li>
@@ -235,24 +239,24 @@ const [isDesktop, setIsDesktop]=useState(false);
                     )}
                   </div>
                 </ul>
-                <ul className="text-gray-900 text-xl italic  mt-4 space-y-3 ">
-                  <li className="text-xl font-semibold text-[#23B14D] text-center">
+                <ul className="mt-4 space-y-2">
+                  <li className="text-lg lg:text-xl font-semibold text-[#23B14D] text-center">
                     Action
                   </li>
-                  {data?.howBecomeGreenSupplier?.item?.map(
-                    (item: SupplierStep, index: number) => (
-                      <li key={index}>{item.action}</li>
-                    )
-                  ) || (
-                    <>
-                      <li>Submit your Supplier Introduction Form</li>
-                      <li>Undergo technical and commercial review</li>
-
-                      <li>Get listed as an Approved Supply Partner</li>
-                    </>
-                  )}
-
-                  <li>Receive GREEN’s Supplier Code & Onboarding Pack</li>
+                  <div className="italic flex flex-col mt-4 space-y-2 text-base lg:text-lg font-semibold text-gray-900">
+                    {data?.howBecomeGreenSupplier?.item?.map(
+                      (item: SupplierStep, index: number) => (
+                        <li key={index}>{item.action}</li>
+                      )
+                    ) || (
+                      <>
+                        <li>Submit your Supplier Introduction Form</li>
+                        <li>Undergo technical and commercial review</li>
+                        <li>Get listed as an Approved Supply Partner</li>
+                      </>
+                    )}
+                    <li>Receive GREEN’s Supplier Code & Onboarding Pack</li>
+                  </div>
                 </ul>
               </div>
             </div>
@@ -293,11 +297,11 @@ const [isDesktop, setIsDesktop]=useState(false);
               <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
                 {data?.mainPage?.title?.toUpperCase() || "SUPPLY PARTNERS"}
               </h1>
-              <h2 className="lg:text-2xl font-bold text-[#23B14D] italic mb-4">
+              <h2 className="text-lg lg:text-2xl font-bold text-[#23B14D] italic mb-4">
                 {data?.mainPage?.subHeadline ||
                   "Technology You Can Trust. Partners Who Deliver."}
               </h2>
-              <p className="text-gray-600 lg:text-lg mb-6">
+              <p className="text-gray-600 text-base lg:text-lg mb-6">
                 {data?.mainPage?.description?.highlighted ? (
                   <>
                     {

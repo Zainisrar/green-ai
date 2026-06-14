@@ -62,7 +62,7 @@ const CareerGreen = () => {
         <div className="flex h-full">
           {/* Left Side - GLOBAL SNAPSHOT Text */}
           <div className="w-1/6 flex items-center justify-center">
-            <div className="fixed top-1/5 left-4 lg:left-14">
+            <div className="fixed top-[20%] left-4 lg:left-14">
               <img
                 src="/images/careers-green/industry-affiliations-certifications.png"
                 alt="Careers at GREEN"
@@ -108,7 +108,7 @@ const CareerGreen = () => {
                 ]).map((key, index) => (
                   <div key={index} className="lg:flex lg:space-x-8 border-b border-green-600 pb-4 items-center lg:w-full justify-between">
                     <div>
-                      <h3 className="lg:text-lg font-bold text-gray-800 mb-1">
+                      <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-1">
                         {key.text}
                       </h3>
                     </div>

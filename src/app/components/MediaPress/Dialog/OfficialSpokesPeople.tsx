@@ -70,9 +70,7 @@ const OfficialSpokesPeople: React.FC<OfficialSpokesPeopleProps> = ({
     <>
       {/* Title Section */}
       <div className="mb-8">
-        <h2
-        style={{transform:"skewX(6deg)"}}
-        className="text-2xl  lg:text-3xl font-black text-gray-800 mb-4">
+        <h2 className="text-2xl  lg:text-3xl font-black text-gray-800 mb-4">
           Official Spokespeople
         </h2>
         <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
@@ -83,9 +81,7 @@ const OfficialSpokesPeople: React.FC<OfficialSpokesPeopleProps> = ({
       </div>
 
       {/* Spokespeople Grid */}
-      <div
-      style={{transform:"skewX(5deg)"}}
-      className="grid grid-cols-1 md:grid-cols-2 px-20  lg:grid-cols-4 gap-y-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 px-20  lg:grid-cols-4 gap-y-2 gap-6">
         {spokespeople.map((person, idx) => (
           <div
             key={idx}
@@ -139,7 +135,7 @@ const OfficialSpokesPeople: React.FC<OfficialSpokesPeopleProps> = ({
             /* Desktop Layout */
             <div
               className="bg-gray-100 transform  py-14  px-16 relative shadow-2xl max-h-[85vh]"
-              style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
+              style={{
                 transform:"skewX(-12deg)"
                }}
             >
@@ -159,7 +155,7 @@ const OfficialSpokesPeople: React.FC<OfficialSpokesPeopleProps> = ({
               {/* Modal Content */}
               <div
               style={{
-                transform:"skewX(6deg)"
+                transform:"skewX(12deg)"
               }}
               className="transform max-w-5xl mx-auto">
                 {renderContent()}

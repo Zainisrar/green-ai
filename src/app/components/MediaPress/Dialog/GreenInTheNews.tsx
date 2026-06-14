@@ -123,7 +123,7 @@ const GreenInTheNews: React.FC<GreenInTheNewsProps> = ({ isOpen, onClose }) => {
             /* Desktop Layout */
             <div
               className="bg-gray-100 transform  py-14 border-2 border-[#23B14D] px-16 relative shadow-2xl  max-h-[85vh]"
-              style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
+              style={{
                 transform:"skewX(-12deg)"
                }}
             >
@@ -143,7 +143,7 @@ const GreenInTheNews: React.FC<GreenInTheNewsProps> = ({ isOpen, onClose }) => {
               {/* Modal Content */}
               <div
               style={{
-                transform:"skewX(6deg)"
+                transform:"skewX(12deg)"
               }}
               className="transform  max-w-5xl mx-auto">
                 {renderContent()}

@@ -18,7 +18,7 @@ const ReportWhitePapers = () => {
   const [grid, setGrid] = React.useState(true);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [selectedYear, setSelectedYear] = React.useState<number | null>(null);
-  const reportsPerPage = 4;
+  const reportsPerPage = 6;
 
   const { data: apiReports } = useReportsWhitepapers();
 
@@ -170,10 +170,10 @@ const ReportWhitePapers = () => {
           <div className="w-full lg:flex-1 lg:min-w-0 px-4 lg:px-8 pt-8">
             {/* Main Title */}
             <div className="mb-8">
-              <h1 className="text-2xl lg:text-3xl font-black text-[#23B14D] mb-4">
-                REPORTS & <span className="text-black">WHITEPAPERS</span>
+              <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
+                <span className="text-[#23B14D]">REPORTS &</span> WHITEPAPERS
               </h1>
-              <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
+              <h2 className="text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-4">
                 Research that powers policy, investment, and innovation.
               </h2>
               <p className="text-gray-600 text-base mb-6">
@@ -294,38 +294,55 @@ const ReportWhitePapers = () => {
                   ))
                 ) : (
                   // Grid View
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 p-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 p-4">
                     {currentReports.map((report) => (
                       <div
                         key={report.id}
-                        className="border border-gray-200 rounded-md p-4 hover:shadow-lg transition-shadow"
+                        className="flex flex-col h-full border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
                       >
-                        <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
-                          {report.title}
-                        </h3>
-                        <h4 className="text-base font-semibold mb-3 text-[#23B14D]">
-                          {report.subTitle}
-                        </h4>
-                        <div className="flex space-x-4 mb-4">
+                        <div className="relative">
                           <img
                             src={report.img}
                             alt={report.title}
-                            className="w-16 h-16 object-cover rounded"
+                            className="w-full h-40 object-cover"
                           />
-                          <p className="text-gray-600 text-sm flex-1">{report.description}</p>
+                          <span className="absolute top-3 left-3 bg-[#23B14D] text-white text-xs font-semibold px-2 py-1 rounded">
+                            {report.year}
+                          </span>
                         </div>
-                        <div className="flex justify-end">
-                          <a 
-                            href={"https://g-stack.green.com.pg/"+report.href} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="cursor-pointer hover:opacity-80 transition-opacity"
-                          >
-                            <img
-                              src="/images/media-press/explore.png"
-                              alt="explore report"
-                            />
-                          </a>
+                        <div className="flex flex-col flex-1 p-4">
+                          <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-1 line-clamp-2">
+                            {report.title}
+                          </h3>
+                          <h4 className="text-base font-semibold mb-3 text-[#23B14D] line-clamp-1">
+                            {report.subTitle}
+                          </h4>
+                          <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                            {report.description}
+                          </p>
+                          <div className="flex items-center justify-end gap-3 mt-auto pt-2 border-t border-gray-100">
+                            <a
+                              href={"https://g-stack.green.com.pg/"+report.href}
+                              download
+                              className="cursor-pointer hover:opacity-80 transition-opacity"
+                            >
+                              <img
+                                src="/images/reports/download.png"
+                                alt="download report"
+                              />
+                            </a>
+                            <a
+                              href={"https://g-stack.green.com.pg/"+report.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="cursor-pointer hover:opacity-80 transition-opacity"
+                            >
+                              <img
+                                src="/images/media-press/explore.png"
+                                alt="explore report"
+                              />
+                            </a>
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -394,20 +411,20 @@ const ReportWhitePapers = () => {
             </div>
 
             {/* Quote Box */}
-            <div className="italic relative mt-6 px-8 py-10">
+            <div className="italic relative mt-6">
               <img
                 src="/images/reports/shape1.png"
                 alt=""
-                className="absolute top-0 left-0 w-10 h-auto"
+                className="pointer-events-none absolute top-0 left-0 w-8 h-auto"
               />
-              <h3 className="relative z-10 text-lg lg:text-xl font-bold leading-relaxed text-gray-800">
+              <h3 className="relative z-10 px-10 py-12 text-lg lg:text-xl font-bold leading-relaxed text-gray-800">
                 We Don't Just <span className="text-[#23B14D]">Build</span> Systems.
                 We Build <span className="text-[#23B14D]">Evidence.</span>
               </h3>
               <img
                 src="/images/reports/shape2.png"
                 alt=""
-                className="absolute bottom-0 right-0 w-10 h-auto"
+                className="pointer-events-none absolute bottom-0 right-0 w-8 h-auto"
               />
             </div>
           </div>

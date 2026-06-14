@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useOurValueChain } from "../../../hooks/useOurValueChain";
@@ -41,17 +41,6 @@ interface OurValueChainData {
 }
 
 const OurChainValue = () => {
-  const [isDesktop, setIsDesktop] = React.useState(false);
-    useEffect(() => {
-      const handleResize = () => {
-        if (typeof window !== "undefined") {
-          setIsDesktop(window.innerWidth >= 1024);
-        }
-      };
-      handleResize();
-      window.addEventListener("resize", handleResize);
-      return () => window.removeEventListener("resize", handleResize);
-    }, []);
   const { data: apiData } = useOurValueChain();
   // Type assertion to help TypeScript understand the data structure
   const data = apiData as OurValueChainData | undefined;
@@ -64,14 +53,10 @@ const OurChainValue = () => {
     <React.Fragment>
       <div className="  ">
         <TopNavigation />
-        <div
-        style={{
-          transform: isDesktop ? "skewX(-2deg)" : "none"
-        }}
-        className="absolute top-0 left-0 lg:left-10 lg:block hidden ">
+        <div className="absolute top-0 left-0 lg:left-10 lg:block hidden">
           <img
             src="/images/our-value-chain/mainImg.png"
-            className="lg:w-8/12 w-screen lg:h-[125vh]"
+            className="w-screen lg:w-auto lg:h-[125vh]"
             alt="bg"
           />
         </div>
@@ -104,7 +89,7 @@ const OurChainValue = () => {
                   "OUR VALUE CHAIN"
                 )}
               </h1>
-              <h2 className=" font-bold text-[#23B14D] italic mb-4">
+              <h2 className="text-lg lg:text-2xl font-bold text-[#23B14D] italic mb-4">
                 {data?.subHeadline || "Built by Design. Delivered End-to-End."}
               </h2>
               <div className="absolute lg:block hidden bottom-10">

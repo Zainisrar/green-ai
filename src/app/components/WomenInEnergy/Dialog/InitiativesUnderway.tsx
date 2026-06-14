@@ -66,7 +66,7 @@ const InitiativesUnderway = ({ isOpen, onClose }: Props) => {
               <div className="">
                 {/* Title Section */}
                 <div className="mb-8">
-                  <h2 className="text-3xl font-black text-gray-800 mb-4">
+                  <h2 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
                     {modalData.title}
                   </h2>
                   <h3 className="text-lg mb-4">
@@ -116,7 +116,7 @@ const InitiativesUnderway = ({ isOpen, onClose }: Props) => {
           ) : (
             <div
               className="bg-gray-100 transform  py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-              style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
+              style={{
                 transform:"skewX(-12deg)"
                }}
             >
@@ -138,12 +138,12 @@ const InitiativesUnderway = ({ isOpen, onClose }: Props) => {
               {/* Modal Content */}
               <div
               style={{
-                transform:"skewX(6deg)"
+                transform:"skewX(12deg)"
               }}
               className="transform max-w-5xl mx-auto">
                 {/* Title Section */}
                 <div className="mb-8">
-                  <h2 className="text-3xl font-black text-gray-800 mb-4">
+                  <h2 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
                     {modalData.title}
                   </h2>
                   <h3 className="text-lg mb-4">

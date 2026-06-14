@@ -23,7 +23,7 @@ const EventsWebinars = () => {
   const [eventType, setEventType] = React.useState<"all" | "upcoming" | "past">(
     "all"
   );
-  const eventsPerPage = 4;
+  const eventsPerPage = 6;
 
   const { data: apiData, isLoading, error } = useEventsWebinars();
 
@@ -178,7 +178,7 @@ const EventsWebinars = () => {
         <div className={`flex relative ${nav.isNavigationOpen?"":"z-[99999999999999999]"} h-full`}>
           {/* Left Side */}
           <div className="lg:flex hidden lg:w-1/6 items-center justify-center">
-            <div className="fixed top-1/4 left-14">
+            <div className="fixed top-1/4 left-4 lg:left-24">
               <img
                 src="/images/events/events.png"
                 alt="Events and Webinars"
@@ -188,13 +188,13 @@ const EventsWebinars = () => {
           </div>
 
           {/* Main Content Area */}
-          <div className="w-full lg:w-2/3 px-4 lg:px-8 pt-8">
+          <div className="w-full lg:flex-1 lg:min-w-0 px-4 lg:px-8 pt-8">
             {/* Main Title */}
-            <div className="mb-8 pl-20 lg:pl-0">
-              <h1 className="text-2xl lg:text-3xl font-black text-[#23B14D] mb-4">
+            <div className="mb-8">
+              <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
                 {apiData?.mainPage.title.toUpperCase() || "EVENTS & WEBINARS"}
               </h1>
-              <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
+              <h2 className="text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-4">
                 {apiData?.mainPage.subHeadline ||
                   "Where Innovation Meets Action."}
               </h2>
@@ -253,53 +253,53 @@ const EventsWebinars = () => {
               </h3>
 
               {currentEvents.length > 0 ? (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 mb-6">
                   {currentEvents.map((event) => (
                     <div
                       key={event.id}
-                      className="border border-gray-200 relative rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                      className="flex flex-col h-full border border-gray-200 relative rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
                     >
                       <img
                         src={event.img}
                         alt={event.title}
-                        className="w-full h-32 object-cover"
+                        className="w-full h-28 object-cover"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
                           target.src = "/images/events/placeholder.png";
                         }}
                       />
-                      <div className="p-4">
-                        <h4 className="font-bold text-gray-800 text-lg lg:text-xl mb-2">
+                      <div className="flex flex-col flex-1 p-4">
+                        <h4 className="font-bold text-gray-800 text-base lg:text-lg mb-1 line-clamp-2">
                           {event.title}
                         </h4>
-                        <p className="text-sm text-gray-600 mb-3">
+                        <p className="text-sm text-gray-600 mb-3 line-clamp-2">
                           {event.description}
                         </p>
 
-                        <div className="space-y-2 mb-4">
-                          <div className="flex items-center space-x-3">
+                        <div className="space-y-1.5 mb-4">
+                          <div className="flex items-center space-x-2">
                             <img
                               src="/images/events/calendar.png"
-                              className="w-4 h-4"
+                              className="w-4 h-4 shrink-0"
                               alt="calendar"
                             />
-                            <span className="font-medium text-gray-700 text-sm">
+                            <span className="font-medium text-gray-700 text-sm truncate">
                               {event.date}
                             </span>
                           </div>
-                          <div className="flex items-center space-x-3">
+                          <div className="flex items-center space-x-2">
                             <img
                               src="/images/events/location.png"
-                              className="w-4 h-4"
+                              className="w-4 h-4 shrink-0"
                               alt="location"
                             />
-                            <span className="font-medium text-gray-700 text-sm">
+                            <span className="font-medium text-gray-700 text-sm truncate">
                               {event.location}
                             </span>
                           </div>
                         </div>
 
-                        <div className="flex justify-end">
+                        <div className="flex justify-end mt-auto">
                           <a
                             href={event.href}
                             className="cursor-pointer hover:opacity-80 transition-opacity"
@@ -435,12 +435,28 @@ const EventsWebinars = () => {
           </div>
         </div>
 
-        <div className="flex justify-end my-4 mb-40 cursor-pointer px-4 lg:px-8">
-          <a href={apiData?.mainPage.cta[0]?.href || "#"}>
-            <img
-              src="/images/events/host.png"
-              alt={apiData?.mainPage.cta[0]?.text || "Host with Green"}
-            />
+        <div className="flex justify-end my-6 mb-32 px-4 lg:px-8">
+          <a
+            href={apiData?.mainPage.cta[0]?.href || "#"}
+            className="group inline-flex -skew-x-12 items-center rounded-md bg-gradient-to-r from-[#3cb14b] to-[#e6f0a3] px-8 py-3 shadow-md transition-shadow hover:shadow-lg"
+          >
+            <span className="flex skew-x-12 items-center gap-3 text-base lg:text-lg font-bold text-gray-900">
+              {apiData?.mainPage.cta[0]?.text || "Host with GREEN"}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth={3}
+                className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 6l6 6-6 6"
+                />
+              </svg>
+            </span>
           </a>
         </div>
 

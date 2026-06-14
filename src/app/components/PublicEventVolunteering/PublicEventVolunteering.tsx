@@ -69,7 +69,7 @@ const PublicEventVolunteering = () => {
         <TopNavigation />
         <div className="flex h-full">
           <div className=" lg:w-1/6 hidden lg:flex items-center justify-center">
-            <div className="fixed top-1/5 left-14">
+            <div className="fixed top-[20%] left-14">
               <img
                 src="/images/public-events-volunteering/public-event-volunteering.png"
                 alt="public-event-volunteering"
@@ -82,7 +82,7 @@ const PublicEventVolunteering = () => {
           <div className=" flex flex-col   md:pl-38 md:mr-4  md:my-10 lg:my-0 lg:pl-8 lg:px-8  lg:mr-8 ml-4 rounded-lg">
             <div className=" ">
               {/* Main Heading */}
-              <h1 className="text-2xl lg:text-3xl font-black mb-4">
+              <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
                 PUBLIC <span className="text-[#23B14D]">EVENTS</span> &
                 VOLUNTEERING
               </h1>
@@ -124,7 +124,7 @@ const PublicEventVolunteering = () => {
                 </div>
 
                 {/* Ways to Get Involved */}
-                <div className="-ml-16 flex border-b border-[#23B14D] items-center justify-between  pb-4">
+                <div className="flex border-b border-[#23B14D] items-center justify-between  pb-4">
                   <div>
                     <h3 className="text-xl lg:text-2xl font-bold mb-2">
                       Ways to Get Involved
@@ -145,7 +145,7 @@ const PublicEventVolunteering = () => {
                 </div>
 
                 {/* Who Can Join */}
-                <div className="-ml-32 flex border-b border-[#23B14D] items-center justify-between  pb-4">
+                <div className="flex border-b border-[#23B14D] items-center justify-between  pb-4">
                   <div>
                     <h3 className="text-xl lg:text-2xl font-bold mb-2">Who Can Join?</h3>
                     <p className="text-gray-600 italic">
@@ -164,7 +164,7 @@ const PublicEventVolunteering = () => {
                 </div>
 
                 {/* Volunteer Sign-Up */}
-                <div className="-ml-52 flex border-b border-[#23B14D] items-center justify-between  pb-4">
+                <div className="flex border-b border-[#23B14D] items-center justify-between  pb-4">
                   <div>
                     <h3 className="text-xl lg:text-2xl font-bold mb-2">
                       Volunteer Sign-Up
@@ -185,7 +185,7 @@ const PublicEventVolunteering = () => {
                 </div>
 
                 {/* Past Highlights */}
-                <div className="-ml-72 flex border-b border-[#23B14D] items-center justify-between  pb-4">
+                <div className="flex border-b border-[#23B14D] items-center justify-between  pb-4">
                   <div>
                     <h3 className="text-xl lg:text-2xl font-bold mb-2">Past Highlights</h3>
                     <p className="text-gray-600 italic">

@@ -40,19 +40,19 @@ const NewsLetterSignUp = () => {
             <div className=" mt-10 flex  justify-between ">
               <div>
                 {/* Main Heading */}
-                <h1 className="text-2xl lg:text-3xl font-black mb-4">
-                  NEWSLETTER <span className="text-green-600">SIGNUP</span>
+                <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
+                  NEWSLETTER <span className="text-[#23B14D]">SIGNUP</span>
                 </h1>
 
                 {/* Subtitle */}
-                <p className="text-2xl text-green-600 font-semibold mb-6 italic">
+                <p className="text-xl lg:text-2xl text-[#23B14D] font-bold mb-6 italic">
                   Stay Informed. Stay Energized.
                 </p>
 
                 {/* Description */}
-                <p className="text-gray-700 max-w-lg font-bold mb-8 leading-relaxed">
+                <p className="text-gray-700 text-base lg:text-lg max-w-lg font-bold mb-8 leading-relaxed">
                   Subscribe to{" "}
-                  <span className="font-bold text-green-600">
+                  <span className="font-bold text-[#23B14D]">
                     GREEN Insights
                   </span>{" "}
                   — your monthly pulse on solar innovation, impact projects,
@@ -64,16 +64,16 @@ const NewsLetterSignUp = () => {
               <div className="flex flex-col space-y-8">
                 {/* Left Column - Why Subscribe */}
                 <div>
-                  <h2 className="text-xl lg:text-2xl font-bold mb-4">Why Subscribe?</h2>
+                  <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">Why Subscribe?</h2>
 
                   <div className="overflow-x-auto">
                     <table className="w-full border-collapse">
                       <thead>
                         <tr className="">
-                          <th className=" px-4 py-3 text-lg text-left font-black text-green-600">
+                          <th className=" px-4 py-3 text-lg text-left font-black text-[#23B14D]">
                             Benefit
                           </th>
-                          <th className="  px-4 py-3 text-lg text-left font-black text-green-600">
+                          <th className="  px-4 py-3 text-lg text-left font-black text-[#23B14D]">
                             Description
                           </th>
                         </tr>
@@ -120,8 +120,8 @@ const NewsLetterSignUp = () => {
 
                 {/* Right Column - What You'll Receive */}
                 <div className="mt-10">
-                  <h2 className="text-xl lg:text-2xl font-bold mb-8">
-                    What You'll <span className="text-green-600">Receive</span>
+                  <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-8">
+                    What You'll <span className="text-[#23B14D]">Receive</span>
                   </h2>
 
                   <div className="space-y-4">
@@ -177,7 +177,7 @@ const NewsLetterSignUp = () => {
               </div>
               <div>
                 <h3 className="text-xl lg:text-2xl font-bold mb-2">Contact</h3>
-                <p className="text-green-600 text-lg font-semibold">
+                <p className="text-[#23B14D] text-lg font-semibold">
                   —{" "}
                   <span className="italic">
                     <a href="mailto:insights@green.com.pg">
@@ -198,7 +198,7 @@ const NewsLetterSignUp = () => {
                   From remote installations to regional milestones
                 </p>
                 <p className="text-gray-900">
-                  — let <span className="font-bold text-green-600">GREEN</span>{" "}
+                  — let <span className="font-bold text-[#23B14D]">GREEN</span>{" "}
                   power your inbox with content that matters.
                 </p>
               </div>

@@ -67,10 +67,10 @@ if (!data) return null;
   return (
     <React.Fragment>
       <TopNavigation />
-      <div className="z-50 flex h-full min-h-screen bg-gradient-to-br from-[#E8F5E9] via-white to-white">
+      <div className="relative z-50 flex h-full min-h-screen bg-gradient-to-br from-[#E8F5E9] via-white to-white">
         {/* Left Sidebar - Vertical Text */}
         <div className="w-1/6 flex items-center justify-center">
-          <div className="fixed top-4/12 lg:top-1/3 left-4 lg:left-14 z-10">
+          <div className="fixed top-1/3 left-4 lg:left-14 z-10">
             <img
               src="/images/investor-relations/investor-relations.png"
               alt="investor-relations"
@@ -89,10 +89,10 @@ if (!data) return null;
                 {data.mainPage.title.toUpperCase().split(" ")[1]}
               </span>
             </h1>
-            <h2 className="text-2xl lg:text-3xl font-bold text-[#23B14D] italic mb-6">
+            <h2 className="text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-6">
               {data.mainPage.subHeadline}
             </h2>
-            <div className="text-gray-700 lg:text-lg mb-6 max-w-4xl">
+            <div className="text-gray-700 text-base lg:text-lg mb-6 max-w-4xl">
               <p className="mb-2">
                 {highlightText(
                   data.mainPage.description.text,
@@ -169,9 +169,9 @@ if (!data) return null;
             </div>
           </div>
 
-          <div className="lg:flex">
+          <div className="relative lg:flex justify-between">
             {/* Bottom Quote Section */}
-            <div className="">
+            <div className="lg:max-w-2xl">
               <h2 className="text-xl lg:text-3xl font-bold text-gray-900 mb-4">
                 {highlightText(
                   data.mainPage.quote2.text.split("\n")[0],
@@ -187,7 +187,7 @@ if (!data) return null;
             </div>
 
             {/* CTA Buttons */}
-            <div className="space-y-8">
+            <div className="relative z-50 space-y-8">
               <div className="cursor-pointer">
                 <Link href={data.mainPage.cta[0].href || "#"} className="relative group">
                   <button className="cursor-pointer">

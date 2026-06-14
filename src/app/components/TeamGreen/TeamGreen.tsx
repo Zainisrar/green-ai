@@ -118,14 +118,14 @@ const TeamGreen = () => {
 
                 return (
                   <div key={index} className="lg:flex lg:flex-row flex-col    lg:space-x-8 border-b  border-green-600 pb-4 lg:items-center lg:w-9/12 lg:justify-between">
-                    <div className="flex space-x-6 lg:space-x-10 ">
-                      <div>
+                    <div className="flex space-x-6 lg:space-x-10 lg:flex-1">
+                      <div className="lg:w-52 lg:shrink-0">
                         <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-1">
                           {key.title}
                         </h3>
                       </div>
-                      <div>
-                        <p className="text-base w-11/12 text-gray-800 font-semibold mb-2 italic">
+                      <div className="flex-1">
+                        <p className="text-base text-gray-800 font-semibold mb-2 italic">
                           {key.description.replace(/\n/g, ' ')}
                         </p>
                       </div>

@@ -10,7 +10,7 @@ const RequestProposal = () => {
         <TopNavigation />
         <div className="flex h-full">
           <div className=" lg:w-1/6 hidden lg:flex items-center justify-center">
-            <div className=" fixed top-1/5 left-14">
+            <div className=" fixed top-[20%] left-14">
               <img
                 src="/images/book-consulation/book-consulation.png"
                 alt="globalsnapshot"
@@ -23,18 +23,18 @@ const RequestProposal = () => {
           <div className="  flex flex-col   md:pl-38 md:mr-4  md:my-10  lg:my-0 lg:pl-8 lg:px-8  lg:mr-8 ml-4 rounded-lg">
             <div className="">
               {/* Main Heading */}
-              <h1 className="text-2xl lg:text-3xl font-black mb-4">
-                Request A <span className="text-[#23B14D]">CONSULTATION</span>{" "}
+              <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
+                Request A <span className="text-[#23B14D]">PROPOSAL</span>{" "}
                 {` `} (RFP)
               </h1>
 
               {/* Subtitle */}
-              <p className="text-xl lg:text-2xl text-[#23B14D] italic font-semibold mb-2">
+              <p className="text-xl lg:text-2xl text-[#23B14D] italic font-bold mb-2">
                 Let’s Build Your Energy Project — From Vision to Reality.
               </p>
 
               {/* Description */}
-              <p className="text-gray-700 max-w-7xl mb-4 leading-relaxed">
+              <p className="text-gray-700 text-base lg:text-lg max-w-7xl mb-4 leading-relaxed">
                 Whether you're developing a project, designing a grant, or
                 planning a regional rollout — schedule a tailored consultation
                 with <span className="font-bold text-[#23B14D]">GREEN's</span>{" "}
@@ -43,7 +43,7 @@ const RequestProposal = () => {
               </p>
 
               {/* Who Should Use This Section */}
-              <h2 className="text-xl lg:text-2xl font-bold mb-4">Who Should Use This</h2>
+              <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">Who Should Use This</h2>
 
               <div className="flex justify-between">
                 <div className="  mb-16 ">
@@ -56,7 +56,12 @@ const RequestProposal = () => {
                           }}
                           className=" px-8 border-[#FFE500] border-2   py-3 font-semibold"
                         >
-                          Government Agencies
+                          <span
+                            style={{ transform: "skewX(16deg)" }}
+                            className="inline-block"
+                          >
+                            Government Agencies
+                          </span>
                         </p>
                       </div>
 
@@ -67,7 +72,12 @@ const RequestProposal = () => {
                           }}
                           className=" px-8  border-[#FFE500] border-2 py-3 font-semibold"
                         >
-                          Donors & NGOs
+                          <span
+                            style={{ transform: "skewX(16deg)" }}
+                            className="inline-block"
+                          >
+                            Donors & NGOs
+                          </span>
                         </p>
                       </div>
                     </div>
@@ -78,7 +88,12 @@ const RequestProposal = () => {
                           transform:"skewX(-16deg)"
                         }}
                         className=" px-8 border-[#FFE500] border-2  py-3 font-semibold">
-                          Commercial developers
+                          <span
+                            style={{ transform: "skewX(16deg)" }}
+                            className="inline-block"
+                          >
+                            Commercial developers
+                          </span>
                         </p>
                       </div>
 
@@ -88,21 +103,26 @@ const RequestProposal = () => {
                           transform:"skewX(-16deg)"
                          }}
                         className=" px-8  border-[#FFE500] border-2  py-3 font-semibold">
-                          Large enterprises
+                          <span
+                            style={{ transform: "skewX(16deg)" }}
+                            className="inline-block"
+                          >
+                            Large enterprises
+                          </span>
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="absolute  right-0 -z-10">
+              <div className="absolute top-0 right-0 -z-10">
                 <img
                   src="/images/book-consulation/requestProposalMainImg.png"
                   alt="mainImg"
                 />
               </div>
               {/* What GREEN Delivers in Every Proposal */}
-              <h2 className="text-xl lg:text-2xl font-bold mb-4">
+              <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                 What GREEN Delivers in Every Proposal
               </h2>
 
@@ -229,7 +249,7 @@ const RequestProposal = () => {
                     </a>
                   </span>
                 </div>
-                <div className=" flex justify-end cursor-pointer">
+                <div className="relative z-10 flex justify-end cursor-pointer lg:mt-10">
                   <img
                     src="/images/book-consulation/requestProposal.png"
                     alt="book-my-consulation"

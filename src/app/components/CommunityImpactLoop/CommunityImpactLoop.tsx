@@ -171,7 +171,7 @@ const CommunityImpactLoop = () => {
       case 1:
         return (
           <div>
-            <h3 className=" text-xl lg:text-2xl font-bold text-gray-800 mb-2">
+            <h3 className=" text-xl lg:text-2xl font-bold text-gray-800 mb-4">
               {loop?.title ?? "How the Loop Works"}
             </h3>
             {(
@@ -225,7 +225,7 @@ const CommunityImpactLoop = () => {
       case 2:
         return (
           <div>
-            <h3 className=" text-xl lg:text-2xl font-bold text-gray-800 mb-6">
+            <h3 className=" text-xl lg:text-2xl font-bold text-gray-800 mb-4">
               {measured?.title ?? "Measured Impact"}
             </h3>
 
@@ -314,8 +314,8 @@ const CommunityImpactLoop = () => {
 
       case 3:
         return (
-          <div className="flex flex-col lg:w-96 items-center">
-            <h3 className="lg:text-2xl text-xl text-center font-bold text-gray-800 mb-6">
+          <div className="flex flex-col">
+            <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
               {join?.title ?? "Join the Loop"}
             </h3>
 
@@ -336,7 +336,7 @@ const CommunityImpactLoop = () => {
             {/* Partnership Message */}
             <div className="space-y-4">
               {join?.quote ? (
-                <p className="mx-auto font-black lg:w-9/12 text-gray-800 leading-relaxed">
+                <p className="font-black lg:w-9/12 text-gray-800 leading-relaxed">
                   {join.quote.text
                     .split(join.quote.highlighted)
                     .map((part, i, arr) => (
@@ -351,7 +351,7 @@ const CommunityImpactLoop = () => {
                     ))}
                 </p>
               ) : (
-                <p className="mx-auto font-black w-9/12 text-gray-800 leading-relaxed">
+                <p className="font-black w-9/12 text-gray-800 leading-relaxed">
                   Want your organization, ministry, or donor program to plug
                   into the{" "}
                   <span className="font-bold text-[#23B14D]">GREEN</span>{" "}
@@ -579,7 +579,9 @@ const CommunityImpactLoop = () => {
                     />
                   </div>
                 </div>
-                <div className={`my-12 lg:my-0`}>{active.data}</div>
+                <div className="my-12 lg:my-0 lg:w-[420px] lg:shrink-0">
+                  {active.data}
+                </div>
               </div>
             </div>
 
@@ -623,19 +625,19 @@ const CommunityImpactLoop = () => {
                 src="/images/community-impact-loop/submit.png"
                 alt="Submit Proposal / Collaboration Inquiry"
               />
-              <div className="absolute top-4 font-bold right-16 lg:right-20">
+              <div className="absolute inset-0 flex items-center pl-8 lg:pl-12 pr-12 lg:pr-16 text-sm lg:text-base font-bold">
                 {main.cta[0].text}
               </div>
             </Link>
             <Link
-              href={main.cta[0].href}
+              href={main.cta[1]?.href ?? main.cta[0].href}
               className=" relative flex justify-end  cursor-pointer"
             >
               <img
                 src="/images/community-impact-loop/green.png"
                 alt="GREEN Innovation Partnership Framework (PDF)"
               />
-              <div className="absolute top-3 lg:top-4 lg:text-base text-sm font-bold right-16 lg:right-20">
+              <div className="absolute inset-0 flex items-center pl-8 lg:pl-12 pr-12 lg:pr-16 text-sm lg:text-base font-bold">
                 {main.cta[1].text}
               </div>
             </Link>

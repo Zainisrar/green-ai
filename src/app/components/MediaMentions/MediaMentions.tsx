@@ -29,7 +29,7 @@ const MediaMentions: React.FC = () => {
   const [selectedYear, setSelectedYear] = useState<number>(2025);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [playingVideo, setPlayingVideo] = useState<number | null>(null);
-  const itemsPerPage = 3;
+  const itemsPerPage = 6;
 
   // Transform API data to match component structure
   const mockMediaData: YearData[] = useMemo(() => {
@@ -108,7 +108,7 @@ const MediaMentions: React.FC = () => {
       <div className={`${nav.isNavigationOpen ? "" : "z-[9999999999999]"} flex relative`}>
         {/* Left Side Icon */}
         <div className="lg:w-1/6 hidden lg:flex items-center justify-center">
-          <div className="fixed top-1/4 left-14">
+          <div className="fixed top-1/4 left-4 lg:left-24">
             <img
               src="/images/media-mentions/media-mentions.png"
               alt="media mentions"
@@ -118,10 +118,10 @@ const MediaMentions: React.FC = () => {
         </div>
 
         {/* Main Content Area */}
-        <div className="w-full lg:w-2/3 px-4 lg:px-8 pt-8">
+        <div className="w-full lg:flex-1 lg:min-w-0 px-4 lg:px-8 pt-8">
           {/* Main Title */}
-          <div className="mb-8 lg:pl-0 pl-20">
-            <h1 className="text-2xl lg:text-3xl font-black text-[#23B14D] mb-4">
+          <div className="mb-8">
+            <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
               {apiData?.mainPage.title.toUpperCase() || "MEDIA & MENTIONS"}
             </h1>
             <h2 className="text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-4">
@@ -141,9 +141,9 @@ const MediaMentions: React.FC = () => {
             {/* Media Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
               {currentItems.map((item) => (
-                <div 
+                <div
                   key={item.id}
-                  className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300"
+                  className="flex flex-col h-full bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300"
                   onClick={() => handleMediaClick(item)}
                 >
                   <div className="relative">
@@ -179,11 +179,11 @@ const MediaMentions: React.FC = () => {
                       </>
                     )}
                   </div>
-                  <div className="p-4">
+                  <div className="flex flex-col flex-1 p-4">
                     <h4 className="font-bold text-gray-800 text-sm mb-2 line-clamp-2">
                       {item.title}
                     </h4>
-                    <p className="text-xs text-gray-500">{item.source}</p>
+                    <p className="text-xs text-gray-500 mt-auto">{item.source}</p>
                   </div>
                 </div>
               ))}

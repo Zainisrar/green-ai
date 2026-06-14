@@ -46,7 +46,7 @@ const GreenTalentIncubator = () => {
               <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                 {why?.title ?? "Why We Built This"}
               </h3>
-              <p className="ont-semibold mb-4 italic text-[#23B14D]">
+              <p className="font-semibold mb-4 italic text-[#23B14D]">
                 {why?.description ?? '"Energy transformation needs talent transformation."'}
               </p>
               <p className="text-gray-700 font-semibold mb-4">
@@ -166,7 +166,7 @@ const GreenTalentIncubator = () => {
       case 4:
         return (
           <div>
-            <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-6">
+            <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
               {alumni?.title ?? "Alumni Voices"}
             </h3>
             <div className="space-y-6">
@@ -204,7 +204,7 @@ const GreenTalentIncubator = () => {
         <TopNavigation />
         <div className="flex h-full">
           <div className="w-1/10 flex items-center justify-center">
-            <div className="fixed top-1/2 lg:top-1/5 left-4 lg:left-14">
+            <div className="fixed top-1/2 lg:top-[20%] left-4 lg:left-14">
               <img
                 src="/images/green-talent-incubator/icn.png"
                 alt="talent-incubator"
@@ -402,7 +402,9 @@ const GreenTalentIncubator = () => {
                     />
                   </div>
                 </div>
-                <div className={`my-12 lg:my-0`}>{active.data}</div>
+                <div className="my-12 lg:my-0 lg:w-[420px] lg:shrink-0">
+                  {active.data}
+                </div>
               </div>
             </div>
 
@@ -416,16 +418,16 @@ const GreenTalentIncubator = () => {
           </div>
         </div>
         {data?.mainPage.cta && data?.mainPage.cta.length > 0 ? (
-          <div className="flex flex-col items-end gap-8 ">
+          <div className="flex flex-col items-end gap-8 pr-4 lg:pr-10 pb-12 lg:pb-16">
             <Link href={data.mainPage.cta[0]?.href ?? "#"} className="relative flex justify-end cursor-pointer">
               <img src="/images/green-talent-incubator/apply-program.png" alt="Apply for a Program" />
-              <div className="absolute top-4 font-bold right-16 lg:right-20">
+              <div className="absolute inset-0 flex items-center pl-8 lg:pl-12 pr-12 lg:pr-16 text-sm lg:text-base font-bold">
                 {data.mainPage.cta[0]?.text ?? "Apply for a Program"}
               </div>
             </Link>
             <Link href={data.mainPage.cta[1]?.href ?? "#"} className="relative flex justify-end cursor-pointer">
               <img src="/images/green-talent-incubator/green.png" alt="Partnership Brief" />
-              <div className="absolute top-3 lg:top-4 lg:text-base text-sm font-bold right-16 lg:right-20">
+              <div className="absolute inset-0 flex items-center pl-8 lg:pl-12 pr-12 lg:pr-16 text-sm lg:text-base font-bold">
                 {data.mainPage.cta[1]?.text ?? "GREEN Talent Incubator Partnership Brief (PDF)"}
               </div>
             </Link>

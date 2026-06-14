@@ -26,7 +26,7 @@ const ThoughtsLeadership = () => {
   const [selectedCategory, setSelectedCategory] = React.useState<string | null>(
     null
   );
-  const articlesPerPage = 4;
+  const articlesPerPage = 6;
 
   const { data: apiData } = useThoughtLeadership();
   
@@ -43,11 +43,18 @@ const ThoughtsLeadership = () => {
   const allArticles: Article[] = React.useMemo(() => {
     if (!apiData) return [];
 
-    return apiData.editorials.map((editorial, index) => ({
+    return apiData.editorials.map((editorial, index) => {
+      const writerName =
+        editorial.writer && typeof editorial.writer === "object"
+          ? editorial.writer.name?.trim()
+          : `Writer ${editorial.writer}`;
+
+      return {
       id: index + 1,
       title: editorial.title,
       description: editorial.description,
-      author: `Writer ${editorial.writer}`,
+      author:
+        writerName && writerName !== "Unknown User" ? writerName : "GREEN",
       position: "GREEN Leadership",
       img: editorial.featuredImg.src,
       href: editorial.cta.href || "#",
@@ -62,7 +69,8 @@ const ThoughtsLeadership = () => {
         month: "long",
         day: "numeric",
       }),
-    }));
+      };
+    });
   }, [apiData]);
 
   // Get unique categories from API data
@@ -214,7 +222,7 @@ const ThoughtsLeadership = () => {
   <div className={`flex h-full ${nav.isNavigationOpen ? "pointer-events-none z-0" : "z-[999999999999999999999999999999999999999999]"}`}>
           {/* Left Side */}
           <div className="hidden lg:flex w-1/6 items-center justify-center">
-            <div className="fixed top-1/4 left-14">
+            <div className="fixed top-1/4 left-4 lg:left-24">
               <img
                 src="/images/thoughts-leadership/thought.png"
                 alt="thought leadership"
@@ -224,9 +232,9 @@ const ThoughtsLeadership = () => {
           </div>
 
           {/* Main Content Area */}
-          <div className={`relative w-full lg:w-2/3 px-4 lg:px-8 pt-8 overflow-y-auto ${nav.isNavigationOpen ? "pointer-events-none" : "z-[999999999999999999999999999999999999999999]"}`}>
+          <div className={`relative w-full lg:flex-1 lg:min-w-0 px-4 lg:px-8 pt-8 overflow-y-auto ${nav.isNavigationOpen ? "pointer-events-none" : "z-[999999999999999999999999999999999999999999]"}`}>
             {/* Main Title */}
-            <div className="mb-8 pl-20 lg:pl-0">
+            <div className="mb-8">
               <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
                 {apiData?.mainPage.title.toUpperCase() || "THOUGHT LEADERSHIP"}
               </h1>
@@ -292,36 +300,36 @@ const ThoughtsLeadership = () => {
               </h3>
 
               {(currentArticles || []).length > 0 ? (
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-6">
                   {currentArticles.map((article, index) => {
                     const readMoreProps = readMoreHooks[index] || readMoreHooks[0];
                     
                     return (
                       <div
                         key={article.id}
-                        className="flex relative space-x-4 bg-white border border-gray-200 rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow"
+                        className="flex flex-col h-full relative bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow"
                       >
                         <img
                           src={article.img}
                           alt={article.title}
-                          className="w-20 h-20 object-cover rounded flex-shrink-0"
+                          className="w-full h-40 object-cover"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
                             target.src =
                               "/images/thoughts-leadership/placeholder.png";
                           }}
                         />
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-bold text-gray-800 mb-2 text-sm lg:text-base line-clamp-2">
+                        <div className="flex flex-col flex-1 p-4">
+                          <h4 className="font-bold text-gray-800 mb-2 text-base lg:text-lg line-clamp-2">
                             {article.title}
                           </h4>
-                          <p className="text-xs lg:text-sm text-gray-600 mb-3 line-clamp-3">
+                          <p className="text-sm text-gray-600 mb-4 line-clamp-3">
                             {article.description}
                           </p>
-                          <div className="flex justify-between items-end">
-                            <div className="text-xs text-gray-500">
-                              <div>By {article.author}</div>
-                              <div>— {article.position}</div>
+                          <div className="mt-auto flex justify-between items-end gap-3">
+                            <div className="text-xs text-gray-500 min-w-0">
+                              <div className="truncate">By {article.author}</div>
+                              <div className="truncate">— {article.position}</div>
                               <div className="text-gray-400 mt-1">
                                 {article.date}
                               </div>
@@ -331,7 +339,7 @@ const ThoughtsLeadership = () => {
                                 <img
                                   src="/images/thoughts-leadership/readMore.png"
                                   alt="read more"
-                                  className="h-10"
+                                  className="h-9"
                                 />
                               </button>
                             </div>

@@ -38,7 +38,7 @@ const CommunityVoices = () => {
       <TopNavigation />
       <div className="flex h-full">
         <div className="w-1/6 flex items-center justify-center">
-          <div className="fixed top-4/12 lg:top-1/3 left-4 lg:left-14">
+          <div className="fixed top-1/3 left-4 lg:left-14">
             <img
               src="/images/community-voices/community-voices.png"
               alt="community-voices"
@@ -48,13 +48,13 @@ const CommunityVoices = () => {
         </div>
         <div className="w-full lg:px-8 pt-8">
           <div className="mb-8">
-            <h1 className="lg:text-3xl text-2xl font-black text-gray-800 mb-4">
+            <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
               {data.mainPage.title.toUpperCase()}
             </h1>
             <h2 className="text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-4">
               {data.mainPage.subHeadline}
             </h2>
-            <div className="text-gray-600 lg:text-lg mb-10">
+            <div className="text-gray-600 text-base lg:text-lg mb-10">
               <p className="mb-2">
                 {highlightText(
                   data.mainPage.description.text,
@@ -100,35 +100,33 @@ const CommunityVoices = () => {
               </div>
             </div>
             <div className="my-20">
-              <div className="relative z-10 flex flex-col items-center justify-center gap-8 lg:gap-12">
-                {data.mainPage.modals.map((modal, idx) => (
-                  <div
-                    key={idx}
-                    className="relative group cursor-pointer flex"
-                    onClick={() => {
-                      if (idx === 0) setOpenModal("voicesFromField");
-                      else if (idx === 1) setOpenModal("whatMakesOurImpact");
-                      else if (idx === 2) setOpenModal("projectShowcase");
-                    }}
-                  >
-                    <div className="lg:flex space-x-4  items-center">
-                      <div className="">
+              <div className="relative z-10 grid grid-cols-[auto_1fr_auto] items-center gap-x-4 lg:gap-x-10 gap-y-8 lg:gap-y-12">
+                {data.mainPage.modals.map((modal, idx) => {
+                  const onClick = () => {
+                    if (idx === 0) setOpenModal("voicesFromField");
+                    else if (idx === 1) setOpenModal("whatMakesOurImpact");
+                    else if (idx === 2) setOpenModal("projectShowcase");
+                  };
+                  return (
+                    <React.Fragment key={idx}>
+                      <div className="cursor-pointer" onClick={onClick}>
                         <img src={modal.img.src} alt={modal.img.alt} />
                       </div>
-                      <div className="space-x-4 my-4 lg:space-x-20 flex lg:text-center">
-                        <p className="text-gray-800 font-bold text-lg mb-3">
-                          {modal.cta}
-                        </p>
-                        <button className="cursor-pointer">
-                          <img
-                            src="/images/community-voices/exploreBtn.png"
-                            alt="exploreBtn"
-                          />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                      <p
+                        className="text-gray-800 font-bold text-lg cursor-pointer"
+                        onClick={onClick}
+                      >
+                        {modal.cta}
+                      </p>
+                      <button className="cursor-pointer" onClick={onClick}>
+                        <img
+                          src="/images/community-voices/exploreBtn.png"
+                          alt="exploreBtn"
+                        />
+                      </button>
+                    </React.Fragment>
+                  );
+                })}
               </div>
             </div>
           </div>

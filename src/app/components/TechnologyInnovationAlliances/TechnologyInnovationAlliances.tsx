@@ -49,7 +49,7 @@ const TechnologyInnovationAlliances = () => {
         <div className="flex h-full relative">
           {/* Left Side - GLOBAL SNAPSHOT Text */}
           <div className="w-1/6 flex items-center justify-center">
-            <div className="fixed top-1/3 lg:top-1/5 left-4 lg:left-14">
+            <div className="fixed top-1/3 lg:top-[20%] left-4 lg:left-14">
               <img
                 src="/images/technology-innovation-alliances/technology-innovation-alliances.png"
                 alt="Supplier Code of Conduct"
@@ -61,7 +61,7 @@ const TechnologyInnovationAlliances = () => {
           {/* Main Content Area */}
           <div className=" px-8 pt-8 ">
             {/* Main Title */}
-            <div className="mb-8 ml-10 lg:pl-20">
+            <div className="mb-8">
               <h1 className="lg:text-3xl text-2xl font-black text-gray-800 mb-4">
                 {mainPage.title.toUpperCase()}
               </h1>
@@ -197,7 +197,7 @@ const TechnologyInnovationAlliances = () => {
                 </div>
               </div>
             </div>
-            <div className="absolute lg:block hidden right-0 -z-10">
+            <div className="absolute lg:block hidden top-0 right-0 -z-10">
               <img
                 src="/images/technology-innovation-alliances/mainImg.png"
                 className="h-[60vh]"

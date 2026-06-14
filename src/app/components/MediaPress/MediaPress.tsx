@@ -170,7 +170,7 @@ const MediaPress = () => {
           </div>
         </div>
 
-        <div className=" space-y-10 mb-32">
+        <div className="relative z-10 space-y-10 mb-32 lg:-mt-32">
           <div className="   flex justify-end  cursor-pointer">
             <img
               src="/images/media-press/download-the-press-kit.png"
