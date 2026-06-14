@@ -90,22 +90,24 @@ const SupplyPartners = () => {
     setActiveIndex(index);
   };
 
-  if (!data) {
-    return null;
-  }
-const [isDesktop, setIsDesktop]=useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
     const checkDesktop = () => {
       if (typeof window !== "undefined") {
         const desktop = window.innerWidth >= 1024;
         setIsDesktop(desktop);
-      } 
+      }
     };
 
     checkDesktop();
     window.addEventListener("resize", checkDesktop);
     return () => window.removeEventListener("resize", checkDesktop);
   }, []);
+
+  if (!data) {
+    return null;
+  }
+
   const ActiveItem = (activeIndex: number) => {
     switch (activeIndex) {
       case 0:
@@ -466,8 +468,7 @@ const [isDesktop, setIsDesktop]=useState(false);
                         className="lg:h-12"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src =
-                            "/images/supply-partners/placeholder.png";
+                          target.src = "/images/supply-partners/clenergy.png";
                         }}
                       />
                     )

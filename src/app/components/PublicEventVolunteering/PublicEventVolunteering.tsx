@@ -210,6 +210,7 @@ const PublicEventVolunteering = () => {
                   <img
                     src="/images/public-events-volunteering/shape.png"
                     alt=""
+                    role="presentation"
                   />
                 </div>
                 <div>
@@ -226,6 +227,7 @@ const PublicEventVolunteering = () => {
                   <img
                     src="/images/public-events-volunteering/shape2.png"
                     alt=""
+                    role="presentation"
                   />
                 </div>
               </div>

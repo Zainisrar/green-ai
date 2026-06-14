@@ -17,10 +17,10 @@ const ProductNavigation = () => {
   const productNavItems = [
     { link: "/explore/welcome-to-green", name: "Explore" },
     { link: "/energy", name: "Energy" },
-    { link: "/elements", name: "Elements" },
+    { link: "/engineering/products/lighting-up-and-lifting-up-living-standards", name: "Elements" },
     { link: "/expertise", name: "Expertise" },
-    { link: "/enlist", name: "Enlist" },
-    { link: "/engage", name: "Engage" },
+    { link: "/empower/join-us", name: "Enlist" },
+    { link: "/engage/reach-us", name: "Engage" },
   ];
 
   useEffect(() => {

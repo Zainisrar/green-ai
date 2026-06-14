@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 interface Text1 {
   headline: string;
+  description?: string;
 }
 
 interface Text2 {

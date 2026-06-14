@@ -54,7 +54,7 @@ const Handbook = () => {
               </p>
             </div>
             <div className="absolute left-14 -z-10">
-              <img src="/images/handbook/mainImg.png" alt="" />
+              <img src="/images/handbook/mainImg.png" alt="" role="presentation" />
             </div>
             {/* Content Grid */}
             <div className="grid  lg:grid-cols-2  gap-8 mb-8">
@@ -167,8 +167,8 @@ const Handbook = () => {
                   </div>
                   <div className="">
                       {mainPage.quote.slice(0,2).map((q,i) => (
-                    <h3 className="text-2xl font-bold text-gray-800  whitespace-pre-line">
-                        <span key={i} className={q.highlighted ? "text-[#23B14D]" : ""}>{q.text}</span>
+                    <h3 key={i} className="text-2xl font-bold text-gray-800  whitespace-pre-line">
+                        <span className={q.highlighted ? "text-[#23B14D]" : ""}>{q.text}</span>
                     </h3>
                       ))}
                   </div>

@@ -3,6 +3,7 @@ import React from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useOurValueChain } from "../../../hooks/useOurValueChain";
+import { handleImageError } from "../lib/utils";
 
 interface ValueChainItem {
   img: {
@@ -198,10 +199,7 @@ const OurChainValue = () => {
                           src={item.img.src}
                           alt={item.img.alt || `${item.title} icon`}
                           className="w-8"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.src = "/images/our-value-chain/globe.png";
-                          }}
+                          onError={(e) => handleImageError(e, "/images/our-value-chain/globe.png")}
                         />
                       </div>
                       <div>

@@ -12,6 +12,7 @@ import type {
   GlobalSnapshotActionButtons,
 } from "../../lib/api";
 import Link from "next/link";
+import { handleImageError } from "../lib/utils";
 
 const GlobalSnapshot = () => {
   const { globalSnapshotData,  error } = useGlobalSnapshot();
@@ -99,7 +100,7 @@ const GlobalSnapshot = () => {
       icon: {
         img: {
           src: item.icon.src,
-          alt: item.icon.alt,
+          alt: item.icon.alt || item.label || "Statistic icon",
         },
       },
       text: {
@@ -191,7 +192,8 @@ const GlobalSnapshot = () => {
                 <img
                   className="w-14"
                   src={item.icon.img.src}
-                  alt={item.icon.img.alt}
+                  alt={item.icon.img.alt || item.text.heading || "Statistic"}
+                  onError={(e) => handleImageError(e, "/images/global-snapshot/mw.png")}
                 />
                 <div className="text-lg">
                   <p className="font-bold text-gray-800">{item.text.heading}</p>
@@ -262,8 +264,9 @@ const GlobalSnapshot = () => {
                   <div key={index} className="flex space-x-3 items-start">
                     <img
                       src={feature.icon.src}
-                      alt={feature.icon.alt}
+                      alt={feature.icon.alt || feature.text || "Feature icon"}
                       className="w-10 mt-1 flex-shrink-0"
+                      onError={(e) => handleImageError(e, "/images/global-snapshot/lighting.png")}
                     />
                     <div className="text-base">{feature.text}</div>
                   </div>
@@ -527,8 +530,9 @@ const GlobalSnapshot = () => {
                         <div>
                           <img
                             src={feature.icon.src}
-                            alt={feature.icon.alt}
+                            alt={feature.icon.alt || feature.text || "Feature icon"}
                             className="w-6 flex-shrink-0"
+                            onError={(e) => handleImageError(e, "/images/global-snapshot/lighting.png")}
                           />
                         </div>
                         <div>{feature.text}</div>

@@ -4,6 +4,7 @@ import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useExpertiseBySlug } from "../../../hooks/useExpertiseBySlug";
 import Link from "next/link";
+import { handleImageError } from "../lib/utils";
 
 interface ExpertiseDetailProps {
   slug: string;
@@ -96,10 +97,11 @@ const ExpertiseDetail = ({ slug }: ExpertiseDetailProps) => {
                     <div key={index} className="flex space-x-4">
                       <div>
                         <img
-                          src={icon.img.src}
-                          alt={icon.img.alt}
-                          className="w-28 lg:w-32"
-                        />
+                  src={icon.img.src}
+                  alt={icon.img.alt || icon.title}
+                  className="w-28 lg:w-32"
+                  onError={(e) => handleImageError(e, "/images/expertise/img.png")}
+                />
                       </div>
                       <div className="flex flex-col space-y-2">
                         <div className="font-semibold text-base lg:text-lg">
@@ -141,8 +143,9 @@ const ExpertiseDetail = ({ slug }: ExpertiseDetailProps) => {
               <div className="absolute left-0 -top-10">
                 <img
                   src={expertise.image}
-                  alt="expertise"
+                  alt={expertise.title || "expertise"}
                   className="rounded-2xl w-32 h-32 object-cover"
+                  onError={(e) => handleImageError(e, "/images/expertise/img.png")}
                 />
               </div>
               {expertise.keys.map((key, index) => (
@@ -224,6 +227,7 @@ const StackedMobileImages = ({ images }: { images: string[] }) => {
             alt={`detail-${i}`}
             className={className}
             style={style}
+            onError={(e) => handleImageError(e, "/images/expertise/img.png")}
           />
         );
       })}
@@ -282,6 +286,7 @@ const StackedImages = ({ images }: { images: string[] }) => {
               alt={`detail-${i}`}
               className={className}
               style={style}
+              onError={(e) => handleImageError(e, "/images/expertise/img.png")}
             />
           );
         })}
@@ -304,6 +309,7 @@ const StackedImages = ({ images }: { images: string[] }) => {
                   }`}
                   src={image}
                   alt={`thumbnail-${index}`}
+                  onError={(e) => handleImageError(e, "/images/expertise/img.png")}
                 />
               </div>
             ))}

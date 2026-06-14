@@ -415,6 +415,7 @@ const ReportWhitePapers = () => {
               <img
                 src="/images/reports/shape1.png"
                 alt=""
+                role="presentation"
                 className="pointer-events-none absolute top-0 left-0 w-8 h-auto"
               />
               <h3 className="relative z-10 px-10 py-12 text-lg lg:text-xl font-bold leading-relaxed text-gray-800">
@@ -424,6 +425,7 @@ const ReportWhitePapers = () => {
               <img
                 src="/images/reports/shape2.png"
                 alt=""
+                role="presentation"
                 className="pointer-events-none absolute bottom-0 right-0 w-8 h-auto"
               />
             </div>

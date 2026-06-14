@@ -50,6 +50,7 @@ const Team = () => {
           <img
             src="/images/our-team/maskImg.png"
             alt=""
+            role="presentation"
             className="absolute top-16 w-[400px] -z-10 "
           />
         </div>

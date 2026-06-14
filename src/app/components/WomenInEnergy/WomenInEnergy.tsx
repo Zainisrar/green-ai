@@ -291,7 +291,7 @@ const WomenInEnergy = () => {
             </div>
           </div>
           <div className="absolute  right-0 -z-10">
-            <img src="/images/women-in-energy/mainImg.png" alt="" />
+            <img src="/images/women-in-energy/mainImg.png" alt="" role="presentation" />
           </div>
           <div className="my-20 flex justify-end relative">
             <div className="lg:block hidden absolute -bottom-4 left-[70%]">

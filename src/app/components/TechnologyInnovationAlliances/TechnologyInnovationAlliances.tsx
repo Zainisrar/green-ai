@@ -12,6 +12,7 @@ import CurrentTechnologyCollaborators from "./Modals/CurrentTechnologyCollaborat
 import ResearchCoDevelopment from "./Modals/ResearchCoDevelopment";
 import InnovativePartner from "./Modals/InnovativePartner";
 import { useInteractiveZIndex } from "../../../hooks/useInteractiveZIndex";
+import { handleImageError } from "../lib/utils";
 
 const TechnologyInnovationAlliances = () => {
   const [isOurProcurementEthosOpen, setIsOurProcurementEthosOpen] =
@@ -97,6 +98,7 @@ const TechnologyInnovationAlliances = () => {
                   src={modal0?.img?.src || "/images/technology-innovation-alliances/whywepartner.png"}
                   alt={modal0?.img?.alt || "Why We Partner"}
                   className="lg:w-62 h-20 lg:h-32"
+                  onError={(e) => handleImageError(e, "/images/technology-innovation-alliances/whywepartner.png")}
                 />
                 <div className="flex-1">
                   <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
@@ -123,6 +125,7 @@ const TechnologyInnovationAlliances = () => {
                   src={modal1?.img?.src || "/images/technology-innovation-alliances/currenttechnologycollaborators.png"}
                   alt={modal1?.img?.alt || "Current Technology Collaborators"}
                   className="lg:w-62 h-20 lg:h-32"
+                  onError={(e) => handleImageError(e, "/images/technology-innovation-alliances/currenttechnologycollaborators.png")}
                 />
                 <div className="flex-1">
                   <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
@@ -149,6 +152,7 @@ const TechnologyInnovationAlliances = () => {
                   src={modal2?.img?.src || "/images/technology-innovation-alliances/researchdevelopment.png"}
                   alt={modal2?.img?.alt || "Research & Co-Development"}
                   className="lg:w-62 h-20 lg:h-32"
+                  onError={(e) => handleImageError(e, "/images/technology-innovation-alliances/researchdevelopment.png")}
                 />
                 <div className="flex-1">
                   <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
@@ -175,6 +179,7 @@ const TechnologyInnovationAlliances = () => {
                   src={modal3?.img?.src || "/images/technology-innovation-alliances/innovationpartner.png"}
                   alt={modal3?.img?.alt || "Become an Innovation Partner"}
                   className="lg:w-62 h-20 lg:h-32"
+                  onError={(e) => handleImageError(e, "/images/technology-innovation-alliances/innovationpartner.png")}
                 />
                 <div className="flex-1">
                   <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
@@ -202,6 +207,7 @@ const TechnologyInnovationAlliances = () => {
                 src="/images/technology-innovation-alliances/mainImg.png"
                 className="h-[60vh]"
                 alt=""
+                role="presentation"
               />
             </div>
             <div className=" lg:flex hidden  justify-end ">

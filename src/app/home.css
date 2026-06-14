@@ -1,10 +1,8 @@
 /* Home Page - D6 */
 .home-page-d6 {
   position: relative;
-  width: 1920px;
-  height: 970px;
   background: #F5F5F5;
-  overflow: visible;
+  overflow: hidden;
 }
 
 /* Layer ordering */
@@ -144,52 +142,126 @@
 /* Renewables: Providing cleaner energy to our world. Renewable energy is at the core of the solutions we provide to address our clients' varied requirements. Thus, sustaiablity assured, the green way! */
 .renewables-desc {
   width: 358.26px;
-  height: 110px;
+  min-height: 110px;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 800;
-  font-size: 13px;
-  line-height: 22px;
-  /* or 169% */
+  font-size: 15px;
+  line-height: 24px;
   color: #FFFFFF;
   text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
-  /* Inside auto layout */
   flex: none;
   order: 0;
   flex-grow: 0;
+  transition: opacity 0.35s ease;
+}
+
+.renewables-desc.desc-visible {
+  opacity: 1;
+}
+
+.renewables-desc.desc-hidden {
+  opacity: 0;
+}
+
+/* Description under each panel heading — small body text, clipped to panel */
+.panel-desc {
+  position: absolute;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 17px;
+  color: #FFFFFF;
+  text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.35s ease;
+  max-height: 72px;
+  overflow: hidden;
+}
+
+.panel-headline-text {
+  display: block;
+  font-weight: 800;
+  line-height: 1.12;
+}
+
+/* Clips heading + description to a single panel column */
+.panel-copy-zone {
+  position: absolute;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.panel-copy-zone h2,
+.panel-copy-zone p {
+  position: absolute;
+  z-index: 1;
+}
+
+/* Panel headings — position set inline per panel in D6Template */
+.panel-headline {
+  position: absolute;
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 54px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.panel-headline-italic {
+  font-style: italic;
+}
+
+.panel-headline-r {
+  font-style: normal;
+  font-size: 54px;
+  line-height: 1.1;
+}
+
+.slide-visible {
+  opacity: 1;
+}
+
+.slide-hidden {
+  opacity: 0;
 }
 
 /* Renewable Energy The Core */
 .renewable-energy-core {
   position: absolute;
-  width: 454px;
-  height: 98px;
+  width: auto;
+  height: auto;
   left: 400.67px;
-  top: calc(50% - 98px/2 - 103px);
-  font-family: 'Montserrat';
+  top: 318px;
+  font-family: 'Montserrat', sans-serif;
   font-style: normal;
-  font-weight: 600;
-  font-size: 40px;
-  line-height: 49px;
+  font-weight: 800;
+  font-size: 62px;
+  line-height: 1.08;
   text-transform: uppercase;
   color: #FFFFFF;
   text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
   z-index: 10;
+  transition: opacity 0.35s ease;
 }
 
 /* Products and Solutions */
 .products-solutions {
   position: absolute;
-  width: 213px;
-  height: 108px;
-  left: 927px;
-  top: 365px;
-  font-family: 'Montserrat';
+  width: auto;
+  height: auto;
+  left: 580px;
+  top: 348px;
+  font-family: 'Montserrat', sans-serif;
   font-style: italic;
   font-weight: 800;
-  font-size: 32px;
-  line-height: 36px;
-  /* or 112% */
+  font-size: 54px;
+  line-height: 1.1;
+  text-transform: uppercase;
   color: #FFFFFF;
   text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
 }
@@ -298,16 +370,16 @@
 /* EPC Energy Services */
 .epc-energy-services {
   position: absolute;
-  width: 221px;
-  height: 108px;
-  left: 1274px;
-  top: 365px;
-  font-family: 'Montserrat';
+  width: auto;
+  height: auto;
+  left: 960px;
+  top: 348px;
+  font-family: 'Montserrat', sans-serif;
   font-style: italic;
   font-weight: 800;
-  font-size: 32px;
-  line-height: 36px;
-  /* or 112% */
+  font-size: 54px;
+  line-height: 1.1;
+  text-transform: uppercase;
   color: #FFFFFF;
   text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
 }
@@ -378,16 +450,16 @@
 /* Projects and Services */
 .projects-and-services {
   position: absolute;
-  width: 221px;
-  height: 108px;
-  left: 1648px;
-  top: 369px;
-  font-family: 'Montserrat';
+  width: auto;
+  height: auto;
+  left: 1345px;
+  top: 350px;
+  font-family: 'Montserrat', sans-serif;
   font-style: italic;
   font-weight: 800;
-  font-size: 32px;
-  line-height: 36px;
-  /* or 112% */
+  font-size: 54px;
+  line-height: 1.1;
+  text-transform: uppercase;
   color: #FFFFFF;
   text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
 }
@@ -460,16 +532,15 @@
 /* gREEN Future envisionEd */
 .green-future-envisioned {
   position: absolute;
-  width: 247.23px;
-  height: 108px;
+  width: auto;
+  height: auto;
   left: 51.17px;
-  top: 372px;
-  font-family: 'Montserrat';
+  top: 348px;
+  font-family: 'Montserrat', sans-serif;
   font-style: italic;
   font-weight: 800;
-  font-size: 32px;
-  line-height: 36px;
-  /* or 112% */
+  font-size: 54px;
+  line-height: 1.1;
   text-transform: uppercase;
   color: #FFFFFF;
   text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
@@ -537,15 +608,16 @@
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Rectangle 34624681 */
-.rectangle-34624681 {
+/* Rectangle 34624681 — green top-left wedge (Figma Home Page D6) */
+.rectangle-34624681,
+.d6-green-corner {
   position: absolute;
   width: 319.77px;
   height: 668.01px;
   left: -60.62px;
   top: -160.8px;
-  background: linear-gradient(69.29deg, rgba(255, 229, 0, 0.623) -78.63%, rgba(35, 209, 75, 0.21) 238.3%);
-  box-shadow: 0px 0px 36px rgba(0, 0, 0, 0.1);
+  background: url('/greenRectangle.png') no-repeat center / cover;
+  pointer-events: none;
 }
 
 /* Group 1171280893 */
@@ -660,6 +732,32 @@
   top: -242px;
 }
 
+.home-page-d6 h2 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 800;
+}
+
+.home-page-d6 .frame-1171277914 a {
+  text-decoration: none;
+  color: inherit;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+  height: 24px;
+  line-height: 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  text-transform: uppercase;
+  color: #303030;
+}
+
+.home-page-d6 .frame-1171277914 a:hover {
+  color: #23B14D;
+}
+
 /* GREEN Logo - High 5 */
 .green-logo-high {
   position: absolute;
@@ -667,7 +765,6 @@
   height: 68px;
   left: 25px;
   top: 25px;
-  background: url('/images/home/GREEN Logo - High 5.png');
 }
 
 /* Component */
@@ -710,140 +807,33 @@
 .bolt-1 {
   position: absolute;
   height: 85px;
-  left: 94.36%;
-  right: 0.54%;
+  width: 85px;
+  left: 1574px;
   top: 16px;
-  background: url('/images/heroSection/lighting.svg');
+  background: url('/images/heroSection/lighting.svg') no-repeat center / contain;
+  cursor: pointer;
 }
 
-/* Frame 1171277914 */
+/* Frame 1171277914 — single-row top nav tabs */
 .frame-1171277914 {
-  /* Auto layout */
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding: 0;
   gap: 30px;
   position: absolute;
-  left: 48.8%;
-  right: 5.22%;
-  top: 40.52%;
-  bottom: 40.52%;
-}
-
-/* Explore */
-.nav-explore {
-  width: 97px;
+  left: 814px;
+  top: 47px;
+  width: max-content;
   height: 24px;
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-  text-transform: uppercase;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  color: #303030;
-  /* Inside auto layout */
-  flex: none;
-  order: 0;
-  flex-grow: 0;
 }
 
-/* Energy */
-.nav-energy {
-  width: 86px;
-  height: 24px;
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-  text-transform: uppercase;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  color: #303030;
-  /* Inside auto layout */
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-}
-
-/* Elements */
-.nav-elements {
-  width: 112px;
-  height: 24px;
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-  text-transform: uppercase;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  color: #303030;
-  /* Inside auto layout */
-  flex: none;
-  order: 2;
-  flex-grow: 0;
-}
-
-/* Expertise */
-.nav-expertise {
-  width: 153px;
-  height: 37px;
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-  text-transform: uppercase;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  color: #303030;
-  /* Inside auto layout */
-  flex: none;
-  order: 3;
-  flex-grow: 0;
-}
-
-/* Projects */
-.nav-projects {
-  width: 51px;
-  height: 19px;
-  /* Inside auto layout */
-  flex: none;
-  order: 4;
-  flex-grow: 0;
-}
-
-/* Enlist */
-.nav-enlist {
-  position: absolute;
-  width: 72px;
-  height: 24px;
-  left: -36px;
-  top: 0px;
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-  text-transform: uppercase;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  color: #303030;
-}
-
-/* Engage */
+/* Nav tab labels — widths handled by flex row, no per-item positioning */
+.nav-explore,
+.nav-energy,
+.nav-elements,
+.nav-expertise,
+.nav-enlist,
 .nav-engage {
-  width: 89px;
-  height: 24px;
-  font-family: 'Montserrat';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-  text-transform: uppercase;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  color: #303030;
-  /* Inside auto layout */
   flex: none;
-  order: 5;
-  flex-grow: 0;
 }

@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack --port 5000",
+    "predev": "node scripts/prepare-next-cache.mjs",
+    "dev": "next dev --port 5000",
+    "dev:turbo": "next dev --turbopack --port 5000",
+    "prebuild": "node scripts/prepare-next-cache.mjs",
     "build": "next build --turbopack",
+    "clean": "node scripts/clean-next-cache.mjs",
     "start": "next start --port 3001",
     "lint": "biome check",
     "format": "biome format --write"
@@ -25,6 +29,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

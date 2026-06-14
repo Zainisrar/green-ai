@@ -4,6 +4,7 @@ import React from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useFlagshipProject } from "../../../hooks/useFlagshipProject";
+import { handleImageError } from "../lib/utils";
 
 const FlagShip = () => {
     const [isDesktop, setIsDesktop] = React.useState(false);
@@ -67,8 +68,9 @@ const FlagShip = () => {
                   <div className="mb-4">
                     <img
                       src={icon.img.src}
-                      alt={icon.img.alt}
+                      alt={icon.img.alt || icon.title}
                       className="w-16 h-16 mx-auto"
+                      onError={(e) => handleImageError(e, "/images/flagship-projects/global.png")}
                     />
                   </div>
                   <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
@@ -92,7 +94,7 @@ const FlagShip = () => {
               {/* Left Column - Quote Box */}
               <div className="relative flex w-full lg:w-1/2 items-center justify-center lg:justify-start">
                 <div className="absolute top-4 lg:block hidden -left-20">
-                  <img src="/images/flagship-projects/shape1.png" alt="" />
+                  <img src="/images/flagship-projects/shape1.png" alt="" role="presentation" />
                 </div>
                 <div
                   style={{
@@ -124,7 +126,7 @@ const FlagShip = () => {
                   </div>
                 </div>
                   <div className="ml-4 lg:block hidden -mt-4">
-                    <img src="/images/flagship-projects/shape2.png" alt="" />
+                    <img src="/images/flagship-projects/shape2.png" alt="" role="presentation" />
                   </div>
               </div>
 

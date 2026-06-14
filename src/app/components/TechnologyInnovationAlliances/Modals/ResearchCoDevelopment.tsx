@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useInteractiveZIndex } from "../../../../hooks/useInteractiveZIndex";
+import { handleImageError } from "../../lib/utils";
 
 interface Props {
   isOpen: boolean;
@@ -100,6 +101,7 @@ const ResearchCoDevelopment = ({ isOpen, onClose, title, subHeadline, descriptio
                     src={img?.src || "/images/technology-innovation-alliances/researchdevelopment.png"}
                     alt={img?.alt || "Research & Co-Development"}
                     className="w-full"
+                    onError={(e) => handleImageError(e, "/images/technology-innovation-alliances/researchdevelopment.png")}
                   />
                 </div>
               </div>
@@ -196,6 +198,7 @@ const ResearchCoDevelopment = ({ isOpen, onClose, title, subHeadline, descriptio
                     src={img?.src || "/images/technology-innovation-alliances/researchdevelopment.png"}
                     alt={img?.alt || "Research & Co-Development"}
                     className="w-full"
+                    onError={(e) => handleImageError(e, "/images/technology-innovation-alliances/researchdevelopment.png")}
                   />
                 </div>
               </div>

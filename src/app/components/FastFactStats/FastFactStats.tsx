@@ -4,6 +4,7 @@ import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useFastFactStats } from "../../../hooks/useFastFactStats";
 import Link from "next/link";
+import { handleImageError } from "../lib/utils";
 
 const FastFactStats = () => {
   const { fastFactsSection, impactSummarySection } = useFastFactStats();
@@ -85,6 +86,7 @@ const FastFactStats = () => {
           <img
             src="/images/facts/lgImage.png"
             alt=""
+            role="presentation"
             className="h-screen object-contain"
           />
         </div>
@@ -93,6 +95,7 @@ const FastFactStats = () => {
           <img
             src="/images/facts/fast-facts-stats-mbImg.png"
             alt=""
+            role="presentation"
             className="w-2/3 object-contain opacity-60"
           />
         </div>
@@ -149,8 +152,9 @@ const FastFactStats = () => {
                       <div className=" mb-3">
                         <img
                           src={block.icon.src}
-                          alt={block.icon.alt}
+                          alt={block.icon.alt || block.title}
                           className="w-16"
+                          onError={(e) => handleImageError(e, "/images/facts/energy.png")}
                         />
                       </div>
                       <div>
@@ -213,8 +217,9 @@ const FastFactStats = () => {
                       <div className=" mb-3">
                         <img
                           src={block.icon.src}
-                          alt={block.icon.alt}
+                          alt={block.icon.alt || block.title}
                           className="w-16"
+                          onError={(e) => handleImageError(e, "/images/facts/energy.png")}
                         />
                       </div>
                       <div>
@@ -339,8 +344,9 @@ const FastFactStats = () => {
                     <div className={index === 0 ? " mb-6" : " mb-3"}>
                       <img
                         src={block.icon.src}
-                        alt={block.icon.alt}
+                        alt={block.icon.alt || block.title}
                         className={index === 0 ? "w-16" : "w-14"}
+                        onError={(e) => handleImageError(e, "/images/facts/energy.png")}
                       />
                     </div>
                     <div className={index === 0 ? "" : ""}>
@@ -404,8 +410,9 @@ const FastFactStats = () => {
                     <div className=" mb-3">
                       <img
                         src={block.icon.src}
-                        alt={block.icon.alt}
+                        alt={block.icon.alt || block.title}
                         className="w-14"
+                        onError={(e) => handleImageError(e, "/images/facts/energy.png")}
                       />
                     </div>
                     <div>

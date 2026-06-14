@@ -5,8 +5,16 @@ import Chatbot from "../Chatbot";
 import Form from "./Modal/Form";
 import { useInteractiveZIndex } from "../../../hooks/useInteractiveZIndex";
 
+const MAP_IMAGES = [
+  "/images/reach-us/map1.png",
+  "/images/reach-us/map2.png",
+  "/images/reach-us/map3.png",
+  "/images/reach-us/map4.png",
+];
+
 const ReachUs = () => {
   const [currentMapIndex, setCurrentMapIndex] = useState(0);
+  const [loadedMaps, setLoadedMaps] = useState<string[]>([MAP_IMAGES[0]]);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const { getContainerProps } = useInteractiveZIndex();
   const enquiryProps = getContainerProps();
@@ -15,20 +23,25 @@ const ReachUs = () => {
     setIsFormOpen(true);
   };
 
-  const mapImages = [
-    "/images/reach-us/map1.png",
-    "/images/reach-us/map2.png",
-    "/images/reach-us/map3.png",
-    "/images/reach-us/map4.png",
-  ];
+  useEffect(() => {
+    MAP_IMAGES.forEach((src) => {
+      const img = new Image();
+      img.onload = () => {
+        setLoadedMaps((prev) => (prev.includes(src) ? prev : [...prev, src]));
+      };
+      img.src = src;
+    });
+  }, []);
 
   useEffect(() => {
+    if (loadedMaps.length <= 1) return undefined;
+
     const interval = setInterval(() => {
-      setCurrentMapIndex((prevIndex) => (prevIndex + 1) % mapImages.length);
-    }, 2000); // Change map every 2 seconds
+      setCurrentMapIndex((prevIndex) => (prevIndex + 1) % loadedMaps.length);
+    }, 3000);
 
     return () => clearInterval(interval);
-  }, [mapImages.length]);
+  }, [loadedMaps.length]);
 
   return (
     <React.Fragment>
@@ -70,7 +83,7 @@ const ReachUs = () => {
             <div className="relative mb-6 lg:pt-10">
               <div className="relative w-full lg:w-[72%]">
                 <img
-                  src={mapImages[currentMapIndex]}
+                  src={loadedMaps[currentMapIndex] ?? MAP_IMAGES[0]}
                   alt={`World Map ${currentMapIndex + 1}`}
                   className="w-full transition-opacity duration-500 ease-in-out"
                 />
