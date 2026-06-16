@@ -17,9 +17,9 @@ const TopNavigation = () => {
   const desktopNavProps = useInteractiveZIndex();
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768); // Example breakpoint for mobile
+      setIsMobile(window.innerWidth < 768);
     };
-    handleResize(); // Check on mount
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
