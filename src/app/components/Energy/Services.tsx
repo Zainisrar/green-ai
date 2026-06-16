@@ -126,7 +126,7 @@ const Services = () => {
         />
       </div>
       <div className="mt-8  p-8 lg:pl-32">
-        <div className="lg:flex lg:h-[65vh]  relative">
+        <div className="lg:flex lg:min-h-[65vh]  relative">
           <div className="flex flex-col    justify-center">
             {/* Desktop layout */}
             <div className="hidden lg:flex mb-8">
@@ -403,7 +403,7 @@ const Services = () => {
                 "INTEGRATED RENEWABLE ENERGY TRANSFORMATION"}
             </p>
           </div>
-          <div className=" lg:relative lg:block hidden -top-20  ">
+          <div className=" lg:relative lg:block hidden  ">
             <div
              style={{
               transform:"skewX(-16deg)"

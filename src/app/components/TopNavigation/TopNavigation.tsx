@@ -79,20 +79,28 @@ const TopNavigation = () => {
             className="hidden md:block md:h-[600px] lg:h-[1200px] absolute -z-[10] left-0"
           />
           {isMobile && (
-            <div>
+            <div className="w-full">
               <img
                 src="/images/insight1/greenShape.png"
                 alt="green rectangle"
                 className="h-[500px] absolute top-0 -z-[10] left-0"
               />
-              <div>
+              <div className="flex justify-between items-center pt-4 px-4">
                 <a href="/">
                   <img
                     src="/images/heroSection/logo.png"
                     alt="logo"
-                    className="w-40 ml-4"
+                    className="w-40"
                   />
                 </a>
+                <div {...mobileNavProps.getContainerProps()}>
+                  <img
+                    onClick={openNavigation}
+                    src="/images/heroSection/lighting.svg"
+                    className="w-10 h-10 cursor-pointer"
+                    alt="lighting"
+                  />
+                </div>
               </div>
             </div>
           )}
@@ -107,17 +115,7 @@ const TopNavigation = () => {
               </a>
             </div>
             <div className="w-full">
-              <div className="flex justify-end md:hidden">
-                <div {...mobileNavProps.getContainerProps()}>
-                  <img
-                    onClick={openNavigation}
-                    src="/images/heroSection/lighting.svg"
-                    className="w-10 h-10 cursor-pointer"
-                    alt="lighting"
-                  />
-                </div>
-              </div>
-              <ul className="flex px-20 lg:px-0   md:flex-nowrap flex-wrap justify-end md:space-x-4    lg:space-x-10  uppercase items-center">
+              <ul className="hidden md:flex px-20 lg:px-0   md:flex-nowrap flex-wrap justify-end md:space-x-4    lg:space-x-10  uppercase items-center">
                 {navnData.navigation.items.map((item) => (
                   <li
                     key={item.name}

@@ -62,12 +62,12 @@ const Product = ({ slug }: ProductProps) => {
   }
   return (
     // <div className=' h-screen bg-[url("/images/product/bg.jpg")] bg-cover overflow-hidden relative'>
-    <div className=" ">
+    <div className="relative pb-12 lg:pb-0">
       <ProductNavigation />
-      <div className="lg:block hidden absolute -z-10 right-0 top-0">
+      <div className="lg:block hidden absolute -z-10 right-0 top-0 bottom-0">
         <img
           src="/images/product/mainImg.png"
-          className=" h-[150vh] w-[60vw] "
+          className=" h-full w-[66vw] object-fill "
           alt="mainImg"
         />
       </div>
@@ -167,23 +167,31 @@ const Product = ({ slug }: ProductProps) => {
             {/* Right Column - Product Info */}
             <div className="">
               <div className="relative   my-10 lg:my-0 p-4 lg:p-0">
-                <div className="lg:ml-34  lg:pt-16 lg:w-7/12">
-                  <h3
-                  style={{
-                    transform:"skewX(-12deg)"
-                  }}
-                  className="text-xl mt-4 text-center lg:text-left lg:max-w-xs lg:ml-32 lg:text-3xl  lg:tracking-wider lg:leading-10 font-bold text-gray-800 mb-2 lg:mb-4">
-                    {currentProduct?.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm text-center lg:text-left px-4 lg:px-16 lg:text-xl">
-                    {currentProduct?.description ||
-                      "To lift up living standards sustainably, it is crucial to invest in infrastructure that supports a better quality of life."}
-                  </p>
+                <div className="lg:ml-auto lg:mr-12 lg:w-[440px] lg:pt-8">
+                  {/* Yellow card: skewed wrapper so the curve is controllable and
+                      the text always stays inside it. */}
+                  <div
+                    style={{
+                      transform: isDesktop ? "skewX(-10deg)" : "none",
+                    }}
+                    className="lg:bg-gradient-to-br lg:from-[#f4f7d6] lg:to-[#e8f0c4] lg:px-12 lg:py-12 lg:shadow-sm"
+                  >
+                    <div
+                      style={{
+                        transform: isDesktop ? "skewX(10deg)" : "none",
+                      }}
+                    >
+                      <h3 className="text-xl mt-4 lg:mt-0 text-center lg:text-left lg:text-3xl  lg:tracking-wide lg:leading-10 font-bold text-gray-800 mb-2 lg:mb-4">
+                        {currentProduct?.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm text-center lg:text-left px-4 lg:px-0 lg:text-base">
+                        {currentProduct?.description ||
+                          "To lift up living standards sustainably, it is crucial to invest in infrastructure that supports a better quality of life."}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div className="absolute  top-0 -z-10">
-                  <img src="/images/product/boxImg.png" alt="" className="" />
-                </div>
-                <div 
+                <div
                 style={{
                   transform:isDesktop?"skewX(-16deg)":"none"
                 }}

@@ -69,37 +69,35 @@ const ProductNavigation = () => {
             className="hidden md:block top-0 w-72 absolute -z-[10]  left-0"
           />
           {isMobile && (
-            <div>
+            <div className="w-full">
               <img
                 src="/images/insight1/greenShape.png"
                 alt="green rectangle"
                 className="h-[420px]  absolute top-0 -z-[10]  left-0"
               />
-              <div>
+              <div className="flex justify-between items-center pt-4 px-4">
                 <a href="/">
                   <img
                     src="/images/heroSection/logo.png"
                     alt="logo"
-                    className="w-32 ml-4"
+                    className="w-32"
                   />
                 </a>
-              </div>
-            </div>
-          )}
-          <div className="flex relative z-[9999] lg:flex-nowrap flex-wrap items-center md:justify-between md:w-full">
-          
-            <div className="w-full">
-              <div className=" flex  justify-end md:hidden">
                 <img
                   onClick={() => {
                     setIsOpen(true);
                   }}
                   src="/images/heroSection/lighting.svg"
-                  className="w-14 cursor-pointer md:w-auto md:mt-auto -mt-6"
+                  className="w-10 h-10 cursor-pointer"
                   alt="lighting"
                 />
               </div>
-              <ul className="flex px-20 lg:px-0   md:flex-nowrap flex-wrap justify-end md:space-x-4    lg:space-x-10  uppercase items-center">
+            </div>
+          )}
+          <div className="flex relative z-[9999] lg:flex-nowrap flex-wrap items-center md:justify-between md:w-full">
+
+            <div className="w-full">
+              <ul className="hidden md:flex px-20 lg:px-0   md:flex-nowrap flex-wrap justify-end md:space-x-4    lg:space-x-10  uppercase items-center">
                 {productNavItems.map((item) => (
                   <li
                     key={item.name}

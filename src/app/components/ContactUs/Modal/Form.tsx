@@ -434,7 +434,7 @@ const Form = ({ isOpen, onClose }: Props) => {
           ) : (
             /* Desktop Layout - Skewed Modal Background */
             <div
-              className="bg-[#eff5f1] transform  border-lime-300 border py-14 px-16 relative shadow-2xl"
+              className="bg-[#eff5f1] transform  border-lime-300 border py-10 px-16 relative shadow-2xl max-h-[90vh] overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
               style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
               transform:"skewX(-16deg)"
                }}
