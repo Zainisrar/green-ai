@@ -4,6 +4,7 @@ import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useOurValueChain } from "../../../hooks/useOurValueChain";
 import { handleImageError } from "../lib/utils";
+import RequestConsultation from "./Modals/RequestConsultation";
 
 interface ValueChainItem {
   img: {
@@ -43,6 +44,7 @@ interface OurValueChainData {
 
 const OurChainValue = () => {
   const { data: apiData } = useOurValueChain();
+  const [isConsultationOpen, setIsConsultationOpen] = React.useState(false);
   // Type assertion to help TypeScript understand the data structure
   const data = apiData as OurValueChainData | undefined;
 
@@ -267,15 +269,16 @@ const OurChainValue = () => {
         </div>
 
         <div className=" flex justify-end my-8 cursor-pointer">
-          <a
-            href={data?.cta?.[0]?.href || "#"}
+          <button
+            type="button"
+            onClick={() => setIsConsultationOpen(true)}
             className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
           >
             <img
               src="/images/our-value-chain/request.png"
               alt={data?.cta?.[0]?.text || "Request a Consultation"}
             />
-          </a>
+          </button>
         </div>
         <div className=" flex justify-end my-4 mb-20 cursor-pointer">
           <a
@@ -290,6 +293,10 @@ const OurChainValue = () => {
         </div>
       </div>
         <Chatbot />
+      <RequestConsultation
+        isOpen={isConsultationOpen}
+        onClose={() => setIsConsultationOpen(false)}
+      />
     </React.Fragment>
   );
 };

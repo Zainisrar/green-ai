@@ -29,7 +29,7 @@
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
         ],
-        "timeout": 90000
+        "timeout": 60000
       }
     ],
     "quiet": false,
@@ -68,7 +68,7 @@
         {
           "title": "GreenAI Application Audit",
           "file": "app-audit.spec.ts",
-          "line": 262,
+          "line": 263,
           "column": 6,
           "specs": [
             {
@@ -87,12 +87,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 203716,
+                      "duration": 310876,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-06-14T17:47:50.079Z",
+                      "startTime": "2026-06-16T18:53:01.665Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -102,7 +102,7 @@
               ],
               "id": "e4b1780347a26bef3e44-9945f12216a85a0cf161",
               "file": "app-audit.spec.ts",
-              "line": 263,
+              "line": 264,
               "column": 7
             },
             {
@@ -111,7 +111,7 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 90000,
+                  "timeout": 60000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "",
@@ -121,12 +121,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 19406,
+                      "duration": 40056,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-06-14T17:51:14.017Z",
+                      "startTime": "2026-06-16T18:58:14.666Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -136,7 +136,7 @@
               ],
               "id": "e4b1780347a26bef3e44-36db53fcf875f9f30b77",
               "file": "app-audit.spec.ts",
-              "line": 271,
+              "line": 272,
               "column": 7
             },
             {
@@ -145,7 +145,7 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 90000,
+                  "timeout": 60000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "",
@@ -155,12 +155,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 12892,
+                      "duration": 5218,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-06-14T17:51:33.449Z",
+                      "startTime": "2026-06-16T18:58:54.753Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -170,7 +170,7 @@
               ],
               "id": "e4b1780347a26bef3e44-1e7cce771a7be48b9d14",
               "file": "app-audit.spec.ts",
-              "line": 278,
+              "line": 279,
               "column": 7
             },
             {
@@ -179,7 +179,7 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 90000,
+                  "timeout": 60000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "",
@@ -189,12 +189,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2392,
+                      "duration": 2904,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-06-14T17:51:46.366Z",
+                      "startTime": "2026-06-16T18:59:00.004Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -204,7 +204,7 @@
               ],
               "id": "e4b1780347a26bef3e44-46e70830772892e8e58e",
               "file": "app-audit.spec.ts",
-              "line": 306,
+              "line": 307,
               "column": 7
             },
             {
@@ -213,7 +213,7 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 90000,
+                  "timeout": 60000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "",
@@ -223,12 +223,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 4034,
+                      "duration": 8070,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-06-14T17:51:48.787Z",
+                      "startTime": "2026-06-16T18:59:02.946Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -238,7 +238,7 @@
               ],
               "id": "e4b1780347a26bef3e44-49d0bddaa960aaa17e22",
               "file": "app-audit.spec.ts",
-              "line": 332,
+              "line": 333,
               "column": 7
             },
             {
@@ -247,7 +247,7 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 90000,
+                  "timeout": 60000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "",
@@ -257,16 +257,16 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 14852,
+                      "duration": 24519,
                       "errors": [],
                       "stdout": [
                         {
-                          "text": "\nWrote 2 bugs to C:\\Users\\TSP\\OneDrive\\Desktop\\Project\\Projects\\greenai-master\\bug.md\n"
+                          "text": "\nWrote 1 bugs to C:\\Users\\TSP\\OneDrive\\Desktop\\Project\\Projects\\greenai-master\\bug.md\n"
                         }
                       ],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-06-14T17:51:52.848Z",
+                      "startTime": "2026-06-16T18:59:11.053Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -276,7 +276,7 @@
               ],
               "id": "e4b1780347a26bef3e44-999ffbb1a0b5db0dc3b6",
               "file": "app-audit.spec.ts",
-              "line": 356,
+              "line": 357,
               "column": 7
             }
           ]
@@ -286,8 +286,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-06-14T17:47:48.217Z",
-    "duration": 259684.511,
+    "startTime": "2026-06-16T18:52:59.302Z",
+    "duration": 396584.91099999996,
     "expected": 6,
     "skipped": 0,
     "unexpected": 0,

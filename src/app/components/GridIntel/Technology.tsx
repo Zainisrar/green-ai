@@ -1,8 +1,7 @@
-"use client"
-import React, {
-    useEffect,
-    useState
-} from 'react'
+"use client";
+import React from "react";
+import GridIntelInfoModal from "./GridIntelInfoModal";
+import SafeImage from "../shared/SafeImage";
 
 interface TechnologyFeature {
   icon: string;
@@ -24,22 +23,7 @@ interface Props {
     onClose: () => void;
     data?: TechnologyData;
 }
-const Technology = ({
-    isOpen,
-    onClose,
-    data
-}: Props) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
+const Technology = ({ isOpen, onClose, data }: Props) => {
   if (!isOpen) return null;
 
   const renderFeatures = () => {
@@ -117,25 +101,26 @@ const Technology = ({
       </div>
 
       {/* Main Content */}
-      <div className="lg:flex items-start space-x-12">
-        {/* Left Side - Image */}
-        <div className="flex-shrink-0">
+      <div className="flex flex-col items-start gap-8 lg:flex-row lg:space-x-12">
+        <div className="shrink-0">
           <div className="relative">
-            <img 
-              src={data?.image?.src || "/images/grid-intel/technology.png"}
+            <SafeImage
+              src={data?.image?.src}
+              fallbackSrc="/images/grid-intel/technology.png"
               alt={data?.image?.alt || "GRID-INTEL Technology Stack"}
-              className="w-[520px] pt-10"
+              className="w-full max-w-[240px] pt-4 sm:max-w-[280px] lg:max-w-[320px] lg:pt-6"
             />
           </div>
         </div>
 
-        {/* Right Side - Content */}
         <div className="flex-1">
           <div className="mb-8">
-            <p className="text-gray-700 text-lg font-medium mb-6">
-              {data?.description || (
+            <p className="mb-6 text-lg font-medium text-gray-700">
+              {data?.description ? (
+                data.description
+              ) : (
                 <>
-                  <span className="text-[#4CAF50] font-bold">GRID-INTEL™</span> Includes:
+                  <span className="font-bold text-[#4CAF50]">GRID-INTEL™</span> Includes:
                 </>
               )}
             </p>
@@ -150,71 +135,10 @@ const Technology = ({
     </>
   );
   return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed inset-0 bg-black/20 z-[99999999999999999999999999] flex items-center justify-center">
-        {/* Modal Container */}
-        {
-          isMobile ?
-          (<div className="relative w-full lg:max-w-6xl mx-4">
-          {/* Skewed Modal Background */}
-           <div 
-            className="bg-gray-100 h-[80vh] overflow-y-auto p-5 relative shadow-2xl"
-          >
-            {/* Close Button */}
-          <div className='flex justify-end w-full'>
-            <button 
-              onClick={onClose}
-              style={{
-                transform:"skewX(12deg)"
-              }}
-              className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
-            >
-              <img src="/images/join-us/xicon.png" alt="Close Icon" />
-            </button>
-          </div>
+    <GridIntelInfoModal isOpen={isOpen} onClose={onClose}>
+      {renderContent()}
+    </GridIntelInfoModal>
+  );
+};
 
-            {/* Modal Content */}
-            <div className="transform mx-auto">
-              {renderContent()}
-            </div>
-          </div>
-        </div>):
-          (<div className="relative w-full lg:max-w-6xl mx-4">
-          {/* Skewed Modal Background */}
-           <div 
-            className="bg-gray-100 transform py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-            style={{ clipPath: 'polygon(0 0, 95% 0, 100% 100%, 5% 100%)',
-              transform:"skewX(-12deg)"
-             }}
-          >
-            {/* Close Button */}
-          <div className='flex justify-end w-full'>
-            <button 
-              onClick={onClose}
-              style={{
-                transform:"skewX(12deg)"
-              }}
-              className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
-            >
-              <img src="/images/join-us/xicon.png" alt="Close Icon" />
-            </button>
-          </div>
-
-            {/* Modal Content */}
-            <div
-             style={{
-              transform:"skewX(12deg)"
-             }}
-            className="transform  max-w-5xl mx-auto">
-              {renderContent()}
-            </div>
-          </div>
-        </div>)
-        }
-      </div>
-    </React.Fragment>
-  )
-}
-
-export default Technology
+export default Technology;

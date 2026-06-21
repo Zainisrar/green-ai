@@ -5,9 +5,11 @@ import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useFlagshipProject } from "../../../hooks/useFlagshipProject";
 import { handleImageError } from "../lib/utils";
+import RequestConsultation from "./Modals/RequestConsultation";
 
 const FlagShip = () => {
     const [isDesktop, setIsDesktop] = React.useState(false);
+    const [isConsultationOpen, setIsConsultationOpen] = React.useState(false);
 
     React.useEffect(() => {
     const handleResize = () => {
@@ -170,17 +172,35 @@ const FlagShip = () => {
               index === 0 ? 'my-4' : 'my-8 mb-20'
             }`}
           >
-            <a href={ctaItem.href} className="block cursor-pointer transition-transform hover:scale-105">
-              <img
-                src={index === 0 ? "/images/flagship-projects/report.png" : "/images/flagship-projects/explore.png"}
-                alt={ctaItem.text}
-                className="w-60 sm:w-72 lg:w-auto h-auto"
-              />
-            </a>
+            {index === 0 ? (
+              <button
+                type="button"
+                onClick={() => setIsConsultationOpen(true)}
+                className="block cursor-pointer transition-transform hover:scale-105"
+              >
+                <img
+                  src="/images/flagship-projects/report.png"
+                  alt={ctaItem.text || "Request a Consultation"}
+                  className="w-60 sm:w-72 lg:w-auto h-auto"
+                />
+              </button>
+            ) : (
+              <a href={ctaItem.href} className="block cursor-pointer transition-transform hover:scale-105">
+                <img
+                  src="/images/flagship-projects/explore.png"
+                  alt={ctaItem.text}
+                  className="w-60 sm:w-72 lg:w-auto h-auto"
+                />
+              </a>
+            )}
           </div>
         ))}
         <Chatbot />
       </div>
+      <RequestConsultation
+        isOpen={isConsultationOpen}
+        onClose={() => setIsConsultationOpen(false)}
+      />
     </React.Fragment>
   );
 };

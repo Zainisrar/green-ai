@@ -1,13 +1,15 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useFastFactStats } from "../../../hooks/useFastFactStats";
 import Link from "next/link";
 import { handleImageError } from "../lib/utils";
+import ConnectWithGreen from "./Modals/ConnectWithGreen";
 
 const FastFactStats = () => {
   const { fastFactsSection, impactSummarySection } = useFastFactStats();
+  const [isConnectOpen, setIsConnectOpen] = useState(false);
 
   // Fallback data matching current static content
   const fallbackData = {
@@ -497,9 +499,10 @@ const FastFactStats = () => {
               </div>
             ))}
           </div>
-          <div className="flex flex-col items-center lg:items-end gap-8 lg:mr-10 shrink-0">
-            <Link
-              href={ctaButtons?.[0]?.link || "#"}
+          <div className="flex flex-col items-center lg:items-end lg:justify-end gap-8 lg:mr-10 shrink-0">
+            <button
+              type="button"
+              onClick={() => setIsConnectOpen(true)}
               className="relative inline-block cursor-pointer"
             >
               <img
@@ -507,10 +510,10 @@ const FastFactStats = () => {
                 alt="Connect with Green"
                 className="w-64 sm:w-72 lg:w-auto"
               />
-              <div className="absolute inset-0 flex items-center justify-center px-6 text-base lg:text-lg font-bold whitespace-nowrap">
+              <div className="absolute inset-0 flex items-center justify-center px-5 text-sm 2xl:text-base font-bold whitespace-nowrap">
                 {ctaButtons?.[0]?.text || "Connect with GREEN"} {` >`}
               </div>
-            </Link>
+            </button>
             <Link
               href={ctaButtons?.[1]?.link || "#"}
               className="relative inline-block cursor-pointer"
@@ -520,16 +523,20 @@ const FastFactStats = () => {
                 alt="Download Impact Summary"
                 className="w-64 sm:w-72 lg:w-auto"
               />
-              <div className="absolute inset-0 flex items-center justify-center px-6 text-base lg:text-lg font-bold whitespace-nowrap">
+              <div className="absolute inset-0 flex items-center justify-center px-5 text-sm 2xl:text-base font-bold whitespace-nowrap">
                 {ctaButtons?.[1]?.text || "Download Impact Summary"} {` >`}
               </div>
             </Link>
-           
+
           </div>
         </div>
 
         <Chatbot />
       </div>
+      <ConnectWithGreen
+        isOpen={isConnectOpen}
+        onClose={() => setIsConnectOpen(false)}
+      />
     </React.Fragment>
   );
 };

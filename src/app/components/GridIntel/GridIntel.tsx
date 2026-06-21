@@ -10,6 +10,8 @@ import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useGridIntel } from "../../../hooks/useGridIntel";
 import Link from "next/link";
+import TechnicalDeepDive from "./Modals/TechnicalDeepDive";
+import SystemArchitectureTeam from "./Modals/SystemArchitectureTeam";
 
 const GridIntel = () => {
   const [isChallengeOpen, setIsChallengeOpen] = useState(false);
@@ -18,6 +20,8 @@ const GridIntel = () => {
   const [isScenarioOpen, setIsScenarioOpen] = useState(false);
   const [isTechnologyOpen, setIsTechnologyOpen] = useState(false);
   const [isProductOpen, setIsProductOpen] = useState(false);
+  const [isDeepDiveOpen, setIsDeepDiveOpen] = useState(false);
+  const [isArchitectureTeamOpen, setIsArchitectureTeamOpen] = useState(false);
 
   const { gridIntelData } = useGridIntel();
 
@@ -49,6 +53,51 @@ const GridIntel = () => {
   if (!gridIntelData) {
     return null;
   }
+
+  const renderCallToActionButton = (index: number, className: string) => {
+    const text =
+      gridIntelData?.mainPage?.ctaButtons?.[index]?.text ||
+      [
+        "Schedule a Technical Deep-Dive",
+        "Engage Our System Architecture Team",
+        "Download the GRID-INTEL™ Product Dossier",
+      ][index];
+    const buttonContent = (
+      <div
+        style={{ transform: "skewX(-16deg)" }}
+        className={`bg-gradient-to-r from-[#54b85a] to-[#e6f24d] shadow-md ${className}`}
+      >
+        <span className="block text-sm font-bold text-gray-900 whitespace-nowrap lg:text-base">
+          {text} {index < 2 ? ">" : ""}
+        </span>
+      </div>
+    );
+
+    if (index === 0) {
+      return (
+        <button type="button" onClick={() => setIsDeepDiveOpen(true)} className="inline-block max-w-full cursor-pointer">
+          {buttonContent}
+        </button>
+      );
+    }
+
+    if (index === 1) {
+      return (
+        <button type="button" onClick={() => setIsArchitectureTeamOpen(true)} className="inline-block max-w-full cursor-pointer">
+          {buttonContent}
+        </button>
+      );
+    }
+
+    return (
+      <Link
+        href={gridIntelData?.mainPage?.ctaButtons?.[2]?.href || "#"}
+        className="inline-block max-w-full cursor-pointer"
+      >
+        {buttonContent}
+      </Link>
+    );
+  };
 
   return (
     <React.Fragment>
@@ -250,22 +299,9 @@ const GridIntel = () => {
           </div>
 
           <div className="mb-10 flex flex-col items-center gap-6">
-            {[0, 1, 2].map((i) => (
-              <Link
-                key={i}
-                href={gridIntelData?.mainPage.ctaButtons[i]?.href || "#"}
-                className="inline-block cursor-pointer max-w-full"
-              >
-                <div
-                  style={{ transform: "skewX(-16deg)" }}
-                  className="bg-gradient-to-r from-[#54b85a] to-[#e6f24d] px-8 py-3 shadow-md"
-                >
-                  <span className="block text-sm font-bold text-gray-900 whitespace-nowrap">
-                    {gridIntelData?.mainPage.ctaButtons[i]?.text} {`>`}
-                  </span>
-                </div>
-              </Link>
-            ))}
+            {renderCallToActionButton(0, "px-8 py-3")}
+            {renderCallToActionButton(1, "px-8 py-3")}
+            {renderCallToActionButton(2, "px-8 py-3")}
           </div>
         </div>
 
@@ -485,23 +521,10 @@ const GridIntel = () => {
               </div>
             </div>
           </div>
-          <div className="mb-20 pr-8 flex flex-col items-end gap-6">
-            {[0, 1, 2].map((i) => (
-              <Link
-                key={i}
-                href={gridIntelData?.mainPage.ctaButtons[i]?.href || "#"}
-                className="inline-block cursor-pointer"
-              >
-                <div
-                  style={{ transform: "skewX(-16deg)" }}
-                  className="bg-gradient-to-r from-[#54b85a] to-[#e6f24d] px-10 py-3 shadow-md"
-                >
-                  <span className="block text-sm lg:text-base font-bold text-gray-900 whitespace-nowrap">
-                    {gridIntelData?.mainPage.ctaButtons[i]?.text} {`>`}
-                  </span>
-                </div>
-              </Link>
-            ))}
+          <div className="mb-20 flex flex-col items-end gap-6 pr-8">
+            {renderCallToActionButton(0, "px-10 py-3")}
+            {renderCallToActionButton(1, "px-10 py-3")}
+            {renderCallToActionButton(2, "px-10 py-3")}
           </div>
           <div className="lg:block hidden">
             <Chatbot />
@@ -515,7 +538,11 @@ const GridIntel = () => {
         onClose={() => setIsChallengeOpen(false)}
         data={gridIntelData?.challenge}
       />
-      <Solves isOpen={isSolvesOpen} onClose={() => setIsSolvesOpen(false)} />
+      <Solves
+        isOpen={isSolvesOpen}
+        onClose={() => setIsSolvesOpen(false)}
+        data={gridIntelData?.whatSolves}
+      />
       <WhyIntel
         isOpen={isWhyIntelOpen}
         onClose={() => setIsWhyIntelOpen(false)}
@@ -523,15 +550,25 @@ const GridIntel = () => {
       <Scenerios
         isOpen={isScenarioOpen}
         onClose={() => setIsScenarioOpen(false)}
+        data={gridIntelData?.scenarios}
       />
       <Technology
         isOpen={isTechnologyOpen}
         onClose={() => setIsTechnologyOpen(false)}
+        data={gridIntelData?.technologyStack}
       />
       <Product 
         isOpen={isProductOpen} 
         onClose={() => setIsProductOpen(false)}
         data={gridIntelData?.productIntegration}
+      />
+      <TechnicalDeepDive
+        isOpen={isDeepDiveOpen}
+        onClose={() => setIsDeepDiveOpen(false)}
+      />
+      <SystemArchitectureTeam
+        isOpen={isArchitectureTeamOpen}
+        onClose={() => setIsArchitectureTeamOpen(false)}
       />
     </React.Fragment>
   );

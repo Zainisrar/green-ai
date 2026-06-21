@@ -3,9 +3,11 @@ import React, { useEffect, useState } from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useImpactMeasurementEsg } from "../../../hooks/useImpactMeasurementEsg";
+import SampleImpactReport from "./Modals/SampleImpactReport";
 
 const EsgMatters = () => {
   const { data,  error } = useImpactMeasurementEsg();
+  const [isSampleOpen, setIsSampleOpen] = useState(false);
 
   const [active, setActive] = useState<{
     index: number;
@@ -490,15 +492,20 @@ const EsgMatters = () => {
               alt={data.mainPage.cta[0]?.text || "GREEN ESG Policy Brief"}
             />
           </a>
-          <a href={data.mainPage.cta[1]?.href || "#"} target="_blank" rel="noopener noreferrer">
+          <button
+            type="button"
+            onClick={() => setIsSampleOpen(true)}
+            className="cursor-pointer hover:opacity-80 transition-opacity"
+          >
             <img
               src="/images/why-esg-matters-to-green/sample.png"
               alt={data.mainPage.cta[1]?.text || "Sample Impact Report or M&E Framework"}
             />
-          </a>
+          </button>
         </div>
       </div>
       <Chatbot />
+      <SampleImpactReport isOpen={isSampleOpen} onClose={() => setIsSampleOpen(false)} />
     </React.Fragment>
   );
 };

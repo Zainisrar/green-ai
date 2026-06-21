@@ -2,10 +2,11 @@
 import React, { useState } from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
-import Link from "next/link";
 import { useCommunityVoices } from "../../../hooks/useCommunityVoices";
 import VoicesFromField from "./Dialog/VoicesFromField";
 import WhatMakesOurImpactDifferent from "./Dialog/WhatMakesOurImpactDifferent";
+import SubmitTestimonial from "./Dialog/SubmitTestimonial";
+import UploadPhotoVideo from "./Dialog/UploadPhotoVideo";
 
 const CommunityVoices = () => {
   const { data } = useCommunityVoices();
@@ -145,30 +146,28 @@ const CommunityVoices = () => {
             </div>
             <div className="my-20 flex flex-col mb-32 lg:flex-row items-center justify-center gap-6">
               <div className="cursor-pointer relative z-50">
-                <Link
-                  href={data.mainPage.cta[0].href || "#"}
+                <button
+                  type="button"
+                  onClick={() => setOpenModal("submitTestimonial")}
                   className="cursor-pointer relative"
                 >
-                  <button className=" cursor-pointer">
-                    <img
-                      src="/images/community-voices/submit.png"
-                      alt="submit"
-                    />
-                  </button>
-                </Link>
+                  <img
+                    src="/images/community-voices/submit.png"
+                    alt="submit a testimonial"
+                  />
+                </button>
               </div>
               <div className="cursor-pointer relative z-50">
-                <Link
-                  href={data.mainPage.cta[1].href || "#"}
+                <button
+                  type="button"
+                  onClick={() => setOpenModal("uploadPhotoVideo")}
                   className="cursor-pointer relative"
                 >
-                  <button className=" cursor-pointer">
-                    <img
-                      src="/images/community-voices/upload.png"
-                      alt="upload"
-                    />
-                  </button>
-                </Link>
+                  <img
+                    src="/images/community-voices/upload.png"
+                    alt="upload a photo / video"
+                  />
+                </button>
               </div>
             </div>
           </div>
@@ -181,6 +180,14 @@ const CommunityVoices = () => {
       />
       <WhatMakesOurImpactDifferent
         isOpen={openModal === "whatMakesOurImpact"}
+        onClose={() => setOpenModal(null)}
+      />
+      <SubmitTestimonial
+        isOpen={openModal === "submitTestimonial"}
+        onClose={() => setOpenModal(null)}
+      />
+      <UploadPhotoVideo
+        isOpen={openModal === "uploadPhotoVideo"}
         onClose={() => setOpenModal(null)}
       />
     </React.Fragment>

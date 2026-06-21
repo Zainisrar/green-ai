@@ -4,9 +4,11 @@ import Chatbot from "../Chatbot";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import { useGreenTalentIncubator } from "../../../hooks/useGreenTalentIncubator";
 import Link from "next/link";
+import ApplyForProgram from "./Modals/ApplyForProgram";
 
 const GreenTalentIncubator = () => {
   const { data } = useGreenTalentIncubator();
+  const [isApplyOpen, setIsApplyOpen] = useState(false);
   const main = data?.mainPage;
   const why = data?.modals.whyWeBuiltThis;
   const offer = data?.modals.whatWeOffer;
@@ -419,12 +421,16 @@ const GreenTalentIncubator = () => {
         </div>
         {data?.mainPage.cta && data?.mainPage.cta.length > 0 ? (
           <div className="flex flex-col items-end gap-8 pr-4 lg:pr-10 pb-12 lg:pb-16">
-            <Link href={data.mainPage.cta[0]?.href ?? "#"} className="relative flex justify-end cursor-pointer">
+            <button
+              type="button"
+              onClick={() => setIsApplyOpen(true)}
+              className="relative flex justify-end cursor-pointer"
+            >
               <img src="/images/green-talent-incubator/apply-program.png" alt="Apply for a Program" />
               <div className="absolute inset-0 flex items-center pl-8 lg:pl-12 pr-12 lg:pr-16 text-sm lg:text-base font-bold">
                 {data.mainPage.cta[0]?.text ?? "Apply for a Program"}
               </div>
-            </Link>
+            </button>
             <Link href={data.mainPage.cta[1]?.href ?? "#"} className="relative flex justify-end cursor-pointer">
               <img src="/images/green-talent-incubator/green.png" alt="Partnership Brief" />
               <div className="absolute inset-0 flex items-center pl-8 lg:pl-12 pr-12 lg:pr-16 text-sm lg:text-base font-bold">
@@ -434,9 +440,13 @@ const GreenTalentIncubator = () => {
           </div>
         ) : (
           <>
-            <div className="flex justify-end my-8 cursor-pointer">
+            <button
+              type="button"
+              onClick={() => setIsApplyOpen(true)}
+              className="flex justify-end my-8 cursor-pointer"
+            >
               <img src="/images/green-talent-incubator/apply-program.png" alt="Apply for a Program" />
-            </div>
+            </button>
             <div className="flex justify-end my-8 cursor-pointer">
               <img src="/images/green-talent-incubator/green.png" alt="Partnership Brief" />
             </div>
@@ -444,6 +454,10 @@ const GreenTalentIncubator = () => {
         )}
       </div>
       <Chatbot />
+      <ApplyForProgram
+        isOpen={isApplyOpen}
+        onClose={() => setIsApplyOpen(false)}
+      />
     </React.Fragment>
   );
 };

@@ -5,6 +5,7 @@ import WaystoGetInvolved from "./Dialog/WaystoGetInvolved";
 import WhoCanJoin from "./Dialog/WhoCanJoin";
 import VolunteerSignUp from "./Dialog/VolunteerSignUp";
 import PastHighlights from "./Dialog/PastHighlights";
+import SignUpToVolunteer from "./Modals/SignUpToVolunteer";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 
@@ -15,6 +16,7 @@ const PublicEventVolunteering = () => {
   const [isWhoCanJoinOpen, setIsWhoCanJoinOpen] = useState(false);
   const [isVolunteerSignUpOpen, setIsVolunteerSignUpOpen] = useState(false);
   const [isPastHighlightsOpen, setIsPastHighlightsOpen] = useState(false);
+  const [isSignUpFormOpen, setIsSignUpFormOpen] = useState(false);
 
   const handleOpenWhyWeEngage = () => {
     setIsWhyWeEngageOpen(true);
@@ -237,10 +239,16 @@ const PublicEventVolunteering = () => {
 
         <div className="space-y-8 mb-8">
           <div className="  flex justify-end">
-            <img
-              src="/images/public-events-volunteering/SignUptoVolunteer.png"
-              alt="Sign Up to Volunteer"
-            />
+            <button
+              type="button"
+              onClick={() => setIsSignUpFormOpen(true)}
+              className="cursor-pointer"
+            >
+              <img
+                src="/images/public-events-volunteering/SignUptoVolunteer.png"
+                alt="Sign Up to Volunteer"
+              />
+            </button>
           </div>
           <div className="  flex justify-end">
             <img
@@ -274,6 +282,10 @@ const PublicEventVolunteering = () => {
       <PastHighlights
         isOpen={isPastHighlightsOpen}
         onClose={handleClosePastHighlights}
+      />
+      <SignUpToVolunteer
+        isOpen={isSignUpFormOpen}
+        onClose={() => setIsSignUpFormOpen(false)}
       />
     </React.Fragment>
   );

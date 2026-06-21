@@ -1,9 +1,12 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
+import Proposal from "./Modals/Proposal";
 
 const RequestProposal = () => {
+  const [isProposalOpen, setIsProposalOpen] = useState(false);
+
   return (
     <React.Fragment>
       <div className="">
@@ -249,10 +252,13 @@ const RequestProposal = () => {
                     </a>
                   </span>
                 </div>
-                <div className="relative z-10 flex justify-end cursor-pointer lg:mt-10">
+                <div
+                  className="relative z-10 flex cursor-pointer justify-end lg:mt-10"
+                  onClick={() => setIsProposalOpen(true)}
+                >
                   <img
                     src="/images/book-consulation/requestProposal.png"
-                    alt="book-my-consulation"
+                    alt="Request proposal"
                   />
                 </div>
               </div>
@@ -270,6 +276,7 @@ const RequestProposal = () => {
           {/* Sidebar Content */}
         </div>
       </div>
+      <Proposal isOpen={isProposalOpen} onClose={() => setIsProposalOpen(false)} />
       <Chatbot />
     </React.Fragment>
   );

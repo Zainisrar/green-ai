@@ -29,7 +29,7 @@ const Handbook = () => {
 
         <div className="flex h-full z-50 relative">
           {/* Left Side - GLOBAL SNAPSHOT Text */}
-          <div className="w-1/6 flex items-center justify-center">
+          <div className="hidden lg:flex w-1/6 items-center justify-center">
             <div className="fixed top-1/5 left-4 lg:left-14">
               <img
                 src="/images/handbook/supplier-code-of-conduct.png"
@@ -40,7 +40,7 @@ const Handbook = () => {
           </div>
 
           {/* Main Content Area */}
-          <div className=" px-8 pt-8">
+          <div className="min-w-0 flex-1 px-4 sm:px-8 pt-8">
             {/* Main Title */}
             <div className="mb-8 ml-10">
               <h1 className="lg:text-3xl text-2xl font-black text-gray-800 mb-4">
@@ -63,7 +63,7 @@ const Handbook = () => {
                 <img
                   src="/images/become-supplier/procurement-ethos.png"
                   alt="Our Procurement Ethos"
-                  className="h-20 lg:h-auto"
+                  className="h-20 lg:h-28 w-auto object-contain shrink-0"
                 />
                 <div className="flex-1">
                   <h3 className="text-xl font-bold text-gray-800 mb-2">
@@ -87,7 +87,7 @@ const Handbook = () => {
                 <img
                   src="/images/become-supplier/code-of-conduct.png"
                   alt="Code Of Conduct"
-                                    className="h-20 lg:h-auto"
+                                    className="h-20 lg:h-28 w-auto object-contain shrink-0"
 
                 />
                 <div className="flex-1">
@@ -112,7 +112,7 @@ const Handbook = () => {
                 <img
                   src="/images/become-supplier/green-vendor.png"
                   alt="GREEN Vendor Checklist"
-                                    className="h-20 lg:h-auto"
+                                    className="h-20 lg:h-28 w-auto object-contain shrink-0"
 
                 />
                 <div className="flex-1">
@@ -133,7 +133,7 @@ const Handbook = () => {
                 <img
                   src="/images/become-supplier/signature-page.png"
                   alt="Certification & Signature Page"
-                                    className="h-20 lg:h-auto"
+                                    className="h-20 lg:h-28 w-auto object-contain shrink-0"
 
                 />
                 <div className="flex-1">

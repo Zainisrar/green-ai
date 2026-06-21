@@ -128,31 +128,19 @@ const CorePrinciples = ({ isOpen, onClose, data }: Props) => {
             </div>
           ) : (
             /* Desktop Layout */
-            <div
-              className="bg-gray-100 transform  py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-              style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
-                transform:"skewX(-12deg)"
-               }}
-            >
+            <div className="bg-gray-100 max-h-[90vh] overflow-y-auto rounded-lg py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl">
               {/* Close Button */}
               <div className="flex justify-end w-full">
                 <button
                   onClick={onClose}
-                  style={{
-                    transform:"skewX(12deg)"
-                  }}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
+                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
                   <img src="/images/join-us/xicon.png" alt="Close Icon" />
                 </button>
               </div>
 
               {/* Modal Content */}
-              <div
-              style={{
-                transform:"skewX(6deg)"
-              }}
-              className="transform  max-w-5xl mx-auto">
+              <div className="max-w-5xl mx-auto">
                 {renderContent()}
               </div>
             </div>

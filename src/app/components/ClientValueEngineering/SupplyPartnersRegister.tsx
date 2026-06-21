@@ -4,10 +4,12 @@ import { Link } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
+import Enquiry from "../SupplyParnters/Modals/Enquiry";
 
 const SupplyPartnersRegister = () => {
 
 const [isDesktop, setIsDesktop] = useState(false);
+const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
 
 useEffect(() => {
   const handleResize = () => {
@@ -19,7 +21,7 @@ useEffect(() => {
 }, []);
   return (
     <React.Fragment>
-      <div className='lg:h-screen lg:overflow-hidden bg-cover lg:bg-[url("/images/client-value-engineering/bg.jpg")] relative'>
+      <div className='min-h-screen bg-cover lg:bg-[url("/images/client-value-engineering/bg.jpg")] relative'>
       <TopNavigation/>
         <div className="flex h-full">
           <div className=" lg:w-1/6 hidden lg:flex items-center justify-center">
@@ -32,7 +34,7 @@ useEffect(() => {
           </div>
 
           {/* Main Content Area */}
-          <div className="lg:w-5/4  flex flex-col   md:pl-38 md:mr-4  md:my-10 lg:my-0 lg:pl-8 lg:px-8  lg:mr-8 ml-4 rounded-lg">
+          <div className="flex flex-1 min-w-0 flex-col px-4 md:my-10 lg:my-0 lg:px-8 lg:mr-8 rounded-lg">
             <div className="flex flex-col lg:flex-row h-full">
               {/* Left Content */}
               <div className="lg:w-1/2 mt-20 px-4 lg:px-8">
@@ -71,43 +73,45 @@ useEffect(() => {
               </div>
 
               {/* Right Login Form */}
-              <div className="lg:w-1/2 flex items-center justify-center px-4 lg:px-8">
+              <div className="lg:w-1/2 flex items-center justify-center px-4 lg:px-8 pb-10 lg:pb-0">
                 <div
-                 style={{
-                     transform:isDesktop?"skewX(-16deg)":"none"
-                 }}
-                 className="bg-[#f8f9d9]/80 my-10   shadow-2xl p-8 py-32 w-full max-w-xl">
-                  <div className="text-center mb-6">
-                    <p className="text-gray-600 text-base ">
-                      Leverage the Value Engineered for your project!
-                    </p>
-                    <p className="text-gray-600 text-base ">By Logging In</p>
-                  </div>
-
-                  <form className="space-y-4">
-                    <div className="relative">
-                      <input
-                        type="email"
-                        placeholder="solutions@nexttechnosolutions.co.in"
-                        className="w-full placeholder:text-xs lg:placeholder:text-base px-4 py-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-[#4CAF50] text-gray-700"
-                      />
-                      <button
-                        type="button"
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2"
-                      >
-                        <svg
-                          width="40"
-                          height="40"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="#32A928"
-                          strokeWidth="2"
-                        >
-                          <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                      </button>
+                  style={{ transform: isDesktop ? "skewX(-16deg)" : "none" }}
+                  className="my-10 w-full max-w-xl bg-[#f8f9d9]/80 p-8 py-20 shadow-2xl sm:px-12"
+                >
+                  <div style={{ transform: isDesktop ? "skewX(16deg)" : "none" }}>
+                    <div className="mb-6 text-center">
+                      <p className="text-sm text-gray-600 sm:text-base">
+                        Leverage the Value Engineered for your project!
+                      </p>
+                      <p className="text-sm text-gray-600 sm:text-base">By Logging In</p>
                     </div>
-                  </form>
+
+                    <form className="space-y-4">
+                      <div className="relative">
+                        <input
+                          type="email"
+                          placeholder="solutions@nexttechnosolutions.co.in"
+                          className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 pr-12 text-gray-700 placeholder:text-xs focus:border-[#4CAF50] focus:outline-none lg:placeholder:text-base"
+                        />
+                        <button
+                          type="button"
+                          className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
+                          aria-label="Continue"
+                        >
+                          <svg
+                            width="32"
+                            height="32"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="#32A928"
+                            strokeWidth="2"
+                          >
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                          </svg>
+                        </button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
@@ -115,14 +119,19 @@ useEffect(() => {
         </div>
 
         <div className="flex mb-32 justify-center  lg:mb-0 lg:block space-x-2 p-2 my-4">
-          <div className=" lg:absolute right-2 bottom-28 cursor-pointer">
+          <button
+            type="button"
+            onClick={() => setIsEnquiryOpen(true)}
+            className=" lg:absolute right-2 bottom-28 cursor-pointer"
+          >
             <img
               src="/images/supply-partners/login/enquiry.png"
               alt="enquiry"
             />
-          </div>
+          </button>
         </div>
         <Chatbot/>
+        <Enquiry isOpen={isEnquiryOpen} onClose={() => setIsEnquiryOpen(false)} />
       </div>
     </React.Fragment>
   );

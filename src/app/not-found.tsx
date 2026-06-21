@@ -12,7 +12,7 @@ const NotFound = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       
       
-      <div className="flex items-center justify-center min-h-screen px-4 -mt-20">
+      <div className="flex items-center justify-center min-h-screen px-4 py-16">
         <div className="max-w-2xl mx-auto text-center">
           {/* 404 Number */}
           <div className="mb-8">
@@ -49,9 +49,9 @@ const NotFound = () => {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <div {...homeButtonProps.getContainerProps()}>
-              <Link 
+              <Link
                 href="/"
-                className="inline-flex items-center px-8 py-3  text-black font-semibold rounded-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />

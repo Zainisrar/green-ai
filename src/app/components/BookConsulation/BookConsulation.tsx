@@ -208,7 +208,7 @@ const BookConsulation = () => {
             </div>
           </div>
           <div className=" absolute right-0 bottom-0   -z-10">
-            <img src="/images/book-consulation/mainImg.png " alt="bg" />
+            <img src="/images/book-consulation/mainImg.png" alt="bg" />
           </div>
           {/* Sidebar Content */}
           <div className="hidden  lg:flex flex-col items-center h-screen justify-center max-w-xs">

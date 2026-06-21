@@ -1,13 +1,17 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useSolarEPCMServices } from "../../../hooks/useSolarEPCMServices";
 import Link from "next/link";
+import TechnicalDebrief from "./Modals/TechnicalDebrief";
+import DiscoveryConsultation from "./Modals/DiscoveryConsultation";
 
 const EpcmServices = () => {
   const { epcmData, error } = useSolarEPCMServices();
+  const [isDebriefOpen, setIsDebriefOpen] = useState(false);
+  const [isDiscoveryOpen, setIsDiscoveryOpen] = useState(false);
 
 
 
@@ -222,7 +226,7 @@ const EpcmServices = () => {
               </div>
               <div className="flex flex-col items-start lg:items-end gap-6 shrink-0">
                 <Link
-                  href={epcmData?.callToActions[0].href || "#"}
+                  href={epcmData?.callToActions?.[0]?.href || "#"}
                   className="relative inline-block cursor-pointer"
                 >
                   <img
@@ -231,35 +235,37 @@ const EpcmServices = () => {
                     className="w-full max-w-[341px] lg:w-auto"
                   />
                   <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
-                    {epcmData?.callToActions[0].text}
+                    {epcmData?.callToActions?.[0]?.text}
                   </div>
                 </Link>
-                <Link
-                  href={epcmData?.callToActions[1].href || "#"}
+                <button
+                  type="button"
+                  onClick={() => setIsDebriefOpen(true)}
                   className="relative inline-block cursor-pointer"
                 >
                   <img
                     src="/images/epcm-services/technicalBtn.png"
-                    alt="technical"
+                    alt="Request a technical debrief"
                     className="w-full max-w-[301px] lg:w-auto"
                   />
                   <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
-                    {epcmData?.callToActions[1].text}{` >`}
+                    {epcmData?.callToActions?.[1]?.text || "Request a Technical Debrief"}{` >`}
                   </div>
-                </Link>
-                <Link
-                  href={epcmData?.callToActions[2].href || "#"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsDiscoveryOpen(true)}
                   className="relative inline-block cursor-pointer"
                 >
                   <img
                     src="/images/epcm-services/bookingBtn.png"
-                    alt="project porfolio"
+                    alt="Book a discovery consultation"
                     className="w-full max-w-[331px] lg:w-auto"
                   />
                   <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
-                    {epcmData?.callToActions[2].text}{` >`}
+                    {epcmData?.callToActions?.[2]?.text || "Book a Discovery Consultation"}{` >`}
                   </div>
-                </Link>
+                </button>
               </div>
             </div>
           </div>
@@ -268,6 +274,8 @@ const EpcmServices = () => {
       <div className="lg:block hidden">
         <Chatbot />
       </div>
+      <TechnicalDebrief isOpen={isDebriefOpen} onClose={() => setIsDebriefOpen(false)} />
+      <DiscoveryConsultation isOpen={isDiscoveryOpen} onClose={() => setIsDiscoveryOpen(false)} />
     </React.Fragment>
   );
 };

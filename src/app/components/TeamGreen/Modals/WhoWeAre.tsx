@@ -199,7 +199,7 @@ const WhoWeAre = ({ isOpen, onClose, data }: Props) => {
               {/* Modal Content */}
               <div
               style={{
-                transform:"skewX(6deg)"
+                transform:"skewX(12deg)"
               }}
               className="transform  max-w-5xl mx-auto">
                 {renderContent()}

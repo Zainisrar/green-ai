@@ -1,5 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import GridIntelInfoModal from "./GridIntelInfoModal";
+import SafeImage from "../shared/SafeImage";
 
 interface ProductIntegrationItem {
   icon: string;
@@ -25,17 +27,6 @@ interface Props {
   data?: ProductIntegrationData;
 }
 const Product = ({ isOpen, onClose, data }: Props) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768); // Example breakpoint for mobile
-    };
-    handleResize(); // Check on mount
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   if (!isOpen) return null;
 
   const renderIntegrationItems = () => {
@@ -93,159 +84,52 @@ const Product = ({ isOpen, onClose, data }: Props) => {
       </>
     );
   };
-  return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed inset-0 bg-black/20 z-[99999999999999999999999999] flex items-center justify-center">
-        {/* Modal Container */}
-        <div className="relative w-full lg:max-w-6xl mx-4">
-          {/* Skewed Modal Background */}
+  const renderContent = () => (
+    <>
+      <div className="mb-8">
+        <h2 className="mb-4 text-3xl font-black leading-tight text-gray-800 lg:text-4xl">
+          {data?.title || "Product Integration"}
+        </h2>
+        <div className="flex items-center">
+          <span className="mr-2 hidden text-2xl font-bold text-black md:inline">-</span>
+          <h3 className="text-xl font-semibold text-[#4CAF50]">
+            {data?.subtitle || "GRID-INTEL™ is fully integrated with."}
+          </h3>
+        </div>
+        <div className="mt-4 h-0.5 w-full bg-gray-300"></div>
+      </div>
 
-          {isMobile ? (
-            <div className="bg-gray-100 p-5 h-[80vh] overflow-y-auto relative shadow-2xl">
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  onClick={onClose}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
-                >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div className="transform  mx-auto">
-                {/* Title Section */}
-                <div className="mb-8">
-                  <h2 className="text-3xl lg:text-4xl font-black text-gray-800 mb-4 leading-tight">
-                    {data?.title || "Product Integration"}
-                  </h2>
-                  <div className="flex items-center">
-                    <span className="text-2xl text-black font-bold mr-2">
-                      -
-                    </span>
-                    <h3 className="text-xl text-[#4CAF50] font-semibold">
-                      {data?.subtitle ||
-                        "GRID-INTEL™ is fully integrated with."}
-                    </h3>
-                  </div>
-                  <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
-                </div>
-
-                {/* Main Content */}
-                <div className="lg:flex items-start space-x-12">
-                  {/* Left Side - Integration List */}
-                  <div className="flex-1">
-                    <div className="mb-8">
-                      {/* Integration List */}
-                      <div className="space-y-4">
-                        {renderIntegrationItems()}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right Side - Image */}
-                  <div className="flex-shrink-0">
-                    <div className="relative">
-                      <img
-                        src="/images/grid-intel/product-integration.png"
-                        alt="Product Integration Interface"
-                        className="w-[520px] pt-10"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Result Section */}
-              <div className="mt-8 pt-6 text-center border-t border-gray-200">
-                <p className="text-gray-800 font-bold text-lg italic">
-                  {data?.tagline ||
-                    "GRID-INTEL™ turns distributed power systems into orchestrated, intelligent infrastructure."}
-                </p>
-              </div>
-            </div>
-          ) : (
-            <div
-
-              className="bg-gray-100 transform  py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-              style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
-                transform:"skewX(-12deg)"
-               }}
-            >
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  onClick={onClose}
-                  style={{
-                    transform:"skewX(12deg)"
-                  }}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
-                >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div
-              style={{
-                transform:"skewX(12deg)"
-              }}
-              className="transform  max-w-5xl mx-auto">
-                {/* Title Section */}
-                <div className="mb-8">
-                  <h2 className="text-3xl lg:text-4xl font-black text-gray-800 mb-4 leading-tight">
-                    {data?.title || "Product Integration"}
-                  </h2>
-                  <div className="flex items-center">
-                    <span className="text-2xl text-black font-bold mr-2">
-                      -
-                    </span>
-                    <h3 className="text-xl text-[#4CAF50] font-semibold">
-                      {data?.subtitle ||
-                        "GRID-INTEL™ is fully integrated with."}
-                    </h3>
-                  </div>
-                  <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
-                </div>
-
-                {/* Main Content */}
-                <div className="flex items-start space-x-12">
-                  {/* Left Side - Integration List */}
-                  <div className="flex-1">
-                    <div className="mb-8">
-                      {/* Integration List */}
-                      <div className="space-y-4">
-                        {renderIntegrationItems()}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Right Side - Image */}
-                  <div className="flex-shrink-0">
-                    <div className="relative">
-                      <img
-                        src="/images/grid-intel/product-integration.png"
-                        alt="Product Integration Interface"
-                        className="w-[520px] pt-10"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Result Section */}
-              <div className="mt-8 pt-6 text-center border-t border-gray-200">
-                <p className="text-gray-800 font-bold text-lg italic">
-                  {data?.tagline ||
-                    "GRID-INTEL™ turns distributed power systems into orchestrated, intelligent infrastructure."}
-                </p>
-              </div>
-            </div>
-          )}
+      <div className="flex flex-col items-start gap-8 lg:flex-row lg:space-x-12">
+        <div className="flex-1">
+          <div className="space-y-4">{renderIntegrationItems()}</div>
+        </div>
+        <div className="shrink-0">
+          <SafeImage
+            src={data?.image?.src}
+            fallbackSrc="/images/grid-intel/product-integration.png"
+            alt={data?.image?.alt || "Product Integration Interface"}
+            className="w-full max-w-[240px] pt-4 sm:max-w-[280px] lg:max-w-[320px] lg:pt-6"
+          />
         </div>
       </div>
-    </React.Fragment>
+    </>
+  );
+
+  return (
+    <GridIntelInfoModal
+      isOpen={isOpen}
+      onClose={onClose}
+      footer={
+        <div className="mt-8 border-t border-gray-200 pt-6 text-center">
+          <p className="text-lg font-bold italic text-gray-800">
+            {data?.tagline ||
+              "GRID-INTEL™ turns distributed power systems into orchestrated, intelligent infrastructure."}
+          </p>
+        </div>
+      }
+    >
+      {renderContent()}
+    </GridIntelInfoModal>
   );
 };
 

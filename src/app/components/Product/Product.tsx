@@ -1,19 +1,20 @@
 "use client";
 import React from "react";
-import { notFound, useRouter } from "next/navigation";
+import { notFound } from "next/navigation";
 import Chatbot from "../Chatbot";
 import ProductNavigation from "../TopNavigation/ProductNavigation";
 import { useProductBySlug } from "../../../hooks/useProducts";
+import ProductEnquiry from "./Modals/ProductEnquiry";
 
 interface ProductProps {
   slug: string;
 }
 
 const Product = ({ slug }: ProductProps) => {
-  const router = useRouter();
   const { data: currentProduct, isLoading, isError } = useProductBySlug(slug);
   const [active, setActive] = React.useState(0);
   const [isDesktop, setIsDesktop] = React.useState(false);
+  const [isEnquiryOpen, setIsEnquiryOpen] = React.useState(false);
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -145,16 +146,7 @@ const Product = ({ slug }: ProductProps) => {
                 <button
                   type="button"
                   className="cursor-pointer"
-                  onClick={() => {
-                    const href = currentProduct?.ctaButton?.href;
-                    if (href) {
-                      // External/explicit CMS link opens in a new tab.
-                      window.open(href, "_blank");
-                    } else {
-                      // No CMS link yet — route to the contact page so it never dead-clicks.
-                      router.push("/engage/contact-us");
-                    }
-                  }}
+                  onClick={() => setIsEnquiryOpen(true)}
                 >
                   <img
                     src="/images/product/enquiry.png"
@@ -227,6 +219,11 @@ const Product = ({ slug }: ProductProps) => {
       <div className="lg:block hidden">
         <Chatbot />
       </div>
+      <ProductEnquiry
+        isOpen={isEnquiryOpen}
+        onClose={() => setIsEnquiryOpen(false)}
+        productName={currentProduct?.title}
+      />
     </div>
   );
 };

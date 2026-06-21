@@ -1,9 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import GridIntelInfoModal from "./GridIntelInfoModal";
 
 interface SolutionItem {
   icon: string;
-  text: string;
+  text?: string;
+  title?: string;
+  description?: string;
 }
 
 interface SolvesData {
@@ -11,7 +14,8 @@ interface SolvesData {
   subtitle: string;
   description: string;
   solutions: SolutionItem[];
-  bottomStatement: {
+  tagline?: string;
+  bottomStatement?: {
     highlight: string;
     text: string;
   };
@@ -24,18 +28,10 @@ interface Props {
 }
 
 const Solves = ({ isOpen, onClose, data }: Props) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   if (!isOpen) return null;
+
+  const getSolutionText = (solution: SolutionItem) =>
+    solution.text || solution.title || solution.description || "";
 
   const renderSolutions = () => {
     if (data?.solutions) {
@@ -56,8 +52,8 @@ const Solves = ({ isOpen, onClose, data }: Props) => {
                     alt="lighting"
                   />
                 </span>
-                <p className="text-gray-800 font-medium">
-                  {solution.text}
+                <p className="font-medium text-gray-800">
+                  {getSolutionText(solution)}
                 </p>
               </div>
             ))}
@@ -74,8 +70,8 @@ const Solves = ({ isOpen, onClose, data }: Props) => {
                     alt="lighting"
                   />
                 </span>
-                <p className="text-gray-800 font-medium">
-                  {solution.text}
+                <p className="font-medium text-gray-800">
+                  {getSolutionText(solution)}
                 </p>
               </div>
             ))}
@@ -182,8 +178,8 @@ const Solves = ({ isOpen, onClose, data }: Props) => {
           {data?.title || "What GRID-INTEL™ Solves"}
         </h2>
         <div className="flex items-center">
-          {!isMobile && <span className="text-2xl font-bold mr-2">-</span>}
-          <h3 className="text-xl text-[#4CAF50] font-semibold">
+          <span className="mr-2 hidden text-2xl font-bold md:inline">-</span>
+          <h3 className="text-xl font-semibold text-[#4CAF50]">
             {data?.subtitle || "GRID-INTEL™ Is Built to Solve This — With Embedded Intelligence."}
           </h3>
         </div>
@@ -200,70 +196,18 @@ const Solves = ({ isOpen, onClose, data }: Props) => {
             {data?.bottomStatement?.highlight || "GRID-INTEL™"}
           </span>
           <span className="italic">
-            {data?.bottomStatement?.text || " turns distributed power systems into orchestrated, intelligent infrastructure."}
+            {data?.bottomStatement?.text ||
+              data?.tagline ||
+              " turns distributed power systems into orchestrated, intelligent infrastructure."}
           </span>
         </p>
       </div>
     </>
   );
   return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed inset-0 bg-black/20 z-[99999999999999999999999999] flex items-center justify-center">
-        {/* Modal Container */}
-        <div className="relative w-full lg:max-w-6xl mx-4">
-          {/* Skewed Modal Background */}
-          {isMobile ? (
-            <div
-              className="bg-gray-100 p-5 h-[80vh] overflow-y-auto relative shadow-2xl"
-            >
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  onClick={onClose}
-                  className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 "
-                >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
-              {/* Modal Content */}
-              <div className="mx-auto">
-                {renderContent()}
-              </div>
-            </div>
-          ) : (
-            <div
-            
-              className="bg-gray-100 transform py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-              style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
-                transform:"skewX(-12deg)"
-               }}
-            >
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  onClick={onClose}
-                  style={{
-                    transform:"skewX(12deg)"
-                  }}
-                  className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
-                >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
-              {/* Modal Content */}
-              <div
-              style={{
-                transform:"skewX(12deg)"
-              }}
-              className="transform  max-w-5xl mx-auto">
-                {renderContent()}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    </React.Fragment>
+    <GridIntelInfoModal isOpen={isOpen} onClose={onClose}>
+      {renderContent()}
+    </GridIntelInfoModal>
   );
 };
 

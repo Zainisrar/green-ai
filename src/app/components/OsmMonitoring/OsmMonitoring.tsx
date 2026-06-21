@@ -1,12 +1,15 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useOMMonitoring } from "../../../hooks/useOMMonitoring";
-import Link from "next/link";
+import OMProposal from "./Modals/OMProposal";
+import LiveDemoPOC from "./Modals/LiveDemoPOC";
 
 const OsmMonitoring = () => {
   const { omData,  error } = useOMMonitoring();
+  const [isOMProposalOpen, setIsOMProposalOpen] = useState(false);
+  const [isLiveDemoOpen, setIsLiveDemoOpen] = useState(false);
 
 
   if (error) {
@@ -243,25 +246,34 @@ const OsmMonitoring = () => {
                     </div>
                   </div>
                   <div className="mt-10 lg:mt-0 mb-10 flex flex-col items-center lg:items-end gap-6 justify-end">
-                    {[
-                      { i: 0, fallback: "Request an O&M Proposal" },
-                      { i: 1, fallback: "Book a Live Demo of GREEN POC" },
-                    ].map(({ i, fallback }) => (
-                      <Link
-                        key={i}
-                        href={omData?.callToActions[i]?.href || "#"}
-                        className="inline-block cursor-pointer"
+                    <button
+                      type="button"
+                      onClick={() => setIsOMProposalOpen(true)}
+                      className="inline-block cursor-pointer"
+                    >
+                      <div
+                        style={{ transform: "skewX(-16deg)" }}
+                        className="bg-gradient-to-r from-[#54b85a] to-[#e6f24d] px-8 py-3 shadow-md"
                       >
-                        <div
-                          style={{ transform: "skewX(-16deg)" }}
-                          className="bg-gradient-to-r from-[#54b85a] to-[#e6f24d] px-8 py-3 shadow-md"
-                        >
-                          <span className="block text-sm lg:text-base font-bold text-gray-900 whitespace-nowrap">
-                            {(omData?.callToActions[i]?.text || fallback) + " >"}
-                          </span>
-                        </div>
-                      </Link>
-                    ))}
+                        <span className="block text-sm lg:text-base font-bold text-gray-900 whitespace-nowrap">
+                          {(omData?.callToActions?.[0]?.text || "Request an O&M Proposal") + " >"}
+                        </span>
+                      </div>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setIsLiveDemoOpen(true)}
+                      className="inline-block cursor-pointer"
+                    >
+                      <div
+                        style={{ transform: "skewX(-16deg)" }}
+                        className="bg-gradient-to-r from-[#54b85a] to-[#e6f24d] px-8 py-3 shadow-md"
+                      >
+                        <span className="block text-sm lg:text-base font-bold text-gray-900 whitespace-nowrap">
+                          {(omData?.callToActions?.[1]?.text || "Book a Live Demo of GREEN POC") + " >"}
+                        </span>
+                      </div>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -272,6 +284,8 @@ const OsmMonitoring = () => {
         <Chatbot />
       </div>
       </div>
+      <OMProposal isOpen={isOMProposalOpen} onClose={() => setIsOMProposalOpen(false)} />
+      <LiveDemoPOC isOpen={isLiveDemoOpen} onClose={() => setIsLiveDemoOpen(false)} />
     </React.Fragment>
   );
 };

@@ -1,5 +1,17 @@
 "use client";
-import React, { useState, useEffect } from "react";
+
+import React, { useEffect, useState } from "react";
+import {
+  buildReachUsPayload,
+  generateCaptcha,
+  submitReachUs,
+} from "@/app/lib/forms";
+import EngineeringFormModal, {
+  captchaInputGroupClass,
+  captchaRowClass,
+  formFieldClass,
+  formGridClass,
+} from "@/app/components/shared/EngineeringFormModal";
 
 interface Props {
   isOpen: boolean;
@@ -15,10 +27,6 @@ interface FormData {
   phone_country_code: string;
   message: string;
   is_whatsapp_number: boolean;
-  lead_type: number;
-  login_from: number;
-  source: number;
-  csrfmiddlewaretoken: string;
 }
 
 // Countries with dial codes
@@ -68,79 +76,46 @@ const COUNTRIES = [
   { name: "Vietnam", dial_code: "+84", code: "vn" },
 ];
 
-const generateCaptcha = () => {
-  return Array.from({ length: 4 }, () => Math.floor(Math.random() * 10)).join(" ");
+const initialFormData: FormData = {
+  firstname: "",
+  lastname: "",
+  email: "",
+  phone: "",
+  phone_dial_code: "+675",
+  phone_country_code: "pg",
+  message: "",
+  is_whatsapp_number: false,
 };
 
 const Form = ({ isOpen, onClose }: Props) => {
-  const [formData, setFormData] = useState<FormData>({
-    firstname: "",
-    lastname: "",
-    email: "",
-    phone: "",
-    phone_dial_code: "+675",
-    phone_country_code: "pg",
-    message: "",
-    is_whatsapp_number: false,
-    lead_type: 329,
-    login_from: 60,
-    source: 82,
-    csrfmiddlewaretoken: "",
-  });
-
+  const [formData, setFormData] = useState<FormData>(initialFormData);
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [isMobile, setIsMobile] = useState(false);
   const [captcha, setCaptcha] = useState(generateCaptcha());
   const [captchaInput, setCaptchaInput] = useState("");
 
   useEffect(() => {
-    const checkMobile = () => {
-      if (typeof window !== 'undefined') {
-        const mobile = window.innerWidth < 768;
-        setIsMobile(mobile);
-      }
-    };
-    
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  useEffect(() => {
-    // Get CSRF token from meta tag or create a default one
-    const getCsrfToken = () => {
-      const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
-      if (token) {
-        setFormData((prev) => ({
-          ...prev,
-          csrfmiddlewaretoken: token,
-        }));
-      }
-    };
-    
-    getCsrfToken();
-  }, []);
+    if (isOpen) {
+      setCaptcha(generateCaptcha());
+      setCaptchaInput("");
+      setSuccessMessage("");
+      setErrorMessage("");
+    }
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
   const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const { name, value, type } = e.target;
-    
+
     if (type === "checkbox") {
       const { checked } = e.target as HTMLInputElement;
-      setFormData((prev) => ({
-        ...prev,
-        [name]: checked,
-      }));
+      setFormData((prev) => ({ ...prev, [name]: checked }));
     } else if (name === "phone_country") {
-      // Handle country selection
-      const selected = COUNTRIES.find(c => c.code === value);
+      const selected = COUNTRIES.find((c) => c.code === value);
       if (selected) {
         setFormData((prev) => ({
           ...prev,
@@ -149,10 +124,7 @@ const Form = ({ isOpen, onClose }: Props) => {
         }));
       }
     } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+      setFormData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -162,7 +134,6 @@ const Form = ({ isOpen, onClose }: Props) => {
     setErrorMessage("");
     setSuccessMessage("");
 
-    // Validate captcha
     if (captchaInput.replace(/\s/g, "") !== captcha.replace(/\s/g, "")) {
       setErrorMessage("Captcha verification failed. Please try again.");
       setCaptcha(generateCaptcha());
@@ -172,34 +143,26 @@ const Form = ({ isOpen, onClose }: Props) => {
     }
 
     try {
-      const response = await fetch(
-        "https://app-gsolve.green.com.pg/submit/reach_us/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
+      const data = await submitReachUs(
+        buildReachUsPayload({
+          firstname: formData.firstname,
+          lastname: formData.lastname,
+          email: formData.email,
+          phone: formData.phone,
+          phone_dial_code: formData.phone_dial_code,
+          phone_country_code: formData.phone_country_code,
+          is_whatsapp_number: formData.is_whatsapp_number,
+          message: formData.message,
+        }),
       );
 
-      const data = await response.json();
-
       if (data.Code === "001") {
-        setSuccessMessage(data.Message || "Your enquiry has been submitted successfully!");
-        // Reset form
-        setFormData((prev) => ({
-          ...prev,
-          firstname: "",
-          lastname: "",
-          email: "",
-          phone: "",
-          message: "",
-          is_whatsapp_number: false,
-        }));
+        setSuccessMessage(
+          data.Message || "Your enquiry has been submitted successfully!",
+        );
+        setFormData(initialFormData);
         setCaptcha(generateCaptcha());
         setCaptchaInput("");
-        // Close modal after 2 seconds
         setTimeout(() => {
           onClose();
           setSuccessMessage("");
@@ -209,261 +172,158 @@ const Form = ({ isOpen, onClose }: Props) => {
       }
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "An error occurred while submitting the form."
+        error instanceof Error ? error.message : "An error occurred while submitting the form.",
       );
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleClose = (e: React.MouseEvent) => {
-    e.preventDefault();
-    // Reset captcha when closing
-    setCaptcha(generateCaptcha());
-    setCaptchaInput("");
-    onClose();
-  };
+  return (
+    <EngineeringFormModal
+      isOpen={isOpen}
+      onClose={onClose}
+      maxWidthClass="max-w-6xl"
+      title={
+        <>
+          REACH <span className="text-green-600">US</span>
+        </>
+      }
+      subtitle="Let's connect and power your future."
+    >
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
+        {/* Form Section */}
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+          <div className={formGridClass}>
+            <input
+              type="text"
+              name="firstname"
+              placeholder="FIRST NAME"
+              value={formData.firstname}
+              onChange={handleInputChange}
+              className={formFieldClass}
+              required
+            />
+            <input
+              type="text"
+              name="lastname"
+              placeholder="LAST NAME"
+              value={formData.lastname}
+              onChange={handleInputChange}
+              className={formFieldClass}
+            />
+          </div>
 
-  const renderContent = () => (
-    <>
-      {/* Main Content Layout */}
-      <div className={`${isMobile ? 'flex flex-col space-y-6' : 'grid grid-cols-[2fr_1.5fr] gap-4'}`}>
-        {/* Mobile: Marketing Message First, Desktop: Form First */}
-        {isMobile && (
-          <div className="flex flex-col justify-center items-center text-center">
-            <div className="mb-4">
-              <h3 className="text-2xl font-bold text-green-600 italic mb-2">
-                "Power Your Future"
-              </h3>
-              <h2 className="text-2xl font-bold text-gray-800 leading-tight">
-                Get a Free <span className="italic">Solar</span> Quote Today!
-              </h2>
+          <input
+            type="email"
+            name="email"
+            placeholder="E-MAIL ID"
+            value={formData.email}
+            onChange={handleInputChange}
+            className={formFieldClass}
+            required
+          />
+
+          <div className={formGridClass}>
+            <select
+              name="phone_country"
+              value={formData.phone_country_code}
+              onChange={handleInputChange}
+              className={`${formFieldClass} cursor-pointer`}
+              required
+            >
+              {COUNTRIES.map((country) => (
+                <option key={country.code} value={country.code}>
+                  {country.name} ({country.dial_code})
+                </option>
+              ))}
+            </select>
+            <div className="flex min-w-0">
+              <div className="flex shrink-0 items-center rounded-l-lg border border-r-0 border-gray-300 bg-white px-2 py-2.5 sm:px-3 sm:py-3">
+                <span className="text-sm text-gray-700 sm:text-base">
+                  {formData.phone_dial_code}
+                </span>
+              </div>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="PHONE"
+                value={formData.phone}
+                onChange={handleInputChange}
+                className={`${formFieldClass} rounded-l-none`}
+                required
+              />
             </div>
           </div>
-        )}
 
-        {/* Form Section */}
-        <div>
-          <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
-            {/* First Row */}
-            <div className={`${isMobile ? 'space-y-4' : 'grid grid-cols-2 gap-4'}`}>
-              <div>
-                <input
-                  type="text"
-                  name="firstname"
-                  placeholder="FIRST NAME"
-                  value={formData.firstname}
-                  onChange={handleInputChange}
-                  className={`w-full ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border border-gray-300 rounded-lg bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:border-green-500`}
-                  required
-                />
-              </div>
-              <div>
-                <input
-                  type="text"
-                  name="lastname"
-                  placeholder="LAST NAME"
-                  value={formData.lastname}
-                  onChange={handleInputChange}
-                  className={`w-full ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border border-gray-300 rounded-lg bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:border-green-500`}
-                />
-              </div>
-            </div>
+          <div className="flex items-center gap-3">
+            <input
+              type="checkbox"
+              id="reachus-whatsapp"
+              name="is_whatsapp_number"
+              checked={formData.is_whatsapp_number}
+              onChange={handleInputChange}
+              className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+            />
+            <label htmlFor="reachus-whatsapp" className="text-sm text-gray-700 sm:text-base">
+              Is this your WhatsApp number?
+            </label>
+          </div>
 
-            {/* Email */}
-            <div>
-              <input
-                type="email"
-                name="email"
-                placeholder="E-MAIL ID"
-                value={formData.email}
-                onChange={handleInputChange}
-                className={`w-full ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border border-gray-300 rounded-lg bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:border-green-500`}
-                required
-              />
-            </div>
+          <textarea
+            name="message"
+            placeholder="MESSAGE"
+            value={formData.message}
+            onChange={handleInputChange}
+            rows={4}
+            className={`${formFieldClass} resize-none`}
+            required
+          />
 
-            {/* Phone */}
-            <div className="relative">
-              <div className={`${isMobile ? 'space-y-2' : 'flex gap-2'}`}>
-                {/* Country Dropdown */}
-                <select
-                  name="phone_country"
-                  value={formData.phone_country_code}
-                  onChange={handleInputChange}
-                  className={`${isMobile ? 'w-full' : 'flex-1'} ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border border-gray-300 rounded-lg bg-white text-gray-700 focus:outline-none focus:border-green-500`}
-                  required
-                >
-                  {COUNTRIES.map((country) => (
-                    <option key={country.code} value={country.code}>
-                      {country.name} ({country.dial_code})
-                    </option>
-                  ))}
-                </select>
+          {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
+          {successMessage && <p className="text-sm text-green-600">{successMessage}</p>}
 
-                {/* Phone Number Input */}
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="PHONE"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className={`${isMobile ? 'w-full' : 'flex-1'} ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border border-gray-300 rounded-lg bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:border-green-500`}
-                  required
-                />
-              </div>
-            </div>
-
-            {/* WhatsApp Checkbox */}
-            <div className="flex items-center space-x-3">
-              <input
-                type="checkbox"
-                name="is_whatsapp_number"
-                checked={formData.is_whatsapp_number}
-                onChange={handleInputChange}
-                className={`${isMobile ? 'w-3 h-3' : 'w-4 h-4'} text-green-600 border-gray-300 rounded focus:ring-green-500`}
-              />
-              <label
-                htmlFor="is_whatsapp_number"
-                className={`text-gray-700 ${isMobile ? 'text-xs' : 'text-sm'}`}
-              >
-                Is this your WhatsApp number?
-              </label>
-            </div>
-
-            {/* Message/Notes Section */}
-            <div>
-              <textarea
-                name="message"
-                placeholder="MESSAGE"
-                value={formData.message}
-                onChange={handleInputChange}
-                rows={isMobile ? 4 : 6}
-                className={`w-full ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border border-gray-300 rounded-lg bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:border-green-500 resize-none`}
-                required
-              />
-            </div>
-
-            {/* Status Messages */}
-            {successMessage && (
-              <div className="p-3 bg-green-100 border border-green-300 text-green-700 rounded-lg text-sm">
-                {successMessage}
-              </div>
-            )}
-            {errorMessage && (
-              <div className="p-3 bg-red-100 border border-red-300 text-red-700 rounded-lg text-sm">
-                {errorMessage}
-              </div>
-            )}
-
-            {/* Captcha */}
-            <div className={`${isMobile ? 'flex flex-col space-y-2 items-center' : 'flex items-center gap-4'}`}>
-              <div className={`bg-gray-200 ${isMobile ? 'px-3 py-2' : 'px-4 py-2'} rounded border font-mono tracking-widest`}>
-                <span className={`${isMobile ? 'text-base' : 'text-lg'} font-bold`}>{captcha}</span>
+          <div className={captchaRowClass}>
+            <div className={captchaInputGroupClass}>
+              <div className="rounded border bg-gray-200 px-3 py-2 sm:px-4">
+                <span className="font-mono text-base tracking-widest sm:text-lg">
+                  {captcha}
+                </span>
               </div>
               <input
                 type="text"
                 placeholder="Enter captcha"
                 value={captchaInput}
                 onChange={(e) => setCaptchaInput(e.target.value)}
-                className={`${isMobile ? 'px-3 py-2 text-sm w-32' : 'px-4 py-2 w-40'} border border-gray-300 rounded-lg bg-white text-gray-700 focus:outline-none focus:border-green-500`}
+                className={`${formFieldClass} sm:max-w-[200px]`}
                 required
               />
             </div>
-
-            {/* Submit Button */}
-            <div className={`${isMobile ? 'flex flex-col space-y-4 items-center' : 'flex items-center justify-end'}`}>
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="cursor-pointer flex justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <img
-                  src="/images/book-consulation/formBtn.png"
-                  className={`${isMobile ? 'w-32' : 'w-44'}`}
-                  alt={isLoading ? "Submitting..." : "submit"}
-                />
-              </button>
-            </div>
-          </form>
-        </div>
-
-        {/* Desktop: Marketing Message Second */}
-        {!isMobile && (
-          <div className="flex flex-col justify-center items-center text-center">
-            <div className="mb-6">
-              <h3 className="text-4xl font-bold text-green-600 italic mb-4">
-                "Power Your Future"
-              </h3>
-              <h2 className="text-4xl font-bold text-gray-800 leading-tight">
-                Get a Free <span className="italic">Solar</span>
-                <br />
-                Quote Today!
-              </h2>
-            </div>
-          </div>
-        )}
-      </div>
-    </>
-  );
-
-  return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed z-[9999999999999999999] inset-0 bg-black/20 flex items-center justify-center p-4">
-        {/* Modal Container */}
-        <div className={`relative w-full ${isMobile ? 'max-w-sm' : 'max-w-6xl'} mx-4`}>
-          {/* Mobile Layout */}
-          {isMobile ? (
-            <div className="bg-[#eff5f1] p-4 border-lime-300 border relative shadow-2xl rounded-lg max-h-[90vh] overflow-y-auto">
-              {/* Close Button */}
-              <div className="flex justify-end w-full mb-4">
-                <button
-                  onClick={handleClose}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-xl"
-                >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div className="mx-auto">
-                {renderContent()}
-              </div>
-            </div>
-          ) : (
-            /* Desktop Layout - Skewed Modal Background */
-            <div
-              className="bg-[#eff5f1] transform  border-lime-300 border py-14 px-16 relative shadow-2xl"
-              style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
-              transform:"skewX(-16deg)"
-               }}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="shrink-0 cursor-pointer self-end disabled:opacity-50"
             >
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  onClick={handleClose}
-                  style={{
-                    transform:"skewX(12deg)"
-                  }}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
-                >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
-              {/* Modal Content */}
-              <div
-              style={{
-                transform:"skewX(6deg)"
-              }}
-              className="transform  max-w-5xl mx-auto">
-                {renderContent()}
-              </div>
-            </div>
-          )}
+              <img
+                src="/images/book-consulation/formBtn.png"
+                className="w-28 sm:w-40"
+                alt={isLoading ? "Submitting..." : "Submit"}
+              />
+            </button>
+          </div>
+        </form>
+
+        {/* Marketing Message */}
+        <div className="flex flex-col items-center justify-center text-center lg:items-start lg:text-left">
+          <h3 className="mb-3 text-2xl font-bold italic text-green-600 sm:text-3xl lg:text-4xl">
+            &quot;Power Your Future&quot;
+          </h3>
+          <h2 className="text-2xl font-bold leading-tight text-gray-800 sm:text-3xl lg:text-4xl">
+            Get a Free <span className="italic">Solar</span> Quote Today!
+          </h2>
         </div>
       </div>
-    </React.Fragment>
+    </EngineeringFormModal>
   );
 };
 

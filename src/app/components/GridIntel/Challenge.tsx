@@ -1,5 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import GridIntelInfoModal from "./GridIntelInfoModal";
+import SafeImage from "../shared/SafeImage";
 
 interface ChallengeItem {
   icon: string;
@@ -25,17 +27,6 @@ interface Props {
 }
 
 const Challenge = ({ isOpen, onClose, data }: Props) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
   if (!isOpen) return null;
 
   const renderChallenges = () => {
@@ -106,11 +97,9 @@ const Challenge = ({ isOpen, onClose, data }: Props) => {
         <h2 className="text-3xl lg:text-4xl font-black text-gray-800 mb-4 leading-tight">
           {data?.title || "The Challenge"}
         </h2>
-        <div className="lg:flex items-center">
-          {!isMobile && (
-            <span className="text-2xl text-black font-bold mr-2">-</span>
-          )}
-          <h3 className="text-xl text-[#4CAF50] font-semibold">
+        <div className="flex items-center">
+          <span className="mr-2 hidden text-2xl font-bold text-black md:inline">-</span>
+          <h3 className="text-xl font-semibold text-[#4CAF50]">
             {data?.subtitle ||
               "Energy Systems Are Being Installed Without Intelligence"}
           </h3>
@@ -119,14 +108,14 @@ const Challenge = ({ isOpen, onClose, data }: Props) => {
       </div>
 
       {/* Main Content */}
-      <div className="lg:flex items-start space-x-12">
-        {/* Left Side - Image */}
-        <div className="flex-shrink-0">
+      <div className="flex flex-col items-start gap-8 lg:flex-row lg:space-x-12">
+        <div className="shrink-0">
           <div className="relative">
-            <img
-              src="/images/grid-intel/challenge.png"
-              alt="People working on energy systems"
-              className="w-[520px] pt-10"
+            <SafeImage
+              src={data?.image?.src}
+              fallbackSrc="/images/grid-intel/challenge.png"
+              alt={data?.image?.alt || "People working on energy systems"}
+              className="w-full max-w-[240px] pt-4 sm:max-w-[280px] lg:max-w-[320px] lg:pt-6"
             />
           </div>
         </div>
@@ -148,77 +137,20 @@ const Challenge = ({ isOpen, onClose, data }: Props) => {
   );
 
   return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed inset-0 bg-black/20 z-[99999999999999999999999999] flex items-center justify-center">
-        {/* Modal Container */}
-        <div className="relative w-full lg:max-w-6xl mx-4">
-          {/* Mobile Layout */}
-          {isMobile ? (
-            <div className="bg-gray-100 h-[80vh] p-3 overflow-y-auto py-14 border-2 border-[#4CAF50] relative shadow-2xl">
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  onClick={onClose}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
-                >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div className="mx-auto">{renderContent()}</div>
-
-              {/* Result Section */}
-              <div className="mt-8 pt-6 text-center border-t border-gray-200">
-                <p className="text-gray-800 font-bold text-lg italic">
-                  {data?.resultText ||
-                    "The Result: Energy Loss, Operational Downtime, And High Cost Of Ownership."}
-                </p>
-              </div>
-            </div>
-          ) : (
-            /* Desktop Layout */
-            <div
-              className="bg-gray-100 transform  py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-              style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
-                transform:"skewX(-12deg)"
-               }}
-            >
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  onClick={onClose}
-                  style={{
-                    transform:"skewX(12deg)"
-                  }}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
-                >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div
-               style={{
-                transform:"skewX(12deg)"
-               }}
-              className="transform  max-w-5xl mx-auto">
-                {renderContent()}
-              </div>
-
-              {/* Result Section */}
-              <div className="mt-8 pt-6 text-center border-t border-gray-200">
-                <p className="text-gray-800 font-bold text-lg italic">
-                  {data?.resultText ||
-                    "The Result: Energy Loss, Operational Downtime, And High Cost Of Ownership."}
-                </p>
-              </div>
-            </div>
-          )}
+    <GridIntelInfoModal
+      isOpen={isOpen}
+      onClose={onClose}
+      footer={
+        <div className="mt-8 border-t border-gray-200 pt-6 text-center">
+          <p className="text-lg font-bold italic text-gray-800">
+            {data?.resultText ||
+              "The Result: Energy Loss, Operational Downtime, And High Cost Of Ownership."}
+          </p>
         </div>
-      </div>
-    </React.Fragment>
+      }
+    >
+      {renderContent()}
+    </GridIntelInfoModal>
   );
 };
 

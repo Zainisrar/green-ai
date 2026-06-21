@@ -1,11 +1,15 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useSustainabilityESG } from "../../../hooks/useSustainabilityESG";
+import BookTechnicalDebrief from "./Modals/BookTechnicalDebrief";
+import RequestEngineeringDossier from "./Modals/RequestEngineeringDossier";
 
 const EsgCommitments = () => {
   const { sustainabilityData, isLoading, error } = useSustainabilityESG();
+  const [isDebriefOpen, setIsDebriefOpen] = useState(false);
+  const [isDossierOpen, setIsDossierOpen] = useState(false);
 
 
 
@@ -227,8 +231,54 @@ const EsgCommitments = () => {
           </div>
         </div>
 
+        {/* Bottom-right CTA buttons */}
+        <div className="flex flex-col items-center lg:items-end gap-4 px-4 lg:px-10 pb-24 lg:-mt-6">
+          <button
+            type="button"
+            onClick={() => setIsDebriefOpen(true)}
+            className="w-full max-w-xs cursor-pointer lg:w-auto"
+          >
+            <span
+              style={{ transform: "skewX(-12deg)" }}
+              className="flex items-center justify-between gap-3 bg-gradient-to-r from-lime-300 to-green-500 px-6 py-3 shadow-md transition hover:brightness-105"
+            >
+              <span
+                style={{ transform: "skewX(12deg)" }}
+                className="text-sm font-bold text-gray-900 lg:text-base"
+              >
+                Book a Technical Debrief
+              </span>
+              <span style={{ transform: "skewX(12deg)" }} className="font-bold text-gray-900">
+                ›
+              </span>
+            </span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setIsDossierOpen(true)}
+            className="w-full max-w-xs cursor-pointer lg:w-auto"
+          >
+            <span
+              style={{ transform: "skewX(-12deg)" }}
+              className="flex items-center justify-between gap-3 bg-gradient-to-r from-lime-300 to-green-500 px-6 py-3 shadow-md transition hover:brightness-105"
+            >
+              <span
+                style={{ transform: "skewX(12deg)" }}
+                className="text-sm font-bold text-gray-900 lg:text-base"
+              >
+                Request our Engineering Dossier
+              </span>
+              <span style={{ transform: "skewX(12deg)" }} className="font-bold text-gray-900">
+                ›
+              </span>
+            </span>
+          </button>
+        </div>
+
         <Chatbot />
       </div>
+      <BookTechnicalDebrief isOpen={isDebriefOpen} onClose={() => setIsDebriefOpen(false)} />
+      <RequestEngineeringDossier isOpen={isDossierOpen} onClose={() => setIsDossierOpen(false)} />
     </React.Fragment>
   );
 };

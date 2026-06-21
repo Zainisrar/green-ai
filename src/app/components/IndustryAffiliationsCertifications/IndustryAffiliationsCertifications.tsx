@@ -9,6 +9,7 @@ import TopNavigation from "../TopNavigation/TopNavigation";
 import { useIndustryAffiliationsCertifications } from "@/app/hooks/useIndustryAffiliationsCertifications";
 import Chatbot from "../Chatbot";
 import Link from "next/link";
+import IndividualCertification from "./Modals/IndividualCertification";
 
 const IndustryAffiliationsCertifications = () => {
   const [isWhyCertOpen, setIsWhyCertOpen] = useState(false);
@@ -17,6 +18,7 @@ const IndustryAffiliationsCertifications = () => {
     useState(false);
   const [isWhatThisMeansForClientsOpen, setIsWhatThisMeansForClientsOpen] =
     useState(false);
+  const [isIndividualCertOpen, setIsIndividualCertOpen] = useState(false);
 
   const handleWhyCertOpen = () => {
     setIsWhyCertOpen(true);
@@ -272,23 +274,19 @@ const IndustryAffiliationsCertifications = () => {
               )}
             </div>
             <div className=" flex justify-end my-8 cursor-pointer">
-              {mainPage?.cta?.[1]?.href ? (
-                <Link href={mainPage.cta[1].href}>
-                  <img
-                    src="/images/industry-affiliations-certifications/individual.png"
-                    alt={
-                      mainPage?.cta?.[1]?.text ||
-                      "Individual Certificate or Verification Letter"
-                    }
-                    className="w-full h-full"
-                  />
-                </Link>
-              ) : (
+              <button
+                type="button"
+                onClick={() => setIsIndividualCertOpen(true)}
+                className="cursor-pointer hover:opacity-80 transition-opacity"
+              >
                 <img
                   src="/images/industry-affiliations-certifications/individual.png"
-                  alt="Individual Certificate or Verification Letter"
+                  alt={
+                    mainPage?.cta?.[1]?.text ||
+                    "Individual Certificate or Verification Letter"
+                  }
                 />
-              )}
+              </button>
             </div>
           </div>
         </div>
@@ -321,6 +319,10 @@ const IndustryAffiliationsCertifications = () => {
         title={whatThisMeansClients?.title || "What This Means for Clients"}
         keys={whatThisMeansClients?.keys || []}
         img={whatThisMeansClients?.img || { alt: "", src: "" }}
+      />
+      <IndividualCertification
+        isOpen={isIndividualCertOpen}
+        onClose={() => setIsIndividualCertOpen(false)}
       />
     </React.Fragment>
   );

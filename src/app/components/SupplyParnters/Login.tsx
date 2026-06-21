@@ -1,12 +1,46 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
+import Enquiry from "./Modals/Enquiry";
 import { useNavigationState } from "@/hooks/useNavigationState";
+import { useInteractiveZIndex } from "../../../hooks/useInteractiveZIndex";
+import { loginSupplyPartner } from "@/app/lib/forms";
 
 const Login = () => {
-const nav=useNavigationState()
+  const nav = useNavigationState();
+  const { getContainerProps } = useInteractiveZIndex();
+  const enquiryProps = getContainerProps();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setErrorMessage("");
+    setSuccessMessage("");
+
+    try {
+      const data = await loginSupplyPartner(email, password);
+      if (data.Code === "001") {
+        setSuccessMessage(data.Message || "Login successful.");
+      } else {
+        setErrorMessage(data.Message || "Login failed. Please check your credentials.");
+      }
+    } catch (error) {
+      setErrorMessage(
+        error instanceof Error ? error.message : "Login failed. Please try again.",
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <React.Fragment>
       <div className=''>
@@ -91,6 +125,7 @@ const nav=useNavigationState()
                   </div>
 
                   <form
+                  onSubmit={handleSubmit}
                   style={{
                     transform:"skewX(16deg)"
                   }}
@@ -98,15 +133,36 @@ const nav=useNavigationState()
                     <div className="relative">
                       <input
                         type="email"
-                        placeholder="supplytest@nexttechnosolutions.co.in"
+                        name="email"
+                        placeholder="E-MAIL ID"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         style={{
                           transform:"skewX(-12deg)"
                         }}
-                        className="w-full px-4 py-3 bg-white border border-gray-300  focus:outline-none focus:border-[#4CAF50] text-gray-700"
+                        className="w-full px-4 py-3 bg-white border border-gray-300 focus:outline-none focus:border-[#4CAF50] text-gray-700"
+                        required
+                      />
+                    </div>
+
+                    <div className="relative">
+                      <input
+                        type="password"
+                        name="password"
+                        placeholder="PASSWORD"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        style={{
+                          transform:"skewX(-12deg)"
+                        }}
+                        className="w-full px-4 py-3 bg-white border border-gray-300 focus:outline-none focus:border-[#4CAF50] text-gray-700"
+                        required
                       />
                       <button
-                        type="button"
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2"
+                        type="submit"
+                        disabled={isLoading}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 disabled:opacity-50"
+                        aria-label="Submit login"
                       >
                         <svg
                           width="20"
@@ -121,12 +177,15 @@ const nav=useNavigationState()
                       </button>
                     </div>
 
+                    {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
+                    {successMessage && <p className="text-sm text-green-600">{successMessage}</p>}
+
                     <div className="text-center">
                       <p className="text-gray-500 text-sm font-semibold mb-4">
                         OR
                       </p>
                       <Link
-                        href={"/client-value-engineering"}
+                        href={"/ecosystem/supply-partners/register"}
                         className="text-[#4CAF50] cursor-pointer font-semibold hover:underline"
                       >
                         Register
@@ -139,13 +198,18 @@ const nav=useNavigationState()
           </div>
         </div>
 
-          <div className="  flex justify-end my-8 mb-40 cursor-pointer">
+          <div
+            {...enquiryProps}
+            onClick={() => setIsFormOpen(true)}
+            className={`${enquiryProps.className} flex justify-end my-8 mb-40 cursor-pointer`}
+          >
             <img
               src="/images/supply-partners/login/enquiry.png"
               alt="Enquiry"
             />
           </div>
-     
+
+       <Enquiry isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
        <Chatbot/>
       </div>
     </React.Fragment>

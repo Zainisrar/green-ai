@@ -6,6 +6,7 @@ import WhatSetsGREENApart from "./Dialog/WhatSetsGREENApart";
 import UseCases from "./Dialog/UseCases";
 import Link from "next/link";
 import PartnershipOnboarding from "./Dialog/PartnershipOnboarding";
+import BookDiscoveryCall from "./Modals/BookDiscoveryCall";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useClientPartnerships } from "../../../hooks/useClientPartnerships";
@@ -17,6 +18,7 @@ const ClientPartnerships = () => {
   const [isUseCasesOpen, setIsUseCasesOpen] = useState(false);
   const [isPartnershipOnboardingOpen, setIsPartnershipOnboardingOpen] =
     useState(false);
+  const [isBookCallOpen, setIsBookCallOpen] = useState(false);
 
   const { data } = useClientPartnerships();
 
@@ -45,7 +47,7 @@ const ClientPartnerships = () => {
         <TopNavigation />
         <div className="flex h-full">
           {/* Left Side  */}
-          <div className="w-1/6 flex items-center justify-center">
+          <div className="hidden lg:flex w-1/6 items-center justify-center">
             <div className="fixed top-1/4 left-5 lg:left-14">
               <img
                 src="/images/client-partnerships/client-partnerships.png"
@@ -56,7 +58,7 @@ const ClientPartnerships = () => {
           </div>
 
           {/* Main Content Area */}
-          <div className="px-8 pt-8">
+          <div className="min-w-0 flex-1 px-4 sm:px-8 pt-8">
             {/* Main Title */}
             <div className="mb-8 lg:px-0 px-8">
               <h1 className=" text-xl lg:text-3xl font-black text-gray-800 mb-4">
@@ -251,10 +253,16 @@ const ClientPartnerships = () => {
                 </div>
                 <div>
                   <div className=" flex justify-end my-8 cursor-pointer">
-                    <img
-                      src="/images/client-partnerships/book.png"
-                      alt="Book Discovery Call"
-                    />
+                    <button
+                      type="button"
+                      onClick={() => setIsBookCallOpen(true)}
+                      className="cursor-pointer hover:opacity-80 transition-opacity"
+                    >
+                      <img
+                        src="/images/client-partnerships/book.png"
+                        alt="Book Discovery Call"
+                      />
+                    </button>
                   </div>
                   <div className=" flex justify-end mb-32 mt-8 cursor-pointer">
                     <img
@@ -292,6 +300,10 @@ const ClientPartnerships = () => {
       <PartnershipOnboarding
         isOpen={isPartnershipOnboardingOpen}
         onClose={closePartnershipOnboardingModal}
+      />
+      <BookDiscoveryCall
+        isOpen={isBookCallOpen}
+        onClose={() => setIsBookCallOpen(false)}
       />
     </React.Fragment>
   );

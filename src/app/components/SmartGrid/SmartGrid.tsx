@@ -1,16 +1,73 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useEnergyStorageSmartGrid } from "../../../hooks/useEnergyStorageSmartGrid";
 import Link from "next/link";
+import DispatchArchitect from "./Modals/DispatchArchitect";
+import StorageSystemReview from "./Modals/StorageSystemReview";
 
 const SmartGrid = () => {
   const { smartGridData } = useEnergyStorageSmartGrid();
+  const [isDispatchArchitectOpen, setIsDispatchArchitectOpen] = useState(false);
+  const [isStorageReviewOpen, setIsStorageReviewOpen] = useState(false);
 
   if (!smartGridData) {
     return null;
   }
+
+  const renderCallToActionButton = (index: number, className: string) => {
+    const text =
+      smartGridData?.callToActions?.[index]?.text ||
+      [
+        "Talk to a Dispatch Architect",
+        "Book a Storage System Review",
+        "Download our Smart Grid and Storage Dossier",
+      ][index];
+    const buttonContent = (
+      <div
+        style={{ transform: "skewX(-16deg)" }}
+        className={`bg-gradient-to-r from-[#54b85a] to-[#e6f24d] shadow-md ${className}`}
+      >
+        <span className="block text-sm font-bold text-gray-900 whitespace-nowrap lg:text-base">
+          {text} {index < 2 ? ">" : ""}
+        </span>
+      </div>
+    );
+
+    if (index === 0) {
+      return (
+        <button
+          type="button"
+          onClick={() => setIsDispatchArchitectOpen(true)}
+          className="inline-block cursor-pointer"
+        >
+          {buttonContent}
+        </button>
+      );
+    }
+
+    if (index === 1) {
+      return (
+        <button
+          type="button"
+          onClick={() => setIsStorageReviewOpen(true)}
+          className="inline-block cursor-pointer"
+        >
+          {buttonContent}
+        </button>
+      );
+    }
+
+    return (
+      <Link
+        href={smartGridData?.callToActions?.[2]?.href || "#"}
+        className="inline-block cursor-pointer"
+      >
+        {buttonContent}
+      </Link>
+    );
+  };
 
   return (
     <React.Fragment>
@@ -162,22 +219,9 @@ const SmartGrid = () => {
           </div>
 
           <div className="flex flex-col items-center gap-5 lg:hidden">
-            {[0, 1, 2].map((i) => (
-              <Link
-                key={i}
-                href={smartGridData?.callToActions[i]?.href || "#"}
-                className="inline-block cursor-pointer"
-              >
-                <div
-                  style={{ transform: "skewX(-16deg)" }}
-                  className="bg-gradient-to-r from-[#54b85a] to-[#e6f24d] px-8 py-3 shadow-md"
-                >
-                  <span className="block text-sm font-bold text-gray-900 whitespace-nowrap">
-                    {smartGridData?.callToActions[i]?.text} {`>`}
-                  </span>
-                </div>
-              </Link>
-            ))}
+            {renderCallToActionButton(0, "px-8 py-3")}
+            {renderCallToActionButton(1, "px-8 py-3")}
+            {renderCallToActionButton(2, "px-8 py-3")}
           </div>
         </div>
 
@@ -338,22 +382,9 @@ const SmartGrid = () => {
                   </p>
                 </div>
                 <div className="hidden lg:flex flex-col items-end gap-6 min-w-0">
-                  {[0, 1, 2].map((i) => (
-                    <Link
-                      key={i}
-                      href={smartGridData?.callToActions[i]?.href || "#"}
-                      className="inline-block cursor-pointer"
-                    >
-                      <div
-                        style={{ transform: "skewX(-16deg)" }}
-                        className="bg-gradient-to-r from-[#54b85a] to-[#e6f24d] px-10 py-3 shadow-md"
-                      >
-                        <span className="block text-sm lg:text-base font-bold text-gray-900 whitespace-nowrap">
-                          {smartGridData?.callToActions[i]?.text} {`>`}
-                        </span>
-                      </div>
-                    </Link>
-                  ))}
+                  {renderCallToActionButton(0, "px-10 py-3")}
+                  {renderCallToActionButton(1, "px-10 py-3")}
+                  {renderCallToActionButton(2, "px-10 py-3")}
                 </div>
               </div>
             </div>
@@ -364,6 +395,14 @@ const SmartGrid = () => {
           <Chatbot />
         </div>
       </div>
+      <DispatchArchitect
+        isOpen={isDispatchArchitectOpen}
+        onClose={() => setIsDispatchArchitectOpen(false)}
+      />
+      <StorageSystemReview
+        isOpen={isStorageReviewOpen}
+        onClose={() => setIsStorageReviewOpen(false)}
+      />
     </React.Fragment>
   );
 };

@@ -4,6 +4,7 @@ import CorePrinciples from "./CorePrinciples";
 import Compromise from "./Compromise";
 import Procrument from "./Procrument";
 import Vendor from "./Vendor";
+import SubmitInterest from "./Modals/SubmitInterest";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useOurProcurementPhilosophy } from "../../../hooks/useOurProcurementPhilosophy";
@@ -14,6 +15,7 @@ const OurProcurementPhilosophy = () => {
   const [isCompromiseOpen, setIsCompromiseOpen] = useState(false);
   const [isProcrumentOpen, setIsProcrumentOpen] = useState(false);
   const [isVendorOpen, setIsVendorOpen] = useState(false);
+  const [isSubmitInterestOpen, setIsSubmitInterestOpen] = useState(false);
 
   if (!apiData) {
     return null;
@@ -206,15 +208,16 @@ const OurProcurementPhilosophy = () => {
 
        <div className="space-y-8 mb-32">
          <div className=" flex justify-end  cursor-pointer">
-          <a 
-            href={apiData?.mainPage?.cta?.[0]?.href || "#"}
+          <button
+            type="button"
+            onClick={() => setIsSubmitInterestOpen(true)}
             className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
           >
             <img
               src="/images/our-procurement-philosophy/submit-interest.png"
               alt={apiData?.mainPage?.cta?.[0]?.text || "submit interest"}
             />
-          </a>
+          </button>
         </div>
         <div className=" flex justify-end  cursor-pointer">
           <a 
@@ -294,10 +297,14 @@ const OurProcurementPhilosophy = () => {
         onClose={closeProcrument}
         data={apiData?.procurementAlignedImpact}
       />
-      <Vendor 
-        isOpen={isVendorOpen} 
+      <Vendor
+        isOpen={isVendorOpen}
         onClose={closeVendor}
         data={apiData?.strategicVendorRelationships}
+      />
+      <SubmitInterest
+        isOpen={isSubmitInterestOpen}
+        onClose={() => setIsSubmitInterestOpen(false)}
       />
     </React.Fragment>
   );

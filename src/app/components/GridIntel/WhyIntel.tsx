@@ -1,143 +1,48 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import GridIntelInfoModal from "./GridIntelInfoModal";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
+
 const WhyIntel = ({ isOpen, onClose }: Props) => {
   if (!isOpen) return null;
 
   return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed inset-0 bg-black/20 z-[99999999999999999999999999] flex items-center justify-center">
-        {/* Modal Container */}
-        <div className="relative w-full max-w-6xl mx-4">
-          {/* Skewed Modal Background */}
-          <div
-            className="bg-gray-100 transform py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-            style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
-              transform:"skewX(-12deg)"
-             }}
-          >
-            {/* Close Button */}
-            <div className="flex justify-end w-full">
-              <button
-                onClick={onClose}
-                style={{
-                  transform:"skewX(12deg)"
-                }}
-                className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
-              >
-                <img src="/images/join-us/xicon.png" alt="Close Icon" />
-              </button>
-            </div>
+    <GridIntelInfoModal isOpen={isOpen} onClose={onClose}>
+      <div className="mb-8">
+        <h2 className="mb-2 text-3xl font-black leading-tight text-gray-800 lg:text-4xl">
+          Why GRID-INTEL™{" "}
+          <span className="text-xl text-[#4CAF50] lg:text-2xl">- Is Different</span>
+        </h2>
+      </div>
 
-            {/* Modal Content */}
-            <div
-            style={{
-              transform:"skewX(12deg)"
-            }}
-            className="transform  max-w-5xl mx-auto">
-              {/* Title Section */}
-              <div className="mb-8">
-                <h2 className="text-3xl lg:text-4xl font-black text-gray-800 mb-2 leading-tight">
-                  Why GRID-INTEL™{" "}
-                  <span className="text-[#4CAF50] text-xl lg:text-2xl">
-                    - Is Different
-                  </span>
-                </h2>
-              </div>
-
-              {/* Comparison Table */}
-              <div className="overflow-hidden ">
-                {/* Table Header */}
-                <div className="grid grid-cols-3 ">
-                  <div className="px-6 py-4 r font-bold text-[#4CAF50] ">
-                    Feature
-                  </div>
-                  <div className="px-6 py-4  font-bold text-[#4CAF50] ">
-                    GRID-INTEL™
-                  </div>
-                  <div className="px-6 py-4 r font-bold text-[#4CAF50]">
-                    Conventional Controllers
-                  </div>
-                </div>
-
-                {/* Table Rows */}
-                <div className="">
-                  {/* Row 1 */}
-                  <div className="grid grid-cols-3 ">
-                    <div className="px-6 py-4 font-medium text-gray-800 ">
-                      Predictive load forecasting
-                    </div>
-                    <div className="px-6 py-4  text-gray-800 ">
-                      Integrated
-                    </div>
-                    <div className="px-6 py-4  text-gray-800">
-                      Not Available
-                    </div>
-                  </div>
-
-                  {/* Row 2 */}
-                  <div className="grid grid-cols-3 ">
-                    <div className="px-6 py-4 font-medium text-gray-800 ">
-                      Hybrid source optimization
-                    </div>
-                    <div className="px-6 py-4  text-gray-800 ">
-                      Multi-input real-time control
-                    </div>
-                    <div className="px-6 py-4  text-gray-800">
-                      Manual or static logic
-                    </div>
-                  </div>
-
-                  {/* Row 3 */}
-                  <div className="grid grid-cols-3 ">
-                    <div className="px-6 py-4 font-medium text-gray-800 ">
-                      Remote telemetry & diagnostics
-                    </div>
-                    <div className="px-6 py-4  text-gray-800 ">
-                      Fully enabled
-                    </div>
-                    <div className="px-6 py-4  text-gray-800">
-                      Rare or unsupported
-                    </div>
-                  </div>
-
-                  {/* Row 4 */}
-                  <div className="grid grid-cols-3 ">
-                    <div className="px-6 py-4 font-medium text-gray-800 ">
-                      Modular architecture
-                    </div>
-                    <div className="px-6 py-4  text-gray-800 ">
-                      Plug & scale
-                    </div>
-                    <div className="px-6 py-4  text-gray-800">
-                      Proprietary and rigid
-                    </div>
-                  </div>
-
-                  {/* Row 5 */}
-                  <div className="grid grid-cols-3">
-                    <div className="px-6 py-4 font-medium text-gray-800 ">
-                      Renewable prioritization
-                    </div>
-                    <div className="px-6 py-4  text-gray-800 ">
-                      Configured as default logic
-                    </div>
-                    <div className="px-6 py-4  text-gray-800">
-                      Diesel-centric fallback
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div className="overflow-x-auto">
+        <div className="min-w-[640px]">
+          <div className="grid grid-cols-3">
+            <div className="px-4 py-3 font-bold text-[#4CAF50] sm:px-6 sm:py-4">Feature</div>
+            <div className="px-4 py-3 font-bold text-[#4CAF50] sm:px-6 sm:py-4">GRID-INTEL™</div>
+            <div className="px-4 py-3 font-bold text-[#4CAF50] sm:px-6 sm:py-4">Conventional Controllers</div>
           </div>
+
+          {[
+            ["Predictive load forecasting", "Integrated", "Not Available"],
+            ["Hybrid source optimization", "Multi-input real-time control", "Manual or static logic"],
+            ["Remote telemetry & diagnostics", "Fully enabled", "Rare or unsupported"],
+            ["Modular architecture", "Plug & scale", "Proprietary and rigid"],
+            ["Renewable prioritization", "Configured as default logic", "Diesel-centric fallback"],
+          ].map(([feature, gridIntel, conventional]) => (
+            <div key={feature} className="grid grid-cols-3 border-t border-gray-200">
+              <div className="px-4 py-3 font-medium text-gray-800 sm:px-6 sm:py-4">{feature}</div>
+              <div className="px-4 py-3 text-gray-800 sm:px-6 sm:py-4">{gridIntel}</div>
+              <div className="px-4 py-3 text-gray-800 sm:px-6 sm:py-4">{conventional}</div>
+            </div>
+          ))}
         </div>
       </div>
-    </React.Fragment>
+    </GridIntelInfoModal>
   );
 };
 

@@ -20,6 +20,7 @@ const TopNavigation = () => {
       setIsMobile(window.innerWidth < 768);
     };
     handleResize();
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -76,14 +77,14 @@ const TopNavigation = () => {
           <img
             src="/images/insight1/greenShape.png"
             alt="green rectangle"
-            className="hidden md:block md:h-[600px] lg:h-[1200px] absolute -z-[10] left-0"
+            className="hidden md:block md:h-[600px] lg:h-[1200px] pointer-events-none absolute -z-[10] left-0"
           />
           {isMobile && (
             <div className="w-full">
               <img
                 src="/images/insight1/greenShape.png"
                 alt="green rectangle"
-                className="h-[500px] absolute top-0 -z-[10] left-0"
+                className="h-[500px] pointer-events-none absolute top-0 -z-[10] left-0"
               />
               <div className="flex justify-between items-center pt-4 px-4">
                 <a href="/">

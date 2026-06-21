@@ -8,6 +8,7 @@ import WhyThisMatters from "./Dialog/WhyThisMatters";
 import InitiativesUnderway from "./Dialog/InitiativesUnderway";
 import VoicesofPower from "./Dialog/VoicesofPower";
 import PartnerwithUs from "./Dialog/PartnerwithUs";
+import JoinTheNetwork from "./Dialog/JoinTheNetwork";
 
 const WomenInEnergy = () => {
   const { data, error } = useWomenInEnergy();
@@ -328,18 +329,19 @@ const WomenInEnergy = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link
-                    href={data.mainPage.cta[1].href || "#"}
+                  <button
+                    type="button"
+                    onClick={() => setOpenModal("joinNetwork")}
                     className="relative cursor-pointer"
                   >
                     <img
                       src="/images/women-in-energy/joinNetworkBtn.png"
-                      alt={"submit interest"}
+                      alt={"join the network"}
                     />
                     <div className="absolute inset-0 flex items-center pl-8 lg:pl-10 pr-12 lg:pr-16 text-xs lg:text-sm font-semibold leading-tight">
                       {data.mainPage.cta[1].text}
                     </div>
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>
@@ -363,6 +365,10 @@ const WomenInEnergy = () => {
       />
       <PartnerwithUs
         isOpen={openModal === "partnerWithUs"}
+        onClose={() => setOpenModal(null)}
+      />
+      <JoinTheNetwork
+        isOpen={openModal === "joinNetwork"}
         onClose={() => setOpenModal(null)}
       />
     </React.Fragment>

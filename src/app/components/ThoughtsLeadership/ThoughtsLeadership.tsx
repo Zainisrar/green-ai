@@ -5,6 +5,8 @@ import Chatbot from "../Chatbot";
 import { useThoughtLeadership } from "../../../hooks/useThoughtLeadership";
 import { useInteractiveZIndex } from "../../../hooks/useInteractiveZIndex";
 import { useNavigationState } from "@/hooks/useNavigationState";
+import DiscoveryConsultation from "./Modals/DiscoveryConsultation";
+import TechnicalDebrief from "./Modals/TechnicalDebrief";
 // import { useNavigationState } from "@/hooks/useNavigationState";
 
 interface Article {
@@ -22,6 +24,8 @@ interface Article {
 const ThoughtsLeadership = () => {
   // All hooks must be called before any conditional returns
   const nav=useNavigationState()
+  const [isConsultationOpen, setIsConsultationOpen] = React.useState(false);
+  const [isDebriefOpen, setIsDebriefOpen] = React.useState(false);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [selectedCategory, setSelectedCategory] = React.useState<string | null>(
     null
@@ -481,25 +485,44 @@ const ThoughtsLeadership = () => {
               index === (apiData?.mainPage.cta || []).length - 1 ? "mb-40" : ""
             }`}
           >
-            <a
-              href={ctaItem.href}
-              className="hover:opacity-80 transition-opacity"
-            >
-              <img
-                src={
-                  index === 0
-                    ? "/images/thoughts-leadership/request.png"
-                    : "/images/thoughts-leadership/book.png"
-                }
-                alt={ctaItem.text}
-                className="hover:opacity-80 transition-opacity"
-              />
-            </a>
+            {index === 0 ? (
+              <button
+                type="button"
+                onClick={() => setIsDebriefOpen(true)}
+                className="cursor-pointer hover:opacity-80 transition-opacity"
+              >
+                <img
+                  src="/images/thoughts-leadership/request.png"
+                  alt={ctaItem.text}
+                  className="hover:opacity-80 transition-opacity"
+                />
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setIsConsultationOpen(true)}
+                className="cursor-pointer hover:opacity-80 transition-opacity"
+              >
+                <img
+                  src="/images/thoughts-leadership/book.png"
+                  alt={ctaItem.text}
+                  className="hover:opacity-80 transition-opacity"
+                />
+              </button>
+            )}
           </div>
         ))}
 
         <Chatbot />
       </div>
+      <TechnicalDebrief
+        isOpen={isDebriefOpen}
+        onClose={() => setIsDebriefOpen(false)}
+      />
+      <DiscoveryConsultation
+        isOpen={isConsultationOpen}
+        onClose={() => setIsConsultationOpen(false)}
+      />
     </React.Fragment>
   );
 };

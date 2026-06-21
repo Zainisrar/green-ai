@@ -5,9 +5,11 @@ import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useCertificationsAccreditations } from "../../../hooks/useCertificationsAccreditations";
 import Link from "next/link";
+import LetsStart from "./Modals/LetsStart";
 
 const Accrediations = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isStartOpen, setIsStartOpen] = useState(false);
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
   const { certificationsData, error } =
@@ -186,8 +188,9 @@ const Accrediations = () => {
 
           {/* Bottom CTA */}
           <div className="flex justify-center">
-             <Link
-              href={certificationsData?.cta.link || "#"} 
+             <button
+              type="button"
+              onClick={() => setIsStartOpen(true)}
               className=" cursor-pointer relative"
             >
               <img
@@ -195,9 +198,9 @@ const Accrediations = () => {
                 alt="call to action"
               />
               <div className="absolute inset-0 flex items-center justify-center px-4 italic text-base lg:text-lg font-bold whitespace-nowrap">
-                {certificationsData?.cta.text}
+                {certificationsData?.cta.text || "Let's Start"}
               </div>
-            </Link>
+            </button>
           </div>
         </div>
 
@@ -338,8 +341,9 @@ const Accrediations = () => {
                 />
               </div>
             </div>
-            <Link
-              href={certificationsData?.cta.link || "#"}
+            <button
+              type="button"
+              onClick={() => setIsStartOpen(true)}
               className="relative inline-block shrink-0 cursor-pointer"
             >
               <img
@@ -349,7 +353,7 @@ const Accrediations = () => {
               <div className="absolute inset-0 flex items-center justify-center px-4 italic text-base lg:text-lg font-bold whitespace-nowrap">
                 {certificationsData?.cta.text || "Let's Start"}
               </div>
-            </Link>
+            </button>
           </div>
               </div>
             </div>
@@ -383,6 +387,7 @@ const Accrediations = () => {
         <Chatbot />
       </div>
       <ListofCertificates isOpen={isOpen} onClose={closeModal} />
+      <LetsStart isOpen={isStartOpen} onClose={() => setIsStartOpen(false)} />
     </React.Fragment>
   );
 };

@@ -8,10 +8,12 @@ import WhyInvestGreen from "./Dialog/WhyInvestGreen";
 import InvestmentFocusArea from "./Dialog/InvestmentFocusArea";
 import PerformanceSnapshots from "./Dialog/PerformanceSnapshots";
 import InvestmentInstruments from "./Dialog/InvestmentInstruments";
+import SubmitEOI from "./Modals/SubmitEOI";
 
 const InvestorRelations = () => {
   const { data } = useInvestorRelations();
   const [openModal, setOpenModal] = useState<string | null>(null);
+  const [isEoiOpen, setIsEoiOpen] = useState(false);
 
   const highlightText = (text: string, highlight: string) => {
     if (!highlight) return text;
@@ -200,14 +202,16 @@ if (!data) return null;
               </div>
 
               <div className="cursor-pointer">
-                <Link href={data.mainPage.cta[1].href || "#"} className="relative group">
-                  <button className="cursor-pointer">
-                    <img
-                      src="/images/investor-relations/submit.png"
-                      alt="submit"
-                    />
-                  </button>
-                </Link>
+                <button
+                  type="button"
+                  onClick={() => setIsEoiOpen(true)}
+                  className="relative group cursor-pointer"
+                >
+                  <img
+                    src="/images/investor-relations/submit.png"
+                    alt="Submit an Expression of Interest"
+                  />
+                </button>
               </div>
             </div>
           </div>
@@ -233,6 +237,7 @@ if (!data) return null;
         isOpen={openModal === "investmentInstruments"}
         onClose={() => setOpenModal(null)}
       />
+      <SubmitEOI isOpen={isEoiOpen} onClose={() => setIsEoiOpen(false)} />
     </React.Fragment>
   );
 };

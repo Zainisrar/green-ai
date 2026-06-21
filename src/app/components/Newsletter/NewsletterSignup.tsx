@@ -2,10 +2,12 @@
 import React, { useEffect, useState } from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
+import NewsletterSignupModal from "./NewsletterSignupModal";
 
 const NewsLetterSignUp = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [isTablet, setIsTablet] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -19,10 +21,10 @@ const NewsLetterSignUp = () => {
 
   return (
     <React.Fragment>
-      <div className="absolute top-0 left-0">
-        <img src="/images/newsletter/mainImg.png" className="w-8/12 h-[150vh]" alt="bg" />
+      <div className="pointer-events-none absolute top-0 left-0 -z-10">
+        <img src="/images/newsletter/mainImg.png" className="w-8/12 h-[150vh]" alt="" role="presentation" />
       </div>
-      <div className="">
+      <div className="relative z-10">
         <TopNavigation />
         <div className="flex h-full ">
           <div className=" lg:w-1/6 hidden lg:flex items-center justify-center">
@@ -202,13 +204,17 @@ const NewsLetterSignUp = () => {
                   power your inbox with content that matters.
                 </p>
               </div>
-              <div className="  relative flex justify-end cursor-pointer">
+              <div
+                className="relative flex justify-end cursor-pointer"
+                onClick={() => setIsFormOpen(true)}
+              >
                 <img src="/images/newsletter/sign-up-now.png" alt="sign up" />
               </div>
             </div>
           </div>
         </div>
       </div>
+      <NewsletterSignupModal isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
       <Chatbot />
     </React.Fragment>
   );

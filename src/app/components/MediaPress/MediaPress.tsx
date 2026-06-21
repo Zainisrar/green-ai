@@ -5,11 +5,13 @@ import MediaContactInterviewRequests from "./Dialog/MediaContactInterviewRequest
 import MediaKitDownload from "./Dialog/MediaKitDownload";
 import GreenInTheNews from "./Dialog/GreenInTheNews";
 import OfficialSpokesPeople from "./Dialog/OfficialSpokesPeople";
+import RequestQuoteAppointment from "./Modals/RequestQuoteAppointment";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 
 const MediaPress = () => {
 
+  const [isRequestQuoteOpen, setIsRequestQuoteOpen] = useState(false);
   const [isLatestPressReleasesOpen, setIsLatestPressReleasesOpen] = useState(false);
   const [isMediaContactOpen, setIsMediaContactOpen] = useState(false);
   const [isMediaKitDownloadOpen, setIsMediaKitDownloadOpen] = useState(false);
@@ -177,11 +179,17 @@ const MediaPress = () => {
               alt="download the press kit"
             />
           </div>
-          <div className="  flex justify-end cursor-pointer">
-            <img
-              src="/images/media-press/request-quote.png"
-              alt="request a quote"
-            />
+          <div className="  flex justify-end">
+            <button
+              type="button"
+              onClick={() => setIsRequestQuoteOpen(true)}
+              className="cursor-pointer"
+            >
+              <img
+                src="/images/media-press/request-quote.png"
+                alt="request a quote"
+              />
+            </button>
           </div>
         </div>
       </div>
@@ -205,6 +213,10 @@ const MediaPress = () => {
       <OfficialSpokesPeople
         isOpen={isOfficialSpokesPeopleOpen}
         onClose={handleOfficialSpokesPeopleClose}
+      />
+      <RequestQuoteAppointment
+        isOpen={isRequestQuoteOpen}
+        onClose={() => setIsRequestQuoteOpen(false)}
       />
     </React.Fragment>
   );

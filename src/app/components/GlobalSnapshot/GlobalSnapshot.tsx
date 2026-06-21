@@ -12,10 +12,12 @@ import type {
   GlobalSnapshotActionButtons,
 } from "../../lib/api";
 import Link from "next/link";
-import { handleImageError } from "../lib/utils";
+import SafeImage from "../shared/SafeImage";
+import RequestConsultation from "./Modals/RequestConsultation";
 
 const GlobalSnapshot = () => {
   const { globalSnapshotData,  error } = useGlobalSnapshot();
+  const [isConsultationOpen, setIsConsultationOpen] = useState(false);
 
   // Fallback data - keeping the original structure for compatibility
   const [fallbackPoints] = useState([
@@ -189,11 +191,11 @@ const GlobalSnapshot = () => {
                 key={item.id}
                 className="flex items-center space-x-3 bg-white/80 p-3 rounded-lg"
               >
-                <img
+                <SafeImage
                   className="w-14"
                   src={item.icon.img.src}
                   alt={item.icon.img.alt || item.text.heading || "Statistic"}
-                  onError={(e) => handleImageError(e, "/images/global-snapshot/mw.png")}
+                  fallbackSrc="/images/global-snapshot/mw.png"
                 />
                 <div className="text-lg">
                   <p className="font-bold text-gray-800">{item.text.heading}</p>
@@ -262,11 +264,11 @@ const GlobalSnapshot = () => {
               {frameworkFeatures.length > 0 ? (
                 frameworkFeatures.map((feature, index) => (
                   <div key={index} className="flex space-x-3 items-start">
-                    <img
+                    <SafeImage
                       src={feature.icon.src}
                       alt={feature.icon.alt || feature.text || "Feature icon"}
                       className="w-10 mt-1 flex-shrink-0"
-                      onError={(e) => handleImageError(e, "/images/global-snapshot/lighting.png")}
+                      fallbackSrc="/images/global-snapshot/lighting.png"
                     />
                     <div className="text-base">{feature.text}</div>
                   </div>
@@ -343,19 +345,20 @@ const GlobalSnapshot = () => {
 
           {/* Bottom Buttons */}
           <div className="mb-20 flex flex-col items-center space-y-8">
-            <Link
-              href={ctaButtons[1]?.link || "#"}
-              className="relative inline-block w-full max-w-[300px]"
+            <button
+              type="button"
+              onClick={() => setIsConsultationOpen(true)}
+              className="relative inline-block w-full max-w-[300px] cursor-pointer"
             >
               <img
                 src="/images/global-snapshot/consulation.png"
                 alt="consultation"
                 className="w-full"
               />
-              <div className="absolute inset-0 flex items-center justify-center px-4 font-bold text-sm sm:text-base whitespace-nowrap">
+              <div className="absolute inset-0 flex items-center justify-center px-4 font-bold text-sm whitespace-nowrap">
                 {ctaButtons[1]?.text || "Request a Consultation"} {">"}
               </div>
-            </Link>
+            </button>
             <Link
               href={ctaButtons[2]?.link || "#"}
               className="relative inline-block w-full max-w-[340px]"
@@ -365,8 +368,8 @@ const GlobalSnapshot = () => {
                 alt="project portfolio"
                 className="w-full"
               />
-              <div className="absolute inset-0 flex items-center justify-center px-4 font-bold text-sm sm:text-base whitespace-nowrap">
-                {ctaButtons[2]?.text || "View Global Project Portfolio"} {">"}
+              <div className="absolute inset-0 flex items-center justify-center px-5 text-center font-bold text-[11px] sm:text-xs leading-tight">
+                {ctaButtons[2]?.text || "Explore Our Global Project Portfolio"} {">"}
               </div>
             </Link>
           </div>
@@ -420,10 +423,11 @@ const GlobalSnapshot = () => {
                           }`}
                         >
                           <div>
-                            <img
+                            <SafeImage
                               className="w-14"
                               src={item.icon.img.src}
-                              alt={item.icon.img.alt}
+                              alt={item.icon.img.alt || item.text.heading || "Statistic"}
+                              fallbackSrc="/images/global-snapshot/mw.png"
                             />
                           </div>
                           <div>
@@ -528,11 +532,11 @@ const GlobalSnapshot = () => {
                         }`}
                       >
                         <div>
-                          <img
+                          <SafeImage
                             src={feature.icon.src}
                             alt={feature.icon.alt || feature.text || "Feature icon"}
                             className="w-6 flex-shrink-0"
-                            onError={(e) => handleImageError(e, "/images/global-snapshot/lighting.png")}
+                            fallbackSrc="/images/global-snapshot/lighting.png"
                           />
                         </div>
                         <div>{feature.text}</div>
@@ -620,8 +624,9 @@ const GlobalSnapshot = () => {
             </div>
 
             <div className="mt-10 mr-10 flex flex-col items-end space-y-8 z-50">
-              <Link
-                href={ctaButtons[1]?.link || "#"}
+              <button
+                type="button"
+                onClick={() => setIsConsultationOpen(true)}
                 className="relative inline-block cursor-pointer"
               >
                 <img
@@ -631,7 +636,7 @@ const GlobalSnapshot = () => {
                 <div className="absolute inset-0 flex items-center justify-center px-6 text-base lg:text-lg font-bold whitespace-nowrap">
                   {ctaButtons[1]?.text || "Request a Consultation"} {` >`}
                 </div>
-              </Link>
+              </button>
               <Link
                 href={ctaButtons[2]?.link || "#"}
                 className="relative inline-block cursor-pointer"
@@ -640,8 +645,8 @@ const GlobalSnapshot = () => {
                   src="/images/global-snapshot/globalprojectportfolioBtn.png"
                   alt="project portfolio"
                 />
-                <div className="absolute inset-0 flex items-center justify-center px-6 text-base lg:text-lg font-bold whitespace-nowrap">
-                  {ctaButtons[2]?.text || "View Global Project Portfolio"} {` >`}
+                <div className="absolute inset-0 flex items-center justify-center px-5 text-sm 2xl:text-base font-bold whitespace-nowrap">
+                  {ctaButtons[2]?.text || "Explore Our Global Project Portfolio"} {` >`}
                 </div>
               </Link>
             </div>
@@ -650,6 +655,10 @@ const GlobalSnapshot = () => {
 
         <Chatbot />
       </div>
+      <RequestConsultation
+        isOpen={isConsultationOpen}
+        onClose={() => setIsConsultationOpen(false)}
+      />
     </React.Fragment>
   );
 };

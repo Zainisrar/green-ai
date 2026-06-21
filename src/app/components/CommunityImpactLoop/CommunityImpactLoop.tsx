@@ -4,9 +4,11 @@ import Chatbot from "../Chatbot";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import { useCommunityImpactLoop } from "../../../hooks/useCommunityImpactLoop";
 import Link from "next/link";
+import SubmitProposal from "./Modals/SubmitProposal";
 
 const CommunityImpactLoop = () => {
   const { data, isLoading, error } = useCommunityImpactLoop();
+  const [isProposalOpen, setIsProposalOpen] = useState(false);
   const main = data?.mainPage;
   const gcil = data?.greenCommunityImpactLoop;
   const loop = data?.howLoopWorks;
@@ -617,8 +619,9 @@ const CommunityImpactLoop = () => {
 
         {main?.cta && main.cta.length > 0 ? (
           <div className="flex flex-col items-end gap-8 my-8">
-            <Link
-              href={main.cta[0].href}
+            <button
+              type="button"
+              onClick={() => setIsProposalOpen(true)}
               className=" relative flex justify-end cursor-pointer"
             >
               <img
@@ -628,7 +631,7 @@ const CommunityImpactLoop = () => {
               <div className="absolute inset-0 flex items-center pl-8 lg:pl-12 pr-12 lg:pr-16 text-sm lg:text-base font-bold">
                 {main.cta[0].text}
               </div>
-            </Link>
+            </button>
             <Link
               href={main.cta[1]?.href ?? main.cta[0].href}
               className=" relative flex justify-end  cursor-pointer"
@@ -645,10 +648,12 @@ const CommunityImpactLoop = () => {
         ) : (
           <>
             <div className=" flex justify-end my-8 cursor-pointer">
-              <img
-                src="/images/community-impact-loop/submit.png"
-                alt="Submit Proposal / Collaboration Inquiry"
-              />
+              <button type="button" onClick={() => setIsProposalOpen(true)} className="cursor-pointer">
+                <img
+                  src="/images/community-impact-loop/submit.png"
+                  alt="Submit Proposal / Collaboration Inquiry"
+                />
+              </button>
             </div>
             <div className=" flex justify-end my-8 cursor-pointer">
               <img
@@ -660,6 +665,7 @@ const CommunityImpactLoop = () => {
         )}
       </div>
       <Chatbot />
+      <SubmitProposal isOpen={isProposalOpen} onClose={() => setIsProposalOpen(false)} />
     </React.Fragment>
   );
 };

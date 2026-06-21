@@ -6,6 +6,7 @@ import EnergyStorageSystems from "./EnergyStorageSystems";
 import SystemIntelligence from "./SystemIntelligence";
 import BalanceofSystem from "./BalanceofSystem";
 import ProcurementNotes from "./ProcurementNotes";
+import SupplyingToGreen from "./Modals/SupplyingToGreen";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useKeySupplyCategories } from "../../../hooks/useKeySupplyCategories";
@@ -13,6 +14,7 @@ import { useKeySupplyCategories } from "../../../hooks/useKeySupplyCategories";
 const KeySupplyCategories = () => {
   const { data: apiData, isLoading, error } = useKeySupplyCategories();
   const [isSolarOpen, setIsSolarOpen] = useState(false);
+  const [isSupplyingOpen, setIsSupplyingOpen] = useState(false);
   const [isPowerOpen, setIsPowerOpen] = useState(false);
   const [isEnergyOpen, setIsEnergyOpen] = useState(false);
   const [isSystemOpen, setIsSystemOpen] = useState(false);
@@ -163,15 +165,16 @@ const KeySupplyCategories = () => {
               </div>
               <div className="lg:absolute lg:block hidden right-0 bottom-0">
                 <div className=" flex justify-end my-10 cursor-pointer">
-                  <a 
-                    href={apiData?.mainPage?.cta?.[0]?.href || "#"}
+                  <button
+                    type="button"
+                    onClick={() => setIsSupplyingOpen(true)}
                     className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
                   >
                     <img
                       src="/images/key-supplier-categories/supplying-to-green.png"
                       alt={apiData?.mainPage?.cta?.[0]?.text || "supplying to green"}
                     />
-                  </a>
+                  </button>
                 </div>
                 <div className=" flex justify-end my-10 lg:mb-32 cursor-pointer">
                   <a 
@@ -236,15 +239,16 @@ const KeySupplyCategories = () => {
             </div> 
               <div className=" lg:hidden space-y-8  my-4 mb-40">
                 <div className=" flex justify-end my-10 cursor-pointer">
-                  <a 
-                    href={apiData?.mainPage?.cta?.[0]?.href || "#"}
+                  <button
+                    type="button"
+                    onClick={() => setIsSupplyingOpen(true)}
                     className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
                   >
                     <img
                       src="/images/key-supplier-categories/supplying-to-green.png"
                       alt={apiData?.mainPage?.cta?.[0]?.text || "supplying to green"}
                     />
-                  </a>
+                  </button>
                 </div>
                 <div className=" flex justify-end my-10 lg:mb-32 cursor-pointer">
                   <a 
@@ -291,6 +295,10 @@ const KeySupplyCategories = () => {
       <ProcurementNotes
         isOpen={isProcurementOpen}
         onClose={closeProcurementModal}
+      />
+      <SupplyingToGreen
+        isOpen={isSupplyingOpen}
+        onClose={() => setIsSupplyingOpen(false)}
       />
     </React.Fragment>
   );

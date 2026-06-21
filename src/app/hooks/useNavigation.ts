@@ -67,13 +67,16 @@ export const useNavigation = (isOpen: boolean, currentPath?: string) => {
     const fetchNavigationData = async () => {
       if (!isOpen) return;
 
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
+
       try {
         setLoading(true);
         setError(null);
 
-        const response = await fetch(
-          "https://g-stack.green.com.pg/api/navigation"
-        );
+        const response = await fetch("/api/navigation", {
+          signal: controller.signal,
+        });
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -95,13 +98,19 @@ export const useNavigation = (isOpen: boolean, currentPath?: string) => {
           throw new Error("Invalid response format");
         }
       } catch (error) {
-        console.error("Failed to fetch navigation data:", error);
-        setError(
-          error instanceof Error
-            ? error.message
-            : "Failed to fetch navigation data"
-        );
+        if (error instanceof Error && error.name === "AbortError") {
+          console.error("Navigation fetch timed out");
+          setError("Navigation request timed out");
+        } else {
+          console.error("Failed to fetch navigation data:", error);
+          setError(
+            error instanceof Error
+              ? error.message
+              : "Failed to fetch navigation data"
+          );
+        }
       } finally {
+        clearTimeout(timeout);
         setLoading(false);
       }
     };

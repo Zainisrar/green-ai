@@ -3,11 +3,13 @@ import React from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useProjects } from "../../../hooks/useProjects";
+import LetsStart from "./Modals/LetsStart";
 
 const Project = () => {
   const [isProjectsOpen, setIsProjectsOpen] = React.useState(true);
   const [currentProjectIndex, setCurrentProjectIndex] = React.useState(0);
   const [isDesktop, setIsDesktop] = React.useState(false);
+  const [isStartOpen, setIsStartOpen] = React.useState(false);
   React.useEffect(() => {
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 1024);
@@ -508,13 +510,18 @@ const Project = () => {
           </button>
         </div>
 
-        <div className="hidden lg:block lg:fixed right-2 bottom-28 z-40 cursor-pointer">
+        <button
+          type="button"
+          onClick={() => setIsStartOpen(true)}
+          className="hidden lg:block lg:fixed right-2 bottom-28 z-40 cursor-pointer"
+        >
           <img src="/images/projects/letStart.png" alt="Let's Start" />
-        </div>
+        </button>
         <div className="lg:block hidden">
           <Chatbot />
         </div>
       </div>
+      <LetsStart isOpen={isStartOpen} onClose={() => setIsStartOpen(false)} />
     </React.Fragment>
   );
 };

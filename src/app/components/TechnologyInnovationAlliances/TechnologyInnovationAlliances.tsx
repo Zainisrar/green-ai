@@ -11,6 +11,7 @@ import WhyWePartner from "./Modals/WhyWePartner";
 import CurrentTechnologyCollaborators from "./Modals/CurrentTechnologyCollaborators";
 import ResearchCoDevelopment from "./Modals/ResearchCoDevelopment";
 import InnovativePartner from "./Modals/InnovativePartner";
+import BecomeTechnologyPartner from "./Modals/BecomeTechnologyPartner";
 import { useInteractiveZIndex } from "../../../hooks/useInteractiveZIndex";
 import { handleImageError } from "../lib/utils";
 
@@ -20,6 +21,7 @@ const TechnologyInnovationAlliances = () => {
   const [isCurrentTechnologyCollaboratorsOpen, setIsCurrentTechnologyCollaboratorsOpen] = useState(false);
   const [isResearchCoDevelopmentOpen, setIsResearchCoDevelopmentOpen] = useState(false);
   const [isBecomeInnovationPartnerOpen, setIsBecomeInnovationPartnerOpen] = useState(false);
+  const [isBecomeTechnologyPartnerOpen, setIsBecomeTechnologyPartnerOpen] = useState(false);
   
   // Interactive z-index hooks
   const procurementEthosProps = useInteractiveZIndex();
@@ -277,15 +279,16 @@ const TechnologyInnovationAlliances = () => {
                 </div>
                 <div className="flex justify-end my-8">
                   <div {...loginLink2Props.getContainerProps()}>
-                    <Link
-                      href={mainPage.cta?.[0]?.href || "/supply-partners/login"}
-                      className=" cursor-pointer"
+                    <button
+                      type="button"
+                      onClick={() => setIsBecomeTechnologyPartnerOpen(true)}
+                      className=" cursor-pointer hover:opacity-80 transition-opacity"
                     >
                       <img
                         src="/images/technology-innovation-alliances/become-technology-partner.png"
                         alt={mainPage.cta?.[0]?.text || "Become a Technology Partner"}
                       />
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -335,6 +338,10 @@ const TechnologyInnovationAlliances = () => {
         img={modal3?.img || { alt: "", src: "" }}
         keys={modal3?.keys || []}
         quote={modal3?.quote || { text: "", highlighted: "" }}
+      />
+      <BecomeTechnologyPartner
+        isOpen={isBecomeTechnologyPartnerOpen}
+        onClose={() => setIsBecomeTechnologyPartnerOpen(false)}
       />
     </React.Fragment>
   );

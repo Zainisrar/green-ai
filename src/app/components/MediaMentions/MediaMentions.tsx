@@ -4,6 +4,7 @@ import TopNavigation from '../TopNavigation/TopNavigation'
 import Chatbot from '../Chatbot'
 import { useMediaMentions } from '../../../hooks/useMediaMentions'
 import { useNavigationState } from '@/hooks/useNavigationState';
+import SubmitMediaRequest from './Modals/SubmitMediaRequest';
 // import { useNavigationState } from '@/hooks/useNavigationState';
 
 interface MediaItem {
@@ -26,6 +27,7 @@ interface YearData {
 const MediaMentions: React.FC = () => {
   const { data: apiData } = useMediaMentions();
   const nav=useNavigationState()
+  const [isMediaRequestOpen, setIsMediaRequestOpen] = useState<boolean>(false);
   const [selectedYear, setSelectedYear] = useState<number>(2025);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [playingVideo, setPlayingVideo] = useState<number | null>(null);
@@ -281,8 +283,9 @@ const MediaMentions: React.FC = () => {
 
       {/* Submit Media Request */}
       <div className="flex justify-end px-4 lg:px-8 my-8 mb-40">
-        <a 
-          href={apiData?.mainPage.cta[0]?.href || "#"}
+        <button
+          type="button"
+          onClick={() => setIsMediaRequestOpen(true)}
           className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
         >
           <img
@@ -290,10 +293,14 @@ const MediaMentions: React.FC = () => {
             alt={apiData?.mainPage.cta[0]?.text || "Submit Media Request"}
             className="h-12 object-contain"
           />
-        </a>
+        </button>
       </div>
-       
+
       <Chatbot />
+      <SubmitMediaRequest
+        isOpen={isMediaRequestOpen}
+        onClose={() => setIsMediaRequestOpen(false)}
+      />
     </div>
   )
 }

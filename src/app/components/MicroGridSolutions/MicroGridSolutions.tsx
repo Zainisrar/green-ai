@@ -1,12 +1,16 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useHybridMicrogridSolutions } from "../../../hooks/useHybridMicrogridSolutions";
 import Link from "next/link";
+import SystemArchitect from "./Modals/SystemArchitect";
+import DeploymentReview from "./Modals/DeploymentReview";
 
 const MicroGridSolutions = () => {
   const { microgridData,  error } = useHybridMicrogridSolutions();
+  const [isArchitectOpen, setIsArchitectOpen] = useState(false);
+  const [isDeploymentReviewOpen, setIsDeploymentReviewOpen] = useState(false);
 
 
   if (error) {
@@ -203,30 +207,32 @@ const MicroGridSolutions = () => {
 
           {/* Call to Action Buttons */}
           <div className="flex flex-col items-center gap-6">
-            <Link
-              href={microgridData?.callToActions[0].href || "#"}
+            <button
+              type="button"
+              onClick={() => setIsArchitectOpen(true)}
               className="relative inline-block cursor-pointer w-64 sm:w-72"
             >
               <img
                 src="/images/microgrid-solutions/systemarchitect.png"
-                alt="system architect"
+                alt="Talk to a system architect"
                 className="w-full"
               />
               <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
-                {microgridData?.callToActions[0].text} {` >`}
+                {microgridData?.callToActions?.[0]?.text || "Talk to a System Architect"} {` >`}
               </div>
-            </Link>
-            <Link
-              href={microgridData?.callToActions[1].href || "#"}
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsDeploymentReviewOpen(true)}
               className="relative inline-block cursor-pointer w-64 sm:w-72"
             >
-              <img src="/images/microgrid-solutions/book.png" alt="book" className="w-full" />
+              <img src="/images/microgrid-solutions/book.png" alt="Book a deployment review" className="w-full" />
               <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
-                {microgridData?.callToActions[1].text} {` >`}
+                {microgridData?.callToActions?.[1]?.text || "Book a Deployment Review"} {` >`}
               </div>
-            </Link>
+            </button>
             <Link
-              href={microgridData?.callToActions[2].href || "#"}
+              href={microgridData?.callToActions?.[2]?.href || "#"}
               className="relative inline-block cursor-pointer w-64 sm:w-72"
             >
               <img
@@ -235,7 +241,7 @@ const MicroGridSolutions = () => {
                 className="w-full"
               />
               <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
-                {microgridData?.callToActions[2].text}
+                {microgridData?.callToActions?.[2]?.text}
               </div>
             </Link>
           </div>
@@ -435,30 +441,32 @@ const MicroGridSolutions = () => {
                 "with zero disruption, and full intelligence."}
             </p>
           </div>
-          <div className="lg:flex flex-col items-end gap-6 hidden">
-            <Link
-              href={microgridData?.callToActions[0].href || "#"}
+          <div className="hidden lg:flex flex-col items-end gap-6">
+            <button
+              type="button"
+              onClick={() => setIsArchitectOpen(true)}
               className="relative inline-block cursor-pointer"
             >
               <img
                 src="/images/microgrid-solutions/systemarchitect.png"
-                alt="system architect"
+                alt="Talk to a system architect"
               />
               <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
-                {microgridData?.callToActions[0].text} {` >`}
+                {microgridData?.callToActions?.[0]?.text || "Talk to a System Architect"} {` >`}
               </div>
-            </Link>
-            <Link
-              href={microgridData?.callToActions[1].href || "#"}
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsDeploymentReviewOpen(true)}
               className="relative inline-block cursor-pointer"
             >
-              <img src="/images/microgrid-solutions/book.png" alt="book" />
+              <img src="/images/microgrid-solutions/book.png" alt="Book a deployment review" />
               <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
-                {microgridData?.callToActions[1].text} {` >`}
+                {microgridData?.callToActions?.[1]?.text || "Book a Deployment Review"} {` >`}
               </div>
-            </Link>
+            </button>
             <Link
-              href={microgridData?.callToActions[2].href || "#"}
+              href={microgridData?.callToActions?.[2]?.href || "#"}
               className="relative inline-block cursor-pointer"
             >
               <img
@@ -466,7 +474,7 @@ const MicroGridSolutions = () => {
                 alt="downloadhybrid"
               />
               <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
-                {microgridData?.callToActions[2].text}
+                {microgridData?.callToActions?.[2]?.text}
               </div>
             </Link>
           </div>
@@ -512,6 +520,8 @@ const MicroGridSolutions = () => {
       <div className="lg:block hidden">
         <Chatbot />
       </div>
+      <SystemArchitect isOpen={isArchitectOpen} onClose={() => setIsArchitectOpen(false)} />
+      <DeploymentReview isOpen={isDeploymentReviewOpen} onClose={() => setIsDeploymentReviewOpen(false)} />
     </React.Fragment>
   );
 };

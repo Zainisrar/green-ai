@@ -7,144 +7,72 @@ interface Props {
   title: string;
   items: { category: string; requiredStandard: string }[];
 }
+
 const CodeOfConduct = ({ isOpen, onClose, title, items }: Props) => {
   if (!isOpen) return null;
-  const [isMobile, setIsMobile] = React.useState(false);
-
-  React.useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768); // Example breakpoint for mobile
-    };
-    handleResize(); // Check on mount
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed inset-0 bg-black/20 z-50 flex items-center justify-center">
-        {/* Modal Container */}
-        <div className="relative w-full lg:max-w-6xl mx-4">
-          {/* Skewed Modal Background */}
-          {
-            isMobile?
-            <div
-            className="bg-gray-100 h-[80vh]  overflow-y-auto py-14 border-2 border-[#4CAF50] px-4 relative shadow-2xl"
+    <div className="scrollbar-hide fixed inset-0 z-[9999999999999999999] flex items-start justify-center overflow-y-auto bg-black/20 p-3 sm:items-center sm:p-4">
+      <div className="relative my-2 w-full max-w-6xl sm:my-auto">
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute right-4 top-2 z-30 cursor-pointer p-1.5 text-gray-700 transition hover:text-gray-900 sm:right-8 sm:top-4"
+          aria-label="Close modal"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 sm:h-8 sm:w-8"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2.5}
           >
-            {/* Close Button */}
-            <div className="flex justify-end w-full">
-              <button
-                onClick={onClose}
-                className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 "
-              >
-                <img src="/images/join-us/xicon.png" alt="Close Icon" />
-              </button>
-            </div>
-            {/* Modal Content */}
-            <div className="">
-              {/* Title Section */}
-              <div className="mb-8">
-                <h2 className="text-3xl font-black text-gray-800 mb-4">
-                  {title || "Code of Conduct"}
-                </h2>
-                <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
-              </div>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
 
-              {/* Code of Conduct Table */}
-              <div className="overflow-hidden">
-                <table className="w-full">
-                  <thead>
-                    <tr>
-                      <th className="px-6 py-4 text-left text-lg font-bold text-[#4CAF50]">
-                        Category
-                      </th>
-                      <th className="px-6 py-4 text-left text-lg font-bold text-[#4CAF50]">
-                        Required Standard
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {items?.map((row, idx) => (
-                      <tr key={`${row.category}-${idx}`}>
-                        <td className="px-6 py-4 font-semibold text-gray-800">
-                          {row.category}
-                        </td>
-                        <td className="px-6 py-4 text-gray-700">
-                          {row.requiredStandard}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+        <div className="scrollbar-hide max-h-[calc(100dvh-1.5rem)] overflow-y-auto sm:max-h-[90dvh]">
+          <div className="relative mx-2 rounded-lg border-2 border-[#4CAF50] bg-gray-100 px-6 py-10 pr-12 shadow-2xl sm:mx-3 sm:px-12 sm:py-12 sm:pr-16 lg:px-16 lg:pr-20">
+            {/* Title Section */}
+            <div className="mb-6 sm:mb-8">
+              <h2 className="text-2xl font-black text-gray-800 sm:text-3xl">
+                {title || "Code of Conduct"}
+              </h2>
+              <div className="mt-4 h-0.5 w-full bg-gray-300" />
             </div>
-          </div>:
-          <div
-            className="bg-gray-100 transform  py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-            style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
-              transform:"skewX(-12deg)"
-             }}
-          >
-            {/* Close Button */}
-            <div className="flex justify-end w-full">
-              <button
-                onClick={onClose}
-                style={{
-                  transform:"skewX(12deg)"
-                }}
-                className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
-              >
-                <img src="/images/join-us/xicon.png" alt="Close Icon" />
-              </button>
-            </div>
-            {/* Modal Content */}
-            <div
-             style={{
-              transform:"skewX(6deg)"
-             }}
-            className="transform max-w-5xl mx-auto">
-              {/* Title Section */}
-              <div className="mb-8">
-                <h2 className="text-3xl font-black text-gray-800 mb-4">
-                  {title || "Code of Conduct"}
-                </h2>
-                <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
-              </div>
 
-              {/* Code of Conduct Table */}
-              <div className="overflow-hidden">
-                <table className="w-full">
-                  <thead>
-                    <tr>
-                      <th className="px-6 py-4 text-left text-lg font-bold text-[#4CAF50]">
-                        Category
-                      </th>
-                      <th className="px-6 py-4 text-left text-lg font-bold text-[#4CAF50]">
-                        Required Standard
-                      </th>
+            {/* Code of Conduct Table */}
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[480px]">
+                <thead>
+                  <tr>
+                    <th className="px-4 py-3 text-left text-base font-bold text-[#4CAF50] sm:px-6 sm:py-4 sm:text-lg">
+                      Category
+                    </th>
+                    <th className="px-4 py-3 text-left text-base font-bold text-[#4CAF50] sm:px-6 sm:py-4 sm:text-lg">
+                      Required Standard
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {items?.map((row, idx) => (
+                    <tr key={`${row.category}-${idx}`}>
+                      <td className="px-4 py-3 font-semibold text-gray-800 sm:px-6 sm:py-4">
+                        {row.category}
+                      </td>
+                      <td className="px-4 py-3 text-gray-700 sm:px-6 sm:py-4">
+                        {row.requiredStandard}
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {items?.map((row, idx) => (
-                      <tr key={`${row.category}-${idx}`}>
-                        <td className="px-6 py-4 font-semibold text-gray-800">
-                          {row.category}
-                        </td>
-                        <td className="px-6 py-4 text-gray-700">
-                          {row.requiredStandard}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
-          }
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 
