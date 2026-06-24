@@ -11,6 +11,7 @@ import EngineeringFormModal, {
   formFieldClass,
   formGridClass,
 } from "@/app/components/shared/EngineeringFormModal";
+import PhoneInput from "@/app/components/shared/PhoneInput";
 
 interface Props {
   isOpen: boolean;
@@ -40,6 +41,7 @@ const Booking = ({ isOpen, onClose }: Props) => {
     notes: "",
   });
 
+  const [phoneCountry, setPhoneCountry] = useState({ dial_code: "+675", country_code: "pg" });
   const [useWhatsapp, setUseWhatsapp] = useState(false);
   const [captcha, setCaptcha] = useState(generateCaptcha());
   const [captchaInput, setCaptchaInput] = useState("");
@@ -96,6 +98,8 @@ const Booking = ({ isOpen, onClose }: Props) => {
           lastname: formData.organization,
           email: formData.email,
           phone: formData.phone,
+          phone_dial_code: phoneCountry.dial_code,
+          phone_country_code: phoneCountry.country_code,
           is_whatsapp_number: useWhatsapp,
           message,
         }),
@@ -162,13 +166,13 @@ const Booking = ({ isOpen, onClose }: Props) => {
         </div>
 
         <div className={formGridClass}>
-          <div className="flex min-w-0">
-            <div className="flex shrink-0 items-center rounded-l-lg border border-r-0 border-gray-300 bg-white px-2 py-2.5 sm:px-3 sm:py-3">
-              <img src="/images/book-consulation/countryCode.png" alt="" className="mr-1 h-4 w-5 sm:mr-2 sm:w-6" />
-              <span className="text-sm text-gray-700 sm:text-base">+675</span>
-            </div>
-            <input type="tel" name="phone" placeholder="PHONE" value={formData.phone} onChange={handleInputChange} className={`${formFieldClass} rounded-l-none`} required />
-          </div>
+          <PhoneInput
+            phone={formData.phone}
+            onPhoneChange={handleInputChange}
+            dialCode={phoneCountry.dial_code}
+            countryCode={phoneCountry.country_code}
+            onCountryChange={(dial_code, country_code) => setPhoneCountry({ dial_code, country_code })}
+          />
           <input type="datetime-local" name="preferredDateTime" value={formData.preferredDateTime} onChange={handleInputChange} className={formFieldClass} required />
         </div>
 

@@ -5,6 +5,7 @@ import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
 import EngineeringFormModal, {
   formGridClass,
 } from "@/app/components/shared/EngineeringFormModal";
+import PhoneInput from "@/app/components/shared/PhoneInput";
 
 interface Props {
   isOpen: boolean;
@@ -40,6 +41,7 @@ const fieldInner =
 
 const RequestConsultation = ({ isOpen, onClose }: Props) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [phoneCountry, setPhoneCountry] = useState({ dial_code: "+675", country_code: "pg" });
   const [agreed, setAgreed] = useState(false);
   const [fileName, setFileName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -116,6 +118,8 @@ const RequestConsultation = ({ isOpen, onClose }: Props) => {
           lastname: formData.organization,
           email: formData.email,
           phone: formData.phone,
+          phone_dial_code: phoneCountry.dial_code,
+          phone_country_code: phoneCountry.country_code,
           message,
         }),
       );
@@ -191,25 +195,13 @@ const RequestConsultation = ({ isOpen, onClose }: Props) => {
               required
             />
           </div>
-          <div className={`${fieldBox} gap-2`}>
-            <div className="flex shrink-0 items-center gap-1">
-              <img
-                src="/images/book-consulation/countryCode.png"
-                alt=""
-                className="h-4 w-5 sm:w-6"
-              />
-              <span className="text-gray-700">+675</span>
-            </div>
-            <input
-              type="tel"
-              name="phone"
-              placeholder="PHONE"
-              value={formData.phone}
-              onChange={handleInputChange}
-              className={fieldInner}
-              required
-            />
-          </div>
+          <PhoneInput
+            phone={formData.phone}
+            onPhoneChange={handleInputChange}
+            dialCode={phoneCountry.dial_code}
+            countryCode={phoneCountry.country_code}
+            onCountryChange={(dial_code, country_code) => setPhoneCountry({ dial_code, country_code })}
+          />
         </div>
 
         <div className={formGridClass}>
@@ -319,7 +311,7 @@ const RequestConsultation = ({ isOpen, onClose }: Props) => {
             type="button"
             onClick={resetForm}
             disabled={isLoading}
-            className="cursor-pointer rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
+            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
           >
             <span className="block text-sm font-bold text-gray-800 sm:text-base">
               Reset
@@ -328,7 +320,7 @@ const RequestConsultation = ({ isOpen, onClose }: Props) => {
           <button
             type="submit"
             disabled={isLoading}
-            className="cursor-pointer rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
+            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
           >
             <span className="block text-sm font-bold text-gray-900 sm:text-base">
               {isLoading ? "Submitting..." : "Submit Request"}

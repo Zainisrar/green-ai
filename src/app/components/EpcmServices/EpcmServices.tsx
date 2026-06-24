@@ -224,15 +224,15 @@ const EpcmServices = () => {
                   .
                 </p>
               </div>
-              <div className="flex flex-col items-start lg:items-end gap-6 shrink-0">
+              <div className="flex flex-col items-start lg:items-stretch gap-6 shrink-0 w-full max-w-[341px]">
                 <Link
                   href={epcmData?.callToActions?.[0]?.href || "#"}
-                  className="relative inline-block cursor-pointer"
+                  className="relative block w-full cursor-pointer"
                 >
                   <img
                     src="/images/epcm-services/epcmBtn.png"
                     alt="epcm"
-                    className="w-full max-w-[341px] lg:w-auto"
+                    className="w-full"
                   />
                   <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
                     {epcmData?.callToActions?.[0]?.text}
@@ -241,12 +241,12 @@ const EpcmServices = () => {
                 <button
                   type="button"
                   onClick={() => setIsDebriefOpen(true)}
-                  className="relative inline-block cursor-pointer"
+                  className="relative block w-full cursor-pointer"
                 >
                   <img
                     src="/images/epcm-services/technicalBtn.png"
                     alt="Request a technical debrief"
-                    className="w-full max-w-[301px] lg:w-auto"
+                    className="w-full"
                   />
                   <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
                     {epcmData?.callToActions?.[1]?.text || "Request a Technical Debrief"}{` >`}
@@ -255,12 +255,12 @@ const EpcmServices = () => {
                 <button
                   type="button"
                   onClick={() => setIsDiscoveryOpen(true)}
-                  className="relative inline-block cursor-pointer"
+                  className="relative block w-full cursor-pointer"
                 >
                   <img
                     src="/images/epcm-services/bookingBtn.png"
                     alt="Book a discovery consultation"
-                    className="w-full max-w-[331px] lg:w-auto"
+                    className="w-full"
                   />
                   <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
                     {epcmData?.callToActions?.[2]?.text || "Book a Discovery Consultation"}{` >`}

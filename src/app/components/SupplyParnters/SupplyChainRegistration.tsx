@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
+import CountryCodeDropdown from "@/app/components/shared/CountryCodeDropdown";
 
 const STEPS = [
   "Company Details",
@@ -29,6 +30,9 @@ const inputClass =
   "w-full min-w-0 border-b border-gray-300 bg-transparent py-1.5 text-sm text-gray-700 placeholder-gray-400 focus:border-[#4CAF50] focus:outline-none";
 
 const Required = () => <span className="text-red-500">*</span>;
+
+const codeTriggerClass =
+  "flex items-center gap-1 bg-transparent text-sm text-gray-700 focus:outline-none";
 
 const initialState = {
   // Step 1 — Company Details
@@ -88,6 +92,9 @@ type FormState = typeof initialState;
 const SupplyChainRegistration = () => {
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<FormState>(initialState);
+  const [officeCountry, setOfficeCountry] = useState({ dial_code: "+675", country_code: "pg" });
+  const [mobileCountry, setMobileCountry] = useState({ dial_code: "+675", country_code: "pg" });
+  const [stakeholderCountry, setStakeholderCountry] = useState({ dial_code: "+675", country_code: "pg" });
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
   const [customProducts, setCustomProducts] = useState<string[]>([]);
   const [customProduct, setCustomProduct] = useState("");
@@ -158,8 +165,8 @@ const SupplyChainRegistration = () => {
       `Company email: ${form.companyEmail}`,
       `Website: ${form.websiteLink}`,
       `LinkedIn: ${form.linkedinPage || "None"}`,
-      `Office telephone: +675 ${form.officeTelephone}`,
-      `Mobile: +675 ${form.mobileNo} (WhatsApp/WeChat: ${form.isWhatsapp ? "Yes" : "No"})`,
+      `Office telephone: ${officeCountry.dial_code} ${form.officeTelephone}`,
+      `Mobile: ${mobileCountry.dial_code} ${form.mobileNo} (WhatsApp/WeChat: ${form.isWhatsapp ? "Yes" : "No"})`,
       `Products: ${selectedProducts.join(", ") || "None"}`,
       "",
       "— Stakeholders Details —",
@@ -168,7 +175,7 @@ const SupplyChainRegistration = () => {
       `Nationality: ${form.nationality}`,
       `ID/Passport: ${form.idPassportNo}`,
       `Email: ${form.stakeholderEmail}`,
-      `Phone: +675 ${form.stakeholderPhone}`,
+      `Phone: ${stakeholderCountry.dial_code} ${form.stakeholderPhone}`,
       `Shareholding: ${form.shareholding}%`,
       `Address: ${form.stakeholderAddress}`,
       "",
@@ -205,6 +212,8 @@ const SupplyChainRegistration = () => {
           lastname: form.companyFullName,
           email: form.companyEmail,
           phone: form.mobileNo,
+          phone_dial_code: mobileCountry.dial_code,
+          phone_country_code: mobileCountry.country_code,
           is_whatsapp_number: form.isWhatsapp,
           message,
         }),
@@ -367,16 +376,24 @@ const SupplyChainRegistration = () => {
                     <div className={fieldWrap}>
                       <label className={labelClass}>Office Telephone No <Required /></label>
                       <div className="flex items-center gap-2 border-b border-gray-300 py-1.5">
-                        <img src="/images/book-consulation/countryCode.png" alt="" className="h-4 w-5" />
-                        <span className="text-sm text-gray-600">+675</span>
+                        <CountryCodeDropdown
+                          dialCode={officeCountry.dial_code}
+                          countryCode={officeCountry.country_code}
+                          onSelect={(dial_code, country_code) => setOfficeCountry({ dial_code, country_code })}
+                          className={codeTriggerClass}
+                        />
                         <input name="officeTelephone" value={form.officeTelephone} onChange={handleChange} className="w-full bg-transparent text-sm text-gray-700 focus:outline-none" required />
                       </div>
                     </div>
                     <div className={fieldWrap}>
                       <label className={labelClass}>Mobile No <Required /></label>
                       <div className="flex items-center gap-2 border-b border-gray-300 py-1.5">
-                        <img src="/images/book-consulation/countryCode.png" alt="" className="h-4 w-5" />
-                        <span className="text-sm text-gray-600">+675</span>
+                        <CountryCodeDropdown
+                          dialCode={mobileCountry.dial_code}
+                          countryCode={mobileCountry.country_code}
+                          onSelect={(dial_code, country_code) => setMobileCountry({ dial_code, country_code })}
+                          className={codeTriggerClass}
+                        />
                         <input name="mobileNo" value={form.mobileNo} onChange={handleChange} className="w-full bg-transparent text-sm text-gray-700 focus:outline-none" required />
                       </div>
                       <label className="mt-2 flex items-center gap-2 text-xs text-gray-600">
@@ -412,8 +429,12 @@ const SupplyChainRegistration = () => {
                     <div className={fieldWrap}>
                       <label className={labelClass}>Phone <Required /></label>
                       <div className="flex items-center gap-2 border-b border-gray-300 py-1.5">
-                        <img src="/images/book-consulation/countryCode.png" alt="" className="h-4 w-5" />
-                        <span className="text-sm text-gray-600">+675</span>
+                        <CountryCodeDropdown
+                          dialCode={stakeholderCountry.dial_code}
+                          countryCode={stakeholderCountry.country_code}
+                          onSelect={(dial_code, country_code) => setStakeholderCountry({ dial_code, country_code })}
+                          className={codeTriggerClass}
+                        />
                         <input name="stakeholderPhone" value={form.stakeholderPhone} onChange={handleChange} className="w-full bg-transparent text-sm text-gray-700 focus:outline-none" required />
                       </div>
                     </div>
@@ -598,7 +619,7 @@ const SupplyChainRegistration = () => {
                   <button
                     type="button"
                     onClick={goBack}
-                    className="cursor-pointer rounded-md border border-gray-300 px-8 py-2.5 text-sm font-bold text-gray-700 transition hover:bg-gray-50"
+                    className="cursor-pointer -skew-x-[16deg] rounded-md border border-gray-300 px-8 py-2.5 text-sm font-bold text-gray-700 transition hover:bg-gray-50"
                   >
                     Back
                   </button>
@@ -608,7 +629,7 @@ const SupplyChainRegistration = () => {
                 <button
                   type="button"
                   onClick={goNext}
-                  className="cursor-pointer rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-2.5 text-sm font-bold text-gray-800 shadow-md transition hover:brightness-105"
+                  className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-2.5 text-sm font-bold text-gray-800 shadow-md transition hover:brightness-105"
                 >
                   Next
                 </button>
@@ -616,7 +637,7 @@ const SupplyChainRegistration = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="cursor-pointer rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-2.5 text-sm font-bold text-gray-900 shadow-md transition hover:brightness-105 disabled:opacity-50"
+                  className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-2.5 text-sm font-bold text-gray-900 shadow-md transition hover:brightness-105 disabled:opacity-50"
                 >
                   {isLoading ? "Submitting..." : "Submit Application"}
                 </button>

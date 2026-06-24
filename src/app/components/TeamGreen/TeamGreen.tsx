@@ -6,6 +6,7 @@ import WhoWeAre from "./Modals/WhoWeAre";
 import OurLeadershipPhilosophy from "./Modals/OurLeadershipPhilosophy";
 import MeettheTeam from "./Modals/MeettheTeam";
 import OurCultureinAction from "./Modals/OurCultureinAction";
+import WorkWithUs from "./Modals/WorkWithUs";
 import { useTeamGreen } from "../../../hooks/useTeamGreen";
 import { useInteractiveZIndex } from "../../../hooks/useInteractiveZIndex";
 
@@ -14,6 +15,7 @@ const TeamGreen = () => {
   const [isOurLeadershipPhilosophyOpen, setIsOurLeadershipPhilosophyOpen] = React.useState(false);
   const [isMeettheTeamOpen, setIsMeettheTeamOpen] = React.useState(false);
   const [isOurCultureinActionOpen, setIsOurCultureinActionOpen] = React.useState(false);
+  const [isWorkWithUsOpen, setIsWorkWithUsOpen] = React.useState(false);
 
   // Fetch team green data
   const { data: teamGreenData } = useTeamGreen();
@@ -171,18 +173,34 @@ const TeamGreen = () => {
               <div>
                 {data?.mainPage.cta.map((cta, index) => {
                   const ctaProps = index === 0 ? workWithUsProps : cultureBriefProps;
+                  const img = (
+                    <img
+                      src={index === 0 ? "/images/team-green/work-with-us.png" : "/images/team-green/green.png"}
+                      alt={cta.text}
+                    />
+                  );
                   return (
                     <div key={index} className="flex justify-end my-8">
                       <div {...ctaProps.getContainerProps()}>
-                        <a 
-                          href={cta.href || '#'} 
-                          className="cursor-pointer block"
-                        >
-                          <img
-                            src={index === 0 ? "/images/team-green/work-with-us.png" : "/images/team-green/green.png"}
-                            alt={cta.text}
-                          />
-                        </a>
+                        {index === 0 ? (
+                          <button
+                            type="button"
+                            onClick={() => setIsWorkWithUsOpen(true)}
+                            className="cursor-pointer block"
+                          >
+                            {img}
+                          </button>
+                        ) : (
+                          <a
+                            href={cta.href || "#"}
+                            download
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="cursor-pointer block"
+                          >
+                            {img}
+                          </a>
+                        )}
                       </div>
                     </div>
                   );
@@ -231,6 +249,10 @@ const TeamGreen = () => {
         }}
         data={data?.ourCultureActionModal}
         />
+      <WorkWithUs
+        isOpen={isWorkWithUsOpen}
+        onClose={() => setIsWorkWithUsOpen(false)}
+      />
     </React.Fragment>
   );
 };

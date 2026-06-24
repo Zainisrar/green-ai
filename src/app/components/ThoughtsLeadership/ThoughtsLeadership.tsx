@@ -30,7 +30,25 @@ const ThoughtsLeadership = () => {
   const [selectedCategory, setSelectedCategory] = React.useState<string | null>(
     null
   );
+  const [expandedIds, setExpandedIds] = React.useState<Set<number>>(new Set());
   const articlesPerPage = 6;
+
+  const handleReadMore = (article: Article) => {
+    // If the CMS provides a real destination, open it; otherwise expand the text inline.
+    if (article.href && article.href !== "#") {
+      window.open(article.href, "_blank", "noopener,noreferrer");
+      return;
+    }
+    setExpandedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(article.id)) {
+        next.delete(article.id);
+      } else {
+        next.add(article.id);
+      }
+      return next;
+    });
+  };
 
   const { data: apiData } = useThoughtLeadership();
   
@@ -327,7 +345,11 @@ const ThoughtsLeadership = () => {
                           <h4 className="font-bold text-gray-800 mb-2 text-base lg:text-lg line-clamp-2">
                             {article.title}
                           </h4>
-                          <p className="text-sm text-gray-600 mb-4 line-clamp-3">
+                          <p
+                            className={`text-sm text-gray-600 mb-4 whitespace-pre-line ${
+                              expandedIds.has(article.id) ? "" : "line-clamp-3"
+                            }`}
+                          >
                             {article.description}
                           </p>
                           <div className="mt-auto flex justify-between items-end gap-3">
@@ -339,7 +361,12 @@ const ThoughtsLeadership = () => {
                               </div>
                             </div>
                             <div {...readMoreProps.getContainerProps()}>
-                              <button className="cursor-pointer hover:opacity-80 transition-opacity flex-shrink-0">
+                              <button
+                                type="button"
+                                onClick={() => handleReadMore(article)}
+                                aria-expanded={expandedIds.has(article.id)}
+                                className="cursor-pointer hover:opacity-80 transition-opacity flex-shrink-0"
+                              >
                                 <img
                                   src="/images/thoughts-leadership/readMore.png"
                                   alt="read more"

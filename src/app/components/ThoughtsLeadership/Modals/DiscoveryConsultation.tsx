@@ -6,6 +6,7 @@ import EngineeringFormModal, {
   formFieldClass,
   formGridClass,
 } from "@/app/components/shared/EngineeringFormModal";
+import PhoneInput from "@/app/components/shared/PhoneInput";
 
 interface Props {
   isOpen: boolean;
@@ -30,6 +31,7 @@ const initialFormData: FormData = {
 
 const DiscoveryConsultation = ({ isOpen, onClose }: Props) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [phoneCountry, setPhoneCountry] = useState({ dial_code: "+675", country_code: "pg" });
   const [agreed, setAgreed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -82,6 +84,8 @@ const DiscoveryConsultation = ({ isOpen, onClose }: Props) => {
           firstname: formData.fullName,
           email: formData.email,
           phone: formData.phone,
+          phone_dial_code: phoneCountry.dial_code,
+          phone_country_code: phoneCountry.country_code,
           message,
         }),
       );
@@ -142,25 +146,13 @@ const DiscoveryConsultation = ({ isOpen, onClose }: Props) => {
         </div>
 
         <div className={formGridClass}>
-          <div className="flex min-w-0">
-            <div className="flex shrink-0 items-center rounded-l-lg border border-r-0 border-gray-300 bg-white px-2 py-2.5 sm:px-3 sm:py-3">
-              <img
-                src="/images/book-consulation/countryCode.png"
-                alt=""
-                className="mr-1 h-4 w-5 sm:mr-2 sm:w-6"
-              />
-              <span className="text-sm text-gray-700 sm:text-base">+675</span>
-            </div>
-            <input
-              type="tel"
-              name="phone"
-              placeholder="PHONE"
-              value={formData.phone}
-              onChange={handleInputChange}
-              className={`${formFieldClass} rounded-l-none`}
-              required
-            />
-          </div>
+          <PhoneInput
+            phone={formData.phone}
+            onPhoneChange={handleInputChange}
+            dialCode={phoneCountry.dial_code}
+            countryCode={phoneCountry.country_code}
+            onCountryChange={(dial_code, country_code) => setPhoneCountry({ dial_code, country_code })}
+          />
           <select
             name="areaOfInterest"
             value={formData.areaOfInterest}
@@ -210,7 +202,7 @@ const DiscoveryConsultation = ({ isOpen, onClose }: Props) => {
             type="button"
             onClick={resetForm}
             disabled={isLoading}
-            className="cursor-pointer rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
+            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
           >
             <span className="block text-sm font-bold text-gray-800 sm:text-base">
               Reset
@@ -219,7 +211,7 @@ const DiscoveryConsultation = ({ isOpen, onClose }: Props) => {
           <button
             type="submit"
             disabled={isLoading}
-            className="cursor-pointer rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
+            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
           >
             <span className="block text-sm font-bold text-gray-900 sm:text-base">
               {isLoading ? "Submitting..." : "Book Consultation"}

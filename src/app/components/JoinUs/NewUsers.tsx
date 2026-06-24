@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import PhoneInput from "@/app/components/shared/PhoneInput";
 
 interface Props {
     isOpen: boolean;
@@ -10,6 +11,7 @@ const NewUsers = ({
     onClose
 }: Props) => {
   const [firstName, setFirstName] = useState('');
+  const [phoneCountry, setPhoneCountry] = useState({ dial_code: "+675", country_code: "pg" });
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
@@ -82,19 +84,14 @@ const NewUsers = ({
         {/* Second Row - Phone and Password */}
         <div className={`${isMobile ? 'space-y-4' : 'grid md:grid-cols-2 gap-6'}`}>
           <div className="relative">
-            <div className="flex">
-              <div className={`flex items-center ${isMobile ? 'px-2 py-2' : 'px-3 py-3'} bg-white border-2 border-gray-300 rounded-l-lg border-r-0`}>
-                <img src="/images/book-consulation/countryCode.png" alt="Country Flag" className={`${isMobile ? 'w-5 h-3' : 'w-6 h-4'} mr-2`} />
-                <span className={`text-gray-600 ${isMobile ? 'text-xs' : 'text-sm'}`}>+675</span>
-              </div>
-              <input
-                type="tel"
-                placeholder="PHONE"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className={`flex-1 ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border-2 border-gray-300 rounded-r-lg bg-white text-gray-800 placeholder-gray-500 focus:outline-none focus:border-[#4CAF50] transition-colors`}
-              />
-            </div>
+            <PhoneInput
+              phone={phone}
+              onPhoneChange={(e) => setPhone(e.target.value)}
+              dialCode={phoneCountry.dial_code}
+              countryCode={phoneCountry.country_code}
+              onCountryChange={(dial_code, country_code) => setPhoneCountry({ dial_code, country_code })}
+              required={false}
+            />
           </div>
           <div className="relative">
             <input

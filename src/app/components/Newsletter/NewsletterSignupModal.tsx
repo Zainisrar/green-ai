@@ -99,8 +99,8 @@ const NewsletterSignupModal = ({ isOpen, onClose }: Props) => {
         <input type="email" name="email" placeholder="E-MAIL ID" value={email} onChange={(e) => setEmail(e.target.value)} className={formFieldClass} required />
 
         <div className={captchaInputGroupClass}>
-          <div className="rounded border bg-gray-200 px-3 py-2 sm:px-4">
-            <span className="font-mono text-base sm:text-lg">{captcha}</span>
+          <div className="flex shrink-0 items-center justify-center rounded-lg border border-gray-300 bg-gray-100 px-5 py-2.5 sm:py-3">
+            <span className="select-none whitespace-nowrap font-mono text-lg font-bold tracking-[0.35em] text-gray-700">{captcha}</span>
           </div>
           <input type="text" placeholder="Enter captcha" value={captchaInput} onChange={(e) => setCaptchaInput(e.target.value)} className={formFieldClass} required />
         </div>

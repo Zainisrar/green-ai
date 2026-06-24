@@ -35,7 +35,7 @@ const Accrediations = () => {
     <React.Fragment>
       <div className="">
         {/* Background Image */}
-        <div className="absolute left-0 hidden lg:block lg:top-10">
+        <div className="absolute left-0 hidden lg:block lg:top-10 pointer-events-none">
           <img
             src="/images/certifications-accredication/mainImg.png"
             className="w-8/12 ml-10"

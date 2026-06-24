@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import { useEnergyServices } from "../../../hooks/useEnergyServices";
+import Enquiry from "./Modals/Enquiry";
 
 const Services = () => {
-  const router = useRouter();
   const { energyData } = useEnergyServices();
   const [activeServiceIndex, setActiveServiceIndex] = useState(0);
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
 
   // Transform API data to match component structure
   const transformedData = energyData
@@ -450,14 +450,7 @@ const Services = () => {
           <button
             type="button"
             className="cursor-pointer"
-            onClick={() => {
-              // Honor the CMS value, but route the non-existent "/contact"
-              // alias to the real contact page so the link never 404s.
-              const href = energyData?.cta?.href;
-              router.push(
-                !href || href === "/contact" ? "/engage/contact-us" : href
-              );
-            }}
+            onClick={() => setIsEnquiryOpen(true)}
           >
             <img
               src="/images/service/enquiry.svg"
@@ -466,6 +459,13 @@ const Services = () => {
             />
           </button>
         </div>
+
+        <Enquiry
+          isOpen={isEnquiryOpen}
+          onClose={() => setIsEnquiryOpen(false)}
+          services={points.map((p) => p.name)}
+          defaultService={points[activeServiceIndex]?.name}
+        />
 
         <Chatbot />
       </div>

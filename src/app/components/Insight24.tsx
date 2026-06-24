@@ -43,7 +43,7 @@ const Insight24: React.FC<Props> = ({
     <React.Fragment>
       <TopNavigation/>
       <div
-        className={`   `}
+        className={`w-full overflow-x-hidden`}
       >
         <div className="absolute top-0 lg:block hidden right-0 -z-10">
         <img
@@ -133,7 +133,7 @@ const Insight24: React.FC<Props> = ({
                  style={{
                   transform: 'skewX(-22deg)',
                  }}
-                className="transform   w-[420px] p-6 bg-white/20 shadow-sm   text-3xl 2xl:text-4xl">
+                className="transform w-full max-w-[360px] 2xl:max-w-[420px] p-6 bg-white/20 shadow-sm text-3xl 2xl:text-4xl">
                   <span className="text-green-600">"</span>
                   <span className="ml-2">{cardTitle}</span>
                   <span className="text-green-600 ">"</span>

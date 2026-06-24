@@ -281,9 +281,9 @@ const ReportWhitePapers = () => {
                             alt="download report"
                           />
                         </a>
-                        <a 
-                          href={"https://g-stack.green.com.pg/"+report.href} 
-                          target="_blank" 
+                        <a
+                          href={"https://view.officeapps.live.com/op/view.aspx?src="+encodeURIComponent("https://g-stack.green.com.pg"+report.href+".pptx")}
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="cursor-pointer hover:opacity-80 transition-opacity"
                         >
@@ -332,7 +332,7 @@ const ReportWhitePapers = () => {
                               />
                             </a>
                             <a
-                              href={"https://g-stack.green.com.pg/"+report.href}
+                              href={"https://view.officeapps.live.com/op/view.aspx?src="+encodeURIComponent("https://g-stack.green.com.pg"+report.href+".pptx")}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="cursor-pointer hover:opacity-80 transition-opacity"

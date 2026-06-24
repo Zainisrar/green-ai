@@ -113,25 +113,6 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
           </div>
         </div>
 
-        <div {...prevButtonProps.getContainerProps()} className="absolute left-4 md:left-8 top-1/2 lg:top-1/2 z-50 transform -translate-y-1/2">
-          <button
-            onClick={goPrev}
-            className="bg-black/40 rounded-full p-3 z-20 cursor-pointer hover:bg-white transition"
-            aria-label="Previous Slide"
-          >
-            {slide.carouselLeft}
-          </button>
-        </div>
-        <div {...nextButtonProps.getContainerProps()} className="absolute right-4 md:right-8 top-1/2 lg:top-1/2 z-50 transform -translate-y-1/2">
-          <button
-            onClick={goNext}
-            className="bg-black/40 rounded-full p-3 z-20 cursor-pointer hover:bg-white transition"
-            aria-label="Next Slide"
-          >
-            {slide.carouselRight}
-          </button>
-        </div>
-
         {/* CTA Buttons */}
         <div className="flex justify-center lg:justify-end lg:mt-20 lg:my-auto md:my-10 gap-4 z-10 px-6 lg:px-0">
           <div {...cta1Props.getContainerProps()}>
@@ -156,6 +137,29 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
               </div>
             </Link>
           </div>
+        </div>
+      </div>
+
+      {/* Carousel arrows: pinned to a constant-height (viewport) layer so they
+          stay vertically fixed regardless of per-slide content height. */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-50 flex h-screen items-center justify-between px-4 md:px-8">
+        <div {...prevButtonProps.getContainerProps()} className="pointer-events-auto">
+          <button
+            onClick={goPrev}
+            className="bg-black/40 rounded-full p-3 cursor-pointer hover:bg-white transition"
+            aria-label="Previous Slide"
+          >
+            {slide.carouselLeft}
+          </button>
+        </div>
+        <div {...nextButtonProps.getContainerProps()} className="pointer-events-auto">
+          <button
+            onClick={goNext}
+            className="bg-black/40 rounded-full p-3 cursor-pointer hover:bg-white transition"
+            aria-label="Next Slide"
+          >
+            {slide.carouselRight}
+          </button>
         </div>
       </div>
     </div>

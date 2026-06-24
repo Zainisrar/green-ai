@@ -17,19 +17,19 @@ interface FormData {
   fullName: string;
   email: string;
   phone: string;
-  requestType: string;
-  details: string;
+  areaOfInterest: string;
+  message: string;
 }
 
 const initialFormData: FormData = {
   fullName: "",
   email: "",
   phone: "",
-  requestType: "",
-  details: "",
+  areaOfInterest: "",
+  message: "",
 };
 
-const SubmitMediaRequest = ({ isOpen, onClose }: Props) => {
+const WorkWithUs = ({ isOpen, onClose }: Props) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [phoneCountry, setPhoneCountry] = useState({ dial_code: "+675", country_code: "pg" });
   const [agreed, setAgreed] = useState(false);
@@ -66,16 +66,16 @@ const SubmitMediaRequest = ({ isOpen, onClose }: Props) => {
     setSuccessMessage("");
 
     if (!agreed) {
-      setErrorMessage("Please agree that GREEN may contact you about this request.");
+      setErrorMessage("Please agree that GREEN may contact you about your application.");
       return;
     }
 
     setIsLoading(true);
 
     const message = [
-      "Submit Media Request (Media & Mentions)",
-      `Request type: ${formData.requestType}`,
-      `Message / details: ${formData.details || "None"}`,
+      "Work With Us (Team GREEN)",
+      `Area of interest: ${formData.areaOfInterest}`,
+      `Message: ${formData.message || "None"}`,
     ].join("\n");
 
     try {
@@ -92,7 +92,7 @@ const SubmitMediaRequest = ({ isOpen, onClose }: Props) => {
 
       if (data.Code === "001") {
         setSuccessMessage(
-          data.Message || "Your media request has been submitted successfully!",
+          data.Message || "Thank you! Your details have been submitted successfully.",
         );
         resetForm();
         setTimeout(() => {
@@ -100,7 +100,7 @@ const SubmitMediaRequest = ({ isOpen, onClose }: Props) => {
           setSuccessMessage("");
         }, 2000);
       } else {
-        setErrorMessage(data.Message || "Failed to submit your request. Please try again.");
+        setErrorMessage(data.Message || "Failed to submit your details. Please try again.");
       }
     } catch (error) {
       setErrorMessage(
@@ -117,9 +117,10 @@ const SubmitMediaRequest = ({ isOpen, onClose }: Props) => {
       onClose={onClose}
       title={
         <>
-          SUBMIT <span className="text-green-600">MEDIA REQUEST</span>
+          WORK <span className="text-green-600">WITH US</span>
         </>
       }
+      subtitle="Join Team GREEN — built by engineers, driven by mission."
     >
       <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
         <div className={formGridClass}>
@@ -152,28 +153,29 @@ const SubmitMediaRequest = ({ isOpen, onClose }: Props) => {
             onCountryChange={(dial_code, country_code) => setPhoneCountry({ dial_code, country_code })}
           />
           <select
-            name="requestType"
-            value={formData.requestType}
+            name="areaOfInterest"
+            value={formData.areaOfInterest}
             onChange={handleInputChange}
             className={`${formFieldClass} cursor-pointer ${
-              formData.requestType ? "text-gray-700" : "text-gray-500"
+              formData.areaOfInterest ? "text-gray-700" : "text-gray-500"
             }`}
             required
           >
-            <option value="">REQUEST TYPE</option>
-            <option value="interview">Interview Request</option>
-            <option value="press-release">Press Release</option>
-            <option value="media-kit">Media Kit</option>
-            <option value="speaking">Speaking Engagement</option>
-            <option value="partnership">Media Partnership</option>
+            <option value="">AREA OF INTEREST</option>
+            <option value="engineering">Engineering &amp; Technical</option>
+            <option value="operations">Operations &amp; Field</option>
+            <option value="project-management">Project Management</option>
+            <option value="community-impact">Community &amp; Social Impact</option>
+            <option value="corporate">Corporate &amp; Administration</option>
+            <option value="internship">Internship / Graduate Program</option>
             <option value="other">Other</option>
           </select>
         </div>
 
         <textarea
-          name="details"
-          placeholder="MESSAGE / DETAILS"
-          value={formData.details}
+          name="message"
+          placeholder="TELL US ABOUT YOURSELF"
+          value={formData.message}
           onChange={handleInputChange}
           rows={3}
           className={`${formFieldClass} resize-none`}
@@ -182,13 +184,13 @@ const SubmitMediaRequest = ({ isOpen, onClose }: Props) => {
         <div className="flex items-start gap-3">
           <input
             type="checkbox"
-            id="media-request-agree"
+            id="work-with-us-agree"
             checked={agreed}
             onChange={(e) => setAgreed(e.target.checked)}
             className="mt-1 h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
           />
-          <label htmlFor="media-request-agree" className="text-sm text-gray-700 sm:text-base">
-            I agree that GREEN may contact me about this request.
+          <label htmlFor="work-with-us-agree" className="text-sm text-gray-700 sm:text-base">
+            I agree that GREEN may contact me about my application.
           </label>
         </div>
 
@@ -212,7 +214,7 @@ const SubmitMediaRequest = ({ isOpen, onClose }: Props) => {
             className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
           >
             <span className="block text-sm font-bold text-gray-900 sm:text-base">
-              {isLoading ? "Submitting..." : "Submit Request"}
+              {isLoading ? "Submitting..." : "Submit"}
             </span>
           </button>
         </div>
@@ -221,4 +223,4 @@ const SubmitMediaRequest = ({ isOpen, onClose }: Props) => {
   );
 };
 
-export default SubmitMediaRequest;
+export default WorkWithUs;
