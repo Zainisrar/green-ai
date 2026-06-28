@@ -22,7 +22,10 @@ const SLIDE_INTERVAL_MS = 2000;
 /** Figma Home Page D6 — photo panels + diagonal seams (node 1201:2820) */
 const FIGMA_LAYERS = {
   panels: [
-    { src: "/images/d6/D6-Page-1/1.png", left: -282.37, top: 0, width: 828, height: 979, z: 1 },
+    // imgLeft/imgTop/imgWidth/imgHeight override the rendered photo box only (the copy-zone
+    // still uses left/top/width/height). Panel 1 is scaled up & anchored bottom-right so its
+    // top-right photo edge reaches the black seam line like panels 3–5.
+    { src: "/images/d6/D6-Page-1/1-fill.png", left: -282.37, top: 0, width: 828, height: 979, z: 3, imgLeft: -282, imgTop: 0, imgWidth: 838, imgHeight: 979 },
     { src: "/images/d6/D6-Page-1/3.png", left: 83, top: 0, width: 1022, height: 976, z: 2 },
     { src: "/images/d6/D6-Page-1/5.png", left: 569, top: -1, width: 827, height: 969, z: 3 },
     { src: "/images/d6/D6-Page-1/7.png", left: 936, top: 0, width: 847, height: 970, z: 5 },
@@ -38,14 +41,14 @@ const FIGMA_LAYERS = {
 
 /** Figma letter vectors — shared bottom baseline (y=755 on 970 canvas) */
 const GREEN_LETTERS = [
-  { src: "/images/d6/lgG.png", left: 0, width: 204 },
-  { src: "/images/d6/lgR.png", left: 379, width: 207 },
-  { src: "/images/d6/lgE.png", left: 797, width: 193 },
-  { src: "/images/d6/lgE.png", left: 1159, width: 194 },
-  { src: "/images/d6/lgN.png", left: 1543, width: 218 },
+  { src: "/images/d6/lgG.png", left: 30, width: 152 },
+  { src: "/images/d6/lgR.png", left: 402, width: 154 },
+  { src: "/images/d6/lgE.png", left: 815, width: 144 },
+  { src: "/images/d6/lgE.png", left: 1177, width: 145 },
+  { src: "/images/d6/lgN.png", left: 1560, width: 162 },
 ] as const;
 
-const LETTER_BASELINE = 215;
+const LETTER_BASELINE = 200;
 
 /** Copy positions relative to each panel image (prevents bleed into adjacent panels) */
 const PANEL_COPY = [
@@ -94,6 +97,15 @@ const PANEL_COPY = [
     descTop: 458,
     descWidth: 210,
   },
+] as const;
+
+/** Mobile (G hidden): one letter per image on the left, its heading at the top-right inside
+   the same diagonal section. Positions are vertical % within the 110vh background. */
+const MOBILE_PANELS = [
+  { letter: "R", heading: "About GREEN", headingTop: "24%", letterTop: "40%", letterLeft: "10%" },
+  { letter: "E", heading: "Products and Solutions", headingTop: "44%", letterTop: "57%", letterLeft: "10%" },
+  { letter: "E", heading: "EPC Energy Services", headingTop: "63%", letterTop: "76%", letterLeft: "10%" },
+  { letter: "N", heading: "Projects and Services", headingTop: "81%", letterTop: "93%", letterLeft: "10%" },
 ] as const;
 
 const NAV_ITEMS = [
@@ -174,6 +186,7 @@ const D6Template = ({ slug }: D6TemplateProps) => {
   }, []);
 
   React.useEffect(() => {
+    // Scale to fill the full viewport width (no side gaps / white space).
     const updateScale = () => setScale(window.innerWidth / DESIGN_W);
     updateScale();
     window.addEventListener("resize", updateScale);
@@ -196,16 +209,29 @@ const D6Template = ({ slug }: D6TemplateProps) => {
   if (isMobile) {
     return (
       <>
-        <div>
-          <div className="mt-2 flex justify-between px-4">
+        {/* Exact image aspect → diagonals land at fixed % on every device (no object-cover crop) */}
+        <div className="relative w-screen overflow-hidden aspect-[360/800]">
+          <img
+            src="/images/d6/mobileBg.png"
+            alt=""
+            role="presentation"
+            className="absolute inset-0 -z-10 h-full w-full"
+          />
+          <div className="mt-2 flex items-center justify-between px-4">
             <img src="/images/d6/logo.png" alt="GREEN logo" />
-            <div className="flex items-center space-x-4">
-              <img src="/images/d6/arr.png" alt="" role="presentation" />
-              <Link href="/explore">Explore</Link>
-              <img src="/images/d6/break.png" alt="" role="presentation" />
-              <Link href="/energy">Energy</Link>
-              <img src="/images/d6/arr2.png" alt="" role="presentation" />
-            </div>
+            <button
+              type="button"
+              onClick={openNavigation}
+              aria-label="Open navigation menu"
+              className="cursor-pointer border-0 bg-transparent p-0"
+            >
+              <img
+                src="/images/heroSection/lighting.svg"
+                alt=""
+                role="presentation"
+                className="h-9 w-auto"
+              />
+            </button>
           </div>
           <div className="mt-4">
             <img src="/images/d6/greenFuture.png" alt="" role="presentation" />
@@ -213,8 +239,35 @@ const D6Template = ({ slug }: D6TemplateProps) => {
           <div onClick={openNavigation} className="mt-4 ml-4 cursor-pointer">
             <img src="/images/d6/moreDetails.png" alt="" role="presentation" className="w-24" />
           </div>
-          <div className="absolute w-screen h-screen -z-10 top-0">
-            <img src="/images/d6/mobileBg.png" alt="" role="presentation" className="w-screen h-[110vh]" />
+          {/* G hidden. Each image: one letter on the left, its heading at the top-right inside. */}
+          <div className="pointer-events-none absolute inset-0 z-0">
+            {MOBILE_PANELS.map((p, i) => (
+              <React.Fragment key={`m-${i}`}>
+                <span
+                  className="absolute block font-bold leading-tight text-white"
+                  style={{
+                    top: p.headingTop,
+                    left: "52%",
+                    maxWidth: 150,
+                    fontSize: 16,
+                    textShadow: "0px 2px 10px rgba(0,0,0,0.6)",
+                  }}
+                >
+                  {p.heading}
+                </span>
+                <span
+                  className="absolute block font-extrabold italic leading-none text-white"
+                  style={{
+                    top: p.letterTop,
+                    left: p.letterLeft,
+                    fontSize: 56,
+                    textShadow: "0px 2px 12px rgba(0,0,0,0.55)",
+                  }}
+                >
+                  {p.letter}
+                </span>
+              </React.Fragment>
+            ))}
           </div>
           <D6Chatbot />
         </div>
@@ -245,25 +298,33 @@ const D6Template = ({ slug }: D6TemplateProps) => {
             transformOrigin: "top left",
           }}
         >
-          {FIGMA_LAYERS.panels.map((layer, i) => (
-            <img
-              key={`panel-${i}`}
-              src={layer.src}
-              alt=""
-              role="presentation"
-              draggable={false}
-              className="absolute select-none transition-opacity duration-500"
-              style={{
-                left: layer.left,
-                top: layer.top,
-                width: layer.width,
-                height: layer.height,
-                zIndex: layer.z,
-                objectFit: "cover",
-                opacity: activeSlide === i ? 1 : 0.88,
-              }}
-            />
-          ))}
+          {FIGMA_LAYERS.panels.map((layer, i) => {
+            const l = layer as typeof layer & {
+              imgLeft?: number;
+              imgTop?: number;
+              imgWidth?: number;
+              imgHeight?: number;
+            };
+            return (
+              <img
+                key={`panel-${i}`}
+                src={layer.src}
+                alt=""
+                role="presentation"
+                draggable={false}
+                className="absolute select-none transition-opacity duration-500"
+                style={{
+                  left: l.imgLeft ?? layer.left,
+                  top: l.imgTop ?? layer.top,
+                  width: l.imgWidth ?? layer.width,
+                  height: l.imgHeight ?? layer.height,
+                  zIndex: layer.z,
+                  objectFit: "cover",
+                  opacity: activeSlide === i ? 1 : 0.88,
+                }}
+              />
+            );
+          })}
           {FIGMA_LAYERS.diagonals.map((layer, i) => (
             <FigmaLayer key={`diag-${i}`} {...layer} />
           ))}
