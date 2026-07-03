@@ -2,19 +2,45 @@
 
 import { Link } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import Enquiry from "../SupplyParnters/Modals/Enquiry";
 
+// Standard RFC-5322-style email format check: local-part@domain.tld
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+
 const SupplyPartnersRegister = () => {
 
+const router = useRouter();
 const [isDesktop, setIsDesktop] = useState(false);
 const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+const [email, setEmail] = useState("");
+const [emailError, setEmailError] = useState("");
+
+const handleContinue = () => {
+  const value = email.trim();
+  if (!value) {
+    setEmailError("Please enter your email address.");
+    return;
+  }
+  if (!EMAIL_REGEX.test(value)) {
+    setEmailError("Please enter a valid email address (e.g. name@gmail.com).");
+    return;
+  }
+  setEmailError("");
+  router.push("/client-value-engineering/dashboard");
+};
+
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+  handleContinue();
+};
 
 useEffect(() => {
   const handleResize = () => {
     setIsDesktop(window.innerWidth >= 1100); // Assuming 1024px as the breakpoint for desktop
-  };  
+  };
   handleResize(); // Initial check
   window.addEventListener("resize", handleResize);
   return () => window.removeEventListener("resize", handleResize);
@@ -86,15 +112,25 @@ useEffect(() => {
                       <p className="text-sm text-gray-600 sm:text-base">By Logging In</p>
                     </div>
 
-                    <form className="space-y-4">
+                    <form className="space-y-4" onSubmit={handleSubmit} noValidate>
                       <div className="relative">
                         <input
                           type="email"
+                          value={email}
+                          onChange={(e) => {
+                            setEmail(e.target.value);
+                            if (emailError) setEmailError("");
+                          }}
                           placeholder="solutions@nexttechnosolutions.co.in"
-                          className="w-full rounded-lg border border-gray-300 bg-white px-4 py-3 pr-12 text-gray-700 placeholder:text-xs focus:border-[#4CAF50] focus:outline-none lg:placeholder:text-base"
+                          aria-invalid={!!emailError}
+                          className={`w-full rounded-lg border bg-white px-4 py-3 pr-12 text-gray-700 placeholder:text-xs focus:outline-none lg:placeholder:text-base ${
+                            emailError
+                              ? "border-red-500 focus:border-red-500"
+                              : "border-gray-300 focus:border-[#4CAF50]"
+                          }`}
                         />
                         <button
-                          type="button"
+                          type="submit"
                           className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
                           aria-label="Continue"
                         >
@@ -110,6 +146,11 @@ useEffect(() => {
                           </svg>
                         </button>
                       </div>
+                      {emailError && (
+                        <p className="text-xs text-red-600 px-1" role="alert">
+                          {emailError}
+                        </p>
+                      )}
                     </form>
                   </div>
                 </div>
