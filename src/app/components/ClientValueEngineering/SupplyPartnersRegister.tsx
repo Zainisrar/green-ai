@@ -17,18 +17,30 @@ const [isDesktop, setIsDesktop] = useState(false);
 const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
 const [email, setEmail] = useState("");
 const [emailError, setEmailError] = useState("");
+const [password, setPassword] = useState("");
+const [passwordError, setPasswordError] = useState("");
 
 const handleContinue = () => {
   const value = email.trim();
+  let hasError = false;
   if (!value) {
     setEmailError("Please enter your email address.");
-    return;
-  }
-  if (!EMAIL_REGEX.test(value)) {
+    hasError = true;
+  } else if (!EMAIL_REGEX.test(value)) {
     setEmailError("Please enter a valid email address (e.g. name@gmail.com).");
-    return;
+    hasError = true;
+  } else {
+    setEmailError("");
   }
-  setEmailError("");
+
+  if (password.length < 8) {
+    setPasswordError("Password must be at least 8 characters.");
+    hasError = true;
+  } else {
+    setPasswordError("");
+  }
+
+  if (hasError) return;
   router.push("/client-value-engineering/dashboard");
 };
 
@@ -113,7 +125,7 @@ useEffect(() => {
                     </div>
 
                     <form className="space-y-4" onSubmit={handleSubmit} noValidate>
-                      <div className="relative">
+                      <div>
                         <input
                           type="email"
                           value={email}
@@ -123,8 +135,31 @@ useEffect(() => {
                           }}
                           placeholder="solutions@nexttechnosolutions.co.in"
                           aria-invalid={!!emailError}
-                          className={`w-full rounded-lg border bg-white px-4 py-3 pr-12 text-gray-700 placeholder:text-xs focus:outline-none lg:placeholder:text-base ${
+                          className={`w-full rounded-lg border bg-white px-4 py-3 text-gray-700 placeholder:text-xs focus:outline-none lg:placeholder:text-base ${
                             emailError
+                              ? "border-red-500 focus:border-red-500"
+                              : "border-gray-300 focus:border-[#4CAF50]"
+                          }`}
+                        />
+                        {emailError && (
+                          <p className="text-xs text-red-600 px-1 mt-1" role="alert">
+                            {emailError}
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="relative">
+                        <input
+                          type="password"
+                          value={password}
+                          onChange={(e) => {
+                            setPassword(e.target.value);
+                            if (passwordError) setPasswordError("");
+                          }}
+                          placeholder="Password (min 8 characters)"
+                          aria-invalid={!!passwordError}
+                          className={`w-full rounded-lg border bg-white px-4 py-3 pr-12 text-gray-700 placeholder:text-xs focus:outline-none lg:placeholder:text-base ${
+                            passwordError
                               ? "border-red-500 focus:border-red-500"
                               : "border-gray-300 focus:border-[#4CAF50]"
                           }`}
@@ -146,11 +181,18 @@ useEffect(() => {
                           </svg>
                         </button>
                       </div>
-                      {emailError && (
+                      {passwordError && (
                         <p className="text-xs text-red-600 px-1" role="alert">
-                          {emailError}
+                          {passwordError}
                         </p>
                       )}
+
+                      <button
+                        type="submit"
+                        className="w-full rounded-lg bg-[#4CAF50] py-3 text-center font-semibold text-white transition-colors hover:bg-[#43a047] cursor-pointer"
+                      >
+                        Login
+                      </button>
                     </form>
                   </div>
                 </div>
@@ -163,7 +205,7 @@ useEffect(() => {
           <button
             type="button"
             onClick={() => setIsEnquiryOpen(true)}
-            className=" lg:absolute right-2 bottom-28 cursor-pointer"
+            className=" lg:absolute right-2 bottom-10 cursor-pointer"
           >
             <img
               src="/images/supply-partners/login/enquiry.png"

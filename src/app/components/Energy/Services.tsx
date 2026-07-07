@@ -140,18 +140,18 @@ const Services = () => {
                       style={{
                         transform: "skewX(-16deg)",
                       }}
-                      className="p-[8px] w-[155px] overflow-hidden h-[164px] border-4 border-[#d9e74b] bg-white"
+                      className="p-[8px] w-[120px] xl:w-[155px] overflow-hidden h-[150px] xl:h-[164px] border-4 border-[#d9e74b] bg-white"
                     >
                       <div className="p-1 pl-4">
                         <h4
                           style={{
                             transform: "skewX(16deg)",
                           }}
-                          className=" text-[#23B14D] mb-2 font-bold text-sm"
+                          className=" text-[#23B14D] mb-2 font-bold text-xs xl:text-sm"
                         >
                           {item.name}
                         </h4>
-                        <ul className="font-bold text-xs text-gray-700 space-y-1">
+                        <ul className="font-bold text-[11px] xl:text-xs text-gray-700 space-y-1">
                           {item.items.map((listItem: string, index: number) => {
                             return <li key={index}>{listItem}</li>;
                           })}
@@ -162,7 +162,7 @@ const Services = () => {
                     {index != 3 && (
                       <div className="-ml-6">
                         <img
-                          className="w-10"
+                          className="w-8 xl:w-10"
                           src="/images/service/arrow.png"
                           alt="arrow"
                         />
@@ -175,14 +175,14 @@ const Services = () => {
 
             {/* Mobile 2x2 grid layout */}
             <div className="lg:hidden mb-8">
-              <div className="grid grid-cols-2 gap-6 relative">
+              <div className="grid grid-cols-2 gap-4 sm:gap-6 relative justify-items-center">
                 {/* Top row: Engineering -> Procurement */}
                 <div className="flex justify-center relative">
                   <div
                    style={{
                             transform: "skewX(-16deg)",
                           }}
-                  className="p-[8px] w-[140px] overflow-hidden  border-4 border-[#d9e74b] bg-white">
+                  className="p-[8px] w-full max-w-[140px] overflow-hidden  border-4 border-[#d9e74b] bg-white">
                     <div className="p-1 pl-4">
                       <h4
                        style={{
@@ -215,7 +215,7 @@ const Services = () => {
                    style={{
                             transform: "skewX(-16deg)",
                           }}
-                  className="p-[8px] w-[140px] overflow-hidden  border-4 border-[#d9e74b] bg-white">
+                  className="p-[8px] w-full max-w-[140px] overflow-hidden  border-4 border-[#d9e74b] bg-white">
                     <div className="p-1 pl-4">
                       <h4
                        style={{
@@ -249,7 +249,7 @@ const Services = () => {
                    style={{
                             transform: "skewX(-16deg)",
                           }}
-                  className="p-[8px] w-[140px] overflow-hidden  border-4 border-[#d9e74b] bg-white">
+                  className="p-[8px] w-full max-w-[140px] overflow-hidden  border-4 border-[#d9e74b] bg-white">
                     <div className="p-1 pl-4">
                       <h4
                        style={{
@@ -282,7 +282,7 @@ const Services = () => {
                   style={{
                     transform:"skewX(-16deg)"
                   }}
-                  className="p-[8px] w-[140px] overflow-hidden  border-4 border-[#d9e74b] bg-white">
+                  className="p-[8px] w-full max-w-[140px] overflow-hidden  border-4 border-[#d9e74b] bg-white">
                     <div className="p-1 pl-4">
                       <h4
                       style={{
