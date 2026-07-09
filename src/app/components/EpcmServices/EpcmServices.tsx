@@ -32,7 +32,7 @@ const EpcmServices = () => {
 
   return (
     <React.Fragment>
-      <div className="relative overflow-x-hidden">
+      <div className="relative overflow-hidden">
         <div className="absolute lg:block hidden -z-10 opacity-40 right-0 top-0">
           <img
             src="/images/epcm-services/mainImg.png"

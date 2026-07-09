@@ -31,8 +31,9 @@ const ListofCertificates = ({
   // Certificate images array - you can replace with actual certificate image paths
   const certificates = [
     "/images/certifications-accredication/cert1.png",
-    "/images/certifications-accredication/cert2.png", 
+    "/images/certifications-accredication/cert2.png",
     "/images/certifications-accredication/cert3.png",
+    "/images/certifications-accredication/cert4.png",
   ];
 
   if (!isOpen) return null;

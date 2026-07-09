@@ -27,16 +27,20 @@ const Vision = () => {
 
   return (
     <React.Fragment>
-      <div className="">
+      <div className="relative overflow-x-hidden">
         {/* Background Image */}
-        <div className="absolute  top-0 lg:bottom-0 left-0">
-          <img src="/images/our-vision/mainImg.png" alt="our vision" />
+        <div className="absolute top-0 lg:bottom-0 left-0 w-full lg:w-auto">
+          <img
+            src="/images/our-vision/mainImg.png"
+            alt="our vision"
+            className="w-full h-auto max-w-full lg:w-auto lg:max-w-none"
+          />
         </div>
-        
+
         <TopNavigation />
 
         {/* Mobile Layout */}
-        <div className="lg:hidden px-4 py-6 relative z-50">
+        <div className="lg:hidden px-4 py-6 relative z-10 pb-28">
           {/* Future Envisioned Title */}
           <div className="text-center mb-8">
             <h1 className="text-2xl lg:text-3xl font-black text-gray-800">
@@ -55,63 +59,51 @@ const Vision = () => {
           </div>
 
           {/* Our Vision Card */}
-          <div
-          style={{
-            transform:"skewX(-16deg)"
-          }}
-          className="bg-[#f7fae9]  w-[320px] mx-auto  p-6 rounded-lg shadow-lg mb-6">
-            <div style={{ transform: "skewX(16deg)" }}>
-              <div className="flex items-center mb-4">
-                <img
-                  src={visionBlock?.icon?.src || "/images/our-vision/visionicn.png"}
-                  alt={visionBlock?.icon?.alt || "vision"}
-                  className="w-8 h-8 mr-3"
-                />
-                <h3 className="text-lg lg:text-xl font-bold text-gray-800">
-                  {visionBlock?.title || "Our Vision"}
-                </h3>
-              </div>
-
-              <p className="text-xs text-gray-700 mb-4 leading-relaxed">
-                {visionBlock?.content?.description || "Envisioning the Energy needs and Envisaging the Environmental impacts on the Globe, GREEN delivers Clean, lean and Green Solutions"}
-              </p>
-
-              <p className="text-xs italic text-center">
-                <span className="text-[#23B14D] text-lg">"</span>
-                {visionBlock?.content?.quote || "Our aspiration is to empower lives with Sustainable Living and Renewable Energy Solutions"}
-                <span className="text-[#23B14D] text-lg">"</span>
-              </p>
+          <div className="bg-[#f7fae9] w-full max-w-[320px] mx-auto p-6 rounded-lg shadow-lg mb-6">
+            <div className="flex items-center mb-4">
+              <img
+                src={visionBlock?.icon?.src || "/images/our-vision/visionicn.png"}
+                alt={visionBlock?.icon?.alt || "vision"}
+                className="w-8 h-8 mr-3"
+              />
+              <h3 className="text-lg lg:text-xl font-bold text-gray-800">
+                {visionBlock?.title || "Our Vision"}
+              </h3>
             </div>
+
+            <p className="text-xs text-gray-700 mb-4 leading-relaxed">
+              {visionBlock?.content?.description || "Envisioning the Energy needs and Envisaging the Environmental impacts on the Globe, GREEN delivers Clean, lean and Green Solutions"}
+            </p>
+
+            <p className="text-xs italic text-center">
+              <span className="text-[#23B14D] text-lg">"</span>
+              {visionBlock?.content?.quote || "Our aspiration is to empower lives with Sustainable Living and Renewable Energy Solutions"}
+              <span className="text-[#23B14D] text-lg">"</span>
+            </p>
           </div>
 
           {/* Our Mission Card */}
-          <div
-          style={{
-            transform:"skewX(-16deg)"
-          }}
-          className="bg-[#f7fae9]  w-[320px] mx-auto p-6 rounded-lg shadow-lg mb-8">
-            <div style={{ transform: "skewX(16deg)" }}>
-              <div className="flex items-center mb-4">
-                <img
-                  src={missionBlock?.icon?.src || "/images/our-vision/missionicon.png"}
-                  alt={missionBlock?.icon?.alt || "mission"}
-                  className="w-8 h-8 mr-3"
-                />
-                <h3 className="text-lg lg:text-xl font-bold text-gray-800">
-                  {missionBlock?.title || "Our Mission"}
-                </h3>
-              </div>
-
-              <p className="text-xs text-gray-700 mb-4 leading-relaxed">
-                {missionBlock?.content?.description || "Sustainable Living and Renewable Energy Solutions for all. To Spearhead the Renewable Energy Movement for Greener environment globally & contribute to Sustainable Development Goals"}
-              </p>
-
-              <p className="text-xs italic text-center">
-                <span className="text-[#23B14D] text-lg">"</span>
-                {missionBlock?.content?.quote || "Innovating, Developing and Delivering Sustainable Renewable Energy based Solutions and Products for a greener social and industrial environment and thereby to ensure community welfare and rural empowerment"}
-                <span className="text-[#23B14D] text-lg">"</span>
-              </p>
+          <div className="bg-[#f7fae9] w-full max-w-[320px] mx-auto p-6 rounded-lg shadow-lg mb-8">
+            <div className="flex items-center mb-4">
+              <img
+                src={missionBlock?.icon?.src || "/images/our-vision/missionicon.png"}
+                alt={missionBlock?.icon?.alt || "mission"}
+                className="w-8 h-8 mr-3"
+              />
+              <h3 className="text-lg lg:text-xl font-bold text-gray-800">
+                {missionBlock?.title || "Our Mission"}
+              </h3>
             </div>
+
+            <p className="text-xs text-gray-700 mb-4 leading-relaxed">
+              {missionBlock?.content?.description || "Sustainable Living and Renewable Energy Solutions for all. To Spearhead the Renewable Energy Movement for Greener environment globally & contribute to Sustainable Development Goals"}
+            </p>
+
+            <p className="text-xs italic text-center">
+              <span className="text-[#23B14D] text-lg">"</span>
+              {missionBlock?.content?.quote || "Innovating, Developing and Delivering Sustainable Renewable Energy based Solutions and Products for a greener social and industrial environment and thereby to ensure community welfare and rural empowerment"}
+              <span className="text-[#23B14D] text-lg">"</span>
+            </p>
           </div>
         </div>
 
