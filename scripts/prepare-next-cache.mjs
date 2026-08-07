@@ -4,6 +4,20 @@ import { platform } from "node:os";
 
 const projectRoot = process.cwd();
 const nextPath = join(projectRoot, ".next");
+const isWin = platform() === "win32";
+
+if (!isWin) {
+  // On macOS/Linux, if .next is a symlink to an old cache directory, remove it so Next uses a clean local .next
+  if (existsSync(nextPath)) {
+    const stat = lstatSync(nextPath);
+    if (stat.isSymbolicLink()) {
+      rmSync(nextPath, { recursive: true, force: true });
+      console.log("Cleaned old symbolic link for .next");
+    }
+  }
+  process.exit(0);
+}
+
 const cacheDir = join(
   process.env.LOCALAPPDATA || process.env.TMP || "/tmp",
   "next-cache",
@@ -11,6 +25,12 @@ const cacheDir = join(
 );
 
 mkdirSync(cacheDir, { recursive: true });
+
+// Clean stale pages cache if present
+const stalePages = join(cacheDir, "server", "pages");
+if (existsSync(stalePages)) {
+  rmSync(stalePages, { recursive: true, force: true });
+}
 
 if (existsSync(nextPath)) {
   const stat = lstatSync(nextPath);
@@ -23,10 +43,6 @@ if (existsSync(nextPath)) {
   }
 }
 
-if (platform() === "win32") {
-  symlinkSync(cacheDir, nextPath, "junction");
-} else {
-  symlinkSync(cacheDir, nextPath, "dir");
-}
-
+symlinkSync(cacheDir, nextPath, "junction");
 console.log(`Linked .next -> ${cacheDir}`);
+

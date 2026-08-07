@@ -67,25 +67,15 @@ const TopNavigation = () => {
     />;
   } else
     return (
-      <div className="lg:pb-20 py-10  lg:p-0 relative ">
+      <div className="relative z-[9999]">
         {/* desktop top navigation */}
         <div
-          className={`flex md:fixed top-0 left-0 w-full md:flex-nowrap flex-wrap md:space-x-8 lg:space-x-20 items-center transition-all duration-300 z-[9999] ${
+          className={`flex fixed top-0 left-0 w-full md:flex-nowrap flex-wrap md:space-x-8 lg:space-x-20 items-center transition-all duration-300 z-[9999] ${
             isScrolled && !isMobile ? "bg-white shadow-md" : "bg-transparent"
           }`}
         >
-          <img
-            src="/images/insight1/greenShape.png"
-            alt="green rectangle"
-            className="hidden md:block md:h-[600px] lg:h-[1200px] pointer-events-none absolute -z-[10] left-0"
-          />
           {isMobile && (
             <div className="w-full">
-              <img
-                src="/images/insight1/greenShape.png"
-                alt="green rectangle"
-                className="h-[500px] pointer-events-none absolute top-0 -z-[10] left-0"
-              />
               <div className="flex justify-between items-center pt-4 px-4">
                 <a href="/">
                   <img

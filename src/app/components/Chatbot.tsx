@@ -355,33 +355,31 @@ const Chatbot: React.FC = () => {
       )}
 
       {/* Chat Trigger */}
-      <div className="fixed z-[20] right-1 lg:right-2 bottom-2">
-        <div className="relative">
-          <img
-            src="/images/letstalkenergy.png"
-            alt="call to action"
-            className="w-96 lg:w-auto"
-          />
-          <div className="absolute bottom-8 lg:bottom-10 left-12 lg:left-14 right-12 lg:right-20">
+      <div className="fixed z-[20] right-4 lg:right-8 bottom-3 lg:bottom-4">
+        <div
+          style={{ transform: "skewX(-16deg)" }}
+          className="relative flex items-center bg-white/95 backdrop-blur-md px-5 py-2 lg:py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border-l-[3px] border-[#23B14D] border-y border-r border-gray-200/80 rounded-sm w-[260px] lg:w-[310px]"
+        >
+          <div style={{ transform: "skewX(16deg)" }} className="flex items-center justify-between w-full">
             <input
               ref={promptInputRef}
               type="text"
               value={promptInputValue}
               onChange={(e) => setPromptInputValue(e.target.value)}
               onKeyDown={handlePromptKeyDown}
-              placeholder="Let's Talk energy"
-              className="outline-none text-gray-900 font-semibold italic w-full text-base bg-transparent placeholder:text-gray-900 placeholder:opacity-100"
+              placeholder="Let's Talk Energy"
+              className="outline-none text-gray-900 font-semibold italic text-sm lg:text-base bg-transparent placeholder:text-gray-900 placeholder:opacity-100 placeholder:italic w-full pr-2"
             />
-          </div>
-          <div
-            className="absolute bottom-8 lg:bottom-10 right-12 lg:right-20 cursor-pointer hover:scale-110 transition-transform"
-            onClick={handlePromptSubmit}
-          >
-            <img
-              src="/images/mike.svg"
-              alt="Send message"
-              className="w-4 lg:w-auto"
-            />
+            <div
+              className="cursor-pointer hover:scale-110 transition-transform shrink-0"
+              onClick={handlePromptSubmit}
+            >
+              <img
+                src="/images/mike.svg"
+                alt="Send message"
+                className="w-4 h-4 lg:w-5 lg:h-5 opacity-70 hover:opacity-100 transition-opacity"
+              />
+            </div>
           </div>
         </div>
       </div>
