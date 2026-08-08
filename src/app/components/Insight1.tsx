@@ -88,14 +88,9 @@ const Insight1: React.FC<Props> = ({
         {/* Left Side Background Diagonal Image Overlay */}
         <div className="absolute top-0 left-0 h-full -z-10 pointer-events-none overflow-hidden">
           <img
-            src={bgImg || "/images/insight1/greenShape.png"}
+            src={bgImg}
             className="h-screen w-auto object-cover object-left"
             alt="Background banner"
-          />
-          <img
-            src="/images/insight1/greenShape.png"
-            className="absolute top-0 left-0 h-screen w-auto object-cover object-left -z-10"
-            alt="Green shape overlay"
           />
         </div>
 
