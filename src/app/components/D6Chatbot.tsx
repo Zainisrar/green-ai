@@ -1,6 +1,11 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 
+interface D6ChatbotProps {
+  canvasAnchored?: boolean;
+  triggerClassName?: string;
+}
+
 interface Message {
   id: string;
   text: string;
@@ -9,7 +14,11 @@ interface Message {
   isStreaming?: boolean;
 }
 
-const D6Chatbot: React.FC = () => {
+const D6Chatbot: React.FC<D6ChatbotProps> = ({
+  canvasAnchored = false,
+  triggerClassName = "",
+}) => {
+  const hasResponsiveTrigger = Boolean(triggerClassName);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
@@ -79,7 +88,7 @@ const D6Chatbot: React.FC = () => {
           body: JSON.stringify({
             question: textToSend,
           }),
-        }
+        },
       );
 
       if (!response.ok) {
@@ -110,16 +119,16 @@ const D6Chatbot: React.FC = () => {
                     prev.map((msg) =>
                       msg.id === botMessageId
                         ? { ...msg, text: accumulatedText }
-                        : msg
-                    )
+                        : msg,
+                    ),
                   );
                 } else if (data.type === "done") {
                   setMessages((prev) =>
                     prev.map((msg) =>
                       msg.id === botMessageId
                         ? { ...msg, isStreaming: false }
-                        : msg
-                    )
+                        : msg,
+                    ),
                   );
                   break;
                 }
@@ -141,8 +150,8 @@ const D6Chatbot: React.FC = () => {
                 text: "Sorry, I'm having trouble connecting right now. Please try again later.",
                 isStreaming: false,
               }
-            : msg
-        )
+            : msg,
+        ),
       );
     } finally {
       setIsLoading(false);
@@ -355,26 +364,42 @@ const D6Chatbot: React.FC = () => {
       )}
 
       {/* Chat Trigger */}
-      <div className="fixed z-[50] right-1 lg:right-2 bottom-2">
+      <div
+        className={`${canvasAnchored ? "absolute" : "fixed"} z-[50] right-1 lg:right-2 bottom-2 ${triggerClassName}`}
+      >
         <div className="relative">
           <img
             src="/images/letstalkenergy.png"
             alt="call to action"
             className="w-62 lg:w-auto"
           />
-          <div className="absolute bottom-4 lg:bottom-10 left-12 lg:left-14 right-12 lg:right-20">
+          <div
+            className={
+              hasResponsiveTrigger
+                ? "absolute top-[47%] left-[12%] right-[19%] -translate-y-1/2"
+                : "absolute bottom-4 lg:bottom-10 left-12 lg:left-14 right-12 lg:right-20"
+            }
+          >
             <input
               ref={promptInputRef}
               type="text"
               value={promptInputValue}
               onChange={(e) => setPromptInputValue(e.target.value)}
               onKeyDown={handlePromptKeyDown}
-              placeholder="Let's Talk energy"
-              className="outline-none placeholder:text-gray-900 placeholder:opacity-100 text-gray-900 font-semibold italic w-full text-base bg-transparent"
+              placeholder="Let's Talk Energy"
+              className={
+                hasResponsiveTrigger
+                  ? "w-full bg-transparent text-[clamp(13px,1vw,18px)] font-semibold italic text-gray-900 outline-none placeholder:text-gray-900 placeholder:opacity-100"
+                  : "outline-none placeholder:text-gray-900 placeholder:opacity-100 text-gray-900 font-semibold italic w-full text-base bg-transparent"
+              }
             />
           </div>
           <div
-            className="absolute bottom-5 lg:bottom-10 right-7 lg:right-20 cursor-pointer hover:scale-110 transition-transform"
+            className={
+              hasResponsiveTrigger
+                ? "absolute top-1/2 right-[10%] -translate-y-1/2 cursor-pointer transition-transform hover:scale-110"
+                : "absolute bottom-5 lg:bottom-10 right-7 lg:right-20 cursor-pointer hover:scale-110 transition-transform"
+            }
             onClick={handlePromptSubmit}
           >
             <img

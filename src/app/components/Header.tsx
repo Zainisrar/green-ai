@@ -1,28 +1,34 @@
 "use client";
 
 import React from "react";
-import { HeaderButtons } from "./ui/gradient-button";
 import Link from "next/link";
 import { useInteractiveZIndex } from "@/hooks/useInteractiveZIndex";
 
+export interface KeyItem {
+  icon: React.ReactNode | string;
+  description: string;
+}
+
 export interface SlideProps {
-  slug?: string; // Add slug for linking
-  title: React.ReactNode;
+  id?: number;
+  slug?: string;
+  headline?: string;
+  subheadline?: string;
+  highlighted?: string;
+  title?: React.ReactNode;
   description: string;
   backgroundImage: string;
-  keys: Array<{
-    icon: React.ReactNode;
-    description: string;
-  }>;
+  tag?: string;
+  keys: KeyItem[];
   cta: {
-    button1: React.ReactNode;
+    button1: React.ReactNode | string;
     link1: string;
-    button2: React.ReactNode;
+    button2: React.ReactNode | string;
     link2: string;
   };
-  logo: string;
-  carouselLeft: React.ReactNode;
-  carouselRight: React.ReactNode;
+  logo?: string;
+  carouselLeft?: React.ReactNode;
+  carouselRight?: React.ReactNode;
 }
 
 interface HeaderProps {
@@ -54,11 +60,14 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
 
   if (!slide) return null;
 
+  const categoryTag = slide.tag || `# Mining Insight 0${slide.id || current + 1}`;
+  const logoUrl = slide.logo || "/images/heroSection/logo.png";
+
   return (
     <div
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      className="relative w-full min-h-screen  flex flex-col justify-between text-white transition-[background-image] duration-700"
+      className="relative w-full h-screen max-h-screen flex flex-col justify-between text-white transition-[background-image] duration-700 font-sans overflow-hidden select-none"
       style={{
         backgroundImage: `url("${slide.backgroundImage}")`,
         backgroundRepeat: "no-repeat",
@@ -66,46 +75,103 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
         backgroundPosition: "center",
       }}
     >
-      {/* add the background black shadow layer also */}
-      <div className="absolute inset-0 bg-black/50 lg:bg-black/70 z-0"></div>
-      <div key={current} className="relative w-full h-full flex flex-col justify-between z-10 animate-fadeIn">
-        <div className="absolute lg:top-8 md:top-6 lg:right-12 z-10 top-4 left-4  lg:left-auto">
-          <a href="/">
-            <img
-              src={slide.logo}
-              alt="Logo"
-              className="h-12 md:h-16 lg:h-20 w-auto"
-            />
-          </a>
+      {/* Background dark overlay matching Figma linear gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-0"></div>
+
+      <div key={current} className="relative w-full h-full flex flex-col justify-between z-10 animate-fadeIn pt-4 pb-6 px-4 md:px-8 lg:px-12 overflow-hidden">
+        
+        {/* Top Header Row: Action Bar + Logo */}
+        <div className="w-full flex items-center justify-between z-20 shrink-0">
+          <div className="flex items-center gap-4">
+            {/* Left side space */}
+          </div>
+          
+          <div className="flex items-center gap-6">
+            {/* LET'S CHAT outline button from Figma */}
+            <a
+              href="/engage/reach-us"
+              className="hidden sm:flex items-center justify-center border-[1.2px] border-white px-4 py-1.5 text-xs md:text-sm font-bold text-white uppercase tracking-wider hover:bg-white/20 transition-all filter drop-shadow-[0_0_14px_rgba(255,255,255,0.65)]"
+            >
+              LET&apos;S CHAT
+            </a>
+
+            {/* GREEN Logo at top right */}
+            <a href="/" className="block">
+              <img
+                src={logoUrl}
+                alt="GREEN Logo"
+                className="h-9 md:h-12 lg:h-14 w-auto object-contain"
+              />
+            </a>
+          </div>
         </div>
 
-        <div className="flex flex-col lg:px-24   px-6 h-full pt-20 md:pt-28 lg:pt-32 ">
-          {slide.slug ? (
+        {/* Main Content Area */}
+        <div className="flex flex-col w-full max-w-[1820px] mx-auto my-auto py-1">
+          
+          {/* Main Title (Headline) */}
+          {slide.headline ? (
+            <div className="text-left uppercase font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl 2xl:text-[76px] text-white tracking-tight leading-[1.05] drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] mb-2 lg:mb-3">
+              {slide.headline}
+            </div>
+          ) : slide.slug ? (
             <Link href={`/insights/${slide.slug}`} className="cursor-pointer hover:opacity-90 transition-opacity">
-              <div className="">{slide.title}</div>
+              <div className="drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">{slide.title}</div>
             </Link>
           ) : (
-            <div className="">{slide.title}</div>
+            <div className="drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">{slide.title}</div>
           )}
-          <p className="  md:text-[20px] lg:text-[25px] font-light font-sans  my-4 lg:my-4 drop-shadow">
+
+          {/* Subheadline with Highlighted Term */}
+          {slide.subheadline && (
+            <div className="text-left font-extrabold italic uppercase text-xl sm:text-2xl md:text-3xl lg:text-4xl 2xl:text-[45px] text-white leading-tight mb-3 lg:mb-4 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+              {(() => {
+                if (!slide.highlighted || slide.subheadline.trim().toLowerCase() === slide.highlighted.trim().toLowerCase()) {
+                  return <span className="text-[#23B14D] not-italic font-black uppercase">{slide.subheadline}</span>;
+                }
+                const parts = slide.subheadline.split(new RegExp(`(${slide.highlighted})`, "gi"));
+                return parts.map((part, idx) =>
+                  part.toLowerCase() === slide.highlighted?.toLowerCase() ? (
+                    <span key={idx} className="text-[#23B14D] not-italic font-black uppercase mx-1">
+                      {part}
+                    </span>
+                  ) : (
+                    <React.Fragment key={idx}>{part}</React.Fragment>
+                  )
+                );
+              })()}
+            </div>
+          )}
+
+          {/* Description */}
+          <p className="font-normal text-sm sm:text-base md:text-xl lg:text-2xl 2xl:text-[25px] text-white leading-relaxed lg:leading-[30px] max-w-7xl my-1 lg:my-2 drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
             {slide.description}
           </p>
-          {/* Key Stats/Icons */}
-          <div
-            className={` w-full  flex flex-col lg:flex-row lg:justify-center  z-10 ${
-              slide.description ==
-              "Therefore, endeavored to provide individuals and communities with sustainable energy solutions. Our mission is to encourage the adoption of renewable energy and contribute to a cleaner, greener future for all.."
-                ? "lg:gap-2 2xl:gap-72"
-                : "lg:gap-2 2xl:gap-32"
-            }`}
-          >
+
+          {/* Key Stats / Column Icons */}
+          <div className={`w-full grid gap-4 lg:gap-8 justify-items-center items-start mt-4 lg:mt-6 mb-2 ${
+            slide.keys.length >= 4
+              ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+              : "grid-cols-1 md:grid-cols-3"
+          }`}>
             {slide.keys.map((key, idx) => (
-              <div
-                key={idx}
-                className="flex md:flex-col  w-full lg:flex-col my-4   px-4  items-center"
-              >
-                <div className="mb-2">{key.icon}</div>
-                <span className="font-bold  md:text-center mx-4  md:text-2xl 2xl:text-lg lg:text-xl mb-1 flex flex-col lg:items-center">
+              <div key={idx} className="flex flex-col items-center text-center max-w-sm">
+                <div className="h-16 lg:h-24 2xl:h-28 w-16 lg:w-24 2xl:w-28 flex items-center justify-center mb-2">
+                  {typeof key.icon === "string" ? (
+                    <img
+                      className="max-h-full max-w-full object-contain filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
+                      src={key.icon}
+                      alt="icon"
+                    />
+                  ) : (
+                    key.icon
+                  )}
+                </div>
+                <span className={`font-black text-center text-white leading-snug drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] ${
+                  slide.keys.length >= 4
+                    ? "text-xs sm:text-sm lg:text-base 2xl:text-[22px] max-w-[340px]"
+                    : "text-sm md:text-lg lg:text-xl 2xl:text-[25px]"
+                }`}>
                   {key.description}
                 </span>
               </div>
@@ -113,52 +179,94 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
           </div>
         </div>
 
-        {/* CTA Buttons */}
-        <div className="flex justify-center lg:justify-end lg:mt-20 lg:my-auto md:my-10 gap-4 z-10 px-6 lg:px-0">
-          <div {...cta1Props.getContainerProps()}>
-            <Link href={slide.cta.link1} className="relative">
-              <div className="absolute top-1/3 left-8 lg:left-20 flex text-black lg:text-xl font-bold">
-                {slide.cta.button1}
-                <img src="/images/heroSection/arrowIcn.png" className="lg:ml-4 h-3 ml-2 lg:h-5 mt-1" alt="icn" />
-              </div>
-              <div className="w-44 lg:w-72">
-                <img src="/images/heroSection/btn.png" alt="button" />
-              </div>
-            </Link>
+        {/* Bottom Section: Tag on Left, CTA Buttons on Right */}
+        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4 z-20 shrink-0">
+          
+          {/* Bottom Left Parallelogram Skewed Tag */}
+          <div
+            style={{
+              width: "371px",
+              height: "41px",
+              background: "rgba(169, 163, 163, 0.3)",
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
+              backdropFilter: "blur(7.5px)",
+              WebkitBackdropFilter: "blur(7.5px)",
+            }}
+            className="self-start md:self-auto transform -skew-x-[45deg] flex items-center justify-center border-0 border-none shrink-0"
+          >
+            <div className="transform skew-x-[45deg] font-semibold italic text-base md:text-lg lg:text-[25px] text-black tracking-wide whitespace-nowrap">
+              {categoryTag}
+            </div>
           </div>
-          <div {...cta2Props.getContainerProps()}>
-            <Link href={slide.cta.link2} className="relative">
-              <div className="absolute top-1/3 left-10 lg:left-24 text-black flex lg:text-xl font-bold">
-                {slide.cta.button2}
-                <img src="/images/heroSection/arrowIcn.png" className="lg:ml-10 h-3 ml-5 lg:h-5 mt-1" alt="icn" />
-              </div>
-              <div className="w-44 lg:w-72 flex space-x-4 items-center">
-                <img src="/images/heroSection/btn.png" alt="button" />
-              </div>
-            </Link>
+
+          {/* Bottom Right CTA Buttons (Parallelogram Skewed Glassmorphism Buttons) */}
+          <div className="flex flex-wrap items-center justify-center md:justify-end gap-4 lg:gap-6 self-end md:self-auto">
+            {/* Button 1 */}
+            <div {...cta1Props.getContainerProps()}>
+              <Link
+                href={slide.cta.link1}
+                style={{
+                  background: "linear-gradient(26.97deg, rgba(35, 209, 75, 0.228) 17.38%, rgba(255, 229, 0, 0.21) 75.79%), rgba(255, 255, 255, 0.5)",
+                  boxShadow: "4px 4px 20px rgba(93, 223, 60, 0.25)",
+                  backdropFilter: "blur(7.5px)",
+                }}
+                className="group relative inline-flex items-center justify-center transform -skew-x-[20deg] border border-white/60 px-8 lg:px-12 py-3 lg:py-3.5 hover:scale-[1.02] hover:brightness-110 transition-all cursor-pointer"
+              >
+                <div className="transform skew-x-[20deg] flex items-center gap-3 font-semibold italic text-lg lg:text-2xl 2xl:text-[28px] text-black capitalize whitespace-nowrap">
+                  <span>{typeof slide.cta.button1 === "string" ? slide.cta.button1 : slide.cta.button1}</span>
+                  <svg className="w-5 h-5 lg:w-7 lg:h-7 stroke-black stroke-[3.5] transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                  </svg>
+                </div>
+              </Link>
+            </div>
+
+            {/* Button 2 */}
+            <div {...cta2Props.getContainerProps()}>
+              <Link
+                href={slide.cta.link2}
+                style={{
+                  background: "linear-gradient(26.97deg, rgba(35, 209, 75, 0.228) 17.38%, rgba(255, 229, 0, 0.21) 75.79%), rgba(255, 255, 255, 0.5)",
+                  boxShadow: "4px 4px 20px rgba(93, 223, 60, 0.25)",
+                  backdropFilter: "blur(7.5px)",
+                }}
+                className="group relative inline-flex items-center justify-center transform -skew-x-[20deg] border border-white/60 px-8 lg:px-12 py-3 lg:py-3.5 hover:scale-[1.02] hover:brightness-110 transition-all cursor-pointer"
+              >
+                <div className="transform skew-x-[20deg] flex items-center gap-3 font-semibold italic text-lg lg:text-2xl 2xl:text-[28px] text-black capitalize whitespace-nowrap">
+                  <span>{typeof slide.cta.button2 === "string" ? slide.cta.button2 : slide.cta.button2}</span>
+                  <svg className="w-5 h-5 lg:w-7 lg:h-7 stroke-black stroke-[3.5] transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                  </svg>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
+
       </div>
 
-      {/* Carousel arrows: pinned to a constant-height (viewport) layer so they
-          stay vertically fixed regardless of per-slide content height. */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-50 flex h-screen items-center justify-between px-4 md:px-8">
+      {/* Carousel Navigation Chevron Arrows (Left & Right) */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-50 flex h-screen items-center justify-between px-3 md:px-8">
         <div {...prevButtonProps.getContainerProps()} className="pointer-events-auto">
           <button
             onClick={goPrev}
-            className="bg-black/40 rounded-full p-3 cursor-pointer hover:bg-white transition"
+            className="p-1 md:p-2 cursor-pointer hover:scale-125 transition-transform border-0 bg-transparent filter drop-shadow-[0_0_8px_rgba(35,209,75,0.6)]"
             aria-label="Previous Slide"
           >
-            {slide.carouselLeft}
+            <svg className="w-8 h-10 md:w-10 md:h-12 text-[#23B14D] stroke-[4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
           </button>
         </div>
         <div {...nextButtonProps.getContainerProps()} className="pointer-events-auto">
           <button
             onClick={goNext}
-            className="bg-black/40 rounded-full p-3 cursor-pointer hover:bg-white transition"
+            className="p-1 md:p-2 cursor-pointer hover:scale-125 transition-transform border-0 bg-transparent filter drop-shadow-[0_0_8px_rgba(35,209,75,0.6)]"
             aria-label="Next Slide"
           >
-            {slide.carouselRight}
+            <svg className="w-8 h-8 md:w-10 md:h-12 text-[#23B14D] stroke-[4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
           </button>
         </div>
       </div>
@@ -167,3 +275,4 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
 };
 
 export default Header;
+

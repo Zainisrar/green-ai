@@ -1,283 +1,223 @@
 "use client";
 
-import React, { useState } from "react";
-import TopNavigation from "../TopNavigation/TopNavigation";
-import Chatbot from "../Chatbot";
-import { useSolarEPCMServices } from "../../../hooks/useSolarEPCMServices";
+import Image from "next/image";
 import Link from "next/link";
-import TechnicalDebrief from "./Modals/TechnicalDebrief";
-import DiscoveryConsultation from "./Modals/DiscoveryConsultation";
+import { useState } from "react";
+import D6Chatbot from "../D6Chatbot";
+import Enquiry from "../Energy/Modals/Enquiry";
+import styles from "./EpcmServices.module.css";
 
-const EpcmServices = () => {
-  const { epcmData, error } = useSolarEPCMServices();
-  const [isDebriefOpen, setIsDebriefOpen] = useState(false);
-  const [isDiscoveryOpen, setIsDiscoveryOpen] = useState(false);
+const navigation = [
+  { href: "/explore/welcome-to-green", label: "Explore" },
+  { href: "/energy", label: "Energy", active: true },
+  {
+    href: "/engineering/products/lighting-up-and-lifting-up-living-standards",
+    label: "Elements",
+  },
+  { href: "/expertise", label: "Expertise" },
+  { href: "/empower/join-us", label: "Enlist" },
+  { href: "/engage/reach-us", label: "Engage" },
+];
 
+const phases = [
+  {
+    name: "Engineering",
+    flowName: "Engineering",
+    points: ["Conceptual Design", "Detailed Design", "Technical Studies"],
+    description:
+      "GREEN Solar provides a range of engineering services from yield assessments to executive design and technical supervision.",
+    detail: [
+      "GREEN Solar provides a range of engineering services from yield assessments to executive design and technical supervision.",
+      "Implementation of solar energy projects of any capacity is a complex process and it is best to entrust experts with a proven track record in the industry to carry out your project. Overseen and executed by our team experts, your solar project will deliver the forecasted yield and the highest possible return of investment.",
+    ],
+  },
+  {
+    name: "Procurement",
+    flowName: "Procurement",
+    points: [
+      "Supply Chain Management",
+      "Vendor Selection",
+      "Logistics and Transportation",
+    ],
+    description:
+      "Using a robust global supply chain and highly experienced procurement team, GREEN coordinates delivery for long-lead items, on time and to budget.",
+    detail: [
+      "Using a robust global Supply Chain and a highly experienced Procurement team, GREEN will procure and coordinate delivery for lengthy lead time items that can be a hindrance on large projects, ensuring delivery on time and pursuant to budget.",
+    ],
+  },
+  {
+    name: "Construction",
+    flowName: "Construction",
+    points: [
+      "Civil Works",
+      "Electrical Works",
+      "Mechanical Works",
+      "Installation",
+      "Commissioning",
+    ],
+    description:
+      "We provide adaptable, safety-led construction delivery that solves site challenges with accuracy, diligence, and care.",
+    detail: [
+      "In the construction of Solar Power Plants, our entrepreneurial spirit propels our capacity to provide openness and rapidly adapt.",
+      "Our team is adept at overcoming unforeseen obstacles such as inclement weather and supply chain problems. We provide solutions, as opposed to problems. We accomplish your goals with accuracy, diligence, and care, ensuring the security of our teams and the prosperity of the communities we serve.",
+    ],
+  },
+  {
+    name: "Operations & Maintenance",
+    flowName: "Management",
+    points: [
+      "Project Planning",
+      "Project Oversight",
+      "Quality Assurance",
+      "Risk Mitigation",
+      "Performance Optimization",
+    ],
+    description:
+      "We keep renewable-energy assets operating safely, efficiently, and predictably over the long term.",
+    detail: [
+      "GREEN Solar supports project performance long after commissioning through tailored operations and maintenance services.",
+      "We combine proactive monitoring, practical maintenance, and transparent reporting to protect uptime and maximise the value of every asset.",
+    ],
+  },
+];
 
-
-  if (error) {
-    return (
-      <React.Fragment>
-        <div className="">
-          <TopNavigation />
-          <div className="flex items-center justify-center h-screen">
-            <div className="text-xl text-red-500">
-              Error loading EPCM services data
-            </div>
-          </div>
-        </div>
-      </React.Fragment>
-    );
-  }
+export default function EpcmServices() {
+  const [activePhase, setActivePhase] = useState(0);
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const selectedPhase = phases[activePhase];
 
   return (
-    <React.Fragment>
-      <div className="relative overflow-hidden">
-        <div className="absolute lg:block hidden -z-10 opacity-40 right-0 top-0">
-          <img
-            src="/images/epcm-services/mainImg.png"
-            className="lg:h-[150vh]"
-            alt="mainImg"
+    <main className={styles.page}>
+      <div className={styles.background} aria-hidden="true" />
+
+      <header className={styles.header}>
+        <Link className={styles.logo} href="/" aria-label="GREEN home">
+          <Image
+            src="/images/heroSection/logo.png"
+            alt="GREEN — Future: Envisioned"
+            width={375}
+            height={98}
+            priority
           />
-        </div>
-        <TopNavigation />
-        <div className="flex h-full">
-          {/* Left Side  */}
-          <div className="hidden lg:block lg:w-1/6 shrink-0">
-            <div className="fixed lg:block hidden top-1/4 left-14">
-              <img
-                src="/images/epcm-services/solarEpcmServices.png"
-                alt="solarEpcmServices"
-                className="w-12"
+        </Link>
+
+        <nav className={styles.navigation} aria-label="Primary navigation">
+          {navigation.map((item) => (
+            <Link
+              className={item.active ? styles.activeNavigationItem : undefined}
+              href={item.href}
+              key={item.label}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <button type="button" aria-label="Open navigation">
+            <Image
+              src="/images/heroSection/lighting.svg"
+              alt=""
+              width={42}
+              height={54}
+            />
+          </button>
+        </nav>
+      </header>
+
+      <Image
+        className={styles.verticalTitle}
+        src="/images/service/services.svg"
+        alt="Services"
+        width={73}
+        height={507}
+        priority
+      />
+
+      <section
+        className={styles.processFlow}
+        aria-label="EPCM delivery process"
+      >
+        {phases.map((phase, index) => (
+          <div className={styles.flowItem} key={phase.name}>
+            <article className={styles.flowCard}>
+              <div className={styles.flowCardContent}>
+                <h2>{phase.flowName}</h2>
+                <ul>
+                  {phase.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+            {index < phases.length - 1 && (
+              <Image
+                className={styles.flowArrow}
+                src="/images/service/arrow.png"
+                alt=""
+                width={65}
+                height={24}
               />
-            </div>
+            )}
           </div>
-          {/* Main Content Panel */}
-          <div className="flex-1 min-w-0 px-4 lg:pr-8 lg:text-left lg:my-20">
-            {/* Header Section */}
-            <div className="mb-8">
-              <h1 className="text-3xl lg:text-4xl 2xl:text-5xl font-black leading-tight text-gray-800 mb-2">
-                {epcmData?.header?.title ? (
-                  epcmData.header.title.includes("EPCM") ? (
-                    <>
-                      {epcmData.header.title.split("EPCM")[0]}
-                      <span className="text-[#23B14D]">EPCM</span>
-                      {epcmData.header.title.split("EPCM")[1]}
-                    </>
-                  ) : (
-                    epcmData.header.title
-                  )
-                ) : (
-                  <>
-                    SOLAR <span className="text-[#23B14D]">EPCM</span> SERVICES
-                  </>
-                )}
-              </h1>
-              <h2 className="text-xl lg:text-2xl text-[#23B14D] italic leading-snug mb-4">
-                {epcmData?.header?.subtitle ||
-                  "Designed for Complexity. Delivered with Precision. Managed to Scale"}
-              </h2>
-              {epcmData?.introduction.text.split("\n").map((para, index) => (
-                <p
-                  key={index}
-                  className={`p-2 ${index === 0 ? "max-w-2xl" : ""}`}
-                >
-                  {para.split(/\b(GREEN)\b/gi).map((part, i) =>
-                    part.toLowerCase() === "green" ? (
-                      <span key={i} className="text-[#23B14D] font-black">
-                        {part}
-                      </span>
-                    ) : (
-                      <React.Fragment key={i}>{part}</React.Fragment>
-                    )
-                  )}
-                </p>
-              ))}
-            </div>
+        ))}
+      </section>
 
-            {/* EPCM Services Grid */}
-            <div className="flex lg:flex-row flex-col lg:gap-6 lg:mb-8 lg:items-stretch">
-              {/* First Row Services */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-stretch w-full lg:flex-1 min-w-0">
-                {epcmData?.services?.slice(0, 2).map((service) => (
-                  <div
-                    key={service.id}
-                    style={{ transform: "skewX(-16deg)" }}
-                    className="h-full p-4 border-4 border-[#f0f9da]"
-                  >
-                    <div>
-                      <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-3">
-                        {service.heading}
-                      </h3>
-                      <ul className="text-sm font-semibold text-gray-700 space-y-2">
-                        {service.points?.map((point, pointIndex) => (
-                          <li key={pointIndex}>{point}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )) || (
-                  <>
-                    <div style={{ transform: "skewX(-16deg)" }} className="h-full p-4 border-4 border-[#f0f9da]">
-                      <div>
-                        <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-3">
-                          Engineering
-                        </h3>
-                        <ul className="text-sm font-semibold text-gray-700 space-y-2">
-                          <li>Site-specific feasibility and load modeling</li>
-                          <li>Climate-resilient design methodologies</li>
-                          <li>Grid, off-grid, and hybrid design specialization</li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div style={{ transform: "skewX(-16deg)" }} className="h-full p-4 border-4 border-[#f0f9da]">
-                      <div>
-                        <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-3">
-                          Procurement
-                        </h3>
-                        <ul className="text-sm font-semibold text-gray-700 space-y-2">
-                          <li>Global supplier network with delivery certainty</li>
-                          <li>Cost-stabilized sourcing and inventory control</li>
-                          <li>
-                            Compliance with IEC, AS/NZS, and local utility specs
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
-              <div style={{ transform: "skewX(-16deg)" }} className="lg:flex hidden items-center justify-center bg-[#e8f3d5] text-center text-xl font-bold p-6 w-[300px] shrink-0 shadow-2xl">
-                <div>
-                  {epcmData?.quote?.text ||
-                    "We embed it — into every process, every panel, every kilowatt."}
-                </div>
-              </div>
-            </div>
+      <section className={styles.detail} aria-live="polite">
+        <h1>{selectedPhase.name}</h1>
+        {selectedPhase.detail.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </section>
 
-            <div className="flex lg:flex-row flex-col lg:gap-6 lg:mb-8 lg:items-stretch">
-              {/* Second Row Services */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 items-stretch w-full lg:flex-1 min-w-0">
-                {epcmData?.services?.slice(2, 4).map((service) => (
-                  <div
-                    key={service.id}
-                    style={{ transform: "skewX(-16deg)" }}
-                    className="h-full p-4 border-4 border-[#f0f9da]"
-                  >
-                    <div>
-                      <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-3">
-                        {service.heading}
-                      </h3>
-                      <ul className="text-sm font-semibold text-gray-700 space-y-2">
-                        {service.points?.map((point, pointIndex) => (
-                          <li key={pointIndex}>{point}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )) || (
-                  <>
-                    <div style={{ transform: "skewX(-16deg)" }} className="h-full p-4 border-4 border-[#f0f9da]">
-                      <div>
-                        <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-3">
-                          Construction
-                        </h3>
-                        <ul className="text-sm font-semibold text-gray-700 space-y-2">
-                          <li>
-                            In-house deployment: civil, electrical, mechanical
-                          </li>
-                          <li>Remote and difficult terrain execution experts</li>
-                          <li>Schedule-bound, safety-prioritized site delivery</li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div style={{ transform: "skewX(-16deg)" }} className="h-full p-4 border-4 border-[#f0f9da]">
-                      <div>
-                        <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-3">
-                          Management
-                        </h3>
-                        <ul className="text-sm font-semibold text-gray-700 space-y-2">
-                          <li>Project lifecycle leadership: plan to performance</li>
-                          <li>Embedded risk tracking and response automation</li>
-                          <li>Stakeholder reporting, permitting, and governance</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </>
-                )}
-              </div>
-              {/* Spacer keeps row-2 cards the same width as row 1 (quote shown once above) */}
-              <div className="hidden lg:block w-[300px] shrink-0" aria-hidden="true" />
-            </div>
+      <section className={styles.heading} aria-label="EPCM">
+        <h2>EPCM</h2>
+        <p>Integrated Renewable Energy Transformation</p>
+      </section>
 
-            {/* Bottom Tagline */}
-            <div className="flex lg:flex-row flex-col gap-6 lg:justify-between lg:items-center mt-8">
-              <div className="italic min-w-0">
-                <p className="text-2xl lg:text-3xl leading-tight text-gray-800">
-                  {epcmData?.tagline?.text?.split(".")[0] ||
-                    "You Don't Engage GREEN to Oversee Solar"}
-                  .
-                </p>
-                <p className="text-2xl lg:text-3xl font-bold leading-tight text-gray-800">
-                  {epcmData?.tagline?.text?.split(".")[1]?.trim() ||
-                    "You Engage Us to Deliver It"}
-                  .
-                </p>
-              </div>
-              <div className="flex flex-col items-start lg:items-stretch gap-6 shrink-0 w-full max-w-[341px]">
-                <Link
-                  href={epcmData?.callToActions?.[0]?.href || "#"}
-                  className="relative block w-full cursor-pointer"
-                >
-                  <img
-                    src="/images/epcm-services/epcmBtn.png"
-                    alt="epcm"
-                    className="w-full"
-                  />
-                  <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
-                    {epcmData?.callToActions?.[0]?.text}
-                  </div>
-                </Link>
+      <section className={styles.servicesPanel} aria-labelledby="our-services">
+        <div className={styles.servicesPanelContent}>
+          <h2 id="our-services">Our Services</h2>
+          <div className={styles.serviceOptions}>
+            {phases.map((phase, index) => {
+              const isActive = activePhase === index;
+
+              return (
                 <button
+                  className={isActive ? styles.selectedService : undefined}
+                  key={phase.name}
+                  onClick={() => setActivePhase(index)}
                   type="button"
-                  onClick={() => setIsDebriefOpen(true)}
-                  className="relative block w-full cursor-pointer"
                 >
-                  <img
-                    src="/images/epcm-services/technicalBtn.png"
-                    alt="Request a technical debrief"
-                    className="w-full"
-                  />
-                  <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
-                    {epcmData?.callToActions?.[1]?.text || "Request a Technical Debrief"}{` >`}
-                  </div>
+                  <span>{phase.name}</span>
+                  {isActive && <small>{phase.description}</small>}
                 </button>
-                <button
-                  type="button"
-                  onClick={() => setIsDiscoveryOpen(true)}
-                  className="relative block w-full cursor-pointer"
-                >
-                  <img
-                    src="/images/epcm-services/bookingBtn.png"
-                    alt="Book a discovery consultation"
-                    className="w-full"
-                  />
-                  <div style={{ transform: "skewX(-16deg)" }} className="absolute inset-0 flex items-center justify-center px-3 text-xs lg:text-sm font-bold whitespace-nowrap">
-                    {epcmData?.callToActions?.[2]?.text || "Book a Discovery Consultation"}{` >`}
-                  </div>
-                </button>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
-      </div>
-      <div className="lg:block hidden">
-        <Chatbot />
-      </div>
-      <TechnicalDebrief isOpen={isDebriefOpen} onClose={() => setIsDebriefOpen(false)} />
-      <DiscoveryConsultation isOpen={isDiscoveryOpen} onClose={() => setIsDiscoveryOpen(false)} />
-    </React.Fragment>
-  );
-};
+      </section>
 
-export default EpcmServices;
+      <button
+        className={styles.enquiryButton}
+        onClick={() => setIsEnquiryOpen(true)}
+        type="button"
+      >
+        <Image
+          src="/images/service/enquiry.svg"
+          alt="Submit an enquiry"
+          width={169}
+          height={52}
+        />
+      </button>
+
+      <Enquiry
+        defaultService={selectedPhase.name}
+        isOpen={isEnquiryOpen}
+        onClose={() => setIsEnquiryOpen(false)}
+        services={phases.map((phase) => phase.name)}
+      />
+
+      <div className={styles.chat}>
+        <D6Chatbot triggerClassName={styles.chatTrigger} />
+      </div>
+    </main>
+  );
+}

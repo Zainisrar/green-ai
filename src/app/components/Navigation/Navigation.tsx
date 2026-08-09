@@ -175,8 +175,8 @@ const currentPath = usePathname();
   };
 
   return (
-    <div className="fixed inset-0 z-[9999999999999999999] bg-black/50">
-      <div className="absolute inset-0 bg-white lg:max-w-[60vw] lg:left-[40vw]">
+    <div className="navigation-overlay-enter fixed inset-0 z-[9999999999999999999] bg-black/50">
+      <div className="navigation-drawer-enter absolute inset-0 bg-white lg:max-w-[60vw] lg:left-[40vw]">
         {/* Close button */}
         <button
           onClick={handleClose}

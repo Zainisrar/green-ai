@@ -1,37 +1,47 @@
 "use client";
 
-import React from "react";
-import TopNavigation from "../TopNavigation/TopNavigation";
+import React, { useEffect, useState } from "react";
+import D6TopNavigation from "../d6TopNav";
 import Chatbot from "../Chatbot";
+import D6Chatbot from "../D6Chatbot";
 import { useAboutUs } from "../../../hooks/useAboutUs";
 import { parseAboutUsContent, parseQuoteContent } from "../../utils/htmlParser";
+import "../../home.css";
 
 const AboutUs = () => {
-
-  
+  const [desktopScale, setDesktopScale] = useState(1);
   // Fetch AboutUs data
   const { aboutUsData } = useAboutUs();
   
   // Parse content when data is available
   const parsedContent = aboutUsData ? parseAboutUsContent(aboutUsData.content) : null;
   const parsedQuote = aboutUsData ? parseQuoteContent(aboutUsData.quote) : null;
-if(aboutUsData){
+
+  const aboutParagraphs = parsedContent?.aboutGreenParagraphs ?? [
+    "GREEN Limited - A Front-runner in sustainable living and Renewable Energy Solution Provider in Papua New Guinea has its global presence in the INDIA, USA and Australia helps to bring out the best of Product design, development and Project delivery strategies, prompt service and a support matrix more suitable to PNG with world class standards. GREEN Limited is an ISO 9001 certified company and complies with all the international standards and quality management methodologies.",
+    "We are committed to enhancing and empowering lives through our energy solutions envisioned to end the energy-dependency for a sustainable and promising future.",
+    "At GREEN, with a Global perspective bestows the finest solutions to Enable, Empower and Energize the drive for a sustainable future with our solutions for a better quality of life.",
+  ];
+  const whatParagraphs = parsedContent?.whatDoesGreenParagraphs ?? [
+    "GREEN Limited renewable energy solutions and services are primarily focused at rural areas without access to conventional sources of energy or utilities. Our products and solutions are primarily intended to empower rural communities for economic and social growth, to enrich a sustainable and healthier quality of life. Our solutions, products and services delivery ensures that are environmental value addition.",
+  ];
+
+  useEffect(() => {
+    const updateScale = () => {
+      setDesktopScale(Math.max(window.innerWidth / 1920, window.innerHeight / 970));
+    };
+
+    updateScale();
+    window.addEventListener("resize", updateScale);
+    return () => window.removeEventListener("resize", updateScale);
+  }, []);
+
   return (
     <React.Fragment>
-      <div className="">
-        {/* Background Image */}
-        <div className="absolute lg:block hidden -z-10 top-0 left-0">
-          <img
-            src={aboutUsData?.bgImg || "/images/about-us/mainImg.png"}
-            className="w-11/12 h-[120vh] "
-            alt="mainBg"
-          />
-        </div>
-        
-        <TopNavigation />
+      <div className="relative min-h-screen overflow-hidden bg-white">
 
         {/* Mobile Layout */}
-        <div className="md:hidden px-4 py-6 relative z-50">
+        <div className="relative z-10 px-4 py-6 md:hidden">
           {/* Clean Lean Green Title */}
           <div className="text-center mb-8">
             <h1 className=" text-2xl lg:text-3xl font-black text-gray-800 leading-tight">
@@ -134,120 +144,63 @@ if(aboutUsData){
           </div>
         </div>
 
-        {/* Desktop Layout */}
-        <div className="hidden md:flex h-full">
-          {/* Left Side - Clean Lean Green Text */}
-          <div className="lg:w-8/12 2xl:w-7/12  flex lg:items-end pb-40 md:justify-center">
-            <div className="text-center relative z-50  lg:pl-20">
-              <h1 className="text-3xl lg:text-6xl 2xl:text-8xl font-black text-gray-800 leading-tight">
-                {aboutUsData?.key.split(' ').map((word, index) => (
-                  <React.Fragment key={index}>
-                    {index === 2 ? (
-                      <span className="text-[#23B14D]">{word}</span>
-                    ) : (
-                      word
-                    )}
-                    {index < 2 && <br />}
-                  </React.Fragment>
-                )) || (
-                  <>
-                    CLEAN
-                    <br />
-                    LEAN
-                    <br />
-                    <span className="text-[#23B14D]">GREEN</span>
-                  </>
-                )}
-              </h1>
-              <div className="absolute -z-10 -top-8 2xl:w-[860px]  lg:w-[650px] 2xl:-left-32 lg:-left-22">
-                <img src="/images/about-us/cleanLeanBg.png" alt="img" className="" />
-              </div>
-            </div>
+        {/* Desktop Figma frame. The design is a 1920px canvas, so the image,
+            content and navigation stay in the same relationship at every size. */}
+        <div
+          className="about-green-desktop hidden md:block"
+          role="region"
+          aria-label="About GREEN"
+          style={{ transform: `scale(${desktopScale})` }}
+        >
+          <img
+            src={aboutUsData?.bgImg || "/images/about-us/bg.jpg"}
+            className="about-green-background"
+            alt=""
+          />
+          <D6TopNavigation />
+
+          <div className="about-green-clean-lean">
+            <img src="/images/about-us/cleanLeanBg.png" alt="" />
+            <h1>
+              CLEAN
+              <br />
+              LEAN
+              <br />
+              <span>GREEN</span>
+            </h1>
           </div>
 
-          {/* Right Side - About Content */}
-          <div className="md:w-[60%] 2xl:w-7/12 lg:w-9/12 flex flex-col justify-center py-10 md:mx-4 md:pl-10 lg:mx-auto lg:pl-36 lg:pr-8">
-            <h2 className="lg:text-2xl 2xl:text-3xl text-xl font-bold flex justify-end lg:block mb-2 text-gray-800">
-              {aboutUsData?.title || "About GREEN"}
-            </h2>
-            <p className="2xl:text-lg md:text-base text-base lg:text-base font-bold mb-4 italic">
+          <section className="about-green-copy">
+            <h2>{aboutUsData?.title || "About GREEN"}</h2>
+            <p className="about-green-subtitle">
               {parsedContent?.subtitle || "Enlightening Our Lives through Sustainable Energy Solutions"}
             </p>
+            <div className="about-green-body">
+              {aboutParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+            </div>
 
-              <div className="space-y-3 text-gray-700 text-sm 2xl:text-base leading-relaxed">
-                {parsedContent?.aboutGreenParagraphs.map((paragraph, index) => (
-                  <p key={index}>
-                    {paragraph}
-                    {index === 1 && <br className="2xl:block hidden"/>}
-                    {index === 2 && <br className="2xl:block hidden"/>}
-                  </p>
-                )) || (
-                  <>
-                    <p>
-                      GREEN Limited - A Front-runner in sustainable living and
-                      Renewable Energy Solution Provider in Papua New Guinea has 15
-                      global presence in the INDIA, USA and Australia helps to bring
-                      out the best of Product design, development and Project delivery
-                      strategies, GREEN Limited is an ISO 9001 certified company and
-                      complies with all the international standards and quality
-                      management methodologies.
-                    </p>
-                    <p>
-                      We are committed to enhancing and empowering lives through our
-                      energy solutions enhanced by <br className="2xl:block hidden"/> and the energy dependency
-                      for a sustainable and promising future.
-                    </p>
-                    <p>
-                      At GREEN, with a Global perspective between the finest solutions
-                      to Enable, Empower and Energize the drive <br className="2xl:block hidden"/> for a
-                      sustainable future with our solutions for a better quality of
-                      life.
-                    </p>
-                  </>
-                )}
-              </div>
-
-            <h3 className="lg:text-2xl 2xl:text-3xl font-bold mt-6 mb-2 flex justify-end lg:justify-start text-xl text-gray-800">
-              {parsedContent?.whatDoesGreenTitle || "What does GREEN do"}
-            </h3>
-            <p className="2xl:text-lg md:text-base font-bold mb-4 italic">
+            <h3>{parsedContent?.whatDoesGreenTitle || "What does GREEN do"}</h3>
+            <p className="about-green-subtitle">
               {parsedContent?.whatDoesGreenSubtitle || "Transforming Lives with Energy Independence"}
             </p>
-
-            {parsedContent?.whatDoesGreenParagraphs.map((paragraph, index) => (
-              <p key={index} className="text-gray-700 text-sm 2xl:text-base leading-relaxed mb-4 2xl:mb-6">
-                {paragraph}
-              </p>
-            )) || (
-              <p className="text-gray-700 text-sm 2xl:text-base leading-relaxed mb-4 2xl:mb-6">
-                GREEN Limited renewable energy solutions and services are
-                primarily focused in rural areas without access to conventional
-                sources of energy or utilities. Our products and solutions are
-                primarily intended to empower rural communities for economic and
-                social growth to enrich their lives. Our innovative products like
-                Solar Lanterns, products and services delivery ensures that are
-                environmental value additions.
-              </p>
-            )}
-
-            <div className="mt-6">
-              <p className="md:text-2xl text-2xl 2xl:text-4xl italic text-gray-700 mb-2">
-                {parsedQuote?.firstQuote || "A Transformation - That's"}{" "}
-                <span className="text-[#23B14D] font-bold">GREEN!</span>
-              </p>
-              <p className="md:text-2xl text-2xl 2xl:text-4xl italic 2xl:mt-4 text-gray-800">
-                {parsedQuote?.secondQuote || "Perspicacious for a"}{" "}
-                <span className="font-bold">BETTER WORLD!</span>
-              </p>
+            <div className="about-green-body about-green-body--what">
+              {whatParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
             </div>
-          </div>
+
+            <div className="about-green-quote">
+              <p>{parsedQuote?.firstQuote || "A Transformation - That's"} <strong>GREEN!</strong></p>
+              <p>{parsedQuote?.secondQuote || "Perspicacious for a"} <b>BETTER WORLD!</b></p>
+            </div>
+          </section>
+          <D6Chatbot canvasAnchored />
         </div>
 
-        <Chatbot />
+        <div className="md:hidden">
+          <Chatbot />
+        </div>
       </div>
     </React.Fragment>
   );
-}
 };
 
 export default AboutUs;

@@ -2,28 +2,147 @@
 import React from "react";
 import { notFound } from "next/navigation";
 import Chatbot from "../Chatbot";
+import D6Chatbot from "../D6Chatbot";
 import ProductNavigation from "../TopNavigation/ProductNavigation";
 import { useProductBySlug } from "../../../hooks/useProducts";
 import ProductEnquiry from "./Modals/ProductEnquiry";
+import "../../home.css";
 
 interface ProductProps {
   slug: string;
 }
+
+const lightingSystemItems = [
+  { icon: "solarpanel.png", name: "Solar Panel", detail: "60W Poly-crystalline" },
+  { icon: "controlbox.png", name: "Control Box", detail: "12.8V/18000mAh LiFePO4" },
+  { icon: "ledbulb.png", name: "LED Bulb", detail: "23 hrs / 11 hrs" },
+  { icon: "tv.png", name: "TV", detail: "DC Television 32 inch", duration: "16 hrs" },
+  { icon: "fan.png", name: "Fan", detail: "DC Pedestal Fan 16 inch", duration: "13 hrs" },
+  { icon: "radio.png", name: "FM Radio", detail: "Radio with MP3 player", duration: "8 hrs" },
+  { icon: "lantern.png", name: "Lantern", detail: "3.2V 600mAh LiFePO4", duration: "8 hrs" },
+  { icon: "flashlight.png", name: "Flashlight", detail: "3W/3.7V 1800mAh Li-ion battery", duration: "8 hrs / 4 hrs" },
+  { icon: "USB.png", name: "USB Cable", detail: "Mobile Charging cable" },
+];
 
 const Product = ({ slug }: ProductProps) => {
   const { data: currentProduct, isLoading, isError } = useProductBySlug(slug);
   const [active, setActive] = React.useState(0);
   const [isDesktop, setIsDesktop] = React.useState(false);
   const [isEnquiryOpen, setIsEnquiryOpen] = React.useState(false);
+  const [figmaScale, setFigmaScale] = React.useState(1);
 
   React.useEffect(() => {
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 1024);
-    }
+      setFigmaScale(Math.min(window.innerWidth / 1920, window.innerHeight / 970));
+    };
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  if (slug === "lighting-up-and-lifting-up-living-standards") {
+    return (
+      <>
+        <div className="product-figma-shell hidden lg:block">
+          <div
+            className="product-figma-desktop"
+            style={{ transform: `scale(${figmaScale})` }}
+          >
+            <img
+              src="/images/product/bg.jpg"
+              alt=""
+              className="product-figma-background"
+            />
+            <ProductNavigation />
+            <h1 className="product-figma-heading">Products</h1>
+
+            <img
+              src="/images/product/product.png"
+              alt="Products"
+              className="product-figma-label"
+            />
+            <img
+              src="/images/product/green-sunshine.png"
+              alt="GREEN SunShine"
+              className="product-figma-brand"
+            />
+
+            <div className="product-figma-showcase">
+              <img
+                src="/images/product/featuredProduct1.png"
+                alt="GREEN SunShine lighting system"
+                className="product-figma-featured"
+              />
+              <div className="product-figma-thumbnails">
+                {["featuredProduct1.png", "productImg2.png", "productImg3.png", "productImg4.png"].map((image, index) => (
+                  <button
+                    key={image}
+                    type="button"
+                    onClick={() => setActive(index)}
+                    className={active === index ? "is-active" : ""}
+                    aria-label={`Show product image ${index + 1}`}
+                  >
+                    <img src={`/images/product/${image}`} alt="" />
+                  </button>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsEnquiryOpen(true)}
+                className="product-figma-enquiry"
+              >
+                <span>Enquiry</span>
+                <span className="product-figma-enquiry-arrow" aria-hidden="true" />
+              </button>
+            </div>
+
+            <section className="product-figma-card">
+              <div>
+                <h2>Lighting Up<br />and Lifting Up<br />Living<br />Standards</h2>
+                <p>
+                  To lift up living standards sustainably, it is crucial to invest
+                  in infrastructure that supports a better quality of life.
+                </p>
+              </div>
+            </section>
+
+            <section className="product-figma-specifications" aria-label="Product specifications">
+              <img src="/images/product/boxKeyImg.png" alt="" />
+              <div className="product-figma-specification-list">
+                {lightingSystemItems.map((item) => (
+                  <article key={item.name}>
+                    <img src={`/images/product/${item.icon}`} alt="" />
+                    <h3>{item.name}</h3>
+                    <p>{item.detail}</p>
+                    {item.duration && <span>{item.duration}</span>}
+                  </article>
+                ))}
+              </div>
+            </section>
+            <D6Chatbot canvasAnchored />
+          </div>
+        </div>
+
+        <div className="lg:hidden">
+          <ProductNavigation />
+          <div className="px-6 pt-24 text-center">
+            <img src="/images/product/green-sunshine.png" alt="GREEN SunShine" className="mx-auto w-44" />
+            <img src="/images/product/featuredProduct1.png" alt="GREEN SunShine lighting system" className="mx-auto mt-8 w-full max-w-md" />
+            <h1 className="mt-8 text-3xl font-bold text-slate-800">Lighting Up and Lifting Up Living Standards</h1>
+            <p className="mt-4 text-slate-600">To lift up living standards sustainably, it is crucial to invest in infrastructure that supports a better quality of life.</p>
+          </div>
+          <Chatbot />
+        </div>
+
+        <ProductEnquiry
+          isOpen={isEnquiryOpen}
+          onClose={() => setIsEnquiryOpen(false)}
+          productName="Lighting Up and Lifting Up Living Standards"
+        />
+      </>
+    );
+  }
 
   // Deliver Cloudinary images optimized + right-sized so they stay crisp.
   // f_auto = best format, q_auto = smart quality, c_limit/w = downscale to the

@@ -29,76 +29,35 @@ const page = () => {
           .replace(/-+/g, "-")
           .trim();
 
+    const getCategoryTag = (id: number, headline: string) => {
+      const h = headline.toLowerCase();
+      if (h.includes("mining")) return `# Mining  Insight 0${id}`;
+      if (h.includes("home") || h.includes("solar")) return `# Home  Insight 0${id}`;
+      if (h.includes("cities") || h.includes("urban") || h.includes("electricity")) return `# Urban  Insight 0${id}`;
+      if (h.includes("hotel")) return `# Hotel  Insight 0${id}`;
+      return `# Insight 0${id}`;
+    };
+
     return {
+      id: item.id,
       slug,
-      title: (
-        <div>
-          <div className=" text-left uppercase  font-bold text-3xl md:text-4xl lg:text-5xl 2xl:text-7xl my-4 md:my-8 lg:my-10">
-            {item.headline}
-          </div>
-          <div className=" text-xl md:text-3xl  lg:text-3xl 2xl:text-5xl font-semibold italic">
-            {(() => {
-              if (
-                item.subheadline.trim().toLowerCase() ===
-                item.highlighted.trim().toLowerCase()
-              ) {
-                return (
-                  <span className="text-green-600 uppercase">
-                    {item.subheadline}
-                  </span>
-                );
-              }
-              const parts = item.subheadline.split(
-                new RegExp(`(${item.highlighted})`, "gi")
-              );
-              return parts.map((part, idx) =>
-                part.toLowerCase() === item.highlighted.toLowerCase() ? (
-                  <span key={idx} className="text-green-600 uppercase">
-                    {part}
-                  </span>
-                ) : (
-                  <React.Fragment key={idx}>{part}</React.Fragment>
-                )
-              );
-            })()}
-          </div>
-        </div>
-      ),
+      headline: item.headline,
+      subheadline: item.subheadline,
+      highlighted: item.highlighted,
+      tag: getCategoryTag(item.id, item.headline),
       description: item.description,
       backgroundImage: item.bgImg,
       keys: item.keys.map((key) => ({
-        icon: (
-          <React.Fragment>
-            <img
-              className="w-16 aspect-square md:w-22 lg:w-24  2xl:w-auto"
-              src={key.icon}
-              alt={key.text}
-            />
-          </React.Fragment>
-        ),
+        icon: key.icon,
         description: key.text,
       })),
-      button1: item.cta1.text,
-      link1: item.cta1.link,
-      button2: item.cta2.text,
-      link2: item.cta2.link,
-      logo: "/images/heroSection/logo.png",
-      carouselLeft: (
-        <div>
-          <img src="/images/heroSection/carouselLeft.svg" alt="arrowleft" />
-        </div>
-      ),
-      carouselRight: (
-        <div>
-          <img src="/images/heroSection/carouselRight.svg" alt="arrowright" />
-        </div>
-      ),
       cta: {
-        button1: <React.Fragment>{item.cta1.text}</React.Fragment>,
+        button1: item.cta1.text,
         link1: item.cta1.link,
-        button2: <React.Fragment>{item.cta2.text}</React.Fragment>,
+        button2: item.cta2.text,
         link2: item.cta2.link,
       },
+      logo: "/images/heroSection/logo.png",
     };
   });
 
