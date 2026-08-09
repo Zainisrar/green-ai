@@ -18,6 +18,7 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
   canvasAnchored = false,
   triggerClassName = "",
 }) => {
+  const hasResponsiveTrigger = Boolean(triggerClassName);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
@@ -372,7 +373,13 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
             alt="call to action"
             className="w-62 lg:w-auto"
           />
-          <div className="absolute bottom-4 lg:bottom-10 left-12 lg:left-14 right-12 lg:right-20">
+          <div
+            className={
+              hasResponsiveTrigger
+                ? "absolute top-[47%] left-[12%] right-[19%] -translate-y-1/2"
+                : "absolute bottom-4 lg:bottom-10 left-12 lg:left-14 right-12 lg:right-20"
+            }
+          >
             <input
               ref={promptInputRef}
               type="text"
@@ -380,11 +387,19 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
               onChange={(e) => setPromptInputValue(e.target.value)}
               onKeyDown={handlePromptKeyDown}
               placeholder="Let's Talk Energy"
-              className="outline-none placeholder:text-gray-900 placeholder:opacity-100 text-gray-900 font-semibold italic w-full text-base bg-transparent"
+              className={
+                hasResponsiveTrigger
+                  ? "w-full bg-transparent text-[clamp(13px,1vw,18px)] font-semibold italic text-gray-900 outline-none placeholder:text-gray-900 placeholder:opacity-100"
+                  : "outline-none placeholder:text-gray-900 placeholder:opacity-100 text-gray-900 font-semibold italic w-full text-base bg-transparent"
+              }
             />
           </div>
           <div
-            className="absolute bottom-5 lg:bottom-10 right-7 lg:right-20 cursor-pointer hover:scale-110 transition-transform"
+            className={
+              hasResponsiveTrigger
+                ? "absolute top-1/2 right-[10%] -translate-y-1/2 cursor-pointer transition-transform hover:scale-110"
+                : "absolute bottom-5 lg:bottom-10 right-7 lg:right-20 cursor-pointer hover:scale-110 transition-transform"
+            }
             onClick={handlePromptSubmit}
           >
             <img

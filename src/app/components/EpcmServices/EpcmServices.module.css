@@ -212,8 +212,16 @@
   width: 24.414vw;
   height: 21.289vw;
   padding: 1.27vw 1.709vw 1.172vw 5.078vw;
-  background: linear-gradient(130deg, #edf8c2 0%, #fbfbd8 100%);
-  box-shadow: 0 0.488vw 0.684vw rgb(0 0 0 / 18%);
+  background:
+    linear-gradient(
+      90deg,
+      rgb(35 177 77 / 20%) -147.34%,
+      rgb(255 254 80 / 20%) 100%
+    ),
+    rgb(241 238 238 / 30%);
+  box-shadow: 0 3px 10px rgb(0 0 0 / 25%);
+  -webkit-backdrop-filter: blur(7.5px);
+  backdrop-filter: blur(7.5px);
   transform: skewX(-21deg);
 }
 
