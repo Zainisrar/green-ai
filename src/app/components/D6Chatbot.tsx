@@ -1,6 +1,11 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 
+interface D6ChatbotProps {
+  canvasAnchored?: boolean;
+  triggerClassName?: string;
+}
+
 interface Message {
   id: string;
   text: string;
@@ -9,7 +14,10 @@ interface Message {
   isStreaming?: boolean;
 }
 
-const D6Chatbot: React.FC = () => {
+const D6Chatbot: React.FC<D6ChatbotProps> = ({
+  canvasAnchored = false,
+  triggerClassName = "",
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
@@ -79,7 +87,7 @@ const D6Chatbot: React.FC = () => {
           body: JSON.stringify({
             question: textToSend,
           }),
-        }
+        },
       );
 
       if (!response.ok) {
@@ -110,16 +118,16 @@ const D6Chatbot: React.FC = () => {
                     prev.map((msg) =>
                       msg.id === botMessageId
                         ? { ...msg, text: accumulatedText }
-                        : msg
-                    )
+                        : msg,
+                    ),
                   );
                 } else if (data.type === "done") {
                   setMessages((prev) =>
                     prev.map((msg) =>
                       msg.id === botMessageId
                         ? { ...msg, isStreaming: false }
-                        : msg
-                    )
+                        : msg,
+                    ),
                   );
                   break;
                 }
@@ -141,8 +149,8 @@ const D6Chatbot: React.FC = () => {
                 text: "Sorry, I'm having trouble connecting right now. Please try again later.",
                 isStreaming: false,
               }
-            : msg
-        )
+            : msg,
+        ),
       );
     } finally {
       setIsLoading(false);
@@ -355,7 +363,9 @@ const D6Chatbot: React.FC = () => {
       )}
 
       {/* Chat Trigger */}
-      <div className="fixed z-[50] right-1 lg:right-2 bottom-2">
+      <div
+        className={`${canvasAnchored ? "absolute" : "fixed"} z-[50] right-1 lg:right-2 bottom-2 ${triggerClassName}`}
+      >
         <div className="relative">
           <img
             src="/images/letstalkenergy.png"
@@ -369,7 +379,7 @@ const D6Chatbot: React.FC = () => {
               value={promptInputValue}
               onChange={(e) => setPromptInputValue(e.target.value)}
               onKeyDown={handlePromptKeyDown}
-              placeholder="Let's Talk energy"
+              placeholder="Let's Talk Energy"
               className="outline-none placeholder:text-gray-900 placeholder:opacity-100 text-gray-900 font-semibold italic w-full text-base bg-transparent"
             />
           </div>

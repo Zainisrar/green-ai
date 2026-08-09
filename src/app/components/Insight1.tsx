@@ -70,6 +70,115 @@ const formatCardTitle = (titleText: string) => {
   );
 };
 
+const miningAssets = {
+  logo: "/images/insight1/figma/green-logo.png",
+  solar: "/images/insight1/figma/renewable-energy.png",
+  operations: "/images/insight1/figma/automation.png",
+  methane: "/images/insight1/figma/mining-3.png",
+  downstream: "/images/insight1/figma/save-the-world.png",
+  bolt: "/images/insight1/figma/bolt.png",
+};
+
+const UrbanInsightScreen: React.FC<Omit<Props, "backgroundImg" | "navigation">> = ({
+  bgImg,
+  title,
+  subheadline,
+  description,
+  name1,
+  name2,
+  cardTitle,
+  keypoints,
+}) => (
+  <main className="urban-insight">
+    <div className="urban-insight__photo" aria-hidden="true"><img src={bgImg} alt="" /></div>
+    <img className="urban-insight__left-shape" src="/images/insight1/figma/left-shape-b.svg" alt="" aria-hidden="true" />
+    <header className="urban-insight__header">
+      <a href="/" className="urban-insight__logo" aria-label="GREEN home"><img src="/images/insight1/figma/green-logo.png" alt="GREEN" /></a>
+      <nav aria-label="Primary navigation" className="urban-insight__nav">
+        <a href="/explore/welcome-to-green">Explore</a><a href="/energy">Energy</a><a href="/engineering/products/lighting-up-and-lifting-up-living-standards">Elements</a><a href="/expertise">Expertise</a><a href="/empower/join-us">Enlist</a><a href="/engage/reach-us">Engage</a>
+        <button type="button" aria-label="Open menu"><img src="/images/insight1/figma/bolt.png" alt="" /></button>
+      </nav>
+    </header>
+    <div className="urban-insight__name"><span>{name1}</span><strong>{name2}</strong></div>
+    <div className="urban-insight__quote"><p><span>“</span>{cardTitle}<span>”</span></p></div>
+    <section className="urban-insight__content">
+      <h1>{title}</h1><h2>{subheadline}</h2><p className="urban-insight__description">{description}</p>
+    </section>
+    <div className="urban-insight__facts">
+      {keypoints.map((point, index) => <article className={`urban-insight__fact urban-insight__fact--${index + 1}`} key={index}><img src={point.icon} alt="" /><p>{point.text}</p></article>)}
+    </div>
+    <p className="urban-insight__tag"># {name2} &nbsp;Insight 03</p>
+    <button className="urban-insight__chat" type="button" aria-label="Open chat"><img className="insight-chat__panel" src="/images/insight1/figma/chat-panel.svg" alt="" aria-hidden="true" /><span className="insight-chat__label">Let’s Talk Energy</span><img className="insight-chat__microphone" src="/images/insight1/figma/chat-microphone.svg" alt="" aria-hidden="true" /></button>
+  </main>
+);
+
+const MiningInsightScreen = () => (
+  <main className="mining-insight">
+    <div className="mining-insight__photo" aria-hidden="true" />
+    <div className="mining-insight__wash" aria-hidden="true" />
+    <div className="mining-insight__accent" aria-hidden="true" />
+
+    <header className="mining-insight__header">
+      <a href="/" className="mining-insight__logo-link" aria-label="GREEN home">
+        <img src={miningAssets.logo} alt="GREEN" />
+      </a>
+      <nav aria-label="Primary navigation" className="mining-insight__nav">
+        <a href="/explore/welcome-to-green">Explore</a>
+        <a href="/energy">Energy</a>
+        <a href="/engineering/products/lighting-up-and-lifting-up-living-standards">Elements</a>
+        <a href="/expertise">Expertise</a>
+        <a href="/empower/join-us">Enlist</a>
+        <a href="/engage/reach-us">Engage</a>
+        <button type="button" aria-label="Open menu">
+          <img src={miningAssets.bolt} alt="" />
+        </button>
+      </nav>
+    </header>
+
+    <section className="mining-insight__left-copy">
+      <h1><span>Solar</span><strong>Mining</strong></h1>
+      <blockquote>
+        <span>&quot;</span>Sun-Powered Mining:<br />
+        Powering the Future,<br />
+        Sustainably.<span>&quot;</span>
+      </blockquote>
+      <p className="mining-insight__tag"># Mining&nbsp; Insight 01</p>
+    </section>
+
+    <section className="mining-insight__content">
+      <h2>The Carbon Footprint of Mining</h2>
+      <h3>How Solar Energy Reduces Emissions?</h3>
+      <p className="mining-insight__description">
+        Therefore, endeavored to provide individuals and communities with sustainable energy solutions. Our mission is to encourage the adoption of renewable energy and contribute to a cleaner, greener future for all..
+      </p>
+      <div className="mining-insight__facts">
+        <article>
+          <img src={miningAssets.solar} alt="" />
+          <p>Total emissions: 4–7% of<br />global greenhouse emissions</p>
+        </article>
+        <article>
+          <img src={miningAssets.operations} alt="" />
+          <p>Direct operations<br />(Scope 1 &amp; 2): ~1%</p>
+        </article>
+        <article>
+          <img src={miningAssets.methane} alt="" />
+          <p>Fugitive methane emissions from<br />coal mining 3–6%</p>
+        </article>
+        <article>
+          <img src={miningAssets.downstream} alt="" />
+          <p>Downstream emissions (Scope 3):<br />~28% (mainly from coal use)</p>
+        </article>
+      </div>
+    </section>
+
+    <div className="mining-insight__chat" aria-label="Chat with GREEN">
+      <img className="insight-chat__panel" src="/images/insight1/figma/chat-panel.svg" alt="" aria-hidden="true" />
+      <span className="insight-chat__label">Let’s Talk Energy</span>
+      <img className="insight-chat__microphone" src="/images/insight1/figma/chat-microphone.svg" alt="" aria-hidden="true" />
+    </div>
+  </main>
+);
+
 const Insight1: React.FC<Props> = ({
   name1,
   name2,
@@ -80,6 +189,14 @@ const Insight1: React.FC<Props> = ({
   bgImg,
   keypoints,
 }) => {
+  if (title.toLowerCase().includes("carbon footprint") || name2.toLowerCase().includes("mining")) {
+    return <MiningInsightScreen />;
+  }
+
+  if (name2.toLowerCase().includes("urban")) {
+    return <UrbanInsightScreen {...{ bgImg, title, subheadline, description, name1, name2, cardTitle, keypoints }} />;
+  }
+
   return (
     <React.Fragment>
       <TopNavigation />
@@ -184,6 +301,3 @@ const Insight1: React.FC<Props> = ({
 };
 
 export default Insight1;
-
-
-

@@ -170,13 +170,13 @@
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  line-height: 21px;
+  font-weight: 800;
+  font-size: 13px;
+  line-height: 22px;
   color: #FFFFFF;
   text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
   transition: opacity 0.35s ease;
-  max-height: 100px;
+  max-height: 110px;
   overflow: hidden;
 }
 
@@ -185,8 +185,8 @@
 .home-page-d6 .panel-headline-text {
   display: block;
   font-weight: 800;
-  font-size: 30px;
-  line-height: 1.12;
+  font-size: 32px;
+  line-height: 36px;
 }
 
 /* Clips heading + description to a single panel column */
@@ -194,6 +194,18 @@
   position: absolute;
   overflow: hidden;
   pointer-events: none;
+  transition:
+    clip-path 1s cubic-bezier(.4, 0, .2, 1),
+    transform 1s cubic-bezier(.4, 0, .2, 1),
+    opacity .3s ease-out;
+}
+
+.home-page-d6.is-transitioning-to-r .d6-panel-copy--1 {
+  opacity: 0 !important;
+  transition:
+    clip-path 1s cubic-bezier(.4, 0, .2, 1),
+    transform 1s cubic-bezier(.4, 0, .2, 1),
+    opacity 0s;
 }
 
 .panel-copy-zone h2,
@@ -208,8 +220,8 @@
   margin: 0;
   font-family: 'Montserrat', sans-serif;
   font-weight: 800;
-  font-size: 54px;
-  line-height: 1.1;
+  font-size: 32px;
+  line-height: 36px;
   text-transform: uppercase;
   color: #FFFFFF;
   text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
@@ -221,8 +233,146 @@
 
 .panel-headline-r {
   font-style: normal;
-  font-size: 54px;
-  line-height: 1.1;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 49px;
+}
+
+.home-page-d6 .panel-headline-about .panel-headline-text {
+  max-width: 190px;
+  font-size: 32px;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 36px;
+  text-transform: none;
+}
+
+.d6-panel-link {
+  display: block;
+  position: absolute;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    left 1s cubic-bezier(.4, 0, .2, 1),
+    transform 180ms cubic-bezier(.2, .8, .2, 1),
+    filter 180ms ease;
+  transform-origin: left center;
+  pointer-events: auto;
+}
+
+.d6-panel-link:hover,
+.d6-panel-link:focus-visible {
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, .42));
+  transform: translateX(5px);
+  outline: none;
+}
+
+.d6-panel-link:active {
+  transform: translateX(5px) scale(.975);
+}
+
+.d6-badge {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 1s cubic-bezier(.4, 0, .2, 1), filter 220ms ease, opacity 1s cubic-bezier(.4, 0, .2, 1);
+}
+
+.d6-badge img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.d6-badge:hover,
+.d6-badge:focus-visible {
+  transform: translateY(-8px) scale(1.035);
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .25));
+  outline: none;
+}
+
+.d6-badge[aria-disabled="true"],
+.d6-panel-link[aria-disabled="true"] {
+  cursor: default;
+}
+
+.d6-badge[aria-disabled="true"]:hover,
+.d6-panel-link[aria-disabled="true"]:hover {
+  transform: none;
+  filter: none;
+}
+
+.d6-expanded-copy {
+  position: absolute;
+  z-index: 42;
+  pointer-events: none;
+  font-family: var(--font-montserrat), 'Montserrat', sans-serif;
+  font-style: normal;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, .5);
+  animation: d6-panel-copy-in 700ms 240ms cubic-bezier(.4, 0, .2, 1) both;
+}
+
+.d6-expanded-panel__eyebrow {
+  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .18em;
+}
+
+.home-page-d6 .d6-expanded-copy h2 {
+  max-width: calc(100% - var(--d6-copy-title-inset));
+  margin: 0 0 0 var(--d6-copy-title-inset);
+  font-size: var(--d6-copy-title-size);
+  font-weight: 600;
+  line-height: var(--d6-copy-title-line-height);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.home-page-d6 .d6-expanded-copy h2 span {
+  display: block;
+  white-space: nowrap;
+}
+
+.home-page-d6 .d6-expanded-copy > div > p:last-child {
+  width: var(--d6-copy-body-width);
+  margin: var(--d6-copy-body-gap) 0 0;
+  font-size: var(--d6-copy-body-size);
+  font-weight: 800;
+  line-height: var(--d6-copy-body-line-height);
+}
+
+.d6-expanded-panel__close {
+  position: absolute;
+  top: -230px;
+  right: 0;
+  border: 0;
+  background: rgba(255, 255, 255, .75);
+  color: #1b1b1b;
+  padding: 10px 16px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+@keyframes d6-panel-copy-in {
+  from { opacity: 0; transform: translateX(-24px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .d6-badge,
+  .d6-panel-link,
+  .d6-expanded-copy { animation: none; transition: none; }
 }
 
 .slide-visible {
@@ -623,43 +773,148 @@
   pointer-events: none;
 }
 
+/* Fill the exposed top-left triangle behind the diagonal landscape panel. */
+.d6-left-corner-wash {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  top: 0;
+  width: 195px;
+  height: 414px;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  background: linear-gradient(115deg, #d7efc2 0%, #e8ef92 48%, #ffea55 100%);
+  pointer-events: none;
+}
+
+.d6-static-art {
+  transition: transform 1s cubic-bezier(.4, 0, .2, 1), opacity 1s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* Figma fades the copy while the slower panel geometry continues moving. */
+.d6-route-shell {
+  opacity: 1;
+}
+
+.d6-route-shell.is-leaving-gentle {
+  animation: d6-route-exit 1s cubic-bezier(.4, 0, .2, 1) both;
+  pointer-events: none;
+}
+
+.d6-route-shell.is-leaving-quick {
+  animation: d6-route-exit .3s ease-out both;
+  pointer-events: none;
+}
+
+@keyframes d6-route-exit {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.d6-static-art {
+  opacity: 1;
+}
+
+.d6-live-art,
+.d6-state-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.d6-live-art {
+  z-index: 10;
+  overflow: hidden;
+}
+
+.d6-state-art {
+  display: block;
+  z-index: 1;
+  object-fit: cover;
+  clip-path: polygon(548px 0, 548px 0, 70px 100%, 70px 100%);
+  transition: clip-path 1s cubic-bezier(.4, 0, .2, 1);
+  will-change: clip-path;
+}
+
+.d6-state-art.is-active {
+  clip-path: polygon(548px 0, 100% 0, 100% 100%, 70px 100%);
+}
+
+.d6-panel-hit {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 18;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: clip-path 1s cubic-bezier(.4, 0, .2, 1);
+}
+
+.d6-panel-hit:focus-visible {
+  outline: 4px solid rgba(255, 255, 255, .85);
+  outline-offset: -8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .d6-static-art,
+  .d6-state-art,
+  .d6-panel-hit,
+  .d6-route-shell,
+  .panel-copy-zone {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Keep the desktop canvas from exposing the page background if a diagonal
+   image is still loading or a browser rounds the clipped edge by one pixel. */
+.home-page-d6 {
+  background-color: #dff0bf;
+}
+
+.d6-green-corner {
+  background: transparent;
+}
+
 /* Group 1171280893 */
 .group-1171280893 {
   position: absolute;
-  width: 107px;
-  height: 66px;
+  width: 110px;
+  height: 74px;
   left: 1786px;
-  top: 818px;
+  /* Keep the callout clearly above the talk bar. At this y-position its left
+     edge also sits on the white wedge diagonal, as in the Figma frame. */
+  top: 760px;
+  pointer-events: none;
 }
 
-/* company Snapshots IN 90 SEC */
-.company-snapshots {
+.d6-fixed-right-wedge {
   position: absolute;
-  width: 106px;
-  height: 59px;
-  left: 1787px;
-  top: 825px;
-  font-family: 'Montserrat';
-  font-style: italic;
-  font-weight: 300;
-  font-size: 14px;
-  line-height: 17px;
-  text-transform: uppercase;
-  font-feature-settings: 'pnum' on, 'lnum' on;
-  color: #000000;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  z-index: 17;
+  inset: 0;
+  /* Continue the same 478px diagonal used by the exported N panel. The line
+     starts well beyond the top-right of the frame and reaches x=1685 at the
+     bottom, matching the narrow white rail in the Figma frame. */
+  clip-path: polygon(
+    calc(100% + 243px) 0,
+    100% 0,
+    100% 100%,
+    calc(100% - 235px) 100%
+  );
+  background: #f5f5f5;
+  pointer-events: none;
 }
 
-/* Arrow 1 */
-.arrow-1 {
-  box-sizing: border-box;
-  position: absolute;
-  width: 92.01px;
-  height: 0px;
-  left: 1786px;
-  top: 818px;
-  border: 2px solid #23B14D;
-  transform: rotate(-0.62deg);
+.company-snapshots-art {
+  display: block;
+  width: 110px;
+  height: 74px;
+  object-fit: contain;
+  user-select: none;
 }
 
 /* Group 1171276641 */
@@ -767,7 +1022,7 @@
   width: 235px;
   height: 68px;
   left: 25px;
-  top: 25px;
+  top: 32px;
 }
 
 /* Component */
@@ -826,7 +1081,7 @@
   gap: 30px;
   position: absolute;
   left: 814px;
-  top: 47px;
+  top: 55px;
   width: max-content;
   height: 24px;
 }
@@ -839,4 +1094,469 @@
 .nav-enlist,
 .nav-engage {
   flex: none;
+}
+
+/* About GREEN — Figma node 7077:4439 */
+.about-green-desktop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 970px;
+  transform-origin: top left;
+  font-family: var(--font-montserrat), "Montserrat", sans-serif;
+}
+
+.about-green-background {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 1920px;
+  height: 970px;
+}
+
+.about-green-clean-lean {
+  position: absolute;
+  left: -9px;
+  top: 443px;
+  width: 1093px;
+  height: 526px;
+}
+
+.about-green-clean-lean img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.about-green-clean-lean h1 {
+  position: absolute;
+  top: 57px;
+  left: 338px;
+  margin: 0;
+  color: #000;
+  font-size: 128px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.about-green-clean-lean h1 span,
+.about-green-quote strong {
+  color: #23b14d;
+}
+
+.about-green-copy {
+  position: absolute;
+  top: 119px;
+  left: 1112px;
+  width: 760px;
+  color: #111;
+}
+
+.about-green-copy h2,
+.about-green-copy h3 {
+  margin: 0;
+  color: #000;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.about-green-copy h3 {
+  margin-top: 26px;
+}
+
+.about-green-subtitle {
+  margin: 20px 0 24px;
+  font-size: 21px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.about-green-copy h3 + .about-green-subtitle {
+  margin-top: 20px;
+  margin-bottom: 24px;
+}
+
+.about-green-body {
+  color: #333;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.about-green-body p {
+  margin: 0 0 23px;
+}
+
+.about-green-body--what p {
+  margin-bottom: 0;
+}
+
+.about-green-quote {
+  margin-top: 17px;
+  color: #000;
+  font-size: 34px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.22;
+}
+
+.about-green-quote p {
+  margin: 0;
+}
+
+.about-green-quote b {
+  font-weight: 800;
+}
+
+/* The About GREEN header shares the D6 navigation component, but this frame
+   uses the wider Figma spacing rather than the standard page header spacing. */
+.about-green-desktop > div:nth-of-type(1) > div {
+  position: static;
+}
+
+.about-green-desktop > div:nth-of-type(1) > div > div:first-child {
+  position: absolute;
+  top: 25px;
+  left: 15px;
+  margin: 0;
+}
+
+.about-green-desktop > div:nth-of-type(1) > div > div:first-child img {
+  width: 235px;
+  height: 68px;
+  padding: 0;
+}
+
+.about-green-desktop > div:nth-of-type(1) > div > div:last-child {
+  position: static;
+  width: auto;
+}
+
+.about-green-desktop > div:nth-of-type(1) ul {
+  position: absolute;
+  top: 50px;
+  left: 1076px;
+  display: flex;
+  gap: 45px;
+  width: auto;
+}
+
+.about-green-desktop > div:nth-of-type(1) ul > li {
+  margin: 0;
+}
+
+.about-green-desktop > div:nth-of-type(1) ul > li:last-child {
+  position: absolute;
+  top: -34px;
+  left: 784px;
+  width: 85px;
+  height: 85px;
+}
+
+.about-green-desktop > div:nth-of-type(1) ul > li:last-child img {
+  width: 85px;
+  height: 85px;
+}
+
+.about-green-desktop > div:last-child {
+  right: -30px;
+  bottom: -14px;
+}
+
+/* GREEN SunShine product detail — Figma node 7077:12683 */
+.product-figma-shell {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+  background: #fff;
+}
+
+.product-figma-desktop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 970px;
+  transform-origin: top left;
+  font-family: var(--font-montserrat), "Montserrat", sans-serif;
+}
+
+.product-figma-background {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 970px;
+}
+
+.product-figma-label {
+  position: absolute;
+  top: 420px;
+  left: 75px;
+  width: 72px;
+  height: 518px;
+}
+
+.product-figma-heading {
+  position: absolute;
+  top: 99px;
+  left: 280px;
+  margin: 0;
+  color: #050505;
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.product-figma-brand {
+  position: absolute;
+  top: 135px;
+  left: 918px;
+  width: 176px;
+  height: 70px;
+}
+
+.product-figma-showcase {
+  position: absolute;
+  top: 166px;
+  left: 160px;
+  width: 704px;
+}
+
+.product-figma-featured {
+  display: block;
+  width: 704px;
+  height: auto;
+  margin: 0;
+}
+
+.product-figma-thumbnails {
+  position: absolute;
+  top: 579px;
+  left: 72px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.product-figma-thumbnails button {
+  display: grid;
+  width: 105px;
+  height: 105px;
+  padding: 8px;
+  place-items: center;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.product-figma-thumbnails button.is-active {
+  border: 3px solid #23b14d;
+}
+
+.product-figma-thumbnails img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.product-figma-enquiry {
+  position: absolute;
+  top: 704px;
+  left: 477px;
+  width: 171px;
+  height: 54px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: linear-gradient(100deg, #d7f5a8 0%, #f8fa7a 100%);
+  clip-path: polygon(16% 0, 100% 0, 84% 100%, 0 100%);
+  color: #121212;
+  cursor: pointer;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.product-figma-enquiry span:first-child {
+  display: inline-block;
+  margin-left: -7px;
+}
+
+.product-figma-enquiry-arrow {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  margin: 0 0 1px 18px;
+  border-top: 3px solid currentColor;
+  border-right: 3px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.product-figma-card {
+  position: absolute;
+  top: 183px;
+  left: 1090px;
+  box-sizing: border-box;
+  width: 660px;
+  height: 390px;
+  padding: 75px 127px;
+  background: #f1f5c9;
+  box-shadow: 14px 16px 22px rgba(22, 29, 39, 0.22);
+  transform: skewX(-16deg);
+}
+
+.product-figma-card > div {
+  transform: skewX(16deg);
+}
+
+.product-figma-card h2 {
+  position: relative;
+  top: 2px;
+  left: 10px;
+  margin: 0;
+  color: #1f2b43;
+  font-size: 45px;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.1;
+}
+
+.product-figma-card p {
+  position: relative;
+  top: 5px;
+  left: -50px;
+  width: 440px;
+  margin: 28px 0 0;
+  color: #657085;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+.product-figma-specifications {
+  position: absolute;
+  top: 724px;
+  left: 861px;
+  width: 970px;
+  height: 170px;
+}
+
+.product-figma-specifications > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.product-figma-specification-list {
+  position: absolute;
+  top: 34px;
+  right: 130px;
+  left: 70px;
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: 0;
+}
+
+.product-figma-specification-list article {
+  min-width: 0;
+  color: #202020;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.product-figma-specification-list article > img {
+  display: block;
+  width: auto;
+  height: 27px;
+  max-width: 32px;
+  margin: 0 auto 5px;
+  object-fit: contain;
+}
+
+.product-figma-specification-list h3,
+.product-figma-specification-list p,
+.product-figma-specification-list span {
+  display: block;
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.product-figma-specification-list h3 {
+  font-weight: 700;
+}
+
+.product-figma-specification-list p,
+.product-figma-specification-list span {
+  margin-top: 8px;
+  font-size: 8px;
+}
+
+.product-figma-specification-list span {
+  margin-top: 5px;
+}
+
+/* ProductNavigation intentionally keeps its behavior; these rules only place
+   its existing desktop markup at the coordinates from this product frame. */
+.product-figma-desktop > div:first-of-type {
+  position: absolute;
+  inset: 0;
+  padding: 0;
+}
+
+.product-figma-desktop > div:first-of-type > div {
+  position: absolute;
+  inset: 0;
+}
+
+.product-figma-desktop > div:first-of-type > div > img {
+  display: none;
+}
+
+.product-figma-desktop > div:first-of-type > div > div,
+.product-figma-desktop > div:first-of-type > div > div > div {
+  position: static;
+}
+
+.product-figma-desktop > div:first-of-type ul {
+  position: absolute;
+  top: 58px;
+  left: 1043px;
+  display: flex;
+  gap: 27px;
+  align-items: flex-start;
+  padding: 0;
+}
+
+.product-figma-desktop > div:first-of-type ul > li {
+  margin: 0;
+  font-size: 20px;
+}
+
+.product-figma-desktop > div:first-of-type ul > li:last-child {
+  position: absolute;
+  top: -26px;
+  left: 757px;
+  margin: 0;
+}
+
+.product-figma-desktop > div:first-of-type ul > li:last-child img {
+  display: block !important;
+  width: 60px !important;
+  height: 85px !important;
+  min-width: 60px !important;
+  max-width: 60px !important;
+  flex: none;
+}
+
+.product-figma-desktop > div:last-child {
+  right: 104px;
+  bottom: 2px;
 }

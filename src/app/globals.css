@@ -43,10 +43,633 @@ body {
   animation: fadeIn 0.6s ease-in-out;
 }
 
+/* Figma hamburger Change To interaction: 0.3s, Ease Out. */
+@keyframes navigation-overlay-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes navigation-drawer-enter {
+  from { opacity: 0; transform: translateX(48px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.navigation-overlay-enter {
+  animation: navigation-overlay-enter 0.3s ease-out both;
+}
+
+.navigation-drawer-enter {
+  animation: navigation-drawer-enter 0.3s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navigation-overlay-enter,
+  .navigation-drawer-enter {
+    animation: none;
+  }
+}
+
 /* Line clamp utilities */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* Figma: Insight page - 1 / mining screen */
+.mining-insight {
+  position: relative;
+  min-height: 100svh;
+  height: 100vh;
+  overflow: hidden;
+  background: #fff;
+  color: #050505;
+  font-family: var(--font-montserrat), sans-serif;
+}
+
+.mining-insight__photo {
+  position: absolute;
+  left: -4.9vw;
+  top: -4.8vw;
+  width: 61.5vw;
+  height: 61.5vw;
+  background: url('/images/insight1/figma/mining-background.png') center / cover no-repeat;
+  -webkit-mask-image: url('/images/insight1/figma/mining-mask.svg');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 61.93vw 99.24vw;
+  -webkit-mask-position: -5.52vw 0;
+  mask-image: url('/images/insight1/figma/mining-mask.svg');
+  mask-repeat: no-repeat;
+  mask-size: 61.93vw 99.24vw;
+  mask-position: -5.52vw 0;
+}
+
+.mining-insight__wash {
+  position: absolute;
+  left: -4.9vw;
+  top: -4.8vw;
+  width: 61.5vw;
+  height: 61.5vw;
+  background: linear-gradient(123deg, rgba(35, 177, 77, .42) 0%, rgba(213, 239, 95, .3) 35%, rgba(255, 255, 255, .68) 72%);
+  -webkit-mask-image: url('/images/insight1/figma/mining-mask.svg');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 61.93vw 99.24vw;
+  -webkit-mask-position: -5.52vw 0;
+  mask-image: url('/images/insight1/figma/mining-mask.svg');
+  mask-repeat: no-repeat;
+  mask-size: 61.93vw 99.24vw;
+  mask-position: -5.52vw 0;
+  pointer-events: none;
+}
+
+.mining-insight__accent {
+  position: absolute;
+  z-index: 1;
+  top: -2.24vw;
+  left: -2.97vw;
+  width: 21.35vw;
+  height: 38.83vw;
+  background: url('/images/insight1/figma/left-shape-b.svg') center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+.mining-insight__header {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 116px;
+  z-index: 2;
+}
+
+.mining-insight__logo-link {
+  position: absolute;
+  top: 1vw;
+  left: .47vw;
+  width: min(13.28vw, 255px);
+}
+
+.mining-insight__logo-link img { display: block; width: 100%; height: auto; }
+
+.mining-insight__nav {
+  position: absolute;
+  top: .83vw;
+  right: .54vw;
+  display: flex;
+  align-items: center;
+  gap: 1.56vw;
+  text-transform: uppercase;
+  font-size: min(1.04vw, 20px);
+  font-weight: 500;
+}
+
+.mining-insight__nav a { color: #202020; text-decoration: none; white-space: nowrap; }
+.mining-insight__nav button { width: min(4.22vw, 81px); height: min(4.22vw, 81px); padding: 0; border: 0; background: transparent; }
+.mining-insight__nav button img { width: 100%; height: 100%; object-fit: contain; }
+
+.mining-insight__left-copy {
+  position: absolute;
+  z-index: 1;
+  right: 64.9%;
+  top: 9.22vw;
+  width: 22.3%;
+  text-align: right;
+}
+
+.mining-insight__left-copy h1 { margin: 0; text-transform: uppercase; font-size: clamp(48px, 5vw, 96px); line-height: .9; font-weight: 800; }
+.mining-insight__left-copy h1 span, .mining-insight__left-copy h1 strong { display: block; }
+.mining-insight__left-copy h1 strong { color: #23b14d; font-weight: 800; }
+
+.mining-insight__left-copy blockquote {
+  position: relative;
+  box-sizing: border-box;
+  text-align: left;
+  width: min(42.41vw, 814px);
+  aspect-ratio: 814.331 / 282.5;
+  margin: 8vw 0 0 -5.1vw;
+  padding: 2.08vw 3.8vw 0 7.8vw;
+  background: url('/images/insight1/figma/quote-panel.svg') center / 100% 100% no-repeat;
+  font-size: clamp(23px, 2.45vw, 47px);
+  line-height: 1.21;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.mining-insight__left-copy blockquote span { color: #23b14d; font-weight: 800; }
+.mining-insight__left-copy blockquote span:first-child { margin-left: -5px; }
+.mining-insight__tag { position: fixed; left: 1.72vw; bottom: 1.4vw; margin: 0; color: #8e8e8e; font-size: clamp(14px, 1.3vw, 25px); font-weight: 600; font-style: italic; }
+
+.mining-insight__content { position: absolute; z-index: 1; top: 7.66vw; left: 46.9%; width: 50.5%; }
+.mining-insight__content h2 { margin: 0; text-transform: uppercase; font-size: clamp(30px, 2.5vw, 48px); line-height: 1.12; font-weight: 800; }
+.mining-insight__content h3 { margin: 1.35vw 0 1.5vw; color: #23b14d; font-size: clamp(24px, 2.1vw, 40px); line-height: .9; font-weight: 800; font-style: italic; }
+.mining-insight__description { max-width: 1000px; margin: 0; font-size: clamp(15px, 1.3vw, 25px); line-height: 1.2; }
+.mining-insight__facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 34px; row-gap: 8px; margin-top: 1.35vw; }
+.mining-insight__facts article { display: flex; min-height: 12.6vw; flex-direction: column; align-items: center; text-align: center; }
+.mining-insight__facts img { width: clamp(68px, 7vw, 135px); height: clamp(68px, 7vw, 135px); object-fit: contain; }
+.mining-insight__facts p { margin: 6px 0 0; font-size: clamp(14px, 1.3vw, 25px); line-height: 1.2; font-weight: 500; }
+
+.mining-insight__chat { position: absolute; z-index: 2; right: 4px; bottom: 19px; width: 418px; height: 52px; }
+
+@media (max-width: 1200px) and (min-width: 901px) {
+  .mining-insight__nav { gap: 16px; right: 16px; font-size: 9px; }
+  .mining-insight__nav button { width: 34px; height: 34px; }
+  .mining-insight__logo-link { width: 132px; }
+  .mining-insight__left-copy { right: auto; left: 6%; width: 40%; text-align: left; }
+  .mining-insight__left-copy h1 { font-size: clamp(50px, 6vw, 72px); }
+  .mining-insight__left-copy blockquote { width: 92%; margin-top: 16%; margin-left: 0; padding: 20px 30px; font-size: clamp(20px, 2.1vw, 28px); }
+  .mining-insight__content { left: 45%; width: 52%; }
+  .mining-insight__content h2 { font-size: clamp(24px, 2.8vw, 34px); }
+  .mining-insight__content h3 { font-size: clamp(20px, 2.4vw, 30px); }
+  .mining-insight__description, .mining-insight__facts p { font-size: clamp(12px, 1.45vw, 17px); }
+  .mining-insight__facts { margin-top: 10px; column-gap: 8px; }
+  .mining-insight__facts article { min-height: 150px; }
+  .mining-insight__facts img { width: clamp(58px, 7vw, 84px); height: clamp(58px, 7vw, 84px); }
+}
+
+@media (max-width: 900px) {
+  .mining-insight { height: auto; min-height: 100svh; overflow-y: auto; padding: 80px 22px 60px; }
+  .mining-insight__photo, .mining-insight__wash {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 42%;
+    -webkit-mask-image: none;
+    mask-image: none;
+    opacity: .28;
+  }
+  .mining-insight__accent { display: none; }
+  .mining-insight__header { height: 70px; }
+  .mining-insight__logo-link { width: 122px; top: 10px; }
+  .mining-insight__nav { gap: 10px; top: 17px; font-size: 8px; }
+  .mining-insight__nav a:nth-child(n+4) { display: none; }
+  .mining-insight__nav button { width: 28px; height: 28px; }
+  .mining-insight__left-copy, .mining-insight__content { position: relative; inset: auto; width: 100%; }
+  .mining-insight__left-copy { margin-bottom: 38px; }
+  .mining-insight__left-copy h1 { font-size: 58px; }
+  .mining-insight__left-copy { text-align: left; }
+  .mining-insight__left-copy blockquote { width: 92%; margin: 32px 0 0; font-size: 24px; }
+  .mining-insight__content h2 { font-size: 28px; }
+  .mining-insight__content h3 { font-size: 24px; }
+  .mining-insight__facts { column-gap: 10px; row-gap: 0; }
+  .mining-insight__facts article { min-height: 150px; }
+  .mining-insight__facts p { font-size: 13px; }
+  .mining-insight__chat { position: static; width: 42%; margin: 28px 0 0 auto; }
+  .mining-insight__tag { position: static; margin-top: 40px; }
+}
+
+@media (max-width: 600px) {
+  .mining-insight { padding: 72px 16px 52px; }
+  .mining-insight__photo, .mining-insight__wash { height: 360px; }
+  .mining-insight__nav { right: 12px; gap: 7px; }
+  .mining-insight__nav a { display: none; }
+  .mining-insight__nav button { width: 30px; height: 30px; }
+  .mining-insight__left-copy h1 { font-size: clamp(48px, 16vw, 72px); }
+  .mining-insight__left-copy blockquote { width: 100%; padding: 18px 26px; font-size: clamp(19px, 6vw, 25px); }
+  .mining-insight__content h2 { font-size: clamp(24px, 8vw, 32px); }
+  .mining-insight__content h3 { font-size: clamp(19px, 6.5vw, 25px); }
+  .mining-insight__description { font-size: 14px; line-height: 1.35; }
+  .mining-insight__facts { grid-template-columns: 1fr; gap: 22px; margin-top: 26px; }
+  .mining-insight__facts article { min-height: 0; }
+  .mining-insight__facts img { width: 82px; height: 82px; }
+  .mining-insight__facts p { margin-top: 4px; font-size: 14px; }
+  .mining-insight__chat { width: 58%; min-width: 0; margin-top: 30px; }
+}
+
+/* Figma: Insight page - 2 / solar home screen */
+.solar-home-insight {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  background: #fff;
+  color: #050505;
+  font-family: var(--font-montserrat), sans-serif;
+}
+
+.solar-home-insight__solar {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  width: 41.51vw;
+  height: 99%;
+  overflow: hidden;
+}
+
+.solar-home-insight__solar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.solar-home-insight__left-shape {
+  position: absolute;
+  z-index: 1;
+  top: -4.4vh;
+  left: -2.97vw;
+  width: 21.35vw;
+  height: 76.1vh;
+  pointer-events: none;
+}
+
+.solar-home-insight__header {
+  position: absolute;
+  z-index: 5;
+  inset: 0 0 auto;
+  height: 116px;
+}
+
+.solar-home-insight__logo {
+  position: absolute;
+  top: 19px;
+  left: 9px;
+  width: min(13.28vw, 255px);
+}
+
+.solar-home-insight__logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.solar-home-insight__nav {
+  position: absolute;
+  top: 47px;
+  right: 9px;
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  text-transform: uppercase;
+  font-size: min(1.04vw, 20px);
+  font-weight: 500;
+}
+
+.solar-home-insight__nav a {
+  color: #303030;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.solar-home-insight__nav button {
+  width: min(4.22vw, 81px);
+  height: min(4.22vw, 81px);
+  margin-top: -31px;
+  margin-left: -1px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.solar-home-insight__nav button img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.solar-home-insight__name {
+  position: absolute;
+  z-index: 3;
+  top: 6.04vw;
+  left: 13.85vw;
+  text-transform: uppercase;
+  font-size: min(4.69vw, 90px);
+  line-height: 1;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.solar-home-insight__name strong {
+  color: #23b14d;
+  font-weight: 800;
+}
+
+.solar-home-insight__title {
+  position: absolute;
+  z-index: 3;
+  top: 12.14vw;
+  left: 13.85vw;
+  width: 51vw;
+  text-transform: uppercase;
+  font-size: min(2.5vw, 48px);
+  line-height: 1.21;
+  font-weight: 800;
+}
+
+.solar-home-insight__title div:last-child {
+  color: #23b14d;
+}
+
+.solar-home-insight__description {
+  position: absolute;
+  z-index: 3;
+  top: 20.7vw;
+  left: 12.3vw;
+  width: 52.25vw;
+  margin: 0;
+  font-size: min(1.3vw, 25px);
+  line-height: 1.2;
+  font-weight: 400;
+}
+
+.solar-home-insight__facts {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+}
+
+.solar-home-insight__fact {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+}
+
+.solar-home-insight__fact img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  flex: 0 0 auto;
+  max-width: none;
+  width: 7.03vw;
+  height: 7.03vw;
+  object-fit: contain;
+}
+
+.solar-home-insight__fact p {
+  position: absolute;
+  top: .1vw;
+  left: 8.33vw;
+  width: 22.34vw;
+  margin: 0;
+  font-size: 1.3vw;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.solar-home-insight__fact--1 { top: 27.34vw; left: 6.82vw; }
+.solar-home-insight__fact--2 { top: 26.67vw; left: 40.68vw; }
+.solar-home-insight__fact--3 { top: 37.66vw; left: 2.66vw; }
+.solar-home-insight__fact--4 { top: 37.66vw; left: 38.07vw; }
+
+.solar-home-insight__fact--2 img,
+.solar-home-insight__fact--3 img { width: 6.67vw; height: 6.67vw; }
+.solar-home-insight__fact--4 img { width: 6.82vw; height: 6.82vw; }
+.solar-home-insight__fact--2 p { top: .1vw; left: 7.45vw; width: 23.33vw; }
+.solar-home-insight__fact--3 p { top: .42vw; left: 7.92vw; width: 24.64vw; }
+.solar-home-insight__fact--4 p { top: 1.09vw; left: 7.45vw; width: 24.64vw; }
+
+.solar-home-insight__quote-panel {
+  position: absolute;
+  z-index: 3;
+  top: 28.33vw;
+  left: 69.58vw;
+  width: 30.63vw;
+  height: 9.64vw;
+  background: url('/images/insight1/figma/quote-panel.svg') center / 100% 100% no-repeat;
+}
+
+.solar-home-insight__quote-panel p {
+  position: absolute;
+  top: 15.5%;
+  left: 13%;
+  width: 82%;
+  margin: 0;
+  color: #000;
+  font-size: min(1.72vw, 33px);
+  line-height: 1.3;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.solar-home-insight__quote-panel span {
+  color: #23b14d;
+  font-weight: 800;
+}
+
+.solar-home-insight__tag {
+  position: absolute;
+  z-index: 4;
+  bottom: 14px;
+  left: 1.72vw;
+  margin: 0;
+  color: #8e8e8e;
+  font-size: min(1.3vw, 25px);
+  line-height: 30px;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.solar-home-insight__chat {
+  position: absolute;
+  z-index: 4;
+  right: 4px;
+  bottom: 19px;
+  display: block;
+  width: 418px;
+  height: 52px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.insight-chat__panel { position: absolute; z-index: -1; top: -33.65%; left: -4.28%; display: block; max-width: none; width: 110.48%; height: 182.7%; pointer-events: none; }
+.insight-chat__label { position: absolute; top: 4px; left: 50%; width: 159px; height: 57px; transform: translateX(-50%); color: #717171; font-size: 13px; font-style: italic; font-weight: 600; line-height: 40px; text-align: center; white-space: nowrap; }
+.insight-chat__microphone { position: absolute; top: 14px; right: 36px; display: block; max-width: none; width: 18px; height: 23px; object-fit: contain; }
+
+@media (max-width: 900px) {
+  .solar-home-insight {
+    min-height: 100svh;
+    height: auto;
+    overflow-y: auto;
+    padding: 86px 28px 70px;
+  }
+
+  .solar-home-insight__solar {
+    width: 48%;
+    height: 420px;
+    opacity: .28;
+  }
+
+  .solar-home-insight__left-shape { top: 0; left: 0; width: 210px; height: 430px; }
+  .solar-home-insight__header { height: 76px; }
+  .solar-home-insight__logo { top: 12px; left: 16px; width: 150px; }
+  .solar-home-insight__nav { top: 23px; right: 14px; gap: 14px; font-size: 11px; align-items: center; }
+  .solar-home-insight__nav button { width: 38px; height: 38px; margin-top: 0; }
+
+  .solar-home-insight__name,
+  .solar-home-insight__title,
+  .solar-home-insight__description,
+  .solar-home-insight__facts,
+  .solar-home-insight__quote-panel,
+  .solar-home-insight__tag,
+  .solar-home-insight__chat { position: relative; inset: auto; }
+
+  .solar-home-insight__name { margin: 34px 0 10px; font-size: clamp(52px, 7vw, 76px); white-space: normal; }
+  .solar-home-insight__title { width: 100%; font-size: clamp(28px, 3.5vw, 42px); }
+  .solar-home-insight__description { width: min(100%, 1000px); margin: 22px 0 30px; font-size: clamp(16px, 1.7vw, 22px); }
+  .solar-home-insight__facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 24px; }
+  .solar-home-insight__fact,
+  .solar-home-insight__fact--1,
+  .solar-home-insight__fact--2,
+  .solar-home-insight__fact--3,
+  .solar-home-insight__fact--4 { position: relative; inset: auto; display: flex; align-items: flex-start; gap: 18px; width: auto; height: auto; }
+  .solar-home-insight__fact img,
+  .solar-home-insight__fact--2 img,
+  .solar-home-insight__fact--3 img,
+  .solar-home-insight__fact--4 img { position: static; width: 84px; height: 84px; }
+  .solar-home-insight__fact p,
+  .solar-home-insight__fact--2 p,
+  .solar-home-insight__fact--3 p,
+  .solar-home-insight__fact--4 p { position: static; flex: 1 1 auto; width: auto; margin: 0; font-size: 16px; }
+  .solar-home-insight__quote-panel { width: min(100%, 588px); height: 189px; margin: 40px 0 0 auto; }
+  .solar-home-insight__quote-panel p { font-size: 26px; }
+  .solar-home-insight__tag { margin-top: 36px; font-size: 18px; }
+  .solar-home-insight__chat { width: min(100%, 418px); margin: 24px 0 0 auto; }
+}
+
+@media (max-width: 600px) {
+  .solar-home-insight { padding: 76px 18px 52px; }
+  .solar-home-insight__left-shape { display: none; }
+  .solar-home-insight__solar { width: 100%; height: 300px; }
+  .solar-home-insight__nav a { display: none; }
+  .solar-home-insight__nav { top: 18px; }
+  .solar-home-insight__name { font-size: clamp(42px, 13vw, 58px); white-space: normal; }
+  .solar-home-insight__title { font-size: clamp(24px, 7vw, 32px); }
+  .solar-home-insight__facts { grid-template-columns: 1fr; gap: 20px; }
+  .solar-home-insight__fact p { font-size: 14px; }
+  .solar-home-insight__quote-panel { height: 150px; }
+  .solar-home-insight__quote-panel p { font-size: 21px; }
+}
+
+/* Figma: Insight page - 3 / solar urban screen */
+.urban-insight { position: relative; width: 100%; height: 100vh; min-height: 600px; overflow: hidden; background: #fff; color: #050505; font-family: var(--font-montserrat), sans-serif; }
+.urban-insight__photo { position: absolute; inset: 0 auto 0 0; width: 48%; z-index: 0; overflow: hidden; }
+.urban-insight__photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: left top; }
+.urban-insight__left-shape { position: absolute; z-index: 1; top: -4.4vh; left: -2.97vw; width: 21.35vw; height: 76.1vh; pointer-events: none; }
+.urban-insight__header { position: absolute; z-index: 5; inset: 0 0 auto; height: 116px; }
+.urban-insight__logo { position: absolute; top: 19px; left: 9px; width: min(13.28vw, 255px); }
+.urban-insight__logo img { display: block; width: 100%; height: auto; }
+.urban-insight__nav { position: absolute; top: 47px; right: 9px; display: flex; align-items: flex-start; gap: 30px; text-transform: uppercase; font-size: min(1.04vw, 20px); font-weight: 500; }
+.urban-insight__nav a { color: #303030; text-decoration: none; white-space: nowrap; }
+.urban-insight__nav button { width: min(4.22vw, 81px); height: min(4.22vw, 81px); margin-top: -31px; padding: 0; border: 0; background: transparent; }
+.urban-insight__nav button img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.urban-insight__name { position: absolute; z-index: 3; top: 17.75vw; left: 9.8vw; display: flex; flex-direction: column; text-transform: uppercase; font-size: 5vw; line-height: .94; font-weight: 800; }
+.urban-insight__name strong { color: #23b14d; font-weight: 800; }
+.urban-insight__quote { position: absolute; z-index: 3; top: 28.8vw; left: 7.71vw; width: 39.35vw; height: 10.86vw; background: url('/images/insight1/figma/urban-quote-panel.svg') center / 100% 100% no-repeat; }
+.urban-insight__quote p { position: absolute; top: 22.5%; left: 15.3%; width: 72%; margin: 0; color: #000; font-size: 2.45vw; line-height: 1.21; font-style: italic; font-weight: 400; }
+.urban-insight__quote span { color: #23b14d; font-weight: 800; }
+.urban-insight__content { position: absolute; z-index: 3; top: 7.4vw; left: 46.93vw; width: 52.3vw; }
+.urban-insight__content h1 { margin: 0; font-size: 2.24vw; line-height: 1.15; font-weight: 800; text-transform: uppercase; white-space: nowrap; }
+.urban-insight__content h2 { margin: .55vw 0 1.35vw; color: #23b14d; font-size: 2.08vw; line-height: 1; font-style: italic; font-weight: 800; }
+.urban-insight__description { width: 52.25vw; margin: 0; font-size: 1.3vw; line-height: 1.2; }
+.urban-insight__facts { position: absolute; inset: 0; }
+.urban-insight__fact { position: absolute; width: 0; height: 0; text-align: center; }
+.urban-insight__fact img { position: absolute; left: 50%; top: 0; max-width: none; width: 6.67vw; height: 6.67vw; transform: translateX(-50%); object-fit: contain; }
+.urban-insight__fact p { position: absolute; top: 8.1vw; left: -11.67vw; width: 23.33vw; margin: 0; font-size: 1.3vw; line-height: 1.2; font-weight: 500; }
+.urban-insight__fact--1 { top: 21.25vw; left: 58.54vw; }
+.urban-insight__fact--2 { top: 21.46vw; left: 84.32vw; }
+.urban-insight__fact--3 { top: 33.85vw; left: 58vw; }
+.urban-insight__fact--4 { top: 33.85vw; left: 84.06vw; }
+.urban-insight__fact--1 img { width: 7.03vw; height: 7.03vw; }
+.urban-insight__fact--4 img { width: 6.82vw; height: 6.82vw; }
+.urban-insight__tag { position: absolute; z-index: 4; bottom: 14px; left: 1.72vw; margin: 0; color: #8e8e8e; font-size: 1.3vw; line-height: 30px; font-style: italic; font-weight: 600; }
+.urban-insight__chat { position: absolute; z-index: 4; right: 4px; bottom: 19px; display: block; width: 418px; height: 52px; padding: 0; border: 0; background: transparent; }
+
+/* Figma: Insight page - 4 / solar hotel adjustments */
+.solar-home-insight--hotel .solar-home-insight__name { top: 6.67vw; left: 13.85vw; }
+.solar-home-insight--hotel .solar-home-insight__title { width: 77.92vw; }
+.solar-home-insight--hotel .solar-home-insight__title div:last-child { font-style: italic; }
+.solar-home-insight--hotel .solar-home-insight__description { left: 10.68vw; }
+.solar-home-insight--hotel .solar-home-insight__fact--1 { top: 25.73vw; left: 5.26vw; }
+.solar-home-insight--hotel .solar-home-insight__fact--1 p { top: 1.82vw; left: 9.89vw; }
+.solar-home-insight--hotel .solar-home-insight__fact--2 { top: 26.4vw; left: 40.26vw; }
+.solar-home-insight--hotel .solar-home-insight__fact--2 p { top: 1.65vw; left: 8.59vw; }
+.solar-home-insight--hotel .solar-home-insight__fact--3 { top: 35.47vw; left: 2.08vw; }
+.solar-home-insight--hotel .solar-home-insight__fact--3 p { top: .89vw; left: 8.49vw; }
+.solar-home-insight--hotel .solar-home-insight__fact--4 { top: 35.78vw; left: 37.7vw; }
+.solar-home-insight--hotel .solar-home-insight__fact--4 p { top: 1.45vw; left: 7.86vw; }
+.solar-home-insight--hotel .solar-home-insight__quote-panel { top: 27.87vw; left: 65.68vw; width: 33.23vw; height: 10.47vw; background-image: url('/images/insight1/figma/hotel-quote-panel.svg'); }
+.solar-home-insight--hotel .solar-home-insight__quote-panel p { top: 13.2%; left: 17.3%; width: 82%; font-size: min(1.62vw, 31px); }
+.solar-home-insight__quote-panel .solar-home-insight__hotel-quote { color: #000; font-weight: 400; }
+
+@media (max-width: 900px) {
+  .solar-home-insight--hotel .solar-home-insight__fact--2,
+  .solar-home-insight--hotel .solar-home-insight__fact--3,
+  .solar-home-insight--hotel .solar-home-insight__fact--4 { inset: auto; }
+  .solar-home-insight--hotel .solar-home-insight__fact--2 p,
+  .solar-home-insight--hotel .solar-home-insight__fact--3 p,
+  .solar-home-insight--hotel .solar-home-insight__fact--4 p { position: static; top: auto; left: auto; width: auto; }
+  .urban-insight { min-height: 100svh; height: auto; overflow-y: auto; padding: 86px 28px 70px; }
+  .urban-insight__photo { width: 100%; height: 420px; opacity: .24; }
+  .urban-insight__left-shape { top: 0; left: 0; width: 210px; height: 430px; }
+  .urban-insight__header { height: 76px; }
+  .urban-insight__logo { top: 12px; left: 16px; width: 150px; }
+  .urban-insight__nav { top: 23px; right: 14px; gap: 14px; align-items: center; font-size: 11px; }
+  .urban-insight__nav button { width: 38px; height: 38px; margin-top: 0; }
+  .urban-insight__name, .urban-insight__quote, .urban-insight__content, .urban-insight__tag, .urban-insight__chat { position: relative; inset: auto; }
+  .urban-insight__name { margin: 34px 0; font-size: clamp(76px, 7vw, 90px); }
+  .urban-insight__quote { width: min(100%, 755px); height: 209px; margin: 0 0 36px; }
+  .urban-insight__quote p { font-size: 30px; }
+  .urban-insight__content { width: 100%; }
+  .urban-insight__content h1 { white-space: normal; font-size: clamp(28px, 3.5vw, 43px); }
+  .urban-insight__content h2 { font-size: clamp(25px, 3vw, 40px); }
+  .urban-insight__description { width: min(100%, 1000px); font-size: clamp(16px, 1.7vw, 22px); }
+  .urban-insight__facts { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 24px; margin-top: 38px; }
+  .urban-insight__fact, .urban-insight__fact--1, .urban-insight__fact--2, .urban-insight__fact--3, .urban-insight__fact--4 { position: relative; inset: auto; display: flex; flex-direction: column; align-items: center; width: auto; height: auto; }
+  .urban-insight__fact img, .urban-insight__fact--1 img, .urban-insight__fact--4 img { position: static; width: 84px; height: 84px; transform: none; }
+  .urban-insight__fact p { position: static; width: auto; margin: 10px 0 0; font-size: 16px; }
+  .urban-insight__tag { margin-top: 36px; font-size: 18px; }
+  .urban-insight__chat { width: min(100%, 418px); margin: 24px 0 0 auto; background-size: 100% 100%; }
+}
+
+@media (max-width: 600px) {
+  .urban-insight { padding: 76px 18px 52px; }
+  .urban-insight__left-shape { display: none; }
+  .urban-insight__photo { height: 300px; }
+  .urban-insight__nav a { display: none; }
+  .urban-insight__nav { top: 18px; }
+  .urban-insight__name { font-size: clamp(42px, 13vw, 58px); }
+  .urban-insight__facts { grid-template-columns: 1fr; }
 }
