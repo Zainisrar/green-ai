@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface Message {
   id: string;
@@ -9,7 +9,11 @@ interface Message {
   isStreaming?: boolean;
 }
 
-const Chatbot: React.FC = () => {
+interface ChatbotProps {
+  triggerClassName?: string;
+}
+
+const Chatbot: React.FC<ChatbotProps> = ({ triggerClassName = "" }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
@@ -79,7 +83,7 @@ const Chatbot: React.FC = () => {
           body: JSON.stringify({
             question: textToSend,
           }),
-        }
+        },
       );
 
       if (!response.ok) {
@@ -110,16 +114,16 @@ const Chatbot: React.FC = () => {
                     prev.map((msg) =>
                       msg.id === botMessageId
                         ? { ...msg, text: accumulatedText }
-                        : msg
-                    )
+                        : msg,
+                    ),
                   );
                 } else if (data.type === "done") {
                   setMessages((prev) =>
                     prev.map((msg) =>
                       msg.id === botMessageId
                         ? { ...msg, isStreaming: false }
-                        : msg
-                    )
+                        : msg,
+                    ),
                   );
                   break;
                 }
@@ -141,8 +145,8 @@ const Chatbot: React.FC = () => {
                 text: "Sorry, I'm having trouble connecting right now. Please try again later.",
                 isStreaming: false,
               }
-            : msg
-        )
+            : msg,
+        ),
       );
     } finally {
       setIsLoading(false);
@@ -355,12 +359,17 @@ const Chatbot: React.FC = () => {
       )}
 
       {/* Chat Trigger */}
-      <div className="fixed z-[20] right-4 lg:right-8 bottom-3 lg:bottom-4">
+      <div
+        className={`fixed z-[20] right-4 lg:right-8 bottom-3 lg:bottom-4 ${triggerClassName}`}
+      >
         <div
           style={{ transform: "skewX(-16deg)" }}
           className="relative flex items-center bg-white/95 backdrop-blur-md px-5 py-2 lg:py-2.5 shadow-[0_4px_20px_rgba(0,0,0,0.08)] border-l-[3px] border-[#23B14D] border-y border-r border-gray-200/80 rounded-sm w-[260px] lg:w-[310px]"
         >
-          <div style={{ transform: "skewX(16deg)" }} className="flex items-center justify-between w-full">
+          <div
+            style={{ transform: "skewX(16deg)" }}
+            className="flex items-center justify-between w-full"
+          >
             <input
               ref={promptInputRef}
               type="text"

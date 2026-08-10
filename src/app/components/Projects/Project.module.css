@@ -1,0 +1,749 @@
+.page {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 720px;
+  overflow: hidden;
+  background: #fff;
+  color: #fff;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.page::before {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 16.35vw;
+  height: 52.5vh;
+  background: linear-gradient(145deg, #f7ff9a 0%, #dcffbd 72%, #ccf6c9 100%);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  content: "";
+}
+
+.header {
+  position: absolute;
+  z-index: 20;
+  inset: 0 0 auto;
+  height: 12vh;
+}
+
+.logo {
+  position: absolute;
+  top: 2.9vh;
+  left: 0.75vw;
+  display: block;
+  width: min(13.1vw, 268px);
+}
+
+.logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.navigation {
+  position: absolute;
+  top: 6.1vh;
+  right: 1.05vw;
+  display: flex;
+  align-items: center;
+  gap: 2.65vw;
+  color: #161616;
+  font-size: clamp(12px, 1.04vw, 21px);
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.navigation a {
+  color: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.navigation a:hover,
+.navigation a:focus-visible {
+  color: #23b14d;
+}
+
+.menuButton {
+  display: grid;
+  width: min(2.3vw, 47px);
+  min-width: 30px;
+  margin-left: 0.8vw;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  place-items: center;
+  transform: translateY(-1.1vh);
+}
+
+.menuButton img {
+  width: 100%;
+  height: auto;
+}
+
+.verticalTitle {
+  position: absolute;
+  z-index: 6;
+  top: 47.4%;
+  left: 2.65%;
+  width: min(3.6vw, 74px);
+  height: auto;
+  opacity: 0.72;
+}
+
+.stage {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+}
+
+.mainPhoto {
+  position: absolute;
+  inset: 0 auto 0 19.7vw;
+  width: 67.2vw;
+  overflow: hidden;
+  clip-path: polygon(38% 0, 100% 0, 65% 100%, 0 100%);
+}
+
+.mainPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.photoShade {
+  display: none;
+}
+
+.titlePanel {
+  position: absolute;
+  z-index: 5;
+  top: 20.6vh;
+  left: 38.55vw;
+  display: grid;
+  width: 41.3vw;
+  min-height: 62px;
+  padding: 0.65vw 1.8vw;
+  background: rgb(174 174 166 / 0.76);
+  place-items: center;
+  transform: skewX(-12deg);
+}
+
+.titlePanel h1 {
+  width: 100%;
+  margin: 0;
+  color: #030303;
+  font-size: clamp(18px, 1.55vw, 32px);
+  font-weight: 700;
+  line-height: 1.08;
+  text-align: center;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+  white-space: normal;
+  transform: skewX(12deg);
+}
+
+.collapseButton {
+  position: absolute;
+  z-index: 7;
+  top: 39.2vh;
+  left: 52.15vw;
+  display: grid;
+  width: 3.8vw;
+  min-width: 55px;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  place-items: center;
+}
+
+.collapseButton svg,
+.previewArrow svg,
+.mobileArrow svg {
+  width: 74%;
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+  transition: transform 0.2s ease;
+}
+
+.collapseButton .rotated {
+  transform: rotate(180deg);
+}
+
+.statsPanel {
+  position: absolute;
+  z-index: 5;
+  top: 46.1vh;
+  left: 19.75vw;
+  width: 53.8vw;
+  height: 46.5vh;
+  min-height: 365px;
+  padding: 5.1vh 4.6vw 3vh 7.9vw;
+  overflow: hidden;
+  background: rgb(26 28 35 / 0.58);
+  clip-path: polygon(8.5% 0, 100% 0, 78.5% 100%, 0 100%);
+  -webkit-backdrop-filter: blur(11px);
+  backdrop-filter: blur(11px);
+}
+
+.primaryStats {
+  display: grid;
+  grid-template-columns: 0.8fr 0.85fr 1.18fr 1.6fr;
+  align-items: center;
+  gap: 1.4vw;
+  width: 86%;
+  margin-left: 14%;
+}
+
+.stat {
+  display: grid;
+  gap: 1.2vh;
+  text-align: center;
+}
+
+.stat span {
+  color: #f2f2f2;
+  font-size: clamp(11px, 0.73vw, 15px);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.stat strong {
+  color: #fff;
+  font-size: clamp(18px, 1.27vw, 26px);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.stat .largeValue {
+  font-size: clamp(20px, 1.36vw, 28px);
+}
+
+.battery {
+  display: flex;
+  width: 100%;
+  height: 5.5vh;
+  min-height: 46px;
+  border: 1px solid rgb(255 255 255 / 0.85);
+  align-items: center;
+  font-size: clamp(17px, 1.18vw, 24px);
+  font-style: italic;
+  transform: skewX(-14deg);
+}
+
+.battery span {
+  display: grid;
+  width: 62%;
+  height: 100%;
+  background: #23b14d;
+  place-items: center;
+}
+
+.battery span img {
+  width: 24px;
+  height: auto;
+  object-fit: contain;
+  transform: skewX(14deg);
+}
+
+.battery strong {
+  width: 38%;
+  font-weight: 400;
+  text-align: center;
+  transform: skewX(14deg);
+}
+
+.impactStats {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.75vw;
+  width: 94%;
+  margin-top: 2.6vh;
+  margin-left: 6%;
+}
+
+.impact {
+  display: grid;
+  min-width: 0;
+  flex: 1;
+  gap: 0.35vh;
+  justify-items: center;
+  text-align: center;
+}
+
+.impact img {
+  width: auto;
+  height: clamp(21px, 1.55vw, 32px);
+  object-fit: contain;
+}
+
+.impact span {
+  min-height: 2.4em;
+  color: #d6d6d6;
+  font-size: clamp(8px, 0.52vw, 11px);
+  line-height: 1.22;
+  white-space: nowrap;
+}
+
+.impact strong {
+  color: #fff;
+  font-size: clamp(14px, 1.04vw, 21px);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.divider {
+  align-self: center;
+  margin: 0 -0.2vw;
+  color: rgb(255 255 255 / 0.45);
+  font-size: clamp(18px, 1.3vw, 27px);
+  font-weight: 300;
+}
+
+.chartRow {
+  display: grid;
+  grid-template-columns: 31% 1fr;
+  gap: 2.6vw;
+  align-items: center;
+  width: 71%;
+  margin-top: 2.1vh;
+  margin-left: 14%;
+}
+
+.periods {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.1vh 0.85vw;
+}
+
+.periods button {
+  height: 3.25vh;
+  min-height: 28px;
+  border: 1px solid #71809a;
+  background: transparent;
+  color: #fff;
+  font:
+    600 clamp(9px, 0.57vw, 12px) / 1 var(--font-montserrat),
+    sans-serif;
+  cursor: pointer;
+  transform: skewX(-14deg);
+}
+
+.periods button:hover,
+.periods button:focus-visible {
+  border-color: #d6ec4d;
+  color: #d6ec4d;
+}
+
+.graph {
+  position: relative;
+  padding-top: 2.3vh;
+}
+
+.graph p {
+  position: absolute;
+  top: 0;
+  left: 6%;
+  margin: 0;
+  font-size: clamp(8px, 0.55vw, 12px);
+  white-space: nowrap;
+}
+
+.graph img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.graph span {
+  position: absolute;
+  right: 3%;
+  bottom: -1.1vh;
+  color: #ddd;
+  font-size: clamp(8px, 0.48vw, 10px);
+}
+
+.preview {
+  position: absolute;
+  z-index: 8;
+  top: 33.7vh;
+  display: block;
+  width: 25.5vw;
+  height: 34.8vh;
+  min-height: 280px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.previousPreview {
+  left: 9.8vw;
+}
+
+.nextPreview {
+  right: 4.15vw;
+}
+
+.previewArrow {
+  position: absolute;
+  z-index: 6;
+  top: 34%;
+  display: grid;
+  width: 3.1vw;
+  min-width: 46px;
+  aspect-ratio: 1;
+  background: transparent;
+  place-items: center;
+}
+
+.previousPreview .previewArrow {
+  left: -1.5vw;
+}
+
+.nextPreview .previewArrow {
+  right: -0.7vw;
+}
+
+.previewArrow svg {
+  width: 70%;
+  stroke: #23b14d;
+  stroke-width: 2.2;
+}
+
+.previewCard {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.previewCard img {
+  position: absolute;
+  inset: 12% 3% 0 0;
+  width: 97%;
+  height: 88%;
+  object-fit: cover;
+  clip-path: polygon(27% 0, 100% 0, 69% 100%, 0 100%);
+}
+
+.previewCard::after {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background: rgb(235 239 239 / 0.64);
+  clip-path: polygon(40% 0, 100% 0, 61% 100%, 6% 100%);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  content: "";
+}
+
+.previewCard span {
+  position: absolute;
+  z-index: 3;
+  top: 39%;
+  left: 29%;
+  width: 57%;
+  color: #050505;
+  font-size: clamp(14px, 1.06vw, 22px);
+  font-weight: 600;
+  line-height: 1.08;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.startButton {
+  position: fixed;
+  z-index: 12;
+  right: 0;
+  bottom: 13.1vh;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.startButton img {
+  display: block;
+  width: min(9.3vw, 191px);
+  height: auto;
+}
+
+.viewToggle {
+  position: fixed;
+  z-index: 11;
+  bottom: 3.7vh;
+  left: 40.15vw;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 10.75vw;
+  min-width: 190px;
+  height: 3.1vh;
+  min-height: 30px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.screenReaderOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viewToggle button {
+  padding: 0;
+  border: 0;
+  background: #e7eee9;
+  color: #252525;
+  font:
+    700 clamp(11px, 0.73vw, 15px) / 1 var(--font-montserrat),
+    sans-serif;
+  cursor: pointer;
+}
+
+.viewToggle .activeView {
+  background: #bdeccf;
+}
+
+.mobileArrow {
+  display: none;
+}
+
+.chatTrigger {
+  /* Keep the skewed input inside the viewport instead of clipping its right edge. */
+  right: clamp(16px, 1vw, 24px) !important;
+  bottom: 5vh !important;
+}
+
+.chatTrigger > div {
+  width: min(22vw, 451px) !important;
+  min-height: 5.6vh;
+  border: 1px solid #7adf94 !important;
+  border-left-width: 1px !important;
+  background: rgb(255 255 255 / 0.94) !important;
+  box-shadow: 0 15px 22px rgb(216 255 41 / 0.35) !important;
+}
+
+.chatTrigger input {
+  color: #bfc3c1 !important;
+  font-size: clamp(12px, 0.72vw, 15px) !important;
+}
+
+.chatTrigger input::placeholder {
+  color: #bfc3c1 !important;
+}
+
+@media (max-width: 1023px) {
+  .page {
+    height: auto;
+    min-height: 100svh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-bottom: 110px;
+  }
+
+  .page::before {
+    width: 220px;
+    height: 310px;
+  }
+
+  .header {
+    position: relative;
+    height: 92px;
+  }
+
+  .logo {
+    top: 18px;
+    left: 16px;
+    width: 190px;
+  }
+
+  .navigation {
+    display: none;
+  }
+
+  .verticalTitle,
+  .preview,
+  .viewToggle {
+    display: none;
+  }
+
+  .stage {
+    position: relative;
+    height: 820px;
+  }
+
+  .mainPhoto {
+    inset: 0 4vw auto;
+    width: 92vw;
+    height: 100%;
+    clip-path: polygon(12% 0, 100% 0, 86% 100%, 0 100%);
+  }
+
+  .titlePanel {
+    top: 55px;
+    left: 10%;
+    width: 80%;
+    height: 74px;
+  }
+
+  .titlePanel h1 {
+    font-size: clamp(20px, 4vw, 30px);
+    white-space: normal;
+  }
+
+  .collapseButton {
+    top: 170px;
+    left: calc(50% - 32px);
+    width: 64px;
+  }
+
+  .statsPanel {
+    top: 235px;
+    left: 5%;
+    width: 90%;
+    height: 540px;
+    padding: 55px 9% 35px 12%;
+    clip-path: polygon(6% 0, 100% 0, 91% 100%, 0 100%);
+  }
+
+  .primaryStats {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 20px;
+  }
+
+  .battery {
+    width: 80%;
+    justify-self: center;
+  }
+
+  .impactStats {
+    flex-wrap: wrap;
+    margin-top: 35px;
+  }
+
+  .impact {
+    flex: 0 0 30%;
+  }
+
+  .impact span {
+    font-size: 10px;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .chartRow {
+    width: 86%;
+    margin-top: 25px;
+    margin-left: 2%;
+  }
+
+  .mobileArrow {
+    position: fixed;
+    z-index: 15;
+    top: 50%;
+    display: grid;
+    width: 46px;
+    aspect-ratio: 1;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.92);
+    box-shadow: 0 4px 14px rgb(0 0 0 / 0.16);
+    place-items: center;
+  }
+
+  .mobileArrow svg {
+    width: 44%;
+    stroke: #23b14d;
+  }
+
+  .mobilePrevious {
+    left: 8px;
+  }
+
+  .mobileNext {
+    right: 8px;
+  }
+
+  .startButton {
+    right: 10px;
+    bottom: 78px;
+  }
+
+  .startButton img {
+    width: 170px;
+  }
+
+  .chatTrigger > div {
+    width: min(72vw, 360px) !important;
+  }
+}
+
+@media (max-width: 540px) {
+  .stage {
+    height: 760px;
+  }
+
+  .titlePanel {
+    top: 35px;
+    min-height: 66px;
+  }
+
+  .statsPanel {
+    top: 210px;
+    height: 510px;
+    padding: 42px 7% 25px 10%;
+  }
+
+  .stat span {
+    font-size: 10px;
+  }
+
+  .stat strong,
+  .stat .largeValue {
+    font-size: 17px;
+  }
+
+  .impactStats {
+    margin-top: 24px;
+  }
+
+  .impact img {
+    height: 24px;
+  }
+
+  .impact strong {
+    font-size: 13px;
+  }
+
+  .chartRow {
+    grid-template-columns: 34% 1fr;
+    gap: 12px;
+    width: 96%;
+    margin-top: 20px;
+    margin-left: 0;
+  }
+
+  .graph p {
+    font-size: 8px;
+  }
+}
