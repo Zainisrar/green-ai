@@ -1,0 +1,56 @@
+.panel {
+  --brand-panel-width: clamp(210px, 16.145833vw, 310px);
+
+  position: absolute;
+  width: var(--brand-panel-width);
+  height: calc(var(--brand-panel-width) * 1.633871);
+  pointer-events: none;
+}
+
+.rectangle {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.rectangle img {
+  position: absolute;
+  top: -8.2922%;
+  left: -13.5484%;
+  display: block;
+  width: 127.0968%;
+  height: 116.5844%;
+  max-width: none;
+}
+
+.logo {
+  position: absolute;
+  z-index: 1;
+  top: 3.9487%;
+  left: 2.5806%;
+  display: block;
+  width: 82.2581%;
+  height: auto;
+  aspect-ratio: 255 / 67;
+  pointer-events: auto;
+}
+
+.logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.compactLogo {
+  top: 4.8%;
+  left: 3.6%;
+  width: 76%;
+}
+
+@media (max-width: 900px) {
+  .panel {
+    --brand-panel-width: 190px;
+  }
+}

@@ -211,14 +211,13 @@
   box-sizing: border-box;
   width: 24.414vw;
   height: 21.289vw;
-  padding: 1.27vw 1.709vw 1.172vw 5.078vw;
+  padding: 1.875vw 1.709vw 1.172vw 5.078vw;
   background:
     linear-gradient(
       90deg,
       rgb(35 177 77 / 20%) -147.34%,
       rgb(255 254 80 / 20%) 100%
-    ),
-    rgb(241 238 238 / 30%);
+    ), rgb(241 238 238 / 30%);
   box-shadow: 0 3px 10px rgb(0 0 0 / 25%);
   -webkit-backdrop-filter: blur(7.5px);
   backdrop-filter: blur(7.5px);
@@ -226,28 +225,72 @@
 }
 
 .servicesPanelContent {
+  min-width: 0;
   transform: skewX(21deg);
 }
 
 .servicesPanel h2 {
-  margin: 0 0 1.904vw;
+  margin: 0 0 2.95vw;
   color: #303030;
   font-size: 1.465vw;
   font-weight: 700;
   line-height: 1;
   text-transform: uppercase;
-  transform: translateX(0.977vw);
+  transform: translateX(0.9vw);
 }
 
 .serviceOptions {
+  --active-line-end: 4.639vw;
+  --active-line-start: 0vw;
+
+  position: relative;
   display: grid;
-  gap: 0.537vw;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.65vw;
+  min-width: 0;
+  width: calc(100% + 3.5vw);
+}
+
+.serviceOptions:has(button:nth-child(2).selectedService) {
+  --active-line-end: 7.739vw;
+  --active-line-start: 3.1vw;
+}
+
+.serviceOptions:has(button:nth-child(3).selectedService) {
+  --active-line-end: 10.839vw;
+  --active-line-start: 6.2vw;
+}
+
+.serviceOptions:has(button:nth-child(4).selectedService) {
+  --active-line-end: 13.939vw;
+  --active-line-start: 9.3vw;
+}
+
+.serviceOptions::before {
+  position: absolute;
+  top: -0.488vw;
+  bottom: 0;
+  left: -4.15vw;
+  width: max(2px, 0.146vw);
+  background: linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 92%) 0 var(--active-line-start),
+    #23b14d var(--active-line-start) var(--active-line-end),
+    rgb(255 255 255 / 92%) var(--active-line-end) 100%
+  );
+  content: "";
+  pointer-events: none;
+  transform: skewX(-21deg);
 }
 
 .serviceOptions button {
+  --service-row-offset: 0vw;
+
   position: relative;
   display: block;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
   padding: 0;
   border: 0;
   background: transparent;
@@ -257,7 +300,22 @@
   font-weight: 500;
   line-height: 1.1;
   text-align: left;
+  overflow-wrap: normal;
+  white-space: nowrap;
   cursor: pointer;
+  transform: translateX(var(--service-row-offset));
+}
+
+.serviceOptions button:nth-child(2) {
+  --service-row-offset: -2.25vw;
+}
+
+.serviceOptions button:nth-child(3) {
+  --service-row-offset: -3.5vw;
+}
+
+.serviceOptions button:nth-child(4) {
+  --service-row-offset: -5vw;
 }
 
 .serviceOptions button:hover,
@@ -268,31 +326,24 @@
 
 .serviceOptions .selectedService {
   min-height: 4.004vw;
+  margin-bottom: -1.125vw;
   padding-left: 1.709vw;
   color: #23b14d;
   font-size: 1.416vw;
   font-weight: 800;
-  transform: translateX(-1.709vw);
-}
-
-.selectedService::before {
-  position: absolute;
-  width: max(2px, 0.146vw);
-  height: 4.639vw;
-  margin: -0.488vw 0 0 -0.83vw;
-  background: #23b14d;
-  content: "";
-  transform: skewX(-21deg);
+  transform: translateX(calc(var(--service-row-offset) - 1.709vw));
 }
 
 .selectedService small {
   display: block;
-  max-width: 16.602vw;
+  max-width: 21vw;
   margin-top: 0.391vw;
   color: #5a5a5a;
   font-size: 0.781vw;
   font-weight: 500;
   line-height: 1.25;
+  overflow-wrap: normal;
+  white-space: normal;
 }
 
 .enquiryButton {
@@ -320,7 +371,8 @@
 .chatTrigger {
   position: fixed;
   top: auto;
-  right: clamp(-21px, -1.025vw, -8px);
+  /* Match the shared chat trigger inset so the microphone stays inside its frame. */
+  right: 8px;
   bottom: clamp(0px, 0.781vw, 16px);
   width: min(23.926vw, 490px);
 }
@@ -328,6 +380,11 @@
 .chatTrigger > div > img {
   width: 100%;
   height: auto;
+}
+
+/* The skewed right edge needs more clearance than the default chat trigger. */
+.chatTrigger > div > div:last-child {
+  right: 16%;
 }
 
 @media (max-width: 900px) {
@@ -461,7 +518,8 @@
     height: auto;
     min-height: 390px;
     margin: 35px 35px 30px 65px;
-    padding: 31px 44px 35px 70px;
+    /* Keep all mobile copy clear of the panel's angled upper-left edge. */
+    padding: 31px 44px 35px 31%;
   }
 
   .servicesPanel h2 {
@@ -471,24 +529,46 @@
   }
 
   .serviceOptions {
+    --active-line-end: 88px;
+    --active-line-start: 0px;
+
     gap: 12px;
   }
 
-  .serviceOptions button {
+  .serviceOptions:has(button:nth-child(2).selectedService) {
+    --active-line-end: 124px;
+    --active-line-start: 36px;
+  }
+
+  .serviceOptions:has(button:nth-child(3).selectedService) {
+    --active-line-end: 160px;
+    --active-line-start: 72px;
+  }
+
+  .serviceOptions:has(button:nth-child(4).selectedService) {
+    --active-line-end: 196px;
+    --active-line-start: 108px;
+  }
+
+  .serviceOptions::before {
+    top: -8px;
+    left: -45px;
+  }
+
+  .servicesPanel .serviceOptions button {
+    --service-row-offset: 0px;
+
     font-size: 22px;
+    overflow-wrap: anywhere;
+    white-space: normal;
   }
 
   .serviceOptions .selectedService {
     min-height: 78px;
+    margin-bottom: 0;
     padding-left: 30px;
     font-size: 24px;
     transform: translateX(-30px);
-  }
-
-  .selectedService::before {
-    width: 3px;
-    height: 88px;
-    margin: -8px 0 0 -15px;
   }
 
   .selectedService small {

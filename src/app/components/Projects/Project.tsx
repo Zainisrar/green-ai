@@ -1,529 +1,648 @@
 "use client";
-import React from "react";
-import TopNavigation from "../TopNavigation/TopNavigation";
+
+import Image from "next/image";
+import { useEffect, useMemo, useState } from "react";
+import { useProjects } from "@/hooks/useProjects";
 import Chatbot from "../Chatbot";
-import { useProjects } from "../../../hooks/useProjects";
+import SiteHeader from "../SiteHeader/SiteHeader";
 import LetsStart from "./Modals/LetsStart";
+import styles from "./Project.module.css";
 
-const Project = () => {
-  const [isProjectsOpen, setIsProjectsOpen] = React.useState(true);
-  const [currentProjectIndex, setCurrentProjectIndex] = React.useState(0);
-  const [isDesktop, setIsDesktop] = React.useState(false);
-  const [isStartOpen, setIsStartOpen] = React.useState(false);
-  React.useEffect(() => {
-    const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1024);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-  const { data: apiProjects } = useProjects();
-
-  // Transform API data to match component structure
-  const projectsData = React.useMemo(() => {
-    if (!apiProjects) return [];
-
-    return apiProjects.map((project) => ({
-      id: project.id,
-      title: project.title,
-      image: project.featuredImg,
-      systems: parseInt(project.numberofsystems),
-      days: parseInt(project.noofdays),
-      totalGeneration: parseInt(project.totalgeneration.replace(" kWh", "")),
-      batteryPercentage: parseInt(project.battery.replace(" %", "")),
-      coalA: parseFloat(project.coalA),
-      emissionReduction: parseFloat(project.emissionreduction),
-      treesPlanted: parseInt(project.treesplanted),
-      capacity: project.capacity,
-      toDateProduction: project.todateproduct,
-      consumption: project.consumption,
-      dailyGeneration: project.totalenergydaily,
-    }));
-  }, [apiProjects]);
-
-  if (!projectsData || projectsData.length === 0) {
-    return null;
-  }
-
-  const currentProject = projectsData[currentProjectIndex];
-
-  const toggleProjects = () => {
-    setIsProjectsOpen(!isProjectsOpen);
-  };
-
-  const nextProject = () => {
-    setCurrentProjectIndex((prev) => (prev + 1) % projectsData.length);
-  };
-
-  const prevProject = () => {
-    setCurrentProjectIndex(
-      (prev) => (prev - 1 + projectsData.length) % projectsData.length
-    );
-  };
-
-  const getPrevProject = () => {
-    const prevIndex =
-      (currentProjectIndex - 1 + projectsData.length) % projectsData.length;
-    return projectsData[prevIndex];
-  };
-
-  const getNextProject = () => {
-    const nextIndex = (currentProjectIndex + 1) % projectsData.length;
-    return projectsData[nextIndex];
-  };
-
-
-
-  return (
-    <React.Fragment>
-      <div className="">
-        <TopNavigation />
-        <div className="flex h-full ">
-          {/* Left Side Project Card and Navigation */}
-          <div className="lg:w-1/6  hidden lg:flex items-center justify-center relative">
-            <div className="fixed top-1/4 left-10 z-40">
-              <img
-                src="/images/projects/projects.png"
-                className="w-14"
-                alt="Projects"
-              />
-            </div>
-
-            {/* Left (previous) preview */}
-            <button
-              type="button"
-              onClick={prevProject}
-              aria-label="Previous project"
-              className="group fixed left-4 top-1/2 z-50 hidden -translate-y-1/2 cursor-pointer items-center gap-3 lg:flex xl:left-10"
-            >
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/90 text-[#23B14D] shadow-lg transition group-hover:scale-110 group-hover:bg-white">
-                <svg
-                  className="h-6 w-6"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M15 18L9 12L15 6" />
-                </svg>
-              </span>
-              <div
-                style={{ transform: "skewX(-10deg)" }}
-                className="relative h-44 w-40 overflow-hidden shadow-2xl ring-1 ring-white/30 xl:w-48"
-              >
-                <img
-                  src={getPrevProject().image}
-                  alt={getPrevProject().title}
-                  className="h-full w-full scale-110 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                <div
-                  style={{ transform: "skewX(10deg)" }}
-                  className="absolute inset-x-0 bottom-0 p-3"
-                >
-                  <span className="line-clamp-2 block text-center text-sm font-bold leading-tight text-white drop-shadow">
-                    {getPrevProject().title}
-                  </span>
-                </div>
-              </div>
-            </button>
-          </div>
-          <button
-            type="button"
-            onClick={prevProject}
-            aria-label="Previous project"
-            className="fixed left-2 top-1/2 z-50 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[#23B14D] shadow-lg lg:hidden"
-          >
-            <svg
-              className="h-6 w-6"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M15 18L9 12L15 6" />
-            </svg>
-          </button>
-          {/* Center Stage */}
-          <div className="relative flex-1 flex flex-col items-center justify-center min-h-screen px-4 py-24 lg:py-12">
-            {/* Background project image — kept behind the content */}
-            <div className="absolute inset-y-6 inset-x-2 lg:inset-y-10 lg:inset-x-[12%] -z-10 flex">
-              <div
-                style={{ transform: isDesktop ? "skewX(-4deg)" : "skewX(-8deg)" }}
-                className="relative w-full overflow-hidden shadow-2xl"
-              >
-                <img
-                  src={currentProject.image}
-                  alt={currentProject.title}
-                  className="h-full w-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/50" />
-              </div>
-            </div>
-
-            {/* Foreground content */}
-            <div className="relative z-10 flex w-full max-w-3xl flex-col items-center">
-              {/* Title */}
-              <div
-                style={{ transform: "skewX(-12deg)" }}
-                className="bg-white/25 px-6 lg:px-10 py-3 shadow-lg backdrop-blur-sm"
-              >
-                <div
-                  style={{ transform: "skewX(12deg)" }}
-                  className="text-center text-2xl font-black leading-tight text-white lg:text-4xl"
-                >
-                  {(() => {
-                    const words = String(currentProject.title ?? "")
-                      .trim()
-                      .split(/\s+/)
-                      .filter(Boolean);
-                    const lines: string[] = [];
-                    for (let i = 0; i < words.length; i += 3) {
-                      lines.push(words.slice(i, i + 3).join(" "));
-                    }
-                    return lines.map((line, i) => (
-                      <React.Fragment key={i}>
-                        {line}
-                        {i < lines.length - 1 && <br />}
-                      </React.Fragment>
-                    ));
-                  })()}
-                </div>
-              </div>
-              {/* Expand / collapse toggle */}
-              <button
-                type="button"
-                onClick={toggleProjects}
-                aria-label={
-                  isProjectsOpen
-                    ? "Collapse project details"
-                    : "Expand project details"
-                }
-                className="my-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-gray-800 shadow-lg transition hover:scale-110 hover:bg-white"
-              >
-                <svg
-                  className={`h-6 w-6 transition-transform duration-300 ${
-                    isProjectsOpen ? "" : "rotate-180"
-                  }`}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M18 15L12 9L6 15" />
-                </svg>
-              </button>
-                  {isProjectsOpen && (
-                    <div
-                      style={{
-                        transform: isDesktop ? "skewX(-8deg)" : "skewX(-10deg)",
-                      }}
-                      className="mt-2 w-full flex flex-col bg-black/60 p-6 lg:p-10 relative z-50 space-y-6 shadow-2xl text-white"
-                    >
-                      <div
-                        style={{
-                          transform: isDesktop ? "skewX(4deg)" : "",
-                        }}
-                        className="flex  lg:space-x-10 "
-                      >
-                        <div className="flex text-center flex-col items-center space-y-2">
-                          <div>No. of systems</div>
-                          <div className="font-bold">
-                            {currentProject.systems}
-                          </div>
-                        </div>
-                        <div className="flex flex-col text-center items-center space-y-2">
-                          <div>No. of days</div>
-                          <div className="font-bold">{currentProject.days}</div>
-                        </div>
-                        <div className="flex text-center flex-col items-center space-y-2">
-                          <div>Total Generation</div>
-                          <div className="font-bold">
-                            <span className="lg:text-2xl">
-                              {currentProject.totalGeneration}
-                            </span>
-                            {` kWh`}
-                          </div>
-                        </div>
-                        <div
-                          style={{
-                            transform: "skewX(-16deg)",
-                          }}
-                          className=" hidden lg:flex items-center space-x-4 h-8 border-white border "
-                        >
-                          <div className="bg-[#23B14D] lg:px-10  lg:p-4 relative">
-                            <div className="absolute top-1 z-10 left-4">
-                              <img
-                                src="/images/projects/batteryPercentage.png"
-                                className="w-5"
-                                alt="battery icn"
-                              />
-                            </div>
-                          </div>
-                          <div className="p-4">
-                            {currentProject.batteryPercentage}%
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        style={{
-                          transform: isDesktop ? "skewX(8deg)" : "none",
-                        }}
-                        className="flex lg:flex-nowrap space-y-4 lg:space-y-0 flex-wrap space-x-4 justify-center lg:justify-start "
-                      >
-                        <div
-                          style={{
-                            transform: isDesktop ? "skewX(4deg)" : "none",
-                          }}
-                          className="flex text-center flex-col items-center space-y-2"
-                        >
-                          <div>
-                            <img
-                              src="/images/projects/coal.png"
-                              alt="coal"
-                              className=" object-cover "
-                            />
-                          </div>
-                          <div className="text-xs">Coal A</div>
-                          <div className="font-bold">
-                            {currentProject.coalA}
-                          </div>
-                        </div>
-                        <div>/</div>
-                        <div
-                          style={{
-                            transform: "skewX(4deg)",
-                          }}
-                          className=" flex flex-col text-center items-center space-y-2"
-                        >
-                          <div>
-                            <img
-                              src="/images/projects/co2.png"
-                              alt="coal"
-                              className=" object-cover"
-                            />
-                          </div>
-                          <div className="text-xs">
-                            Emission <br /> reduction
-                          </div>
-                          <div className="font-bold">
-                            {currentProject.emissionReduction}
-                          </div>
-                        </div>
-                        <div>/</div>
-                        <div className="flex flex-col text-center items-center space-y-2">
-                          <div>
-                            <img
-                              src="/images/projects/tree.png"
-                              alt="coal"
-                              className=" object-cover"
-                            />
-                          </div>
-                          <div className="text-xs">Trees Planted</div>
-                          <div className="font-bold">
-                            {currentProject.treesPlanted}
-                          </div>
-                        </div>
-                        <div className="flex flex-col text-center items-center space-y-2">
-                          <div>
-                            <img
-                              src="/images/projects/capacity.png"
-                              alt="coal"
-                              className=" object-cover"
-                            />
-                          </div>
-                          <div className="text-xs">Capacity</div>
-                          <div className="font-bold">
-                            {currentProject.capacity}
-                          </div>
-                        </div>
-                        <div className="flex flex-col text-center items-center space-y-2">
-                          <div>
-                            <img
-                              src="/images/projects/totalProduction.png"
-                              alt="coal"
-                              className=" object-cover"
-                            />
-                          </div>
-                          <div className="text-xs">To date Production</div>
-                          <div className="font-bold">
-                            {currentProject.toDateProduction}
-                          </div>
-                        </div>
-                        <div className="flex flex-col text-center items-center space-y-2">
-                          <div>
-                            <img
-                              src="/images/projects/consumption.png"
-                              alt="coal"
-                              className=" object-cover"
-                            />
-                          </div>
-                          <div className="text-xs">Consumption</div>
-                          <div className="font-bold">
-                            {currentProject.consumption}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex lg:flex-row flex-col space-y-10 lg:space-x-4">
-                        <div className="flex flex-col items-center space-y-2 mt-4">
-                          <div className="flex text-center space-x-4">
-                            <div
-                              style={{
-                                transform: "skewX(-16deg)",
-                              }}
-                              className="border-2 border-gray-500  text-sm p-2 px-4 "
-                            >
-                              <div
-                                style={{
-                                  transform: "skewX(16deg)",
-                                }}
-                              >
-                                Day
-                              </div>
-                            </div>
-                            <div
-                              style={{
-                                transform: "skewX(-16deg)",
-                              }}
-                              className="border-2 border-gray-500 text-sm  p-2 px-4 "
-                            >
-                              <div
-                                style={{
-                                  transform: "skewX(16deg)",
-                                }}
-                              >
-                                Week
-                              </div>
-                            </div>
-                          </div>
-                          <div className="flex  text-center space-x-4">
-                            <div
-                              style={{
-                                transform: "skewX(-16deg)",
-                              }}
-                              className="border-2 border-gray-500  text-sm p-2 px-4 "
-                            >
-                              <div
-                                style={{
-                                  transform: "skewX(16deg)",
-                                }}
-                              >
-                                Month
-                              </div>
-                            </div>
-                            <div
-                              style={{
-                                transform: "skewX(-16deg)",
-                              }}
-                              className="border-2 border-gray-500 text-sm  p-2 px-4 "
-                            >
-                              <div
-                                style={{
-                                  transform: "skewX(16deg)",
-                                }}
-                              >
-                                Year
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="relative">
-                          <div>
-                            <img src="/images/projects/graph.png" alt="graph" />
-                          </div>
-                          <div className="absolute text-xs right-0">Today</div>
-                          <div className="absolute left-20 text-xs top-0">
-                            Total Generation daily :{" "}
-                            {currentProject.dailyGeneration}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-              </div>
-            </div>
-          <button
-            type="button"
-            onClick={nextProject}
-            aria-label="Next project"
-            className="fixed right-2 top-1/2 z-50 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[#23B14D] shadow-lg lg:hidden"
-          >
-            <svg
-              className="h-6 w-6"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M9 18L15 12L9 6" />
-            </svg>
-          </button>
-
-          {/* Right (next) preview */}
-          <button
-            type="button"
-            onClick={nextProject}
-            aria-label="Next project"
-            className="group fixed right-4 top-1/2 z-50 hidden -translate-y-1/2 cursor-pointer items-center gap-3 lg:flex xl:right-10"
-          >
-            <div
-              style={{ transform: "skewX(-10deg)" }}
-              className="relative h-44 w-40 overflow-hidden shadow-2xl ring-1 ring-white/30 xl:w-48"
-            >
-              <img
-                src={getNextProject().image}
-                alt={getNextProject().title}
-                className="h-full w-full scale-110 object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-              <div
-                style={{ transform: "skewX(10deg)" }}
-                className="absolute inset-x-0 bottom-0 p-3"
-              >
-                <span className="line-clamp-2 block text-center text-sm font-bold leading-tight text-white drop-shadow">
-                  {getNextProject().title}
-                </span>
-              </div>
-            </div>
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/90 text-[#23B14D] shadow-lg transition group-hover:scale-110 group-hover:bg-white">
-              <svg
-                className="h-6 w-6"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M9 18L15 12L9 6" />
-              </svg>
-            </span>
-          </button>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setIsStartOpen(true)}
-          className="hidden lg:block lg:fixed right-2 bottom-28 z-40 cursor-pointer"
-        >
-          <img src="/images/projects/letStart.png" alt="Let's Start" />
-        </button>
-        <div className="lg:block hidden">
-          <Chatbot />
-        </div>
-      </div>
-      <LetsStart isOpen={isStartOpen} onClose={() => setIsStartOpen(false)} />
-    </React.Fragment>
-  );
+type ProjectSlide = {
+  id: number;
+  title: string;
+  image: string;
+  systems: string;
+  days: string;
+  totalGeneration: string;
+  batteryPercentage: string;
+  coalA: string;
+  emissionReduction: string;
+  treesPlanted: string;
+  capacity: string;
+  toDateProduction: string;
+  consumption: string;
+  dailyGeneration: string;
 };
 
-export default Project;
+const fallbackProject: ProjectSlide = {
+  id: 1,
+  title: "Wildlife Conservation Society 2025",
+  image: "/images/projects/featuredProjectImg1.png",
+  systems: "1",
+  days: "265",
+  totalGeneration: "1000 kWh",
+  batteryPercentage: "68",
+  coalA: "3.37",
+  emissionReduction: "8.78",
+  treesPlanted: "603",
+  capacity: "93.15 kWh",
+  toDateProduction: "10800 kWh",
+  consumption: "1298.7 kWh",
+  dailyGeneration: "109 kWh",
+};
+
+const fallbackProjects = [
+  fallbackProject,
+  {
+    ...fallbackProject,
+    id: 2,
+    title:
+      "PNG’s First Utility-Scale Grid-Connected Solar Power Plant, 3MW, Baiyer (2025)",
+    image: "/images/projects/image.png",
+  },
+  {
+    ...fallbackProject,
+    id: 3,
+    title: "Mongal Health Centre 2020",
+    image: "/images/projects/image2.png",
+  },
+];
+
+const supplementalProjects: ProjectSlide[] = [
+  {
+    ...fallbackProject,
+    id: -1,
+    title: "Pimaga Health Centre 2023",
+    image: "/images/projects/pimaga-health-centre-2023.png",
+  },
+];
+
+const valueWithoutUnit = (value: string | undefined, unit: string) =>
+  value?.replace(unit, "").trim() || "—";
+
+const previewTitle = (title: string) => {
+  if (title.toLowerCase().includes("baiyer")) {
+    return "Baiyer Solar Plant 2025";
+  }
+
+  return title;
+};
+
+const timelineCards = [
+  {
+    year: "2007",
+    title: "PNG’s First Solar Street Light",
+    subtitle: "at NCD",
+    position: "card2007",
+    visibleAt: 1,
+  },
+  {
+    year: "2010",
+    title: "PNG’s First Solar-Powered Hospital with Lighting",
+    subtitle:
+      "Mutzing, Atzunas, Chuya, Markham Valley, Walium, Mosa, Malala, Mulau, Kaiapit, and Narawapum",
+    position: "card2010",
+    visibleAt: 2,
+  },
+  {
+    year: "2011",
+    title: "PNG’s First Solar-Powered Rural Electrification islands",
+    subtitle: "such as Kairuru, Musu, Wallis, Tarawai, Koli, Vokeo",
+    position: "card2011",
+    visibleAt: 2,
+  },
+  {
+    year: "2012",
+    title: "PNG’s First Solar-Powered Rural Government Office",
+    subtitle: "such as Simbai, Middle Ramu District",
+    position: "card2012",
+    visibleAt: 3,
+  },
+  {
+    year: "2020",
+    title:
+      "PNG’s First Solar-Powered Health Facilities with Full Biomedical Functioning,",
+    subtitle: "Kagua, Mongol, Munihu, Kandep, Laigaim, Yango, Tambitanis",
+    position: "card2020",
+    visibleAt: 4,
+  },
+  {
+    year: "2024",
+    title:
+      "PNG’s First largest Solar Powered Home Lighting Kits for 20,000 Houses",
+    subtitle: "Gulf Province",
+    position: "card2024",
+    visibleAt: 5,
+  },
+  {
+    year: "2023",
+    title: "PNG’s First Solar-Powered Minigrid",
+    subtitle: "at Pimaga Rural Hospital including staff houses",
+    position: "card2023",
+    visibleAt: 5,
+  },
+] as const;
+
+const INITIAL_TIMELINE_DELAY_MS = 1000;
+const TIMELINE_STEP_INTERVAL_MS = 2283;
+const LAST_TIMELINE_STEP = 5;
+
+export default function Project() {
+  const [isProjectsOpen, setIsProjectsOpen] = useState(true);
+  const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
+  const [isStartOpen, setIsStartOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<"in-view" | "slide">("slide");
+  const [timelineRun, setTimelineRun] = useState(0);
+  const { data: apiProjects } = useProjects();
+
+  const projects = useMemo(() => {
+    const liveProjects = apiProjects?.length
+      ? apiProjects.map((project) => ({
+          id: project.id,
+          title: project.title?.trim() || fallbackProject.title,
+          image: project.featuredImg || fallbackProject.image,
+          systems: valueWithoutUnit(project.numberofsystems, ""),
+          days: valueWithoutUnit(project.noofdays, ""),
+          totalGeneration:
+            project.totalgeneration || fallbackProject.totalGeneration,
+          batteryPercentage: valueWithoutUnit(project.battery, "%"),
+          coalA: project.coalA || fallbackProject.coalA,
+          emissionReduction:
+            project.emissionreduction || fallbackProject.emissionReduction,
+          treesPlanted: project.treesplanted || fallbackProject.treesPlanted,
+          capacity: project.capacity || fallbackProject.capacity,
+          toDateProduction:
+            project.todateproduct || fallbackProject.toDateProduction,
+          consumption: project.consumption || fallbackProject.consumption,
+          dailyGeneration:
+            project.totalenergydaily || fallbackProject.dailyGeneration,
+        }))
+      : fallbackProjects;
+
+    return [
+      ...liveProjects,
+      ...supplementalProjects.filter(
+        (supplemental) =>
+          !liveProjects.some(
+            (project) =>
+              project.title.toLowerCase() === supplemental.title.toLowerCase(),
+          ),
+      ),
+    ];
+  }, [apiProjects]);
+
+  const activeIndex = currentProjectIndex % projects.length;
+  const currentProject = projects[activeIndex];
+  const isPimagaProject = currentProject.title
+    .toLowerCase()
+    .includes("pimaga health centre");
+  const previousProject =
+    projects[(activeIndex - 1 + projects.length) % projects.length];
+  const nextProject = projects[(activeIndex + 1) % projects.length];
+  const moveProject = (amount: number) => {
+    setViewMode("slide");
+    setCurrentProjectIndex(
+      (index) => (index + amount + projects.length) % projects.length,
+    );
+  };
+  const openInView = () => {
+    setTimelineRun((run) => run + 1);
+    setViewMode("in-view");
+  };
+  const openTimelineProject = (year: string) => {
+    const matchingIndex = projects.findIndex((project) =>
+      project.title.includes(year),
+    );
+
+    if (matchingIndex >= 0) {
+      setCurrentProjectIndex(matchingIndex);
+    }
+    setViewMode("slide");
+  };
+
+  return (
+    <main className={styles.page}>
+      <SiteHeader />
+
+      <Image
+        className={styles.verticalTitle}
+        src="/images/projects/projects.png"
+        alt="Projects"
+        width={73}
+        height={480}
+        priority
+      />
+
+      {viewMode === "in-view" ? (
+        <InViewTimeline key={timelineRun} onExplore={openTimelineProject} />
+      ) : (
+        <section className={styles.stage} aria-label="Project portfolio">
+          <div
+            className={`${styles.mainPhoto} ${isPimagaProject ? styles.pimagaPhoto : ""}`}
+          >
+            <img src={currentProject.image} alt={currentProject.title} />
+            <div className={styles.photoShade} />
+          </div>
+
+          <div className={styles.titlePanel}>
+            <h1>{currentProject.title}</h1>
+          </div>
+
+          <button
+            type="button"
+            className={styles.collapseButton}
+            onClick={() => setIsProjectsOpen((open) => !open)}
+            aria-expanded={isProjectsOpen}
+            aria-label={
+              isProjectsOpen
+                ? "Collapse project details"
+                : "Expand project details"
+            }
+          >
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              className={isProjectsOpen ? "" : styles.rotated}
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+
+          {isProjectsOpen && (
+            <section
+              className={styles.statsPanel}
+              aria-label="Project performance data"
+            >
+              <div className={styles.primaryStats}>
+                <Stat label="No. of systems" value={currentProject.systems} />
+                <Stat label="No. of days" value={currentProject.days} />
+                <Stat
+                  label="Total Generation"
+                  value={currentProject.totalGeneration}
+                  large
+                />
+                <div className={styles.battery}>
+                  <span>
+                    <Image
+                      src="/images/projects/batteryPercentage.png"
+                      width={26}
+                      height={27}
+                      alt=""
+                    />
+                  </span>
+                  <strong>{currentProject.batteryPercentage}%</strong>
+                </div>
+              </div>
+              <div className={styles.impactStats}>
+                <Impact
+                  icon="/images/projects/coal.png"
+                  label="Coal A"
+                  value={currentProject.coalA}
+                />
+                <span className={styles.divider}>/</span>
+                <Impact
+                  icon="/images/projects/co2.png"
+                  label={
+                    <>
+                      Emission
+                      <br />
+                      reduction
+                    </>
+                  }
+                  value={currentProject.emissionReduction}
+                />
+                <span className={styles.divider}>/</span>
+                <Impact
+                  icon="/images/projects/tree.png"
+                  label="Trees Planted"
+                  value={currentProject.treesPlanted}
+                />
+                <Impact
+                  icon="/images/projects/capacity.png"
+                  label="Capacity"
+                  value={currentProject.capacity}
+                />
+                <Impact
+                  icon="/images/projects/totalProduction.png"
+                  label="To date Production"
+                  value={currentProject.toDateProduction}
+                />
+                <Impact
+                  icon="/images/projects/consumption.png"
+                  label="Consumption"
+                  value={currentProject.consumption}
+                />
+              </div>
+              <div className={styles.chartRow}>
+                <div className={styles.periods}>
+                  {["Day", "Week", "Month", "Year"].map((period) => (
+                    <button type="button" key={period}>
+                      {period}
+                    </button>
+                  ))}
+                </div>
+                <div className={styles.graph}>
+                  <p>
+                    Total Generation daily : {currentProject.dailyGeneration}
+                  </p>
+                  <Image
+                    src="/images/projects/graph.png"
+                    alt="Daily energy generation graph"
+                    width={342}
+                    height={148}
+                  />
+                  <span>Today</span>
+                </div>
+              </div>
+            </section>
+          )}
+        </section>
+      )}
+
+      <fieldset className={styles.viewToggle}>
+        <legend className={styles.screenReaderOnly}>Project view mode</legend>
+        <button
+          type="button"
+          className={viewMode === "in-view" ? styles.activeView : undefined}
+          onClick={openInView}
+          aria-pressed={viewMode === "in-view"}
+        >
+          In View
+        </button>
+        <button
+          type="button"
+          className={viewMode === "slide" ? styles.activeView : undefined}
+          onClick={() => setViewMode("slide")}
+          aria-pressed={viewMode === "slide"}
+        >
+          Slide
+        </button>
+      </fieldset>
+
+      {viewMode === "slide" && (
+        <>
+          <ProjectPreview
+            project={previousProject}
+            direction="previous"
+            onClick={() => moveProject(-1)}
+          />
+          <ProjectPreview
+            project={nextProject}
+            direction="next"
+            onClick={() => moveProject(1)}
+          />
+
+          <button
+            type="button"
+            className={`${styles.mobileArrow} ${styles.mobilePrevious}`}
+            onClick={() => moveProject(-1)}
+            aria-label="Previous project"
+          >
+            <Arrow direction="left" />
+          </button>
+          <button
+            type="button"
+            className={`${styles.mobileArrow} ${styles.mobileNext}`}
+            onClick={() => moveProject(1)}
+            aria-label="Next project"
+          >
+            <Arrow direction="right" />
+          </button>
+
+          <button
+            type="button"
+            className={styles.startButton}
+            onClick={() => setIsStartOpen(true)}
+          >
+            <Image
+              src="/images/projects/letStart.png"
+              alt="Let's Start"
+              width={179}
+              height={62}
+            />
+          </button>
+        </>
+      )}
+      <Chatbot triggerClassName={styles.chatTrigger} />
+      <LetsStart isOpen={isStartOpen} onClose={() => setIsStartOpen(false)} />
+    </main>
+  );
+}
+
+function InViewTimeline({ onExplore }: { onExplore: (year: string) => void }) {
+  const [step, setStep] = useState(0);
+
+  useEffect(() => {
+    let sequence: number | undefined;
+    const initial = window.setTimeout(() => {
+      setStep(1);
+      sequence = window.setInterval(() => {
+        setStep((current) => (current >= LAST_TIMELINE_STEP ? 0 : current + 1));
+      }, TIMELINE_STEP_INTERVAL_MS);
+    }, INITIAL_TIMELINE_DELAY_MS);
+
+    return () => {
+      window.clearTimeout(initial);
+      if (sequence !== undefined) {
+        window.clearInterval(sequence);
+      }
+    };
+  }, []);
+
+  return (
+    <section
+      className={styles.inViewStage}
+      data-step={step}
+      aria-label="PNG project milestone map"
+    >
+      <Image
+        className={styles.pngMap}
+        src="/images/projects/png-map-figma.png"
+        alt="Map of Papua New Guinea showing GREEN project locations"
+        width={2048}
+        height={756}
+        priority
+      />
+
+      <div
+        className={`${styles.mapPin} ${styles.pin2007}`}
+        aria-hidden="true"
+      />
+      <span
+        className={`${styles.connector} ${styles.connector2007}`}
+        aria-hidden="true"
+      />
+
+      <div
+        className={`${styles.revealGroup} ${step >= 2 ? styles.isVisible : ""}`}
+      >
+        <div
+          className={`${styles.mapPin} ${styles.pin2010}`}
+          aria-hidden="true"
+        />
+        <div
+          className={`${styles.mapPin} ${styles.pin2011}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2010}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2011}`}
+          aria-hidden="true"
+        />
+      </div>
+
+      <div
+        className={`${styles.revealGroup} ${step >= 3 ? styles.isVisible : ""}`}
+      >
+        <div
+          className={`${styles.mapPin} ${styles.pin2012}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2012Vertical}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2012Horizontal}`}
+          aria-hidden="true"
+        />
+      </div>
+
+      <div
+        className={`${styles.revealGroup} ${step >= 4 ? styles.isVisible : ""}`}
+      >
+        <div
+          className={`${styles.mapPin} ${styles.pin2020}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2020}`}
+          aria-hidden="true"
+        />
+      </div>
+
+      <div
+        className={`${styles.revealGroup} ${step >= 5 ? styles.isVisible : ""}`}
+      >
+        <div
+          className={`${styles.mapPin} ${styles.pin2024}`}
+          aria-hidden="true"
+        />
+        <div
+          className={`${styles.mapPin} ${styles.pin2023}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2024Vertical}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2024Horizontal}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2023Vertical}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2023Horizontal}`}
+          aria-hidden="true"
+        />
+      </div>
+
+      {timelineCards.map((card) => (
+        <article
+          className={`${styles.timelineCard} ${styles[card.position]} ${step >= card.visibleAt ? styles.isVisible : ""}`}
+          key={card.year}
+        >
+          <div className={styles.timelineCopy}>
+            <h2>
+              {card.year} - {card.title}
+            </h2>
+            <p>{card.subtitle}</p>
+          </div>
+          <button type="button" onClick={() => onExplore(card.year)}>
+            Explore
+            <span className={styles.exploreArrow} aria-hidden="true">
+              ›
+            </span>
+          </button>
+        </article>
+      ))}
+    </section>
+  );
+}
+
+function Stat({
+  label,
+  value,
+  large = false,
+}: {
+  label: string;
+  value: string;
+  large?: boolean;
+}) {
+  return (
+    <div className={styles.stat}>
+      <span>{label}</span>
+      <strong className={large ? styles.largeValue : undefined}>{value}</strong>
+    </div>
+  );
+}
+
+function Impact({
+  icon,
+  label,
+  value,
+}: {
+  icon: string;
+  label: React.ReactNode;
+  value: string;
+}) {
+  return (
+    <div className={styles.impact}>
+      <Image src={icon} alt="" width={34} height={28} />
+      <span>{label}</span>
+      <strong>{value}</strong>
+    </div>
+  );
+}
+
+function Arrow({ direction }: { direction: "left" | "right" }) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d={direction === "left" ? "m14 5-7 7 7 7" : "m10 5 7 7-7 7"} />
+    </svg>
+  );
+}
+
+function ProjectPreview({
+  project,
+  direction,
+  onClick,
+}: {
+  project: ProjectSlide;
+  direction: "previous" | "next";
+  onClick: () => void;
+}) {
+  const isPrevious = direction === "previous";
+  const label = previewTitle(project.title);
+
+  return (
+    <button
+      type="button"
+      className={`${styles.preview} ${isPrevious ? styles.previousPreview : styles.nextPreview}`}
+      onClick={onClick}
+      aria-label={`${isPrevious ? "Previous" : "Next"} project: ${label}`}
+    >
+      {isPrevious && (
+        <span className={styles.previewArrow}>
+          <Arrow direction="left" />
+        </span>
+      )}
+      <span className={styles.previewCard}>
+        <img src={project.image} alt="" />
+        <span>{label}</span>
+      </span>
+      {!isPrevious && (
+        <span className={styles.previewArrow}>
+          <Arrow direction="right" />
+        </span>
+      )}
+    </button>
+  );
+}

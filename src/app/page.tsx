@@ -3,6 +3,7 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import Header from "@/app/components/Header";
+import SiteHeader from "@/app/components/SiteHeader/SiteHeader";
 import { api } from "@/app/lib/api";
 import { queryKeys } from "@/app/hooks/useQuery";
 import type { Insight } from "@/app/lib/api";
@@ -65,6 +66,7 @@ const page = () => {
     <React.Fragment>
       <StructuredData data={organizationStructuredData} />
       <StructuredData data={websiteStructuredData} />
+      <SiteHeader />
       <Header slides={slides || []} />
     </React.Fragment>
   );

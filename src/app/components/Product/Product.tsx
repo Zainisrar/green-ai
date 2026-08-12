@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
 import { notFound } from "next/navigation";
+import React from "react";
+import { useProductBySlug } from "../../../hooks/useProducts";
 import Chatbot from "../Chatbot";
 import D6Chatbot from "../D6Chatbot";
-import ProductNavigation from "../TopNavigation/ProductNavigation";
-import { useProductBySlug } from "../../../hooks/useProducts";
+import SiteHeader from "../SiteHeader/SiteHeader";
 import ProductEnquiry from "./Modals/ProductEnquiry";
 import "../../home.css";
 
@@ -13,14 +13,47 @@ interface ProductProps {
 }
 
 const lightingSystemItems = [
-  { icon: "solarpanel.png", name: "Solar Panel", detail: "60W Poly-crystalline" },
-  { icon: "controlbox.png", name: "Control Box", detail: "12.8V/18000mAh LiFePO4" },
+  {
+    icon: "solarpanel.png",
+    name: "Solar Panel",
+    detail: "60W Poly-crystalline",
+  },
+  {
+    icon: "controlbox.png",
+    name: "Control Box",
+    detail: "12.8V/18000mAh LiFePO4",
+  },
   { icon: "ledbulb.png", name: "LED Bulb", detail: "23 hrs / 11 hrs" },
-  { icon: "tv.png", name: "TV", detail: "DC Television 32 inch", duration: "16 hrs" },
-  { icon: "fan.png", name: "Fan", detail: "DC Pedestal Fan 16 inch", duration: "13 hrs" },
-  { icon: "radio.png", name: "FM Radio", detail: "Radio with MP3 player", duration: "8 hrs" },
-  { icon: "lantern.png", name: "Lantern", detail: "3.2V 600mAh LiFePO4", duration: "8 hrs" },
-  { icon: "flashlight.png", name: "Flashlight", detail: "3W/3.7V 1800mAh Li-ion battery", duration: "8 hrs / 4 hrs" },
+  {
+    icon: "tv.png",
+    name: "TV",
+    detail: "DC Television 32 inch",
+    duration: "16 hrs",
+  },
+  {
+    icon: "fan.png",
+    name: "Fan",
+    detail: "DC Pedestal Fan 16 inch",
+    duration: "13 hrs",
+  },
+  {
+    icon: "radio.png",
+    name: "FM Radio",
+    detail: "Radio with MP3 player",
+    duration: "8 hrs",
+  },
+  {
+    icon: "lantern.png",
+    name: "Lantern",
+    detail: "3.2V 600mAh LiFePO4",
+    duration: "8 hrs",
+  },
+  {
+    icon: "flashlight.png",
+    name: "Flashlight",
+    detail: "3W/3.7V 1800mAh Li-ion battery",
+    duration: "8 hrs / 4 hrs",
+  },
   { icon: "USB.png", name: "USB Cable", detail: "Mobile Charging cable" },
 ];
 
@@ -34,7 +67,9 @@ const Product = ({ slug }: ProductProps) => {
   React.useEffect(() => {
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 1024);
-      setFigmaScale(Math.min(window.innerWidth / 1920, window.innerHeight / 970));
+      setFigmaScale(
+        Math.min(window.innerWidth / 1920, window.innerHeight / 970),
+      );
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -44,6 +79,7 @@ const Product = ({ slug }: ProductProps) => {
   if (slug === "lighting-up-and-lifting-up-living-standards") {
     return (
       <>
+        <SiteHeader brand="sunshine" />
         <div className="product-figma-shell hidden lg:block">
           <div
             className="product-figma-desktop"
@@ -54,7 +90,6 @@ const Product = ({ slug }: ProductProps) => {
               alt=""
               className="product-figma-background"
             />
-            <ProductNavigation />
             <h1 className="product-figma-heading">Products</h1>
 
             <img
@@ -75,7 +110,12 @@ const Product = ({ slug }: ProductProps) => {
                 className="product-figma-featured"
               />
               <div className="product-figma-thumbnails">
-                {["featuredProduct1.png", "productImg2.png", "productImg3.png", "productImg4.png"].map((image, index) => (
+                {[
+                  "featuredProduct1.png",
+                  "productImg2.png",
+                  "productImg3.png",
+                  "productImg4.png",
+                ].map((image, index) => (
                   <button
                     key={image}
                     type="button"
@@ -93,21 +133,36 @@ const Product = ({ slug }: ProductProps) => {
                 className="product-figma-enquiry"
               >
                 <span>Enquiry</span>
-                <span className="product-figma-enquiry-arrow" aria-hidden="true" />
+                <span
+                  className="product-figma-enquiry-arrow"
+                  aria-hidden="true"
+                />
               </button>
             </div>
 
             <section className="product-figma-card">
               <div>
-                <h2>Lighting Up<br />and Lifting Up<br />Living<br />Standards</h2>
+                <h2>
+                  Lighting Up
+                  <br />
+                  and Lifting Up
+                  <br />
+                  Living
+                  <br />
+                  Standards
+                </h2>
                 <p>
-                  To lift up living standards sustainably, it is crucial to invest
-                  in infrastructure that supports a better quality of life.
+                  To lift up living standards sustainably, it is crucial to
+                  invest in infrastructure that supports a better quality of
+                  life.
                 </p>
               </div>
             </section>
 
-            <section className="product-figma-specifications" aria-label="Product specifications">
+            <section
+              className="product-figma-specifications"
+              aria-label="Product specifications"
+            >
               <img src="/images/product/boxKeyImg.png" alt="" />
               <div className="product-figma-specification-list">
                 {lightingSystemItems.map((item) => (
@@ -120,17 +175,32 @@ const Product = ({ slug }: ProductProps) => {
                 ))}
               </div>
             </section>
-            <D6Chatbot canvasAnchored />
+            <D6Chatbot
+              canvasAnchored
+              triggerClassName="product-figma-chatbot"
+            />
           </div>
         </div>
 
         <div className="lg:hidden">
-          <ProductNavigation />
           <div className="px-6 pt-24 text-center">
-            <img src="/images/product/green-sunshine.png" alt="GREEN SunShine" className="mx-auto w-44" />
-            <img src="/images/product/featuredProduct1.png" alt="GREEN SunShine lighting system" className="mx-auto mt-8 w-full max-w-md" />
-            <h1 className="mt-8 text-3xl font-bold text-slate-800">Lighting Up and Lifting Up Living Standards</h1>
-            <p className="mt-4 text-slate-600">To lift up living standards sustainably, it is crucial to invest in infrastructure that supports a better quality of life.</p>
+            <img
+              src="/images/product/green-sunshine.png"
+              alt="GREEN SunShine"
+              className="mx-auto w-44"
+            />
+            <img
+              src="/images/product/featuredProduct1.png"
+              alt="GREEN SunShine lighting system"
+              className="mx-auto mt-8 w-full max-w-md"
+            />
+            <h1 className="mt-8 text-3xl font-bold text-slate-800">
+              Lighting Up and Lifting Up Living Standards
+            </h1>
+            <p className="mt-4 text-slate-600">
+              To lift up living standards sustainably, it is crucial to invest
+              in infrastructure that supports a better quality of life.
+            </p>
           </div>
           <Chatbot />
         </div>
@@ -151,7 +221,7 @@ const Product = ({ slug }: ProductProps) => {
     if (!url?.includes("/upload/")) return url;
     return url.replace(
       "/upload/",
-      `/upload/f_auto,q_auto,c_limit,w_${width},dpr_2.0/`
+      `/upload/f_auto,q_auto,c_limit,w_${width},dpr_2.0/`,
     );
   };
 
@@ -183,7 +253,7 @@ const Product = ({ slug }: ProductProps) => {
   return (
     // <div className=' h-screen bg-[url("/images/product/bg.jpg")] bg-cover overflow-hidden relative'>
     <div className="relative pb-12 lg:pb-0">
-      <ProductNavigation />
+      <SiteHeader />
       <div className="lg:block hidden absolute -z-10 right-0 top-0 bottom-0">
         <img
           src="/images/product/mainImg.png"
@@ -303,15 +373,17 @@ const Product = ({ slug }: ProductProps) => {
                   </div>
                 </div>
                 <div
-                style={{
-                  transform:isDesktop?"skewX(-16deg)":"none"
-                }}
-                className=" lg:bg-gray-100  p-4 mt-32  lg:shadow-2xl lg:p-8  lg:mt-52 ">
+                  style={{
+                    transform: isDesktop ? "skewX(-16deg)" : "none",
+                  }}
+                  className=" lg:bg-gray-100  p-4 mt-32  lg:shadow-2xl lg:p-8  lg:mt-52 "
+                >
                   <div
-                   style={{
-                  transform:isDesktop?"skewX(16deg)":"none"
-                }}
-                  className="grid grid-cols-3 gap-4 text-center text-xs lg:flex lg:flex-wrap lg:justify-start lg:gap-6 lg:text-left">
+                    style={{
+                      transform: isDesktop ? "skewX(16deg)" : "none",
+                    }}
+                    className="grid grid-cols-3 gap-4 text-center text-xs lg:flex lg:flex-wrap lg:justify-start lg:gap-6 lg:text-left"
+                  >
                     {currentProduct?.keys.map((key: any, index: number) => (
                       <div
                         key={index}

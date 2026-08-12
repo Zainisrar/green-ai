@@ -80,7 +80,7 @@ const ClientDashboard = () => {
           </a>
           <nav className="hidden md:flex items-center gap-6 lg:gap-9 uppercase text-sm text-gray-700">
             <a href="/explore/welcome-to-green">Explore</a>
-            <a href="/energy">Energy</a>
+            <a href="/engineering/solar-epcm-services">Energy</a>
             <a href="/engineering/products/lighting-up-and-lifting-up-living-standards">
               Elements
             </a>

@@ -1,12 +1,9 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import React from "react";
 import D6Chatbot from "./D6Chatbot";
-import Navigation from "./Navigation/Navigation";
-import { useNavigation } from "@/app/hooks/useNavigation";
-import { useNavigationState } from "@/hooks/useNavigationState";
+import SiteHeader from "./SiteHeader/SiteHeader";
 import "../home.css";
 
 interface D6TemplateProps {
@@ -21,17 +18,84 @@ const FIGMA_LAYERS = {
     // imgLeft/imgTop/imgWidth/imgHeight override the rendered photo box only (the copy-zone
     // still uses left/top/width/height). Panel 1 is scaled up & anchored bottom-right so its
     // top-right photo edge reaches the black seam line like panels 3–5.
-    { src: "/images/home/download (1) 1.png", left: -282.37, top: 0, width: 828, height: 979, z: 3, imgLeft: 0, imgTop: 0, imgWidth: 546, imgHeight: 970 },
-    { src: "/images/d6/D6-Page-1/3.png", left: 83, top: 0, width: 1022, height: 976, z: 2 },
-    { src: "/images/d6/D6-Page-1/5.png", left: 569, top: -1, width: 827, height: 969, z: 3 },
-    { src: "/images/d6/D6-Page-1/7.png", left: 936, top: 0, width: 847, height: 970, z: 5 },
-    { src: "/images/d6/D6-Page-1/9.png", left: 1321, top: -8, width: 827, height: 973, z: 4 },
+    {
+      src: "/images/home/download (1) 1.png",
+      left: -282.37,
+      top: 0,
+      width: 828,
+      height: 979,
+      z: 3,
+      imgLeft: 0,
+      imgTop: 0,
+      imgWidth: 546,
+      imgHeight: 970,
+    },
+    {
+      src: "/images/d6/D6-Page-1/3.png",
+      left: 83,
+      top: 0,
+      width: 1022,
+      height: 976,
+      z: 2,
+    },
+    {
+      src: "/images/d6/D6-Page-1/5.png",
+      left: 569,
+      top: -1,
+      width: 827,
+      height: 969,
+      z: 3,
+    },
+    {
+      src: "/images/d6/D6-Page-1/7.png",
+      left: 936,
+      top: 0,
+      width: 847,
+      height: 970,
+      z: 5,
+    },
+    {
+      src: "/images/d6/D6-Page-1/9.png",
+      left: 1321,
+      top: -8,
+      width: 827,
+      height: 973,
+      z: 4,
+    },
   ],
   diagonals: [
-    { src: "/images/d6/D6-Page-1/2.png", left: 70, top: 1, width: 478, height: 969, z: 6 },
-    { src: "/images/d6/D6-Page-1/4.png", left: 558, top: 1, width: 478, height: 969, z: 7 },
-    { src: "/images/d6/D6-Page-1/6.png", left: 920, top: 1, width: 478, height: 969, z: 8 },
-    { src: "/images/d6/D6-Page-1/8.png", left: 1305, top: 1, width: 478, height: 969, z: 9 },
+    {
+      src: "/images/d6/D6-Page-1/2.png",
+      left: 70,
+      top: 1,
+      width: 478,
+      height: 969,
+      z: 6,
+    },
+    {
+      src: "/images/d6/D6-Page-1/4.png",
+      left: 558,
+      top: 1,
+      width: 478,
+      height: 969,
+      z: 7,
+    },
+    {
+      src: "/images/d6/D6-Page-1/6.png",
+      left: 920,
+      top: 1,
+      width: 478,
+      height: 969,
+      z: 8,
+    },
+    {
+      src: "/images/d6/D6-Page-1/8.png",
+      left: 1305,
+      top: 1,
+      width: 478,
+      height: 969,
+      z: 9,
+    },
   ],
 } as const;
 
@@ -61,10 +125,30 @@ type Diagonal = readonly [top: number, bottom: number];
 /** The four shared panel edges. Every state uses the very same boundaries, so
  * adjacent photos always touch and no page background can appear mid-motion. */
 const PANEL_EDGES: Record<number, readonly Diagonal[]> = {
-  1: [[548, 70], [1036, 558], [1398, 920], [1783, 1305]],
-  2: [[548, 70], [900, 444], [1397, 937], [1783, 1305]],
-  3: [[548, 70], [980, 502], [1268, 810], [1783, 1305]],
-  4: [[548, 70], [980, 502], [1268, 810], [1654, 1196]],
+  1: [
+    [548, 70],
+    [1036, 558],
+    [1398, 920],
+    [1783, 1305],
+  ],
+  2: [
+    [548, 70],
+    [900, 444],
+    [1397, 937],
+    [1783, 1305],
+  ],
+  3: [
+    [548, 70],
+    [980, 502],
+    [1268, 810],
+    [1783, 1305],
+  ],
+  4: [
+    [548, 70],
+    [980, 502],
+    [1268, 810],
+    [1654, 1196],
+  ],
 };
 
 const panelHitGeometry = (index: number, edges: readonly Diagonal[]) => {
@@ -173,7 +257,7 @@ const PANELS = [
     label: "RENEWABLE ENERGY THE CORE",
     description:
       "Renewables: Providing cleaner energy to our world. Renewable energy is at the core of the solutions we provide to address our clients' varied requirements. Thus, sustaiablity assured, the green way!",
-    href: "/energy",
+    href: "/engineering/solar-epcm-services",
   },
   {
     label: "PRODUCTS AND SOLUTIONS",
@@ -200,55 +284,125 @@ const EXPANDED_PANELS = [
     titleLines: ["About GREEN"],
     description:
       "We are building a cleaner, more resilient future through practical renewable-energy solutions.",
-    layout: { left: 520, top: 168, width: 540, bodyWidth: 500, bodyGap: 14, titleInset: 0, titleSize: 40, titleLineHeight: 49, bodySize: 13, bodyLineHeight: 22 },
+    layout: {
+      left: 520,
+      top: 168,
+      width: 540,
+      bodyWidth: 500,
+      bodyGap: 14,
+      titleInset: 0,
+      titleSize: 40,
+      titleLineHeight: 49,
+      bodySize: 13,
+      bodyLineHeight: 22,
+    },
   },
   {
     title: "Energy augmentation for industry transformation",
     titleLines: ["Energy", "Augmentation", "For Industry", "Transformation"],
     description:
       "From homes to industries, we provide an extensive spectrum of energy solutions designed to solve the underlying challenges and bring about beneficial transformations.",
-    layout: { left: 760, top: 295, width: 430, bodyWidth: 350, bodyGap: 14, titleInset: 0, titleSize: 38, titleLineHeight: 46, bodySize: 12, bodyLineHeight: 19 },
+    layout: {
+      left: 760,
+      top: 295,
+      width: 430,
+      bodyWidth: 350,
+      bodyGap: 14,
+      titleInset: 0,
+      titleSize: 38,
+      titleLineHeight: 46,
+      bodySize: 12,
+      bodyLineHeight: 19,
+    },
   },
   {
     title: "Energy augmentation for industry transformation",
     titleLines: ["Energy", "Augmentation", "For Industry", "Transformation"],
     description:
       "From homes to industries, we provide an extensive spectrum of energy solutions designed to solve the underlying challenges and bring about beneficial transformations.",
-    layout: { left: 760, top: 295, width: 430, bodyWidth: 350, bodyGap: 14, titleInset: 0, titleSize: 38, titleLineHeight: 46, bodySize: 12, bodyLineHeight: 19 },
+    layout: {
+      left: 760,
+      top: 295,
+      width: 430,
+      bodyWidth: 350,
+      bodyGap: 14,
+      titleInset: 0,
+      titleSize: 38,
+      titleLineHeight: 46,
+      bodySize: 12,
+      bodyLineHeight: 19,
+    },
   },
   {
     title: "Energy engineering from turnkey project deliveries",
     titleLines: ["Energy Engineering", "From Turnkey", "Project Deliveries"],
     description:
       "Energy Engineering for micro-grid to utility-scale solar energy generation and distribution / delivery, encompassing system design, procurement information, and installation of the entire commercial solar system. After delivering a completely functioning solar power plant, GREEN will continue to perform routine inspections and maintenance to ensure the solar system operates at peak efficiency.",
-    layout: { left: 1150, top: 239, width: 470, bodyWidth: 320, bodyGap: 12, titleInset: 0, titleSize: 38, titleLineHeight: 46, bodySize: 12, bodyLineHeight: 19 },
+    layout: {
+      left: 1150,
+      top: 239,
+      width: 470,
+      bodyWidth: 320,
+      bodyGap: 12,
+      titleInset: 0,
+      titleSize: 38,
+      titleLineHeight: 46,
+      bodySize: 12,
+      bodyLineHeight: 19,
+    },
   },
   {
     title: "Net Zero - An Innate Commitment",
     titleLines: ["Net Zero", "- An Innate", "Commitment"],
     description:
       'Achieving "net zero" carbon emissions is a crucial objective of GREEN. This means that it is necessary to remove CO2 from the atmosphere at the same rate at which it is released. Our target is to provide 100% carbon-free energy to all of our clients by the year 2050 through the utilization of renewable energy sources and environmentally sound business practices in all of the energy solutions we offer.',
-    layout: { left: 1590, top: 222, width: 305, bodyWidth: 265, bodyGap: 10, titleInset: 0, titleSize: 38, titleLineHeight: 46, bodySize: 12, bodyLineHeight: 19 },
+    layout: {
+      left: 1590,
+      top: 222,
+      width: 305,
+      bodyWidth: 265,
+      bodyGap: 10,
+      titleInset: 0,
+      titleSize: 38,
+      titleLineHeight: 46,
+      bodySize: 12,
+      bodyLineHeight: 19,
+    },
   },
 ] as const;
 
 /** Mobile (G hidden): one letter per image on the left, its heading at the top-right inside
    the same diagonal section. Positions are vertical % within the 110vh background. */
 const MOBILE_PANELS = [
-  { letter: "R", heading: "About GREEN", headingTop: "24%", letterTop: "40%", letterLeft: "10%" },
-  { letter: "E", heading: "Products and Solutions", headingTop: "44%", letterTop: "57%", letterLeft: "10%" },
-  { letter: "E", heading: "EPC Energy Services", headingTop: "63%", letterTop: "76%", letterLeft: "10%" },
-  { letter: "N", heading: "Projects and Services", headingTop: "81%", letterTop: "93%", letterLeft: "10%" },
+  {
+    letter: "R",
+    heading: "About GREEN",
+    headingTop: "24%",
+    letterTop: "40%",
+    letterLeft: "10%",
+  },
+  {
+    letter: "E",
+    heading: "Products and Solutions",
+    headingTop: "44%",
+    letterTop: "57%",
+    letterLeft: "10%",
+  },
+  {
+    letter: "E",
+    heading: "EPC Energy Services",
+    headingTop: "63%",
+    letterTop: "76%",
+    letterLeft: "10%",
+  },
+  {
+    letter: "N",
+    heading: "Projects and Services",
+    headingTop: "81%",
+    letterTop: "93%",
+    letterLeft: "10%",
+  },
 ] as const;
-
-const NAV_ITEMS = [
-  { href: "/explore/welcome-to-green", label: "Explore", className: "nav-explore" },
-  { href: "/energy", label: "Energy", className: "nav-energy" },
-  { href: "/engineering/products/lighting-up-and-lifting-up-living-standards", label: "Elements", className: "nav-elements" },
-  { href: "/expertise", label: "Expertise", className: "nav-expertise" },
-  { href: "/empower/join-us", label: "Enlist", className: "nav-enlist" },
-  { href: "/engage/reach-us", label: "Engage", className: "nav-engage" },
-];
 
 const stackHeadline = (text: string) => {
   const line = text.trim().replace(/\s+/g, " ");
@@ -281,47 +435,22 @@ const FigmaLayer = ({
 );
 
 const D6Template = (_props: D6TemplateProps) => {
-  const router = useRouter();
-  const { isNavigationOpen, openNavigation, closeNavigation } =
-    useNavigationState();
-  const { navigationData, activeSection, setActiveSection, featuredChild } =
-    useNavigation(isNavigationOpen);
-
   const [isMobile, setIsMobile] = React.useState(false);
   const [scale, setScale] = React.useState(1);
   const [expandedPanel, setExpandedPanel] = React.useState(1);
-  const [transitioningTo, setTransitioningTo] = React.useState<number | null>(null);
-  const panelCopyTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
-  const [routeExit, setRouteExit] = React.useState<"gentle" | "quick" | null>(null);
-  const routeTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [transitioningTo, setTransitioningTo] = React.useState<number | null>(
+    null,
+  );
+  const panelCopyTimer = React.useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
 
-  React.useEffect(() => () => {
-    if (routeTimer.current) clearTimeout(routeTimer.current);
-    if (panelCopyTimer.current) clearTimeout(panelCopyTimer.current);
-  }, []);
-
-  const navigateFromHeader = (
-    event: React.MouseEvent<HTMLAnchorElement>,
-    href: string,
-    speed: "gentle" | "quick",
-  ) => {
-    if (
-      event.defaultPrevented ||
-      event.button !== 0 ||
-      event.metaKey ||
-      event.ctrlKey ||
-      event.shiftKey ||
-      event.altKey
-    ) return;
-
-    event.preventDefault();
-    if (routeExit) return;
-
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const duration = reduceMotion ? 0 : speed === "quick" ? 300 : 1000;
-    setRouteExit(speed);
-    routeTimer.current = setTimeout(() => router.push(href), duration);
-  };
+  React.useEffect(
+    () => () => {
+      if (panelCopyTimer.current) clearTimeout(panelCopyTimer.current);
+    },
+    [],
+  );
 
   React.useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -337,9 +466,8 @@ const D6Template = (_props: D6TemplateProps) => {
 
     // In the R frame, its active headline advances to the E1 frame. The
     // other active panels stay put, matching their "already active" state.
-    const target = expandedPanel === index
-      ? (index === 1 ? 2 : expandedPanel)
-      : index;
+    const target =
+      expandedPanel === index ? (index === 1 ? 2 : expandedPanel) : index;
     if (target === expandedPanel) return;
 
     if (panelCopyTimer.current) clearTimeout(panelCopyTimer.current);
@@ -351,11 +479,7 @@ const D6Template = (_props: D6TemplateProps) => {
   };
 
   const itemTransform = (index: number) => {
-    if (
-      index === 0 ||
-      expandedPanel === 1 ||
-      index === expandedPanel
-    )
+    if (index === 0 || expandedPanel === 1 || index === expandedPanel)
       return "translateX(0)";
     const distance = Math.abs(index - expandedPanel);
     const direction = index < expandedPanel ? -1 : 1;
@@ -375,28 +499,18 @@ const D6Template = (_props: D6TemplateProps) => {
     // Cover the desktop viewport. This prevents the white strip that appeared
     // below the 1920x970 composition on slightly taller desktop aspect ratios.
     const updateScale = () =>
-      setScale(Math.max(window.innerWidth / DESIGN_W, window.innerHeight / DESIGN_H));
+      setScale(
+        Math.max(window.innerWidth / DESIGN_W, window.innerHeight / DESIGN_H),
+      );
     updateScale();
     window.addEventListener("resize", updateScale);
     return () => window.removeEventListener("resize", updateScale);
   }, []);
 
-  if (isNavigationOpen && navigationData) {
-    return (
-      <Navigation
-        navigationData={navigationData}
-        activeSection={activeSection}
-        setActiveSection={setActiveSection}
-        featuredChild={featuredChild}
-        isOpen={isNavigationOpen}
-        onClose={closeNavigation}
-      />
-    );
-  }
-
   if (isMobile) {
     return (
       <>
+        <SiteHeader />
         {/* Exact image aspect → diagonals land at fixed % on every device (no object-cover crop) */}
         <div className="relative w-screen overflow-hidden aspect-[360/800]">
           <img
@@ -405,27 +519,8 @@ const D6Template = (_props: D6TemplateProps) => {
             role="presentation"
             className="absolute inset-0 -z-10 h-full w-full"
           />
-          <div className="mt-2 flex items-center justify-between px-4">
-            <img src="/images/d6/logo.png" alt="GREEN logo" />
-            <button
-              type="button"
-              onClick={openNavigation}
-              aria-label="Open navigation menu"
-              className="cursor-pointer border-0 bg-transparent p-0"
-            >
-              <img
-                src="/images/heroSection/lighting.svg"
-                alt=""
-                role="presentation"
-                className="h-9 w-auto"
-              />
-            </button>
-          </div>
           <div className="mt-4">
             <img src="/images/d6/greenFuture.png" alt="" role="presentation" />
-          </div>
-          <div onClick={openNavigation} className="mt-4 ml-4 cursor-pointer">
-            <img src="/images/d6/moreDetails.png" alt="" role="presentation" className="w-24" />
           </div>
           {/* G hidden. Each image: one letter on the left, its heading at the top-right inside. */}
           <div className="pointer-events-none absolute inset-0 z-0">
@@ -465,8 +560,9 @@ const D6Template = (_props: D6TemplateProps) => {
 
   return (
     <>
+      <SiteHeader />
       <div
-        className={`d6-route-shell relative w-full overflow-hidden bg-[#f5f5f5]${routeExit ? ` is-leaving-${routeExit}` : ""}`}
+        className="d6-route-shell relative w-full overflow-hidden bg-[#f5f5f5]"
         style={{ height: "100svh" }}
       >
         <div
@@ -477,7 +573,7 @@ const D6Template = (_props: D6TemplateProps) => {
             transform: `scale(${scale})`,
             transformOrigin: "top left",
           }}
-          >
+        >
           <div className="d6-left-corner-wash" aria-hidden />
           {FIGMA_LAYERS.panels.map((layer, i) => {
             const l = layer as typeof layer & {
@@ -578,7 +674,12 @@ const D6Template = (_props: D6TemplateProps) => {
                 opacity: expandedPanel === 1 || i === 0 ? 1 : 0,
               }}
             >
-              <img src={letter.src} alt="" role="presentation" draggable={false} />
+              <img
+                src={letter.src}
+                alt=""
+                role="presentation"
+                draggable={false}
+              />
             </button>
           ))}
 
@@ -613,7 +714,7 @@ const D6Template = (_props: D6TemplateProps) => {
               : panelContent.href;
             return (
               <div
-                key={panelContent.href}
+                key={`${i}-${panelContent.href}`}
                 className={`panel-copy-zone d6-panel-copy--${i}`}
                 style={{
                   left: panel.left,
@@ -626,7 +727,9 @@ const D6Template = (_props: D6TemplateProps) => {
                     PANEL_EDGES[expandedPanel] ?? PANEL_EDGES[1],
                     panel.left,
                   ),
-                  transform: isCollapsedPanel ? "translateX(0)" : itemTransform(i),
+                  transform: isCollapsedPanel
+                    ? "translateX(0)"
+                    : itemTransform(i),
                   opacity: expandedPanel === i && i >= 2 ? 0 : 1,
                 }}
               >
@@ -680,18 +783,20 @@ const D6Template = (_props: D6TemplateProps) => {
               key={expandedPanel}
               className={`d6-expanded-copy d6-expanded-copy--${expandedPanel}`}
               aria-live="polite"
-              style={{
-                left: EXPANDED_PANELS[expandedPanel].layout.left,
-                top: EXPANDED_PANELS[expandedPanel].layout.top,
-                width: EXPANDED_PANELS[expandedPanel].layout.width,
-                "--d6-copy-body-width": `${EXPANDED_PANELS[expandedPanel].layout.bodyWidth}px`,
-                "--d6-copy-body-gap": `${EXPANDED_PANELS[expandedPanel].layout.bodyGap}px`,
-                "--d6-copy-title-inset": `${EXPANDED_PANELS[expandedPanel].layout.titleInset}px`,
-                "--d6-copy-title-size": `${EXPANDED_PANELS[expandedPanel].layout.titleSize}px`,
-                "--d6-copy-title-line-height": `${EXPANDED_PANELS[expandedPanel].layout.titleLineHeight}px`,
-                "--d6-copy-body-size": `${EXPANDED_PANELS[expandedPanel].layout.bodySize}px`,
-                "--d6-copy-body-line-height": `${EXPANDED_PANELS[expandedPanel].layout.bodyLineHeight}px`,
-              } as React.CSSProperties}
+              style={
+                {
+                  left: EXPANDED_PANELS[expandedPanel].layout.left,
+                  top: EXPANDED_PANELS[expandedPanel].layout.top,
+                  width: EXPANDED_PANELS[expandedPanel].layout.width,
+                  "--d6-copy-body-width": `${EXPANDED_PANELS[expandedPanel].layout.bodyWidth}px`,
+                  "--d6-copy-body-gap": `${EXPANDED_PANELS[expandedPanel].layout.bodyGap}px`,
+                  "--d6-copy-title-inset": `${EXPANDED_PANELS[expandedPanel].layout.titleInset}px`,
+                  "--d6-copy-title-size": `${EXPANDED_PANELS[expandedPanel].layout.titleSize}px`,
+                  "--d6-copy-title-line-height": `${EXPANDED_PANELS[expandedPanel].layout.titleLineHeight}px`,
+                  "--d6-copy-body-size": `${EXPANDED_PANELS[expandedPanel].layout.bodySize}px`,
+                  "--d6-copy-body-line-height": `${EXPANDED_PANELS[expandedPanel].layout.bodyLineHeight}px`,
+                } as React.CSSProperties
+              }
             >
               <div>
                 <h2 aria-label={EXPANDED_PANELS[expandedPanel].title}>
@@ -714,38 +819,6 @@ const D6Template = (_props: D6TemplateProps) => {
             />
           </div>
 
-          <Link href="/" className="green-logo-high block" style={{ zIndex: 50 }} aria-label="GREEN home">
-            <img
-              src="/images/home/GREEN Logo - High 5.png"
-              alt="GREEN logo"
-              className="h-full w-full object-contain"
-            />
-          </Link>
-
-          <nav className="component" style={{ zIndex: 50 }}>
-            <div className="frame-1171277914">
-              {NAV_ITEMS.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={item.className}
-                  onClick={(event) => navigateFromHeader(
-                    event,
-                    item.href,
-                    item.label === "Enlist" || item.label === "Engage" ? "quick" : "gentle",
-                  )}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-            <button
-              type="button"
-              onClick={openNavigation}
-              className="bolt-1 cursor-pointer border-0 bg-transparent p-0"
-              aria-label="Open navigation menu"
-            />
-          </nav>
           <D6Chatbot canvasAnchored />
         </div>
       </div>

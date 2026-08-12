@@ -1285,6 +1285,21 @@
   font-family: var(--font-montserrat), "Montserrat", sans-serif;
 }
 
+/* The artwork contains an old logo. Preserve its gradient wedge while the
+   shared transparent header supplies the current site logo above it. */
+.product-figma-desktop::before {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 112px;
+  background: linear-gradient(100deg, #e1f5b8 0%, #ebf3a8 100%);
+  clip-path: polygon(0 0, 100% 0, 76% 100%, 0 100%);
+  content: "";
+  pointer-events: none;
+}
+
 .product-figma-background {
   position: absolute;
   inset: 0;
@@ -1302,7 +1317,7 @@
 
 .product-figma-heading {
   position: absolute;
-  top: 99px;
+  top: 122px;
   left: 280px;
   margin: 0;
   color: #050505;
@@ -1503,60 +1518,7 @@
   margin-top: 5px;
 }
 
-/* ProductNavigation intentionally keeps its behavior; these rules only place
-   its existing desktop markup at the coordinates from this product frame. */
-.product-figma-desktop > div:first-of-type {
-  position: absolute;
-  inset: 0;
-  padding: 0;
-}
-
-.product-figma-desktop > div:first-of-type > div {
-  position: absolute;
-  inset: 0;
-}
-
-.product-figma-desktop > div:first-of-type > div > img {
-  display: none;
-}
-
-.product-figma-desktop > div:first-of-type > div > div,
-.product-figma-desktop > div:first-of-type > div > div > div {
-  position: static;
-}
-
-.product-figma-desktop > div:first-of-type ul {
-  position: absolute;
-  top: 58px;
-  left: 1043px;
-  display: flex;
-  gap: 27px;
-  align-items: flex-start;
-  padding: 0;
-}
-
-.product-figma-desktop > div:first-of-type ul > li {
-  margin: 0;
-  font-size: 20px;
-}
-
-.product-figma-desktop > div:first-of-type ul > li:last-child {
-  position: absolute;
-  top: -26px;
-  left: 757px;
-  margin: 0;
-}
-
-.product-figma-desktop > div:first-of-type ul > li:last-child img {
-  display: block !important;
-  width: 60px !important;
-  height: 85px !important;
-  min-width: 60px !important;
-  max-width: 60px !important;
-  flex: none;
-}
-
-.product-figma-desktop > div:last-child {
+.product-figma-chatbot {
   right: 104px;
   bottom: 2px;
 }
