@@ -1,28 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useMemo, useState } from "react";
-import { useNavigation } from "@/app/hooks/useNavigation";
-import { useNavigationState } from "@/hooks/useNavigationState";
+import { useEffect, useMemo, useState } from "react";
 import { useProjects } from "@/hooks/useProjects";
 import Chatbot from "../Chatbot";
-import Navigation from "../Navigation/Navigation";
+import SiteHeader from "../SiteHeader/SiteHeader";
 import LetsStart from "./Modals/LetsStart";
 import styles from "./Project.module.css";
-
-const navigation = [
-  { href: "/explore/welcome-to-green", label: "Explore" },
-  { href: "/energy", label: "Energy" },
-  {
-    href: "/engineering/products/lighting-up-and-lifting-up-living-standards",
-    label: "Elements",
-  },
-  { href: "/expertise", label: "Expertise" },
-  { href: "/empower/join-us", label: "Enlist" },
-  { href: "/engage/reach-us", label: "Engage" },
-];
 
 type ProjectSlide = {
   id: number;
@@ -95,16 +79,71 @@ const previewTitle = (title: string) => {
   return title;
 };
 
+const timelineCards = [
+  {
+    year: "2007",
+    title: "PNG’s First Solar Street Light",
+    subtitle: "at NCD",
+    position: "card2007",
+    visibleAt: 1,
+  },
+  {
+    year: "2010",
+    title: "PNG’s First Solar-Powered Hospital with Lighting",
+    subtitle:
+      "Mutzing, Atzunas, Chuya, Markham Valley, Walium, Mosa, Malala, Mulau, Kaiapit, and Narawapum",
+    position: "card2010",
+    visibleAt: 2,
+  },
+  {
+    year: "2011",
+    title: "PNG’s First Solar-Powered Rural Electrification islands",
+    subtitle: "such as Kairuru, Musu, Wallis, Tarawai, Koli, Vokeo",
+    position: "card2011",
+    visibleAt: 2,
+  },
+  {
+    year: "2012",
+    title: "PNG’s First Solar-Powered Rural Government Office",
+    subtitle: "such as Simbai, Middle Ramu District",
+    position: "card2012",
+    visibleAt: 3,
+  },
+  {
+    year: "2020",
+    title:
+      "PNG’s First Solar-Powered Health Facilities with Full Biomedical Functioning,",
+    subtitle: "Kagua, Mongol, Munihu, Kandep, Laigaim, Yango, Tambitanis",
+    position: "card2020",
+    visibleAt: 4,
+  },
+  {
+    year: "2024",
+    title:
+      "PNG’s First largest Solar Powered Home Lighting Kits for 20,000 Houses",
+    subtitle: "Gulf Province",
+    position: "card2024",
+    visibleAt: 5,
+  },
+  {
+    year: "2023",
+    title: "PNG’s First Solar-Powered Minigrid",
+    subtitle: "at Pimaga Rural Hospital including staff houses",
+    position: "card2023",
+    visibleAt: 5,
+  },
+] as const;
+
+const INITIAL_TIMELINE_DELAY_MS = 1000;
+const TIMELINE_STEP_INTERVAL_MS = 2283;
+const LAST_TIMELINE_STEP = 5;
+
 export default function Project() {
   const [isProjectsOpen, setIsProjectsOpen] = useState(true);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [isStartOpen, setIsStartOpen] = useState(false);
-  const [viewMode, setViewMode] = useState<"in-view" | "slide">("in-view");
-  const pathname = usePathname();
-  const { isNavigationOpen, openNavigation, closeNavigation } =
-    useNavigationState();
-  const { navigationData, activeSection, setActiveSection, featuredChild } =
-    useNavigation(isNavigationOpen, pathname);
+  const [viewMode, setViewMode] = useState<"in-view" | "slide">("slide");
+  const [timelineRun, setTimelineRun] = useState(0);
   const { data: apiProjects } = useProjects();
 
   const projects = useMemo(() => {
@@ -145,6 +184,9 @@ export default function Project() {
 
   const activeIndex = currentProjectIndex % projects.length;
   const currentProject = projects[activeIndex];
+  const isPimagaProject = currentProject.title
+    .toLowerCase()
+    .includes("pimaga health centre");
   const previousProject =
     projects[(activeIndex - 1 + projects.length) % projects.length];
   const nextProject = projects[(activeIndex + 1) % projects.length];
@@ -154,54 +196,24 @@ export default function Project() {
       (index) => (index + amount + projects.length) % projects.length,
     );
   };
-
-  if (isNavigationOpen && navigationData) {
-    return (
-      <Navigation
-        navigationData={navigationData}
-        activeSection={activeSection}
-        setActiveSection={setActiveSection}
-        featuredChild={featuredChild}
-        currentPath={pathname}
-        isOpen={isNavigationOpen}
-        onClose={closeNavigation}
-      />
+  const openInView = () => {
+    setTimelineRun((run) => run + 1);
+    setViewMode("in-view");
+  };
+  const openTimelineProject = (year: string) => {
+    const matchingIndex = projects.findIndex((project) =>
+      project.title.includes(year),
     );
-  }
+
+    if (matchingIndex >= 0) {
+      setCurrentProjectIndex(matchingIndex);
+    }
+    setViewMode("slide");
+  };
 
   return (
     <main className={styles.page}>
-      <header className={styles.header}>
-        <Link href="/" className={styles.logo} aria-label="GREEN home">
-          <Image
-            src="/images/heroSection/logo.png"
-            alt="GREEN — Future: Envisioned"
-            width={375}
-            height={98}
-            priority
-          />
-        </Link>
-        <nav className={styles.navigation} aria-label="Primary navigation">
-          {navigation.map((item) => (
-            <Link href={item.href} key={item.label}>
-              {item.label}
-            </Link>
-          ))}
-          <button
-            type="button"
-            onClick={openNavigation}
-            aria-label="Open navigation"
-            className={styles.menuButton}
-          >
-            <Image
-              src="/images/heroSection/lighting.svg"
-              alt=""
-              width={42}
-              height={54}
-            />
-          </button>
-        </nav>
-      </header>
+      <SiteHeader />
 
       <Image
         className={styles.verticalTitle}
@@ -212,130 +224,139 @@ export default function Project() {
         priority
       />
 
-      <section className={styles.stage} aria-label="Project portfolio">
-        <div className={styles.mainPhoto}>
-          <img src={currentProject.image} alt={currentProject.title} />
-          <div className={styles.photoShade} />
-        </div>
-
-        <div className={styles.titlePanel}>
-          <h1>{currentProject.title}</h1>
-        </div>
-
-        <button
-          type="button"
-          className={styles.collapseButton}
-          onClick={() => setIsProjectsOpen((open) => !open)}
-          aria-expanded={isProjectsOpen}
-          aria-label={
-            isProjectsOpen
-              ? "Collapse project details"
-              : "Expand project details"
-          }
-        >
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-            className={isProjectsOpen ? "" : styles.rotated}
+      {viewMode === "in-view" ? (
+        <InViewTimeline key={timelineRun} onExplore={openTimelineProject} />
+      ) : (
+        <section className={styles.stage} aria-label="Project portfolio">
+          <div
+            className={`${styles.mainPhoto} ${isPimagaProject ? styles.pimagaPhoto : ""}`}
           >
-            <path d="m6 9 6 6 6-6" />
-          </svg>
-        </button>
+            <img src={currentProject.image} alt={currentProject.title} />
+            <div className={styles.photoShade} />
+          </div>
 
-        {isProjectsOpen && (
-          <section
-            className={styles.statsPanel}
-            aria-label="Project performance data"
+          <div className={styles.titlePanel}>
+            <h1>{currentProject.title}</h1>
+          </div>
+
+          <button
+            type="button"
+            className={styles.collapseButton}
+            onClick={() => setIsProjectsOpen((open) => !open)}
+            aria-expanded={isProjectsOpen}
+            aria-label={
+              isProjectsOpen
+                ? "Collapse project details"
+                : "Expand project details"
+            }
           >
-            <div className={styles.primaryStats}>
-              <Stat label="No. of systems" value={currentProject.systems} />
-              <Stat label="No. of days" value={currentProject.days} />
-              <Stat
-                label="Total Generation"
-                value={currentProject.totalGeneration}
-                large
-              />
-              <div className={styles.battery}>
-                <span>
-                  <Image
-                    src="/images/projects/batteryPercentage.png"
-                    width={26}
-                    height={27}
-                    alt=""
-                  />
-                </span>
-                <strong>{currentProject.batteryPercentage}%</strong>
-              </div>
-            </div>
-            <div className={styles.impactStats}>
-              <Impact
-                icon="/images/projects/coal.png"
-                label="Coal A"
-                value={currentProject.coalA}
-              />
-              <span className={styles.divider}>/</span>
-              <Impact
-                icon="/images/projects/co2.png"
-                label={
-                  <>
-                    Emission
-                    <br />
-                    reduction
-                  </>
-                }
-                value={currentProject.emissionReduction}
-              />
-              <span className={styles.divider}>/</span>
-              <Impact
-                icon="/images/projects/tree.png"
-                label="Trees Planted"
-                value={currentProject.treesPlanted}
-              />
-              <Impact
-                icon="/images/projects/capacity.png"
-                label="Capacity"
-                value={currentProject.capacity}
-              />
-              <Impact
-                icon="/images/projects/totalProduction.png"
-                label="To date Production"
-                value={currentProject.toDateProduction}
-              />
-              <Impact
-                icon="/images/projects/consumption.png"
-                label="Consumption"
-                value={currentProject.consumption}
-              />
-            </div>
-            <div className={styles.chartRow}>
-              <div className={styles.periods}>
-                {["Day", "Week", "Month", "Year"].map((period) => (
-                  <button type="button" key={period}>
-                    {period}
-                  </button>
-                ))}
-              </div>
-              <div className={styles.graph}>
-                <p>Total Generation daily : {currentProject.dailyGeneration}</p>
-                <Image
-                  src="/images/projects/graph.png"
-                  alt="Daily energy generation graph"
-                  width={342}
-                  height={148}
+            <svg
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              className={isProjectsOpen ? "" : styles.rotated}
+            >
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+
+          {isProjectsOpen && (
+            <section
+              className={styles.statsPanel}
+              aria-label="Project performance data"
+            >
+              <div className={styles.primaryStats}>
+                <Stat label="No. of systems" value={currentProject.systems} />
+                <Stat label="No. of days" value={currentProject.days} />
+                <Stat
+                  label="Total Generation"
+                  value={currentProject.totalGeneration}
+                  large
                 />
-                <span>Today</span>
+                <div className={styles.battery}>
+                  <span>
+                    <Image
+                      src="/images/projects/batteryPercentage.png"
+                      width={26}
+                      height={27}
+                      alt=""
+                    />
+                  </span>
+                  <strong>{currentProject.batteryPercentage}%</strong>
+                </div>
               </div>
-            </div>
-          </section>
-        )}
-      </section>
+              <div className={styles.impactStats}>
+                <Impact
+                  icon="/images/projects/coal.png"
+                  label="Coal A"
+                  value={currentProject.coalA}
+                />
+                <span className={styles.divider}>/</span>
+                <Impact
+                  icon="/images/projects/co2.png"
+                  label={
+                    <>
+                      Emission
+                      <br />
+                      reduction
+                    </>
+                  }
+                  value={currentProject.emissionReduction}
+                />
+                <span className={styles.divider}>/</span>
+                <Impact
+                  icon="/images/projects/tree.png"
+                  label="Trees Planted"
+                  value={currentProject.treesPlanted}
+                />
+                <Impact
+                  icon="/images/projects/capacity.png"
+                  label="Capacity"
+                  value={currentProject.capacity}
+                />
+                <Impact
+                  icon="/images/projects/totalProduction.png"
+                  label="To date Production"
+                  value={currentProject.toDateProduction}
+                />
+                <Impact
+                  icon="/images/projects/consumption.png"
+                  label="Consumption"
+                  value={currentProject.consumption}
+                />
+              </div>
+              <div className={styles.chartRow}>
+                <div className={styles.periods}>
+                  {["Day", "Week", "Month", "Year"].map((period) => (
+                    <button type="button" key={period}>
+                      {period}
+                    </button>
+                  ))}
+                </div>
+                <div className={styles.graph}>
+                  <p>
+                    Total Generation daily : {currentProject.dailyGeneration}
+                  </p>
+                  <Image
+                    src="/images/projects/graph.png"
+                    alt="Daily energy generation graph"
+                    width={342}
+                    height={148}
+                  />
+                  <span>Today</span>
+                </div>
+              </div>
+            </section>
+          )}
+        </section>
+      )}
 
       <fieldset className={styles.viewToggle}>
         <legend className={styles.screenReaderOnly}>Project view mode</legend>
         <button
           type="button"
           className={viewMode === "in-view" ? styles.activeView : undefined}
-          onClick={() => setViewMode("in-view")}
+          onClick={openInView}
+          aria-pressed={viewMode === "in-view"}
         >
           In View
         </button>
@@ -343,54 +364,206 @@ export default function Project() {
           type="button"
           className={viewMode === "slide" ? styles.activeView : undefined}
           onClick={() => setViewMode("slide")}
+          aria-pressed={viewMode === "slide"}
         >
           Slide
         </button>
       </fieldset>
 
-      <ProjectPreview
-        project={previousProject}
-        direction="previous"
-        onClick={() => moveProject(-1)}
-      />
-      <ProjectPreview
-        project={nextProject}
-        direction="next"
-        onClick={() => moveProject(1)}
-      />
+      {viewMode === "slide" && (
+        <>
+          <ProjectPreview
+            project={previousProject}
+            direction="previous"
+            onClick={() => moveProject(-1)}
+          />
+          <ProjectPreview
+            project={nextProject}
+            direction="next"
+            onClick={() => moveProject(1)}
+          />
 
-      <button
-        type="button"
-        className={`${styles.mobileArrow} ${styles.mobilePrevious}`}
-        onClick={() => moveProject(-1)}
-        aria-label="Previous project"
-      >
-        <Arrow direction="left" />
-      </button>
-      <button
-        type="button"
-        className={`${styles.mobileArrow} ${styles.mobileNext}`}
-        onClick={() => moveProject(1)}
-        aria-label="Next project"
-      >
-        <Arrow direction="right" />
-      </button>
+          <button
+            type="button"
+            className={`${styles.mobileArrow} ${styles.mobilePrevious}`}
+            onClick={() => moveProject(-1)}
+            aria-label="Previous project"
+          >
+            <Arrow direction="left" />
+          </button>
+          <button
+            type="button"
+            className={`${styles.mobileArrow} ${styles.mobileNext}`}
+            onClick={() => moveProject(1)}
+            aria-label="Next project"
+          >
+            <Arrow direction="right" />
+          </button>
 
-      <button
-        type="button"
-        className={styles.startButton}
-        onClick={() => setIsStartOpen(true)}
-      >
-        <Image
-          src="/images/projects/letStart.png"
-          alt="Let's Start"
-          width={179}
-          height={62}
-        />
-      </button>
+          <button
+            type="button"
+            className={styles.startButton}
+            onClick={() => setIsStartOpen(true)}
+          >
+            <Image
+              src="/images/projects/letStart.png"
+              alt="Let's Start"
+              width={179}
+              height={62}
+            />
+          </button>
+        </>
+      )}
       <Chatbot triggerClassName={styles.chatTrigger} />
       <LetsStart isOpen={isStartOpen} onClose={() => setIsStartOpen(false)} />
     </main>
+  );
+}
+
+function InViewTimeline({ onExplore }: { onExplore: (year: string) => void }) {
+  const [step, setStep] = useState(0);
+
+  useEffect(() => {
+    let sequence: number | undefined;
+    const initial = window.setTimeout(() => {
+      setStep(1);
+      sequence = window.setInterval(() => {
+        setStep((current) => (current >= LAST_TIMELINE_STEP ? 0 : current + 1));
+      }, TIMELINE_STEP_INTERVAL_MS);
+    }, INITIAL_TIMELINE_DELAY_MS);
+
+    return () => {
+      window.clearTimeout(initial);
+      if (sequence !== undefined) {
+        window.clearInterval(sequence);
+      }
+    };
+  }, []);
+
+  return (
+    <section
+      className={styles.inViewStage}
+      data-step={step}
+      aria-label="PNG project milestone map"
+    >
+      <Image
+        className={styles.pngMap}
+        src="/images/projects/png-map-figma.png"
+        alt="Map of Papua New Guinea showing GREEN project locations"
+        width={2048}
+        height={756}
+        priority
+      />
+
+      <div
+        className={`${styles.mapPin} ${styles.pin2007}`}
+        aria-hidden="true"
+      />
+      <span
+        className={`${styles.connector} ${styles.connector2007}`}
+        aria-hidden="true"
+      />
+
+      <div
+        className={`${styles.revealGroup} ${step >= 2 ? styles.isVisible : ""}`}
+      >
+        <div
+          className={`${styles.mapPin} ${styles.pin2010}`}
+          aria-hidden="true"
+        />
+        <div
+          className={`${styles.mapPin} ${styles.pin2011}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2010}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2011}`}
+          aria-hidden="true"
+        />
+      </div>
+
+      <div
+        className={`${styles.revealGroup} ${step >= 3 ? styles.isVisible : ""}`}
+      >
+        <div
+          className={`${styles.mapPin} ${styles.pin2012}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2012Vertical}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2012Horizontal}`}
+          aria-hidden="true"
+        />
+      </div>
+
+      <div
+        className={`${styles.revealGroup} ${step >= 4 ? styles.isVisible : ""}`}
+      >
+        <div
+          className={`${styles.mapPin} ${styles.pin2020}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2020}`}
+          aria-hidden="true"
+        />
+      </div>
+
+      <div
+        className={`${styles.revealGroup} ${step >= 5 ? styles.isVisible : ""}`}
+      >
+        <div
+          className={`${styles.mapPin} ${styles.pin2024}`}
+          aria-hidden="true"
+        />
+        <div
+          className={`${styles.mapPin} ${styles.pin2023}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2024Vertical}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2024Horizontal}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2023Vertical}`}
+          aria-hidden="true"
+        />
+        <span
+          className={`${styles.connector} ${styles.connector2023Horizontal}`}
+          aria-hidden="true"
+        />
+      </div>
+
+      {timelineCards.map((card) => (
+        <article
+          className={`${styles.timelineCard} ${styles[card.position]} ${step >= card.visibleAt ? styles.isVisible : ""}`}
+          key={card.year}
+        >
+          <div className={styles.timelineCopy}>
+            <h2>
+              {card.year} - {card.title}
+            </h2>
+            <p>{card.subtitle}</p>
+          </div>
+          <button type="button" onClick={() => onExplore(card.year)}>
+            Explore
+            <span className={styles.exploreArrow} aria-hidden="true">
+              ›
+            </span>
+          </button>
+        </article>
+      ))}
+    </section>
   );
 }
 

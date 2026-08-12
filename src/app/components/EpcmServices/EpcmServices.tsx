@@ -1,23 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import Enquiry from "../Energy/Modals/Enquiry";
+import SiteHeader from "../SiteHeader/SiteHeader";
 import styles from "./EpcmServices.module.css";
-
-const navigation = [
-  { href: "/explore/welcome-to-green", label: "Explore" },
-  { href: "/energy", label: "Energy", active: true },
-  {
-    href: "/engineering/products/lighting-up-and-lifting-up-living-standards",
-    label: "Elements",
-  },
-  { href: "/expertise", label: "Expertise" },
-  { href: "/empower/join-us", label: "Enlist" },
-  { href: "/engage/reach-us", label: "Engage" },
-];
 
 const phases = [
   {
@@ -89,38 +77,7 @@ export default function EpcmServices() {
   return (
     <main className={styles.page}>
       <div className={styles.background} aria-hidden="true" />
-
-      <header className={styles.header}>
-        <Link className={styles.logo} href="/" aria-label="GREEN home">
-          <Image
-            src="/images/heroSection/logo.png"
-            alt="GREEN — Future: Envisioned"
-            width={375}
-            height={98}
-            priority
-          />
-        </Link>
-
-        <nav className={styles.navigation} aria-label="Primary navigation">
-          {navigation.map((item) => (
-            <Link
-              className={item.active ? styles.activeNavigationItem : undefined}
-              href={item.href}
-              key={item.label}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <button type="button" aria-label="Open navigation">
-            <Image
-              src="/images/heroSection/lighting.svg"
-              alt=""
-              width={42}
-              height={54}
-            />
-          </button>
-        </nav>
-      </header>
+      <SiteHeader compactLogo panel="logoOnly" />
 
       <Image
         className={styles.verticalTitle}

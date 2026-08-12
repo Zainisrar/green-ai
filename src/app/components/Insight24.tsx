@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import type React from "react";
+import TopNavigation from "./TopNavigation/TopNavigation";
 
 type NavigationProps = {
   items: { name: string; link: string }[];
@@ -19,15 +20,6 @@ interface Props {
   keypoints2: { icon: string; text: React.ReactNode }[];
 }
 
-const links = [
-  ["Explore", "/explore/welcome-to-green"],
-  ["Energy", "/energy"],
-  ["Elements", "/engineering/products/lighting-up-and-lifting-up-living-standards"],
-  ["Expertise", "/expertise"],
-  ["Enlist", "/empower/join-us"],
-  ["Engage", "/engage/reach-us"],
-] as const;
-
 const Insight24: React.FC<Props> = ({
   title,
   subheadline,
@@ -44,7 +36,9 @@ const Insight24: React.FC<Props> = ({
   const isHotel = name2.toLowerCase().includes("hotel");
 
   return (
-    <main className={`solar-home-insight${isHotel ? " solar-home-insight--hotel" : ""}`}>
+    <main
+      className={`solar-home-insight${isHotel ? " solar-home-insight--hotel" : ""}`}
+    >
       <div className="solar-home-insight__solar" aria-hidden="true">
         <img src={backroundImg} alt="" />
       </div>
@@ -55,19 +49,7 @@ const Insight24: React.FC<Props> = ({
         aria-hidden="true"
       />
 
-      <header className="solar-home-insight__header">
-        <a href="/" className="solar-home-insight__logo" aria-label="GREEN home">
-          <img src="/images/insight1/figma/green-logo.png" alt="GREEN" />
-        </a>
-        <nav aria-label="Primary navigation" className="solar-home-insight__nav">
-          {links.map(([label, href]) => (
-            <a href={href} key={label}>{label}</a>
-          ))}
-          <button type="button" aria-label="Open menu">
-            <img src="/images/insight1/figma/bolt.png" alt="" />
-          </button>
-        </nav>
-      </header>
+      <TopNavigation />
 
       <div className="solar-home-insight__name">
         <span>{name1}</span> <strong>{name2}</strong>
@@ -80,29 +62,66 @@ const Insight24: React.FC<Props> = ({
 
       <p className="solar-home-insight__description">{description}</p>
 
-      <section className="solar-home-insight__facts" aria-label="Solar Home benefits">
+      <section
+        className="solar-home-insight__facts"
+        aria-label="Solar Home benefits"
+      >
         {keypoints.map((point, index) => (
-          <article className={`solar-home-insight__fact solar-home-insight__fact--${index + 1}`} key={index}>
+          <article
+            className={`solar-home-insight__fact solar-home-insight__fact--${index + 1}`}
+            key={index}
+          >
             <img src={point.icon} alt="" />
             <p>{point.text}</p>
           </article>
         ))}
       </section>
 
-      <div className="solar-home-insight__quote-panel" aria-label="Insight quote">
+      <div
+        className="solar-home-insight__quote-panel"
+        aria-label="Insight quote"
+      >
         <p>
           <span>“</span>
-          {isHotel ? <><span className="solar-home-insight__hotel-quote">Empower Hotels as<br />leadership in sustainability<br />and climate responsibility.</span></> : cardTitle}
+          {isHotel ? (
+            <>
+              <span className="solar-home-insight__hotel-quote">
+                Empower Hotels as
+                <br />
+                leadership in sustainability
+                <br />
+                and climate responsibility.
+              </span>
+            </>
+          ) : (
+            cardTitle
+          )}
           <span>”</span>
         </p>
       </div>
 
-      <p className="solar-home-insight__tag"># {name2} &nbsp;Insight {isHotel ? "04" : "02"}</p>
+      <p className="solar-home-insight__tag">
+        # {name2} &nbsp;Insight {isHotel ? "04" : "02"}
+      </p>
 
-      <button className="solar-home-insight__chat" type="button" aria-label="Open chat">
-        <img className="insight-chat__panel" src="/images/insight1/figma/chat-panel.svg" alt="" aria-hidden="true" />
+      <button
+        className="solar-home-insight__chat"
+        type="button"
+        aria-label="Open chat"
+      >
+        <img
+          className="insight-chat__panel"
+          src="/images/insight1/figma/chat-panel.svg"
+          alt=""
+          aria-hidden="true"
+        />
         <span className="insight-chat__label">Let’s Talk Energy</span>
-        <img className="insight-chat__microphone" src="/images/insight1/figma/chat-microphone.svg" alt="" aria-hidden="true" />
+        <img
+          className="insight-chat__microphone"
+          src="/images/insight1/figma/chat-microphone.svg"
+          alt=""
+          aria-hidden="true"
+        />
       </button>
     </main>
   );

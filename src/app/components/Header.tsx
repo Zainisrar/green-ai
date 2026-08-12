@@ -61,8 +61,6 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
   if (!slide) return null;
 
   const categoryTag = slide.tag || `# Mining Insight 0${slide.id || current + 1}`;
-  const logoUrl = slide.logo || "/images/heroSection/logo.png";
-
   return (
     <div
       onMouseEnter={() => setPaused(true)}
@@ -80,32 +78,6 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
 
       <div key={current} className="relative w-full h-full flex flex-col justify-between z-10 animate-fadeIn pt-4 pb-6 px-4 md:px-8 lg:px-12 overflow-hidden">
         
-        {/* Top Header Row: Action Bar + Logo */}
-        <div className="w-full flex items-center justify-between z-20 shrink-0">
-          <div className="flex items-center gap-4">
-            {/* Left side space */}
-          </div>
-          
-          <div className="flex items-center gap-6">
-            {/* LET'S CHAT outline button from Figma */}
-            <a
-              href="/engage/reach-us"
-              className="hidden sm:flex items-center justify-center border-[1.2px] border-white px-4 py-1.5 text-xs md:text-sm font-bold text-white uppercase tracking-wider hover:bg-white/20 transition-all filter drop-shadow-[0_0_14px_rgba(255,255,255,0.65)]"
-            >
-              LET&apos;S CHAT
-            </a>
-
-            {/* GREEN Logo at top right */}
-            <a href="/" className="block">
-              <img
-                src={logoUrl}
-                alt="GREEN Logo"
-                className="h-9 md:h-12 lg:h-14 w-auto object-contain"
-              />
-            </a>
-          </div>
-        </div>
-
         {/* Main Content Area */}
         <div className="flex flex-col w-full max-w-[1820px] mx-auto my-auto py-1">
           
@@ -275,4 +247,3 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
 };
 
 export default Header;
-

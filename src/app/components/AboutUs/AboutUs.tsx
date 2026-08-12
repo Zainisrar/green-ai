@@ -1,20 +1,22 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import D6TopNavigation from "../d6TopNav";
-import Chatbot from "../Chatbot";
-import D6Chatbot from "../D6Chatbot";
 import { useAboutUs } from "../../../hooks/useAboutUs";
 import { parseAboutUsContent, parseQuoteContent } from "../../utils/htmlParser";
+import Chatbot from "../Chatbot";
+import D6Chatbot from "../D6Chatbot";
+import D6TopNavigation from "../d6TopNav";
 import "../../home.css";
 
 const AboutUs = () => {
   const [desktopScale, setDesktopScale] = useState(1);
   // Fetch AboutUs data
   const { aboutUsData } = useAboutUs();
-  
+
   // Parse content when data is available
-  const parsedContent = aboutUsData ? parseAboutUsContent(aboutUsData.content) : null;
+  const parsedContent = aboutUsData
+    ? parseAboutUsContent(aboutUsData.content)
+    : null;
   const parsedQuote = aboutUsData ? parseQuoteContent(aboutUsData.quote) : null;
 
   const aboutParagraphs = parsedContent?.aboutGreenParagraphs ?? [
@@ -28,7 +30,9 @@ const AboutUs = () => {
 
   useEffect(() => {
     const updateScale = () => {
-      setDesktopScale(Math.max(window.innerWidth / 1920, window.innerHeight / 970));
+      setDesktopScale(
+        Math.max(window.innerWidth / 1920, window.innerHeight / 970),
+      );
     };
 
     updateScale();
@@ -38,14 +42,14 @@ const AboutUs = () => {
 
   return (
     <React.Fragment>
+      <D6TopNavigation />
       <div className="relative min-h-screen overflow-hidden bg-white">
-
         {/* Mobile Layout */}
         <div className="relative z-10 px-4 py-6 md:hidden">
           {/* Clean Lean Green Title */}
           <div className="text-center mb-8">
             <h1 className=" text-2xl lg:text-3xl font-black text-gray-800 leading-tight">
-              {aboutUsData?.key.split(' ').map((word, index) => (
+              {aboutUsData?.key.split(" ").map((word, index) => (
                 <React.Fragment key={index}>
                   {index === 2 ? (
                     <span className="text-[#23B14D]">{word}</span>
@@ -72,37 +76,38 @@ const AboutUs = () => {
               {aboutUsData?.title || "About GREEN"}
             </h2>
             <p className="text-base font-bold mb-4 italic text-center">
-              {parsedContent?.subtitle.toUpperCase() || "ENLIGHTENING OUR LIVES THROUGH SUSTAINABLE ENERGY SOLUTIONS"}
+              {parsedContent?.subtitle.toUpperCase() ||
+                "ENLIGHTENING OUR LIVES THROUGH SUSTAINABLE ENERGY SOLUTIONS"}
             </p>
 
-              <div className="space-y-4 text-gray-700 text-sm leading-relaxed">
-                {parsedContent?.aboutGreenParagraphs.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
-                )) || (
-                  <>
-                    <p>
-                      GREEN Limited - A Front-runner in sustainable living and
-                      Renewable Energy Solution Provider in Papua New Guinea has 15
-                      global presence in the INDIA, USA and Australia helps to bring
-                      out the best of Product design, development and Project delivery
-                      strategies, GREEN Limited is an ISO 9001 certified company and
-                      complies with all the international standards and quality
-                      management methodologies.
-                    </p>
-                    <p>
-                      We are committed to enhancing and empowering lives through our
-                      energy solutions enhanced by and the energy dependency
-                      for a sustainable and promising future.
-                    </p>
-                    <p>
-                      At GREEN, with a Global perspective between the finest solutions
-                      to Enable, Empower and Energize the drive for a
-                      sustainable future with our solutions for a better quality of
-                      life.
-                    </p>
-                  </>
-                )}
-              </div>
+            <div className="space-y-4 text-gray-700 text-sm leading-relaxed">
+              {parsedContent?.aboutGreenParagraphs.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              )) || (
+                <>
+                  <p>
+                    GREEN Limited - A Front-runner in sustainable living and
+                    Renewable Energy Solution Provider in Papua New Guinea has
+                    15 global presence in the INDIA, USA and Australia helps to
+                    bring out the best of Product design, development and
+                    Project delivery strategies, GREEN Limited is an ISO 9001
+                    certified company and complies with all the international
+                    standards and quality management methodologies.
+                  </p>
+                  <p>
+                    We are committed to enhancing and empowering lives through
+                    our energy solutions enhanced by and the energy dependency
+                    for a sustainable and promising future.
+                  </p>
+                  <p>
+                    At GREEN, with a Global perspective between the finest
+                    solutions to Enable, Empower and Energize the drive for a
+                    sustainable future with our solutions for a better quality
+                    of life.
+                  </p>
+                </>
+              )}
+            </div>
           </div>
 
           {/* What does GREEN do Section */}
@@ -111,11 +116,15 @@ const AboutUs = () => {
               {parsedContent?.whatDoesGreenTitle || "What does GREEN Do"}
             </h3>
             <p className="text-base font-bold mb-4 italic text-center">
-              {parsedContent?.whatDoesGreenSubtitle.toUpperCase() || "TRANSFORMING LIVES WITH ENERGY INDEPENDENCE"}
+              {parsedContent?.whatDoesGreenSubtitle.toUpperCase() ||
+                "TRANSFORMING LIVES WITH ENERGY INDEPENDENCE"}
             </p>
 
             {parsedContent?.whatDoesGreenParagraphs.map((paragraph, index) => (
-              <p key={index} className="text-gray-700 text-sm leading-relaxed mb-6">
+              <p
+                key={index}
+                className="text-gray-700 text-sm leading-relaxed mb-6"
+              >
                 {paragraph}
               </p>
             )) || (
@@ -124,9 +133,9 @@ const AboutUs = () => {
                 primarily focused in rural areas without access to conventional
                 sources of energy or utilities. Our products and solutions are
                 primarily intended to empower rural communities for economic and
-                social growth to enrich their lives. Our innovative products like
-                Solar Lanterns, products and services delivery ensures that are
-                environmental value additions.
+                social growth to enrich their lives. Our innovative products
+                like Solar Lanterns, products and services delivery ensures that
+                are environmental value additions.
               </p>
             )}
           </div>
@@ -157,8 +166,6 @@ const AboutUs = () => {
             className="about-green-background"
             alt=""
           />
-          <D6TopNavigation />
-
           <div className="about-green-clean-lean">
             <img src="/images/about-us/cleanLeanBg.png" alt="" />
             <h1>
@@ -173,23 +180,35 @@ const AboutUs = () => {
           <section className="about-green-copy">
             <h2>{aboutUsData?.title || "About GREEN"}</h2>
             <p className="about-green-subtitle">
-              {parsedContent?.subtitle || "Enlightening Our Lives through Sustainable Energy Solutions"}
+              {parsedContent?.subtitle ||
+                "Enlightening Our Lives through Sustainable Energy Solutions"}
             </p>
             <div className="about-green-body">
-              {aboutParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+              {aboutParagraphs.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
             </div>
 
             <h3>{parsedContent?.whatDoesGreenTitle || "What does GREEN do"}</h3>
             <p className="about-green-subtitle">
-              {parsedContent?.whatDoesGreenSubtitle || "Transforming Lives with Energy Independence"}
+              {parsedContent?.whatDoesGreenSubtitle ||
+                "Transforming Lives with Energy Independence"}
             </p>
             <div className="about-green-body about-green-body--what">
-              {whatParagraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+              {whatParagraphs.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
             </div>
 
             <div className="about-green-quote">
-              <p>{parsedQuote?.firstQuote || "A Transformation - That's"} <strong>GREEN!</strong></p>
-              <p>{parsedQuote?.secondQuote || "Perspicacious for a"} <b>BETTER WORLD!</b></p>
+              <p>
+                {parsedQuote?.firstQuote || "A Transformation - That's"}{" "}
+                <strong>GREEN!</strong>
+              </p>
+              <p>
+                {parsedQuote?.secondQuote || "Perspicacious for a"}{" "}
+                <b>BETTER WORLD!</b>
+              </p>
             </div>
           </section>
           <D6Chatbot canvasAnchored />
