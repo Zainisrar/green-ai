@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Message {
   id: string;
@@ -23,12 +24,10 @@ const Chatbot: React.FC<ChatbotProps> = ({ triggerClassName = "" }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const promptInputRef = useRef<HTMLInputElement>(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
   useEffect(() => {
-    scrollToBottom();
+    messagesEndRef.current?.scrollIntoView({
+      behavior: messages.length > 0 ? "smooth" : "auto",
+    });
   }, [messages]);
 
   useEffect(() => {
@@ -127,10 +126,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ triggerClassName = "" }) => {
                   );
                   break;
                 }
-              } catch (e) {
-                // Skip invalid JSON lines
-                continue;
-              }
+              } catch {}
             }
           }
         }
@@ -195,11 +191,13 @@ const Chatbot: React.FC<ChatbotProps> = ({ triggerClassName = "" }) => {
               </div>
             </div>
             <button
+              type="button"
               onClick={toggleChat}
               className="text-white hover:bg-green-600 rounded-full p-1 transition-colors"
               aria-label="Close chat"
             >
               <svg
+                aria-hidden="true"
                 className="w-5 h-5"
                 fill="none"
                 stroke="currentColor"
@@ -312,6 +310,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ triggerClassName = "" }) => {
                 className="flex-1 p-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#23B14D] focus:border-transparent text-sm disabled:opacity-50"
               />
               <button
+                type="button"
                 onClick={() => handleSendMessage()}
                 disabled={!inputValue.trim() || isLoading}
                 className="bg-[#23B14D] text-white p-3 rounded-full hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
@@ -319,6 +318,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ triggerClassName = "" }) => {
               >
                 {isLoading ? (
                   <svg
+                    aria-hidden="true"
                     className="w-5 h-5 animate-spin"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -339,6 +339,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ triggerClassName = "" }) => {
                   </svg>
                 ) : (
                   <svg
+                    aria-hidden="true"
                     className="w-5 h-5"
                     fill="none"
                     stroke="currentColor"
@@ -379,16 +380,18 @@ const Chatbot: React.FC<ChatbotProps> = ({ triggerClassName = "" }) => {
               placeholder="Let's Talk Energy"
               className="outline-none text-gray-900 font-semibold italic text-sm lg:text-base bg-transparent placeholder:text-gray-900 placeholder:opacity-100 placeholder:italic w-full pr-2"
             />
-            <div
-              className="cursor-pointer hover:scale-110 transition-transform shrink-0"
+            <button
+              type="button"
+              className="shrink-0 cursor-pointer border-0 bg-transparent p-0 transition-transform hover:scale-110"
               onClick={handlePromptSubmit}
+              aria-label="Send message"
             >
               <img
                 src="/images/mike.svg"
-                alt="Send message"
+                alt=""
                 className="w-4 h-4 lg:w-5 lg:h-5 opacity-70 hover:opacity-100 transition-opacity"
               />
-            </div>
+            </button>
           </div>
         </div>
       </div>

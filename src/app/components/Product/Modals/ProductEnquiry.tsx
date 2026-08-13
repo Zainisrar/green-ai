@@ -1,18 +1,104 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
+import CountryCodeDropdown from "@/app/components/shared/CountryCodeDropdown";
 import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
-import EngineeringFormModal, {
-  formFieldClass,
-  formGridClass,
-} from "@/app/components/shared/EngineeringFormModal";
-import PhoneInput from "@/app/components/shared/PhoneInput";
+import styles from "./ProductEnquiry.module.css";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
   productName?: string;
 }
+
+interface ProductEnquiryFrameProps {
+  children: React.ReactNode;
+  labelledBy: string;
+  onClose: () => void;
+  closeLabel?: string;
+  compact?: boolean;
+  height?: number;
+  shape?: string;
+  width?: number;
+}
+
+export const ProductEnquiryFrame = ({
+  children,
+  labelledBy,
+  onClose,
+  closeLabel = "Close dialog",
+  compact = false,
+  height = 665,
+  shape,
+  width = 1688,
+}: ProductEnquiryFrameProps) => {
+  const [desktopScale, setDesktopScale] = useState(1);
+
+  useEffect(() => {
+    const updateDesktopScale = () => {
+      if (window.innerWidth <= 1200) {
+        setDesktopScale(1);
+        return;
+      }
+
+      setDesktopScale(
+        Math.min(
+          1,
+          (window.innerWidth - 36) / width,
+          (window.innerHeight - 36) / height,
+        ),
+      );
+    };
+
+    updateDesktopScale();
+    window.addEventListener("resize", updateDesktopScale);
+    return () => window.removeEventListener("resize", updateDesktopScale);
+  }, [height, width]);
+
+  return (
+    <div className={styles.overlay} role="presentation">
+      <button
+        type="button"
+        className={styles.backdropClose}
+        onClick={onClose}
+        aria-label={closeLabel}
+      />
+      <section
+        className={`${styles.stage} ${compact ? styles.compactStage : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={labelledBy}
+        style={
+          {
+            "--product-enquiry-scale": desktopScale,
+            "--product-enquiry-width": `${width}px`,
+            "--product-enquiry-height": `${height}px`,
+            ...(shape ? { "--product-enquiry-shape": shape } : {}),
+          } as React.CSSProperties
+        }
+      >
+        <div className={styles.modal}>
+          <div className={styles.surface} aria-hidden="true" />
+          <button
+            type="button"
+            onClick={onClose}
+            className={styles.close}
+            aria-label={closeLabel}
+          >
+            <span />
+            <span />
+          </button>
+          <span className={styles.maximize} aria-hidden="true">
+            <span />
+            <span />
+          </span>
+          {children}
+        </div>
+      </section>
+    </div>
+  );
+};
 
 interface FormData {
   fullName: string;
@@ -36,7 +122,10 @@ const initialFormData: FormData = {
 
 const ProductEnquiry = ({ isOpen, onClose, productName }: Props) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const [phoneCountry, setPhoneCountry] = useState({ dial_code: "+675", country_code: "pg" });
+  const [phoneCountry, setPhoneCountry] = useState({
+    dial_code: "+675",
+    country_code: "pg",
+  });
   const [agreed, setAgreed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -46,24 +135,22 @@ const ProductEnquiry = ({ isOpen, onClose, productName }: Props) => {
     if (isOpen) {
       setSuccessMessage("");
       setErrorMessage("");
-      setFormData((prev) => ({
-        ...prev,
-        productInterest: prev.productInterest || productName || "",
-      }));
     }
-  }, [isOpen, productName]);
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const resetForm = () => {
-    setFormData({ ...initialFormData, productInterest: productName || "" });
+    setFormData(initialFormData);
     setAgreed(false);
     setErrorMessage("");
     setSuccessMessage("");
@@ -75,7 +162,9 @@ const ProductEnquiry = ({ isOpen, onClose, productName }: Props) => {
     setSuccessMessage("");
 
     if (!agreed) {
-      setErrorMessage("Please agree that GREEN may contact you about this request.");
+      setErrorMessage(
+        "Please agree that GREEN may contact you about this request.",
+      );
       return;
     }
 
@@ -112,11 +201,15 @@ const ProductEnquiry = ({ isOpen, onClose, productName }: Props) => {
           setSuccessMessage("");
         }, 2000);
       } else {
-        setErrorMessage(data.Message || "Failed to submit your enquiry. Please try again.");
+        setErrorMessage(
+          data.Message || "Failed to submit your enquiry. Please try again.",
+        );
       }
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "An error occurred while submitting the form.",
+        error instanceof Error
+          ? error.message
+          : "An error occurred while submitting the form.",
       );
     } finally {
       setIsLoading(false);
@@ -124,24 +217,24 @@ const ProductEnquiry = ({ isOpen, onClose, productName }: Props) => {
   };
 
   return (
-    <EngineeringFormModal
-      isOpen={isOpen}
+    <ProductEnquiryFrame
+      labelledBy="product-enquiry-title"
       onClose={onClose}
-      title={
-        <>
-          PRODUCT <span className="text-green-600">ENQUIRY</span>
-        </>
-      }
+      closeLabel="Close product enquiry"
     >
-      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-        <div className={formGridClass}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <h2 id="product-enquiry-title" className={styles.title}>
+          PRODUCT ENQUIRY
+        </h2>
+
+        <div className={styles.grid}>
           <input
             type="text"
             name="fullName"
             placeholder="FULL NAME"
             value={formData.fullName}
             onChange={handleInputChange}
-            className={formFieldClass}
+            className={`${styles.field} ${styles.skewForward}`}
             required
           />
           <input
@@ -150,46 +243,57 @@ const ProductEnquiry = ({ isOpen, onClose, productName }: Props) => {
             placeholder="ORGANIZATION"
             value={formData.organization}
             onChange={handleInputChange}
-            className={formFieldClass}
+            className={`${styles.field} ${styles.skewBack}`}
             required
           />
-        </div>
-
-        <div className={formGridClass}>
           <input
             type="email"
             name="email"
             placeholder="EMAIL ID"
             value={formData.email}
             onChange={handleInputChange}
-            className={formFieldClass}
+            className={`${styles.field} ${styles.skewForward}`}
             required
           />
-          <PhoneInput
-            phone={formData.phone}
-            onPhoneChange={handleInputChange}
-            dialCode={phoneCountry.dial_code}
-            countryCode={phoneCountry.country_code}
-            onCountryChange={(dial_code, country_code) => setPhoneCountry({ dial_code, country_code })}
-          />
-        </div>
-
-        <div className={formGridClass}>
-          <input
-            type="text"
+          <div className={`${styles.phoneField} ${styles.skewBack}`}>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="PHONE"
+              value={formData.phone}
+              onChange={handleInputChange}
+              required
+              aria-label={`Phone number, dial code ${phoneCountry.dial_code}`}
+            />
+            <CountryCodeDropdown
+              dialCode={phoneCountry.dial_code}
+              countryCode={phoneCountry.country_code}
+              onSelect={(dial_code, country_code) =>
+                setPhoneCountry({ dial_code, country_code })
+              }
+              className={styles.countryCode}
+            />
+          </div>
+          <select
             name="productInterest"
-            placeholder="PRODUCT / SYSTEM OF INTEREST"
             value={formData.productInterest}
             onChange={handleInputChange}
-            className={formFieldClass}
+            className={`${styles.field} ${styles.select} ${styles.skewForward} ${
+              formData.productInterest ? styles.hasValue : ""
+            }`}
             required
-          />
+          >
+            <option value="">PRODUCT / SYSTEM OF INTEREST</option>
+            <option value={productName || "GREEN SunShine"}>
+              {productName || "GREEN SunShine"}
+            </option>
+          </select>
           <select
             name="consultationType"
             value={formData.consultationType}
             onChange={handleInputChange}
-            className={`${formFieldClass} cursor-pointer ${
-              formData.consultationType ? "text-gray-700" : "text-gray-500"
+            className={`${styles.field} ${styles.select} ${styles.skewBack} ${
+              formData.consultationType ? styles.hasValue : ""
             }`}
             required
           >
@@ -206,48 +310,43 @@ const ProductEnquiry = ({ isOpen, onClose, productName }: Props) => {
           value={formData.message}
           onChange={handleInputChange}
           rows={3}
-          className={`${formFieldClass} resize-none`}
+          className={`${styles.field} ${styles.message}`}
         />
 
-        <div className="flex items-start gap-3">
+        <div className={styles.agreement}>
           <input
             type="checkbox"
             id="product-enquiry-agree"
             checked={agreed}
             onChange={(e) => setAgreed(e.target.checked)}
-            className="mt-1 h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
           />
-          <label htmlFor="product-enquiry-agree" className="text-sm text-gray-700 sm:text-base">
+          <label htmlFor="product-enquiry-agree">
             I agree that GREEN may contact me about this request.
           </label>
         </div>
 
-        {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
-        {successMessage && <p className="text-sm text-green-600">{successMessage}</p>}
+        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+        {successMessage && <p className={styles.success}>{successMessage}</p>}
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:justify-end sm:gap-6">
+        <div className={styles.actions}>
           <button
             type="button"
             onClick={resetForm}
             disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
+            className={styles.action}
           >
-            <span className="block text-sm font-bold text-gray-800 sm:text-base">
-              Reset
-            </span>
+            <span>Reset</span>
           </button>
           <button
             type="submit"
             disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
+            className={`${styles.action} ${styles.submit}`}
           >
-            <span className="block text-sm font-bold text-gray-900 sm:text-base">
-              {isLoading ? "Submitting..." : "Send Enquiry"}
-            </span>
+            <span>{isLoading ? "Submitting..." : "Send Enquiry"}</span>
           </button>
         </div>
       </form>
-    </EngineeringFormModal>
+    </ProductEnquiryFrame>
   );
 };
 

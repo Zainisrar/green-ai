@@ -53,6 +53,20 @@
   object-fit: contain;
 }
 
+.sunshineLogo.productLogo {
+  position: absolute;
+  top: 0;
+  left: clamp(8px, 0.78vw, 15px);
+  width: clamp(132px, 9.17vw, 176px);
+  height: auto;
+  align-self: flex-start;
+}
+
+.sunshineLogo.productLogo img {
+  height: auto;
+  padding: 0;
+}
+
 .navigation {
   display: flex;
   align-items: center;
@@ -76,6 +90,10 @@
   color: #23b14d;
 }
 
+.navigation .active {
+  font-weight: 600;
+}
+
 .menuButton {
   display: grid;
   flex: 0 0 auto;
@@ -92,7 +110,8 @@
 .menuButton img {
   display: block;
   width: 42px;
-  height: 54px;
+  height: 42px;
+  object-fit: contain;
 }
 
 .canvasHeader {
@@ -168,6 +187,10 @@
     padding: 8px 0;
   }
 
+  .sunshineLogo.productLogo {
+    width: 168px;
+  }
+
   .navigation {
     gap: 0;
   }
@@ -176,9 +199,13 @@
     display: none;
   }
 
-  .menuButton,
-  .menuButton img {
+  .menuButton {
     width: 34px;
     height: 44px;
+  }
+
+  .menuButton img {
+    width: 34px;
+    height: 34px;
   }
 }

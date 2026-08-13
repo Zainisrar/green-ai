@@ -39,6 +39,8 @@ const headerBrands = {
 
 interface SiteHeaderProps {
   brand?: keyof typeof headerBrands;
+  brandClassName?: string;
+  productLogo?: boolean;
   compactLogo?: boolean;
   panel?: "full" | "logoOnly";
   layout?: "viewport" | "figmaCanvas";
@@ -65,6 +67,8 @@ const isItemActive = (pathname: string, label: string) => {
 
 export default function SiteHeader({
   brand = "green",
+  brandClassName = "",
+  productLogo = false,
   compactLogo = false,
   panel = "full",
   layout = "viewport",
@@ -111,12 +115,13 @@ export default function SiteHeader({
               : styles.brandPanel
           }
           compactLogo={compactLogo}
+          fixedCanvasSize={layout === "figmaCanvas"}
           showPanel={panel === "full"}
         />
       ) : (
         <Link
-          href="/"
-          className={`${styles.logo} ${styles.sunshineLogo}`}
+          href="/home/renewable-energy-the-core"
+          className={`${styles.logo} ${styles.sunshineLogo} ${productLogo ? styles.productLogo : ""} ${brandClassName}`}
           aria-label="GREEN home"
         >
           <Image
@@ -154,7 +159,7 @@ export default function SiteHeader({
               src="/images/heroSection/lighting.svg"
               alt=""
               width={42}
-              height={54}
+              height={42}
             />
           </button>
         ) : null}

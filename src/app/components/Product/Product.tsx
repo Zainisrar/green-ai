@@ -1,4 +1,5 @@
 "use client";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { notFound } from "next/navigation";
 import React from "react";
 import { useProductBySlug } from "../../../hooks/useProducts";
@@ -17,13 +18,20 @@ const lightingSystemItems = [
     icon: "solarpanel.png",
     name: "Solar Panel",
     detail: "60W Poly-crystalline",
+    duration: "--",
   },
   {
     icon: "controlbox.png",
     name: "Control Box",
     detail: "12.8V/18000mAh LiFePO4",
+    duration: "--",
   },
-  { icon: "ledbulb.png", name: "LED Bulb", detail: "23 hrs / 11 hrs" },
+  {
+    icon: "ledbulb.png",
+    name: "LED Bulb",
+    detail: "LED Bulb",
+    duration: "23 hrs / 11 hrs",
+  },
   {
     icon: "tv.png",
     name: "TV",
@@ -54,8 +62,78 @@ const lightingSystemItems = [
     detail: "3W/3.7V 1800mAh Li-ion battery",
     duration: "8 hrs / 4 hrs",
   },
-  { icon: "USB.png", name: "USB Cable", detail: "Mobile Charging cable" },
+  {
+    icon: "USB.png",
+    name: "USB Cable",
+    detail: "Mobile Charging cable",
+    duration: "--",
+  },
 ];
+
+const productGalleryImages = [
+  {
+    full: "featuredProduct1.png",
+    thumbnail: "featuredProduct1.png",
+    alt: "GREEN SunShine student study and home-lighting kit",
+  },
+  {
+    full: "productImg2-large.png",
+    thumbnail: "productImg2.png",
+    alt: "GREEN SunShine solar home-lighting system with hanging lamps",
+  },
+  {
+    full: "productImg3-large.png",
+    thumbnail: "productImg3.png",
+    alt: "GREEN SunShine solar system with television, fan, and lamps",
+  },
+  {
+    full: "productImg4-large.png",
+    thumbnail: "productImg4.png",
+    alt: "GREEN SunShine large solar home and entertainment system",
+  },
+] as const;
+
+const gallerySpring = {
+  type: "spring",
+  mass: 1,
+  stiffness: 100,
+  damping: 15,
+} as const;
+
+type GalleryRect = {
+  top: number;
+  left: number;
+  width: number;
+  height: number;
+};
+
+type GalleryTransition = {
+  id: number;
+  incomingIndex: number;
+  outgoingIndex: number;
+  incomingStart: GalleryRect;
+  incomingEnd: GalleryRect;
+  outgoingStart: GalleryRect;
+  outgoingEnd: GalleryRect;
+};
+
+const getGalleryRect = (element: Element): GalleryRect => {
+  const rect = element.getBoundingClientRect();
+
+  return {
+    top: rect.top,
+    left: rect.left,
+    width: rect.width,
+    height: rect.height,
+  };
+};
+
+const insetGalleryRect = (rect: GalleryRect, inset: number): GalleryRect => ({
+  top: rect.top + inset,
+  left: rect.left + inset,
+  width: rect.width - inset * 2,
+  height: rect.height - inset * 2,
+});
 
 const Product = ({ slug }: ProductProps) => {
   const { data: currentProduct, isLoading, isError } = useProductBySlug(slug);
@@ -63,27 +141,95 @@ const Product = ({ slug }: ProductProps) => {
   const [isDesktop, setIsDesktop] = React.useState(false);
   const [isEnquiryOpen, setIsEnquiryOpen] = React.useState(false);
   const [figmaScale, setFigmaScale] = React.useState(1);
+  const [figmaOffsetX, setFigmaOffsetX] = React.useState(0);
+  const [figmaRightSafeInset, setFigmaRightSafeInset] = React.useState(0);
+  const [galleryTransition, setGalleryTransition] =
+    React.useState<GalleryTransition | null>(null);
+  const mainProductImageRef = React.useRef<HTMLImageElement>(null);
+  const thumbnailRefs = React.useRef<Array<HTMLButtonElement | null>>([]);
+  const transitionIdRef = React.useRef(0);
+  const prefersReducedMotion = useReducedMotion();
 
   React.useEffect(() => {
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 1024);
-      setFigmaScale(
-        Math.min(window.innerWidth / 1920, window.innerHeight / 970),
+      const scale = Math.max(
+        window.innerWidth / 1920,
+        window.innerHeight / 970,
       );
+      const horizontalCrop = Math.max(
+        0,
+        (1920 * scale - window.innerWidth) / 2,
+      );
+
+      setFigmaScale(scale);
+      setFigmaOffsetX(-horizontalCrop);
+      setFigmaRightSafeInset(horizontalCrop / scale);
     };
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  const handleGallerySelect = (nextIndex: number) => {
+    if (nextIndex === active || galleryTransition) return;
+
+    const incomingThumbnail = thumbnailRefs.current[nextIndex];
+    const outgoingThumbnail = thumbnailRefs.current[active];
+    const mainProductImage = mainProductImageRef.current;
+
+    if (
+      prefersReducedMotion ||
+      !incomingThumbnail ||
+      !outgoingThumbnail ||
+      !mainProductImage
+    ) {
+      setActive(nextIndex);
+      return;
+    }
+
+    const incomingStart = insetGalleryRect(
+      getGalleryRect(incomingThumbnail),
+      8 * figmaScale,
+    );
+    const outgoingEnd = insetGalleryRect(
+      getGalleryRect(outgoingThumbnail),
+      10 * figmaScale,
+    );
+    const heroRect = getGalleryRect(mainProductImage);
+
+    transitionIdRef.current += 1;
+    setGalleryTransition({
+      id: transitionIdRef.current,
+      incomingIndex: nextIndex,
+      outgoingIndex: active,
+      incomingStart,
+      incomingEnd: heroRect,
+      outgoingStart: heroRect,
+      outgoingEnd,
+    });
+    setActive(nextIndex);
+  };
+
   if (slug === "lighting-up-and-lifting-up-living-standards") {
     return (
       <>
-        <SiteHeader brand="sunshine" />
+        <SiteHeader
+          brand="sunshine"
+          brandClassName="product-figma-header-logo"
+          productLogo
+        />
         <div className="product-figma-shell hidden lg:block">
           <div
             className="product-figma-desktop"
-            style={{ transform: `scale(${figmaScale})` }}
+            style={
+              {
+                left: figmaOffsetX,
+                transform: `scale(${figmaScale})`,
+                "--product-right-safe-inset": `${figmaRightSafeInset}px`,
+                "--d6-right-safe-inset": `${figmaRightSafeInset}px`,
+              } as React.CSSProperties
+            }
           >
             <img
               src="/images/product/bg.jpg"
@@ -104,27 +250,36 @@ const Product = ({ slug }: ProductProps) => {
             />
 
             <div className="product-figma-showcase">
-              <img
-                src="/images/product/featuredProduct1.png"
-                alt="GREEN SunShine lighting system"
+              <motion.img
+                ref={mainProductImageRef}
+                key={productGalleryImages[active].full}
+                src={`/images/product/${productGalleryImages[active].full}`}
+                alt={productGalleryImages[active].alt}
                 className="product-figma-featured"
+                initial={false}
+                animate={{ opacity: galleryTransition ? 0 : 1 }}
+                transition={{ duration: prefersReducedMotion ? 0 : 0.08 }}
+                data-node-id="7077:12667"
               />
               <div className="product-figma-thumbnails">
-                {[
-                  "featuredProduct1.png",
-                  "productImg2.png",
-                  "productImg3.png",
-                  "productImg4.png",
-                ].map((image, index) => (
-                  <button
-                    key={image}
+                {productGalleryImages.map((image, index) => (
+                  <motion.button
+                    ref={(element) => {
+                      thumbnailRefs.current[index] = element;
+                    }}
+                    key={image.full}
                     type="button"
-                    onClick={() => setActive(index)}
+                    onClick={() => handleGallerySelect(index)}
                     className={active === index ? "is-active" : ""}
+                    aria-pressed={active === index}
                     aria-label={`Show product image ${index + 1}`}
+                    layout
+                    transition={
+                      prefersReducedMotion ? { duration: 0 } : gallerySpring
+                    }
                   >
-                    <img src={`/images/product/${image}`} alt="" />
-                  </button>
+                    <img src={`/images/product/${image.thumbnail}`} alt="" />
+                  </motion.button>
                 ))}
               </div>
               <button
@@ -204,6 +359,52 @@ const Product = ({ slug }: ProductProps) => {
           </div>
           <Chatbot />
         </div>
+
+        <AnimatePresence>
+          {galleryTransition && !prefersReducedMotion ? (
+            <React.Fragment key={galleryTransition.id}>
+              <motion.img
+                data-node-id="7077:12784"
+                src={`/images/product/${productGalleryImages[galleryTransition.incomingIndex].full}`}
+                alt=""
+                className="product-gallery-transition-image"
+                initial={{
+                  ...galleryTransition.incomingStart,
+                  opacity: 0,
+                  borderRadius: 16,
+                }}
+                animate={{
+                  ...galleryTransition.incomingEnd,
+                  opacity: 1,
+                  borderRadius: 0,
+                }}
+                transition={gallerySpring}
+                onAnimationComplete={() => {
+                  setGalleryTransition((current) =>
+                    current?.id === galleryTransition.id ? null : current,
+                  );
+                }}
+              />
+              <motion.img
+                data-node-id="7077:12785"
+                src={`/images/product/${productGalleryImages[galleryTransition.outgoingIndex].full}`}
+                alt=""
+                className="product-gallery-transition-image product-gallery-transition-image--outgoing"
+                initial={{
+                  ...galleryTransition.outgoingStart,
+                  opacity: 1,
+                  borderRadius: 0,
+                }}
+                animate={{
+                  ...galleryTransition.outgoingEnd,
+                  opacity: 0.7,
+                  borderRadius: 16,
+                }}
+                transition={gallerySpring}
+              />
+            </React.Fragment>
+          ) : null}
+        </AnimatePresence>
 
         <ProductEnquiry
           isOpen={isEnquiryOpen}

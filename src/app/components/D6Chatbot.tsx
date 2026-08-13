@@ -366,6 +366,14 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
       {/* Chat Trigger */}
       <div
         className={`${canvasAnchored ? "absolute" : "fixed"} z-[50] right-1 lg:right-2 bottom-2 ${triggerClassName}`}
+        style={
+          canvasAnchored
+            ? {
+                right:
+                  "calc(var(--d6-right-safe-inset, 0px) + 0.5rem)",
+              }
+            : undefined
+        }
       >
         <div className="relative">
           <img

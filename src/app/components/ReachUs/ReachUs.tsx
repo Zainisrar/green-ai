@@ -1,118 +1,254 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import { motion, useReducedMotion } from "motion/react";
+import { useEffect, useState } from "react";
+import D6Chatbot from "../D6Chatbot";
+import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import TopNavigation from "../TopNavigation/TopNavigation";
-import Chatbot from "../Chatbot";
-import Form from "./Modal/Form";
-import { useInteractiveZIndex } from "../../../hooks/useInteractiveZIndex";
+import styles from "./ReachUs.module.css";
 
-const MAP_IMAGES = [
-  "/images/reach-us/map1.png",
-  "/images/reach-us/map2.png",
-  "/images/reach-us/map3.png",
-  "/images/reach-us/map4.png",
-];
+const DESIGN_WIDTH = 1920;
+const DESIGN_HEIGHT = 970;
+const OFFICES = [
+  {
+    id: "papuaNewGuinea",
+    name: "PAPUA NEW GUINEA",
+    flag: "/images/reach-us/flag-png.png",
+    address: [
+      "PO Box 1243, Port Moresby",
+      "Section 405, Allotment 4, Waigani Drive,",
+      "North Hohola, National Capital District.",
+      "11.043442, 77.892613",
+    ],
+  },
+  {
+    id: "india",
+    name: "INDIA",
+    flag: "/images/reach-us/flag-india.png",
+    address: [
+      "194E-404, Gurusamy Nagar,",
+      "Thanneer Panthal, Peelamedu Post,",
+      "Coimbatore, Tamilnadu - 641 004",
+      "11.043442, 77.892613",
+    ],
+  },
+  {
+    id: "australia",
+    name: "AUSTRALIA",
+    flag: "/images/reach-us/flag-australia.png",
+    address: [
+      "Level 36 Riparian Plaza",
+      "71 Eagle street Brisbane",
+      "Qld 4000",
+    ],
+  },
+  {
+    id: "singapore",
+    name: "SINGAPORE",
+    flag: "/images/reach-us/flag-singapore.png",
+    address: ["8 Burn Road", "# 07-07 Trivex", "Singapore (369977)"],
+  },
+] as const;
 
-const ReachUs = () => {
-  const [currentMapIndex, setCurrentMapIndex] = useState(0);
-  const [loadedMaps, setLoadedMaps] = useState<string[]>([MAP_IMAGES[0]]);
+const MAP_EASE = [0, 0, 0.58, 1] as const;
+
+export default function ReachUs() {
+  const [currentOfficeIndex, setCurrentOfficeIndex] = useState(0);
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const { getContainerProps } = useInteractiveZIndex();
-  const enquiryProps = getContainerProps();
-
-  const openForm = () => {
-    setIsFormOpen(true);
-  };
+  const [canvasScale, setCanvasScale] = useState(1);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    MAP_IMAGES.forEach((src) => {
-      const img = new Image();
-      img.onload = () => {
-        setLoadedMaps((prev) => (prev.includes(src) ? prev : [...prev, src]));
-      };
-      img.src = src;
-    });
+    const updateScale = () => {
+      setCanvasScale(
+        Math.min(
+          window.innerWidth / DESIGN_WIDTH,
+          window.innerHeight / DESIGN_HEIGHT,
+        ),
+      );
+    };
+
+    updateScale();
+    window.addEventListener("resize", updateScale, { passive: true });
+    return () => window.removeEventListener("resize", updateScale);
   }, []);
 
   useEffect(() => {
-    if (loadedMaps.length <= 1) return undefined;
-
-    const interval = setInterval(() => {
-      setCurrentMapIndex((prevIndex) => (prevIndex + 1) % loadedMaps.length);
+    if (reduceMotion) return undefined;
+    const interval = window.setInterval(() => {
+      setCurrentOfficeIndex((index) => (index + 1) % OFFICES.length);
     }, 3000);
 
-    return () => clearInterval(interval);
-  }, [loadedMaps.length]);
+    return () => window.clearInterval(interval);
+  }, [reduceMotion]);
 
   return (
-    <React.Fragment>
-      <div className="">
-        <TopNavigation />
+    <main className={styles.page}>
+      <TopNavigation />
 
-        {/* Side watermark icon (desktop only, fixed — does not affect layout) */}
-        <div className="fixed top-1/4 left-6 lg:left-14 z-20 hidden lg:block">
+      <section className={styles.desktopStage} aria-label="Reach GREEN">
+        <div
+          className={styles.canvas}
+          style={{ transform: `translateX(-50%) scale(${canvasScale})` }}
+          data-node-id="7077:13486"
+        >
           <img
-            src="/images/reach-us/reach-us.png"
-            className="w-12 lg:w-16"
-            alt="reach-us"
+            className={styles.background}
+            src="/images/reach-us/bg.jpg"
+            alt=""
+            aria-hidden="true"
           />
-        </div>
 
-        {/* Main Content Area */}
-        <div className="relative w-full px-6 py-8 lg:py-10 lg:pl-32 lg:pr-10">
-          <div className="relative">
-            {/* Header Text + Enquiry Button (top right) */}
-            <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-              <p className="text-gray-700 text-lg max-w-xl">
-                Are you prepared to get started on your Energy Deployment right
-                away? Let&apos;s connect!
-              </p>
-              <div
-                {...enquiryProps}
-                onClick={openForm}
-                className={`${enquiryProps.className} shrink-0 cursor-pointer self-start lg:self-auto`}
-              >
-                <img
-                  src="/images/reach-us/enquiry.png"
-                  alt="Enquiry Button"
-                  className="cursor-pointer"
-                />
-              </div>
-            </div>
+          <p className={styles.intro} data-node-id="7077:13496">
+            Are you prepared to get started on your Energy Requirement right
+            away? Let&apos;s connect!
+          </p>
 
-            {/* World Map with Animation */}
-            <div className="relative mb-6 lg:pt-10">
-              <div className="relative w-full lg:w-[72%]">
-                <img
-                  src={loadedMaps[currentMapIndex] ?? MAP_IMAGES[0]}
-                  alt={`World Map ${currentMapIndex + 1}`}
-                  className="w-full transition-opacity duration-500 ease-in-out"
-                />
-              </div>
-            </div>
+          <img
+            className={styles.verticalLabel}
+            src="/images/reach-us/reach-us.png"
+            alt="Reach us"
+          />
 
-            {/* Sidebar cards — stacked & centered on mobile, floated right on desktop */}
-            <div className="flex flex-col items-center gap-8 pb-10 lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:items-end lg:gap-12 lg:pb-0">
+          <div className={styles.mapViewport} data-node-id="7077:13498">
+            <img
+              className={styles.map}
+              src="/images/reach-us/world-map.png"
+              alt="World map showing GREEN global offices"
+            />
+
+            <div className={styles.pins} aria-hidden="true">
               <img
-                src="/images/reach-us/transformation.png"
-                alt="Transformation Card"
-                className="w-64 lg:w-72"
+                className={styles.indiaPin}
+                src="/images/reach-us/pin-india.svg"
+                alt=""
               />
               <img
-                src="/images/reach-us/join-us.png"
-                alt="Join Us Card"
-                className="w-64 lg:w-72"
+                className={styles.pngPin}
+                src="/images/reach-us/pin-png.svg"
+                alt=""
+              />
+              <img
+                className={styles.singaporePin}
+                src="/images/reach-us/pin-singapore.svg"
+                alt=""
+              />
+              <img
+                className={styles.australiaPin}
+                src="/images/reach-us/pin-australia.svg"
+                alt=""
               />
             </div>
+
+            <motion.div
+              key={currentOfficeIndex}
+              className={styles.officeLabels}
+              initial={reduceMotion ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: reduceMotion ? 0 : 0.2, ease: MAP_EASE }}
+              aria-live="polite"
+            >
+              {OFFICES.map((office, index) => {
+                const isActive = index === currentOfficeIndex;
+
+                return (
+                  <article
+                    key={office.id}
+                    className={`${styles.officeCard} ${styles[office.id]} ${
+                      isActive ? styles.officeCardActive : ""
+                    }`}
+                  >
+                    {isActive && (
+                      <img
+                        className={styles.officeFlag}
+                        src={office.flag}
+                        alt=""
+                      />
+                    )}
+                    <h2>{office.name}</h2>
+                    {isActive && (
+                      <p>
+                        {office.address.map((line) => (
+                          <span key={line}>{line}</span>
+                        ))}
+                      </p>
+                    )}
+                  </article>
+                );
+              })}
+            </motion.div>
           </div>
-        </div>
-        <Form
-          isOpen={isFormOpen}
-          onClose={() => setIsFormOpen(false)}
-        />
-        <Chatbot />
-      </div>
-    </React.Fragment>
-  );
-};
 
-export default ReachUs;
+          <button
+            type="button"
+            className={styles.enquiry}
+            onClick={() => setIsFormOpen(true)}
+            aria-label="Open enquiry form"
+            data-node-id="7077:13531"
+          >
+            <img src="/images/reach-us/enquiry.png" alt="Enquiry" />
+          </button>
+
+          <div className={styles.sideCards}>
+            <img
+              src="/images/reach-us/transformation.png"
+              alt="Transformation"
+              data-node-id="7077:13537"
+            />
+            <img
+              src="/images/reach-us/join-us.png"
+              alt="Join us"
+              data-node-id="7077:13542"
+            />
+          </div>
+
+          <D6Chatbot canvasAnchored triggerClassName={styles.chatbot} />
+        </div>
+      </section>
+
+      <section className={styles.mobileLayout}>
+        <p className={styles.mobileIntro}>
+          Are you prepared to get started on your Energy Requirement right away?
+          Let&apos;s connect!
+        </p>
+        <button
+          type="button"
+          className={styles.mobileEnquiry}
+          onClick={() => setIsFormOpen(true)}
+        >
+          <img src="/images/reach-us/enquiry.png" alt="Enquiry" />
+        </button>
+        <div className={styles.mobileMapFrame}>
+          <img
+            className={styles.mobileMap}
+            src="/images/reach-us/world-map.png"
+            alt="World map showing GREEN global offices"
+          />
+          <motion.div
+            key={currentOfficeIndex}
+            className={styles.mobileOfficeLabel}
+            initial={reduceMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: reduceMotion ? 0 : 0.2, ease: MAP_EASE }}
+          >
+            <strong>{OFFICES[currentOfficeIndex].name}</strong>
+            {OFFICES[currentOfficeIndex].address.map((line) => (
+              <span key={line}>{line}</span>
+            ))}
+          </motion.div>
+        </div>
+        <div className={styles.mobileCards}>
+          <img src="/images/reach-us/transformation.png" alt="Transformation" />
+          <img src="/images/reach-us/join-us.png" alt="Join us" />
+        </div>
+        <D6Chatbot />
+      </section>
+
+      <ProductEnquiry
+        isOpen={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        productName="Energy Requirement"
+      />
+    </main>
+  );
+}

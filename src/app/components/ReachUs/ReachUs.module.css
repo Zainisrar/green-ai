@@ -1,0 +1,405 @@
+.page {
+  min-height: 100svh;
+  overflow: hidden;
+  background: #fff;
+  color: #050505;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.desktopStage {
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1920px;
+  height: 970px;
+  overflow: hidden;
+  transform-origin: top center;
+  background: #fff;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 1920px;
+  height: 970px;
+  object-fit: cover;
+}
+
+.intro {
+  position: absolute;
+  z-index: 2;
+  top: 198px;
+  left: 320px;
+  width: 744px;
+  margin: 0;
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 25px;
+}
+
+.verticalLabel {
+  position: absolute;
+  z-index: 2;
+  top: 405px;
+  left: 55px;
+  display: block;
+  width: 73px;
+  height: 525px;
+  object-fit: contain;
+}
+
+.mapViewport {
+  position: absolute;
+  z-index: 1;
+  top: 286px;
+  left: 140px;
+  width: 1203.1923px;
+  height: 534.752px;
+  overflow: visible;
+}
+
+.map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 1203.1923px;
+  height: 534.752px;
+  max-width: none;
+  object-fit: fill;
+}
+
+.pins,
+.officeLabels {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.pins img {
+  position: absolute;
+  display: block;
+  width: 30px;
+  height: 38px;
+  max-width: none;
+}
+
+.indiaPin {
+  top: 258px;
+  left: 761px;
+}
+
+.pngPin {
+  top: 318px;
+  left: 949px;
+}
+
+.singaporePin {
+  top: 298px;
+  left: 847px;
+}
+
+.australiaPin {
+  top: 395px;
+  left: 966px;
+}
+
+.officeCard {
+  position: absolute;
+  display: flex;
+  width: 160px;
+  height: 46px;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(10px 13px 13px rgba(0, 0, 0, 0.13));
+  isolation: isolate;
+}
+
+.officeCard::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-left: 4px solid #23b14d;
+  background: rgba(255, 255, 255, 0.96);
+  content: "";
+  transform: skewX(-24deg);
+  transform-origin: center;
+}
+
+.officeCard h2 {
+  margin: 0;
+  color: #23b14d;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 22px;
+  white-space: nowrap;
+}
+
+.officeCard p {
+  display: none;
+}
+
+.officeCardActive {
+  width: 348px;
+  height: 112px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 13px 28px 12px 65px;
+}
+
+.officeCardActive::before {
+  border-left-width: 5px;
+}
+
+.officeCardActive h2 {
+  font-size: 18px;
+}
+
+.officeCardActive p {
+  position: absolute;
+  top: 40px;
+  left: 60px;
+  display: block;
+  width: calc(100% - 82px);
+  margin: 0;
+  color: #000;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  text-align: center;
+}
+
+.officeCardActive p span {
+  display: block;
+}
+
+.officeFlag {
+  position: absolute;
+  top: 8px;
+  left: 43px;
+  width: 50px;
+  height: 28px;
+  object-fit: fill;
+  transform: translateX(-100%);
+}
+
+.india {
+  top: 216px;
+  left: 778px;
+  width: 144px;
+}
+
+.india.officeCardActive {
+  top: 150px;
+  left: 782px;
+  width: 347px;
+  height: 116px;
+}
+
+.singapore {
+  top: 324px;
+  left: 711px;
+  width: 149px;
+}
+
+.singapore.officeCardActive {
+  top: 312px;
+  left: 545px;
+  width: 302px;
+  height: 107px;
+}
+
+.papuaNewGuinea {
+  top: 280px;
+  left: 970px;
+  width: 234px;
+}
+
+.papuaNewGuinea.officeCardActive {
+  top: 208px;
+  left: 963px;
+  width: 373px;
+  height: 116px;
+}
+
+.australia {
+  top: 377px;
+  left: 989px;
+  width: 157px;
+}
+
+.australia.officeCardActive {
+  top: 399px;
+  left: 941px;
+  width: 302px;
+  height: 107px;
+}
+
+.enquiry {
+  position: absolute;
+  z-index: 4;
+  top: 199px;
+  left: 1751px;
+  width: 169px;
+  height: 52px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.enquiry img {
+  display: block;
+  width: 170px;
+  height: 54px;
+  max-width: none;
+}
+
+.sideCards {
+  position: absolute;
+  z-index: 2;
+  top: 327px;
+  left: 1434px;
+  display: flex;
+  width: 416px;
+  flex-direction: column;
+  gap: 71px;
+}
+
+.sideCards img {
+  display: block;
+  width: 416px;
+  height: 128px;
+}
+
+.chatbot {
+  right: auto !important;
+  bottom: -1px !important;
+  left: 1489px !important;
+  width: 427px;
+}
+
+.chatbot > div > img {
+  display: block;
+  width: 427px !important;
+  height: auto;
+  max-width: none;
+}
+
+.chatbot > div > div:nth-child(2) {
+  right: 19%;
+  left: 12%;
+}
+
+.chatbot > div > div:last-child {
+  right: 9%;
+}
+
+.mobileLayout {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .officeLabels {
+    will-change: auto;
+  }
+}
+
+@media (max-width: 1023px) {
+  .page {
+    overflow: visible;
+  }
+
+  .desktopStage {
+    display: none;
+  }
+
+  .mobileLayout {
+    display: flex;
+    min-height: 100svh;
+    flex-direction: column;
+    gap: 28px;
+    padding: 110px 20px 130px;
+    background: url("/images/reach-us/bg.jpg") top left / cover no-repeat;
+  }
+
+  .mobileIntro {
+    max-width: 680px;
+    margin: 20px 0 0;
+    color: #303030;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .mobileEnquiry {
+    align-self: flex-start;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .mobileEnquiry img {
+    display: block;
+    width: 170px;
+    height: 54px;
+  }
+
+  .mobileMap {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .mobileMapFrame {
+    position: relative;
+  }
+
+  .mobileOfficeLabel {
+    position: relative;
+    display: flex;
+    margin: -4px 8px 0;
+    padding: 14px 18px;
+    flex-direction: column;
+    border-left: 3px solid #23b14d;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+    color: #303030;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .mobileOfficeLabel strong {
+    margin-bottom: 4px;
+    color: #23b14d;
+    font-size: 15px;
+  }
+
+  .mobileCards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .mobileCards img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 560px) {
+  .mobileCards {
+    grid-template-columns: 1fr;
+  }
+}

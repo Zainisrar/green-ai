@@ -1,247 +1,162 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import { useEffect, useState } from "react";
+import { ProductEnquiryFrame } from "@/app/components/Product/Modals/ProductEnquiry";
 import PhoneInput from "@/app/components/shared/PhoneInput";
+import styles from "./AuthDialogs.module.css";
 
 interface Props {
-    isOpen: boolean;
-    onClose: () => void;
+  isOpen: boolean;
+  onClose: () => void;
 }
-const NewUsers = ({
-    isOpen,
-    onClose
-}: Props) => {
-  const [firstName, setFirstName] = useState('');
-  const [phoneCountry, setPhoneCountry] = useState({ dial_code: "+675", country_code: "pg" });
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+
+export default function NewUsers({ isOpen, onClose }: Props) {
+  const [firstName, setFirstName] = useState("");
+  const [phoneCountry, setPhoneCountry] = useState({
+    dial_code: "+675",
+    country_code: "pg",
+  });
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [resume, setResume] = useState<File | null>(null);
   const [isApplyingForVacancy, setIsApplyingForVacancy] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => {
-      if (typeof window !== 'undefined') {
-        const mobile = window.innerWidth < 768;
-        setIsMobile(mobile);
-      }
+    if (!isOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
     };
-    
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
-  const handleResumeUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setResume(e.target.files[0]);
-    }
-  };
+  return (
+    <ProductEnquiryFrame
+      labelledBy="new-users-title"
+      onClose={onClose}
+      closeLabel="Close new users registration"
+    >
+      <div className={styles.newContent}>
+        <header className={styles.dialogHeader}>
+          <h2 id="new-users-title">
+            New to <strong>GREEN</strong>? Create your <strong>Profile</strong>
+          </h2>
+          <p>
+            Join the growing talent network powering the Pacific&apos;s
+            renewable energy transformation.
+          </p>
+        </header>
 
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
-  };
-  const renderContent = () => (
-    <>
-      {/* Title */}
-      <div className="mb-6 md:mb-8">
-        <h2 className={`${isMobile ? 'text-xl' : 'text-3xl'} font-bold text-gray-800 mb-2`}>
-          NEW TO <span className="text-[#4CAF50]">GREEN</span>? CREATE YOUR <span className="text-[#4CAF50]">PROFILE</span>
-        </h2>
-        <p className={`text-gray-600 ${isMobile ? 'text-xs' : 'text-sm'}`}>
-          Join the growing talent network powering the Pacific's renewable energy transformation.
-        </p>
-      </div>
-
-      {/* Form */}
-      <form className="space-y-4 md:space-y-6">
-        {/* First Row - First Name and Email */}
-        <div className={`${isMobile ? 'space-y-4' : 'grid md:grid-cols-2 gap-6'}`}>
-          <div>
+        <form
+          className={styles.newForm}
+          onSubmit={(event) => event.preventDefault()}
+        >
+          <label className={`${styles.fieldShape} ${styles.activeField}`}>
+            <span className={styles.srOnly}>First name</span>
             <input
               type="text"
               placeholder="FIRST NAME"
               value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              className={`w-full ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border-2 border-[#8BC34A] rounded-lg bg-white text-gray-800 placeholder-gray-500 focus:outline-none focus:border-[#4CAF50] transition-colors`}
+              onChange={(event) => setFirstName(event.target.value)}
             />
-          </div>
-          <div>
+          </label>
+
+          <label className={styles.fieldShape}>
+            <span className={styles.srOnly}>Email address</span>
             <input
               type="email"
               placeholder="E-MAIL ID"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={`w-full ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border-2 border-gray-300 rounded-lg bg-white text-gray-800 placeholder-gray-500 focus:outline-none focus:border-[#4CAF50] transition-colors`}
+              onChange={(event) => setEmail(event.target.value)}
             />
-          </div>
-        </div>
+          </label>
 
-        {/* Second Row - Phone and Password */}
-        <div className={`${isMobile ? 'space-y-4' : 'grid md:grid-cols-2 gap-6'}`}>
-          <div className="relative">
+          <div className={`${styles.fieldShape} ${styles.phoneField}`}>
             <PhoneInput
               phone={phone}
-              onPhoneChange={(e) => setPhone(e.target.value)}
+              onPhoneChange={(event) => setPhone(event.target.value)}
               dialCode={phoneCountry.dial_code}
               countryCode={phoneCountry.country_code}
-              onCountryChange={(dial_code, country_code) => setPhoneCountry({ dial_code, country_code })}
+              onCountryChange={(dial_code, country_code) =>
+                setPhoneCountry({ dial_code, country_code })
+              }
               required={false}
             />
           </div>
-          <div className="relative">
+
+          <label className={`${styles.fieldShape} ${styles.passwordField}`}>
+            <span className={styles.srOnly}>Password</span>
             <input
               type={showPassword ? "text" : "password"}
               placeholder="PASSWORD"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className={`w-full ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border-2 border-gray-300 rounded-lg bg-white text-gray-800 placeholder-gray-500 focus:outline-none focus:border-[#4CAF50] transition-colors`}
+              onChange={(event) => setPassword(event.target.value)}
             />
-            <button 
+            <button
               type="button"
-              onClick={togglePasswordVisibility}
-              className="absolute cursor-pointer right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+              onClick={() => setShowPassword((current) => !current)}
+              aria-label={showPassword ? "Hide password" : "Show password"}
             >
-              <img src="/images/join-us/arrow.png" alt="Toggle Password Visibility" className={isMobile ? 'w-4 h-4' : ''} />
+              <img src="/images/join-us/arrow.png" alt="" />
             </button>
-          </div>
-        </div>
+          </label>
 
-        {/* Third Row - Confirm Password and Resume Upload */}
-        <div className={`${isMobile ? 'space-y-4' : 'grid md:grid-cols-2 gap-6'}`}>
-          <div>
+          <label className={styles.fieldShape}>
+            <span className={styles.srOnly}>Confirm password</span>
             <input
               type="password"
-              placeholder="CONFORM PASSWORD"
+              placeholder="CONFIRM PASSWORD"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              className={`w-full ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border-2 border-gray-300 rounded-lg bg-white text-gray-800 placeholder-gray-500 focus:outline-none focus:border-[#4CAF50] transition-colors`}
+              onChange={(event) => setConfirmPassword(event.target.value)}
             />
-          </div>
-          <div className="relative">
+          </label>
+
+          <div className={styles.uploadGroup}>
             <input
               type="file"
               accept=".pdf,.doc,.docx"
-              onChange={handleResumeUpload}
-              className="hidden"
+              onChange={(event) => setResume(event.target.files?.[0] ?? null)}
+              className={styles.fileInput}
               id="resume-upload"
             />
-            <label 
-              htmlFor="resume-upload"
-              className={`w-full ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border-2 border-gray-300 rounded-lg bg-white text-gray-500 cursor-pointer flex items-center justify-between hover:border-[#4CAF50] transition-colors`}
-            >
-              <span className={isMobile ? 'text-xs' : ''}>{resume ? resume.name : 'RESUME UPLOAD'}</span>
-              <span><img src="/images/join-us/upload.png" alt="Upload Icon" className={isMobile ? 'w-4 h-4' : ''} /></span>
+            <label className={styles.fieldShape} htmlFor="resume-upload">
+              <span>{resume?.name || "RESUME UPLOAD"}</span>
+              <img src="/images/join-us/upload.png" alt="" />
             </label>
-            <div className={`${isMobile ? 'text-xs' : 'text-xs'} text-gray-500 mt-1`}>
-              (Formats: <span className="text-green-600">PDF/DOC</span>, Size: <span className="text-green-600">Below 2Mb</span>)
-            </div>
+            <p>
+              (Formats: <strong>PDF/DOC</strong>, Size:{" "}
+              <strong>Below 2Mb</strong>)
+            </p>
           </div>
-        </div>
 
-        {/* Checkbox */}
-        <div className="flex items-center space-x-3">
-          <input
-            type="checkbox"
-            id="applying-for-vacancy"
-            checked={isApplyingForVacancy}
-            onChange={(e) => setIsApplyingForVacancy(e.target.checked)}
-            className={`${isMobile ? 'w-3 h-3' : 'w-4 h-4'} text-[#4CAF50] border-2 border-gray-300 rounded focus:ring-[#4CAF50]`}
-          />
-          <label htmlFor="applying-for-vacancy" className={`text-gray-700 ${isMobile ? 'text-xs' : 'text-sm'}`}>
-            I'm applying for a current vacancy
+          <label className={styles.vacancyCheck}>
+            <input
+              type="checkbox"
+              checked={isApplyingForVacancy}
+              onChange={(event) =>
+                setIsApplyingForVacancy(event.target.checked)
+              }
+            />
+            <span>I&apos;m applying for a current vacancy</span>
           </label>
-        </div>
 
-        {/* Submit Button */}
-        <div className="flex justify-end pt-4">
-          <button
-            type="submit"
-          >
-            <img src="/images/join-us/send.png" alt="Send Icon" className={isMobile ? 'w-16 h-8' : ''} />
+          <button type="submit" className={styles.sendButton}>
+            <img src="/images/join-us/send.png" alt="Send" />
           </button>
-        </div>
-      </form>
-    </>
-  );
-
-  return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed inset-0 bg-black/30 z-[99999999999999999999999999] flex items-center justify-center p-4">
-        {/* Modal Container */}
-        <div className={`relative w-full ${isMobile ? 'max-w-sm' : 'max-w-5xl'} mx-4`}>
-          {/* Mobile Layout */}
-          {isMobile ? (
-            <div className="bg-[#f1f3ed] p-4 border-2 border-[#4CAF50] relative shadow-2xl rounded-lg max-h-[90vh] overflow-y-auto">
-              {/* Close Button */}
-              <div className="flex space-x-3 justify-end w-full mb-4">
-                <button 
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-xl"
-                >
-                  <img src="/images/join-us/solar_maximize.png" alt="Maximize Icon" className="w-5 h-5" />
-                </button>
-                <button 
-                  onClick={onClose}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-xl"
-                >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div className="mx-auto">
-                {renderContent()}
-              </div>
-            </div>
-          ) : (
-            /* Desktop Layout - Skewed Modal Background */
-            <div 
-             
-              className="bg-[#f1f3ed] transform  py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-              style={{ clipPath: 'polygon(0 0, 95% 0, 100% 100%, 5% 100%)',
-                transform:"skewX(-12deg)"
-               }}
-            >
-              {/* Close Button */}
-              <div className="flex space-x-5 justify-end w-full">
-                <button 
-                style={{
-                  transform:"skewX(12deg)"
-                }}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
-                >
-                  <img src="/images/join-us/solar_maximize.png" alt="Maximize Icon" />
-                </button>
-                <button 
-                  onClick={onClose}
-                  style={{
-                    transform:"skewX(12deg)"
-                  }}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
-                >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div
-              style={{
-                transform:"skewX(6deg)"
-              }}
-              className="transform  max-w-4xl mx-auto">
-                {renderContent()}
-              </div>
-            </div>
-          )}
-        </div>
+        </form>
       </div>
-    </React.Fragment>
+    </ProductEnquiryFrame>
   );
-};
-
-export default NewUsers;
+}
