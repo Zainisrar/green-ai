@@ -22,6 +22,13 @@ for (const bug of selectedBugs) {
         body: "{}",
       }),
     );
+    await page.route("**/api/explore/global-snapshot", (route) =>
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: "{}",
+      }),
+    );
 
     for (const width of REFERENCE_VIEWPORTS) {
       const height = width === 1920 ? 970 : width >= 1024 ? 900 : 844;
@@ -31,7 +38,7 @@ for (const bug of selectedBugs) {
       });
       expect(response?.status(), `${bug.route} should load`).toBeLessThan(400);
       await page.locator("body").waitFor({ state: "visible" });
-      if (bug.id === 21) {
+      if (bug.id === 21 || bug.id === 22) {
         await page.waitForFunction(
           ({ expectedWidth, expectedHeight }) => {
             if (expectedWidth <= 1200) {
@@ -71,6 +78,19 @@ for (const bug of selectedBugs) {
         path: `test-results/bug-${String(bug.id).padStart(4, "0")}-${width}.png`,
         fullPage: false,
       });
+    }
+
+    if (bug.id === 22) {
+      await page.setViewportSize({ width: 1920, height: 970 });
+      await page.goto(bug.route, { waitUntil: "domcontentloaded" });
+      await page.waitForTimeout(750);
+      await page
+        .locator('[data-node-id="7077:14892"]')
+        .click({ position: { x: 120, y: 25 } });
+      await expect(
+        page.getByRole("heading", { name: "REQUEST A CONSULTATION" }),
+      ).toBeVisible();
+      await expect(page.getByLabel("Close modal")).toBeVisible();
     }
   });
 }

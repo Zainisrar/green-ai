@@ -31,7 +31,14 @@ export const FIGMA_BUGS: readonly FigmaBug[] = [
     "implemented",
     "why-green",
   ),
-  bug(22, "Global Snapshot", "/explore/global-snapshot", ["7077:14856"]),
+  bug(
+    22,
+    "Global Snapshot",
+    "/explore/global-snapshot",
+    ["7077:14856"],
+    "implemented",
+    "global-snapshot",
+  ),
   bug(23, "Fast Facts & Stats", "/explore/fast-facts-stats", ["7077:6529"]),
   bug(24, "Our Story & Milestones", "/evolution/our-story-milestones", [
     "7077:6923",
