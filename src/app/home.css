@@ -259,17 +259,14 @@
   cursor: pointer;
   transition:
     left 1s cubic-bezier(.4, 0, .2, 1),
-    transform 180ms cubic-bezier(.2, .8, .2, 1),
-    filter 180ms ease;
+    transform 180ms cubic-bezier(.2, .8, .2, 1);
   transform-origin: left center;
   pointer-events: auto;
 }
 
-.d6-panel-link:hover,
 .d6-panel-link:focus-visible {
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, .42));
-  transform: translateX(5px);
-  outline: none;
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
 }
 
 .d6-panel-link:active {
@@ -282,7 +279,7 @@
   border: 0;
   background: transparent;
   cursor: pointer;
-  transition: transform 1s cubic-bezier(.4, 0, .2, 1), filter 220ms ease, opacity 1s cubic-bezier(.4, 0, .2, 1);
+  transition: transform 1s cubic-bezier(.4, 0, .2, 1), opacity 1s cubic-bezier(.4, 0, .2, 1);
 }
 
 .d6-badge img {
@@ -291,22 +288,14 @@
   height: auto;
 }
 
-.d6-badge:hover,
 .d6-badge:focus-visible {
-  transform: translateY(-8px) scale(1.035);
-  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .25));
-  outline: none;
+  outline: 2px solid #fff;
+  outline-offset: 5px;
 }
 
 .d6-badge[aria-disabled="true"],
 .d6-panel-link[aria-disabled="true"] {
   cursor: default;
-}
-
-.d6-badge[aria-disabled="true"]:hover,
-.d6-panel-link[aria-disabled="true"]:hover {
-  transform: none;
-  filter: none;
 }
 
 .d6-expanded-copy {
