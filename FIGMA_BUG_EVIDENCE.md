@@ -6,7 +6,8 @@ Authoritative file: `s4XHMhWuuo8LMFx2ojKFRI`, page `7077:2780`. Desktop referenc
 |---|---|---|---|---|---|
 | 0021 | `/explore/why-green` | `7077:4467` | Recursive context returned no animated nodes | 1920, 1440, 1024, 768, 390 | Implemented; manual Figma/browser overlay reviewed |
 | 0022 | `/explore/global-snapshot` | `7077:14856` | Recursive context returned no animated nodes | 1920, 1440, 1024, 768, 390 | Implemented; exact network image and mask committed |
-| 0023–0036 | See typed manifest | Exact frame IDs recorded in manifest | Pending per-frame inspection | Pending | Pending |
+| 0023 | `/explore/fast-facts-stats` | `7077:6529` | Recursive context returned no animated nodes | 1920, 1440, 1024, 768, 390 | Implemented; exact impact-card and quote vectors committed |
+| 0024–0036 | See typed manifest | Exact frame IDs recorded in manifest | Pending per-frame inspection | Pending | Pending |
 | 0037–0038 | Pattern-derived routes | No matching source frame | Must follow selected source pattern | Pending | Pattern-derived |
 | 0039–0043 | See typed manifest | Exact frame IDs recorded in manifest | Pending per-frame inspection | Pending | Pending |
 | 0044 | `/enlighten/learning-hub` | No matching source frame | Must follow selected source pattern | Pending | Pattern-derived |
