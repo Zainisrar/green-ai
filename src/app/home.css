@@ -1153,11 +1153,11 @@
 }
 
 .about-green-copy h3 {
-  margin-top: 26px;
+  margin-top: 16px;
 }
 
 .about-green-subtitle {
-  margin: 20px 0 24px;
+  margin: 12px 0 16px;
   font-size: 21px;
   font-style: italic;
   font-weight: 600;
@@ -1165,19 +1165,19 @@
 }
 
 .about-green-copy h3 + .about-green-subtitle {
-  margin-top: 20px;
-  margin-bottom: 24px;
+  margin-top: 12px;
+  margin-bottom: 16px;
 }
 
 .about-green-body {
   color: #333;
   font-size: 16px;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .about-green-body p {
-  margin: 0 0 23px;
+  margin: 0 0 14px;
 }
 
 .about-green-body--what p {
@@ -1185,7 +1185,7 @@
 }
 
 .about-green-quote {
-  margin-top: 17px;
+  margin-top: 12px;
   color: #000;
   font-size: 34px;
   font-style: italic;
