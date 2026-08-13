@@ -1,9 +1,12 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface D6ChatbotProps {
   canvasAnchored?: boolean;
   triggerClassName?: string;
+  triggerStyle?: React.CSSProperties;
+  triggerVariant?: "default" | "figmaCanvas";
 }
 
 interface Message {
@@ -17,8 +20,11 @@ interface Message {
 const D6Chatbot: React.FC<D6ChatbotProps> = ({
   canvasAnchored = false,
   triggerClassName = "",
+  triggerStyle,
+  triggerVariant = "default",
 }) => {
   const hasResponsiveTrigger = Boolean(triggerClassName);
+  const isFigmaCanvasTrigger = triggerVariant === "figmaCanvas";
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
@@ -28,12 +34,9 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   const promptInputRef = useRef<HTMLInputElement>(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
   useEffect(() => {
-    scrollToBottom();
+    const behavior = messages.length > 0 ? "smooth" : "auto";
+    messagesEndRef.current?.scrollIntoView({ behavior });
   }, [messages]);
 
   useEffect(() => {
@@ -132,9 +135,8 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
                   );
                   break;
                 }
-              } catch (e) {
+              } catch {
                 // Skip invalid JSON lines
-                continue;
               }
             }
           }
@@ -200,11 +202,13 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
               </div>
             </div>
             <button
+              type="button"
               onClick={toggleChat}
               className="text-white hover:bg-green-600 rounded-full p-1 transition-colors"
               aria-label="Close chat"
             >
               <svg
+                aria-hidden="true"
                 className="w-5 h-5"
                 fill="none"
                 stroke="currentColor"
@@ -317,6 +321,7 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
                 className="flex-1 p-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#23B14D] focus:border-transparent text-sm disabled:opacity-50"
               />
               <button
+                type="button"
                 onClick={() => handleSendMessage()}
                 disabled={!inputValue.trim() || isLoading}
                 className="bg-[#23B14D] text-white p-3 rounded-full hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
@@ -324,6 +329,7 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
               >
                 {isLoading ? (
                   <svg
+                    aria-hidden="true"
                     className="w-5 h-5 animate-spin"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -344,6 +350,7 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
                   </svg>
                 ) : (
                   <svg
+                    aria-hidden="true"
                     className="w-5 h-5"
                     fill="none"
                     stroke="currentColor"
@@ -369,10 +376,10 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
         style={
           canvasAnchored
             ? {
-                right:
-                  "calc(var(--d6-right-safe-inset, 0px) + 0.5rem)",
+                right: "calc(var(--d6-right-safe-inset, 0px) + 0.5rem)",
+                ...triggerStyle,
               }
-            : undefined
+            : triggerStyle
         }
       >
         <div className="relative">
@@ -383,9 +390,11 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
           />
           <div
             className={
-              hasResponsiveTrigger
-                ? "absolute top-[47%] left-[12%] right-[19%] -translate-y-1/2"
-                : "absolute bottom-4 lg:bottom-10 left-12 lg:left-14 right-12 lg:right-20"
+              isFigmaCanvasTrigger
+                ? "absolute left-[47px] top-[21px] h-[40px] w-[159px]"
+                : hasResponsiveTrigger
+                  ? "absolute top-[47%] left-[12%] right-[19%] -translate-y-1/2"
+                  : "absolute bottom-4 lg:bottom-10 left-12 lg:left-14 right-12 lg:right-20"
             }
           >
             <input
@@ -396,17 +405,23 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
               onKeyDown={handlePromptKeyDown}
               placeholder="Let's Talk Energy"
               className={
-                hasResponsiveTrigger
-                  ? "w-full bg-transparent text-[clamp(13px,1vw,18px)] font-semibold italic text-gray-900 outline-none placeholder:text-gray-900 placeholder:opacity-100"
-                  : "outline-none placeholder:text-gray-900 placeholder:opacity-100 text-gray-900 font-semibold italic w-full text-base bg-transparent"
+                isFigmaCanvasTrigger
+                  ? "h-[40px] w-[159px] border-0 bg-transparent p-0 text-center text-[13px] font-semibold italic leading-[40px] text-[#717171] outline-none placeholder:text-[#717171] placeholder:opacity-100"
+                  : hasResponsiveTrigger
+                    ? "w-full bg-transparent text-[clamp(13px,1vw,18px)] font-semibold italic text-gray-900 outline-none placeholder:text-gray-900 placeholder:opacity-100"
+                    : "outline-none placeholder:text-gray-900 placeholder:opacity-100 text-gray-900 font-semibold italic w-full text-base bg-transparent"
               }
             />
           </div>
-          <div
+          <button
+            type="button"
+            aria-label="Send prompt"
             className={
-              hasResponsiveTrigger
-                ? "absolute top-1/2 right-[10%] -translate-y-1/2 cursor-pointer transition-transform hover:scale-110"
-                : "absolute bottom-5 lg:bottom-10 right-7 lg:right-20 cursor-pointer hover:scale-110 transition-transform"
+              isFigmaCanvasTrigger
+                ? "absolute left-[382px] top-[32px] h-[23px] w-[18px] cursor-pointer border-0 bg-transparent p-0"
+                : hasResponsiveTrigger
+                  ? "absolute top-1/2 right-[10%] -translate-y-1/2 cursor-pointer border-0 bg-transparent p-0 transition-transform hover:scale-110"
+                  : "absolute bottom-5 lg:bottom-10 right-7 lg:right-20 cursor-pointer border-0 bg-transparent p-0 hover:scale-110 transition-transform"
             }
             onClick={handlePromptSubmit}
           >
@@ -415,7 +430,7 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
               alt="Send message"
               className="w-3 lg:w-auto"
             />
-          </div>
+          </button>
         </div>
       </div>
     </>

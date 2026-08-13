@@ -44,6 +44,7 @@ interface SiteHeaderProps {
   compactLogo?: boolean;
   panel?: "full" | "logoOnly";
   layout?: "viewport" | "figmaCanvas";
+  highlightActive?: boolean;
 }
 
 const isItemActive = (pathname: string, label: string) => {
@@ -72,6 +73,7 @@ export default function SiteHeader({
   compactLogo = false,
   panel = "full",
   layout = "viewport",
+  highlightActive = true,
 }: SiteHeaderProps) {
   const pathname = usePathname();
   const headerBrand = headerBrands[brand];
@@ -136,7 +138,7 @@ export default function SiteHeader({
 
       <nav className={styles.navigation} aria-label="Primary navigation">
         {navigationItems.map((item) => {
-          const active = isItemActive(pathname, item.label);
+          const active = highlightActive && isItemActive(pathname, item.label);
           return (
             <Link
               href={item.href}
