@@ -110,6 +110,13 @@ for (const bug of selectedBugs) {
         body: "{}",
       }),
     );
+    await page.route("**/api/engineering/products", (route) =>
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: "{}",
+      }),
+    );
 
     for (const width of REFERENCE_VIEWPORTS) {
       const height = width === 1920 ? 970 : width >= 1024 ? 900 : 844;
@@ -120,7 +127,9 @@ for (const bug of selectedBugs) {
       expect(response?.status(), `${bug.route} should load`).toBeLessThan(400);
       await page.locator("body").waitFor({ state: "visible" });
       if (
-        [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33].includes(bug.id)
+        [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34].includes(
+          bug.id,
+        )
       ) {
         await page.waitForFunction(
           ({ expectedWidth, expectedHeight }) => {
@@ -152,7 +161,9 @@ for (const bug of selectedBugs) {
       });
       if (
         width === 1920 &&
-        [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33].includes(bug.id)
+        [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34].includes(
+          bug.id,
+        )
       ) {
         const menuTops = await page
           .locator('[data-site-header] nav[aria-label="Primary navigation"] a')
@@ -271,6 +282,25 @@ for (const bug of selectedBugs) {
         .click();
       await expect(
         page.getByRole("heading", { name: "BOOK A LIVE DEMO OF GREEN POC" }),
+      ).toBeVisible();
+    }
+
+    if (bug.id === 34) {
+      await page.setViewportSize({ width: 1920, height: 970 });
+      await page.goto(bug.route, { waitUntil: "domcontentloaded" });
+      await page.locator('[data-products-hydrated="true"]').waitFor();
+      await page.getByRole("button", { name: "Show product image 2" }).click();
+      await expect(
+        page.getByRole("button", { name: "Show product image 2" }),
+      ).toHaveAttribute("aria-pressed", "true");
+      await page.getByRole("button", { name: "Enquiry" }).click();
+      await expect(
+        page.getByRole("heading", { name: "PRODUCT ENQUIRY" }),
+      ).toBeVisible();
+      await expect(
+        page
+          .getByRole("dialog", { name: "PRODUCT ENQUIRY" })
+          .getByLabel("Close product enquiry"),
       ).toBeVisible();
     }
 

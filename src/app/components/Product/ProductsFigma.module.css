@@ -1,0 +1,262 @@
+.desktop {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #202020;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+.background {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 970px;
+}
+.pageTitle {
+  position: absolute;
+  top: 82px;
+  left: 286px;
+  margin: 0;
+  color: #050505;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 58px;
+}
+.sunshineBrand {
+  position: absolute;
+  top: 98px;
+  left: 276px;
+  width: 176px;
+  height: 70px;
+}
+.verticalTitle {
+  position: absolute;
+  top: 420px;
+  left: 50px;
+  width: 72px;
+  height: 518px;
+}
+.gallery {
+  position: absolute;
+  inset: 0;
+}
+.hero {
+  position: absolute;
+  top: 126px;
+  left: 166px;
+  width: 704px;
+  height: 624px;
+  object-fit: contain;
+}
+.thumbnails {
+  position: absolute;
+  top: 759px;
+  left: 239px;
+  display: flex;
+  align-items: center;
+  gap: 55px;
+  height: 98px;
+}
+.thumbnails button {
+  display: grid;
+  box-sizing: border-box;
+  width: 91px;
+  height: 91px;
+  padding: 5px;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0.72;
+  place-items: center;
+}
+.thumbnails .activeThumbnail {
+  width: 96px;
+  height: 98px;
+  border-color: #23b14d;
+  opacity: 1;
+}
+.thumbnails img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.enquiry {
+  position: absolute;
+  top: 885px;
+  left: 178px;
+  width: 170px;
+  height: 54px;
+  padding: 0 29px 0 45px;
+  border: 0;
+  background: linear-gradient(100deg, #bff59d, #fbfa74);
+  clip-path: polygon(14% 0, 100% 0, 86% 100%, 0 100%);
+  color: #111;
+  cursor: pointer;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  text-align: left;
+}
+.enquiry span {
+  position: absolute;
+  top: 8px;
+  right: 26px;
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 32px;
+}
+.story {
+  position: absolute;
+  top: 178px;
+  left: 1057px;
+  width: 815px;
+  height: 430px;
+}
+.story > img {
+  position: absolute;
+  inset: 0;
+  width: 815px;
+  height: 430px;
+}
+.story h2 {
+  position: absolute;
+  top: 80px;
+  left: 199px;
+  width: 388px;
+  margin: 0;
+  color: #2b2b2b;
+  font-size: 48px;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 51px;
+}
+.story p {
+  position: absolute;
+  top: 311px;
+  left: 140px;
+  width: 437px;
+  margin: 0;
+  color: #303030;
+  font-size: 16px;
+  line-height: 25px;
+}
+.specifications {
+  position: absolute;
+  top: 739px;
+  left: 891px;
+  width: 1002px;
+  height: 182px;
+}
+.specificationPanel {
+  position: absolute;
+  top: -26px;
+  left: -30px;
+  width: 1059px;
+  height: 242px;
+  max-width: none;
+}
+.specificationList {
+  position: absolute;
+  top: 34px;
+  left: 75px;
+  display: grid;
+  width: 872px;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: 0;
+}
+.specificationList article {
+  min-width: 0;
+  color: #111;
+  text-align: center;
+}
+.specificationList article > img {
+  display: block;
+  width: 32px;
+  height: 25px;
+  margin: 0 auto 6px;
+  object-fit: contain;
+}
+.specificationList h3 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15px;
+}
+.specificationList p,
+.specificationList span {
+  display: block;
+  margin: 10px 0 0;
+  white-space: pre-line;
+  font-size: 10px;
+  line-height: 11px;
+}
+.specificationList span {
+  margin-top: 9px;
+}
+.mobile {
+  min-height: 100svh;
+  padding-top: 76px;
+  background: linear-gradient(150deg, #fff 35%, #f5fad9);
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+.mobileContent {
+  width: min(100% - 32px, 760px);
+  margin: auto;
+  padding: 34px 0 150px;
+}
+.eyebrow {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 800;
+}
+.mobileBrand {
+  width: 148px;
+  margin-top: 8px;
+}
+.mobileHero {
+  display: block;
+  width: 100%;
+  margin: 24px auto 12px;
+}
+.mobileThumbnails {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.mobileThumbnails button {
+  padding: 4px;
+  border: 1px solid #dbe7c8;
+  border-radius: 10px;
+  background: #fff;
+}
+.mobileThumbnails button[aria-pressed="true"] {
+  border-color: #23b14d;
+}
+.mobileThumbnails img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+.mobileContent h1 {
+  margin: 28px 0 12px;
+  font-size: clamp(32px, 9vw, 52px);
+  font-style: italic;
+  line-height: 1.05;
+}
+.mobileContent > p:last-of-type {
+  font-size: 16px;
+  line-height: 1.55;
+}
+.mobileEnquiry {
+  min-width: 170px;
+  min-height: 52px;
+  margin-top: 20px;
+  border: 0;
+  background: linear-gradient(100deg, #bff59d, #fbfa74);
+  clip-path: polygon(14% 0, 100% 0, 86% 100%, 0 100%);
+  font: inherit;
+  font-weight: 700;
+}

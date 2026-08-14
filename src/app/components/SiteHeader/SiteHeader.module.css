@@ -177,6 +177,63 @@
   object-fit: cover;
 }
 
+.productCanvasHeader {
+  position: absolute;
+  top: 0;
+  right: auto;
+  left: 0;
+  width: 1920px;
+  height: 116px;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.productCanvasHeader .sunshineLogo {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.productCanvasHeader .navigation {
+  position: absolute;
+  top: 47px;
+  left: 373px;
+  margin: 0;
+  gap: 30px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.productCanvasHeader .navigation a {
+  display: block;
+  height: 24px;
+  line-height: 24px;
+}
+
+.productCanvasHeader .navigation a:nth-child(4) {
+  transform: translateX(-34px);
+}
+
+.productCanvasHeader .navigation a:nth-child(3) {
+  transform: scaleX(0.75);
+  transform-origin: left center;
+}
+
+.productCanvasHeader .navigation a:nth-child(5) {
+  transform: translateX(-27px);
+}
+
+.productCanvasHeader .navigation a:nth-child(6) {
+  transform: translateX(-14px);
+}
+
+.productCanvasHeader .canvasMenuButton {
+  top: 16px;
+  left: 1827px;
+}
+
 @media (max-width: 900px) {
   .header {
     --site-header-height: 76px;

@@ -43,7 +43,7 @@ interface SiteHeaderProps {
   productLogo?: boolean;
   compactLogo?: boolean;
   panel?: "full" | "logoOnly";
-  layout?: "viewport" | "figmaCanvas";
+  layout?: "viewport" | "figmaCanvas" | "productCanvas";
   highlightActive?: boolean;
 }
 
@@ -105,16 +105,14 @@ export default function SiteHeader({
 
   return (
     <header
-      className={`${styles.header} ${layout === "figmaCanvas" ? styles.canvasHeader : ""} ${isScrolled ? styles.scrolled : ""}`}
+      className={`${styles.header} ${layout === "figmaCanvas" ? styles.canvasHeader : ""} ${layout === "productCanvas" ? styles.productCanvasHeader : ""} ${isScrolled ? styles.scrolled : ""}`}
       data-site-header
-      data-node-id={layout === "figmaCanvas" ? "7077:3756" : undefined}
+      data-node-id={layout !== "viewport" ? "7077:3756" : undefined}
     >
       {brand === "green" ? (
         <FigmaBrandPanel
           className={
-            layout === "figmaCanvas"
-              ? styles.canvasBrandPanel
-              : styles.brandPanel
+            layout !== "viewport" ? styles.canvasBrandPanel : styles.brandPanel
           }
           compactLogo={compactLogo}
           fixedCanvasSize={layout === "figmaCanvas"}
@@ -167,7 +165,7 @@ export default function SiteHeader({
         ) : null}
       </nav>
 
-      {layout === "figmaCanvas" ? (
+      {layout !== "viewport" ? (
         <button
           type="button"
           onClick={openNavigation}
