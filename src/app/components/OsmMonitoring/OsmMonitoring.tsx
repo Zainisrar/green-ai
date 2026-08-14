@@ -1,293 +1,239 @@
 "use client";
-import React, { useState } from "react";
-import TopNavigation from "../TopNavigation/TopNavigation";
-import Chatbot from "../Chatbot";
-import { useOMMonitoring } from "../../../hooks/useOMMonitoring";
-import OMProposal from "./Modals/OMProposal";
-import LiveDemoPOC from "./Modals/LiveDemoPOC";
 
-const OsmMonitoring = () => {
-  const { omData,  error } = useOMMonitoring();
+import { useState } from "react";
+import { useOMMonitoring } from "../../../hooks/useOMMonitoring";
+import D6Chatbot from "../D6Chatbot";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaPageCanvas from "../shared/FigmaPageCanvas";
+import LiveDemoPOC from "./Modals/LiveDemoPOC";
+import OMProposal from "./Modals/OMProposal";
+import styles from "./OsmMonitoring.module.css";
+
+const PHILOSOPHY = [
+  {
+    title: "Predict. Prevent. Perform.",
+    description:
+      "Downtime isn’t an option — especially in mission-critical energy environments. GREEN’s O&M model is built around predictive diagnostics, remote oversight, and rapid field response.",
+  },
+  {
+    title: "Standardized. Yet Site-Specific.",
+    description:
+      "Our O&M structure is templated for efficiency but tuned to each site’s unique geography, usage profile, and stakeholder needs.",
+  },
+  {
+    title: "Contracted for Clarity. Delivered with Discipline.",
+    description:
+      "Our clients benefit from clear SLAs, cost transparency, and KPI-driven service performance.",
+  },
+];
+
+const SERVICES = [
+  ["System Monitoring", "24/7 performance tracking via GREEN POC"],
+  [
+    "Preventive Maintenance",
+    "Scheduled inspections, cleaning, and performance audits",
+  ],
+  ["Corrective Maintenance", "Remote diagnostics + rapid-response field teams"],
+  [
+    "Performance Reporting",
+    "Monthly/quarterly reports, uptime dashboards, asset health reports",
+  ],
+  [
+    "Spare Parts & Inventory",
+    "On-demand replacement cycle management through GREEN’s supply network",
+  ],
+  ["Warranty Compliance", "Vendor liaison and documentation support"],
+  [
+    "Training & Handover",
+    "O&M onboarding for local teams, CBOs, and institutional clients",
+  ],
+] as const;
+
+export default function OsmMonitoring() {
+  const { omData } = useOMMonitoring();
   const [isOMProposalOpen, setIsOMProposalOpen] = useState(false);
   const [isLiveDemoOpen, setIsLiveDemoOpen] = useState(false);
+  const philosophy = omData?.philosophy?.items?.length
+    ? omData.philosophy.items
+    : PHILOSOPHY;
+  const services = omData?.services?.items?.length
+    ? omData.services.items.map(
+        (item) => [item.title, item.description] as const,
+      )
+    : SERVICES;
+  const title = omData?.header?.title || "O&M & Monitoring";
+  const intro =
+    omData?.header?.subtitle ||
+    "At GREEN, Operations & Maintenance (O&M) is not an afterthought.";
+  const description =
+    omData?.header?.description ||
+    "It is a core pillar of our Engineering DNA — designed to ensure long-term system efficiency, financial integrity, and real-world impact. We don’t just build systems. We stand behind them — with real-time data, preventative protocols, and field-tested service teams.";
 
+  const desktop = (
+    <main className={styles.desktopPage} data-node-id="7077:4516">
+      <img
+        className={styles.backgroundArt}
+        src="/images/osm-monitoring/mainImg.png"
+        alt=""
+        width="1146"
+        height="970"
+      />
+      <SiteHeader layout="figmaCanvas" highlightActive={false} />
+      <img
+        className={styles.verticalTitle}
+        src="/images/osm-monitoring/osm.png"
+        alt=""
+        width="59"
+        height="760"
+      />
+      <h1 className={styles.pageTitle} data-node-id="7077:4521">
+        <span>O&amp;M</span>
+        {title.replace(/O&M/i, "")}
+      </h1>
+      <div className={styles.intro} data-node-id="7077:4569">
+        <p>{intro}</p>
+        <p>{description}</p>
+      </div>
+      <section className={styles.philosophy} data-node-id="7077:4558">
+        <h2>{omData?.philosophy?.heading || "Our O&M Philosophy"}</h2>
+        {philosophy.slice(0, 3).map((item) => (
+          <article key={item.title}>
+            <img
+              src="/images/osm-monitoring/lighting.png"
+              alt=""
+              width="60"
+              height="60"
+            />
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </article>
+        ))}
+      </section>
+      <p className={styles.systemsQuote} data-node-id="7077:4533">
+        <span>Sustaining</span> Systems.
+        <br />
+        <span>Securing</span> Performance.
+        <br />
+        <span>Scaling</span> Trust.
+      </p>
+      <section className={styles.whyMatters} data-node-id="7077:4568">
+        <h2>{omData?.whyMatters?.heading || "Why This Matters"}</h2>
+        <p>
+          — <span>Systems that are not monitored</span> Fail Quietly.
+        </p>
+        <p>
+          — <span>Systems that are not maintained</span> Fail Early.
+        </p>
+      </section>
+      <section className={styles.services} aria-label="O&M services">
+        {services.slice(0, 7).map(([serviceTitle, serviceDescription]) => (
+          <article key={serviceTitle}>
+            <img
+              src="/images/osm-monitoring/lighting.png"
+              alt=""
+              width="41"
+              height="41"
+            />
+            <h3>{serviceTitle}</h3>
+            <p>{serviceDescription}</p>
+          </article>
+        ))}
+      </section>
+      <div className={styles.actions}>
+        <button type="button" onClick={() => setIsOMProposalOpen(true)}>
+          <img
+            src="/images/osm-monitoring/request.png"
+            alt=""
+            width="301"
+            height="53"
+          />
+          <span>
+            {omData?.callToActions?.[0]?.text || "Request an O&M Proposal"}
+          </span>
+          <b>›</b>
+        </button>
+        <button type="button" onClick={() => setIsLiveDemoOpen(true)}>
+          <img
+            src="/images/osm-monitoring/book.png"
+            alt=""
+            width="351"
+            height="53"
+          />
+          <span>
+            {omData?.callToActions?.[1]?.text ||
+              "Book a Live Demo of GREEN POC"}
+          </span>
+          <b>›</b>
+        </button>
+      </div>
+      <D6Chatbot
+        canvasAnchored
+        triggerVariant="figmaCanvas"
+        triggerClassName={styles.chatTrigger}
+        triggerStyle={{
+          top: 899,
+          right: "auto",
+          bottom: "auto",
+          left: 1498,
+          width: 418,
+        }}
+      />
+    </main>
+  );
 
-  if (error) {
-    return (
-      <React.Fragment>
-        <div className=" ">
-          <TopNavigation />
-          <div className="flex items-center justify-center h-screen">
-            <div className="text-xl text-red-500">
-              Error loading O&M monitoring data
-            </div>
-          </div>
+  const mobile = (
+    <main className={styles.mobilePage} data-node-id="7077:4516-mobile">
+      <SiteHeader panel="logoOnly" />
+      <div className={styles.mobileContent}>
+        <h1>
+          <span>O&amp;M</span> &amp; Monitoring
+        </h1>
+        <p>
+          {intro} {description}
+        </p>
+        <h2>{omData?.philosophy?.heading || "Our O&M Philosophy"}</h2>
+        {philosophy.slice(0, 3).map((item) => (
+          <article key={item.title}>
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </article>
+        ))}
+        <blockquote>
+          <span>Sustaining</span> Systems. <span>Securing</span> Performance.{" "}
+          <span>Scaling</span> Trust.
+        </blockquote>
+        <section className={styles.mobileServices}>
+          {services.slice(0, 7).map(([serviceTitle, serviceDescription]) => (
+            <article key={serviceTitle}>
+              <h3>{serviceTitle}</h3>
+              <p>{serviceDescription}</p>
+            </article>
+          ))}
+        </section>
+        <div className={styles.mobileActions}>
+          <button type="button" onClick={() => setIsOMProposalOpen(true)}>
+            Request an O&amp;M Proposal
+          </button>
+          <button type="button" onClick={() => setIsLiveDemoOpen(true)}>
+            Book a Live Demo of GREEN POC
+          </button>
         </div>
-      </React.Fragment>
-    );
-  }
+      </div>
+      <D6Chatbot />
+    </main>
+  );
 
   return (
-    <React.Fragment>
-        <div className="z-50 relative">
-          <TopNavigation />
-        </div>
-      <div className=" ">
-        <div className="flex mb-10 h-full">
-          <div className="absolute top-0 lg:block hidden left-32">
-            <img
-              className="h-[120vh] -z-10 relative"
-              src="/images/osm-monitoring/mainImg.png"
-              alt="mainImg"
-            />
-          </div>
-          {/* Left Side Image */}
-          <div className="w-1/6   lg:flex hidden  items-center justify-center">
-            <div className="lg:fixed  left-10 top-1/4">
-              <img
-                src="/images/osm-monitoring/osm.png"
-                className="w-10"
-                alt="OSM Monitoring"
-              />
-            </div>
-          </div>
-
-          {/* Main Content Area */}
-          <div className="w-full min-w-0 px-4 lg:px-8 pt-8">
-            {/* Main Title */}
-            <div className="mb-8 lg:w-2/3">
-              <h1 className="text-3xl lg:text-4xl 2xl:text-5xl font-black text-gray-800 mb-4 leading-tight">
-                {omData?.header?.title?.replace("MONITORING", "") || "O&M &"}{" "}
-                <span className="text-[#23B14D]">MONITORING</span>
-              </h1>
-              <p className="text-gray-600 text-lg mb-2">
-                {omData?.header?.subtitle ||
-                  "At GREEN, Operations & Maintenance (O&M) is not an afterthought."}
-              </p>
-              <p className="text-gray-600 text-lg mb-2">
-                {omData?.header?.description?.split(".")[0] ||
-                  "It is a core pillar of our Engineering DNA — designed to increase long-term system efficiency, financial integrity, and real-world impact"}
-                .
-              </p>
-              <p className="text-gray-600 text-lg">
-                {omData?.header?.description?.split(".")[1]?.trim() ||
-                  "We don't just build systems. We stand behind them — with real-time data, preventative protocols, and field-tested service teams"}
-                .
-              </p>
-            </div>
-
-            {/* Content Layout */}
-            <div className="flex lg:flex-row flex-col  lg:space-x-8">
-              {/* Left Column - O&M Philosophy */}
-              <div className="w-full">
-                <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-6">
-                  {omData?.philosophy?.heading || "Our O&M Philosophy"}
-                </h3>
-
-                <div className="grid gap-8 lg:gap-10 lg:grid-cols-[1.3fr_1fr_auto]">
-                  <div className="min-w-0 2xl:-ml-20">
-                    <div className="space-y-8 ">
-                      {omData?.philosophy?.items?.map((item, index) => (
-                        <div
-                          key={index}
-                          className={`flex space-x-4 ${
-                            index === 0
-                              ? "ml-4"
-                              : index === 1
-                              ? "2xl:-ml-20"
-                              : "2xl:-ml-24"
-                          }`}
-                        >
-                          <div className="flex-shrink-0">
-                            <img
-                              src="/images/osm-monitoring/lighting.png"
-                              alt="lighting"
-                              className="w-8 h-8"
-                            />
-                          </div>
-                          <div>
-                            <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
-                              {item.title}
-                            </h4>
-                            <p className="text-gray-600 text-sm">
-                              {item.description}
-                            </p>
-                          </div>
-                        </div>
-                      )) || (
-                        <>
-                          <div className="flex space-x-4 ml-4">
-                            <div className="flex-shrink-0">
-                              <img
-                                src="/images/osm-monitoring/lighting.png"
-                                alt="lighting"
-                                className="w-8 h-8"
-                              />
-                            </div>
-                            <div>
-                              <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
-                                Predict. Prevent. Perform.
-                              </h4>
-                              <p className="text-gray-600 text-sm">
-                                Downtime isn't an option — especially in
-                                mission-critical environments like hospitals and
-                                schools. GREEN's O&M model is built around
-                                predictive diagnostics, remote oversight, and
-                                rapid field response.
-                              </p>
-                            </div>
-                          </div>
-
-                          <div className="flex space-x-4 2xl:-ml-20">
-                            <div className="flex-shrink-0">
-                              <img
-                                src="/images/osm-monitoring/lighting.png"
-                                alt="lighting"
-                                className="w-8 h-8"
-                              />
-                            </div>
-                            <div>
-                              <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
-                                Standardized. Yet Site-Specific.
-                              </h4>
-                              <p className="text-gray-600 text-sm">
-                                Our O&M structure is templated for efficiency,
-                                but every deployment is calibrated for local
-                                safety, usage profile, and stakeholder needs.
-                              </p>
-                            </div>
-                          </div>
-
-                          <div className="flex space-x-4 2xl:-ml-24">
-                            <div className="flex-shrink-0">
-                              <img
-                                src="/images/osm-monitoring/lighting.png"
-                                alt="lighting"
-                                className="w-8 h-8"
-                              />
-                            </div>
-                            <div>
-                              <h4 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
-                                Contracted for Clarity. Delivered with
-                                Discipline.
-                              </h4>
-                              <p className="text-gray-600 text-sm">
-                                Our clients benefit from clear SLAs, cost
-                                transparency, and KPI-driven service
-                                performance.
-                              </p>
-                            </div>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                  <div className="min-w-0 2xl:ml-20">
-                    <div>
-                      <div className="mt-20 mb-10 lg:my-0 flex items-center space-x-4">
-                        <div className="flex-shrink-0">
-                          <img
-                            src="/images/osm-monitoring/shape.png"
-                            alt="shape"
-                            className="w-16"
-                          />
-                        </div>
-                        <div className="min-w-0">
-                          <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
-                            <span className="text-[#23B14D]">Sustaining</span>{" "}
-                            Systems.
-                            <br />
-                            <span className="text-[#23B14D]">
-                              Securing
-                            </span>{" "}
-                            Performance.
-                            <br />
-                            <span className="text-[#23B14D]">Scaling</span>{" "}
-                            Trust.
-                          </h3>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="lg:mt-8 text-center lg:text-left min-w-0">
-                      <h4 className="text-xl lg:text-2xl font-bold italic text-gray-800 mb-4">
-                        {omData?.whyMatters?.heading || "Why This Matters"}
-                      </h4>
-                      <div className="space-y-2 text-base lg:text-lg max-w-md">
-                        {omData?.whyMatters?.points?.map((point, index) => (
-                          <p key={index} className="text-gray-600">
-                            —{" "}
-                            <span className="text-[#23B14D] font-semibold">
-                              {point.split(" ")[0]} {point.split(" ")[1]}{" "}
-                              {point.split(" ")[2]} {point.split(" ")[3]}{" "}
-                              {point.split(" ")[4]}
-                            </span>{" "}
-                            {point.split(" ").slice(5).join(" ")}
-                          </p>
-                        )) || (
-                          <>
-                            <p className="text-gray-600">
-                              —{" "}
-                              <span className="text-[#23B14D] font-semibold">
-                                Systems that are not monitored
-                              </span>{" "}
-                              Fail Quietly.
-                            </p>
-                            <p className="text-gray-600">
-                              —{" "}
-                              <span className="text-[#23B14D] font-semibold">
-                                Systems that are not maintained
-                              </span>{" "}
-                              Fail Early.
-                            </p>
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="mt-10 lg:mt-0 mb-10 flex flex-col items-center lg:items-end gap-6 justify-end">
-                    <button
-                      type="button"
-                      onClick={() => setIsOMProposalOpen(true)}
-                      className="inline-block cursor-pointer"
-                    >
-                      <div
-                        style={{ transform: "skewX(-16deg)" }}
-                        className="bg-gradient-to-r from-[#54b85a] to-[#e6f24d] px-8 py-3 shadow-md"
-                      >
-                        <span className="block text-sm lg:text-base font-bold text-gray-900 whitespace-nowrap">
-                          {(omData?.callToActions?.[0]?.text || "Request an O&M Proposal") + " >"}
-                        </span>
-                      </div>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setIsLiveDemoOpen(true)}
-                      className="inline-block cursor-pointer"
-                    >
-                      <div
-                        style={{ transform: "skewX(-16deg)" }}
-                        className="bg-gradient-to-r from-[#54b85a] to-[#e6f24d] px-8 py-3 shadow-md"
-                      >
-                        <span className="block text-sm lg:text-base font-bold text-gray-900 whitespace-nowrap">
-                          {(omData?.callToActions?.[1]?.text || "Book a Live Demo of GREEN POC") + " >"}
-                        </span>
-                      </div>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      <div className="lg:block hidden">
-        <Chatbot />
-      </div>
-      </div>
-      <OMProposal isOpen={isOMProposalOpen} onClose={() => setIsOMProposalOpen(false)} />
-      <LiveDemoPOC isOpen={isLiveDemoOpen} onClose={() => setIsLiveDemoOpen(false)} />
-    </React.Fragment>
+    <>
+      <FigmaPageCanvas desktop={desktop} mobile={mobile} nodeId="7077:4516" />
+      <OMProposal
+        isOpen={isOMProposalOpen}
+        onClose={() => setIsOMProposalOpen(false)}
+      />
+      <LiveDemoPOC
+        isOpen={isLiveDemoOpen}
+        onClose={() => setIsLiveDemoOpen(false)}
+      />
+    </>
   );
-};
-
-export default OsmMonitoring;
+}

@@ -96,6 +96,13 @@ for (const bug of selectedBugs) {
         body: "{}",
       }),
     );
+    await page.route("**/api/engineering/om-monitoring", (route) =>
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: "{}",
+      }),
+    );
 
     for (const width of REFERENCE_VIEWPORTS) {
       const height = width === 1920 ? 970 : width >= 1024 ? 900 : 844;
@@ -105,7 +112,7 @@ for (const bug of selectedBugs) {
       });
       expect(response?.status(), `${bug.route} should load`).toBeLessThan(400);
       await page.locator("body").waitFor({ state: "visible" });
-      if ([21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].includes(bug.id)) {
+      if ([21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32].includes(bug.id)) {
         await page.waitForFunction(
           ({ expectedWidth, expectedHeight }) => {
             if (expectedWidth <= 1200) {
@@ -136,7 +143,7 @@ for (const bug of selectedBugs) {
       });
       if (
         width === 1920 &&
-        [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31].includes(bug.id)
+        [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32].includes(bug.id)
       ) {
         const menuTops = await page
           .locator('[data-site-header] nav[aria-label="Primary navigation"] a')
@@ -236,6 +243,25 @@ for (const bug of selectedBugs) {
         .click();
       await expect(
         page.getByRole("heading", { name: "BOOK A STORAGE SYSTEM REVIEW" }),
+      ).toBeVisible();
+    }
+
+    if (bug.id === 32) {
+      await page.setViewportSize({ width: 1920, height: 970 });
+      await page.goto(bug.route, { waitUntil: "domcontentloaded" });
+      await page.waitForTimeout(750);
+      await page
+        .getByRole("button", { name: "Request an O&M Proposal" })
+        .click();
+      await expect(
+        page.getByRole("heading", { name: "REQUEST AN O&M PROPOSAL" }),
+      ).toBeVisible();
+      await page.getByLabel("Close modal").click();
+      await page
+        .getByRole("button", { name: "Book a Live Demo of GREEN POC" })
+        .click();
+      await expect(
+        page.getByRole("heading", { name: "BOOK A LIVE DEMO OF GREEN POC" }),
       ).toBeVisible();
     }
   });
