@@ -63,7 +63,14 @@ export const FIGMA_BUGS: readonly FigmaBug[] = [
     "implemented",
     "vision-mission",
   ),
-  bug(26, "Leadership Team", "/evolution/leadership-team", ["7077:6769"]),
+  bug(
+    26,
+    "Leadership Team",
+    "/evolution/leadership-team",
+    ["7077:6769"],
+    "implemented",
+    "leadership-team",
+  ),
   bug(
     27,
     "Certifications & Accreditations",

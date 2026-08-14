@@ -1,0 +1,250 @@
+.desktopPage {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.backgroundArtwork {
+  position: absolute;
+  z-index: 0;
+  inset: 0 auto 0 0;
+  width: 934px;
+  height: 970px;
+  max-width: none;
+}
+
+.pageTitle {
+  position: absolute;
+  z-index: 2;
+  top: 306px;
+  left: 234px;
+  width: 388px;
+  margin: 0;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.pageTitle span {
+  display: block;
+  color: #23b14d;
+}
+
+.watermark {
+  position: absolute;
+  z-index: 2;
+  top: 619px;
+  left: 58px;
+  width: 81px;
+  height: 296px;
+}
+
+.teamGrid {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+}
+
+.member {
+  position: absolute;
+  width: 301px;
+  height: 278px;
+}
+
+.member:nth-child(1) {
+  top: 207px;
+  left: 841px;
+}
+
+.member:nth-child(2) {
+  top: 207px;
+  left: 1139px;
+}
+
+.member:nth-child(3) {
+  top: 204px;
+  left: 1480px;
+}
+
+.member:nth-child(4) {
+  top: 571px;
+  left: 694px;
+}
+
+.member:nth-child(5) {
+  top: 571px;
+  left: 992px;
+}
+
+.member:nth-child(6) {
+  top: 568px;
+  left: 1333px;
+}
+
+.frame {
+  position: absolute;
+  z-index: 0;
+  top: -9px;
+  left: -12px;
+  width: 326px;
+  height: 223px;
+  max-width: none;
+}
+
+.portrait {
+  position: absolute;
+  z-index: 1;
+  top: -51px;
+  left: -5px;
+  width: 251px;
+  height: 251px;
+  object-fit: contain;
+  object-position: bottom;
+  mask-image: url("/images/our-team/figma-portrait-mask.svg");
+  mask-position: 8.213px -14.553px;
+  mask-repeat: no-repeat;
+  mask-size: 294.479px 263.053px;
+}
+
+.engineer .portrait {
+  top: -38px;
+  left: 3px;
+  width: 230px;
+  height: 236px;
+  mask-position: 0.213px -27.553px;
+}
+
+.memberCopy {
+  position: absolute;
+  top: 212px;
+  left: 13px;
+  width: 190px;
+  text-align: center;
+}
+
+.engineer .memberCopy {
+  left: 18px;
+  width: 188px;
+}
+
+.memberCopy h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.member:not(.engineer) .memberCopy h2 {
+  line-height: 36px;
+}
+
+.memberCopy p {
+  margin: 2px 0 0;
+  color: #23b14d;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 0.7px;
+}
+
+.chatTrigger,
+.chatTrigger > div,
+.chatTrigger > div > img {
+  width: 462px;
+  height: 96px;
+}
+
+.mobilePage {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  padding-top: 76px;
+  background: #fff;
+  color: #111;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.mobileArtwork {
+  position: absolute;
+  top: 76px;
+  left: -220px;
+  width: 720px;
+  opacity: 0.14;
+}
+
+.mobileContent {
+  position: relative;
+  z-index: 2;
+  padding: 38px 20px 150px;
+}
+
+.mobileContent > h1 {
+  margin: 0 0 48px;
+  font-size: clamp(38px, 10vw, 64px);
+  font-weight: 800;
+  line-height: 1.04;
+  text-transform: uppercase;
+}
+
+.mobileContent > h1 span {
+  display: block;
+  color: #23b14d;
+}
+
+.mobileGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px 14px;
+}
+
+.mobileGrid article {
+  text-align: center;
+}
+
+.mobileGrid article > div {
+  position: relative;
+  aspect-ratio: 1.35;
+}
+
+.mobileGrid article > div img:first-child {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mobileGrid article > div img:last-child {
+  position: absolute;
+  bottom: 7%;
+  left: 3%;
+  width: 78%;
+  height: 115%;
+  object-fit: contain;
+  object-position: bottom;
+}
+
+.mobileGrid h2 {
+  margin: 8px 0 3px;
+  font-size: 16px;
+  line-height: 1.1;
+}
+
+.mobileGrid p {
+  margin: 0;
+  color: #23b14d;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+@media (max-width: 420px) {
+  .mobileGrid {
+    grid-template-columns: 1fr;
+    padding: 0 44px;
+  }
+}

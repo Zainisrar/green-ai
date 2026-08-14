@@ -1,130 +1,146 @@
 "use client";
-import React from "react";
-import TopNavigation from "../TopNavigation/TopNavigation";
-import Chatbot from "../Chatbot";
+
 import { useLeadershipTeam } from "../../../hooks/useLeadershipTeam";
+import D6Chatbot from "../D6Chatbot";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaPageCanvas from "../shared/FigmaPageCanvas";
+import styles from "./Team.module.css";
 
-const Team = () => {
-  const { leadershipSection,  error } = useLeadershipTeam();
+const FALLBACK_MEMBERS = [
+  {
+    name: "Bernard George",
+    designation: "Chief Executive Officer",
+    image: "/images/our-team/bernard-george.png",
+  },
+  {
+    name: "Senthilkumar Chockalingam",
+    designation: "Senior Business and Engineering Manager",
+    image: "/images/our-team/senthilkumar.png",
+  },
+  {
+    name: "Bernard George",
+    designation: "Chief Executive Officer",
+    image: "/images/our-team/bernard-george.png",
+  },
+  {
+    name: "Bernard George",
+    designation: "Chief Executive Officer",
+    image: "/images/our-team/bernard-george.png",
+  },
+  {
+    name: "Senthilkumar Chockalingam",
+    designation: "Senior Business and Engineering Manager",
+    image: "/images/our-team/senthilkumar.png",
+  },
+  {
+    name: "Bernard George",
+    designation: "Chief Executive Officer",
+    image: "/images/our-team/bernard-george.png",
+  },
+] as const;
 
+export default function Team() {
+  const { leadershipSection } = useLeadershipTeam();
+  const apiMembers = leadershipSection?.members ?? [];
+  const members = FALLBACK_MEMBERS.map((fallback, index) => ({
+    name: apiMembers[index]?.name || fallback.name,
+    designation: apiMembers[index]?.designation || fallback.designation,
+    image: apiMembers[index]?.img?.src || fallback.image,
+    alt: apiMembers[index]?.img?.alt || fallback.name,
+  }));
+  const title = leadershipSection?.title || "Leadership Team";
+  const titleWords = title.trim().split(/\s+/);
+  const titleEnd = titleWords.pop() || "Team";
+  const titleStart = titleWords.join(" ") || "Leadership";
 
-  if (error) {
-    return (
-      <React.Fragment>
-        <div className="">
-          <TopNavigation />
-          <div className="flex items-center justify-center h-screen">
-            <div className="text-xl text-red-500">
-              Error loading leadership team data
+  const desktop = (
+    <main className={styles.desktopPage} data-node-id="7077:6769">
+      <img
+        className={styles.backgroundArtwork}
+        src="/images/our-team/mainImg.png"
+        alt=""
+      />
+      <SiteHeader layout="figmaCanvas" highlightActive={false} />
+      <h1 className={styles.pageTitle} data-node-id="7077:6789">
+        {titleStart}
+        <span>{titleEnd}</span>
+      </h1>
+      <img
+        className={styles.watermark}
+        src="/images/our-team/team.png"
+        alt=""
+      />
+
+      <section className={styles.teamGrid} aria-label="Leadership team">
+        {members.map((member, index) => (
+          <article
+            className={`${styles.member} ${index === 1 || index === 4 ? styles.engineer : ""}`}
+            key={`${member.name}-${index}`}
+            data-node-id={`7077:${6800 + index}`}
+          >
+            <img
+              className={styles.frame}
+              src="/images/our-team/figma-member-frame.svg"
+              alt=""
+            />
+            <img
+              className={styles.portrait}
+              src={member.image}
+              alt={member.alt}
+            />
+            <div className={styles.memberCopy}>
+              <h2>{member.name}</h2>
+              <p>{member.designation}</p>
             </div>
-          </div>
-        </div>
-      </React.Fragment>
-    );
-  }
+          </article>
+        ))}
+      </section>
 
-  const members = leadershipSection?.members || [];
-  const firstRowMembers = members.slice(0, 3);
-  const secondRowMembers = members.slice(3, 6);
-  const key = leadershipSection?.title;
+      <D6Chatbot
+        canvasAnchored
+        triggerVariant="figmaCanvas"
+        triggerClassName={styles.chatTrigger}
+        triggerStyle={{
+          top: 881,
+          right: "auto",
+          bottom: "auto",
+          left: 1480,
+          width: 462,
+        }}
+      />
+    </main>
+  );
 
-  const renderMember = (member: any, index: number) => (
-    <div key={index} className="">
-      <div className="">
-        <div className="relative">
-          <img
-            src={member?.img?.src || "/images/our-team/bernard-george.png"}
-            alt={member?.img?.alt || member?.name || "Team Member"}
-            className="w-full h-full object-cover"
-            style={{
-              maskImage: "url('/images/our-team/maskImg.png')",
-              maskRepeat: "no-repeat",
-              maskSize: "100% 100%",
-              maskPosition: "center",
-              WebkitMaskImage: "url('/images/our-team/maskImg.png')",
-              WebkitMaskRepeat: "no-repeat",
-              WebkitMaskSize: "100% 100%",
-              WebkitMaskPosition: "center",
-            }}
-          />
-          <img
-            src="/images/our-team/maskImg.png"
-            alt=""
-            role="presentation"
-            className="absolute top-16 w-[400px] -z-10 "
-          />
-        </div>
-        <div className="text-center -ml-20">
-          <h3 className="text-lg lg:text-xl font-bold text-gray-800">
-            {member?.name || "Bernard George"}
-          </h3>
-          <p className="text-sm text-green-600 font-semibold">
-            {member?.designation || "Chief Executive Officer"}
-          </p>
+  const mobile = (
+    <main className={styles.mobilePage} data-node-id="7077:6769-mobile">
+      <SiteHeader panel="logoOnly" />
+      <img
+        className={styles.mobileArtwork}
+        src="/images/our-team/mainImg.png"
+        alt=""
+      />
+      <div className={styles.mobileContent}>
+        <h1>
+          {titleStart} <span>{titleEnd}</span>
+        </h1>
+        <div className={styles.mobileGrid}>
+          {members.map((member, index) => (
+            <article key={`${member.name}-mobile-${index}`}>
+              <div>
+                <img src="/images/our-team/maskImg.png" alt="" />
+                <img src={member.image} alt={member.alt} />
+              </div>
+              <h2>{member.name}</h2>
+              <p>{member.designation}</p>
+            </article>
+          ))}
         </div>
       </div>
-    </div>
+      <D6Chatbot />
+    </main>
   );
 
   return (
-    <React.Fragment>
-      <div className="">
-        <TopNavigation />
-        <div className="flex h-full">
-          <div className="absolute top-0 left-0">
-            <img
-              src="/images/our-team/mainImg.png"
-              className="lg:h-screen"
-              alt="mainImg"
-            />
-          </div>
-          {/* Left Side - TEAM Text */}
-          <div className="lg:w-1/6 flex items-center justify-center">
-            <div className="fixed top-1/3 left-8 lg:left-14">
-              <img
-                src="/images/our-team/team.png"
-                className="w-8 lg:w-20"
-                alt="our-team"
-              />
-            </div>
-          </div>
-
-          {/* Main Content Area */}
-          <div className="lg:w-5/6 flex w-full flex-col  lg:px-8  lg:mr-8 lg:ml-4">
-            <div className="lg:flex">
-              {/* Left Content Section */}
-              <div className="lg:w-1/2  flex justify-center text-center lg:block ">
-                <h1 className="text-4xl lg:text-5xl 2xl:text-6xl lg:mt-24 uppercase font-black leading-tight mb-6">
-                  {key?.split("LEADERSHIP")[0] || "Leadership"}
-                  <br />
-                  <span className="text-[#23B14D]">
-                    {key?.slice(key.indexOf("LEADERSHIP") + "LEADERSHIP".length).trim() || "Team"}
-                  </span>
-                </h1>
-              </div>
-
-              {/* Right Content Section */}
-              <div className="w-full flex  flex-col  justify-center lg:ml-52  items-center mt-8">
-                {/* Team Members Grid */}
-
-                <div className="lg:grid lg:grid-cols-3  lg:gap-8 my-2 lg:-ml-52">
-                  {firstRowMembers.map((member, index) =>
-                    renderMember(member, index)
-                  )}
-                </div>
-                <div className="lg:grid lg:grid-cols-3  lg:gap-8 mb-40  lg:-ml-72">
-                  {secondRowMembers.map((member, index) =>
-                    renderMember(member, index + 3)
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <Chatbot />
-      </div>
-    </React.Fragment>
+    <FigmaPageCanvas desktop={desktop} mobile={mobile} nodeId="7077:6769" />
   );
-};
-
-export default Team;
+}
