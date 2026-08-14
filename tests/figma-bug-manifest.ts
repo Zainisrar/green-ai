@@ -47,10 +47,14 @@ export const FIGMA_BUGS: readonly FigmaBug[] = [
     "implemented",
     "fast-fact-stats",
   ),
-  bug(24, "Our Story & Milestones", "/evolution/our-story-milestones", [
-    "7077:6923",
-    "7077:6983",
-  ]),
+  bug(
+    24,
+    "Our Story & Milestones",
+    "/evolution/our-story-milestones",
+    ["7077:6923", "7077:6983"],
+    "implemented",
+    "our-story-milestone",
+  ),
   bug(25, "Mission & Vision", "/evolution/mission-vision", [
     "7077:6846",
     "7077:6885",

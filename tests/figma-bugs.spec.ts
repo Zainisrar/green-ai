@@ -36,6 +36,13 @@ for (const bug of selectedBugs) {
         body: "{}",
       }),
     );
+    await page.route("**/api/evolution/our-story-milestone", (route) =>
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: "{}",
+      }),
+    );
 
     for (const width of REFERENCE_VIEWPORTS) {
       const height = width === 1920 ? 970 : width >= 1024 ? 900 : 844;
@@ -45,7 +52,7 @@ for (const bug of selectedBugs) {
       });
       expect(response?.status(), `${bug.route} should load`).toBeLessThan(400);
       await page.locator("body").waitFor({ state: "visible" });
-      if (bug.id === 21 || bug.id === 22 || bug.id === 23) {
+      if ([21, 22, 23, 24].includes(bug.id)) {
         await page.waitForFunction(
           ({ expectedWidth, expectedHeight }) => {
             if (expectedWidth <= 1200) {
