@@ -10,7 +10,8 @@ Authoritative file: `s4XHMhWuuo8LMFx2ojKFRI`, page `7077:2780`. Desktop referenc
 | 0024 | `/evolution/our-story-milestones` | `7077:6923`, `7077:6983` | Recursive context returned no authored motion | 1920, 1440, 1024, 768, 390 | Implemented; shared header retained and milestone artwork aspect ratio preserved |
 | 0025 | `/evolution/mission-vision` | `7077:6846`, `7077:6885` | Recursive context returned no authored motion | 1920, 1440, 1024, 768, 390 | Implemented; latest Figma card state and exact vectors committed |
 | 0026 | `/evolution/leadership-team` | `7077:6769` | Recursive context returned no authored motion | 1920, 1440, 1024, 768, 390 | Implemented; reusable member cards preserve API content and Figma row geometry |
-| 0027–0036 | See typed manifest | Exact frame IDs recorded in manifest | Pending per-frame inspection | Pending | Pending |
+| 0027 | `/evolution/certifications-accreditations` | `7077:3221` | Source frame contains no authored keyframe motion | 1920, 1440, 1024, 768, 390 | Implemented; exact ISO, Clean Energy Council, quote, and CTA assets committed; shared header baseline corrected |
+| 0028–0036 | See typed manifest | Exact frame IDs recorded in manifest | Pending per-frame inspection | Pending | Pending |
 | 0037–0038 | Pattern-derived routes | No matching source frame | Must follow selected source pattern | Pending | Pattern-derived |
 | 0039–0043 | See typed manifest | Exact frame IDs recorded in manifest | Pending per-frame inspection | Pending | Pending |
 | 0044 | `/enlighten/learning-hub` | No matching source frame | Must follow selected source pattern | Pending | Pattern-derived |

@@ -76,6 +76,8 @@ export const FIGMA_BUGS: readonly FigmaBug[] = [
     "Certifications & Accreditations",
     "/evolution/certifications-accreditations",
     ["7077:3221"],
+    "implemented",
+    "certifications-accreditations",
   ),
   bug(
     28,

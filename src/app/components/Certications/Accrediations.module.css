@@ -1,0 +1,336 @@
+.desktopPage {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+.watermark {
+  position: absolute;
+  top: 249px;
+  left: -36px;
+  width: 755px;
+  height: 755px;
+  max-width: none;
+  object-fit: cover;
+  opacity: 0.2;
+}
+.verticalTitle {
+  position: absolute;
+  top: 290px;
+  left: 28px;
+  width: 98px;
+  color: transparent;
+  font-size: 80px;
+  font-weight: 900;
+  line-height: 1;
+  -webkit-text-stroke: 1px #d0d0d0;
+  transform: rotate(-90deg) translateX(-100%);
+  transform-origin: top left;
+  white-space: nowrap;
+}
+.pageTitle {
+  position: absolute;
+  top: 116px;
+  left: 262px;
+  width: 510px;
+  margin: 0;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: normal;
+  text-transform: uppercase;
+}
+.pageTitle span {
+  display: block;
+  color: #23b14d;
+}
+.quote {
+  position: absolute;
+  top: 568px;
+  left: 149px;
+  width: 606px;
+  height: 155px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.quote img {
+  position: absolute;
+  inset: 0;
+  width: 606px;
+  height: 155px;
+}
+.quote span {
+  position: absolute;
+  top: 23px;
+  left: 70px;
+  width: 510px;
+  font-size: 40px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: normal;
+  text-align: left;
+}
+.esg {
+  position: absolute;
+  top: 131px;
+  left: 785px;
+  width: 1086px;
+}
+.desktopPage h2 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: normal;
+}
+.esg > p {
+  margin: 11px 0 0;
+}
+.esg p,
+.esg li {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+}
+.esg ul {
+  margin: 0;
+  padding-left: 20px;
+}
+.iso {
+  position: absolute;
+  top: 355px;
+  left: 782px;
+  width: 1100px;
+}
+.isoIntro {
+  width: 1100px;
+  margin: 13px 0 0;
+  font-size: 16px;
+  line-height: 24px;
+}
+.certificates {
+  display: grid;
+  grid-template-columns: 247px 268px 271px 325px;
+  margin-top: 20px;
+}
+.certificate {
+  display: flex;
+  align-items: flex-start;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #000;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  flex-direction: column;
+}
+.certificate img {
+  width: 145px;
+  height: 176px;
+  margin-bottom: 4px;
+  object-fit: fill;
+}
+.certificate:nth-child(3) img {
+  width: 144px;
+}
+.certificate strong {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 24px;
+}
+.certificate b {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 22px;
+}
+.certificate:nth-child(-n + 2) b {
+  font-size: 16px;
+}
+.certificate span {
+  width: calc(100% - 10px);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+}
+.cleanEnergy {
+  position: absolute;
+  top: 808px;
+  left: 786px;
+  display: flex;
+  align-items: flex-start;
+  gap: 28px;
+}
+.cleanEnergy > div {
+  width: 369px;
+}
+.cleanEnergy p {
+  margin: 11px 0 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+}
+.cleanEnergy img {
+  width: 262px;
+  height: 117px;
+  margin-top: 12px;
+  object-fit: fill;
+}
+.startButton {
+  position: absolute;
+  top: 805px;
+  left: 1742px;
+  width: 178px;
+  height: 52px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.startButton img {
+  position: absolute;
+  inset: 0;
+  width: 178px;
+  height: 52px;
+}
+.startButton span {
+  position: absolute;
+  inset: 4px 10px 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 40px;
+  text-align: center;
+}
+.chatTrigger {
+  z-index: 3;
+}
+.mobilePage {
+  min-height: 100svh;
+  padding-top: 82px;
+  background: #fff;
+  color: #202020;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+.mobileContent {
+  width: min(100% - 32px, 760px);
+  margin: 0 auto;
+  padding: 34px 0 140px;
+}
+.mobileContent h1 {
+  margin: 0 0 28px;
+  font-size: clamp(30px, 7vw, 48px);
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+.mobileContent h1 span {
+  display: block;
+  color: #23b14d;
+}
+.mobileContent blockquote {
+  margin: 0 0 36px;
+  padding: 22px 26px;
+  background: #f4fbdc;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 12%);
+  clip-path: polygon(6% 0, 100% 0, 94% 100%, 0 100%);
+  font-size: 23px;
+  font-style: italic;
+  font-weight: 500;
+}
+.mobileContent section {
+  margin-top: 34px;
+}
+.mobileContent h2 {
+  margin: 0 0 12px;
+  font-size: 24px;
+  line-height: 1.2;
+}
+.mobileContent p,
+.mobileContent li {
+  font-size: 15px;
+  line-height: 1.55;
+}
+.mobileContent ul {
+  padding-left: 20px;
+}
+.mobileCertificates {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 18px;
+  margin-top: 24px;
+}
+.mobileCertificates button {
+  display: flex;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  text-align: left;
+  flex-direction: column;
+}
+.mobileCertificates img {
+  width: 116px;
+  height: 141px;
+  object-fit: fill;
+}
+.mobileCertificates strong,
+.mobileCertificates b,
+.mobileCertificates span {
+  display: block;
+}
+.mobileCertificates strong {
+  font-size: 18px;
+}
+.mobileCertificates b {
+  margin: 2px 0 5px;
+  font-size: 13px;
+}
+.mobileCertificates span {
+  font-size: 13px;
+  line-height: 1.45;
+}
+.mobileCleanEnergy {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.mobileCleanEnergy > div {
+  flex: 1 1 auto;
+}
+.mobileCleanEnergy img {
+  width: min(40%, 220px);
+  height: auto;
+}
+.mobileStart {
+  display: block;
+  width: 178px;
+  height: 52px;
+  margin: 36px 0 0 auto;
+  border: 1px solid #23b14d;
+  background: #f2ffd7;
+  color: #202020;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+}
+@media (max-width: 560px) {
+  .mobileCertificates {
+    grid-template-columns: 1fr;
+  }
+  .mobileCertificates button {
+    align-items: center;
+    text-align: center;
+  }
+  .mobileCleanEnergy {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .mobileCleanEnergy img {
+    width: 220px;
+  }
+}
