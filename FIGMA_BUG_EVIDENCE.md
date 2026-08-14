@@ -18,7 +18,8 @@ Authoritative file: `s4XHMhWuuo8LMFx2ojKFRI`, page `7077:2780`. Desktop referenc
 | 0032 | `/engineering/om-monitoring` | `7077:4516` | Recursive motion context returned no animated nodes | 1920, 1440, 1024, 768, 390 | Implemented; exact existing monitoring composite, watermark, lightning glyph, and CTA exports reused; shared header retained |
 | 0033 | `/engineering/grid-intel` | `7077:4592` | Recursive motion context returned no animated nodes | 1920, 1440, 1024, 768, 390 | Implemented; exact existing solar composite, watermark, section brackets, and CTA exports reused; all eight existing dialogs retained |
 | 0034 | `/engineering/products` | `7077:12660` | Recursive motion context returned no animated nodes | 1920, 1440, 1024, 768, 390 | Implemented; exact existing Figma product, lifestyle background, gallery, logo, specification-panel, and icon exports reused; API content retained with deterministic Figma fallback |
-| 0035–0036 | See typed manifest | Exact frame IDs recorded in manifest | Pending per-frame inspection | Pending | Pending |
+| 0035 | `/endeavors/project-portfolio` | `7077:7011` | Recursive motion context returned no animated nodes | 1920, 1440, 1024, 768, 390 | Implemented; exact Baiyer, Pimaga, and Mongal project imagery reused; shared canvas/header/chatbot and existing project API/modal behavior retained; editor-only choice tokens excluded |
+| 0036 | `/endeavors/flagship-projects` | `7077:14937` | Pending per-frame inspection | Pending | Pending |
 | 0037–0038 | Pattern-derived routes | No matching source frame | Must follow selected source pattern | Pending | Pattern-derived |
 | 0039–0043 | See typed manifest | Exact frame IDs recorded in manifest | Pending per-frame inspection | Pending | Pending |
 | 0044 | `/enlighten/learning-hub` | No matching source frame | Must follow selected source pattern | Pending | Pattern-derived |

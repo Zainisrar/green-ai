@@ -1,12 +1,12 @@
-import React from 'react'
-import Project from '@/app/components/Projects/Project'
+import Project from "@/app/components/Projects/Project";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function ProjectPortfolioPage() {
   return (
-    <React.Fragment>
-        <Project/>
-    </React.Fragment>
-  )
+    <FigmaPageCanvas
+      desktop={<Project />}
+      mobile={<Project />}
+      nodeId="7077:7011"
+    />
+  );
 }
-
-export default page

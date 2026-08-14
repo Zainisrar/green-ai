@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { useProjects } from "@/hooks/useProjects";
-import Chatbot from "../Chatbot";
+import D6Chatbot from "../D6Chatbot";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import LetsStart from "./Modals/LetsStart";
 import styles from "./Project.module.css";
@@ -27,8 +27,9 @@ type ProjectSlide = {
 
 const fallbackProject: ProjectSlide = {
   id: 1,
-  title: "Wildlife Conservation Society 2025",
-  image: "/images/projects/featuredProjectImg1.png",
+  title:
+    "PNG’s First Utility-Scale Grid-Connected Solar Power Plant, 3MW, Baiyer (2025)",
+  image: "/images/projects/image.png",
   systems: "1",
   days: "265",
   totalGeneration: "1000 kWh",
@@ -47,15 +48,14 @@ const fallbackProjects = [
   {
     ...fallbackProject,
     id: 2,
-    title:
-      "PNG’s First Utility-Scale Grid-Connected Solar Power Plant, 3MW, Baiyer (2025)",
-    image: "/images/projects/image.png",
+    title: "Mongal Health Centre 2020",
+    image: "/images/projects/image2.png",
   },
   {
     ...fallbackProject,
     id: 3,
-    title: "Mongal Health Centre 2020",
-    image: "/images/projects/image2.png",
+    title: "Wildlife Conservation Society 2025",
+    image: "/images/projects/featuredProjectImg1.png",
   },
 ];
 
@@ -134,17 +134,21 @@ const timelineCards = [
   },
 ] as const;
 
-const INITIAL_TIMELINE_DELAY_MS = 1000;
-const TIMELINE_STEP_INTERVAL_MS = 2283;
-const LAST_TIMELINE_STEP = 5;
-
 export default function Project() {
-  const [isProjectsOpen, setIsProjectsOpen] = useState(true);
+  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [isStartOpen, setIsStartOpen] = useState(false);
   const [viewMode, setViewMode] = useState<"in-view" | "slide">("slide");
   const [timelineRun, setTimelineRun] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(true);
   const { data: apiProjects } = useProjects();
+
+  useEffect(() => {
+    const update = () => setIsDesktop(window.innerWidth > 1200);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   const projects = useMemo(() => {
     const liveProjects = apiProjects?.length
@@ -212,8 +216,8 @@ export default function Project() {
   };
 
   return (
-    <main className={styles.page}>
-      <SiteHeader />
+    <main className={styles.page} data-node-id="7077:7011">
+      <SiteHeader layout={isDesktop ? "figmaCanvas" : "viewport"} />
 
       <Image
         className={styles.verticalTitle}
@@ -414,31 +418,29 @@ export default function Project() {
           </button>
         </>
       )}
-      <Chatbot triggerClassName={styles.chatTrigger} />
+      {isDesktop ? (
+        <D6Chatbot
+          canvasAnchored
+          triggerVariant="figmaCanvas"
+          triggerClassName={styles.chatTrigger}
+          triggerStyle={{
+            top: 882,
+            right: "auto",
+            bottom: "auto",
+            left: 1492,
+            width: 418,
+          }}
+        />
+      ) : (
+        <D6Chatbot />
+      )}
       <LetsStart isOpen={isStartOpen} onClose={() => setIsStartOpen(false)} />
     </main>
   );
 }
 
 function InViewTimeline({ onExplore }: { onExplore: (year: string) => void }) {
-  const [step, setStep] = useState(0);
-
-  useEffect(() => {
-    let sequence: number | undefined;
-    const initial = window.setTimeout(() => {
-      setStep(1);
-      sequence = window.setInterval(() => {
-        setStep((current) => (current >= LAST_TIMELINE_STEP ? 0 : current + 1));
-      }, TIMELINE_STEP_INTERVAL_MS);
-    }, INITIAL_TIMELINE_DELAY_MS);
-
-    return () => {
-      window.clearTimeout(initial);
-      if (sequence !== undefined) {
-        window.clearInterval(sequence);
-      }
-    };
-  }, []);
+  const step = 5;
 
   return (
     <section
