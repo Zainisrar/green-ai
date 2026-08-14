@@ -100,6 +100,8 @@ export const FIGMA_BUGS: readonly FigmaBug[] = [
     "Hybrid & Microgrid Solutions",
     "/engineering/hybrid-microgrid-solutions",
     ["7077:5239"],
+    "implemented",
+    "hybrid-microgrid-solutions",
   ),
   bug(
     31,
