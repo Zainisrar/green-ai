@@ -43,6 +43,13 @@ for (const bug of selectedBugs) {
         body: "{}",
       }),
     );
+    await page.route("**/api/evolution/vision-mission", (route) =>
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: "{}",
+      }),
+    );
 
     for (const width of REFERENCE_VIEWPORTS) {
       const height = width === 1920 ? 970 : width >= 1024 ? 900 : 844;
@@ -52,7 +59,7 @@ for (const bug of selectedBugs) {
       });
       expect(response?.status(), `${bug.route} should load`).toBeLessThan(400);
       await page.locator("body").waitFor({ state: "visible" });
-      if ([21, 22, 23, 24].includes(bug.id)) {
+      if ([21, 22, 23, 24, 25].includes(bug.id)) {
         await page.waitForFunction(
           ({ expectedWidth, expectedHeight }) => {
             if (expectedWidth <= 1200) {
