@@ -88,6 +88,14 @@ for (const bug of selectedBugs) {
       await page.addStyleTag({
         content: "nextjs-portal{display:none!important}",
       });
+      if (width === 1920 && [21, 22, 23, 24, 25].includes(bug.id)) {
+        const menuTops = await page
+          .locator('[data-site-header] nav[aria-label="Primary navigation"] a')
+          .evaluateAll((links) =>
+            links.map((link) => link.getBoundingClientRect().top),
+          );
+        expect(new Set(menuTops.map((top) => Math.round(top))).size).toBe(1);
+      }
       await expect
         .poll(() =>
           page.evaluate(
