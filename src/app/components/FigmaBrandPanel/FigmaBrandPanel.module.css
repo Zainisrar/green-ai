@@ -7,6 +7,10 @@
   pointer-events: none;
 }
 
+.fixedCanvasPanel {
+  --brand-panel-width: 310px;
+}
+
 .rectangle {
   position: absolute;
   inset: 0;

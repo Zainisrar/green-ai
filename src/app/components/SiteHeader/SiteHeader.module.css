@@ -53,6 +53,20 @@
   object-fit: contain;
 }
 
+.sunshineLogo.productLogo {
+  position: absolute;
+  top: 0;
+  left: clamp(8px, 0.78vw, 15px);
+  width: clamp(132px, 9.17vw, 176px);
+  height: auto;
+  align-self: flex-start;
+}
+
+.sunshineLogo.productLogo img {
+  height: auto;
+  padding: 0;
+}
+
 .navigation {
   display: flex;
   align-items: center;
@@ -76,6 +90,10 @@
   color: #23b14d;
 }
 
+.navigation .active {
+  font-weight: 600;
+}
+
 .menuButton {
   display: grid;
   flex: 0 0 auto;
@@ -92,7 +110,8 @@
 .menuButton img {
   display: block;
   width: 42px;
-  height: 54px;
+  height: 42px;
+  object-fit: contain;
 }
 
 .canvasHeader {
@@ -128,10 +147,14 @@
   line-height: normal;
 }
 
+.canvasHeader .navigation a {
+  display: block;
+  height: 24px;
+  line-height: 24px;
+}
+
 .canvasHeader .navigation a:nth-child(4) {
   flex: 0 0 153px;
-  height: 37px;
-  font-weight: 600;
 }
 
 .canvasHeader .navigation a:nth-child(5) {
@@ -154,6 +177,63 @@
   object-fit: cover;
 }
 
+.productCanvasHeader {
+  position: absolute;
+  top: 0;
+  right: auto;
+  left: 0;
+  width: 1920px;
+  height: 116px;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.productCanvasHeader .sunshineLogo {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.productCanvasHeader .navigation {
+  position: absolute;
+  top: 47px;
+  left: 373px;
+  margin: 0;
+  gap: 30px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.productCanvasHeader .navigation a {
+  display: block;
+  height: 24px;
+  line-height: 24px;
+}
+
+.productCanvasHeader .navigation a:nth-child(4) {
+  transform: translateX(-34px);
+}
+
+.productCanvasHeader .navigation a:nth-child(3) {
+  transform: scaleX(0.75);
+  transform-origin: left center;
+}
+
+.productCanvasHeader .navigation a:nth-child(5) {
+  transform: translateX(-27px);
+}
+
+.productCanvasHeader .navigation a:nth-child(6) {
+  transform: translateX(-14px);
+}
+
+.productCanvasHeader .canvasMenuButton {
+  top: 16px;
+  left: 1827px;
+}
+
 @media (max-width: 900px) {
   .header {
     --site-header-height: 76px;
@@ -168,6 +248,10 @@
     padding: 8px 0;
   }
 
+  .sunshineLogo.productLogo {
+    width: 168px;
+  }
+
   .navigation {
     gap: 0;
   }
@@ -176,9 +260,13 @@
     display: none;
   }
 
-  .menuButton,
-  .menuButton img {
+  .menuButton {
     width: 34px;
     height: 44px;
+  }
+
+  .menuButton img {
+    width: 34px;
+    height: 34px;
   }
 }

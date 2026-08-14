@@ -70,7 +70,7 @@ const ClientDashboard = () => {
       <header className="relative">
         <div className="h-2 w-full bg-[#4a4a4a]" />
         <div className="flex items-center justify-between px-4 lg:px-10 py-4">
-          <a href="/" className="shrink-0">
+          <a href="/home/renewable-energy-the-core" className="shrink-0">
             <span className="block text-3xl font-black leading-none text-[#4CAF50] tracking-tight italic">
               GREEN
             </span>

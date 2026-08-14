@@ -4,6 +4,7 @@ import styles from "./FigmaBrandPanel.module.css";
 interface FigmaBrandPanelProps {
   className?: string;
   compactLogo?: boolean;
+  fixedCanvasSize?: boolean;
   showPanel?: boolean;
 }
 
@@ -16,11 +17,12 @@ const ASSET_ROOT = "/images/shared/figma-brand-panel";
 export default function FigmaBrandPanel({
   className = "",
   compactLogo = false,
+  fixedCanvasSize = false,
   showPanel = true,
 }: FigmaBrandPanelProps) {
   return (
     <div
-      className={`${styles.panel} ${className}`.trim()}
+      className={`${styles.panel} ${fixedCanvasSize ? styles.fixedCanvasPanel : ""} ${className}`.trim()}
       data-node-id="7077:3753"
     >
       {showPanel ? (
@@ -35,7 +37,7 @@ export default function FigmaBrandPanel({
       ) : null}
 
       <Link
-        href="/"
+        href="/home/renewable-energy-the-core"
         className={`${styles.logo} ${compactLogo ? styles.compactLogo : ""}`}
         aria-label="GREEN home"
         data-node-id="7077:3755"

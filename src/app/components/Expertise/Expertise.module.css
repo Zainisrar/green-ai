@@ -15,12 +15,12 @@
 
 .canvas {
   position: absolute;
-  top: 50%;
+  top: 0;
   left: 50%;
   width: 1920px;
   height: 970px;
   overflow: hidden;
-  transform-origin: center;
+  transform-origin: top center;
   background: #fff;
 }
 
@@ -65,10 +65,31 @@
   color: #23b14d;
 }
 
+.sliderHeroHeading {
+  top: 162px;
+  left: 252px;
+  width: 720px;
+  font-size: 40px;
+  letter-spacing: -0.8px;
+}
+
+.sliderDescription {
+  position: absolute;
+  z-index: 3;
+  top: 226px;
+  left: 252px;
+  width: 1040px;
+  margin: 0;
+  color: #303030;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
 .verticalLabel {
   position: absolute;
-  top: 808px;
-  left: 48px;
+  top: 956px;
+  left: 37px;
   width: 559px;
   height: 110px;
   transform: rotate(-90deg);
@@ -116,8 +137,14 @@
   display: block;
   width: 239px;
   height: 93px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: #050505;
+  font: inherit;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .exploreShape {
@@ -225,55 +252,557 @@
 
 .sliderGallery {
   position: absolute;
-  top: 184px;
-  left: 995px;
-  display: flex;
-  width: 865px;
-  height: 610px;
-  align-items: center;
-  gap: 26px;
-  overflow-x: auto;
-  padding: 0 22px;
-  scrollbar-width: none;
+  z-index: 2;
+  top: 226px;
+  left: -109px;
+  width: 2016px;
+  height: 605px;
+  overflow: hidden;
 }
 
-.sliderGallery::-webkit-scrollbar {
+.sliderGallery::before {
+  position: absolute;
+  z-index: 4;
+  top: -49px;
+  left: -28.17px;
+  width: 2246.669px;
+  height: 163.441px;
+  background:
+    url("/images/expertise/figma-slider/upper-mask.svg") center / 100% 100%
+    no-repeat;
+  content: "";
+  pointer-events: none;
+}
+
+.sliderScroller {
+  position: absolute;
+  inset: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.sliderScroller::-webkit-scrollbar {
   display: none;
 }
 
-.sliderGallery button {
+.sliderDragging {
+  cursor: grabbing;
+}
+
+.sliderScroller:focus-visible {
+  outline: 2px solid #23b14d;
+  outline-offset: -2px;
+}
+
+.sliderGallery::after {
+  position: absolute;
+  z-index: 4;
+  top: 506.48px;
+  left: 90.35px;
+  width: 1950.003px;
+  height: 171.391px;
+  background:
+    url("/images/expertise/figma-slider/lower-mask.svg") center / 100% 100%
+    no-repeat;
+  content: "";
+  pointer-events: none;
+}
+
+.sliderTrack {
+  display: flex;
+  width: max-content;
+  height: 605px;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.sliderPanel {
   position: relative;
-  flex: 0 0 360px;
-  height: 255px;
+  display: block;
+  flex: 0 0 455.361px;
+  width: 455.361px;
+  height: 604.868px;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
   border: 0;
   background: #fff;
-  box-shadow: 0 10px 24px rgb(0 0 0 / 18%);
+  cursor: pointer;
+  animation: slider-panel-reveal 300ms cubic-bezier(0, 0, 0.58, 1) both;
+  box-shadow: 0 7.656px 65.08px rgb(0 0 0 / 10%);
+  will-change: opacity;
+}
+
+.sliderAsset {
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sliderAsset img {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+}
+
+.sliderAssetHealthcare {
+  top: 16.533px;
+  left: -284.33px;
+  width: 1023.327px;
+  height: 571.92px;
+  border-radius: 10px;
+  transform: scaleX(-1);
+}
+
+.sliderAssetHealthcare img {
+  left: 0.23%;
+  width: 99.36%;
+}
+
+.sliderAssetHome {
+  top: 25.434px;
+  left: -346.435px;
+  width: 1128.517px;
+  height: 554px;
+}
+
+.sliderAssetHome img {
+  top: -17.89%;
+  height: 135.78%;
+}
+
+.sliderAssetCorporate {
+  top: 40.32px;
+  left: -257.581px;
+  width: 1126.273px;
+  height: 524.229px;
+}
+
+.sliderAssetCorporate img,
+.sliderAssetCorporateRepeat img {
+  top: -10.42%;
+  height: 120.85%;
+}
+
+.sliderAssetRural {
+  top: 19.431px;
+  left: -278.782px;
+  width: 1152.976px;
+  height: 566.006px;
+}
+
+.sliderAssetRural img,
+.sliderAssetRuralRepeat img {
+  top: -7.29%;
+  height: 114.58%;
+}
+
+.sliderAssetTelecom {
+  top: 37.951px;
+  left: -41.945px;
+  width: 539.431px;
+  height: 529.097px;
+}
+
+.sliderAssetResidence {
+  top: 37.979px;
+  left: -78.055px;
+  width: 612.149px;
+  height: 528.797px;
+}
+
+.sliderAssetCorporateRepeat {
+  top: 0.848px;
+  left: -421.184px;
+  width: 1297.699px;
+  height: 604.02px;
+}
+
+.sliderAssetRuralRepeat {
+  top: 33.714px;
+  left: -319.745px;
+  width: 1095.455px;
+  height: 537.769px;
+}
+
+.sliderLabel {
+  position: absolute;
+  z-index: 2;
+  top: 119.1px;
+  right: 0;
+  left: 0;
+  display: block;
+  height: 59px;
+  overflow: hidden;
+  background: rgb(230 226 226 / 30%);
+  color: #050505;
+  white-space: nowrap;
+  backdrop-filter: blur(7.5px);
+}
+
+.sliderLabel > b {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  width: 480px;
+  transform: translateX(-50%);
+  font-size: 35px;
+  font-weight: 600;
+  line-height: 40px;
+  text-align: center;
+}
+
+.sliderPanelCorporate {
+  top: 102.1px;
+  height: 81px;
+}
+
+.sliderPanelCorporate > b {
+  top: 25px;
+}
+
+.sliderPanelRural {
+  top: 88.6px;
+  height: 94.5px;
+}
+
+.sliderPanelRural > b {
+  top: 39.5px;
+}
+
+.sliderWatermark {
+  z-index: 5;
+  top: 848px;
+  left: 42px;
+  width: 560px;
+  height: 100px;
+  transform: none;
+  color: transparent;
+  font-size: 86px;
+  line-height: 100px;
+  letter-spacing: -2px;
+  -webkit-text-stroke: 1px #b8b8b8;
+  opacity: 0.72;
+}
+
+.sliderPagination {
+  position: absolute;
+  z-index: 5;
+  top: 906px;
+  left: 1474px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #addfc0;
+}
+
+.overviewHidden {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.healthcareDetail {
+  position: absolute;
+  z-index: 8;
+  inset: 0;
+  background: #fff;
+  transform-origin: 52.5% 54%;
+  will-change: transform, opacity;
+}
+
+.detailWatermark {
+  position: absolute;
+  top: 336px;
+  left: 111px;
+  display: block;
+  width: 69px;
+  height: 560px;
+  object-fit: contain;
+  opacity: 0.7;
+}
+
+.detailMedia {
+  position: absolute;
+  top: 129px;
+  left: 200px;
+  width: 716px;
+  height: 775px;
+}
+
+.detailImageStack {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 715px;
+  height: 640px;
+  overflow: hidden;
+}
+
+.detailImageStack img {
+  position: absolute;
+  object-fit: cover;
+}
+
+.detailImageStack .detailStackBack {
+  top: 79px;
+  left: 0;
+  width: 425px;
+  height: 481px;
+  clip-path: polygon(38% 0, 100% 0, 64% 100%, 0 100%);
+  opacity: 0.3;
+}
+
+.detailImageStack .detailStackMiddle {
+  top: 38px;
+  left: 30px;
+  width: 637px;
+  height: 659px;
+  clip-path: polygon(33% 0, 100% 0, 65% 100%, 0 100%);
+  opacity: 0.8;
+}
+
+.detailMainBacking,
+.detailMainImage {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 9px;
+  width: 706px;
+  height: 640px;
+  object-fit: cover;
+  clip-path: polygon(42.35% 0, 100% 0, 70.7% 100%, 0 100%);
+}
+
+.detailMainBacking {
+  pointer-events: none;
+}
+
+.detailMainImage {
+  z-index: 3;
+  animation: slider-panel-reveal 300ms cubic-bezier(0, 0, 0.58, 1) both;
+}
+
+.detailArrows {
+  position: absolute;
+  z-index: 4;
+  top: 565px;
+  left: 527px;
+  display: flex;
+  gap: 19px;
+}
+
+.detailArrows button {
+  display: block;
+  width: 36px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
   cursor: pointer;
 }
 
-.sliderGallery button img {
+.detailArrows img {
+  display: block;
+  width: 36px;
+  height: 100%;
+  object-fit: contain;
+}
+
+.detailThumbnails {
+  position: absolute;
+  bottom: 1px;
+  left: 43px;
+  display: flex;
+  gap: 4px;
+}
+
+.detailThumbnails button {
+  box-sizing: border-box;
+  width: 132px;
+  height: 86px;
+  padding: 0;
+  border: 3px solid transparent;
+  background: transparent;
+  clip-path: polygon(22% 0, 100% 0, 78% 100%, 0 100%);
+  cursor: pointer;
+  opacity: 0.38;
+}
+
+.detailThumbnails button img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.sliderGallery button span {
+.detailThumbnails .detailThumbnailActive {
+  border-color: #23b14d;
+  opacity: 1;
+}
+
+.detailContent {
+  position: absolute;
+  z-index: 2;
+  top: 138px;
+  left: 938px;
+  width: 924px;
+}
+
+.detailContent h1 {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.detailContent h1 span,
+.detailContent h2 {
+  color: #23b14d;
+}
+
+.detailContent h2 {
+  margin: 22px 0 0;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.detailDescription {
+  width: 920px;
+  margin: 37px 0 0;
+  color: #303030;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: justify;
+}
+
+.detailFeatures {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px 72px;
+  margin-top: 36px;
+}
+
+.detailFeatures article {
+  display: grid;
+  grid-template-columns: 55px 1fr;
+  gap: 14px;
+}
+
+.detailFeatures article > img {
+  width: 55px;
+  height: 58px;
+  object-fit: contain;
+}
+
+.detailFeatures h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.detailFeatures p {
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.detailCategories {
+  position: absolute;
+  top: 660px;
+  left: -22px;
+  display: flex;
+  height: 144px;
+}
+
+.detailCategories button {
+  position: relative;
+  width: 77px;
+  padding: 0;
+  border: 0;
+  border-left: 5px solid #f7f7f7;
+  background: #fff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  cursor: pointer;
+}
+
+.detailCategories .detailCategoryActive {
+  width: 204px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 8px;
+  writing-mode: horizontal-tb;
+  transform: none;
+}
+
+.detailCategoryActive img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detailCategoryActive span {
   position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
-  padding: 18px 20px;
+  padding: 12px 8px;
   background: linear-gradient(transparent, rgb(0 0 0 / 72%));
   color: #fff;
-  font-size: 18px;
-  font-weight: 600;
-  text-align: left;
+  font-size: 13px;
 }
 
-.sliderGallery .sliderCardActive {
-  border: 2px solid #23d14b;
-  box-shadow: 0 0 18px rgb(255 254 80 / 65%);
+.detailStartButton {
+  position: absolute;
+  top: 658px;
+  right: -59px;
+  display: grid;
+  width: 176px;
+  height: 54px;
+  background: linear-gradient(100deg, #c9f096, #fff869);
+  clip-path: polygon(18% 0, 100% 0, 83% 100%, 0 100%);
+  color: #050505;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  place-items: center;
+}
+
+@keyframes slider-panel-reveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sliderPanel {
+    animation: none;
+    will-change: auto;
+  }
+
+  .healthcareDetail {
+    will-change: auto;
+  }
 }
 
 .pagination {
@@ -333,8 +862,20 @@
 }
 
 .page .chatbot {
-  right: 5px;
-  bottom: 52px;
+  /* Keep the complete angled trigger—and its microphone—inside the canvas. */
+  right: 4px;
+  bottom: -6px;
+}
+
+.page .chatbot > div > div:last-child {
+  right: 13%;
+}
+
+.page .chatbot > div > div:last-child img {
+  display: block;
+  width: 18px;
+  height: 23px;
+  max-width: none;
 }
 
 .page .chatbot input {

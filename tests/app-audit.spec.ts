@@ -2,7 +2,7 @@ import { test, expect, type Page, type ConsoleMessage } from '@playwright/test';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = 'http://127.0.0.1:5005';
 
 export interface BugReport {
   id: string;

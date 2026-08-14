@@ -1,0 +1,23 @@
+.shell {
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  overflow: hidden;
+  background: #fff;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 970px;
+  overflow: hidden;
+  transform-origin: top left;
+}
+
+.mobile {
+  min-height: 100svh;
+  overflow-x: hidden;
+  background: #fff;
+}

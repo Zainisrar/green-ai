@@ -1,12 +1,5 @@
-import React from 'react'
-import SmartGrid from '@/app/components/SmartGrid/SmartGrid'
+import SmartGrid from "@/app/components/SmartGrid/SmartGrid";
 
-const page = () => {
-  return (
-    <React.Fragment>
-        <SmartGrid/>
-    </React.Fragment>
-  )
+export default function EnergyStorageSmartGridPage() {
+  return <SmartGrid />;
 }
-
-export default page

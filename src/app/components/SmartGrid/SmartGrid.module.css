@@ -1,0 +1,311 @@
+.desktopPage {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.backgroundArt {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 989px;
+  height: 970px;
+  pointer-events: none;
+}
+
+.verticalTitle {
+  position: absolute;
+  top: 153px;
+  left: 45px;
+  width: 40px;
+  height: 773px;
+}
+
+.pageTitle {
+  position: absolute;
+  top: 59px;
+  left: 301px;
+  width: 995px;
+  margin: 0;
+  color: #303030;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  position: absolute;
+  top: 186px;
+  left: 301px;
+  width: 1223px;
+  margin: 0;
+  color: #23b14d;
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 36px;
+}
+
+.description {
+  position: absolute;
+  top: 239px;
+  left: 301px;
+  width: 1003px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.28px;
+}
+
+.description strong,
+.storageQuote span,
+.failureQuote span,
+.statement span,
+.mobileContent blockquote span,
+.mobileStatement span {
+  color: #23b14d;
+}
+
+.architecture {
+  position: absolute;
+  top: 301px;
+  left: 806px;
+  width: 1100px;
+}
+
+.architecture h2 {
+  margin: 0 0 18px;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 44px;
+}
+
+.architecture ul {
+  margin: 0;
+  padding-left: 27px;
+}
+
+.architecture li {
+  margin-bottom: 18px;
+  font-size: 22px;
+  line-height: 20px;
+}
+
+.architecture li strong {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.storageQuote {
+  position: absolute;
+  top: 506px;
+  left: 214px;
+  width: 517px;
+  height: 116px;
+  background: rgb(249 251 211 / 78%);
+  box-shadow: 0 8px 16px rgb(0 0 0 / 18%);
+  clip-path: polygon(9% 0, 100% 0, 91% 100%, 0 100%);
+}
+
+.storageQuote p {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 16px 50px;
+  font-size: 37px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.failureQuote {
+  position: absolute;
+  top: 679px;
+  left: 132px;
+  width: 418px;
+  margin: 0;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: normal;
+  text-align: center;
+}
+
+.statement {
+  position: absolute;
+  top: 677px;
+  left: 576px;
+  width: 980px;
+  margin: 0;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 36px;
+}
+
+.statement strong {
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+.actions {
+  position: absolute;
+  inset: 0;
+}
+
+.actions button,
+.actions a {
+  position: absolute;
+  display: block;
+  height: 53px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #000;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.actions button:nth-child(1) {
+  top: 637px;
+  left: 1581px;
+  width: 341px;
+}
+
+.actions button:nth-child(2) {
+  top: 718px;
+  left: 1566px;
+  width: 351px;
+}
+
+.actions a {
+  top: 793px;
+  left: 1480px;
+  width: 441px;
+}
+
+.actions img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 53px;
+}
+
+.actions span {
+  position: absolute;
+  inset: 6px 34px 0 18px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 40px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.actions b {
+  position: absolute;
+  top: 5px;
+  right: 12px;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 40px;
+}
+
+.actions a b {
+  top: 6px;
+  right: 16px;
+  font-size: 20px;
+}
+
+.chatTrigger {
+  z-index: 3;
+}
+
+.mobilePage {
+  min-height: 100svh;
+  padding-top: 82px;
+  background: #fff;
+  color: #202020;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.mobileContent {
+  width: min(100% - 28px, 760px);
+  margin: 0 auto;
+  padding: 34px 0 140px;
+}
+
+.mobileContent h1 {
+  margin: 0;
+  font-size: clamp(30px, 8vw, 48px);
+  font-weight: 800;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.mobileContent > h2 {
+  margin: 18px 0 8px;
+  color: #23b14d;
+  font-size: 22px;
+  font-style: italic;
+}
+
+.mobileContent > p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.mobileContent blockquote {
+  margin: 28px auto;
+  padding: 22px 34px;
+  background: #f8fad9;
+  box-shadow: 0 8px 16px rgb(0 0 0 / 16%);
+  clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.mobileArchitecture {
+  padding: 24px;
+  border-left: 2px solid #9ae98e;
+}
+
+.mobileArchitecture h3 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.mobileArchitecture ul {
+  padding-left: 20px;
+}
+
+.mobileArchitecture li {
+  margin-bottom: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.mobileStatement {
+  margin: 28px 0;
+  font-size: 18px;
+  font-style: italic;
+}
+
+.mobileActions {
+  display: grid;
+  gap: 14px;
+}
+
+.mobileActions button {
+  min-height: 50px;
+  border: 1px solid #23b14d;
+  background: linear-gradient(110deg, #75d994, #effc97);
+  font-family: inherit;
+  font-weight: 600;
+  clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
+}

@@ -1,12 +1,5 @@
-import Accrediations from '@/app/components/Certications/Accrediations'
-import React from 'react'
+import Accrediations from "@/app/components/Certications/Accrediations";
 
-const page = () => {
-  return (
-    <React.Fragment>
-        <Accrediations/>
-    </React.Fragment>
-  )
+export default function CertificationsAccreditationsPage() {
+  return <Accrediations />;
 }
-
-export default page

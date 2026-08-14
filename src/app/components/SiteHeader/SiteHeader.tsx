@@ -39,9 +39,12 @@ const headerBrands = {
 
 interface SiteHeaderProps {
   brand?: keyof typeof headerBrands;
+  brandClassName?: string;
+  productLogo?: boolean;
   compactLogo?: boolean;
   panel?: "full" | "logoOnly";
-  layout?: "viewport" | "figmaCanvas";
+  layout?: "viewport" | "figmaCanvas" | "productCanvas";
+  highlightActive?: boolean;
 }
 
 const isItemActive = (pathname: string, label: string) => {
@@ -65,9 +68,12 @@ const isItemActive = (pathname: string, label: string) => {
 
 export default function SiteHeader({
   brand = "green",
+  brandClassName = "",
+  productLogo = false,
   compactLogo = false,
   panel = "full",
   layout = "viewport",
+  highlightActive = true,
 }: SiteHeaderProps) {
   const pathname = usePathname();
   const headerBrand = headerBrands[brand];
@@ -99,24 +105,23 @@ export default function SiteHeader({
 
   return (
     <header
-      className={`${styles.header} ${layout === "figmaCanvas" ? styles.canvasHeader : ""} ${isScrolled ? styles.scrolled : ""}`}
+      className={`${styles.header} ${layout === "figmaCanvas" ? styles.canvasHeader : ""} ${layout === "productCanvas" ? styles.productCanvasHeader : ""} ${isScrolled ? styles.scrolled : ""}`}
       data-site-header
-      data-node-id={layout === "figmaCanvas" ? "7077:3756" : undefined}
+      data-node-id={layout !== "viewport" ? "7077:3756" : undefined}
     >
       {brand === "green" ? (
         <FigmaBrandPanel
           className={
-            layout === "figmaCanvas"
-              ? styles.canvasBrandPanel
-              : styles.brandPanel
+            layout !== "viewport" ? styles.canvasBrandPanel : styles.brandPanel
           }
           compactLogo={compactLogo}
+          fixedCanvasSize={layout === "figmaCanvas"}
           showPanel={panel === "full"}
         />
       ) : (
         <Link
-          href="/"
-          className={`${styles.logo} ${styles.sunshineLogo}`}
+          href="/home/renewable-energy-the-core"
+          className={`${styles.logo} ${styles.sunshineLogo} ${productLogo ? styles.productLogo : ""} ${brandClassName}`}
           aria-label="GREEN home"
         >
           <Image
@@ -131,7 +136,7 @@ export default function SiteHeader({
 
       <nav className={styles.navigation} aria-label="Primary navigation">
         {navigationItems.map((item) => {
-          const active = isItemActive(pathname, item.label);
+          const active = highlightActive && isItemActive(pathname, item.label);
           return (
             <Link
               href={item.href}
@@ -154,13 +159,13 @@ export default function SiteHeader({
               src="/images/heroSection/lighting.svg"
               alt=""
               width={42}
-              height={54}
+              height={42}
             />
           </button>
         ) : null}
       </nav>
 
-      {layout === "figmaCanvas" ? (
+      {layout !== "viewport" ? (
         <button
           type="button"
           onClick={openNavigation}

@@ -1,12 +1,5 @@
-import React from 'react'
-import OsmMonitoring from '@/app/components/OsmMonitoring/OsmMonitoring'
+import OsmMonitoring from "@/app/components/OsmMonitoring/OsmMonitoring";
 
-const page = () => {
-  return (
-    <React.Fragment>
-        <OsmMonitoring/>
-    </React.Fragment>
-  )
+export default function OMMonitoringPage() {
+  return <OsmMonitoring />;
 }
-
-export default page

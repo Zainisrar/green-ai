@@ -1,0 +1,315 @@
+.desktopPage {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+.backgroundArt {
+  position: absolute;
+  top: 0;
+  left: 202px;
+  width: 1146px;
+  height: 970px;
+  pointer-events: none;
+}
+.verticalTitle {
+  position: absolute;
+  top: 139px;
+  left: 34px;
+  width: 59px;
+  height: 760px;
+}
+.pageTitle {
+  position: absolute;
+  top: 118px;
+  left: 264px;
+  width: 672px;
+  margin: 0;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: normal;
+  text-transform: uppercase;
+}
+.pageTitle span,
+.systemsQuote span,
+.whyMatters span {
+  color: #23b14d;
+}
+.intro {
+  position: absolute;
+  top: 196px;
+  left: 264px;
+  width: 1281px;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.28px;
+}
+.intro p {
+  margin: 0;
+}
+.philosophy {
+  position: absolute;
+  inset: 0;
+}
+.philosophy > h2 {
+  position: absolute;
+  top: 301px;
+  left: 264px;
+  margin: 0;
+  font-size: 30px;
+}
+.philosophy article {
+  position: absolute;
+  width: 500px;
+}
+.philosophy article:nth-of-type(1) {
+  top: 345px;
+  left: 262px;
+}
+.philosophy article:nth-of-type(2) {
+  top: 502px;
+  left: 199px;
+}
+.philosophy article:nth-of-type(3) {
+  top: 668px;
+  left: 148px;
+}
+.philosophy article img {
+  position: absolute;
+  top: 17px;
+  left: 0;
+  width: 60px;
+  height: 60px;
+}
+.philosophy article h3 {
+  margin: 0 0 0 47px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 50px;
+}
+.philosophy article p {
+  width: 404px;
+  margin: 0 0 0 74px;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.28px;
+}
+.systemsQuote {
+  position: absolute;
+  top: 338px;
+  left: 812px;
+  width: 482px;
+  margin: 0;
+  font-size: 37px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: normal;
+  text-align: center;
+}
+.whyMatters {
+  position: absolute;
+  top: 615px;
+  left: 730px;
+  width: 400px;
+  font-size: 26px;
+  font-style: italic;
+  line-height: 36px;
+}
+.whyMatters h2 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+}
+.whyMatters p {
+  margin: 0 0 15px;
+}
+.services {
+  position: absolute;
+  inset: 0;
+}
+.services article {
+  position: absolute;
+  width: 610px;
+  height: 70px;
+}
+.services article:nth-child(1) {
+  top: 261px;
+  left: 1407px;
+}
+.services article:nth-child(2) {
+  top: 337px;
+  left: 1383px;
+}
+.services article:nth-child(3) {
+  top: 410px;
+  left: 1351px;
+}
+.services article:nth-child(4) {
+  top: 485px;
+  left: 1310px;
+}
+.services article:nth-child(5) {
+  top: 557px;
+  left: 1281px;
+}
+.services article:nth-child(6) {
+  top: 630px;
+  left: 1240px;
+}
+.services article:nth-child(7) {
+  top: 707px;
+  left: 1209px;
+}
+.services img {
+  position: absolute;
+  top: 18px;
+  left: 0;
+  width: 41px;
+  height: 41px;
+}
+.services h3 {
+  margin: 0 0 0 64px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 50px;
+}
+.services p {
+  margin: -6px 0 0 55px;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.28px;
+}
+.services article:nth-child(6) p,
+.services article:nth-child(7) p {
+  width: 329px;
+}
+.actions {
+  position: absolute;
+  inset: 0;
+}
+.actions button {
+  position: absolute;
+  height: 53px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+}
+.actions button:first-child {
+  top: 741px;
+  left: 1620px;
+  width: 301px;
+}
+.actions button:last-child {
+  top: 820px;
+  left: 1570px;
+  width: 351px;
+}
+.actions img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 53px;
+}
+.actions span {
+  position: absolute;
+  inset: 6px 32px 0 18px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 40px;
+  white-space: nowrap;
+}
+.actions b {
+  position: absolute;
+  top: 5px;
+  right: 12px;
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 40px;
+}
+.chatTrigger {
+  z-index: 3;
+}
+.mobilePage {
+  min-height: 100svh;
+  padding-top: 82px;
+  background: #fff;
+  color: #202020;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+.mobileContent {
+  width: min(100% - 28px, 760px);
+  margin: auto;
+  padding: 34px 0 140px;
+}
+.mobileContent h1 {
+  margin: 0;
+  font-size: clamp(32px, 8vw, 50px);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+.mobileContent h1 span,
+.mobileContent blockquote span {
+  color: #23b14d;
+}
+.mobileContent > p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.mobileContent > h2 {
+  margin: 26px 0 14px;
+  font-size: 24px;
+}
+.mobileContent > article,
+.mobileServices article {
+  margin-bottom: 16px;
+  padding: 18px;
+  border-left: 2px solid #9ae98e;
+}
+.mobileContent article h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+.mobileContent article p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.mobileContent blockquote {
+  margin: 26px 0;
+  padding: 22px;
+  background: #f8fad9;
+  font-size: 23px;
+  font-style: italic;
+  font-weight: 700;
+}
+.mobileServices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.mobileServices article {
+  margin: 0;
+}
+.mobileActions {
+  display: grid;
+  gap: 14px;
+  margin-top: 26px;
+}
+.mobileActions button {
+  min-height: 50px;
+  border: 1px solid #23b14d;
+  background: linear-gradient(110deg, #75d994, #effc97);
+  font-family: inherit;
+  font-weight: 600;
+  clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
+}
+@media (max-width: 580px) {
+  .mobileServices {
+    grid-template-columns: 1fr;
+  }
+}

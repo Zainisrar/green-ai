@@ -1,666 +1,333 @@
 "use client";
-import React, { useState } from "react";
-import TopNavigation from "../TopNavigation/TopNavigation";
-import Chatbot from "../Chatbot";
+
+import Link from "next/link";
+import { useState } from "react";
 import { useGlobalSnapshot } from "../../../hooks/useGlobalSnapshot";
 import type {
-  GlobalSnapshotHeroSection,
-  GlobalSnapshotStatsSection,
-  GlobalSnapshotHighlightSection,
-  GlobalSnapshotContentBlock,
-  GlobalSnapshotLocationsSection,
   GlobalSnapshotActionButtons,
+  GlobalSnapshotContentBlock,
+  GlobalSnapshotHeroSection,
+  GlobalSnapshotHighlightSection,
+  GlobalSnapshotLocationsSection,
+  GlobalSnapshotStatsSection,
 } from "../../lib/api";
-import Link from "next/link";
-import SafeImage from "../shared/SafeImage";
+import D6Chatbot from "../D6Chatbot";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaPageCanvas from "../shared/FigmaPageCanvas";
+import styles from "./GlobalSnapshot.module.css";
 import RequestConsultation from "./Modals/RequestConsultation";
 
-const GlobalSnapshot = () => {
-  const { globalSnapshotData,  error } = useGlobalSnapshot();
+const FALLBACK_STATS = [
+  {
+    value: "3.913 MW+",
+    label: "Installed",
+    image: "/images/global-snapshot/mw.png",
+    alt: "Solar capacity",
+  },
+  {
+    value: "200,014",
+    label: "homes energized",
+    image: "/images/global-snapshot/home.png",
+    alt: "Homes energized",
+  },
+  {
+    value: "796,270",
+    label: "lives transformed",
+    image: "/images/global-snapshot/people.png",
+    alt: "People reached",
+  },
+  {
+    value: "6,126",
+    label: "tonnes CO₂ avoided annually",
+    image: "/images/global-snapshot/co2.png",
+    alt: "Carbon emissions avoided",
+  },
+] as const;
+
+const FALLBACK_FEATURES = [
+  "End-to-end EPC execution—from feasibility to commissioning.",
+  "Adaptive product platforms (SunShine, Em’Pawa) engineered for deployment in weeks.",
+  "Global procurement integrated with local deployment networks.",
+  "Project design rooted in data, geography, and long-term asset performance.",
+  "Cultural and social engagement integrated into technical delivery.",
+] as const;
+
+const FALLBACK_DESCRIPTION = [
+  "Global energy demand is rising. Fossil reliance persists. Climate pressure intensifies.",
+  "And over 700 million people remain without access to reliable power.",
+] as const;
+
+const FALLBACK_CREDIBILITY =
+  "The future of energy is not only about capacity. It is about capability. GREEN Limited brings the credibility of experience, the rigor of engineering, and the discipline of execution to the global energy table. Our teams, systems, and strategies are ready to support governments, industries, and developers facing the energy transition.";
+
+export default function GlobalSnapshot() {
+  const { globalSnapshotData, error } = useGlobalSnapshot();
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
+  const sections = globalSnapshotData?.sections ?? [];
+  const hero = sections.find((section) => section.type === "hero-section") as
+    | GlobalSnapshotHeroSection
+    | undefined;
+  const statsSection = sections.find(
+    (section) => section.type === "statistics-grid",
+  ) as GlobalSnapshotStatsSection | undefined;
+  const highlightSection = sections.find(
+    (section) => section.type === "highlight-box",
+  ) as GlobalSnapshotHighlightSection | undefined;
+  const framework = sections.find(
+    (section) => section.type === "content-block",
+  ) as GlobalSnapshotContentBlock | undefined;
+  const locationsSection = sections.find(
+    (section) => section.type === "locations-section",
+  ) as GlobalSnapshotLocationsSection | undefined;
+  const actions = sections.find(
+    (section) => section.type === "action-buttons",
+  ) as GlobalSnapshotActionButtons | undefined;
 
-  // Fallback data - keeping the original structure for compatibility
-  const [fallbackPoints] = useState([
-    {
-      id: 1,
-      icon: {
-        img: {
-          src: "/images/global-snapshot/mw.png",
-          alt: "megawatt",
-        },
-      },
-      text: {
-        heading: "3,912 MW+",
-        highlighted: "Installed",
-      },
-    },
-    {
-      id: 2,
-      icon: {
-        img: {
-          src: "/images/global-snapshot/mw.png",
-          alt: "megawatt",
-        },
-      },
-      text: {
-        heading: "200,014 Homes",
-        highlighted: "Energy Self-Sufficient",
-      },
-    },
-    {
-      id: 3,
-      icon: {
-        img: {
-          src: "/images/global-snapshot/mw.png",
-          alt: "megawatt",
-        },
-      },
-      text: {
-        heading: "796,270 Tons",
-        highlighted: "CO2 Transformed",
-      },
-    },
-    {
-      id: 4,
-      icon: {
-        img: {
-          src: "/images/global-snapshot/mw.png",
-          alt: "megawatt",
-        },
-      },
-      text: {
-        heading: "6,126 Tons CO2",
-        highlighted: "Avoided Annually",
-      },
-    },
-  ]);
+  if (error) console.error("GlobalSnapshot API Error:", error);
 
-  // Extract sections from API data
-  const heroSection = globalSnapshotData?.sections.find(
-    (s) => s.type === "hero-section"
-  ) as GlobalSnapshotHeroSection;
-  const statsSection = globalSnapshotData?.sections.find(
-    (s) => s.type === "statistics-grid"
-  ) as GlobalSnapshotStatsSection;
-  const highlightSection = globalSnapshotData?.sections.find(
-    (s) => s.type === "highlight-box"
-  ) as GlobalSnapshotHighlightSection;
-  const frameworkSection = globalSnapshotData?.sections.find(
-    (s) => s.type === "content-block"
-  ) as GlobalSnapshotContentBlock;
-  const locationsSection = globalSnapshotData?.sections.find(
-    (s) => s.type === "locations-section"
-  ) as GlobalSnapshotLocationsSection;
-  const ctaSection = globalSnapshotData?.sections.find(
-    (s) => s.type === "action-buttons"
-  ) as GlobalSnapshotActionButtons;
-
-  // Transform API data to match existing component structure
-  const points =
-    statsSection?.items.map((item, index) => ({
-      id: index + 1,
-      icon: {
-        img: {
-          src: item.icon.src,
-          alt: item.icon.alt || item.label || "Statistic icon",
-        },
-      },
-      text: {
-        heading: item.value,
-        highlighted: item.label,
-      },
-    })) || fallbackPoints;
-
-  // Use API data or fallback to hardcoded values
-  const title = heroSection?.title || {
-    main: "GLOBAL SNAPSHOT",
-    highlight: "GLOBAL",
-  };
+  const title = hero?.title ?? { main: "GLOBAL SNAPSHOT", highlight: "GLOBAL" };
+  const titleRemainder = title.main.replace(title.highlight, "").trim();
   const subtitle =
-    heroSection?.subtitle ||
-    "From the Highlands to the Horizon - Energy Built to Perform";
+    hero?.subtitle ??
+    "From the Highlands to the Horizon – Energy Built to Perform";
   const headline =
-    heroSection?.headline ||
+    hero?.headline ??
     "The Global Energy Shift Is Inevitable. The Execution Is Not.";
-  const description = heroSection?.description || [
-    "Global energy demand is rising. Fossil reliance persists. Climate pressure intensifies.",
-    "And over 760 million people remain without access to reliable power.",
-  ];
+  const description = hero?.description?.length
+    ? hero.description.slice(0, 2)
+    : FALLBACK_DESCRIPTION;
+  const stats = FALLBACK_STATS.map((fallback, index) => ({
+    ...fallback,
+    value: statsSection?.items[index]?.value || fallback.value,
+    label: statsSection?.items[index]?.label || fallback.label,
+  }));
+  const highlightLines = highlightSection?.content.lines?.length
+    ? highlightSection.content.lines.slice(0, 4)
+    : [
+        "Where Roads End, We Delivered.",
+        "Where Diesel Failed, We Deployed Solar.",
+        "Where Governments Stalled,",
+        "We Executed.",
+      ];
+  const features = FALLBACK_FEATURES.map(
+    (fallback, index) => framework?.features[index]?.text || fallback,
+  );
+  const locations = locationsSection?.locations?.length
+    ? locationsSection.locations.slice(0, 4)
+    : ["Papua New Guinea", "India  |  Australia", "Singapore  |  USA"];
+  const credibility = locationsSection?.description || FALLBACK_CREDIBILITY;
+  const exploreHref =
+    actions?.buttons[0]?.link || "/endeavors/project-portfolio";
+  const portfolioHref =
+    actions?.buttons[2]?.link || "/endeavors/project-portfolio";
 
-  const highlightLines = highlightSection?.content.lines || [
-    "Where roads end, we delivered.",
-    "Where diesel failed, we deployed solar.",
-    "Where governments stalled, We executed.",
-  ];
+  const desktop = (
+    <main className={styles.desktopPage} data-node-id="7077:14856">
+      <div className={styles.network} aria-hidden="true">
+        <img
+          src="/images/global-snapshot/figma-network.jpg"
+          alt=""
+          width="4096"
+          height="2383"
+        />
+      </div>
+      <SiteHeader layout="figmaCanvas" highlightActive={false} />
 
-  const frameworkFeatures = frameworkSection?.features || [];
-  const ctaButtons = ctaSection?.buttons || [];
-  const locations = locationsSection?.locations || [
-    "Papua New Guinea",
-    "India / Australia",
-    "Singapore / USA",
-  ];
-  const locationDescription =
-    locationsSection?.description ||
-    "The future of energy is not only about capacity. It is about capability. GREEN Limited brings the credibility of experience, the rigor of engineering, and the discipline of execution to the global energy table. Our teams, systems, and strategies are ready to support governments, industries, and developers facing the energy transition.";
+      <h1 className={styles.pageTitle} data-node-id="7077:14861">
+        <strong>{title.highlight}</strong> {titleRemainder}
+      </h1>
+      <img
+        className={styles.watermark}
+        src="/images/global-snapshot/globalsnapshot.png"
+        alt=""
+        width="59"
+        height="723"
+        data-node-id="7077:14872"
+      />
 
+      <p className={styles.subtitle} data-node-id="7077:14926">
+        {subtitle}
+      </p>
+      <h2 className={styles.headline} data-node-id="7077:14900">
+        {headline}
+      </h2>
+      <div className={styles.description} data-node-id="7077:14913">
+        {description.map((line) => (
+          <p key={line}>{line}</p>
+        ))}
+      </div>
 
+      <section className={styles.stats} aria-label="GREEN global impact">
+        {stats.map((stat, index) => (
+          <article
+            className={styles.stat}
+            key={stat.label}
+            data-node-id={`7077:${14901 + index}`}
+          >
+            <img src={stat.image} alt={stat.alt} />
+            <p>
+              <strong>{stat.value}</strong> <span>{stat.label}</span>
+            </p>
+          </article>
+        ))}
+      </section>
 
-  if (error) {
-    console.error("GlobalSnapshot API Error:", error);
-    // Continue with fallback data
-  }
+      <Link
+        className={styles.exploreButton}
+        href={exploreHref}
+        data-node-id="7077:14920"
+      >
+        <img src="/images/global-snapshot/exploreBtn.png" alt="" />
+        <span>{actions?.buttons[0]?.text || "Explore"}</span>
+        <b aria-hidden="true">›</b>
+      </Link>
+
+      <section className={styles.highlight} data-node-id="7077:14908">
+        <img src="/images/global-snapshot/sh1.png" alt="" />
+        <div>
+          {highlightLines.map((line) => (
+            <p key={line}>{line}</p>
+          ))}
+        </div>
+        <img src="/images/global-snapshot/sh2.png" alt="" />
+      </section>
+
+      <section className={styles.locations} data-node-id="7077:14912">
+        <h2>{locationsSection?.title || "Global Delivery Sites"}</h2>
+        {locations.map((location) => (
+          <p key={location}>{location}</p>
+        ))}
+      </section>
+
+      <section className={styles.framework} data-node-id="7077:14909">
+        <h2>
+          The <strong>{framework?.title.highlight || "GREEN"}</strong>{" "}
+          {framework?.title.text || "Delivery Framework"}
+        </h2>
+        <div className={styles.featureList}>
+          {features.map((feature) => (
+            <article key={feature}>
+              <img src="/images/global-snapshot/lighting.png" alt="" />
+              <p>{feature}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <p className={styles.credibility} data-node-id="7077:14914">
+        {credibility}
+      </p>
+
+      <div className={styles.actions}>
+        <button
+          type="button"
+          onClick={() => setIsConsultationOpen(true)}
+          data-node-id="7077:14892"
+        >
+          <img src="/images/global-snapshot/consulation.png" alt="" />
+          <span>{actions?.buttons[1]?.text || "Request a Consultation"}</span>
+          <b aria-hidden="true">›</b>
+        </button>
+        <Link href={portfolioHref} data-node-id="7077:14886">
+          <img
+            src="/images/global-snapshot/globalprojectportfolioBtn.png"
+            alt=""
+          />
+          <span>
+            {actions?.buttons[2]?.text ||
+              "Explore our global project portfolio"}
+          </span>
+          <b aria-hidden="true">›</b>
+        </Link>
+      </div>
+
+      <D6Chatbot
+        canvasAnchored
+        triggerVariant="figmaCanvas"
+        triggerClassName={styles.chatTrigger}
+        triggerStyle={{
+          top: 881,
+          right: "auto",
+          bottom: "auto",
+          left: 1480,
+          width: 462,
+        }}
+      />
+    </main>
+  );
+
+  const mobile = (
+    <main className={styles.mobilePage} data-node-id="7077:14856-mobile">
+      <SiteHeader panel="logoOnly" />
+      <img
+        className={styles.mobileNetwork}
+        src="/images/global-snapshot/mainImg.png"
+        alt=""
+      />
+      <div className={styles.mobileContent}>
+        <h1>
+          <strong>{title.highlight}</strong> {titleRemainder}
+        </h1>
+        <p className={styles.mobileSubtitle}>{subtitle}</p>
+        <h2>{headline}</h2>
+        <div className={styles.mobileDescription}>
+          {description.map((line) => (
+            <p key={line}>{line}</p>
+          ))}
+        </div>
+        <div className={styles.mobileStats}>
+          {stats.map((stat) => (
+            <article key={stat.label}>
+              <img src={stat.image} alt="" />
+              <p>
+                <strong>{stat.value}</strong> <span>{stat.label}</span>
+              </p>
+            </article>
+          ))}
+        </div>
+        <div className={styles.mobileHighlight}>
+          {highlightLines.map((line) => (
+            <p key={line}>{line}</p>
+          ))}
+        </div>
+        <section className={styles.mobileLocations}>
+          <h2>{locationsSection?.title || "Global Delivery Sites"}</h2>
+          {locations.map((location) => (
+            <p key={location}>{location}</p>
+          ))}
+        </section>
+        <section className={styles.mobileFramework}>
+          <h2>
+            The <strong>{framework?.title.highlight || "GREEN"}</strong>{" "}
+            {framework?.title.text || "Delivery Framework"}
+          </h2>
+          {features.map((feature) => (
+            <article key={feature}>
+              <img src="/images/global-snapshot/lighting.png" alt="" />
+              <p>{feature}</p>
+            </article>
+          ))}
+        </section>
+        <p className={styles.mobileCredibility}>{credibility}</p>
+        <button
+          type="button"
+          className={styles.mobileConsultation}
+          onClick={() => setIsConsultationOpen(true)}
+        >
+          Request a Consultation
+        </button>
+      </div>
+      <D6Chatbot />
+    </main>
+  );
 
   return (
-    <React.Fragment>
-      <div className="relative z-[99999999999999999999]  ">
-      <TopNavigation />
-        {/* Background Image */}
-        <div className="absolute top-0 left-1/3 -z-10 hidden lg:block pointer-events-none">
-          <img
-            src="/images/global-snapshot/mainImg.png"
-            className="h-[70vh]"
-            alt="globalsnapshot"
-          />
-        </div>
-
-        {/* Mobile Layout */}
-        <div className="lg:hidden  px-4 py-6 relative z-50">
-          {/* Mobile Title */}
-          <div className="text-center mb-6">
-            <div className="text-3xl font-black text-[#23B14D]">
-              {title.highlight}
-            </div>
-            <div className="text-2xl font-black text-gray-800">
-              {title.main.replace(title.highlight, "").trim()}
-            </div>
-          </div>
-
-          <p className="text-[#23B14D]  text-center mb-2">{subtitle}</p>
-
-          <h2 className="text-xl font-bold text-center mb-4">{headline}</h2>
-
-          <p className="text-gray-600  text-center mb-6">
-            {description.join(" ")}
-          </p>
-
-          {/* Stats Points */}
-          <div className="space-y-4 mb-6">
-            {points.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-center space-x-3 bg-white/80 p-3 rounded-lg"
-              >
-                <SafeImage
-                  className="w-14"
-                  src={item.icon.img.src}
-                  alt={item.icon.img.alt || item.text.heading || "Statistic"}
-                  fallbackSrc="/images/global-snapshot/mw.png"
-                />
-                <div className="text-lg">
-                  <p className="font-bold text-gray-800">{item.text.heading}</p>
-                  <p className="text-[#23B14D] font-semibold">
-                    {item.text.highlighted}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Explore Button */}
-          <div className="flex justify-center mb-6">
-            <Link href={ctaButtons[0]?.link || "#"} className="relative inline-block">
-              <img
-                src="/images/global-snapshot/exploreBtn.png"
-                alt="explore"
-                className="w-40"
-              />
-              <div className="absolute inset-0 flex items-center justify-center px-3 font-bold text-sm whitespace-nowrap">
-                {(ctaButtons[0]?.text || "Explore More") + " >"}
-              </div>
-            </Link>
-          </div>
-
-          {/* Where Roads End Section */}
-          <div className="mb-6 text-center">
-            <div className="font-bold space-y-1">
-              {highlightLines.map((line, index) => (
-                <p key={index}>{line}</p>
-              ))}
-            </div>
-          </div>
-
-          {/* Global Delivery Sites */}
-          <div className="mb-6 text-center">
-            <div className="text-[#23B14D] text-xl font-black italic mb-2">
-              {locationsSection?.title || "Global Delivery Sites"}
-            </div>
-            <div className="text-lg font-bold text-gray-800 space-y-1">
-              {locations.map((location, index) => (
-                <div key={index}>{location}</div>
-              ))}
-            </div>
-          </div>
-
-          {/* GREEN Delivery Framework */}
-          <div className="mb-6">
-            <div className="font-semibold italic text-gray-800 mb-3 text-center">
-              {frameworkSection?.title ? (
-                <>
-                  The{" "}
-                  <span className="text-[#23B14D]">
-                    {frameworkSection.title.highlight}
-                  </span>{" "}
-                  {frameworkSection.title.text || "Delivery Framework"}
-                </>
-              ) : (
-                <>
-                  The <span className="text-[#23B14D]">GREEN</span> Delivery
-                  Framework
-                </>
-              )}
-            </div>
-            <div className="space-y-3 mt-8">
-              {frameworkFeatures.length > 0 ? (
-                frameworkFeatures.map((feature, index) => (
-                  <div key={index} className="flex space-x-3 items-start">
-                    <SafeImage
-                      src={feature.icon.src}
-                      alt={feature.icon.alt || feature.text || "Feature icon"}
-                      className="w-10 mt-1 flex-shrink-0"
-                      fallbackSrc="/images/global-snapshot/lighting.png"
-                    />
-                    <div className="text-base">{feature.text}</div>
-                  </div>
-                ))
-              ) : (
-                // Fallback to original content
-                <>
-                  <div className="flex space-x-3 items-start">
-                    <img
-                      src="/images/global-snapshot/lighting.png"
-                      alt="spark"
-                      className="w-4 h-4 mt-1 flex-shrink-0"
-                    />
-                    <div className="text-xs">
-                      End-to-end EPC execution—from feasibility to
-                      commissioning.
-                    </div>
-                  </div>
-                  <div className="flex space-x-3 items-start">
-                    <img
-                      src="/images/global-snapshot/lighting.png"
-                      alt="spark"
-                      className="w-4 h-4 mt-1 flex-shrink-0"
-                    />
-                    <div className="text-xs">
-                      Adaptive product platforms (SunShine, Em'Pawa) engineered
-                      for deployment in weeks.
-                    </div>
-                  </div>
-                  <div className="flex space-x-3 items-start">
-                    <img
-                      src="/images/global-snapshot/lighting.png"
-                      alt="spark"
-                      className="w-4 h-4 mt-1 flex-shrink-0"
-                    />
-                    <div className="text-xs">
-                      Global procurement integrated with local deployment
-                      networks.
-                    </div>
-                  </div>
-                  <div className="flex space-x-3 items-start">
-                    <img
-                      src="/images/global-snapshot/lighting.png"
-                      alt="spark"
-                      className="w-4 h-4 mt-1 flex-shrink-0"
-                    />
-                    <div className="text-xs">
-                      Project design rooted in data, geography, and long-term
-                      asset performance.
-                    </div>
-                  </div>
-                  <div className="flex space-x-3 items-start">
-                    <img
-                      src="/images/global-snapshot/lighting.png"
-                      alt="spark"
-                      className="w-4 h-4 mt-1 flex-shrink-0"
-                    />
-                    <div className="text-xs">
-                      Cultural and social engagement integrated into technical
-                      delivery.
-                    </div>
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-
-          {/* Bottom Text */}
-          <div className="mb-6 text-center">
-            <div className="text-base leading-relaxed">
-              {locationDescription}
-            </div>
-          </div>
-
-          {/* Bottom Buttons */}
-          <div className="mb-20 flex flex-col items-center space-y-8">
-            <button
-              type="button"
-              onClick={() => setIsConsultationOpen(true)}
-              className="relative inline-block w-full max-w-[300px] cursor-pointer"
-            >
-              <img
-                src="/images/global-snapshot/consulation.png"
-                alt="consultation"
-                className="w-full"
-              />
-              <div className="absolute inset-0 flex items-center justify-center px-4 font-bold text-sm whitespace-nowrap">
-                {ctaButtons[1]?.text || "Request a Consultation"} {">"}
-              </div>
-            </button>
-            <Link
-              href={ctaButtons[2]?.link || "#"}
-              className="relative inline-block w-full max-w-[340px]"
-            >
-              <img
-                src="/images/global-snapshot/globalprojectportfolioBtn.png"
-                alt="project portfolio"
-                className="w-full"
-              />
-              <div className="absolute inset-0 flex items-center justify-center px-5 text-center font-bold text-[11px] sm:text-xs leading-tight">
-                {ctaButtons[2]?.text || "Explore Our Global Project Portfolio"} {">"}
-              </div>
-            </Link>
-          </div>
-        </div>
-
-        {/* Desktop Layout */}
-        <div className="hidden lg:flex h-full">
-          {/* Left Sidebar - Desktop only */}
-          <div className="lg:w-1/6 hidden lg:flex items-center justify-center">
-            <div className="fixed top-1/4 -z-10 left-10">
-              <img
-                className="w-10"
-                src="/images/global-snapshot/globalsnapshot.png"
-                alt="globalsnapshot"
-              />
-            </div>
-          </div>
-
-          {/* Main Content Area */}
-          <div className="flex flex-col flex-1 min-w-0 px-10 2xl:px-16 pb-24">
-            {/* Header Section */}
-            <div className="mb-8">
-              <h1 className="text-3xl 2xl:text-4xl">
-                <span className="text-[#23B14D] font-black">
-                  {title.highlight}
-                </span>{" "}
-                <span className="text-gray-800 font-black">
-                  {title.main.replace(title.highlight, "").trim()}
-                </span>
-              </h1>
-
-              <p className="text-[#23B14D] mt-1">{subtitle}</p>
-              <h2 className="my-2 text-2xl 2xl:text-3xl font-bold">{headline}</h2>
-              <p className="text-gray-600 text-sm max-w-3xl">
-                {description.join(" ")}
-              </p>
-            </div>
-
-            <div className="relative z-50">
-              <div className="w-full space-y-6">
-                <div className="grid grid-cols-[1fr_2fr] gap-6">
-                  <div className="space-y-4 my-4 min-w-0">
-                    {points.map((item, index) => {
-                      return (
-                        <div
-                          key={item.id}
-                          className={`flex items-center space-x-4 ${
-                            index == 1 ? "2xl:-ml-12" : ""
-                          } ${index == 2 ? "2xl:-ml-20" : ""} ${
-                            index == 3 ? "2xl:-ml-28" : ""
-                          }`}
-                        >
-                          <div>
-                            <SafeImage
-                              className="w-14"
-                              src={item.icon.img.src}
-                              alt={item.icon.img.alt || item.text.heading || "Statistic"}
-                              fallbackSrc="/images/global-snapshot/mw.png"
-                            />
-                          </div>
-                          <div>
-                            <p className="lg:text-xl 2xl:text-2xl font-bold text-gray-800">
-                              {item.text.heading}{" "}
-                              <span className="text-[#23B14D] lg:text-base 2xl:text-lg">
-                                {item.text.highlighted}
-                              </span>
-                            </p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                    <Link
-                      href={ctaButtons[0]?.link || "#"}
-                      className="my-4 relative inline-block cursor-pointer"
-                    >
-                      <img
-                        src="/images/global-snapshot/exploreBtn.png"
-                        alt="explore"
-                        className="w-auto"
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center px-4 font-bold text-base lg:text-lg whitespace-nowrap">
-                        {(ctaButtons[0]?.text || "Explore More") + " >"}
-                      </div>
-                    </Link>
-                  </div>
-                  <div className="flex flex-col min-w-0">
-                    <div className="flex my-6 relative items-center">
-                      <img
-                        className="ml-0 flex-shrink-0 w-12 2xl:w-auto"
-                        src="/images/global-snapshot/sh1.png"
-                        alt="shape"
-                      />
-                      <div className="text-base 2xl:text-lg capitalize font-bold">
-                        {highlightLines.map((line, index) => (
-                          <p key={index}>{line}</p>
-                        ))}
-                      </div>
-                      <img
-                        className="-ml-8 flex-shrink-0 w-12 2xl:w-auto"
-                        src="/images/global-snapshot/sh2.png"
-                        alt="shape"
-                      />
-                    </div>
-                    <div className="my-6 2xl:mx-12">
-                      <div className="text-[#23B14D] text-xl 2xl:text-3xl font-black italic">
-                        {locationsSection?.title || "Global Delivery Sites"}
-                      </div>
-                      {locations.map((location, index) => (
-                        <div
-                          key={index}
-                          className={`text-xl 2xl:text-3xl font-bold text-gray-800 italic ${
-                            index === 0
-                              ? "2xl:-ml-10"
-                              : index === 1
-                              ? "2xl:-ml-12"
-                              : "2xl:-ml-14"
-                          }`}
-                        >
-                          {location}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-10">
-                <div className="font-semibold italic text-gray-800 text-lg mb-4">
-                  {frameworkSection?.title ? (
-                    <>
-                      The{" "}
-                      <span className="text-[#23B14D]">
-                        {frameworkSection.title.highlight}
-                      </span>
-                      {` `}
-                      {frameworkSection.title.text || "Delivery Framework"}
-                    </>
-                  ) : (
-                    <>
-                      The <span className="text-[#23B14D]">GREEN</span>
-                      {` `}
-                      Delivery Framework
-                    </>
-                  )}
-                </div>
-                <div className="mb-4 lg:my-4 flex flex-col space-y-2">
-                  {frameworkFeatures.length > 0 ? (
-                    frameworkFeatures.map((feature, index) => (
-                      <div
-                        key={index}
-                        className={`flex space-x-4 items-center ${
-                          index === 1
-                            ? "2xl:-ml-6"
-                            : index === 2
-                            ? "2xl:-ml-8"
-                            : index === 3
-                            ? "2xl:-ml-10"
-                            : index === 4
-                            ? "2xl:-ml-14"
-                            : ""
-                        }`}
-                      >
-                        <div>
-                          <SafeImage
-                            src={feature.icon.src}
-                            alt={feature.icon.alt || feature.text || "Feature icon"}
-                            className="w-6 flex-shrink-0"
-                            fallbackSrc="/images/global-snapshot/lighting.png"
-                          />
-                        </div>
-                        <div>{feature.text}</div>
-                      </div>
-                    ))
-                  ) : (
-                    // Fallback to original content
-                    <>
-                      <div className="flex space-x-4 items-center">
-                        <div>
-                          <img
-                            src="/images/global-snapshot/lighting.png"
-                            alt="spark"
-                            className="w-6 flex-shrink-0"
-                          />
-                        </div>
-                        <div>
-                          End-to-end EPC execution—from feasibility to
-                          commissioning.
-                        </div>
-                      </div>
-                      <div className="flex 2xl:-ml-6 space-x-4 items-center">
-                        <div>
-                          <img
-                            src="/images/global-snapshot/lighting.png"
-                            alt="spark"
-                            className="w-6 flex-shrink-0"
-                          />
-                        </div>
-                        <div>
-                          Adaptive product platforms (SunShine, Em'Pawa)
-                          engineered for deployment in weeks.
-                        </div>
-                      </div>
-                      <div className="flex 2xl:-ml-8 space-x-4 items-center">
-                        <div>
-                          <img
-                            src="/images/global-snapshot/lighting.png"
-                            alt="spark"
-                            className="w-6 flex-shrink-0"
-                          />
-                        </div>
-                        <div>
-                          Global procurement integrated with local deployment
-                          networks.
-                        </div>
-                      </div>
-                      <div className="flex 2xl:-ml-10 space-x-4 items-center">
-                        <div>
-                          <img
-                            src="/images/global-snapshot/lighting.png"
-                            alt="spark"
-                            className="w-6 flex-shrink-0"
-                          />
-                        </div>
-                        <div>
-                          Project design rooted in data, geography, and
-                          long-term asset performance.
-                        </div>
-                      </div>
-                      <div className="flex 2xl:-ml-14 space-x-4 items-center">
-                        <div>
-                          <img
-                            src="/images/global-snapshot/lighting.png"
-                            alt="spark"
-                            className="w-6 flex-shrink-0"
-                          />
-                        </div>
-                        <div>
-                          Cultural and social engagement integrated into
-                          technical delivery.
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* Desktop Bottom Content */}
-            <div className="relative z-50 mt-12 ml-10">
-              <div className="max-w-xl text-sm text-gray-700 leading-relaxed">
-                {locationDescription}
-              </div>
-            </div>
-
-            <div className="mt-10 mr-10 flex flex-col items-end space-y-8 z-50">
-              <button
-                type="button"
-                onClick={() => setIsConsultationOpen(true)}
-                className="relative inline-block cursor-pointer"
-              >
-                <img
-                  src="/images/global-snapshot/consulation.png"
-                  alt="consultation"
-                />
-                <div className="absolute inset-0 flex items-center justify-center px-6 text-base lg:text-lg font-bold whitespace-nowrap">
-                  {ctaButtons[1]?.text || "Request a Consultation"} {` >`}
-                </div>
-              </button>
-              <Link
-                href={ctaButtons[2]?.link || "#"}
-                className="relative inline-block cursor-pointer"
-              >
-                <img
-                  src="/images/global-snapshot/globalprojectportfolioBtn.png"
-                  alt="project portfolio"
-                />
-                <div className="absolute inset-0 flex items-center justify-center px-5 text-sm 2xl:text-base font-bold whitespace-nowrap">
-                  {ctaButtons[2]?.text || "Explore Our Global Project Portfolio"} {` >`}
-                </div>
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        <Chatbot />
-      </div>
+    <>
+      <FigmaPageCanvas desktop={desktop} mobile={mobile} nodeId="7077:14856" />
       <RequestConsultation
         isOpen={isConsultationOpen}
         onClose={() => setIsConsultationOpen(false)}
       />
-    </React.Fragment>
+    </>
   );
-};
-
-export default GlobalSnapshot;
+}

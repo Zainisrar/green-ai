@@ -259,17 +259,14 @@
   cursor: pointer;
   transition:
     left 1s cubic-bezier(.4, 0, .2, 1),
-    transform 180ms cubic-bezier(.2, .8, .2, 1),
-    filter 180ms ease;
+    transform 180ms cubic-bezier(.2, .8, .2, 1);
   transform-origin: left center;
   pointer-events: auto;
 }
 
-.d6-panel-link:hover,
 .d6-panel-link:focus-visible {
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, .42));
-  transform: translateX(5px);
-  outline: none;
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
 }
 
 .d6-panel-link:active {
@@ -282,7 +279,7 @@
   border: 0;
   background: transparent;
   cursor: pointer;
-  transition: transform 1s cubic-bezier(.4, 0, .2, 1), filter 220ms ease, opacity 1s cubic-bezier(.4, 0, .2, 1);
+  transition: transform 1s cubic-bezier(.4, 0, .2, 1), opacity 1s cubic-bezier(.4, 0, .2, 1);
 }
 
 .d6-badge img {
@@ -291,22 +288,14 @@
   height: auto;
 }
 
-.d6-badge:hover,
 .d6-badge:focus-visible {
-  transform: translateY(-8px) scale(1.035);
-  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, .25));
-  outline: none;
+  outline: 2px solid #fff;
+  outline-offset: 5px;
 }
 
 .d6-badge[aria-disabled="true"],
 .d6-panel-link[aria-disabled="true"] {
   cursor: default;
-}
-
-.d6-badge[aria-disabled="true"]:hover,
-.d6-panel-link[aria-disabled="true"]:hover {
-  transform: none;
-  filter: none;
 }
 
 .d6-expanded-copy {
@@ -1164,11 +1153,11 @@
 }
 
 .about-green-copy h3 {
-  margin-top: 26px;
+  margin-top: 16px;
 }
 
 .about-green-subtitle {
-  margin: 20px 0 24px;
+  margin: 12px 0 16px;
   font-size: 21px;
   font-style: italic;
   font-weight: 600;
@@ -1176,19 +1165,19 @@
 }
 
 .about-green-copy h3 + .about-green-subtitle {
-  margin-top: 20px;
-  margin-bottom: 24px;
+  margin-top: 12px;
+  margin-bottom: 16px;
 }
 
 .about-green-body {
   color: #333;
   font-size: 16px;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .about-green-body p {
-  margin: 0 0 23px;
+  margin: 0 0 14px;
 }
 
 .about-green-body--what p {
@@ -1196,7 +1185,7 @@
 }
 
 .about-green-quote {
-  margin-top: 17px;
+  margin-top: 12px;
   color: #000;
   font-size: 34px;
   font-style: italic;
@@ -1268,6 +1257,22 @@
 }
 
 /* GREEN SunShine product detail — Figma node 7077:12683 */
+.product-figma-header-logo.product-figma-header-logo {
+  position: absolute;
+  top: 0;
+  left: clamp(8px, 0.78vw, 15px);
+  width: clamp(132px, 9.17vw, 176px);
+  height: auto;
+  align-self: flex-start;
+}
+
+.product-figma-header-logo.product-figma-header-logo img {
+  width: 100%;
+  height: auto;
+  padding: 0;
+  object-fit: contain;
+}
+
 .product-figma-shell {
   position: relative;
   height: 100svh;
@@ -1343,34 +1348,42 @@
 
 .product-figma-featured {
   display: block;
-  width: 704px;
-  height: auto;
+  width: 539px;
+  height: 539px;
   margin: 0;
+  object-fit: contain;
 }
 
 .product-figma-thumbnails {
   position: absolute;
-  top: 579px;
-  left: 72px;
+  top: 594px;
+  left: 79px;
   display: flex;
-  gap: 24px;
+  gap: 62px;
   align-items: center;
+  height: 105px;
 }
 
 .product-figma-thumbnails button {
   display: grid;
-  width: 105px;
-  height: 105px;
-  padding: 8px;
+  width: 85px;
+  height: 85px;
+  padding: 0;
   place-items: center;
-  border: 0;
-  border-radius: 6px;
+  border: 1px solid transparent;
+  border-radius: 16px;
   background: transparent;
   cursor: pointer;
+  opacity: 0.7;
+  overflow: hidden;
 }
 
 .product-figma-thumbnails button.is-active {
-  border: 3px solid #23b14d;
+  width: 105px;
+  height: 105px;
+  padding: 8px;
+  border-color: #23b14d;
+  opacity: 1;
 }
 
 .product-figma-thumbnails img {
@@ -1378,6 +1391,26 @@
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+}
+
+.product-gallery-transition-image {
+  position: fixed;
+  z-index: 9998;
+  display: block;
+  margin: 0;
+  object-fit: contain;
+  pointer-events: none;
+  will-change: top, left, width, height, opacity;
+}
+
+.product-gallery-transition-image--outgoing {
+  z-index: 9997;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-gallery-transition-image {
+    display: none;
+  }
 }
 
 .product-figma-enquiry {
@@ -1457,26 +1490,31 @@
 
 .product-figma-specifications {
   position: absolute;
-  top: 724px;
-  left: 861px;
-  width: 970px;
-  height: 170px;
+  top: 739px;
+  left: calc(891px - var(--product-right-safe-inset, 0px));
+  width: 1002px;
+  height: 181.5px;
 }
 
 .product-figma-specifications > img {
+  position: absolute;
+  top: -26px;
+  left: -30px;
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 1062px;
+  max-width: none;
+  height: 242px;
+  pointer-events: none;
 }
 
 .product-figma-specification-list {
   position: absolute;
-  top: 34px;
-  right: 130px;
-  left: 70px;
+  top: 30px;
+  left: 66px;
   display: grid;
+  width: 874px;
   grid-template-columns: repeat(9, minmax(0, 1fr));
-  gap: 0;
+  column-gap: 4px;
 }
 
 .product-figma-specification-list article {
@@ -1489,9 +1527,9 @@
 .product-figma-specification-list article > img {
   display: block;
   width: auto;
-  height: 27px;
+  height: 24px;
   max-width: 32px;
-  margin: 0 auto 5px;
+  margin: 0 auto 6px;
   object-fit: contain;
 }
 
@@ -1500,7 +1538,7 @@
 .product-figma-specification-list span {
   display: block;
   margin: 0;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.2;
 }
 
@@ -1510,15 +1548,18 @@
 
 .product-figma-specification-list p,
 .product-figma-specification-list span {
-  margin-top: 8px;
-  font-size: 8px;
+  margin-top: 17px;
+  font-size: 10px;
 }
 
 .product-figma-specification-list span {
-  margin-top: 5px;
+  margin-top: 8px;
 }
 
 .product-figma-chatbot {
-  right: 104px;
-  bottom: 2px;
+  bottom: 0;
+}
+
+.product-figma-chatbot > div > div:last-child {
+  right: 13%;
 }

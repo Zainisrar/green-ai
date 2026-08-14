@@ -436,7 +436,10 @@ const FigmaLayer = ({
 
 const D6Template = (_props: D6TemplateProps) => {
   const [isMobile, setIsMobile] = React.useState(false);
-  const [scale, setScale] = React.useState(1);
+  const [viewportScale, setViewportScale] = React.useState({
+    x: 1,
+    y: 1,
+  });
   const [expandedPanel, setExpandedPanel] = React.useState(1);
   const [transitioningTo, setTransitioningTo] = React.useState<number | null>(
     null,
@@ -496,21 +499,25 @@ const D6Template = (_props: D6TemplateProps) => {
   }, []);
 
   React.useEffect(() => {
-    // Cover the desktop viewport. This prevents the white strip that appeared
-    // below the 1920x970 composition on slightly taller desktop aspect ratios.
-    const updateScale = () =>
-      setScale(
-        Math.max(window.innerWidth / DESIGN_W, window.innerHeight / DESIGN_H),
-      );
-    updateScale();
-    window.addEventListener("resize", updateScale);
-    return () => window.removeEventListener("resize", updateScale);
+    // Map the complete Figma frame to the available desktop viewport. Scaling
+    // each axis keeps both the right edge and the bottom edge in view without
+    // cropping or letterboxing on non-1920x970 aspect ratios.
+    const updateViewportScale = () => {
+      setViewportScale({
+        x: window.innerWidth / DESIGN_W,
+        y: window.innerHeight / DESIGN_H,
+      });
+    };
+
+    updateViewportScale();
+    window.addEventListener("resize", updateViewportScale);
+    return () => window.removeEventListener("resize", updateViewportScale);
   }, []);
 
   if (isMobile) {
     return (
       <>
-        <SiteHeader />
+        <SiteHeader panel="logoOnly" />
         {/* Exact image aspect → diagonals land at fixed % on every device (no object-cover crop) */}
         <div className="relative w-screen overflow-hidden aspect-[360/800]">
           <img
@@ -560,7 +567,7 @@ const D6Template = (_props: D6TemplateProps) => {
 
   return (
     <>
-      <SiteHeader />
+      <SiteHeader panel="logoOnly" />
       <div
         className="d6-route-shell relative w-full overflow-hidden bg-[#f5f5f5]"
         style={{ height: "100svh" }}
@@ -568,9 +575,12 @@ const D6Template = (_props: D6TemplateProps) => {
         <div
           className={`home-page-d6${expandedPanel === 1 ? "" : " is-panel-expanded"}${transitioningTo === 1 ? " is-transitioning-to-r" : ""}`}
           style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
             width: DESIGN_W,
             height: DESIGN_H,
-            transform: `scale(${scale})`,
+            transform: `scale(${viewportScale.x}, ${viewportScale.y})`,
             transformOrigin: "top left",
           }}
         >

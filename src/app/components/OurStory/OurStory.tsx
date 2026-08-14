@@ -1,94 +1,102 @@
 "use client";
-import React from "react";
-import TopNavigation from "../TopNavigation/TopNavigation";
-import Chatbot from "../Chatbot";
+
 import { useOurStory } from "../../../hooks/useOurStory";
+import D6Chatbot from "../D6Chatbot";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaPageCanvas from "../shared/FigmaPageCanvas";
+import styles from "./OurStory.module.css";
 
-const OurStory = () => {
-  const { ourStoryData,  error } = useOurStory();
+const FALLBACK_DESCRIPTION =
+  "GREEN Limited renewable energy solutions and services are predominantly targeted at rural areas that lack access to conventional energy sources and utilities. Our products and services are primarily designed to empower rural communities for economic and social growth, thereby improving their quality of life in a sustainable and healthful manner. Our delivery of solutions, products, and services ensures environmental value addition.";
 
+export default function OurStory() {
+  const { ourStoryData } = useOurStory();
+  const key = ourStoryData?.key || "OUR STORY & MILESTONE";
+  const [titleStart, titleEnd = "MILESTONE"] = key.split(" & ");
+  const storyTitle = ourStoryData?.title || "Our Story";
+  const description = ourStoryData?.description || FALLBACK_DESCRIPTION;
+  const milestoneTitle = ourStoryData?.ourMilestone?.title || "Our Milestones";
+  const timelineImage =
+    ourStoryData?.ourMilestone?.maps?.activeImg ||
+    "/images/our-story/ourstory1.png";
+  const mapImage =
+    ourStoryData?.ourMilestone?.maps?.secondaryImg ||
+    "/images/our-story/ourstory2.png";
 
-  if (error) {
-    return (
-      <React.Fragment>
-        <div className="">
-          <TopNavigation />
-          <div className="flex items-center justify-center h-screen">
-            <div className="text-xl text-red-500">
-              Error loading our story data
-            </div>
-          </div>
-        </div>
-      </React.Fragment>
-    );
-  }
+  const desktop = (
+    <main className={styles.desktopPage} data-node-id="7077:6923">
+      <img
+        className={styles.storyArtwork}
+        src="/images/our-story/mainImg.png"
+        alt=""
+      />
+      <SiteHeader layout="figmaCanvas" highlightActive={false} />
+
+      <h1 className={styles.pageTitle} data-node-id="7077:6960">
+        {titleStart} &amp;
+        <span>{titleEnd}</span>
+      </h1>
+
+      <img
+        className={styles.watermark}
+        src="/images/our-story/milestone.png"
+        alt=""
+      />
+
+      <section className={styles.storyCopy} data-node-id="7077:6940">
+        <h2>{storyTitle}</h2>
+        <p>{description}</p>
+      </section>
+
+      <section className={styles.milestones} data-node-id="7077:6941">
+        <h2>{milestoneTitle}</h2>
+        <img src={timelineImage} alt="GREEN milestones from 2007 to 2025" />
+      </section>
+
+      <D6Chatbot
+        canvasAnchored
+        triggerVariant="figmaCanvas"
+        triggerClassName={styles.chatTrigger}
+        triggerStyle={{
+          top: 881,
+          right: "auto",
+          bottom: "auto",
+          left: 1480,
+          width: 462,
+        }}
+      />
+    </main>
+  );
+
+  const mobile = (
+    <main className={styles.mobilePage} data-node-id="7077:6983-mobile">
+      <SiteHeader panel="logoOnly" />
+      <img
+        className={styles.mobileArtwork}
+        src="/images/our-story/mainImg.png"
+        alt=""
+      />
+      <div className={styles.mobileContent}>
+        <h1>
+          {titleStart} &amp; <span>{titleEnd}</span>
+        </h1>
+        <section>
+          <h2>{storyTitle}</h2>
+          <p>{description}</p>
+        </section>
+        <section>
+          <h2>{milestoneTitle}</h2>
+          <img
+            src={mapImage}
+            alt="Map of GREEN milestones across Papua New Guinea"
+          />
+        </section>
+      </div>
+      <D6Chatbot />
+    </main>
+  );
 
   return (
-    <React.Fragment>
-      <div className="">
-        <TopNavigation />
-        <div className="absolute top-0 left-0 ">
-          <img
-            src="/images/our-story/mainImg.png"
-            className="lg:h-[110vh]"
-            alt="mainImg"
-          />
-        </div>
-        <div className="mt-10 flex h-full">
-          {/* Left Side - MILESTONE Text */}
-          <div className="w-1/6 flex items-center justify-center">
-            <div className="fixed left-4 lg:left-10 top-1/4">
-              <img src="/images/our-story/milestone.png" className="w-8 lg:w-auto" alt="milestone" />
-            </div>
-          </div>
-
-          {/* Main Content Area */}
-          <div className="lg:w-5/6  flex flex-col  lg:px-8  lg:mr-8 p-8 lg:ml-4 rounded-lg">
-            <div className="lg:flex">
-              {/* Left Content Section */}
-              <div className="lg:w-1/2 flex justify-center lg:block lg:text-left text-center pr-8">
-                <h1 className="text-4xl lg:text-5xl 2xl:text-6xl lg:mt-24 uppercase font-black leading-tight mb-6">
-                  {ourStoryData?.key.split(" & ")[0]+ ` &` || "OUR STORY &"}
-                  <br />
-                  <span className="text-[#23B14D]">
-                    {ourStoryData?.key.split(" & ")[1] || "MILESTONES"}
-                  </span>
-                </h1>
-              </div>
-
-              {/* Right Content Section */}
-              <div className="w-full z-10  relative">
-                <h2 className="text-2xl lg:text-3xl  font-bold text-gray-800 mb-4">
-                  {ourStoryData?.title || "Our Story"}
-                </h2>
-                <p className="text-gray-700 lg:text-lg leading-relaxed mb-8">
-                  {ourStoryData?.description ||
-                    "GREEN Limited renewable energy solutions and services are predominantly targeted at rural areas that lack access to conventional energy sources and utilities. Our products and services are primarily designed to empower rural communities for economic and social growth, thereby improving their quality of life in a sustainable and healthful manner. Our delivery of solutions, products, and services ensures environmental value addition."}
-                </p>
-
-                <h3 className="text-2xl lg:text-3xl font-bold text-gray-800 mb-6">
-                  {ourStoryData?.ourMilestone?.title || "Our Milestones"}
-                </h3>
-
-                {/* Timeline */}
-                <div className="mb-20">
-                  <img
-                    src={
-                      ourStoryData?.ourMilestone?.maps?.activeImg ||
-                      "/images/our-story/ourstory1.png"
-                    }
-                    alt="ourstory"
-                    className="  object-cover lg:object-fill h-[30vh] lg:h-[45vh] w-auto"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <Chatbot />
-      </div>
-    </React.Fragment>
+    <FigmaPageCanvas desktop={desktop} mobile={mobile} nodeId="7077:6923" />
   );
-};
-
-export default OurStory;
+}

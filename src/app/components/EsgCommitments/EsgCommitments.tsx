@@ -1,286 +1,227 @@
 "use client";
-import React, { useState } from "react";
-import TopNavigation from "../TopNavigation/TopNavigation";
-import Chatbot from "../Chatbot";
+
+import { useState } from "react";
 import { useSustainabilityESG } from "../../../hooks/useSustainabilityESG";
+import D6Chatbot from "../D6Chatbot";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaPageCanvas from "../shared/FigmaPageCanvas";
+import styles from "./EsgCommitments.module.css";
 import BookTechnicalDebrief from "./Modals/BookTechnicalDebrief";
 import RequestEngineeringDossier from "./Modals/RequestEngineeringDossier";
 
-const EsgCommitments = () => {
-  const { sustainabilityData, isLoading, error } = useSustainabilityESG();
+const FALLBACK_SECTIONS = [
+  {
+    heading: "Environmental Stewardship",
+    intro:
+      "We are actively reshaping our footprint by prioritizing climate-positive action.",
+    points: [
+      "Carbon-neutral operations by 2026",
+      "100% transition to renewable energy across all facilities",
+      "Use of biodegradable and recyclable materials",
+      "Sustainable procurement and green supply chain initiatives",
+      "Reforestation and carbon offset programs",
+    ],
+    icon: "/images/esg-commitments/figma-environmental.png",
+    card: "/images/esg-commitments/figma-environment-card.svg",
+    nodeId: "7077:6738",
+  },
+  {
+    heading: "Social Responsibility",
+    intro:
+      "Sustainability is about people, too. We invest in inclusive progress and resilient communities.",
+    points: [
+      "Training programs in green skills and clean-tech employment",
+      "Local sourcing and support for underserved regions",
+      "Ethical labor, diversity, and fair-wage policies",
+      "Collaboration with indigenous and rural communities for eco-preservation",
+    ],
+    icon: "/images/esg-commitments/figma-social.png",
+    card: "/images/esg-commitments/figma-social-card.svg",
+    nodeId: "7077:6730",
+  },
+  {
+    heading: "Ethical Governance",
+    intro: "Good governance is the foundation of sustainable growth.",
+    points: [
+      "ESG-aligned decision-making and board oversight",
+      "Transparent sustainability reporting and KPIs",
+      "Responsible investment screening (no fossil fuels, conflict materials, etc.)",
+      "Climate risk assessment and mitigation planning",
+    ],
+    icon: "/images/esg-commitments/figma-governance.png",
+    card: "/images/esg-commitments/figma-governance-card.svg",
+    nodeId: "7077:6743",
+  },
+] as const;
+
+interface EsgSection {
+  heading: string;
+  intro: string;
+  points: readonly string[];
+  icon: string;
+  card: string;
+  nodeId: string;
+}
+
+interface PillarProps {
+  section: EsgSection;
+  index: number;
+  mobile?: boolean;
+}
+
+function EsgPillar({ section, index, mobile = false }: PillarProps) {
+  return (
+    <article
+      className={`${styles.pillar} ${mobile ? styles.mobilePillar : ""}`}
+      data-node-id={section.nodeId}
+    >
+      <img className={styles.cardShape} src={section.card} alt="" />
+      <div className={styles.pillarContent}>
+        <h2>{section.heading}</h2>
+        <p>{section.intro}</p>
+        <ul>
+          {section.points.map((point) => (
+            <li key={point}>{point}</li>
+          ))}
+        </ul>
+      </div>
+      <img
+        className={styles.pillarIcon}
+        src={section.icon}
+        alt=""
+        width={index === 0 ? 73 : index === 1 ? 75 : 77}
+        height={index === 0 ? 73 : index === 1 ? 75 : 77}
+      />
+    </article>
+  );
+}
+
+export default function EsgCommitments() {
+  const { sustainabilityData } = useSustainabilityESG();
   const [isDebriefOpen, setIsDebriefOpen] = useState(false);
   const [isDossierOpen, setIsDossierOpen] = useState(false);
+  const sections = FALLBACK_SECTIONS.map((fallback, index) => ({
+    ...fallback,
+    heading: sustainabilityData?.sections?.[index]?.heading || fallback.heading,
+    points: sustainabilityData?.sections?.[index]?.points?.length
+      ? sustainabilityData.sections[index].points
+      : fallback.points,
+  }));
+  const subtitle =
+    sustainabilityData?.header?.subtitle ||
+    "sustainability is more than a goal—it’s our core operating principle. We integrate Environmental, Social, and Governance (ESG) values into everything we do, from product design to energy use, supply chains, and community partnerships.";
+  const quote =
+    sustainabilityData?.quote?.text ||
+    "We lead with purpose—to build a thriving, low-carbon future through sustainable innovation and ESG integrity";
 
+  const desktop = (
+    <main className={styles.desktopPage} data-node-id="7077:6707">
+      <img
+        className={styles.background}
+        src="/images/esg-commitments/figma-background.png"
+        alt=""
+        width="967"
+        height="1326"
+      />
+      <SiteHeader layout="figmaCanvas" highlightActive={false} />
+      <div className={styles.verticalTitle} aria-hidden="true">
+        SUSTAINABILITY &amp; ESG COMMITMENTS
+      </div>
+      <h1 className={styles.pageTitle} data-node-id="7077:6715">
+        Sustainability &amp; ESG <span>Commitments</span>
+      </h1>
+      <p className={styles.intro} data-node-id="7077:6708">
+        <strong>GREEN</strong>, {subtitle}
+      </p>
+      <div className={styles.pillars}>
+        {sections.map((section, index) => (
+          <EsgPillar key={section.heading} section={section} index={index} />
+        ))}
+      </div>
+      <blockquote className={styles.quote} data-node-id="7077:6735">
+        “<span>{quote}</span>”
+      </blockquote>
+      <div className={styles.tomorrow} data-node-id="7077:6726">
+        <span>Green Today.</span>
+        <strong>Greener Tomorrow.</strong>
+      </div>
+      <div className={styles.actions}>
+        <button type="button" onClick={() => setIsDebriefOpen(true)}>
+          Book a Technical Debrief <b>›</b>
+        </button>
+        <button type="button" onClick={() => setIsDossierOpen(true)}>
+          Request Our Engineering Dossier <b>›</b>
+        </button>
+        <button type="button">
+          Explore a System Built for Your Reality <b>›</b>
+        </button>
+      </div>
+      <D6Chatbot
+        canvasAnchored
+        triggerVariant="figmaCanvas"
+        triggerClassName={styles.chatTrigger}
+        triggerStyle={{
+          top: 885,
+          right: "auto",
+          bottom: "auto",
+          left: 1498,
+          width: 418,
+        }}
+      />
+    </main>
+  );
 
-
-  if (error) {
-    return (
-      <React.Fragment>
-        <div className="min-h-screen">
-          <TopNavigation />
-          <div className="flex items-center justify-center h-screen">
-            <div className="text-xl text-red-500">Error loading sustainability data</div>
-          </div>
+  const mobile = (
+    <main className={styles.mobilePage} data-node-id="7077:6707-mobile">
+      <SiteHeader panel="logoOnly" />
+      <div className={styles.mobileContent}>
+        <h1>
+          Sustainability &amp; ESG <span>Commitments</span>
+        </h1>
+        <p>
+          <strong>GREEN</strong>, {subtitle}
+        </p>
+        <div className={styles.mobilePillars}>
+          {sections.map((section, index) => (
+            <EsgPillar
+              key={section.heading}
+              section={section}
+              index={index}
+              mobile
+            />
+          ))}
         </div>
-      </React.Fragment>
-    );
-  }
+        <blockquote>
+          “<span>{quote}</span>”
+        </blockquote>
+        <div className={styles.mobileTomorrow}>
+          <span>Green Today.</span>
+          <strong>Greener Tomorrow.</strong>
+        </div>
+        <div className={styles.mobileActions}>
+          <button type="button" onClick={() => setIsDebriefOpen(true)}>
+            Book a Technical Debrief
+          </button>
+          <button type="button" onClick={() => setIsDossierOpen(true)}>
+            Request Our Engineering Dossier
+          </button>
+        </div>
+      </div>
+      <D6Chatbot />
+    </main>
+  );
 
   return (
-    <React.Fragment>
-      <div className="">
-        <TopNavigation />
-        
-        {/* Background Image */}
-        <div className="absolute top-0 left-0 lg:block hidden">
-          <img src="/images/esg-commitments/mainImg.png" alt="mainImg" className="w-9/12 h-[120vh]" />
-        </div>
-
-        {/* Main Layout - Responsive */}
-        <div className="px-4  lg:ml-52 mt-8 lg:mt-20">
-          <div className="lg:flex lg:space-x-20">
-            <div className="shrink-0">
-              <h1 className="text-3xl lg:text-4xl 2xl:text-5xl lg:mt-10 uppercase font-black leading-tight mb-6 text-center lg:text-left">
-                {sustainabilityData?.header?.title?.split(' & ')[0] || "Sustainability"} <br /> & ESG
-                <br />
-                <span className="text-[#23B14D]">
-                  {sustainabilityData?.header?.title?.split(' ')[3] || "Commitments"}
-                </span>
-              </h1>
-            </div>
-            <div className="w-full min-w-0">
-              {/* Header */}
-              <div className="mb-6">
-                <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-3">
-                  A Greener Mission, A Lasting Impact
-                </h2>
-                <p className="text-base font-semibold text-gray-700">
-                  <span className="font-black text-green-600 italic">
-                    — At GREEN
-                  </span>
-                  , {sustainabilityData?.header?.subtitle || "sustainability is more than a goal—it's our core operating principle. We integrate Environmental, Social, and Governance (ESG) values into everything we do, from product design to energy use, supply chains, and community partnerships."}
-                </p>
-              </div>
-
-              <div className="space-y-6 my-8">
-                <div className="grid lg:grid-cols-2 gap-6">
-                  {sustainabilityData?.sections?.slice(0, 2).map((section, index) => (
-                    <div key={section.id}>
-                      <div className="flex space-x-2 items-center mb-3">
-                        <div className="flex space-x-2">
-                          <div>
-                            <img
-                              src={section.icon?.src || `/images/esg-commitments/${index === 0 ? 'environmental' : 'responsibility'}.png`}
-                              alt={section.icon?.alt || section.heading}
-                              className="w-24"
-                            />
-                          </div>
-                        </div>
-                        <div className="flex flex-col space-y-1">
-                          <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
-                            {section.heading}
-                          </h3>
-                          <p className="text-sm text-gray-700 mb-2">
-                            {index === 0 
-                              ? "We are actively rethinking our footprint by prioritizing climate-positive action."
-                              : "Sustainability is about people, too. We invest in inclusive progress and resilient communities."
-                            }
-                          </p>
-                        </div>
-                      </div>
-                      <ul className="ml-12 text-gray-600 space-y-1">
-                        {section.points?.map((point, pointIndex) => (
-                          <li key={pointIndex}>• {point}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )) || (
-                    <>
-                      {/* Fallback content for first two sections */}
-                      <div>
-                        <div className="flex space-x-2 items-center mb-3">
-                          <div className="flex space-x-2">
-                            <div>
-                              <img
-                                src="/images/esg-commitments/environmental.png"
-                                alt="Environmental Stewardship"
-                                className="w-24"
-                              />
-                            </div>
-                          </div>
-                          <div className="flex flex-col space-y-1">
-                            <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
-                              Environmental Stewardship
-                            </h3>
-                            <p className="text-sm text-gray-700 mb-2">
-                              We are actively rethinking our footprint by
-                              prioritizing climate-positive action.
-                            </p>
-                          </div>
-                        </div>
-                        <ul className="ml-12 text-gray-600 space-y-1">
-                          <li>• Carbon-neutral operations by 2030</li>
-                          <li>• 100% transition to renewable energy across all facilities</li>
-                          <li>• Use of biodegradable and recyclable materials</li>
-                          <li>• Sustainable procurement and green supply chain initiatives</li>
-                          <li>• Deforestation and carbon offset programs</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <div className="flex space-x-2 items-center mb-3">
-                          <div className="flex space-x-2">
-                            <div>
-                              <img
-                                src="/images/esg-commitments/responsibility.png"
-                                alt="Social Responsibility"
-                                className="w-24"
-                              />
-                            </div>
-                          </div>
-                          <div className="flex flex-col space-y-1">
-                            <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
-                              Social Responsibility
-                            </h3>
-                            <p className="text-sm text-gray-700 mb-2">
-                              Sustainability is about people, too. We invest in
-                              inclusive progress and resilient communities.
-                            </p>
-                          </div>
-                        </div>
-                        <ul className="ml-12 text-gray-600 space-y-1">
-                          <li>• Training programs in green skills and clean-tech employment</li>
-                          <li>• Local sourcing and support for underserved regions</li>
-                          <li>• Ethical labor, diversity, and fair-wage policies</li>
-                          <li>• Collaboration with indigenous and rural communities for eco-preservation</li>
-                        </ul>
-                      </div>
-                    </>
-                  )}
-                </div>
-
-                <div className="grid lg:grid-cols-2 gap-6">
-                  {sustainabilityData?.sections?.[2] ? (
-                    <div>
-                      <div className="flex space-x-2 items-center mb-3">
-                        <div className="flex space-x-2">
-                          <div>
-                            <img
-                              src={sustainabilityData.sections[2].icon?.src || "/images/esg-commitments/ethical.png"}
-                              alt={sustainabilityData.sections[2].icon?.alt || "Ethical Governance"}
-                              className="w-20"
-                            />
-                          </div>
-                        </div>
-                        <div className="flex flex-col space-y-1">
-                          <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
-                            {sustainabilityData.sections[2].heading}
-                          </h3>
-                          <p className="text-sm text-gray-700 mb-2">
-                            Good governance is the foundation of sustainable growth.
-                          </p>
-                        </div>
-                      </div>
-                      <ul className="ml-12 text-sm text-gray-600 space-y-1">
-                        {sustainabilityData.sections[2].points?.map((point, pointIndex) => (
-                          <li key={pointIndex}>• {point}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  ) : (
-                    <div>
-                      <div className="flex space-x-2 items-center mb-3">
-                        <div className="flex space-x-2">
-                          <div>
-                            <img
-                              src="/images/esg-commitments/ethical.png"
-                              alt="Ethical Governance"
-                              className="w-20"
-                            />
-                          </div>
-                        </div>
-                        <div className="flex flex-col space-y-1">
-                          <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
-                            Ethical Governance
-                          </h3>
-                          <p className="text-sm text-gray-700 mb-2">
-                            Good governance is the foundation of sustainable growth.
-                          </p>
-                        </div>
-                      </div>
-                      <ul className="ml-12 text-sm text-gray-600 space-y-1">
-                        <li>• ESG-aligned decision-making and board oversight</li>
-                        <li>• Transparent sustainability reporting and KPIs</li>
-                        <li>• Responsible investment screening (no fossil fuels, conflict materials, etc.)</li>
-                        <li>• Climate risk assessment and mitigation planning</li>
-                      </ul>
-                    </div>
-                  )}
-
-                  <div className="w-[80%] mx-auto">
-                    <p className="text-2xl font-semibold italic text-gray-700">
-                      <span>"</span>
-                      <span className="text-[#23B14D]">
-                        {sustainabilityData?.quote?.text || "We lead with purpose—to build a thriving, low-carbon future through sustainable innovation and ESG integrity."}
-                      </span>
-                      <span>"</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom-right CTA buttons */}
-        <div className="flex flex-col items-center lg:items-end gap-4 px-4 lg:px-10 pb-24 lg:-mt-6">
-          <button
-            type="button"
-            onClick={() => setIsDebriefOpen(true)}
-            className="w-full max-w-xs cursor-pointer lg:w-auto"
-          >
-            <span
-              style={{ transform: "skewX(-12deg)" }}
-              className="flex items-center justify-between gap-3 bg-gradient-to-r from-lime-300 to-green-500 px-6 py-3 shadow-md transition hover:brightness-105"
-            >
-              <span
-                style={{ transform: "skewX(12deg)" }}
-                className="text-sm font-bold text-gray-900 lg:text-base"
-              >
-                Book a Technical Debrief
-              </span>
-              <span style={{ transform: "skewX(12deg)" }} className="font-bold text-gray-900">
-                ›
-              </span>
-            </span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setIsDossierOpen(true)}
-            className="w-full max-w-xs cursor-pointer lg:w-auto"
-          >
-            <span
-              style={{ transform: "skewX(-12deg)" }}
-              className="flex items-center justify-between gap-3 bg-gradient-to-r from-lime-300 to-green-500 px-6 py-3 shadow-md transition hover:brightness-105"
-            >
-              <span
-                style={{ transform: "skewX(12deg)" }}
-                className="text-sm font-bold text-gray-900 lg:text-base"
-              >
-                Request our Engineering Dossier
-              </span>
-              <span style={{ transform: "skewX(12deg)" }} className="font-bold text-gray-900">
-                ›
-              </span>
-            </span>
-          </button>
-        </div>
-
-        <Chatbot />
-      </div>
-      <BookTechnicalDebrief isOpen={isDebriefOpen} onClose={() => setIsDebriefOpen(false)} />
-      <RequestEngineeringDossier isOpen={isDossierOpen} onClose={() => setIsDossierOpen(false)} />
-    </React.Fragment>
+    <>
+      <FigmaPageCanvas desktop={desktop} mobile={mobile} nodeId="7077:6707" />
+      <BookTechnicalDebrief
+        isOpen={isDebriefOpen}
+        onClose={() => setIsDebriefOpen(false)}
+      />
+      <RequestEngineeringDossier
+        isOpen={isDossierOpen}
+        onClose={() => setIsDossierOpen(false)}
+      />
+    </>
   );
-};
-
-export default EsgCommitments;
+}

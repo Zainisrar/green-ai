@@ -1,604 +1,401 @@
-.page {
+.desktopPage {
   position: relative;
-  min-height: 100svh;
+  width: 1920px;
+  height: 970px;
   overflow: hidden;
-  color: #282828;
   background: #fff;
-  font-family: var(--font-montserrat), "Montserrat", sans-serif;
+  color: #000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
 
-.background {
+.backgroundVisual {
   position: absolute;
-  z-index: 0;
   inset: 0;
-  background: url("/images/service/bg.svg") center top / cover no-repeat;
   pointer-events: none;
 }
 
-.header,
-.processFlow,
-.detail,
-.heading,
-.servicesPanel,
-.enquiryButton,
-.verticalTitle,
-.chat {
+.solarLayer,
+.engineeringLayer {
   position: absolute;
-  z-index: 2;
+  overflow: hidden;
+  mask-image: url("/images/epcm-services/figma-image-mask.svg");
+  mask-repeat: no-repeat;
+  mask-size: 1145.5px 1987px;
 }
 
-.header {
-  inset: 0 0 auto;
-  height: 5.469vw;
+.solarLayer {
+  top: -188px;
+  left: 1106px;
+  width: 967px;
+  height: 1326px;
+  mask-position: -19px 29px;
 }
 
-.logo {
-  position: absolute;
-  top: 0.977vw;
-  left: 0.586vw;
-  display: block;
-  width: 13.037vw;
+.solarLayer img {
+  width: 967px;
+  height: 1326px;
+  object-fit: cover;
+  opacity: 0.24;
 }
 
-.logo img {
-  display: block;
-  width: 100%;
-  height: auto;
+.engineeringLayer {
+  top: -20px;
+  left: 1190px;
+  width: 1024px;
+  height: 1024px;
+  mask-position: -103px -139px;
 }
 
-.navigation {
-  position: absolute;
-  top: 1.709vw;
-  right: 1.025vw;
-  display: flex;
-  align-items: center;
-  gap: 2.1vw;
-  color: #292929;
-  font-size: 0.977vw;
-  font-weight: 500;
-  line-height: 1;
-  text-transform: uppercase;
-}
-
-.navigation a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.navigation a:hover,
-.navigation a:focus-visible {
-  color: #23b14d;
-}
-
-.navigation .activeNavigationItem {
-  color: #23b14d;
-}
-
-.navigation button {
-  display: grid;
-  width: 2.051vw;
-  height: 2.637vw;
-  margin-left: 0.537vw;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  place-items: center;
-  transform: translateY(-0.977vw);
-}
-
-.navigation button img {
-  width: 2.051vw;
-  height: 2.637vw;
+.engineeringLayer img {
+  width: 1024px;
+  height: 1024px;
+  object-fit: cover;
+  opacity: 0.5;
 }
 
 .verticalTitle {
-  top: 22.9vw;
-  left: 2.686vw;
-  width: 3.564vw;
-  height: auto;
+  position: absolute;
+  top: 197px;
+  left: 44px;
+  width: 57px;
+  height: 701px;
 }
 
-.processFlow {
-  top: 16.65vw;
-  left: 8.2%;
-  display: flex;
-  align-items: center;
-}
-
-.flowItem {
-  display: flex;
-  align-items: center;
-}
-
-.flowCard {
-  box-sizing: border-box;
-  width: 9.619vw;
-  height: 6.348vw;
-  padding: 0.684vw 0.488vw 0.488vw 1.221vw;
-  border: max(3px, 0.244vw) solid #d6ec4d;
-  background: rgb(255 255 255 / 88%);
-  box-shadow: 0 0.586vw 1.074vw rgb(0 0 0 / 14%);
-  transform: skewX(-13deg);
-}
-
-.flowCardContent {
-  transform: skewX(13deg);
-}
-
-.flowCard h2 {
-  margin: 0 0 0.635vw;
-  color: #23b14d;
-  font-size: 0.635vw;
+.pageTitle {
+  position: absolute;
+  top: 88px;
+  left: 265px;
+  width: 737px;
+  margin: 0;
+  font-size: 56px;
   font-weight: 800;
-  line-height: 1;
+  line-height: normal;
   text-transform: uppercase;
 }
 
-.flowCard ul {
+.pageTitle span,
+.delivery strong {
+  color: #23b14d;
+}
+
+.subtitle {
+  position: absolute;
+  top: 161px;
+  left: 265px;
+  width: 1175px;
+  margin: 0;
+  color: #23b14d;
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 36px;
+}
+
+.introduction {
+  position: absolute;
+  top: 224px;
+  left: 265px;
+  width: 1031px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.28px;
+}
+
+.serviceGrid {
+  position: absolute;
+  inset: 0;
+}
+
+.serviceCard {
+  position: absolute;
+  width: 528px;
+  height: 210px;
+}
+
+.serviceCard:nth-child(1) {
+  top: 354px;
+  left: 255px;
+}
+
+.serviceCard:nth-child(2) {
+  top: 352px;
+  left: 773px;
+}
+
+.serviceCard:nth-child(3) {
+  top: 621px;
+  left: 188px;
+}
+
+.serviceCard:nth-child(4) {
+  top: 619px;
+  left: 706px;
+}
+
+.cardShape {
+  position: absolute;
+  top: -2.5px;
+  left: -4.25px;
+  width: 536.496px;
+  height: 215px;
+  max-width: none;
+}
+
+.cardContent {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  padding: 25px 48px 15px 73px;
+  text-align: center;
+}
+
+.serviceCard:nth-child(4) .cardContent {
+  padding-left: 49px;
+}
+
+.cardContent h2 {
+  margin: 0 0 18px;
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 34px;
+}
+
+.cardContent ul {
   margin: 0;
   padding: 0;
-  color: #1f1f1f;
-  font-size: 0.586vw;
-  font-weight: 700;
-  line-height: 1.12;
   list-style: none;
 }
 
-.flowArrow {
-  width: 2.295vw;
-  height: auto;
-  margin: 0 -0.049vw;
+.cardContent li {
+  margin: 0 0 13px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 10px;
 }
 
-.detail {
-  top: 8.85vw;
-  right: 4.6%;
-  width: 30.6%;
-}
-
-.detail h1 {
-  margin: 0 0 1.367vw;
-  color: #000;
-  font-size: 3.564vw;
-  font-weight: 700;
-  letter-spacing: -0.055em;
-  line-height: 0.96;
-}
-
-.detail p {
-  margin: 0;
-  font-size: 0.83vw;
-  font-weight: 500;
-  line-height: 1.67;
-}
-
-.detail p + p {
-  margin-top: 0.586vw;
-}
-
-.heading {
-  top: 40.19vw;
-  bottom: auto;
-  left: 9%;
-  width: 27.832vw;
-  text-transform: uppercase;
-}
-
-.heading h2 {
-  margin: 0 0 0.635vw;
-  color: #000;
-  font-size: 2.979vw;
-  font-weight: 900;
-  letter-spacing: -0.045em;
-  line-height: 0.9;
-}
-
-.heading p {
-  max-width: 28.32vw;
-  margin: 0;
-  color: #23b14d;
-  font-size: 1.66vw;
-  font-weight: 800;
-  letter-spacing: -0.028em;
-  line-height: 1.17;
-}
-
-.servicesPanel {
-  top: 26.758vw;
-  bottom: auto;
-  left: 45.4%;
-  box-sizing: border-box;
-  width: 24.414vw;
-  height: 21.289vw;
-  padding: 1.875vw 1.709vw 1.172vw 5.078vw;
-  background:
-    linear-gradient(
-      90deg,
-      rgb(35 177 77 / 20%) -147.34%,
-      rgb(255 254 80 / 20%) 100%
-    ), rgb(241 238 238 / 30%);
-  box-shadow: 0 3px 10px rgb(0 0 0 / 25%);
-  -webkit-backdrop-filter: blur(7.5px);
-  backdrop-filter: blur(7.5px);
-  transform: skewX(-21deg);
-}
-
-.servicesPanelContent {
-  min-width: 0;
-  transform: skewX(21deg);
-}
-
-.servicesPanel h2 {
-  margin: 0 0 2.95vw;
-  color: #303030;
-  font-size: 1.465vw;
-  font-weight: 700;
-  line-height: 1;
-  text-transform: uppercase;
-  transform: translateX(0.9vw);
-}
-
-.serviceOptions {
-  --active-line-end: 4.639vw;
-  --active-line-start: 0vw;
-
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 1.65vw;
-  min-width: 0;
-  width: calc(100% + 3.5vw);
-}
-
-.serviceOptions:has(button:nth-child(2).selectedService) {
-  --active-line-end: 7.739vw;
-  --active-line-start: 3.1vw;
-}
-
-.serviceOptions:has(button:nth-child(3).selectedService) {
-  --active-line-end: 10.839vw;
-  --active-line-start: 6.2vw;
-}
-
-.serviceOptions:has(button:nth-child(4).selectedService) {
-  --active-line-end: 13.939vw;
-  --active-line-start: 9.3vw;
-}
-
-.serviceOptions::before {
+.quotePanel {
   position: absolute;
-  top: -0.488vw;
-  bottom: 0;
-  left: -4.15vw;
-  width: max(2px, 0.146vw);
-  background: linear-gradient(
-    to bottom,
-    rgb(255 255 255 / 92%) 0 var(--active-line-start),
-    #23b14d var(--active-line-start) var(--active-line-end),
-    rgb(255 255 255 / 92%) var(--active-line-end) 100%
-  );
-  content: "";
-  pointer-events: none;
-  transform: skewX(-21deg);
+  top: 355.5px;
+  left: 1295.2px;
+  width: 607.597px;
+  height: 196px;
 }
 
-.serviceOptions button {
-  --service-row-offset: 0vw;
+.quotePanel > img {
+  position: absolute;
+  inset: 0;
+  width: 607.597px;
+  height: 196px;
+}
 
-  position: relative;
+.quotePanel p {
+  position: absolute;
+  top: 29.5px;
+  left: 112.8px;
+  width: 403px;
+  margin: 0;
+  font-size: 32px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.delivery {
+  position: absolute;
+  top: 865px;
+  left: 333px;
+  width: 921px;
+  margin: 0;
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 36px;
+}
+
+.actions {
+  position: absolute;
+  inset: 0;
+}
+
+.actions a,
+.actions button {
+  position: absolute;
   display: block;
-  width: 100%;
-  min-width: 0;
-  max-width: 100%;
+  height: 53px;
   padding: 0;
   border: 0;
   background: transparent;
-  color: #303030;
-  font: inherit;
-  font-size: 1.318vw;
-  font-weight: 500;
-  line-height: 1.1;
-  text-align: left;
-  overflow-wrap: normal;
+  color: #000;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.actions a {
+  top: 680px;
+  left: 1584px;
+  width: 341px;
+}
+
+.actions button:nth-of-type(1) {
+  top: 751px;
+  left: 1620px;
+  width: 301px;
+}
+
+.actions button:nth-of-type(2) {
+  top: 822px;
+  left: 1586px;
+  width: 331px;
+}
+
+.actions img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 53px;
+}
+
+.actions span {
+  position: absolute;
+  inset: 6px 25px 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 40px;
+  text-align: center;
   white-space: nowrap;
-  cursor: pointer;
-  transform: translateX(var(--service-row-offset));
-}
-
-.serviceOptions button:nth-child(2) {
-  --service-row-offset: -2.25vw;
-}
-
-.serviceOptions button:nth-child(3) {
-  --service-row-offset: -3.5vw;
-}
-
-.serviceOptions button:nth-child(4) {
-  --service-row-offset: -5vw;
-}
-
-.serviceOptions button:hover,
-.serviceOptions button:focus-visible {
-  color: #23b14d;
-  outline: none;
-}
-
-.serviceOptions .selectedService {
-  min-height: 4.004vw;
-  margin-bottom: -1.125vw;
-  padding-left: 1.709vw;
-  color: #23b14d;
-  font-size: 1.416vw;
-  font-weight: 800;
-  transform: translateX(calc(var(--service-row-offset) - 1.709vw));
-}
-
-.selectedService small {
-  display: block;
-  max-width: 21vw;
-  margin-top: 0.391vw;
-  color: #5a5a5a;
-  font-size: 0.781vw;
-  font-weight: 500;
-  line-height: 1.25;
-  overflow-wrap: normal;
-  white-space: normal;
-}
-
-.enquiryButton {
-  right: 0.391vw;
-  top: 42.773vw;
-  bottom: auto;
-  display: block;
-  width: 7.324vw;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-
-.enquiryButton img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.chat {
-  z-index: 10;
 }
 
 .chatTrigger {
-  position: fixed;
+  z-index: 3;
+}
+
+.mobilePage {
+  min-height: 100svh;
+  padding-top: 82px;
+  background: #fff;
+  color: #202020;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.mobileContent {
+  width: min(100% - 28px, 760px);
+  margin: 0 auto;
+  padding: 34px 0 140px;
+}
+
+.mobileContent > h1 {
+  margin: 0;
+  font-size: clamp(32px, 8vw, 50px);
+  font-weight: 800;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.mobileContent > h1 span,
+.mobileDelivery strong {
+  color: #23b14d;
+}
+
+.mobileContent > h2 {
+  margin: 16px 0;
+  color: #23b14d;
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.3;
+}
+
+.mobileContent > p {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.mobileGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 14px;
+  margin-top: 30px;
+}
+
+.serviceCard.mobileCard,
+.serviceCard.mobileCard:nth-child(1),
+.serviceCard.mobileCard:nth-child(2),
+.serviceCard.mobileCard:nth-child(3),
+.serviceCard.mobileCard:nth-child(4) {
+  position: relative;
   top: auto;
-  /* Match the shared chat trigger inset so the microphone stays inside its frame. */
-  right: 8px;
-  bottom: clamp(0px, 0.781vw, 16px);
-  width: min(23.926vw, 490px);
-}
-
-.chatTrigger > div > img {
+  left: auto;
   width: 100%;
-  height: auto;
+  height: 190px;
 }
 
-/* The skewed right edge needs more clearance than the default chat trigger. */
-.chatTrigger > div > div:last-child {
-  right: 16%;
+.mobileCard .cardShape {
+  width: 100%;
+  height: 190px;
 }
 
-@media (max-width: 900px) {
-  .page {
-    min-height: auto;
-    overflow: visible;
-    background: #fff;
+.serviceCard.mobileCard .cardContent {
+  padding: 27px 28px 20px 42px;
+}
+
+.mobileCard .cardContent h2 {
+  margin-bottom: 14px;
+  font-size: 25px;
+}
+
+.mobileCard .cardContent li {
+  margin-bottom: 8px;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.mobileContent blockquote {
+  margin: 34px 0;
+  padding: 24px 32px;
+  background: #f4fbdc;
+  box-shadow: 0 8px 18px rgb(0 0 0 / 14%);
+  clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.mobileDelivery {
+  font-size: 19px;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.mobileActions {
+  display: grid;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+.mobileActions button {
+  min-height: 50px;
+  border: 1px solid #23b14d;
+  background: linear-gradient(110deg, #75d994, #effc97);
+  font-family: inherit;
+  font-weight: 600;
+  clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
+}
+
+@media (max-width: 580px) {
+  .mobileGrid {
+    grid-template-columns: 1fr;
   }
 
-  .background {
-    height: 510px;
-    background-image: url("/images/service/mbImg.png");
-    background-size: cover;
+  .serviceCard.mobileCard,
+  .serviceCard.mobileCard:nth-child(1),
+  .serviceCard.mobileCard:nth-child(2),
+  .serviceCard.mobileCard:nth-child(3),
+  .serviceCard.mobileCard:nth-child(4) {
+    height: 205px;
   }
 
-  .header,
-  .processFlow,
-  .detail,
-  .heading,
-  .servicesPanel,
-  .enquiryButton,
-  .verticalTitle,
-  .chat {
-    position: relative;
-  }
-
-  .header {
-    height: 82px;
-  }
-
-  .logo {
-    top: 15px;
-    left: 16px;
-    width: 180px;
-  }
-
-  .navigation {
-    top: 15px;
-    right: 14px;
-  }
-
-  .navigation a {
-    display: none;
-  }
-
-  .navigation button,
-  .navigation button img {
-    width: 35px;
-    height: 44px;
-    margin: 0;
-    transform: none;
-  }
-
-  .verticalTitle {
-    display: none;
-    top: auto;
-  }
-
-  .processFlow {
-    top: auto;
-    left: auto;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px 12px;
-    padding: 35px 30px 15px;
-  }
-
-  .flowItem {
-    display: block;
-  }
-
-  .flowCard {
-    width: 100%;
-    min-width: 0;
-    height: 124px;
-    padding: 14px 12px 10px 24px;
-    border-width: 4px;
-  }
-
-  .flowCard h2 {
-    margin-bottom: 12px;
-    font-size: 12px;
-  }
-
-  .flowCard ul {
-    font-size: 11px;
-  }
-
-  .flowArrow {
-    display: none;
-  }
-
-  .detail {
-    top: auto;
-    right: auto;
-    width: auto;
-    margin: 45px 26px 0;
-  }
-
-  .detail h1 {
-    margin-bottom: 18px;
-    font-size: clamp(42px, 12vw, 60px);
-  }
-
-  .detail p {
-    font-size: 15px;
-    line-height: 1.55;
-  }
-
-  .heading {
-    top: auto;
-    bottom: auto;
-    left: auto;
-    width: auto;
-    margin: 55px 26px 0;
-  }
-
-  .heading h2 {
-    font-size: 49px;
-  }
-
-  .heading p {
-    font-size: 24px;
-  }
-
-  .servicesPanel {
-    top: auto;
-    bottom: auto;
-    left: auto;
-    width: auto;
-    height: auto;
-    min-height: 390px;
-    margin: 35px 35px 30px 65px;
-    /* Keep all mobile copy clear of the panel's angled upper-left edge. */
-    padding: 31px 44px 35px 31%;
-  }
-
-  .servicesPanel h2 {
-    margin-bottom: 36px;
-    font-size: 26px;
-    transform: translateX(14px);
-  }
-
-  .serviceOptions {
-    --active-line-end: 88px;
-    --active-line-start: 0px;
-
-    gap: 12px;
-  }
-
-  .serviceOptions:has(button:nth-child(2).selectedService) {
-    --active-line-end: 124px;
-    --active-line-start: 36px;
-  }
-
-  .serviceOptions:has(button:nth-child(3).selectedService) {
-    --active-line-end: 160px;
-    --active-line-start: 72px;
-  }
-
-  .serviceOptions:has(button:nth-child(4).selectedService) {
-    --active-line-end: 196px;
-    --active-line-start: 108px;
-  }
-
-  .serviceOptions::before {
-    top: -8px;
-    left: -45px;
-  }
-
-  .servicesPanel .serviceOptions button {
-    --service-row-offset: 0px;
-
-    font-size: 22px;
-    overflow-wrap: anywhere;
-    white-space: normal;
-  }
-
-  .serviceOptions .selectedService {
-    min-height: 78px;
-    margin-bottom: 0;
-    padding-left: 30px;
-    font-size: 24px;
-    transform: translateX(-30px);
-  }
-
-  .selectedService small {
-    max-width: 340px;
-    margin-top: 8px;
-    font-size: 13px;
-  }
-
-  .enquiryButton {
-    top: auto;
-    right: auto;
-    bottom: auto;
-    display: block;
-    margin: 0 22px 105px auto;
-  }
-
-  .chat {
-    position: absolute;
-    right: 3px;
-    bottom: 0;
-  }
-
-  .chatTrigger {
-    top: auto;
-    right: 1px;
-    bottom: 2px;
-    width: min(92vw, 462px);
-  }
-
-  .chatTrigger > div > img {
-    width: 100%;
+  .mobileCard .cardShape {
+    height: 205px;
   }
 }

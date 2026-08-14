@@ -1,0 +1,374 @@
+.pageShell {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #fff;
+  color: #0c0c0c;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 992px;
+  overflow: hidden;
+  transform-origin: top left;
+  background: #fff;
+}
+
+.scenicArt {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 971px;
+  transform-origin: 0 0;
+  will-change: transform, opacity;
+}
+
+.scenicArt img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  will-change: opacity;
+}
+
+.title {
+  position: absolute;
+  top: 70px;
+  left: 114px;
+  width: 628px;
+  height: 67px;
+  margin: 0;
+  color: #050505;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.18;
+  text-align: right;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.title strong {
+  color: #23b14d;
+  font-weight: 800;
+}
+
+.subHeadline {
+  position: absolute;
+  top: 164px;
+  left: 282px;
+  width: 859px;
+  margin: 0;
+  color: #23b14d;
+  font-size: 30px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 36px;
+}
+
+.description {
+  position: absolute;
+  top: 215px;
+  left: 282px;
+  width: 1011px;
+  height: 48px;
+  margin: 0;
+  color: #111;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0.36px;
+}
+
+.loginButton {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    filter 160ms ease,
+    transform 160ms ease;
+}
+
+.loginButton:hover,
+.loginButton:focus-visible,
+.cta:hover,
+.cta:focus-visible,
+.contactCard:hover,
+.contactCard:focus-visible {
+  filter: brightness(1.03) saturate(1.05);
+  transform: translateY(-2px);
+}
+
+.loginButton:focus-visible,
+.cta:focus-visible,
+.contactCard:focus-visible {
+  outline: 3px solid rgb(35 177 77 / 45%);
+  outline-offset: 4px;
+}
+
+.loginButton img,
+.cta img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.existingUsers {
+  top: 311px;
+  left: 410px;
+  width: 292px;
+  height: 64px;
+}
+
+.newUsers {
+  top: 311px;
+  left: 732px;
+  width: 262px;
+  height: 64px;
+}
+
+.accessHeading,
+.policy h2 {
+  position: absolute;
+  margin: 0;
+  color: #090909;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.accessHeading {
+  top: 455px;
+  left: 153px;
+  width: 530px;
+}
+
+.divider {
+  position: absolute;
+  top: 502px;
+  left: 153px;
+  width: 1121px;
+  height: 2px;
+  background: #23b14d;
+}
+
+.feature {
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
+  color: #0c0c0c;
+}
+
+.feature > img {
+  flex: 0 0 auto;
+  width: 71px;
+  height: 71px;
+  margin-top: -8px;
+  object-fit: contain;
+}
+
+.feature h3,
+.feature p {
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.feature h3 {
+  font-size: 24px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 30px;
+}
+
+.feature p {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+}
+
+.tracker {
+  top: 531px;
+  left: 133px;
+  width: 585px;
+}
+
+.savedJobs {
+  top: 531px;
+  left: 779px;
+  width: 495px;
+}
+
+.toolkit {
+  top: 621px;
+  left: 131px;
+  width: 617px;
+}
+
+.assessments {
+  top: 609px;
+  left: 772px;
+  width: 502px;
+}
+
+.partnerCopy {
+  position: absolute;
+  top: 529px;
+  left: 1375px;
+  width: 565px;
+  min-height: 194px;
+  color: #050505;
+  font-size: 32px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 45px;
+  text-transform: capitalize;
+}
+
+.partnerCopy p {
+  margin: 0;
+}
+
+.partnerCopy strong {
+  color: #23b14d;
+  font-weight: 800;
+}
+
+.policy {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.policy h2 {
+  top: 739px;
+  left: 153px;
+  width: 530px;
+}
+
+.policy > p {
+  position: absolute;
+  top: 784px;
+  left: 151px;
+  width: 1064px;
+  margin: 0;
+  color: #090909;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 22px;
+  text-transform: capitalize;
+}
+
+.contactCard {
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 53px;
+  padding: 0 26px 0 58px;
+  border: 1.5px solid #d8df00;
+  clip-path: polygon(3% 0, 100% 0, 97% 100%, 0 100%);
+  color: #0c0c0c;
+  background: linear-gradient(90deg, rgb(35 177 77 / 6%), rgb(255 229 0 / 7%));
+  font-size: 20px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 30px;
+  text-decoration: none;
+  transition:
+    filter 160ms ease,
+    transform 160ms ease;
+}
+
+.contactCard img {
+  position: absolute;
+  left: 28px;
+  display: block;
+  width: 28px;
+  height: 23px;
+  object-fit: contain;
+}
+
+.emailCard {
+  top: 880px;
+  left: 168px;
+  width: 536px;
+}
+
+.phoneCard {
+  top: 880px;
+  left: 704px;
+  width: 536px;
+}
+
+.phoneCard img {
+  width: 22px;
+}
+
+.cta {
+  position: absolute;
+  display: block;
+  transition:
+    filter 160ms ease,
+    transform 160ms ease;
+}
+
+.vacancies {
+  top: 748px;
+  left: 1626px;
+  width: 292px;
+  height: 53px;
+}
+
+.privacy {
+  top: 819px;
+  left: 1451px;
+  width: 470px;
+  height: 53px;
+}
+
+.verticalLabel {
+  position: absolute;
+  z-index: 3;
+  top: 128px;
+  left: 55px;
+  display: block;
+  width: 32px;
+  height: 789px;
+  object-fit: contain;
+}
+
+.chatbot {
+  bottom: 0;
+}
+
+.chatbot > div > div:last-child {
+  right: 13%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scenicArt,
+  .content {
+    will-change: auto;
+  }
+
+  .loginButton,
+  .cta,
+  .contactCard {
+    transition: none;
+  }
+}
