@@ -117,6 +117,13 @@ for (const bug of selectedBugs) {
         body: "{}",
       }),
     );
+    await page.route("**/api/endeavors/projects", (route) =>
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: "{}",
+      }),
+    );
 
     for (const width of REFERENCE_VIEWPORTS) {
       const height = width === 1920 ? 970 : width >= 1024 ? 900 : 844;
@@ -127,7 +134,7 @@ for (const bug of selectedBugs) {
       expect(response?.status(), `${bug.route} should load`).toBeLessThan(400);
       await page.locator("body").waitFor({ state: "visible" });
       if (
-        [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34].includes(
+        [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35].includes(
           bug.id,
         )
       ) {
@@ -143,6 +150,9 @@ for (const bug of selectedBugs) {
               '[data-figma-responsive="desktop"]',
             );
             if (!canvas) return false;
+            if (Math.abs(canvas.getBoundingClientRect().top) > 0.5) {
+              return false;
+            }
             const expectedScale = Math.min(
               expectedWidth / 1920,
               expectedHeight / 970,
@@ -159,9 +169,26 @@ for (const bug of selectedBugs) {
       await page.addStyleTag({
         content: "nextjs-portal{display:none!important}",
       });
+      if (bug.id === 35) {
+        const chatPrompts = page.getByPlaceholder("Let's Talk Energy");
+        await expect(chatPrompts).toHaveCount(1);
+        const startButton = page.getByRole("button", { name: "Let's Start" });
+        const [chatBox, startBox] = await Promise.all([
+          chatPrompts.boundingBox(),
+          startButton.boundingBox(),
+        ]);
+        expect(chatBox).not.toBeNull();
+        expect(startBox).not.toBeNull();
+        const overlap =
+          (chatBox?.x ?? 0) < (startBox?.x ?? 0) + (startBox?.width ?? 0) &&
+          (chatBox?.x ?? 0) + (chatBox?.width ?? 0) > (startBox?.x ?? 0) &&
+          (chatBox?.y ?? 0) < (startBox?.y ?? 0) + (startBox?.height ?? 0) &&
+          (chatBox?.y ?? 0) + (chatBox?.height ?? 0) > (startBox?.y ?? 0);
+        expect(overlap, "Project CTAs must not overlap").toBe(false);
+      }
       if (
         width === 1920 &&
-        [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34].includes(
+        [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35].includes(
           bug.id,
         )
       ) {
@@ -171,6 +198,11 @@ for (const bug of selectedBugs) {
             links.map((link) => link.getBoundingClientRect().top),
           );
         expect(new Set(menuTops.map((top) => Math.round(top))).size).toBe(1);
+        await expect(
+          page
+            .locator('[data-site-header] nav[aria-label="Primary navigation"]')
+            .getByRole("link", { name: "Energy", exact: true }),
+        ).toHaveAttribute("href", "/energy");
       }
       await expect
         .poll(() =>
@@ -301,6 +333,25 @@ for (const bug of selectedBugs) {
         page
           .getByRole("dialog", { name: "PRODUCT ENQUIRY" })
           .getByLabel("Close product enquiry"),
+      ).toBeVisible();
+    }
+
+    if (bug.id === 35) {
+      await page.setViewportSize({ width: 1920, height: 970 });
+      await page.goto(bug.route, { waitUntil: "domcontentloaded" });
+      await page.waitForTimeout(750);
+      await expect(
+        page.getByRole("heading", {
+          name: /PNG’s First Utility-Scale Grid-Connected Solar Power Plant/,
+        }),
+      ).toBeVisible();
+      await page.getByRole("button", { name: /Next project: Mongal/ }).click();
+      await expect(
+        page.getByRole("heading", { name: "Mongal Health Centre 2020" }),
+      ).toBeVisible();
+      await page.getByRole("button", { name: "Let's Start" }).click();
+      await expect(
+        page.getByRole("heading", { name: "LET'S START" }),
       ).toBeVisible();
     }
 

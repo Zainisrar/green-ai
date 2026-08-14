@@ -10,6 +10,11 @@ interface Props {
   isOpen: boolean;
   onClose: () => void;
   productName?: string;
+  titlePrefix?: string;
+  titleAccent?: string;
+  interestLabel?: string;
+  interestOptions?: string[];
+  defaultInterest?: string;
 }
 
 interface ProductEnquiryFrameProps {
@@ -120,7 +125,16 @@ const initialFormData: FormData = {
   message: "",
 };
 
-const ProductEnquiry = ({ isOpen, onClose, productName }: Props) => {
+const ProductEnquiry = ({
+  isOpen,
+  onClose,
+  productName,
+  titlePrefix = "PRODUCT",
+  titleAccent = "ENQUIRY",
+  interestLabel = "PRODUCT / SYSTEM OF INTEREST",
+  interestOptions,
+  defaultInterest,
+}: Props) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [phoneCountry, setPhoneCountry] = useState({
     dial_code: "+675",
@@ -135,8 +149,12 @@ const ProductEnquiry = ({ isOpen, onClose, productName }: Props) => {
     if (isOpen) {
       setSuccessMessage("");
       setErrorMessage("");
+      setFormData((current) => ({
+        ...current,
+        productInterest: defaultInterest ?? current.productInterest,
+      }));
     }
-  }, [isOpen]);
+  }, [defaultInterest, isOpen]);
 
   if (!isOpen) return null;
 
@@ -224,7 +242,7 @@ const ProductEnquiry = ({ isOpen, onClose, productName }: Props) => {
     >
       <form onSubmit={handleSubmit} className={styles.form}>
         <h2 id="product-enquiry-title" className={styles.title}>
-          PRODUCT ENQUIRY
+          {titlePrefix} <span>{titleAccent}</span>
         </h2>
 
         <div className={styles.grid}>
@@ -283,10 +301,14 @@ const ProductEnquiry = ({ isOpen, onClose, productName }: Props) => {
             }`}
             required
           >
-            <option value="">PRODUCT / SYSTEM OF INTEREST</option>
-            <option value={productName || "GREEN SunShine"}>
-              {productName || "GREEN SunShine"}
-            </option>
+            <option value="">{interestLabel}</option>
+            {(interestOptions ?? [productName || "GREEN SunShine"]).map(
+              (option) => (
+                <option value={option} key={option}>
+                  {option}
+                </option>
+              ),
+            )}
           </select>
           <select
             name="consultationType"

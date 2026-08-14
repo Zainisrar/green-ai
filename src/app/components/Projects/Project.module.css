@@ -1,8 +1,8 @@
 .page {
   position: relative;
-  width: 100%;
-  height: 100svh;
-  min-height: 720px;
+  width: 1920px;
+  height: 970px;
+  min-height: 0;
   overflow: hidden;
   background: #fff;
   color: #fff;
@@ -10,15 +10,7 @@
 }
 
 .page::before {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  width: 16.35vw;
-  height: 52.5vh;
-  background: linear-gradient(145deg, #f7ff9a 0%, #dcffbd 72%, #ccf6c9 100%);
-  clip-path: polygon(0 0, 100% 0, 0 100%);
-  content: "";
+  display: none;
 }
 
 .header {
@@ -88,9 +80,9 @@
 .verticalTitle {
   position: absolute;
   z-index: 6;
-  top: 47.4%;
-  left: 2.65%;
-  width: min(3.6vw, 74px);
+  top: 239px;
+  left: 25px;
+  width: 73px;
   height: auto;
   opacity: 0.72;
 }
@@ -526,10 +518,12 @@
 
 .mainPhoto {
   position: absolute;
-  inset: 0 auto 0 19.7vw;
-  width: 67.2vw;
+  top: 0;
+  bottom: 0;
+  left: 355px;
+  width: 1295px;
   overflow: hidden;
-  clip-path: polygon(38% 0, 100% 0, 65% 100%, 0 100%);
+  clip-path: polygon(38.7% 0, 100% 0, 66% 100%, 0 100%);
 }
 
 .pimagaPhoto img {
@@ -554,38 +548,36 @@
 .titlePanel {
   position: absolute;
   z-index: 5;
-  top: 20.6vh;
-  left: 38.55vw;
-  display: grid;
-  width: 41.3vw;
-  min-height: 62px;
-  padding: 0.65vw 1.8vw;
+  top: 116px;
+  left: 820px;
+  display: block;
+  width: 672px;
+  min-height: 158px;
+  padding: 10px 44px;
   background: rgb(174 174 166 / 0.76);
-  place-items: center;
-  transform: skewX(-12deg);
+  clip-path: polygon(6% 0, 100% 0, 94% 100%, 0 100%);
 }
 
 .titlePanel h1 {
-  width: 100%;
+  width: 585px;
   margin: 0;
   color: #030303;
-  font-size: clamp(18px, 1.55vw, 32px);
+  font-size: 36px;
   font-weight: 700;
   line-height: 1.08;
-  text-align: center;
+  text-align: left;
   overflow-wrap: anywhere;
-  text-wrap: balance;
+  text-wrap: wrap;
   white-space: normal;
-  transform: skewX(12deg);
 }
 
 .collapseButton {
   position: absolute;
   z-index: 7;
-  top: 39.2vh;
-  left: 52.15vw;
+  top: 842px;
+  left: 832px;
   display: grid;
-  width: 3.8vw;
+  width: 71px;
   min-width: 55px;
   aspect-ratio: 1;
   padding: 0;
@@ -808,11 +800,11 @@
 .preview {
   position: absolute;
   z-index: 8;
-  top: 33.7vh;
+  top: 327px;
   display: block;
-  width: 25.5vw;
-  height: 34.8vh;
-  min-height: 280px;
+  width: 493px;
+  height: 348px;
+  min-height: 0;
   padding: 0;
   border: 0;
   background: transparent;
@@ -820,19 +812,22 @@
 }
 
 .previousPreview {
-  left: 9.8vw;
+  left: 160px;
 }
 
 .nextPreview {
-  right: 4.15vw;
+  right: auto;
+  left: 1380px;
+  width: 422px;
+  height: 346px;
 }
 
 .previewArrow {
   position: absolute;
   z-index: 6;
-  top: 34%;
+  top: 36%;
   display: grid;
-  width: 3.1vw;
+  width: 40px;
   min-width: 46px;
   aspect-ratio: 1;
   background: transparent;
@@ -840,11 +835,11 @@
 }
 
 .previousPreview .previewArrow {
-  left: -1.5vw;
+  left: 0;
 }
 
 .nextPreview .previewArrow {
-  right: -0.7vw;
+  right: -78px;
 }
 
 .previewArrow svg {
@@ -861,9 +856,9 @@
 
 .previewCard img {
   position: absolute;
-  inset: 12% 3% 0 0;
-  width: 97%;
-  height: 88%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   clip-path: polygon(27% 0, 100% 0, 69% 100%, 0 100%);
 }
@@ -886,7 +881,7 @@
   left: 29%;
   width: 57%;
   color: #050505;
-  font-size: clamp(14px, 1.06vw, 22px);
+  font-size: 20px;
   font-weight: 600;
   line-height: 1.08;
   text-align: center;
@@ -894,10 +889,11 @@
 }
 
 .startButton {
-  position: fixed;
+  position: absolute;
   z-index: 12;
+  top: 798px;
   right: 0;
-  bottom: 13.1vh;
+  bottom: auto;
   padding: 0;
   border: 0;
   background: transparent;
@@ -906,20 +902,21 @@
 
 .startButton img {
   display: block;
-  width: min(9.3vw, 191px);
+  width: 179px;
   height: auto;
 }
 
 .viewToggle {
-  position: fixed;
+  display: none;
+  position: absolute;
   z-index: 11;
-  bottom: 3.7vh;
-  left: 40.15vw;
-  display: grid;
+  top: 921px;
+  bottom: auto;
+  left: 771px;
   grid-template-columns: repeat(2, 1fr);
-  width: 10.75vw;
+  width: 206px;
   min-width: 190px;
-  height: 3.1vh;
+  height: 30px;
   min-height: 30px;
   margin: 0;
   padding: 0;
@@ -957,31 +954,12 @@
 }
 
 .chatTrigger {
-  /* Keep the skewed input inside the viewport instead of clipping its right edge. */
-  right: clamp(16px, 1vw, 24px) !important;
-  bottom: 5vh !important;
+  z-index: 9;
 }
 
-.chatTrigger > div {
-  width: min(22vw, 451px) !important;
-  min-height: 5.6vh;
-  border: 1px solid #7adf94 !important;
-  border-left-width: 1px !important;
-  background: rgb(255 255 255 / 0.94) !important;
-  box-shadow: 0 15px 22px rgb(216 255 41 / 0.35) !important;
-}
-
-.chatTrigger input {
-  color: #bfc3c1 !important;
-  font-size: clamp(12px, 0.72vw, 15px) !important;
-}
-
-.chatTrigger input::placeholder {
-  color: #bfc3c1 !important;
-}
-
-@media (max-width: 1023px) {
+@media (max-width: 1200px) {
   .page {
+    width: 100%;
     height: auto;
     min-height: 100svh;
     overflow-x: hidden;
@@ -1028,13 +1006,15 @@
   }
 
   .titlePanel {
-    top: 55px;
-    left: 10%;
-    width: 80%;
+    top: 118px;
+    left: 20%;
+    width: 74%;
     height: 74px;
+    box-sizing: border-box;
   }
 
   .titlePanel h1 {
+    width: 100%;
     font-size: clamp(20px, 4vw, 30px);
     white-space: normal;
   }
@@ -1116,16 +1096,13 @@
   }
 
   .startButton {
+    top: auto;
     right: 10px;
-    bottom: 78px;
+    bottom: 150px;
   }
 
   .startButton img {
     width: 170px;
-  }
-
-  .chatTrigger > div {
-    width: min(72vw, 360px) !important;
   }
 }
 
@@ -1135,8 +1112,17 @@
   }
 
   .titlePanel {
-    top: 35px;
-    min-height: 66px;
+    top: 112px;
+    left: 30%;
+    width: 68%;
+    height: auto;
+    min-height: 92px;
+    padding: 9px 14px;
+  }
+
+  .titlePanel h1 {
+    font-size: clamp(17px, 5vw, 20px);
+    line-height: 1.08;
   }
 
   .statsPanel {

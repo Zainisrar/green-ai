@@ -135,7 +135,14 @@ export const FIGMA_BUGS: readonly FigmaBug[] = [
     "implemented",
     "products-systems",
   ),
-  bug(35, "Project Portfolio", "/endeavors/project-portfolio", ["7077:7011"]),
+  bug(
+    35,
+    "Project Portfolio",
+    "/endeavors/project-portfolio",
+    ["7077:7011"],
+    "implemented",
+    "project-portfolio",
+  ),
   bug(36, "Flagship Projects", "/endeavors/flagship-projects", ["7077:14937"]),
   bug(37, "Case Studies", "/endeavors/case-studies", [], "pattern-derived"),
   bug(

@@ -152,8 +152,8 @@ const Product = ({ slug }: ProductProps) => {
 
   React.useEffect(() => {
     const handleResize = () => {
-      setIsDesktop(window.innerWidth >= 1024);
-      const scale = Math.max(
+      setIsDesktop(window.innerWidth >= 1201);
+      const scale = Math.min(
         window.innerWidth / 1920,
         window.innerHeight / 970,
       );
@@ -219,7 +219,10 @@ const Product = ({ slug }: ProductProps) => {
           brandClassName="product-figma-header-logo"
           productLogo
         />
-        <div className="product-figma-shell hidden lg:block">
+        <div
+          className="product-figma-shell hidden min-[1201px]:block"
+          style={{ height: `${970 * figmaScale}px` }}
+        >
           <div
             className="product-figma-desktop"
             style={
@@ -337,7 +340,7 @@ const Product = ({ slug }: ProductProps) => {
           </div>
         </div>
 
-        <div className="lg:hidden">
+        <div className="min-[1201px]:hidden">
           <div className="px-6 pt-24 text-center">
             <img
               src="/images/product/green-sunshine.png"

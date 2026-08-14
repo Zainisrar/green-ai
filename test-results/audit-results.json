@@ -1,7 +1,7 @@
 {
   "config": {
-    "configFile": "C:\\Users\\TSP\\OneDrive\\Desktop\\Project\\Projects\\greenai-master\\playwright.config.ts",
-    "rootDir": "C:/Users/TSP/OneDrive/Desktop/Project/Projects/greenai-master/tests",
+    "configFile": "/Users/mac/green-ai/playwright.config.ts",
+    "rootDir": "/Users/mac/green-ai/tests",
     "forbidOnly": false,
     "fullyParallel": false,
     "globalSetup": null,
@@ -16,7 +16,7 @@
     "preserveOutput": "always",
     "projects": [
       {
-        "outputDir": "C:/Users/TSP/OneDrive/Desktop/Project/Projects/greenai-master/test-results",
+        "outputDir": "/Users/mac/green-ai/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -24,7 +24,7 @@
         },
         "id": "",
         "name": "",
-        "testDir": "C:/Users/TSP/OneDrive/Desktop/Project/Projects/greenai-master/tests",
+        "testDir": "/Users/mac/green-ai/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -54,241 +54,63 @@
     "updateSnapshots": "missing",
     "updateSourceMethod": "patch",
     "version": "1.60.0",
-    "workers": 1,
-    "webServer": null
+    "workers": 2,
+    "webServer": {
+      "command": "npm run dev",
+      "url": "http://127.0.0.1:5005",
+      "reuseExistingServer": true,
+      "timeout": 120000
+    }
   },
   "suites": [
     {
-      "title": "app-audit.spec.ts",
-      "file": "app-audit.spec.ts",
+      "title": "figma-bugs.spec.ts",
+      "file": "figma-bugs.spec.ts",
       "column": 0,
       "line": 0,
-      "specs": [],
-      "suites": [
+      "specs": [
         {
-          "title": "GreenAI Application Audit",
-          "file": "app-audit.spec.ts",
-          "line": 263,
-          "column": 6,
-          "specs": [
+          "title": "bug-0035 Project Portfolio",
+          "ok": true,
+          "tags": [],
+          "tests": [
             {
-              "title": "audit all static routes",
-              "ok": true,
-              "tags": [],
-              "tests": [
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
                 {
-                  "timeout": 600000,
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 22972,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-14T08:06:38.086Z",
                   "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 310876,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-06-16T18:53:01.665Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
+                  "attachments": []
                 }
               ],
-              "id": "e4b1780347a26bef3e44-9945f12216a85a0cf161",
-              "file": "app-audit.spec.ts",
-              "line": 264,
-              "column": 7
-            },
-            {
-              "title": "audit dynamic routes from API",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 40056,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-06-16T18:58:14.666Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "e4b1780347a26bef3e44-36db53fcf875f9f30b77",
-              "file": "app-audit.spec.ts",
-              "line": 272,
-              "column": 7
-            },
-            {
-              "title": "homepage hero and navigation",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 5218,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-06-16T18:58:54.753Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "e4b1780347a26bef3e44-1e7cce771a7be48b9d14",
-              "file": "app-audit.spec.ts",
-              "line": 279,
-              "column": 7
-            },
-            {
-              "title": "navigation modal opens",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 2904,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-06-16T18:59:00.004Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "e4b1780347a26bef3e44-46e70830772892e8e58e",
-              "file": "app-audit.spec.ts",
-              "line": 307,
-              "column": 7
-            },
-            {
-              "title": "broken internal nav links in ProductNavigation",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 8070,
-                      "errors": [],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-06-16T18:59:02.946Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "e4b1780347a26bef3e44-49d0bddaa960aaa17e22",
-              "file": "app-audit.spec.ts",
-              "line": 333,
-              "column": 7
-            },
-            {
-              "title": "contact and form pages render",
-              "ok": true,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 60000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "",
-                  "projectName": "",
-                  "results": [
-                    {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "passed",
-                      "duration": 24519,
-                      "errors": [],
-                      "stdout": [
-                        {
-                          "text": "\nWrote 1 bugs to C:\\Users\\TSP\\OneDrive\\Desktop\\Project\\Projects\\greenai-master\\bug.md\n"
-                        }
-                      ],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-06-16T18:59:11.053Z",
-                      "annotations": [],
-                      "attachments": []
-                    }
-                  ],
-                  "status": "expected"
-                }
-              ],
-              "id": "e4b1780347a26bef3e44-999ffbb1a0b5db0dc3b6",
-              "file": "app-audit.spec.ts",
-              "line": 357,
-              "column": 7
+              "status": "expected"
             }
-          ]
+          ],
+          "id": "b415e6ba66cd531ba865-ccda1577b08a03d88042",
+          "file": "figma-bugs.spec.ts",
+          "line": 15,
+          "column": 7
         }
       ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-06-16T18:52:59.302Z",
-    "duration": 396584.91099999996,
-    "expected": 6,
+    "startTime": "2026-08-14T08:06:32.322Z",
+    "duration": 29849.594,
+    "expected": 1,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
