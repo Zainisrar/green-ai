@@ -1,12 +1,4 @@
-import React from 'react'
-import GridIntel from '@/app/components/GridIntel/GridIntel'
-
-const page = () => {
-  return (
-    <React.Fragment>
-        <GridIntel/>
-    </React.Fragment>
-  )
+import GridIntel from "@/app/components/GridIntel/GridIntel";
+export default function GridIntelPage() {
+  return <GridIntel />;
 }
-
-export default page

@@ -16,7 +16,8 @@ Authoritative file: `s4XHMhWuuo8LMFx2ojKFRI`, page `7077:2780`. Desktop referenc
 | 0030 | `/engineering/hybrid-microgrid-solutions` | `7077:5239` | Recursive motion context returned no animated nodes | 1920, 1440, 1024, 768, 390 | Implemented; exact existing pole composite, watermark, quote bracket, and slanted CTA exports reused; shared header retained |
 | 0031 | `/engineering/energy-storage-smart-grid` | `7077:6475` | Recursive motion context returned no animated nodes | 1920, 1440, 1024, 768, 390 | Implemented; exact existing storage composite, watermark, and CTA exports reused; shared header retained |
 | 0032 | `/engineering/om-monitoring` | `7077:4516` | Recursive motion context returned no animated nodes | 1920, 1440, 1024, 768, 390 | Implemented; exact existing monitoring composite, watermark, lightning glyph, and CTA exports reused; shared header retained |
-| 0033–0036 | See typed manifest | Exact frame IDs recorded in manifest | Pending per-frame inspection | Pending | Pending |
+| 0033 | `/engineering/grid-intel` | `7077:4592` | Recursive motion context returned no animated nodes | 1920, 1440, 1024, 768, 390 | Implemented; exact existing solar composite, watermark, section brackets, and CTA exports reused; all eight existing dialogs retained |
+| 0034–0036 | See typed manifest | Exact frame IDs recorded in manifest | Pending per-frame inspection | Pending | Pending |
 | 0037–0038 | Pattern-derived routes | No matching source frame | Must follow selected source pattern | Pending | Pattern-derived |
 | 0039–0043 | See typed manifest | Exact frame IDs recorded in manifest | Pending per-frame inspection | Pending | Pending |
 | 0044 | `/enlighten/learning-hub` | No matching source frame | Must follow selected source pattern | Pending | Pattern-derived |
