@@ -65,11 +65,6 @@ export default function ProductsFigma() {
       <SiteHeader layout="productCanvas" brand="sunshine" productLogo />
       <h1 className={styles.pageTitle}>Products</h1>
       <img
-        className={styles.sunshineBrand}
-        src="/images/product/green-sunshine.png"
-        alt="GREEN SunShine"
-      />
-      <img
         className={styles.verticalTitle}
         src="/images/product/product.png"
         alt=""
@@ -204,7 +199,12 @@ export default function ProductsFigma() {
 
   return (
     <>
-      <FigmaPageCanvas desktop={desktop} mobile={mobile} nodeId="7077:12660" />
+      <FigmaPageCanvas
+        desktop={desktop}
+        mobile={mobile}
+        nodeId="7077:12660"
+        fitCanvasHeight
+      />
       <ProductEnquiry
         isOpen={isEnquiryOpen}
         onClose={() => setIsEnquiryOpen(false)}

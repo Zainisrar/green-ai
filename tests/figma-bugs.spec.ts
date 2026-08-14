@@ -150,6 +150,9 @@ for (const bug of selectedBugs) {
               '[data-figma-responsive="desktop"]',
             );
             if (!canvas) return false;
+            if (Math.abs(canvas.getBoundingClientRect().top) > 0.5) {
+              return false;
+            }
             const expectedScale = Math.min(
               expectedWidth / 1920,
               expectedHeight / 970,
@@ -195,6 +198,11 @@ for (const bug of selectedBugs) {
             links.map((link) => link.getBoundingClientRect().top),
           );
         expect(new Set(menuTops.map((top) => Math.round(top))).size).toBe(1);
+        await expect(
+          page
+            .locator('[data-site-header] nav[aria-label="Primary navigation"]')
+            .getByRole("link", { name: "Energy", exact: true }),
+        ).toHaveAttribute("href", "/energy");
       }
       await expect
         .poll(() =>

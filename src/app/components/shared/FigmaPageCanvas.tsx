@@ -12,6 +12,7 @@ interface FigmaPageCanvasProps {
   mobile: ReactNode;
   nodeId: string;
   desktopBreakpoint?: number;
+  fitCanvasHeight?: boolean;
 }
 
 /** Reusable viewport for GREEN's fixed 1920 x 970 Figma compositions. */
@@ -20,6 +21,7 @@ export default function FigmaPageCanvas({
   mobile,
   nodeId,
   desktopBreakpoint = 1200,
+  fitCanvasHeight = false,
 }: FigmaPageCanvasProps) {
   const [viewport, setViewport] = useState({
     width: DESIGN_WIDTH,
@@ -49,12 +51,16 @@ export default function FigmaPageCanvas({
   );
 
   return (
-    <div className={styles.shell} data-figma-page-node={nodeId}>
+    <div
+      className={styles.shell}
+      data-figma-page-node={nodeId}
+      style={fitCanvasHeight ? { height: DESIGN_HEIGHT * scale } : undefined}
+    >
       <div
         className={styles.canvas}
         data-figma-responsive="desktop"
         style={{
-          top: (viewport.height - DESIGN_HEIGHT * scale) / 2,
+          top: 0,
           left: (viewport.width - DESIGN_WIDTH * scale) / 2,
           transform: `scale(${scale})`,
         }}

@@ -75,6 +75,10 @@
   line-height: 1;
 }
 
+.title span {
+  color: #00ab46;
+}
+
 .grid {
   position: absolute;
   top: 19.2%;

@@ -1,7 +1,14 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { COUNTRIES } from "@/app/lib/countries";
+
+const countryFlag = (code: string) =>
+  code
+    .toUpperCase()
+    .split("")
+    .map((letter) => String.fromCodePoint(127397 + letter.charCodeAt(0)))
+    .join("");
 
 interface CountryCodeDropdownProps {
   /** Currently selected dial code, e.g. "+675" (shown in the collapsed field). */
@@ -15,8 +22,7 @@ interface CountryCodeDropdownProps {
 }
 
 /**
- * Custom country-code picker: the collapsed trigger shows ONLY the dial code,
- * while the open list shows the dial code together with the country name.
+ * Custom country-code picker with the selected country flag and dial code.
  */
 const CountryCodeDropdown = ({
   dialCode,
@@ -30,7 +36,8 @@ const CountryCodeDropdown = ({
   useEffect(() => {
     if (!open) return;
     const handler = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+      if (ref.current && !ref.current.contains(e.target as Node))
+        setOpen(false);
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
@@ -45,13 +52,17 @@ const CountryCodeDropdown = ({
         aria-expanded={open}
         className={className}
       >
+        <span aria-hidden="true" className="text-base leading-none">
+          {countryFlag(countryCode)}
+        </span>
         <span>{dialCode}</span>
         <svg
           className="h-3 w-3 text-gray-500"
           viewBox="0 0 20 20"
           fill="currentColor"
-          aria-hidden
+          aria-label="Open country list"
         >
+          <title>Open country list</title>
           <path
             fillRule="evenodd"
             d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
@@ -71,10 +82,17 @@ const CountryCodeDropdown = ({
                   setOpen(false);
                 }}
                 className={`flex w-full items-center gap-2 px-3 py-2 text-sm hover:bg-green-50 ${
-                  c.code === countryCode ? "bg-green-100 text-green-700" : "text-gray-700"
+                  c.code === countryCode
+                    ? "bg-green-100 text-green-700"
+                    : "text-gray-700"
                 }`}
               >
-                <span className="w-12 shrink-0 text-gray-500">{c.dial_code}</span>
+                <span aria-hidden="true" className="text-base leading-none">
+                  {countryFlag(c.code)}
+                </span>
+                <span className="w-12 shrink-0 text-gray-500">
+                  {c.dial_code}
+                </span>
                 <span className="truncate">{c.name}</span>
               </button>
             </li>
