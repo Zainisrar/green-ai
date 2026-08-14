@@ -108,6 +108,8 @@ export const FIGMA_BUGS: readonly FigmaBug[] = [
     "Energy Storage & Smart Grid",
     "/engineering/energy-storage-smart-grid",
     ["7077:6475"],
+    "implemented",
+    "energy-storage-smart-grid",
   ),
   bug(32, "O&M & Monitoring", "/engineering/om-monitoring", ["7077:4516"]),
   bug(33, "GRID-INTEL", "/engineering/grid-intel", ["7077:4592"]),

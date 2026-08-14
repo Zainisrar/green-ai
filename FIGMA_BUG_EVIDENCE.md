@@ -14,7 +14,8 @@ Authoritative file: `s4XHMhWuuo8LMFx2ojKFRI`, page `7077:2780`. Desktop referenc
 | 0028 | `/evolution/sustainability-esg-commitments` | `7077:6671`, `7077:6707` | Source frames contain no authored keyframe motion | 1920, 1440, 1024, 768, 390 | Implemented from later V2 state; exact masked background, ESG icons, and slanted card vectors committed |
 | 0029 | `/engineering/solar-epcm-services` | `7077:6595` | Source frame contains no authored keyframe motion | 1920, 1440, 1024, 768, 390 | Implemented; exact solar composite, service-card, quote-panel, and CTA assets committed; shared header retained |
 | 0030 | `/engineering/hybrid-microgrid-solutions` | `7077:5239` | Recursive motion context returned no animated nodes | 1920, 1440, 1024, 768, 390 | Implemented; exact existing pole composite, watermark, quote bracket, and slanted CTA exports reused; shared header retained |
-| 0031–0036 | See typed manifest | Exact frame IDs recorded in manifest | Pending per-frame inspection | Pending | Pending |
+| 0031 | `/engineering/energy-storage-smart-grid` | `7077:6475` | Recursive motion context returned no animated nodes | 1920, 1440, 1024, 768, 390 | Implemented; exact existing storage composite, watermark, and CTA exports reused; shared header retained |
+| 0032–0036 | See typed manifest | Exact frame IDs recorded in manifest | Pending per-frame inspection | Pending | Pending |
 | 0037–0038 | Pattern-derived routes | No matching source frame | Must follow selected source pattern | Pending | Pattern-derived |
 | 0039–0043 | See typed manifest | Exact frame IDs recorded in manifest | Pending per-frame inspection | Pending | Pending |
 | 0044 | `/enlighten/learning-hub` | No matching source frame | Must follow selected source pattern | Pending | Pattern-derived |
