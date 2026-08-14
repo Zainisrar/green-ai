@@ -57,12 +57,23 @@ for (const bug of selectedBugs) {
         body: "{}",
       }),
     );
-    await page.route("**/api/evolution/certifications-accreditations", (route) =>
-      route.fulfill({
-        status: 503,
-        contentType: "application/json",
-        body: "{}",
-      }),
+    await page.route(
+      "**/api/evolution/certifications-accreditations",
+      (route) =>
+        route.fulfill({
+          status: 503,
+          contentType: "application/json",
+          body: "{}",
+        }),
+    );
+    await page.route(
+      "**/api/evolution/sustainability-esg-commitments",
+      (route) =>
+        route.fulfill({
+          status: 503,
+          contentType: "application/json",
+          body: "{}",
+        }),
     );
 
     for (const width of REFERENCE_VIEWPORTS) {
@@ -73,7 +84,7 @@ for (const bug of selectedBugs) {
       });
       expect(response?.status(), `${bug.route} should load`).toBeLessThan(400);
       await page.locator("body").waitFor({ state: "visible" });
-      if ([21, 22, 23, 24, 25, 26, 27].includes(bug.id)) {
+      if ([21, 22, 23, 24, 25, 26, 27, 28].includes(bug.id)) {
         await page.waitForFunction(
           ({ expectedWidth, expectedHeight }) => {
             if (expectedWidth <= 1200) {
@@ -102,7 +113,7 @@ for (const bug of selectedBugs) {
       await page.addStyleTag({
         content: "nextjs-portal{display:none!important}",
       });
-      if (width === 1920 && [21, 22, 23, 24, 25, 26, 27].includes(bug.id)) {
+      if (width === 1920 && [21, 22, 23, 24, 25, 26, 27, 28].includes(bug.id)) {
         const menuTops = await page
           .locator('[data-site-header] nav[aria-label="Primary navigation"] a')
           .evaluateAll((links) =>

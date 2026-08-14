@@ -84,6 +84,8 @@ export const FIGMA_BUGS: readonly FigmaBug[] = [
     "Sustainability & ESG Commitments",
     "/evolution/sustainability-esg-commitments",
     ["7077:6671", "7077:6707"],
+    "implemented",
+    "sustainability-esg-commitments",
   ),
   bug(29, "Solar EPCM Services", "/engineering/solar-epcm-services", [
     "7077:6595",
