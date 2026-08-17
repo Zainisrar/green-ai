@@ -150,17 +150,11 @@ const AboutUs: React.FC<AboutUsProps> = ({ canvas = false }) => {
         </div>
       </div>
 
-      <D6Chatbot
-        canvasAnchored
-        triggerVariant="figmaCanvas"
-        triggerStyle={{
-          top: 899,
-          right: "auto",
-          bottom: "auto",
-          left: 1498,
-          width: 418,
-        }}
-      />
+      {canvas ? (
+        <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
+      ) : (
+        <D6Chatbot />
+      )}
     </main>
   );
 };

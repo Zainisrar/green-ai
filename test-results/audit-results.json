@@ -70,7 +70,7 @@
       "line": 0,
       "specs": [
         {
-          "title": "bug-0050 Client Partnerships",
+          "title": "bug-0048 Key Supply Categories",
           "ok": true,
           "tags": [],
           "tests": [
@@ -85,12 +85,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 11040,
+                  "duration": 6363,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-17T22:27:54.625Z",
+                  "startTime": "2026-08-17T22:39:41.852Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -98,7 +98,7 @@
               "status": "expected"
             }
           ],
-          "id": "b415e6ba66cd531ba865-7936c37d543d1de851eb",
+          "id": "b415e6ba66cd531ba865-89447570ab0e62c7571a",
           "file": "figma-bugs.spec.ts",
           "line": 15,
           "column": 7
@@ -108,8 +108,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-17T22:27:52.876Z",
-    "duration": 13277.640000000001,
+    "startTime": "2026-08-17T22:39:40.590Z",
+    "duration": 7976.5289999999995,
     "expected": 1,
     "skipped": 0,
     "unexpected": 0,

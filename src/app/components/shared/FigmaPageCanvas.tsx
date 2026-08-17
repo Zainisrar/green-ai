@@ -56,11 +56,12 @@ export default function FigmaPageCanvas({
       ? viewport.width / DESIGN_WIDTH
       : Math.min(viewport.width / DESIGN_WIDTH, viewport.height / designHeight);
 
+  // The shell always fills the full viewport (100svh). The canvas scales to
+  // fit inside. This prevents the white-space gap below on narrower screens.
   return (
     <div
       className={styles.shell}
       data-figma-page-node={nodeId}
-      style={fitCanvasHeight ? { height: designHeight * scale } : undefined}
     >
       <div
         className={styles.canvas}
