@@ -1,19 +1,20 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
+import Image from "next/image";
 import { useAboutUs } from "../../../hooks/useAboutUs";
 import { parseAboutUsContent, parseQuoteContent } from "../../utils/htmlParser";
-import Chatbot from "../Chatbot";
 import D6Chatbot from "../D6Chatbot";
-import D6TopNavigation from "../d6TopNav";
-import "../../home.css";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import styles from "./AboutUs.module.css";
 
-const AboutUs = () => {
-  const [desktopScale, setDesktopScale] = useState(1);
-  // Fetch AboutUs data
+interface AboutUsProps {
+  canvas?: boolean;
+}
+
+const AboutUs: React.FC<AboutUsProps> = ({ canvas = false }) => {
   const { aboutUsData } = useAboutUs();
 
-  // Parse content when data is available
   const parsedContent = aboutUsData
     ? parseAboutUsContent(aboutUsData.content)
     : null;
@@ -24,201 +25,137 @@ const AboutUs = () => {
     "We are committed to enhancing and empowering lives through our energy solutions envisioned to end the energy-dependency for a sustainable and promising future.",
     "At GREEN, with a Global perspective bestows the finest solutions to Enable, Empower and Energize the drive for a sustainable future with our solutions for a better quality of life.",
   ];
+
   const whatParagraphs = parsedContent?.whatDoesGreenParagraphs ?? [
     "GREEN Limited renewable energy solutions and services are primarily focused at rural areas without access to conventional sources of energy or utilities. Our products and solutions are primarily intended to empower rural communities for economic and social growth, to enrich a sustainable and healthier quality of life. Our solutions, products and services delivery ensures that are environmental value addition.",
   ];
 
-  useEffect(() => {
-    const updateScale = () => {
-      setDesktopScale(
-        Math.max(window.innerWidth / 1920, window.innerHeight / 970),
-      );
-    };
-
-    updateScale();
-    window.addEventListener("resize", updateScale);
-    return () => window.removeEventListener("resize", updateScale);
-  }, []);
+  const mainTitle = aboutUsData?.title || "About GREEN";
+  const subHeadline =
+    parsedContent?.subtitle ||
+    "Enlightening Our Lives through Sustainable Energy Solutions";
+  const whatTitle = parsedContent?.whatDoesGreenTitle || "What does GREEN do";
+  const whatSubtitle =
+    parsedContent?.whatDoesGreenSubtitle ||
+    "Transforming Lives with Energy Independence";
+  const quote1 = parsedQuote?.firstQuote || "A Transformation - That’s";
+  const quote2 = parsedQuote?.secondQuote || "Perspicacious for a";
 
   return (
-    <React.Fragment>
-      <D6TopNavigation />
-      <div className="relative min-h-screen overflow-hidden bg-white">
-        {/* Mobile Layout */}
-        <div className="relative z-10 px-4 py-6 md:hidden">
-          {/* Clean Lean Green Title */}
-          <div className="text-center mb-8">
-            <h1 className=" text-2xl lg:text-3xl font-black text-gray-800 leading-tight">
-              {aboutUsData?.key.split(" ").map((word, index) => (
-                <React.Fragment key={index}>
-                  {index === 2 ? (
-                    <span className="text-[#23B14D]">{word}</span>
-                  ) : (
-                    word
-                  )}
-                  {index < 2 && <br />}
-                </React.Fragment>
-              )) || (
-                <>
-                  CLEAN
-                  <br />
-                  LEAN
-                  <br />
-                  <span className="text-[#23B14D]">GREEN</span>
-                </>
-              )}
-            </h1>
-          </div>
+    <main
+      className={styles.page}
+      data-about-us-hydrated="true"
+      role="main"
+      aria-label="Welcome to GREEN"
+    >
+      <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
-          {/* About GREEN Section */}
-          <div className="mb-8">
-            <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4 text-center">
-              {aboutUsData?.title || "About GREEN"}
-            </h2>
-            <p className="text-base font-bold mb-4 italic text-center">
-              {parsedContent?.subtitle.toUpperCase() ||
-                "ENLIGHTENING OUR LIVES THROUGH SUSTAINABLE ENERGY SOLUTIONS"}
-            </p>
+      {/* Left Image & CLEAN LEAN GREEN Parallelogram Banner */}
+      <div className={styles.leftImageContainer}>
+        <img
+          src="/images/about-us/figma-masked-bg.png"
+          alt="Children in sunshine"
+          className={styles.leftImage}
+        />
+      </div>
 
-            <div className="space-y-4 text-gray-700 text-sm leading-relaxed">
-              {parsedContent?.aboutGreenParagraphs.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              )) || (
-                <>
-                  <p>
-                    GREEN Limited - A Front-runner in sustainable living and
-                    Renewable Energy Solution Provider in Papua New Guinea has
-                    15 global presence in the INDIA, USA and Australia helps to
-                    bring out the best of Product design, development and
-                    Project delivery strategies, GREEN Limited is an ISO 9001
-                    certified company and complies with all the international
-                    standards and quality management methodologies.
-                  </p>
-                  <p>
-                    We are committed to enhancing and empowering lives through
-                    our energy solutions enhanced by and the energy dependency
-                    for a sustainable and promising future.
-                  </p>
-                  <p>
-                    At GREEN, with a Global perspective between the finest
-                    solutions to Enable, Empower and Energize the drive for a
-                    sustainable future with our solutions for a better quality
-                    of life.
-                  </p>
-                </>
-              )}
-            </div>
-          </div>
-
-          {/* What does GREEN do Section */}
-          <div className="mb-8">
-            <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4 text-center">
-              {parsedContent?.whatDoesGreenTitle || "What does GREEN Do"}
-            </h3>
-            <p className="text-base font-bold mb-4 italic text-center">
-              {parsedContent?.whatDoesGreenSubtitle.toUpperCase() ||
-                "TRANSFORMING LIVES WITH ENERGY INDEPENDENCE"}
-            </p>
-
-            {parsedContent?.whatDoesGreenParagraphs.map((paragraph, index) => (
-              <p
-                key={index}
-                className="text-gray-700 text-sm leading-relaxed mb-6"
-              >
-                {paragraph}
-              </p>
-            )) || (
-              <p className="text-gray-700 text-sm leading-relaxed mb-6">
-                GREEN Limited renewable energy solutions and services are
-                primarily focused in rural areas without access to conventional
-                sources of energy or utilities. Our products and solutions are
-                primarily intended to empower rural communities for economic and
-                social growth to enrich their lives. Our innovative products
-                like Solar Lanterns, products and services delivery ensures that
-                are environmental value additions.
-              </p>
-            )}
-          </div>
-
-          {/* Bottom Transformation Text */}
-          <div className="text-center">
-            <p className="text-2xl italic text-gray-700 mb-2">
-              {parsedQuote?.firstQuote || "A Transformation - That's"}{" "}
-              <span className="text-[#23B14D] font-bold">GREEN!</span>
-            </p>
-            <p className="text-2xl italic text-gray-800">
-              {parsedQuote?.secondQuote || "Perspicacious for a"}{" "}
-              <span className="font-bold">BETTER WORLD!</span>
-            </p>
-          </div>
-        </div>
-
-        {/* Desktop Figma frame. The design is a 1920px canvas, so the image,
-            content and navigation stay in the same relationship at every size. */}
-        <div
-          className="about-green-desktop hidden md:block"
-          role="region"
-          aria-label="About GREEN"
-          style={{ transform: `scale(${desktopScale})` }}
-        >
-          <img
-            src={aboutUsData?.bgImg || "/images/about-us/bg.jpg"}
-            className="about-green-background"
-            alt=""
-          />
-          <div className="about-green-clean-lean">
-            <img src="/images/about-us/cleanLeanBg.png" alt="" />
-            <h1>
-              CLEAN
-              <br />
-              LEAN
-              <br />
-              <span>GREEN</span>
-            </h1>
-          </div>
-
-          <section className="about-green-copy">
-            <h2>{aboutUsData?.title || "About GREEN"}</h2>
-            <p className="about-green-subtitle">
-              {parsedContent?.subtitle ||
-                "Enlightening Our Lives through Sustainable Energy Solutions"}
-            </p>
-            <div className="about-green-body">
-              {aboutParagraphs.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
-
-            <h3>{parsedContent?.whatDoesGreenTitle || "What does GREEN do"}</h3>
-            <p className="about-green-subtitle">
-              {parsedContent?.whatDoesGreenSubtitle ||
-                "Transforming Lives with Energy Independence"}
-            </p>
-            <div className="about-green-body about-green-body--what">
-              {whatParagraphs.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
-            </div>
-
-            <div className="about-green-quote">
-              <p>
-                {parsedQuote?.firstQuote || "A Transformation - That's"}{" "}
-                <strong>GREEN!</strong>
-              </p>
-              <p>
-                {parsedQuote?.secondQuote || "Perspicacious for a"}{" "}
-                <b>BETTER WORLD!</b>
-              </p>
-            </div>
-          </section>
-          <D6Chatbot canvasAnchored />
-        </div>
-
-        <div className="md:hidden">
-          <Chatbot />
+      <div className={styles.cleanLeanBanner} aria-hidden="true">
+        <img
+          src="/images/about-us/figma-clean-lean-bg.png"
+          alt=""
+          className={styles.cleanLeanBg}
+        />
+        <div className={styles.cleanLeanText}>
+          CLEAN
+          <br />
+          LEAN
+          <br />
+          <span className={styles.greenAccent}>GREEN</span>
         </div>
       </div>
-    </React.Fragment>
+
+      {/* Right Content Column */}
+      <section className={styles.rightContent} aria-label="About Content">
+        <h2 className={styles.mainTitle}>{mainTitle}</h2>
+        <p className={styles.subHeadline}>{subHeadline}</p>
+        {aboutParagraphs.map((paragraph, index) => (
+          <p key={index} className={styles.bodyText}>
+            {paragraph}
+          </p>
+        ))}
+
+        <h3 className={styles.sectionTitle}>{whatTitle}</h3>
+        <p className={styles.subHeadline}>{whatSubtitle}</p>
+        {whatParagraphs.map((paragraph, index) => (
+          <p key={index} className={styles.bodyText}>
+            {paragraph}
+          </p>
+        ))}
+
+        <div className={styles.quoteContainer}>
+          <p className={styles.quoteLine1}>
+            {quote1} <strong>GREEN!</strong>
+          </p>
+          <p className={styles.quoteLine2}>
+            {quote2} <strong>BETTER WORLD!</strong>
+          </p>
+        </div>
+      </section>
+
+      {/* Mobile Flow (< 1200px) */}
+      <div className={styles.mobileElements}>
+        <div className={styles.mobileHero}>
+          <img
+            src="/images/about-us/figma-masked-bg.png"
+            alt="Children in sunshine"
+            className={styles.mobileHeroImg}
+          />
+        </div>
+
+        <div className={styles.mobileCleanLean}>
+          <h1>
+            CLEAN
+            <br />
+            LEAN
+            <br />
+            <span className={styles.greenAccent}>GREEN</span>
+          </h1>
+        </div>
+
+        <div className={styles.mobileContent}>
+          <h2>{mainTitle}</h2>
+          <p className={styles.mobileSubtitle}>{subHeadline}</p>
+          {aboutParagraphs.map((paragraph, index) => (
+            <p key={index} className={styles.mobileBody}>
+              {paragraph}
+            </p>
+          ))}
+
+          <h3>{whatTitle}</h3>
+          <p className={styles.mobileSubtitle}>{whatSubtitle}</p>
+          {whatParagraphs.map((paragraph, index) => (
+            <p key={index} className={styles.mobileBody}>
+              {paragraph}
+            </p>
+          ))}
+
+          <div className={styles.mobileQuote}>
+            <p>
+              {quote1} <strong className={styles.greenAccent}>GREEN!</strong>
+            </p>
+            <p>
+              {quote2} <strong>BETTER WORLD!</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <D6Chatbot
+        canvasAnchored
+        triggerVariant="figmaCanvas"
+        triggerStyle={{ top: 899, left: 1498, width: 418 }}
+      />
+    </main>
   );
 };
 

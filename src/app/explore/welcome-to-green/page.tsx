@@ -1,12 +1,13 @@
-import React from 'react'
-import AboutUs from '@/app/components/AboutUs/AboutUs'
+import AboutUs from "@/app/components/AboutUs/AboutUs";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function WelcomeToGreenPage() {
   return (
-    <React.Fragment>
-        <AboutUs/>
-    </React.Fragment>
-  )
+    <FigmaPageCanvas
+      desktop={<AboutUs canvas />}
+      mobile={<AboutUs />}
+      nodeId="7080:56378"
+      fitCanvasHeight
+    />
+  );
 }
-
-export default page

@@ -70,7 +70,7 @@
       "line": 0,
       "specs": [
         {
-          "title": "bug-0049 Become a Supplier",
+          "title": "bug-0073 V2 About GREEN",
           "ok": true,
           "tags": [],
           "tests": [
@@ -85,12 +85,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 15222,
+                  "duration": 7632,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-17T12:44:50.163Z",
+                  "startTime": "2026-08-17T22:03:10.329Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -98,7 +98,7 @@
               "status": "expected"
             }
           ],
-          "id": "b415e6ba66cd531ba865-fe5d5b9b84b1635dfc24",
+          "id": "b415e6ba66cd531ba865-b1a24b1f2a5c1eca1837",
           "file": "figma-bugs.spec.ts",
           "line": 15,
           "column": 7
@@ -108,8 +108,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-17T12:44:26.912Z",
-    "duration": 39306.754,
+    "startTime": "2026-08-17T22:03:07.410Z",
+    "duration": 11108.171,
     "expected": 1,
     "skipped": 0,
     "unexpected": 0,
