@@ -70,7 +70,7 @@
       "line": 0,
       "specs": [
         {
-          "title": "bug-0048 Key Supply Categories",
+          "title": "bug-0073 V2 About GREEN",
           "ok": true,
           "tags": [],
           "tests": [
@@ -85,12 +85,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 6363,
+                  "duration": 8536,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-17T22:39:41.852Z",
+                  "startTime": "2026-08-17T23:18:18.910Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -98,7 +98,7 @@
               "status": "expected"
             }
           ],
-          "id": "b415e6ba66cd531ba865-89447570ab0e62c7571a",
+          "id": "b415e6ba66cd531ba865-b1a24b1f2a5c1eca1837",
           "file": "figma-bugs.spec.ts",
           "line": 15,
           "column": 7
@@ -108,8 +108,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-17T22:39:40.590Z",
-    "duration": 7976.5289999999995,
+    "startTime": "2026-08-17T23:18:14.934Z",
+    "duration": 12959.206,
     "expected": 1,
     "skipped": 0,
     "unexpected": 0,

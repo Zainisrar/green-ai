@@ -4,6 +4,8 @@
   height: 100svh;
   overflow: hidden;
   background: #fff;
+  /* Prevent any content below the scaled canvas from creating scrollable whitespace */
+  max-height: 100svh;
 }
 
 .canvas {

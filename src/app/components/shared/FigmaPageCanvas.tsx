@@ -27,7 +27,7 @@ export default function FigmaPageCanvas({
   desktopBreakpoint = 1200,
   fitCanvasHeight = false,
   designHeight = DESIGN_HEIGHT,
-  scaleToViewport = "contain",
+  scaleToViewport = "width",
 }: FigmaPageCanvasProps) {
   const [viewport, setViewport] = useState({
     width: DESIGN_WIDTH,
