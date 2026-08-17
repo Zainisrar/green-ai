@@ -243,10 +243,10 @@ export default function OurProcurementPhilosophy({
           canvasAnchored
           triggerVariant="figmaCanvas"
           triggerStyle={{
-            top: 889,
+            top: 899,
             right: "auto",
             bottom: "auto",
-            left: 1500,
+            left: 1498,
             width: 418,
           }}
         />

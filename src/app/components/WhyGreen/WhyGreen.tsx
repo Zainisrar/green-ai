@@ -173,12 +173,12 @@ export default function WhyGreen() {
         triggerVariant="figmaCanvas"
         triggerClassName={styles.chatTrigger}
         triggerStyle={{
-          top: 881,
-          right: "auto",
-          bottom: "auto",
-          left: 1480,
-          width: 462,
-        }}
+            top: 899,
+            right: "auto",
+            bottom: "auto",
+            left: 1498,
+            width: 418,
+          }}
       />
     </main>
   );

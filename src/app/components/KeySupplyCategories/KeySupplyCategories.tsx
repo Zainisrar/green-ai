@@ -205,10 +205,10 @@ export default function KeySupplyCategories({
           canvasAnchored
           triggerVariant="figmaCanvas"
           triggerStyle={{
-            top: 853,
+            top: 899,
             right: "auto",
             bottom: "auto",
-            left: 1499,
+            left: 1498,
             width: 418,
           }}
         />

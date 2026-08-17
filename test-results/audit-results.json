@@ -70,7 +70,7 @@
       "line": 0,
       "specs": [
         {
-          "title": "bug-0073 V2 About GREEN",
+          "title": "bug-0050 Client Partnerships",
           "ok": true,
           "tags": [],
           "tests": [
@@ -85,12 +85,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 7632,
+                  "duration": 11040,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-17T22:03:10.329Z",
+                  "startTime": "2026-08-17T22:27:54.625Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -98,7 +98,7 @@
               "status": "expected"
             }
           ],
-          "id": "b415e6ba66cd531ba865-b1a24b1f2a5c1eca1837",
+          "id": "b415e6ba66cd531ba865-7936c37d543d1de851eb",
           "file": "figma-bugs.spec.ts",
           "line": 15,
           "column": 7
@@ -108,8 +108,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-17T22:03:07.410Z",
-    "duration": 11108.171,
+    "startTime": "2026-08-17T22:27:52.876Z",
+    "duration": 13277.640000000001,
     "expected": 1,
     "skipped": 0,
     "unexpected": 0,

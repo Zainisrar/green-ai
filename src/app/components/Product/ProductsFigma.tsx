@@ -145,12 +145,12 @@ export default function ProductsFigma() {
         canvasAnchored
         triggerVariant="figmaCanvas"
         triggerStyle={{
-          top: 882,
-          right: "auto",
-          bottom: "auto",
-          left: 1498,
-          width: 418,
-        }}
+            top: 899,
+            right: "auto",
+            bottom: "auto",
+            left: 1498,
+            width: 418,
+          }}
       />
     </main>
   );

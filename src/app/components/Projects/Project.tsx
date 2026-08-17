@@ -424,10 +424,10 @@ export default function Project() {
           triggerVariant="figmaCanvas"
           triggerClassName={styles.chatTrigger}
           triggerStyle={{
-            top: 882,
+            top: 899,
             right: "auto",
             bottom: "auto",
-            left: 1492,
+            left: 1498,
             width: 418,
           }}
         />

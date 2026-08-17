@@ -829,7 +829,7 @@ const D6Template = (_props: D6TemplateProps) => {
             />
           </div>
 
-          <D6Chatbot canvasAnchored />
+          <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
         </div>
       </div>
     </>

@@ -180,12 +180,12 @@ export default function Accrediations() {
         triggerVariant="figmaCanvas"
         triggerClassName={styles.chatTrigger}
         triggerStyle={{
-          top: 871,
-          right: "auto",
-          bottom: "auto",
-          left: 1480,
-          width: 462,
-        }}
+            top: 899,
+            right: "auto",
+            bottom: "auto",
+            left: 1498,
+            width: 418,
+          }}
       />
     </main>
   );

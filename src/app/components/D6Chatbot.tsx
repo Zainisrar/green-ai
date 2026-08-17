@@ -372,14 +372,26 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
 
       {/* Chat Trigger */}
       <div
-        className={`${canvasAnchored ? "absolute" : "fixed"} z-[50] right-1 lg:right-2 bottom-2 ${triggerClassName}`}
+        className={`${canvasAnchored ? "absolute" : "fixed"} z-[50] ${
+          canvasAnchored ? "" : "right-1 lg:right-2 bottom-2"
+        } ${triggerClassName}`}
         style={
-          canvasAnchored
+          isFigmaCanvasTrigger
             ? {
-                right: "calc(var(--d6-right-safe-inset, 0px) + 0.5rem)",
-                ...triggerStyle,
+                /* Canonical position from Figma node 7080:56395 — 418×52px */
+                top: 899,
+                left: 1498,
+                width: 418,
+                height: 52,
+                right: "auto",
+                bottom: "auto",
               }
-            : triggerStyle
+            : canvasAnchored
+              ? {
+                  right: "calc(var(--d6-right-safe-inset, 0px) + 0.5rem)",
+                  ...triggerStyle,
+                }
+              : triggerStyle
         }
       >
         <div
