@@ -382,16 +382,28 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
             : triggerStyle
         }
       >
-        <div className="relative">
+        <div
+          className={
+            isFigmaCanvasTrigger ? "relative h-[52px] w-[418px]" : "relative"
+          }
+        >
           <img
-            src="/images/letstalkenergy.png"
+            src={
+              isFigmaCanvasTrigger
+                ? "/images/insight1/figma/chat-panel.svg"
+                : "/images/letstalkenergy.png"
+            }
             alt="call to action"
-            className="w-62 lg:w-auto"
+            className={
+              isFigmaCanvasTrigger
+                ? "absolute -left-[18px] -top-[18px] h-[95px] w-[462px] max-w-none"
+                : "w-62 lg:w-auto"
+            }
           />
           <div
             className={
               isFigmaCanvasTrigger
-                ? "absolute left-[47px] top-[21px] h-[40px] w-[159px]"
+                ? "absolute left-[29px] top-[3px] h-[57px] w-[159px]"
                 : hasResponsiveTrigger
                   ? "absolute top-[47%] left-[12%] right-[19%] -translate-y-1/2"
                   : "absolute bottom-4 lg:bottom-10 left-12 lg:left-14 right-12 lg:right-20"
@@ -406,7 +418,7 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
               placeholder="Let's Talk Energy"
               className={
                 isFigmaCanvasTrigger
-                  ? "h-[40px] w-[159px] border-0 bg-transparent p-0 text-center text-[13px] font-semibold italic leading-[40px] text-[#717171] outline-none placeholder:text-[#717171] placeholder:opacity-100"
+                  ? "h-[57px] w-[159px] border-0 bg-transparent p-0 text-center text-[13px] font-semibold italic leading-[40px] text-[#717171] outline-none placeholder:text-[#717171] placeholder:opacity-100"
                   : hasResponsiveTrigger
                     ? "w-full bg-transparent text-[clamp(13px,1vw,18px)] font-semibold italic text-gray-900 outline-none placeholder:text-gray-900 placeholder:opacity-100"
                     : "outline-none placeholder:text-gray-900 placeholder:opacity-100 text-gray-900 font-semibold italic w-full text-base bg-transparent"
@@ -418,7 +430,7 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
             aria-label="Send prompt"
             className={
               isFigmaCanvasTrigger
-                ? "absolute left-[382px] top-[32px] h-[23px] w-[18px] cursor-pointer border-0 bg-transparent p-0"
+                ? "absolute left-[364px] top-[14px] h-[23px] w-[18px] cursor-pointer border-0 bg-transparent p-0"
                 : hasResponsiveTrigger
                   ? "absolute top-1/2 right-[10%] -translate-y-1/2 cursor-pointer border-0 bg-transparent p-0 transition-transform hover:scale-110"
                   : "absolute bottom-5 lg:bottom-10 right-7 lg:right-20 cursor-pointer border-0 bg-transparent p-0 hover:scale-110 transition-transform"

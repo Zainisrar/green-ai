@@ -1,12 +1,13 @@
-import React from 'react'
-import ReportWhitePapers from '@/app/components/ReportWhitePapers/ReportWhitePapers'
+import ReportWhitePapers from "@/app/components/ReportWhitePapers/ReportWhitePapers";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function ReportsWhitepapersPage() {
   return (
-    <React.Fragment>
-        <ReportWhitePapers/>
-    </React.Fragment>
-  )
+    <FigmaPageCanvas
+      desktop={<ReportWhitePapers canvas />}
+      mobile={<ReportWhitePapers />}
+      nodeId="7077:5298"
+      fitCanvasHeight
+    />
+  );
 }
-
-export default page

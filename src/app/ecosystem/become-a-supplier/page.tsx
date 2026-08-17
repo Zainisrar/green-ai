@@ -1,12 +1,13 @@
-import React from 'react'
-import BecomeSupplier from '@/app/components/BecomeSupplier/BecomeSupplier'
+import BecomeSupplier from "@/app/components/BecomeSupplier/BecomeSupplier";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function BecomeSupplierPage() {
   return (
-    <div>
-        <BecomeSupplier/>
-    </div>
-  )
+    <FigmaPageCanvas
+      desktop={<BecomeSupplier canvas />}
+      mobile={<BecomeSupplier />}
+      nodeId="7077:28549"
+      fitCanvasHeight
+    />
+  );
 }
-
-export default page

@@ -13,9 +13,9 @@ interface CorePrinciplesData {
 }
 
 interface Props {
-    isOpen: boolean;
-    onClose: () => void;
-    data?: CorePrinciplesData;
+  isOpen: boolean;
+  onClose: () => void;
+  data?: CorePrinciplesData;
 }
 const CorePrinciples = ({ isOpen, onClose, data }: Props) => {
   const [isMobile, setIsMobile] = useState(false);
@@ -51,14 +51,39 @@ const CorePrinciples = ({ isOpen, onClose, data }: Props) => {
       {isMobile ? (
         /* Mobile: Card Layout */
         <div className="space-y-4">
-          {(data?.items || [
-            { principle: "Performance First", statement: "Every component must perform in real field conditions — not just on paper." },
-            { principle: "Value over Price", statement: "We invest in lifecycle value, not just low upfront costs." },
-            { principle: "Fit-for-Environment", statement: "Equipment must withstand PNG's terrain, humidity, and intermittency." },
-            { principle: "Partner Reliability", statement: "We choose partners who stand behind their products — long after shipping." },
-            { principle: "Scalability Ready", statement: "What we deploy today must be compatible with tomorrow's growth." }
-          ]).map((item, index) => (
-            <div key={index} className="bg-white p-4 rounded-lg shadow-sm border border-gray-200">
+          {(
+            data?.items || [
+              {
+                principle: "Performance First",
+                statement:
+                  "Every component must perform in real field conditions — not just on paper.",
+              },
+              {
+                principle: "Value over Price",
+                statement:
+                  "We invest in lifecycle value, not just low upfront costs.",
+              },
+              {
+                principle: "Fit-for-Environment",
+                statement:
+                  "Equipment must withstand PNG's terrain, humidity, and intermittency.",
+              },
+              {
+                principle: "Partner Reliability",
+                statement:
+                  "We choose partners who stand behind their products — long after shipping.",
+              },
+              {
+                principle: "Scalability Ready",
+                statement:
+                  "What we deploy today must be compatible with tomorrow's growth.",
+              },
+            ]
+          ).map((item, index) => (
+            <div
+              key={index}
+              className="bg-white p-4 rounded-lg shadow-sm border border-gray-200"
+            >
               <h4 className="font-bold text-gray-800 mb-2">{item.principle}</h4>
               <p className="text-gray-700 text-sm">{item.statement}</p>
             </div>
@@ -79,20 +104,40 @@ const CorePrinciples = ({ isOpen, onClose, data }: Props) => {
               </tr>
             </thead>
             <tbody>
-              {(data?.items || [
-                { principle: "Performance First", statement: "Every component must perform in real field conditions — not just on paper." },
-                { principle: "Value over Price", statement: "We invest in lifecycle value, not just low upfront costs." },
-                { principle: "Fit-for-Environment", statement: "Equipment must withstand PNG's terrain, humidity, and intermittency." },
-                { principle: "Partner Reliability", statement: "We choose partners who stand behind their products — long after shipping." },
-                { principle: "Scalability Ready", statement: "What we deploy today must be compatible with tomorrow's growth." }
-              ]).map((item, index) => (
+              {(
+                data?.items || [
+                  {
+                    principle: "Performance First",
+                    statement:
+                      "Every component must perform in real field conditions — not just on paper.",
+                  },
+                  {
+                    principle: "Value over Price",
+                    statement:
+                      "We invest in lifecycle value, not just low upfront costs.",
+                  },
+                  {
+                    principle: "Fit-for-Environment",
+                    statement:
+                      "Equipment must withstand PNG's terrain, humidity, and intermittency.",
+                  },
+                  {
+                    principle: "Partner Reliability",
+                    statement:
+                      "We choose partners who stand behind their products — long after shipping.",
+                  },
+                  {
+                    principle: "Scalability Ready",
+                    statement:
+                      "What we deploy today must be compatible with tomorrow's growth.",
+                  },
+                ]
+              ).map((item, index) => (
                 <tr key={index}>
                   <td className="px-6 py-4 font-semibold text-gray-800">
                     {item.principle}
                   </td>
-                  <td className="px-6 py-4 text-gray-700">
-                    {item.statement}
-                  </td>
+                  <td className="px-6 py-4 text-gray-700">{item.statement}</td>
                 </tr>
               ))}
             </tbody>
@@ -116,6 +161,7 @@ const CorePrinciples = ({ isOpen, onClose, data }: Props) => {
               {/* Close Button */}
               <div className="flex justify-end w-full">
                 <button
+                  type="button"
                   onClick={onClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
@@ -132,6 +178,7 @@ const CorePrinciples = ({ isOpen, onClose, data }: Props) => {
               {/* Close Button */}
               <div className="flex justify-end w-full">
                 <button
+                  type="button"
                   onClick={onClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
@@ -140,15 +187,13 @@ const CorePrinciples = ({ isOpen, onClose, data }: Props) => {
               </div>
 
               {/* Modal Content */}
-              <div className="max-w-5xl mx-auto">
-                {renderContent()}
-              </div>
+              <div className="max-w-5xl mx-auto">{renderContent()}</div>
             </div>
           )}
         </div>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default CorePrinciples
+export default CorePrinciples;

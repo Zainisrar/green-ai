@@ -1,12 +1,13 @@
-import React from 'react'
-import KeySupplyCategories from '@/app/components/KeySupplyCategories/KeySupplyCategories'
+import KeySupplyCategories from "@/app/components/KeySupplyCategories/KeySupplyCategories";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function KeySupplyCategoriesPage() {
   return (
-    <React.Fragment>
-        <KeySupplyCategories/>
-    </React.Fragment>
-  )
+    <FigmaPageCanvas
+      desktop={<KeySupplyCategories canvas />}
+      mobile={<KeySupplyCategories />}
+      nodeId="7077:27873"
+      fitCanvasHeight
+    />
+  );
 }
-
-export default page

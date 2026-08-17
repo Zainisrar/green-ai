@@ -10,7 +10,14 @@ interface Props {
   img: { alt: string; src: string };
 }
 
-const OurProcurementEthos = ({ isOpen, onClose, title, description, keys, img }: Props) => {
+const OurProcurementEthos = ({
+  isOpen,
+  onClose,
+  title,
+  description,
+  keys,
+  img,
+}: Props) => {
   if (!isOpen) return null;
 
   return (
@@ -29,8 +36,14 @@ const OurProcurementEthos = ({ isOpen, onClose, title, description, keys, img }:
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2.5}
+            role="img"
+            aria-label="Close"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M18 6L6 18" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 6l12 12M18 6L6 18"
+            />
           </svg>
         </button>
 
@@ -56,7 +69,10 @@ const OurProcurementEthos = ({ isOpen, onClose, title, description, keys, img }:
               {/* Left Column - Ethos Points */}
               <div className="flex-1 space-y-5">
                 {keys?.map((k, idx) => (
-                  <div key={`${idx}-${k.slice(0, 20)}`} className="flex items-start gap-3">
+                  <div
+                    key={`${idx}-${k.slice(0, 20)}`}
+                    className="flex items-start gap-3"
+                  >
                     <span className="shrink-0">
                       <img
                         src="/images/grid-intel/lighting.png"

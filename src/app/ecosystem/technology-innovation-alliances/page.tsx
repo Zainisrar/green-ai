@@ -1,12 +1,12 @@
-import React from 'react'
-import TechnologyInnovationAlliances from '@/app/components/TechnologyInnovationAlliances/TechnologyInnovationAlliances'
+import React from "react";
+import TechnologyInnovationAlliances from "@/app/components/TechnologyInnovationAlliances/TechnologyInnovationAlliances";
 
 const page = () => {
   return (
     <div>
-        <TechnologyInnovationAlliances/>
+      <TechnologyInnovationAlliances />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

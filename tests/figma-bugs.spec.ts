@@ -124,6 +124,41 @@ for (const bug of selectedBugs) {
         body: "{}",
       }),
     );
+    await page.route("**/api/ecosystem/our-value-chain", (route) =>
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: "{}",
+      }),
+    );
+    await page.route("**/api/ecosystem/our-procurement-philosophy", (route) =>
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: "{}",
+      }),
+    );
+    await page.route("**/api/ecosystem/key-supply-categories", (route) =>
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: "{}",
+      }),
+    );
+    await page.route("**/api/ecosystem/become-a-supplier", (route) =>
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: "{}",
+      }),
+    );
+    await page.route("**/api/ecosystem/client-partnerships", (route) =>
+      route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: "{}",
+      }),
+    );
 
     for (const width of REFERENCE_VIEWPORTS) {
       const height = width === 1920 ? 970 : width >= 1024 ? 900 : 844;
@@ -134,9 +169,10 @@ for (const bug of selectedBugs) {
       expect(response?.status(), `${bug.route} should load`).toBeLessThan(400);
       await page.locator("body").waitFor({ state: "visible" });
       if (
-        [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35].includes(
-          bug.id,
-        )
+        [
+          21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 39,
+          40, 41, 42, 43, 45, 46, 47, 48, 49, 50,
+        ].includes(bug.id)
       ) {
         await page.waitForFunction(
           ({ expectedWidth, expectedHeight }) => {
@@ -188,9 +224,10 @@ for (const bug of selectedBugs) {
       }
       if (
         width === 1920 &&
-        [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35].includes(
-          bug.id,
-        )
+        [
+          21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 39,
+          40, 41, 42, 43, 45, 46, 47, 48, 49, 50,
+        ].includes(bug.id)
       ) {
         const menuTops = await page
           .locator('[data-site-header] nav[aria-label="Primary navigation"] a')
@@ -202,7 +239,10 @@ for (const bug of selectedBugs) {
           page
             .locator('[data-site-header] nav[aria-label="Primary navigation"]')
             .getByRole("link", { name: "Energy", exact: true }),
-        ).toHaveAttribute("href", "/energy");
+        ).toHaveAttribute(
+          "href",
+          /^\/(energy|engineering\/solar-epcm-services)/,
+        );
       }
       await expect
         .poll(() =>
@@ -374,6 +414,72 @@ for (const bug of selectedBugs) {
           name: "ENGAGE OUR SYSTEM ARCHITECTURE TEAM",
         }),
       ).toBeVisible();
+    }
+
+    if (bug.id === 48) {
+      await page.setViewportSize({ width: 1920, height: 970 });
+      await page.goto(bug.route, { waitUntil: "domcontentloaded" });
+      await page.waitForTimeout(750);
+      await expect(
+        page.getByRole("heading", { name: "KEY SUPPLY CATEGORIES" }),
+      ).toBeVisible();
+      await page
+        .locator('[data-figma-responsive="desktop"]')
+        .getByRole("button", { name: "Supplying to GREEN?" })
+        .click();
+      await expect(
+        page
+          .getByRole("dialog")
+          .getByRole("heading", { name: "SUPPLYING TO GREEN" }),
+      ).toBeVisible();
+      await page
+        .getByRole("dialog")
+        .getByLabel("Close product enquiry")
+        .click();
+    }
+
+    if (bug.id === 49) {
+      await page.setViewportSize({ width: 1920, height: 970 });
+      await page.goto(bug.route, { waitUntil: "domcontentloaded" });
+      await page.waitForTimeout(750);
+      await expect(
+        page.getByRole("heading", { name: "BECOME A SUPPLIER" }),
+      ).toBeVisible();
+      await page
+        .locator('[data-figma-responsive="desktop"]')
+        .getByRole("button", { name: "Procurement Contact" })
+        .click();
+      await expect(
+        page
+          .getByRole("dialog")
+          .getByRole("heading", { name: "BECOME A SUPPLIER" }),
+      ).toBeVisible();
+      await page
+        .getByRole("dialog")
+        .getByLabel("Close product enquiry")
+        .click();
+    }
+
+    if (bug.id === 50) {
+      await page.setViewportSize({ width: 1920, height: 970 });
+      await page.goto(bug.route, { waitUntil: "domcontentloaded" });
+      await page.waitForTimeout(750);
+      await expect(
+        page.getByRole("heading", { name: "CLIENT PARTNERSHIPS" }),
+      ).toBeVisible();
+      await page
+        .locator('[data-figma-responsive="desktop"]')
+        .getByRole("button", { name: "Book a Discovery Call" })
+        .click();
+      await expect(
+        page
+          .getByRole("dialog")
+          .getByRole("heading", { name: "BOOK A DISCOVERY CALL" }),
+      ).toBeVisible();
+      await page
+        .getByRole("dialog")
+        .getByLabel("Close product enquiry")
+        .click();
     }
   });
 }

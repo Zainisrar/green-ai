@@ -1,12 +1,13 @@
-import React from 'react'
-import Handbook from '@/app/components/Handbook/Handbook'
+import Handbook from "@/app/components/Handbook/Handbook";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function SupplierCodeOfConductPage() {
   return (
-    <React.Fragment>
-        <Handbook/>
-    </React.Fragment>
-  )
+    <FigmaPageCanvas
+      desktop={<Handbook canvas />}
+      mobile={<Handbook />}
+      nodeId="7077:28846"
+      fitCanvasHeight
+    />
+  );
 }
-
-export default page

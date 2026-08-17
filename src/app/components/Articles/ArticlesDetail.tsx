@@ -40,16 +40,19 @@ const ArticlesDetail = ({ slug }: ArticlesDetailProps) => {
                 <h1 className=" text-2xl lg:text-3xl font-black text-gray-800 mb-4">
                   {article.title}
                 </h1>
-                <div >
-                  <button 
-                  style={{
-                    transform:"skewX(-16deg)",
-                  }}
+                <div>
+                  <button
+                    style={{
+                      transform: "skewX(-16deg)",
+                    }}
                     onClick={() => window.history.back()}
                     className="flex items-center text-gray-600 border border-green-600 px-8 p-2  hover:text-gray-800"
                   >
                     <span className="mr-2">
-                      <img src="/images/articles/arrowBack.png" alt="arrowBtn" />
+                      <img
+                        src="/images/articles/arrowBack.png"
+                        alt="arrowBtn"
+                      />
                     </span>
                     <span>Back</span>
                   </button>
@@ -65,14 +68,19 @@ const ArticlesDetail = ({ slug }: ArticlesDetailProps) => {
             <div className="lg:flex space-x-8 mb-8">
               {/* Left Content */}
               <div className="lg:w-1/2">
-                <div 
+                <div
                   className="text-gray-700 text-base leading-relaxed mb-6 prose prose-lg max-w-none"
-                  dangerouslySetInnerHTML={{ __html: article.content.split('<h2>')[0] }}
+                  dangerouslySetInnerHTML={{
+                    __html: article.content.split("<h2>")[0],
+                  }}
                 />
 
                 <div className="mb-6 flex justify-end">
                   <a href={article.cta.href} className="cursor-pointer">
-                    <img src="/images/media-press/explore.png" alt={article.cta.text} />
+                    <img
+                      src="/images/media-press/explore.png"
+                      alt={article.cta.text}
+                    />
                   </a>
                 </div>
               </div>
@@ -89,25 +97,28 @@ const ArticlesDetail = ({ slug }: ArticlesDetailProps) => {
 
             {/* Dynamic Content Sections */}
             {(() => {
-              const contentSections = article.content.split('<h2>').slice(1);
+              const contentSections = article.content.split("<h2>").slice(1);
               return contentSections.map((section, index) => {
-                const [titlePart, ...contentParts] = section.split('</h2>');
+                const [titlePart, ...contentParts] = section.split("</h2>");
                 const sectionTitle = titlePart.trim();
-                const sectionContent = contentParts.join('</h2>').trim();
-                
+                const sectionContent = contentParts.join("</h2>").trim();
+
                 return (
                   <div key={index} className="mb-8">
                     <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
                       {sectionTitle}
                     </h2>
                     <div className="lg:flex justify-between items-start ">
-                      <div 
+                      <div
                         className="text-gray-700 text-base leading-relaxed my-4 lg:w-3/4 prose prose-lg max-w-none"
                         dangerouslySetInnerHTML={{ __html: sectionContent }}
                       />
                       <div className="ml-4">
                         <a href={article.cta.href} className="cursor-pointer">
-                          <img src="/images/media-press/explore.png" alt={article.cta.text} />
+                          <img
+                            src="/images/media-press/explore.png"
+                            alt={article.cta.text}
+                          />
                         </a>
                       </div>
                     </div>
@@ -119,9 +130,8 @@ const ArticlesDetail = ({ slug }: ArticlesDetailProps) => {
             {/* Bottom Section - Quote */}
             <div className="mt-12 mb-8">
               <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
-                {article.quote.text.split('—')[0].trim()}
-                <br />
-                —{" "}
+                {article.quote.text.split("—")[0].trim()}
+                <br />—{" "}
                 <span className="text-[#23B14D] italic">
                   {article.quote.highlighted}
                 </span>
@@ -129,7 +139,7 @@ const ArticlesDetail = ({ slug }: ArticlesDetailProps) => {
             </div>
           </div>
         </div>
-       <Chatbot/>
+        <Chatbot />
       </div>
     </React.Fragment>
   );

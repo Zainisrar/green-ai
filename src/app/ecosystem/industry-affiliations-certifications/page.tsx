@@ -1,12 +1,12 @@
-import React from 'react'
-import IndustryAffiliationsCertifications from '@/app/components/IndustryAffiliationsCertifications/IndustryAffiliationsCertifications'
+import React from "react";
+import IndustryAffiliationsCertifications from "@/app/components/IndustryAffiliationsCertifications/IndustryAffiliationsCertifications";
 
 const page = () => {
   return (
     <div>
-        <IndustryAffiliationsCertifications/>
+      <IndustryAffiliationsCertifications />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

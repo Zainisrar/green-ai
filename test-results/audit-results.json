@@ -70,7 +70,7 @@
       "line": 0,
       "specs": [
         {
-          "title": "bug-0035 Project Portfolio",
+          "title": "bug-0049 Become a Supplier",
           "ok": true,
           "tags": [],
           "tests": [
@@ -85,12 +85,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 22972,
+                  "duration": 15222,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-14T08:06:38.086Z",
+                  "startTime": "2026-08-17T12:44:50.163Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -98,7 +98,7 @@
               "status": "expected"
             }
           ],
-          "id": "b415e6ba66cd531ba865-ccda1577b08a03d88042",
+          "id": "b415e6ba66cd531ba865-fe5d5b9b84b1635dfc24",
           "file": "figma-bugs.spec.ts",
           "line": 15,
           "column": 7
@@ -108,8 +108,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-14T08:06:32.322Z",
-    "duration": 29849.594,
+    "startTime": "2026-08-17T12:44:26.912Z",
+    "duration": 39306.754,
     "expected": 1,
     "skipped": 0,
     "unexpected": 0,

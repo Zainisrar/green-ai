@@ -1,0 +1,92 @@
+.cta {
+  --figma-cta-slant: 23px;
+
+  position: relative;
+  isolation: isolate;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+  max-width: 100%;
+  height: 52px;
+  padding: 0 20px 0 28px;
+  border: 0;
+  background: transparent;
+  color: #000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    filter 0.15s ease,
+    transform 0.15s ease;
+}
+
+.cta::before,
+.cta::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: "";
+  pointer-events: none;
+}
+
+/* Outer 1px stroke (100% saturated gradient) */
+.cta::before {
+  background: linear-gradient(90deg, #23b14d 0%, #fffe50 100%);
+  clip-path: polygon(
+    var(--figma-cta-slant) 0,
+    100% 0,
+    calc(100% - var(--figma-cta-slant)) 100%,
+    0 100%
+  );
+}
+
+/* Inner 50% opacity gradient fill over white background matching Figma */
+.cta::after {
+  inset: 1px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.5) 0%,
+      rgba(255, 254, 80, 0.5) 100%
+    ), #ffffff;
+  backdrop-filter: blur(15px);
+  clip-path: polygon(
+    var(--figma-cta-slant) 0,
+    100% 0,
+    calc(100% - var(--figma-cta-slant)) 100%,
+    0 100%
+  );
+}
+
+.cta span {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.arrow {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: 10px;
+  height: 18px;
+}
+
+.cta:hover,
+.cta:focus-visible {
+  filter: brightness(1.03);
+}
+
+.cta:active {
+  filter: brightness(0.97);
+}
+
+.cta:focus-visible {
+  outline: 2px solid #23b14d;
+  outline-offset: 3px;
+}

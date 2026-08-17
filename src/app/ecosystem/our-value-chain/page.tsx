@@ -1,12 +1,13 @@
-import React from 'react'
-import OurChainValue from '@/app/components/OurChainValue/OurChainValue'
+import OurChainValue from "@/app/components/OurChainValue/OurChainValue";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function OurValueChainPage() {
   return (
-    <React.Fragment>
-        <OurChainValue/>
-    </React.Fragment>
-  )
+    <FigmaPageCanvas
+      desktop={<OurChainValue canvas />}
+      mobile={<OurChainValue />}
+      nodeId="7077:18325"
+      fitCanvasHeight
+    />
+  );
 }
-
-export default page

@@ -1,12 +1,12 @@
-import React from 'react'
-import CollaborationInnovation from '@/app/components/CollaborationInnovation/CollaborationInnovation'
+import React from "react";
+import CollaborationInnovation from "@/app/components/CollaborationInnovation/CollaborationInnovation";
 
 const page = () => {
   return (
     <React.Fragment>
-        <CollaborationInnovation/>
+      <CollaborationInnovation />
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default page
+export default page;

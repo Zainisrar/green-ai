@@ -27,8 +27,14 @@ const CodeOfConduct = ({ isOpen, onClose, title, items }: Props) => {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2.5}
+            role="img"
+            aria-label="Close"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M18 6L6 18" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 6l12 12M18 6L6 18"
+            />
           </svg>
         </button>
 

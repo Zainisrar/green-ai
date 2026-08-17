@@ -17,30 +17,38 @@ const defaultItems = [
   },
   {
     clientType: "Multilateral Donors & Development Banks",
-    valueDelivered: "Policy-aligned execution, transparent compliance, verified impact",
+    valueDelivered:
+      "Policy-aligned execution, transparent compliance, verified impact",
   },
   {
     clientType: "Private Sector Enterprises",
-    valueDelivered: "Clean power, hybrid resilience, ESG-integrated infrastructure",
+    valueDelivered:
+      "Clean power, hybrid resilience, ESG-integrated infrastructure",
   },
   {
     clientType: "Institutions (Health, Education, Telecom)",
-    valueDelivered: "Reliable systems, custom-engineered uptime, long-term O&M models",
+    valueDelivered:
+      "Reliable systems, custom-engineered uptime, long-term O&M models",
   },
 ];
 
 const WhoWePartnerWith = ({ isOpen, onClose, data }: Props) => {
   const items = data?.items ?? defaultItems;
   const title = data?.title ?? "Who We Partner With";
-  const subHeadline = data?.subHeadline ?? "Strategic Clients. Transformational Outcomes.";
+  const subHeadline =
+    data?.subHeadline ?? "Strategic Clients. Transformational Outcomes.";
 
   return (
     <ClientInfoModal isOpen={isOpen} onClose={onClose}>
       <div className="mb-6 sm:mb-8">
-        <h2 className="text-2xl font-black text-gray-800 sm:text-3xl">{title}</h2>
+        <h2 className="text-2xl font-black text-gray-800 sm:text-3xl">
+          {title}
+        </h2>
         <div className="mt-2 flex items-center">
           <span className="mr-2 text-2xl font-bold text-black">-</span>
-          <h3 className="text-lg font-semibold text-[#4CAF50] sm:text-xl">{subHeadline}</h3>
+          <h3 className="text-lg font-semibold text-[#4CAF50] sm:text-xl">
+            {subHeadline}
+          </h3>
         </div>
         <div className="mt-4 h-0.5 w-full bg-gray-300" />
       </div>

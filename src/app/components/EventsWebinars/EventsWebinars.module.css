@@ -1,0 +1,233 @@
+.page {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #fff;
+  color: #121212;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+.canvasPage {
+  height: 970px;
+  min-height: 970px;
+}
+.verticalTitle {
+  position: absolute;
+  top: 116px;
+  left: 96px;
+  width: 50px;
+  height: 695px;
+  object-fit: contain;
+}
+.content {
+  position: relative;
+  z-index: 2;
+  width: 1162px;
+  margin-left: 276px;
+  padding-top: 102px;
+}
+.intro h1 {
+  margin: 0;
+  font-size: 53px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.intro h1 span,
+.intro h2,
+.yearList h3 span,
+.quote em {
+  color: #23b14d;
+}
+.intro h2 {
+  color: #121212;
+  margin: 15px 0 8px;
+  font-size: 29px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+.intro p {
+  margin: 0;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+}
+.events {
+  margin-top: 33px;
+}
+.events > h3 {
+  margin: 0 0 18px;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 271px);
+  gap: 36px 26px;
+}
+.card {
+  position: relative;
+  height: 242px;
+  overflow: hidden;
+  border: 1px solid #e9ef69;
+  background: #fff;
+  box-shadow: 0 7px 13px rgb(0 0 0 / 12%);
+}
+.cardImage {
+  display: block;
+  width: 100%;
+  height: 119px;
+  object-fit: cover;
+}
+.cardBody {
+  padding: 4px 8px 29px;
+}
+.card h4 {
+  max-width: 235px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.08;
+}
+.card p {
+  margin: 4px 0 10px;
+  font-size: 10px;
+  line-height: 1.4;
+}
+.metadata {
+  display: grid;
+  gap: 4px;
+  font-size: 9px;
+  font-weight: 500;
+}
+.metadata span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.metadata img {
+  width: 11px;
+  height: 11px;
+  object-fit: contain;
+}
+.register {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 116px;
+  height: 22px;
+  font:
+    700 9px / 1 var(--font-montserrat),
+    Montserrat,
+    sans-serif;
+}
+.pagination {
+  position: absolute;
+  right: 4px;
+  bottom: 75px;
+  font-size: 32px;
+  letter-spacing: 6px;
+}
+.sidebar {
+  position: absolute;
+  top: 296px;
+  left: 1474px;
+  width: 390px;
+}
+.yearList {
+  min-height: 371px;
+  border-left: 1px solid #1cb34c;
+  padding-left: 35px;
+}
+.yearList h3 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  line-height: 1;
+}
+.yearList ul {
+  margin: 18px 0 22px;
+  padding: 0 0 0 13px;
+  list-style: none;
+  border-left: 1px solid #1cb34c;
+}
+.yearList li {
+  margin: 0 0 15px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.quote {
+  position: absolute;
+  top: 404px;
+  left: 0;
+  width: 430px;
+  margin: 0;
+  padding: 15px 0 15px 57px;
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.quoteCornerLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.quoteCornerRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.host {
+  position: absolute;
+  top: 529px;
+  right: -52px;
+  width: 210px;
+  height: 54px;
+  font:
+    700 16px / 1 var(--font-montserrat),
+    Montserrat,
+    sans-serif;
+}
+@media (max-width: 1200px) {
+  .page {
+    overflow: visible;
+  }
+  .verticalTitle,
+  .sidebar {
+    display: none;
+  }
+  .content {
+    width: auto;
+    margin: 0;
+    padding: 140px 28px 80px;
+  }
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .card {
+    height: 260px;
+  }
+  .cardImage {
+    height: 130px;
+  }
+  .pagination {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .content {
+    padding: 120px 18px 70px;
+  }
+  .intro h1 {
+    font-size: 38px;
+  }
+  .intro h2 {
+    font-size: 23px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

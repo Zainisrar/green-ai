@@ -3,12 +3,17 @@
 
   position: absolute;
   width: var(--brand-panel-width);
-  height: calc(var(--brand-panel-width) * 1.633871);
+  height: var(--brand-panel-height, calc(var(--brand-panel-width) * 1.633871));
   pointer-events: none;
 }
 
 .fixedCanvasPanel {
   --brand-panel-width: 310px;
+}
+
+.flagshipPanel {
+  --brand-panel-width: 326px;
+  --brand-panel-height: 661.5px;
 }
 
 .rectangle {
@@ -51,6 +56,12 @@
   top: 4.8%;
   left: 3.6%;
   width: 76%;
+}
+
+.flagshipPanel .logo {
+  top: 3.0234%;
+  left: 7.362%;
+  width: 78.221%;
 }
 
 @media (max-width: 900px) {

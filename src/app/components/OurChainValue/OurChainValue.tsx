@@ -1,304 +1,222 @@
 "use client";
-import React from "react";
-import TopNavigation from "../TopNavigation/TopNavigation";
-import Chatbot from "../Chatbot";
+
+import { useState } from "react";
 import { useOurValueChain } from "../../../hooks/useOurValueChain";
-import { handleImageError } from "../lib/utils";
-import RequestConsultation from "./Modals/RequestConsultation";
+import D6Chatbot from "../D6Chatbot";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import ProductEnquiry from "../Product/Modals/ProductEnquiry";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import styles from "./OurChainValue.module.css";
 
 interface ValueChainItem {
-  img: {
-    alt: string;
-    src: string;
-  };
+  id: string;
   title: string;
   description: string;
+  icon: string;
 }
 
-interface Quote {
-  text: string;
-  highlighted: string;
+const fallbackCapabilities: ValueChainItem[] = [
+  {
+    id: "source",
+    title: "Source",
+    description: "Tier-1 tech. Global partners. Proven materials.",
+    icon: "/images/our-value-chain/figma-icon-source.svg",
+  },
+  {
+    id: "engineer",
+    title: "Engineer",
+    description: "Precision design. Terrain-smart. Load-aware.",
+    icon: "/images/our-value-chain/figma-icon-engineer.svg",
+  },
+  {
+    id: "build",
+    title: "Build",
+    description: "Executed in-house. Built to endure.",
+    icon: "/images/our-value-chain/figma-icon-build.svg",
+  },
+  {
+    id: "commission",
+    title: "Commission",
+    description: "Tested. Verified. Switched on with certainty.",
+    icon: "/images/our-value-chain/figma-icon-commission.svg",
+  },
+  {
+    id: "operate",
+    title: "Operate",
+    description: "Monitored via GRID-INTEL™. Maintained proactively.",
+    icon: "/images/our-value-chain/figma-icon-operate.svg",
+  },
+  {
+    id: "deliver-impact",
+    title: "Deliver Impact",
+    description: "Lowered costs. Reliable power. Local livelihoods",
+    icon: "/images/our-value-chain/figma-icon-deliver-impact.svg",
+  },
+];
+
+interface OurChainValueProps {
+  canvas?: boolean;
 }
 
-interface CTA {
-  href: string;
-  text: string;
-}
-
-interface Description {
-  text: string;
-  highlighted: string;
-}
-
-interface OurValueChainData {
-  id: number;
-  title: string;
-  subHeadline: string;
-  description: Description;
-  quote: Quote[];
-  cta: CTA[];
-  valueChainStrip: ValueChainItem[];
-  createdAt: string;
-  updatedAt: string;
-}
-
-const OurChainValue = () => {
+export default function OurChainValue({ canvas = false }: OurChainValueProps) {
   const { data: apiData } = useOurValueChain();
-  const [isConsultationOpen, setIsConsultationOpen] = React.useState(false);
-  // Type assertion to help TypeScript understand the data structure
-  const data = apiData as OurValueChainData | undefined;
+  const [isConsultationOpen, setIsConsultationOpen] = useState(false);
 
-  if (!data) {
-    return null;
-  }
+  // Map API data if present, or use Figma fallback
+  const subHeadline =
+    apiData?.subHeadline || "Built by Design. Delivered End-to-End.";
 
   return (
-    <React.Fragment>
-      <div className="  ">
-        <TopNavigation />
-        <div className="absolute top-0 left-0 lg:left-10 lg:block hidden">
+    <main
+      className={`${styles.page} ${canvas ? styles.canvasPage : ""}`}
+      data-node-id="7077:18325"
+    >
+      <SiteHeader
+        layout={canvas ? "figmaCanvas" : "viewport"}
+        panel="logoOnly"
+      />
+
+      {/* Background Artwork */}
+      <img
+        src="/images/our-value-chain/bg.jpg"
+        alt=""
+        className={styles.maskBg}
+        aria-hidden="true"
+      />
+
+      {/* Vertical Side Title */}
+      <img
+        src="/images/our-value-chain/our-value-chain.png"
+        alt="Our Value Chain"
+        className={styles.verticalTitle}
+      />
+
+      {/* Top Header Content */}
+      <div className={styles.topSection}>
+        <div className={styles.headlineGroup}>
+          <h1>
+            OUR <span>VALUE</span> CHAIN
+          </h1>
+          <h2>{subHeadline}</h2>
+        </div>
+        <p className={styles.topDescription}>
+          <strong>GREEN</strong> doesn’t outsource reliability — we engineer it.
+          From sourcing to service, every step is owned, optimized, and
+          accountable.
+        </p>
+      </div>
+
+      {/* Left Elements (Desktop) */}
+      <div className={styles.leftElements}>
+        <div className={styles.ecosystemCard}>
           <img
-            src="/images/our-value-chain/mainImg.png"
-            className="w-screen lg:w-auto lg:h-[125vh]"
-            alt="bg"
+            src="/images/our-value-chain/figma-ecosystem-card.svg"
+            alt=""
+            className={styles.ecosystemCardBg}
+            aria-hidden="true"
           />
-        </div>
-        <div className="flex h-full">
-          {/* Left Side */}
-          <div className="lg:w-1/6 flex items-center justify-center">
-            <div className="fixed top-1/4 left-4 lg:left-14">
-              <img
-                src="/images/our-value-chain/our-value-chain.png"
-                alt="our value chain"
-                className="w-5 lg:w-auto"
-              />
-            </div>
-          </div>
-
-          {/* Main Content Area */}
-          <div className="lg:flex space-x-4  ml-10 mt-10 ">
-            {/* Main Title */}
-            <div className="mb-8 pl-10 lg:pl-0 lg:w-5/12">
-              <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
-                {data?.title ? (
-                  data.title.split(/\b(value)\b/gi).map((part, index) => 
-                    part.toLowerCase() === 'value' ? (
-                      <span key={index} className="text-[#23B14D]">{part.toUpperCase()}</span>
-                    ) : (
-                      <span key={index}>{part.toUpperCase()}</span>
-                    )
-                  )
-                ) : (
-                  "OUR VALUE CHAIN"
-                )}
-              </h1>
-              <h2 className="text-lg lg:text-2xl font-bold text-[#23B14D] italic mb-4">
-                {data?.subHeadline || "Built by Design. Delivered End-to-End."}
-              </h2>
-              <div className="absolute lg:block hidden bottom-10">
-                <div className="">
-                  <div
-                  style={{
-                    transform:"skewX(-16deg)"
-                  }}
-                  className="bg-[#f7fadb]  p-5 mb-10 shadow-lg">
-                    <h3
-                    style={{
-                      transform:"skewX(16deg)"
-                    }}
-                    className="text-xl lg:text-2xl capitalize font-bold text-gray-800  ">
-                      {data?.quote?.[0]?.highlighted ? (
-                        <>
-                          {data?.quote?.[0]?.text
-                            ?.split("\n")
-                            ?.filter((line) => line.trim() !== "") // remove empty/extra lines
-                            ?.map((line, i) => (
-                              <div key={i}>
-                                {line.includes(
-                                  data?.quote?.[0]?.highlighted
-                                ) ? (
-                                  <>
-                                    {
-                                      line.split(
-                                        data?.quote?.[0]?.highlighted
-                                      )[0]
-                                    }
-                                    <span className="text-[#23B14D]">
-                                      {data?.quote?.[0]?.highlighted}
-                                    </span>
-                                    {
-                                      line.split(
-                                        data?.quote?.[0]?.highlighted
-                                      )[1]
-                                    }
-                                  </>
-                                ) : (
-                                  line
-                                )}
-                              </div>
-                            ))}
-                        </>
-                      ) : (
-                        <>
-                          End-To-End{" "}
-                          <span className="text-[#23B14D]">Solution</span>
-                          <br />
-                          Ecosystem.
-                        </>
-                      )}
-                    </h3>
-                  </div>
-                </div>
-                <div className=" font-bold">
-                  <div className="text-lg italic text-gray-700 mb-4">
-                    {data?.quote?.[1]?.text?.split("\n")?.map((line, index) => (
-                      <div key={index}>{line}</div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Value Chain Strip */}
-            <div className="mb-12">
-              <div className="text-gray-600 text-lg mb-6">
-                {data?.description?.highlighted ? (
-                  <>
-                    {
-                      data.description.text.split(
-                        data.description.highlighted
-                      )[0]
-                    }
-                    <span className="text-[#23B14D] font-semibold">
-                      {data.description.highlighted}
-                    </span>
-                    {
-                      data.description.text.split(
-                        data.description.highlighted
-                      )[1]
-                    }
-                  </>
-                ) : (
-                  <>
-                    <span className="text-[#23B14D] font-semibold">GREEN</span>{" "}
-                    doesn't outsource reliability — we engineer it. From
-                    sourcing to service, every step is owned, optimized, and
-                    accountable.
-                  </>
-                )}
-              </div>
-              <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-6">
-                Value Chain Strip
-              </h3>
-
-              {/* Chain Steps Grid */}
-              <div className="grid lg:grid-cols-2 gap-8 mb-8">
-                {(data?.valueChainStrip || []).map(
-                  (item: ValueChainItem, index: number) => (
-                    <div key={index} className="flex space-x-4">
-                      <div className="">
-                        <img
-                          src={item.img.src}
-                          alt={item.img.alt || `${item.title} icon`}
-                          className="w-8"
-                          onError={(e) => handleImageError(e, "/images/our-value-chain/globe.png")}
-                        />
-                      </div>
-                      <div>
-                        <h4 className="text-lg lg:text-xl font-bold text-gray-800 ">
-                          {item.title}
-                        </h4>
-                        <div className="text-sm text-gray-900 ">
-                          {item.description}
-                        </div>
-                      </div>
-                    </div>
-                  )
-                )}
-              </div>
-              <div className="flex space-x-12 mb-8">
-                {/* End-to-End Solution Box */}
-
-                {/* Right Side Content */}
-                <div className="">
-                  {/* Quote Section */}
-                  <div>
-                    <div className="mb-4">
-                      <div className="text-lg font-bold text-gray-800">
-                        {data?.quote?.[2]?.highlighted && (
-                          <>
-                            {data?.quote?.[2]?.text
-                              ?.split("\n")
-                              ?.filter((line) => line.trim() !== "") // remove empty lines
-                              ?.map((line, i) => (
-                                <div key={i}>
-                                  {line.includes(
-                                    data?.quote?.[2]?.highlighted
-                                  ) ? (
-                                    <>
-                                      {
-                                        line.split(
-                                          data?.quote?.[2]?.highlighted
-                                        )[0]
-                                      }
-                                      <span className="text-[#23B14D]">
-                                        {data?.quote?.[2]?.highlighted}
-                                      </span>
-                                      {
-                                        line.split(
-                                          data?.quote?.[2]?.highlighted
-                                        )[1]
-                                      }
-                                    </>
-                                  ) : (
-                                    line
-                                  )}
-                                </div>
-                              ))}
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Left Side Content */}
-          </div>
+          <h3 className={styles.ecosystemCardText}>
+            End-To-End <span>Solution</span>
+            <br />
+            Ecosystem.
+          </h3>
         </div>
 
-        <div className=" flex justify-end my-8 cursor-pointer">
-          <button
-            type="button"
-            onClick={() => setIsConsultationOpen(true)}
-            className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
-          >
-            <img
-              src="/images/our-value-chain/request.png"
-              alt={data?.cta?.[0]?.text || "Request a Consultation"}
-            />
-          </button>
-        </div>
-        <div className=" flex justify-end my-4 mb-20 cursor-pointer">
-          <a
-            href={data?.cta?.[1]?.href || "#"}
-            className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
-          >
-            <img
-              src="/images/our-value-chain/green.png"
-              alt={data?.cta?.[1]?.text || "Green Project Delivery Framework"}
-            />
-          </a>
+        <div className={styles.quoteBox}>
+          <p>“We don’t wait for things to break. We design them not to.”</p>
         </div>
       </div>
-        <Chatbot />
-      <RequestConsultation
+
+      {/* Value Chain Grid Section */}
+      <section
+        className={styles.valueChainSection}
+        aria-label="Value Chain Capabilities"
+      >
+        <h2 className={styles.stripHeading}>Value Chain Strip</h2>
+        <div className={styles.stripGrid}>
+          {fallbackCapabilities.map((item) => (
+            <article className={styles.stripItem} key={item.id}>
+              <img
+                src={item.icon}
+                alt=""
+                className={styles.stripIcon}
+                aria-hidden="true"
+              />
+              <div className={styles.stripItemContent}>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Bottom Statement */}
+      <p className={styles.bottomStatement}>
+        Every phase has one owner. <span>GREEN.</span>
+        <br />
+        Every project is more than delivered — it’s engineered for legacy.
+      </p>
+
+      {/* Desktop CTAs */}
+      <div className={styles.desktopCtas}>
+        <FigmaAngledCta
+          className={styles.consultationBtn}
+          onClick={() => setIsConsultationOpen(true)}
+        >
+          Request a Consultation
+        </FigmaAngledCta>
+        <FigmaAngledCta className={styles.frameworkBtn}>
+          GREEN Project Delivery Framework (PDF)
+        </FigmaAngledCta>
+      </div>
+
+      {/* Mobile Flow (< 1200px) */}
+      <div className={styles.mobileElements}>
+        <div className={styles.mobileEcosystemCard}>
+          <p>
+            End-To-End <span>Solution</span> Ecosystem.
+          </p>
+        </div>
+        <div className={styles.mobileQuoteBox}>
+          <p>“We don’t wait for things to break. We design them not to.”</p>
+        </div>
+        <div className={styles.mobileCtas}>
+          <FigmaAngledCta onClick={() => setIsConsultationOpen(true)}>
+            Request a Consultation
+          </FigmaAngledCta>
+          <FigmaAngledCta>
+            GREEN Project Delivery Framework (PDF)
+          </FigmaAngledCta>
+        </div>
+      </div>
+
+      {/* Chatbot */}
+      {canvas ? (
+        <D6Chatbot
+          canvasAnchored
+          triggerVariant="figmaCanvas"
+          triggerStyle={{
+            top: 899,
+            right: "auto",
+            bottom: "auto",
+            left: 1498,
+            width: 418,
+          }}
+        />
+      ) : (
+        <D6Chatbot />
+      )}
+
+      {/* Request Consultation Modal */}
+      <ProductEnquiry
         isOpen={isConsultationOpen}
         onClose={() => setIsConsultationOpen(false)}
+        titlePrefix="REQUEST A"
+        titleAccent="CONSULTATION"
+        interestLabel="WHAT DO YOU NEED HELP WITH?"
+        defaultInterest="Our Value Chain"
       />
-    </React.Fragment>
+    </main>
   );
-};
-
-export default OurChainValue;
+}

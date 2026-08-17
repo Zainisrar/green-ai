@@ -1,0 +1,338 @@
+.page {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #fff;
+  color: #121212;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.canvasPage {
+  height: 970px;
+  min-height: 970px;
+}
+
+.verticalTitle {
+  position: absolute;
+  top: 152px;
+  left: 66px;
+  width: 28px;
+  height: 733px;
+  object-fit: contain;
+  z-index: 2;
+}
+
+.topSection {
+  position: absolute;
+  top: 101px;
+  left: 262px;
+  right: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 3;
+}
+
+.mainTitle {
+  margin: 0;
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.15;
+  color: #000;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.greenText {
+  color: #23b14d;
+}
+
+.topSection h2 {
+  margin: 8px 0 0;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #23b14d;
+}
+
+.topSection p {
+  max-width: 1384px;
+  margin: 8px 0 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #000;
+}
+
+/* Category Rows Container */
+.categoriesContainer {
+  position: absolute;
+  top: 290px;
+  left: 0;
+  width: 1400px;
+  z-index: 3;
+}
+
+.categoryRow {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 957px;
+  height: 46px;
+}
+
+.categoryRow1 {
+  top: 9px;
+  left: 395px;
+}
+
+.categoryRow2 {
+  top: 91px;
+  left: 358px;
+}
+
+.categoryRow3 {
+  top: 172px;
+  left: 321px;
+}
+
+.categoryRow4 {
+  top: 251px;
+  left: 285px;
+}
+
+.categoryRow5 {
+  top: 331px;
+  left: 246px;
+}
+
+.categoryRow6 {
+  top: 415px;
+  left: 209px;
+}
+
+.categoryName {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  color: #000;
+  letter-spacing: -0.01em;
+}
+
+.categoryCta {
+  width: 134px;
+  height: 41px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 14px 0 18px;
+}
+
+.dividerLine {
+  position: absolute;
+  height: 1px;
+  background: #dcdcdc;
+  width: 964px;
+}
+
+.divider1 {
+  top: 73px;
+  left: 376px;
+}
+
+.divider2 {
+  top: 150px;
+  left: 341px;
+}
+
+.divider3 {
+  top: 229px;
+  left: 310px;
+}
+
+.divider4 {
+  top: 308px;
+  left: 274px;
+}
+
+.divider5 {
+  top: 393px;
+  left: 237px;
+}
+
+/* Left Quote Block */
+.leftQuoteBlock {
+  position: absolute;
+  top: 837px;
+  left: 194px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 3;
+}
+
+.quoteShapeLeft,
+.quoteShapeRight {
+  width: 79px;
+  height: 98px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.quoteText {
+  margin: 0;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #000;
+  white-space: nowrap;
+}
+
+/* Desktop CTAs */
+.desktopCtas {
+  position: absolute;
+  top: 695px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 25px;
+  z-index: 3;
+}
+
+.supplyingCta {
+  width: 299px;
+  height: 52px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.downloadCta {
+  width: 449px;
+  height: 52px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Mobile & Tablet Responsive Flow (< 1200px) */
+@media (max-width: 1200px) {
+  .page {
+    overflow: visible;
+  }
+
+  .verticalTitle,
+  .leftQuoteBlock,
+  .desktopCtas {
+    display: none;
+  }
+
+  .topSection {
+    position: static;
+    padding: 130px 24px 0;
+  }
+
+  .categoriesContainer {
+    position: static;
+    width: auto;
+    padding: 30px 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .categoryRow {
+    position: static;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  .dividerLine {
+    display: none;
+  }
+
+  .categoryName {
+    font-size: 18px;
+  }
+
+  .mobileElements {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 30px 24px 80px;
+  }
+
+  .mobileQuoteBox {
+    border-left: 3px solid #23b14d;
+    padding-left: 16px;
+  }
+
+  .mobileQuoteBox p {
+    margin: 0;
+    font-size: 17px;
+    font-style: italic;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .mobileCtas {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 10px;
+  }
+
+  .mobileCtas button,
+  .mobileCtas a {
+    width: 100%;
+    height: 52px;
+  }
+}
+
+@media (min-width: 1201px) {
+  .mobileElements {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .topSection {
+    padding: 110px 16px 0;
+  }
+
+  .mainTitle {
+    font-size: 30px;
+  }
+
+  .topSection h2 {
+    font-size: 18px;
+  }
+
+  .topSection p {
+    font-size: 15px;
+  }
+
+  .categoriesContainer {
+    padding: 24px 16px 0;
+  }
+
+  .categoryRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .categoryCta {
+    width: 100%;
+  }
+
+  .mobileElements {
+    padding: 24px 16px 70px;
+  }
+}

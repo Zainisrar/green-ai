@@ -20,15 +20,11 @@ interface ProcurementAlignedImpactData {
 }
 
 interface Props {
-    isOpen: boolean;
-    onClose: () => void;
-    data?: ProcurementAlignedImpactData;
+  isOpen: boolean;
+  onClose: () => void;
+  data?: ProcurementAlignedImpactData;
 }
-const Procrument = ({
-    isOpen,
-    onClose,
-    data
-}: Props) => {
+const Procrument = ({ isOpen, onClose, data }: Props) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -52,23 +48,32 @@ const Procrument = ({
 
       {/* Description */}
       <p className="text-gray-800 font-medium text-base lg:text-lg mb-6 lg:mb-8 italic">
-        {data?.description || "GREEN's procurement decisions are directly tied to:"}
+        {data?.description ||
+          "GREEN's procurement decisions are directly tied to:"}
       </p>
 
       {/* Main Content */}
-      <div className={`${isMobile ? 'space-y-8' : 'flex items-start space-x-12'}`}>
+      <div
+        className={`${isMobile ? "space-y-8" : "flex items-start space-x-12"}`}
+      >
         {/* Content List */}
         <div className="flex-1">
           <div className="space-y-4 lg:space-y-6">
-            {(data?.keys || [
-              "Energy access reliability for remote communities",
-              "O&M predictability for donor-funded projects",
-              "Technical integrity  for national infrastructure",
-              "Carbon responsibility via recyclable or low-impact components"
-            ]).map((key, index) => (
+            {(
+              data?.keys || [
+                "Energy access reliability for remote communities",
+                "O&M predictability for donor-funded projects",
+                "Technical integrity  for national infrastructure",
+                "Carbon responsibility via recyclable or low-impact components",
+              ]
+            ).map((key, index) => (
               <div key={index} className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
-                  <img src="/images/grid-intel/lighting.png" className='w-10 lg:w-14 -mt-2 lg:-mt-4' alt="lighting" />
+                  <img
+                    src="/images/grid-intel/lighting.png"
+                    className="w-10 lg:w-14 -mt-2 lg:-mt-4"
+                    alt="lighting"
+                  />
                 </div>
                 <p className="text-gray-800 font-medium text-base lg:text-lg">
                   {key}
@@ -81,13 +86,17 @@ const Procrument = ({
         {/* Image */}
         <div className="flex-shrink-0">
           <div className="relative">
-            <img 
-              src={data?.img?.src || "/images/our-procurement-philosophy/procrumentDialog.png"}
+            <img
+              src={
+                data?.img?.src ||
+                "/images/our-procurement-philosophy/procrumentDialog.png"
+              }
               alt={data?.img?.alt || "Solar panels in field"}
-              className={`${isMobile ? 'w-full max-w-sm mx-auto' : 'w-[520px]'} ${!isMobile && 'mt-16'}`}
+              className={`${isMobile ? "w-full max-w-sm mx-auto" : "w-[520px]"} ${!isMobile && "mt-16"}`}
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
-                target.src = "/images/our-procurement-philosophy/procrumentDialog.png";
+                target.src =
+                  "/images/our-procurement-philosophy/procrumentDialog.png";
               }}
             />
           </div>
@@ -117,6 +126,7 @@ const Procrument = ({
               {/* Close Button */}
               <div className="flex justify-end w-full">
                 <button
+                  type="button"
                   onClick={onClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
@@ -133,6 +143,7 @@ const Procrument = ({
               {/* Close Button */}
               <div className="flex justify-end w-full">
                 <button
+                  type="button"
                   onClick={onClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
@@ -141,15 +152,13 @@ const Procrument = ({
               </div>
 
               {/* Modal Content */}
-              <div className="max-w-5xl mx-auto">
-                {renderContent()}
-              </div>
+              <div className="max-w-5xl mx-auto">{renderContent()}</div>
             </div>
           )}
         </div>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default Procrument
+export default Procrument;

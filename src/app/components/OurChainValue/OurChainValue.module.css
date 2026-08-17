@@ -1,0 +1,395 @@
+.page {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  background: #fff;
+  color: #121212;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.canvasPage {
+  height: 970px;
+  min-height: 970px;
+}
+
+.maskBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 970px;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.verticalTitle {
+  position: absolute;
+  top: 363px;
+  left: 47px;
+  width: 48px;
+  height: 538px;
+  object-fit: contain;
+  z-index: 2;
+}
+
+.topSection {
+  position: absolute;
+  top: 97px;
+  left: 264px;
+  right: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+  z-index: 3;
+}
+
+.headlineGroup {
+  flex: 0 0 auto;
+}
+
+.headlineGroup h1 {
+  margin: 0;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: #000;
+  letter-spacing: -0.02em;
+}
+
+.headlineGroup h1 span {
+  color: #23b14d;
+}
+
+.headlineGroup h2 {
+  margin: 12px 0 0;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #23b14d;
+}
+
+.topDescription {
+  max-width: 940px;
+  margin: 0;
+  margin-top: 64px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #000;
+}
+
+.topDescription strong {
+  font-weight: 700;
+  color: #23b14d;
+}
+
+/* Left Column Elements (Desktop) */
+.leftElements {
+  position: absolute;
+  top: 497px;
+  left: 188px;
+  width: 520px;
+  z-index: 3;
+}
+
+.ecosystemCard {
+  position: relative;
+  width: 517px;
+  height: 163px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ecosystemCardBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ecosystemCardText {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0 40px 0 60px;
+  font-size: 37px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #000;
+}
+
+.ecosystemCardText span {
+  color: #23b14d;
+}
+
+.quoteBox {
+  margin-top: 49px;
+  margin-left: -26px;
+  width: 418px;
+}
+
+.quoteBox p {
+  margin: 0;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #000;
+}
+
+/* Right Section: Value Chain Strip */
+.valueChainSection {
+  position: absolute;
+  top: 233px;
+  left: 840px;
+  width: 1020px;
+  z-index: 3;
+}
+
+.stripHeading {
+  margin: 0 0 20px 0;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+  color: #000;
+}
+
+.stripGrid {
+  display: grid;
+  grid-template-columns: 480px 480px;
+  column-gap: 60px;
+  row-gap: 36px;
+}
+
+.stripItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.stripIcon {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  object-fit: contain;
+}
+
+.stripItemContent {
+  flex: 1;
+}
+
+.stripItemContent h3 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #000;
+}
+
+.stripItemContent p {
+  margin: 6px 0 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #000;
+}
+
+/* Bottom Statement */
+.bottomStatement {
+  position: absolute;
+  top: 725px;
+  left: 574px;
+  width: 980px;
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.38;
+  color: #000;
+  z-index: 3;
+}
+
+.bottomStatement span {
+  color: #23b14d;
+}
+
+/* Desktop CTAs */
+.desktopCtas {
+  position: absolute;
+  top: 741px;
+  right: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 25px;
+  z-index: 3;
+}
+
+.consultationBtn {
+  width: 299px;
+  height: 52px;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+.frameworkBtn {
+  width: 429px;
+  height: 52px;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+}
+
+/* Mobile & Tablet Responsive Flow (< 1200px) */
+@media (max-width: 1200px) {
+  .page {
+    overflow: visible;
+  }
+
+  .maskBg,
+  .logoPanelBg,
+  .verticalTitle,
+  .desktopCtas,
+  .leftElements {
+    display: none;
+  }
+
+  .topSection {
+    position: static;
+    flex-direction: column;
+    padding: 130px 24px 0;
+    gap: 16px;
+  }
+
+  .topDescription {
+    margin-top: 10px;
+    max-width: 100%;
+  }
+
+  .valueChainSection {
+    position: static;
+    width: auto;
+    padding: 30px 24px 0;
+  }
+
+  .stripGrid {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
+
+  .bottomStatement {
+    position: static;
+    width: auto;
+    padding: 30px 24px 0;
+    font-size: 20px;
+  }
+
+  .mobileElements {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 30px 24px 80px;
+  }
+
+  .mobileEcosystemCard {
+    background: linear-gradient(
+      135deg,
+      rgba(35, 177, 77, 0.1) 0%,
+      rgba(255, 254, 80, 0.1) 100%
+    );
+    border: 1px solid rgba(35, 177, 77, 0.3);
+    border-radius: 8px;
+    padding: 24px;
+  }
+
+  .mobileEcosystemCard p {
+    margin: 0;
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .mobileEcosystemCard span {
+    color: #23b14d;
+  }
+
+  .mobileQuoteBox {
+    border-left: 3px solid #23b14d;
+    padding-left: 16px;
+  }
+
+  .mobileQuoteBox p {
+    margin: 0;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .mobileCtas {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 10px;
+  }
+
+  .mobileCtas button {
+    width: 100%;
+    height: 52px;
+  }
+}
+
+@media (min-width: 1201px) {
+  .mobileElements {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .topSection {
+    padding: 110px 16px 0;
+  }
+
+  .headlineGroup h1 {
+    font-size: 36px;
+  }
+
+  .headlineGroup h2 {
+    font-size: 18px;
+  }
+
+  .topDescription {
+    font-size: 15px;
+  }
+
+  .valueChainSection {
+    padding: 24px 16px 0;
+  }
+
+  .stripHeading {
+    font-size: 24px;
+  }
+
+  .stripItemContent h3 {
+    font-size: 20px;
+  }
+
+  .stripItemContent p {
+    font-size: 14px;
+  }
+
+  .bottomStatement {
+    padding: 24px 16px 0;
+    font-size: 17px;
+  }
+
+  .mobileElements {
+    padding: 24px 16px 70px;
+  }
+}

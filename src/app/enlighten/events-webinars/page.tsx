@@ -1,12 +1,13 @@
-import React from 'react'
-import EventsWebinars from '@/app/components/EventsWebinars/EventsWebinars'
+import EventsWebinars from "@/app/components/EventsWebinars/EventsWebinars";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function EventsWebinarsPage() {
   return (
-    <React.Fragment>
-        <EventsWebinars/>
-    </React.Fragment>
-  )
+    <FigmaPageCanvas
+      desktop={<EventsWebinars canvas />}
+      mobile={<EventsWebinars />}
+      nodeId="7080:57600"
+      fitCanvasHeight
+    />
+  );
 }
-
-export default page

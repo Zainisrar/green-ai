@@ -1,12 +1,15 @@
-import React from 'react'
-import Articles from '@/app/components/Articles/Articles'
+import Articles from "@/app/components/Articles/Articles";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
-  return (
-    <React.Fragment>
-        <Articles/>
-    </React.Fragment>
-  )
-}
+const page = () => (
+  <FigmaPageCanvas
+    desktop={<Articles canvas />}
+    mobile={<Articles />}
+    nodeId="7080:58112"
+    designHeight={1890}
+    scaleToViewport="width"
+    fitCanvasHeight
+  />
+);
 
-export default page
+export default page;

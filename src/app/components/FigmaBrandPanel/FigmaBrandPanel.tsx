@@ -5,6 +5,7 @@ interface FigmaBrandPanelProps {
   className?: string;
   compactLogo?: boolean;
   fixedCanvasSize?: boolean;
+  variant?: "default" | "flagship";
   showPanel?: boolean;
 }
 
@@ -18,11 +19,12 @@ export default function FigmaBrandPanel({
   className = "",
   compactLogo = false,
   fixedCanvasSize = false,
+  variant = "default",
   showPanel = true,
 }: FigmaBrandPanelProps) {
   return (
     <div
-      className={`${styles.panel} ${fixedCanvasSize ? styles.fixedCanvasPanel : ""} ${className}`.trim()}
+      className={`${styles.panel} ${fixedCanvasSize ? styles.fixedCanvasPanel : ""} ${variant === "flagship" ? styles.flagshipPanel : ""} ${className}`.trim()}
       data-node-id="7077:3753"
     >
       {showPanel ? (

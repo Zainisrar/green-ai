@@ -13,6 +13,10 @@ interface FigmaPageCanvasProps {
   nodeId: string;
   desktopBreakpoint?: number;
   fitCanvasHeight?: boolean;
+  /** Height of the source Figma frame. Most screens are 1920 x 970. */
+  designHeight?: number;
+  /** Long Figma pages should preserve the 1920px design width and scroll. */
+  scaleToViewport?: "contain" | "width";
 }
 
 /** Reusable viewport for GREEN's fixed 1920 x 970 Figma compositions. */
@@ -22,6 +26,8 @@ export default function FigmaPageCanvas({
   nodeId,
   desktopBreakpoint = 1200,
   fitCanvasHeight = false,
+  designHeight = DESIGN_HEIGHT,
+  scaleToViewport = "contain",
 }: FigmaPageCanvasProps) {
   const [viewport, setViewport] = useState({
     width: DESIGN_WIDTH,
@@ -45,16 +51,16 @@ export default function FigmaPageCanvas({
     );
   }
 
-  const scale = Math.min(
-    viewport.width / DESIGN_WIDTH,
-    viewport.height / DESIGN_HEIGHT,
-  );
+  const scale =
+    scaleToViewport === "width"
+      ? viewport.width / DESIGN_WIDTH
+      : Math.min(viewport.width / DESIGN_WIDTH, viewport.height / designHeight);
 
   return (
     <div
       className={styles.shell}
       data-figma-page-node={nodeId}
-      style={fitCanvasHeight ? { height: DESIGN_HEIGHT * scale } : undefined}
+      style={fitCanvasHeight ? { height: designHeight * scale } : undefined}
     >
       <div
         className={styles.canvas}
@@ -62,6 +68,7 @@ export default function FigmaPageCanvas({
         style={{
           top: 0,
           left: (viewport.width - DESIGN_WIDTH * scale) / 2,
+          height: designHeight,
           transform: `scale(${scale})`,
         }}
       >

@@ -34,7 +34,11 @@ const ClientInfoModal = ({
             stroke="currentColor"
             strokeWidth={2.5}
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M18 6L6 18" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 6l12 12M18 6L6 18"
+            />
           </svg>
         </button>
 

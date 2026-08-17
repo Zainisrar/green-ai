@@ -43,13 +43,32 @@ const SystemIntelligence = ({ isOpen, onClose, data }: Props) => {
       {isMobile ? (
         /* Mobile: Card Layout */
         <div className="space-y-4">
-          {(data?.item || [
-            { component: "Monitoring Platforms", technicalNotes: "GRID-INTEL™ or equivalent; real-time I/O, remote diagnostics, API push-pull, OTA upgrades" },
-            { component: "Sensors & Meters", technicalNotes: "CT/VT class 0.5 or better, 3-phase/bi-directional metering, IP65 enclosures" },
-            { component: "IoT Interfaces", technicalNotes: "RS485, Modbus TCP/IP, LoRa/4G fallback; sync with SCADA/BMS platforms" }
-          ]).map((item, index) => (
-            <div key={index} className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-              <h4 className="font-bold text-[#4CAF50] mb-2">{item.component}</h4>
+          {(
+            data?.item || [
+              {
+                component: "Monitoring Platforms",
+                technicalNotes:
+                  "GRID-INTEL™ or equivalent; real-time I/O, remote diagnostics, API push-pull, OTA upgrades",
+              },
+              {
+                component: "Sensors & Meters",
+                technicalNotes:
+                  "CT/VT class 0.5 or better, 3-phase/bi-directional metering, IP65 enclosures",
+              },
+              {
+                component: "IoT Interfaces",
+                technicalNotes:
+                  "RS485, Modbus TCP/IP, LoRa/4G fallback; sync with SCADA/BMS platforms",
+              },
+            ]
+          ).map((item, index) => (
+            <div
+              key={index}
+              className="bg-gray-50 p-4 rounded-lg border border-gray-200"
+            >
+              <h4 className="font-bold text-[#4CAF50] mb-2">
+                {item.component}
+              </h4>
               <p className="text-gray-700 text-sm">{item.technicalNotes}</p>
             </div>
           ))}
@@ -69,11 +88,25 @@ const SystemIntelligence = ({ isOpen, onClose, data }: Props) => {
               </tr>
             </thead>
             <tbody>
-              {(data?.item || [
-                { component: "Monitoring Platforms", technicalNotes: "GRID-INTEL™ or equivalent; real-time I/O, remote diagnostics, API push-pull, OTA upgrades" },
-                { component: "Sensors & Meters", technicalNotes: "CT/VT class 0.5 or better, 3-phase/bi-directional metering, IP65 enclosures" },
-                { component: "IoT Interfaces", technicalNotes: "RS485, Modbus TCP/IP, LoRa/4G fallback; sync with SCADA/BMS platforms" }
-              ]).map((item, index) => (
+              {(
+                data?.item || [
+                  {
+                    component: "Monitoring Platforms",
+                    technicalNotes:
+                      "GRID-INTEL™ or equivalent; real-time I/O, remote diagnostics, API push-pull, OTA upgrades",
+                  },
+                  {
+                    component: "Sensors & Meters",
+                    technicalNotes:
+                      "CT/VT class 0.5 or better, 3-phase/bi-directional metering, IP65 enclosures",
+                  },
+                  {
+                    component: "IoT Interfaces",
+                    technicalNotes:
+                      "RS485, Modbus TCP/IP, LoRa/4G fallback; sync with SCADA/BMS platforms",
+                  },
+                ]
+              ).map((item, index) => (
                 <tr key={index}>
                   <td className="px-6 py-4 font-semibold text-gray-800">
                     {item.component}
@@ -118,16 +151,17 @@ const SystemIntelligence = ({ isOpen, onClose, data }: Props) => {
             /* Desktop Layout */
             <div
               className="bg-white transform  py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-              style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
-                transform:"skewX(-12deg)"
-               }}
+              style={{
+                clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
+                transform: "skewX(-12deg)",
+              }}
             >
               {/* Close Button */}
               <div className="flex justify-end w-full">
                 <button
                   onClick={onClose}
                   style={{
-                    transform:"skewX(12deg)"
+                    transform: "skewX(12deg)",
                   }}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
                 >
@@ -137,10 +171,11 @@ const SystemIntelligence = ({ isOpen, onClose, data }: Props) => {
 
               {/* Modal Content */}
               <div
-              style={{
-                transform:"skewX(6deg)"
-              }}
-              className="transform  max-w-5xl mx-auto">
+                style={{
+                  transform: "skewX(6deg)",
+                }}
+                className="transform  max-w-5xl mx-auto"
+              >
                 {renderContent()}
               </div>
             </div>

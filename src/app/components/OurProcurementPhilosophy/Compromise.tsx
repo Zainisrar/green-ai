@@ -19,13 +19,11 @@ interface WhatWeWontCompromiseData {
 }
 
 interface Props {
-    isOpen: boolean;
-    onClose: () => void;
-    data?: WhatWeWontCompromiseData;
+  isOpen: boolean;
+  onClose: () => void;
+  data?: WhatWeWontCompromiseData;
 }
-const Compromise = (
-    { isOpen, onClose, data }: Props
-) => {
+const Compromise = ({ isOpen, onClose, data }: Props) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -48,20 +46,28 @@ const Compromise = (
       </div>
 
       {/* Main Content */}
-      <div className={`${isMobile ? 'space-y-8' : 'flex items-start space-x-12'}`}>
+      <div
+        className={`${isMobile ? "space-y-8" : "flex items-start space-x-12"}`}
+      >
         {/* Content List */}
         <div className="flex-1">
           <div className="space-y-6">
-            {(data?.keys || [
-              "Unproven manufacturers",
-              "Incomplete warranties or weak after-sales",
-              "Lack of compliance with IEC, ISO, or local grid standards",
-              "High failure rates in humid/tropical stress environments",
-              "Vendor opacity or inconsistent documentation"
-            ]).map((key, index) => (
+            {(
+              data?.keys || [
+                "Unproven manufacturers",
+                "Incomplete warranties or weak after-sales",
+                "Lack of compliance with IEC, ISO, or local grid standards",
+                "High failure rates in humid/tropical stress environments",
+                "Vendor opacity or inconsistent documentation",
+              ]
+            ).map((key, index) => (
               <div key={index} className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
-                  <img src="/images/grid-intel/lighting.png" className='w-10 lg:w-14 -mt-2 lg:-mt-4' alt="lighting" />
+                  <img
+                    src="/images/grid-intel/lighting.png"
+                    className="w-10 lg:w-14 -mt-2 lg:-mt-4"
+                    alt="lighting"
+                  />
                 </div>
                 <p className="text-gray-800 font-medium text-base lg:text-lg">
                   {key}
@@ -74,13 +80,17 @@ const Compromise = (
         {/* Image */}
         <div className="flex-shrink-0">
           <div className="relative">
-            <img 
-              src={data?.img?.src || "/images/our-procurement-philosophy/compromiseDialog.png"}
+            <img
+              src={
+                data?.img?.src ||
+                "/images/our-procurement-philosophy/compromiseDialog.png"
+              }
               alt={data?.img?.alt || "Solar panel field"}
-              className={`${isMobile ? 'w-full max-w-sm mx-auto' : 'w-[500px]'} ${!isMobile && 'mt-10'}`}
+              className={`${isMobile ? "w-full max-w-sm mx-auto" : "w-[500px]"} ${!isMobile && "mt-10"}`}
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
-                target.src = "/images/our-procurement-philosophy/compromiseDialog.png";
+                target.src =
+                  "/images/our-procurement-philosophy/compromiseDialog.png";
               }}
             />
           </div>
@@ -97,7 +107,10 @@ const Compromise = (
               {data.quote.text.split(data.quote.highlighted)[1]}
             </>
           ) : (
-            <>If it can't stand the test of time, it doesn't belong in a <span className="text-[#4CAF50]">GREEN</span> system.</>
+            <>
+              If it can't stand the test of time, it doesn't belong in a{" "}
+              <span className="text-[#4CAF50]">GREEN</span> system.
+            </>
           )}
         </p>
       </div>
@@ -118,6 +131,7 @@ const Compromise = (
               {/* Close Button */}
               <div className="flex justify-end w-full">
                 <button
+                  type="button"
                   onClick={onClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
@@ -134,6 +148,7 @@ const Compromise = (
               {/* Close Button */}
               <div className="flex justify-end w-full">
                 <button
+                  type="button"
                   onClick={onClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
@@ -142,15 +157,13 @@ const Compromise = (
               </div>
 
               {/* Modal Content */}
-              <div className="max-w-5xl mx-auto">
-                {renderContent()}
-              </div>
+              <div className="max-w-5xl mx-auto">{renderContent()}</div>
             </div>
           )}
         </div>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default Compromise
+export default Compromise;

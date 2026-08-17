@@ -1,12 +1,12 @@
-import React from 'react'
-import CommunityImpactLoop from '@/app/components/CommunityImpactLoop/CommunityImpactLoop'
+import React from "react";
+import CommunityImpactLoop from "@/app/components/CommunityImpactLoop/CommunityImpactLoop";
 
 const page = () => {
   return (
     <div>
-        <CommunityImpactLoop/>
+      <CommunityImpactLoop />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

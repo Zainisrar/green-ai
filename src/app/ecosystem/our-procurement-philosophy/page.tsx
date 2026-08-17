@@ -1,12 +1,13 @@
-import React from 'react'
-import OurProcurementPhilosophy from '@/app/components/OurProcurementPhilosophy/OurProcurementPhilosophy'
+import OurProcurementPhilosophy from "@/app/components/OurProcurementPhilosophy/OurProcurementPhilosophy";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function OurProcurementPhilosophyPage() {
   return (
-    <React.Fragment>
-        <OurProcurementPhilosophy/>
-    </React.Fragment>
-  )
+    <FigmaPageCanvas
+      desktop={<OurProcurementPhilosophy canvas />}
+      mobile={<OurProcurementPhilosophy />}
+      nodeId="7080:73710"
+      fitCanvasHeight
+    />
+  );
 }
-
-export default page

@@ -1,307 +1,269 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import SolarGenerationEquipment from "./SolarGenerationEquipment";
-import PowerConversionSystems from "./PowerConversionSystems";
-import EnergyStorageSystems from "./EnergyStorageSystems";
-import SystemIntelligence from "./SystemIntelligence";
-import BalanceofSystem from "./BalanceofSystem";
-import ProcurementNotes from "./ProcurementNotes";
-import SupplyingToGreen from "./Modals/SupplyingToGreen";
-import TopNavigation from "../TopNavigation/TopNavigation";
-import Chatbot from "../Chatbot";
-import { useKeySupplyCategories } from "../../../hooks/useKeySupplyCategories";
 
-const KeySupplyCategories = () => {
-  const { data: apiData, isLoading, error } = useKeySupplyCategories();
+import { useState } from "react";
+import { useKeySupplyCategories } from "@/hooks/useKeySupplyCategories";
+import D6Chatbot from "../D6Chatbot";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import ProductEnquiry from "../Product/Modals/ProductEnquiry";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import BalanceofSystem from "./BalanceofSystem";
+import EnergyStorageSystems from "./EnergyStorageSystems";
+import styles from "./KeySupplyCategories.module.css";
+import PowerConversionSystems from "./PowerConversionSystems";
+import ProcurementNotes from "./ProcurementNotes";
+import SolarGenerationEquipment from "./SolarGenerationEquipment";
+import SystemIntelligence from "./SystemIntelligence";
+
+interface KeySupplyCategoriesProps {
+  canvas?: boolean;
+}
+
+export default function KeySupplyCategories({
+  canvas = false,
+}: KeySupplyCategoriesProps) {
+  const { data: apiData } = useKeySupplyCategories();
   const [isSolarOpen, setIsSolarOpen] = useState(false);
-  const [isSupplyingOpen, setIsSupplyingOpen] = useState(false);
   const [isPowerOpen, setIsPowerOpen] = useState(false);
   const [isEnergyOpen, setIsEnergyOpen] = useState(false);
   const [isSystemOpen, setIsSystemOpen] = useState(false);
   const [isBalanceOpen, setIsBalanceOpen] = useState(false);
   const [isProcurementOpen, setIsProcurementOpen] = useState(false);
+  const [isSupplyingOpen, setIsSupplyingOpen] = useState(false);
 
+  const title = apiData?.mainPage?.title || "KEY SUPPLY CATEGORIES";
+  const subHeadline =
+    apiData?.mainPage?.subHeadline || "What We Source — And Why It Matters.";
+  const description =
+    apiData?.mainPage?.description?.text ||
+    "GREEN procures across a disciplined matrix of technologies and components — each category evaluated for compatibility, field performance, grid resilience, and long-term support.";
 
+  const categories = [
+    {
+      id: "solar",
+      name: "Solar Generation Equipment",
+      className: styles.categoryRow1,
+      onExplore: () => setIsSolarOpen(true),
+    },
+    {
+      id: "power",
+      name: "Power Conversion Systems",
+      className: styles.categoryRow2,
+      onExplore: () => setIsPowerOpen(true),
+    },
+    {
+      id: "storage",
+      name: "Energy Storage Systems",
+      className: styles.categoryRow3,
+      onExplore: () => setIsEnergyOpen(true),
+    },
+    {
+      id: "intelligence",
+      name: "System Intelligence & Data",
+      className: styles.categoryRow4,
+      onExplore: () => setIsSystemOpen(true),
+    },
+    {
+      id: "bos",
+      name: "Balance of System (BoS)",
+      className: styles.categoryRow5,
+      onExplore: () => setIsBalanceOpen(true),
+    },
+    {
+      id: "procurement",
+      name: "Supply Chain & Procurement Notes",
+      className: styles.categoryRow6,
+      onExplore: () => setIsProcurementOpen(true),
+    },
+  ];
 
-  if (error) {
-    return (
-      <div className="">
-        <TopNavigation />
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="text-xl text-red-600">Error loading key supply categories. Please try again later.</div>
-        </div>
-      </div>
-    );
-  }
-
-  const openSolarModal = () => {
-    setIsSolarOpen(true);
-  };
-  const closeSolarModal = () => {
-    setIsSolarOpen(false);
-  };
-
-  const closePowerModal = () => {
-    setIsPowerOpen(false);
-  };
-  const openPowerModal = () => {
-    setIsPowerOpen(true);
-  };
-
-  const closeEnergyModal = () => {
-    setIsEnergyOpen(false);
-  };
-  const openEnergyModal = () => {
-    setIsEnergyOpen(true);
-  };
-  const closeSystemModal = () => {
-    setIsSystemOpen(false);
-  };
-  const openSystemModal = () => {
-    setIsSystemOpen(true);
-  };
-  const closeBalanceModal = () => {
-    setIsBalanceOpen(false);
-  };
-  const openBalanceModal = () => {
-    setIsBalanceOpen(true);
-  };
-  const closeProcurementModal = () => {
-    setIsProcurementOpen(false);
-  };
-  const openProcurementModal = () => {
-    setIsProcurementOpen(true);
-  };
   return (
-    <React.Fragment>
-        <div className="absolute top-0 right-0 ">
-          <img src="/images/key-supplier-categories/mainImg.png" className="h-[132vh] " alt="bg" />
-        </div>
-      <div className="    ">
-        <TopNavigation />
-        <div className="flex h-full">
-          {/* Left Side  */}
-          <div className="w-1/6 flex items-center justify-center">
-            <div className="fixed top-1/4 left-4 lg:left-14">
-              <img
-                src="/images/key-supplier-categories/key-supply-categories.png"
-                alt="key supply categories"
-                className="w-6 lg:w-8"
-              />
-            </div>
-          </div>
+    <main
+      className={`${styles.page} ${canvas ? styles.canvasPage : ""}`}
+      data-node-id="7077:27873"
+    >
+      <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
-          {/* Main Content Area */}
-          <div className=" pt-8 ">
-            {/* Main Title */}
-            <div className="lg:px-8 mb-8 pl-10">
-              <h1 className="lg:text-3xl text-2xl font-black text-gray-800 mb-4">
-                {apiData?.mainPage?.title?.toUpperCase() || "KEY SUPPLY CATEGORIES"}
-              </h1>
-              <h2 className="text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-4">
-                {apiData?.mainPage?.subHeadline || "What We Source — And Why It Matters."}
-              </h2>
-              <p className="text-gray-600 lg:text-lg mb-8">
-                {apiData?.mainPage?.description?.highlighted ? (
-                  <>
-                    {apiData.mainPage.description.text.split(apiData.mainPage.description.highlighted)[0]}
-                    <span className="text-[#23B14D] font-semibold">{apiData.mainPage.description.highlighted}</span>
-                    {apiData.mainPage.description.text.split(apiData.mainPage.description.highlighted)[1]}
-                  </>
-                ) : (
-                  <>
-                    <span className="text-[#23B14D] font-semibold">GREEN</span>{" "}
-                    procures across a disciplined matrix of technologies and
-                    components — each category evaluated for compatibility, field
-                    performance, grid resilience, and long-term support.
-                  </>
-                )}
-              </p>
-            </div>
+      {/* Vertical Side Title */}
+      <img
+        src="/images/key-supplier-categories/figma-vertical-title.svg"
+        alt="Key Supply Categories"
+        className={styles.verticalTitle}
+      />
 
-            {/* Supply Categories List */}
-            <div className="flex relative">
-              <div className="lg:px-8 lg:w-7/12 space-y-4  mb-12">
-                {/* Dynamic Modal Categories */}
-                {apiData?.modals?.map((modal, index) => {
-                  const modalHandlers = [
-                    openSolarModal,
-                    openPowerModal,
-                    openEnergyModal,
-                    openSystemModal,
-                    openBalanceModal
-                  ];
-                  
-                  return (
-                    <div key={index} className="flex items-center justify-between border-b border-[#23B14D] pb-4">
-                      <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
-                        {modal.title}
-                      </h3>
-                      <button onClick={modalHandlers[index]} className="cursor-pointer">
-                        <img
-                          src="/images/client-partnerships/explore.png"
-                          alt="explore"
-                        />
-                      </button>
-                    </div>
-                  );
-                })}
-
-                {/* Supply Chain & Procurement Notes - Static */}
-                <div className="flex items-center justify-between border-b border-[#23B14D] pb-4">
-                  <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
-                    Supply Chain & Procurement Notes
-                  </h3>
-                  <button
-                    onClick={openProcurementModal}
-                    className="cursor-pointer"
-                  >
-                    <img
-                      src="/images/client-partnerships/explore.png"
-                      alt="explore"
-                    />
-                  </button>
-                </div>
-              </div>
-              <div className="lg:absolute lg:block hidden right-0 bottom-0">
-                <div className=" flex justify-end my-10 cursor-pointer">
-                  <button
-                    type="button"
-                    onClick={() => setIsSupplyingOpen(true)}
-                    className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
-                  >
-                    <img
-                      src="/images/key-supplier-categories/supplying-to-green.png"
-                      alt={apiData?.mainPage?.cta?.[0]?.text || "supplying to green"}
-                    />
-                  </button>
-                </div>
-                <div className=" flex justify-end my-10 lg:mb-32 cursor-pointer">
-                  <a 
-                    href={apiData?.mainPage?.cta?.[1]?.href || "#"}
-                    className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
-                  >
-                    <img
-                      src="/images/key-supplier-categories/full-supply-category-technical-pack.png"
-                      alt={apiData?.mainPage?.cta?.[1]?.text || "full supply category technical pack"}
-                    />
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom Quote */}
-            <div className="flex justify-center  ">
-              <div className="mb-8 flex relative space-x-4">
-                <div className="absolute -left-16 top-2">
-                  <img
-                    src="/images/key-supplier-categories/shape.png"
-                    alt="shape"
-                  />
-                </div>
-                <div>
-                  {apiData?.mainPage?.quote?.highlighted ? (
-                    <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
-                      {apiData.mainPage.quote.text.split('\n').map((line, index) => (
-                        <span key={index}>
-                          {line.includes(apiData.mainPage.quote.highlighted) ? (
-                            <>
-                              {line.split(apiData.mainPage.quote.highlighted)[0]}
-                              <span className="text-[#23B14D]">{apiData.mainPage.quote.highlighted}</span>
-                              {line.split(apiData.mainPage.quote.highlighted)[1]}
-                            </>
-                          ) : (
-                            line
-                          )}
-                          {index === 0 && <br />}
-                        </span>
-                      ))}
-                    </h3>
-                  ) : (
-                    <>
-                      <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
-                        We Don't Tell Stories To Impress.
-                      </h3>
-                      <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
-                        We Share Stories That Prove What{" "}
-                        <span className="text-[#23B14D]">Energy</span> Can Do.
-                      </h3>
-                    </>
-                  )}
-                </div>
-                <div className="-mt-4 -ml-10">
-                  <img
-                    src="/images/key-supplier-categories/shape2.png"
-                    alt="shape"
-                  />
-                </div>
-              </div>
-            </div> 
-              <div className=" lg:hidden space-y-8  my-4 mb-40">
-                <div className=" flex justify-end my-10 cursor-pointer">
-                  <button
-                    type="button"
-                    onClick={() => setIsSupplyingOpen(true)}
-                    className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
-                  >
-                    <img
-                      src="/images/key-supplier-categories/supplying-to-green.png"
-                      alt={apiData?.mainPage?.cta?.[0]?.text || "supplying to green"}
-                    />
-                  </button>
-                </div>
-                <div className=" flex justify-end my-10 lg:mb-32 cursor-pointer">
-                  <a 
-                    href={apiData?.mainPage?.cta?.[1]?.href || "#"}
-                    className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
-                  >
-                    <img
-                      src="/images/key-supplier-categories/full-supply-category-technical-pack.png"
-                      alt={apiData?.mainPage?.cta?.[1]?.text || "full supply category technical pack"}
-                    />
-                  </a>
-                </div>
-              </div>
-          </div>
-        </div>
-
-        <Chatbot />
+      {/* Top Header Content */}
+      <div className={styles.topSection}>
+        <h1 className={styles.mainTitle}>{title}</h1>
+        <h2>{subHeadline}</h2>
+        <p>{description}</p>
       </div>
+
+      {/* 6 Category Rows */}
+      <section
+        className={styles.categoriesContainer}
+        aria-label="Key Supply Categories"
+      >
+        {categories.map((cat) => (
+          <article
+            key={cat.id}
+            className={`${styles.categoryRow} ${cat.className}`}
+          >
+            <h3 className={styles.categoryName}>{cat.name}</h3>
+            <FigmaAngledCta
+              className={styles.categoryCta}
+              onClick={cat.onExplore}
+            >
+              Explore
+            </FigmaAngledCta>
+          </article>
+        ))}
+
+        {/* Divider lines between categories */}
+        <div
+          className={`${styles.dividerLine} ${styles.divider1}`}
+          aria-hidden="true"
+        />
+        <div
+          className={`${styles.dividerLine} ${styles.divider2}`}
+          aria-hidden="true"
+        />
+        <div
+          className={`${styles.dividerLine} ${styles.divider3}`}
+          aria-hidden="true"
+        />
+        <div
+          className={`${styles.dividerLine} ${styles.divider4}`}
+          aria-hidden="true"
+        />
+        <div
+          className={`${styles.dividerLine} ${styles.divider5}`}
+          aria-hidden="true"
+        />
+      </section>
+
+      {/* Left Bottom Quote Block */}
+      <div className={styles.leftQuoteBlock}>
+        <img
+          src="/images/handbook/figma-quote-left.svg"
+          alt=""
+          className={styles.quoteShapeLeft}
+          aria-hidden="true"
+        />
+        <p className={styles.quoteText}>
+          We don’t tell stories to impress.
+          <br />
+          We share stories that prove what energy can do.
+        </p>
+        <img
+          src="/images/handbook/figma-quote-right.svg"
+          alt=""
+          className={styles.quoteShapeRight}
+          aria-hidden="true"
+        />
+      </div>
+
+      {/* Desktop Bottom Right CTAs */}
+      <div className={styles.desktopCtas}>
+        <FigmaAngledCta
+          className={styles.supplyingCta}
+          onClick={() => setIsSupplyingOpen(true)}
+        >
+          Supplying to GREEN?
+        </FigmaAngledCta>
+        <FigmaAngledCta
+          className={styles.downloadCta}
+          icon="download"
+          href="/supply-partners/full-supply-category-technical-pack.pdf"
+        >
+          Full Supply Category Technical Pack (PDF)
+        </FigmaAngledCta>
+      </div>
+
+      {/* Mobile Flow (< 1200px) */}
+      <div className={styles.mobileElements}>
+        <div className={styles.mobileQuoteBox}>
+          <p>
+            “We don’t tell stories to impress. We share stories that prove what
+            energy can do.”
+          </p>
+        </div>
+        <div className={styles.mobileCtas}>
+          <FigmaAngledCta onClick={() => setIsSupplyingOpen(true)}>
+            Supplying to GREEN?
+          </FigmaAngledCta>
+          <FigmaAngledCta
+            icon="download"
+            href="/supply-partners/full-supply-category-technical-pack.pdf"
+          >
+            Full Supply Category Technical Pack (PDF)
+          </FigmaAngledCta>
+        </div>
+      </div>
+
+      {/* Chatbot */}
+      {canvas ? (
+        <D6Chatbot
+          canvasAnchored
+          triggerVariant="figmaCanvas"
+          triggerStyle={{
+            top: 853,
+            right: "auto",
+            bottom: "auto",
+            left: 1499,
+            width: 418,
+          }}
+        />
+      ) : (
+        <D6Chatbot />
+      )}
+
+      {/* Category Modals */}
       <SolarGenerationEquipment
         isOpen={isSolarOpen}
-        onClose={closeSolarModal}
+        onClose={() => setIsSolarOpen(false)}
         data={apiData?.modals?.[0]}
       />
-      <PowerConversionSystems 
-        isOpen={isPowerOpen} 
-        onClose={closePowerModal}
+      <PowerConversionSystems
+        isOpen={isPowerOpen}
+        onClose={() => setIsPowerOpen(false)}
         data={apiData?.modals?.[1]}
       />
-      <EnergyStorageSystems 
-        isOpen={isEnergyOpen} 
-        onClose={closeEnergyModal}
+      <EnergyStorageSystems
+        isOpen={isEnergyOpen}
+        onClose={() => setIsEnergyOpen(false)}
         data={apiData?.modals?.[2]}
       />
-      <SystemIntelligence 
-        isOpen={isSystemOpen} 
-        onClose={closeSystemModal}
+      <SystemIntelligence
+        isOpen={isSystemOpen}
+        onClose={() => setIsSystemOpen(false)}
         data={apiData?.modals?.[3]}
       />
-      <BalanceofSystem 
-        isOpen={isBalanceOpen} 
-        onClose={closeBalanceModal}
+      <BalanceofSystem
+        isOpen={isBalanceOpen}
+        onClose={() => setIsBalanceOpen(false)}
         data={apiData?.modals?.[4]}
       />
       <ProcurementNotes
         isOpen={isProcurementOpen}
-        onClose={closeProcurementModal}
+        onClose={() => setIsProcurementOpen(false)}
       />
-      <SupplyingToGreen
+
+      {/* Supplier Inquiry / Application Modal */}
+      <ProductEnquiry
         isOpen={isSupplyingOpen}
         onClose={() => setIsSupplyingOpen(false)}
+        titlePrefix="SUPPLYING TO"
+        titleAccent="GREEN"
+        interestLabel="WHAT CATEGORY DO YOU SUPPLY?"
+        interestOptions={[
+          "Solar Generation Equipment",
+          "Power Conversion Systems",
+          "Energy Storage Systems",
+          "System Intelligence & Data",
+          "Balance of System (BoS)",
+          "Supply Chain & BOS Hardware",
+        ]}
+        defaultInterest="Solar Generation Equipment"
       />
-    </React.Fragment>
+    </main>
   );
-};
-
-export default KeySupplyCategories;
+}

@@ -1,12 +1,12 @@
-import React from 'react'
-import EsgMatters from '@/app/components/EsgMatters/EsgMatters'
+import React from "react";
+import EsgMatters from "@/app/components/EsgMatters/EsgMatters";
 
 const page = () => {
   return (
     <div>
-        <EsgMatters/>
+      <EsgMatters />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -44,6 +44,7 @@ interface SiteHeaderProps {
   compactLogo?: boolean;
   panel?: "full" | "logoOnly";
   layout?: "viewport" | "figmaCanvas" | "productCanvas";
+  figmaPanelVariant?: "default" | "flagship";
   highlightActive?: boolean;
 }
 
@@ -73,6 +74,7 @@ export default function SiteHeader({
   compactLogo = false,
   panel = "full",
   layout = "viewport",
+  figmaPanelVariant = "default",
   highlightActive = true,
 }: SiteHeaderProps) {
   const pathname = usePathname();
@@ -112,10 +114,13 @@ export default function SiteHeader({
       {brand === "green" ? (
         <FigmaBrandPanel
           className={
-            layout !== "viewport" ? styles.canvasBrandPanel : styles.brandPanel
+            layout !== "viewport"
+              ? `${styles.canvasBrandPanel} ${figmaPanelVariant === "flagship" ? styles.flagshipCanvasBrandPanel : ""}`
+              : styles.brandPanel
           }
           compactLogo={compactLogo}
           fixedCanvasSize={layout === "figmaCanvas"}
+          variant={figmaPanelVariant}
           showPanel={panel === "full"}
         />
       ) : (

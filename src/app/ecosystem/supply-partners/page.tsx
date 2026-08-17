@@ -1,12 +1,12 @@
-import React from 'react'
-import SupplyPartners from '@/app/components/SupplyParnters/SupplyPartners'
+import React from "react";
+import SupplyPartners from "@/app/components/SupplyParnters/SupplyPartners";
 
 const page = () => {
   return (
     <React.Fragment>
-        <SupplyPartners />
+      <SupplyPartners />
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -1,12 +1,13 @@
-import React from 'react'
-import ThoughtsLeadership from '@/app/components/ThoughtsLeadership/ThoughtsLeadership'
+import ThoughtsLeadership from "@/app/components/ThoughtsLeadership/ThoughtsLeadership";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function ThoughtsLeadershipPage() {
   return (
-    <React.Fragment>
-        <ThoughtsLeadership/>
-    </React.Fragment>
-  )
+    <FigmaPageCanvas
+      desktop={<ThoughtsLeadership canvas />}
+      mobile={<ThoughtsLeadership />}
+      nodeId="7077:15063"
+      fitCanvasHeight
+    />
+  );
 }
-
-export default page

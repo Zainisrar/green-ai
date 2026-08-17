@@ -18,15 +18,11 @@ interface StrategicVendorRelationshipsData {
 }
 
 interface Props {
-    isOpen: boolean;
-    onClose: () => void;
-    data?: StrategicVendorRelationshipsData;
+  isOpen: boolean;
+  onClose: () => void;
+  data?: StrategicVendorRelationshipsData;
 }
-const Vendor = (
-    {
-        isOpen, onClose, data
-    }: Props
-) => {
+const Vendor = ({ isOpen, onClose, data }: Props) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -49,17 +45,31 @@ const Vendor = (
       </div>
 
       {/* Main Content */}
-      <div className={`${isMobile ? 'space-y-8' : 'flex items-start space-x-12'}`}>
+      <div
+        className={`${isMobile ? "space-y-8" : "flex items-start space-x-12"}`}
+      >
         {/* Content List */}
         <div className="flex-1">
           <div className="space-y-6 lg:space-y-8">
-            {(data?.keys || [
-              { text: "We don't treat vendors as vendors. We treat them as partners in performance.", highlighted: "partners in performance." },
-              { text: "If you're a manufacturer or supplier who believes in quality, transparency, and shared mission, we welcome your collaboration.", highlighted: "quality transparency, and shared mission" }
-            ]).map((key, index) => (
+            {(
+              data?.keys || [
+                {
+                  text: "We don't treat vendors as vendors. We treat them as partners in performance.",
+                  highlighted: "partners in performance.",
+                },
+                {
+                  text: "If you're a manufacturer or supplier who believes in quality, transparency, and shared mission, we welcome your collaboration.",
+                  highlighted: "quality transparency, and shared mission",
+                },
+              ]
+            ).map((key, index) => (
               <div key={index} className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
-                  <img src="/images/grid-intel/lighting.png" className='w-10 lg:w-14 -mt-2 lg:-mt-4' alt="lighting" />
+                  <img
+                    src="/images/grid-intel/lighting.png"
+                    className="w-10 lg:w-14 -mt-2 lg:-mt-4"
+                    alt="lighting"
+                  />
                 </div>
                 <div>
                   <p className="text-gray-800 font-medium text-base lg:text-lg">
@@ -82,10 +92,13 @@ const Vendor = (
         {/* Image */}
         <div className="flex-shrink-0">
           <div className="relative">
-            <img 
-              src={data?.img?.src || "/images/our-procurement-philosophy/handshake.png"}
+            <img
+              src={
+                data?.img?.src ||
+                "/images/our-procurement-philosophy/handshake.png"
+              }
               alt={data?.img?.alt || "Business handshake partnership"}
-              className={`${isMobile ? 'w-full max-w-sm mx-auto' : 'w-[420px]'}`}
+              className={`${isMobile ? "w-full max-w-sm mx-auto" : "w-[420px]"}`}
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.src = "/images/our-procurement-philosophy/handshake.png";
@@ -118,6 +131,7 @@ const Vendor = (
               {/* Close Button */}
               <div className="flex justify-end w-full">
                 <button
+                  type="button"
                   onClick={onClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
@@ -134,6 +148,7 @@ const Vendor = (
               {/* Close Button */}
               <div className="flex justify-end w-full">
                 <button
+                  type="button"
                   onClick={onClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
@@ -142,15 +157,13 @@ const Vendor = (
               </div>
 
               {/* Modal Content */}
-              <div className="max-w-5xl mx-auto">
-                {renderContent()}
-              </div>
+              <div className="max-w-5xl mx-auto">{renderContent()}</div>
             </div>
           )}
         </div>
       </div>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default Vendor
+export default Vendor;

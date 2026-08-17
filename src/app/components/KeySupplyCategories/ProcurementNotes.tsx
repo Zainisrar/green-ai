@@ -21,20 +21,24 @@ const ProcurementNotes = ({ isOpen, onClose }: Props) => {
   const procurementNotes = [
     {
       title: "Prequalified Vendor Requirement:",
-      description: "All categories require documentation of IEC/UL certification, product test reports, and after-sales service presence in APAC or Pacific."
+      description:
+        "All categories require documentation of IEC/UL certification, product test reports, and after-sales service presence in APAC or Pacific.",
     },
     {
       title: "Lead Time Sensitivity:",
-      description: "All critical components tracked in GREEN's ERP for staggered delivery schedules and JIT staging."
+      description:
+        "All critical components tracked in GREEN's ERP for staggered delivery schedules and JIT staging.",
     },
     {
       title: "Sustainability Factor:",
-      description: "Preference given to recyclable or low-impact manufacturing processes."
+      description:
+        "Preference given to recyclable or low-impact manufacturing processes.",
     },
     {
       title: "Warranty Requirements:",
-      description: "Minimum 5 years for electronics, 10 years for structural/solar, 3 years for BoS."
-    }
+      description:
+        "Minimum 5 years for electronics, 10 years for structural/solar, 3 years for BoS.",
+    },
   ];
 
   const renderContent = () => (
@@ -48,9 +52,12 @@ const ProcurementNotes = ({ isOpen, onClose }: Props) => {
       </div>
 
       {/* Procurement Notes List */}
-      <div className={`${isMobile ? 'space-y-4' : 'space-y-6'}`}>
+      <div className={`${isMobile ? "space-y-4" : "space-y-6"}`}>
         {procurementNotes.map((note, index) => (
-          <div key={index} className={`${isMobile ? 'bg-gray-50 p-4 rounded-lg border border-gray-200' : 'flex items-start gap-4'}`}>
+          <div
+            key={index}
+            className={`${isMobile ? "bg-gray-50 p-4 rounded-lg border border-gray-200" : "flex items-start gap-4"}`}
+          >
             {!isMobile && (
               <div className="flex-shrink-0 mt-1">
                 <img
@@ -60,11 +67,15 @@ const ProcurementNotes = ({ isOpen, onClose }: Props) => {
                 />
               </div>
             )}
-            <div className={isMobile ? '' : 'flex-1'}>
-              <span className={`font-bold text-gray-800 ${isMobile ? 'block mb-2' : ''}`}>
+            <div className={isMobile ? "" : "flex-1"}>
+              <span
+                className={`font-bold text-gray-800 ${isMobile ? "block mb-2" : ""}`}
+              >
                 {note.title}
               </span>
-              <span className={`text-gray-700 text-sm lg:text-base ${isMobile ? 'block' : 'ml-2'}`}>
+              <span
+                className={`text-gray-700 text-sm lg:text-base ${isMobile ? "block" : "ml-2"}`}
+              >
                 {note.description}
               </span>
             </div>
@@ -102,16 +113,17 @@ const ProcurementNotes = ({ isOpen, onClose }: Props) => {
             /* Desktop Layout */
             <div
               className="bg-white transform py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-              style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
-                transform:"skewX(-12deg)"
-               }}
+              style={{
+                clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
+                transform: "skewX(-12deg)",
+              }}
             >
               {/* Close Button */}
               <div className="flex justify-end w-full">
                 <button
                   onClick={onClose}
                   style={{
-                    transform:"skewX(12deg)"
+                    transform: "skewX(12deg)",
                   }}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
                 >
@@ -121,10 +133,11 @@ const ProcurementNotes = ({ isOpen, onClose }: Props) => {
 
               {/* Modal Content */}
               <div
-               style={{
-                transform:"skewX(6deg)"
-               }}
-              className="transform  max-w-5xl mx-auto">
+                style={{
+                  transform: "skewX(6deg)",
+                }}
+                className="transform  max-w-5xl mx-auto"
+              >
                 {renderContent()}
               </div>
             </div>
