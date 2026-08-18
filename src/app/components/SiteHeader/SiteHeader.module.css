@@ -1,3 +1,4 @@
+/* Shared header: the Products Figma canvas keeps its product category stack at left and the global navigation in the source header lane. */
 .header {
   --site-header-height: 112px;
   position: fixed;
@@ -92,6 +93,11 @@
 
 .navigation .active {
   font-weight: 600;
+}
+
+.neutralNavigation .navigation a {
+  color: #202020;
+  font-weight: 500;
 }
 
 .menuButton {
@@ -203,7 +209,7 @@
 .productCanvasHeader .navigation {
   position: absolute;
   top: 47px;
-  left: 373px;
+  left: 1076px;
   margin: 0;
   gap: 30px;
   font-size: 20px;

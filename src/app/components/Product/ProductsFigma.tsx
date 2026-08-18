@@ -1,5 +1,6 @@
 "use client";
 
+/** Figma Products canvas: product category marks are intentionally static; only the product gallery itself is interactive. */
 import { useEffect, useState } from "react";
 import { useProducts } from "../../../hooks/useProducts";
 import D6Chatbot from "../D6Chatbot";
@@ -145,12 +146,12 @@ export default function ProductsFigma() {
         canvasAnchored
         triggerVariant="figmaCanvas"
         triggerStyle={{
-            top: 899,
-            right: "auto",
-            bottom: "auto",
-            left: 1498,
-            width: 418,
-          }}
+          top: 899,
+          right: "auto",
+          bottom: "auto",
+          left: 1498,
+          width: 418,
+        }}
       />
     </main>
   );

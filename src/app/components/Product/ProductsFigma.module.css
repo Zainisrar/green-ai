@@ -1,3 +1,4 @@
+/* Figma Products canvas: the authored product-category stack is a static visual layer. */
 .desktop {
   position: relative;
   width: 1920px;
@@ -9,12 +10,14 @@
 }
 .background {
   position: absolute;
+  z-index: 0;
   inset: 0;
   width: 1920px;
   height: 970px;
 }
 .pageTitle {
   position: absolute;
+  z-index: 2;
   top: 82px;
   left: 286px;
   margin: 0;
@@ -25,6 +28,7 @@
 }
 .verticalTitle {
   position: absolute;
+  z-index: 2;
   top: 420px;
   left: 50px;
   width: 72px;
@@ -32,6 +36,7 @@
 }
 .gallery {
   position: absolute;
+  z-index: 2;
   inset: 0;
 }
 .hero {
@@ -103,6 +108,7 @@
 }
 .story {
   position: absolute;
+  z-index: 2;
   top: 178px;
   left: 1057px;
   width: 815px;
@@ -138,6 +144,7 @@
 }
 .specifications {
   position: absolute;
+  z-index: 2;
   top: 739px;
   left: 891px;
   width: 1002px;

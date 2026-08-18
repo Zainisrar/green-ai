@@ -1,12 +1,6 @@
-import React from 'react'
-import Services from '../components/Energy/Services'
+import { redirect } from "next/navigation";
 
-const page = () => {
-  return (
-    <div>
-      <Services />
-    </div>
-  )
+/** The primary Energy entry point is the restored Engineering/EPCM service page. */
+export default function EnergyPage() {
+  redirect("/engineering/solar-epcm-services");
 }
-
-export default page

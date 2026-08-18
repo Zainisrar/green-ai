@@ -1,5 +1,6 @@
 "use client";
 
+/** Shared brand registry for Figma canvases; product-canvas marks are rendered by their page source layers. */
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -35,6 +36,18 @@ const headerBrands = {
     width: 176,
     height: 70,
   },
+  empawa: {
+    src: "/images/product/green-empawa.png",
+    alt: "GREEN Em’Pawa",
+    width: 230,
+    height: 85,
+  },
+  sunsmart: {
+    src: "/images/product/green-sunsmart.png",
+    alt: "GREEN SunSmart",
+    width: 226,
+    height: 77,
+  },
 } as const;
 
 interface SiteHeaderProps {
@@ -46,6 +59,7 @@ interface SiteHeaderProps {
   layout?: "viewport" | "figmaCanvas" | "productCanvas";
   figmaPanelVariant?: "default" | "flagship";
   highlightActive?: boolean;
+  neutralNavigation?: boolean;
 }
 
 const isItemActive = (pathname: string, label: string) => {
@@ -76,6 +90,7 @@ export default function SiteHeader({
   layout = "viewport",
   figmaPanelVariant = "default",
   highlightActive = true,
+  neutralNavigation = false,
 }: SiteHeaderProps) {
   const pathname = usePathname();
   const headerBrand = headerBrands[brand];
@@ -107,7 +122,7 @@ export default function SiteHeader({
 
   return (
     <header
-      className={`${styles.header} ${layout === "figmaCanvas" ? styles.canvasHeader : ""} ${layout === "productCanvas" ? styles.productCanvasHeader : ""} ${isScrolled ? styles.scrolled : ""}`}
+      className={`${styles.header} ${layout === "figmaCanvas" ? styles.canvasHeader : ""} ${layout === "productCanvas" ? styles.productCanvasHeader : ""} ${neutralNavigation ? styles.neutralNavigation : ""} ${isScrolled ? styles.scrolled : ""}`}
       data-site-header
       data-node-id={layout !== "viewport" ? "7077:3756" : undefined}
     >
@@ -178,11 +193,11 @@ export default function SiteHeader({
           aria-label="Open navigation menu"
           data-node-id="I7077:3756;7077:14065"
         >
-          <img
+          <Image
             src="/images/shared/figma-brand-panel/bolt.png"
             alt=""
-            width="85"
-            height="85"
+            width={85}
+            height={85}
           />
         </button>
       ) : null}

@@ -73,12 +73,10 @@ export default function EpcmServices() {
   const [activePhase, setActivePhase] = useState(0);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const selectedPhase = phases[activePhase];
-
   return (
     <main className={styles.page}>
       <div className={styles.background} aria-hidden="true" />
       <SiteHeader compactLogo panel="logoOnly" />
-
       <Image
         className={styles.verticalTitle}
         src="/images/service/services.svg"
@@ -87,7 +85,6 @@ export default function EpcmServices() {
         height={507}
         priority
       />
-
       <section
         className={styles.processFlow}
         aria-label="EPCM delivery process"
@@ -116,26 +113,22 @@ export default function EpcmServices() {
           </div>
         ))}
       </section>
-
       <section className={styles.detail} aria-live="polite">
         <h1>{selectedPhase.name}</h1>
         {selectedPhase.detail.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
       </section>
-
       <section className={styles.heading} aria-label="EPCM">
         <h2>EPCM</h2>
         <p>Integrated Renewable Energy Transformation</p>
       </section>
-
       <section className={styles.servicesPanel} aria-labelledby="our-services">
         <div className={styles.servicesPanelContent}>
           <h2 id="our-services">Our Services</h2>
           <div className={styles.serviceOptions}>
             {phases.map((phase, index) => {
               const isActive = activePhase === index;
-
               return (
                 <button
                   className={isActive ? styles.selectedService : undefined}
@@ -151,7 +144,6 @@ export default function EpcmServices() {
           </div>
         </div>
       </section>
-
       <button
         className={styles.enquiryButton}
         onClick={() => setIsEnquiryOpen(true)}
@@ -164,7 +156,6 @@ export default function EpcmServices() {
           height={52}
         />
       </button>
-
       <ProductEnquiry
         defaultInterest={selectedPhase.name}
         interestLabel="SERVICE OF INTEREST"
@@ -174,7 +165,6 @@ export default function EpcmServices() {
         titleAccent="ENQUIRY"
         titlePrefix="EPCM"
       />
-
       <div className={styles.chat}>
         <D6Chatbot triggerClassName={styles.chatTrigger} />
       </div>
