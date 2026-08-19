@@ -23,6 +23,21 @@ const result = await page.evaluate(() => {
     quoteText: pick('[class*="canvasQuote"] p'),
     cta1: pick('[class*="canvasCtas"] > :first-child'),
     cta2: pick('[class*="canvasCtas"] > :last-child'),
+    dayQuote: pick('[class*="canvasDayQuote"]'),
+    dayQuoteText: pick('[class*="canvasDayQuote"] p'),
+    rows: Array.from(document.querySelectorAll('[class*="canvasRow_"]')).map((node) => {
+      const r = node.getBoundingClientRect();
+      const label = node.querySelector('h3');
+      const description = node.querySelector('p');
+      const cta = node.querySelector('a,button');
+      const rect = (element) => {
+        if (!element) return null;
+        const bounds = element.getBoundingClientRect();
+        const styles = getComputedStyle(element);
+        return { x: Math.round(bounds.x), y: Math.round(bounds.y), width: Math.round(bounds.width), height: Math.round(bounds.height), marginLeft: styles.marginLeft, marginRight: styles.marginRight, paddingLeft: styles.paddingLeft, paddingRight: styles.paddingRight, text: (element.textContent || '').trim() };
+      };
+      return { row: { x: Math.round(r.x), y: Math.round(r.y), width: Math.round(r.width), height: Math.round(r.height), gridTemplateColumns: getComputedStyle(node).gridTemplateColumns }, label: rect(label), description: rect(description), cta: rect(cta) };
+    }),
     bodyText: (document.body.innerText || '').slice(0, 1200),
   };
 });

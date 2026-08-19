@@ -83,6 +83,12 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
   const data = teamGreenData?.data ?? FALLBACK_DATA;
   const quoteText = data.mainPage.quote2?.text || "Team GREEN doesn't clock in. We show up — because lives depend on it.";
   const canvasQuoteText = quoteText.startsWith("“") ? quoteText : `“${quoteText}”`;
+  const canvasRows = [
+    { label: "Who We Are", description: "We don't just work on infrastructure.\nWe work on impact.”", onClick: () => setIsWhoWeAreOpen(true) },
+    { label: "Our Leadership Philosophy", description: "Our leadership is PNG-rooted and\nglobally aligned", onClick: () => setIsOurLeadershipPhilosophyOpen(true) },
+    { label: "Meet the Team", description: "Team GREEN doesn't clock in. We show up", onClick: () => setIsMeettheTeamOpen(true) },
+    { label: "Our Culture in Action", description: "it's my way to shape the future of PNG", onClick: () => setIsOurCultureinActionOpen(true) },
+  ];
 
   if (canvas) {
     return (
@@ -97,12 +103,26 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
           <h2>{data.mainPage.subHeadline}</h2>
           <p>{data.mainPage.description.text}</p>
         </section>
+        <div className={styles.canvasRows}>
+          {canvasRows.map((row, index) => (
+            <div className={`${styles.canvasRow} ${styles[`canvasRow${index + 1}`]}`} key={row.label}>
+              <h3>{row.label}</h3>
+              <p>{row.description}</p>
+              <FigmaAngledCta className={styles.canvasExploreCta} onClick={row.onClick}>Explore</FigmaAngledCta>
+            </div>
+          ))}
+        </div>
+        <div className={styles.canvasDayQuote}>
+          <img src="/images/handbook/shape.png" alt="" aria-hidden="true" />
+          <p>“A Day with Team <span>GREEN</span></p>
+          <img src="/images/handbook/shape2.png" alt="" aria-hidden="true" />
+        </div>
         <div className={styles.canvasQuote}>
           <p>{canvasQuoteText}</p>
         </div>
         <div className={styles.canvasCtas}>
           <FigmaAngledCta className={styles.canvasWorkCta} onClick={() => setIsWorkWithUsOpen(true)}>{data.mainPage.cta[0]?.text || "Work With Us"}</FigmaAngledCta>
-          <FigmaAngledCta className={styles.canvasBriefCta} href={data.mainPage.cta[1]?.href || "/supply-partners/team-green-brief.pdf"} icon="download">{data.mainPage.cta[1]?.text || "GREEN Team Brief"}</FigmaAngledCta>
+          <FigmaAngledCta className={styles.canvasBriefCta} href={data.mainPage.cta[1]?.href || "/supply-partners/team-green-brief.pdf"} icon="download">GREEN People &amp; Culture Brief (PDF)</FigmaAngledCta>
         </div>
         <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
         <WhoWeAre isOpen={isWhoWeAreOpen} onClose={() => setIsWhoWeAreOpen(false)} data={data.whoWeAreModal} />

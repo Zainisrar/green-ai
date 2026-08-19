@@ -73,7 +73,114 @@
   margin: 20px 0 0;
   font-size: 18px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 23px;
+}
+
+.canvasRows {
+  position: absolute;
+  z-index: 5;
+  top: 356px;
+  left: 735px;
+  width: 978px;
+  height: 305px;
+}
+
+.canvasRow {
+  position: absolute;
+  left: 0;
+  display: grid;
+  width: 978px;
+  grid-template-columns: 431px 425px 122px;
+  align-items: start;
+  border-bottom: 1px solid rgba(35, 177, 77, 0.62);
+}
+
+.canvasRow h3,
+.canvasRow p {
+  margin: 0;
+  font-style: italic;
+}
+
+.canvasRow h3 {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 32px;
+  font-style: normal;
+}
+
+.canvasRow p {
+  width: 430px;
+  white-space: pre-line;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 23px;
+}
+
+.canvasRow1 { top: 0; height: 48px; }
+.canvasRow2 { top: 94px; height: 38px; }
+.canvasRow3 { top: 184px; height: 38px; }
+.canvasRow4 { top: 268px; height: 38px; }
+
+.canvasRow h3 { transform: translateY(4px); }
+.canvasRow1 h3 { width: 173px; }
+.canvasRow2 h3 { width: 369px; }
+.canvasRow3 h3 { width: 204px; }
+.canvasRow4 h3 { width: 291px; }
+.canvasRow1 p { width: 341px; transform: translateY(2px); }
+.canvasRow2 p { width: 316px; transform: translateY(2px); }
+.canvasRow3 p { width: 392px; transform: translateY(9px); font-size: 18px; line-height: 16px; }
+.canvasRow4 p { width: 353px; transform: translateY(12px); font-size: 18px; line-height: 16px; }
+
+.canvasExploreCta {
+  width: 122px;
+  height: 36px;
+  min-height: 36px;
+  justify-content: space-between !important;
+  padding: 0 13px 0 27px !important;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.canvasDayQuote {
+  position: absolute;
+  z-index: 5;
+  top: 709px;
+  left: 132px;
+  width: 518.5px;
+  height: 99px;
+}
+
+.canvasDayQuote p {
+  position: absolute;
+  top: 28px;
+  left: 72px;
+  width: 396px;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 28px;
+  white-space: nowrap;
+}
+
+.canvasDayQuote p span {
+  color: #23b14d;
+}
+
+.canvasDayQuote img:first-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 82px;
+  height: 101px;
+}
+
+.canvasDayQuote img:last-child {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 82px;
+  height: 101px;
 }
 
 .canvasQuote {
@@ -97,11 +204,11 @@
   position: absolute;
   z-index: 7;
   top: 724px;
-  right: 0;
+  right: 13px;
   display: flex;
-  width: 419px;
+  width: 379px;
   flex-direction: column;
-  gap: 43px;
+  gap: 26px;
 }
 
 .canvasCtas > * {
@@ -117,12 +224,14 @@
 .canvasWorkCta {
   width: 209px;
   align-self: flex-end;
-  margin-right: 10px;
+  margin-right: -3px;
 }
 
 .canvasBriefCta {
-  width: 419px;
+  width: 379px;
+  margin-left: 0;
 }
+
 
 @media (max-width: 1200px) {
   .canvasPage {
@@ -136,6 +245,8 @@
   .canvasArtwork,
   .canvasVerticalTitle,
   .canvasHeader,
+  .canvasRows,
+  .canvasDayQuote,
   .canvasQuote,
   .canvasCtas {
     position: static;
