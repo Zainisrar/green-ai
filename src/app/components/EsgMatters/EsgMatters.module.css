@@ -246,16 +246,16 @@
 
 .canvasMonitoring img:first-child {
   position: absolute;
-  top: 10px;
-  left: -66px;
+  top: 17px;
+  left: -70px;
   width: 82px;
   height: 101px;
 }
 
 .canvasMonitoring img:last-child {
   position: absolute;
-  top: -5px;
-  right: -5px;
+  top: 0;
+  right: -42px;
   width: 82px;
   height: 102px;
 }
