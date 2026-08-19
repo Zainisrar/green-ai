@@ -1,12 +1,13 @@
-import GreenTalentIncubator from '@/app/components/GreenTalentIncubator/GreenTalentIncubator'
-import React from 'react'
+import GreenTalentIncubator from "@/app/components/GreenTalentIncubator/GreenTalentIncubator";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function GreenTalentIncubatorPage() {
   return (
-    <React.Fragment>
-        <GreenTalentIncubator/>
-    </React.Fragment>
-  )
+    <FigmaPageCanvas
+      desktop={<GreenTalentIncubator canvas />}
+      mobile={<GreenTalentIncubator />}
+      nodeId="7077:15370"
+      fitCanvasHeight
+    />
+  );
 }
-
-export default page

@@ -2,11 +2,15 @@
 import React, { useState } from "react";
 import Chatbot from "../Chatbot";
 import TopNavigation from "../TopNavigation/TopNavigation";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import D6Chatbot from "../D6Chatbot";
+import styles from "./GreenTalentIncubator.module.css";
 import { useGreenTalentIncubator } from "../../../hooks/useGreenTalentIncubator";
 import Link from "next/link";
 import ApplyForProgram from "./Modals/ApplyForProgram";
 
-const GreenTalentIncubator = () => {
+const GreenTalentIncubator = ({ canvas = false }: { canvas?: boolean }) => {
   const { data } = useGreenTalentIncubator();
   const [isApplyOpen, setIsApplyOpen] = useState(false);
   const main = data?.mainPage;
@@ -192,6 +196,44 @@ const GreenTalentIncubator = () => {
         return null;
     }
   };
+
+  if (canvas) {
+    const canvasRows = [
+      { label: "Why We Built This", onClick: () => { handleActive(0); const next = handleData(0); if (next) setActive((prev) => ({ ...prev, data: next })); } },
+      { label: "What We Offer", onClick: () => { handleActive(1); const next = handleData(1); if (next) setActive((prev) => ({ ...prev, data: next })); } },
+      { label: "Our Model", onClick: () => { handleActive(2); const next = handleData(2); if (next) setActive((prev) => ({ ...prev, data: next })); } },
+      { label: "Partner With Us", onClick: () => { handleActive(3); const next = handleData(3); if (next) setActive((prev) => ({ ...prev, data: next })); } },
+      { label: "Alumni Voices", onClick: () => { handleActive(4); const next = handleData(4); if (next) setActive((prev) => ({ ...prev, data: next })); } },
+    ];
+
+    return (
+      <main className={styles.canvasPage} data-node-id="7077:15370">
+        <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
+        <div className={styles.canvasArtwork} aria-hidden="true">
+          <img src="/images/green-talent-incubator/mainImg.png" alt="" />
+        </div>
+        <img className={styles.canvasVerticalTitle} src="/images/green-talent-incubator/icn.png" alt="GREEN Talent Incubator" />
+        <h1 className={styles.canvasTitle}>GREEN <span>TALENT</span> INCUBATOR</h1>
+        <p className={styles.canvasSubtitle}>From Learners to Leaders. From Classroom to Field.</p>
+        <p className={styles.canvasDescription}>The GREEN Talent Incubator is where technical education meets real-world execution. We train and mentor the engineers, technicians, planners, and project leads who will power the next decade of clean energy in Papua New Guinea — and beyond.</p>
+        <div className={styles.canvasRows}>
+          {canvasRows.map((row, index) => (
+            <button type="button" className={`${styles.canvasRow} ${styles[`canvasRow${index + 1}`]}`} key={row.label} onClick={row.onClick}>{row.label}</button>
+          ))}
+        </div>
+        <h2 className={styles.canvasRightHeading}>Why We Built This</h2>
+        <p className={styles.canvasRightQuote}>“Energy transformation needs talent transformation.”</p>
+        <p className={styles.canvasRightIntro}>GREEN realized that most talent pipelines were:</p>
+        <p className={styles.canvasRightList}><span>Too academic, not applied</span><span>Too urban, not inclusive</span><span>Too global, not grounded</span></p>
+        <p className={styles.canvasRightBody}>The Talent Incubator solves this by embedding technical skill development directly into our project ecosystem.</p>
+        <p className={styles.canvasBottomQuote}>“The Incubator gave me confidence<br />— now I lead installs across three provinces.”<br />— O&amp;M Lead, <span>GREEN</span> Projects</p>
+        <FigmaAngledCta className={styles.canvasApplyCta} onClick={() => setIsApplyOpen(true)}>Apply for a Program</FigmaAngledCta>
+        <FigmaAngledCta className={styles.canvasProspectusCta} href={main?.cta?.[1]?.href ?? "#"} icon="download">GREEN Talent Incubator Partnership Brief (PDF)</FigmaAngledCta>
+        <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
+        <ApplyForProgram isOpen={isApplyOpen} onClose={() => setIsApplyOpen(false)} />
+      </main>
+    );
+  }
 
   return (
     <React.Fragment>
