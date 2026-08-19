@@ -1,14 +1,7 @@
 # BUG FIX TASK STATE (canonical)
 
-## Done (all pushed)
-Bugs 72, 75, 78, 80, 81, 82, 83, 84/85, 86, 87, 91, 92, 93, 94 — latest commit 8c10541 (Bug 72 homepage).
-
-## Remaining bugs
-- Bug 99: Request a Proposal (/engage/request-a-proposal, Figma node 7077:19854)
-- Bug 95/96: Partner With Us / Become a Supplier (node 7077:23359)
-- Bug 97: Investor Relations re-check (node 7077:19989)
-- Bug 71/98: Contact Us (/engage/contact-us)
-- Bug 100: Find Us Globally (/engage/reach-us)
+## Done — ALL bugs 60–100 complete (latest commit aab543e)
+Bugs 72, 75, 78, 80, 81, 82, 83, 84/85, 86, 87, 91, 92, 93, 94 (earlier), 95/96 Partner With Us & Become a Supplier, 97 Investor Relations, 99 Request a Proposal, 100 Find Us Globally (reach-us), 71/98 Contact Us (popup form verified).
 
 ## Working pattern (proven)
 1. Dump node subtree: python script walking /tmp/reach_file.json (root = d['document']), start at target node, emit REL coords + text/font/fill (scripts like /tmp/*dump*.py exist from earlier bugs; write new one per bug at /tmp/dumpN.py).
