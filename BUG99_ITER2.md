@@ -380,3 +380,81 @@ Bottom: "Your Capital Can Build Megawatts — Or It Can Build Movements. With GR
 ## Bug96 iter3 (cmp96_3) verdict
 Matches Figma: ghost faint photo ✓, vertical title ✓, H1 uppercase green span ✓, subtitle green italic ✓, description with green GREEN ✓, 3 cards with brackets/photos/titles/descs/Explore CTAs ✓, quote Title Case italic bold ✓ with brackets ✓, Procurement Contact + Prospectus CTAs ✓, bottom text Title Case with green GREEN ✓, chatbar ✓.
 Next: commit bug 96, then bug 97 investor relations.
+
+## Bug97 (cmp97_1) baseline deltas
+Current vs Figma:
+1. Header: mine H1 "INVESTOR RELATIONS" black+green span ✓ matches Figma. Figma render shows H1 at (262,112) ✓. Subtitle/desc ✓.
+2. Vertical title: mine PNG investor-relations.png at (47,363) 59x539 — Figma shows vertical title text at left edge x~12 y320-860 area (stroke outline title "INVESTOR RELATIONS" vertically, light gray, taller ~540h at x47 y363? render shows it starting y~320 going down). Mine looks aligned but check crop.
+3. Right collage: mine rightCollage opacity 0.45 with single mainImg — Figma has composite collage (multiple photos, diagonal white edge, faint people silhouette). Mine collage area looks mostly white + faint right edge. Figma collage = mask group 7077:19990 (photos incl. person silhouette, battery storage, engineer, lightbulb, bar-graph, ghost, desert) clipped by parallelogram white shape w/ diag edge. Current code approximates badly — replace with masked composite crop from render.
+4. Row cards: mine clip-path parallelogram + green accent bar; Figma cards are photos clipped in parallelogram mask + L-bracket vector behind at left. Mine accent = solid green shape, Figma bracket = light green (#B6DF8F?) L-shape line. Mine close but bracket style differs slightly; also photo content differs per card (Figma: solar field, hands, energy collage, handshake) — mine img assets maybe different per row ✓ (assets exist). Figma brackets are same light-green as rfp quote brackets. Replace rowImageAccent with rfp quote bracket? Mine accent at left -19; Figma bracket at (x-19,y+10) 79x98 — matches geometry! But Figma bracket is L-shaped stroke not parallelogram. Use quote_bracket_l.png? Mine clip accent currently shows green parallelogram strip — visually wrong shape (Figma: thin L-shaped green bracket). 
+5. Bottom quote: mine h2 italic — Figma bottom text is NOT italic (render: "Your Capital Can Build Megawatts..." bold, NOT italic). Fix.
+6. Download CTA: mine left 1572 vs Figma 1569; eoi CTA left 1541 ✓.
+7. Chatbar: mine "Type your words...." vs Figma "Let's Talk Energy" — fix figmaPlaceholder.
+8. Quote card: position fine. "PNG" green span ✓.
+
+Fixes to apply: collage composite, bracket L-shape, bottom quote no italic, chatbar placeholder, CTA left 1569.
+
+## Bug97 collage approach
+Mask group render gave only ONE photo (handshake/charts) w/ diagonal mask — Figma render r97.png shows the FULL composite (lightbulb photo top, engineer+solar, battery, ghost, desert, handshake+charts) all clipped by the parallelogram mask w/ diag edge on left AND right (right edge also diagonal from x~1920). Simplest reliable approach (as used for bug99): crop right region from r97 render (x1000-1920), then mask off the non-collage zones (quote card text, CTA buttons, chatbar) so those can render as HTML over. The collage covers right column fully. Zones to mask in crop: quote card (1476,424)-(1817,509) → crop coords (476,424)-(817,509); CTAs (1541,741)-(1916,871) → (541,741)-(916,871); chatbar (1498,899)-(1916,951) → (498,899)-(916,951). Also vertical title area NOT part of collage.
+
+## Collage issue
+ir_collage.png shows: top = Figma nav menu + lightning (header INSTANCE spans full width, x262-1930, y0-116). My mask missed those (nav 1076-1812 y47, bolt 1836-1921 y16). Explore CTAs at x1046-1168 (left of crop x1000) — visible. Quote card text not fully masked (456-840 region partial). Fix: expand masks: nav y0-120 (x1000-1920), Explore CTA zones rows y382-419, y500-537, y629-666, y757-794 (x1000-1300), quote card (1456,386)-(1840,530) already but visible?? Actually quote card text shown because bracket+text inside; my mask (1456,386)-(1840,530) 2x=(2912,772)-(3680,1060) — did that not paste? Order issue: I masked AFTER crop with 2x boxes; boxes look correct... text at y424-509 → 2x 848-1018, box y772-1060 ✓ but text still visible?? Wait the displayed collage text "PNG Market Leader..." is at y~430-520 2x scale of displayed (displayed is 1840x1940 raw). Text at raw y860-1050 — my box was (1456*2=2912, 386*2=772) → (3680,1060) → should cover... but text spans x1476-1820 raw 2x 2952-3640 within 2912-3680 ✓ and y 848-1050 within 772-1060 ✓. Why not masked? Because paste with white on a crop created from .crop() — should work. Looking again at image: text IS there black... Hmm wait the visible text is at displayed coords y~435-520 of 1840-wide image; raw = same (not resized). Text y435..520 raw? That would be 2x y870-1040 — INSIDE mask. Something wrong... Oh! The text shown is the Figma render's text BUT my paste coords: crop box used (2912,772)-(3680,1060) but the crop itself is offset: crop = im.crop((2000,0,...)) — paste coords are RELATIVE to crop, so must subtract 2000: (912,772)-(1680,1060). BUG: paste used absolute 2x coords, but crop origin is (2000,0). So masks all missed by 2000px → outside. Fix: subtract 2000 from x coords.
+Also mask row CTA explore zones x1000-1300 for the 4 rows.
+
+## Bug97 STATE (save before compaction)
+### Key facts
+- Figma render: /tmp/r97.png (3840x1940 2x), 1x copy /tmp/r97_1x.png
+- Frame node 7077:19989, dump: /tmp/bug97_dump.txt
+- Component: src/app/components/InvestorRelations/InvestorRelations.tsx (canvas branch exists, wired via page.tsx nodeId 7077:19989)
+- Component current issues found in cmp97_1:
+  1. Collage: rightCollage CSS approximates badly → replace with /tmp/ir_collage.png asset (built from r97 right region w/ mask zones)
+  2. Quote card "PNG..." position top 424 left 1476 ✓ but brackets: uses FigmaQuoteBrackets showRight=false — quote brackets in Figma are LIGHT GREEN (rfp quote_bracket_l/r.png reusable) at L(1413,421) 79x98 vector 7374 + R vector 7375 (1764,418) 79.5x99
+  3. Bottom quote NOT italic (remove font-style: italic from .bottomQuote h2)
+  4. Chatbar placeholder "Type your words...." → "Let's Talk Energy" (figmaPlaceholder prop)
+  5. Download CTA left 1572 → 1569
+  6. Row bracket accents: Figma brackets = light-green L vectors (Vector 7378-7381) behind each card at (292,340),(414,458),(287,587),(397,715) 79x98; current .rowImageAccent is green parallelogram — replace with quote_bracket_l.png images at those positions (z-index behind card img)
+  7. Card photos: Figma mask group composites per card — current assets /images/investor-relations/card1..4.png (check they match; cmp97_1 looked ok)
+- Collage build script /tmp/build_ir_collage.py — masks used RELATIVE coords after realizing crop offset bug. Verified paste works. Quote card mask (912,772)-(1680,1060) relative OK. ir_collage_test.png shows quote area masked (light bracket L still visible partially at y~700) — acceptable: re-mask bracket zone (750,770)-(1000,1060) too? The L-bracket at (1413,421) → 2x (2826,842) → crop rel (826,842). Test image shows bracket L at approx (700,1000)? whatever — widen quote mask to (800,760)-(1700,1070).
+- ALSO mask: nav row y0-120 (done), explore CTAs rows, read-more (1521,799)-(1689,823) canvas → 2x (1042,1598)-(1378,1646) crop rel; bottom quote extends canvas x262-1305 y862-934 → crop rel x0-305 y1724-1868 → mask (0,1700)-(320,1900)
+- Chatbar mask: canvas (1498,899)-(1916,951) → 2x crop rel (996-ox? no ox=2000, so 2996-2000=996, 1798)-(1832,1902)
+- Collage img CSS: position abs, top -8? Figma mask group box (1278,-8) 1152x1888.5 — render includes top overflow. Use top:-8 left:1000 w 1152 h 970? The render crop was x1000-1920 y0-970 (canvas). Mask group extends above (y-8) — crop y0 fine.
+- Remaining steps: fix collage asset masks, replace collage in CSS (rightCollage img from /images/investor-relations/collage.png placed at top 0 left 1000 w 920 h 970), replace rowImageAccent with brackets, quote brackets swap to light-green PNGs, remove italic from bottom quote, chatbar placeholder, CTA left 1569. Then typecheck, screenshot, compare, commit.
+
+## Collage round2 fix
+Second build still shows Explore CTAs at left — my 2x rel math: canvas x1046 → 2x 2092 → rel 92. I used 1092 (off by 1000!). Recompute properly: rel2x = canvas2x - 2000 = (canvas*2) - 2000.
+- row1 explore: canvas (1046,382)-(1168,419) → rel2x (92,764)-(336,838)
+- row2: (1167,500)-(1289,537) → (334,1000)-(578,1074)
+- row3: (1046,629)-(1168,666) → (92,1258)-(336,1332)
+- row4: (1156,757)-(1278,794) → (312,1514)-(556,1588)
+- quote card: (1413,386)-(1840,530) → (826,772)-(1680,1060)  [bracket L at 1413]
+- CTAs: (1520,725)-(1920,872) → (1040,1450)-(1840,1744)
+- chatbar: (1480,890)-(1920,960) → (960,1780)-(1840,1920)
+- desc text at left y242-314 canvas → rel2x y484-628 x0-1078 (description x264-1648 canvas → rel -1472..? canvas x264*2=528 rel -1472? no canvas x264 → 2x 528 → rel -1472?? ox=2000 so rel = 528-2000 = -1472. Canvas desc spans x264-1648 → rel2x -1472..1296. Left part of crop (x<0) already cut; visible text "ntire region." is canvas x~1400+ → rel2x up to 1296 → need mask (0,484)-(1296,628)? but description should be HTML... it's ALREADY HTML in component. Why visible in collage asset? Because the collage is the Figma render containing the text layer! I MUST mask the whole description zone so HTML version overlays: canvas desc (264,242)-(1648,314) → but HTML desc sits same zone; if collage includes it faintly it dupes. The collage opacity 0.45 makes it ghostly. Mask desc zone too: rel2x (0,484)-(1296,628).
+- Actually left half of collage (canvas x1000-1300) should be fully masked white anyway — collage only exists right of x~1000 (mask group at 1278). So mask entire crop x0-600 white: (0,0,600,1940)! Simpler: collage starts canvas x~1246 (ghost img) with mask parallelogram edge around x1278. Mask rel2x x0-560 all.
+
+## Collage round3
+Much cleaner. Remaining visible: nav tail "ELEMENTS EXPERTISE ENLIST ENGAGE" + lightning bolt at top (canvas x~1279-1930 y0-116) — header nav spans x1076+ canvas → rel2x 152+; my header mask (0,224,2524,484) y covered 0-240 → should mask y0-240 rel. Visible text at y~30-80 of 1840-high — that's rel2x y60-160... within 0-240 but visible?? The image shows text at TOP y~50-90 → within mask; why visible? Because image viewer shows 1840x1940; text visible at y~50-90 (rel) — mask was y0-240 ✓. BUT text still there... Ah wait (0,224,2524,484) I passed 2524>1840 clamped ok; but order: masks list has (0,0,600,1940) first then (0,224,2524,484) last — last pastes over earlier, fine. Yet text visible → my mask y range (224,484)?? NO! I wrote (0,224,2524,484) meaning y1=224..y2=484 — wrong! Header is y0-240, not 224-484. Fix to (0,0,2524,240) clamped. Also lightning bolt is bright/yellow; mask needed. Also small green speck at y~800 x~650 (bracket sliver) and bottom area faint. Fix header mask then rebuild.
+
+## Bug97 iter2 (cmp97_2) analysis
+Improvements: collage ghost present now (faint photos right), chatbar "Let's Talk Energy" ✓, download CTA position ✓, bottom quote not italic ✓.
+Issues remaining:
+1. Quote brackets: my quoteBracketL/R at (1413,421)/(1764,418) show as L-shaped brackets visible ABOVE quote card overlapping rows (Figma has brackets BEHIND/around quote text — same placement actually: Figma brackets at (1413,421) and (1764,418) frame the quote text y424-509. Mine render correctly but brackets appear to be in front/visible — the Figma render also shows them same way. Check crop: mine brackets look identical to Figma. OK likely fine.
+2. Row brackets: mine at (-19,10) within rowImage button — but they render overlapping row above's desc (visible at left of 'Performance Snapshots' etc). Figma brackets at (292,340) for row1 → relative x292-260? row1 card x291 (my x291 vs Figma 292). My brackets left = row.x - 19 → 272 vs Figma 292?? Figma bracket x292, card x291: bracket at card.x +1? Figma: row1 group (292,330) card mask (311,330); bracket vector (292,340). So bracket x = group x, card x = group x - 19? 291 vs 292 ≈ same. Mine ok. But visually in cmp97_2, brackets between rows look duplicated: the bracket spans y10..108 per row w/ top:10 — should be fine. Looking again: brackets appear overlapping row2 'Our Investment Focus Areas' desc zone because rows stagger; Figma same. Acceptable.
+3. Vertical title: mine at (47,363) vs Figma (47,363) ✓.
+4. Collage opacity: Figma ghost is fainter; mine 0.5. Also collage extends left to x1000 vs Figma mask parallelogram starting x1246 w/ diagonal. Right edge of mine cut at x1920 ✓.
+5. Chatbar: mine positioned at (1498,899) ✓ matches Figma.
+6. Quote text: Figma has bracket behind text; 'PNG' green ✓.
+Overall close. Fine-tune: vertical title y — Figma render shows title spanning y~320-860; mine 363-902? image shows title at correct spot.
+Verdict: good match; minor collage mask edge: at x1000 there's faint photo leakage beyond Figma's diagonal edge. Reduce collage left to x1246 canvas and keep diagonal? Figma diagonal mask from (1246,-3) to ... parallelogram left edge runs from (1246,-3) to (1002+?). Simpler: set collage left:1246 w 674? Then faint ghost at left area of Figma (x1000-1246) contains ghost IMG (bar-graph 1246) — actual Figma ghost visible from x~1150 (person silhouette). Keep left:1000 but add opacity 0.4.
+
+## Quote zone crop mismatch
+q_cur2/q_fig2 crops (1350,380)-(1920,560) showed desc tail not quote. Quote position in r97 render differs from dump coords (dump says text box y424-509 but Figma renders maybe shifted by 2x scale?). Actually dump boxes are canvas coords; r97_1x = same scale. q_fig2 at y380-560 shows desc tail (~y400-430 1x?) — no. Confusing: earlier full render view: quote text at vertical position between row1 and row2 area, right column. Re-check r97 render with ruler.
+
+## Grid-verified coords (r97 2x)
+Quote card "PNG Market Leader..." at canvas y424-520, x1476-1820 (bracket L at 1413, R 1764) ✓ matches dump. My crop (1350,380)-(1920,560) of 1x render DID include quote y424-520 but q_fig2 only showed desc — actually q_fig2 crop coords used r97_1x.png... it showed desc tail y~400-430 1x = desc y242-314? NO wait desc is y242-314 1x. q_fig2 at y20-90 of 180-high crop = 1x y400-470?? The crop y range was (380,560)→ shows y400-470 region = includes desc tail y400? Desc box y242-314. Something off but moot — grid confirms quote y424-520 ✓.
+Other verified: H1 y112-180 ✓, subtitle y192-228 ✓, desc y242-314 ✓, rows: r1 img y330-438 card x291, title 579/329, r2 img y448 title 700/446, r3 y577 title 579/583, r4 y705 title 689/712. Explore CTAs: r1 (1046,382), r2 (1167,500), r3 (1046,629), r4 (1156,757). Download CTA (1569,741), EOI (1541,819). Chatbar (1498,899). Bottom quote y862-934 x262-1305. Vertical title x47 y363-902.
+Collage: covers right ~x1150+ faint; diagonal parallelogram left edge from (1246,-3) going down-left to (~1002,940?) then right edge diag from top (~1778?) — visible ghost spans x1150-1920. My left:1000 w920 over-reaches slightly into white at left (small faint diagonal strip at x1000-1150) — acceptable but improve: shift left to 1150 w770? Figma mask parallelogram bbox (1278,-8) w1152 — photos inside. The faint diagonal edge at left passes near x1180 top → x1002 bottom. Simplest: keep left:1000 w920 opacity ~0.42.
+cmp97_2 verdict: match is strong. Only minor: my brackets appear slightly more opaque green than Figma's very light brackets; rfp quote_bracket_l.png color avg (181,236,161) — Figma render brackets look same light green. OK.
+
+## Bug97 rows verdict
+Rows zone comparison: cards/photos/titles/descs/Explore CTAs/brackets/row dividers all match Figma. My bracket L at left of each card matches Figma L-bracket style (light green). Iter2 commit-ready.

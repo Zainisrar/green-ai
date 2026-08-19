@@ -3,7 +3,6 @@ import { useState } from "react";
 import Link from "next/link";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
-import FigmaQuoteBrackets from "../FigmaQuoteBrackets/FigmaQuoteBrackets";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import styles from "./InvestorRelations.module.css";
 import WhyInvestGreen from "./Dialog/WhyInvestGreen";
@@ -134,10 +133,13 @@ export default function InvestorRelations({
         className={styles.verticalTitle}
       />
 
-      {/* Faint right-side photo collage */}
-      <div className={styles.rightCollage} aria-hidden="true">
-        <img src="/images/investor-relations/mainImg.png" alt="" />
-      </div>
+      {/* Faint right-side photo collage (baked from Figma render) */}
+      <img
+        className={styles.rightCollageImg}
+        src="/images/investor-relations/collage.png"
+        alt=""
+        aria-hidden="true"
+      />
 
       {/* Header section */}
       <div className={styles.headerSection}>
@@ -165,7 +167,11 @@ export default function InvestorRelations({
             aria-label={`Open ${row.title}`}
           >
             <img src={row.image} alt={row.title} />
-            <span className={styles.rowImageAccent} aria-hidden="true" />
+            <span
+              className={styles.rowBracket}
+              aria-hidden="true"
+              style={{ top: 10, left: -19 }}
+            />
           </button>
 
           <div
@@ -204,8 +210,19 @@ export default function InvestorRelations({
       ))}
 
       {/* Right quote card */}
+      <img
+        className={styles.quoteBracketL}
+        src="/images/rfp/quote_bracket_l.png"
+        alt=""
+        aria-hidden="true"
+      />
+      <img
+        className={styles.quoteBracketR}
+        src="/images/rfp/quote_bracket_r.png"
+        alt=""
+        aria-hidden="true"
+      />
       <div className={styles.quoteCard}>
-        <FigmaQuoteBrackets showRight={false} />
         <p>
           {highlightText(d.quote1.text, d.quote1.highlighted)}
         </p>
@@ -221,7 +238,7 @@ export default function InvestorRelations({
       {/* Bottom-right CTAs */}
       <FigmaAngledCta
         className={styles.downloadCta}
-        style={{ position: "absolute", left: 1572, top: 741 }}
+        style={{ position: "absolute", left: 1569, top: 741 }}
         icon="download"
         href={ctaLinks.investorPack}
       >
@@ -240,6 +257,7 @@ export default function InvestorRelations({
         <D6Chatbot
           canvasAnchored
           triggerVariant="figmaCanvas"
+          figmaPlaceholder="Let&rsquo;s Talk Energy"
           triggerStyle={{
             top: 899,
             right: "auto",

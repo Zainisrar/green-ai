@@ -8,27 +8,17 @@
   font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
 
-.rightCollage {
+.rightCollageImg {
   position: absolute;
   top: 0;
-  right: 0;
-  width: 972px;
-  height: 970px;
-  overflow: hidden;
-  opacity: 0.45;
-  z-index: 0;
-}
-
-.rightCollage img {
-  position: absolute;
-  right: -180px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 1200px;
+  left: 1000px;
+  width: 920px;
   height: 970px;
   object-fit: cover;
-  object-position: left center;
-  filter: saturate(0.35) brightness(1.15);
+  object-position: right top;
+  opacity: 0.5;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .verticalTitle {
@@ -110,16 +100,17 @@
   clip-path: polygon(19px 0, 100% 0, calc(100% - 19px) 100%, 0 100%);
 }
 
-.rowImageAccent {
+.rowBracket {
   position: absolute;
-  left: -19px;
-  top: 10px;
   width: 79px;
   height: 98px;
-  background: #23b14d;
-  clip-path: polygon(100% 0, 100% 100%, 0 100%, 14% 0%);
+  background: url("/images/rfp/quote_bracket_l.png") no-repeat center / contain;
   z-index: -1;
+  pointer-events: none;
 }
+
+.quoteBracketL { position: absolute; z-index: 2; top: 421px; left: 1413px; width: 79px; height: 98px; pointer-events: none; }
+.quoteBracketR { position: absolute; z-index: 2; top: 418px; left: 1764px; width: 79.5px; height: 99px; pointer-events: none; }
 
 .rowText {
   width: 460px;
@@ -197,7 +188,6 @@
 .bottomQuote h2 {
   margin: 0;
   font-size: 26px;
-  font-style: italic;
   font-weight: 700;
   line-height: 1.35;
   color: #000;
