@@ -1,0 +1,243 @@
+.canvasPage {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  min-height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #111;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.canvasArtwork {
+  position: absolute;
+  z-index: 0;
+  top: -59px;
+  left: 1063px;
+  width: 1003px;
+  height: 2134px;
+  pointer-events: none;
+}
+
+.canvasArtwork img {
+  display: block;
+  width: 1003px;
+  height: 2134px;
+  max-width: none;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0.92;
+}
+
+.canvasVerticalTitle {
+  position: absolute;
+  z-index: 3;
+  top: 128px;
+  left: 45px;
+  display: block;
+  width: 43px;
+  height: 787px;
+  max-width: none;
+  object-fit: fill;
+}
+
+.canvasTitle {
+  position: absolute;
+  z-index: 5;
+  top: 103px;
+  left: 265px;
+  width: 628px;
+  margin: 0;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 57px;
+}
+
+.canvasSubtitle {
+  position: absolute;
+  z-index: 5;
+  top: 181px;
+  left: 262px;
+  width: 859px;
+  margin: 0;
+  color: #111;
+  font-size: 30px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 36px;
+}
+
+.canvasDescription {
+  position: absolute;
+  z-index: 5;
+  top: 234px;
+  left: 270px;
+  width: 1011px;
+  margin: 0;
+  color: #111;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.canvasRows {
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  width: 1290px;
+  height: 769px;
+}
+
+.canvasRow {
+  position: absolute;
+  display: flex;
+  width: 959px;
+  height: 48px;
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(35, 177, 77, 0.62);
+}
+
+.canvasRow h2 {
+  width: 530px;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 37px;
+}
+
+.canvasRow1 { top: 374px; left: 331px; width: 957px; height: 46px; }
+.canvasRow2 { top: 485px; left: 282px; width: 959px; height: 63px; }
+.canvasRow3 { top: 601px; left: 233px; width: 959px; height: 46px; }
+.canvasRow4 { top: 721px; left: 185px; width: 957px; height: 48px; }
+.canvasRow2 h2 { padding-top: 19px; }
+.canvasRow3 h2 { padding-top: 13px; }
+.canvasRow4 h2 { padding-top: 4px; }
+
+.canvasExploreCta {
+  position: absolute;
+  top: 0;
+  left: 816px;
+  width: 141px;
+  height: 46px;
+  min-height: 46px;
+  justify-content: space-between !important;
+  padding: 0 12px 0 14px !important;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.canvasRow2 .canvasExploreCta { left: 818px; }
+.canvasRow3 .canvasExploreCta { left: 818px; }
+.canvasRow4 .canvasExploreCta { left: 816px; }
+
+.canvasRightQuote {
+  position: absolute;
+  z-index: 5;
+  top: 479px;
+  left: 1374px;
+  width: 565px;
+  height: 194px;
+  margin: 0;
+  color: #111;
+  font-size: 32px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 45px;
+  white-space: pre-line;
+}
+
+.canvasReadMore {
+  position: absolute;
+  z-index: 5;
+  top: 799px;
+  left: 1521px;
+  display: flex;
+  width: 168px;
+  height: 24px;
+  align-items: center;
+  gap: 10px;
+  color: #111;
+  font-family: Raleway, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.canvasReadMore span:last-child {
+  color: #23b14d;
+  font-size: 24px;
+  line-height: 14px;
+}
+
+.canvasBottomQuote {
+  position: absolute;
+  z-index: 5;
+  top: 830px;
+  left: 159px;
+  width: 1064px;
+  height: 72px;
+  margin: 0;
+  color: #111;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 36px;
+  white-space: pre-line;
+}
+
+.canvasCtas {
+  position: absolute;
+  z-index: 7;
+  top: 748px;
+  right: 0;
+  display: flex;
+  width: 419px;
+  flex-direction: column;
+  gap: 19px;
+}
+
+.canvasCtas > * {
+  height: 52px;
+  flex: 0 0 52px;
+  justify-content: space-between !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.canvasApplyCta {
+  width: 210px;
+  align-self: flex-end;
+  margin-right: 4px;
+}
+
+.canvasProspectusCta {
+  width: 419px;
+}
+
+@media (max-width: 1200px) {
+  .canvasPage {
+    position: static;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .canvasArtwork,
+  .canvasVerticalTitle,
+  .canvasTitle,
+  .canvasSubtitle,
+  .canvasDescription,
+  .canvasRows,
+  .canvasRightQuote,
+  .canvasReadMore,
+  .canvasBottomQuote,
+  .canvasCtas {
+    position: static;
+    width: auto;
+    height: auto;
+    min-height: 0;
+  }
+}
