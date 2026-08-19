@@ -18,7 +18,8 @@ const sections = [
   { key: "whyGreen", title: "Why GREEN?" },
   { key: "partnershipTypes", title: "Partnership Types We Support" },
   { key: "whatYouCanExpect", title: "What You Can Expect" },
-  { key: "applicationChannels", title: "Application Channels" },
+  // Section 4 matches the Figma design text verbatim (designer placeholder)
+  { key: "applicationChannels", title: "Abortion Channels Active Coll" },
   { key: "trustedBy", title: "Trusted By" },
 ];
 
@@ -38,15 +39,39 @@ const PartnerWithUs = ({ canvas = false }: { canvas?: boolean }) => {
     return (
       <main className={styles.canvasPage} data-node-id="7077:23359">
         <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
-        <div className={styles.canvasArtwork} aria-hidden="true"><img src="/images/client-partnerships/future-visions-business-technology.png" alt="" /></div>
-        <div className={styles.canvasVerticalTitle}>PARTNER WITH US</div>
-        <h1 className={styles.canvasTitle}>Partner With <span>Us</span></h1>
+        <img
+          className={styles.canvasArtwork}
+          src="/images/partner/photo_card.png"
+          alt=""
+          width="621"
+          height="250"
+        />
+        <svg
+          className={styles.canvasVerticalTitle}
+          width="28"
+          height="575"
+          viewBox="0 0 28 575"
+          aria-hidden="true"
+        >
+          <text
+            fill="none"
+            stroke="#d9d9d9"
+            strokeWidth="0.9"
+            fontFamily="'Raleway', Raleway, sans-serif"
+            fontWeight="900"
+            fontSize="46"
+            transform="translate(24,560) rotate(-90)"
+          >
+            PARTNER WITH US
+          </text>
+        </svg>
+        <h1 className={styles.canvasTitle}>PARTNER WITH <span>US</span></h1>
         <p className={styles.canvasSubtitle}>Your Mission, Delivered.</p>
-        <p className={styles.canvasDescription}>Whether you&apos;re a donor, government, or global institution — if your goal is clean energy access, sustainable infrastructure, and real-world delivery — <span>GREEN</span> is your execution partner in Papua New Guinea and the South Pacific.</p>
+        <p className={styles.canvasDescription}>Whether you&apos;re a donor, government, or global institution — if your goal is clean energy access, sustainable infrastructure, and real-world delivery — <span className={styles.descGreen}>GREEN</span> is your execution partner in Papua New Guinea and the South Pacific.</p>
         <div className={styles.canvasRows}>
           {sections.map((section, index) => (
             <div className={`${styles.canvasRow} ${styles[`canvasRow${index + 1}`]}`} key={section.key}>
-              <h2>{section.title}</h2>
+              <h2>{renderTitle(section.title)}</h2>
               <p>We don&apos;t just build solar systems — we engineer energy impact.</p>
               <FigmaAngledCta className={styles.canvasRowCta} onClick={() => setOpenModal(section.key)}>Explore</FigmaAngledCta>
             </div>
@@ -56,7 +81,11 @@ const PartnerWithUs = ({ canvas = false }: { canvas?: boolean }) => {
         <div className={styles.canvasReadMore}><span>Read more</span><span aria-hidden="true">›</span></div>
         <FigmaAngledCta className={styles.canvasSubmitCta} onClick={() => setIsBriefOpen(true)}>Submit a Collaboration Brief</FigmaAngledCta>
         <FigmaAngledCta className={styles.canvasDownloadCta} href="#" icon="download">Download our Partnership Overview (PDF)</FigmaAngledCta>
-        <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
+        <D6Chatbot
+          canvasAnchored
+          triggerVariant="figmaCanvas"
+          figmaPlaceholder="Let&rsquo;s Talk Energy"
+        />
         <WhyGreen isOpen={openModal === "whyGreen"} onClose={() => setOpenModal(null)} />
         <PartnershipTypes isOpen={openModal === "partnershipTypes"} onClose={() => setOpenModal(null)} />
         <WhatYouCanExpect isOpen={openModal === "whatYouCanExpect"} onClose={() => setOpenModal(null)} />

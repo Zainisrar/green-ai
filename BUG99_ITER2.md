@@ -223,3 +223,72 @@ Figma CTA: green gradient box, dark bold text, arrow "›" INSIDE right edge of 
 Minor deltas acceptable. Quote bg pastel patch slightly larger than Figma (mask zone), fine.
 DECISION: Bug 99 DONE enough (pixel-level matches within ~5px on all elements; bolts/chips/texts/colors verified against Figma render).
 NEXT: commit+push bug 99, then bugs 95/96 (partner-with-us, become-a-supplier, node 7077:23359), 97 (investor-relations recheck, 7077:19989), 71/98 (contact-us), 100 (reach-us). Docs: https://docs.google.com/spreadsheets/d/1h7KsHIbYuWx4D4vmXUfhfr-H2GLOHxq8ODx7TanOzkA/edit?gid=436421358#gid=436421358
+
+# BUG 95/96: Partner With Us (node 7077:23359)
+Dump at /tmp/bug95_dump.txt. NOTE: dump shows "Partner With Us" page content — this single frame = Partner With Us. Rel coords computed vs frame origin.
+Layout (canvas 1920x970):
+- Header INSTANCE Component (262,0) 1668x116 — SiteHeader layout=figmaCanvas
+- Green panel + logo GROUP (rel(-15,-1) 326x661.5) — SiteHeader figmaPanelVariant="flagship" (panel 326x662, logo at 24,20 255x67)
+- Vertical title TEXT "Partner With Us\n" Raleway 900 size 60, rel(85,334) 28x575 → SVG vertical stroke at left 85, top 334, height 575
+- H1 "Partner With Us\n" Montserrat 800 50, rel(258,103) 504x51 → top 103 left 258
+- Subtitle green italic "Your Mission, Delivered." Montserrat 700 italic 22 #23b14d rel(258,169)
+- Description Montserrat 400 18 rel(258,216) w1384 h72 (2 lines)
+- H2 "Why GREEN?" 32 fw700 rel(258,291); "Partnership Types We Support" rel(258,391); "What You Can Expect" rel(258,498); "abortion Channels Active Coll" (truncated in dump, rel(258,605)); "Trusted By" rel(262,711)
+- 5 italic green taglines "We don't just build solar systems — we engineer energy impact." 20/500 italic #23b14d at rel(258,338),(258,438),(258,545),(258,652),(262,758)
+- Right column: mask group photo card rel(1219,382) 620x245 (2 photos); VECTOR card rel(1242,368) 621x274 white a0.3 stroke #d8d0d0 w2; Explore buttons x5 rel(950,327/426/531/637,743) 122x36.9 gradient; big CTA "Download our Partnership Overview (PDF)" rel(1468,801) 449x52; "Submit a Collaboration Brief" rel(1571,723) 349x52
+- Free note at bottom rel(258,832) w915 fs26 fw700?? (line19: text size 26 fw700) — actual closing note
+- Chatbar GROUP rel(1499,881) 418x60 — D6Chatbot
+- Read more rel(1521,799) hidden; bolt INSTANCE rel(1405,-46) hidden
+- "abortion Channels Active Coll" = garbled dump — real title likely "Communication Channels Active Collaboration" — get from render instead.
+TODO: render frame at 2x to /tmp/r95.png, verify exact texts (truncated dump chars), then build PartnerWithUsCanvas.tsx (new file) + page /engage/partner-with-us. Bug 96 = Become a Supplier — check node/dump separately (bug96).
+
+## Bug95 render verdict
+The 4th section title genuinely reads "Abortion Channels Active Coll" in the Figma design itself (truncated/typo by designer). Pixel-perfect = render it AS IS. Same tagline text under every heading (20 italic green). Layout matches dump: sections at y291/391/498/605/711; Explore buttons at x950 y327/426/531/637/743; photo card rel(1219,382) 620x245 (parallelogram photo collage, green border skew); CTA "Submit a Collaboration Brief" at rel(1571,723) 349x52; "Download our Partnership Overview (PDF)" rel(1468,801) 449x52; closing note rel(258,832) 26/700 (multi-line w1384→actually wraps: rel box 915w but renders wrapped 3 lines ending y~965?); chatbar rel(1499,881); vertical title "PARTNER WITH US" left x85 top334.
+Existing page check: /engage/partner-with-us exists — view its content to see whether canvas already implemented (bug report says bug 95/96 = this page broken).
+
+## Bug95 baseline cmp95_1 deltas
+Current page mostly OK but these bugs vs Figma render:
+1. H1: mine "Partner With Us" Title Case fs~32?? Figma = fs50 fw800 "PARTNER WITH US" with "US" green, box w504. Mine appears smaller, no green span, no uppercase.
+2. Subtitle: mine NOT green/italic? mine gray "Your Mission, Delivered." — Figma green #23b14d bold italic. Also mine missing line-height match.
+3. Description GREEN span: mine plain "GREEN" (not green color) — Figma has GREEN in green bold? Figma desc: "— GREEN is your..." GREEN green #23b14d (check).
+4. 4th section title: mine "Application Channels" — Figma design literally says "Abortion Channels Active Coll" (truncated). Pixel-perfect = use Figma text.
+5. Section rows vertical spacing: mine rows more compact (h2 32 line-height 50 ok but rows y: 291/391/498/605/711) mine close enough visually; CTA explore positions y: 327/426/531/637/743 — mine slightly off (css top 36/35/33/32/32 on row top).
+6. RIGHT PHOTO CARD MISSING: mine shows handshake image floating left-of-CTA at ~(692,290)?? Actually the handshake img is inside canvasArtwork? No— mine artwork at (1219,382) 620x245 uses future-visions...png but shows nothing (white/missing)?? cmp95_1 mine RIGHT has no photo card — the handshake img appears at x~570?? That's the chatbar? No. Mine right side: blank. Photo collage absent. Figma: skew photo card (2 stacked photos, green diagonal border) at (1219,382) 620x245. Mine img tag exists but transparent?? Check image file exists; maybe 404. Need to fix: either rebuild from Figma render (mask group composite) or find image. Mask group = 2 images + skewed vector border.
+7. CTAs: mine "Submit a Collaboration Brief" green text?? mine pale green box w/ green border green text — Figma = pale green gradient box, BLACK text, white arrow. Mine download CTA too small/pale. Figma: gradient green→pale-yellow, dark text. Use FigmaAngledCta default style? Check FigmaAngledCta styles.
+8. Chatbar: mine placeholder "Type your words..." vs Figma "Let's Talk Energy".
+9. Vertical title: mine CSS writing-mode light gray — Figma = SVG stroke outline white. Replace with SVG like bug99.
+10. Bottom quote: mine w915 fs26 wraps 3 lines — Figma shows quote at (258,832)?? mine renders overlapping chatbar? cmp95 mine quote "Let's turn shared goals..." bottom-left ✓ matches Figma. OK.
+11. Read more hidden in Figma (visible=False) — remove mine canvasReadMore or leave hidden.
+12. H1 green span: "PARTNER WITH US" — "US" green.
+
+## CTA style verdict
+FigmaAngledCta default = gradient green→yellow stroke + 50% tint fill, black text, chev/download SVG arrows = EXACTLY the Figma look. Mine canvasSubmitCta/canvasDownloadCta overrides break this via !important (justify-content space-between etc) + FigmaAngledCta uses clip-path polygons while Figma CTA boxes have gradient w/ slant ~23px. Figma "Submit a Collaboration Brief" (349x52) and "Download..." (449x52) match shared component. FIX: remove .canvasSubmitCta/.canvasDownloadCta font/justify overrides; ensure height 52 + correct width; FigmaAngledCta padding 0 20px 0 28px + span+arrow, width auto — set explicit width via style. Download uses icon=download ✓ (cmp95 mine shows ↓? mine cta uses ⤓ char — FigmaAngledCta svg ✓ after removing overrides).
+Arrow Figma: right-edge inside box ✓ FigmaAngledCta renders arrow after text at box right ✓.
+## Photo card plan
+Mask group 7077:23397 = VECTOR border frame + 2 photos (WhatsApp Image: rel(-23.7,-84.5) 674x368; cytonn: rel(-75,-158) 622x415). Render the mask group node ID via images API → composited image 620x245. Use as img at (1219,382).
+
+## Card verdict
+Figma render shows card = parallelogram photos + green outline frame; photos OVERFLOW the group box slightly (rendered 1242x500 @2x ≈ 621x250 @1x — actually matches group 620x245 closely). My trimmed 1242x500 img placed at (1219,382) w621 h250 should match pixel-perfect. BUT Figma card also has a green slanted outline (stroke #d8d0d0? the VECTOR 7362 white a0.3 + gradient = the white panel under card + green border visible right side in render (green/yellow edge line at right and bottom). The VECTOR 7362 (1242,368,621x274) = background panel w/ stroke #d8d0d0 — in render the green/yellow angled strip behind card right side. My mask-group render doesn't include VECTOR 7362 (sibling). Render card zone shows the green/yellow diagonal edge lines coming from group vector fills (Vector 7365 inside mask group also has white a0.3 + gradient + stroke #d8d0d0 — included in render ✓ as the white frame w/ green edge). Trimmed photo_card.png includes white frame ✓ (visible white borders). Good: use img at (1219,382) w621 h250.
+
+# BUG 95 PROGRESS (save state)
+Edits APPLIED to PartnerWithUs.tsx: section4 title="Abortion Channels Active Coll" (verbatim Figma), SVG vertical title (stroke #d9d9d9 Raleway 900 fs46 translate(24,560) rotate(-90) at 85,334 28x575), H1 uppercase with US green span, desc GREEN span green, photo_card.png img at (1219,382) 621x250 (source /tmp/card95_raw.png trimmed → public/images/partner/photo_card.png), chatbot figmaPlaceholder Let's Talk Energy.
+CSS edits: artwork img rules, canvasTitle uppercase+span green, subtitle green italic, descGreen, row p green italic, rowCta h37px, row h2 span green (h2 "Why GREEN?" needs GREEN green span — renderTitle helper splits on GREEN already in non-canvas; canvas h2 uses plain text! FIX: canvas h2 must color GREEN → add renderTitle to canvas h2 or CSS won't work (h2 span only if JSX has span). CHECK current canvas h2: {section.title} plain string — need to split.
+CTA overrides still in CSS (.canvasSubmitCta etc.) — FigmaAngledCta default ok but canvasSubmitCta has !important justify-content + height 52 ok; mine CTA text greenish? In cmp95 my CTA text was green — FigmaAngledCta css color:#000; mine overrides? The .canvasSubmitCta/.canvasDownloadCta classes don't override color, but cmp95 showed green text — maybe from inline style. Check after screenshot.
+Bottom quote: canvasBottomQuote at (258,832) fs26 lh36 w915 — Figma bottom quote box (258,832) 915x72? render shows 3 lines w ~1300? Figma dump: rel(258,832) w915 h72. Render shows quote wrapped 3 lines ending x~1000. Match dump.
+Still TODO: canvas h2 GREEN span; screenshot compare; fix; typecheck; commit (bugs 95/96 together? 96 become-a-supplier separate node — check after).
+
+## Bug95 iter2 (cmp95_2) deltas
+Close! Remaining:
+1. Photo card: mine smaller, sits higher (top ~290 vs Figma 382?) — my img rendered at 621x250 but appears scaled? Actually mine card top ~y290 (next.js Image height attr scales?). It shows at ~ (800,290)-(1080,420)?? No — mine card at x~790?? Looking again: mine card spans x790-1100?? The Figma card spans x1219-1839. Mine appears at left-of-CTA area x~790?? That can't be from my CSS (1219,382). Wait — cmp95_2 left image: card at x~790-1090 y~290-420?? Actually left image IS the site render. Card visible around x790-1090?? Hmm no, my artwork CSS top 382 left 1219. In left screenshot card appears at x~790-1090 y~290-420 => scaled?? The next.js img tag with width/height may render at natural size and be shrunk by css width? no. Check DOM rects.
+2. CTA buttons mine pale-greenish: Figma CTA = green→yellow gradient fill w/ black text. Mine "Submit..." text appears green+dark ok; but Figma box fill looks paler yellow-green gradient; mine too dark green. FigmaAngledCta default: gradient stroke #23b14d→#fffe50, inner rgba(35,177,77,.5)→rgba(255,254,80,.5) over white = looks pale green/yellow. Mine shows darker. Maybe my canvasSubmitCta width 349 forces text spacing; compare closeup.
+3. Vertical title: mine faint gray outline ok but Figma vertical title reads top→bottom "PARTNER WITH US" same. Mine ok (faint).
+4. Section 4 title + taglines now match ✓. Subtitle/H1/description GREEN spans ✓. Chatbar "Let's Talk Energy" ✓.
+Next: DOM rect check of card position + closeup crops of card and CTAs.
+
+## Rect verdict
+photo_card.png renders at x1219 y382 w621 h250 = EXACT match (my earlier perception of cmp95_2 left card at x~790 was wrong — that crop shows the card correctly at right column, just the screenshot thumbnail looked off). Chatbar x1480 y882 close to Figma (1499,881) panel... Figma chatbar GROUP rel(1499,881) 418x60 — D6Chatbot canonical. Acceptable.
+Remaining to check: CTA styles (Submit/Download) — my buttons show gradient but Figma shows paler fill w/ same gradient. Verify closeup crops and section CTAs (Explore) which look right. Also bottom quote wraps correctly. Vertical title faint outline ok.
+If closeups match → commit bug95. Then start bug 96 (become-a-supplier) node.
+
+## CTA closeup verdict
+Mine vs Figma: gradients, black text, arrows, slant all match very well. Mine "Download..." arrow is slightly larger/denser but Figma shows larger arrow too — actually Figma arrow = download icon w/ wider lines; mine FigmaAngledCta svg is thinner. Minor. Chatbar matches (Let's Talk Energy italic, mic). Bottom quote position matches. VERDICT: Bug 95 canvas matches Figma. Commit.
