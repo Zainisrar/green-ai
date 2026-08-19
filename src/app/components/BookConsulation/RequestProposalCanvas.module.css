@@ -1,0 +1,297 @@
+.desktopPage {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.verticalTitle {
+  position: absolute;
+  top: 320px;
+  left: 47px;
+  width: 59px;
+  height: 582px;
+}
+
+.collage {
+  position: absolute;
+  top: 444px;
+  left: 1023px;
+  width: 897px;
+  height: 526px;
+}
+
+.h1 {
+  position: absolute;
+  top: 112px;
+  left: 262px;
+  margin: 0;
+  font-size: 56px;
+  line-height: 67px;
+  font-weight: 800;
+  text-transform: uppercase;
+  white-space: nowrap;
+  letter-spacing: -1px;
+}
+
+.h1Green {
+  color: #23b14d;
+}
+
+.subtitle {
+  position: absolute;
+  top: 192px;
+  left: 262px;
+  margin: 0;
+  width: 1175px;
+  color: #23b14d;
+  font-size: 22px;
+  line-height: 26px;
+  font-weight: 700;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.description {
+  position: absolute;
+  top: 242px;
+  left: 264px;
+  margin: 0;
+  width: 1384px;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.sectionHead {
+  position: absolute;
+  top: 320px;
+  left: 259px;
+  margin: 0;
+  font-size: 26px;
+  line-height: 31px;
+  font-weight: 700;
+}
+
+.sectionHead2 {
+  position: absolute;
+  top: 542px;
+  left: 262px;
+  margin: 0;
+  font-size: 26px;
+  line-height: 31px;
+  font-weight: 700;
+}
+
+.chips {
+  position: absolute;
+  inset: 0;
+}
+
+.chip {
+  position: absolute;
+  width: 366px;
+  height: 53px;
+  border: 2px solid #ffe500;
+  transform: skewX(-16deg);
+}
+
+.chipText {
+  position: absolute;
+  top: 11px;
+  left: 38px;
+  transform: skewX(16deg);
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 600;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.delivRow {
+  position: absolute;
+  height: 70px;
+}
+
+.bolt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70px;
+  height: 70px;
+  display: block;
+  object-fit: contain;
+}
+
+.delivText {
+  position: absolute;
+  top: 20px;
+  left: 73px;
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 600;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.quoteWrap {
+  position: absolute;
+  width: 440px;
+  height: 230px;
+  background: #f2f9fc;
+}
+
+.bracketL {
+  position: absolute;
+  top: 59px;
+  left: 0;
+  width: 81px;
+  height: 100px;
+}
+
+.quote {
+  position: absolute;
+  top: 0;
+  left: 58px;
+  width: 387px;
+  margin: 0;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
+}
+
+.quoteGreen {
+  color: #23b14d;
+}
+
+.bracketR {
+  position: absolute;
+  top: 0;
+  left: 388px;
+  width: 82px;
+  height: 101px;
+}
+
+.emailBox {
+  position: absolute;
+  top: 845px;
+  left: 219px;
+  width: 556px;
+  height: 53px;
+}
+
+.emailSkew {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 556px;
+  height: 53px;
+  background: #fff;
+  border: 2px solid #ffe81d;
+  transform: skewX(-16deg);
+  transform-origin: top left;
+}
+
+.calendarIcon {
+  position: absolute;
+  top: 11px;
+  left: 44px;
+  width: 30px;
+  height: 31px;
+}
+
+.emailText {
+  position: absolute;
+  top: 11px;
+  left: 92px;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 600;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.ctaButton {
+  position: absolute;
+  top: 819px;
+  left: 1647px;
+  width: 269px;
+  height: 52px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.ctaBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 269px;
+  height: 52px;
+  transform: skewX(-16deg);
+}
+
+.ctaText {
+  position: absolute;
+  top: 6px;
+  left: 17px;
+  transform: skewX(16deg);
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #000;
+}
+
+.ctaArrow {
+  position: absolute;
+  top: 12px;
+  left: 225px;
+  width: 36px;
+  height: 32px;
+  transform: skewX(16deg);
+}
+
+.freeNote {
+  position: absolute;
+  top: 918px;
+  left: 332px;
+  width: 928px;
+  margin: 0;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.noteGreen {
+  color: #23b14d;
+  font-weight: 600;
+}
+
+.mobilePage {
+  padding: 24px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.mobilePage h1 {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.mobilePage h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.mobilePage button {
+  margin-top: 16px;
+  padding: 12px 20px;
+  background: #23b14d;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  font-size: 16px;
+}

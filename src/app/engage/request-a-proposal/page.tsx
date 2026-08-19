@@ -1,4 +1,4 @@
-import RequestProposal from '@/app/components/BookConsulation/RequestProposal'
+import RequestProposal from '@/app/components/BookConsulation/RequestProposalCanvas'
 import React from 'react'
 
 const page = () => {
