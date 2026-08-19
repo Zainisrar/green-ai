@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Chatbot from "../Chatbot";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import styles from "./CommunityImpactLoop.module.css";
 import { useCommunityImpactLoop } from "../../../hooks/useCommunityImpactLoop";
 import Link from "next/link";
@@ -625,50 +626,79 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
         </div>
 
         {main?.cta && main.cta.length > 0 ? (
-          <div className={canvas ? styles.canvasCtas : "flex flex-col items-end gap-8 my-8"}>
-            <button
-              type="button"
-              onClick={() => setIsProposalOpen(true)}
-              className=" relative flex justify-end cursor-pointer"
-            >
-              <img
-                src="/images/community-impact-loop/submit.png"
-                alt="Submit Proposal / Collaboration Inquiry"
-              />
-              <div className="absolute inset-0 flex items-center pl-8 lg:pl-12 pr-12 lg:pr-16 text-sm lg:text-base font-bold">
+          canvas ? (
+            <div className={styles.canvasCtas}>
+              <FigmaAngledCta onClick={() => setIsProposalOpen(true)}>
                 {main.cta[0].text}
-              </div>
-            </button>
-            <Link
-              href={main.cta[1]?.href ?? main.cta[0].href}
-              className=" relative flex justify-end  cursor-pointer"
+              </FigmaAngledCta>
+              <FigmaAngledCta
+                href={main.cta[1]?.href ?? main.cta[0].href}
+                icon="download"
+              >
+                {main.cta[1]?.text ?? "GREEN Innovation Partnership Framework (PDF)"}
+              </FigmaAngledCta>
+            </div>
+          ) : (
+            <div className="flex flex-col items-end gap-8 my-8">
+              <button
+                type="button"
+                onClick={() => setIsProposalOpen(true)}
+                className="relative flex justify-end cursor-pointer"
+              >
+                <img
+                  src="/images/community-impact-loop/submit.png"
+                  alt="Submit Proposal / Collaboration Inquiry"
+                />
+                <div className="absolute inset-0 flex items-center pl-8 lg:pl-12 pr-12 lg:pr-16 text-sm lg:text-base font-bold">
+                  {main.cta[0].text}
+                </div>
+              </button>
+              <Link
+                href={main.cta[1]?.href ?? main.cta[0].href}
+                className="relative flex justify-end cursor-pointer"
+              >
+                <img
+                  src="/images/community-impact-loop/green.png"
+                  alt="GREEN Innovation Partnership Framework (PDF)"
+                />
+                <div className="absolute inset-0 flex items-center pl-8 lg:pl-12 pr-12 lg:pr-16 text-sm lg:text-base font-bold">
+                  {main.cta[1]?.text ?? "GREEN Innovation Partnership Framework (PDF)"}
+                </div>
+              </Link>
+            </div>
+          )
+        ) : canvas ? (
+          <div className={styles.canvasCtas}>
+            <FigmaAngledCta onClick={() => setIsProposalOpen(true)}>
+              Submit Proposal / Collaboration Inquiry
+            </FigmaAngledCta>
+            <FigmaAngledCta
+              className={styles.canvasDownloadCta}
+              icon="download"
+              showArrow={true}
             >
-              <img
-                src="/images/community-impact-loop/green.png"
-                alt="GREEN Innovation Partnership Framework (PDF)"
-              />
-              <div className="absolute inset-0 flex items-center pl-8 lg:pl-12 pr-12 lg:pr-16 text-sm lg:text-base font-bold">
-                {main.cta[1].text}
-              </div>
-            </Link>
+              GREEN Innovation Partnership Framework (PDF)
+            </FigmaAngledCta>
           </div>
         ) : (
           <>
-            <div className={canvas ? styles.canvasCtas : ""}>
-            <div className={canvas ? styles.canvasCtaItem : " flex justify-end my-8 cursor-pointer"}>
-              <button type="button" onClick={() => setIsProposalOpen(true)} className="cursor-pointer">
+            <div className="flex justify-end my-8 cursor-pointer">
+              <button
+                type="button"
+                onClick={() => setIsProposalOpen(true)}
+                className="cursor-pointer"
+              >
                 <img
                   src="/images/community-impact-loop/submit.png"
                   alt="Submit Proposal / Collaboration Inquiry"
                 />
               </button>
             </div>
-            <div className={canvas ? styles.canvasCtaItem : " flex justify-end my-8 cursor-pointer"}>
+            <div className="flex justify-end my-8 cursor-pointer">
               <img
                 src="/images/community-impact-loop/green.png"
                 alt="GREEN Innovation Partnership Framework (PDF)"
               />
-            </div>
             </div>
           </>
         )}
