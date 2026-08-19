@@ -1,0 +1,264 @@
+.page {
+  position: relative;
+  height: 970px;
+  min-height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+/* ── Left green/yellow angled panel (Group 1171277870, 326×662 at -15,-1) ── */
+.leftPanel {
+  position: absolute;
+  top: -1px;
+  left: -15px;
+  width: 326px;
+  height: 662px;
+  clip-path: polygon(311px 0, 326px 0, -15px 661px, -15px 0);
+  background: linear-gradient(
+    125deg,
+    rgba(255, 229, 0, 0.89) 0%,
+    rgba(190, 235, 120, 0.55) 55%,
+    rgba(35, 209, 75, 0.3) 100%
+  );
+  z-index: 1;
+}
+
+.panelLogo {
+  position: absolute;
+  left: 9px;
+  top: 19px;
+  width: 255px;
+  height: 67px;
+  object-fit: contain;
+  z-index: 2;
+}
+
+/* ── Vertical side title (Raleway 900 50px, outlined #989898, bottom-up) ── */
+.verticalTitle {
+  position: absolute;
+  bottom: 864px;
+  left: 106px;
+  margin: 0;
+  white-space: nowrap;
+  font-family: var(--font-raleway), Raleway, sans-serif;
+  font-size: 50px;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(152, 152, 152, 0.75);
+  transform: rotate(-90deg) translateX(-100%);
+  transform-origin: left bottom;
+  z-index: 2;
+}
+
+/* ── Faint left collage (Mask group at -472,408, 1152×1888) ── */
+.leftCollage {
+  position: absolute;
+  top: 408px;
+  left: -472px;
+  width: 1152px;
+  height: 562px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.leftCollage img {
+  display: block;
+  width: 1152px;
+  height: 1888px;
+  object-fit: none;
+  object-position: 472px 0;
+  opacity: 0.42;
+  filter: saturate(0.9);
+}
+
+/* ── Header block ── */
+.headerBlock {
+  position: absolute;
+  top: 97px;
+  left: 264px;
+  width: 1384px;
+  z-index: 3;
+}
+
+.mainTitle {
+  margin: 0;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #000;
+}
+
+.subHeadline {
+  margin: 12px 0 0;
+  font-size: 22px;
+  font-weight: 700;
+  font-style: italic;
+  color: #23b14d;
+}
+
+.description {
+  margin: 22px 0 0;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #000;
+}
+
+.greenText,
+.greenHighlight {
+  color: #23b14d;
+  font-weight: 700;
+}
+
+/* ── Slanted feature cards (Vectors 7362/7363/7364, 527×351) ── */
+.card {
+  position: absolute;
+  width: 527px;
+  height: 351px;
+  z-index: 3;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, #f4f9dc 0%, #fbfdef 55%, #f0f6dd 100%);
+  clip-path: polygon(46px 0, 100% 0, calc(100% - 46px) 100%, 0 100%);
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: #fff;
+  clip-path: polygon(46px 0, 100% 0, calc(100% - 46px) 100%, 0 100%);
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #000;
+  z-index: 2;
+}
+
+.cardImage {
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 367px;
+  height: 145px;
+  overflow: hidden;
+  clip-path: polygon(22px 0, 100% 0, calc(100% - 22px) 100%, 0 100%);
+  z-index: 1;
+}
+
+.cardImage img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardImageAccent {
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(22px 0, 100% 0, calc(100% - 22px) 100%, 0 100%);
+  border: 2px solid #fff;
+  pointer-events: none;
+}
+
+.cardSubtitle {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #000;
+  z-index: 2;
+}
+
+.cardCta {
+  position: absolute;
+  width: 122px;
+  height: 37px;
+  z-index: 2;
+}
+
+/* ── Bottom-left quote with angled brackets (Vectors 7374 / 7375) ── */
+.bottomQuote {
+  position: absolute;
+  left: 104px;
+  top: 603px;
+  width: 458px;
+  height: 99px;
+  z-index: 4;
+}
+
+.quoteBracketLeft {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 79px;
+  height: 98px;
+}
+
+.quoteBracketRight {
+  position: absolute;
+  left: 378px;
+  top: 0;
+  width: 80px;
+  height: 99px;
+}
+
+.quoteText {
+  position: absolute;
+  left: 79px;
+  top: 0;
+  margin: 0;
+  width: 379px;
+  font-size: 22px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.35;
+  color: #000;
+  z-index: 1;
+}
+
+/* ── Legacy statement ── */
+.legacyQuote {
+  position: absolute;
+  left: 489px;
+  top: 808px;
+  margin: 0;
+  width: 980px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #000;
+  z-index: 3;
+}
+
+/* ── CTAs ── */
+.submitCta {
+  position: absolute;
+  left: 1510px;
+  top: 741px;
+  width: 409px;
+  height: 52px;
+  z-index: 4;
+}
+
+.frameworkCta {
+  position: absolute;
+  left: 1437px;
+  top: 819px;
+  width: 479px;
+  height: 52px;
+  z-index: 4;
+}

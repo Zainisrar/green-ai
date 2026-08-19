@@ -4,7 +4,7 @@ import CollaborationInnovation from "@/app/components/CollaborationInnovation/Co
 const page = () => {
   return (
     <React.Fragment>
-      <CollaborationInnovation />
+      <CollaborationInnovation canvas />
     </React.Fragment>
   );
 };
