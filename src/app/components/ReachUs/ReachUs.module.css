@@ -128,9 +128,24 @@
 
 .officeCard::before {
   position: absolute;
+  z-index: -2;
+  top: -2px;
+  left: -1px;
+  width: 25px;
+  height: 50px;
+  background: #23b14d;
+  content: "";
+  transform: skewX(-24deg);
+  transform-origin: center;
+}
+
+.officeCard::after {
+  position: absolute;
   z-index: -1;
-  inset: 0;
-  border-left: 4px solid #23b14d;
+  top: 0;
+  left: 0;
+  width: calc(100% + 1px);
+  height: calc(100% + 1px);
   background: rgba(255, 255, 255, 0.96);
   content: "";
   transform: skewX(-24deg);
@@ -151,27 +166,36 @@
 }
 
 .officeCardActive {
-  width: 348px;
-  height: 112px;
+  width: 373px;
+  height: 111px;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 13px 28px 12px 65px;
+  padding: 7px 14px 12px 46px;
 }
 
 .officeCardActive::before {
-  border-left-width: 5px;
+  top: -2px;
+  left: -1px;
+  width: 59px;
+  height: 116px;
 }
 
 .officeCardActive h2 {
+  margin: 0;
+  padding: 0;
+  color: #23b14d;
   font-size: 18px;
+  font-weight: 800;
+  line-height: 17px;
+  white-space: nowrap;
 }
 
 .officeCardActive p {
   position: absolute;
-  top: 40px;
-  left: 60px;
+  top: 36px;
+  left: 58px;
   display: block;
-  width: calc(100% - 82px);
+  width: 276px;
   margin: 0;
   color: #000;
   font-size: 12px;
@@ -186,8 +210,8 @@
 
 .officeFlag {
   position: absolute;
-  top: 8px;
-  left: 43px;
+  top: 3px;
+  left: 45px;
   width: 50px;
   height: 28px;
   object-fit: fill;
@@ -201,10 +225,10 @@
 }
 
 .india.officeCardActive {
-  top: 150px;
-  left: 782px;
-  width: 347px;
-  height: 116px;
+  top: 217px;
+  left: 779px;
+  width: 373px;
+  height: 111px;
 }
 
 .singapore {
@@ -214,10 +238,10 @@
 }
 
 .singapore.officeCardActive {
-  top: 312px;
-  left: 545px;
-  width: 302px;
-  height: 107px;
+  top: 326px;
+  left: 712px;
+  width: 373px;
+  height: 111px;
 }
 
 .papuaNewGuinea {
@@ -227,10 +251,10 @@
 }
 
 .papuaNewGuinea.officeCardActive {
-  top: 208px;
-  left: 963px;
+  top: 211px;
+  left: 967px;
   width: 373px;
-  height: 116px;
+  height: 111px;
 }
 
 .australia {
@@ -240,10 +264,10 @@
 }
 
 .australia.officeCardActive {
-  top: 399px;
-  left: 941px;
-  width: 302px;
-  height: 107px;
+  top: 358px;
+  left: 990px;
+  width: 373px;
+  height: 111px;
 }
 
 .enquiry {

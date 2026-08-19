@@ -458,3 +458,101 @@ cmp97_2 verdict: match is strong. Only minor: my brackets appear slightly more o
 
 ## Bug97 rows verdict
 Rows zone comparison: cards/photos/titles/descs/Explore CTAs/brackets/row dividers all match Figma. My bracket L at left of each card matches Figma L-bracket style (light green). Iter2 commit-ready.
+
+## Bug 100 / reach-us investigation
+Frame 7077:13414 (REach us D1) = the Reach Us page design: intro text y169, Enquiry CTA (1424,184), world map ~ (157,244)-(968,714), office labels: INDIA card w/ flag at ~(763,389), PNG label at (898,517), SINGAPORE (690,560), AUSTRALIA (912,591), pins at locations, vertical REACH US title left (47,363-902 approx), TRANSFORMATION card (1157,301) 412x120, JOIN US (1157,479), chatbar (1246,884). Note: this is the "Find Us Globally" page = /engage/reach-us → Bug 100 target frame = 7077:13414 (one of the 5 D1s; pick the one whose active office label matches component's rotation; current comp active=PNG).
+Still need: Contact Us page design = bug 71/98. The ContactUs component is NOT canvas-based. Check other candidates: maybe "Media & Press - Media Contact" 7077:27191? That's a different page. Look for frames with names like "Contact us D1" or check frames_all.txt full list again.
+
+## Bug 71/98 conclusion
+No frame in the Figma file is named "Contact Us" — the /engage/contact-us route corresponds to the "REach us D1" family (vertical REACH US title + global offices). Bug 71/98 = Contact Us page → Figma = REach us D1 (7077:13486 is ReachUs.tsx's current data-node-id canvas = one of the 5 D1 variants). Current ReachUs component ALREADY uses canvas mode with node 7077:13486. So bug 71/98 = make ReachUs canvas pixel-perfect vs Figma 7077:13486.
+The 5 REach us D1 frames (13414/13486/13558/13630/13702) differ in active office label state. Render all 5, compare with current page, choose the matching base (component auto-rotates every 3s; take screenshot and pick best match or fix to the canonical 7077:13486 frame).
+Also check: ReachUs uses /images/reach-us/* assets; Figma render shows world map, pins, office labels, enquiry CTA, TRANSFORMATION/JOIN US cards, chatbar.
+
+## Bug100/reach-us baseline (cmp100_b: cur vs 13486)
+Current page vs Figma 7077:13486 look VERY similar already! Deltas observed:
+1. Active office card: mine shows INDIA (rotating); 13486 shows PAPUA NEW GUNINEA active w/ flag. Frame 13486 has PNG active. Current active=PNG at index0 → matches 13486's active PNG? Mine shows INDIA label visible. Need to check timing; screenshot at 6s likely shows rotated state. Set default office index to match PNG active? Figma 13486: PNG active card at ~(840,430) w/ flag. Mine PNG label at (898,517) smaller.
+2. Office labels style: Figma labels = white parallelogram chips w/ colored underline + office name green bold + leader line from pin; mine text labels styled differently (mine SINGAPORE/PAPUA NEW GUINEA/AUSTRALIA plain black+green w/ white chips). Need closeup comparison.
+3. Pin positions: Figma pins at map locations with white shadow; mine similar.
+4. Map size/position: mine map spans ~x100-950; Figma map bigger x~160-970, taller.
+5. Intro text x position similar. Enquiry CTA (1424,184) canvas: mine right side ok.
+6. Side cards TRANSFORMATION (1157,301), JOIN US (1157,479) — mine appear at right but slightly different placement?
+7. Vertical title REACH US mine present ✓ (outline style).
+Next: view gridded 13486 render + tight crops of map zone, office labels, pins to get exact coords; then fix ReachUs.tsx/.css.
+
+## Grid-verified Figma 13486 coords (2x px, canvas = px/2)
+- Intro text: x=330..980 (canvas 165..490), y=338 (canvas 169), fs ~28px2x = fs14
+- Enquiry CTA: canvas (1424,184) approx 2x (2848,368)
+- World map: 2x x=190..1960 (canvas 95..980), y=500..1170 (canvas 250..585); map is a composite of green + olive landmasses
+- TRANSFORMATION card: 2x x=2314..3660 (canvas 1157..1830), y=602..898 (canvas 301..449)
+- JOIN US card: 2x x=2314..3660 (canvas 1157..1830), y=958..1294 (canvas 479..647)
+- Office labels: PNG active card w/ flag: 2x x=2320..3120 (canvas 1160..1560)? NO — PNG card at 2x (2330,830)-(3130,1020): canvas (1165,415)-(1565,510). Actually PNG card at x~2330-3130? Let me recompute: PNG label card top-left ~ (2330,830) 2x → canvas (1165,415). Hmm but PNG name appears right of center ~x=2400-3050 2x.
+- INDIA inactive label: 2x (1570,830)-(1760,878) → canvas (785,415)
+- SINGAPORE label: 2x (1370,1030)-(1650,1080) → canvas (685,515)
+- AUSTRALIA label: 2x (1860,1090)-(2080,1130) → canvas (930,545)
+- PAPUA NEW GUNINEA label: 2x (1960,820)-(2480,855) → canvas (980,410)
+- Pins: PNG 2x (1835,1005)?, INDIA 2x (1595,905), SINGAPORE 2x (1470,990), AUSTRALIA 2x (1890,1150)
+- Chatbar: canvas (1246,884) ≈ 2x (2492,1768), 540x88 2x → canvas w270 h44? Figma chatbar looks larger: 2x x=2465..3500 (canvas 1232..1750), y=1750..1860 (canvas 875..930)
+- Vertical REACH US title: left edge x~100 (canvas 50), y=730..1830 (canvas 365..915), outline white strokes
+
+## Reach-us closeup verdict
+The current reach-us page and Figma 13486 are extremely close. Main visible delta: current shows INDIA active (rotated), Figma base frame has PNG active. Labels, pins, map, cards, chatbar all match style. The component rotates every 3s, so the base frame mismatch isn't really a bug.
+Check remaining items vs bug tracker spreadsheet (Google Sheets gid 436421358). Rather than re-inventing the wheel, read the actual bug list from the sheet to see what bugs 71/98 and 100 say.
+
+## Final bug list read from Google Sheet (gid 436421358)
+- Bug-0096: Become a Supplier — "Need to give standard color pattern for the CTA buttons, Need to check typography..." (DONE, committed earlier)
+- Bug-0097: Investor Relations — "Right-side slider images need to move top, the CTA button need to move top and a typography and alignments, Need to check the base designs" (DONE, committed)
+- Bug-0098: Contact Us — "Need to check the Figma design, need the popup form for this" 
+- Bug-0099: Request a Proposal (RFP) — "Need to check..." (DONE)
+- Bug-0100: (row after 0099, visible partially) — likely Find Us Globally related
+
+The sheet has Bug-0098 Contact Us saying "need the popup form" — the ContactUs page popup form already exists (Form.tsx with enquiry). Also Bug-0069 V1 "Find Us Globally (Map) — Enquiry Link button need to position correctly."
+My mapping from earlier session notes (BUG_TASK_STATE.md): 
+- Bug 95/96 = Partner With Us / Become a Supplier DONE
+- Bug 97 = Investor Relations re-check DONE
+- Bug 71/98 = Contact Us — "Need to check the Figma design, need the popup form for this" → /engage/contact-us page needs to match Figma reach-us design + popup form works
+- Bug 100 = Find Us Globally — /engage/reach-us page (already canvas-based, very close match)
+
+Plan for remaining:
+1. Bug 100 reach-us: finalize pixel check — verify active-card start index vs Figma 13486 (PNG active), fix small deltas (map bounds, pins, label chips), commit.
+2. Bug 71/98 contact-us: compare current non-canvas page with the Figma reach-us D1 design — likely needs rebuild to canvas + popup form (Form.tsx already exists). Check whether /engage/contact-us already serves something similar; if contact-us page = same design as reach-us, maybe reuse ReachUs component or note skip.
+Actually: from BUG_TASK_STATE.md (need to re-read) — bug 71/98 may specifically say check Figma design of contact page and popup form. Verify popup form opens + styled.
+
+## Bug100/reach-us verified spec from dump (node 7077:13486, canvas coords 1:1)
+Intro text: (320,198) 744x25, fs14 Montserrat 400 #000. Vertical title "REACH US": (46,405) 117x529, fs96 Montserrat 900 — rendered as outlined strokes (white stroke text); my current SVG/outline approach ok.
+Map group (139.8,286) 1339.4x534.8 = map VECTOR + labels + pins. Pins: 901.3,544.3 / 1088.5,603.7 / 986.5,583.9 / 1106.3,681.0 (each ~29x29).
+Office labels: INDIA white chip (918.3,503.9) 143.4x41.7 + green parallelogram accent (917.5,502) 24.5x45.6; text INDIA at (955,513) fs15 fw800 #23b14d. SINGAPORE chip (852,612.4) 148.4x41.7, text (823.3,621.3). AUSTRALIA chip (1129.8,644.5) 156.1x41.7, text (1102.6,654). PNG active card: big white card (1106.5,496.7) 372.8x110.9, green accent (1103,494) 58.6x116.3, flag (1152,499.5) 50x28, title PAPUA NEW GUNINEA (1202,504) fs18 fw800 #23b14d, address text (1164,532) 275x67 fs12 fw500 #000 4 lines: "PO Box 1243, Port Moresby\nSection 405, Allotment 4, Waigani Drive,\nNorth Hohola, National Capital District.\n11.043442, 77.892613".
+Enquiry CTA: (1751,199) 169x52 parallelogram, text (1792,202) fs16 fw600, arrow icon (1867,209) 36x32.
+TRANSFORMATION mask group (1434,327) 416x128 photo + text (1515,365) 255x46 fs20 fw600 white. JOIN US (1434,526) 416x128, text (1513,554).
+Chatbar group (1489,899) 427x60: white parallelogram vectors + text (1489,902) fs13 fw600 #707070 "Let's Talk Energy" + mic vector (1862,913) 18x23 #c6c2c2.
+Header: nav x=1076..1725 y=47 fs20 fw500 #303030; ENGAGE active; bolt logo right (1836,16).
+Comparison to current ReachUs.tsx: main deltas to fix:
+1. Pin positions/size (mine differ), label chips w/ green parallelogram accent (mine = plain parallelogram w/ green text only, missing white chip + green accent pair).
+2. PNG active card = full address card w/ flag; mine currently rotates showing INDIA with address. The Figma base = PNG active. Component rotates; acceptable but default state should be PNG active (index 0 = papuaNewGuinea — it is! but timer rotates at 3s; screenshot at 6s showed INDIA active — timer bug? rotation happens too fast vs screenshot wait; acceptable).
+3. Chatbar at (1489,899) my D6Chatbot uses triggerVariant figmaCanvas (1498,899 w418 h52) — VERY close, fine.
+4. Enquiry CTA (1751,199) mine ok.
+5. Intro text pos (320,198) mine ok.
+6. TRANSFORMATION (1434,327) JOIN US (1434,526) — mine may differ slightly.
+7. Address text has coordinates "11.043442, 77.892613" in OFFICES data for PNG+India — matches Figma (designer put same coords, leave as-is).
+Conclusion: minor CSS deltas; prioritize label chips to match white chip + green accent, pin positions. Check current ReachUs.module.css styles for .officeCard,.pins etc.
+
+## Bug100 map comparison findings (cmp_map.png)
+Pin positions already match Figma: india 901.3,544.3 ✓ (code 761+140, 258+286), png 1088.5,603.7 ✓ (949,318+286), singapore 986.5,583.9 ✓ (847,298), australia 1106.3,681 ✓ (966,395).
+Remaining deltas vs Figma: (a) labels use one skewed white card + green left edge; Figma uses separate green parallelogram accent (24.5x45.6) overlapping white chip (e.g., INDIA chip 143.4x41.7 at 918.3,503.9 + accent at 917.5,502). (b) Active PNG card in Figma: white card 372.8x110.9 at (1106.5,496.7) + accent 58.6x116.3 at (1103,494) — current close (top 208 vs 210.7 rel; left 963 vs 966.5). (c) Figma "PAPUA NEW GUNINEA" typo preserved in code ✓.
+Plan: refine officeCard to have explicit accent parallelogram like Figma (24.5x45.6, slightly above/left of chip) instead of border-left; adjust active card dims/pos to exact spec; keep rotation behavior.
+
+## Bug100 baseline assessment (cur100_b + cmp100_b)
+Overall match is very good: header ✓, intro text ✓, enquiry CTA ✓, transformation/join cards ✓, chatbar ✓, pins ✓ (measured), map ✓, active card rotating (INDIA at 6s) ✓ with flag+address.
+Remaining deltas: (1) Figma base state = PNG active card; current shows INDIA active due to 3s rotation vs 6s screenshot wait — acceptable live behavior but default matches (index 0). (2) Label chips: current = single skewed white card w/ green left edge; Figma = white chip + separate green parallelogram accent overlapping left edge. Visually current already looks close to Figma (left image shows green accent at left of INDIA chip, SINGAPORE/AUSTRALIA similar). The accent in current is a border-left; figma's is a full parallelogram shape taller than the chip (45.6 vs 41.7h) extending 2px beyond top. Very subtle — acceptable for pixel-level? I'll make it distinct: separate ::before parallelogram with explicit size/offset to match figma (accent 24.5x45.6 at -0.8,-1.9 rel to chip group; chip 143.4x41.7 at 0.8,1.9). Implement: .officeCard::before parallelogram width 24px skewX(-24deg)? Figma accent appears to be a parallelogram overlapping card's left: chip rel 918.3 vs accent 917.5 → accent starts 0.8px left; accent height 45.6 vs chip 41.7 → extends 2px beyond top/bottom (1.9 each). Skew: figma accent skew unknown but current skewX(-24deg) matches look.
+DECISION: minor CSS tweaks only — accent separate shape, active card exact dims (372.8x110.9), pos top 210.7 left 966.5 rel map, p text at (1164-1106.5=57.5, 532-496.7=35.3) rel card, fs12 fw500 lh? w500 → lh ~16. Figma text lines lh≈16. Current active p lh16 ✓ but padding 13 28 12 65 → text at left 65 vs 57.5. Title h2 at rel (1202-1106.5=95.5, 504-496.7=7.3). Current h2 at left 65? no — flex centered. Adjust.
+Actually given the very small visual deltas and risk of regression, I will make surgical tweaks: officeCard structure → accent div (::before stays but adjust to overlap as in figma), active card size 373x111, h2 padding-left to align title at 95.5+flag at rel 45.5, p at left 57 top 35. Then screenshot and diff.
+
+## Bug100 cmp_map2 (cur100c top vs figma bottom)
+Chips now show green parallelogram accent at left + white chip — much closer to Figma. Labels positions: INDIA chip at top ~40-46, SINGAPORE ~64-70, AUSTRALIA ~74-80 in crop (real y 420+). In figma: INDIA 503.9..549.5, SINGAPORE 610.4..656, AUSTRALIA 642.6..688.2, PNG pin 1088.5,603.7.
+Observed deltas (small): INDIA chip in current sits slightly lower-right of figma? Crop shows INDIA chip to right of pin vs figma INDIA chip right of pin too — acceptable. PNG pin top of figma bottom crop at y~738 rel figma crop = 738/2*2+760=... figma crop box (1000,760)-(3200,1700) scaled to 1100 wide → scale 0.5. PNG pin figma at (1088.5,603.7) → crop (88.5, -156.3)? out of crop, fine.
+Figma bottom crop shows PNG label at y~660 crop = 660*2+760=2080/... wait crop 1100 wide from 2200 orig. Figma PNG card text at crop y~660 → real y = 660*2 + 760 = 2080?? >1940. Scale: crop resized to 1100 (orig 2200) = 0.5 → real = crop*2+760. Crop y 660 → 2080 too big — recheck: figma PNG label "PAPUA NEW GUNINEA" at crop y~660/700: figma crop box was (1000,760,3200,1700) h940 displayed 470 → scale 0.5 for displayed; but PIL crop kept orig px. Crop orig y: label ~700 → real 700*2+760=2160?? NO the displayed image is 1100x940 = I saved resized b (1100x470). So displayed crop coords = orig crop /2 + offset. PNG card figma real y=496.7 → displayed = (496.7-760)/2 = -131 → NOT visible?? But it IS visible at crop y~660 → real = 660*2+760 = 2080?! Contradiction.
+Correction: my resize b.resize((1100,470)) halves the 2200x940 crop → displayed coord d: real = d*2 + 760. PNG card real y 496.7 → d=(496.7-760)/2 = -131. Not in crop. Yet visible "PAPUA NEW GUNINEA" near top-right of figma crop at d~660?? That must be the TRANSFORMATION card area (x 1434-1850, y 327-455 → d = (327-760)/2 = -216? still negative). Hmm visible white card w/ text at right of figma crop is the TRANSFORMATION + JOIN US images overlapping crop right edge at real x 1395-1900, y 276-815: d = (y-760)/2 → 276→-242, 815→27. So JOIN card bottom visible at d~27 (top of figma crop shows lightbulb row). The "PAPUA NEW GUNINEA" visible at d~660 → real y 2080 — IMPOSSIBLE; that's actually the bottom crop row showing PNG card?? No— the visible "PAPUA NEW GUNINEA" is in the BOTTOM (figma) panel at displayed y~660 → real 2080?? WRONG box: bottom panel in my composite is b.resize(1100,470) at y=470..940. The PNG card displayed at panel-local y~190 → global y 660. panel y = (real-760)/2 → real = 190*2+760 = 1140. Not 496.7!!
+So figma PNG card is at real y 496.7 but displays in my crop at panel y (496.7-760)/2 = -131 (clipped). Yet I see PNG card in figma panel... the card I see with "PAPUA NEW GUNINEA" at panel y~190 must be the png active card from... real y 1140? Nothing in Figma at y1140. → WAIT: the crop box for figma was (1000,760,3200,1700) on 3840x1940 image, OK. PNG card real y 496.7 < 760 → indeed clipped at top of crop. So the visible "PAPUA NEW GUNINEA" card at panel y 190 is NOT in the crop region?? Unless... it IS visible because I'm misreading the composite: bottom panel shows PNG card + pins + AUSTRALIA label → those are at real y 496-690 → all <760 → should be clipped. Yet visible. → Ah, I see: the bottom panel crop actually used box (1000,760,...)? In the code: crop(fig,(1000,760,3200,1700)) → figma img 3840x1940. crop y 760..1700 = displayed as bottom half. PNG card y496.7 OUTSIDE. But image shows it... Hmm maybe the displayed card IS below: figma PNG card at y496... NOPE visible card = the AUSTRALIA active card? Real y 644.5..690.1 <760. Still outside. The visible card at panel y 190→real 1140 must come from... oh! The figma render might be scaled differently: Figma export with scale=2 positions at 2x but coordinates are in frame units; img crop by px works on rendered pixels: card at y 496.7 in FRAME coords = 993 in render px. AHH yes! Render PNG is 3840x1940 = 2x frame units. My crop must use 2x coords: PNG card rendered at y 993. Crop y 760 → visible at panel y (993-760)/2 = 116 ✓ matches image (~190 w/ card h). OK so rendered coords = 2x frame coords. Good.
+So my earlier pin-position check used 1x frame coords doubled properly? Pins in code: indiaPin top 258+286=544 real → rendered 1088. Figma pin 544.3 → rendered 1088.6 ✓. All good.
+Final check from cmp_map2: labels and accent look right. PNG card (index 0 default) vs current screenshot at 7s shows AUSTRALIA active (timer at 3s intervals; default IS PNG for 3s). Acceptable. Text content matches figma (PAPUA NEW GUNINEA typo retained ✓, addresses match ✓).
+VERDICT: Bug 100 matches. Minor: PNG active card in figma has accent 58.6x116.3 at (1103,494) rendered; current active card accent now 59x116 with top -2 left -1 relative to 373x111 card at top211,left967 → accent absolute = (966,209) rel map = (1106,495) real ✓ matches (1103,494)≈. Card (1107,498) vs figma (1106.5,496.7) ✓.
+BUG100 DONE — commit.
