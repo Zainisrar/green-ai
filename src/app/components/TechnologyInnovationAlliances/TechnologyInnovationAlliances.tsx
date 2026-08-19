@@ -122,14 +122,9 @@ export default function TechnologyInnovationAlliances({
 
   return (
     <main className={styles.page} data-node-id="7077:22719">
-      <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
-
-      {/* Left green/yellow angled panel (Group 1171277870, 326×662) */}
-      <div className={styles.leftPanel} aria-hidden="true" />
-      <img
-        src="/images/technology-innovation-alliances/logo_green.png"
-        alt="GREEN Future: Envisioned"
-        className={styles.panelLogo}
+      <SiteHeader
+        layout={canvas ? "figmaCanvas" : "viewport"}
+        figmaPanelVariant={canvas ? "flagship" : "default"}
       />
 
       {/* Vertical outlined side title */}
