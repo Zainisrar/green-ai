@@ -2,13 +2,17 @@
 import React, { useState } from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import D6Chatbot from "../D6Chatbot";
+import styles from "./CommunityVoices.module.css";
 import { useCommunityVoices } from "../../../hooks/useCommunityVoices";
 import VoicesFromField from "./Dialog/VoicesFromField";
 import WhatMakesOurImpactDifferent from "./Dialog/WhatMakesOurImpactDifferent";
 import SubmitTestimonial from "./Dialog/SubmitTestimonial";
 import UploadPhotoVideo from "./Dialog/UploadPhotoVideo";
 
-const CommunityVoices = () => {
+const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
   const { data } = useCommunityVoices();
   const [openModal, setOpenModal] = useState<string | null>(null);
 
@@ -32,6 +36,43 @@ const CommunityVoices = () => {
       );
     });
   };
+
+    if (canvas) {
+      const rows = [
+        { title: "Voices from the Field", image: "/images/community-voices/mainImg.png", onClick: () => setOpenModal("voicesFromField") },
+        { title: "What Makes Our Impact Different?", image: "/images/community-voices/mainImg.png", onClick: () => setOpenModal("whatMakesOurImpact") },
+        { title: "Project Showcase", image: "/images/community-voices/mainImg.png", onClick: () => setOpenModal("projectShowcase") },
+      ];
+      return (
+        <main className={styles.canvasPage} data-node-id="7077:21678">
+          <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
+          <div className={styles.canvasArtwork} aria-hidden="true"><img src="/images/community-voices/mainImg.png" alt="" /></div>
+          <img className={styles.canvasVerticalTitle} src="/images/community-voices/community-voices.png" alt="Community Voices" />
+          <h1 className={styles.canvasTitle}>Community Voices</h1>
+          <p className={styles.canvasSubtitle}>You Call Them Projects. We Call Them People.</p>
+          <p className={styles.canvasDescription}>From off-grid islands to inland clinics, GREEN’s systems don’t just power equipment — they power lives.<br />Here, the people speak. And the impact speaks for itself.</p>
+          <div className={styles.canvasRows}>
+            {rows.map((row, index) => (
+              <div className={`${styles.canvasRow} ${styles[`canvasRow${index + 1}`]}`} key={row.title} role="button" tabIndex={0} onClick={row.onClick} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); row.onClick(); } }}>
+                <img className={styles.canvasRowImage} src={row.image} alt="" />
+                <h2 className={styles.canvasRowTitle}>{row.title}</h2>
+                <FigmaAngledCta className={styles.canvasRowCta} onClick={(event) => { event.stopPropagation(); row.onClick(); }}>Explore</FigmaAngledCta>
+              </div>
+            ))}
+          </div>
+          <p className={styles.canvasQuote}>You Call Them Projects.<br />We Call Them People.</p>
+          <p className={styles.canvasBottomQuote}>When the lights come on, the real story begins.<br />And GREEN is honored to power every chapter.</p>
+          <div className={styles.canvasReadMore}><span>Read more</span><span aria-hidden="true">›</span></div>
+          <FigmaAngledCta className={styles.canvasSubmitCta} onClick={() => setOpenModal("submitTestimonial")}>Submit a Testimonial</FigmaAngledCta>
+          <FigmaAngledCta className={styles.canvasUploadCta} onClick={() => setOpenModal("uploadPhotoVideo")} icon="download">Upload a Photo / Video</FigmaAngledCta>
+          <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
+          <VoicesFromField isOpen={openModal === "voicesFromField"} onClose={() => setOpenModal(null)} />
+          <WhatMakesOurImpactDifferent isOpen={openModal === "whatMakesOurImpact"} onClose={() => setOpenModal(null)} />
+          <SubmitTestimonial isOpen={openModal === "submitTestimonial"} onClose={() => setOpenModal(null)} />
+          <UploadPhotoVideo isOpen={openModal === "uploadPhotoVideo"} onClose={() => setOpenModal(null)} />
+        </main>
+      );
+    }
 
     if (!data) return null;
   return (

@@ -3,6 +3,10 @@
 import React, { useState } from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import D6Chatbot from "../D6Chatbot";
+import styles from "./PartnerWithUs.module.css";
 import WhyGreen from "./Dialog/WhyGreen";
 import PartnershipTypes from "./Dialog/PartnershipTypes";
 import WhatYouCanExpect from "./Dialog/WhatYouCanExpect";
@@ -18,7 +22,7 @@ const sections = [
   { key: "trustedBy", title: "Trusted By" },
 ];
 
-const PartnerWithUs = () => {
+const PartnerWithUs = ({ canvas = false }: { canvas?: boolean }) => {
   const [openModal, setOpenModal] = useState<string | null>(null);
   const [isBriefOpen, setIsBriefOpen] = useState(false);
 
@@ -29,6 +33,39 @@ const PartnerWithUs = () => {
         {i < arr.length - 1 && <span className="text-[#23B14D]">GREEN</span>}
       </React.Fragment>
     ));
+
+  if (canvas) {
+    return (
+      <main className={styles.canvasPage} data-node-id="7077:23359">
+        <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
+        <div className={styles.canvasArtwork} aria-hidden="true"><img src="/images/client-partnerships/future-visions-business-technology.png" alt="" /></div>
+        <div className={styles.canvasVerticalTitle}>PARTNER WITH US</div>
+        <h1 className={styles.canvasTitle}>Partner With <span>Us</span></h1>
+        <p className={styles.canvasSubtitle}>Your Mission, Delivered.</p>
+        <p className={styles.canvasDescription}>Whether you&apos;re a donor, government, or global institution — if your goal is clean energy access, sustainable infrastructure, and real-world delivery — <span>GREEN</span> is your execution partner in Papua New Guinea and the South Pacific.</p>
+        <div className={styles.canvasRows}>
+          {sections.map((section, index) => (
+            <div className={`${styles.canvasRow} ${styles[`canvasRow${index + 1}`]}`} key={section.key}>
+              <h2>{section.title}</h2>
+              <p>We don&apos;t just build solar systems — we engineer energy impact.</p>
+              <FigmaAngledCta className={styles.canvasRowCta} onClick={() => setOpenModal(section.key)}>Explore</FigmaAngledCta>
+            </div>
+          ))}
+        </div>
+        <p className={styles.canvasBottomQuote}>Let&apos;s turn shared goals into shared ground. With <span>GREEN</span>, you don&apos;t partner for plans, meetings and fun. You partner for outcomes and mission accomplishments.</p>
+        <div className={styles.canvasReadMore}><span>Read more</span><span aria-hidden="true">›</span></div>
+        <FigmaAngledCta className={styles.canvasSubmitCta} onClick={() => setIsBriefOpen(true)}>Submit a Collaboration Brief</FigmaAngledCta>
+        <FigmaAngledCta className={styles.canvasDownloadCta} href="#" icon="download">Download our Partnership Overview (PDF)</FigmaAngledCta>
+        <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
+        <WhyGreen isOpen={openModal === "whyGreen"} onClose={() => setOpenModal(null)} />
+        <PartnershipTypes isOpen={openModal === "partnershipTypes"} onClose={() => setOpenModal(null)} />
+        <WhatYouCanExpect isOpen={openModal === "whatYouCanExpect"} onClose={() => setOpenModal(null)} />
+        <ApplicationChannels isOpen={openModal === "applicationChannels"} onClose={() => setOpenModal(null)} />
+        <TrustedBy isOpen={openModal === "trustedBy"} onClose={() => setOpenModal(null)} />
+        <SubmitCollaborationBrief isOpen={isBriefOpen} onClose={() => setIsBriefOpen(false)} />
+      </main>
+    );
+  }
 
   return (
     <React.Fragment>

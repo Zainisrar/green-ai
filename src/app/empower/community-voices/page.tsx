@@ -1,12 +1,13 @@
-import CommunityVoices from '@/app/components/CommunityVoices/CommunityVoices'
-import React from 'react'
+import CommunityVoices from "@/app/components/CommunityVoices/CommunityVoices";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function CommunityVoicesPage() {
   return (
-    <div>
-        <CommunityVoices/>
-    </div>
-  )
+    <FigmaPageCanvas
+      desktop={<CommunityVoices canvas />}
+      mobile={<CommunityVoices canvas />}
+      nodeId="7077:21678"
+      fitCanvasHeight
+    />
+  );
 }
-
-export default page

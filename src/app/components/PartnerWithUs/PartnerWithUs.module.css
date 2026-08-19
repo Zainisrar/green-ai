@@ -1,0 +1,40 @@
+.canvasPage { position: relative; width: 1920px; height: 970px; min-height: 970px; overflow: hidden; background: #fff; color: #111; font-family: var(--font-montserrat), Montserrat, sans-serif; }
+.canvasArtwork { position: absolute; z-index: 0; top: 382px; left: 1219px; width: 620px; height: 245px; pointer-events: none; }
+.canvasArtwork img { display: block; width: 620px; height: 245px; max-width: none; object-fit: cover; opacity: .82; }
+.canvasVerticalTitle { position: absolute; z-index: 3; top: 334px; left: 85px; width: 28px; height: 575px; writing-mode: vertical-rl; transform: rotate(180deg); color: #d9d9d9; font-family: Raleway, sans-serif; font-size: 60px; font-weight: 900; line-height: 70px; letter-spacing: 1px; white-space: nowrap; }
+.canvasTitle { position: absolute; z-index: 5; top: 103px; left: 258px; width: 504px; margin: 0; font-size: 50px; font-weight: 800; line-height: 51px; }
+.canvasSubtitle { position: absolute; z-index: 5; top: 169px; left: 258px; width: 715px; margin: 0; font-size: 22px; font-weight: 700; line-height: 36px; }
+.canvasDescription { position: absolute; z-index: 5; top: 216px; left: 258px; width: 1384px; margin: 0; font-size: 18px; font-weight: 400; line-height: 24px; }
+.canvasRows { position: absolute; z-index: 5; inset: 0; }
+.canvasRow { position: absolute; left: 258px; width: 1220px; height: 70px; }
+.canvasRow h2 { position: absolute; left: 0; width: 553px; margin: 0; font-size: 32px; font-weight: 700; line-height: 50px; }
+.canvasRow p { position: absolute; left: 0; width: 654px; margin: 0; font-size: 20px; font-weight: 500; line-height: 36px; }
+.canvasRowCta { position: absolute; left: 692px; width: 122px; height: 36px; min-height: 36px; justify-content: space-between !important; padding: 0 12px 0 14px !important; font-size: 13px; font-weight: 600; }
+.canvasRow1 { top: 291px; }
+.canvasRow2 { top: 391px; }
+.canvasRow3 { top: 498px; }
+.canvasRow4 { top: 605px; }
+.canvasRow5 { top: 711px; left: 262px; }
+.canvasRow1 h2 { top: 0; }
+.canvasRow2 h2 { top: 0; }
+.canvasRow3 h2 { top: 0; }
+.canvasRow4 h2 { top: 0; }
+.canvasRow5 h2 { top: 0; }
+.canvasRow1 p { top: 47px; }
+.canvasRow2 p { top: 47px; }
+.canvasRow3 p { top: 47px; }
+.canvasRow4 p { top: 47px; }
+.canvasRow5 p { top: 47px; left: 0; }
+.canvasRow1 .canvasRowCta { top: 36px; }
+.canvasRow2 .canvasRowCta { top: 35px; }
+.canvasRow3 .canvasRowCta { top: 33px; }
+.canvasRow4 .canvasRowCta { top: 32px; }
+.canvasRow5 .canvasRowCta { top: 32px; left: 688px; }
+.canvasBottomQuote { position: absolute; z-index: 5; top: 832px; left: 258px; width: 915px; height: 72px; margin: 0; font-size: 26px; font-weight: 700; line-height: 36px; white-space: pre-line; }
+.canvasBottomQuote span { color: #23b14d; }
+.canvasReadMore { position: absolute; z-index: 6; top: 799px; left: 1521px; display: flex; width: 168px; height: 24px; align-items: center; gap: 10px; font-family: Raleway, sans-serif; font-size: 14px; line-height: 24px; }
+.canvasReadMore span:last-child { color: #23b14d; font-size: 24px; line-height: 14px; }
+.canvasSubmitCta, .canvasDownloadCta { position: absolute; z-index: 7; height: 52px; min-height: 52px; justify-content: space-between !important; padding-top: 0 !important; padding-bottom: 0 !important; font-size: 16px; font-weight: 600; }
+.canvasSubmitCta { top: 723px; left: 1571px; width: 349px; }
+.canvasDownloadCta { top: 801px; left: 1468px; width: 449px; }
+@media (max-width: 1200px) { .canvasPage { position: static; width: auto; height: auto; min-height: 0; overflow: visible; } .canvasArtwork, .canvasVerticalTitle, .canvasTitle, .canvasSubtitle, .canvasDescription, .canvasRows, .canvasBottomQuote, .canvasReadMore, .canvasSubmitCta, .canvasDownloadCta { position: static; width: auto; height: auto; min-height: 0; } }

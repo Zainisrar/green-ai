@@ -1,12 +1,13 @@
-import React from "react";
 import PartnerWithUs from "@/app/components/PartnerWithUs/PartnerWithUs";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function PartnerWithUsPage() {
   return (
-    <React.Fragment>
-      <PartnerWithUs />
-    </React.Fragment>
+    <FigmaPageCanvas
+      desktop={<PartnerWithUs canvas />}
+      mobile={<PartnerWithUs canvas />}
+      nodeId="7077:23359"
+      fitCanvasHeight
+    />
   );
-};
-
-export default page;
+}
