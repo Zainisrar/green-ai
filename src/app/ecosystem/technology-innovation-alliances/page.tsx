@@ -1,12 +1,13 @@
-import React from "react";
 import TechnologyInnovationAlliances from "@/app/components/TechnologyInnovationAlliances/TechnologyInnovationAlliances";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function TechnologyInnovationAlliancesPage() {
   return (
-    <div>
-      <TechnologyInnovationAlliances />
-    </div>
+    <FigmaPageCanvas
+      desktop={<TechnologyInnovationAlliances canvas />}
+      mobile={<TechnologyInnovationAlliances />}
+      nodeId="7077:22719"
+      fitCanvasHeight
+    />
   );
-};
-
-export default page;
+}

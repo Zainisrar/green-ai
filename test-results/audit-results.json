@@ -1,7 +1,7 @@
 {
   "config": {
-    "configFile": "/Users/mac/green-ai/playwright.config.ts",
-    "rootDir": "/Users/mac/green-ai/tests",
+    "configFile": "/home/ubuntu/green-ai/playwright.config.ts",
+    "rootDir": "/home/ubuntu/green-ai/tests",
     "forbidOnly": false,
     "fullyParallel": false,
     "globalSetup": null,
@@ -16,7 +16,7 @@
     "preserveOutput": "always",
     "projects": [
       {
-        "outputDir": "/Users/mac/green-ai/test-results",
+        "outputDir": "/home/ubuntu/green-ai/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -24,7 +24,7 @@
         },
         "id": "",
         "name": "",
-        "testDir": "/Users/mac/green-ai/tests",
+        "testDir": "/home/ubuntu/green-ai/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.@(spec|test).?(c|m)[jt]s?(x)"
@@ -64,13 +64,13 @@
   },
   "suites": [
     {
-      "title": "figma-bugs.spec.ts",
-      "file": "figma-bugs.spec.ts",
+      "title": "inspect_title.spec.ts",
+      "file": "inspect_title.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [
         {
-          "title": "bug-0073 V2 About GREEN",
+          "title": "inspect title",
           "ok": true,
           "tags": [],
           "tests": [
@@ -85,12 +85,16 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 8536,
+                  "duration": 5880,
                   "errors": [],
-                  "stdout": [],
+                  "stdout": [
+                    {
+                      "text": "TITLE_INFO:: [{\"rect\":[-27.78125,740,91.78125,494],\"stroke\":\"1px rgba(218, 218, 218, 0.95)\",\"color\":\"rgba(0, 0, 0, 0)\",\"font\":\"Raleway, \\\"Raleway Fallback\\\", Raleway, sans-serif\",\"fs\":\"34px\",\"zIndex\":\"2\",\"display\":\"block\",\"text\":\"TECHNOLOGY & INNOVATION\\nALLIANCES\"}]\n"
+                    }
+                  ],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-08-17T23:18:18.910Z",
+                  "startTime": "2026-08-19T10:52:39.278Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -98,18 +102,18 @@
               "status": "expected"
             }
           ],
-          "id": "b415e6ba66cd531ba865-b1a24b1f2a5c1eca1837",
-          "file": "figma-bugs.spec.ts",
-          "line": 15,
-          "column": 7
+          "id": "94dda6637e85f93d0e0d-983400a5bb3f74cea57d",
+          "file": "inspect_title.spec.ts",
+          "line": 2,
+          "column": 5
         }
       ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-08-17T23:18:14.934Z",
-    "duration": 12959.206,
+    "startTime": "2026-08-19T10:52:38.331Z",
+    "duration": 6876.235,
     "expected": 1,
     "skipped": 0,
     "unexpected": 0,

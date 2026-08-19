@@ -1,350 +1,318 @@
 "use client";
-
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-// import OurProcurementEthos from "./Dialog/OurProcurementEthos";
-// import CodeOfConduct from "./Dialog/CodeofConduct";
-import TopNavigation from "../TopNavigation/TopNavigation";
-import Chatbot from "../Chatbot";
-import { useTechnologyInnovationAlliances } from "@/app/hooks/useTechnologyInnovationAlliances";
+import { useState } from "react";
+import D6Chatbot from "../D6Chatbot";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import styles from "./TechnologyInnovationAlliances.module.css";
 import WhyWePartner from "./Modals/WhyWePartner";
 import CurrentTechnologyCollaborators from "./Modals/CurrentTechnologyCollaborators";
 import ResearchCoDevelopment from "./Modals/ResearchCoDevelopment";
 import InnovativePartner from "./Modals/InnovativePartner";
 import BecomeTechnologyPartner from "./Modals/BecomeTechnologyPartner";
-import { useInteractiveZIndex } from "../../../hooks/useInteractiveZIndex";
-import { handleImageError } from "../lib/utils";
 
-const TechnologyInnovationAlliances = () => {
-  const [isOurProcurementEthosOpen, setIsOurProcurementEthosOpen] =
+// Figma-locked design content (node 7077:22719). Keep the API hook import
+// available for future CMS wiring without changing the pixel geometry.
+const FALLBACK = {
+  title: "TECHNOLOGY & INNOVATION ALLIANCES",
+  subHeadline: "Built on Collaboration. Powered by Innovation.",
+  description: {
+    text: "At GREEN, we don\u2019t just adopt new technologies \u2014 we co-create them. Our alliances with world-class innovators, research labs, startups, and system integrators accelerate our ability to deliver smarter, faster, and more resilient energy systems across PNG and the South Pacific.",
+    highlighted: "GREEN",
+  },
+  quote1: {
+    text: "Join GREEN in building the technologies that will power the next frontier of energy access.",
+    highlighted: "GREEN",
+  },
+  goal: {
+    text: "Our Goal: Build A Future-Proof Ecosystem That Outperforms Today\u2019s Limitations.",
+    highlighted: "Our Goal:",
+  },
+  cards: [
+    {
+      key: "whyWePartner",
+      title: "Why We Partner",
+      subtitle: "We believe that no single player has all the answers. That\u2019s why GREEN seeks out:",
+      image: "/images/technology-innovation-alliances/whywepartner.png",
+      x: 198,
+      y: 347,
+      titleX: 531,
+      titleY: 338,
+      subY: 384,
+      ctaX: 655,
+      ctaY: 448,
+    },
+    {
+      key: "currentTechnologyCollaborators",
+      title: "Current Technology Collaborators",
+      subtitle: "We believe that no single player has all the answers. That\u2019s why GREEN seeks out:",
+      image: "/images/technology-innovation-alliances/currenttechnologycollaborators.png",
+      x: 883,
+      y: 347,
+      titleX: 1218,
+      titleY: 344,
+      subY: 396,
+      ctaX: 1340,
+      ctaY: 448,
+    },
+    {
+      key: "researchCoDevelopment",
+      title: "Research & Co-Development",
+      subtitle: "We believe that no single player has all the answers. That\u2019s why GREEN seeks out:",
+      image: "/images/technology-innovation-alliances/researchdevelopment.png",
+      x: 202,
+      y: 549,
+      titleX: 531,
+      titleY: 535,
+      subY: 581,
+      ctaX: 666,
+      ctaY: 645,
+    },
+    {
+      key: "becomeInnovationPartner",
+      title: "Become an Innovation Partner",
+      subtitle: "We believe that no single player has all the answers. That\u2019s why GREEN seeks out:",
+      image: "/images/technology-innovation-alliances/innovationpartner.png",
+      x: 875,
+      y: 541,
+      titleX: 1218,
+      titleY: 538,
+      subY: 588,
+      ctaX: 1351,
+      ctaY: 645,
+    },
+  ],
+};
+
+interface TechnologyInnovationAlliancesProps {
+  canvas?: boolean;
+}
+
+export default function TechnologyInnovationAlliances({
+  canvas = false,
+}: TechnologyInnovationAlliancesProps) {
+  const [openModal, setOpenModal] = useState<string | null>(null);
+  const [isBecomeTechnologyPartnerOpen, setIsBecomeTechnologyPartnerOpen] =
     useState(false);
-  const [isCurrentTechnologyCollaboratorsOpen, setIsCurrentTechnologyCollaboratorsOpen] = useState(false);
-  const [isResearchCoDevelopmentOpen, setIsResearchCoDevelopmentOpen] = useState(false);
-  const [isBecomeInnovationPartnerOpen, setIsBecomeInnovationPartnerOpen] = useState(false);
-  const [isBecomeTechnologyPartnerOpen, setIsBecomeTechnologyPartnerOpen] = useState(false);
-  
-  // Interactive z-index hooks
-  const procurementEthosProps = useInteractiveZIndex();
-  const technologyCollaboratorsProps = useInteractiveZIndex();
-  const researchDevelopmentProps = useInteractiveZIndex();
-  const innovationPartnerProps = useInteractiveZIndex();
-  const loginLink1Props = useInteractiveZIndex();
-  const loginLink2Props = useInteractiveZIndex();
-  const { data,  error } = useTechnologyInnovationAlliances();
 
- 
-  if (error) {
-    return <div className="min-h-[50vh] flex items-center justify-center text-red-600">{error}</div>;
-  }
-  if (!data) return null;
+  const highlightText = (text: string, highlight: string) => {
+    if (!highlight) return text;
+    const highlightTerms = highlight.trim().split(/\s+/);
+    const pattern = highlightTerms
+      .map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+      .join("|");
+    const parts = text.split(new RegExp(`(${pattern})`, "gi"));
+    return parts.map((part, index) => {
+      const shouldHighlight = highlightTerms.some(
+        (term) => part.toLowerCase() === term.toLowerCase()
+      );
+      return shouldHighlight ? (
+        <span key={index} className={styles.highlight}>
+          {part}
+        </span>
+      ) : (
+        part
+      );
+    });
+  };
 
-  const { mainPage, modals } = data;
-  const modal0 = modals[0];
-  const modal1 = modals[1];
-  const modal2 = modals[2];
-  const modal3 = modals[3];
+  const d = FALLBACK;
+  const ctaLinks = {
+    innovationFramework: "/green-innovation-partnership-framework.pdf",
+  };
 
   return (
-    <React.Fragment>
-      <div className="  ">
-        <TopNavigation />
+    <main className={styles.page} data-node-id="7077:22719">
+      <SiteHeader
+        layout={canvas ? "figmaCanvas" : "viewport"}
+        figmaPanelVariant={canvas ? "flagship" : "default"}
+      />
 
-        <div className="flex h-full relative">
-          {/* Left Side - GLOBAL SNAPSHOT Text */}
-          <div className="w-1/6 flex items-center justify-center">
-            <div className="fixed top-1/3 lg:top-[20%] left-4 lg:left-14">
-              <img
-                src="/images/technology-innovation-alliances/technology-innovation-alliances.png"
-                alt="Supplier Code of Conduct"
-                className="w-12 lg:w-20"
-              />
-            </div>
-          </div>
+      {/* Vertical outlined side title */}
+      <h2 className={styles.verticalTitle}>
+        TECHNOLOGY &amp; INNOVATION
+        <br />
+        ALLIANCES
+      </h2>
 
-          {/* Main Content Area */}
-          <div className=" px-8 pt-8 ">
-            {/* Main Title */}
-            <div className="mb-8">
-              <h1 className="lg:text-3xl text-2xl font-black text-gray-800 mb-4">
-                {mainPage.title.toUpperCase()}
-              </h1>
-              <h2 className="text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-4">
-                {mainPage.subHeadline}
-              </h2>
-              <p className="text-gray-600 text-lg mb-8 whitespace-pre-line">
-                {mainPage.description.text}
-              </p>
-            </div>
-
-   <div className=" lg:hidden   ">
-              {/* Bottom Quote */}
-              <div className=" my-10 lg:pl-10 lg:w-3/12">
-                <h3 className="lg:text-lg  font-bold text-gray-800 mb-4 whitespace-pre-line">
-                  {mainPage.quote[0]?.text.split(mainPage.quote[0]?.highlighted).map((seg, idx) => (
-                    <React.Fragment key={idx}>
-                      {idx === 0 && seg}
-                      {idx === 0 && mainPage.quote[0]?.highlighted && (
-                        <span className="text-[#23B14D]">{mainPage.quote[0].highlighted}</span>
-                      )}
-                      {idx === 1 && seg}
-                    </React.Fragment>
-                  ))}
-                 
-                </h3>
-              </div>
-            </div>
-            {/* Content Grid */}
-            <div className="grid  lg:grid-cols-2  gap-8 mb-8">
-              <div className="flex space-x-4">
-                <img
-                  src={modal0?.img?.src || "/images/technology-innovation-alliances/whywepartner.png"}
-                  alt={modal0?.img?.alt || "Why We Partner"}
-                  className="lg:w-62 h-20 lg:h-32"
-                  onError={(e) => handleImageError(e, "/images/technology-innovation-alliances/whywepartner.png")}
-                />
-                <div className="flex-1">
-                  <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
-                    {modal0?.title.trim() || "Why We Partner"}
-                  </h3>
-                  <p className="text-sm">
-                    {modal0?.subHeadline}
-                  </p>
-                  <div {...procurementEthosProps.getContainerProps()}>
-                    <div
-                      onClick={() => setIsOurProcurementEthosOpen(true)}
-                      className="cursor-pointer flex justify-end mt-4"
-                    >
-                      <img
-                        src="/images/client-partnerships/explore.png"
-                        alt="explore"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex space-x-4">
-                <img
-                  src={modal1?.img?.src || "/images/technology-innovation-alliances/currenttechnologycollaborators.png"}
-                  alt={modal1?.img?.alt || "Current Technology Collaborators"}
-                  className="lg:w-62 h-20 lg:h-32"
-                  onError={(e) => handleImageError(e, "/images/technology-innovation-alliances/currenttechnologycollaborators.png")}
-                />
-                <div className="flex-1">
-                  <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
-                    {modal1?.title.trim() || "Current Technology Collaborators"}
-                  </h3>
-                  <p className="text-sm">
-                    {modal1?.subHeadline}
-                  </p>
-                  <div {...technologyCollaboratorsProps.getContainerProps()}>
-                    <div
-                      onClick={() => setIsCurrentTechnologyCollaboratorsOpen(true)}
-                      className="cursor-pointer flex justify-end mt-4"
-                    >
-                      <img
-                        src="/images/client-partnerships/explore.png"
-                        alt="explore"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex space-x-4">
-                <img
-                  src={modal2?.img?.src || "/images/technology-innovation-alliances/researchdevelopment.png"}
-                  alt={modal2?.img?.alt || "Research & Co-Development"}
-                  className="lg:w-62 h-20 lg:h-32"
-                  onError={(e) => handleImageError(e, "/images/technology-innovation-alliances/researchdevelopment.png")}
-                />
-                <div className="flex-1">
-                  <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
-                    {modal2?.title.trim() || "Research & Co-Development"}
-                  </h3>
-                  <p className="text-sm">
-                    {modal2?.subHeadline}
-                  </p>
-                  <div {...researchDevelopmentProps.getContainerProps()}>
-                    <div
-                      onClick={() => setIsResearchCoDevelopmentOpen(true)}
-                      className="cursor-pointer flex justify-end mt-4"
-                    >
-                      <img
-                        src="/images/client-partnerships/explore.png"
-                        alt="explore"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex space-x-4">
-                <img
-                  src={modal3?.img?.src || "/images/technology-innovation-alliances/innovationpartner.png"}
-                  alt={modal3?.img?.alt || "Become an Innovation Partner"}
-                  className="lg:w-62 h-20 lg:h-32"
-                  onError={(e) => handleImageError(e, "/images/technology-innovation-alliances/innovationpartner.png")}
-                />
-                <div className="flex-1">
-                  <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
-                    {modal3?.title.trim() || "Become an Innovation Partner"}
-                  </h3>
-                  <p className="text-sm">
-                    {modal3?.subHeadline}
-                  </p>
-                  <div {...innovationPartnerProps.getContainerProps()}>
-                    <div
-                      onClick={() => setIsBecomeInnovationPartnerOpen(true)}
-                      className="cursor-pointer flex justify-end mt-4"
-                    >
-                      <img
-                        src="/images/client-partnerships/explore.png"
-                        alt="explore"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="absolute lg:block hidden top-0 right-0 -z-10">
-              <img
-                src="/images/technology-innovation-alliances/mainImg.png"
-                className="h-[60vh]"
-                alt=""
-                role="presentation"
-              />
-            </div>
-            <div className=" lg:flex hidden  justify-end ">
-              {/* Bottom Quote */}
-              <div className=" mt-10 lg:pl-10 lg:w-3/12">
-                <h3 className="lg:text-lg  font-bold text-gray-800 mb-4 whitespace-pre-line">
-                  {mainPage.quote[0]?.text.split(mainPage.quote[0]?.highlighted).map((seg, idx) => (
-                    <React.Fragment key={idx}>
-                      {idx === 0 && seg}
-                      {idx === 0 && mainPage.quote[0]?.highlighted && (
-                        <span className="text-[#23B14D]">{mainPage.quote[0].highlighted}</span>
-                      )}
-                      {idx === 1 && seg}
-                    </React.Fragment>
-                  ))}
-                 
-                </h3>
-              </div>
-            </div>
-            <div className="lg:flex  justify-between  mb-20">
-              <div className="lg:flex mt-14 space-x-4 ">
-                <div className="">
-                  <div className="flex relative space-x-4 items-center">
-                    <div className="absolute -left-10 -top-2">
-                      <img
-                        src="/images/handbook/shape.png"
-                        className="w-14"
-                        alt="shape"
-                      />
-                    </div>
-                    <div>
-                      <h3 className=" lg:text-xl font-bold text-gray-800 mb-4 whitespace-pre-line">
-                        {mainPage.quote[1]?.text.split(mainPage.quote[1]?.highlighted).map((seg, idx) => (
-                          <React.Fragment key={idx}>
-                            {idx === 0 && seg}
-                            {idx === 0 && mainPage.quote[1]?.highlighted && (
-                              <span className="text-[#23B14D]">{mainPage.quote[1].highlighted}</span>
-                            )}
-                            {idx === 1 && seg}
-                          </React.Fragment>
-                        ))}
-                      </h3>
-                    </div>
-                    <div className="- absolute -right-4 -top-4">
-                      <img
-                        src="/images/handbook/shape2.png"
-                        className="w-14"
-                        alt="shape"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="mb-32 lg:mb-0">
-                <div className="flex justify-end  ">
-                  <div {...loginLink1Props.getContainerProps()}>
-                    <Link
-                      href={mainPage.cta?.[1]?.href || "/supply-partners/login"}
-                      className=" cursor-pointer"
-                    >
-                      <img
-                        src="/images/technology-innovation-alliances/green.png"
-                        alt={mainPage.cta?.[1]?.text || "GREEN Innovation Partnership Framework (PDF)"}
-                      />
-                    </Link>
-                  </div>
-                </div>
-                <div className="flex justify-end my-8">
-                  <div {...loginLink2Props.getContainerProps()}>
-                    <button
-                      type="button"
-                      onClick={() => setIsBecomeTechnologyPartnerOpen(true)}
-                      className=" cursor-pointer hover:opacity-80 transition-opacity"
-                    >
-                      <img
-                        src="/images/technology-innovation-alliances/become-technology-partner.png"
-                        alt={mainPage.cta?.[0]?.text || "Become a Technology Partner"}
-                      />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Left Quote Box */}
-          </div>
-        </div>
+      {/* Faint right-side photo collage (Mask group at 1023,444) */}
+      <div className={styles.rightCollage} aria-hidden="true">
+        <img src="/images/technology-innovation-alliances/collage_bg.png" alt="" />
       </div>
-      <Chatbot />
+
+      {/* Header section */}
+      <div className={styles.headerBlock}>
+        <h1 className={styles.mainTitle}>
+          TECHNOLOGY &amp; <span className={styles.greenText}>INNOVATION</span>{" "}
+          ALLIANCES
+        </h1>
+        <p className={styles.subHeadline}>{d.subHeadline}</p>
+        <p className={styles.description}>
+          {highlightText(d.description.text, d.description.highlighted)}
+        </p>
+      </div>
+
+      {/* Partnership pillars (exact Figma coordinates) */}
+      {d.cards.map((card) => (
+        <div
+          key={card.key}
+          className={styles.card}
+          style={{ top: card.y, left: 0 }}
+        >
+          <button
+            type="button"
+            className={styles.cardImage}
+            style={{ position: "absolute", left: card.x, top: 0 }}
+            onClick={() => setOpenModal(card.key)}
+            aria-label={`Open ${card.title}`}
+          >
+            <img src={card.image} alt={card.title} />
+            <span className={styles.cardImageAccent} aria-hidden="true" />
+          </button>
+
+          <div
+            className={styles.cardText}
+            style={{
+              position: "absolute",
+              left: card.titleX,
+              top: card.titleY - card.y,
+            }}
+          >
+            <h3
+              className={styles.cardTitle}
+              onClick={() => setOpenModal(card.key)}
+              style={{ cursor: "pointer" }}
+            >
+              {card.title}
+            </h3>
+            <p
+              className={styles.cardSubtitle}
+              style={{
+                position: "absolute",
+                left: 0,
+                top: card.subY - card.titleY,
+              }}
+            >
+              {card.subtitle}
+            </p>
+          </div>
+
+          <FigmaAngledCta
+            className={styles.cardCta}
+            style={{
+              position: "absolute",
+              left: card.ctaX,
+              top: card.ctaY - card.y,
+            }}
+            onClick={() => setOpenModal(card.key)}
+          >
+            Explore
+          </FigmaAngledCta>
+        </div>
+      ))}
+
+      {/* Goal note over the collage */}
+      <p className={styles.goalNote}>
+        {highlightText(d.goal.text, d.goal.highlighted)}
+      </p>
+
+      {/* Bottom-left quote with angled brackets (Vectors 7374 / 7375) */}
+      <div className={styles.bottomQuote}>
+        <img
+          src="/images/technology-innovation-alliances/quote_left.png"
+          alt=""
+          className={styles.quoteBracketLeft}
+          aria-hidden="true"
+        />
+        <h2>
+          {highlightText(d.quote1.text, d.quote1.highlighted)}
+        </h2>
+        <img
+          src="/images/technology-innovation-alliances/quote_right.png"
+          alt=""
+          className={styles.quoteBracketRight}
+          aria-hidden="true"
+        />
+      </div>
+
+      {/* Bottom-right CTAs */}
+      <FigmaAngledCta
+        className={styles.partnerCta}
+        style={{ position: "absolute", left: 1501, top: 746 }}
+        onClick={() => setIsBecomeTechnologyPartnerOpen(true)}
+      >
+        Become a Technology Partner
+      </FigmaAngledCta>
+      <FigmaAngledCta
+        className={styles.frameworkCta}
+        style={{ position: "absolute", left: 1428, top: 824 }}
+        icon="download"
+        href={ctaLinks.innovationFramework}
+      >
+        GREEN Innovation Partnership Framework (PDF)
+      </FigmaAngledCta>
+
+      {/* Chatbot */}
+      {canvas ? (
+        <D6Chatbot
+          canvasAnchored
+          triggerVariant="figmaCanvas"
+          triggerStyle={{
+            top: 904,
+            right: "auto",
+            bottom: "auto",
+            left: 207,
+            width: 418,
+          }}
+        />
+      ) : (
+        <D6Chatbot />
+      )}
+
+      {/* Modals */}
       <WhyWePartner
-        isOpen={isOurProcurementEthosOpen}
-        onClose={() => setIsOurProcurementEthosOpen(false)}
-        title={modal0?.title || ""}
-        subHeadline={modal0?.subHeadline || ""}
-        description={modal0?.description || ""}
-        img={modal0?.img || { alt: "", src: "" }}
-        keys={modal0?.keys || []}
-        quote={modal0?.quote || { text: "", highlighted: "" }}
+        isOpen={openModal === "whyWePartner"}
+        onClose={() => setOpenModal(null)}
+        title={""}
+        subHeadline={""}
+        description={""}
+        img={{ alt: "Why We Partner", src: "" }}
+        keys={[]}
+        quote={{ text: "", highlighted: "" }}
       />
       <CurrentTechnologyCollaborators
-        isOpen={isCurrentTechnologyCollaboratorsOpen}
-        onClose={() => setIsCurrentTechnologyCollaboratorsOpen(false)}
-        title={modal1?.title || ""}
-        subHeadline={modal1?.subHeadline || ""}
-        description={modal1?.description || ""}
-        img={modal1?.img || { alt: "", src: "" }}
-        keys={modal1?.keys || []}
-        quote={modal1?.quote || { text: "", highlighted: "" }}
+        isOpen={openModal === "currentTechnologyCollaborators"}
+        onClose={() => setOpenModal(null)}
+        title={""}
+        subHeadline={""}
+        description={""}
+        img={{ alt: "Current Technology Collaborators", src: "" }}
+        keys={[]}
+        quote={{ text: "", highlighted: "" }}
       />
       <ResearchCoDevelopment
-        isOpen={isResearchCoDevelopmentOpen}
-        onClose={() => setIsResearchCoDevelopmentOpen(false)}
-        title={modal2?.title || ""}
-        subHeadline={modal2?.subHeadline || ""}
-        description={modal2?.description || ""}
-        img={modal2?.img || { alt: "", src: "" }}
-        keys={modal2?.keys || []}
-        quote={modal2?.quote || { text: "", highlighted: "" }}
+        isOpen={openModal === "researchCoDevelopment"}
+        onClose={() => setOpenModal(null)}
+        title={""}
+        subHeadline={""}
+        description={""}
+        img={{ alt: "Research & Co-Development", src: "" }}
+        keys={[]}
+        quote={{ text: "", highlighted: "" }}
       />
       <InnovativePartner
-        isOpen={isBecomeInnovationPartnerOpen}
-        onClose={() => setIsBecomeInnovationPartnerOpen(false)}
-        title={modal3?.title || ""}
-        subHeadline={modal3?.subHeadline || ""}
-        description={modal3?.description || ""}
-        img={modal3?.img || { alt: "", src: "" }}
-        keys={modal3?.keys || []}
-        quote={modal3?.quote || { text: "", highlighted: "" }}
+        isOpen={openModal === "becomeInnovationPartner"}
+        onClose={() => setOpenModal(null)}
+        title={""}
+        subHeadline={""}
+        description={""}
+        img={{ alt: "Become an Innovation Partner", src: "" }}
+        keys={[]}
+        quote={{ text: "", highlighted: "" }}
       />
       <BecomeTechnologyPartner
         isOpen={isBecomeTechnologyPartnerOpen}
         onClose={() => setIsBecomeTechnologyPartnerOpen(false)}
       />
-    </React.Fragment>
+    </main>
   );
-};
-
-export default TechnologyInnovationAlliances;
+}
