@@ -396,131 +396,50 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
       >
         <div
           className={
-            isFigmaCanvasTrigger ? "relative h-[52px] w-[418px]" : "relative"
+            isFigmaCanvasTrigger
+              ? "relative h-[52px] w-[418px]"
+              : `relative h-[52px] ${
+                  hasResponsiveTrigger
+                    ? "w-full"
+                    : "w-[min(418px,calc(100vw-24px))]"
+                }`
           }
         >
-          {isFigmaCanvasTrigger ? (
-            <>
-              {/*
-               * Parallelogram trigger — same CSS pattern as the Energy page Chatbot.
-               * Outer div uses skewX(-16deg) to create the slant; inner div counter-
-               * rotates with skewX(16deg) to keep text/icon upright.
-               * Matches Figma node 7080:65088: 418×52px, green left border, white
-               * semi-transparent fill with backdrop-blur, green shadow.
-               */}
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  transform: "skewX(-16deg)",
-                  background: "rgba(255,255,255,0.95)",
-                  backdropFilter: "blur(8px)",
-                  WebkitBackdropFilter: "blur(8px)",
-                  borderLeft: "3px solid #23B14D",
-                  borderTop: "1px solid rgba(209,213,219,0.8)",
-                  borderRight: "1px solid rgba(209,213,219,0.8)",
-                  borderBottom: "1px solid rgba(209,213,219,0.8)",
-                  boxShadow: "4px 4px 20px 1px rgba(93,222,60,0.25), 0 4px 20px rgba(0,0,0,0.06)",
-                  borderRadius: "2px",
-                }}
-              >
-                <div
-                  style={{
-                    transform: "skewX(16deg)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    height: "100%",
-                    padding: "0 18px 0 22px",
-                  }}
-                >
-                  <input
-                    ref={promptInputRef}
-                    type="text"
-                    value={promptInputValue}
-                    onChange={(e) => setPromptInputValue(e.target.value)}
-                    onKeyDown={handlePromptKeyDown}
-                    placeholder="Let's Talk Energy"
-                    aria-label="Let's Talk Energy"
-                    style={{
-                      flex: 1,
-                      border: 0,
-                      background: "transparent",
-                      outline: "none",
-                      fontSize: 13,
-                      fontWeight: 600,
-                      fontStyle: "italic",
-                      color: "#1a1a1a",
-                      cursor: "text",
-                      fontFamily: "var(--font-montserrat, Montserrat, sans-serif)",
-                      letterSpacing: "0.2px",
-                    }}
-                  />
-                  <button
-                    type="button"
-                    aria-label="Send prompt"
-                    style={{
-                      flexShrink: 0,
-                      border: 0,
-                      background: "transparent",
-                      padding: 0,
-                      cursor: "pointer",
-                      display: "flex",
-                      alignItems: "center",
-                      transition: "transform 0.15s",
-                    }}
-                    onClick={handlePromptSubmit}
-                  >
-                    <img
-                      src="/images/mike.svg"
-                      alt="Send message"
-                      style={{ display: "block", width: 16, height: 16, opacity: 0.7 }}
-                    />
-                  </button>
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              <img
-                src="/images/letstalkenergy.png"
-                alt="call to action"
-                className="w-62 lg:w-auto"
-              />
-              <div
-                className={
-                  hasResponsiveTrigger
-                    ? "absolute top-[47%] left-[12%] right-[19%] -translate-y-1/2"
-                    : "absolute bottom-4 lg:bottom-10 left-12 lg:left-14 right-12 lg:right-20"
-                }
-              >
-                <input
-                  ref={promptInputRef}
-                  type="text"
-                  value={promptInputValue}
-                  onChange={(e) => setPromptInputValue(e.target.value)}
-                  onKeyDown={handlePromptKeyDown}
-                  placeholder="Let's Talk Energy"
-                  className={
-                    hasResponsiveTrigger
-                      ? "w-full bg-transparent text-[clamp(13px,1vw,18px)] font-semibold italic text-gray-900 outline-none placeholder:text-gray-900 placeholder:opacity-100"
-                      : "outline-none placeholder:text-gray-900 placeholder:opacity-100 text-gray-900 font-semibold italic w-full text-base bg-transparent"
-                  }
-                />
-              </div>
-              <button
-                type="button" aria-label="Send prompt"
-                className={
-                  hasResponsiveTrigger
-                    ? "absolute top-1/2 right-[10%] -translate-y-1/2 cursor-pointer border-0 bg-transparent p-0 transition-transform hover:scale-110"
-                    : "absolute bottom-5 lg:bottom-10 right-7 lg:right-20 cursor-pointer border-0 bg-transparent p-0 hover:scale-110 transition-transform"
-                }
-                onClick={handlePromptSubmit}
-              >
-                <img src="/images/mike.svg" alt="Send message" className="w-3 lg:w-auto" />
-              </button>
-            </>
-          )}
+          <img
+            src="/images/insight1/figma/chat-panel.svg"
+            alt=""
+            aria-hidden="true"
+            className="absolute -left-[4.28%] -top-[33.65%] z-0 block h-[182.7%] w-[110.48%] max-w-none"
+          />
+          <div className="absolute inset-y-0 left-[11%] right-[16%] z-10 flex items-center">
+            <input
+              ref={promptInputRef}
+              type="text"
+              value={promptInputValue}
+              onChange={(e) => setPromptInputValue(e.target.value)}
+              onKeyDown={handlePromptKeyDown}
+              placeholder="Let's Talk Energy"
+              aria-label="Let's Talk Energy"
+              className={`w-full min-w-0 border-0 bg-transparent font-semibold text-[#626262] outline-none placeholder:text-[#626262] placeholder:opacity-100 ${
+                isFigmaCanvasTrigger
+                  ? "text-[13px]"
+                  : "text-[clamp(13px,1vw,16px)]"
+              }`}
+              style={{ fontFamily: "var(--font-montserrat, Montserrat, sans-serif)" }}
+            />
+          </div>
+          <button
+            type="button"
+            aria-label="Send prompt"
+            className="absolute top-1/2 right-[7%] z-10 flex -translate-y-1/2 cursor-pointer items-center border-0 bg-transparent p-0 transition-transform hover:scale-110"
+            onClick={handlePromptSubmit}
+          >
+            <img
+              src="/images/insight1/figma/chat-microphone.svg"
+              alt="Send message"
+              className="block h-[23px] w-[18px] opacity-80 transition-opacity hover:opacity-100"
+            />
+          </button>
         </div>
       </div>
     </>
