@@ -16,38 +16,86 @@ type Report = {
   year: number;
 };
 
-const fallbackReports: Report[] = [
+const figmaReports: Report[] = [
   {
     id: 1,
-    title: "Energy Transition in Papua New Guinea",
-    subtitle: "Research brief",
+    title: "GRID-INTEL™ Technical Brief (2025)",
+    subtitle: "AI in Energy Management",
     description:
-      "A practical view of the infrastructure, investment, and delivery conditions shaping PNG's energy transition.",
+      "A practical briefing on intelligent monitoring and better energy decisions.",
     image: "/images/articles/article1.png",
     href: "",
     year: 2025,
   },
   {
     id: 2,
-    title: "Building Resilient Microgrids",
-    subtitle: "Technical paper",
+    title: "Microgrid Feasibility in Islanded PNG (2025)",
+    subtitle: "Hybrid Systems",
     description:
-      "Lessons from remote energy systems designed around reliability, local capability, and long-term operation.",
+      "Field-tested guidance for resilient hybrid systems in islanded communities.",
     image: "/images/articles/article1.png",
     href: "",
     year: 2025,
   },
   {
     id: 3,
-    title: "Evidence for Better Energy Decisions",
-    subtitle: "GREEN field report",
+    title: "Renewable Energy Integration for Resilience",
+    subtitle: "Integration Models",
     description:
-      "Decision-grade insights for ministries, funders, developers, and energy-sector innovators.",
+      "Models for integrating renewable generation into dependable local networks.",
     image: "/images/articles/article1.png",
     href: "",
-    year: 2024,
+    year: 2025,
+  },
+  {
+    id: 4,
+    title: "Energy Storage Landscape: PNG & Pacific",
+    subtitle: "Storage Innovations",
+    description:
+      "A regional view of storage technologies, use cases, and delivery conditions.",
+    image: "/images/articles/article1.png",
+    href: "",
+    year: 2025,
+  },
+  {
+    id: 5,
+    title: "GRID-INTEL™ Technical Brief (2025)",
+    subtitle: "AI in Energy Management",
+    description:
+      "A practical briefing on intelligent monitoring and better energy decisions.",
+    image: "/images/articles/article1.png",
+    href: "",
+    year: 2025,
+  },
+  {
+    id: 6,
+    title: "Microgrid Feasibility in Islanded PNG (2025)",
+    subtitle: "Hybrid Systems",
+    description:
+      "Field-tested guidance for resilient hybrid systems in islanded communities.",
+    image: "/images/articles/article1.png",
+    href: "",
+    year: 2025,
   },
 ];
+
+const yearGroups = [
+  {
+    year: 2025,
+    count: 36,
+    items: [
+      "GRID-INTEL™ Technical Brief (2025)",
+      "Microgrid Feasibility in Islanded PNG (2025)",
+      "Renewable Energy Integration for Resilience",
+      "Energy Storage Landscape: PNG & Pacific",
+      "GRID-INTEL™ Technical Brief (2025)",
+      "Microgrid Feasibility in Islanded PNG (2025)",
+    ],
+  },
+  { year: 2024, count: 145, items: [] },
+  { year: 2023, count: 135, items: [] },
+  { year: 2023, count: 95, items: [] },
+] as const;
 
 interface ReportWhitePapersProps {
   canvas?: boolean;
@@ -58,10 +106,14 @@ export default function ReportWhitePapers({
 }: ReportWhitePapersProps) {
   const [view, setView] = useState<"list" | "grid">("list");
   const [year, setYear] = useState<number | null>(null);
+  const [page, setPage] = useState(1);
   const { data: apiReports } = useReportsWhitepapers();
 
   const reports = useMemo<Report[]>(() => {
-    if (!apiReports?.length) return fallbackReports;
+    // The Figma canvas is a curated six-card editorial state. Keep it
+    // deterministic so a live API response cannot change the visual frame.
+    if (canvas || !apiReports?.length) return figmaReports;
+
     return apiReports.map((report) => ({
       id: report.id,
       title: report.title,
@@ -71,11 +123,8 @@ export default function ReportWhitePapers({
       href: report.pptx,
       year: Number.parseInt(report.year, 10) || 2025,
     }));
-  }, [apiReports]);
+  }, [apiReports, canvas]);
 
-  const years = [...new Set(reports.map((report) => report.year))].sort(
-    (a, b) => b - a,
-  );
   const visibleReports = year
     ? reports.filter((report) => report.year === year)
     : reports;
@@ -132,11 +181,14 @@ export default function ReportWhitePapers({
               </div>
             </div>
             {view === "list" ? (
-              <div className={styles.list}>
-                {visibleReports.map((report) => (
-                  <ReportRow key={report.id} report={report} />
-                ))}
-              </div>
+              <>
+                <div className={styles.list}>
+                  {visibleReports.map((report) => (
+                    <ReportRow key={report.id} report={report} />
+                  ))}
+                </div>
+                <Pagination page={page} onChange={setPage} />
+              </>
             ) : (
               <div className={styles.cards}>
                 {visibleReports.map((report) => (
@@ -160,30 +212,30 @@ export default function ReportWhitePapers({
             )}
           </section>
 
-          <aside className={styles.sidebar}>
+          <aside className={styles.sidebar} aria-label="Reports by year">
             <div className={styles.filters}>
-              <button
-                type="button"
-                className={year === null ? styles.active : ""}
-                onClick={() => setYear(null)}
-              >
-                All Years ({reports.length})
-              </button>
-              {years.map((item) => (
-                <button
-                  type="button"
-                  key={item}
-                  className={year === item ? styles.active : ""}
-                  onClick={() => setYear(item)}
-                >
-                  {item} (
-                  {reports.filter((report) => report.year === item).length})
-                </button>
+              {yearGroups.map((group, index) => (
+                <div className={styles.yearGroup} key={`${group.year}-${index}`}>
+                  <button
+                    type="button"
+                    className={year === group.year ? styles.active : ""}
+                    onClick={() => setYear(year === group.year ? null : group.year)}
+                  >
+                    {group.year} ({group.count})
+                  </button>
+                  {group.items.length ? (
+                    <ul>
+                      {group.items.map((item, itemIndex) => (
+                        <li key={`${item}-${itemIndex}`}>{item}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </div>
               ))}
             </div>
             <div className={styles.quote}>
               <img
-                className={styles.quoteStart}
+                className={styles.quoteLeft}
                 src="/images/reports/shape1.png"
                 alt=""
               />
@@ -193,7 +245,7 @@ export default function ReportWhitePapers({
                 We Build <strong>Evidence.</strong>
               </p>
               <img
-                className={styles.quoteEnd}
+                className={styles.quoteRight}
                 src="/images/reports/shape2.png"
                 alt=""
               />
@@ -203,18 +255,7 @@ export default function ReportWhitePapers({
       </div>
 
       {canvas ? (
-        <D6Chatbot
-          canvasAnchored
-          triggerVariant="figmaCanvas"
-          triggerClassName={styles.chatTrigger}
-          triggerStyle={{
-            top: 899,
-            right: "auto",
-            bottom: "auto",
-            left: 1498,
-            width: 418,
-          }}
-        />
+        <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
       ) : (
         <D6Chatbot />
       )}
@@ -249,11 +290,33 @@ function ReportActions({ report }: { report: Report }) {
 function ReportRow({ report }: { report: Report }) {
   return (
     <article className={styles.row}>
-      <div>
-        <h4>{report.title}</h4>
-        <span>{report.subtitle}</span>
-      </div>
+      <h4>{report.title}</h4>
+      <span>{report.subtitle}</span>
       <ReportActions report={report} />
     </article>
+  );
+}
+
+function Pagination({ page, onChange }: { page: number; onChange: (page: number) => void }) {
+  return (
+    <nav className={styles.pagination} aria-label="Reports pages">
+      <button type="button" aria-label="Previous page" onClick={() => onChange(Math.max(1, page - 1))}>
+        ‹‹
+      </button>
+      {Array.from({ length: 6 }, (_, index) => index + 1).map((item) => (
+        <button
+          type="button"
+          key={item}
+          className={item === page ? styles.pageActive : ""}
+          aria-current={item === page ? "page" : undefined}
+          onClick={() => onChange(item)}
+        >
+          {item}
+        </button>
+      ))}
+      <button type="button" aria-label="Next page" onClick={() => onChange(Math.min(6, page + 1))}>
+        ››
+      </button>
+    </nav>
   );
 }
