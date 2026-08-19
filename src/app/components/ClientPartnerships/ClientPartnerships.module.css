@@ -25,32 +25,23 @@
   z-index: 1;
 }
 
-.panelLogo {
-  position: absolute;
-  top: 19px;
-  left: 9px;
-  width: 255px;
-  height: 67px;
-  object-fit: contain;
-  z-index: 2;
-}
-
 /* ---------- Vertical outlined side title (Raleway 900 70px) ---------- */
 .verticalTitle {
   position: absolute;
   left: 57px;
-  top: 115px;
+  top: 902px;
+  width: 787px;
+  height: 82px;
   margin: 0;
-  width: 82px;
-  height: 787px;
   font-family: var(--font-raleway), Raleway, sans-serif;
   font-size: 70px;
   font-weight: 900;
+  line-height: 82px;
   color: transparent;
   -webkit-text-stroke: 1px rgba(152, 152, 152, 0.75);
   text-stroke: 1px rgba(152, 152, 152, 0.75);
-  transform: rotate(-90deg) translateX(-100%);
-  transform-origin: left bottom;
+  transform: rotate(-90deg);
+  transform-origin: left top;
   white-space: nowrap;
   z-index: 2;
 }
@@ -59,8 +50,8 @@
 .rightCollage {
   position: absolute;
   top: 0;
-  left: 1063px;
-  width: 857px;
+  left: 984px;
+  width: 936px;
   height: 970px;
   overflow: hidden;
   z-index: 1;
@@ -68,13 +59,12 @@
 
 .rightCollage img {
   position: absolute;
-  top: -59px;
+  top: 0;
   left: 0;
   width: 1003px;
-  height: 2134px;
-  object-fit: none;
-  object-position: 792px 6px;
-  opacity: 0.45;
+  height: 989px;
+  object-fit: fill;
+  opacity: 1;
 }
 
 /* ---------- Header ---------- */
@@ -89,7 +79,7 @@
   margin: 0;
   font-size: 56px;
   font-weight: 800;
-  line-height: 1.1;
+  line-height: 68px;
   color: #000;
   text-transform: uppercase;
   white-space: nowrap;
@@ -110,7 +100,8 @@
   max-width: 1011px;
   font-size: 18px;
   font-weight: 600;
-  line-height: 1.45;
+  line-height: 24px;
+  letter-spacing: 0.36px;
   color: #000;
 }
 
@@ -138,7 +129,8 @@
   margin: 6px 0 0;
   font-size: 16px;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 24px;
+  letter-spacing: 0.32px;
   color: #000;
   white-space: nowrap;
 }
@@ -160,20 +152,20 @@
   margin: 0;
   font-size: 39px;
   font-weight: 600;
-  line-height: 1.22;
+  line-height: 45px;
   color: #000;
   z-index: 3;
 }
 
 .rightSubQuote {
   position: absolute;
-  top: 452px;
+  top: 445px;
   left: 1213px;
   margin: 0;
   font-size: 26px;
   font-weight: 600;
-  font-style: italic;
-  line-height: 1.2;
+  font-style: normal;
+  line-height: 36px;
   color: #23b14d;
   white-space: nowrap;
   z-index: 3;
@@ -248,4 +240,114 @@
   color: rgba(255, 255, 255, 0.85);
   text-decoration: none;
   z-index: 4;
+}
+
+
+@media (max-width: 1200px) {
+  .page {
+    width: 100%;
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+
+  .leftPanel {
+    display: none;
+  }
+
+  .verticalTitle,
+  .rightCollage,
+  .rightQuote,
+  .rightSubQuote,
+  .statementBlock,
+  .bookCta,
+  .prospectusCta,
+  .readMore {
+    display: none;
+  }
+
+  .headerBlock {
+    position: static;
+    padding: 130px 24px 0;
+  }
+
+  .mainTitle {
+    font-size: 34px;
+    line-height: 1.15;
+    white-space: normal;
+  }
+
+  .subHeadline {
+    margin-top: 10px;
+    font-size: 20px;
+    line-height: 1.3;
+    white-space: normal;
+  }
+
+  .description {
+    max-width: none;
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .rowLine {
+    display: none;
+  }
+
+  .rowText {
+    position: static !important;
+    width: 100%;
+    padding: 18px 24px 0;
+  }
+
+  .rowTitle {
+    font-size: 20px;
+    line-height: 1.25;
+    white-space: normal;
+  }
+
+  .rowSubtitle {
+    margin-top: 6px;
+    line-height: 1.4;
+    white-space: normal;
+  }
+
+  .rowCta {
+    position: static !important;
+    display: flex;
+    width: calc(100% - 48px);
+    margin: 14px 24px 20px;
+  }
+
+  .page > .rowText + .rowCta {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  .headerBlock {
+    padding: 110px 16px 0;
+  }
+
+  .mainTitle {
+    font-size: 30px;
+  }
+
+  .subHeadline {
+    font-size: 18px;
+  }
+
+  .description {
+    font-size: 15px;
+  }
+
+  .rowText {
+    padding-inline: 16px;
+  }
+
+  .rowCta {
+    width: calc(100% - 32px);
+    margin-inline: 16px;
+  }
 }

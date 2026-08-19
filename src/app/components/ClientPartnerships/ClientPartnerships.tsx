@@ -26,8 +26,8 @@ const FALLBACK = {
       cta: "Explore",
       ctaX: 943,
       ctaY: 364,
-      titleY: 438,
-      subtitleY: 464,
+      titleY: 360,
+      subtitleY: 386,
       lineX: 264,
       lineY: 424,
     },
@@ -38,8 +38,8 @@ const FALLBACK = {
       cta: "Explore",
       ctaX: 943,
       ctaY: 442,
-      titleY: 522,
-      subtitleY: 549,
+      titleY: 438,
+      subtitleY: 464,
       lineX: 262,
       lineY: 507,
     },
@@ -50,8 +50,8 @@ const FALLBACK = {
       cta: "Explore",
       ctaX: 937,
       ctaY: 526,
-      titleY: 606,
-      subtitleY: 632,
+      titleY: 522,
+      subtitleY: 549,
       lineX: 262,
       lineY: 592,
     },
@@ -62,18 +62,30 @@ const FALLBACK = {
       cta: "Explore",
       ctaX: 933,
       ctaY: 610,
-      titleY: 690,
-      subtitleY: 719,
+      titleY: 606,
+      subtitleY: 632,
       lineX: 266,
       lineY: 677,
     },
     {
       key: "partnershipOnboarding",
+      title: "Partnership Onboarding",
+      subtitle: "Let\u2019s Build What Your Nation or Enterprise Needs Next.",
+      cta: "Explore",
+      ctaX: 926,
+      ctaY: 698,
+      titleY: 690,
+      subtitleY: 719,
+      lineX: 266,
+      lineY: 767,
+    },
+    {
+      key: "clientPartnerLogin",
       title: "CLIENT PARTNER LOGIN",
       subtitle: "Let\u2019s Build What Your Nation or Enterprise Needs Next.",
       cta: "Login",
       ctaX: 926,
-      ctaY: 698,
+      ctaY: 788,
       titleY: 780,
       subtitleY: 809,
       lineX: 266,
@@ -104,18 +116,22 @@ export default function ClientPartnerships({
 
   return (
     <main className={styles.page} data-node-id="7077:15858">
-      <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
+      <SiteHeader
+        layout={canvas ? "figmaCanvas" : "viewport"}
+        panel="logoOnly"
+      />
 
       {/* Left green/yellow angled panel (Group 1171277870, 326×662 at -15,-1) */}
       <div className={styles.leftPanel} aria-hidden="true" />
-      <img
-        src="/images/client-partnerships/logo_green.png"
-        alt="GREEN Future: Envisioned"
-        className={styles.panelLogo}
-      />
 
       {/* Vertical outlined side title (Raleway 900 70px, stroke #989898) */}
-      <h2 className={styles.verticalTitle}>CLIENT PARTNERSHIPS</h2>
+      <h2
+        className={styles.verticalTitle}
+        aria-hidden="true"
+        role="presentation"
+      >
+        CLIENT PARTNERSHIPS
+      </h2>
 
       {/* Right-side photo collage (Mask group at 1063,-59, 1003×2134) */}
       <div className={styles.rightCollage} aria-hidden="true">
@@ -134,7 +150,13 @@ export default function ClientPartnerships({
         <React.Fragment key={row.key}>
           <div
             className={styles.rowLine}
-            style={{ position: "absolute", left: row.lineX, top: row.lineY, width: 812 }}
+            style={{
+              position: "absolute",
+              left: row.lineX,
+              top: row.lineY,
+              width: 812,
+              display: row.key === "clientPartnerLogin" ? "none" : "block",
+            }}
             aria-hidden="true"
           />
           <div
@@ -144,7 +166,7 @@ export default function ClientPartnerships({
             <h3
               className={styles.rowTitle}
               onClick={
-                row.key === "partnershipOnboarding"
+                row.key === "clientPartnerLogin"
                   ? undefined
                   : () =>
                       row.key === "whoWePartnerWith"
@@ -153,7 +175,9 @@ export default function ClientPartnerships({
                           ? setIsOurModelOpen(true)
                           : row.key === "whatSetsGreenApart"
                             ? setIsWhatSetsOpen(true)
-                            : setIsUseCasesOpen(true)
+                            : row.key === "partnershipOnboarding"
+                              ? setIsPartnershipOnboardingOpen(true)
+                              : setIsUseCasesOpen(true)
               }
               style={{ cursor: "pointer" }}
             >
@@ -165,7 +189,7 @@ export default function ClientPartnerships({
             className={styles.rowCta}
             style={{ position: "absolute", left: row.ctaX, top: row.ctaY }}
             onClick={
-              row.key === "partnershipOnboarding"
+              row.key === "partnershipOnboarding" || row.key === "clientPartnerLogin"
                 ? () => setIsPartnershipOnboardingOpen(true)
                 : () =>
                     row.key === "whoWePartnerWith"
@@ -228,6 +252,7 @@ export default function ClientPartnerships({
         <D6Chatbot
           canvasAnchored
           triggerVariant="figmaCanvas"
+          figmaPlaceholder="Let’s Talk Energy"
           triggerStyle={{
             top: 899,
             right: "auto",
