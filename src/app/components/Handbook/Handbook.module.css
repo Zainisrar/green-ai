@@ -14,7 +14,8 @@
   overflow: hidden;
 }
 
-/* ---------- Left gradient panel (Group 1171277870: 326×662 at -15,-1) ---------- */
+  /* ---------- Left gradient panel (Group 1171277870: 326×662 at -15,-1) ---------- */
+
 .leftPanel {
   position: absolute;
   top: -1px;
@@ -31,32 +32,23 @@
   z-index: 1;
 }
 
-.panelLogo {
-  position: absolute;
-  top: 19px;
-  left: 9px;
-  width: 255px;
-  height: 67px;
-  object-fit: contain;
-  z-index: 2;
-}
-
 /* ---------- Vertical outlined side title (Raleway 900 35px stroke gray) ---------- */
 .verticalTitle {
   position: absolute;
-  left: 112px;
-  top: 214px;
+  left: 61px;
+  top: 890px;
+  width: 752px;
+  height: 41px;
   margin: 0;
-  width: 41px;
-  height: 752px;
   font-family: var(--font-raleway), Raleway, sans-serif;
   font-size: 35px;
   font-weight: 900;
+  line-height: 41px;
   color: transparent;
   -webkit-text-stroke: 1px rgba(152, 152, 152, 0.9);
   text-stroke: 1px rgba(152, 152, 152, 0.9);
-  transform: rotate(-90deg) translateX(-100%);
-  transform-origin: left bottom;
+  transform: rotate(-90deg);
+  transform-origin: left top;
   white-space: nowrap;
   z-index: 2;
 }
@@ -175,7 +167,7 @@
 .statementBracketRight {
   position: absolute;
   top: 6px;
-  left: 464px;
+  left: 320px;
   width: 79px;
   height: 98px;
   object-fit: contain;

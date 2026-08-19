@@ -109,16 +109,13 @@ export default function Handbook({ canvas = false }: HandbookProps) {
       className={`${styles.page} ${canvas ? styles.canvasPage : ""}`}
       data-node-id="7077:28846"
     >
-      <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
+      <SiteHeader
+        layout={canvas ? "figmaCanvas" : "viewport"}
+        panel={canvas ? "logoOnly" : "full"}
+      />
 
-      {/* Left gradient panel + logo */}
-      <div className={styles.leftPanel}>
-        <img
-          src="/images/supplier-code-of-conduct/logo_green.png"
-          alt="GREEN — Future: Envisioned"
-          className={styles.panelLogo}
-        />
-      </div>
+      {/* Left gradient panel */}
+      <div className={styles.leftPanel} />
 
       {/* Vertical outlined side title */}
       <h2 className={styles.verticalTitle}>{title}</h2>
