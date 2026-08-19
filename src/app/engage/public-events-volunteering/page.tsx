@@ -1,12 +1,13 @@
-import React from 'react'
-import PublicEventVolunteering from '@/app/components/PublicEventVolunteering/PublicEventVolunteering'
+import PublicEventVolunteering from "@/app/components/PublicEventVolunteering/PublicEventVolunteering";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function PublicEventsVolunteeringPage() {
   return (
-    <React.Fragment>
-        <PublicEventVolunteering canvas />
-    </React.Fragment>
-  )
+    <FigmaPageCanvas
+      desktop={<PublicEventVolunteering canvas />}
+      mobile={<PublicEventVolunteering canvas />}
+      nodeId="7077:24270"
+      fitCanvasHeight
+    />
+  );
 }
-
-export default page
