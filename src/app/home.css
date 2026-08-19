@@ -222,13 +222,25 @@
   font-weight: 800;
   font-size: 32px;
   line-height: 36px;
-  text-transform: uppercase;
   color: #FFFFFF;
   text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
+/* First-panel label — Figma "gREEN Future envisionED" three stacked lines.
+   Rendered line bands measured in the Figma export: y 380-401 / 416-437 /
+   452-473 at x 52-186, so top 380, fs 32, lh 36, fw 600. */
+.panel-headline-first {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 36px;
+  text-transform: none;
+}
+
 .panel-headline-italic {
   font-style: italic;
+  font-size: 28px;
+  line-height: 32px;
+  text-transform: none;
 }
 
 .panel-headline-r {
@@ -236,6 +248,11 @@
   font-weight: 600;
   font-size: 40px;
   line-height: 49px;
+  text-transform: none;
+}
+
+.home-page-d6 .panel-headline-text {
+  text-transform: none;
 }
 
 .home-page-d6 .panel-headline-about .panel-headline-text {
@@ -750,15 +767,16 @@
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
-/* Rectangle 34624681 — green top-left wedge (Figma Home Page D6) */
+/* Figma Rectangle 34624681 — rendered as an exported PNG by D6Template.
+   Kept as a transparent spacer for any fallback consumers of this class. */
 .rectangle-34624681,
 .d6-green-corner {
   position: absolute;
   width: 319.77px;
   height: 668.01px;
-  left: -60.62px;
-  top: -160.8px;
-  background: url('/greenRectangle.png') no-repeat center / cover;
+  left: -68px;
+  top: -146px;
+  background: transparent;
   pointer-events: none;
 }
 
@@ -869,15 +887,29 @@
   background: transparent;
 }
 
+/* "About GREEN" collapsed label — always visible per Figma node 7077:4218, at
+   (441,369) 213px wide even while panel R is the expanded state. */
+.about-green-label {
+  position: absolute;
+  z-index: 1;
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 36px;
+  color: #FFFFFF;
+  text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
 /* Group 1171280893 */
 .group-1171280893 {
   position: absolute;
   width: 110px;
   height: 74px;
   left: 1786px;
-  /* Keep the callout clearly above the talk bar. At this y-position its left
-     edge also sits on the white wedge diagonal, as in the Figma frame. */
-  top: 760px;
+  /* Figma callout art (arrow + "COMPANY SNAPSHOTS IN 90 SEC") starts at the
+     arrow's top edge on the white rail diagonal. */
+  top: 818px;
   pointer-events: none;
 }
 
@@ -1060,6 +1092,24 @@
   background: url('/images/heroSection/lighting.svg') no-repeat center / contain;
   cursor: pointer;
 }
+
+/* Homepage nav — Figma node 7077:4218: row at left 814 top 47, gap 30.
+   Per-item widths pin each tab to its Figma x: Explore 814 / Energy 941 /
+   Elements 1057 / Expertise 1199 / Enlist 1346 / Engage 1463. */
+.home-page-d6 .canvasHeader .navigation {
+  right: auto;
+}
+
+.home-page-d6 .canvasHeader .navigation a {
+  flex: 0 0 auto;
+}
+
+.home-page-d6 .canvasHeader .navigation a:nth-child(1) { flex-basis: 97px; }
+.home-page-d6 .canvasHeader .navigation a:nth-child(2) { flex-basis: 86px; }
+.home-page-d6 .canvasHeader .navigation a:nth-child(3) { flex-basis: 112px; }
+.home-page-d6 .canvasHeader .navigation a:nth-child(4) { flex-basis: 117px; }
+.home-page-d6 .canvasHeader .navigation a:nth-child(5) { flex-basis: 87px; }
+.home-page-d6 .canvasHeader .navigation a:nth-child(6) { flex-basis: 89px; }
 
 /* Frame 1171277914 — single-row top nav tabs */
 .frame-1171277914 {

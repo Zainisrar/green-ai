@@ -99,17 +99,25 @@ const FIGMA_LAYERS = {
   ],
 } as const;
 
-/** Figma letter vectors — shared bottom baseline (y=755 on 970 canvas) */
+/** Figma letter vectors (node 7077:4218) — each position taken from the VECTOR
+ * letter nodes G-R-E-E-N (bottom baseline ~y=747–755 on the 970 canvas). */
 const GREEN_LETTERS = [
-  { src: "/images/d6/lgG.png", left: 0, width: 214 },
-  { src: "/images/d6/lgR.png", left: 380, width: 267 },
-  { src: "/images/d6/lgE.png", left: 775, width: 253 },
-  { src: "/images/d6/lgE.png", left: 1159, width: 253 },
-  { src: "/images/d6/lgN.png", left: 1543, width: 278 },
+  { src: "/images/d6/lgG.png", left: 0, width: 204, bottom: 215 },
+  { src: "/images/d6/lgR.png", left: 290, width: 207, bottom: 220 },
+  { src: "/images/d6/lgE.png", left: 743, width: 193, bottom: 223 },
+  { src: "/images/d6/lgE.png", left: 1159, width: 194, bottom: 222 },
+  { src: "/images/d6/lgN.png", left: 1545, width: 218, bottom: 223 },
 ] as const;
-
-const LETTER_BASELINE = 184;
 const ACCORDION_SHIFT = 105;
+
+/** Figma green top-left wedge (VECTOR Rectangle 34624681, -68,-146 320x668) */
+const GREEN_WEDGE = {
+  src: "/images/d6/wedge.png",
+  left: -68,
+  top: -146,
+  width: 320,
+  height: 668,
+} as const;
 
 /** Exact exported Figma composites for the interactive expanded states.
  * Keeping the photography, tints and seams in the approved composites avoids
@@ -195,10 +203,10 @@ const centeredPanelHeadingLeft = (
 /** Copy positions from Figma node 7077:4372, relative to their panel images. */
 const PANEL_COPY = [
   {
-    headlineLeft: 333.5,
-    headlineTop: 383,
-    headlineWidth: 247,
-    headlineStyle: "panel-headline panel-headline-italic",
+    headlineLeft: 335.37,
+    headlineTop: 374,
+    headlineWidth: 285,
+    headlineStyle: "panel-headline panel-headline-first",
     descLeft: 338,
     descTop: 499,
     descWidth: 215,
@@ -207,14 +215,14 @@ const PANEL_COPY = [
     headlineLeft: 317.67,
     headlineTop: 343,
     headlineWidth: 360,
-    headlineStyle: "panel-headline panel-headline-r",
+    headlineStyle: "panel-headline panel-headline-r", // R's active heading (fs40, Figma lh49)
     descLeft: 317.67,
     descTop: 457,
     descWidth: 358.26,
   },
   {
-    headlineLeft: 358,
-    headlineTop: 377,
+    headlineLeft: 376,
+    headlineTop: 365,
     headlineWidth: 220,
     headlineStyle: "panel-headline panel-headline-italic",
     descLeft: 358,
@@ -222,18 +230,18 @@ const PANEL_COPY = [
     descWidth: 200,
   },
   {
-    headlineLeft: 338,
-    headlineTop: 376,
-    headlineWidth: 220,
+    headlineLeft: 376,
+    headlineTop: 365,
+    headlineWidth: 221,
     headlineStyle: "panel-headline panel-headline-italic",
     descLeft: 338,
     descTop: 492,
     descWidth: 200,
   },
   {
-    headlineLeft: 327,
-    headlineTop: 391.36,
-    headlineWidth: 240,
+    headlineLeft: 367,
+    headlineTop: 370,
+    headlineWidth: 221,
     headlineStyle: "panel-headline panel-headline-italic",
     descLeft: 327,
     descTop: 507,
@@ -265,12 +273,12 @@ const PANELS = [
     href: "/engineering/products/lighting-up-and-lifting-up-living-standards",
   },
   {
-    label: "EPC ENERGY SERVICES",
+    label: "EPC Energy Services",
     description: undefined,
     href: "/engineering/solar-epcm-services",
   },
   {
-    label: "PROJECTS AND SERVICES",
+    label: "Projects and Services",
     description: undefined,
     href: "/endeavors/project-portfolio",
   },
@@ -303,16 +311,16 @@ const EXPANDED_PANELS = [
     description:
       "From homes to industries, we provide an extensive spectrum of energy solutions designed to solve the underlying challenges and bring about beneficial transformations.",
     layout: {
-      left: 760,
-      top: 295,
+      left: 776,
+      top: 273,
       width: 430,
-      bodyWidth: 350,
+      bodyWidth: 358,
       bodyGap: 14,
       titleInset: 0,
-      titleSize: 38,
-      titleLineHeight: 46,
-      bodySize: 12,
-      bodyLineHeight: 19,
+      titleSize: 40,
+      titleLineHeight: 49,
+      bodySize: 13,
+      bodyLineHeight: 22,
     },
   },
   {
@@ -321,16 +329,16 @@ const EXPANDED_PANELS = [
     description:
       "From homes to industries, we provide an extensive spectrum of energy solutions designed to solve the underlying challenges and bring about beneficial transformations.",
     layout: {
-      left: 760,
-      top: 295,
+      left: 776,
+      top: 273,
       width: 430,
-      bodyWidth: 350,
+      bodyWidth: 358,
       bodyGap: 14,
       titleInset: 0,
-      titleSize: 38,
-      titleLineHeight: 46,
-      bodySize: 12,
-      bodyLineHeight: 19,
+      titleSize: 40,
+      titleLineHeight: 49,
+      bodySize: 13,
+      bodyLineHeight: 22,
     },
   },
   {
@@ -405,8 +413,14 @@ const MOBILE_PANELS = [
 ] as const;
 
 const stackHeadline = (text: string) => {
-  const line = text.trim().replace(/\s+/g, " ");
-  return <span className="panel-headline-text">{line}</span>;
+  // One <span> per word so each word stacks on its own line, matching the
+  // per-word line breaks in the Figma homepage labels (node 7077:4218).
+  const words = text.trim().split(/\s+/);
+  return words.map((w) => (
+    <span className="panel-headline-text" key={w}>
+      {w}
+    </span>
+  ));
 };
 
 const FigmaLayer = ({
@@ -567,7 +581,7 @@ const D6Template = (_props: D6TemplateProps) => {
 
   return (
     <>
-      <SiteHeader panel="logoOnly" />
+      <SiteHeader layout="figmaCanvas" panel="logoOnly" />
       <div
         className="d6-route-shell relative w-full overflow-hidden bg-[#f5f5f5]"
         style={{ height: "100svh" }}
@@ -677,7 +691,7 @@ const D6Template = (_props: D6TemplateProps) => {
               aria-disabled={i === 0}
               style={{
                 left: letter.left,
-                bottom: LETTER_BASELINE,
+                bottom: letter.bottom,
                 width: letter.width,
                 zIndex: 20,
                 transform: itemTransform(i),
@@ -702,6 +716,15 @@ const D6Template = (_props: D6TemplateProps) => {
             const copy = PANEL_COPY[i];
             const isCollapsedPanel = i > 0 && expandedPanel !== i;
             const isCollapsedAbout = i === 1 && isCollapsedPanel;
+            const isAboutLabelPanel = i === 1;
+            // R's own active heading is not shown while panel R is the expanded
+            // state — only the "About GREEN" collapsed label stays visible (Figma
+            // node 7077:4218).
+            const hideOwnHeading =
+              i === 1 && expandedPanel === 1;
+            // Panel 3_E has no collapsed label in the D6 homepage state
+            // (Figma node 7077:4218 only shows G / About / EPC / Projects).
+            const noCollapsedLabel = i === 2 && isCollapsedPanel;
             const label = isCollapsedAbout ? "ABOUT GREEN" : panelContent.label;
             // Collapsed labels share the same visual row in the Figma states.
             // R's active Renewable heading sits higher, so About GREEN needs a
@@ -711,18 +734,43 @@ const D6Template = (_props: D6TemplateProps) => {
               panel.top +
               headlineTop +
               (COLLAPSED_LABEL_LINES[i] * COLLAPSED_LABEL_LINE_HEIGHT) / 2;
-            const headlineLeft = isCollapsedPanel
-              ? centeredPanelHeadingLeft(
-                  i,
-                  headlineVisualMidY,
-                  isCollapsedAbout ? 190 : copy.headlineWidth,
-                  PANEL_EDGES[expandedPanel] ?? PANEL_EDGES[1],
-                ) - panel.left
-              : copy.headlineLeft;
+            const headlineLeft = copy.headlineLeft;
             const detailHref = isCollapsedAbout
               ? "/explore/welcome-to-green"
               : panelContent.href;
+            if (hideOwnHeading) {
+              // Panel R is the expanded state: skip its own heading and keep
+              // only the "About GREEN" collapsed label visible (Figma node
+              // 7077:4218).
+              return (
+                <React.Fragment key={`copy-${i}`}>
+                  {isAboutLabelPanel && !isCollapsedPanel && (
+                    <div
+                      key={`${i}-about-label`}
+                      className="panel-copy-zone"
+                      style={{
+                        position: "absolute",
+                        left: 83,
+                        top: 0,
+                        width: 1022,
+                        height: 976,
+                        zIndex: 30,
+                        overflow: "visible",
+                      }}
+                    >
+                      <span
+                        className="about-green-label"
+                        style={{ left: 441 - 83, top: 369, width: 213 }}
+                      >
+                        About GREEN
+                      </span>
+                    </div>
+                  )}
+                </React.Fragment>
+              );
+            }
             return (
+              <React.Fragment key={`copy-${i}`}>
               <div
                 key={`${i}-${panelContent.href}`}
                 className={`panel-copy-zone d6-panel-copy--${i}`}
@@ -744,6 +792,7 @@ const D6Template = (_props: D6TemplateProps) => {
                 }}
               >
                 {isCollapsedPanel ? (
+                  noCollapsedLabel ? null : (
                   <Link
                     href={detailHref}
                     className={`d6-panel-link ${copy.headlineStyle}${isCollapsedAbout ? " panel-headline-about" : ""}`}
@@ -756,6 +805,7 @@ const D6Template = (_props: D6TemplateProps) => {
                   >
                     {stackHeadline(label)}
                   </Link>
+                  )
                 ) : (
                   <button
                     type="button"
@@ -772,7 +822,7 @@ const D6Template = (_props: D6TemplateProps) => {
                     {stackHeadline(label)}
                   </button>
                 )}
-                {panelContent.description && expandedPanel === 1 && (
+                {panelContent.description && expandedPanel === 1 && !isAboutLabelPanel && (
                   <p
                     className="panel-desc"
                     style={{
@@ -785,10 +835,38 @@ const D6Template = (_props: D6TemplateProps) => {
                   </p>
                 )}
               </div>
+              {/* "About GREEN" collapsed label — always visible per Figma node
+                  7077:4218, even while panel R is the expanded state. */}
+              {isAboutLabelPanel && !isCollapsedPanel && (
+                <div
+                  key={`${i}-about-label`}
+                  className="panel-copy-zone"
+                  style={{
+                    left: 83,
+                    top: 0,
+                    width: 1022,
+                    height: 976,
+                    zIndex: 30,
+                    overflow: "visible",
+                  }}
+                >
+                  <span
+                    className="about-green-label"
+                    style={{
+                      left: 441 - 83,
+                      top: 369,
+                      width: 213,
+                    }}
+                  >
+                    About GREEN
+                  </span>
+                </div>
+              )}
+              </React.Fragment>
             );
           })}
 
-          {expandedPanel >= 2 && (
+          {expandedPanel >= 1 && (
             <section
               key={expandedPanel}
               className={`d6-expanded-copy d6-expanded-copy--${expandedPanel}`}
@@ -829,7 +907,11 @@ const D6Template = (_props: D6TemplateProps) => {
             />
           </div>
 
-          <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
+          <D6Chatbot
+            canvasAnchored
+            triggerVariant="figmaCanvas"
+            figmaPlaceholder="Let's Talk Energy"
+          />
         </div>
       </div>
     </>

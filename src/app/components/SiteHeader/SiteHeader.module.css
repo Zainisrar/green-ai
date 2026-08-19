@@ -163,7 +163,6 @@
   height: 24px;
   line-height: 24px;
 }
-
 .canvasHeader .navigation a:nth-child(4) {
   flex: 0 0 153px;
 }
@@ -172,6 +171,8 @@
   flex: 0 0 51px;
   margin-left: -36px;
 }
+
+
 
 .canvasMenuButton {
   position: absolute;
