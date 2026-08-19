@@ -88,19 +88,12 @@
 
 .verticalLabel {
   position: absolute;
-  top: 956px;
-  left: 37px;
-  width: 559px;
-  height: 110px;
-  transform: rotate(-90deg);
-  transform-origin: left top;
-  color: transparent;
-  font-size: 90px;
-  font-weight: 900;
-  line-height: 110px;
-  letter-spacing: 1px;
-  -webkit-text-stroke: 1px #a8a8a8;
-  opacity: 0.7;
+  z-index: 2;
+  top: 391px;
+  left: 39px;
+  width: 68px;
+  height: 558px;
+  max-width: none;
 }
 
 .introduction {
@@ -482,15 +475,9 @@
   z-index: 5;
   top: 848px;
   left: 42px;
-  width: 560px;
-  height: 100px;
+  width: 68px;
+  height: 558px;
   transform: none;
-  color: transparent;
-  font-size: 86px;
-  line-height: 100px;
-  letter-spacing: -2px;
-  -webkit-text-stroke: 1px #b8b8b8;
-  opacity: 0.72;
 }
 
 .sliderPagination {
