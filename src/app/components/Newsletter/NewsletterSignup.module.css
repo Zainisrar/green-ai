@@ -25,14 +25,6 @@
   clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
-.panelLogo {
-  position: absolute;
-  left: 24px;
-  top: 18px;
-  width: 255px;
-  height: 67px;
-}
-
 /* ── Large left collage (mask group at -164,-134, 1208x1987) ── */
 .leftCollage {
   position: absolute;
@@ -214,70 +206,6 @@
   width: 577px;
   height: 106px;
   z-index: 5;
-}
-
-.quoteBracketBottom {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 79px;
-  height: 98px;
-}
-
-.quoteBracketBottom::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 56px;
-  width: 70px;
-  height: 5px;
-  background: #9fd98e;
-  border-radius: 2px;
-  transform-origin: left center;
-  transform: rotate(-32deg);
-}
-
-.quoteBracketBottom::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 62px;
-  width: 5px;
-  height: 36px;
-  background: #9fd98e;
-  border-radius: 2px;
-}
-
-.quoteBracketTop {
-  position: absolute;
-  right: 0;
-  top: 7px;
-  width: 80px;
-  height: 99px;
-}
-
-.quoteBracketTop::before {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 70px;
-  height: 5px;
-  background: #9fd98e;
-  border-radius: 2px;
-  transform-origin: right center;
-  transform: rotate(32deg);
-}
-
-.quoteBracketTop::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 2px;
-  width: 5px;
-  height: 36px;
-  background: #9fd98e;
-  border-radius: 2px;
 }
 
 .contactText {

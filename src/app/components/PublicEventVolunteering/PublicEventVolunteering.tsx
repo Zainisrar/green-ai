@@ -4,6 +4,7 @@ import Link from "next/link";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import FigmaQuoteBrackets from "../FigmaQuoteBrackets/FigmaQuoteBrackets";
 import styles from "./PublicEventVolunteering.module.css";
 import WhyWeEngage from "./Dialog/WhyWeEngage";
 import WaystoGetInvolved from "./Dialog/WaystoGetInvolved";
@@ -165,22 +166,14 @@ export default function PublicEventVolunteering({
 
       {/* Bottom quote */}
       <div className={styles.bottomQuote}>
-        <img
-          src="/images/handbook/figma-quote-left.svg"
-          alt=""
-          className={styles.quoteShapeLeft}
-          aria-hidden="true"
+        <FigmaQuoteBrackets
+          leftStyle={{ left: -69, top: -11 }}
+          rightStyle={{ right: -75, top: -16 }}
         />
         <h2 className={styles.bottomQuoteText}>
           You Don’t Need To Be An <span className={styles.highlight}>Engineer</span> To
           Power Change. You Just Need To Show Up. We’ll Show You How.
         </h2>
-        <img
-          src="/images/handbook/figma-quote-right.svg"
-          alt=""
-          className={styles.quoteShapeRight}
-          aria-hidden="true"
-        />
       </div>
 
       {/* Bottom-right CTAs */}

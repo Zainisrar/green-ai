@@ -25,16 +25,6 @@
   z-index: 1;
 }
 
-.panelLogo {
-  position: absolute;
-  left: 9px;
-  top: 19px;
-  width: 255px;
-  height: 67px;
-  object-fit: contain;
-  mix-blend-mode: multiply;
-}
-
 /* ── Vertical side title (Raleway Black 900, 50px, outlined, bottom-up) ── */
 .verticalTitle {
   position: absolute;
@@ -280,70 +270,6 @@
   background: rgba(241, 238, 238, 0.1);
   transform: rotate(14deg);
   transform-origin: center;
-}
-
-.quoteBracketTop {
-  position: absolute;
-  left: 330px;
-  top: 0;
-  width: 80px;
-  height: 99px;
-}
-
-.quoteBracketTop::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 80px;
-  height: 4px;
-  background: #aedc9e;
-  border-radius: 2px;
-}
-
-.quoteBracketTop::after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 4px;
-  height: 99px;
-  background: #aedc9e;
-  border-radius: 2px;
-  transform-origin: top center;
-  transform: rotate(-39deg);
-}
-
-.quoteBracketBottom {
-  position: absolute;
-  left: -58px;
-  top: 59px;
-  width: 79px;
-  height: 98px;
-}
-
-.quoteBracketBottom::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 79px;
-  height: 4px;
-  background: #aedc9e;
-  border-radius: 2px;
-}
-
-.quoteBracketBottom::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 4px;
-  height: 98px;
-  background: #aedc9e;
-  border-radius: 2px;
-  transform-origin: bottom center;
-  transform: rotate(32deg);
 }
 
 .quoteText {

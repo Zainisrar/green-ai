@@ -2,6 +2,7 @@
 import { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import FigmaQuoteBrackets from "../FigmaQuoteBrackets/FigmaQuoteBrackets";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import Booking from "../BookConsulation/Modals/Booking";
 import styles from "./BookAConsultation.module.css";
@@ -83,13 +84,7 @@ export default function BookAConsultation({
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
       {/* Left green/yellow angled panel */}
-      <div className={styles.leftPanel} aria-hidden="true">
-        <img
-          src="/images/book-consulation/figma-logo.png"
-          alt=""
-          className={styles.panelLogo}
-        />
-      </div>
+      <div className={styles.leftPanel} aria-hidden="true" />
 
       {/* Vertical side title (Raleway Black 900, outlined, bottom-up) */}
       <p className={styles.verticalTitle} aria-hidden="true">
@@ -219,8 +214,10 @@ export default function BookAConsultation({
       {/* Right quote over collage */}
       <div className={styles.quoteBlock}>
         <div className={styles.quoteShape} aria-hidden="true" />
-        <span className={styles.quoteBracketTop} aria-hidden="true" />
-        <span className={styles.quoteBracketBottom} aria-hidden="true" />
+        <FigmaQuoteBrackets
+          leftStyle={{ left: -58, top: 59 }}
+          rightStyle={{ right: -1, top: 0 }}
+        />
         <p className={styles.quoteText}>
           {highlight(QUOTE_PARTS, styles.greenText)}
         </p>

@@ -180,24 +180,6 @@
   color: #000;
 }
 
-.quoteShapeLeft {
-  position: absolute;
-  top: -11px;
-  left: -69px;
-  width: 79px;
-  height: 98px;
-  object-fit: contain;
-}
-
-.quoteShapeRight {
-  position: absolute;
-  top: -16px;
-  right: -75px;
-  width: 80px;
-  height: 99px;
-  object-fit: contain;
-}
-
 /* Bottom-right CTAs */
 .ctaSignUp {
   width: 289px;

@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import FigmaQuoteBrackets from "../FigmaQuoteBrackets/FigmaQuoteBrackets";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import styles from "./InvestorRelations.module.css";
 import WhyInvestGreen from "./Dialog/WhyInvestGreen";
@@ -204,14 +205,7 @@ export default function InvestorRelations({
 
       {/* Right quote card */}
       <div className={styles.quoteCard}>
-        <div className={styles.quoteShapeWrap}>
-          <img
-            src="/images/handbook/figma-quote-left.svg"
-            alt=""
-            className={styles.quoteShapeTop}
-            aria-hidden="true"
-          />
-        </div>
+        <FigmaQuoteBrackets showRight={false} />
         <p>
           {highlightText(d.quote1.text, d.quote1.highlighted)}
         </p>

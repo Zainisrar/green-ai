@@ -1,0 +1,25 @@
+.brackets {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.left,
+.right {
+  position: absolute;
+  display: block;
+  width: 82px;
+  height: 101px;
+  object-fit: contain;
+}
+
+.left {
+  left: 0;
+  top: 0;
+}
+
+.right {
+  right: 0;
+  top: 0;
+}

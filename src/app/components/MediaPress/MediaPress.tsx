@@ -2,6 +2,7 @@
 import { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import FigmaQuoteBrackets from "../FigmaQuoteBrackets/FigmaQuoteBrackets";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import LatestPressReleases from "./Dialog/LatestPressReleases";
 import MediaContactInterviewRequests from "./Dialog/MediaContactInterviewRequests";
@@ -79,13 +80,7 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
       {/* Left green/yellow angled panel */}
-      <div className={styles.leftPanel} aria-hidden="true">
-        <img
-          src="/images/book-consulation/figma-logo.png"
-          alt=""
-          className={styles.panelLogo}
-        />
-      </div>
+      <div className={styles.leftPanel} aria-hidden="true" />
 
       {/* Vertical side title (Raleway Black, outlined, bottom-up) */}
       <p className={styles.verticalTitle} aria-hidden="true">
@@ -142,8 +137,10 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
 
       {/* Bottom-left quote */}
       <div className={styles.quoteBlock}>
-        <span className={styles.quoteBracketBottom} aria-hidden="true" />
-        <span className={styles.quoteBracketTop} aria-hidden="true" />
+        <FigmaQuoteBrackets
+          leftStyle={{ left: -64, top: -16 }}
+          rightStyle={{ right: 0, top: -16 }}
+        />
         <p className={styles.quoteText}>
           We Don&rsquo;t Tell Stories To Impress.
           <br />
