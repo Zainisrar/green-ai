@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 interface D6ChatbotProps {
   canvasAnchored?: boolean;
   triggerClassName?: string;
+  /** Page-specific placeholder text for the figmaCanvas trigger */
+  figmaPlaceholder?: string;
   triggerStyle?: React.CSSProperties;
   triggerVariant?: "default" | "figmaCanvas";
 }
@@ -20,6 +22,7 @@ interface Message {
 const D6Chatbot: React.FC<D6ChatbotProps> = ({
   canvasAnchored = false,
   triggerClassName = "",
+  figmaPlaceholder,
   triggerStyle,
   triggerVariant = "default",
 }) => {
@@ -418,7 +421,11 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
               value={promptInputValue}
               onChange={(e) => setPromptInputValue(e.target.value)}
               onKeyDown={handlePromptKeyDown}
-              placeholder={isFigmaCanvasTrigger ? "Type your words...." : "Let's Talk Energy"}
+              placeholder={
+                isFigmaCanvasTrigger
+                  ? (figmaPlaceholder ?? "Type your words....")
+                  : "Let's Talk Energy"
+              }
               aria-label="Chat input"
               className={`w-full min-w-0 border-0 bg-transparent font-semibold text-[#626262] outline-none placeholder:text-[#626262] placeholder:opacity-100 ${
                 isFigmaCanvasTrigger

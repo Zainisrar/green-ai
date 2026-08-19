@@ -64,10 +64,14 @@ export default function ProductsFigma() {
     >
       <img className={styles.background} src="/images/product/bg.jpg" alt="" />
       <SiteHeader layout="productCanvas" brand="sunshine" productLogo />
-      <h1 className={styles.pageTitle}>Products</h1>
+      <img
+        className={styles.pageTitleImg}
+        src="/images/product/title_h1.png"
+        alt=""
+      />
       <img
         className={styles.verticalTitle}
-        src="/images/product/product.png"
+        src="/images/product/product_vert.png"
         alt=""
       />
 
@@ -83,7 +87,7 @@ export default function ProductsFigma() {
             <button
               key={image}
               type="button"
-              className={active === index ? styles.activeThumbnail : undefined}
+              className={active === index ? styles.activeThumbnail : styles.inactiveThumbnail}
               onClick={() => setActive(index)}
               aria-label={`Show product image ${index + 1}`}
               aria-pressed={active === index}
@@ -145,6 +149,7 @@ export default function ProductsFigma() {
       <D6Chatbot
         canvasAnchored
         triggerVariant="figmaCanvas"
+        figmaPlaceholder="Let's Talk Energy"
         triggerStyle={{
           top: 899,
           right: "auto",

@@ -1,0 +1,263 @@
+.canvasPage {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  min-height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #111;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.canvasArtwork {
+  position: absolute;
+  z-index: 0;
+  top: -122.5px;
+  left: 450px;
+  width: 968px;
+  height: 1916.5px;
+  pointer-events: none;
+}
+
+.canvasArtwork img {
+  display: block;
+  width: 968px;
+  height: 970px;
+  max-width: none;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+.canvasVerticalTitle {
+  position: absolute;
+  z-index: 3;
+  top: 208px;
+  left: 57px;
+  display: block;
+  width: 60px;
+  height: 694px;
+  max-width: none;
+  object-fit: fill;
+}
+
+.canvasTitle {
+  position: absolute;
+  z-index: 5;
+  top: 104px;
+  left: 250px;
+  width: 846px;
+  margin: 0;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 68px;
+}
+
+.canvasTitle span {
+  color: #23b14d;
+}
+
+.canvasSubtitle {
+  position: absolute;
+  z-index: 5;
+  top: 183px;
+  left: 262px;
+  width: 834px;
+  margin: 0;
+  color: #111;
+  font-size: 30px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 36px;
+}
+
+.canvasDescription {
+  position: absolute;
+  z-index: 5;
+  top: 237px;
+  left: 265px;
+  width: 1430px;
+  margin: 0;
+  color: #111;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.canvasRows {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+}
+
+.canvasRow {
+  position: absolute;
+  display: block;
+  width: 530px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #111;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 27px;
+}
+
+.canvasRow1 { top: 350px; left: 412px; }
+.canvasRow2 { top: 430px; left: 370px; }
+.canvasRow3 { top: 512px; left: 337px; }
+.canvasRow4 { top: 592px; left: 300px; }
+.canvasRow5 { top: 675px; left: 259px; }
+
+.canvasRow:focus-visible {
+  outline: 2px solid #23b14d;
+  outline-offset: 4px;
+}
+
+.canvasRightHeading {
+  position: absolute;
+  z-index: 5;
+  top: 330px;
+  left: 1235px;
+  width: 596px;
+  margin: 0;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 39px;
+}
+
+.canvasRightQuote {
+  position: absolute;
+  z-index: 5;
+  top: 374px;
+  left: 1227px;
+  width: 834px;
+  margin: 0;
+  font-size: 21px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 36px;
+}
+
+.canvasRightIntro {
+  position: absolute;
+  z-index: 5;
+  top: 421px;
+  left: 1227px;
+  width: 515px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 30px;
+}
+
+.canvasRightList {
+  position: absolute;
+  z-index: 5;
+  top: 471px;
+  left: 1218px;
+  width: 388px;
+  margin: 0;
+  height: 96px;
+  font-size: 22px;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 24px;
+}
+
+.canvasRightList span {
+  display: block;
+}
+
+.canvasRightList span:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.canvasRightBody {
+  position: absolute;
+  z-index: 5;
+  top: 608px;
+  left: 1169px;
+  width: 681px;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.canvasBottomQuote {
+  position: absolute;
+  z-index: 5;
+  top: 785px;
+  left: 518px;
+  width: 1170px;
+  height: 144px;
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 36px;
+  white-space: pre-line;
+}
+
+.canvasBottomQuote span {
+  color: #23b14d;
+}
+
+.canvasApplyCta,
+.canvasProspectusCta {
+  position: absolute;
+  z-index: 7;
+  height: 52px;
+  min-height: 52px;
+  justify-content: space-between !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.canvasApplyCta {
+  top: 732px;
+  left: 1637px;
+  width: 279px;
+}
+
+.canvasProspectusCta {
+  top: 812px;
+  left: 1426px;
+  width: 490px;
+}
+
+@media (max-width: 1200px) {
+  .canvasPage {
+    position: static;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .canvasArtwork,
+  .canvasVerticalTitle,
+  .canvasTitle,
+  .canvasSubtitle,
+  .canvasDescription,
+  .canvasRows,
+  .canvasRightHeading,
+  .canvasRightQuote,
+  .canvasRightIntro,
+  .canvasRightList,
+  .canvasRightBody,
+  .canvasBottomQuote,
+  .canvasApplyCta,
+  .canvasProspectusCta {
+    position: static;
+    width: auto;
+    height: auto;
+    min-height: 0;
+  }
+}

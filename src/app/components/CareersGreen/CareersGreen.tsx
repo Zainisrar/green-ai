@@ -2,14 +2,18 @@
 import React from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import D6Chatbot from "../D6Chatbot";
+import styles from "./CareersGreen.module.css";
 import { useCareersGreen } from "../../../hooks/useCareersGreen";
 import WhyWorkWithGreen from "./Modals/WhyWorkWithGreen";
 import CareerTracksSupport from "./Modals/CareerTracksSupport";
 import WhatMakesGreenDifferent from "./Modals/WhatMakesGreenDifferent";
 import OpenRoles from "./Modals/OpenRoles";
 
-const CareerGreen = () => {
-  const { data: careersData,  error } = useCareersGreen();
+const CareerGreen = ({ canvas = false }: { canvas?: boolean }) => {
+  const { data: careersData, error } = useCareersGreen();
   const [isWhyWorkWithGreenOpen, setIsWhyWorkWithGreenOpen] = React.useState(false);
   const [isCareerTracksSupportOpen, setIsCareerTracksSupportOpen] = React.useState(false);
   const [isWhatMakesGreenDifferentOpen, setIsWhatMakesGreenDifferentOpen] = React.useState(false);
@@ -37,7 +41,7 @@ const CareerGreen = () => {
   };
 
 
-  if (error) {
+  if (!canvas && error) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
@@ -48,6 +52,48 @@ const CareerGreen = () => {
       </div>
     );
   }
+  if (canvas) {
+    const canvasRows = [
+      { label: "Why Work With GREEN?", onClick: () => setIsWhyWorkWithGreenOpen(true) },
+      { label: "Career Tracks We Support", onClick: () => setIsCareerTracksSupportOpen(true) },
+      { label: "What Makes GREEN Different", onClick: () => setIsWhatMakesGreenDifferentOpen(true) },
+      { label: "Open Roles", onClick: () => setIsOpenRolesOpen(true) },
+    ];
+
+    return (
+      <main className={styles.canvasPage} data-node-id="7077:16449">
+        <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
+        <div className={styles.canvasArtwork} aria-hidden="true">
+          <img src="/images/careers-green/mainImg.png" alt="" />
+        </div>
+        <img className={styles.canvasVerticalTitle} src="/images/careers-green/industry-affiliations-certifications.png" alt="Industry Affiliations & Certifications" />
+        <h1 className={styles.canvasTitle}>Careers at GREEN</h1>
+        <p className={styles.canvasSubtitle}>Build More Than a Career. Build the Future of Energy.</p>
+        <p className={styles.canvasDescription}>GREEN isn’t a job. It’s a calling. If you’re ready to solve real problems, power real communities, and leave systems behind that last — we’re hiring.</p>
+        <div className={styles.canvasRows}>
+          {canvasRows.map((row, index) => (
+            <div className={`${styles.canvasRow} ${styles[`canvasRow${index + 1}`]}`} key={row.label}>
+              <h2>{row.label}</h2>
+              <FigmaAngledCta className={styles.canvasExploreCta} onClick={row.onClick}>Explore</FigmaAngledCta>
+            </div>
+          ))}
+        </div>
+        <p className={styles.canvasRightQuote}>We engineer energy.<br />But our real asset is people.</p>
+        <div className={styles.canvasReadMore}><span>Read more</span><span aria-hidden="true">›</span></div>
+        <p className={styles.canvasBottomQuote}>“In energy infrastructure, trust is engineered<br />— through compliance, peer validation, and continuous improvement.”</p>
+        <div className={styles.canvasCtas}>
+          <FigmaAngledCta className={styles.canvasApplyCta} onClick={() => setIsOpenRolesOpen(true)}>Apply Now</FigmaAngledCta>
+          <FigmaAngledCta className={styles.canvasProspectusCta} href={careersData?.data?.mainPage?.cta?.[1]?.href || "/empower/careers-at-green-prospectus.pdf"} icon="download">Careers at GREEN Prospectus (PDF)</FigmaAngledCta>
+        </div>
+        <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
+        <WhyWorkWithGreen isOpen={isWhyWorkWithGreenOpen} onClose={() => setIsWhyWorkWithGreenOpen(false)} data={careersData?.data?.whyWorkWithGreenModal} />
+        <CareerTracksSupport isOpen={isCareerTracksSupportOpen} onClose={() => setIsCareerTracksSupportOpen(false)} data={careersData?.data?.careerTrackSupport} />
+        <WhatMakesGreenDifferent isOpen={isWhatMakesGreenDifferentOpen} onClose={() => setIsWhatMakesGreenDifferentOpen(false)} data={careersData?.data?.whatMakesGreenDifferent} />
+        <OpenRoles isOpen={isOpenRolesOpen} onClose={() => setIsOpenRolesOpen(false)} data={careersData?.data?.openRoles} />
+      </main>
+    );
+  }
+
   return (
     <React.Fragment>
       <div className="">

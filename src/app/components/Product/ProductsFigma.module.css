@@ -15,24 +15,23 @@
   width: 1920px;
   height: 970px;
 }
-.pageTitle {
+.pageTitleImg {
   position: absolute;
   z-index: 2;
-  top: 82px;
+  top: 90px;
   left: 286px;
-  margin: 0;
-  color: #050505;
-  font-size: 48px;
-  font-weight: 800;
-  line-height: 58px;
+  width: 223px;
+  height: 36px;
+  max-width: none;
 }
 .verticalTitle {
   position: absolute;
   z-index: 2;
-  top: 420px;
-  left: 50px;
+  top: 418px;
+  left: 31px;
   width: 72px;
-  height: 518px;
+  height: 517px;
+  max-width: none;
 }
 .gallery {
   position: absolute;
@@ -49,19 +48,15 @@
 }
 .thumbnails {
   position: absolute;
-  top: 759px;
-  left: 239px;
-  display: flex;
-  align-items: center;
-  gap: 55px;
-  height: 98px;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
 }
 .thumbnails button {
+  position: absolute;
   display: grid;
   box-sizing: border-box;
-  width: 91px;
-  height: 91px;
-  padding: 5px;
+  padding: 0;
   overflow: hidden;
   border: 1px solid transparent;
   border-radius: 16px;
@@ -69,10 +64,34 @@
   cursor: pointer;
   opacity: 0.72;
   place-items: center;
+  pointer-events: auto;
+}
+.thumbnails button > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.thumbnails .inactiveThumbnail {
+  width: 84px;
+  height: 84px;
+}
+.thumbnails .inactiveThumbnail:nth-of-type(1) {
+  top: 764px;
+  left: 401px;
+}
+.thumbnails .inactiveThumbnail:nth-of-type(2) {
+  top: 760px;
+  left: 548px;
+}
+.thumbnails .inactiveThumbnail:nth-of-type(3) {
+  top: 760px;
+  left: 694px;
 }
 .thumbnails .activeThumbnail {
-  width: 96px;
-  height: 98px;
+  width: 95px;
+  height: 95px;
+  top: 760px;
+  left: 239px;
   border-color: #23b14d;
   opacity: 1;
 }
@@ -83,10 +102,10 @@
 }
 .enquiry {
   position: absolute;
-  top: 885px;
-  left: 178px;
-  width: 170px;
-  height: 54px;
+  top: 886px;
+  left: 658px;
+  width: 169px;
+  height: 52px;
   padding: 0 29px 0 45px;
   border: 0;
   background: linear-gradient(100deg, #bff59d, #fbfa74);
@@ -122,25 +141,25 @@
 }
 .story h2 {
   position: absolute;
-  top: 80px;
+  top: 74px;
   left: 199px;
   width: 388px;
   margin: 0;
-  color: #2b2b2b;
-  font-size: 48px;
+  color: #303030;
+  font-size: 38px;
   font-style: italic;
   font-weight: 800;
   line-height: 51px;
 }
 .story p {
   position: absolute;
-  top: 311px;
+  top: 308px;
   left: 140px;
   width: 437px;
   margin: 0;
   color: #303030;
-  font-size: 16px;
-  line-height: 25px;
+  font-size: 14px;
+  line-height: 24px;
 }
 .specifications {
   position: absolute;

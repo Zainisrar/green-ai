@@ -8,41 +8,34 @@
   font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
 
-.storyArtwork {
+.collage {
   position: absolute;
   z-index: 0;
-  inset: 0 auto 0 0;
-  width: 1010px;
-  height: 970px;
+  top: -271px;
+  left: -6px;
+  width: 1016px;
+  height: 1574px;
   max-width: none;
-  object-fit: contain;
 }
 
-.pageTitle {
+.pageTitleImg {
   position: absolute;
   z-index: 2;
-  top: 292px;
+  top: 289px;
   left: 209px;
-  width: 433px;
-  margin: 0;
-  font-size: 56px;
-  font-weight: 800;
-  line-height: normal;
-  text-transform: uppercase;
-}
-
-.pageTitle span {
-  display: block;
-  color: #23b14d;
+  width: 402px;
+  height: 109px;
+  max-width: none;
 }
 
 .watermark {
   position: absolute;
   z-index: 2;
-  top: 487px;
-  left: 88px;
-  width: 61px;
-  height: 452px;
+  top: 486px;
+  left: 73px;
+  width: 60px;
+  height: 451px;
+  max-width: none;
 }
 
 .storyCopy {
@@ -53,8 +46,7 @@
   width: 1022px;
 }
 
-.storyCopy h2,
-.milestones h2 {
+.storyCopy h2 {
   margin: 0;
   font-size: 30px;
   font-weight: 800;
@@ -77,28 +69,85 @@
   inset: 0;
 }
 
-.milestones h2 {
+.milestonesTitle {
   position: absolute;
   top: 287px;
   left: 821px;
   width: 293px;
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 36px;
+  letter-spacing: 1.5px;
 }
 
-.milestones > img {
+.timelineLine {
   position: absolute;
-  top: 354px;
-  left: 455px;
-  width: 1453px;
-  height: 603px;
+  top: 364px;
+  left: 1038px;
+  width: 282px;
+  height: 578px;
   max-width: none;
-  object-fit: contain;
 }
 
-.chatTrigger,
-.chatTrigger > div,
-.chatTrigger > div > img {
-  width: 462px;
-  height: 96px;
+.bubble {
+  position: absolute;
+  z-index: 1;
+  max-width: none;
+}
+
+.dot {
+  position: absolute;
+  z-index: 2;
+  width: 12px;
+  height: 12px;
+  max-width: none;
+}
+
+.tag {
+  position: absolute;
+  z-index: 3;
+  width: 56px;
+  height: 19px;
+  max-width: none;
+}
+
+.milestoneImg {
+  position: absolute;
+  z-index: 4;
+  max-width: none;
+}
+
+.readMore {
+  position: absolute;
+  z-index: 5;
+  top: 799px;
+  left: 1521px;
+  width: 168px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-family: var(--font-raleway), Raleway, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  text-decoration: none;
+}
+
+.readMoreArrow {
+  width: 25px;
+  height: 7px;
+  max-width: none;
+}
+
+.chatTrigger {
+  position: absolute;
+  top: 899px;
+  left: 1498px;
+  width: 418px;
+  height: 52px;
 }
 
 .mobilePage {
