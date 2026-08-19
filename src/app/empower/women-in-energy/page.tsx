@@ -1,13 +1,13 @@
-"use client";
-import WomenInEnergy from '@/app/components/WomenInEnergy/WomenInEnergy';
-import React from 'react'
+import WomenInEnergy from "@/app/components/WomenInEnergy/WomenInEnergy";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function WomenInEnergyPage() {
   return (
-    <React.Fragment>
-        <WomenInEnergy/>
-    </React.Fragment>
-  )
+    <FigmaPageCanvas
+      desktop={<WomenInEnergy canvas />}
+      mobile={<WomenInEnergy canvas />}
+      nodeId="7077:19753"
+      fitCanvasHeight
+    />
+  );
 }
-
-export default page
