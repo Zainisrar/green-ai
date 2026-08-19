@@ -1,12 +1,13 @@
-import React from 'react'
-import NewsLetterSignUp from '@/app/components/Newsletter/NewsletterSignup'
+import NewsletterSignup from "@/app/components/Newsletter/NewsletterSignup";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function NewsletterPage() {
   return (
-    <React.Fragment>
-        <NewsLetterSignUp canvas />
-    </React.Fragment>
-  )
+    <FigmaPageCanvas
+      desktop={<NewsletterSignup canvas />}
+      mobile={<NewsletterSignup canvas />}
+      nodeId="7077:14996"
+      fitCanvasHeight
+    />
+  );
 }
-
-export default page

@@ -1,12 +1,13 @@
-import React from 'react'
-import BookAConsultation from '@/app/components/BookAConsultation/BookAConsultation'
+import BookAConsultation from "@/app/components/BookAConsultation/BookAConsultation";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function BookAConsultationPage() {
   return (
-    <React.Fragment>
-        <BookAConsultation canvas />
-    </React.Fragment>
-  )
+    <FigmaPageCanvas
+      desktop={<BookAConsultation canvas />}
+      mobile={<BookAConsultation canvas />}
+      nodeId="7077:19924"
+      fitCanvasHeight
+    />
+  );
 }
-
-export default page
