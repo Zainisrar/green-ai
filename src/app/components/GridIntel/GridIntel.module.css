@@ -23,7 +23,7 @@
 }
 .pageTitle {
   position: absolute;
-  top: 105px;
+  top: 97px;
   left: 270px;
   width: 672px;
   margin: 0;
@@ -68,6 +68,7 @@
 .platform h2 {
   margin: 0 0 32px;
   font-size: 30px;
+  font-weight: 800;
 }
 .platform p {
   margin: 0 0 17px;
@@ -83,6 +84,7 @@
 .energy h2 {
   margin: 0;
   font-size: 24px;
+  font-weight: 800;
 }
 .energy h3 {
   margin: 5px 0 18px;
@@ -125,8 +127,7 @@
 }
 .sections button {
   position: absolute;
-  width: 520px;
-  height: 65px;
+  height: 62px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -139,41 +140,62 @@
 .sections button:nth-child(1) {
   top: 261px;
   left: 1407px;
+  width: 275px;
 }
 .sections button:nth-child(2) {
   top: 344px;
   left: 1364px;
+  width: 481px;
 }
 .sections button:nth-child(3) {
   top: 424px;
   left: 1329px;
+  width: 285px;
 }
 .sections button:nth-child(4) {
   top: 504px;
   left: 1288px;
+  width: 468px;
 }
 .sections button:nth-child(5) {
   top: 584px;
   left: 1245px;
+  width: 631px;
 }
 .sections button:nth-child(6) {
   top: 665px;
   left: 1208px;
+  width: 367px;
 }
 .sections img {
   position: absolute;
   inset: 0;
-  width: 81px;
-  height: 65px;
+  width: 78px;
+  height: 62px;
 }
 .sections .active img {
-  width: 266px;
+  width: 263px;
 }
 .sections span {
   position: absolute;
-  top: 22px;
+  top: 23px;
   left: 24px;
   white-space: nowrap;
+}
+.bracket {
+  position: absolute;
+}
+.bracketLeft {
+  top: 388px;
+  left: 773px;
+  width: 79px;
+  height: 98px;
+}
+.bracketRight {
+  top: 377px;
+  left: 1239px;
+  width: 80px;
+  height: 99px;
 }
 .sections .active span {
   color: #23b14d;
@@ -196,23 +218,23 @@
 .actions button:nth-child(1) {
   top: 658px;
   left: 1570px;
-  width: 351px;
+  width: 349px;
 }
 .actions button:nth-child(2) {
   top: 732px;
   left: 1527px;
-  width: 391px;
+  width: 389px;
 }
 .actions a {
   top: 812px;
   left: 1457px;
-  width: 461px;
+  width: 459px;
 }
 .actions img {
   position: absolute;
   inset: 0;
   width: 100%;
-  height: 53px;
+  height: 52px;
 }
 .actions span {
   position: absolute;

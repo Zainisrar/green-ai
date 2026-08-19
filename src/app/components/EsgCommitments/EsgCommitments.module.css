@@ -12,37 +12,26 @@
   top: -123px;
   left: 1064px;
   width: 967px;
-  height: 1326px;
+  height: 1297px;
   max-width: none;
-  object-fit: cover;
   opacity: 0.24;
 }
 .verticalTitle {
   position: absolute;
-  top: 904px;
+  top: 95px;
   left: 49px;
-  color: transparent;
-  font-size: 40px;
-  font-weight: 900;
-  line-height: 49px;
-  text-transform: uppercase;
-  transform: rotate(-90deg);
-  transform-origin: top left;
-  white-space: nowrap;
-  -webkit-text-stroke: 1px #d0d0d0;
+  width: 49px;
+  height: 837px;
+  max-width: none;
 }
 .pageTitle {
   position: absolute;
   top: 101px;
   left: 285px;
-  width: 1213px;
-  margin: 0;
-  font-size: 50px;
-  font-weight: 800;
-  line-height: normal;
-  text-transform: uppercase;
+  width: 1030px;
+  height: 37px;
+  max-width: none;
 }
-.pageTitle span,
 .intro strong,
 .quote span,
 .tomorrow span {
@@ -55,12 +44,12 @@
   position: absolute;
   top: 170px;
   left: 278px;
-  width: 1214px;
+  width: 1180px;
   margin: 0;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 17px;
+  font-weight: 800;
   line-height: 24px;
-  letter-spacing: 1.5px;
+  letter-spacing: 0;
 }
 .intro strong {
   font-weight: 900;
@@ -161,69 +150,48 @@
   left: 1440px;
   width: 386px;
   margin: 0;
-  color: #000;
+  color: #23b14d;
   font-size: 24px;
   font-style: italic;
   font-weight: 500;
   line-height: normal;
-  letter-spacing: 1.2px;
+}
+.quoteMark {
+  position: absolute;
+  top: 49px;
+  left: 399px;
+  color: #000;
+  font-size: 50px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 61px;
+}
+.tomorrowPanel {
+  position: absolute;
+  top: 717px;
+  left: 919px;
+  width: 511px;
+  height: 132px;
+  max-width: none;
 }
 .tomorrow {
   position: absolute;
-  top: 726px;
-  left: 921px;
-  display: flex;
-  box-sizing: border-box;
-  width: 506.5px;
-  height: 113.5px;
-  padding: 8px 40px 8px 45px;
-  background: #f5fbdc;
-  box-shadow: 0 8px 16px rgb(0 0 0 / 20%);
-  clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
+  top: 733px;
+  left: 966px;
+  z-index: 1;
   font-size: 40px;
   font-style: italic;
   font-weight: 600;
   line-height: normal;
-  flex-direction: column;
+  color: #23b14d;
+}
+.tomorrow > span:first-child,
+.tomorrow strong {
+  display: block;
 }
 .actions {
   position: absolute;
-  top: 658px;
-  right: 0;
-  display: flex;
-  align-items: flex-end;
-  gap: 22px;
-  flex-direction: column;
-}
-.actions button {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
-  height: 52px;
-  padding: 0 18px 0 30px;
-  border: 1px solid #23b14d;
-  background: linear-gradient(110deg, #83d99b, #effc97);
-  color: #000;
-  font-family: inherit;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
-}
-.actions button:nth-child(1) {
-  width: 300px;
-}
-.actions button:nth-child(2) {
-  width: 363px;
-}
-.actions button:nth-child(3) {
-  width: 420px;
-}
-.actions b {
-  font-size: 30px;
-  font-weight: 400;
-  line-height: 1;
+  inset: 0;
 }
 .chatTrigger {
   z-index: 3;

@@ -12,16 +12,19 @@ const result = await page.evaluate(() => {
     return { selector, x: Math.round(r.x), y: Math.round(r.y), width: Math.round(r.width), height: Math.round(r.height), display: style.display, position: style.position, color: style.color, opacity: style.opacity, zIndex: style.zIndex, visibility: style.visibility, text: (node.textContent || '').trim().slice(0, 120) };
   };
   return {
-    page: pick('[class*="canvasPage"]'),
-    main: pick('[class*="canvasMain"]'),
+    page: pick('[class*="page"]'),
+    main: pick('[class*="headerBlock"]'),
     header: pick('[class*="canvasHeader"]'),
     title: pick('h1'),
-    cards: pick('[class*="TechnologyInnovationAlliances_canvasCards"]'),
-    card1: pick('[class*="canvasCard"]'),
-    quote: pick('[class*="canvasQuote"]'),
-    ctas: pick('[class*="canvasCtas"]'),
-    vertical: pick('[class*="canvasVerticalImageAsset"]'),
-    background: pick('[class*="canvasBackgroundImage"]'),
+    cards: pick('[class*="card"]'),
+    card1: pick('[class*="cardImage"]'),
+    quote: pick('[class*="bottomQuote"] h2'),
+    leftBracket: pick('[class*="quoteBracketLeft"]'),
+    rightBracket: pick('[class*="quoteBracketRight"]'),
+    ctas: pick('[class*="partnerCta"]'),
+    frameworkCta: pick('[class*="frameworkCta"]'),
+    vertical: pick('[class*="verticalTitle"]'),
+    background: pick('[class*="rightCollage"]'),
     bodyText: (document.body.innerText || '').slice(0, 1500),
   };
 });

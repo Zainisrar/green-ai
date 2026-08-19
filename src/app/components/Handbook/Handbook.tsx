@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useState } from "react";
 import { useHandbook } from "@/app/hooks/useHandbook";
 import D6Chatbot from "../D6Chatbot";
@@ -11,6 +12,22 @@ import styles from "./Handbook.module.css";
 
 interface HandbookProps {
   canvas?: boolean;
+}
+
+interface CardRow {
+  key: string;
+  img: string;
+  imgAlt: string;
+  maskX: number;
+  maskY: number;
+  outlineX: number;
+  outlineY: number;
+  titleX: number;
+  titleY: number;
+  title: string;
+  ctaX: number;
+  ctaY: number;
+  dialogKey?: "ethos" | "conduct";
 }
 
 export default function Handbook({ canvas = false }: HandbookProps) {
@@ -26,6 +43,67 @@ export default function Handbook({ canvas = false }: HandbookProps) {
     data?.mainPage?.description ||
     "At GREEN, every vendor is expected to perform under field pressure, not policy pressure.";
 
+  const cards: CardRow[] = [
+    {
+      key: "ethos",
+      img: "/images/supplier-code-of-conduct/card_ethos.png",
+      imgAlt: "Our Procurement Ethos",
+      maskX: 719,
+      maskY: 314,
+      outlineX: 730,
+      outlineY: 306,
+      titleX: 1059,
+      titleY: 297,
+      title: "Our Procurement Ethos",
+      ctaX: 1014,
+      ctaY: 394,
+      dialogKey: "ethos",
+    },
+    {
+      key: "conduct",
+      img: "/images/supplier-code-of-conduct/card_conduct.png",
+      imgAlt: "Code of Conduct (Rewritten)",
+      maskX: 1346,
+      maskY: 314,
+      outlineX: 1357,
+      outlineY: 306,
+      titleX: 1694,
+      titleY: 303,
+      title: data?.codeOfConduct?.title || "Code of Conduct (Rewritten)",
+      ctaX: 1641,
+      ctaY: 397,
+      dialogKey: "conduct",
+    },
+    {
+      key: "checklist",
+      img: "/images/supplier-code-of-conduct/card_checklist.png",
+      imgAlt: "The GREEN Vendor Checklist (Editable PDF Style)",
+      maskX: 596,
+      maskY: 545,
+      outlineX: 607,
+      outlineY: 538,
+      titleX: 936,
+      titleY: 538,
+      title: "The GREEN Vendor Checklist (Editable PDF Style)",
+      ctaX: 882,
+      ctaY: 633,
+    },
+    {
+      key: "certification",
+      img: "/images/supplier-code-of-conduct/card_certification.png",
+      imgAlt: "Certification & Signature Page",
+      maskX: 1247,
+      maskY: 536,
+      outlineX: 1258,
+      outlineY: 528,
+      titleX: 1594,
+      titleY: 536,
+      title: "Certification & Signature Page",
+      ctaX: 1532,
+      ctaY: 622,
+    },
+  ];
+
   return (
     <main
       className={`${styles.page} ${canvas ? styles.canvasPage : ""}`}
@@ -33,143 +111,134 @@ export default function Handbook({ canvas = false }: HandbookProps) {
     >
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
-      {/* Background Mask Artwork */}
-      <img
-        src="/images/handbook/figma-mask-bg.png"
-        alt=""
-        className={styles.maskBg}
-        aria-hidden="true"
-      />
+      {/* Left gradient panel + logo */}
+      <div className={styles.leftPanel}>
+        <img
+          src="/images/supplier-code-of-conduct/logo_green.png"
+          alt="GREEN — Future: Envisioned"
+          className={styles.panelLogo}
+        />
+      </div>
 
-      {/* Vertical Side Title */}
-      <img
-        src="/images/handbook/figma-vertical-title.svg"
-        alt="Supplier Code of Conduct / Handbook"
-        className={styles.verticalTitle}
-      />
+      {/* Vertical outlined side title */}
+      <h2 className={styles.verticalTitle}>{title}</h2>
 
-      {/* Top Header Content */}
-      <div className={styles.topSection}>
-        <h1>{title}</h1>
+      {/* Washed left collage (mask group at -472,408) */}
+      <div className={styles.leftCollage}>
+        <img
+          src="/images/supplier-code-of-conduct/collage.png"
+          alt=""
+          aria-hidden="true"
+        />
+      </div>
+
+      {/* Header block */}
+      <div className={styles.headerBlock}>
+        <h1>
+          <span className={styles.h1Black}>SUPPLIER CODE OF </span>
+          <span className={styles.h1Green}>CONDUCT</span>
+          <span className={styles.h1Black}> / HANDBOOK</span>
+        </h1>
         <h2>{subHeadline}</h2>
         <p>{description}</p>
       </div>
 
-      {/* 4 Handbook Cards (2x2 Grid) */}
-      <section className={styles.cardsSection} aria-label="Handbook Documents">
-        {/* Row 1 */}
-        <div className={styles.cardRow}>
-          {/* Card 1: Our Procurement Ethos */}
-          <article className={styles.card} data-node-id="7077:28889">
-            <img
-              src="/images/handbook/figma-card-1.png"
-              alt="Our Procurement Ethos"
-              className={styles.cardThumb}
-            />
-            <div className={styles.cardContent}>
-              <h3>
-                {data?.ourProcurementEthos?.title || "Our Procurement Ethos"}
-              </h3>
-              <FigmaAngledCta
-                className={styles.exploreCta}
-                onClick={() => setIsOurProcurementEthosOpen(true)}
-              >
-                Explore
-              </FigmaAngledCta>
-            </div>
-          </article>
+      {/* Cards: parallelogram image masks, headings, Explore pills */}
+      {cards.map((card) => (
+        <React.Fragment key={card.key}>
+          <img
+            src={card.img}
+            alt={card.imgAlt}
+            className={styles.cardImg}
+            style={{ left: card.maskX, top: card.maskY }}
+          />
+          <h3
+            className={styles.cardTitle}
+            style={{ left: card.titleX, top: card.titleY }}
+          >
+            {card.title}
+          </h3>
+          <FigmaAngledCta
+            className={styles.cardCta}
+            style={{ position: "absolute", left: card.ctaX, top: card.ctaY }}
+            onClick={
+              card.dialogKey === "ethos"
+                ? () => setIsOurProcurementEthosOpen(true)
+                : card.dialogKey === "conduct"
+                  ? () => setIsCodeOfConductOpen(true)
+                  : undefined
+            }
+          >
+            Explore
+          </FigmaAngledCta>
+        </React.Fragment>
+      ))}
 
-          {/* Card 2: Code of Conduct */}
-          <article className={styles.card} data-node-id="7077:28890">
-            <img
-              src="/images/handbook/figma-card-2.png"
-              alt="Code of Conduct"
-              className={styles.cardThumb}
-            />
-            <div className={styles.cardContent}>
-              <h3>
-                {data?.codeOfConduct?.title || "Code of Conduct (Rewritten)"}
-              </h3>
-              <FigmaAngledCta
-                className={styles.exploreCta}
-                onClick={() => setIsCodeOfConductOpen(true)}
-              >
-                Explore
-              </FigmaAngledCta>
-            </div>
-          </article>
-        </div>
-
-        {/* Row 2 */}
-        <div className={styles.cardRow}>
-          {/* Card 3: The GREEN Vendor Checklist */}
-          <article className={styles.card} data-node-id="7077:28891">
-            <img
-              src="/images/handbook/figma-card-3.png"
-              alt="The GREEN Vendor Checklist"
-              className={styles.cardThumb}
-            />
-            <div className={styles.cardContent}>
-              <h3>The GREEN Vendor Checklist (Editable PDF style)</h3>
-              <FigmaAngledCta className={styles.exploreCta}>
-                Explore
-              </FigmaAngledCta>
-            </div>
-          </article>
-
-          {/* Card 4: Certification & Signature Page */}
-          <article className={styles.card} data-node-id="7077:28892">
-            <img
-              src="/images/handbook/figma-card-4.png"
-              alt="Certification & Signature Page"
-              className={styles.cardThumb}
-            />
-            <div className={styles.cardContent}>
-              <h3>Certification & Signature Page</h3>
-              <FigmaAngledCta className={styles.exploreCta}>
-                Explore
-              </FigmaAngledCta>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      {/* Left Quote Block */}
-      <div className={styles.leftQuoteBlock}>
+      {/* Left statement with angled brackets */}
+      <div className={styles.statementBlock}>
         <img
-          src="/images/handbook/figma-quote-left.svg"
+          src="/images/supplier-code-of-conduct/quote_left.png"
           alt=""
-          className={styles.quoteShapeLeft}
+          className={styles.statementBracketLeft}
           aria-hidden="true"
         />
-        <p className={styles.quoteText}>
-          You Call Them Projects.
+        <img
+          src="/images/supplier-code-of-conduct/quote_right.png"
+          alt=""
+          className={styles.statementBracketRight}
+          aria-hidden="true"
+        />
+        <p className={styles.statementText}>
+          You Call Them <span>Projects.</span>
           <br />
-          We Call Them People.
+          We Call Them <span>People.</span>
         </p>
-        <img
-          src="/images/handbook/figma-quote-right.svg"
-          alt=""
-          className={styles.quoteShapeRight}
-          aria-hidden="true"
-        />
       </div>
 
-      {/* Bottom Statement */}
-      <p className={styles.bottomStatement}>
-        When the lights come on, the real story begins. And <span>GREEN</span>{" "}
-        is honored to power every chapter.
+      {/* Right closing quote */}
+      <p className={styles.rightQuote}>
+        When The Lights Come On, The Real Story Begins.
+        <br />
+        And <span>GREEN</span> Is Honored To Power Every Chapter.
       </p>
 
-      {/* Desktop CTA: Supplier Login */}
-      <div className={styles.desktopCtas}>
-        <FigmaAngledCta
-          className={styles.loginBtn}
-          href="/supply-partners/login"
+      {/* Supplier Login pill + Read more */}
+      <FigmaAngledCta
+        className={styles.loginCta}
+        style={{ position: "absolute", left: 1650, top: 792 }}
+        href="/supply-partners/login"
+      >
+        Supplier Login
+      </FigmaAngledCta>
+      <a className={styles.readMore} href="/supply-partners/login">
+        Read more
+        <svg
+          width="25"
+          height="7"
+          viewBox="0 0 25 7"
+          fill="none"
+          aria-hidden="true"
         >
-          Supplier Login
-        </FigmaAngledCta>
-      </div>
+          <path d="M0 3.5H23M23 3.5L19 0.5M23 3.5L19 6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </a>
+
+      {/* Chatbot */}
+      {canvas ? (
+        <D6Chatbot
+          canvasAnchored
+          triggerVariant="figmaCanvas"
+          triggerStyle={{
+            top: 889,
+            right: "auto",
+            bottom: "auto",
+            left: 1500,
+            width: 418,
+          }}
+        />
+      ) : (
+        <D6Chatbot />
+      )}
 
       {/* Mobile Flow (< 1200px) */}
       <div className={styles.mobileElements}>
@@ -185,23 +254,6 @@ export default function Handbook({ canvas = false }: HandbookProps) {
           </FigmaAngledCta>
         </div>
       </div>
-
-      {/* Chatbot */}
-      {canvas ? (
-        <D6Chatbot
-          canvasAnchored
-          triggerVariant="figmaCanvas"
-          triggerStyle={{
-            top: 899,
-            right: "auto",
-            bottom: "auto",
-            left: 1498,
-            width: 418,
-          }}
-        />
-      ) : (
-        <D6Chatbot />
-      )}
 
       {/* Dialogs */}
       {data?.ourProcurementEthos ? (

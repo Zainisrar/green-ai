@@ -1,4 +1,5 @@
 "use client";
+import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
@@ -91,6 +92,7 @@ export default function TechnologyInnovationAlliances({
   canvas = false,
 }: TechnologyInnovationAlliancesProps) {
   const [openModal, setOpenModal] = useState<string | null>(null);
+  const reduceMotion = useReducedMotion();
   const [isBecomeTechnologyPartnerOpen, setIsBecomeTechnologyPartnerOpen] =
     useState(false);
 
@@ -152,11 +154,18 @@ export default function TechnologyInnovationAlliances({
       </div>
 
       {/* Partnership pillars (exact Figma coordinates) */}
-      {d.cards.map((card) => (
-        <div
+      {d.cards.map((card, index) => (
+        <motion.div
           key={card.key}
           className={styles.card}
           style={{ top: card.y, left: 0 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.45,
+            delay: reduceMotion ? 0 : index * 0.08,
+            ease: "easeOut",
+          }}
         >
           <button
             type="button"
@@ -207,7 +216,7 @@ export default function TechnologyInnovationAlliances({
           >
             Explore
           </FigmaAngledCta>
-        </div>
+        </motion.div>
       ))}
 
       {/* Goal note over the collage */}
@@ -216,7 +225,12 @@ export default function TechnologyInnovationAlliances({
       </p>
 
       {/* Bottom-left quote with angled brackets (Vectors 7374 / 7375) */}
-      <div className={styles.bottomQuote}>
+      <motion.div
+        className={styles.bottomQuote}
+        initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : 0.35, ease: "easeOut" }}
+      >
         <img
           src="/images/technology-innovation-alliances/quote_left.png"
           alt=""
@@ -232,7 +246,7 @@ export default function TechnologyInnovationAlliances({
           className={styles.quoteBracketRight}
           aria-hidden="true"
         />
-      </div>
+      </motion.div>
 
       {/* Bottom-right CTAs */}
       <FigmaAngledCta

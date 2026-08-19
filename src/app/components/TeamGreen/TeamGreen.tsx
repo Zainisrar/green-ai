@@ -1,7 +1,11 @@
 "use client";
 import React from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import D6Chatbot from "../D6Chatbot";
 import Chatbot from "../Chatbot";
+import styles from "./TeamGreen.module.css";
 import WhoWeAre from "./Modals/WhoWeAre";
 import OurLeadershipPhilosophy from "./Modals/OurLeadershipPhilosophy";
 import MeettheTeam from "./Modals/MeettheTeam";
@@ -10,7 +14,34 @@ import WorkWithUs from "./Modals/WorkWithUs";
 import { useTeamGreen } from "../../../hooks/useTeamGreen";
 import { useInteractiveZIndex } from "../../../hooks/useInteractiveZIndex";
 
-const TeamGreen = () => {
+const FALLBACK_DATA = {
+  id: 0,
+  createdAt: "",
+  updatedAt: "",
+  mainPage: {
+    title: "Team GREEN",
+    subHeadline: "Built by Engineers. Driven by Mission. Grounded in Community.",
+    description: { text: "GREEN is powered by a team that spans disciplines, geographies, and generations — but is united by one belief: Clean energy should be reliable, inclusive, and transformative.", highlighted: "GREEN" },
+    quote1: { text: "A team with the courage to build differently.", highlighted: "courage" },
+    quote2: { text: "Team GREEN doesn't clock in. We show up — because lives depend on it.", highlighted: "GREEN" },
+    keys: [
+      { title: "Who We Are", description: "People, disciplines, and purpose moving together.", button: { href: "#who-we-are", text: "Explore" } },
+      { title: "Our Leadership Philosophy", description: "Lead with clarity, humility, and accountability.", button: { href: "#leadership", text: "Explore" } },
+      { title: "Meet the Team", description: "The people turning intention into action.", button: { href: "#meet-the-team", text: "Explore" } },
+      { title: "Our Culture in Action", description: "A culture shaped by how we work every day.", button: { href: "#culture", text: "Explore" } },
+    ],
+    cta: [
+      { href: "#work-with-us", text: "Work With Us" },
+      { href: "/supply-partners/team-green-brief.pdf", text: "GREEN Team Brief" },
+    ],
+  },
+  whoWeAreModal: { img: { src: "/images/team-green/mainImg.png", alt: "Team GREEN", highlighted: "GREEN" }, quote: { text: "Different disciplines. One mission.", highlighted: "mission" }, title: "Who We Are", title2: "", description: "We bring practical expertise and shared purpose to every project.", description2: "" },
+  ourLeadershipPhilosophy: { icon: [], quote: { text: "Leadership is service.", highlighted: "service", highlightedText: "service" }, title: "Our Leadership Philosophy", keyPoints: [], qualities: [], description: "We lead with clarity, humility, and accountability." },
+  meetTeam: { quote: { text: "Meet the people behind the work.", text1: "Meet the people", text2: "behind the work.", highlighted: "people", highlightedText: "people" }, title: "Meet the Team", jobTitle: [], description: "", designations: [] },
+  ourCultureActionModal: { img: "/images/team-green/mainImg.png", keys: [], quote: "Culture is how we deliver.", title: "Our Culture in Action", keypoint: [], description: "", quoteHighlighted: "deliver" },
+};
+
+const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
   const [isWhoWeAreOpen, setIsWhoWeAreOpen] = React.useState(false);
   const [isOurLeadershipPhilosophyOpen, setIsOurLeadershipPhilosophyOpen] = React.useState(false);
   const [isMeettheTeamOpen, setIsMeettheTeamOpen] = React.useState(false);
@@ -49,10 +80,38 @@ const TeamGreen = () => {
     );
   };
 
-  const data = teamGreenData?.data;
-  
-  if (!data) {
-    return null;
+  const data = teamGreenData?.data ?? FALLBACK_DATA;
+  const quoteText = data.mainPage.quote2?.text || "Team GREEN doesn't clock in. We show up — because lives depend on it.";
+  const canvasQuoteText = quoteText.startsWith("“") ? quoteText : `“${quoteText}”`;
+
+  if (canvas) {
+    return (
+      <main className={styles.canvasPage} data-node-id="7077:21015">
+        <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
+        <div className={styles.canvasArtwork} aria-hidden="true">
+          <img src="/images/team-green/mainImg.png" alt="" />
+        </div>
+        <img className={styles.canvasVerticalTitle} src="/images/team-green/team-green.png" alt="Team GREEN" />
+        <section className={styles.canvasHeader}>
+          <h1>Team <span>GREEN</span></h1>
+          <h2>{data.mainPage.subHeadline}</h2>
+          <p>{data.mainPage.description.text}</p>
+        </section>
+        <div className={styles.canvasQuote}>
+          <p>{canvasQuoteText}</p>
+        </div>
+        <div className={styles.canvasCtas}>
+          <FigmaAngledCta className={styles.canvasWorkCta} onClick={() => setIsWorkWithUsOpen(true)}>{data.mainPage.cta[0]?.text || "Work With Us"}</FigmaAngledCta>
+          <FigmaAngledCta className={styles.canvasBriefCta} href={data.mainPage.cta[1]?.href || "/supply-partners/team-green-brief.pdf"} icon="download">{data.mainPage.cta[1]?.text || "GREEN Team Brief"}</FigmaAngledCta>
+        </div>
+        <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
+        <WhoWeAre isOpen={isWhoWeAreOpen} onClose={() => setIsWhoWeAreOpen(false)} data={data.whoWeAreModal} />
+        <OurLeadershipPhilosophy isOpen={isOurLeadershipPhilosophyOpen} onClose={() => setIsOurLeadershipPhilosophyOpen(false)} data={data.ourLeadershipPhilosophy} />
+        <MeettheTeam isOpen={isMeettheTeamOpen} onClose={() => setIsMeettheTeamOpen(false)} data={data.meetTeam} />
+        <OurCultureinAction isOpen={isOurCultureinActionOpen} onClose={() => setIsOurCultureinActionOpen(false)} data={data.ourCultureActionModal} />
+        <WorkWithUs isOpen={isWorkWithUsOpen} onClose={() => setIsWorkWithUsOpen(false)} />
+      </main>
+    );
   }
 
   return (

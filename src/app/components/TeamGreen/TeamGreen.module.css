@@ -1,0 +1,146 @@
+.canvasPage {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  min-height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #111;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.canvasArtwork {
+  position: absolute;
+  z-index: 0;
+  top: -191px;
+  left: -307px;
+  width: 1296px;
+  height: 1271px;
+  pointer-events: none;
+}
+
+.canvasArtwork img {
+  display: block;
+  width: 1296px;
+  height: 1271px;
+  max-width: none;
+  object-fit: contain;
+  opacity: 0.92;
+}
+
+.canvasVerticalTitle {
+  position: absolute;
+  z-index: 3;
+  top: 437px;
+  left: 57px;
+  display: block;
+  width: 94px;
+  height: 507px;
+  max-width: none;
+  object-fit: fill;
+}
+
+.canvasHeader {
+  position: absolute;
+  z-index: 5;
+  top: 110px;
+  left: 274px;
+  width: 1430px;
+}
+
+.canvasHeader h1 {
+  width: 626px;
+  margin: 0;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 67px;
+}
+
+.canvasHeader h1 span {
+  color: #23b14d;
+}
+
+.canvasHeader h2 {
+  width: 1136px;
+  margin: 5px 0 0;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 36px;
+}
+
+.canvasHeader p {
+  width: 1072px;
+  margin: 20px 0 0;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.canvasQuote {
+  position: absolute;
+  z-index: 5;
+  top: 858px;
+  left: 264px;
+  width: 1293px;
+  height: 36px;
+}
+
+.canvasQuote p {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 36px;
+  white-space: nowrap;
+}
+
+.canvasCtas {
+  position: absolute;
+  z-index: 7;
+  top: 724px;
+  right: 0;
+  display: flex;
+  width: 419px;
+  flex-direction: column;
+  gap: 43px;
+}
+
+.canvasCtas > * {
+  height: 52px;
+  flex: 0 0 52px;
+  justify-content: space-between !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.canvasWorkCta {
+  width: 209px;
+  align-self: flex-end;
+  margin-right: 10px;
+}
+
+.canvasBriefCta {
+  width: 419px;
+}
+
+@media (max-width: 1200px) {
+  .canvasPage {
+    position: static;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .canvasArtwork,
+  .canvasVerticalTitle,
+  .canvasHeader,
+  .canvasQuote,
+  .canvasCtas {
+    position: static;
+    width: auto;
+    height: auto;
+    min-height: 0;
+  }
+}

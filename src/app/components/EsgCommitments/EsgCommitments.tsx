@@ -5,6 +5,7 @@ import { useSustainabilityESG } from "../../../hooks/useSustainabilityESG";
 import D6Chatbot from "../D6Chatbot";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import styles from "./EsgCommitments.module.css";
 import BookTechnicalDebrief from "./Modals/BookTechnicalDebrief";
 import RequestEngineeringDossier from "./Modals/RequestEngineeringDossier";
@@ -21,8 +22,8 @@ const FALLBACK_SECTIONS = [
       "Sustainable procurement and green supply chain initiatives",
       "Reforestation and carbon offset programs",
     ],
-    icon: "/images/esg-commitments/figma-environmental.png",
-    card: "/images/esg-commitments/figma-environment-card.svg",
+    icon: "/images/esg-commitments/icon_env.png",
+    card: "/images/esg-commitments/panel_env_trim.png",
     nodeId: "7077:6738",
   },
   {
@@ -35,8 +36,8 @@ const FALLBACK_SECTIONS = [
       "Ethical labor, diversity, and fair-wage policies",
       "Collaboration with indigenous and rural communities for eco-preservation",
     ],
-    icon: "/images/esg-commitments/figma-social.png",
-    card: "/images/esg-commitments/figma-social-card.svg",
+    icon: "/images/esg-commitments/icon_social.png",
+    card: "/images/esg-commitments/panel_social_trim.png",
     nodeId: "7077:6730",
   },
   {
@@ -48,8 +49,8 @@ const FALLBACK_SECTIONS = [
       "Responsible investment screening (no fossil fuels, conflict materials, etc.)",
       "Climate risk assessment and mitigation planning",
     ],
-    icon: "/images/esg-commitments/figma-governance.png",
-    card: "/images/esg-commitments/figma-governance-card.svg",
+    icon: "/images/esg-commitments/icon_gov.png",
+    card: "/images/esg-commitments/panel_gov_trim.png",
     nodeId: "7077:6743",
   },
 ] as const;
@@ -109,7 +110,7 @@ export default function EsgCommitments() {
   }));
   const subtitle =
     sustainabilityData?.header?.subtitle ||
-    "sustainability is more than a goal—it’s our core operating principle. We integrate Environmental, Social, and Governance (ESG) values into everything we do, from product design to energy use, supply chains, and community partnerships.";
+    "sustainability is more than a goal—it’s our core operating principle. We integrate Environmental, Social and Governance (ESG) values into everything we do, from product design to energy use, supply chains, and community partnerships.";
   const quote =
     sustainabilityData?.quote?.text ||
     "We lead with purpose—to build a thriving, low-carbon future through sustainable innovation and ESG integrity";
@@ -118,18 +119,28 @@ export default function EsgCommitments() {
     <main className={styles.desktopPage} data-node-id="7077:6707">
       <img
         className={styles.background}
-        src="/images/esg-commitments/figma-background.png"
+        src="/images/esg-commitments/mask_composite.png"
         alt=""
         width="967"
-        height="1326"
+        height="1297"
       />
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
-      <div className={styles.verticalTitle} aria-hidden="true">
-        SUSTAINABILITY &amp; ESG COMMITMENTS
-      </div>
-      <h1 className={styles.pageTitle} data-node-id="7077:6715">
-        Sustainability &amp; ESG <span>Commitments</span>
-      </h1>
+      <img
+        className={styles.verticalTitle}
+        src="/images/esg-commitments/title_vert.png"
+        alt=""
+        aria-hidden="true"
+        width="49"
+        height="837"
+      />
+      <img
+        className={styles.pageTitle}
+        src="/images/esg-commitments/title_h1.png"
+        alt="Sustainability & ESG Commitments"
+        data-node-id="7077:6715"
+        width="1030"
+        height="37"
+      />
       <p className={styles.intro} data-node-id="7077:6708">
         <strong>GREEN</strong>, {subtitle}
       </p>
@@ -140,21 +151,39 @@ export default function EsgCommitments() {
       </div>
       <blockquote className={styles.quote} data-node-id="7077:6735">
         “<span>{quote}</span>”
+        <span className={styles.quoteMark} aria-hidden="true">
+          “
+        </span>
       </blockquote>
+      <img
+        className={styles.tomorrowPanel}
+        src="/images/esg-commitments/tomorrow_panel.png"
+        alt=""
+        width="511"
+        height="132"
+      />
       <div className={styles.tomorrow} data-node-id="7077:6726">
         <span>Green Today.</span>
         <strong>Greener Tomorrow.</strong>
       </div>
       <div className={styles.actions}>
-        <button type="button" onClick={() => setIsDebriefOpen(true)}>
-          Book a Technical Debrief <b>›</b>
-        </button>
-        <button type="button" onClick={() => setIsDossierOpen(true)}>
-          Request Our Engineering Dossier <b>›</b>
-        </button>
-        <button type="button">
-          Explore a System Built for Your Reality <b>›</b>
-        </button>
+        <FigmaAngledCta
+          onClick={() => setIsDebriefOpen(true)}
+          style={{ position: "absolute", top: 658, left: 1620, width: 299 }}
+        >
+          Book a Technical Debrief
+        </FigmaAngledCta>
+        <FigmaAngledCta
+          onClick={() => setIsDossierOpen(true)}
+          style={{ position: "absolute", top: 732, left: 1557, width: 359 }}
+        >
+          Request Our Engineering Dossier
+        </FigmaAngledCta>
+        <FigmaAngledCta
+          style={{ position: "absolute", top: 812, left: 1497, width: 419 }}
+        >
+          Explore a System Built for Your Reality
+        </FigmaAngledCta>
       </div>
       <D6Chatbot
         canvasAnchored

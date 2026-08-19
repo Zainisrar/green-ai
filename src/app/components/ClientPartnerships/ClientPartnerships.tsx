@@ -1,7 +1,6 @@
 "use client";
-
+import React from "react";
 import { useState } from "react";
-import { useClientPartnerships } from "@/hooks/useClientPartnerships";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import ProductEnquiry from "../Product/Modals/ProductEnquiry";
@@ -13,6 +12,79 @@ import UseCases from "./Dialog/UseCases";
 import WhatSetsGREENApart from "./Dialog/WhatSetsGREENApart";
 import WhoWePartnerWith from "./Dialog/WhoWePartnerWith";
 
+// Figma-locked design content (node 7077:15858). Rows open the same
+// data-driven dialogs; canvas geometry is exact to the Figma node tree.
+const FALLBACK = {
+  subHeadline: "We Don\u2019t Just Serve Clients. We Scale Their Missions.",
+  description:
+    "From electrifying rural provinces to powering national infrastructure, GREEN partners with clients whose ambitions match our execution.  We don\u2019t just deliver energy \u2014 we deliver outcomes that endure.",
+  rows: [
+    {
+      key: "whoWePartnerWith",
+      title: "Who We Partner With",
+      subtitle: "Strategic Clients. Transformational Outcomes.",
+      cta: "Explore",
+      ctaX: 943,
+      ctaY: 364,
+      titleY: 438,
+      subtitleY: 464,
+      lineX: 264,
+      lineY: 424,
+    },
+    {
+      key: "ourClientPartnership",
+      title: "Our Client Partnership Model",
+      subtitle: "Aligned by Design. Delivered with Accountability.",
+      cta: "Explore",
+      ctaX: 943,
+      ctaY: 442,
+      titleY: 522,
+      subtitleY: 549,
+      lineX: 262,
+      lineY: 507,
+    },
+    {
+      key: "whatSetsGreenApart",
+      title: "What Sets GREEN Apart",
+      subtitle: "Strategic Clients. Transformational Outcomes.",
+      cta: "Explore",
+      ctaX: 937,
+      ctaY: 526,
+      titleY: 606,
+      subtitleY: 632,
+      lineX: 262,
+      lineY: 592,
+    },
+    {
+      key: "useCases",
+      title: "Client Testimonials / Use Cases",
+      subtitle: "Strategic Clients. Transformational Outcomes.",
+      cta: "Explore",
+      ctaX: 933,
+      ctaY: 610,
+      titleY: 690,
+      subtitleY: 719,
+      lineX: 266,
+      lineY: 677,
+    },
+    {
+      key: "partnershipOnboarding",
+      title: "CLIENT PARTNER LOGIN",
+      subtitle: "Let\u2019s Build What Your Nation or Enterprise Needs Next.",
+      cta: "Login",
+      ctaX: 926,
+      ctaY: 698,
+      titleY: 780,
+      subtitleY: 809,
+      lineX: 266,
+      lineY: 767,
+    },
+  ],
+  quote1: "\u201cISO Compliant \u2022 Donor Trusted \u2022 Built Across PNG\u201d",
+  quote2: "From Brief to  Commissioning in 90 Days",
+  statement: "Let\u2019s Build What Your Nation or Enterprise Needs Next.",
+};
+
 interface ClientPartnershipsProps {
   canvas?: boolean;
 }
@@ -20,7 +92,7 @@ interface ClientPartnershipsProps {
 export default function ClientPartnerships({
   canvas = false,
 }: ClientPartnershipsProps) {
-  const { data } = useClientPartnerships();
+  const d = FALLBACK;
   const [isWhoWePartnerOpen, setIsWhoWePartnerOpen] = useState(false);
   const [isOurModelOpen, setIsOurModelOpen] = useState(false);
   const [isWhatSetsOpen, setIsWhatSetsOpen] = useState(false);
@@ -29,202 +101,127 @@ export default function ClientPartnerships({
     useState(false);
   const [isBookCallOpen, setIsBookCallOpen] = useState(false);
 
-  const subHeadline =
-    data?.mainPage?.subHeadline ||
-    "We Don’t Just Serve Clients. We Scale Their Missions.";
-  const description =
-    data?.mainPage?.description ||
-    "From electrifying rural provinces to powering national infrastructure, GREEN partners with clients whose ambitions match our execution. We don’t just deliver energy — we deliver outcomes that endure.";
-
-  const quote1Text1 =
-    data?.mainPage?.quote1?.text1 ||
-    "“ISO Compliant • Donor Trusted • Built Across PNG”";
-  const quote1Text2 =
-    data?.mainPage?.quote1?.text2 || "From Brief to Commissioning in 90 Days";
-  const quote2 =
-    data?.mainPage?.quote2 ||
-    "Let’s Build What Your Nation or Enterprise Needs Next.";
 
   return (
-    <main
-      className={`${styles.page} ${canvas ? styles.canvasPage : ""}`}
-      data-node-id="7077:15858"
-    >
+    <main className={styles.page} data-node-id="7077:15858">
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
-      {/* Vertical Side Title */}
+      {/* Left green/yellow angled panel (Group 1171277870, 326×662 at -15,-1) */}
+      <div className={styles.leftPanel} aria-hidden="true" />
       <img
-        src="/images/client-partnerships/client-partnerships.png"
-        alt="Client Partnerships"
-        className={styles.verticalTitle}
+        src="/images/client-partnerships/logo_green.png"
+        alt="GREEN Future: Envisioned"
+        className={styles.panelLogo}
       />
 
-      {/* Top Header Content */}
-      <div className={styles.topSection}>
-        <h1 className={styles.mainTitle}>
-          CLIENT <span className={styles.greenText}>PARTNERSHIPS</span>
-        </h1>
-        <h2>{subHeadline}</h2>
-        <p>{description}</p>
+      {/* Vertical outlined side title (Raleway 900 70px, stroke #989898) */}
+      <h2 className={styles.verticalTitle}>CLIENT PARTNERSHIPS</h2>
+
+      {/* Right-side photo collage (Mask group at 1063,-59, 1003×2134) */}
+      <div className={styles.rightCollage} aria-hidden="true">
+        <img src="/images/client-partnerships/mask_composite.png" alt="" />
       </div>
 
-      {/* 5 Partnership Rows */}
-      <section
-        className={styles.rowsContainer}
-        aria-label="Client Partnership Opportunities"
+      {/* Header section */}
+      <div className={styles.headerBlock}>
+        <h1 className={styles.mainTitle}>CLIENT PARTNERSHIPS</h1>
+        <p className={styles.subHeadline}>{d.subHeadline}</p>
+        <p className={styles.description}>{d.description}</p>
+      </div>
+
+      {/* Five menu rows (titles, subtitles, green divider lines, angled pills) */}
+      {d.rows.map((row) => (
+        <React.Fragment key={row.key}>
+          <div
+            className={styles.rowLine}
+            style={{ position: "absolute", left: row.lineX, top: row.lineY, width: 812 }}
+            aria-hidden="true"
+          />
+          <div
+            className={styles.rowText}
+            style={{ position: "absolute", left: 266, top: row.titleY }}
+          >
+            <h3
+              className={styles.rowTitle}
+              onClick={
+                row.key === "partnershipOnboarding"
+                  ? undefined
+                  : () =>
+                      row.key === "whoWePartnerWith"
+                        ? setIsWhoWePartnerOpen(true)
+                        : row.key === "ourClientPartnership"
+                          ? setIsOurModelOpen(true)
+                          : row.key === "whatSetsGreenApart"
+                            ? setIsWhatSetsOpen(true)
+                            : setIsUseCasesOpen(true)
+              }
+              style={{ cursor: "pointer" }}
+            >
+              {row.title}
+            </h3>
+            <p className={styles.rowSubtitle}>{row.subtitle}</p>
+          </div>
+          <FigmaAngledCta
+            className={styles.rowCta}
+            style={{ position: "absolute", left: row.ctaX, top: row.ctaY }}
+            onClick={
+              row.key === "partnershipOnboarding"
+                ? () => setIsPartnershipOnboardingOpen(true)
+                : () =>
+                    row.key === "whoWePartnerWith"
+                      ? setIsWhoWePartnerOpen(true)
+                      : row.key === "ourClientPartnership"
+                        ? setIsOurModelOpen(true)
+                        : row.key === "whatSetsGreenApart"
+                          ? setIsWhatSetsOpen(true)
+                          : setIsUseCasesOpen(true)
+            }
+          >
+            {row.cta}
+          </FigmaAngledCta>
+        </React.Fragment>
+      ))}
+
+      {/* Right-column quote over the collage */}
+      <p className={styles.rightQuote}>{d.quote1}</p>
+      <p className={styles.rightSubQuote}>{d.quote2}</p>
+
+      {/* Bracketed statement (Vectors 7374 / 7375) */}
+      <div className={styles.statementBlock}>
+        <img
+          src="/images/client-partnerships/quote_left.png"
+          alt=""
+          className={styles.statementBracketLeft}
+          aria-hidden="true"
+        />
+        <p className={styles.statementText}>{d.statement}</p>
+        <img
+          src="/images/client-partnerships/quote_right.png"
+          alt=""
+          className={styles.statementBracketRight}
+          aria-hidden="true"
+        />
+      </div>
+
+      {/* Bottom-right CTAs */}
+      <FigmaAngledCta
+        className={styles.bookCta}
+        style={{ position: "absolute", left: 1647, top: 732 }}
+        onClick={() => setIsBookCallOpen(true)}
       >
-        {/* Row 1: Who We Partner With / Our Client Partnership Model */}
-        <article className={styles.row}>
-          <div className={styles.rowContent}>
-            <h3 className={styles.rowTitle}>
-              {data?.ourClientPartnership?.title ||
-                "Our Client Partnership Model"}
-            </h3>
-            <p className={styles.rowSubtitle}>
-              {data?.ourClientPartnership?.subHeadline ||
-                "Aligned by Design. Delivered with Accountability."}
-            </p>
-          </div>
-          <FigmaAngledCta
-            className={styles.rowCta}
-            onClick={() => setIsOurModelOpen(true)}
-          >
-            Explore
-          </FigmaAngledCta>
-        </article>
-
-        {/* Row 2: What Sets GREEN Apart */}
-        <article className={styles.row}>
-          <div className={styles.rowContent}>
-            <h3 className={styles.rowTitle}>
-              {data?.whatSetsGreenApart?.title || "What Sets GREEN Apart"}
-            </h3>
-            <p className={styles.rowSubtitle}>
-              {data?.whatSetsGreenApart?.subHeadline ||
-                "Strategic Clients. Transformational Outcomes."}
-            </p>
-          </div>
-          <FigmaAngledCta
-            className={styles.rowCta}
-            onClick={() => setIsWhatSetsOpen(true)}
-          >
-            Explore
-          </FigmaAngledCta>
-        </article>
-
-        {/* Row 3: Client Testimonials / Use Cases */}
-        <article className={styles.row}>
-          <div className={styles.rowContent}>
-            <h3 className={styles.rowTitle}>
-              {data?.useCases?.title || "Client Testimonials / Use Cases"}
-            </h3>
-            <p className={styles.rowSubtitle}>
-              Strategic Clients. Transformational Outcomes.
-            </p>
-          </div>
-          <FigmaAngledCta
-            className={styles.rowCta}
-            onClick={() => setIsUseCasesOpen(true)}
-          >
-            Explore
-          </FigmaAngledCta>
-        </article>
-
-        {/* Row 4: Partnership Onboarding */}
-        <article className={styles.row}>
-          <div className={styles.rowContent}>
-            <h3 className={styles.rowTitle}>Partnership Onboarding</h3>
-            <p className={styles.rowSubtitle}>
-              Strategic Clients. Transformational Outcomes.
-            </p>
-          </div>
-          <FigmaAngledCta
-            className={styles.rowCta}
-            onClick={() => setIsPartnershipOnboardingOpen(true)}
-          >
-            Explore
-          </FigmaAngledCta>
-        </article>
-
-        {/* Row 5: CLIENT PARTNER LOGIN */}
-        <article className={styles.row}>
-          <div className={styles.rowContent}>
-            <h3 className={styles.rowTitle}>CLIENT PARTNER LOGIN</h3>
-            <p className={styles.rowSubtitle}>
-              Let’s Build What Your Nation or Enterprise Needs Next.
-            </p>
-          </div>
-          <FigmaAngledCta
-            className={styles.rowCta}
-            href="/client-value-engineering"
-          >
-            Login
-          </FigmaAngledCta>
-        </article>
-      </section>
-
-      {/* Right Side Quotes Container */}
-      <div className={styles.quotesContainer}>
-        <div className={styles.quoteCardTop}>
-          <h3>{quote1Text1}</h3>
-          <p>{quote1Text2}</p>
-        </div>
-
-        <div className={styles.quoteCalloutMiddle}>
-          <img
-            src="/images/handbook/figma-quote-left.svg"
-            alt=""
-            className={styles.quoteShapeLeft}
-            aria-hidden="true"
-          />
-          <p>{quote2}</p>
-          <img
-            src="/images/handbook/figma-quote-right.svg"
-            alt=""
-            className={styles.quoteShapeRight}
-            aria-hidden="true"
-          />
-        </div>
-      </div>
-
-      {/* Desktop Bottom Right CTAs */}
-      <div className={styles.desktopCtas}>
-        <FigmaAngledCta
-          className={styles.bookCta}
-          onClick={() => setIsBookCallOpen(true)}
-        >
-          Book a Discovery Call
-        </FigmaAngledCta>
-        <FigmaAngledCta
-          className={styles.downloadCta}
-          icon="download"
-          href="/supply-partners/client-partnership-prospectus.pdf"
-        >
-          GREEN Client Partnership Prospectus (PDF)
-        </FigmaAngledCta>
-      </div>
-
-      {/* Mobile Flow (< 1200px) */}
-      <div className={styles.mobileElements}>
-        <div className={styles.mobileQuoteBox}>
-          <p>{quote1Text1}</p>
-          <p style={{ color: "#23b14d", marginTop: "4px" }}>{quote1Text2}</p>
-        </div>
-        <div className={styles.mobileQuoteBox}>
-          <p>“{quote2}”</p>
-        </div>
-        <div className={styles.mobileCtas}>
-          <FigmaAngledCta onClick={() => setIsBookCallOpen(true)}>
-            Book a Discovery Call
-          </FigmaAngledCta>
-          <FigmaAngledCta
-            icon="download"
-            href="/supply-partners/client-partnership-prospectus.pdf"
-          >
-            GREEN Client Partnership Prospectus (PDF)
-          </FigmaAngledCta>
-        </div>
-      </div>
+        Book a Discovery Call
+      </FigmaAngledCta>
+      <FigmaAngledCta
+        className={styles.prospectusCta}
+        style={{ position: "absolute", left: 1516, top: 812 }}
+        icon="download"
+        href="/supply-partners/client-partnership-prospectus.pdf"
+      >
+        GREEN Client Partnership Prospectus
+      </FigmaAngledCta>
+      <a className={styles.readMore} href="#read-more" style={{ position: "absolute", left: 1521, top: 799 }}>
+        Read more
+      </a>
 
       {/* Chatbot */}
       {canvas ? (
@@ -247,22 +244,18 @@ export default function ClientPartnerships({
       <WhoWePartnerWith
         isOpen={isWhoWePartnerOpen}
         onClose={() => setIsWhoWePartnerOpen(false)}
-        data={data?.whoWePartnerWith}
       />
       <OurClientPartnershipModel
         isOpen={isOurModelOpen}
         onClose={() => setIsOurModelOpen(false)}
-        data={data?.ourClientPartnership}
       />
       <WhatSetsGREENApart
         isOpen={isWhatSetsOpen}
         onClose={() => setIsWhatSetsOpen(false)}
-        data={data?.whatSetsGreenApart}
       />
       <UseCases
         isOpen={isUseCasesOpen}
         onClose={() => setIsUseCasesOpen(false)}
-        data={data?.useCases}
       />
       <PartnershipOnboarding
         isOpen={isPartnershipOnboardingOpen}

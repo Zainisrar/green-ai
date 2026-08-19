@@ -221,10 +221,10 @@ export default function Project() {
 
       <Image
         className={styles.verticalTitle}
-        src="/images/projects/projects.png"
-        alt="Projects"
-        width={73}
-        height={480}
+        src="/images/projects/title_proj.png"
+        alt=""
+        width={113}
+        height={485}
         priority
       />
 
@@ -232,16 +232,22 @@ export default function Project() {
         <InViewTimeline key={timelineRun} onExplore={openTimelineProject} />
       ) : (
         <section className={styles.stage} aria-label="Project portfolio">
-          <div
-            className={`${styles.mainPhoto} ${isPimagaProject ? styles.pimagaPhoto : ""}`}
-          >
-            <img src={currentProject.image} alt={currentProject.title} />
+          <div className={styles.mainPhoto}>
+            <img
+              src="/images/projects/mask_7077_7014.png"
+              alt={currentProject.title}
+              className={styles.figmaMainPhoto}
+            />
             <div className={styles.photoShade} />
           </div>
 
           <div className={styles.titlePanel}>
             <h1>{currentProject.title}</h1>
           </div>
+
+          <span className={styles.bottomRect} aria-hidden="true" />
+          <span className={styles.bottomLineA} aria-hidden="true" />
+          <span className={styles.bottomLineB} aria-hidden="true" />
 
           <button
             type="button"
@@ -631,20 +637,22 @@ function ProjectPreview({
       onClick={onClick}
       aria-label={`${isPrevious ? "Previous" : "Next"} project: ${label}`}
     >
-      {isPrevious && (
-        <span className={styles.previewArrow}>
-          <Arrow direction="left" />
-        </span>
-      )}
+      <span className={styles.previewWash} />
       <span className={styles.previewCard}>
         <img src={project.image} alt="" />
-        <span>{label}</span>
       </span>
-      {!isPrevious && (
-        <span className={styles.previewArrow}>
-          <Arrow direction="right" />
-        </span>
-      )}
+      <span className={styles.previewCaption}>{label}</span>
+      <span
+        className={styles.previewArrow}
+        aria-hidden="true"
+      >
+        <img
+          src={isPrevious ? "/images/projects/arrow_7077_7037.png" : "/images/projects/arrow_7077_7036.png"}
+          alt=""
+          width={40}
+          height={23}
+        />
+      </span>
     </button>
   );
 }

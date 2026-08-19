@@ -50,18 +50,19 @@ export default function GridIntel() {
     <main className={styles.desktopPage} data-node-id="7077:4592">
       <img
         className={styles.backgroundArt}
-        src="/images/grid-intel/mainImg.png"
+        src="/images/grid-intel/collage_mask.png"
         alt=""
         width="1146"
-        height="970"
+        height="1015"
+        style={{ left: 450 }}
       />
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
       <img
         className={styles.verticalTitle}
-        src="/images/grid-intel/grid-intel.png"
+        src="/images/grid-intel/title_gridintel.png"
         alt=""
         width="91"
-        height="690"
+        height="689"
       />
       <h1 className={styles.pageTitle}>
         <span>GRID</span>
@@ -102,6 +103,20 @@ export default function GridIntel() {
         <br />
         Scale Without <span>Uncertainty.</span>
       </p>
+      <img
+        className={`${styles.bracket} ${styles.bracketLeft}`}
+        src="/images/grid-intel/v_7077_7374.png"
+        alt=""
+        width="79"
+        height="98"
+      />
+      <img
+        className={`${styles.bracket} ${styles.bracketRight}`}
+        src="/images/grid-intel/v_7077_7375.png"
+        alt=""
+        width="80"
+        height="99"
+      />
       <nav className={styles.sections} aria-label="GRID-INTEL details">
         {SECTIONS.map((x, i) => (
           <button
@@ -111,14 +126,10 @@ export default function GridIntel() {
             className={i === 2 ? styles.active : ""}
           >
             <img
-              src={
-                i === 2
-                  ? "/images/grid-intel/shape4.png"
-                  : "/images/grid-intel/shape3.png"
-              }
+              src={`/images/grid-intel/v_7077_${[7382, 7377, 7378, 7379, 7380, 7381][i]}.png`}
               alt=""
-              width={i === 2 ? 266 : 81}
-              height="65"
+              width={i === 2 ? 263 : 78}
+              height="62"
             />
             <span>{x}</span>
           </button>
@@ -129,8 +140,8 @@ export default function GridIntel() {
           <img
             src="/images/grid-intel/schedule.png"
             alt=""
-            width="351"
-            height="53"
+            width="349"
+            height="52"
           />
           <span>Schedule a Technical Deep-Dive</span>
         </button>
@@ -138,8 +149,8 @@ export default function GridIntel() {
           <img
             src="/images/grid-intel/engage.png"
             alt=""
-            width="391"
-            height="53"
+            width="389"
+            height="52"
           />
           <span>Engage Our System Architecture Team</span>
         </button>
@@ -147,8 +158,8 @@ export default function GridIntel() {
           <img
             src="/images/grid-intel/download.png"
             alt=""
-            width="461"
-            height="53"
+            width="459"
+            height="52"
           />
           <span>Download the GRID-INTEL™ Product Dossier</span>
         </Link>

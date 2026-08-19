@@ -201,36 +201,33 @@
 /* ── Bottom-left quote with angled brackets ── */
 .bottomQuote {
   position: absolute;
-  top: 787px;
-  left: 250px;
-  width: 1050px;
+  top: 799px;
+  left: 329px;
+  width: 980px;
   z-index: 3;
 }
-
 .quoteBracketLeft {
   position: absolute;
-  left: -6px;
-  top: -34px;
+  left: -79px;
+  top: -3px;
   width: 79px;
   height: 98px;
   object-fit: contain;
 }
-
 .bottomQuote h2 {
   margin: 0;
-  padding-left: 79px;
-  font-size: 27px;
+  padding: 0;
+  font-size: 26px;
   font-weight: 700;
-  line-height: 1.32;
+  line-height: 36px;
   color: #000;
   max-width: 980px;
 }
-
 .quoteBracketRight {
   position: absolute;
-  right: -8px;
-  top: -26px;
-  width: 80px;
+  right: 12.5px;
+  top: -21px;
+  width: 79.5px;
   height: 99px;
   object-fit: contain;
 }
