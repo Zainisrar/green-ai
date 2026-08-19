@@ -12,13 +12,23 @@
   min-height: 970px;
 }
 
+.backgroundArtwork {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 970px;
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .verticalTitle {
   position: absolute;
-  top: 152px;
-  left: 66px;
-  width: 28px;
-  height: 733px;
-  object-fit: contain;
+  top: 401px;
+  left: 47px;
+  width: 59px;
+  height: 501px;
+  object-fit: fill;
   z-index: 2;
 }
 
@@ -35,11 +45,11 @@
 
 .mainTitle {
   margin: 0;
-  font-size: 42px;
-  font-weight: 900;
-  line-height: 1.15;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 68px;
   color: #000;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -59,29 +69,44 @@
 .topSection p {
   max-width: 890px;
   margin: 8px 0 0;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
-  line-height: 1.45;
+  line-height: 24px;
+  letter-spacing: 0.36px;
+  white-space: pre-line;
   color: #000;
 }
 
 /* 3 Cards Section */
 .cardsSection {
   position: absolute;
-  top: 347px;
-  left: 294px;
-  width: 880px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 970px;
+  display: block;
   z-index: 3;
 }
 
 .card {
+  position: absolute;
+  left: 294px;
   display: flex;
   align-items: center;
   gap: 20px;
-  width: 100%;
+  width: 878px;
+}
+
+.card:nth-child(1) {
+  top: 346.5px;
+}
+
+.card:nth-child(2) {
+  top: 503.5px;
+}
+
+.card:nth-child(3) {
+  top: 676.36px;
 }
 
 .cardThumb {
@@ -101,23 +126,23 @@
 .cardContent h3 {
   margin: 0 0 4px 0;
   font-size: 22px;
-  font-weight: 800;
-  line-height: 1.2;
+  font-weight: 700;
+  line-height: 32px;
   color: #000;
 }
 
 .cardContent p {
   margin: 0;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.35;
-  color: #444;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #000;
 }
 
 .cardCta {
   width: 122px;
   height: 37px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   padding: 0 14px 0 18px;
   flex: 0 0 auto;
@@ -126,29 +151,43 @@
 /* Middle Right Quote Callout */
 .quoteCallout {
   position: absolute;
-  top: 480px;
-  left: 1240px;
-  width: 445px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  top: 513.5px;
+  left: 1305px;
+  width: 583px;
+  height: 99px;
   z-index: 3;
 }
 
 .quoteShapeLeft,
 .quoteShapeRight {
-  width: 60px;
-  height: 75px;
+  position: absolute;
+  width: 79px;
+  height: 98px;
   object-fit: contain;
-  flex: 0 0 auto;
+}
+
+.quoteShapeLeft {
+  top: 29.88px;
+  left: 0;
+}
+
+.quoteShapeRight {
+  top: 0;
+  left: 503px;
+  width: 80px;
+  height: 99px;
 }
 
 .quoteCallout p {
+  position: absolute;
+  top: 16.5px;
+  left: 63.64px;
+  width: 445px;
   margin: 0;
-  font-size: 19px;
+  font-size: 22px;
   font-style: italic;
-  font-weight: 800;
-  line-height: 1.35;
+  font-weight: 700;
+  line-height: 26.82px;
   color: #000;
 }
 
@@ -157,11 +196,11 @@
   position: absolute;
   top: 862px;
   left: 262px;
-  max-width: 1043px;
+  width: 1043px;
   margin: 0;
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 1.35;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 36px;
   color: #000;
   z-index: 3;
 }
@@ -169,16 +208,17 @@
 /* Desktop CTAs */
 .desktopCtas {
   position: absolute;
-  top: 733px;
-  right: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 25px;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 970px;
   z-index: 3;
 }
 
 .contactCta {
+  position: absolute;
+  top: 733px;
+  left: 1614.5px;
   width: 299px;
   height: 52px;
   font-size: 16px;
@@ -186,6 +226,9 @@
 }
 
 .downloadCta {
+  position: absolute;
+  top: 810px;
+  left: 1507px;
   width: 409px;
   height: 52px;
   font-size: 16px;
@@ -198,6 +241,7 @@
     overflow: visible;
   }
 
+  .backgroundArtwork,
   .verticalTitle,
   .quoteCallout,
   .bottomStatement,
@@ -213,11 +257,13 @@
   .cardsSection {
     position: static;
     width: auto;
+    height: auto;
     padding: 30px 24px 0;
     gap: 28px;
   }
 
   .card {
+    position: static;
     flex-direction: column;
     align-items: flex-start;
     gap: 14px;
@@ -289,6 +335,7 @@
 
   .mainTitle {
     font-size: 30px;
+    line-height: 1.15;
   }
 
   .topSection h2 {

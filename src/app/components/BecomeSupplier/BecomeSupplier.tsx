@@ -24,9 +24,10 @@ export default function BecomeSupplier({
 
   const subHeadline =
     data?.mainPage?.subHeadline || "Partner with GREEN. Build What Matters.";
-  const description =
+  const description = (
     data?.mainPage?.description?.text ||
-    "GREEN Limited sources only from trusted suppliers who meet our uncompromising standards. This portal is your first step toward becoming part of our global energy supply network.";
+    "GREEN Limited sources only from trusted suppliers who meet our uncompromising standards. This portal is your first step toward becoming part of our global energy supply network."
+  ).replace(". This portal", ".\nThis portal");
 
   return (
     <main
@@ -34,6 +35,14 @@ export default function BecomeSupplier({
       data-node-id="7077:28549"
     >
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
+
+      {/* Existing Figma canvas background artwork */}
+      <img
+        src="/images/become-supplier/bg.jpg"
+        alt=""
+        className={styles.backgroundArtwork}
+        aria-hidden="true"
+      />
 
       {/* Vertical Side Title */}
       <img
@@ -126,8 +135,7 @@ export default function BecomeSupplier({
           aria-hidden="true"
         />
         <p>
-          “This portal is your first step toward becoming part of our global
-          energy supply network.”
+          This Portal Is Your First Step Toward Becoming Part Of Our Global Energy Supply Network
         </p>
         <img
           src="/images/handbook/figma-quote-right.svg"
@@ -139,8 +147,9 @@ export default function BecomeSupplier({
 
       {/* Bottom Statement */}
       <p className={styles.bottomStatement}>
-        Your capital can build megawatts — or it can build movements. With
-        GREEN, you can do both.
+        Your Capital Can Build Megawatts — Or It Can Build Movements.
+        <br />
+        With <span className={styles.greenText}>GREEN</span>, You Can Do Both.
       </p>
 
       {/* Desktop CTAs */}
@@ -164,8 +173,7 @@ export default function BecomeSupplier({
       <div className={styles.mobileElements}>
         <div className={styles.mobileQuoteBox}>
           <p>
-            “This portal is your first step toward becoming part of our global
-            energy supply network.”
+            “This Portal Is Your First Step Toward Becoming Part Of Our Global Energy Supply Network”
           </p>
         </div>
         <p className={styles.mobileBottomStatement}>
@@ -190,6 +198,7 @@ export default function BecomeSupplier({
         <D6Chatbot
           canvasAnchored
           triggerVariant="figmaCanvas"
+          figmaPlaceholder="Let’s Talk Energy"
           triggerStyle={{
             top: 899,
             right: "auto",
