@@ -1,12 +1,13 @@
-import React from "react";
 import EsgMatters from "@/app/components/EsgMatters/EsgMatters";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function WhyEsgMattersToGreenPage() {
   return (
-    <div>
-      <EsgMatters />
-    </div>
+    <FigmaPageCanvas
+      desktop={<EsgMatters canvas />}
+      mobile={<EsgMatters />}
+      nodeId="7077:18427"
+      fitCanvasHeight
+    />
   );
-};
-
-export default page;
+}

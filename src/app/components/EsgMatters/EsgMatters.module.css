@@ -1,0 +1,355 @@
+.canvasPage {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  min-height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #111;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.canvasBackground {
+  position: absolute;
+  z-index: 0;
+  top: -1px;
+  left: 1225px;
+  width: 1237px;
+  height: 971px;
+  overflow: hidden;
+  opacity: 0.24;
+  pointer-events: none;
+}
+
+.canvasBackground img {
+  display: block;
+  width: 1237px;
+  height: 971px;
+  max-width: none;
+  object-fit: cover;
+  object-position: top right;
+  filter: saturate(0.25) brightness(1.12);
+}
+
+.canvasVerticalTitle {
+  position: absolute;
+  z-index: 3;
+  top: 138px;
+  left: 68px;
+  display: block;
+  width: 59px;
+  height: 730px;
+  max-width: none;
+  object-fit: fill;
+}
+
+.canvasHeader {
+  position: absolute;
+  z-index: 4;
+  top: 92px;
+  left: 234px;
+  width: 1502px;
+}
+
+.canvasHeader h1 {
+  margin: 0;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 68px;
+  white-space: nowrap;
+}
+
+.canvasHeader h1 span,
+.canvasHeader h2,
+.canvasMonitoring span {
+  color: #23b14d;
+}
+
+.canvasHeader h2 {
+  margin: 9px 0 0 30px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 36px;
+}
+
+.canvasHeader p {
+  width: 985px;
+  margin: 9px 0 0 30px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.canvasMenu {
+  position: absolute;
+  z-index: 5;
+  top: 336px;
+  left: 264px;
+  display: flex;
+  width: 500px;
+  flex-direction: column;
+  gap: 27px;
+}
+
+.canvasMenu button {
+  width: max-content;
+  max-width: 491px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #111;
+  font-family: inherit;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 44px;
+  text-align: left;
+  cursor: pointer;
+  transition: color 180ms ease, transform 180ms ease;
+}
+
+.canvasMenu button:hover,
+.canvasMenuActive {
+  color: #23b14d !important;
+}
+
+.canvasMenu button:focus-visible {
+  outline: 2px solid #23b14d;
+  outline-offset: 4px;
+}
+
+.canvasDetail {
+  position: absolute;
+  z-index: 5;
+  top: 337px;
+  left: 869px;
+  width: 600px;
+  min-height: 380px;
+}
+
+.canvasDetailInner {
+  width: 600px;
+}
+
+.canvasDetailInner h3 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 44px;
+}
+
+.canvasPanelQuote {
+  width: 614px;
+  margin: 12px 0 20px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.canvasPanelLead {
+  width: 719px;
+  margin: 12px 0 22px;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.canvasEsgKeys {
+  display: flex;
+  width: 720px;
+  flex-direction: column;
+  gap: 0;
+  margin-left: -140px;
+  margin-top: 12px;
+}
+
+.canvasEsgKeys > div {
+  display: flex;
+  min-height: 50px;
+  align-items: center;
+  gap: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 50px;
+}
+
+.canvasKeyMark {
+  display: block;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  background: url("/images/grid-intel/lighting.png") center / contain no-repeat;
+}
+
+.canvasMetricsTable {
+  width: 690px;
+  margin-top: 16px;
+  border-collapse: collapse;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.canvasMetricsTable th {
+  padding: 8px 12px;
+  color: #23b14d;
+  text-align: left;
+}
+
+.canvasMetricsTable td {
+  padding: 10px 12px;
+  border-top: 1px solid rgba(35, 177, 77, 0.2);
+  font-style: italic;
+}
+
+.canvasPanelNote {
+  margin-top: 18px;
+  color: #23b14d;
+  font-size: 18px;
+  font-style: italic;
+}
+
+.canvasDetailList {
+  display: flex;
+  width: 700px;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 24px;
+}
+
+.canvasDetailList > div {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 16px;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.canvasDetailList strong {
+  font-size: 20px;
+  font-style: italic;
+}
+
+.canvasMonitoring {
+  position: absolute;
+  z-index: 5;
+  top: 611px;
+  left: 1449px;
+  width: 407px;
+  height: 108px;
+}
+
+.canvasMonitoring p {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 36px;
+}
+
+.canvasMonitoring img:first-child {
+  position: absolute;
+  top: 10px;
+  left: -66px;
+  width: 82px;
+  height: 101px;
+}
+
+.canvasMonitoring img:last-child {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 82px;
+  height: 102px;
+}
+
+.canvasStatement {
+  position: absolute;
+  z-index: 5;
+  top: 783px;
+  left: 262px;
+  width: 980px;
+  height: 108px;
+}
+
+.canvasStatement h3 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 36px;
+}
+
+.canvasStatement h3 span {
+  color: #23b14d;
+}
+
+.canvasStatement h3::first-line {
+  color: #23b14d;
+}
+
+.canvasStatement img:first-child {
+  position: absolute;
+  top: -20px;
+  left: -64px;
+  width: 82px;
+  height: 101px;
+}
+
+.canvasStatement img:last-child {
+  position: absolute;
+  top: -5px;
+  right: -6px;
+  width: 82px;
+  height: 102px;
+}
+
+.canvasCtas {
+  position: absolute;
+  z-index: 7;
+  top: 741px;
+  right: 1px;
+  display: flex;
+  width: 429px;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.canvasCtas > * {
+  height: 52px;
+  flex: 0 0 52px;
+  justify-content: space-between !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.canvasCtas > :first-child {
+  width: 329px;
+  align-self: flex-end;
+}
+
+.canvasCtas > :last-child {
+  width: 429px;
+}
+
+@media (max-width: 1200px) {
+  .canvasPage {
+    position: static;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .canvasBackground,
+  .canvasVerticalTitle,
+  .canvasHeader,
+  .canvasMenu,
+  .canvasDetail,
+  .canvasMonitoring,
+  .canvasStatement,
+  .canvasCtas {
+    position: static;
+    width: auto;
+    height: auto;
+    min-height: 0;
+  }
+}
