@@ -1,0 +1,330 @@
+.canvasPage {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  min-height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #121212;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.canvasBackground {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 1550px;
+  height: 970px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.canvasBackground img {
+  display: block;
+  width: auto;
+  height: 1552px;
+  max-width: none;
+}
+
+.canvasFlow {
+  position: relative;
+  z-index: 2;
+  width: 1920px;
+  height: 970px;
+}
+
+.canvasLayout {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+}
+
+.canvasVertical {
+  position: absolute;
+  z-index: 3;
+  top: 118px;
+  left: 57px;
+  display: block;
+  width: 70px;
+  height: 786px;
+}
+
+.canvasVerticalImage {
+  position: static;
+  width: 48px;
+  height: 786px;
+}
+
+.canvasVerticalImage img {
+  display: block;
+  width: 48px;
+  height: 786px;
+  object-fit: contain;
+}
+
+.canvasMain {
+  position: absolute;
+  top: 116px;
+  left: 262px;
+  z-index: 4;
+  width: 1600px;
+  height: 854px;
+  padding: 0;
+}
+
+.canvasHeaderContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+}
+
+.canvasHeaderContent h1 {
+  margin: 0 0 12px;
+  font-size: 50px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.canvasHeaderContent h2 {
+  margin: 0 0 14px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.canvasHeaderContent p,
+.canvasHeaderContent > div > div {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #4b5563;
+}
+
+.canvasGrid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1600px;
+  height: 690px;
+}
+
+.canvasMenu {
+  position: absolute;
+  top: 273px;
+  left: 8px;
+  display: block;
+  width: 460px;
+  height: 300px;
+}
+
+.canvasMenu > div {
+  position: absolute;
+  left: 0;
+  width: 460px;
+  margin: 0;
+  padding: 0;
+}
+
+.canvasMenu > div:nth-child(1) { top: 0; }
+.canvasMenu > div:nth-child(2) { top: 72px; }
+.canvasMenu > div:nth-child(3) { top: 149px; }
+.canvasMenu > div:nth-child(4) { top: 234px; }
+
+.canvasMenu h3 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.canvasCallout {
+  position: absolute;
+  top: 329px;
+  left: 500px;
+  display: flex;
+  width: 430px;
+  height: 150px;
+  padding: 0;
+  align-items: flex-start;
+}
+
+.canvasCallout > div:first-child {
+  position: absolute;
+  top: 0;
+  left: -58px;
+  width: 82px;
+  height: 101px;
+}
+
+.canvasCallout > div:first-child img,
+.canvasCallout > div:last-child img {
+  width: 82px;
+  height: 101px;
+  object-fit: contain;
+}
+
+.canvasCallout > div:nth-child(2) {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+.canvasCallout h3 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.canvasCallout > div:last-child {
+  position: absolute;
+  top: -16px;
+  right: -2px;
+  width: 82px;
+  height: 102px;
+}
+
+.canvasPanel {
+  position: absolute;
+  top: 136px;
+  left: 1007px;
+  width: 420px;
+  min-height: 360px;
+  margin: 0;
+}
+
+.canvasPanel > div {
+  margin-top: 0 !important;
+}
+
+.canvasPanel h3 {
+  margin: 0 0 14px;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.canvasPanel p {
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.canvasPanel ul {
+  margin-top: 28px;
+  padding: 0;
+}
+
+.canvasPanel li {
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.canvasQuote {
+  position: absolute;
+  top: 683px;
+  left: 7px;
+  width: 850px;
+  margin: 0;
+}
+
+.canvasQuote h3 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.canvasCtas {
+  position: absolute;
+  z-index: 6;
+  top: 748px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18px;
+  margin: 0;
+}
+
+.canvasCtaItem {
+  display: block;
+  width: max-content;
+  height: 53px;
+}
+
+.canvasCtaItem > button {
+  display: block;
+  width: 422px;
+  height: 53px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.canvasCtaItem > img {
+  display: block;
+  width: 491px;
+  height: 53px;
+}
+
+.canvasCtas button,
+.canvasCtas a {
+  position: relative;
+  display: block;
+  width: max-content;
+  height: 53px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #202020;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.canvasCtas button img,
+.canvasCtas a img {
+  display: block;
+  width: auto;
+  height: 53px;
+}
+
+.canvasCtas button > div,
+.canvasCtas a > div {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 48px;
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (max-width: 1200px) {
+  .canvasPage,
+  .canvasBackground,
+  .canvasFlow,
+  .canvasLayout,
+  .canvasVertical,
+  .canvasMain {
+    position: static;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .canvasBackground {
+    display: none;
+  }
+}

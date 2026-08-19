@@ -1,12 +1,13 @@
-import React from "react";
 import CommunityImpactLoop from "@/app/components/CommunityImpactLoop/CommunityImpactLoop";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function CommunityImpactLoopPage() {
   return (
-    <div>
-      <CommunityImpactLoop />
-    </div>
+    <FigmaPageCanvas
+      desktop={<CommunityImpactLoop canvas />}
+      mobile={<CommunityImpactLoop />}
+      nodeId="7077:15645"
+      fitCanvasHeight
+    />
   );
-};
-
-export default page;
+}

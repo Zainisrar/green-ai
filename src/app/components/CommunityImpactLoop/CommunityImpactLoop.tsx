@@ -2,11 +2,17 @@
 import React, { useEffect, useState } from "react";
 import Chatbot from "../Chatbot";
 import TopNavigation from "../TopNavigation/TopNavigation";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import styles from "./CommunityImpactLoop.module.css";
 import { useCommunityImpactLoop } from "../../../hooks/useCommunityImpactLoop";
 import Link from "next/link";
 import SubmitProposal from "./Modals/SubmitProposal";
 
-const CommunityImpactLoop = () => {
+interface CommunityImpactLoopProps {
+  canvas?: boolean;
+}
+
+const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
   const { data, isLoading, error } = useCommunityImpactLoop();
   const [isProposalOpen, setIsProposalOpen] = useState(false);
   const main = data?.mainPage;
@@ -371,19 +377,20 @@ const CommunityImpactLoop = () => {
   };
   return (
     <React.Fragment>
-      <div className="lg:block hidden absolute top-0 left-32">
+      <div className={canvas ? styles.canvasPage : ""}>
+      <div className={canvas ? styles.canvasBackground : "lg:block hidden absolute top-0 left-32"}>
         <img
           src="/images/community-impact-loop/mainImg.png"
           className="h-[160vh]"
           alt="bg"
         />
       </div>
-      <div className="mb-40">
-        <TopNavigation />
-        <div className="flex h-full ">
+      <div className={canvas ? styles.canvasFlow : "mb-40"}>
+        {canvas ? <SiteHeader layout="figmaCanvas" /> : <TopNavigation />}
+        <div className={canvas ? styles.canvasLayout : "flex h-full "}>
           {/* Left Side - GLOBAL SNAPSHOT Text */}
-          <div className="w-1/10 flex items-center justify-center">
-            <div className="fixed top-1/2 lg:top-1/5 left-4 lg:left-14">
+          <div className={canvas ? styles.canvasVertical : "w-1/10 flex items-center justify-center"}>
+            <div className={canvas ? styles.canvasVerticalImage : "fixed top-1/2 lg:top-1/5 left-4 lg:left-14"}>
               <img
                 src="/images/community-impact-loop/community-impact-loop.png"
                 alt="communityimpactloop"
@@ -393,9 +400,9 @@ const CommunityImpactLoop = () => {
           </div>
 
           {/* Main Content Area */}
-          <div className="pl-14 lg:pl-24 relative z-20 pr-4 pt-8">
+          <div className={canvas ? styles.canvasMain : "pl-14 lg:pl-24 relative z-20 pr-4 pt-8"}>
             {/* Main Title */}
-            <div className="">
+            <div className={canvas ? styles.canvasHeaderContent : ""}>
               <div className="mb-8">
                 <h1 className=" text-2xl lg:text-3xl font-black text-gray-800 mb-4">
                   {main?.title ? (
@@ -463,9 +470,9 @@ const CommunityImpactLoop = () => {
                   </div>
                 </div>
               {/* Content Layout */}
-              <div className="lg:flex space-x-8">
+              <div className={canvas ? styles.canvasGrid : "lg:flex space-x-8"}>
                 {/* Left Column - Content List */}
-                <div className=" space-y-8">
+                <div className={canvas ? styles.canvasMenu : " space-y-8"}>
                   {/* What is the GREEN Community Impact Loop? */}
                   <div
                     className=" cursor-pointer"
@@ -556,7 +563,7 @@ const CommunityImpactLoop = () => {
                   </div>
                 </div>
 
-                <div className=" lg:flex hidden p-2   relative ">
+                <div className={canvas ? styles.canvasCallout : " lg:flex hidden p-2   relative "}>
                   <div className="absolute -left-14 top-12">
                     <img
                       src="/images/community-impact-loop/shape.png"
@@ -581,14 +588,14 @@ const CommunityImpactLoop = () => {
                     />
                   </div>
                 </div>
-                <div className="my-12 lg:my-0 lg:w-[420px] lg:shrink-0">
+                <div className={canvas ? styles.canvasPanel : "my-12 lg:my-0 lg:w-[420px] lg:shrink-0"}>
                   {active.data}
                 </div>
               </div>
             </div>
 
             {/* Bottom Flow Statement */}
-            <div className="mt-12  ">
+            <div className={canvas ? styles.canvasQuote : "mt-12  "}>
               {main?.quote ? (
                 <h3 className="text-xl lg:text-2xl max-w-xl  capitalize leading-9  font-bold text-gray-800">
                   {main.quote.text
@@ -618,7 +625,7 @@ const CommunityImpactLoop = () => {
         </div>
 
         {main?.cta && main.cta.length > 0 ? (
-          <div className="flex flex-col items-end gap-8 my-8">
+          <div className={canvas ? styles.canvasCtas : "flex flex-col items-end gap-8 my-8"}>
             <button
               type="button"
               onClick={() => setIsProposalOpen(true)}
@@ -647,7 +654,8 @@ const CommunityImpactLoop = () => {
           </div>
         ) : (
           <>
-            <div className=" flex justify-end my-8 cursor-pointer">
+            <div className={canvas ? styles.canvasCtas : ""}>
+            <div className={canvas ? styles.canvasCtaItem : " flex justify-end my-8 cursor-pointer"}>
               <button type="button" onClick={() => setIsProposalOpen(true)} className="cursor-pointer">
                 <img
                   src="/images/community-impact-loop/submit.png"
@@ -655,14 +663,16 @@ const CommunityImpactLoop = () => {
                 />
               </button>
             </div>
-            <div className=" flex justify-end my-8 cursor-pointer">
+            <div className={canvas ? styles.canvasCtaItem : " flex justify-end my-8 cursor-pointer"}>
               <img
                 src="/images/community-impact-loop/green.png"
                 alt="GREEN Innovation Partnership Framework (PDF)"
               />
             </div>
+            </div>
           </>
         )}
+      </div>
       </div>
       <Chatbot />
       <SubmitProposal isOpen={isProposalOpen} onClose={() => setIsProposalOpen(false)} />
