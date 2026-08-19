@@ -323,14 +323,14 @@ export default function Expertise() {
               POWERING <span>HEALTHCARE</span>
             </h1>
 
-            <div
+            <img
               className={`${styles.verticalLabel} ${
                 view === "slider" ? styles.sliderWatermark : ""
               }`}
+              src="/images/expertise/figma-d2/expertise_vert.png"
+              alt=""
               data-node-id="7077:3713"
-            >
-              SOLUTIONS
-            </div>
+            />
 
             {view === "grid" ? (
               <>

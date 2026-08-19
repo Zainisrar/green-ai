@@ -2,6 +2,10 @@
 import React, { useState } from "react";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import D6Chatbot from "../D6Chatbot";
+import styles from "./WomenInEnergy.module.css";
 import Link from "next/link";
 import { useWomenInEnergy } from "../../../hooks/useWomenInEnergy";
 import WhyThisMatters from "./Dialog/WhyThisMatters";
@@ -10,7 +14,7 @@ import VoicesofPower from "./Dialog/VoicesofPower";
 import PartnerwithUs from "./Dialog/PartnerwithUs";
 import JoinTheNetwork from "./Dialog/JoinTheNetwork";
 
-const WomenInEnergy = () => {
+const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
   const { data, error } = useWomenInEnergy();
   const [openModal, setOpenModal] = useState<string | null>(null);
   const escapeRegExp = (string: string) => {
@@ -85,6 +89,47 @@ const WomenInEnergy = () => {
       description: "  Executed in-house. Built to endure.",
     },
   ]);
+
+  if (canvas) {
+    const canvasCards = [
+      { title: "Why This Matters", image: "/images/women-in-energy/card1.png", description: "Energy access is only transformational if it includes everyone.", onClick: () => setOpenModal("whyThisMatters") },
+      { title: "Initiatives Underway", image: "/images/women-in-energy/card2.png", description: "Precision design.\nTerrain-smart. Load-aware.", onClick: () => setOpenModal("initiativesUnderway") },
+      { title: "Voices of Power", image: "/images/women-in-energy/card3.png", description: "Executed in-house.\nBuilt to endure.", onClick: () => setOpenModal("voicesOfPower") },
+      { title: "Partner with Us", image: "/images/women-in-energy/card4.png", description: "Executed in-house.\nBuilt to endure.", onClick: () => setOpenModal("partnerWithUs") },
+    ];
+
+    return (
+      <main className={styles.canvasPage} data-node-id="7077:19753">
+        <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
+        <div className={styles.canvasArtwork} aria-hidden="true"><img src="/images/women-in-energy/mainImg.png" alt="" /></div>
+        <img className={styles.canvasVerticalTitle} src="/images/women-in-energy/women-in-energy.png" alt="Women in Energy" />
+        <h1 className={styles.canvasTitle}>Women in Energy</h1>
+        <p className={styles.canvasSubtitle}>Powering Equity. Engineering Inclusion.</p>
+        <p className={styles.canvasDescription}>At GREEN, women are not just participants—they are pioneers. From solar technicians to project engineers to regional leads, we’re breaking stereotypes and building a gender-equal energy future.</p>
+        <div className={styles.canvasCards}>
+          {canvasCards.map((card, index) => (
+            <div className={`${styles.canvasCard} ${styles[`canvasCard${index + 1}`]}`} key={card.title} role="button" tabIndex={0} onClick={card.onClick} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); card.onClick(); } }}>
+              <h2>{card.title}</h2>
+              <img className={styles.canvasCardImage} src={card.image} alt="" />
+              <p className={styles.canvasCardDescription}>{card.description}</p>
+              <FigmaAngledCta className={styles.canvasCardCta} onClick={(event) => { event.stopPropagation(); card.onClick(); }}>Explore</FigmaAngledCta>
+            </div>
+          ))}
+        </div>
+        <p className={styles.canvasRightQuote}>Because when women<br />build energy systems<br />— they electrify possibility.</p>
+        <p className={styles.canvasBottomQuote}>GREEN’s workforce is now 22% female in technical roles<br />— and growing.</p>
+        <div className={styles.canvasReadMore}><span>Read more</span><span aria-hidden="true">›</span></div>
+        <FigmaAngledCta className={styles.canvasProspectusCta} href={data?.mainPage?.cta?.[0]?.href || "#"} icon="download">Women in Energy Program Brief (PDF)</FigmaAngledCta>
+        <FigmaAngledCta className={styles.canvasJoinCta} onClick={() => setOpenModal("joinNetwork")} showArrow>Join the Network | Apply for Labs | Partner to Scale</FigmaAngledCta>
+        <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
+        <WhyThisMatters isOpen={openModal === "whyThisMatters"} onClose={() => setOpenModal(null)} />
+        <InitiativesUnderway isOpen={openModal === "initiativesUnderway"} onClose={() => setOpenModal(null)} />
+        <VoicesofPower isOpen={openModal === "voicesOfPower"} onClose={() => setOpenModal(null)} />
+        <PartnerwithUs isOpen={openModal === "partnerWithUs"} onClose={() => setOpenModal(null)} />
+        <JoinTheNetwork isOpen={openModal === "joinNetwork"} onClose={() => setOpenModal(null)} />
+      </main>
+    );
+  }
 
   if (error || !data) {
     return null;

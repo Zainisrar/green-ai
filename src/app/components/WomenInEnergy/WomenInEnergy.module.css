@@ -1,0 +1,266 @@
+.canvasPage {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  min-height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #111;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.canvasArtwork {
+  position: absolute;
+  z-index: 0;
+  top: 444px;
+  left: 1023px;
+  width: 1152px;
+  height: 1889px;
+  pointer-events: none;
+}
+
+.canvasArtwork img {
+  display: block;
+  width: 1152px;
+  height: 675px;
+  max-width: none;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+.canvasVerticalTitle {
+  position: absolute;
+  z-index: 3;
+  top: 427px;
+  left: 47px;
+  display: block;
+  width: 118px;
+  height: 475px;
+  max-width: none;
+  object-fit: fill;
+}
+
+.canvasTitle {
+  position: absolute;
+  z-index: 5;
+  top: 112px;
+  left: 272.69px;
+  width: 626px;
+  margin: 0;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 67px;
+}
+
+.canvasSubtitle {
+  position: absolute;
+  z-index: 5;
+  top: 192px;
+  left: 272.69px;
+  width: 468px;
+  margin: 0;
+  color: #111;
+  font-size: 22px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 36px;
+}
+
+.canvasDescription {
+  position: absolute;
+  z-index: 5;
+  top: 242px;
+  left: 272.69px;
+  width: 1242px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.canvasRightQuote {
+  position: absolute;
+  z-index: 5;
+  top: 562px;
+  left: 1534px;
+  width: 341px;
+  height: 85px;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 26.8px;
+  white-space: pre-line;
+}
+
+.canvasBottomQuote {
+  position: absolute;
+  z-index: 5;
+  top: 799px;
+  left: 382px;
+  width: 882px;
+  height: 72px;
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 36px;
+  white-space: pre-line;
+}
+
+.canvasBottomQuote span {
+  color: #23b14d;
+}
+
+.canvasReadMore {
+  position: absolute;
+  z-index: 6;
+  top: 799px;
+  left: 1521px;
+  display: flex;
+  width: 168px;
+  height: 24px;
+  align-items: center;
+  gap: 10px;
+  font-family: Raleway, sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.canvasReadMore span:last-child {
+  color: #23b14d;
+  font-size: 24px;
+  line-height: 14px;
+}
+
+.canvasCard {
+  position: absolute;
+  z-index: 5;
+  width: 300px;
+  height: 284px;
+  cursor: pointer;
+}
+
+.canvasCard h2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 260px;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 50px;
+  white-space: nowrap;
+}
+
+.canvasCardImage {
+  position: absolute;
+  top: 53px;
+  left: -79px;
+  width: 299.5px;
+  height: 118.33px;
+  object-fit: fill;
+}
+
+.canvasCardDescription {
+  position: absolute;
+  top: 192px;
+  left: -102px;
+  width: 265px;
+  height: 32px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  white-space: pre-line;
+}
+
+.canvasCardCta {
+  position: absolute;
+  top: 245px;
+  left: 82px;
+  width: 134px;
+  height: 30px;
+  min-height: 30px;
+  justify-content: space-between !important;
+  padding: 0 8px 0 19px !important;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.canvasCard1 { top: 408px; left: 297px; }
+.canvasCard2 { top: 402px; left: 630px; }
+.canvasCard3 { top: 399px; left: 973.72px; }
+.canvasCard4 { top: 399px; left: 1298.32px; }
+.canvasCard1 h2 { width: 208px; }
+.canvasCard2 h2 { width: 238px; }
+.canvasCard3 h2 { width: 184px; }
+.canvasCard4 h2 { width: 181px; }
+.canvasCard1 .canvasCardImage { left: -79px; top: 53px; }
+.canvasCard2 .canvasCardImage { left: -73.88px; top: 51.31px; }
+.canvasCard3 .canvasCardImage { left: -95.06px; top: 54.31px; }
+.canvasCard4 .canvasCardImage { left: -89.66px; top: 54.31px; }
+.canvasCard1 .canvasCardDescription { top: 192px; left: -103px; }
+.canvasCard2 .canvasCardDescription { top: 189px; left: -82px; }
+.canvasCard3 .canvasCardDescription { top: 187px; left: -97.72px; }
+.canvasCard4 .canvasCardDescription { top: 187px; left: -92.32px; }
+.canvasCard1 .canvasCardCta { top: 245px; left: 3px; width: 133px; }
+.canvasCard2 .canvasCardCta { top: 251px; left: 25px; width: 127px; }
+.canvasCard3 .canvasCardCta { top: 254px; left: -8px; width: 137px; }
+.canvasCard4 .canvasCardCta { top: 254px; left: 11px; width: 123px; }
+
+.canvasCard:focus-visible {
+  outline: 2px solid #23b14d;
+  outline-offset: 4px;
+}
+
+.canvasProspectusCta,
+.canvasJoinCta {
+  position: absolute;
+  z-index: 7;
+  height: 52px;
+  min-height: 52px;
+  justify-content: space-between !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.canvasProspectusCta {
+  top: 741px;
+  left: 1510px;
+  width: 409px;
+}
+
+.canvasJoinCta {
+  top: 819px;
+  left: 1437px;
+  width: 479px;
+}
+
+@media (max-width: 1200px) {
+  .canvasPage {
+    position: static;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .canvasArtwork,
+  .canvasVerticalTitle,
+  .canvasTitle,
+  .canvasSubtitle,
+  .canvasDescription,
+  .canvasRightQuote,
+  .canvasBottomQuote,
+  .canvasReadMore,
+  .canvasCard,
+  .canvasProspectusCta,
+  .canvasJoinCta {
+    position: static;
+    width: auto;
+    height: auto;
+    min-height: 0;
+  }
+}
