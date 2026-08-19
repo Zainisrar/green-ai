@@ -87,17 +87,6 @@
   color: #23b14d;
 }
 
-/* Figma quote vector framing */
-.quoteVector {
-  position: absolute;
-  top: 673px;
-  left: 51px;
-  z-index: 2;
-  width: 472px;
-  height: 91px;
-  pointer-events: none;
-}
-
 /* Left Column Elements (Desktop) */
 .leftElements {
   position: absolute;
@@ -272,8 +261,7 @@
   .logoPanelBg,
   .verticalTitle,
   .desktopCtas,
-  .leftElements,
-  .quoteVector {
+  .leftElements {
     display: none;
   }
 

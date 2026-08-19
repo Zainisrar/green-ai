@@ -107,13 +107,6 @@ export default function OurChainValue({ canvas = false }: OurChainValueProps) {
       </div>
 
       {/* Left Elements (Desktop) */}
-      <img
-        src="/images/handbook/figma-quote-left.svg"
-        alt=""
-        className={styles.quoteVector}
-        aria-hidden="true"
-      />
-
       <div className={styles.leftElements}>
         <div className={styles.ecosystemCard}>
           <img
