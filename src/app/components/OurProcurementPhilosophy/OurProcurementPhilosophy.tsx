@@ -29,9 +29,10 @@ export default function OurProcurementPhilosophy({
   const subHeadline =
     apiData?.mainPage?.subHeadline ||
     "Procurement by Purpose. Partnership by Proof.";
-  const description =
+  const description = (
     apiData?.mainPage?.description ||
-    "GREEN’s procurement approach isn’t driven by cost — it’s driven by consequence. Every product we source carries the weight of performance, reputation, and impact. That’s why we buy smart, selectively, and strategically.";
+    "GREEN’s procurement approach isn’t driven by cost — it’s driven by consequence. Every product we source carries the weight of performance, reputation, and impact. That’s why we buy smart, selectively, and strategically."
+  ).replace(" Every product", "\nEvery product");
 
   return (
     <main
@@ -171,7 +172,7 @@ export default function OurProcurementPhilosophy({
       </section>
 
       {/* Left Quote Block */}
-      <div className={styles.leftQuoteBlock}>
+      <div className={styles.leftQuoteBlock} data-node-id="7077:21801">
         <img
           src="/images/handbook/figma-quote-left.svg"
           alt=""
@@ -242,6 +243,7 @@ export default function OurProcurementPhilosophy({
         <D6Chatbot
           canvasAnchored
           triggerVariant="figmaCanvas"
+          figmaPlaceholder="Let’s Talk Energy"
           triggerStyle={{
             top: 899,
             right: "auto",
