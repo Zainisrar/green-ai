@@ -1,0 +1,24 @@
+.canvasPage { position: relative; width: 1920px; height: 970px; min-height: 970px; overflow: hidden; background: #fff; color: #111; font-family: var(--font-montserrat), Montserrat, sans-serif; }
+.canvasGhost { position: absolute; z-index: 0; top: -3px; left: 1246px; width: 1590px; height: 1060px; pointer-events: none; display: block; }
+.canvasVerticalTitle { position: absolute; z-index: 3; top: 401px; left: 47px; width: 59px; height: 501px; }
+.canvasTitle { position: absolute; z-index: 5; top: 112px; left: 262px; margin: 0; font-size: 56px; font-weight: 800; line-height: 67px; text-transform: uppercase; }
+.canvasTitle span { color: #23b14d; }
+.canvasSubtitle { position: absolute; z-index: 5; top: 192px; left: 262px; width: 715px; margin: 0; font-size: 22px; font-weight: 700; line-height: 36px; color: #23b14d; font-style: italic; }
+.canvasDescription { position: absolute; z-index: 5; top: 242px; left: 264px; width: 890px; margin: 0; font-size: 18px; font-weight: 400; line-height: 24px; }
+.green { color: #23b14d; font-weight: 600; }
+.canvasCard { position: absolute; z-index: 5; left: 294px; width: 900px; height: 100px; }
+.canvasCardImg { position: absolute; left: 0; top: 0; width: 242px; display: block; }
+.canvasCardTitle { position: absolute; left: 268px; top: 0; margin: 0; font-size: 22px; font-weight: 700; line-height: 32px; white-space: nowrap; }
+.canvasCardTitle span { color: #23b14d; }
+.canvasCardDesc { position: absolute; left: 268px; top: 43px; width: 426px; margin: 0; font-size: 16px; font-weight: 600; line-height: 20px; }
+.canvasExploreCta { position: absolute; left: 735px; top: 52px; width: 122px; height: 37px; min-height: 37px; font-size: 13px; font-weight: 600; }
+.canvasBracketL { position: absolute; z-index: 2; width: 79px; height: 98px; pointer-events: none; }
+.canvasQuote { position: absolute; z-index: 5; top: 530px; left: 1369px; width: 446px; margin: 0; font-size: 22px; font-weight: 700; line-height: 30px; font-style: italic; }
+.canvasQuoteBracketL { position: absolute; z-index: 2; top: 543px; left: 1305px; width: 79px; height: 98px; pointer-events: none; }
+.canvasQuoteBracketR { position: absolute; z-index: 2; top: 514px; left: 1808px; width: 80px; height: 99px; pointer-events: none; }
+.canvasProcurementCta { position: absolute; z-index: 7; top: 733px; left: 1615px; width: 299px; height: 52px; min-height: 52px; justify-content: space-between !important; padding: 0 14px 0 16px !important; font-size: 16px; font-weight: 600; }
+.canvasProcurementCta > span:last-child, .canvasProcurementCta svg { color: #000 !important; }
+.canvasProspectusCta { position: absolute; z-index: 7; top: 810px; left: 1507px; width: 409px; height: 52px; min-height: 52px; justify-content: space-between !important; padding: 0 14px 0 16px !important; font-size: 16px; font-weight: 600; }
+.canvasBottomText { position: absolute; z-index: 5; top: 862px; left: 262px; width: 1043px; margin: 0; font-size: 26px; font-weight: 700; line-height: 36px; white-space: pre-line; }
+.bottomGreen { color: #23b14d; }
+@media (max-width: 1200px) { .canvasPage { position: static; width: auto; height: auto; min-height: 0; overflow: visible; } .canvasGhost, .canvasVerticalTitle, .canvasTitle, .canvasSubtitle, .canvasDescription, .canvasCard, .canvasQuote, .canvasQuoteBracketL, .canvasQuoteBracketR, .canvasProcurementCta, .canvasProspectusCta, .canvasBottomText, .canvasBracketL { position: static; width: auto; height: auto; } }
