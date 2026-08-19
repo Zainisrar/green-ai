@@ -1,12 +1,13 @@
-import React from "react";
 import TeamGreen from "@/app/components/TeamGreen/TeamGreen";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function TeamGreenPage() {
   return (
-    <React.Fragment>
-      <TeamGreen />
-    </React.Fragment>
+    <FigmaPageCanvas
+      desktop={<TeamGreen canvas />}
+      mobile={<TeamGreen />}
+      nodeId="7077:21015"
+      fitCanvasHeight
+    />
   );
-};
-
-export default page;
+}
