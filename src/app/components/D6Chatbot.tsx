@@ -388,6 +388,7 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
                 height: 52,
                 right: "auto",
                 bottom: "auto",
+                ...triggerStyle,
               }
             : canvasAnchored
               ? {

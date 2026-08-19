@@ -83,6 +83,14 @@ export default function KeySupplyCategories({
     >
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
+      {/* Existing Figma canvas background artwork */}
+      <img
+        src="/images/key-supplier-categories/bg.jpg"
+        alt=""
+        className={styles.backgroundArtwork}
+        aria-hidden="true"
+      />
+
       {/* Vertical Side Title */}
       <img
         src="/images/key-supplier-categories/figma-vertical-title.svg"
@@ -92,7 +100,9 @@ export default function KeySupplyCategories({
 
       {/* Top Header Content */}
       <div className={styles.topSection}>
-        <h1 className={styles.mainTitle}>{title}</h1>
+        <h1 className={styles.mainTitle}>
+          KEY <span className={styles.greenText}>SUPPLY</span> CATEGORIES
+        </h1>
         <h2>{subHeadline}</h2>
         <p>{description}</p>
       </div>
@@ -149,9 +159,9 @@ export default function KeySupplyCategories({
           aria-hidden="true"
         />
         <p className={styles.quoteText}>
-          We don’t tell stories to impress.
+          We Don’t Tell Stories To Impress.
           <br />
-          We share stories that prove what energy can do.
+          We Share Stories That Prove What <span className={styles.greenText}>Energy</span> Can Do.
         </p>
         <img
           src="/images/handbook/figma-quote-right.svg"
@@ -182,8 +192,7 @@ export default function KeySupplyCategories({
       <div className={styles.mobileElements}>
         <div className={styles.mobileQuoteBox}>
           <p>
-            “We don’t tell stories to impress. We share stories that prove what
-            energy can do.”
+            “We Don’t Tell Stories To Impress. We Share Stories That Prove What Energy Can Do.”
           </p>
         </div>
         <div className={styles.mobileCtas}>
@@ -204,11 +213,12 @@ export default function KeySupplyCategories({
         <D6Chatbot
           canvasAnchored
           triggerVariant="figmaCanvas"
+          figmaPlaceholder="Let’s Talk Energy"
           triggerStyle={{
-            top: 899,
+            top: 853,
             right: "auto",
             bottom: "auto",
-            left: 1498,
+            left: 1499,
             width: 418,
           }}
         />

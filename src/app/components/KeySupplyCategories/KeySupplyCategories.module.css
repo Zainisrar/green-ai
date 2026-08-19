@@ -12,6 +12,16 @@
   min-height: 970px;
 }
 
+.backgroundArtwork {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 970px;
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .verticalTitle {
   position: absolute;
   top: 152px;
@@ -35,11 +45,11 @@
 
 .mainTitle {
   margin: 0;
-  font-size: 42px;
-  font-weight: 900;
-  line-height: 1.15;
+  font-size: 50px;
+  font-weight: 800;
+  line-height: 61px;
   color: #000;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -59,9 +69,10 @@
 .topSection p {
   max-width: 1384px;
   margin: 8px 0 0;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
-  line-height: 1.45;
+  line-height: 24px;
+  letter-spacing: 0.36px;
   color: #000;
 }
 
@@ -115,16 +126,17 @@
 
 .categoryName {
   margin: 0;
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 800;
+  line-height: 27px;
   color: #000;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .categoryCta {
   width: 134px;
   height: 41px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   padding: 0 14px 0 18px;
 }
@@ -132,7 +144,7 @@
 .dividerLine {
   position: absolute;
   height: 1px;
-  background: #dcdcdc;
+  background: rgba(35, 177, 77, 0.65);
   width: 964px;
 }
 
@@ -166,28 +178,40 @@
   position: absolute;
   top: 837px;
   left: 194px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  width: 821px;
+  height: 106px;
   z-index: 3;
 }
 
 .quoteShapeLeft,
 .quoteShapeRight {
+  position: absolute;
   width: 79px;
   height: 98px;
   object-fit: contain;
-  flex: 0 0 auto;
+}
+
+.quoteShapeLeft {
+  top: 0;
+  left: 0;
+}
+
+.quoteShapeRight {
+  top: 7px;
+  left: 742px;
 }
 
 .quoteText {
+  position: absolute;
+  top: 16px;
+  left: 64px;
+  width: 726px;
   margin: 0;
-  font-size: 18px;
-  font-style: italic;
-  font-weight: 800;
-  line-height: 1.3;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 36px;
   color: #000;
-  white-space: nowrap;
 }
 
 /* Desktop CTAs */
@@ -222,6 +246,7 @@
     overflow: visible;
   }
 
+  .backgroundArtwork,
   .verticalTitle,
   .leftQuoteBlock,
   .desktopCtas {
@@ -308,6 +333,7 @@
 
   .mainTitle {
     font-size: 30px;
+    line-height: 1.15;
   }
 
   .topSection h2 {
