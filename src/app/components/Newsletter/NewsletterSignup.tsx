@@ -1,223 +1,165 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import TopNavigation from "../TopNavigation/TopNavigation";
-import Chatbot from "../Chatbot";
+import { useState } from "react";
+import D6Chatbot from "../D6Chatbot";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import SiteHeader from "../SiteHeader/SiteHeader";
 import NewsletterSignupModal from "./NewsletterSignupModal";
+import styles from "./NewsletterSignup.module.css";
 
-const NewsLetterSignUp = () => {
-  const [isMobile, setIsMobile] = useState(false);
-  const [isTablet, setIsTablet] = useState(false);
-  const [isFormOpen, setIsFormOpen] = useState(false);
+const BENEFIT_ROWS = [
+  { benefit: "Insider Updates", desc: "See the projects before they make headlines" },
+  { benefit: "Expert Insights", desc: "Get briefings from GREEN engineers, strategists & partners" },
+  { benefit: "Event Access", desc: "Early invites to webinars, expos, and community events" },
+  { benefit: "Opportunity Alerts", desc: "Be first to hear about RFPs, tenders, job openings" },
+];
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768); // Example breakpoint for mobile
-      setIsTablet(window.innerWidth >= 768 && window.innerWidth < 1024); // Example breakpoint for tablet
-    };
-    handleResize(); // Check on mount
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+const PILL_ROW_1 = [
+  { text: "1 Monthly Email (No Spam)", left: 691, top: 649, width: 356, textLeft: 727 },
+  { text: "Curated Project Highlights", left: 1047, top: 649, width: 356, textLeft: 1083 },
+  { text: "Thought Leadership Articles", left: 1403, top: 649, width: 356, textLeft: 1439 },
+];
+
+const PILL_ROW_2 = [
+  { text: "Thought Leadership Articles", left: 662, top: 725, width: 356, textLeft: 698 },
+  { text: "Tools, Templates, & Free Downloads", left: 1018, top: 725, width: 436, textLeft: 1054 },
+];
+
+interface NewsletterSignupProps {
+  canvas?: boolean;
+}
+
+export default function NewsletterSignup({ canvas = false }: NewsletterSignupProps) {
+  const [formOpen, setFormOpen] = useState(false);
 
   return (
-    <React.Fragment>
-      <div className="pointer-events-none absolute top-0 left-0 -z-10">
-        <img src="/images/newsletter/mainImg.png" className="w-8/12 h-[150vh]" alt="" role="presentation" />
+    <main className={styles.page} data-node-id="7077:14996">
+      <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
+
+      {/* Left green/yellow angled panel */}
+      <div className={styles.leftPanel} aria-hidden="true">
+        <img
+          src="/images/book-consulation/figma-logo.png"
+          alt=""
+          className={styles.panelLogo}
+        />
       </div>
-      <div className="relative z-10">
-        <TopNavigation />
-        <div className="flex h-full ">
-          <div className=" lg:w-1/6 hidden lg:flex items-center justify-center">
-            <div className="fixed top-1/4 left-14">
-              <img
-                src="/images/newsletter/newsletter-signup.png"
-                alt="newsletter signup"
-                className="w-10"
-              />
-            </div>
-          </div>
 
-          {/* Main Content Area */}
-          <div className="   flex flex-col   md:pl-38 md:mr-4  md:my-10 lg:my-0 lg:pl-8 lg:px-8  lg:mr-8 ml-4 rounded-lg">
-            <div className=" mt-10 flex  justify-between ">
-              <div>
-                {/* Main Heading */}
-                <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
-                  NEWSLETTER <span className="text-[#23B14D]">SIGNUP</span>
-                </h1>
+      {/* Large left collage (Figma mask group) */}
+      <img
+        src="/images/newsletter/collage.png"
+        alt=""
+        className={styles.leftCollage}
+        aria-hidden="true"
+      />
 
-                {/* Subtitle */}
-                <p className="text-xl lg:text-2xl text-[#23B14D] font-bold mb-6 italic">
-                  Stay Informed. Stay Energized.
-                </p>
+      {/* Vertical side title (Raleway Black, outlined, bottom-up) */}
+      <p className={styles.verticalTitle} aria-hidden="true">
+        Newsletter Signup
+      </p>
 
-                {/* Description */}
-                <p className="text-gray-700 text-base lg:text-lg max-w-lg font-bold mb-8 leading-relaxed">
-                  Subscribe to{" "}
-                  <span className="font-bold text-[#23B14D]">
-                    GREEN Insights
-                  </span>{" "}
-                  — your monthly pulse on solar innovation, impact projects,
-                  energy access breakthroughs, and exclusive behind-the-scenes
-                  content from across PNG and the South Pacific.
-                </p>
-              </div>
-              {/* Two Column Layout */}
-              <div className="flex flex-col space-y-8">
-                {/* Left Column - Why Subscribe */}
-                <div>
-                  <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">Why Subscribe?</h2>
+      {/* Header block */}
+      <div className={styles.headerBlock}>
+        <h1 className={styles.mainTitle}>
+          NEWSLETTER <span className={styles.greenText}>SIGNUP</span>
+        </h1>
+        <p className={styles.subHeadline}>Stay Informed. Stay Energized.</p>
+        <p className={styles.description}>
+          Subscribe to{" "}
+          <span className={styles.greenText}>GREEN Insights</span> — your
+          monthly pulse on solar innovation, impact projects, energy access
+          breakthroughs, and exclusive behind-the-scenes content from across
+          PNG and the South Pacific.
+        </p>
+      </div>
 
-                  <div className="overflow-x-auto">
-                    <table className="w-full border-collapse">
-                      <thead>
-                        <tr className="">
-                          <th className=" px-4 py-3 text-lg text-left font-black text-[#23B14D]">
-                            Benefit
-                          </th>
-                          <th className="  px-4 py-3 text-lg text-left font-black text-[#23B14D]">
-                            Description
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td className=" px-4 py-3 font-black">
-                            Insider Updates
-                          </td>
-                          <td className="text-lg font-medium  px-4 py-3">
-                            See the projects before they make headlines
-                          </td>
-                        </tr>
-                        <tr className="">
-                          <td className=" px-4 py-3 font-black">
-                            Expert Insights
-                          </td>
-                          <td className=" text-lg font-medium px-4 py-3">
-                            Get briefings from GREEN engineers, strategists &
-                            partners
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className=" px-4 py-3 font-black">
-                            Event Access
-                          </td>
-                          <td className=" text-lg font-medium px-4 py-3">
-                            Early invites to webinars, expos, and community
-                            events
-                          </td>
-                        </tr>
-                        <tr className="">
-                          <td className=" px-4 py-3 font-black">
-                            Opportunity Alerts
-                          </td>
-                          <td className="text-lg font-medium  px-4 py-3">
-                            Be first to hear about RFPs, tenders, job openings
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
-                {/* Right Column - What You'll Receive */}
-                <div className="mt-10">
-                  <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-8">
-                    What You'll <span className="text-[#23B14D]">Receive</span>
-                  </h2>
-
-                  <div className="space-y-4">
-                    <div className="flex  gap-8">
-                      <span
-                      style={{
-                        transform:"skewX(-12deg)"
-                      }}
-                      className=" border-2  border-[#f0f9da] px-6 py-2  text-sm font-semibold">
-                        1 Monthly Email (No Spam)
-                      </span>
-                      <span
-                        style={{
-                        transform:"skewX(-12deg)"
-                      }}
-                      className=" border-2  border-[#f0f9da] px-6 py-2  text-sm font-semibold">
-                        Curated Project Highlights
-                      </span>
-                      <span 
-                        style={{
-                        transform:"skewX(-12deg)"
-                      }}
-                      className=" border-2  border-[#f0f9da] px-6 py-2  text-sm font-semibold">
-                        Thought Leadership Articles
-                      </span>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2">
-                      <span
-                        style={{
-                        transform:"skewX(-12deg)"
-                      }}
-                      
-                      className=" border-2 border-[#f0f9da] px-6 py-2  text-sm font-semibold">
-                        Thought Leadership Articles
-                      </span>
-                      <span
-                        style={{
-                        transform:"skewX(-12deg)"
-                      }}
-                      className=" border-2  border-[#f0f9da] px-6 py-2  text-sm font-semibold">
-                        Tools, Templates, & Free Downloads
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* Contact Info */}
-            <div className="mb-6 relative flex items-center space-x-4 mt-10">
-              <div className="absolute top-4 -left-20">
-                <img src="/images/newsletter/shape.png" className="w-14" alt="shape" />
-              </div>
-              <div>
-                <h3 className="text-xl lg:text-2xl font-bold mb-2">Contact</h3>
-                <p className="text-[#23B14D] text-lg font-semibold">
-                  —{" "}
-                  <span className="italic">
-                    <a href="mailto:insights@green.com.pg">
-                      insights@green.com.pg
-                    </a>
-                  </span>{" "}
-                  .
-                </p>
-              </div>
-              <div className="-ml-4 ">
-                <img src="/images/newsletter/shape2.png" className="w-14" alt="shape2" />
-              </div>
-            </div>
-            {/* Bottom Message */}
-            <div className="flex mb-40 justify-between">
-              <div className="text-center text-xl font-semibold">
-                <p className="text-gray-900 italic mb-2">
-                  From remote installations to regional milestones
-                </p>
-                <p className="text-gray-900">
-                  — let <span className="font-bold text-[#23B14D]">GREEN</span>{" "}
-                  power your inbox with content that matters.
-                </p>
-              </div>
-              <div
-                className="relative flex justify-end cursor-pointer"
-                onClick={() => setIsFormOpen(true)}
-              >
-                <img src="/images/newsletter/sign-up-now.png" alt="sign up" />
-              </div>
-            </div>
-          </div>
+      {/* Why Subscribe? table */}
+      <h2 className={styles.whyTitle} style={{ left: 909, top: 201 }}>
+        Why Subscribe?
+      </h2>
+      <p className={styles.thBenefit}>Benefit</p>
+      <p className={styles.thDesc}>Description</p>
+      {BENEFIT_ROWS.map((row, i) => (
+        <div
+          key={row.benefit}
+          className={styles.tableRow}
+          style={{ top: 295 + i * 54 }}
+        >
+          <p className={styles.tdB}>{row.benefit}</p>
+          <p className={styles.tdD}>{row.desc}</p>
         </div>
-      </div>
-      <NewsletterSignupModal isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
-      <Chatbot />
-    </React.Fragment>
-  );
-};
+      ))}
 
-export default NewsLetterSignUp;
+      {/* What You'll Receive pills */}
+      <h2 className={styles.receiveTitle} style={{ left: 746, top: 568 }}>
+        What You&rsquo;ll <span className={styles.greenText}>Receive</span>
+      </h2>
+      {[PILL_ROW_1, PILL_ROW_2].map((row, ri) =>
+        row.map((pill) => (
+          <div
+            key={`${ri}-${pill.text}`}
+            className={styles.pill}
+            style={{
+              left: pill.left,
+              top: pill.top,
+              width: pill.width,
+              minHeight: 53,
+            }}
+          >
+            <span className={styles.pillText}>{pill.text}</span>
+          </div>
+        )),
+      )}
+
+      {/* Contact block with brackets */}
+      <div className={styles.contactBlock}>
+        <span className={styles.quoteBracketBottom} aria-hidden="true" />
+        <span className={styles.quoteBracketTop} aria-hidden="true" />
+        <p className={styles.contactText}>
+          Contact
+          <br />
+          —{" "}
+          <a href="mailto:insights@green.com.pg" className={styles.emailLink}>
+            insights@green.com.pg
+          </a>{" "}
+          .
+        </p>
+      </div>
+
+      {/* Tagline */}
+      <p className={styles.tagline}>
+        From remote installations to regional milestones
+        <br />
+        — let <span className={styles.greenText}>GREEN</span> power your inbox
+        with content that matters.
+      </p>
+
+      {/* Sign Up Now CTA */}
+      <FigmaAngledCta
+        className={styles.signupCta}
+        style={{ position: "absolute", left: 1709, top: 824 }}
+        onClick={() => setFormOpen(true)}
+      >
+        Sign Up Now
+      </FigmaAngledCta>
+
+      {/* Chatbot */}
+      {canvas ? (
+        <D6Chatbot
+          canvasAnchored
+          triggerVariant="figmaCanvas"
+          triggerStyle={{
+            top: 899,
+            right: "auto",
+            bottom: "auto",
+            left: 1498,
+            width: 418,
+          }}
+        />
+      ) : (
+        <D6Chatbot />
+      )}
+
+      <NewsletterSignupModal isOpen={formOpen} onClose={() => setFormOpen(false)} />
+    </main>
+  );
+}

@@ -1,0 +1,223 @@
+.page {
+  position: relative;
+  height: 970px;
+  min-height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.rightCollage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 972px;
+  height: 970px;
+  overflow: hidden;
+  opacity: 0.45;
+  z-index: 0;
+}
+
+.rightCollage img {
+  position: absolute;
+  right: -180px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1200px;
+  height: 970px;
+  object-fit: cover;
+  object-position: left center;
+  filter: saturate(0.35) brightness(1.15);
+}
+
+.verticalTitle {
+  position: absolute;
+  top: 363px;
+  left: 47px;
+  width: 59px;
+  height: 539px;
+  object-fit: contain;
+  z-index: 2;
+}
+
+.headerSection {
+  position: absolute;
+  top: 112px;
+  left: 262px;
+  width: 1384px;
+  z-index: 3;
+}
+
+.mainTitle {
+  margin: 0;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.greenText {
+  color: #23b14d;
+}
+
+.subHeadline {
+  margin: 12px 0 0;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.3;
+  color: #23b14d;
+}
+
+.description {
+  margin: 12px 0 0;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #000;
+  max-width: 1150px;
+}
+
+.highlight {
+  color: #23b14d;
+}
+
+.row {
+  position: absolute;
+  left: 0;
+  width: 1668px;
+  z-index: 3;
+}
+
+.rowImage {
+  display: block;
+  width: 260px;
+  height: 108px;
+  overflow: hidden;
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.rowImage img {
+  display: block;
+  width: 262px;
+  height: 143px;
+  object-fit: cover;
+  clip-path: polygon(19px 0, 100% 0, calc(100% - 19px) 100%, 0 100%);
+}
+
+.rowImageAccent {
+  position: absolute;
+  left: -19px;
+  top: 10px;
+  width: 79px;
+  height: 98px;
+  background: #23b14d;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%, 14% 0%);
+  z-index: -1;
+}
+
+.rowText {
+  width: 460px;
+}
+
+.rowTitle {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #000;
+}
+
+.rowSubtitle {
+  position: absolute;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #000;
+  max-width: 454px;
+}
+
+.rowCta {
+  position: absolute;
+  width: 122px;
+  height: 37px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0 12px 0 16px;
+}
+
+.rowDivider {
+  position: absolute;
+  bottom: 0;
+  left: 262px;
+  right: 262px;
+  border: 0;
+  border-bottom: 1px solid #c8d9cc;
+}
+
+/* Right quote card */
+.quoteCard {
+  position: absolute;
+  top: 424px;
+  left: 1476px;
+  width: 341px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quoteShapeTop {
+  width: 311px;
+  height: 91px;
+  object-fit: contain;
+  align-self: flex-start;
+}
+
+.quoteCard p {
+  margin: 0;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #000;
+  max-width: 341px;
+}
+
+/* Bottom quote */
+.bottomQuote {
+  position: absolute;
+  top: 862px;
+  left: 262px;
+  width: 1010px;
+  z-index: 3;
+}
+
+.bottomQuote h2 {
+  margin: 0;
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #000;
+}
+
+.downloadCta {
+  width: 350px;
+  height: 52px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.eoiCta {
+  width: 375px;
+  height: 52px;
+  font-size: 16px;
+  font-weight: 600;
+}

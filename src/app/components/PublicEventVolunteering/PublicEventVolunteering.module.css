@@ -1,0 +1,221 @@
+.page {
+  position: relative;
+  height: 970px;
+  min-height: 970px;
+  overflow: hidden;
+  background: #ffffff;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+/* Background hands collage behind left panel */
+.bgWrap {
+  position: absolute;
+  top: -191px;
+  left: -212px;
+  width: 1201px;
+  height: 1998px;
+  z-index: 0;
+}
+
+.bgImg {
+  width: 963px;
+  height: 963px;
+  object-fit: cover;
+  opacity: 0.9;
+}
+
+/* Left green gradient panel */
+.greenPanel {
+  position: absolute;
+  top: -1px;
+  left: -15px;
+  width: 326px;
+  height: 662px;
+  background: linear-gradient(
+    120deg,
+    rgba(200, 233, 156, 0.95) 0%,
+    rgba(140, 205, 95, 0.75) 45%,
+    rgba(120, 196, 85, 0.0) 100%
+  );
+  z-index: 1;
+}
+
+.bgFade {
+  position: absolute;
+  top: -191px;
+  left: -212px;
+  width: 1201px;
+  height: 1998px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(255, 255, 255, 0.55) 12%,
+    rgba(255, 255, 255, 0) 30%
+  );
+  z-index: 1;
+}
+
+/* Left vertical title (Raleway 900 rotated) */
+.verticalTitleWrap {
+  position: absolute;
+  top: 263px;
+  left: 66px;
+  width: 94px;
+  height: 668px;
+  z-index: 3;
+  overflow: visible;
+}
+
+.verticalTitle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  font-family: var(--font-raleway), Raleway, sans-serif;
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.55);
+  transform: rotate(-90deg) translateX(-100%);
+  transform-origin: left bottom;
+  white-space: nowrap;
+}
+
+/* Page header */
+.pageHeader {
+  position: absolute;
+  top: 107px;
+  left: 264px;
+  z-index: 2;
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 50px;
+  font-weight: 800;
+  line-height: 1.02;
+  color: #000;
+  letter-spacing: 0.5px;
+}
+
+.subHeadline {
+  margin: 14px 0 0;
+  font-size: 22px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1.3;
+  color: #23b14d;
+}
+
+.description {
+  margin: 26px 0 0;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: #000;
+  max-width: 1100px;
+}
+
+.highlight {
+  color: #23b14d;
+  font-weight: 700;
+}
+
+/* Rows */
+.row {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.rowTitle {
+  position: absolute;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #000;
+}
+
+.rowSub {
+  position: absolute;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.4;
+  color: #000;
+}
+
+.rowCta {
+  width: 122px;
+  height: 36px;
+  font-size: 13px;
+}
+
+.rowDivider {
+  position: absolute;
+  bottom: -57px;
+  left: 598px;
+  width: 914px;
+  border: 0;
+  border-bottom: 1px solid #7dc98f;
+}
+
+/* Bottom quote */
+.bottomQuote {
+  position: absolute;
+  top: 856px;
+  left: 595px;
+  width: 740px;
+  z-index: 3;
+}
+
+.bottomQuoteText {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.38;
+  color: #000;
+}
+
+.quoteShapeLeft {
+  position: absolute;
+  top: -11px;
+  left: -69px;
+  width: 79px;
+  height: 98px;
+  object-fit: contain;
+}
+
+.quoteShapeRight {
+  position: absolute;
+  top: -16px;
+  right: -75px;
+  width: 80px;
+  height: 99px;
+  object-fit: contain;
+}
+
+/* Bottom-right CTAs */
+.ctaSignUp {
+  width: 289px;
+  height: 52px;
+  font-size: 16px;
+  z-index: 3;
+}
+
+.ctaCalendar {
+  width: 389px;
+  height: 52px;
+  font-size: 16px;
+  z-index: 3;
+}
+
+.ctaWelcome {
+  width: 419px;
+  height: 52px;
+  font-size: 16px;
+  z-index: 3;
+}

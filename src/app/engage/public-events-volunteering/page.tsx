@@ -4,7 +4,7 @@ import PublicEventVolunteering from '@/app/components/PublicEventVolunteering/Pu
 const page = () => {
   return (
     <React.Fragment>
-        <PublicEventVolunteering/>
+        <PublicEventVolunteering canvas />
     </React.Fragment>
   )
 }

@@ -1,13 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
+  CSSProperties,
+  ReactNode,
+} from "react";
 import styles from "./FigmaAngledCta.module.css";
 
 interface FigmaAngledCtaProps
   extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
   children: ReactNode;
   className?: string;
+  style?: CSSProperties;
   showArrow?: boolean;
   icon?: "chevron" | "download";
   href?: string;
@@ -69,8 +75,14 @@ export default function FigmaAngledCta({
   );
 
   if (href) {
+    const { type: _type, ...anchorProps } = props as AnchorHTMLAttributes<HTMLAnchorElement>;
+    void _type;
     return (
-      <Link href={href} className={`${styles.cta} ${className}`.trim()}>
+      <Link
+        href={href}
+        className={`${styles.cta} ${className}`.trim()}
+        {...anchorProps}
+      >
         {content}
       </Link>
     );

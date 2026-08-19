@@ -1,0 +1,260 @@
+.page {
+  position: relative;
+  height: 970px;
+  min-height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+/* ── Left panel (same as other engage pages: 326×662 at -15,-1) ── */
+.leftPanel {
+  position: absolute;
+  top: -1px;
+  left: -15px;
+  width: 326px;
+  height: 662px;
+  clip-path: polygon(311px 0, 326px 0, -15px 661px, -15px 0);
+  background: linear-gradient(
+    125deg,
+    rgba(255, 229, 0, 0.89) 0%,
+    rgba(190, 235, 120, 0.55) 55%,
+    rgba(35, 209, 75, 0.3) 100%
+  );
+  z-index: 1;
+}
+
+.panelLogo {
+  position: absolute;
+  left: 9px;
+  top: 19px;
+  width: 255px;
+  height: 67px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+/* ── Vertical side title (Raleway Black 74, outlined, bottom-up) ── */
+.verticalTitle {
+  position: absolute;
+  bottom: 85px;
+  left: 66px;
+  margin: 0;
+  font-family: var(--font-raleway), Raleway, sans-serif;
+  font-size: 74px;
+  font-weight: 900;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #d8d8d8;
+  transform: rotate(-90deg) translateX(-100%);
+  transform-origin: left bottom;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+/* ── Right faint collage ── */
+.rightCollage {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 897px;
+  height: 970px;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.rightCollage img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top right;
+}
+
+/* ── Header block ── */
+.headerBlock {
+  position: absolute;
+  top: 101px;
+  left: 262px;
+  width: 1384px;
+  z-index: 3;
+}
+
+.mainTitle {
+  margin: 0;
+  font-size: 50px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #000;
+}
+
+.subHeadline {
+  margin: 18px 0 0;
+  font-size: 22px;
+  font-weight: 700;
+  font-style: italic;
+  color: #23b14d;
+}
+
+.description {
+  margin: 10px 0 0;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #000;
+  max-width: 1384px;
+}
+
+.greenText {
+  color: #23b14d;
+  font-weight: 700;
+}
+
+/* ── Menu rows ── */
+.rowTitle {
+  position: absolute;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: #000;
+  white-space: nowrap;
+  z-index: 3;
+}
+
+.exploreBtn {
+  position: absolute;
+  height: 41px !important;
+  padding: 0 18px 0 20px !important;
+  font-size: 12px !important;
+  z-index: 4;
+}
+
+.rowLine {
+  position: absolute;
+  width: 964px;
+  height: 0;
+  margin: 0;
+  border: 0;
+  border-top: 2px solid #23b14d;
+  z-index: 2;
+}
+
+/* ── Bottom-left quote ── */
+.quoteBlock {
+  position: absolute;
+  left: 258px;
+  top: 853px;
+  width: 726px;
+  height: 72px;
+  z-index: 4;
+}
+
+.quoteBracketBottom {
+  position: absolute;
+  left: -64px;
+  top: -16px;
+  width: 79px;
+  height: 98px;
+}
+
+.quoteBracketBottom::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 79px;
+  height: 4px;
+  background: #aedc9e;
+  border-radius: 2px;
+}
+
+.quoteBracketBottom::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 98px;
+  background: #aedc9e;
+  border-radius: 2px;
+  transform-origin: bottom center;
+  transform: rotate(32deg);
+}
+
+.quoteBracketTop {
+  position: absolute;
+  left: 260px;
+  top: -16px;
+  width: 170px;
+  height: 105px;
+}
+
+.quoteBracketTop::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 170px;
+  height: 4px;
+  background: #aedc9e;
+  border-radius: 2px;
+}
+
+.quoteBracketTop::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 4px;
+  height: 105px;
+  background: #aedc9e;
+  border-radius: 2px;
+  transform-origin: top center;
+  transform: rotate(32deg);
+}
+
+.quoteText {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  width: 726px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #000;
+  z-index: 1;
+}
+
+/* ── Right CTAs ── */
+.ctaDownload {
+  position: absolute;
+  z-index: 4;
+  width: 349px;
+  justify-content: flex-start;
+  padding: 0 66px 0 69px !important;
+  min-width: 349px;
+}
+
+.ctaQuote {
+  position: absolute;
+  z-index: 4;
+  width: 381px;
+  justify-content: flex-start;
+  padding: 0 66px 0 68px !important;
+  min-width: 381px;
+}
+
+.pdfLink {
+  position: absolute;
+  left: 1467px;
+  top: 778px;
+  width: 410px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #000;
+  text-decoration: underline;
+  z-index: 4;
+}

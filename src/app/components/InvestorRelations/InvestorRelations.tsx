@@ -1,19 +1,46 @@
 "use client";
-import React, { useState } from "react";
-import TopNavigation from "../TopNavigation/TopNavigation";
-import Chatbot from "../Chatbot";
+import { useState } from "react";
 import Link from "next/link";
-import { useInvestorRelations } from "../../../hooks/useInvestorRelations";
+import D6Chatbot from "../D6Chatbot";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import styles from "./InvestorRelations.module.css";
 import WhyInvestGreen from "./Dialog/WhyInvestGreen";
 import InvestmentFocusArea from "./Dialog/InvestmentFocusArea";
 import PerformanceSnapshots from "./Dialog/PerformanceSnapshots";
 import InvestmentInstruments from "./Dialog/InvestmentInstruments";
 import SubmitEOI from "./Modals/SubmitEOI";
 
-const InvestorRelations = () => {
-  const { data } = useInvestorRelations();
+const FALLBACK = {
+  title: "INVESTOR RELATIONS",
+  subHeadline: "Invest in Resilience. Deliver Real Returns.",
+  description: {
+    text: "GREEN is not just building solar — we’re building the energy backbone of an entire region. For investors seeking meaningful impact with measurable performance, we offer one thing: outcomes.",
+    highlighted: "GREEN",
+  },
+  quote1: {
+    text: "PNG Market Leader With Replicable Model Across The Pacific",
+    highlighted: "PNG",
+  },
+  quote2: {
+    text: "Your Capital Can Build Megawatts — Or It Can Build Movements. With GREEN, You Can Do Both.",
+    highlighted: "GREEN",
+  },
+};
+
+interface InvestorRelationsProps {
+  canvas?: boolean;
+}
+
+export default function InvestorRelations({
+  canvas = false,
+}: InvestorRelationsProps) {
   const [openModal, setOpenModal] = useState<string | null>(null);
   const [isEoiOpen, setIsEoiOpen] = useState(false);
+  const ctaLinks = {
+    investorPack: "/investor-pack.pdf",
+    partnershipFramework: "/green-innovation-partnership-framework.pdf",
+  };
 
   const highlightText = (text: string, highlight: string) => {
     if (!highlight) return text;
@@ -27,7 +54,7 @@ const InvestorRelations = () => {
         (term) => part.toLowerCase() === term.toLowerCase()
       );
       return shouldHighlight ? (
-        <span key={index} className="text-[#23B14D] font-semibold">
+        <span key={index} className={styles.highlight}>
           {part}
         </span>
       ) : (
@@ -36,189 +63,200 @@ const InvestorRelations = () => {
     });
   };
 
+  // Static data (design is fixed in Figma; keep API hook import available for
+  // future CMS wiring without changing the pixel geometry).
+  const d = FALLBACK;
 
-if (!data) return null;
-
-  const investmentCards = [
+  const rows = [
     {
-      title: data.whyInvestGreen.title,
-      description: data.whyInvestGreen.headline,
+      key: "whyInvestGreen",
+      title: "Why Invest in GREEN?",
+      subtitle: "Infrastructure without integrity is a risk. With GREEN, resilience is engineered.",
       image: "/images/investor-relations/card1.png",
-      modalKey: "whyInvestGreen",
+      x: 291,
+      y: 330,
+      titleX: 579,
+      titleY: 329,
+      subY: 373,
+      ctaX: 1046,
+      ctaY: 382,
     },
     {
-      title: data.investmentFocusArea.title,
-      description: data.investmentFocusArea.headline,
+      key: "investmentFocusArea",
+      title: "Our Investment Focus Areas",
+      subtitle: "Financial models and IRR simulations available on request",
       image: "/images/investor-relations/card2.png",
-      modalKey: "investmentFocusArea",
+      x: 414,
+      y: 448,
+      titleX: 700,
+      titleY: 446,
+      subY: 490,
+      ctaX: 1167,
+      ctaY: 500,
     },
     {
-      title: data.performanceSnapshots.title,
-      description: data.performanceSnapshots.headline,
+      key: "performanceSnapshots",
+      title: "Performance Snapshots",
+      subtitle: "Annual Reports and ESG Dashboards available",
       image: "/images/investor-relations/card3.png",
-      modalKey: "performanceSnapshots",
+      x: 287,
+      y: 577,
+      titleX: 579,
+      titleY: 583,
+      subY: 625,
+      ctaX: 1046,
+      ctaY: 629,
     },
     {
-      title: data.investmentInstruments.title,
-      description: data.investmentInstruments.headline,
+      key: "investmentInstruments",
+      title: "Investment Instruments Supported",
+      subtitle: "Pay-for-performance models (OPEX or carbon-linked)",
       image: "/images/investor-relations/card4.png",
-      modalKey: "investmentInstruments",
+      x: 397,
+      y: 705,
+      titleX: 689,
+      titleY: 712,
+      subY: 754,
+      ctaX: 1156,
+      ctaY: 757,
     },
   ];
 
   return (
-    <React.Fragment>
-      <TopNavigation />
-      <div className="relative z-50 flex h-full min-h-screen bg-gradient-to-br from-[#E8F5E9] via-white to-white">
-        {/* Left Sidebar - Vertical Text */}
-        <div className="w-1/6 flex items-center justify-center">
-          <div className="fixed top-1/3 left-4 lg:left-14 z-10">
-            <img
-              src="/images/investor-relations/investor-relations.png"
-              alt="investor-relations"
-              className="w-6 lg:w-8"
-            />
-          </div>
-        </div>
+    <main className={styles.page} data-node-id="7077:19989">
+      <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
-        {/* Main Content */}
-        <div className="w-full lg:px-8 pt-8 pb-20">
-          {/* Header Section */}
-          <div className="mb-12">
-            <h1 className="text-2xl lg:text-3xl font-black text-gray-900 mb-4">
-              {data.mainPage.title.toUpperCase().split(" ")[0]}{" "}
-              <span className="text-[#23B14D]">
-                {data.mainPage.title.toUpperCase().split(" ")[1]}
-              </span>
-            </h1>
-            <h2 className="text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-6">
-              {data.mainPage.subHeadline}
-            </h2>
-            <div className="text-gray-700 text-base lg:text-lg mb-6 max-w-4xl">
-              <p className="mb-2">
-                {highlightText(
-                  data.mainPage.description.text,
-                  data.mainPage.description.highlighted
-                )}
-              </p>
-            </div>
-          </div>
+      {/* Left vertical side title */}
+      <img
+        src="/images/investor-relations/investor-relations.png"
+        alt="Investor Relations"
+        className={styles.verticalTitle}
+      />
 
-          {/* Investment Cards Grid */}
-          <div className="lg:flex justify-between">
-            <div className="grid grid-cols-1 gap-8 ">
-              {investmentCards.map((card, idx) => (
-                <div
-                  key={idx}
-                  className="relative group cursor-pointer transform transition-all duration-300 hover:scale-105"
-                  onClick={() => setOpenModal(card.modalKey)}
-                >
-                  <div className="flex">
-                    {/* Image Section */}
-                    <div className="">
-                      <img src={card.image} alt={card.title} />
-                    </div>
-
-                    {/* Content Section */}
-                    <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-3">
-                        {card.title}
-                      </h3>
-                      <div className="flex w-[300px]">
-                        <p className="text-gray-600 mb-4">{card.description}</p>
-                        <button className="w-full">
-                          <img
-                            src="/images/investor-relations/explore.png"
-                            alt="exploreBtn"
-                          />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="">
-              <div className="lg:block hidden absolute right-0 top-0 w-6/12 -z-10">
-                <img
-                  src="/images/investor-relations/mainImg.png"
-                  className="h-[200vh]"
-                  alt="mainImg"
-                />
-              </div>
-              <div className=" relative capitalize flex flex-col  justify-center my-12 lg:my-0 lg:h-[40vh] font-bold text-base mr-10 italic ">
-                <div className="lg:block hidden absolute bottom-24 -left-20">
-                  <img
-                    src="/images/investor-relations/shape1.png"
-                    alt="vector"
-                  />
-                </div>
-                <p className="text-gray-800 text-center lg:text-left text-lg">
-                  {data.mainPage.quote1.text.split('\n').map((line, index) => (
-                    <React.Fragment key={index}>
-                      {highlightText(line, data.mainPage.quote1.highlighted)}
-                      {index < data.mainPage.quote1.text.split('\n').length - 1 && <br />}
-                    </React.Fragment>
-                  ))}
-                </p>
-                <div className="lg:block hidden absolute top-16 -right-16">
-                  <img
-                    src="/images/investor-relations/shape2.png"
-                    alt="vector"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative lg:flex justify-between">
-            {/* Bottom Quote Section */}
-            <div className="lg:max-w-2xl">
-              <h2 className="text-xl lg:text-3xl font-bold text-gray-900 mb-4">
-                {highlightText(
-                  data.mainPage.quote2.text.split("\n")[0],
-                  ""
-                )}
-              </h2>
-              <h3 className="text-lg lg:text-2xl font-bold mb-6">
-                {highlightText(
-                  data.mainPage.quote2.text.split("\n")[1],
-                  data.mainPage.quote2.highlighted
-                )}
-              </h3>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="relative z-50 space-y-8">
-              <div className="cursor-pointer">
-                <Link href={data.mainPage.cta[0].href || "#"} className="relative group">
-                  <button className="cursor-pointer">
-                    <img
-                      src="/images/investor-relations/download.png"
-                      alt="download"
-                    />
-                  </button>
-                </Link>
-              </div>
-
-              <div className="cursor-pointer">
-                <button
-                  type="button"
-                  onClick={() => setIsEoiOpen(true)}
-                  className="relative group cursor-pointer"
-                >
-                  <img
-                    src="/images/investor-relations/submit.png"
-                    alt="Submit an Expression of Interest"
-                  />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <Chatbot />
-        </div>
+      {/* Faint right-side photo collage */}
+      <div className={styles.rightCollage} aria-hidden="true">
+        <img src="/images/investor-relations/mainImg.png" alt="" />
       </div>
+
+      {/* Header section */}
+      <div className={styles.headerSection}>
+        <h1 className={styles.mainTitle}>
+          INVESTOR <span className={styles.greenText}>RELATIONS</span>
+        </h1>
+        <p className={styles.subHeadline}>{d.subHeadline}</p>
+        <p className={styles.description}>
+          {highlightText(d.description.text, d.description.highlighted)}
+        </p>
+      </div>
+
+      {/* Staggered investment rows (exact Figma coordinates) */}
+      {rows.map((row) => (
+        <div
+          key={row.key}
+          className={styles.row}
+          style={{ top: row.y, left: 0 }}
+        >
+          <button
+            type="button"
+            className={styles.rowImage}
+            style={{ position: "absolute", left: row.x, top: 0 }}
+            onClick={() => setOpenModal(row.key)}
+            aria-label={`Open ${row.title}`}
+          >
+            <img src={row.image} alt={row.title} />
+            <span className={styles.rowImageAccent} aria-hidden="true" />
+          </button>
+
+          <div
+            className={styles.rowText}
+            style={{ position: "absolute", left: row.titleX, top: row.titleY - row.y }}
+          >
+            <h3
+              className={styles.rowTitle}
+              onClick={() => setOpenModal(row.key)}
+              style={{ cursor: "pointer" }}
+            >
+              {row.title}
+            </h3>
+            <p
+              className={styles.rowSubtitle}
+              style={{ position: "absolute", left: 0, top: row.subY - row.titleY }}
+            >
+              {row.subtitle}
+            </p>
+          </div>
+
+          <FigmaAngledCta
+            className={styles.rowCta}
+            style={{
+              position: "absolute",
+              left: row.ctaX,
+              top: row.ctaY - row.y,
+            }}
+            onClick={() => setOpenModal(row.key)}
+          >
+            Explore
+          </FigmaAngledCta>
+
+          <div className={styles.rowDivider} />
+        </div>
+      ))}
+
+      {/* Right quote card */}
+      <div className={styles.quoteCard}>
+        <div className={styles.quoteShapeWrap}>
+          <img
+            src="/images/handbook/figma-quote-left.svg"
+            alt=""
+            className={styles.quoteShapeTop}
+            aria-hidden="true"
+          />
+        </div>
+        <p>
+          {highlightText(d.quote1.text, d.quote1.highlighted)}
+        </p>
+      </div>
+
+      {/* Bottom-left closing quote */}
+      <div className={styles.bottomQuote}>
+        <h2>
+          {highlightText(d.quote2.text, d.quote2.highlighted)}
+        </h2>
+      </div>
+
+      {/* Bottom-right CTAs */}
+      <FigmaAngledCta
+        className={styles.downloadCta}
+        style={{ position: "absolute", left: 1572, top: 741 }}
+        icon="download"
+        href={ctaLinks.investorPack}
+      >
+        Download Investor Pack (PDF)
+      </FigmaAngledCta>
+      <FigmaAngledCta
+        className={styles.eoiCta}
+        style={{ position: "absolute", left: 1541, top: 819 }}
+        onClick={() => setIsEoiOpen(true)}
+      >
+        Submit an Expression of Interest
+      </FigmaAngledCta>
+
+      {/* Chatbot */}
+      {canvas ? (
+        <D6Chatbot
+          canvasAnchored
+          triggerVariant="figmaCanvas"
+          triggerStyle={{
+            top: 899,
+            right: "auto",
+            bottom: "auto",
+            left: 1498,
+            width: 418,
+          }}
+        />
+      ) : (
+        <D6Chatbot />
+      )}
 
       {/* Modals */}
       <WhyInvestGreen
@@ -238,8 +276,6 @@ if (!data) return null;
         onClose={() => setOpenModal(null)}
       />
       <SubmitEOI isOpen={isEoiOpen} onClose={() => setIsEoiOpen(false)} />
-    </React.Fragment>
+    </main>
   );
-};
-
-export default InvestorRelations;
+}

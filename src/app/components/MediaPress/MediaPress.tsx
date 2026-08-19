@@ -1,225 +1,208 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+import D6Chatbot from "../D6Chatbot";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import SiteHeader from "../SiteHeader/SiteHeader";
 import LatestPressReleases from "./Dialog/LatestPressReleases";
 import MediaContactInterviewRequests from "./Dialog/MediaContactInterviewRequests";
 import MediaKitDownload from "./Dialog/MediaKitDownload";
 import GreenInTheNews from "./Dialog/GreenInTheNews";
 import OfficialSpokesPeople from "./Dialog/OfficialSpokesPeople";
 import RequestQuoteAppointment from "./Modals/RequestQuoteAppointment";
-import TopNavigation from "../TopNavigation/TopNavigation";
-import Chatbot from "../Chatbot";
+import styles from "./MediaPress.module.css";
 
-const MediaPress = () => {
-
-  const [isRequestQuoteOpen, setIsRequestQuoteOpen] = useState(false);
-  const [isLatestPressReleasesOpen, setIsLatestPressReleasesOpen] = useState(false);
-  const [isMediaContactOpen, setIsMediaContactOpen] = useState(false);
-  const [isMediaKitDownloadOpen, setIsMediaKitDownloadOpen] = useState(false);
-  const [isGreenInTheNewsOpen, setIsGreenInTheNewsOpen] = useState(false);
-  const [isOfficialSpokesPeopleOpen, setIsOfficialSpokesPeopleOpen] =
-    useState(false);
-
-    const handleLatestPressReleasesOpen = () => {
-        setIsLatestPressReleasesOpen(true);
-    }
-    const handleLatestPressReleasesClose = () => {
-        setIsLatestPressReleasesOpen(false);
-    }
-    const handleMediaContactOpen = () => {
-        setIsMediaContactOpen(true);
-    }
-    const handleMediaContactClose = () => {
-        setIsMediaContactOpen(false);
-    }
-    const handleMediaKitDownloadOpen = () => {
-        setIsMediaKitDownloadOpen(true);
-    }
-    const handleMediaKitDownloadClose = () => {
-        setIsMediaKitDownloadOpen(false);
-    }
-    const handleGreenInTheNewsOpen = () => {
-        setIsGreenInTheNewsOpen(true);
-    }
-    const handleGreenInTheNewsClose = () => {
-        setIsGreenInTheNewsOpen(false);
-    }
-    const handleOfficialSpokesPeopleOpen = () => {
-        setIsOfficialSpokesPeopleOpen(true);
-    }
-    const handleOfficialSpokesPeopleClose = () => {
-        setIsOfficialSpokesPeopleOpen(false);
-    }
-
-
-
-  return (
-    <React.Fragment>
-       <div className=" absolute top-0 right-0  -z-10">
-        <img src="/images/media-press/mainImg.png" className=" h-[150vh]" alt="bg" />
-      </div>
-      <div className=''>
-       <TopNavigation/>
-        <div className="flex h-full">
-          <div className=" lg:w-1/6 hidden lg:flex items-center justify-center">
-            <div className="fixed top-1/4 left-14">
-              <img
-                src="/images/media-press/media-press.png"
-                alt="Media Press"
-                className="w-14"
-              />
-            </div>
-          </div>
-
-          {/* Main Content Area */}
-          <div className="  flex flex-col   md:pl-38 md:mr-4  md:my-10 lg:my-0 lg:pl-8 lg:px-8  lg:mr-8 ml-4 rounded-lg">
-            {/* Main Title */}
-            <div className="mb-8 lg:pt-8">
-              <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
-                MEDIA & <span className="text-[#23B14D]">PRESS</span>
-              </h1>
-              <h2 className="text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-4">
-                Telling the Energy Story — The Right Way.
-              </h2>
-              <p className="text-gray-600 text-base lg:text-lg  max-w-7xl">
-                <span className="text-[#23B14D] font-semibold">GREEN</span>{" "}
-                Limited is shaping the future of energy access in PNG and the
-                Pacific. For accurate information, interviews, brand assets, and
-                official statements — this is your source.
-              </p>
-            </div>
-
-            {/* Content List */}
-            <div className="space-y-8 max-w-4xl ">
-              {/* Latest Press Releases */}
-              <div className="border-b pb-2 border-[#23B14D] flex items-center justify-between ">
-                <h3 className="text-lg lg:text-xl font-bold text-gray-800">
-                  Latest Press Releases
-                </h3>
-                <button className="cursor-pointer"
-                onClick={handleLatestPressReleasesOpen}
-                > 
-                  <img src="/images/media-press/explore.png" alt="Explore" />
-                </button>
-              </div>
-
-              {/* Media Contact & Interview Requests */}
-              <div className="border-b  pb-2 border-[#23B14D] flex items-center justify-between ">
-                <h3 className="text-lg lg:text-xl font-bold text-gray-800">
-                  Media Contact & Interview Requests
-                </h3>
-                <button className="cursor-pointer"
-                onClick={handleMediaContactOpen}
-                > 
-                  <img src="/images/media-press/explore.png" alt="Explore" />
-                </button>
-              </div>
-
-              {/* Media Kit Download */}
-              <div className="border-b  pb-2 border-[#23B14D] flex items-center justify-between ">
-                <h3 className="text-lg lg:text-xl font-bold text-gray-800">
-                  Media Kit Download
-                </h3>
-                 <button className="cursor-pointer"
-                 onClick={handleMediaKitDownloadOpen}
-                > 
-                  <img src="/images/media-press/explore.png" alt="Explore" />
-                </button>
-              </div>
-
-              {/* GREEN in the News */}
-              <div className="border-b  pb-2 border-[#23B14D] flex items-center justify-between ">
-                <h3 className="text-lg lg:text-xl font-bold text-gray-800">
-                  GREEN in the News
-                </h3>
-                <button className="cursor-pointer"
-                onClick={handleGreenInTheNewsOpen}
-                > 
-                  <img src="/images/media-press/explore.png" alt="Explore" />
-                </button>
-              </div>
-
-              {/* Official Spokes people */}
-              <div className="border-b  pb-2 border-[#23B14D] flex items-center justify-between ">
-                <h3 className="text-lg lg:text-xl font-bold text-gray-800">
-                  Official Spokes people
-                </h3>
-                <button className="cursor-pointer"
-                onClick={handleOfficialSpokesPeopleOpen}
-                > 
-                  <img src="/images/media-press/explore.png" alt="Explore" />
-                </button>
-              </div>
-            </div>
-
-            {/* Bottom Quote */}
-            <div className="mt-16 flex relative ">
-              <div className="absolute -left-12 -top-4">
-                <img src="/images/media-press/shape.png" alt="Shape" />
-              </div>
-              <div className="">
-                <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
-                  We Don't Tell Stories To Impress.
-                </h3>
-                <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
-                  We Share Stories That Prove What{" "}
-                  <span className="text-[#23B14D]">Energy</span> Can Do.
-                </h3>
-              </div>
-              <div className="-mt-2 -ml-7">
-                <img src="/images/media-press/shape2.png" alt="Shape" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative z-10 space-y-10 mb-32 lg:-mt-32">
-          <div className="   flex justify-end  cursor-pointer">
-            <img
-              src="/images/media-press/download-the-press-kit.png"
-              alt="download the press kit"
-            />
-          </div>
-          <div className="  flex justify-end">
-            <button
-              type="button"
-              onClick={() => setIsRequestQuoteOpen(true)}
-              className="cursor-pointer"
-            >
-              <img
-                src="/images/media-press/request-quote.png"
-                alt="request a quote"
-              />
-            </button>
-          </div>
-        </div>
-      </div>
-       <Chatbot/>
-      <LatestPressReleases
-        isOpen={isLatestPressReleasesOpen}
-        onClose={handleLatestPressReleasesClose}
-        />
-      <MediaContactInterviewRequests
-        isOpen={isMediaContactOpen}
-        onClose={handleMediaContactClose}
-      />
-      <MediaKitDownload
-        isOpen={isMediaKitDownloadOpen}
-        onClose={handleMediaKitDownloadClose}
-      />
-      <GreenInTheNews
-        isOpen={isGreenInTheNewsOpen}
-        onClose={handleGreenInTheNewsClose}
-      />
-      <OfficialSpokesPeople
-        isOpen={isOfficialSpokesPeopleOpen}
-        onClose={handleOfficialSpokesPeopleClose}
-      />
-      <RequestQuoteAppointment
-        isOpen={isRequestQuoteOpen}
-        onClose={() => setIsRequestQuoteOpen(false)}
-      />
-    </React.Fragment>
-  );
+const CTA_LINKS = {
+  pressKit: "/press-kit.pdf",
+  partnershipFramework: "/volunteer-welcome-pack.pdf",
 };
 
-export default MediaPress;
+const ROWS = [
+  {
+    id: "latest-press-releases",
+    title: "Latest Press Releases",
+    titlePos: { left: 392, top: 316 },
+    explorePos: { left: 1208, top: 309 },
+    lineY: 381,
+    dialog: "latest" as const,
+  },
+  {
+    id: "media-contact",
+    title: "Media Contact & Interview Requests",
+    titlePos: { left: 351, top: 420 },
+    explorePos: { left: 1167, top: 412 },
+    lineY: 485,
+    dialog: "contact" as const,
+  },
+  {
+    id: "media-kit",
+    title: " Media Kit Download",
+    titlePos: { left: 306, top: 530 },
+    explorePos: { left: 1122, top: 521 },
+    lineY: 597,
+    dialog: "kit" as const,
+  },
+  {
+    id: "green-news",
+    title: "GREEN in the News",
+    titlePos: { left: 259, top: 636 },
+    explorePos: { left: 1075, top: 627 },
+    lineY: 701,
+    dialog: "news" as const,
+  },
+  {
+    id: "spokes-people",
+    title: "Official Spokes people",
+    titlePos: { left: 217, top: 740 },
+    explorePos: { left: 1033, top: 731 },
+    lineY: null,
+    dialog: "spokes" as const,
+  },
+];
+
+interface MediaPressProps {
+  canvas?: boolean;
+}
+
+export default function MediaPress({ canvas = false }: MediaPressProps) {
+  const [latestOpen, setLatestOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
+  const [kitOpen, setKitOpen] = useState(false);
+  const [newsOpen, setNewsOpen] = useState(false);
+  const [spokesOpen, setSpokesOpen] = useState(false);
+  const [quoteOpen, setQuoteOpen] = useState(false);
+
+  const open =
+    { latest: setLatestOpen, contact: setContactOpen, kit: setKitOpen, news: setNewsOpen, spokes: setSpokesOpen } as const;
+
+  return (
+    <main className={styles.page} data-node-id="7077:23952">
+      <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
+
+      {/* Left green/yellow angled panel */}
+      <div className={styles.leftPanel} aria-hidden="true">
+        <img
+          src="/images/book-consulation/figma-logo.png"
+          alt=""
+          className={styles.panelLogo}
+        />
+      </div>
+
+      {/* Vertical side title (Raleway Black, outlined, bottom-up) */}
+      <p className={styles.verticalTitle} aria-hidden="true">
+        Media &amp; Press
+      </p>
+
+      {/* Right faint collage */}
+      <div className={styles.rightCollage} aria-hidden="true">
+        <img src="/images/media-press/mainImg.png" alt="" />
+      </div>
+
+      {/* Header block */}
+      <div className={styles.headerBlock}>
+        <h1 className={styles.mainTitle}>
+          MEDIA &amp; <span className={styles.greenText}>PRESS</span>
+        </h1>
+        <p className={styles.subHeadline}>
+          Telling the Energy Story — The Right Way.
+        </p>
+        <p className={styles.description}>
+          <span className={styles.greenText}>GREEN</span> Limited is shaping
+          the future of energy access in PNG and the Pacific. For accurate
+          information, interviews, brand assets, and official statements —
+          this is your source.
+        </p>
+      </div>
+
+      {/* Menu rows with Explore pills and separator lines */}
+      {ROWS.map((row) => (
+        <div key={row.id}>
+          <h3 className={styles.rowTitle} style={row.titlePos}>
+            {row.title}
+          </h3>
+          <FigmaAngledCta
+            className={styles.exploreBtn}
+            style={{
+              position: "absolute",
+              left: row.explorePos.left,
+              top: row.explorePos.top,
+            }}
+            onClick={() => open[row.dialog](true)}
+          >
+            Explore
+          </FigmaAngledCta>
+          {row.lineY !== null ? (
+            <hr
+              className={styles.rowLine}
+              style={{ top: row.lineY, left: row.titlePos.left - 16 }}
+              aria-hidden="true"
+            />
+          ) : null}
+        </div>
+      ))}
+
+      {/* Bottom-left quote */}
+      <div className={styles.quoteBlock}>
+        <span className={styles.quoteBracketBottom} aria-hidden="true" />
+        <span className={styles.quoteBracketTop} aria-hidden="true" />
+        <p className={styles.quoteText}>
+          We Don&rsquo;t Tell Stories To Impress.
+          <br />
+          We Share Stories That Prove What{" "}
+          <span className={styles.greenText}>Energy</span> Can Do.
+        </p>
+      </div>
+
+      {/* Right CTAs */}
+      <FigmaAngledCta
+        className={styles.ctaDownload}
+        style={{ position: "absolute", left: 1571, top: 695 }}
+        icon="download"
+        href={CTA_LINKS.pressKit}
+      >
+        Download the Press Kit
+      </FigmaAngledCta>
+
+      {/* PDF link above/beside the quote CTA */}
+      <a
+        href={CTA_LINKS.partnershipFramework}
+        className={styles.pdfLink}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GREEN Innovation Partnership Framework (PDF)
+      </a>
+
+      <FigmaAngledCta
+        className={styles.ctaQuote}
+        style={{ position: "absolute", left: 1536, top: 773 }}
+        onClick={() => setQuoteOpen(true)}
+      >
+        Request Quote Or Appearance
+      </FigmaAngledCta>
+
+      {/* Chatbot */}
+      {canvas ? (
+        <D6Chatbot
+          canvasAnchored
+          triggerVariant="figmaCanvas"
+          triggerStyle={{
+            top: 853,
+            right: "auto",
+            bottom: "auto",
+            left: 1499,
+            width: 418,
+          }}
+        />
+      ) : (
+        <D6Chatbot />
+      )}
+
+      <LatestPressReleases isOpen={latestOpen} onClose={() => setLatestOpen(false)} />
+      <MediaContactInterviewRequests isOpen={contactOpen} onClose={() => setContactOpen(false)} />
+      <MediaKitDownload isOpen={kitOpen} onClose={() => setKitOpen(false)} />
+      <GreenInTheNews isOpen={newsOpen} onClose={() => setNewsOpen(false)} />
+      <OfficialSpokesPeople isOpen={spokesOpen} onClose={() => setSpokesOpen(false)} />
+      <RequestQuoteAppointment isOpen={quoteOpen} onClose={() => setQuoteOpen(false)} />
+    </main>
+  );
+}

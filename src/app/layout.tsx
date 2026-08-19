@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Montserrat, Raleway } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "./providers/QueryProvider";
 import { ReduxProvider } from "../providers/ReduxProvider";
@@ -8,6 +8,13 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+const raleway = Raleway({
+  variable: "--font-raleway",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -101,7 +108,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${montserrat.variable} antialiased`}
+        className={`${montserrat.variable} ${raleway.variable} antialiased`}
         suppressHydrationWarning
       >
         <ReduxProvider>

@@ -1,0 +1,321 @@
+/* Newsletter Signup — canvas-anchored geometry from Figma node 7077:14996 */
+.page {
+  position: relative;
+  width: 100%;
+  height: 970px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* ── Left gradient panel (326x662 at -15,-1) ── */
+.leftPanel {
+  position: absolute;
+  left: -15px;
+  top: -1px;
+  width: 326px;
+  height: 662px;
+  z-index: 2;
+  background: linear-gradient(
+    116deg,
+    rgba(255, 234, 54, 0.95) 0%,
+    rgba(255, 229, 0, 0.89) 28%,
+    rgba(35, 209, 75, 0.72) 70%,
+    rgba(35, 209, 75, 0.3) 100%
+  );
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+.panelLogo {
+  position: absolute;
+  left: 24px;
+  top: 18px;
+  width: 255px;
+  height: 67px;
+}
+
+/* ── Large left collage (mask group at -164,-134, 1208x1987) ── */
+.leftCollage {
+  position: absolute;
+  left: -164px;
+  top: 400px;
+  width: 1208px;
+  height: 659px;
+  object-fit: fill;
+  opacity: 0.8;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Vertical side title (Raleway 900, outlined, bottom-up) ── */
+.verticalTitle {
+  position: absolute;
+  left: 34px;
+  bottom: 72px;
+  z-index: 3;
+  font-family: "Raleway", sans-serif;
+  font-weight: 900;
+  font-size: 65px;
+  line-height: 1.08;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(150, 200, 150, 0.75);
+  white-space: nowrap;
+  transform: rotate(-90deg) translateX(-100%);
+  transform-origin: left bottom;
+  letter-spacing: 2px;
+  pointer-events: none;
+}
+
+/* ── Header block ── */
+.headerBlock {
+  position: absolute;
+  left: 277px;
+  top: 98px;
+  width: 720px;
+  z-index: 4;
+}
+
+.mainTitle {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  font-size: 56px;
+  line-height: 1;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.subHeadline {
+  margin-top: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 30px;
+  line-height: 1.2;
+  color: #23b14d;
+}
+
+.description {
+  margin-top: 16px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #2b2b2b;
+  width: 500px;
+}
+
+.greenText {
+  color: #23b14d;
+}
+
+/* ── Why Subscribe table ── */
+.whyTitle {
+  position: absolute;
+  z-index: 4;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.thBenefit {
+  position: absolute;
+  left: 913px;
+  top: 252px;
+  z-index: 4;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  font-size: 26px;
+  color: #23b14d;
+  margin: 0;
+}
+
+.thDesc {
+  position: absolute;
+  left: 1201px;
+  top: 250px;
+  z-index: 4;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  font-size: 26px;
+  color: #23b14d;
+  margin: 0;
+}
+
+.tableRow {
+  position: absolute;
+  left: 913px;
+  width: 960px;
+  z-index: 4;
+}
+
+.tdB {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: #1a1a1a;
+  margin: 0;
+  width: 260px;
+}
+
+.tdD {
+  position: absolute;
+  left: 288px;
+  top: 0;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  color: #1a1a1a;
+  margin: 0;
+  width: 700px;
+}
+
+/* ── What You'll Receive pills ── */
+.receiveTitle {
+  position: absolute;
+  z-index: 4;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.pill {
+  position: absolute;
+  z-index: 4;
+  min-height: 53px;
+  border: 1.5px solid #cfe97e;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  transform: skewX(-14deg);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.pillText {
+  display: inline-block;
+  transform: skewX(14deg);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 20px;
+  color: #2b2b2b;
+  white-space: nowrap;
+}
+
+/* ── Contact block ── */
+.contactBlock {
+  position: absolute;
+  left: 148px;
+  top: 605px;
+  width: 577px;
+  height: 106px;
+  z-index: 5;
+}
+
+.quoteBracketBottom {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 79px;
+  height: 98px;
+}
+
+.quoteBracketBottom::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 56px;
+  width: 70px;
+  height: 5px;
+  background: #9fd98e;
+  border-radius: 2px;
+  transform-origin: left center;
+  transform: rotate(-32deg);
+}
+
+.quoteBracketBottom::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 62px;
+  width: 5px;
+  height: 36px;
+  background: #9fd98e;
+  border-radius: 2px;
+}
+
+.quoteBracketTop {
+  position: absolute;
+  right: 0;
+  top: 7px;
+  width: 80px;
+  height: 99px;
+}
+
+.quoteBracketTop::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 70px;
+  height: 5px;
+  background: #9fd98e;
+  border-radius: 2px;
+  transform-origin: right center;
+  transform: rotate(32deg);
+}
+
+.quoteBracketTop::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 2px;
+  width: 5px;
+  height: 36px;
+  background: #9fd98e;
+  border-radius: 2px;
+}
+
+.contactText {
+  position: absolute;
+  left: 53px;
+  top: 16px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 26px;
+  line-height: 1.35;
+  color: #1a1a1a;
+}
+
+.emailLink {
+  color: #23b14d;
+  text-decoration: none;
+}
+
+/* ── Tagline ── */
+.tagline {
+  position: absolute;
+  left: 623px;
+  top: 840px;
+  z-index: 5;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 26px;
+  line-height: 1.4;
+  color: #1a1a1a;
+  white-space: nowrap;
+}
+
+/* ── Sign Up Now CTA ── */
+.signupCta {
+  z-index: 6;
+  min-width: 212px;
+  height: 52px;
+  padding: 0 56px 0 48px !important;
+}

@@ -4,7 +4,7 @@ import NewsLetterSignUp from '@/app/components/Newsletter/NewsletterSignup'
 const page = () => {
   return (
     <React.Fragment>
-        <NewsLetterSignUp/>
+        <NewsLetterSignUp canvas />
     </React.Fragment>
   )
 }

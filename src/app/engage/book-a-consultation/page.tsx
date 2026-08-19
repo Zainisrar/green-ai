@@ -1,10 +1,10 @@
 import React from 'react'
-import BookConsulation from '@/app/components/BookConsulation/BookConsulation'
+import BookAConsultation from '@/app/components/BookAConsultation/BookAConsultation'
 
 const page = () => {
   return (
     <React.Fragment>
-        <BookConsulation/>
+        <BookAConsultation canvas />
     </React.Fragment>
   )
 }
