@@ -1,13 +1,13 @@
-"use client";
-import InvestorRelations from '@/app/components/InvestorRelations/InvestorRelations';
-import React from 'react'
+import InvestorRelations from "@/app/components/InvestorRelations/InvestorRelations";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function InvestorRelationsPage() {
   return (
-    <React.Fragment>
-        <InvestorRelations canvas />
-    </React.Fragment>
-  )
+    <FigmaPageCanvas
+      desktop={<InvestorRelations canvas />}
+      mobile={<InvestorRelations canvas />}
+      nodeId="7077:19989"
+      fitCanvasHeight
+    />
+  );
 }
-
-export default page
