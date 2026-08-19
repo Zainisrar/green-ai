@@ -9,38 +9,43 @@
 }
 .watermark {
   position: absolute;
-  top: 249px;
+  top: 252px;
   left: -36px;
   width: 755px;
   height: 755px;
+  z-index: 2;
   max-width: none;
-  object-fit: cover;
-  opacity: 0.2;
+  object-fit: none;
 }
-.verticalTitle {
+.verticalTitleImg {
   position: absolute;
-  top: 290px;
-  left: 28px;
-  width: 98px;
-  color: transparent;
-  font-size: 80px;
-  font-weight: 900;
-  line-height: 1;
-  -webkit-text-stroke: 1px #d0d0d0;
-  transform: rotate(-90deg) translateX(-100%);
-  transform-origin: top left;
-  white-space: nowrap;
+  top: 359px;
+  left: 71px;
+  width: 61px;
+  height: 555px;
+  z-index: 2;
+  max-width: none;
 }
 .pageTitle {
   position: absolute;
   top: 116px;
   left: 262px;
-  width: 510px;
+  width: 487px;
+  height: 98px;
   margin: 0;
-  font-size: 50px;
-  font-weight: 700;
-  line-height: normal;
-  text-transform: uppercase;
+  padding: 0;
+  font-size: 0;
+  line-height: 0;
+}
+.pageTitleImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 487px;
+  height: 98px;
+  z-index: 2;
+  max-width: none;
 }
 .pageTitle span {
   display: block;
@@ -52,6 +57,7 @@
   left: 149px;
   width: 606px;
   height: 155px;
+  z-index: 1;
   padding: 0;
   border: 0;
   background: transparent;
@@ -97,7 +103,11 @@
 }
 .esg ul {
   margin: 0;
-  padding-left: 20px;
+  padding-left: 6px;
+  list-style: "\00b7  ";
+}
+.esg li::marker {
+  content: "\00b7  ";
 }
 .iso {
   position: absolute;
@@ -138,17 +148,19 @@
   width: 144px;
 }
 .certificate strong {
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 24px;
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 22px;
 }
 .certificate b {
+  display: block;
   font-size: 14px;
   font-weight: 700;
   line-height: 22px;
 }
 .certificate:nth-child(-n + 2) b {
-  font-size: 16px;
+  font-size: 14px;
 }
 .certificate span {
   width: calc(100% - 10px);
@@ -159,12 +171,13 @@
 .cleanEnergy {
   position: absolute;
   top: 808px;
-  left: 786px;
-  display: flex;
-  align-items: flex-start;
-  gap: 28px;
+  left: 782px;
+  width: 700px;
 }
 .cleanEnergy > div {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 369px;
 }
 .cleanEnergy p {
@@ -174,9 +187,12 @@
   line-height: 22px;
 }
 .cleanEnergy img {
+  position: absolute;
+  top: 12px;
+  left: 404px;
   width: 262px;
   height: 117px;
-  margin-top: 12px;
+  max-width: none;
   object-fit: fill;
 }
 .startButton {
@@ -205,7 +221,7 @@
   text-align: center;
 }
 .chatTrigger {
-  z-index: 3;
+  z-index: 4;
 }
 .mobilePage {
   min-height: 100svh;
@@ -253,7 +269,12 @@
   line-height: 1.55;
 }
 .mobileContent ul {
-  padding-left: 20px;
+  margin: 0;
+  padding-left: 6px;
+  list-style: "\00b7  ";
+}
+.mobileContent li::marker {
+  content: "\00b7  ";
 }
 .mobileCertificates {
   display: grid;
@@ -288,6 +309,7 @@
 .mobileCertificates b {
   margin: 2px 0 5px;
   font-size: 13px;
+  font-weight: 700;
 }
 .mobileCertificates span {
   font-size: 13px;

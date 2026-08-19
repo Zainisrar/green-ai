@@ -48,7 +48,13 @@ const FALLBACK_ESG_POINTS = [
   "Environmental: We reduce emissions, conserve resources, and support climate-resilient operations.",
   "Social: We promote diversity, equity, inclusion, employee well-being, and community engagement.",
   "Governance: We ensure transparent leadership, ethical conduct, and regulatory compliance.",
-  "ESG Integration: We align with GRI, SASB, and UN SDGs, with clear reporting and measurable progress.",
+  (
+    <span key="esg-int">
+      ESG Integration: We align with{" "}
+      <strong>GRI, SASB, and UN SDGs</strong>, with clear reporting and
+      measurable progress.
+    </span>
+  ),
 ] as const;
 
 export default function Accrediations() {
@@ -71,16 +77,27 @@ export default function Accrediations() {
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
       <img
         className={styles.watermark}
-        src="/images/certifications-accredication/figma-watermark.png"
+        src="/images/certifications/mask_composite.png"
         alt=""
         width="755"
         height="755"
       />
-      <div className={styles.verticalTitle} aria-hidden="true">
-        CERTIFICATE
-      </div>
+      <img
+        className={styles.verticalTitleImg}
+        src="/images/certifications/title_vert.png"
+        alt=""
+        aria-hidden="true"
+        width="61"
+        height="555"
+      />
       <h1 className={styles.pageTitle} data-node-id="7077:3249">
-        {titleStart} &amp;<span>{titleEnd}</span>
+        <img
+          className={styles.pageTitleImg}
+          src="/images/certifications/title_h1.png"
+          alt={title}
+          width="487"
+          height="98"
+        />
       </h1>
       <button
         type="button"
@@ -89,15 +106,15 @@ export default function Accrediations() {
         data-node-id="7077:3263"
       >
         <img
-          src="/images/certifications-accredication/figma-quote-panel.svg"
+          src="/images/certifications/quote_panel.png"
           alt=""
           width="606"
           height="155"
         />
         <span>
-          “Setting the Benchmark
+          &ldquo;Setting the Benchmark
           <br />
-          for Excellence.”
+          for Excellence.&rdquo;
         </span>
       </button>
       <section className={styles.esg} data-node-id="7077:3250">
@@ -110,8 +127,8 @@ export default function Accrediations() {
             "Our ESG standards reflect a deep commitment to sustainable growth, ethical practices, and positive impact on society and the environment. We align our actions with globally recognized ESG frameworks to create long-term value for all stakeholders."}
         </p>
         <ul>
-          {esgPoints.map((point) => (
-            <li key={point}>{point}</li>
+          {esgPoints.map((point, i) => (
+            <li key={`esg-${i}`}>{point}</li>
           ))}
         </ul>
       </section>
@@ -119,7 +136,7 @@ export default function Accrediations() {
         <h2>{certificationsData?.isoSection?.heading || "ISO Standards"}</h2>
         <p className={styles.isoIntro}>
           {certificationsData?.isoSection?.description ||
-            "At Your Company Name, we adhere to globally recognized ISO standards to ensure quality, efficiency, and continuous improvement across our operations. These certifications reflect our commitment to excellence, customer satisfaction, and regulatory compliance."}
+            "At [Your Company Name], we adhere to globally recognized ISO standards to ensure quality, efficiency, and continuous improvement across our operations. These certifications reflect our commitment to excellence, customer satisfaction, and regulatory compliance."}
         </p>
         <div className={styles.certificates}>
           {certificates.map((certificate) => (
@@ -155,7 +172,7 @@ export default function Accrediations() {
           </p>
         </div>
         <img
-          src="/images/certifications-accredication/figma-clean-energy.png"
+          src="/images/certifications/cec_logo.png"
           alt="Clean Energy Council"
           width="262"
           height="117"
@@ -168,7 +185,7 @@ export default function Accrediations() {
         data-node-id="7077:3275"
       >
         <img
-          src="/images/certifications-accredication/figma-lets-start.svg"
+          src="/images/certifications/cta_panel.png"
           alt=""
           width="178"
           height="52"
@@ -180,10 +197,10 @@ export default function Accrediations() {
         triggerVariant="figmaCanvas"
         triggerClassName={styles.chatTrigger}
         triggerStyle={{
-            top: 899,
+            top: 885,
             right: "auto",
             bottom: "auto",
-            left: 1498,
+            left: 1497,
             width: 418,
           }}
       />
@@ -198,10 +215,10 @@ export default function Accrediations() {
           {titleStart} &amp; <span>{titleEnd}</span>
         </h1>
         <blockquote>
-          “
+          &ldquo;
           {certificationsData?.tagline ||
             "Setting the Benchmark for Excellence."}
-          ”
+          &rdquo;
         </blockquote>
         <section>
           <h2>
@@ -213,8 +230,8 @@ export default function Accrediations() {
               "Our ESG standards reflect a commitment to sustainable growth, ethical practices, and positive impact on society and the environment."}
           </p>
           <ul>
-            {esgPoints.map((point) => (
-              <li key={point}>{point}</li>
+            {esgPoints.map((point, i) => (
+              <li key={`esg-${i}`}>{point}</li>
             ))}
           </ul>
         </section>
@@ -253,7 +270,7 @@ export default function Accrediations() {
             </p>
           </div>
           <img
-            src="/images/certifications-accredication/figma-clean-energy.png"
+            src="/images/certifications/cec_logo.png"
             alt="Clean Energy Council"
             width="262"
             height="117"

@@ -418,8 +418,8 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
               value={promptInputValue}
               onChange={(e) => setPromptInputValue(e.target.value)}
               onKeyDown={handlePromptKeyDown}
-              placeholder="Let's Talk Energy"
-              aria-label="Let's Talk Energy"
+              placeholder={isFigmaCanvasTrigger ? "Type your words...." : "Let's Talk Energy"}
+              aria-label="Chat input"
               className={`w-full min-w-0 border-0 bg-transparent font-semibold text-[#626262] outline-none placeholder:text-[#626262] placeholder:opacity-100 ${
                 isFigmaCanvasTrigger
                   ? "text-[13px]"
