@@ -198,15 +198,6 @@
   white-space: nowrap;
 }
 
-.receiveBracket {
-  position: absolute;
-  left: 654px;
-  top: 535px;
-  width: 82px;
-  height: 101px;
-  z-index: 4;
-}
-
 /* ── Contact block ── */
 .contactBlock {
   position: absolute;

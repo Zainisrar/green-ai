@@ -85,11 +85,6 @@ export default function NewsletterSignup({ canvas = false }: NewsletterSignupPro
       <h2 className={styles.receiveTitle} style={{ left: 746, top: 568 }}>
         What You&rsquo;ll <span className={styles.greenText}>Receive</span>
       </h2>
-      <FigmaQuoteBrackets
-        className={styles.receiveBracket}
-        showRight={false}
-        leftSrc="/images/newsletter/shape.png"
-      />
       {[PILL_ROW_1, PILL_ROW_2].map((row, ri) =>
         row.map((pill) => (
           <div
@@ -111,7 +106,7 @@ export default function NewsletterSignup({ canvas = false }: NewsletterSignupPro
       <div className={styles.contactBlock}>
         <FigmaQuoteBrackets
           leftStyle={{ left: 0, top: 0 }}
-          showRight={false}
+          rightStyle={{ right: 75, top: 7 }}
           leftSrc="/images/newsletter/shape.png"
           rightSrc="/images/newsletter/shape2.png"
         />
