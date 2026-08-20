@@ -143,6 +143,7 @@ export default function NewsletterSignup({ canvas = false }: NewsletterSignupPro
         <D6Chatbot
           canvasAnchored
           triggerVariant="figmaCanvas"
+          figmaPlaceholder="Let's Talk Energy"
           triggerStyle={{
             top: 899,
             right: "auto",

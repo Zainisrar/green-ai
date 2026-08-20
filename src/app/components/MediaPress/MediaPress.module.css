@@ -173,6 +173,7 @@
 }
 
 .pdfLink {
+  display: none;
   position: absolute;
   left: 1467px;
   top: 778px;

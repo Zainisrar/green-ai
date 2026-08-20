@@ -179,6 +179,7 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
         <D6Chatbot
           canvasAnchored
           triggerVariant="figmaCanvas"
+          figmaPlaceholder="Let's Talk Energy"
           triggerStyle={{
             top: 853,
             right: "auto",

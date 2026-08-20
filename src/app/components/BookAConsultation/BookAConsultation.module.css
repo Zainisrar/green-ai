@@ -233,6 +233,7 @@
 
 /* ── PDF link ── */
 .pdfLink {
+  display: none;
   position: absolute;
   left: 1466px;
   top: 824px;
