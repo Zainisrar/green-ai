@@ -352,13 +352,7 @@
   object-fit: contain;
 }
 
-.chatbot {
-  bottom: 0;
-}
 
-.chatbot > div > div:last-child {
-  right: 13%;
-}
 
 @media (prefers-reduced-motion: reduce) {
   .scenicArt,

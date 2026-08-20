@@ -13,7 +13,7 @@ import styles from "./SiteHeader.module.css";
 
 const navigationItems = [
   { href: "/explore/welcome-to-green", label: "Explore" },
-  { href: "/engineering/solar-epcm-services", label: "Energy" },
+  { href: "/energy", label: "Energy" },
   {
     href: "/engineering/products/lighting-up-and-lifting-up-living-standards",
     label: "Elements",

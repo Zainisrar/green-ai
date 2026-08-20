@@ -131,7 +131,7 @@
   background: transparent;
   box-shadow: none;
   backdrop-filter: none;
-  z-index: 10;
+  z-index: 60;
 }
 
 .canvasBrandPanel {
@@ -177,6 +177,14 @@
 
 .canvasHeader .navigation a:nth-child(3) {
   left: 243px;
+}
+
+/* The Figma D6 header has no green hover or active-state colour treatment. */
+.canvasHeader .navigation a:hover,
+.canvasHeader .navigation a:focus-visible,
+.canvasHeader .navigation .active {
+  color: inherit;
+  font-weight: 500;
 }
 
 .canvasHeader .navigation a:nth-child(4) {

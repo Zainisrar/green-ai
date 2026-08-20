@@ -202,7 +202,7 @@ export default function ReachUs() {
             />
           </div>
 
-          <D6Chatbot canvasAnchored triggerClassName={styles.chatbot} />
+          <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
         </div>
       </section>
 

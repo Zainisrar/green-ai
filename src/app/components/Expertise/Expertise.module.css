@@ -848,34 +848,7 @@
   background: #b8e0c4;
 }
 
-.page .chatbot {
-  /* Keep the complete angled trigger—and its microphone—inside the canvas. */
-  right: 4px;
-  bottom: -6px;
-}
 
-.page .chatbot > div > div:last-child {
-  right: 13%;
-}
-
-.page .chatbot > div > div:last-child img {
-  display: block;
-  width: 18px;
-  height: 23px;
-  max-width: none;
-}
-
-.page .chatbot input {
-  color: #b9b9b9;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 400;
-}
-
-.page .chatbot input::placeholder {
-  color: #b9b9b9;
-  opacity: 1;
-}
 
 .mobileLayout {
   display: none;

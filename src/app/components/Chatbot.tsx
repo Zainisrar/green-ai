@@ -1,6 +1,7 @@
 "use client";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
+import { Vector7366 } from "./Vector7366";
 
 interface Message {
   id: string;
@@ -361,40 +362,16 @@ const Chatbot: React.FC<ChatbotProps> = ({ triggerClassName = "" }) => {
 
       {/* Chat Trigger */}
       <div
-        className={`fixed z-[20] right-4 lg:right-8 bottom-3 lg:bottom-4 ${triggerClassName}`}
+        className={`fixed z-[20] right-4 lg:right-6 bottom-4 lg:bottom-5 ${triggerClassName}`}
       >
-        <div className="relative h-[52px] w-[min(418px,calc(100vw-24px))]">
-          <img
-            src="/images/insight1/figma/chat-panel.svg"
-            alt=""
-            aria-hidden="true"
-            className="absolute -left-[4.28%] -top-[33.65%] z-0 block h-[182.7%] w-[110.48%] max-w-none"
-          />
-          <div className="absolute inset-y-0 left-[11%] right-[16%] z-10 flex items-center">
-            <input
-              ref={promptInputRef}
-              type="text"
-              value={promptInputValue}
-              onChange={(e) => setPromptInputValue(e.target.value)}
-              onKeyDown={handlePromptKeyDown}
-              placeholder="Let's Talk Energy"
-              aria-label="Let's Talk Energy"
-              className="w-full min-w-0 border-0 bg-transparent text-[clamp(13px,1vw,16px)] font-semibold text-[#626262] outline-none placeholder:text-[#626262] placeholder:opacity-100"
-            />
-          </div>
-          <button
-            type="button"
-            className="absolute top-1/2 right-[7%] z-10 flex -translate-y-1/2 cursor-pointer items-center border-0 bg-transparent p-0 transition-transform hover:scale-110"
-            onClick={handlePromptSubmit}
-            aria-label="Send message"
-          >
-            <img
-              src="/images/insight1/figma/chat-microphone.svg"
-              alt=""
-              className="block h-[23px] w-[18px] opacity-80 transition-opacity hover:opacity-100"
-            />
-          </button>
-        </div>
+        <Vector7366
+          value={promptInputValue}
+          onChange={setPromptInputValue}
+          onKeyDown={handlePromptKeyDown}
+          onSubmit={handlePromptSubmit}
+          inputRef={promptInputRef}
+          variant="responsive"
+        />
       </div>
     </>
   );

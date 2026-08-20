@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { useAboutUs } from "../../../hooks/useAboutUs";
 import { parseAboutUsContent, parseQuoteContent } from "../../utils/htmlParser";
 import D6Chatbot from "../D6Chatbot";
@@ -41,68 +40,81 @@ const AboutUs: React.FC<AboutUsProps> = ({ canvas = false }) => {
   const quote1 = parsedQuote?.firstQuote || "A Transformation - That’s";
   const quote2 = parsedQuote?.secondQuote || "Perspicacious for a";
 
+  if (canvas) {
+    return (
+      <main
+        className={styles.canvasPage}
+        data-about-us-hydrated="true"
+        role="main"
+        aria-label="Welcome to GREEN"
+      >
+        <SiteHeader layout="figmaCanvas" />
+
+        {/* Left Image & CLEAN LEAN GREEN Parallelogram Banner */}
+        <div className={styles.leftImageContainer}>
+          <img
+            src="/images/about-us/figma-masked-bg.png"
+            alt="Children in sunshine"
+            className={styles.leftImage}
+          />
+        </div>
+
+        <div className={styles.cleanLeanBanner} aria-hidden="true">
+          <img
+            src="/images/about-us/figma-clean-lean-bg.png"
+            alt=""
+            className={styles.cleanLeanBg}
+          />
+          <div className={styles.cleanLeanText}>
+            CLEAN
+            <br />
+            LEAN
+            <br />
+            <span className={styles.greenAccent}>GREEN</span>
+          </div>
+        </div>
+
+        {/* Right Content Column */}
+        <section className={styles.rightContent} aria-label="About Content">
+          <h2 className={styles.mainTitle}>{mainTitle}</h2>
+          <p className={styles.subHeadline}>{subHeadline}</p>
+          {aboutParagraphs.map((paragraph, index) => (
+            <p key={index} className={styles.bodyText}>
+              {paragraph}
+            </p>
+          ))}
+
+          <h3 className={styles.sectionTitle}>{whatTitle}</h3>
+          <p className={styles.subHeadline}>{whatSubtitle}</p>
+          {whatParagraphs.map((paragraph, index) => (
+            <p key={index} className={styles.bodyText}>
+              {paragraph}
+            </p>
+          ))}
+
+          <div className={styles.quoteContainer}>
+            <p className={styles.quoteLine1}>
+              {quote1} <strong>GREEN!</strong>
+            </p>
+            <p className={styles.quoteLine2}>
+              {quote2} <strong>BETTER WORLD!</strong>
+            </p>
+          </div>
+        </section>
+
+        <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
+      </main>
+    );
+  }
+
   return (
     <main
-      className={styles.page}
+      className={styles.mobilePage}
       data-about-us-hydrated="true"
       role="main"
       aria-label="Welcome to GREEN"
     >
-      <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
-
-      {/* Left Image & CLEAN LEAN GREEN Parallelogram Banner */}
-      <div className={styles.leftImageContainer}>
-        <img
-          src="/images/about-us/figma-masked-bg.png"
-          alt="Children in sunshine"
-          className={styles.leftImage}
-        />
-      </div>
-
-      <div className={styles.cleanLeanBanner} aria-hidden="true">
-        <img
-          src="/images/about-us/figma-clean-lean-bg.png"
-          alt=""
-          className={styles.cleanLeanBg}
-        />
-        <div className={styles.cleanLeanText}>
-          CLEAN
-          <br />
-          LEAN
-          <br />
-          <span className={styles.greenAccent}>GREEN</span>
-        </div>
-      </div>
-
-      {/* Right Content Column */}
-      <section className={styles.rightContent} aria-label="About Content">
-        <h2 className={styles.mainTitle}>{mainTitle}</h2>
-        <p className={styles.subHeadline}>{subHeadline}</p>
-        {aboutParagraphs.map((paragraph, index) => (
-          <p key={index} className={styles.bodyText}>
-            {paragraph}
-          </p>
-        ))}
-
-        <h3 className={styles.sectionTitle}>{whatTitle}</h3>
-        <p className={styles.subHeadline}>{whatSubtitle}</p>
-        {whatParagraphs.map((paragraph, index) => (
-          <p key={index} className={styles.bodyText}>
-            {paragraph}
-          </p>
-        ))}
-
-        <div className={styles.quoteContainer}>
-          <p className={styles.quoteLine1}>
-            {quote1} <strong>GREEN!</strong>
-          </p>
-          <p className={styles.quoteLine2}>
-            {quote2} <strong>BETTER WORLD!</strong>
-          </p>
-        </div>
-      </section>
-
-      {/* Mobile Flow (< 1200px) */}
+      <SiteHeader panel="logoOnly" />
       <div className={styles.mobileElements}>
         <div className={styles.mobileHero}>
           <img
@@ -149,12 +161,7 @@ const AboutUs: React.FC<AboutUsProps> = ({ canvas = false }) => {
           </div>
         </div>
       </div>
-
-      {canvas ? (
-        <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" figmaPlaceholder="Let's Talk Energy" />
-      ) : (
-        <D6Chatbot />
-      )}
+      <D6Chatbot />
     </main>
   );
 };

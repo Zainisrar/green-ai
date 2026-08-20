@@ -313,12 +313,7 @@
   font-size: 28px;
   font-weight: 400;
 }
-.chatTrigger,
-.chatTrigger > div,
-.chatTrigger > div > img {
-  width: 462px;
-  height: 96px;
-}
+
 .mobilePage {
   position: relative;
   min-height: 100svh;

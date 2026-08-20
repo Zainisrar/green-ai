@@ -1,0 +1,154 @@
+/* Figma Canvas & Proportional Trigger */
+.canvasContainer {
+  position: relative;
+  width: 100% !important;
+  max-width: 418px !important;
+  aspect-ratio: 418 / 52;
+  height: auto;
+  user-select: none;
+}
+
+.canvasBgImage {
+  position: absolute !important;
+  top: -33.65% !important;
+  left: -4.28% !important;
+  width: 110.526% !important;
+  height: 182.69% !important;
+  min-width: 110.526% !important;
+  max-width: none !important;
+  pointer-events: none;
+  object-fit: fill;
+}
+
+.canvasInput {
+  position: absolute !important;
+  top: 0 !important;
+  left: 6.938% !important;
+  width: 38.038% !important;
+  height: 100% !important;
+  border: 0 !important;
+  background: transparent !important;
+  outline: none !important;
+  font-family: var(--font-montserrat), "Montserrat", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  font-style: italic !important;
+  color: #717171 !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+  cursor: text;
+}
+
+.canvasInput::placeholder {
+  color: #717171 !important;
+  opacity: 1 !important;
+  font-family: var(--font-montserrat), "Montserrat", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  font-style: italic !important;
+  letter-spacing: 0 !important;
+}
+
+.canvasMicButton {
+  position: absolute !important;
+  top: 26.923% !important;
+  right: 8.612% !important;
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 18px !important;
+  height: 23px !important;
+}
+
+.canvasMicIcon {
+  display: block !important;
+  width: 18px !important;
+  height: 23px !important;
+  opacity: 1 !important;
+}
+
+/* Standard Responsive / Viewport Floating Mode */
+.responsiveContainer {
+  position: relative;
+  /* Keep the viewport trigger visually consistent with the 418px canvas CTA.
+     The previous 380px cap made it noticeably undersized beside the Elements
+     specification panel on desktop canvases. */
+  width: clamp(300px, 29.18vw, 510px);
+  aspect-ratio: 418 / 52;
+  height: auto;
+  max-width: calc(100vw - 32px);
+  user-select: none;
+}
+
+@media (max-width: 480px) {
+  .responsiveContainer {
+    width: clamp(220px, 75vw, 290px);
+    max-width: calc(100vw - 24px);
+  }
+}
+
+.responsiveBgImage {
+  position: absolute !important;
+  top: -33.65% !important;
+  left: -4.28% !important;
+  width: 110.526% !important;
+  height: 182.69% !important;
+  max-width: none !important;
+  pointer-events: none;
+  object-fit: fill;
+}
+
+.responsiveInput {
+  position: absolute !important;
+  top: 0 !important;
+  left: 6.938% !important;
+  width: 38.038% !important;
+  height: 100% !important;
+  border: 0 !important;
+  background: transparent !important;
+  outline: none !important;
+  font-family: var(--font-montserrat), "Montserrat", sans-serif !important;
+  font-size: clamp(12px, 0.91vw, 17.5px) !important;
+  font-weight: 600 !important;
+  font-style: italic !important;
+  color: #717171 !important;
+  letter-spacing: 0 !important;
+  text-align: center !important;
+  cursor: text;
+}
+
+.responsiveInput::placeholder {
+  color: #717171 !important;
+  opacity: 1 !important;
+  font-family: var(--font-montserrat), "Montserrat", sans-serif !important;
+  font-size: clamp(12px, 0.91vw, 17.5px) !important;
+  font-weight: 600 !important;
+  font-style: italic !important;
+  letter-spacing: 0 !important;
+}
+
+.responsiveMicButton {
+  position: absolute !important;
+  top: 26.923% !important;
+  right: 8.612% !important;
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  cursor: pointer;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 4.306% !important;
+  height: 44.231% !important;
+}
+
+.responsiveMicIcon {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 1 !important;
+}

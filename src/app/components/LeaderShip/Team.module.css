@@ -152,12 +152,7 @@
   letter-spacing: 0.7px;
 }
 
-.chatTrigger,
-.chatTrigger > div,
-.chatTrigger > div > img {
-  width: 462px;
-  height: 96px;
-}
+
 
 .mobilePage {
   position: relative;

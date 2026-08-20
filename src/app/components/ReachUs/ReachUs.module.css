@@ -308,28 +308,7 @@
   height: 128px;
 }
 
-.chatbot {
-  right: auto !important;
-  bottom: -1px !important;
-  left: 1489px !important;
-  width: 427px;
-}
 
-.chatbot > div > img {
-  display: block;
-  width: 427px !important;
-  height: auto;
-  max-width: none;
-}
-
-.chatbot > div > div:nth-child(2) {
-  right: 19%;
-  left: 12%;
-}
-
-.chatbot > div > div:last-child {
-  right: 9%;
-}
 
 .mobileLayout {
   display: none;

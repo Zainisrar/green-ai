@@ -1,6 +1,7 @@
 "use client";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
+import { Vector7366 } from "./Vector7366";
 
 interface D6ChatbotProps {
   canvasAnchored?: boolean;
@@ -376,7 +377,7 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
       {/* Chat Trigger */}
       <div
         className={`${canvasAnchored ? "absolute" : "fixed"} z-[50] ${
-          canvasAnchored ? "" : "right-1 lg:right-2 bottom-2"
+          canvasAnchored ? "" : "right-4 lg:right-6 bottom-4 lg:bottom-5"
         } ${triggerClassName}`}
         style={
           isFigmaCanvasTrigger
@@ -398,57 +399,14 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
               : triggerStyle
         }
       >
-        <div
-          className={
-            isFigmaCanvasTrigger
-              ? "relative h-[52px] w-[418px]"
-              : `relative h-[52px] ${
-                  hasResponsiveTrigger
-                    ? "w-full"
-                    : "w-[min(418px,calc(100vw-24px))]"
-                }`
-          }
-        >
-          <img
-            src="/images/insight1/figma/chat-panel.svg"
-            alt=""
-            aria-hidden="true"
-            className="absolute -left-[4.28%] -top-[33.65%] z-0 block h-[182.7%] w-[110.48%] max-w-none"
-          />
-          <div className="absolute inset-y-0 left-[11%] right-[16%] z-10 flex items-center">
-            <input
-              ref={promptInputRef}
-              type="text"
-              value={promptInputValue}
-              onChange={(e) => setPromptInputValue(e.target.value)}
-              onKeyDown={handlePromptKeyDown}
-              placeholder={
-                isFigmaCanvasTrigger
-                  ? (figmaPlaceholder ?? "Type your words....")
-                  : "Let's Talk Energy"
-              }
-              aria-label="Chat input"
-              className={`w-full min-w-0 border-0 bg-transparent font-semibold text-[#626262] outline-none placeholder:text-[#626262] placeholder:opacity-100 ${
-                isFigmaCanvasTrigger
-                  ? "text-[13px]"
-                  : "text-[clamp(13px,1vw,16px)]"
-              }`}
-              style={{ fontFamily: "var(--font-montserrat, Montserrat, sans-serif)" }}
-            />
-          </div>
-          <button
-            type="button"
-            aria-label="Send prompt"
-            className="absolute top-1/2 right-[7%] z-10 flex -translate-y-1/2 cursor-pointer items-center border-0 bg-transparent p-0 transition-transform hover:scale-110"
-            onClick={handlePromptSubmit}
-          >
-            <img
-              src="/images/insight1/figma/chat-microphone.svg"
-              alt="Send message"
-              className="block h-[23px] w-[18px] opacity-80 transition-opacity hover:opacity-100"
-            />
-          </button>
-        </div>
+        <Vector7366
+          value={promptInputValue}
+          onChange={setPromptInputValue}
+          onKeyDown={handlePromptKeyDown}
+          onSubmit={handlePromptSubmit}
+          inputRef={promptInputRef}
+          variant={isFigmaCanvasTrigger ? "figmaCanvas" : "responsive"}
+        />
       </div>
     </>
   );

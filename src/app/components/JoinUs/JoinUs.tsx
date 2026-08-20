@@ -210,7 +210,7 @@ export default function JoinUs() {
             alt="Industry affiliations and certifications"
           />
 
-          <D6Chatbot canvasAnchored triggerClassName={styles.chatbot} />
+          <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
         </div>
       </main>
 

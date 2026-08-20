@@ -577,7 +577,7 @@ export default function Expertise() {
             </fieldset>
           </div>
 
-          <D6Chatbot canvasAnchored triggerClassName={styles.chatbot} />
+          <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
         </div>
       </section>
 

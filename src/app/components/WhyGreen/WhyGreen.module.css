@@ -275,15 +275,7 @@
   margin-top: 7px;
 }
 
-.chatTrigger {
-  height: 96px;
-}
 
-.chatTrigger > div,
-.chatTrigger > div > img {
-  width: 462px;
-  height: 96px;
-}
 
 .mobilePage {
   position: relative;

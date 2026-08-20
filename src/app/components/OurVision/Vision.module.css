@@ -185,12 +185,7 @@
   color: #23b14d;
 }
 
-.chatTrigger,
-.chatTrigger > div,
-.chatTrigger > div > img {
-  width: 462px;
-  height: 96px;
-}
+
 
 .mobilePage {
   position: relative;

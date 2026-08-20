@@ -1,0 +1,243 @@
+{
+  "id": "7077:3021",
+  "name": "Insight page - 1",
+  "texts": [
+    {
+      "id": "7077:3034",
+      "name": "LET’S CHAT",
+      "chars": "LET’S CHAT"
+    },
+    {
+      "id": "7077:3037",
+      "name": "Therefore, endeavored to provide individuals and communities with sustainable energy solutions. Our mission is to encourage the adoption of renewable energy and contribute to a cleaner, greener future for all..",
+      "chars": "Therefore, endeavored to provide individuals and communities with sustainable energy solutions. Our mission is to encourage the adoption of renewable energy and contribute to a cleaner, greener future for all.."
+    },
+    {
+      "id": "7077:3039",
+      "name": "Total emissions: 4–7% of global greenhouse emissions",
+      "chars": "Total emissions: 4–7% of \nglobal greenhouse emissions"
+    },
+    {
+      "id": "7077:3041",
+      "name": "Direct operations (Scope 1 & 2): ~1%",
+      "chars": "Direct operations\n (Scope 1 & 2): ~1%"
+    },
+    {
+      "id": "7077:3043",
+      "name": "Downstream emissions (Scope 3): ~28% (mainly from coal use)",
+      "chars": "Downstream emissions (Scope 3): ~28% (mainly from coal use)"
+    },
+    {
+      "id": "7077:3045",
+      "name": "Fugitive methane emissions from coal mining 3–6%",
+      "chars": "Fugitive methane emissions from coal mining 3–6%"
+    },
+    {
+      "id": "7077:3047",
+      "name": "The Carbon Footprint of Mining",
+      "chars": "The Carbon Footprint of Mining"
+    },
+    {
+      "id": "7077:3048",
+      "name": "How Solar Energy Reduces Emissions?",
+      "chars": "How Solar Energy Reduces Emissions?"
+    },
+    {
+      "id": "7077:3049",
+      "name": "D1",
+      "chars": "D1"
+    },
+    {
+      "id": "7077:3058",
+      "name": "# Mining Insight 01",
+      "chars": "# Mining  Insight 01"
+    },
+    {
+      "id": "7077:3062",
+      "name": "\"Sun-Powered Mining: Powering the Future, Sustainably.\" ",
+      "chars": "   \"Sun-Powered Mining: \n  Powering the Future, \nSustainably.\" "
+    },
+    {
+      "id": "7077:3063",
+      "name": "solar mining",
+      "chars": "solar mining"
+    },
+    {
+      "id": "7077:3068",
+      "name": "Let’s Talk Energy",
+      "chars": "Let’s Talk Energy"
+    },
+    {
+      "id": "I7077:3071;7077:14069",
+      "name": "Explore",
+      "chars": "Explore"
+    },
+    {
+      "id": "I7077:3071;7077:14070",
+      "name": "Energy",
+      "chars": "Energy"
+    },
+    {
+      "id": "I7077:3071;7077:14071",
+      "name": "Elements",
+      "chars": "Elements"
+    },
+    {
+      "id": "I7077:3071;7077:14072",
+      "name": "Expertise",
+      "chars": "Expertise"
+    },
+    {
+      "id": "I7077:3071;7077:14074",
+      "name": "Enlist",
+      "chars": "Enlist"
+    },
+    {
+      "id": "I7077:3071;7077:14075",
+      "name": "Engage",
+      "chars": "Engage"
+    }
+  ],
+  "images": [
+    {
+      "id": "7077:3021",
+      "file": "./Insight_page___1/assets/7077:3021.png"
+    },
+    {
+      "id": "7077:3023",
+      "file": "./Insight_page___1/assets/7077:3023.png"
+    },
+    {
+      "id": "7077:3024",
+      "file": "./Insight_page___1/assets/7077:3024.png"
+    },
+    {
+      "id": "7077:3025",
+      "file": "./Insight_page___1/assets/7077:3025.png"
+    },
+    {
+      "id": "7077:3026",
+      "file": "./Insight_page___1/assets/7077:3026.png"
+    },
+    {
+      "id": "I7077:3027;5207:29710",
+      "file": "./Insight_page___1/assets/I7077:3027;5207:29710.png"
+    },
+    {
+      "id": "I7077:3028;5207:29712",
+      "file": "./Insight_page___1/assets/I7077:3028;5207:29712.png"
+    },
+    {
+      "id": "I7077:3028;5207:29713",
+      "file": "./Insight_page___1/assets/I7077:3028;5207:29713.png"
+    },
+    {
+      "id": "I7077:3029;5207:29715",
+      "file": "./Insight_page___1/assets/I7077:3029;5207:29715.png"
+    },
+    {
+      "id": "I7077:3029;5207:29716",
+      "file": "./Insight_page___1/assets/I7077:3029;5207:29716.png"
+    },
+    {
+      "id": "I7077:3030;5207:29718",
+      "file": "./Insight_page___1/assets/I7077:3030;5207:29718.png"
+    },
+    {
+      "id": "I7077:3031;5207:29720",
+      "file": "./Insight_page___1/assets/I7077:3031;5207:29720.png"
+    },
+    {
+      "id": "7077:3033",
+      "file": "./Insight_page___1/assets/7077:3033.png"
+    },
+    {
+      "id": "7077:3036",
+      "file": "./Insight_page___1/assets/7077:3036.png"
+    },
+    {
+      "id": "7077:3038",
+      "file": "./Insight_page___1/assets/7077:3038.png"
+    },
+    {
+      "id": "7077:3040",
+      "file": "./Insight_page___1/assets/7077:3040.png"
+    },
+    {
+      "id": "7077:3042",
+      "file": "./Insight_page___1/assets/7077:3042.png"
+    },
+    {
+      "id": "7077:3044",
+      "file": "./Insight_page___1/assets/7077:3044.png"
+    },
+    {
+      "id": "7077:3046",
+      "file": "./Insight_page___1/assets/7077:3046.png"
+    },
+    {
+      "id": "7077:3055",
+      "file": "./Insight_page___1/assets/7077:3055.png"
+    },
+    {
+      "id": "7077:3056",
+      "file": "./Insight_page___1/assets/7077:3056.png"
+    },
+    {
+      "id": "7077:3057",
+      "file": "./Insight_page___1/assets/7077:3057.png"
+    },
+    {
+      "id": "7077:3059",
+      "file": "./Insight_page___1/assets/7077:3059.png"
+    },
+    {
+      "id": "7077:3060",
+      "file": "./Insight_page___1/assets/7077:3060.png"
+    },
+    {
+      "id": "7077:3061",
+      "file": "./Insight_page___1/assets/7077:3061.png"
+    },
+    {
+      "id": "I7077:3064;1155:12330",
+      "file": "./Insight_page___1/assets/I7077:3064;1155:12330.png"
+    },
+    {
+      "id": "I7077:3064;1155:12331",
+      "file": "./Insight_page___1/assets/I7077:3064;1155:12331.png"
+    },
+    {
+      "id": "7077:3066",
+      "file": "./Insight_page___1/assets/7077:3066.png"
+    },
+    {
+      "id": "7077:3067",
+      "file": "./Insight_page___1/assets/7077:3067.png"
+    },
+    {
+      "id": "7077:3069",
+      "file": "./Insight_page___1/assets/7077:3069.png"
+    },
+    {
+      "id": "I7077:3070;1155:12330",
+      "file": "./Insight_page___1/assets/I7077:3070;1155:12330.png"
+    },
+    {
+      "id": "I7077:3070;1155:12331",
+      "file": "./Insight_page___1/assets/I7077:3070;1155:12331.png"
+    },
+    {
+      "id": "I7077:3071;7077:14067",
+      "file": "./Insight_page___1/assets/I7077:3071;7077:14067.png"
+    },
+    {
+      "id": "I7077:3071;7077:14068",
+      "file": "./Insight_page___1/assets/I7077:3071;7077:14068.png"
+    },
+    {
+      "id": "I7077:3071;7077:14073",
+      "file": "./Insight_page___1/assets/I7077:3071;7077:14073.png"
+    }
+  ]
+}

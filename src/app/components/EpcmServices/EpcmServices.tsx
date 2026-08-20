@@ -1,191 +1,183 @@
 "use client";
 
-import FigmaPageCanvas from "../shared/FigmaPageCanvas";
-import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import Image from "next/image";
+import { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
+import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import styles from "./EpcmServices.module.css";
 
-const features = [
+const phases = [
   {
     name: "Engineering",
-    points: [
-      "Site-specific feasibility and load modeling",
-      "Climate-resilient system architecture",
-      "Grid, off-grid, and hybrid design specialization",
+    flowName: "Engineering",
+    points: ["Conceptual Design", "Detailed Design", "Technical Studies"],
+    description:
+      "GREEN Solar provides a range of engineering services from yield assessments to executive design and technical supervision.",
+    detail: [
+      "GREEN Solar provides a range of engineering services from yield assessments to executive design and technical supervision.",
+      "Implementation of solar energy projects of any capacity is a complex process and it is best to entrust experts with a proven track record in the industry to carry out your project. Overseen and executed by our team experts, your solar project will deliver the forecasted yield and the highest possible return of investment.",
     ],
   },
   {
     name: "Procurement",
+    flowName: "Procurement",
     points: [
-      "Global supplier network with delivery certainty",
-      "Cost-stabilized sourcing and inventory control",
-      "Compliance with IEC, AS/NZS, and local utility specs",
+      "Supply Chain Management",
+      "Vendor Selection",
+      "Logistics and Transportation",
+    ],
+    description:
+      "Using a robust global supply chain and highly experienced procurement team, GREEN coordinates delivery for long-lead items, on time and to budget.",
+    detail: [
+      "Using a robust global Supply Chain and a highly experienced Procurement team, GREEN will procure and coordinate delivery for lengthy lead time items that can be a hindrance on large projects, ensuring delivery on time and pursuant to budget.",
     ],
   },
   {
     name: "Construction",
+    flowName: "Construction",
     points: [
-      "In-house deployment: civil, electrical, mechanical",
-      "Remote and difficult terrain execution experts",
-      "Schedule-bound, safety-prioritized site delivery",
+      "Civil Works",
+      "Electrical Works",
+      "Mechanical Works",
+      "Installation",
+      "Commissioning",
+    ],
+    description:
+      "We provide adaptable, safety-led construction delivery that solves site challenges with accuracy, diligence, and care.",
+    detail: [
+      "In the construction of Solar Power Plants, our entrepreneurial spirit propels our capacity to provide openness and rapidly adapt.",
+      "Our team is adept at overcoming unforeseen obstacles such as inclement weather and supply chain problems. We provide solutions, as opposed to problems. We accomplish your goals with accuracy, diligence, and care, ensuring the security of our teams and the prosperity of the communities we serve.",
     ],
   },
   {
-    name: "Management",
+    name: "Operations & Maintenance",
+    flowName: "Management",
     points: [
-      "Project lifecycle leadership: plan to performance",
-      "Embedded risk tracking and response automation",
-      "Stakeholder reporting, permitting, and governance",
+      "Project Planning",
+      "Project Oversight",
+      "Quality Assurance",
+      "Risk Mitigation",
+      "Performance Optimization",
+    ],
+    description:
+      "We keep renewable-energy assets operating safely, efficiently, and predictably over the long term.",
+    detail: [
+      "GREEN Solar supports project performance long after commissioning through tailored operations and maintenance services.",
+      "We combine proactive monitoring, practical maintenance, and transparent reporting to protect uptime and maximise the value of every asset.",
     ],
   },
 ];
 
 export default function EpcmServices() {
-  const desktop = (
-    <main className={styles.desktopPage} data-node-id="7077:6595">
-      <SiteHeader
-        layout="figmaCanvas"
-        highlightActive={false}
-        figmaPanelVariant="flagship"
-      />
-      <img
-        className={styles.collage}
-        src="/images/solar-epcm/mask_composite_solar.png"
-        alt=""
-        width="1108"
-        height="1297"
-      />
-      <img
+  const [activePhase, setActivePhase] = useState(0);
+  const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const selectedPhase = phases[activePhase];
+
+  return (
+    <main className={styles.page}>
+      <div className={styles.background} aria-hidden="true" />
+      <SiteHeader compactLogo panel="logoOnly" />
+
+      <Image
         className={styles.verticalTitle}
-        src="/images/solar-epcm/title_vert.png"
-        alt=""
-        width="82"
-        height="698"
+        src="/images/service/services.svg"
+        alt="Services"
+        width={73}
+        height={507}
+        priority
       />
-      <img
-        className={styles.pageTitle}
-        src="/images/solar-epcm/title_h1.png"
-        alt="Solar EPCM Services"
-        width="737"
-        height="68"
-      />
-      <p className={styles.subtitle}>
-        Designed for Complexity. Delivered with Precision. Managed to Scale
-      </p>
-      <p className={styles.description}>
-        At GREEN, EPCM is not coordination — it’s control.
-        <br />
-        We transform technical ambition into clean energy infrastructure
-        through a seamless, standards-driven delivery model.
-        <br />
-        From feasibility to commissioning, we manage every milestone with zero
-        compromise.
-      </p>
-      <section className={styles.cards}>
-        {features.map((f, i) => (
-          <div
-            key={f.name}
-            className={styles.card}
-            style={
-              [
-                { top: 354, left: 255 },
-                { top: 352, left: 773 },
-                { top: 621, left: 188 },
-                { top: 619, left: 706 },
-              ][i]
-            }
-          >
-            <img
-              className={styles.cardPanel}
-              src="/images/solar-epcm/card_panel.png"
-              alt=""
-              width="537"
-              height="215"
-              style={{ top: -2.5, left: -4.25 }}
-            />
-            <h2 className={styles.cardTitle}>{f.name}</h2>
-            <ul className={styles.cardPoints}>
-              {f.points.map((p) => (
-                <li key={p}>{p}</li>
-              ))}
-            </ul>
+
+      <section
+        className={styles.processFlow}
+        aria-label="EPCM delivery process"
+      >
+        {phases.map((phase, index) => (
+          <div className={styles.flowItem} key={phase.name}>
+            <article className={styles.flowCard}>
+              <div className={styles.flowCardContent}>
+                <h2>{phase.flowName}</h2>
+                <ul>
+                  {phase.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+            {index < phases.length - 1 && (
+              <Image
+                className={styles.flowArrow}
+                src="/images/service/arrow.png"
+                alt=""
+                width={65}
+                height={24}
+              />
+            )}
           </div>
         ))}
       </section>
-      <blockquote className={styles.embedQuote}>
-        <img
-          className={styles.quotePanel}
-          src="/images/solar-epcm/quote_panel.png"
-          alt=""
-          width="572"
-          height="173"
-          style={{ top: -9, left: -2.75 }}
-        />
-        <span>
-          We embed it — into every process, every panel, every kilowatt.
-        </span>
-      </blockquote>
-      <div className={styles.actions}>
-        <FigmaAngledCta
-          icon="download"
-          style={{ top: 681, left: 1585, width: 339 }}
-        >
-          Download EPCM Capabilities Brief
-        </FigmaAngledCta>
-        <FigmaAngledCta style={{ top: 752, left: 1621, width: 299 }}>
-          Request a Technical Debrief
-        </FigmaAngledCta>
-        <FigmaAngledCta style={{ top: 823, left: 1587, width: 329 }}>
-          Book a Discovery Consultation
-        </FigmaAngledCta>
-      </div>
-      <a className={styles.readMore} href="#epcm-details">
-        <span>Read more</span>
-      </a>
-      <h2 className={styles.tagline}>
-        You Don’t Engage GREEN to Oversee Solar.
-        <br />
-        You Engage Us to Deliver It.
-      </h2>
-      <D6Chatbot
-        canvasAnchored
-        triggerVariant="figmaCanvas"
-        figmaPlaceholder="Let's Talk Energy"
-        triggerStyle={{
-          top: 899,
-          right: "auto",
-          bottom: "auto",
-          left: 1498,
-          width: 418,
-        }}
-      />
-    </main>
-  );
 
-  return (
-    <FigmaPageCanvas
-      desktop={desktop}
-      nodeId="7077:6595"
-      mobile={
-        <main className={styles.mobilePage}>
-          <h1>Solar EPCM Services</h1>
-          <p>
-            Designed for Complexity. Delivered with Precision. Managed to
-            Scale.
-          </p>
-          {features.map((f) => (
-            <section key={f.name}>
-              <h2>{f.name}</h2>
-              <ul>
-                {f.points.map((p) => (
-                  <li key={p}>{p}</li>
-                ))}
-              </ul>
-            </section>
-          ))}
-        </main>
-      }
-    />
+      <section className={styles.detail} aria-live="polite">
+        <h1>{selectedPhase.name}</h1>
+        {selectedPhase.detail.map((paragraph) => (
+          <p key={paragraph}>{paragraph}</p>
+        ))}
+      </section>
+
+      <section className={styles.heading} aria-label="EPCM">
+        <h2>EPCM</h2>
+        <p>Integrated Renewable Energy Transformation</p>
+      </section>
+
+      <section className={styles.servicesPanel} aria-labelledby="our-services">
+        <div className={styles.servicesPanelContent}>
+          <h2 id="our-services">Our Services</h2>
+          <div className={styles.serviceOptions}>
+            {phases.map((phase, index) => {
+              const isActive = activePhase === index;
+
+              return (
+                <button
+                  className={isActive ? styles.selectedService : undefined}
+                  key={phase.name}
+                  onClick={() => setActivePhase(index)}
+                  type="button"
+                >
+                  <span>{phase.name}</span>
+                  {isActive && <small>{phase.description}</small>}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <button
+        className={styles.enquiryButton}
+        onClick={() => setIsEnquiryOpen(true)}
+        type="button"
+      >
+        <Image
+          src="/images/service/enquiry.svg"
+          alt="Submit an enquiry"
+          width={169}
+          height={52}
+        />
+      </button>
+
+      <ProductEnquiry
+        defaultInterest={selectedPhase.name}
+        interestLabel="SERVICE OF INTEREST"
+        interestOptions={phases.map((phase) => phase.name)}
+        isOpen={isEnquiryOpen}
+        onClose={() => setIsEnquiryOpen(false)}
+        titleAccent="ENQUIRY"
+        titlePrefix="EPCM"
+      />
+
+      <div className={styles.chat}>
+        <D6Chatbot triggerClassName={styles.chatTrigger} />
+      </div>
+    </main>
   );
 }
