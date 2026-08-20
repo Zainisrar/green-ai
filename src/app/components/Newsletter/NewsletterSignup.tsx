@@ -36,9 +36,6 @@ export default function NewsletterSignup({ canvas = false }: NewsletterSignupPro
     <main className={styles.page} data-node-id="7077:14996">
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
-      {/* Left green/yellow angled panel */}
-      <div className={styles.leftPanel} aria-hidden="true" />
-
       {/* Large left collage (Figma mask group) */}
       <img
         src="/images/newsletter/mainImg.png"
@@ -114,7 +111,7 @@ export default function NewsletterSignup({ canvas = false }: NewsletterSignupPro
       <div className={styles.contactBlock}>
         <FigmaQuoteBrackets
           leftStyle={{ left: 0, top: 0 }}
-          rightStyle={{ right: 0, top: 0 }}
+          showRight={false}
           leftSrc="/images/newsletter/shape.png"
           rightSrc="/images/newsletter/shape2.png"
         />

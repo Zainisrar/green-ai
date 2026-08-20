@@ -83,9 +83,6 @@ export default function BookAConsultation({
     <main className={styles.page} data-node-id="7077:19924">
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
-      {/* Left green/yellow angled panel */}
-      <div className={styles.leftPanel} aria-hidden="true" />
-
       {/* Vertical side title (Raleway Black 900, outlined, bottom-up) */}
       <p className={styles.verticalTitle} aria-hidden="true">
         Book a Consultation

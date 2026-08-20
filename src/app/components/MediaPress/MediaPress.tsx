@@ -79,9 +79,6 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
     <main className={styles.page} data-node-id="7077:23952">
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
-      {/* Left green/yellow angled panel */}
-      <div className={styles.leftPanel} aria-hidden="true" />
-
       {/* Vertical side title (Raleway Black, outlined, bottom-up) */}
       <p className={styles.verticalTitle} aria-hidden="true">
         Media &amp; Press

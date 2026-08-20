@@ -116,9 +116,6 @@ export default function PublicEventVolunteering({
       {/* Site header */}
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
-      {/* Left green gradient panel */}
-      <div className={styles.greenPanel} aria-hidden="true" />
-
       {/* Vertical side title */}
       <div className={styles.verticalTitleWrap}>
         <p className={styles.verticalTitle}>PUBLIC EVENTS &amp; VOLUNTEERING</p>
