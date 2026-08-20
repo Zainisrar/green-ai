@@ -151,7 +151,7 @@ const AboutUs: React.FC<AboutUsProps> = ({ canvas = false }) => {
       </div>
 
       {canvas ? (
-        <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
+        <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" figmaPlaceholder="Let's Talk Energy" />
       ) : (
         <D6Chatbot />
       )}

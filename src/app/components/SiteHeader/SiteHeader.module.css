@@ -152,24 +152,43 @@
   bottom: 47px;
   left: 814px;
   margin: 0;
-  gap: 30px;
   font-size: 20px;
   font-weight: 500;
   line-height: normal;
 }
 
 .canvasHeader .navigation a {
+  position: absolute;
+  top: 0;
   display: block;
   height: 24px;
   line-height: 24px;
+  white-space: nowrap;
 }
+
+/* Figma absolute nav text positions within the header (7077:6657): */
+.canvasHeader .navigation a:nth-child(1) {
+  left: 0;
+}
+
+.canvasHeader .navigation a:nth-child(2) {
+  left: 127px;
+}
+
+.canvasHeader .navigation a:nth-child(3) {
+  left: 243px;
+}
+
 .canvasHeader .navigation a:nth-child(4) {
-  flex: 0 0 153px;
+  left: 385px;
 }
 
 .canvasHeader .navigation a:nth-child(5) {
-  flex: 0 0 51px;
-  margin-left: -36px;
+  left: 532px;
+}
+
+.canvasHeader .navigation a:nth-child(6) {
+  left: 649px;
 }
 
 
@@ -210,35 +229,45 @@
 .productCanvasHeader .navigation {
   position: absolute;
   top: 47px;
-  left: 1076px;
+  left: 814px;
   margin: 0;
-  gap: 30px;
   font-size: 20px;
   font-weight: 500;
   line-height: normal;
 }
 
 .productCanvasHeader .navigation a {
+  position: absolute;
+  top: 0;
   display: block;
   height: 24px;
   line-height: 24px;
+  white-space: nowrap;
 }
 
-.productCanvasHeader .navigation a:nth-child(4) {
-  transform: translateX(-34px);
+/* Figma absolute nav text positions within the header (Products D1, 7077:25302): */
+.productCanvasHeader .navigation a:nth-child(1) {
+  left: 0;
+}
+
+.productCanvasHeader .navigation a:nth-child(2) {
+  left: 127px;
 }
 
 .productCanvasHeader .navigation a:nth-child(3) {
-  transform: scaleX(0.75);
-  transform-origin: left center;
+  left: 243px;
+}
+
+.productCanvasHeader .navigation a:nth-child(4) {
+  left: 385px;
 }
 
 .productCanvasHeader .navigation a:nth-child(5) {
-  transform: translateX(-27px);
+  left: 532px;
 }
 
 .productCanvasHeader .navigation a:nth-child(6) {
-  transform: translateX(-14px);
+  left: 649px;
 }
 
 .productCanvasHeader .canvasMenuButton {

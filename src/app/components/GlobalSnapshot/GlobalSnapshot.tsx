@@ -244,6 +244,7 @@ export default function GlobalSnapshot() {
       <D6Chatbot
         canvasAnchored
         triggerVariant="figmaCanvas"
+        figmaPlaceholder="Let's Talk Energy"
         triggerClassName={styles.chatTrigger}
         triggerStyle={{
             top: 899,
