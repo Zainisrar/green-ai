@@ -7,6 +7,8 @@ interface FigmaQuoteBracketsProps {
   rightStyle?: CSSProperties;
   showLeft?: boolean;
   showRight?: boolean;
+  leftSrc?: string;
+  rightSrc?: string;
 }
 
 export default function FigmaQuoteBrackets({
@@ -15,12 +17,14 @@ export default function FigmaQuoteBrackets({
   rightStyle,
   showLeft = true,
   showRight = true,
+  leftSrc = "/images/handbook/figma-quote-left.svg",
+  rightSrc = "/images/handbook/figma-quote-right.svg",
 }: FigmaQuoteBracketsProps) {
   return (
     <span className={`${styles.brackets} ${className}`.trim()} aria-hidden="true">
       {showLeft ? (
         <img
-          src="/images/handbook/figma-quote-left.svg"
+          src={leftSrc}
           alt=""
           className={styles.left}
           style={leftStyle}
@@ -28,7 +32,7 @@ export default function FigmaQuoteBrackets({
       ) : null}
       {showRight ? (
         <img
-          src="/images/handbook/figma-quote-right.svg"
+          src={rightSrc}
           alt=""
           className={styles.right}
           style={rightStyle}
