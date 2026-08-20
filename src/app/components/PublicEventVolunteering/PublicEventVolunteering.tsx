@@ -165,7 +165,7 @@ export default function PublicEventVolunteering({
       <div className={styles.bottomQuote}>
         <FigmaQuoteBrackets
           leftStyle={{ left: -69, top: -11 }}
-          rightStyle={{ right: -75, top: -16 }}
+          rightStyle={{ right: -42, top: -16 }}
         />
         <h2 className={styles.bottomQuoteText}>
           You Don’t Need To Be An <span className={styles.highlight}>Engineer</span> To

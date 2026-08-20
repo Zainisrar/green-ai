@@ -106,7 +106,7 @@ export default function NewsletterSignup({ canvas = false }: NewsletterSignupPro
       <div className={styles.contactBlock}>
         <FigmaQuoteBrackets
           leftStyle={{ left: 0, top: 0 }}
-          rightStyle={{ right: 75, top: 7 }}
+          rightStyle={{ right: 90, top: 7 }}
           leftSrc="/images/newsletter/shape.png"
           rightSrc="/images/newsletter/shape2.png"
         />

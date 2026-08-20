@@ -213,7 +213,7 @@ export default function BookAConsultation({
         <div className={styles.quoteShape} aria-hidden="true" />
         <FigmaQuoteBrackets
           leftStyle={{ left: -58, top: 59 }}
-          rightStyle={{ right: -1, top: 0 }}
+          rightStyle={{ right: -25, top: 0 }}
         />
         <p className={styles.quoteText}>
           {highlight(QUOTE_PARTS, styles.greenText)}

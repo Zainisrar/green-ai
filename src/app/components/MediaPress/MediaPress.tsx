@@ -136,7 +136,7 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
       <div className={styles.quoteBlock}>
         <FigmaQuoteBrackets
           leftStyle={{ left: -64, top: -16 }}
-          rightStyle={{ right: 0, top: -16 }}
+          rightStyle={{ right: -34, top: -9 }}
         />
         <p className={styles.quoteText}>
           We Don&rsquo;t Tell Stories To Impress.

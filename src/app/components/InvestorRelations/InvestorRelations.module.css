@@ -166,7 +166,7 @@
 .quoteCard p {
   position: absolute;
   left: 0;
-  top: 100px;
+  top: 0;
   margin: 0;
   font-size: 22px;
   font-style: italic;
