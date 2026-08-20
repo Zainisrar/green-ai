@@ -142,7 +142,37 @@ const fallbackNavigation: NavigationItem[] = [
     name: "Enlighten",
     slug: "/insights",
     top: true,
-    children: [{ id: 51, name: "Insights", slug: "/insights", top: false }],
+    children: [
+      {
+        id: 51,
+        name: "Insights",
+        slug: "/enlighten/insights-articles",
+        top: false,
+        image: { src: "/images/nav/5.png", alt: "GREEN energy insights" },
+        text: {
+          description: "Ideas and knowledge for a more sustainable future",
+          highlighted: "sustainable future",
+        },
+      },
+      {
+        id: 52,
+        name: "Thought Leadership",
+        slug: "/enlighten/thought-leadership",
+        top: false,
+      },
+      {
+        id: 53,
+        name: "Learning Hub",
+        slug: "/enlighten/learning-hub",
+        top: false,
+      },
+      {
+        id: 54,
+        name: "Reports & Whitepapers",
+        slug: "/enlighten/reports-whitepapers",
+        top: false,
+      },
+    ],
   },
   {
     id: 6,
@@ -150,7 +180,35 @@ const fallbackNavigation: NavigationItem[] = [
     slug: "/ecosystem",
     top: true,
     children: [
-      { id: 61, name: "Our Ecosystem", slug: "/ecosystem", top: false },
+      {
+        id: 61,
+        name: "Our Ecosystem",
+        slug: "/ecosystem",
+        top: false,
+        image: { src: "/images/nav/6.png", alt: "GREEN supply ecosystem" },
+        text: {
+          description: "Building the partnerships that deliver lasting impact",
+          highlighted: "lasting impact",
+        },
+      },
+      {
+        id: 62,
+        name: "Our Value Chain",
+        slug: "/ecosystem/our-value-chain",
+        top: false,
+      },
+      {
+        id: 63,
+        name: "Client Partnerships",
+        slug: "/ecosystem/client-partnerships",
+        top: false,
+      },
+      {
+        id: 64,
+        name: "Technology Alliances",
+        slug: "/ecosystem/technology-innovation-alliances",
+        top: false,
+      },
     ],
   },
   {
