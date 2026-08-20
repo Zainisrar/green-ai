@@ -1,27 +1,17 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useProducts } from "../../../hooks/useProducts";
+import { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import ProductEnquiry from "./Modals/ProductEnquiry";
 import styles from "./ProductsFigma.module.css";
 
-const PRODUCT_SLUG = "lighting-up-and-lifting-up-living-standards";
-
 const gallery = [
-  [
-    "featuredProduct1.png",
-    "GREEN SunShine student study and home-lighting kit",
-  ],
-  ["productImg2-large.png", "GREEN SunShine solar home-lighting system"],
-  [
-    "productImg3-large.png",
-    "GREEN SunShine home system with television and fan",
-  ],
-  ["productImg4-large.png", "GREEN SunShine home and entertainment system"],
+  ["kit-1.png", "GREEN SunSmart controlled-environment solar system"],
+  ["kit-2.png", "GREEN SunSmart solar energy system"],
+  ["kit-3.png", "GREEN SunSmart energy platform"],
+  ["kit-4.png", "GREEN SunSmart solar structure"],
 ] as const;
 
 const specifications = [
@@ -41,34 +31,23 @@ const specifications = [
   ["USB.png", "USB Cable", "Mobile Charging\ncable", "--"],
 ] as const;
 
-const fallbackTitle = "Lighting Up and Lifting Up Living Standards";
-const fallbackDescription =
+const productName = "GREEN SunSmart";
+const productTitle = "Lighting Up and Lifting Up Living Standards";
+const description =
   "To lift up living standards sustainably, it is crucial to invest in infrastructure that supports a better quality of life.";
 
-export default function ProductsFigma() {
-  const { data: products } = useProducts();
-  const product = products?.find((item) => item.slug === PRODUCT_SLUG);
-  const title = product?.title || fallbackTitle;
-  const description = product?.description || fallbackDescription;
+/** SunSmart Figma page composed from individual exported assets, not a frame screenshot. */
+export default function SunsmartProductsFigma() {
   const [active, setActive] = useState(0);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
-
-  useEffect(() => setHydrated(true), []);
 
   const desktop = (
-    <main
-      className={styles.desktop}
-      data-node-id="7077:12660"
-      data-products-hydrated={hydrated}
-    >
+    <main className={styles.desktop} data-node-id="7077:25900">
       <img className={styles.background} src="/images/product/bg.jpg" alt="" />
-      <SiteHeader layout="productCanvas" brand="sunshine" productLogo />
-      <Link
-        href="/engineering/products/green-sunsmart"
-        className={styles.sunsmartProductLink}
-        aria-label="View GREEN SunSmart products"
-      />
+      <SiteHeader layout="productCanvas" brand="sunsmart" productLogo />
+      <div className={styles.sunsmartPrimaryBrand}>
+        <img src="/images/product/green-sunsmart.png" alt={productName} />
+      </div>
       <img
         className={styles.pageTitleImg}
         src="/images/product/title_h1.png"
@@ -80,12 +59,11 @@ export default function ProductsFigma() {
         alt=""
       />
 
-      <section className={styles.gallery} aria-label="Product gallery">
+      <section className={styles.gallery} aria-label={`${productName} gallery`}>
         <img
           className={styles.hero}
-          src={`/images/product/${gallery[active][0]}`}
+          src={`/images/product/sunsmart/${gallery[active][0]}`}
           alt={gallery[active][1]}
-          data-node-id="7077:12667"
         />
         <div className={styles.thumbnails}>
           {gallery.map(([image, alt], index) => (
@@ -98,10 +76,10 @@ export default function ProductsFigma() {
                   : styles.inactiveThumbnail
               }
               onClick={() => setActive(index)}
-              aria-label={`Show product image ${index + 1}`}
+              aria-label={`Show ${productName} product ${index + 1}`}
               aria-pressed={active === index}
             >
-              <img src={`/images/product/${image}`} alt={alt} />
+              <img src={`/images/product/sunsmart/${image}`} alt={alt} />
             </button>
           ))}
         </div>
@@ -114,22 +92,16 @@ export default function ProductsFigma() {
         </button>
       </section>
 
-      <section className={styles.story} aria-labelledby="product-story-title">
+      <section className={styles.story} aria-labelledby="sunsmart-story-title">
         <img src="/images/product/boxImg.png" alt="" />
-        <h2 id="product-story-title">
-          {title === fallbackTitle ? (
-            <>
-              Lighting Up
-              <br />
-              and Lifting Up
-              <br />
-              Living
-              <br />
-              Standards
-            </>
-          ) : (
-            title
-          )}
+        <h2 id="sunsmart-story-title">
+          Lighting Up
+          <br />
+          and Lifting Up
+          <br />
+          Living
+          <br />
+          Standards
         </h2>
         <p>{description}</p>
       </section>
@@ -177,24 +149,12 @@ export default function ProductsFigma() {
         <p className={styles.eyebrow}>Products</p>
         <img
           className={styles.mobileBrand}
-          src="/images/product/green-sunshine.png"
-          alt="GREEN SunShine"
+          src="/images/product/green-sunsmart.png"
+          alt={productName}
         />
-        <Link
-          href="/engineering/products/green-empawa"
-          className={styles.mobileEmpawaLink}
-        >
-          View GREEN Em’Pawa products
-        </Link>
-        <Link
-          href="/engineering/products/green-sunsmart"
-          className={styles.mobileEmpawaLink}
-        >
-          View GREEN SunSmart products
-        </Link>
         <img
           className={styles.mobileHero}
-          src={`/images/product/${gallery[active][0]}`}
+          src={`/images/product/sunsmart/${gallery[active][0]}`}
           alt={gallery[active][1]}
         />
         <div className={styles.mobileThumbnails}>
@@ -203,14 +163,14 @@ export default function ProductsFigma() {
               key={image}
               type="button"
               onClick={() => setActive(index)}
-              aria-label={`Show product image ${index + 1}`}
+              aria-label={`Show ${productName} product ${index + 1}`}
               aria-pressed={active === index}
             >
-              <img src={`/images/product/${image}`} alt="" />
+              <img src={`/images/product/sunsmart/${image}`} alt="" />
             </button>
           ))}
         </div>
-        <h1>{title}</h1>
+        <h1>{productTitle}</h1>
         <p>{description}</p>
         <button
           type="button"
@@ -229,13 +189,13 @@ export default function ProductsFigma() {
       <FigmaPageCanvas
         desktop={desktop}
         mobile={mobile}
-        nodeId="7077:12660"
+        nodeId="7077:25900"
         fitCanvasHeight
       />
       <ProductEnquiry
         isOpen={isEnquiryOpen}
         onClose={() => setIsEnquiryOpen(false)}
-        productName={title}
+        productName={productName}
       />
     </>
   );

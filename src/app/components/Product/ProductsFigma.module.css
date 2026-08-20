@@ -24,6 +24,58 @@
   height: 36px;
   max-width: none;
 }
+.sunsmartPrimaryBrand {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  display: grid;
+  width: 320px;
+  height: 112px;
+  padding: 14px 32px 12px 20px;
+  background: linear-gradient(120deg, #d6fac5 0%, #f8f98a 100%);
+  clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
+  place-items: center;
+}
+.sunsmartPrimaryBrand img {
+  width: 230px;
+  height: auto;
+  max-height: 80px;
+  object-fit: contain;
+}
+.empawaPrimaryBrand {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  display: grid;
+  width: 320px;
+  height: 112px;
+  padding: 14px 32px 12px 20px;
+  background: linear-gradient(120deg, #d6fac5 0%, #f8f98a 100%);
+  clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
+  place-items: center;
+}
+.empawaPrimaryBrand img {
+  width: 230px;
+  height: auto;
+  max-height: 80px;
+  object-fit: contain;
+}
+.sunsmartProductLink {
+  position: absolute;
+  z-index: 4;
+  top: 190px;
+  left: 0;
+  display: block;
+  width: 255px;
+  height: 82px;
+  cursor: pointer;
+}
+.sunsmartProductLink:focus-visible {
+  outline: 3px solid #23b14d;
+  outline-offset: -4px;
+}
 .verticalTitle {
   position: absolute;
   z-index: 2;
@@ -71,27 +123,29 @@
   height: 100%;
   object-fit: contain;
 }
+.thumbnails button:nth-of-type(1) {
+  top: 760px;
+  left: 239px;
+}
+.thumbnails button:nth-of-type(2) {
+  top: 764px;
+  left: 401px;
+}
+.thumbnails button:nth-of-type(3) {
+  top: 760px;
+  left: 548px;
+}
+.thumbnails button:nth-of-type(4) {
+  top: 760px;
+  left: 694px;
+}
 .thumbnails .inactiveThumbnail {
   width: 84px;
   height: 84px;
 }
-.thumbnails .inactiveThumbnail:nth-of-type(1) {
-  top: 764px;
-  left: 401px;
-}
-.thumbnails .inactiveThumbnail:nth-of-type(2) {
-  top: 760px;
-  left: 548px;
-}
-.thumbnails .inactiveThumbnail:nth-of-type(3) {
-  top: 760px;
-  left: 694px;
-}
 .thumbnails .activeThumbnail {
   width: 95px;
   height: 95px;
-  top: 760px;
-  left: 239px;
   border-color: #23b14d;
   opacity: 1;
 }
@@ -234,6 +288,15 @@
 .mobileBrand {
   width: 148px;
   margin-top: 8px;
+}
+.mobileEmpawaLink {
+  display: inline-flex;
+  margin: 14px 0 0;
+  color: #148c3c;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 .mobileHero {
   display: block;

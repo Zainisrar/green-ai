@@ -1,0 +1,273 @@
+.overlay {
+  position: fixed;
+  z-index: 10000;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+.backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  /* The Figma drawer overlays the page; it does not darken the left canvas. */
+  background: transparent;
+  cursor: pointer;
+}
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  width: min(100vw, 942px);
+  height: auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: #202020;
+  background: rgb(255 255 255 / 80%);
+  box-shadow: 0 10px 30px rgb(0 0 0 / 25%);
+  backdrop-filter: blur(40px);
+}
+.close {
+  position: absolute;
+  z-index: 2;
+  top: 39px;
+  right: 29px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.close span {
+  position: absolute;
+  top: 19px;
+  left: -2px;
+  width: 44px;
+  height: 5px;
+  background: #202b3a;
+}
+.close span:first-child {
+  transform: rotate(45deg);
+}
+.close span:last-child {
+  transform: rotate(-45deg);
+}
+.content {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 67%;
+  min-height: 0;
+  padding: 147px 36px 46px;
+}
+.feature {
+  width: min(100%, 307px);
+  height: 205px;
+}
+.feature img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.subNavigation {
+  position: absolute;
+  top: 147px;
+  left: 371px;
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+  width: calc(100% - 383px);
+  padding-left: 12px;
+  border-left: 2px solid #23b14d;
+}
+.subNavigation a,
+.subNavigation button,
+.back {
+  padding: 0;
+  border: 0;
+  color: #303030;
+  background: transparent;
+  font:
+    700 18px / 1.35 var(--font-montserrat),
+    Montserrat,
+    sans-serif;
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.subNavigation a:hover,
+.subNavigation button:hover,
+.activeItem {
+  color: #23b14d !important;
+}
+.back {
+  margin-bottom: 2px;
+  color: #23b14d;
+  font-size: 15px;
+}
+.quote {
+  position: absolute;
+  right: 20px;
+  /* Node 7077:13975 places the two-line quote at y=679 in the 975px panel. */
+  bottom: 195px;
+  left: 60px;
+  margin: 0;
+  color: #303b50;
+  font-size: clamp(24px, 1.67vw, 32px);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.65;
+}
+.quote em {
+  color: #23b14d;
+  font-style: italic;
+}
+.divider {
+  position: absolute;
+  top: 137px;
+  left: 67%;
+  width: 1px;
+  height: min(660px, calc(100vh - 178px));
+  margin: 0;
+  background: #9ca3af;
+}
+.divider::before {
+  display: block;
+  width: 2px;
+  height: 62px;
+  content: "";
+  background: #23b14d;
+}
+.sections {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: calc(67% + 1px);
+  padding: 145px 30px 170px 23px;
+}
+.sections button {
+  display: block;
+  width: 100%;
+  margin: 0 0 55px;
+  padding: 0;
+  border: 0;
+  color: #202020;
+  background: transparent;
+  font:
+    700 26px / 1 var(--font-montserrat),
+    Montserrat,
+    sans-serif;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.sections button:hover,
+.sections .activeSection {
+  color: #23b14d;
+}
+.actions {
+  position: absolute;
+  right: 36px;
+  bottom: 46px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.actions a {
+  display: grid;
+  width: 205px;
+  height: 57px;
+  color: #000;
+  background: linear-gradient(105deg, #d5f7a5, #ffffac);
+  clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+  font:
+    600 16px / 1 var(--font-montserrat),
+    Montserrat,
+    sans-serif;
+  text-decoration: none;
+  place-items: center;
+}
+.actions a:first-child {
+  width: 180px;
+}
+
+/* The desktop drawer is based on a 975px-tall Figma frame. At shorter
+   desktop heights, its eight section links reached the fixed action buttons.
+   Compact the vertical rhythm before that overlap can occur. */
+@media (min-width: 901px) and (max-height: 900px) {
+  .content {
+    padding-top: clamp(100px, 13vh, 130px);
+  }
+
+  .subNavigation {
+    top: clamp(100px, 13vh, 130px);
+  }
+
+  .quote {
+    bottom: clamp(125px, 17vh, 155px);
+  }
+
+  .divider {
+    top: clamp(92px, 12vh, 120px);
+    height: calc(100vh - clamp(185px, 25vh, 225px));
+  }
+
+  .sections {
+    padding-top: clamp(100px, 13vh, 130px);
+    padding-bottom: 118px;
+  }
+
+  .sections button {
+    margin-bottom: clamp(18px, 4vh, 36px);
+    font-size: clamp(20px, 2.8vh, 26px);
+  }
+
+  .actions {
+    bottom: 28px;
+  }
+}
+
+@media (max-width: 900px) {
+  .drawer {
+    position: fixed;
+    grid-template-columns: 1fr;
+    width: min(88vw, 520px);
+    overflow-y: auto;
+  }
+  .content {
+    position: relative;
+    inset: auto;
+    width: auto;
+    min-height: auto;
+    padding: 100px 32px 240px;
+  }
+  .feature {
+    width: 100%;
+    max-width: 307px;
+  }
+  .subNavigation {
+    position: static;
+    width: min(100%, 250px);
+    margin-top: 26px;
+  }
+
+  .quote {
+    position: static;
+    margin-top: 52px;
+    font-size: 24px;
+  }
+  .divider,
+  .sections {
+    display: none;
+  }
+  .actions {
+    right: 28px;
+    bottom: 34px;
+  }
+}

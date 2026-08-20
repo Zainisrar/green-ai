@@ -72,7 +72,9 @@
   display: flex;
   align-items: center;
   margin-left: auto;
-  gap: clamp(24px, 2.35vw, 48px);
+  /* Match the 1920px Figma canvas navigation lane used by Explore. The
+     previous 45px desktop gap made viewport pages begin roughly 50px earlier. */
+  gap: clamp(24px, 1.85vw, 36px);
   font-size: clamp(14px, 0.98vw, 20px);
   font-weight: 500;
   line-height: 1;
@@ -199,8 +201,6 @@
   left: 649px;
 }
 
-
-
 .canvasMenuButton {
   position: absolute;
   top: 16px;
@@ -227,6 +227,14 @@
   background: transparent;
   box-shadow: none;
   backdrop-filter: none;
+  /* The visual header spans the full lane; only its actual controls should
+     intercept clicks so product-category marks beneath it remain usable. */
+  pointer-events: none;
+}
+
+.productCanvasHeader .navigation,
+.productCanvasHeader .canvasMenuButton {
+  pointer-events: auto;
 }
 
 .productCanvasHeader .sunshineLogo {
@@ -234,10 +242,28 @@
   pointer-events: none;
 }
 
+.productEmpawaLink {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 384px;
+  height: 128px;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.productEmpawaLink:focus-visible {
+  outline: 3px solid #23b14d;
+  outline-offset: -4px;
+}
+
 .productCanvasHeader .navigation {
   position: absolute;
   top: 47px;
-  left: 814px;
+  /* Unlike `.canvasHeader`, this header begins at x=0 (rather than x=262).
+     Keep the same global Figma coordinate for the navigation lane. */
+  left: 1076px;
   margin: 0;
   font-size: 20px;
   font-weight: 500;

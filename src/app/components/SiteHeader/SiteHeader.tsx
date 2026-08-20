@@ -99,6 +99,9 @@ export default function SiteHeader({
     useNavigationState();
   const { navigationData, activeSection, setActiveSection, featuredChild } =
     useNavigation(isNavigationOpen, pathname);
+  const showEmpawaProductLink =
+    (layout === "productCanvas" && brand === "sunshine") ||
+    brandClassName === "product-figma-header-logo";
 
   useEffect(() => {
     const updateHeader = () => setIsScrolled(window.scrollY > 32);
@@ -153,6 +156,14 @@ export default function SiteHeader({
           />
         </Link>
       )}
+
+      {showEmpawaProductLink ? (
+        <Link
+          href="/engineering/products/green-empawa"
+          className={styles.productEmpawaLink}
+          aria-label="View GREEN Em’Pawa products"
+        />
+      ) : null}
 
       <nav className={styles.navigation} aria-label="Primary navigation">
         {navigationItems.map((item) => {

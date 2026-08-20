@@ -1,5 +1,6 @@
 "use client";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
 import { useProductBySlug } from "../../../hooks/useProducts";
@@ -239,6 +240,11 @@ const Product = ({ slug }: ProductProps) => {
               alt=""
               className="product-figma-background"
             />
+            <Link
+              href="/engineering/products/green-sunsmart"
+              className="product-figma-sunsmart-link"
+              aria-label="View GREEN SunSmart products"
+            />
             <h1 className="product-figma-heading">Products</h1>
 
             <img
@@ -251,6 +257,12 @@ const Product = ({ slug }: ProductProps) => {
               alt="GREEN SunShine"
               className="product-figma-brand"
             />
+            <Link
+              href="/engineering/products/green-sunsmart"
+              className="mt-4 inline-flex text-sm font-bold text-green-700 underline underline-offset-4"
+            >
+              View GREEN SunSmart products
+            </Link>
 
             <div className="product-figma-showcase">
               <motion.img

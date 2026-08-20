@@ -371,15 +371,16 @@
 .chatTrigger {
   position: fixed;
   top: auto;
-  /* Match the shared chat trigger inset so the microphone stays inside its frame. */
-  right: 8px;
-  bottom: clamp(0px, 0.781vw, 16px);
-  width: min(23.926vw, 490px);
+  /* The vector extends beyond its layout box for the glow. Reserve that
+     clearance so its angled edge remains within the EPCM canvas. */
+  right: clamp(24px, 1.4vw, 28px);
+  bottom: clamp(24px, 1.4vw, 28px);
+  width: min(21.771vw, 418px);
 }
 
-.chatTrigger > div > img {
+.chatTrigger > div {
   width: 100%;
-  height: auto;
+  max-width: none;
 }
 
 /* The skewed right edge needs more clearance than the default chat trigger. */

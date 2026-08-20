@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import ProductEnquiry from "../Product/Modals/ProductEnquiry";
-import TopNavigation from "../TopNavigation/TopNavigation";
+import SiteHeader from "../SiteHeader/SiteHeader";
 import styles from "./ReachUs.module.css";
 
 const DESIGN_WIDTH = 1920;
@@ -84,7 +84,8 @@ export default function ReachUs() {
 
   return (
     <main className={styles.page}>
-      <TopNavigation />
+      {/* The Reach Us background already renders the left brand panel. */}
+      <SiteHeader panel="logoOnly" />
 
       <section className={styles.desktopStage} aria-label="Reach GREEN">
         <div
