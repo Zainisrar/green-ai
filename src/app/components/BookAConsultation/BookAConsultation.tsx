@@ -2,7 +2,6 @@
 import { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
-import FigmaQuoteBrackets from "../FigmaQuoteBrackets/FigmaQuoteBrackets";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import Booking from "../BookConsulation/Modals/Booking";
 import styles from "./BookAConsultation.module.css";
@@ -81,12 +80,15 @@ export default function BookAConsultation({
 
   return (
     <main className={styles.page} data-node-id="7077:19924">
-      <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
+      <SiteHeader
+        layout={canvas ? "figmaCanvas" : "viewport"}
+        figmaPanelVariant="flagship"
+      />
 
       {/* Vertical side title (Raleway Black 900, outlined, bottom-up) */}
-      <p className={styles.verticalTitle} aria-hidden="true">
-        Book a Consultation
-      </p>
+      <div className={styles.verticalTitle} aria-hidden="true">
+        <p>Book a Consultation</p>
+      </div>
 
       {/* Right faint collage (masked photo collage) */}
       <div className={styles.rightCollage} aria-hidden="true">
@@ -162,23 +164,30 @@ export default function BookAConsultation({
 
       {/* Availability pills */}
       <div className={styles.pill} style={{ left: 262, top: 845 }}>
-        <span className={styles.pillIcon} style={{ left: 44, top: 11 }} aria-hidden="true">
-          <svg width="30" height="31" viewBox="0 0 30 31" fill="none" aria-hidden="true">
-            <rect x="1" y="1" width="28" height="29" rx="3" stroke="#999999" strokeWidth="2" />
-            <path d="M1 9H29" stroke="#999999" strokeWidth="2" />
-            <circle cx="7" cy="16" r="1.6" fill="#999999" />
-            <circle cx="15" cy="16" r="1.6" fill="#999999" />
-            <circle cx="23" cy="16" r="1.6" fill="#999999" />
-            <circle cx="7" cy="23.5" r="1.6" fill="#999999" />
-            <circle cx="15" cy="23.5" r="1.6" fill="#999999" />
-            <circle cx="23" cy="23.5" r="1.6" fill="#999999" />
-          </svg>
-        </span>
+        <img
+          src="/images/book-consulation/availability-window.svg"
+          alt=""
+          aria-hidden="true"
+          className={styles.pillFrame}
+        />
+        <img
+          src="/images/book-consulation/availability-calendar.svg"
+          alt=""
+          aria-hidden="true"
+          className={styles.pillIcon}
+          style={{ left: 44, top: 11 }}
+        />
         <span className={styles.pillText} style={{ left: 91 }}>
           Monday&ndash;Friday | 9 AM To 5 PM GMT+10
         </span>
       </div>
       <div className={styles.pill} style={{ left: 798, top: 845 }}>
+        <img
+          src="/images/book-consulation/availability-window.svg"
+          alt=""
+          aria-hidden="true"
+          className={styles.pillFrame}
+        />
         <span className={styles.pillText} style={{ left: 36 }}>
           Other Slots By Request (For Global Partners)
         </span>
@@ -210,10 +219,17 @@ export default function BookAConsultation({
 
       {/* Right quote over collage */}
       <div className={styles.quoteBlock}>
-        <div className={styles.quoteShape} aria-hidden="true" />
-        <FigmaQuoteBrackets
-          leftStyle={{ left: -58, top: 59 }}
-          rightStyle={{ right: -25, top: 0 }}
+        <img
+          src="/images/book-consulation/quote-bracket-left.svg"
+          alt=""
+          aria-hidden="true"
+          className={styles.quoteBracketLeft}
+        />
+        <img
+          src="/images/book-consulation/quote-bracket-right.svg"
+          alt=""
+          aria-hidden="true"
+          className={styles.quoteBracketRight}
         />
         <p className={styles.quoteText}>
           {highlight(QUOTE_PARTS, styles.greenText)}

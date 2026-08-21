@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import type React from "react";
+import styles from "./EngineeringFormModal.module.css";
 
 interface EngineeringFormModalProps {
   isOpen: boolean;
@@ -9,6 +10,8 @@ interface EngineeringFormModalProps {
   subtitle?: string;
   children: React.ReactNode;
   maxWidthClass?: string;
+  /** Use the large angular window from the Book a Consultation Figma popup. */
+  geometry?: "default" | "consultation";
 }
 
 const EngineeringFormModal = ({
@@ -18,12 +21,23 @@ const EngineeringFormModal = ({
   subtitle,
   children,
   maxWidthClass = "max-w-5xl",
+  geometry = "default",
 }: EngineeringFormModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="scrollbar-hide fixed inset-0 z-[9999999999999999999] flex items-start justify-center overflow-y-auto bg-black/20 p-3 sm:items-center sm:p-4">
-      <div className={`relative my-2 w-full ${maxWidthClass} sm:my-auto`}>
+    <div
+      className={`scrollbar-hide fixed inset-0 z-[9999999999999999999] flex items-start justify-center overflow-y-auto p-3 sm:items-center sm:p-4 ${
+        geometry === "consultation" ? styles.consultationOverlay : "bg-black/20"
+      }`}
+    >
+      <div
+        className={`relative my-2 w-full ${maxWidthClass} sm:my-auto ${
+          geometry === "consultation" ? styles.consultationWindow : styles.window
+        }`}
+        role="dialog"
+        aria-modal="true"
+      >
         <button
           type="button"
           onClick={onClose}
@@ -37,13 +51,18 @@ const EngineeringFormModal = ({
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2.5}
+            aria-hidden="true"
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M18 6L6 18" />
           </svg>
         </button>
 
         <div className="scrollbar-hide max-h-[calc(100dvh-1.5rem)] overflow-y-auto sm:max-h-[90dvh]">
-          <div className="relative mx-2 sm:mx-3">
+          <div
+            className={`relative mx-2 sm:mx-3 ${
+              geometry === "consultation" ? styles.consultationPanel : ""
+            }`}
+          >
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 rounded-lg border border-lime-300 bg-[#eff5f1] shadow-2xl"

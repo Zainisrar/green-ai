@@ -1,0 +1,13 @@
+<svg width="82" height="101" viewBox="0 0 82 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="82" height="101" fill="#555252"/>
+<g id="Book a Consultation">
+<rect width="1920" height="970" transform="translate(-1438.51 -591.301)" fill="white"/>
+<foreignObject x="-15" y="-15" width="111.486" height="130.199"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(7.5px);height:100%;width:100%"></div></foreignObject><path id="Vector 7374" data-figma-bg-blur-radius="15" d="M54.1593 0.699219L2.48633 98.6992H81.4863" stroke="url(#paint0_linear_7077_2780)" stroke-width="3"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_7077_2780" x1="465.019" y1="-295.746" x2="185.275" y2="350.424" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFE500" stop-opacity="0.89"/>
+<stop offset="1" stop-color="#23D14B" stop-opacity="0.3"/>
+</linearGradient>
+</defs>
+</svg>

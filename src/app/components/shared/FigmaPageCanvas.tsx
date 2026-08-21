@@ -17,6 +17,8 @@ interface FigmaPageCanvasProps {
   designHeight?: number;
   /** Long Figma pages should preserve the 1920px design width and scroll. */
   scaleToViewport?: "contain" | "width";
+  /** Scale a desktop-only Figma frame down on narrow screens instead of clipping it. */
+  scaleMobileToViewport?: boolean;
 }
 
 /** Reusable viewport for GREEN's fixed 1920 x 970 Figma compositions. */
@@ -28,6 +30,7 @@ export default function FigmaPageCanvas({
   fitCanvasHeight = false,
   designHeight = DESIGN_HEIGHT,
   scaleToViewport = "width",
+  scaleMobileToViewport = false,
 }: FigmaPageCanvasProps) {
   const [viewport, setViewport] = useState({
     width: DESIGN_WIDTH,
@@ -44,6 +47,27 @@ export default function FigmaPageCanvas({
   }, []);
 
   if (viewport.width <= desktopBreakpoint) {
+    if (scaleMobileToViewport) {
+      const mobileScale = viewport.width / DESIGN_WIDTH;
+
+      return (
+        <div className={styles.shell} data-figma-page-node={nodeId}>
+          <div
+            className={styles.canvas}
+            data-figma-responsive="mobile"
+            style={{
+              top: 0,
+              left: 0,
+              height: designHeight,
+              transform: `scale(${mobileScale})`,
+            }}
+          >
+            {mobile}
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div className={styles.mobile} data-figma-responsive="mobile">
         {mobile}
@@ -52,17 +76,19 @@ export default function FigmaPageCanvas({
   }
 
   const scale =
-    scaleToViewport === "width"
-      ? viewport.width / DESIGN_WIDTH
-      : Math.min(viewport.width / DESIGN_WIDTH, viewport.height / designHeight);
+    fitCanvasHeight || scaleToViewport === "contain"
+      ? Math.min(viewport.width / DESIGN_WIDTH, viewport.height / designHeight)
+      : scaleToViewport === "width"
+        ? viewport.width / DESIGN_WIDTH
+        : Math.min(
+            viewport.width / DESIGN_WIDTH,
+            viewport.height / designHeight,
+          );
 
   // The shell always fills the full viewport (100svh). The canvas scales to
   // fit inside. This prevents the white-space gap below on narrower screens.
   return (
-    <div
-      className={styles.shell}
-      data-figma-page-node={nodeId}
-    >
+    <div className={styles.shell} data-figma-page-node={nodeId}>
       <div
         className={styles.canvas}
         data-figma-responsive="desktop"

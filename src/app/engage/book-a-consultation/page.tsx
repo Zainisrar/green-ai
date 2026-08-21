@@ -8,6 +8,7 @@ export default function BookAConsultationPage() {
       mobile={<BookAConsultation canvas />}
       nodeId="7077:19924"
       fitCanvasHeight
+      scaleMobileToViewport
     />
   );
 }

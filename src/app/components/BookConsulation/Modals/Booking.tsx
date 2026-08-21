@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
 import {
   buildReachUsPayload,
   generateCaptcha,
@@ -140,6 +141,8 @@ const Booking = ({ isOpen, onClose }: Props) => {
     <EngineeringFormModal
       isOpen={isOpen}
       onClose={onClose}
+      geometry="consultation"
+      maxWidthClass="max-w-[1698px]"
       title={
         <>
           BOOK A <span className="text-green-600">CONSULTATION</span>
