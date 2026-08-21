@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { NavigationItem, NavigationText } from "../../hooks/useNavigation";
 import styles from "./Navigation.module.css";
 
@@ -28,12 +28,52 @@ export default function Navigation({
   const [selectedParent, setSelectedParent] = useState<NavigationItem | null>(
     null,
   );
+  const drawerRef = useRef<HTMLElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+
+  // The CMS can replace the fallback navigation after the drawer has opened.
+  // Do not retain a drill-down item from the previous data set.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: This prop changes when the CMS replaces fallback navigation.
   useEffect(() => {
+    setSelectedParent(null);
+  }, [navigationData]);
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null;
     const closeOnEscape = (event: KeyboardEvent) =>
       event.key === "Escape" && onClose();
+
     window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
+    closeButtonRef.current?.focus();
+
+    return () => {
+      window.removeEventListener("keydown", closeOnEscape);
+      previouslyFocused?.focus();
+    };
   }, [onClose]);
+
+  const trapFocus = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key !== "Tab") return;
+
+    const focusableElements = drawerRef.current?.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    );
+    if (!focusableElements?.length) {
+      event.preventDefault();
+      return;
+    }
+
+    const first = focusableElements[0];
+    const last = focusableElements[focusableElements.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
 
   const quote =
     featuredChild?.text?.description ||
@@ -58,8 +98,9 @@ export default function Navigation({
         onClick={onClose}
         aria-label="Close navigation"
       />
-      <aside className={styles.drawer}>
+      <aside className={styles.drawer} ref={drawerRef} onKeyDown={trapFocus}>
         <button
+          ref={closeButtonRef}
           className={styles.close}
           type="button"
           onClick={onClose}
@@ -150,7 +191,7 @@ export default function Navigation({
           <Link href="/engage/reach-us" onClick={onClose}>
             Enquiry
           </Link>
-          <Link href="/engage/reach-us" onClick={onClose}>
+          <Link href="/engage/contact-us" onClick={onClose}>
             Contact Us
           </Link>
         </div>

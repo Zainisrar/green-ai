@@ -8,6 +8,7 @@ export default function PartnerWithUsPage() {
       mobile={<PartnerWithUs canvas />}
       nodeId="7077:23359"
       fitCanvasHeight
+      scaleMobileToViewport
     />
   );
 }

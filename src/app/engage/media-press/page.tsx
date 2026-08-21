@@ -8,6 +8,7 @@ export default function MediaPressPage() {
       mobile={<MediaPress canvas />}
       nodeId="7077:23952"
       fitCanvasHeight
+      scaleMobileToViewport
     />
   );
 }

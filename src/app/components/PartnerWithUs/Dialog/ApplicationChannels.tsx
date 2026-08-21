@@ -18,7 +18,7 @@ const channels = [
 
 const ApplicationChannels = ({ isOpen, onClose }: Props) => {
   return (
-    <ClientInfoModal isOpen={isOpen} onClose={onClose}>
+    <ClientInfoModal isOpen={isOpen} onClose={onClose} geometry="consultation">
       <div className="mb-6 sm:mb-8">
         <h2 className="text-2xl font-black text-gray-800 sm:text-3xl">
           Application Channels — Active Collaboration

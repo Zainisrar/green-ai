@@ -1,6 +1,7 @@
 .canvasPage { position: relative; width: 1920px; height: 970px; min-height: 970px; overflow: hidden; background: #fff; color: #111; font-family: var(--font-montserrat), Montserrat, sans-serif; }
 .canvasArtwork { position: absolute; z-index: 0; top: 382px; left: 1219px; width: 621px; height: 250px; pointer-events: none; display: block; }
-.canvasVerticalTitle { position: absolute; z-index: 3; top: 334px; left: 85px; width: 28px; height: 575px; }
+.canvasVerticalTitle { position: absolute; z-index: 3; top: 334px; left: 85px; display: flex; width: 28px; height: 575px; align-items: center; justify-content: center; }
+.canvasVerticalTitle p { margin: 0; color: transparent; font-family: var(--font-raleway), Raleway, sans-serif; font-size: 60px; font-weight: 900; line-height: 1; -webkit-text-stroke: 1.5px #d9d9d9; text-transform: uppercase; transform: rotate(-90deg); white-space: nowrap; }
 .canvasTitle { position: absolute; z-index: 5; top: 103px; left: 258px; width: 504px; margin: 0; font-size: 50px; font-weight: 800; line-height: 51px; text-transform: uppercase; }
 .canvasTitle span { color: #23b14d; }
 .canvasSubtitle { position: absolute; z-index: 5; top: 169px; left: 258px; width: 715px; margin: 0; font-size: 22px; font-weight: 700; line-height: 36px; color: #23b14d; font-style: italic; }
@@ -10,7 +11,9 @@
 .canvasRow { position: absolute; left: 258px; width: 1220px; height: 70px; }
 .canvasRow h2 { position: absolute; left: 0; width: 553px; margin: 0; font-size: 32px; font-weight: 700; line-height: 50px; }
 .canvasRow p { position: absolute; left: 0; width: 654px; margin: 0; font-size: 20px; font-weight: 500; line-height: 36px; color: #23b14d; font-style: italic; }
-.canvasRowCta { position: absolute; left: 692px; width: 122px; height: 37px; min-height: 37px; justify-content: space-between !important; padding: 0 12px 0 14px !important; font-size: 13px; font-weight: 600; }
+.canvasRowCta { position: absolute; left: 692px; display: grid; width: 122px; height: 52px; min-height: 52px; grid-template-columns: 1fr auto 1fr; gap: 0; padding: 0 12px !important; font-size: 13px; font-weight: 600; }
+.canvasRowCta span { grid-column: 2; text-align: center; }
+.canvasRowCta svg { grid-column: 3; justify-self: end; margin: 0; transform: translateX(-8px); }
 .canvasRow1 { top: 291px; }
 .canvasRow2 { top: 391px; }
 .canvasRow3 { top: 498px; }
@@ -38,5 +41,4 @@
 .canvasReadMore span:last-child { color: #23b14d; font-size: 24px; line-height: 14px; }
 .canvasSubmitCta, .canvasDownloadCta { position: absolute; z-index: 7; height: 52px; min-height: 52px; justify-content: space-between !important; padding-top: 0 !important; padding-bottom: 0 !important; font-size: 16px; font-weight: 600; }
 .canvasSubmitCta { top: 723px; left: 1571px; width: 349px; }
-.canvasDownloadCta { top: 801px; left: 1468px; width: 449px; }
-@media (max-width: 1200px) { .canvasPage { position: static; width: auto; height: auto; min-height: 0; overflow: visible; } .canvasArtwork, .canvasVerticalTitle, .canvasTitle, .canvasSubtitle, .canvasDescription, .canvasRows, .canvasBottomQuote, .canvasReadMore, .canvasSubmitCta, .canvasDownloadCta { position: static; width: auto; height: auto; min-height: 0; } }
+.canvasDownloadCta { top: 801px; left: 1452px; width: 449px; }

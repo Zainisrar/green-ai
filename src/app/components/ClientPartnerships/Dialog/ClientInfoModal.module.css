@@ -1,0 +1,24 @@
+.enquiryPanel {
+  position: relative;
+  isolation: isolate;
+  border: 0 !important;
+  border-radius: 0;
+  background: linear-gradient(90deg, #23b14d 0%, #fffe50 100%) !important;
+  clip-path: polygon(16% 0, 100% 0, 84% 100%, 0 100%);
+  padding-right: calc(16% + 60px) !important;
+  padding-left: calc(16% + 60px) !important;
+}
+
+.enquiryPanel::before {
+  position: absolute;
+  z-index: 0;
+  inset: 2px;
+  content: "";
+  background: #fff;
+  clip-path: polygon(16% 0, 100% 0, 84% 100%, 0 100%);
+}
+
+.enquiryPanel > * {
+  position: relative;
+  z-index: 1;
+}

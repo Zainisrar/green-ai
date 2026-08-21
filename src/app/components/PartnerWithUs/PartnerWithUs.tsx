@@ -46,25 +46,9 @@ const PartnerWithUs = ({ canvas = false }: { canvas?: boolean }) => {
           width="621"
           height="250"
         />
-        <svg
-          className={styles.canvasVerticalTitle}
-          width="28"
-          height="575"
-          viewBox="0 0 28 575"
-          aria-hidden="true"
-        >
-          <text
-            fill="none"
-            stroke="#d9d9d9"
-            strokeWidth="0.9"
-            fontFamily="'Raleway', Raleway, sans-serif"
-            fontWeight="900"
-            fontSize="46"
-            transform="translate(24,560) rotate(-90)"
-          >
-            PARTNER WITH US
-          </text>
-        </svg>
+        <div className={styles.canvasVerticalTitle} aria-hidden="true">
+          <p>Partner With Us</p>
+        </div>
         <h1 className={styles.canvasTitle}>PARTNER WITH <span>US</span></h1>
         <p className={styles.canvasSubtitle}>Your Mission, Delivered.</p>
         <p className={styles.canvasDescription}>Whether you&apos;re a donor, government, or global institution — if your goal is clean energy access, sustainable infrastructure, and real-world delivery — <span className={styles.descGreen}>GREEN</span> is your execution partner in Papua New Guinea and the South Pacific.</p>

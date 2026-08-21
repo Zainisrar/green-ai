@@ -80,9 +80,9 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
       {/* Vertical side title (Raleway Black, outlined, bottom-up) */}
-      <p className={styles.verticalTitle} aria-hidden="true">
-        Media &amp; Press
-      </p>
+      <div className={styles.verticalTitle} aria-hidden="true">
+        <p>Media &amp; Press</p>
+      </div>
 
       {/* Right faint collage */}
       <div className={styles.rightCollage} aria-hidden="true">
@@ -166,13 +166,25 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
         GREEN Innovation Partnership Framework (PDF)
       </a>
 
-      <FigmaAngledCta
+      <button
         className={styles.ctaQuote}
-        style={{ position: "absolute", left: 1536, top: 773 }}
         onClick={() => setQuoteOpen(true)}
+        type="button"
       >
-        Request Quote Or Appearance
-      </FigmaAngledCta>
+        <img
+          className={styles.ctaQuoteFrame}
+          src="/images/media-press/request-quote-appearance-frame.svg"
+          alt=""
+          aria-hidden="true"
+        />
+        <span>Request Quote Or Appearance</span>
+        <img
+          className={styles.ctaQuoteArrow}
+          src="/images/media-press/cta-arrow.svg"
+          alt=""
+          aria-hidden="true"
+        />
+      </button>
 
       {/* Chatbot */}
       {canvas ? (
