@@ -355,6 +355,27 @@
     font-size: 22px;
     line-height: 1.35;
   }
+
+  /* The Engage panel has nine links, including the two-line Public Events
+     item. Its original Figma spacing exceeds short browser windows and puts
+     the action buttons on top of Request a Proposal / Find Us Globally. */
+  .engageDrawer .subNavigation {
+    gap: 6px;
+  }
+
+  .engageDrawer .actions {
+    bottom: 12px;
+  }
+
+  .engageDrawer .actions a {
+    width: 185px;
+    height: 52px;
+    font-size: 15px;
+  }
+
+  .engageDrawer .actions a:first-child {
+    width: 165px;
+  }
 }
 
 /* A retina-sized browser can have a 900–1100px CSS viewport even though the

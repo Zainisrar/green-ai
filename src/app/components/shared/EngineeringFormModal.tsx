@@ -22,7 +22,7 @@ const EngineeringFormModal = ({
   subtitle,
   children,
   maxWidthClass = "max-w-5xl",
-  geometry = "default",
+  geometry = "consultation",
 }: EngineeringFormModalProps) => {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);

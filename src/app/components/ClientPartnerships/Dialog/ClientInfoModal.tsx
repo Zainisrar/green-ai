@@ -18,7 +18,7 @@ const ClientInfoModal = ({
   onClose,
   children,
   maxWidthClass = "max-w-6xl",
-  geometry = "default",
+  geometry = "consultation",
 }: ClientInfoModalProps) => {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);

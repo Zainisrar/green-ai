@@ -56,7 +56,9 @@ const Proposal = ({ isOpen, onClose }: Props) => {
   if (!isOpen) return null;
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -95,7 +97,10 @@ const Proposal = ({ isOpen, onClose }: Props) => {
       );
 
       if (data.Code === "001") {
-        setSuccessMessage(data.Message || "Your proposal request has been submitted successfully!");
+        setSuccessMessage(
+          data.Message ||
+            "Your proposal request has been submitted successfully!",
+        );
         setFormData({
           organization: "",
           contactName: "",
@@ -112,11 +117,16 @@ const Proposal = ({ isOpen, onClose }: Props) => {
           setSuccessMessage("");
         }, 2000);
       } else {
-        setErrorMessage(data.Message || "Failed to submit proposal request. Please try again.");
+        setErrorMessage(
+          data.Message ||
+            "Failed to submit proposal request. Please try again.",
+        );
       }
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "An error occurred while submitting the form.",
+        error instanceof Error
+          ? error.message
+          : "An error occurred while submitting the form.",
       );
     } finally {
       setIsLoading(false);
@@ -127,6 +137,8 @@ const Proposal = ({ isOpen, onClose }: Props) => {
     <EngineeringFormModal
       isOpen={isOpen}
       onClose={onClose}
+      geometry="consultation"
+      maxWidthClass="max-w-[1698px]"
       title={
         <>
           REQUEST A <span className="text-green-600">PROPOSAL</span>
@@ -135,16 +147,54 @@ const Proposal = ({ isOpen, onClose }: Props) => {
     >
       <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
         <div className={formGridClass}>
-          <input type="text" name="contactName" placeholder="CONTACT NAME" value={formData.contactName} onChange={handleInputChange} className={formFieldClass} required />
-          <input type="text" name="organization" placeholder="ORGANIZATION" value={formData.organization} onChange={handleInputChange} className={formFieldClass} required />
+          <input
+            type="text"
+            name="contactName"
+            placeholder="CONTACT NAME"
+            value={formData.contactName}
+            onChange={handleInputChange}
+            className={formFieldClass}
+            required
+          />
+          <input
+            type="text"
+            name="organization"
+            placeholder="ORGANIZATION"
+            value={formData.organization}
+            onChange={handleInputChange}
+            className={formFieldClass}
+            required
+          />
         </div>
 
         <div className={formGridClass}>
-          <input type="email" name="email" placeholder="E-MAIL ID" value={formData.email} onChange={handleInputChange} className={formFieldClass} required />
-          <input type="tel" name="phone" placeholder="PHONE" value={formData.phone} onChange={handleInputChange} className={formFieldClass} required />
+          <input
+            type="email"
+            name="email"
+            placeholder="E-MAIL ID"
+            value={formData.email}
+            onChange={handleInputChange}
+            className={formFieldClass}
+            required
+          />
+          <input
+            type="tel"
+            name="phone"
+            placeholder="PHONE"
+            value={formData.phone}
+            onChange={handleInputChange}
+            className={formFieldClass}
+            required
+          />
         </div>
 
-        <select name="projectType" value={formData.projectType} onChange={handleInputChange} className={formFieldClass} required>
+        <select
+          name="projectType"
+          value={formData.projectType}
+          onChange={handleInputChange}
+          className={formFieldClass}
+          required
+        >
           <option value="">PROJECT TYPE</option>
           <option value="solar-epcm">Solar EPCM</option>
           <option value="microgrid">Hybrid Microgrid</option>
@@ -153,22 +203,47 @@ const Proposal = ({ isOpen, onClose }: Props) => {
           <option value="other">Other</option>
         </select>
 
-        <textarea name="projectDescription" placeholder="PROJECT DESCRIPTION / REQUIREMENTS" value={formData.projectDescription} onChange={handleInputChange} rows={3} className={`${formFieldClass} resize-none`} required />
+        <textarea
+          name="projectDescription"
+          placeholder="PROJECT DESCRIPTION / REQUIREMENTS"
+          value={formData.projectDescription}
+          onChange={handleInputChange}
+          rows={3}
+          className={`${formFieldClass} resize-none`}
+          required
+        />
 
         <div className={captchaRowClass}>
           <div className={captchaInputGroupClass}>
             <div className="rounded border bg-gray-200 px-3 py-2 sm:px-4">
               <span className="font-mono text-base sm:text-lg">{captcha}</span>
             </div>
-            <input type="text" placeholder="Enter captcha" value={captchaInput} onChange={(e) => setCaptchaInput(e.target.value)} className={`${formFieldClass} sm:max-w-[200px]`} required />
+            <input
+              type="text"
+              placeholder="Enter captcha"
+              value={captchaInput}
+              onChange={(e) => setCaptchaInput(e.target.value)}
+              className={`${formFieldClass} sm:max-w-[200px]`}
+              required
+            />
           </div>
-          <button type="submit" disabled={isLoading} className="shrink-0 cursor-pointer self-end disabled:opacity-50">
-            <img src="/images/book-consulation/formBtn.png" className="w-28 sm:w-40" alt="Submit proposal" />
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="shrink-0 cursor-pointer self-end disabled:opacity-50"
+          >
+            <img
+              src="/images/book-consulation/formBtn.png"
+              className="w-28 sm:w-40"
+              alt="Submit proposal"
+            />
           </button>
         </div>
 
         {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
-        {successMessage && <p className="text-sm text-green-600">{successMessage}</p>}
+        {successMessage && (
+          <p className="text-sm text-green-600">{successMessage}</p>
+        )}
       </form>
     </EngineeringFormModal>
   );

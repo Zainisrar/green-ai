@@ -4,9 +4,9 @@
   border: 0 !important;
   border-radius: 0;
   background: linear-gradient(90deg, #23b14d 0%, #fffe50 100%) !important;
-  clip-path: polygon(16% 0, 100% 0, 84% 100%, 0 100%);
-  padding-right: calc(16% + 60px) !important;
-  padding-left: calc(16% + 60px) !important;
+  clip-path: polygon(2.1% 0, 100% 0, 97.9% 100%, 0 100%);
+  padding-right: clamp(1.5rem, 4vw, 4rem) !important;
+  padding-left: clamp(1.5rem, 4vw, 4rem) !important;
 }
 
 .enquiryPanel::before {
@@ -15,7 +15,7 @@
   inset: 2px;
   content: "";
   background: #fff;
-  clip-path: polygon(16% 0, 100% 0, 84% 100%, 0 100%);
+  clip-path: polygon(2.1% 0, 100% 0, 97.9% 100%, 0 100%);
 }
 
 .enquiryPanel > * {

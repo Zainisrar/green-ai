@@ -134,7 +134,7 @@ export default function Navigation({
         aria-label="Close navigation"
       />
       <aside
-        className={`${styles.drawer} ${isFeatureLedLayout ? styles.featureLedDrawer : ""} ${isEngineeringLayout ? styles.engineeringDrawer : ""}`}
+        className={`${styles.drawer} ${isFeatureLedLayout ? styles.featureLedDrawer : ""} ${isEngineeringLayout ? styles.engineeringDrawer : ""} ${isEngageLayout ? styles.engageDrawer : ""}`}
         ref={drawerRef}
         onKeyDown={trapFocus}
       >

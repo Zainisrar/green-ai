@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import D6Chatbot from "../D6Chatbot";
 import SiteHeader from "../SiteHeader/SiteHeader";
@@ -35,7 +36,6 @@ export default function RequestProposalCanvas() {
         highlightActive={false}
         figmaPanelVariant="flagship"
       />
-      {/* Vertical outline title: BOOK A CONSULTATION (Figma TEXT node 47,320 59x582) */}
       <svg
         className={styles.verticalTitle}
         width="59"
@@ -45,7 +45,7 @@ export default function RequestProposalCanvas() {
       >
         <text
           fill="none"
-          stroke="rgba(255,255,255,0.85)"
+          stroke="rgba(0,0,0,0.15)"
           strokeWidth="1.3"
           fontFamily="'Raleway', Raleway, sans-serif"
           fontWeight="900"
@@ -73,8 +73,8 @@ export default function RequestProposalCanvas() {
       <p className={styles.description}>
         Whether you&rsquo;re developing a project, designing a grant, or
         planning a regional rollout — schedule a tailored consultation with
-        GREEN&rsquo;s technical, strategy, or policy teams. Get real answers
-        from those who deliver real energy systems.
+        <strong>GREEN&rsquo;s</strong> technical, strategy, or policy teams. Get
+        real answers from those who deliver real energy systems.
       </p>
       <h2 className={styles.sectionHead}>Who Should Use This</h2>
       <div className={styles.chips}>
@@ -158,30 +158,16 @@ export default function RequestProposalCanvas() {
           </span>
         </div>
       </div>
-      <button
+      <FigmaAngledCta
         className={styles.ctaButton}
         onClick={() => setModalOpen(true)}
-        type="button"
       >
-        <img
-          className={styles.ctaBox}
-          src="/images/rfp/cta_box.png"
-          alt=""
-          width="269"
-          height="52"
-        />
-        <span className={styles.ctaText}> Request a Proposal (RFP)</span>
-        <img
-          className={styles.ctaArrow}
-          src="/images/rfp/cta_arrow.png"
-          alt=""
-          width="36"
-          height="32"
-        />
-      </button>
+        Request a Proposal (RFP)
+      </FigmaAngledCta>
       <p className={styles.freeNote}>
-        Consultations are free for government agencies, donors, NGOs, and
-        registered local businesses.
+        Consultations are free for{" "}
+        <span>government agencies, donors, NGOs</span>, and registered local
+        businesses.
       </p>
       <D6Chatbot
         canvasAnchored
@@ -206,14 +192,12 @@ export default function RequestProposalCanvas() {
       mobile={
         <main className={styles.mobilePage}>
           <h1>Request a Proposal (RFP)</h1>
-          <p>
-            Let&rsquo;s Build Your Energy Project — From Vision to Reality.
-          </p>
+          <p>Let&rsquo;s Build Your Energy Project — From Vision to Reality.</p>
           <p>
             Whether you&rsquo;re developing a project, designing a grant, or
-            planning a regional rollout — schedule a tailored consultation
-            with GREEN&rsquo;s technical, strategy, or policy teams. Get real
-            answers from those who deliver real energy systems.
+            planning a regional rollout — schedule a tailored consultation with
+            GREEN&rsquo;s technical, strategy, or policy teams. Get real answers
+            from those who deliver real energy systems.
           </p>
           <section>
             <h2>Who Should Use This</h2>

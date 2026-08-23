@@ -14,6 +14,7 @@
   left: 47px;
   width: 59px;
   height: 582px;
+  overflow: visible;
 }
 
 .collage {
@@ -62,7 +63,13 @@
   margin: 0;
   width: 1384px;
   font-size: 18px;
-  line-height: 22px;
+  line-height: 24px;
+}
+
+.description strong,
+.freeNote span {
+  color: #23b14d;
+  font-weight: 800;
 }
 
 .sectionHead {
@@ -92,17 +99,27 @@
 
 .chip {
   position: absolute;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
   width: 366px;
   height: 53px;
-  border: 2px solid #ffe500;
-  transform: skewX(-16deg);
+  background: #ffe500;
+  clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
+}
+
+.chip::before {
+  position: absolute;
+  z-index: 0;
+  inset: 2px;
+  content: "";
+  background: #fff;
+  clip-path: polygon(5% 0, 100% 0, 95% 100%, 0 100%);
 }
 
 .chipText {
-  position: absolute;
-  top: 11px;
-  left: 38px;
-  transform: skewX(16deg);
+  position: relative;
+  z-index: 1;
   font-size: 24px;
   line-height: 29px;
   font-weight: 600;
@@ -112,6 +129,7 @@
 
 .delivRow {
   position: absolute;
+  width: 600px;
   height: 70px;
 }
 
@@ -121,6 +139,7 @@
   left: 0;
   width: 70px;
   height: 70px;
+  max-width: none;
   display: block;
   object-fit: contain;
 }
@@ -140,7 +159,7 @@
   position: absolute;
   width: 440px;
   height: 230px;
-  background: #f2f9fc;
+  background: transparent;
 }
 
 .bracketL {
@@ -213,47 +232,17 @@
   white-space: nowrap;
 }
 
-.ctaButton {
+.ctaButton.ctaButton {
   position: absolute;
   top: 819px;
   left: 1647px;
   width: 269px;
+  min-width: 269px;
   height: 52px;
-  margin: 0;
+  min-height: 52px;
   padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-
-.ctaBox {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 269px;
-  height: 52px;
-  transform: skewX(-16deg);
-}
-
-.ctaText {
-  position: absolute;
-  top: 6px;
-  left: 17px;
-  transform: skewX(16deg);
-  font-size: 16px;
-  line-height: 19px;
-  font-weight: 600;
-  white-space: nowrap;
-  color: #000;
-}
-
-.ctaArrow {
-  position: absolute;
-  top: 12px;
-  left: 225px;
-  width: 36px;
-  height: 32px;
-  transform: skewX(16deg);
+  gap: 10px;
+  justify-content: center;
 }
 
 .freeNote {
@@ -264,6 +253,8 @@
   margin: 0;
   font-size: 18px;
   line-height: 24px;
+  font-style: italic;
+  font-weight: 500;
 }
 
 .noteGreen {
