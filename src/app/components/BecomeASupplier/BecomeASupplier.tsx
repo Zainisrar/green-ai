@@ -129,12 +129,12 @@ const BecomeASupplier = () => {
 
               <div className="mt-8 flex flex-col items-stretch gap-4 lg:mt-0 lg:items-end">
                 <a
-                  href="#"
+                  href="mailto:procurement@green.com.pg?subject=Supplier%20Handbook%20Request"
                   className="flex items-center justify-between gap-4 border border-[#4CAF50] bg-gradient-to-r from-[#23B14D]/15 to-[#FFFE50]/15 px-6 py-3 text-sm font-bold text-gray-800 shadow-sm transition hover:brightness-105 sm:text-base"
                   style={{ clipPath: "polygon(6% 0, 100% 0, 94% 100%, 0 100%)" }}
                 >
-                  <span>Download Handbook</span>
-                  <span className="text-[#23B14D]">⤓</span>
+                  <span>Request Supplier Handbook</span>
+                  <span className="text-[#23B14D]">›</span>
                 </a>
                 <button
                   type="button"

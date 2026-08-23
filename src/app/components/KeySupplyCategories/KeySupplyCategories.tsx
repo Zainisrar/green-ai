@@ -181,10 +181,10 @@ export default function KeySupplyCategories({
         </FigmaAngledCta>
         <FigmaAngledCta
           className={styles.downloadCta}
-          icon="download"
-          href="/supply-partners/full-supply-category-technical-pack.pdf"
+          icon="chevron"
+          href="mailto:procurement@green.com.pg?subject=Supply%20Category%20Technical%20Pack%20Request"
         >
-          Full Supply Category Technical Pack (PDF)
+          Request Supply Category Technical Pack
         </FigmaAngledCta>
       </div>
 
@@ -200,10 +200,10 @@ export default function KeySupplyCategories({
             Supplying to GREEN?
           </FigmaAngledCta>
           <FigmaAngledCta
-            icon="download"
-            href="/supply-partners/full-supply-category-technical-pack.pdf"
+            icon="chevron"
+            href="mailto:procurement@green.com.pg?subject=Supply%20Category%20Technical%20Pack%20Request"
           >
-            Full Supply Category Technical Pack (PDF)
+            Request Supply Category Technical Pack
           </FigmaAngledCta>
         </div>
       </div>

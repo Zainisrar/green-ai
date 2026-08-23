@@ -57,7 +57,7 @@ const fallbackNavigation: NavigationItem[] = [
       {
         id: 14,
         name: "Fast Facts & Stats",
-        slug: "/explore/fast-facts-and-stats",
+        slug: "/explore/fast-facts-stats",
         top: false,
       },
     ],
@@ -140,7 +140,7 @@ const fallbackNavigation: NavigationItem[] = [
   {
     id: 5,
     name: "Enlighten",
-    slug: "/insights",
+    slug: "/enlighten/insights-articles",
     top: true,
     children: [
       {
@@ -177,13 +177,13 @@ const fallbackNavigation: NavigationItem[] = [
   {
     id: 6,
     name: "Ecosystem",
-    slug: "/ecosystem",
+    slug: "/ecosystem/our-value-chain",
     top: true,
     children: [
       {
         id: 61,
         name: "Our Ecosystem",
-        slug: "/ecosystem",
+        slug: "/ecosystem/our-value-chain",
         top: false,
         image: { src: "/images/nav/6.png", alt: "GREEN supply ecosystem" },
         text: {

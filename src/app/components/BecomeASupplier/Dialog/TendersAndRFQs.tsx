@@ -40,12 +40,12 @@ const TendersAndRFQs = ({ isOpen, onClose }: Props) => {
         {documents.map((doc, idx) => (
           <a
             key={idx}
-            href="#"
+            href={`mailto:procurement@green.com.pg?subject=${encodeURIComponent(`${doc} Request`)}`}
             className="flex items-center justify-between gap-3 border border-[#4CAF50] bg-gradient-to-r from-[#23B14D]/15 to-[#FFFE50]/15 px-4 py-3 text-xs font-semibold text-gray-800 shadow-sm transition hover:brightness-105 sm:text-sm"
             style={{ clipPath: "polygon(4% 0, 100% 0, 96% 100%, 0 100%)" }}
           >
             <span>{doc}</span>
-            <span className="shrink-0 text-[#23B14D]">⤓</span>
+            <span className="shrink-0 text-[#23B14D]">›</span>
           </a>
         ))}
       </div>

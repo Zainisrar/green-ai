@@ -1,35 +1,19 @@
-import { MetadataRoute } from 'next'
+import { SITE_URL } from "../lib/seo-config";
 
 export function GET(): Response {
   const robotsTxt = `User-agent: *
 Allow: /
-
-# Disallow admin and private areas
-Disallow: /admin/
 Disallow: /api/
-Disallow: /_next/
-Disallow: /private/
+Disallow: /client-value-engineering/dashboard
+Disallow: /ecosystem/supply-partners/login
+Disallow: /ecosystem/supply-partners/register
 
-# Allow important pages
-Allow: /about
-Allow: /services
-Allow: /products
-Allow: /insights
-Allow: /careers
-Allow: /contact
-
-# Sitemap location
-Sitemap: https://example.com/sitemap.xml
-
-# Crawl delay (optional)
-Crawl-delay: 1
-
-# Host directive
-Host: https://example.com`
+Sitemap: ${SITE_URL}/sitemap.xml`;
 
   return new Response(robotsTxt, {
     headers: {
-      'Content-Type': 'text/plain',
+      "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
+      "Content-Type": "text/plain; charset=utf-8",
     },
-  })
+  });
 }

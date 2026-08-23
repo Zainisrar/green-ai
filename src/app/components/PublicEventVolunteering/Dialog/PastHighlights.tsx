@@ -163,7 +163,7 @@ const PastHighlights = ({ isOpen, onClose }: Props) => {
               {/* Bottom Link */}
               <div className="text-right mt-12">
                 <p className="text-gray-700 text-lg">
-                  <span className="italic">Browse the</span> <a href="#" className="text-[#23B14D] font-medium underline hover:text-[#1B8F3A]">GREEN Events Gallery →</a>
+                  <span className="italic">Browse the</span> <a href="/enlighten/events-webinars" className="text-[#23B14D] font-medium underline hover:text-[#1B8F3A]">GREEN Events Gallery →</a>
                 </p>
               </div>
             </div>

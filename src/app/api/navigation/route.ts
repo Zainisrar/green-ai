@@ -6,22 +6,27 @@ export async function GET() {
   try {
     const response = await fetch(NAVIGATION_API, {
       headers: {
-        "Content-Type": "application/json",
+        Accept: "application/json",
       },
-      cache: "no-store",
+      next: { revalidate: 300 },
+      signal: AbortSignal.timeout(8000),
     });
 
     if (!response.ok) {
-      throw new Error(`API Error: ${response.status} ${response.statusText}`);
+      return NextResponse.json(
+        { success: false, data: [] },
+        { headers: { "Cache-Control": "no-store" } },
+      );
     }
 
     const data = await response.json();
     return NextResponse.json(data);
-  } catch (error) {
-    console.error("Error fetching navigation:", error);
+  } catch {
+    // The client ships a complete local fallback, so an optional CMS outage is
+    // a degraded-data state rather than an application error.
     return NextResponse.json(
-      { success: false, error: "Failed to fetch navigation" },
-      { status: 500 },
+      { success: false, data: [] },
+      { headers: { "Cache-Control": "no-store" } },
     );
   }
 }

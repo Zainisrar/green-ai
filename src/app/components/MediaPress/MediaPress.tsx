@@ -13,8 +13,9 @@ import RequestQuoteAppointment from "./Modals/RequestQuoteAppointment";
 import styles from "./MediaPress.module.css";
 
 const CTA_LINKS = {
-  pressKit: "/press-kit.pdf",
-  partnershipFramework: "/volunteer-welcome-pack.pdf",
+  pressKit: "mailto:media@green.com.pg?subject=GREEN%20Press%20Kit%20Request",
+  partnershipFramework:
+    "mailto:innovation@green.com.pg?subject=Innovation%20Partnership%20Framework%20Request",
 };
 
 const ROWS = [
@@ -150,10 +151,10 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
       <FigmaAngledCta
         className={styles.ctaDownload}
         style={{ position: "absolute", left: 1571, top: 695 }}
-        icon="download"
+        icon="chevron"
         href={CTA_LINKS.pressKit}
       >
-        Download the Press Kit
+        Request the Press Kit
       </FigmaAngledCta>
 
       {/* PDF link above/beside the quote CTA */}
@@ -163,7 +164,7 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
         target="_blank"
         rel="noopener noreferrer"
       >
-        GREEN Innovation Partnership Framework (PDF)
+        Request GREEN Innovation Partnership Framework
       </a>
 
       <button

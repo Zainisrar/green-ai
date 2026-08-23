@@ -210,10 +210,10 @@ export default function OurProcurementPhilosophy({
         </FigmaAngledCta>
         <FigmaAngledCta
           className={styles.downloadBtn}
-          icon="download"
-          href="/supply-partners/code-of-conduct.pdf"
+          icon="chevron"
+          href="/ecosystem/supplier-code-of-conduct"
         >
-          GREEN Supplier Code of Conduct (PDF)
+          View GREEN Supplier Code of Conduct
         </FigmaAngledCta>
       </div>
 
@@ -230,10 +230,10 @@ export default function OurProcurementPhilosophy({
             Submit Interest
           </FigmaAngledCta>
           <FigmaAngledCta
-            icon="download"
-            href="/supply-partners/code-of-conduct.pdf"
+            icon="chevron"
+            href="/ecosystem/supplier-code-of-conduct"
           >
-            GREEN Supplier Code of Conduct (PDF)
+            View GREEN Supplier Code of Conduct
           </FigmaAngledCta>
         </div>
       </div>

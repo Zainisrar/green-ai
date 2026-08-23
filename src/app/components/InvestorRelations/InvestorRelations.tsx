@@ -38,8 +38,10 @@ export default function InvestorRelations({
   const [openModal, setOpenModal] = useState<string | null>(null);
   const [isEoiOpen, setIsEoiOpen] = useState(false);
   const ctaLinks = {
-    investorPack: "/investor-pack.pdf",
-    partnershipFramework: "/green-innovation-partnership-framework.pdf",
+    investorPack:
+      "mailto:info@green.com.pg?subject=GREEN%20Investor%20Pack%20Request",
+    partnershipFramework:
+      "mailto:innovation@green.com.pg?subject=Innovation%20Partnership%20Framework%20Request",
   };
 
   const highlightText = (text: string, highlight: string) => {
@@ -239,10 +241,10 @@ export default function InvestorRelations({
       <FigmaAngledCta
         className={styles.downloadCta}
         style={{ position: "absolute", left: 1569, top: 741 }}
-        icon="download"
+        icon="chevron"
         href={ctaLinks.investorPack}
       >
-        Download Investor Pack (PDF)
+        Request Investor Pack
       </FigmaAngledCta>
       <FigmaAngledCta
         className={styles.eoiCta}

@@ -64,7 +64,7 @@ const PartnerWithUs = ({ canvas = false }: { canvas?: boolean }) => {
         <p className={styles.canvasBottomQuote}>Let&apos;s turn shared goals into shared ground. With <span>GREEN</span>, you don&apos;t partner for plans, meetings and fun. You partner for outcomes and mission accomplishments.</p>
         <div className={styles.canvasReadMore}><span>Read more</span><span aria-hidden="true">›</span></div>
         <FigmaAngledCta className={styles.canvasSubmitCta} onClick={() => setIsBriefOpen(true)}>Submit a Collaboration Brief</FigmaAngledCta>
-        <FigmaAngledCta className={styles.canvasDownloadCta} href="#" icon="download">Download our Partnership Overview (PDF)</FigmaAngledCta>
+        <FigmaAngledCta className={styles.canvasDownloadCta} href="mailto:programs@green.com.pg?subject=Partnership%20Overview%20Request" icon="chevron">Request our Partnership Overview</FigmaAngledCta>
         <D6Chatbot
           canvasAnchored
           triggerVariant="figmaCanvas"
@@ -173,12 +173,12 @@ const PartnerWithUs = ({ canvas = false }: { canvas?: boolean }) => {
                   <span className="text-[#23B14D]">›</span>
                 </button>
                 <a
-                  href="#"
+                  href="mailto:programs@green.com.pg?subject=Partnership%20Overview%20Request"
                   className="group flex items-center justify-between gap-4 border border-[#4CAF50] bg-gradient-to-r from-[#23B14D]/15 to-[#FFFE50]/15 px-6 py-3 text-sm font-bold text-gray-800 shadow-sm transition hover:brightness-105 sm:text-base"
                   style={{ clipPath: "polygon(6% 0, 100% 0, 94% 100%, 0 100%)" }}
                 >
-                  <span>Download our Partnership Overview (PDF)</span>
-                  <span className="text-[#23B14D]">⤓</span>
+                  <span>Request our Partnership Overview</span>
+                  <span className="text-[#23B14D]">›</span>
                 </a>
               </div>
             </div>

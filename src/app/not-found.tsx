@@ -1,8 +1,8 @@
 "use client";
 
-import React from 'react';
-import Link from 'next/link';
-import { useInteractiveZIndex } from '@/hooks/useInteractiveZIndex';
+import Image from "next/image";
+import Link from "next/link";
+import { useInteractiveZIndex } from "@/hooks/useInteractiveZIndex";
 
 const NotFound = () => {
   const homeButtonProps = useInteractiveZIndex();
@@ -10,8 +10,6 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      
-      
       <div className="flex items-center justify-center min-h-screen px-4 py-16">
         <div className="max-w-2xl mx-auto text-center">
           {/* 404 Number */}
@@ -27,7 +25,8 @@ const NotFound = () => {
               Oops! Page Not Found
             </h2>
             <p className="text-lg text-gray-600 mb-2">
-              The page you're looking for seems to have wandered off into the digital wilderness.
+              The page you're looking for seems to have wandered off into the
+              digital wilderness.
             </p>
             <p className="text-base text-gray-500">
               Don't worry, even the best explorers sometimes take a wrong turn.
@@ -37,10 +36,12 @@ const NotFound = () => {
           {/* Decorative Element */}
           <div className="mb-8 flex justify-center">
             <div className="relative">
-              <img 
-                src="/images/heroSection/logo.png" 
-                alt="GREEN Logo" 
-                className="h-16 opacity-50"
+              <Image
+                src="/images/heroSection/logo.png"
+                alt="GREEN Logo"
+                width={256}
+                height={64}
+                className="h-16 w-auto opacity-50"
               />
               <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full animate-pulse"></div>
             </div>
@@ -53,26 +54,48 @@ const NotFound = () => {
                 href="/"
                 className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                <svg
+                  aria-hidden="true"
+                  className="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                  />
                 </svg>
                 Go Home
               </Link>
             </div>
 
             <div {...backButtonProps.getContainerProps()}>
-              <button 
+              <button
+                type="button"
                 onClick={() => window.history.back()}
                 className="inline-flex items-center cursor-pointer px-8 py-3 border-2 border-green-500 text-green-600 font-semibold rounded-lg hover:bg-green-50 transition-all duration-300 transform hover:scale-105"
               >
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                <svg
+                  aria-hidden="true"
+                  className="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                  />
                 </svg>
                 Go Back
               </button>
             </div>
           </div>
-
         </div>
       </div>
 

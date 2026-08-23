@@ -220,17 +220,17 @@ export default function CollaborationInnovation({
       <FigmaAngledCta
         className={styles.submitCta}
         style={{ position: "absolute", left: 1510, top: 741 }}
-        onClick={() => {}}
+        href="mailto:innovation@green.com.pg?subject=Collaboration%20Proposal"
       >
         Submit Proposal / Collaboration Inquiry
       </FigmaAngledCta>
       <FigmaAngledCta
         className={styles.frameworkCta}
         style={{ position: "absolute", left: 1437, top: 819 }}
-        icon="download"
-        href="/green-innovation-partnership-framework.pdf"
+        icon="chevron"
+        href="mailto:innovation@green.com.pg?subject=Innovation%20Partnership%20Framework%20Request"
       >
-        GREEN Innovation Partnership Framework (PDF)
+        Request Innovation Partnership Framework
       </FigmaAngledCta>
 
       {/* Chatbot */}
@@ -266,4 +266,3 @@ export default function CollaborationInnovation({
     </main>
   );
 }
-

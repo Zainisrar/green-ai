@@ -1,155 +1,131 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
+import { SITE_URL } from "./lib/seo-config";
+
+const staticRoutes = [
+  "/home/renewable-energy-the-core",
+  "/ecosystem/become-a-supplier",
+  "/ecosystem/client-partnerships",
+  "/ecosystem/collaboration-innovation",
+  "/ecosystem/community-impact-loop",
+  "/ecosystem/industry-affiliations-certifications",
+  "/ecosystem/key-supply-categories",
+  "/ecosystem/our-procurement-philosophy",
+  "/ecosystem/our-value-chain",
+  "/ecosystem/supplier-code-of-conduct",
+  "/ecosystem/supply-partners",
+  "/ecosystem/technology-innovation-alliances",
+  "/ecosystem/why-esg-matters-to-green",
+  "/empower/careers-at-green",
+  "/empower/community-voices",
+  "/empower/green-talent-incubator",
+  "/empower/join-us",
+  "/empower/team-green",
+  "/empower/women-in-energy",
+  "/endeavors/flagship-projects",
+  "/endeavors/project-portfolio",
+  "/engage/become-a-supplier",
+  "/engage/book-a-consultation",
+  "/engage/contact-us",
+  "/engage/investor-relations",
+  "/engage/media-press",
+  "/engage/newsletter",
+  "/engage/partner-with-us",
+  "/engage/public-events-volunteering",
+  "/engage/reach-us",
+  "/engage/request-a-proposal",
+  "/engineering/energy-storage-smart-grid",
+  "/engineering/grid-intel",
+  "/engineering/hybrid-microgrid-solutions",
+  "/engineering/om-monitoring",
+  "/engineering/products",
+  "/engineering/products/green-empawa",
+  "/engineering/products/green-sunsmart",
+  "/engineering/solar-epcm-services",
+  "/enlighten/events-webinars",
+  "/enlighten/insights-articles",
+  "/enlighten/learning-hub",
+  "/enlighten/media-mentions",
+  "/enlighten/reports-whitepapers",
+  "/enlighten/thought-leadership",
+  "/evolution/certifications-accreditations",
+  "/evolution/leadership-team",
+  "/evolution/mission-vision",
+  "/evolution/our-story-milestones",
+  "/evolution/sustainability-esg-commitments",
+  "/expertise",
+  "/explore/fast-facts-stats",
+  "/explore/global-snapshot",
+  "/explore/welcome-to-green",
+  "/explore/why-green",
+] as const;
+
+interface ApiItem {
+  slug?: string;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+interface ApiListResponse {
+  data?: ApiItem[];
+}
+
+const safeDate = (value?: string) => {
+  if (!value) return undefined;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? undefined : date;
+};
+
+async function fetchDynamicRoutes(
+  endpoint: string,
+  routePrefix: string,
+): Promise<MetadataRoute.Sitemap> {
+  try {
+    const response = await fetch(endpoint, {
+      next: { revalidate: 3600 },
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!response.ok) return [];
+
+    const payload = (await response.json()) as ApiListResponse;
+    return (payload.data ?? []).flatMap((item) => {
+      if (!item.slug) return [];
+      return [
+        {
+          url: `${SITE_URL}${routePrefix}/${encodeURIComponent(item.slug)}`,
+          lastModified: safeDate(item.updatedAt || item.createdAt),
+          changeFrequency: "weekly" as const,
+          priority: 0.7,
+        },
+      ];
+    });
+  } catch {
+    // A temporary CMS outage should not make /sitemap.xml fail entirely.
+    return [];
+  }
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://example.com'
-  
-  // Static pages
-  const staticPages = [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'daily' as const,
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/services`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/products`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/insights`,
-      lastModified: new Date(),
-      changeFrequency: 'daily' as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/careers`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/team`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/why-green`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/global-snapshot`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/our-story`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/our-vision`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/leadership`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/certifications`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/esg-commitments`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.5,
-    },
-  ]
+  const staticPages: MetadataRoute.Sitemap = staticRoutes.map((route) => ({
+    url: `${SITE_URL}${route}`,
+    changeFrequency:
+      route === "/home/renewable-energy-the-core" ? "daily" : "weekly",
+    priority: route === "/home/renewable-energy-the-core" ? 1 : 0.7,
+  }));
 
-  // Dynamic pages - fetch from APIs
-  let dynamicPages: MetadataRoute.Sitemap = []
+  const dynamicPages = await Promise.all([
+    fetchDynamicRoutes(
+      "https://g-stack.green.com.pg/api/enlighten/insights-articles",
+      "/enlighten/insights-articles",
+    ),
+    fetchDynamicRoutes(
+      "https://g-stack.green.com.pg/api/engineering/products",
+      "/engineering/products",
+    ),
+    fetchDynamicRoutes(
+      "https://g-stack.green.com.pg/api/expertise",
+      "/expertise",
+    ),
+  ]);
 
-  try {
-    // Fetch insights/articles
-    const insightsResponse = await fetch('https://g-stack.green.com.pg/api/insights/articles')
-    if (insightsResponse.ok) {
-      const insightsData = await insightsResponse.json()
-      const insightPages = insightsData.data?.map((insight: any) => ({
-        url: `${baseUrl}/insights/${insight.slug}`,
-        lastModified: new Date(insight.updatedAt || insight.createdAt),
-        changeFrequency: 'weekly' as const,
-        priority: 0.6,
-      })) || []
-      dynamicPages = [...dynamicPages, ...insightPages]
-    }
-  } catch (error) {
-    console.error('Error fetching insights for sitemap:', error)
-  }
-
-  try {
-    // Fetch products
-    const productsResponse = await fetch('https://g-stack.green.com.pg/api/products')
-    if (productsResponse.ok) {
-      const productsData = await productsResponse.json()
-      const productPages = productsData.data?.map((product: any) => ({
-        url: `${baseUrl}/products/${product.slug}`,
-        lastModified: new Date(product.updatedAt || product.createdAt),
-        changeFrequency: 'monthly' as const,
-        priority: 0.7,
-      })) || []
-      dynamicPages = [...dynamicPages, ...productPages]
-    }
-  } catch (error) {
-    console.error('Error fetching products for sitemap:', error)
-  }
-
-  try {
-    // Fetch expertise areas
-    const expertiseResponse = await fetch('https://g-stack.green.com.pg/api/expertise')
-    if (expertiseResponse.ok) {
-      const expertiseData = await expertiseResponse.json()
-      const expertisePages = expertiseData.data?.map((expertise: any) => ({
-        url: `${baseUrl}/expertise/${expertise.slug}`,
-        lastModified: new Date(expertise.updatedAt || expertise.createdAt),
-        changeFrequency: 'monthly' as const,
-        priority: 0.6,
-      })) || []
-      dynamicPages = [...dynamicPages, ...expertisePages]
-    }
-  } catch (error) {
-    console.error('Error fetching expertise for sitemap:', error)
-  }
-
-  return [...staticPages, ...dynamicPages]
+  return [...staticPages, ...dynamicPages.flat()];
 }

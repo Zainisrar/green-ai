@@ -166,10 +166,10 @@ const BecomeSupplierCanvas = () => {
       </FigmaAngledCta>
       <FigmaAngledCta
         className={styles.canvasProspectusCta}
-        href="#"
-        icon="download"
+        href="mailto:procurement@green.com.pg?subject=GREEN%20Supplier%20Prospectus%20Request"
+        icon="chevron"
       >
-        GREEN Supplier Prospectus (PDF)
+        Request GREEN Supplier Prospectus
       </FigmaAngledCta>
 
       <p className={styles.canvasBottomText}>

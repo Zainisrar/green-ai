@@ -1,6 +1,7 @@
 "use client";
 
 import type React from "react";
+import { useEffect, useRef } from "react";
 import styles from "./EngineeringFormModal.module.css";
 
 interface EngineeringFormModalProps {
@@ -23,22 +24,77 @@ const EngineeringFormModal = ({
   maxWidthClass = "max-w-5xl",
   geometry = "default",
 }: EngineeringFormModalProps) => {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusable?.length) {
+        event.preventDefault();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      previouslyFocused?.focus();
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
     <div
-      className={`scrollbar-hide fixed inset-0 z-[9999999999999999999] flex items-start justify-center overflow-y-auto p-3 sm:items-center sm:p-4 ${
+      className={`scrollbar-hide fixed inset-0 z-[2147483647] flex items-start justify-center overflow-y-auto p-3 sm:items-center sm:p-4 ${
         geometry === "consultation" ? styles.consultationOverlay : "bg-black/20"
       }`}
     >
+      <button
+        type="button"
+        className="absolute inset-0 cursor-default"
+        onClick={onClose}
+        aria-label="Close dialog"
+      />
       <div
-        className={`relative my-2 w-full ${maxWidthClass} sm:my-auto ${
-          geometry === "consultation" ? styles.consultationWindow : styles.window
+        ref={dialogRef}
+        className={`relative z-10 my-2 w-full ${maxWidthClass} sm:my-auto ${
+          geometry === "consultation"
+            ? styles.consultationWindow
+            : styles.window
         }`}
         role="dialog"
         aria-modal="true"
       >
         <button
+          ref={closeButtonRef}
           type="button"
           onClick={onClose}
           className="absolute right-4 top-2 z-30 cursor-pointer p-1.5 text-gray-700 transition hover:text-gray-900 sm:right-8 sm:top-4"
@@ -53,7 +109,11 @@ const EngineeringFormModal = ({
             strokeWidth={2.5}
             aria-hidden="true"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 6l12 12M18 6L6 18" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 6l12 12M18 6L6 18"
+            />
           </svg>
         </button>
 

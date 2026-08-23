@@ -32,7 +32,7 @@ const FALLBACK_DATA = {
     ],
     cta: [
       { href: "#work-with-us", text: "Work With Us" },
-      { href: "/supply-partners/team-green-brief.pdf", text: "GREEN Team Brief" },
+      { href: "mailto:careers.support@green.com.pg?subject=Team%20GREEN%20Brief%20Request", text: "Request GREEN Team Brief" },
     ],
   },
   whoWeAreModal: { img: { src: "/images/team-green/mainImg.png", alt: "Team GREEN", highlighted: "GREEN" }, quote: { text: "Different disciplines. One mission.", highlighted: "mission" }, title: "Who We Are", title2: "", description: "We bring practical expertise and shared purpose to every project.", description2: "" },
@@ -122,7 +122,7 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
         </div>
         <div className={styles.canvasCtas}>
           <FigmaAngledCta className={styles.canvasWorkCta} onClick={() => setIsWorkWithUsOpen(true)}>{data.mainPage.cta[0]?.text || "Work With Us"}</FigmaAngledCta>
-          <FigmaAngledCta className={styles.canvasBriefCta} href={data.mainPage.cta[1]?.href || "/supply-partners/team-green-brief.pdf"} icon="download">GREEN People &amp; Culture Brief (PDF)</FigmaAngledCta>
+          <FigmaAngledCta className={styles.canvasBriefCta} href={data.mainPage.cta[1]?.href || "mailto:careers.support@green.com.pg?subject=Team%20GREEN%20Brief%20Request"} icon="chevron">Request GREEN People &amp; Culture Brief</FigmaAngledCta>
         </div>
         <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
         <WhoWeAre isOpen={isWhoWeAreOpen} onClose={() => setIsWhoWeAreOpen(false)} data={data.whoWeAreModal} />

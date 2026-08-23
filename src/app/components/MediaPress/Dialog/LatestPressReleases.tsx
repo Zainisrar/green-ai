@@ -1,6 +1,5 @@
 "use client";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 interface Props {
   isOpen: boolean;
@@ -85,13 +84,13 @@ const LatestPressReleases = ({ isOpen, onClose }: Props) => {
                             10 July 2025
                           </span>
                         </div>
-                        <button className="w-32 cursor-pointer">
+                        <span title="Press release link unavailable" className="inline-block w-32 opacity-50">
                           <img
                             src="/images/media-press/read-more.png"
                             className=""
                             alt="Read More"
                           />
-                        </button>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -131,13 +130,13 @@ const LatestPressReleases = ({ isOpen, onClose }: Props) => {
                             10 July 2025
                           </span>
                         </div>
-                        <button className="w-32 cursor-pointer">
+                        <span title="Press release link unavailable" className="inline-block w-32 opacity-50">
                           <img
                             src="/images/media-press/read-more.png"
                             className=""
                             alt="Read More"
                           />
-                        </button>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -177,13 +176,13 @@ const LatestPressReleases = ({ isOpen, onClose }: Props) => {
                             10 July 2025
                           </span>
                         </div>
-                        <button className="w-32 cursor-pointer">
+                        <span title="Press release link unavailable" className="inline-block w-32 opacity-50">
                           <img
                             src="/images/media-press/read-more.png"
                             className=""
                             alt="Read More"
                           />
-                        </button>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -195,15 +194,12 @@ const LatestPressReleases = ({ isOpen, onClose }: Props) => {
 
               {/* View All Link */}
               <div className="flex justify-end">
-                <Link
-                  href="#"
-                  className="text-gray-700 flex items-center space-x-4 text-lg hover:text-gray-900"
-                >
-                  <span className="italic">View All Press Releases</span>{" "}
+                <span className="text-gray-500 flex items-center space-x-4 text-lg">
+                  <span className="italic">More press releases coming soon</span>{" "}
                   <div>
                     <img src="/images/media-press/arrow.png" alt="" />
                   </div>
-                </Link>
+                </span>
               </div>
             </div>
           </div>

@@ -83,7 +83,7 @@ const CareerGreen = ({ canvas = false }: { canvas?: boolean }) => {
         <p className={styles.canvasBottomQuote}>“In energy infrastructure, trust is engineered<br />— through compliance, peer validation, and continuous improvement.”</p>
         <div className={styles.canvasCtas}>
           <FigmaAngledCta className={styles.canvasApplyCta} onClick={() => setIsOpenRolesOpen(true)}>Apply Now</FigmaAngledCta>
-          <FigmaAngledCta className={styles.canvasProspectusCta} href={careersData?.data?.mainPage?.cta?.[1]?.href || "/empower/careers-at-green-prospectus.pdf"} icon="download">Careers at GREEN Prospectus (PDF)</FigmaAngledCta>
+          <FigmaAngledCta className={styles.canvasProspectusCta} href={careersData?.data?.mainPage?.cta?.[1]?.href || "mailto:careers.support@green.com.pg?subject=Careers%20Prospectus%20Request"} icon="chevron">Request Careers at GREEN Prospectus</FigmaAngledCta>
         </div>
         <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
         <WhyWorkWithGreen isOpen={isWhyWorkWithGreenOpen} onClose={() => setIsWhyWorkWithGreenOpen(false)} data={careersData?.data?.whyWorkWithGreenModal} />

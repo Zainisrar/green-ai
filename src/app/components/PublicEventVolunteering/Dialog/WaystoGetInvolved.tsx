@@ -184,7 +184,7 @@ const WaystoGetInvolved = ({ isOpen, onClose }: Props) => {
               <div className="text-right mt-8">
                 <p className="text-gray-700">
                   <span className="italic">Download</span>{" "}
-                  <a href="#" className="text-[#23B14D] font-medium underline">
+                  <a href="/volunteer-welcome-pack.pdf" download className="text-[#23B14D] font-medium underline">
                     Volunteer Welcome Pack (PDF)
                   </a>
                 </p>

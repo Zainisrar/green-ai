@@ -4,54 +4,134 @@
 // backend fails fast and components can fall back instead of hanging forever.
 const DEFAULT_TIMEOUT_MS = 10000;
 
+export class ApiError extends Error {
+  status: number;
+
+  constructor(status: number, statusText: string) {
+    super(`API Error: ${status} ${statusText}`);
+    this.name = "ApiError";
+    this.status = status;
+  }
+}
+
 // Generic fetch wrapper with error handling
-export async function fetchApi<T>(endpoint: string, options?: RequestInit): Promise<T> {
-  const url = endpoint.startsWith('http') ? endpoint : `${window.location.origin}${endpoint}`;
+export async function fetchApi<T>(
+  endpoint: string,
+  options?: RequestInit,
+): Promise<T> {
+  const url =
+    endpoint.startsWith("http") || typeof window !== "undefined"
+      ? endpoint
+      : new URL(
+          endpoint,
+          process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:5005",
+        ).toString();
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
+  const abortFromCaller = () => controller.abort(options?.signal?.reason);
+  options?.signal?.addEventListener("abort", abortFromCaller, { once: true });
+
+  const headers = new Headers(options?.headers);
+  headers.set("Accept", "application/json");
+  if (options?.body && !headers.has("Content-Type")) {
+    headers.set("Content-Type", "application/json");
+  }
 
   try {
     const response = await fetch(url, {
       ...options,
       signal: controller.signal,
-      headers: {
-        'Content-Type': 'application/json',
-        ...options?.headers,
-      },
+      headers,
     });
 
     if (!response.ok) {
-      throw new Error(`API Error: ${response.status} ${response.statusText}`);
+      throw new ApiError(response.status, response.statusText);
     }
 
     return response.json();
   } finally {
     clearTimeout(timeout);
+    options?.signal?.removeEventListener("abort", abortFromCaller);
   }
 }
 
 export const api = {
-  getInsights: () => fetchApi<InsightsResponse>('/api/insights'),
-  getEnergyServices: () => fetchApi<EnergyServicesResponse>('https://g-stack.green.com.pg/api/energy'),
-  getAboutUs: () => fetchApi<AboutUsResponse>('https://g-stack.green.com.pg/api/explore/about-us'),
-  getWhyGreen: () => fetchApi<WhyGreenResponse>('https://g-stack.green.com.pg/api/explore/why-green'),
-  getGlobalSnapshot: () => fetchApi<GlobalSnapshotResponse>('https://g-stack.green.com.pg/api/explore/global-snapshot'),
-  getFastFactStats: () => fetchApi<FastFactStatsResponse>('https://g-stack.green.com.pg/api/explore/fast-fact-stats'),
-  getOurStory: () => fetchApi<OurStoryResponse>('https://g-stack.green.com.pg/api/evolution/our-story-milestone'),
-  getVisionMission: () => fetchApi<VisionMissionResponse>('https://g-stack.green.com.pg/api/evolution/vision-mission'),
-  getLeadershipTeam: () => fetchApi<LeadershipTeamResponse>('https://g-stack.green.com.pg/api/evolution/leadership-team'),
-  getCertificationsAccreditations: () => fetchApi<CertificationsAccreditationsResponse>('https://g-stack.green.com.pg/api/evolution/certifications-accreditations'),
-  getSustainabilityESG: () => fetchApi<SustainabilityESGResponse>('https://g-stack.green.com.pg/api/evolution/sustainability-esg-commitments'),
-  getSolarEPCMServices: () => fetchApi<SolarEPCMServicesResponse>('https://g-stack.green.com.pg/api/engineering/solar-epcm-services'),
-  getHybridMicrogridSolutions: () => fetchApi<HybridMicrogridSolutionsResponse>('https://g-stack.green.com.pg/api/engineering/hybrid-microgrid-solutions'),
-  getEnergyStorageSmartGrid: () => fetchApi<EnergyStorageSmartGridResponse>('https://g-stack.green.com.pg/api/engineering/energy-storage-smart-grid'),
-  getOMMonitoring: () => fetchApi<OMMonitoringResponse>('https://g-stack.green.com.pg/api/engineering/om-monitoring'),
-  getGridIntel: () => fetchApi<GridIntelResponse>('https://g-stack.green.com.pg/api/engineering/grid-intel'),
-  getBecomeSupplier: () => fetchApi<BecomeSupplierResponse>('https://g-stack.green.com.pg/api/ecosystem/become-a-supplier'),
-  getClientPartnerships: () => fetchApi<ClientPartnershipsResponse>('https://g-stack.green.com.pg/api/ecosystem/client-partnerships'),
-  getCollaborationInnovation: () => fetchApi<CollaborationInnovationResponse>('https://g-stack.green.com.pg/api/ecosystem/collaboration-innovation'),
-  getCommunityImpactLoop: () => fetchApi<CommunityImpactLoopResponse>('https://g-stack.green.com.pg/api/ecosystem/community-impact-loop'),
+  getInsights: () => fetchApi<InsightsResponse>("/api/insights"),
+  getEnergyServices: () =>
+    fetchApi<EnergyServicesResponse>("https://g-stack.green.com.pg/api/energy"),
+  getAboutUs: () =>
+    fetchApi<AboutUsResponse>(
+      "https://g-stack.green.com.pg/api/explore/about-us",
+    ),
+  getWhyGreen: () =>
+    fetchApi<WhyGreenResponse>(
+      "https://g-stack.green.com.pg/api/explore/why-green",
+    ),
+  getGlobalSnapshot: () =>
+    fetchApi<GlobalSnapshotResponse>(
+      "https://g-stack.green.com.pg/api/explore/global-snapshot",
+    ),
+  getFastFactStats: () =>
+    fetchApi<FastFactStatsResponse>(
+      "https://g-stack.green.com.pg/api/explore/fast-fact-stats",
+    ),
+  getOurStory: () =>
+    fetchApi<OurStoryResponse>(
+      "https://g-stack.green.com.pg/api/evolution/our-story-milestone",
+    ),
+  getVisionMission: () =>
+    fetchApi<VisionMissionResponse>(
+      "https://g-stack.green.com.pg/api/evolution/vision-mission",
+    ),
+  getLeadershipTeam: () =>
+    fetchApi<LeadershipTeamResponse>(
+      "https://g-stack.green.com.pg/api/evolution/leadership-team",
+    ),
+  getCertificationsAccreditations: () =>
+    fetchApi<CertificationsAccreditationsResponse>(
+      "https://g-stack.green.com.pg/api/evolution/certifications-accreditations",
+    ),
+  getSustainabilityESG: () =>
+    fetchApi<SustainabilityESGResponse>(
+      "https://g-stack.green.com.pg/api/evolution/sustainability-esg-commitments",
+    ),
+  getSolarEPCMServices: () =>
+    fetchApi<SolarEPCMServicesResponse>(
+      "https://g-stack.green.com.pg/api/engineering/solar-epcm-services",
+    ),
+  getHybridMicrogridSolutions: () =>
+    fetchApi<HybridMicrogridSolutionsResponse>(
+      "https://g-stack.green.com.pg/api/engineering/hybrid-microgrid-solutions",
+    ),
+  getEnergyStorageSmartGrid: () =>
+    fetchApi<EnergyStorageSmartGridResponse>(
+      "https://g-stack.green.com.pg/api/engineering/energy-storage-smart-grid",
+    ),
+  getOMMonitoring: () =>
+    fetchApi<OMMonitoringResponse>(
+      "https://g-stack.green.com.pg/api/engineering/om-monitoring",
+    ),
+  getGridIntel: () =>
+    fetchApi<GridIntelResponse>(
+      "https://g-stack.green.com.pg/api/engineering/grid-intel",
+    ),
+  getBecomeSupplier: () =>
+    fetchApi<BecomeSupplierResponse>(
+      "https://g-stack.green.com.pg/api/ecosystem/become-a-supplier",
+    ),
+  getClientPartnerships: () =>
+    fetchApi<ClientPartnershipsResponse>(
+      "https://g-stack.green.com.pg/api/ecosystem/client-partnerships",
+    ),
+  getCollaborationInnovation: () =>
+    fetchApi<CollaborationInnovationResponse>(
+      "https://g-stack.green.com.pg/api/ecosystem/collaboration-innovation",
+    ),
+  getCommunityImpactLoop: () =>
+    fetchApi<CommunityImpactLoopResponse>(
+      "https://g-stack.green.com.pg/api/ecosystem/community-impact-loop",
+    ),
 };
 
 // Type definitions
@@ -245,12 +325,12 @@ export interface GlobalSnapshotActionButtons {
   buttons: GlobalSnapshotButton[];
 }
 
-export type GlobalSnapshotSection = 
-  | GlobalSnapshotHeroSection 
-  | GlobalSnapshotStatsSection 
-  | GlobalSnapshotHighlightSection 
-  | GlobalSnapshotContentBlock 
-  | GlobalSnapshotLocationsSection 
+export type GlobalSnapshotSection =
+  | GlobalSnapshotHeroSection
+  | GlobalSnapshotStatsSection
+  | GlobalSnapshotHighlightSection
+  | GlobalSnapshotContentBlock
+  | GlobalSnapshotLocationsSection
   | GlobalSnapshotActionButtons;
 
 export interface GlobalSnapshotData {
@@ -478,15 +558,16 @@ export interface CertificationsAccreditationsData {
   certificate1: string;
   certificate2: string;
   certificate3: string;
-  cta:{
-    link:string;
-    text:string;
-  }
+  cta: {
+    link: string;
+    text: string;
+  };
   createdAt: string;
   updatedAt: string;
 }
 
-export interface CertificationsAccreditationsResponse extends CertificationsAccreditationsData {}
+export interface CertificationsAccreditationsResponse
+  extends CertificationsAccreditationsData {}
 
 // Sustainability ESG Types
 export interface SustainabilityESGHeader {
@@ -617,7 +698,8 @@ export interface HybridMicrogridSolutionsData {
   updatedAt: string;
 }
 
-export interface HybridMicrogridSolutionsResponse extends HybridMicrogridSolutionsData {}
+export interface HybridMicrogridSolutionsResponse
+  extends HybridMicrogridSolutionsData {}
 
 // Energy Storage Smart Grid Types
 export interface EnergyStorageSmartGridHeader {
@@ -661,7 +743,8 @@ export interface EnergyStorageSmartGridData {
   updatedAt: string;
 }
 
-export interface EnergyStorageSmartGridResponse extends EnergyStorageSmartGridData {}
+export interface EnergyStorageSmartGridResponse
+  extends EnergyStorageSmartGridData {}
 
 // O&M Monitoring Types
 export interface OMMonitoringHeader {
@@ -1008,9 +1091,18 @@ export interface ClientPartnershipsResponse {
 }
 
 // Collaboration & Innovation Types
-export interface CollaborationInnovationCTA { href: string; text: string; }
-export interface CollaborationInnovationQuote { text: string; highlighted: string; }
-export interface CollaborationInnovationDescription { text: string; highlighted: string; }
+export interface CollaborationInnovationCTA {
+  href: string;
+  text: string;
+}
+export interface CollaborationInnovationQuote {
+  text: string;
+  highlighted: string;
+}
+export interface CollaborationInnovationDescription {
+  text: string;
+  highlighted: string;
+}
 
 export interface CollaborationInnovationMainPage {
   cta: CollaborationInnovationCTA[];
@@ -1060,8 +1152,14 @@ export interface CollaborationInnovationResponse {
 }
 
 // Community Impact Loop Types
-export interface CommunityImpactLoopCTA { href: string; text: string; }
-export interface CommunityImpactLoopQuote { text: string; highlighted: string; }
+export interface CommunityImpactLoopCTA {
+  href: string;
+  text: string;
+}
+export interface CommunityImpactLoopQuote {
+  text: string;
+  highlighted: string;
+}
 
 export interface CommunityImpactLoopMainPage {
   cta: CommunityImpactLoopCTA[];
@@ -1082,22 +1180,37 @@ export interface GreenCommunityImpactLoopSection {
   description: GreenCommunityImpactLoopDescription;
 }
 
-export interface CommunityImpactLoopHowItem { title: string; description: string; }
+export interface CommunityImpactLoopHowItem {
+  title: string;
+  description: string;
+}
 export interface CommunityImpactLoopHowLoopWorks {
   items: CommunityImpactLoopHowItem[];
   title: string;
 }
 
-export interface CommunityImpactLoopMeasuredImpactItem { title: string; description: string; }
-export interface CommunityImpactLoopMeasuredImpactQuote { text: string; highlighted: string; }
+export interface CommunityImpactLoopMeasuredImpactItem {
+  title: string;
+  description: string;
+}
+export interface CommunityImpactLoopMeasuredImpactQuote {
+  text: string;
+  highlighted: string;
+}
 export interface CommunityImpactLoopMeasuredImpact {
   items: CommunityImpactLoopMeasuredImpactItem[];
   quote: CommunityImpactLoopMeasuredImpactQuote;
   title: string;
 }
 
-export interface CommunityImpactLoopJoinTheLoopImage { alt: string; src: string; }
-export interface CommunityImpactLoopJoinTheLoopQuote { text: string; highlighted: string; }
+export interface CommunityImpactLoopJoinTheLoopImage {
+  alt: string;
+  src: string;
+}
+export interface CommunityImpactLoopJoinTheLoopQuote {
+  text: string;
+  highlighted: string;
+}
 export interface CommunityImpactLoopJoinTheLoop {
   img: CommunityImpactLoopJoinTheLoopImage;
   quote: CommunityImpactLoopJoinTheLoopQuote;

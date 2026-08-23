@@ -162,10 +162,10 @@ export default function BecomeSupplier({
         </FigmaAngledCta>
         <FigmaAngledCta
           className={styles.downloadCta}
-          icon="download"
-          href="/supply-partners/green-supplier-prospectus.pdf"
+          icon="chevron"
+          href="mailto:procurement@green.com.pg?subject=GREEN%20Supplier%20Prospectus%20Request"
         >
-          GREEN Supplier Prospectus (PDF)
+          Request GREEN Supplier Prospectus
         </FigmaAngledCta>
       </div>
 
@@ -185,10 +185,10 @@ export default function BecomeSupplier({
             Procurement Contact
           </FigmaAngledCta>
           <FigmaAngledCta
-            icon="download"
-            href="/supply-partners/green-supplier-prospectus.pdf"
+            icon="chevron"
+            href="mailto:procurement@green.com.pg?subject=GREEN%20Supplier%20Prospectus%20Request"
           >
-            GREEN Supplier Prospectus (PDF)
+            Request GREEN Supplier Prospectus
           </FigmaAngledCta>
         </div>
       </div>

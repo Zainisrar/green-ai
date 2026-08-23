@@ -119,7 +119,8 @@ export default function TechnologyInnovationAlliances({
 
   const d = FALLBACK;
   const ctaLinks = {
-    innovationFramework: "/green-innovation-partnership-framework.pdf",
+    innovationFramework:
+      "mailto:innovation@green.com.pg?subject=Innovation%20Partnership%20Framework%20Request",
   };
 
   return (
@@ -259,10 +260,10 @@ export default function TechnologyInnovationAlliances({
       <FigmaAngledCta
         className={styles.frameworkCta}
         style={{ position: "absolute", left: 1428, top: 824 }}
-        icon="download"
+        icon="chevron"
         href={ctaLinks.innovationFramework}
       >
-        GREEN Innovation Partnership Framework (PDF)
+        Request Innovation Partnership Framework
       </FigmaAngledCta>
 
       {/* Chatbot */}

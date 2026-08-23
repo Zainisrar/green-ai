@@ -4,8 +4,9 @@ import React, { useEffect, useState } from "react";
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  onJoin: () => void;
 }
-const VolunteerSignUp = ({ isOpen, onClose }: Props) => {
+const VolunteerSignUp = ({ isOpen, onClose, onJoin }: Props) => {
   if (!isOpen) return null;
 
   return (
@@ -66,7 +67,7 @@ const VolunteerSignUp = ({ isOpen, onClose }: Props) => {
                         Step 1
                       </td>
                       <td className="py-4 text-lg text-gray-700">
-                        Fill the Volunteer Interest Form → <a href="#" className="text-[#23B14D] font-medium underline hover:text-[#1B8F3A]">Join Now</a>
+                        Fill the Volunteer Interest Form → <button type="button" onClick={onJoin} className="text-[#23B14D] font-medium underline hover:text-[#1B8F3A]">Join Now</button>
                       </td>
                     </tr>
                     <tr className="">

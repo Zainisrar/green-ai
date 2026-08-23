@@ -226,6 +226,10 @@ export default function PublicEventVolunteering({
       <VolunteerSignUp
         isOpen={openModal === "volunteerSignUp"}
         onClose={() => setOpenModal(null)}
+        onJoin={() => {
+          setOpenModal(null);
+          setIsSignUpFormOpen(true);
+        }}
       />
       <PastHighlights
         isOpen={openModal === "pastHighlights"}

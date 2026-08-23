@@ -7,7 +7,8 @@ import Booking from "../BookConsulation/Modals/Booking";
 import styles from "./BookAConsultation.module.css";
 
 const CTA_LINKS = {
-  partnershipFramework: "/volunteer-welcome-pack.pdf",
+  partnershipFramework:
+    "mailto:innovation@green.com.pg?subject=Innovation%20Partnership%20Framework%20Request",
 };
 
 const BENEFITS = [
@@ -205,7 +206,7 @@ export default function BookAConsultation({
         target="_blank"
         rel="noopener noreferrer"
       >
-        GREEN Innovation Partnership Framework (PDF)
+        Request GREEN Innovation Partnership Framework
       </a>
 
       {/* CTA: Book My Consultation (opens booking modal) */}

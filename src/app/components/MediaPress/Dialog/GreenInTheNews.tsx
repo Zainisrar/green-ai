@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 interface GreenInTheNewsProps {
@@ -85,11 +84,9 @@ const GreenInTheNews: React.FC<GreenInTheNewsProps> = ({ isOpen, onClose }) => {
               <h3 className="text-gray-900 font-bold text-base mb-3">
                 {item.title}
               </h3>
-              <Link
-              href={"#"}
-              className=" cursor-pointer">
-              <img src="/images/media-press/ctanews.png" className="w-32" alt="cta" />
-              </Link>
+              <span title="Article link unavailable" className="inline-block opacity-50">
+                <img src="/images/media-press/ctanews.png" className="w-32" alt="Article link unavailable" />
+              </span>
             </div>
           </div>
         ))}

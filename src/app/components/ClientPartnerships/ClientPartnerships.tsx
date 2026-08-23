@@ -238,10 +238,10 @@ export default function ClientPartnerships({
       <FigmaAngledCta
         className={styles.prospectusCta}
         style={{ position: "absolute", left: 1516, top: 812 }}
-        icon="download"
-        href="/supply-partners/client-partnership-prospectus.pdf"
+        icon="chevron"
+        href="mailto:programs@green.com.pg?subject=Client%20Partnership%20Prospectus%20Request"
       >
-        GREEN Client Partnership Prospectus
+        Request Client Partnership Prospectus
       </FigmaAngledCta>
       <a className={styles.readMore} href="#read-more" style={{ position: "absolute", left: 1521, top: 799 }}>
         Read more

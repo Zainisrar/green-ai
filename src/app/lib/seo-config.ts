@@ -1,25 +1,30 @@
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL || "https://green.com.pg"
+).replace(/\/$/, "");
+
 export const seoConfig = {
   defaultTitle: "GREEN Limited - Sustainable Energy Solutions",
   titleTemplate: "%s | GREEN Limited",
-  defaultDescription: "Leading provider of sustainable energy solutions, specializing in solar power, energy storage, and renewable energy infrastructure across the Pacific region.",
-  siteUrl: "https://example.com",
+  defaultDescription:
+    "Leading provider of sustainable energy solutions, specializing in solar power, energy storage, and renewable energy infrastructure across the Pacific region.",
+  siteUrl: SITE_URL,
   siteName: "GREEN Limited",
-  
+
   // Social media handles
   social: {
     twitter: "@green_limited",
     linkedin: "company/green-limited",
     facebook: "greenlimited",
   },
-  
+
   // Default images
   defaultImage: "/images/heroSection/logo.png",
   defaultImageAlt: "GREEN Limited Logo",
-  
+
   // Brand colors
   themeColor: "#4CAF50",
   backgroundColor: "#ffffff",
-  
+
   // Organization info
   organization: {
     name: "GREEN Limited",
@@ -32,11 +37,10 @@ export const seoConfig = {
       locality: "Port Moresby",
     },
     contact: {
-      phone: "+675-XXX-XXX-XXX",
       email: "info@green.com.pg",
     },
   },
-  
+
   // Default keywords
   keywords: [
     "renewable energy",
@@ -56,7 +60,7 @@ export const seoConfig = {
     "sustainability",
     "ESG commitments",
   ],
-  
+
   // Robots configuration
   robots: {
     index: true,
@@ -69,28 +73,28 @@ export const seoConfig = {
       "max-snippet": -1,
     },
   },
-}
+};
 
 export const generatePageMetadata = (page: {
-  title?: string
-  description?: string
-  keywords?: string[]
-  image?: string
-  url?: string
-  type?: "website" | "article"
-  publishedTime?: string
-  modifiedTime?: string
+  title?: string;
+  description?: string;
+  keywords?: string[];
+  image?: string;
+  url?: string;
+  type?: "website" | "article";
+  publishedTime?: string;
+  modifiedTime?: string;
 }) => {
-  const title = page.title 
+  const title = page.title
     ? `${page.title} | ${seoConfig.siteName}`
-    : seoConfig.defaultTitle
-    
-  const description = page.description || seoConfig.defaultDescription
-  const image = page.image || seoConfig.defaultImage
-  const url = page.url ? `${seoConfig.siteUrl}${page.url}` : seoConfig.siteUrl
-  const keywords = page.keywords 
+    : seoConfig.defaultTitle;
+
+  const description = page.description || seoConfig.defaultDescription;
+  const image = page.image || seoConfig.defaultImage;
+  const url = page.url ? `${seoConfig.siteUrl}${page.url}` : seoConfig.siteUrl;
+  const keywords = page.keywords
     ? [...seoConfig.keywords, ...page.keywords]
-    : seoConfig.keywords
+    : seoConfig.keywords;
 
   return {
     title,
@@ -125,5 +129,5 @@ export const generatePageMetadata = (page: {
       canonical: url,
     },
     robots: seoConfig.robots,
-  }
-}
+  };
+};
