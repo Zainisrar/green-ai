@@ -118,8 +118,9 @@ const fallbackNavigation: NavigationItem[] = [
         top: false,
         image: { src: "/images/nav/3.png", alt: "GREEN products" },
         text: {
-          description: "Explore our comprehensive solutions and services",
-          highlighted: "solutions",
+          description:
+            "Our Technical Capabilities, Services, and Flagship Products",
+          highlighted: "Capabilities, Services, and Flagship",
         },
       },
       {
@@ -142,7 +143,7 @@ const fallbackNavigation: NavigationItem[] = [
       },
       {
         id: 35,
-        name: "Digital & Design Innovation",
+        name: "Grid-Intel",
         slug: "/engineering/grid-intel",
         top: false,
       },
@@ -151,6 +152,32 @@ const fallbackNavigation: NavigationItem[] = [
         name: "Products & Systems",
         slug: "/engineering/products",
         top: false,
+        children: [
+          {
+            id: 361,
+            name: "GREEN SunShine",
+            slug: "/engineering/products",
+            top: false,
+          },
+          {
+            id: 362,
+            name: "GREEN Em’Pawa",
+            slug: "/engineering/products/green-empawa",
+            top: false,
+          },
+          {
+            id: 363,
+            name: "GREEN SunSmart",
+            slug: "/engineering/products/green-sunsmart",
+            top: false,
+          },
+          {
+            id: 364,
+            name: "Future Offerings",
+            slug: "/engineering/products/future-offerings",
+            top: false,
+          },
+        ],
       },
     ],
   },
@@ -330,37 +357,37 @@ const fallbackNavigation: NavigationItem[] = [
     children: [
       {
         id: 71,
-        name: "Careers at GREEN",
-        slug: "/empower/careers-at-green",
+        name: "Team GREEN",
+        slug: "/empower/team-green",
         top: false,
         image: { src: "/images/nav/8.png", alt: "GREEN community network" },
         text: {
           description: "People-first. Talent-driven.",
-          highlighted: "People-first",
+          highlighted: "Talent-driven",
         },
       },
       {
         id: 72,
-        name: "Internships & Graduate Pathways",
-        slug: "/empower/green-talent-incubator",
+        name: "Careers at GREEN",
+        slug: "/empower/careers-at-green",
         top: false,
       },
       {
         id: 73,
-        name: "GREEN Em’Pawa",
-        slug: "/engineering/products/green-empawa",
+        name: "GREEN Talent Incubator",
+        slug: "/empower/green-talent-incubator",
         top: false,
       },
       {
         id: 74,
-        name: "Life at GREEN",
-        slug: "/empower/team-green",
+        name: "Women in Energy",
+        slug: "/empower/women-in-energy",
         top: false,
       },
       {
         id: 75,
-        name: "Women in Energy",
-        slug: "/empower/women-in-energy",
+        name: "Community Voices",
+        slug: "/empower/community-voices",
         top: false,
       },
     ],
@@ -440,6 +467,9 @@ const findSectionByPath = (
   path: string,
 ): NavigationItem | null => {
   for (const section of data) {
+    if (section.slug === path || path.startsWith(`${section.slug}/`)) {
+      return section;
+    }
     // Check if any child matches the current path (exact match or starts with)
     if (section.children) {
       for (const child of section.children) {

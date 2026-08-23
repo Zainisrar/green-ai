@@ -15,7 +15,7 @@ const navigationItems = [
   { href: "/explore/welcome-to-green", label: "Explore" },
   { href: "/energy", label: "Energy" },
   {
-    href: "/engineering/products/lighting-up-and-lifting-up-living-standards",
+    href: "/engineering/products",
     label: "Elements",
   },
   { href: "/expertise", label: "Expertise" },

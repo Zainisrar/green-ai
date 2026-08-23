@@ -16,9 +16,11 @@
   font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
 
-/* Figma keeps the primary header above the open navigation drawer. */
+/* The drawer provides its own close control and section navigation. Keeping
+   this header above it produced two overlapping crosses and duplicate, scaled
+   menu labels on Figma canvas pages. */
 .navigationOpen {
-  z-index: 10001;
+  visibility: hidden;
 }
 
 .scrolled {

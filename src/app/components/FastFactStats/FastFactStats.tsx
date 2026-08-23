@@ -14,22 +14,30 @@ const FALLBACK_CARDS = [
     title: "200,014",
     subtitle: "Rural Homes Energized",
     details: "GREEN SunShine, Em’Pawa, SunSmart Scale-Up",
+    detailLines: ["GREEN SunShine, Em’Pawa,", "SunSmart Scale-Up"],
   },
   {
     title: "223",
     subtitle: "Green Jobs Created",
     details: "Local Technician Tracks & SME Jobs",
+    detailLines: ["Local Technician Tracks &", "SME Jobs"],
   },
   {
     title: "796,270",
     subtitle: "People Positively Affected",
     details:
       "Healthcenters, Hospitals, Schools, Government offices, Household Solar Expansion",
+    detailLines: [
+      "Healthcenters, Hospitals,",
+      "Schools, Government offices,",
+      "Household Solar Expansion",
+    ],
   },
   {
     title: "6,126",
     subtitle: "Emissions Avoided",
     details: "Hybrid Solar with Storage Deployment",
+    detailLines: ["Hybrid Solar with Storage", "Deployment"],
   },
 ] as const;
 
@@ -169,7 +177,7 @@ export default function FastFactStats() {
               <strong>{card.title}</strong>
               {index === 3 ? <small>tones annually</small> : null}
               <h3>{card.subtitle.replace("Tonnes Annually ", "")}</h3>
-              <p>{card.details}</p>
+              <p>{card.detailLines.join("\n")}</p>
             </div>
           </article>
         ))}
@@ -245,12 +253,12 @@ export default function FastFactStats() {
         triggerVariant="figmaCanvas"
         triggerClassName={styles.chatTrigger}
         triggerStyle={{
-            top: 899,
-            right: "auto",
-            bottom: "auto",
-            left: 1498,
-            width: 418,
-          }}
+          top: 899,
+          right: "auto",
+          bottom: "auto",
+          left: 1498,
+          width: 418,
+        }}
       />
     </main>
   );

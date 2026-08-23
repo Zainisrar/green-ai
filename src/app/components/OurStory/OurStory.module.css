@@ -40,7 +40,7 @@
 
 .storyCopy {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   top: 116px;
   left: 870px;
   width: 1022px;
@@ -71,8 +71,9 @@
 
 .milestonesTitle {
   position: absolute;
-  top: 287px;
-  left: 821px;
+  z-index: 2;
+  top: 328px;
+  left: 768px;
   width: 293px;
   margin: 0;
   font-size: 30px;
@@ -81,40 +82,13 @@
   letter-spacing: 1.5px;
 }
 
-.timelineLine {
-  position: absolute;
-  top: 364px;
-  left: 1038px;
-  width: 282px;
-  height: 578px;
-  max-width: none;
-}
-
-.bubble {
+.milestoneMap {
   position: absolute;
   z-index: 1;
-  max-width: none;
-}
-
-.dot {
-  position: absolute;
-  z-index: 2;
-  width: 12px;
-  height: 12px;
-  max-width: none;
-}
-
-.tag {
-  position: absolute;
-  z-index: 3;
-  width: 56px;
-  height: 19px;
-  max-width: none;
-}
-
-.milestoneImg {
-  position: absolute;
-  z-index: 4;
+  top: 250px;
+  left: 672px;
+  width: 1220px;
+  height: 686px;
   max-width: none;
 }
 

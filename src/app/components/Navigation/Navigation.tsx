@@ -40,6 +40,16 @@ export default function Navigation({
     setSelectedParent(null);
   }, [navigationData]);
 
+  // The Figma panels expose their related child group as part of the active
+  // section. Engineering opens Products & Systems and Enlighten opens
+  // Learning Hub without requiring an extra click.
+  useEffect(() => {
+    const nestedParent = activeSection?.children?.find(
+      (item) => item.children?.length,
+    );
+    setSelectedParent(nestedParent ?? null);
+  }, [activeSection]);
+
   useEffect(() => {
     const previouslyFocused = document.activeElement as HTMLElement | null;
     const closeOnEscape = (event: KeyboardEvent) =>
@@ -83,9 +93,32 @@ export default function Navigation({
   const highlight = featuredChild?.text?.highlighted;
   const visibleItems = activeSection?.children ?? [];
   const sections = navigationData.slice().sort((a, b) => a.id - b.id);
+  const isFeatureLedLayout = activeSection?.id === 7 || activeSection?.id === 8;
+  const isEngineeringLayout = activeSection?.id === 3;
+  const isEmpowerLayout = activeSection?.id === 7;
+  const isEngageLayout = activeSection?.id === 8;
   const isCurrent = (item: NavigationItem) =>
     currentPath === item.slug ||
     Boolean(item.slug && currentPath?.startsWith(`${item.slug}/`));
+  const hasCurrentMenuItem = visibleItems.some(isCurrent);
+  const isActiveMenuItem = (item: NavigationItem, index: number) => {
+    // Engineering opens on Products & Systems in the Figma panel. Treat that
+    // expandable parent as the only active top-level item while its products
+    // are visible, even if the underlying page is Solar EPC Services.
+    if (isEngineeringLayout && selectedParent) {
+      return item.id === selectedParent.id;
+    }
+
+    return isCurrent(item) || (!hasCurrentMenuItem && index === 0);
+  };
+  const activeMenuClassName = (item: NavigationItem, index: number) => {
+    if (!isActiveMenuItem(item, index)) return "";
+
+    // The Figma Engage panel keeps its active item green but omits the
+    // divider underneath it. Every other section uses that divider to mark
+    // the active destination.
+    return `${styles.activeItem} ${isEngageLayout ? "" : styles.underlinedActiveItem}`;
+  };
 
   return (
     <div
@@ -100,7 +133,11 @@ export default function Navigation({
         onClick={onClose}
         aria-label="Close navigation"
       />
-      <aside className={styles.drawer} ref={drawerRef} onKeyDown={trapFocus}>
+      <aside
+        className={`${styles.drawer} ${isFeatureLedLayout ? styles.featureLedDrawer : ""} ${isEngineeringLayout ? styles.engineeringDrawer : ""}`}
+        ref={drawerRef}
+        onKeyDown={trapFocus}
+      >
         <button
           ref={closeButtonRef}
           className={styles.close}
@@ -130,12 +167,12 @@ export default function Navigation({
             ) : null}
           </div>
           <div className={styles.subNavigation}>
-            {visibleItems.map((item) =>
+            {visibleItems.map((item, index) =>
               item.children?.length ? (
                 <button
                   key={item.id}
                   type="button"
-                  className={`${styles.subMenuTrigger} ${isCurrent(item) ? styles.activeItem : ""}`}
+                  className={`${styles.subMenuTrigger} ${isActiveMenuItem(item, index) || selectedParent?.id === item.id ? `${styles.activeItem} ${isEngageLayout ? "" : styles.underlinedActiveItem}` : ""}`}
                   aria-expanded={selectedParent?.id === item.id}
                   onClick={() =>
                     setSelectedParent((selected) =>
@@ -150,7 +187,7 @@ export default function Navigation({
                 <Link
                   key={item.id}
                   href={item.slug}
-                  className={isCurrent(item) ? styles.activeItem : undefined}
+                  className={activeMenuClassName(item, index) || undefined}
                   onClick={onClose}
                 >
                   {item.name}
@@ -171,17 +208,34 @@ export default function Navigation({
             </nav>
           ) : null}
           <blockquote className={styles.quote}>
-            “
-            {highlight && quote.includes(highlight) ? (
+            {isEngageLayout ? (
               <>
-                {quote.split(highlight)[0]}
-                <em>{highlight}</em>
-                {quote.split(highlight).slice(1).join(highlight)}
+                <span>
+                  “Let&apos;s <em>Connect</em> and
+                </span>
+                <span>
+                  Define <em>Future</em> Together”
+                </span>
               </>
+            ) : isEmpowerLayout ? (
+              <span>
+                “People-First. <em>Talent-Driven.</em>”
+              </span>
             ) : (
-              quote
+              <>
+                “
+                {highlight && quote.includes(highlight) ? (
+                  <>
+                    {quote.split(highlight)[0]}
+                    <em>{highlight}</em>
+                    {quote.split(highlight).slice(1).join(highlight)}
+                  </>
+                ) : (
+                  quote
+                )}
+                ”
+              </>
             )}
-            ”
           </blockquote>
         </motion.div>
         <div className={styles.divider} />

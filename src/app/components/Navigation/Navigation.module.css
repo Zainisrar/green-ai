@@ -108,6 +108,18 @@
 .activeItem {
   color: #23b14d !important;
 }
+.underlinedActiveItem {
+  position: relative;
+}
+.underlinedActiveItem::after {
+  position: absolute;
+  right: 0;
+  bottom: -9px;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: #d1d1cc;
+}
 .subMenuTrigger {
   display: flex;
   align-items: center;
@@ -163,6 +175,46 @@
 .quote em {
   color: #23b14d;
   font-style: italic;
+}
+
+/* Empower and Engage use Figma's feature-led composition: quote above the
+   feature image and its links, rather than the default bottom quote. */
+.featureLedDrawer .feature {
+  position: absolute;
+  top: 319px;
+  left: 36px;
+}
+.featureLedDrawer .subNavigation {
+  top: 318px;
+  left: 352px;
+  width: 277px;
+  gap: 24px;
+  padding-left: 10px;
+}
+.featureLedDrawer .quote {
+  top: 159px;
+  right: auto;
+  bottom: auto;
+  left: 73px;
+  width: 518px;
+  color: #303030;
+  font-size: 32px;
+  line-height: 1.2;
+  text-align: center;
+}
+.featureLedDrawer .quote span {
+  display: block;
+}
+.featureLedDrawer .actions {
+  bottom: 48px;
+}
+
+/* The Engineering panel expands a four-item product group below the primary
+   menu. Anchor its quote to the same canvas coordinates so viewport scaling
+   cannot push it into the expanded links. */
+.engineeringDrawer .quote {
+  top: min(690px, calc(100vh - 210px));
+  bottom: auto;
 }
 .divider {
   position: absolute;
@@ -263,6 +315,11 @@
     bottom: clamp(125px, 17vh, 155px);
   }
 
+  .engineeringDrawer .quote {
+    top: min(690px, calc(100vh - 210px));
+    bottom: auto;
+  }
+
   .divider {
     top: clamp(92px, 12vh, 120px);
     height: calc(100vh - clamp(185px, 25vh, 225px));
@@ -280,6 +337,46 @@
 
   .actions {
     bottom: 28px;
+  }
+
+  .engineeringDrawer .nestedNavigation {
+    top: 400px;
+    gap: 8px;
+  }
+
+  .engineeringDrawer .nestedNavigation a {
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  .engineeringDrawer .quote {
+    top: 550px;
+    width: min(500px, calc(100% - 90px));
+    font-size: 22px;
+    line-height: 1.35;
+  }
+}
+
+/* A retina-sized browser can have a 900–1100px CSS viewport even though the
+   captured image is much wider. Keep the Figma desktop columns, but compact
+   Engineering's expanded product group so it never enters the quote lane. */
+@media (min-width: 901px) and (max-width: 1100px) {
+  .engineeringDrawer .nestedNavigation {
+    top: 400px;
+    gap: 8px;
+  }
+
+  .engineeringDrawer .nestedNavigation a {
+    font-size: 15px;
+    line-height: 1.2;
+  }
+
+  .engineeringDrawer .quote {
+    top: min(550px, calc(100vh - 225px));
+    bottom: auto;
+    width: min(500px, calc(100% - 90px));
+    font-size: 22px;
+    line-height: 1.35;
   }
 }
 

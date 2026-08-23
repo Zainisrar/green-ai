@@ -222,6 +222,23 @@
   font-size: 14px;
   font-weight: 600;
   line-height: 18px;
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+.impactCards article:nth-child(1) p,
+.impactCards article:nth-child(3) p {
+  width: 205px;
+  margin-left: 0;
+  font-size: 13px;
+  line-height: 17px;
+}
+.impactCards article:nth-child(1) p {
+  transform: translateX(-12px);
+}
+.impactCards article:nth-child(2) p {
+  width: 230px;
+  margin-left: 0;
+  transform: translateX(-8px);
 }
 .quoteBox {
   position: absolute;
