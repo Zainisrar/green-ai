@@ -11,6 +11,8 @@ export interface Vector7366Props {
   inputRef?: React.RefObject<HTMLInputElement | null>;
   variant?: "figmaCanvas" | "responsive";
   className?: string;
+  micIconSrc?: string;
+  micScale?: number;
 }
 
 /**
@@ -31,6 +33,8 @@ export const Vector7366: React.FC<Vector7366Props> = ({
   inputRef,
   variant = "figmaCanvas",
   className = "",
+  micIconSrc = "/images/mike.svg",
+  micScale = 1,
 }) => {
   if (variant === "figmaCanvas") {
     return (
@@ -64,9 +68,10 @@ export const Vector7366: React.FC<Vector7366Props> = ({
           className={styles.canvasMicButton}
         >
           <img
-            src="/images/mike.svg"
+            src={micIconSrc}
             alt="Send message"
             className={styles.canvasMicIcon}
+            style={{ transform: `scale(${micScale})` }}
           />
         </button>
       </div>
@@ -104,10 +109,11 @@ export const Vector7366: React.FC<Vector7366Props> = ({
         onClick={onSubmit}
         className={styles.responsiveMicButton}
       >
-        <img
-          src="/images/mike.svg"
-          alt="Send message"
-          className={styles.responsiveMicIcon}
+          <img
+            src={micIconSrc}
+            alt="Send message"
+            className={styles.responsiveMicIcon}
+            style={{ transform: `scale(${micScale})` }}
         />
       </button>
     </div>

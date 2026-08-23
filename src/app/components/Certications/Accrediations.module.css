@@ -9,11 +9,11 @@
 }
 .watermark {
   position: absolute;
-  top: 252px;
+  top: 249px;
   left: -36px;
   width: 755px;
   height: 755px;
-  z-index: 2;
+  z-index: 0;
   max-width: none;
   object-fit: none;
 }
@@ -85,6 +85,7 @@
   top: 131px;
   left: 785px;
   width: 1086px;
+  z-index: 3;
 }
 .desktopPage h2 {
   margin: 0;
@@ -114,6 +115,7 @@
   top: 355px;
   left: 782px;
   width: 1100px;
+  z-index: 3;
 }
 .isoIntro {
   width: 1100px;
@@ -173,6 +175,7 @@
   top: 808px;
   left: 782px;
   width: 700px;
+  z-index: 3;
 }
 .cleanEnergy > div {
   position: absolute;
@@ -201,6 +204,7 @@
   left: 1742px;
   width: 178px;
   height: 52px;
+  z-index: 3;
   padding: 0;
   border: 0;
   background: transparent;

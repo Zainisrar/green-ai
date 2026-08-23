@@ -8,6 +8,10 @@ interface D6ChatbotProps {
   triggerClassName?: string;
   /** Page-specific placeholder text for the figmaCanvas trigger */
   figmaPlaceholder?: string;
+  /** Optional page-specific Figma microphone asset. */
+  figmaMicIconSrc?: string;
+  /** Optional page-specific microphone scale. */
+  figmaMicScale?: number;
   triggerStyle?: React.CSSProperties;
   triggerVariant?: "default" | "figmaCanvas";
 }
@@ -24,6 +28,8 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
   canvasAnchored = false,
   triggerClassName = "",
   figmaPlaceholder,
+  figmaMicIconSrc,
+  figmaMicScale,
   triggerStyle,
   triggerVariant = "default",
 }) => {
@@ -406,6 +412,8 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
           onSubmit={handlePromptSubmit}
           inputRef={promptInputRef}
           variant={isFigmaCanvasTrigger ? "figmaCanvas" : "responsive"}
+          micIconSrc={figmaMicIconSrc}
+          micScale={figmaMicScale}
         />
       </div>
     </>

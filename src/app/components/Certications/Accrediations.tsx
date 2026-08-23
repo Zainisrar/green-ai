@@ -77,7 +77,7 @@ export default function Accrediations() {
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
       <img
         className={styles.watermark}
-        src="/images/certifications/mask_composite.png"
+        src="/images/certifications/figma-background.png"
         alt=""
         width="755"
         height="755"

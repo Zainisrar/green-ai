@@ -27,7 +27,7 @@
 
 .pageTitle {
   position: absolute;
-  top: 59px;
+  top: 117px;
   left: 251px;
   width: 1045px;
   margin: 0;
@@ -97,6 +97,7 @@
 .mobileUseCases ul {
   margin: 7px 0 0;
   padding-left: 25px;
+  list-style: none;
 }
 
 .solutionColumns li {
@@ -226,7 +227,8 @@
   width: 441px;
 }
 
-.actions img {
+.actions > button > img:first-child,
+.actions > a > img:first-child {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -243,19 +245,21 @@
   white-space: nowrap;
 }
 
-.actions b {
+.actionArrow {
   position: absolute;
-  top: 5px;
-  right: 12px;
-  font-size: 30px;
-  font-weight: 400;
-  line-height: 40px;
+  top: 17px;
+  right: 31px;
+  width: 11px;
+  height: 19px;
+  transform: rotate(180deg);
 }
 
-.actions a b {
-  top: 6px;
-  right: 16px;
-  font-size: 20px;
+.actionDownload {
+  position: absolute;
+  top: 14px;
+  left: 395px;
+  width: 20px;
+  height: 20px;
 }
 
 .chatTrigger {
@@ -351,13 +355,36 @@
   gap: 14px;
 }
 
-.mobileActions button {
+.mobileActions button,
+.mobileActions a {
+  position: relative;
+  display: flex;
   min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 44px 8px 20px;
   border: 1px solid #23b14d;
   background: linear-gradient(110deg, #75d994, #effc97);
+  color: inherit;
   font-family: inherit;
   font-weight: 600;
+  text-align: center;
+  text-decoration: none;
   clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
+}
+
+.mobileActions img {
+  position: absolute;
+  right: 20px;
+  width: 11px;
+  height: 19px;
+  transform: rotate(180deg);
+}
+
+.mobileActions a img {
+  width: 20px;
+  height: 20px;
+  transform: none;
 }
 
 @media (max-width: 580px) {

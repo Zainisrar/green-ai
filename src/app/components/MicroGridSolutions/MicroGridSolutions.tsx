@@ -173,7 +173,12 @@ export default function MicroGridSolutions() {
             {microgridData?.callToActions?.[0]?.text ||
               "Talk to a System Architect"}
           </span>
-          <b aria-hidden="true">›</b>
+          <img
+            className={styles.actionArrow}
+            src="/images/microgrid-solutions/figma-action-arrow.svg"
+            alt=""
+            aria-hidden="true"
+          />
         </button>
         <button type="button" onClick={() => setIsDeploymentReviewOpen(true)}>
           <img
@@ -186,7 +191,12 @@ export default function MicroGridSolutions() {
             {microgridData?.callToActions?.[1]?.text ||
               "Book a Deployment Review"}
           </span>
-          <b aria-hidden="true">›</b>
+          <img
+            className={styles.actionArrow}
+            src="/images/microgrid-solutions/figma-action-arrow.svg"
+            alt=""
+            aria-hidden="true"
+          />
         </button>
         <Link href={microgridData?.callToActions?.[2]?.href || "#"}>
           <img
@@ -199,7 +209,12 @@ export default function MicroGridSolutions() {
             {microgridData?.callToActions?.[2]?.text ||
               "Download Our Hybrid & Microgrid Overview"}
           </span>
-          <b aria-hidden="true">⇩</b>
+          <img
+            className={styles.actionDownload}
+            src="/images/microgrid-solutions/figma-download-icon.png"
+            alt=""
+            aria-hidden="true"
+          />
         </Link>
       </div>
       <D6Chatbot
@@ -259,11 +274,32 @@ export default function MicroGridSolutions() {
         </p>
         <div className={styles.mobileActions}>
           <button type="button" onClick={() => setIsArchitectOpen(true)}>
-            Talk to a System Architect
+            <span>Talk to a System Architect</span>
+            <img
+              src="/images/microgrid-solutions/figma-action-arrow.svg"
+              alt=""
+              aria-hidden="true"
+            />
           </button>
           <button type="button" onClick={() => setIsDeploymentReviewOpen(true)}>
-            Book a Deployment Review
+            <span>Book a Deployment Review</span>
+            <img
+              src="/images/microgrid-solutions/figma-action-arrow.svg"
+              alt=""
+              aria-hidden="true"
+            />
           </button>
+          <Link href={microgridData?.callToActions?.[2]?.href || "#"}>
+            <span>
+              {microgridData?.callToActions?.[2]?.text ||
+                "Download Our Hybrid & Microgrid Overview"}
+            </span>
+            <img
+              src="/images/microgrid-solutions/figma-download-icon.png"
+              alt=""
+              aria-hidden="true"
+            />
+          </Link>
         </div>
       </div>
       <D6Chatbot />
@@ -272,7 +308,12 @@ export default function MicroGridSolutions() {
 
   return (
     <>
-      <FigmaPageCanvas desktop={desktop} mobile={mobile} nodeId="7077:5239" />
+      <FigmaPageCanvas
+        desktop={desktop}
+        mobile={mobile}
+        nodeId="7077:5239"
+        scaleToViewport="contain"
+      />
       <SystemArchitect
         isOpen={isArchitectOpen}
         onClose={() => setIsArchitectOpen(false)}

@@ -32,7 +32,7 @@
 .pageTitle {
   position: absolute;
   z-index: 2;
-  top: 194px;
+  top: 198px;
   left: 322px;
   width: 388px;
   margin: 0;
@@ -89,17 +89,17 @@
 }
 
 .visionCard .cardIcon {
-  top: 16px;
-  left: 267px;
-  width: 139px;
-  height: 145px;
+  top: -2px;
+  left: 223px;
+  width: 183px;
+  height: 183px;
 }
 
 .missionCard .cardIcon {
-  top: 24px;
-  left: 275px;
-  width: 146px;
-  height: 146px;
+  top: 0;
+  left: 222px;
+  width: 184px;
+  height: 184px;
 }
 
 .card h2 {
@@ -113,6 +113,7 @@
 
 .visionCard h2 {
   left: 444px;
+  top: 70px;
 }
 
 .missionCard h2 {
@@ -132,6 +133,7 @@
 
 .visionCard .description {
   left: 179px;
+  top: 213px;
   width: 427px;
 }
 
@@ -156,15 +158,15 @@
 }
 
 .visionCard .quote {
-  top: 350px;
-  left: 125px;
-  width: 360px;
+  top: 353px;
+  left: 103px;
+  width: 404px;
 }
 
 .missionCard .quote {
   top: 321px;
-  left: 112px;
-  width: 480px;
+  left: 95px;
+  width: 514px;
 }
 
 .footer {
@@ -184,8 +186,6 @@
   display: block;
   color: #23b14d;
 }
-
-
 
 .mobilePage {
   position: relative;

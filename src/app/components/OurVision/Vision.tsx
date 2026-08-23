@@ -50,12 +50,12 @@ export default function Vision() {
   const greenFooterStart = footer.indexOf("GREEN");
 
   const desktop = (
-    <main className={styles.desktopPage} data-node-id="7077:6885">
+    <main className={styles.desktopPage} data-node-id="7077:6846">
       <div className={styles.eyeArtwork} aria-hidden="true">
         <img src="/images/our-vision/figma-eye.png" alt="" />
       </div>
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
-      <h1 className={styles.pageTitle} data-node-id="7077:6920">
+      <h1 className={styles.pageTitle} data-node-id="7077:6867">
         {titleStart}:<span>{titleEnd.trim()}</span>
       </h1>
       <img
@@ -66,7 +66,7 @@ export default function Vision() {
 
       <section
         className={`${styles.card} ${styles.visionCard}`}
-        data-node-id="7077:6886"
+        data-node-id="7077:6847"
       >
         <img
           className={styles.cardShape}
@@ -85,7 +85,7 @@ export default function Vision() {
 
       <section
         className={`${styles.card} ${styles.missionCard}`}
-        data-node-id="7077:6887"
+        data-node-id="7077:6848"
       >
         <img
           className={styles.cardShape}
@@ -102,7 +102,7 @@ export default function Vision() {
         </p>
       </section>
 
-      <p className={styles.footer} data-node-id="7077:6915">
+      <p className={styles.footer} data-node-id="7077:6878">
         {greenFooterStart >= 0 ? footer.slice(0, greenFooterStart) : footer}
         {greenFooterStart >= 0 ? (
           <span>{footer.slice(greenFooterStart)}</span>
@@ -114,12 +114,12 @@ export default function Vision() {
         triggerVariant="figmaCanvas"
         triggerClassName={styles.chatTrigger}
         triggerStyle={{
-            top: 899,
-            right: "auto",
-            bottom: "auto",
-            left: 1498,
-            width: 418,
-          }}
+          top: 899,
+          right: "auto",
+          bottom: "auto",
+          left: 1498,
+          width: 418,
+        }}
       />
     </main>
   );
@@ -153,6 +153,6 @@ export default function Vision() {
   );
 
   return (
-    <FigmaPageCanvas desktop={desktop} mobile={mobile} nodeId="7077:6885" />
+    <FigmaPageCanvas desktop={desktop} mobile={mobile} nodeId="7077:6846" />
   );
 }

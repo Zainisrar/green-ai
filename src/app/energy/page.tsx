@@ -1,6 +1,5 @@
-import { redirect } from "next/navigation";
+import ServicesD1 from "@/app/components/Energy/ServicesD1";
 
-/** The primary Energy entry point is the restored Engineering/EPCM service page. */
 export default function EnergyPage() {
-  redirect("/engineering/solar-epcm-services");
+  return <ServicesD1 />;
 }
