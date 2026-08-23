@@ -47,20 +47,18 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
 
     // Split highlight by spaces to handle multiple terms like "GREEN's 22%"
     const highlightTerms = highlight.trim().split(/\s+/);
-    
+
     // Create a regex pattern that matches any of the terms
-    const pattern = highlightTerms
-      .map(term => escapeRegExp(term))
-      .join('|');
-    
+    const pattern = highlightTerms.map((term) => escapeRegExp(term)).join("|");
+
     const parts = text.split(new RegExp(`(${pattern})`, "gi"));
-    
+
     return parts.map((part, index) => {
       // Check if this part matches any of the highlight terms
       const shouldHighlight = highlightTerms.some(
-        term => part.toLowerCase() === term.toLowerCase()
+        (term) => part.toLowerCase() === term.toLowerCase(),
       );
-      
+
       return shouldHighlight ? (
         <span key={index} className="text-[#23B14D]">
           {part}
@@ -92,41 +90,161 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
 
   if (canvas) {
     const canvasCards = [
-      { title: "Why This Matters", image: "/images/women-in-energy/card1.png", description: "Energy access is only transformational if it includes everyone.", onClick: () => setOpenModal("whyThisMatters") },
-      { title: "Initiatives Underway", image: "/images/women-in-energy/card2.png", description: "Precision design.\nTerrain-smart. Load-aware.", onClick: () => setOpenModal("initiativesUnderway") },
-      { title: "Voices of Power", image: "/images/women-in-energy/card3.png", description: "Executed in-house.\nBuilt to endure.", onClick: () => setOpenModal("voicesOfPower") },
-      { title: "Partner with Us", image: "/images/women-in-energy/card4.png", description: "Executed in-house.\nBuilt to endure.", onClick: () => setOpenModal("partnerWithUs") },
+      {
+        title: "Why This Matters",
+        image: "/images/women-in-energy/card1.png",
+        description:
+          "Energy access is only transformational if it includes everyone.",
+        onClick: () => setOpenModal("whyThisMatters"),
+      },
+      {
+        title: "Initiatives Underway",
+        image: "/images/women-in-energy/card2.png",
+        description: "Precision design.\nTerrain-smart. Load-aware.",
+        onClick: () => setOpenModal("initiativesUnderway"),
+      },
+      {
+        title: "Voices of Power",
+        image: "/images/women-in-energy/card3.png",
+        description: "Executed in-house.\nBuilt to endure.",
+        onClick: () => setOpenModal("voicesOfPower"),
+      },
+      {
+        title: "Partner with Us",
+        image: "/images/women-in-energy/card4.png",
+        description: "Executed in-house.\nBuilt to endure.",
+        onClick: () => setOpenModal("partnerWithUs"),
+      },
     ];
 
     return (
       <main className={styles.canvasPage} data-node-id="7077:19753">
         <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
-        <div className={styles.canvasArtwork} aria-hidden="true"><img src="/images/women-in-energy/mainImg.png" alt="" /></div>
-        <img className={styles.canvasVerticalTitle} src="/images/women-in-energy/women-in-energy.png" alt="Women in Energy" />
-        <h1 className={styles.canvasTitle}>Women in Energy</h1>
-        <p className={styles.canvasSubtitle}>Powering Equity. Engineering Inclusion.</p>
-        <p className={styles.canvasDescription}>At GREEN, women are not just participants—they are pioneers. From solar technicians to project engineers to regional leads, we’re breaking stereotypes and building a gender-equal energy future.</p>
+        <div className={styles.canvasArtwork} aria-hidden="true">
+          <img src="/images/women-in-energy/mainImg.png" alt="" />
+        </div>
+        <img
+          className={styles.canvasVerticalTitle}
+          src="/images/women-in-energy/women-in-energy.png"
+          alt="Women in Energy"
+        />
+        <h1 className={styles.canvasTitle}>
+          Women in <span>Energy</span>
+        </h1>
+        <p className={styles.canvasSubtitle}>
+          Powering Equity. Engineering Inclusion.
+        </p>
+        <p className={styles.canvasDescription}>
+          At <strong>GREEN</strong>, women are not just participants—they are
+          pioneers.
+          <br />
+          From solar technicians to project engineers to regional leads, we’re
+          breaking stereotypes and building a gender-equal energy future.
+        </p>
         <div className={styles.canvasCards}>
           {canvasCards.map((card, index) => (
-            <div className={`${styles.canvasCard} ${styles[`canvasCard${index + 1}`]}`} key={card.title} role="button" tabIndex={0} onClick={card.onClick} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); card.onClick(); } }}>
+            <div
+              className={`${styles.canvasCard} ${styles[`canvasCard${index + 1}`]}`}
+              key={card.title}
+              role="button"
+              tabIndex={0}
+              onClick={card.onClick}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  card.onClick();
+                }
+              }}
+            >
               <h2>{card.title}</h2>
+              <img
+                className={styles.canvasCardFrameStart}
+                src="/images/women-in-energy/shape1.png"
+                alt=""
+                aria-hidden="true"
+              />
+              <img
+                className={styles.canvasCardFrameEnd}
+                src="/images/women-in-energy/shape2.png"
+                alt=""
+                aria-hidden="true"
+              />
               <img className={styles.canvasCardImage} src={card.image} alt="" />
               <p className={styles.canvasCardDescription}>{card.description}</p>
-              <FigmaAngledCta className={styles.canvasCardCta} onClick={(event) => { event.stopPropagation(); card.onClick(); }}>Explore</FigmaAngledCta>
+              <FigmaAngledCta
+                className={styles.canvasCardCta}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  card.onClick();
+                }}
+              >
+                Explore
+              </FigmaAngledCta>
             </div>
           ))}
         </div>
-        <p className={styles.canvasRightQuote}>Because when women<br />build energy systems<br />— they electrify possibility.</p>
-        <p className={styles.canvasBottomQuote}>GREEN’s workforce is now 22% female in technical roles<br />— and growing.</p>
-        <div className={styles.canvasReadMore}><span>Read more</span><span aria-hidden="true">›</span></div>
-        <FigmaAngledCta className={styles.canvasProspectusCta} href={data?.mainPage?.cta?.[0]?.href || "#"} icon="download">Women in Energy Program Brief (PDF)</FigmaAngledCta>
-        <FigmaAngledCta className={styles.canvasJoinCta} onClick={() => setOpenModal("joinNetwork")} showArrow>Join the Network | Apply for Labs | Partner to Scale</FigmaAngledCta>
+        <img
+          className={styles.canvasQuoteFrameStart}
+          src="/images/women-in-energy/figma/quote-frame-left.svg"
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          className={styles.canvasQuoteFrameEnd}
+          src="/images/women-in-energy/figma/quote-frame-right.svg"
+          alt=""
+          aria-hidden="true"
+        />
+        <p className={styles.canvasRightQuote}>
+          Because When Women
+          <br />
+          Build Energy Systems
+          <br />— They Electrify Possibility.
+        </p>
+        <p className={styles.canvasBottomQuote}>
+          <span>GREEN’s</span> Workforce Is Now <span>22%</span> Female In
+          Technical Roles
+          <br />— And Growing.
+        </p>
+        <div className={styles.canvasReadMore}>
+          <span>Read more</span>
+          <span aria-hidden="true">›</span>
+        </div>
+        <FigmaAngledCta
+          className={styles.canvasProspectusCta}
+          href={data?.mainPage?.cta?.[0]?.href || "#"}
+          icon="download"
+        >
+          Women in Energy Program Brief (PDF)
+        </FigmaAngledCta>
+        <FigmaAngledCta
+          className={styles.canvasJoinCta}
+          onClick={() => setOpenModal("joinNetwork")}
+          showArrow
+        >
+          Join the Network | Apply for Labs | Partner to Scale
+        </FigmaAngledCta>
         <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
-        <WhyThisMatters isOpen={openModal === "whyThisMatters"} onClose={() => setOpenModal(null)} />
-        <InitiativesUnderway isOpen={openModal === "initiativesUnderway"} onClose={() => setOpenModal(null)} />
-        <VoicesofPower isOpen={openModal === "voicesOfPower"} onClose={() => setOpenModal(null)} />
-        <PartnerwithUs isOpen={openModal === "partnerWithUs"} onClose={() => setOpenModal(null)} />
-        <JoinTheNetwork isOpen={openModal === "joinNetwork"} onClose={() => setOpenModal(null)} />
+        <WhyThisMatters
+          isOpen={openModal === "whyThisMatters"}
+          onClose={() => setOpenModal(null)}
+        />
+        <InitiativesUnderway
+          isOpen={openModal === "initiativesUnderway"}
+          onClose={() => setOpenModal(null)}
+        />
+        <VoicesofPower
+          isOpen={openModal === "voicesOfPower"}
+          onClose={() => setOpenModal(null)}
+        />
+        <PartnerwithUs
+          isOpen={openModal === "partnerWithUs"}
+          onClose={() => setOpenModal(null)}
+        />
+        <JoinTheNetwork
+          isOpen={openModal === "joinNetwork"}
+          onClose={() => setOpenModal(null)}
+        />
       </main>
     );
   }
@@ -134,7 +252,6 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
   if (error || !data) {
     return null;
   }
-  
 
   return (
     <React.Fragment>
@@ -163,7 +280,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
               <p className="mb-2">
                 {highlightText(
                   data.mainPage.description.text,
-                  data.mainPage.description.highlighted
+                  data.mainPage.description.highlighted,
                 )}
               </p>
             </div>
@@ -337,7 +454,11 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
             </div>
           </div>
           <div className="absolute  right-0 -z-10">
-            <img src="/images/women-in-energy/mainImg.png" alt="" role="presentation" />
+            <img
+              src="/images/women-in-energy/mainImg.png"
+              alt=""
+              role="presentation"
+            />
           </div>
           <div className="my-20 flex justify-end relative">
             <div className="lg:block hidden absolute -bottom-4 left-[70%]">
@@ -354,8 +475,10 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
             <div className=" lg:flex space-x-4 justify-between">
               <div className="my-8 lg:my-0">
                 <h3 className="text-xl lg:text-2xl font-bold   whitespace-pre-line">
-                  
-                  {highlightText(data.mainPage.quote2.text, data.mainPage.quote2.highlighted)}
+                  {highlightText(
+                    data.mainPage.quote2.text,
+                    data.mainPage.quote2.highlighted,
+                  )}
                 </h3>
               </div>
               <div className="space-y-8  ">

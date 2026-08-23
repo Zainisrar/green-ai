@@ -34,10 +34,10 @@
   top: 427px;
   left: 47px;
   display: block;
-  width: 118px;
-  height: 475px;
+  width: 41px;
+  height: 482px;
   max-width: none;
-  object-fit: fill;
+  object-fit: contain;
 }
 
 .canvasTitle {
@@ -50,6 +50,13 @@
   font-size: 56px;
   font-weight: 800;
   line-height: 67px;
+  text-transform: uppercase;
+}
+
+.canvasTitle span,
+.canvasDescription strong,
+.canvasBottomQuote span {
+  color: #23b14d;
 }
 
 .canvasSubtitle {
@@ -59,7 +66,7 @@
   left: 272.69px;
   width: 468px;
   margin: 0;
-  color: #111;
+  color: #23b14d;
   font-size: 22px;
   font-weight: 700;
   font-style: italic;
@@ -75,7 +82,12 @@
   margin: 0;
   font-size: 18px;
   font-weight: 400;
+  letter-spacing: 0.36px;
   line-height: 24px;
+}
+
+.canvasDescription strong {
+  font-weight: 800;
 }
 
 .canvasRightQuote {
@@ -161,6 +173,27 @@
   object-fit: fill;
 }
 
+.canvasCardFrameStart,
+.canvasCardFrameEnd {
+  position: absolute;
+  z-index: 1;
+  width: 64px;
+  height: 80px;
+  pointer-events: none;
+}
+
+.canvasCardFrameStart {
+  top: 200px;
+  left: -161px;
+}
+
+.canvasCardFrameEnd {
+  top: -17px;
+  left: 214px;
+  width: 65px;
+  transform: rotate(180deg);
+}
+
 .canvasCardDescription {
   position: absolute;
   top: 192px;
@@ -174,39 +207,122 @@
   white-space: pre-line;
 }
 
-.canvasCardCta {
+.canvasCardCta.canvasCardCta {
   position: absolute;
   top: 245px;
   left: 82px;
   width: 134px;
   height: 30px;
   min-height: 30px;
-  justify-content: space-between !important;
-  padding: 0 8px 0 19px !important;
+  justify-content: center;
+  gap: 8px;
+  padding: 0;
   font-size: 13px;
   font-weight: 600;
 }
 
-.canvasCard1 { top: 408px; left: 297px; }
-.canvasCard2 { top: 402px; left: 630px; }
-.canvasCard3 { top: 399px; left: 973.72px; }
-.canvasCard4 { top: 399px; left: 1298.32px; }
-.canvasCard1 h2 { width: 208px; }
-.canvasCard2 h2 { width: 238px; }
-.canvasCard3 h2 { width: 184px; }
-.canvasCard4 h2 { width: 181px; }
-.canvasCard1 .canvasCardImage { left: -79px; top: 53px; }
-.canvasCard2 .canvasCardImage { left: -73.88px; top: 51.31px; }
-.canvasCard3 .canvasCardImage { left: -95.06px; top: 54.31px; }
-.canvasCard4 .canvasCardImage { left: -89.66px; top: 54.31px; }
-.canvasCard1 .canvasCardDescription { top: 192px; left: -103px; }
-.canvasCard2 .canvasCardDescription { top: 189px; left: -82px; }
-.canvasCard3 .canvasCardDescription { top: 187px; left: -97.72px; }
-.canvasCard4 .canvasCardDescription { top: 187px; left: -92.32px; }
-.canvasCard1 .canvasCardCta { top: 245px; left: 3px; width: 133px; }
-.canvasCard2 .canvasCardCta { top: 251px; left: 25px; width: 127px; }
-.canvasCard3 .canvasCardCta { top: 254px; left: -8px; width: 137px; }
-.canvasCard4 .canvasCardCta { top: 254px; left: 11px; width: 123px; }
+.canvasCard1 {
+  top: 408px;
+  left: 297px;
+}
+.canvasCard2 {
+  top: 402px;
+  left: 630px;
+}
+.canvasCard3 {
+  top: 399px;
+  left: 973.72px;
+}
+.canvasCard4 {
+  top: 399px;
+  left: 1298.32px;
+}
+.canvasCard1 h2 {
+  width: 208px;
+}
+.canvasCard2 h2 {
+  width: 238px;
+}
+.canvasCard3 h2 {
+  width: 184px;
+}
+.canvasCard4 h2 {
+  width: 181px;
+}
+.canvasCard1 .canvasCardImage {
+  left: -79px;
+  top: 53px;
+}
+.canvasCard2 .canvasCardImage {
+  left: -73.88px;
+  top: 51.31px;
+}
+.canvasCard3 .canvasCardImage {
+  left: -95.06px;
+  top: 54.31px;
+}
+.canvasCard4 .canvasCardImage {
+  left: -89.66px;
+  top: 54.31px;
+}
+.canvasCard1 .canvasCardDescription {
+  top: 192px;
+  left: -103px;
+}
+.canvasCard2 .canvasCardDescription {
+  top: 189px;
+  left: -82px;
+}
+.canvasCard3 .canvasCardDescription {
+  top: 187px;
+  left: -97.72px;
+}
+.canvasCard4 .canvasCardDescription {
+  top: 187px;
+  left: -92.32px;
+}
+.canvasCard1 .canvasCardCta {
+  top: 245px;
+  left: 3px;
+  width: 133px;
+}
+.canvasCard2 .canvasCardCta {
+  top: 251px;
+  left: 25px;
+  width: 127px;
+}
+.canvasCard3 .canvasCardCta {
+  top: 254px;
+  left: -8px;
+  width: 137px;
+}
+.canvasCard4 .canvasCardCta {
+  top: 254px;
+  left: 11px;
+  width: 123px;
+}
+
+.canvasQuoteFrameStart,
+.canvasQuoteFrameEnd {
+  position: absolute;
+  z-index: 4;
+  width: 79px;
+  height: 98px;
+  pointer-events: none;
+}
+
+.canvasQuoteFrameStart {
+  top: 559px;
+  left: 1471px;
+}
+
+.canvasQuoteFrameEnd {
+  top: 556px;
+  left: 1822px;
+  width: 79.5px;
+  height: 99px;
+  transform: rotate(180deg);
+}
 
 .canvasCard:focus-visible {
   outline: 2px solid #23b14d;
@@ -240,7 +356,7 @@
 
 @media (max-width: 1200px) {
   .canvasPage {
-    position: static;
+    position: relative;
     width: auto;
     height: auto;
     min-height: 0;
@@ -248,7 +364,6 @@
   }
 
   .canvasArtwork,
-  .canvasVerticalTitle,
   .canvasTitle,
   .canvasSubtitle,
   .canvasDescription,
@@ -256,11 +371,28 @@
   .canvasBottomQuote,
   .canvasReadMore,
   .canvasCard,
+  .canvasCardFrameStart,
+  .canvasCardFrameEnd,
+  .canvasQuoteFrameStart,
+  .canvasQuoteFrameEnd,
   .canvasProspectusCta,
   .canvasJoinCta {
     position: static;
     width: auto;
     height: auto;
     min-height: 0;
+  }
+
+  /* This is a fixed Figma canvas layer, not responsive body content. */
+  .canvasVerticalTitle {
+    position: absolute;
+    z-index: 3;
+    top: 427px;
+    left: 47px;
+    display: block;
+    width: 41px;
+    height: 482px;
+    max-width: none;
+    object-fit: contain;
   }
 }

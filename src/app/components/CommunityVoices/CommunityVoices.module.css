@@ -1,28 +1,282 @@
-.canvasPage { position: relative; width: 1920px; height: 970px; min-height: 970px; overflow: hidden; background: #fff; color: #111; font-family: var(--font-montserrat), Montserrat, sans-serif; }
-.canvasArtwork { position: absolute; z-index: 0; top: 407.5px; left: -472px; width: 1152px; height: 1889px; pointer-events: none; }
-.canvasArtwork img { display: block; width: 1152px; height: 954px; max-width: none; object-fit: contain; opacity: .75; }
-.canvasVerticalTitle { position: absolute; z-index: 3; top: 193px; left: 71px; width: 86px; height: 733px; max-width: none; object-fit: fill; }
-.canvasTitle { position: absolute; z-index: 5; top: 119px; left: 269px; width: 626px; margin: 0; font-size: 56px; font-weight: 800; line-height: 67px; }
-.canvasSubtitle { position: absolute; z-index: 5; top: 193px; left: 269px; width: 547px; margin: 0; font-size: 22px; font-weight: 700; font-style: italic; line-height: 36px; }
-.canvasDescription { position: absolute; z-index: 5; top: 242px; left: 275px; width: 1384px; height: 72px; margin: 0; font-size: 18px; font-weight: 400; line-height: 24px; }
-.canvasRow { position: absolute; z-index: 5; width: 322px; height: 138px; }
-.canvasRowImage { position: absolute; top: 0; left: 0; width: 322px; height: 138px; object-fit: contain; }
-.canvasRowTitle { position: absolute; top: 0; left: 322px; margin: 0; font-size: 22px; font-weight: 700; line-height: 50px; white-space: nowrap; }
-.canvasRowCta { position: absolute; top: 46px; left: 728px; width: 141px; height: 46px; min-height: 46px; justify-content: space-between !important; padding: 0 12px 0 14px !important; font-size: 12px; font-weight: 600; }
-.canvasRow1 { top: 308px; left: 775px; }
-.canvasRow2 { top: 485px; left: 686px; }
-.canvasRow3 { top: 647px; left: 602px; }
-.canvasRow1 .canvasRowTitle { left: 322px; top: 0; }
-.canvasRow2 .canvasRowTitle { left: 322px; top: 42px; }
-.canvasRow3 .canvasRowTitle { left: 322px; top: 47px; }
-.canvasRow1 .canvasRowCta { top: 46px; left: 728px; }
-.canvasRow2 .canvasRowCta { top: 46px; left: 747px; }
-.canvasRow3 .canvasRowCta { top: 55px; left: 760px; }
-.canvasQuote { position: absolute; z-index: 5; top: 634px; left: 228px; width: 291px; height: 72px; margin: 0; font-size: 22px; font-weight: 700; line-height: 36px; white-space: pre-line; }
-.canvasBottomQuote { position: absolute; z-index: 5; top: 855px; left: 599px; width: 693px; height: 72px; margin: 0; font-size: 26px; font-weight: 700; line-height: 36px; white-space: pre-line; }
-.canvasReadMore { position: absolute; z-index: 6; top: 799px; left: 1521px; display: flex; width: 168px; height: 24px; align-items: center; gap: 10px; font-family: Raleway, sans-serif; font-size: 14px; line-height: 24px; }
-.canvasReadMore span:last-child { color: #23b14d; font-size: 24px; line-height: 14px; }
-.canvasSubmitCta, .canvasUploadCta { position: absolute; z-index: 7; height: 52px; min-height: 52px; justify-content: space-between !important; padding-top: 0 !important; padding-bottom: 0 !important; font-size: 16px; font-weight: 600; }
-.canvasSubmitCta { top: 731px; left: 1653px; width: 268px; }
-.canvasUploadCta { top: 809px; left: 1619px; width: 299px; }
-@media (max-width: 1200px) { .canvasPage { position: static; width: auto; height: auto; min-height: 0; overflow: visible; } .canvasArtwork, .canvasVerticalTitle, .canvasTitle, .canvasSubtitle, .canvasDescription, .canvasRow, .canvasQuote, .canvasBottomQuote, .canvasReadMore, .canvasSubmitCta, .canvasUploadCta { position: static; width: auto; height: auto; min-height: 0; } }
+.canvasPage {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  min-height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #111;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+.canvasArtwork {
+  position: absolute;
+  z-index: 0;
+  top: 407.5px;
+  left: -472px;
+  width: 1152px;
+  height: 1889px;
+  pointer-events: none;
+}
+.canvasArtwork img {
+  display: block;
+  width: 1152px;
+  height: 954px;
+  max-width: none;
+  object-fit: contain;
+  opacity: 0.75;
+}
+.canvasVerticalTitle {
+  position: absolute;
+  z-index: 3;
+  top: 193px;
+  left: 71px;
+  width: 86px;
+  height: 733px;
+  max-width: none;
+  object-fit: fill;
+}
+.canvasTitle {
+  position: absolute;
+  z-index: 5;
+  top: 119px;
+  left: 269px;
+  width: 626px;
+  margin: 0;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 67px;
+  text-transform: uppercase;
+}
+.canvasTitle span,
+.canvasQuote span,
+.canvasBottomQuote span,
+.canvasDescription strong {
+  color: #23b14d;
+}
+.canvasSubtitle {
+  position: absolute;
+  z-index: 5;
+  top: 193px;
+  left: 269px;
+  width: 547px;
+  margin: 0;
+  color: #23b14d;
+  font-size: 22px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 36px;
+}
+.canvasDescription {
+  position: absolute;
+  z-index: 5;
+  top: 242px;
+  left: 275px;
+  width: 1384px;
+  height: 72px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0.36px;
+  line-height: 24px;
+}
+.canvasDescription strong {
+  font-weight: 800;
+}
+.canvasRow {
+  position: absolute;
+  z-index: 5;
+  width: 322px;
+  height: 138px;
+}
+.canvasRowImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 322px;
+  height: 138px;
+  padding: 7px 11px 7px 12px;
+  background: linear-gradient(90deg, #23b14d 0%, #fffe50 100%);
+  clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
+  filter: drop-shadow(2px 5px 2px rgba(0, 0, 0, 0.28));
+  box-sizing: border-box;
+}
+.canvasRowImage img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: polygon(11% 0, 100% 0, 89% 100%, 0 100%);
+}
+.canvasRowTitle {
+  position: absolute;
+  top: 0;
+  left: 322px;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 50px;
+  white-space: nowrap;
+}
+.canvasRowCta.canvasRowCta {
+  position: absolute;
+  top: 46px;
+  left: 728px;
+  width: 141px;
+  height: 41px;
+  min-height: 41px;
+  justify-content: center;
+  gap: 10px;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 600;
+}
+.canvasRow1 {
+  top: 308px;
+  left: 775px;
+}
+.canvasRow2 {
+  top: 485px;
+  left: 686px;
+}
+.canvasRow3 {
+  top: 647px;
+  left: 602px;
+}
+.canvasRow1 .canvasRowTitle {
+  left: 322px;
+  top: 0;
+}
+.canvasRow2 .canvasRowTitle {
+  left: 322px;
+  top: 42px;
+}
+.canvasRow3 .canvasRowTitle {
+  left: 322px;
+  top: 47px;
+}
+.canvasRow1 .canvasRowCta {
+  top: 46px;
+  left: 728px;
+}
+.canvasRow2 .canvasRowCta {
+  top: 46px;
+  left: 747px;
+}
+.canvasRow3 .canvasRowCta {
+  top: 55px;
+  left: 760px;
+}
+.canvasQuote {
+  position: absolute;
+  z-index: 5;
+  top: 634px;
+  left: 228px;
+  width: 291px;
+  height: 72px;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 36px;
+  white-space: pre-line;
+}
+.canvasQuoteFrameLeft {
+  position: absolute;
+  z-index: 4;
+  top: 623px;
+  left: 171px;
+  width: 81px;
+  height: 100px;
+}
+.canvasQuoteFrameRight {
+  position: absolute;
+  z-index: 4;
+  top: 629px;
+  left: 464px;
+  width: 81px;
+  height: 100px;
+  transform: rotate(180deg);
+}
+.canvasBottomQuote {
+  position: absolute;
+  z-index: 5;
+  top: 855px;
+  left: 599px;
+  width: 693px;
+  height: 72px;
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 36px;
+  text-transform: capitalize;
+  white-space: pre-line;
+}
+.canvasReadMore {
+  position: absolute;
+  z-index: 6;
+  top: 799px;
+  left: 1521px;
+  display: flex;
+  width: 168px;
+  height: 24px;
+  align-items: center;
+  gap: 10px;
+  font-family: Raleway, sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+}
+.canvasReadMore span:last-child {
+  color: #23b14d;
+  font-size: 24px;
+  line-height: 14px;
+}
+.canvasSubmitCta,
+.canvasUploadCta {
+  position: absolute;
+  z-index: 7;
+  height: 52px;
+  min-height: 52px;
+  justify-content: space-between !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  font-size: 16px;
+  font-weight: 600;
+}
+.canvasSubmitCta {
+  top: 731px;
+  left: 1653px;
+  width: 268px;
+}
+.canvasUploadCta {
+  top: 809px;
+  left: 1619px;
+  width: 299px;
+}
+@media (max-width: 1200px) {
+  .canvasPage {
+    position: static;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+  .canvasArtwork,
+  .canvasVerticalTitle,
+  .canvasTitle,
+  .canvasSubtitle,
+  .canvasDescription,
+  .canvasRow,
+  .canvasQuote,
+  .canvasQuoteFrameLeft,
+  .canvasQuoteFrameRight,
+  .canvasBottomQuote,
+  .canvasReadMore,
+  .canvasSubmitCta,
+  .canvasUploadCta {
+    position: static;
+    width: auto;
+    height: auto;
+    min-height: 0;
+  }
+}

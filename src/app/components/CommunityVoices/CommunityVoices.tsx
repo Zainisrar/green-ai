@@ -25,7 +25,7 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
     const parts = text.split(new RegExp(`(${pattern})`, "gi"));
     return parts.map((part, index) => {
       const shouldHighlight = highlightTerms.some(
-        (term) => part.toLowerCase() === term.toLowerCase()
+        (term) => part.toLowerCase() === term.toLowerCase(),
       );
       return shouldHighlight ? (
         <span key={index} className="text-[#23B14D]">
@@ -37,44 +37,139 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
     });
   };
 
-    if (canvas) {
-      const rows = [
-        { title: "Voices from the Field", image: "/images/community-voices/mainImg.png", onClick: () => setOpenModal("voicesFromField") },
-        { title: "What Makes Our Impact Different?", image: "/images/community-voices/mainImg.png", onClick: () => setOpenModal("whatMakesOurImpact") },
-        { title: "Project Showcase", image: "/images/community-voices/mainImg.png", onClick: () => setOpenModal("projectShowcase") },
-      ];
-      return (
-        <main className={styles.canvasPage} data-node-id="7077:21678">
-          <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
-          <div className={styles.canvasArtwork} aria-hidden="true"><img src="/images/community-voices/mainImg.png" alt="" /></div>
-          <img className={styles.canvasVerticalTitle} src="/images/community-voices/community-voices.png" alt="Community Voices" />
-          <h1 className={styles.canvasTitle}>Community Voices</h1>
-          <p className={styles.canvasSubtitle}>You Call Them Projects. We Call Them People.</p>
-          <p className={styles.canvasDescription}>From off-grid islands to inland clinics, GREEN’s systems don’t just power equipment — they power lives.<br />Here, the people speak. And the impact speaks for itself.</p>
-          <div className={styles.canvasRows}>
-            {rows.map((row, index) => (
-              <div className={`${styles.canvasRow} ${styles[`canvasRow${index + 1}`]}`} key={row.title} role="button" tabIndex={0} onClick={row.onClick} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); row.onClick(); } }}>
-                <img className={styles.canvasRowImage} src={row.image} alt="" />
-                <h2 className={styles.canvasRowTitle}>{row.title}</h2>
-                <FigmaAngledCta className={styles.canvasRowCta} onClick={(event) => { event.stopPropagation(); row.onClick(); }}>Explore</FigmaAngledCta>
-              </div>
-            ))}
-          </div>
-          <p className={styles.canvasQuote}>You Call Them Projects.<br />We Call Them People.</p>
-          <p className={styles.canvasBottomQuote}>When the lights come on, the real story begins.<br />And GREEN is honored to power every chapter.</p>
-          <div className={styles.canvasReadMore}><span>Read more</span><span aria-hidden="true">›</span></div>
-          <FigmaAngledCta className={styles.canvasSubmitCta} onClick={() => setOpenModal("submitTestimonial")}>Submit a Testimonial</FigmaAngledCta>
-          <FigmaAngledCta className={styles.canvasUploadCta} onClick={() => setOpenModal("uploadPhotoVideo")} icon="download">Upload a Photo / Video</FigmaAngledCta>
-          <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
-          <VoicesFromField isOpen={openModal === "voicesFromField"} onClose={() => setOpenModal(null)} />
-          <WhatMakesOurImpactDifferent isOpen={openModal === "whatMakesOurImpact"} onClose={() => setOpenModal(null)} />
-          <SubmitTestimonial isOpen={openModal === "submitTestimonial"} onClose={() => setOpenModal(null)} />
-          <UploadPhotoVideo isOpen={openModal === "uploadPhotoVideo"} onClose={() => setOpenModal(null)} />
-        </main>
-      );
-    }
+  if (canvas) {
+    const rows = [
+      {
+        title: "Voices from the Field",
+        image: "/images/community-voices/figma/project-showcase.png",
+        onClick: () => setOpenModal("voicesFromField"),
+      },
+      {
+        title: "What Makes Our Impact Different?",
+        image: "/images/community-voices/figma/voices-from-field.png",
+        onClick: () => setOpenModal("whatMakesOurImpact"),
+      },
+      {
+        title: "Project Showcase",
+        image: "/images/community-voices/figma/impact-different.png",
+        onClick: () => setOpenModal("projectShowcase"),
+      },
+    ];
+    return (
+      <main className={styles.canvasPage} data-node-id="7077:21678">
+        <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
+        <div className={styles.canvasArtwork} aria-hidden="true">
+          <img src="/images/community-voices/mainImg.png" alt="" />
+        </div>
+        <img
+          className={styles.canvasVerticalTitle}
+          src="/images/community-voices/community-voices.png"
+          alt="Community Voices"
+        />
+        <h1 className={styles.canvasTitle}>
+          Community <span>Voices</span>
+        </h1>
+        <p className={styles.canvasSubtitle}>
+          You Call Them Projects. We Call Them People.
+        </p>
+        <p className={styles.canvasDescription}>
+          From off-grid islands to inland clinics, <strong>GREEN’s</strong>{" "}
+          systems don’t just power equipment — they power lives.
+          <br />
+          Here, the people speak. And the impact speaks for itself.
+        </p>
+        <div className={styles.canvasRows}>
+          {rows.map((row, index) => (
+            <div
+              className={`${styles.canvasRow} ${styles[`canvasRow${index + 1}`]}`}
+              key={row.title}
+              role="button"
+              tabIndex={0}
+              onClick={row.onClick}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  row.onClick();
+                }
+              }}
+            >
+              <span className={styles.canvasRowImage} aria-hidden="true">
+                <img src={row.image} alt="" />
+              </span>
+              <h2 className={styles.canvasRowTitle}>{row.title}</h2>
+              <FigmaAngledCta
+                className={styles.canvasRowCta}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  row.onClick();
+                }}
+              >
+                Explore
+              </FigmaAngledCta>
+            </div>
+          ))}
+        </div>
+        <p className={styles.canvasQuote}>
+          You Call Them <span>Projects.</span>
+          <br />
+          We Call Them <span>People.</span>
+        </p>
+        <img
+          className={styles.canvasQuoteFrameLeft}
+          src="/images/community-voices/figma/quote-frame-left.svg"
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          className={styles.canvasQuoteFrameRight}
+          src="/images/community-voices/figma/quote-frame-right.svg"
+          alt=""
+          aria-hidden="true"
+        />
+        <p className={styles.canvasBottomQuote}>
+          When the lights come on, the real story begins.
+          <br />
+          And <span>GREEN</span> is honored to power every chapter.
+        </p>
+        <div className={styles.canvasReadMore}>
+          <span>Read more</span>
+          <span aria-hidden="true">›</span>
+        </div>
+        <FigmaAngledCta
+          className={styles.canvasSubmitCta}
+          onClick={() => setOpenModal("submitTestimonial")}
+        >
+          Submit a Testimonial
+        </FigmaAngledCta>
+        <FigmaAngledCta
+          className={styles.canvasUploadCta}
+          onClick={() => setOpenModal("uploadPhotoVideo")}
+          icon="download"
+        >
+          Upload a Photo / Video
+        </FigmaAngledCta>
+        <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
+        <VoicesFromField
+          isOpen={openModal === "voicesFromField"}
+          onClose={() => setOpenModal(null)}
+        />
+        <WhatMakesOurImpactDifferent
+          isOpen={openModal === "whatMakesOurImpact"}
+          onClose={() => setOpenModal(null)}
+        />
+        <SubmitTestimonial
+          isOpen={openModal === "submitTestimonial"}
+          onClose={() => setOpenModal(null)}
+        />
+        <UploadPhotoVideo
+          isOpen={openModal === "uploadPhotoVideo"}
+          onClose={() => setOpenModal(null)}
+        />
+      </main>
+    );
+  }
 
-    if (!data) return null;
+  if (!data) return null;
   return (
     <React.Fragment>
       <TopNavigation />
@@ -100,7 +195,7 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
               <p className="mb-2">
                 {highlightText(
                   data.mainPage.description.text,
-                  data.mainPage.description.highlighted
+                  data.mainPage.description.highlighted,
                 )}
               </p>
             </div>
@@ -121,24 +216,22 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
                   <div>
                     {highlightText(
                       data.mainPage.quote1.text1,
-                      data.mainPage.quote1.highlighted1
+                      data.mainPage.quote1.highlighted1,
                     )}
                   </div>
                   <div>
                     {highlightText(
                       data.mainPage.quote1.text2,
-                      data.mainPage.quote1.highlighted2
+                      data.mainPage.quote1.highlighted2,
                     )}
                   </div>
-                   <div className="hidden absolute -top-10 -right-20 lg:block ">
+                  <div className="hidden absolute -top-10 -right-20 lg:block ">
                     <img
                       src="/images/community-voices/shape2.png"
                       alt="vector"
                     />
                   </div>
                 </div>
-
-                
               </div>
             </div>
             <div className="my-20">

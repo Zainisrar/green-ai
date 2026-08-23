@@ -63,7 +63,7 @@
   left: 262px;
   width: 834px;
   margin: 0;
-  color: #111;
+  color: #23b14d;
   font-size: 30px;
   font-weight: 600;
   font-style: italic;
@@ -81,6 +81,18 @@
   font-size: 18px;
   font-weight: 600;
   line-height: 24px;
+}
+
+.canvasDescription span,
+.canvasDescription strong,
+.canvasRightIntro span,
+.canvasRightBody span,
+.canvasBottomQuote span {
+  color: #23b14d;
+}
+
+.canvasDescription strong {
+  font-weight: 800;
 }
 
 .canvasRows {
@@ -106,15 +118,69 @@
   line-height: 27px;
 }
 
-.canvasRow1 { top: 350px; left: 412px; }
-.canvasRow2 { top: 430px; left: 370px; }
-.canvasRow3 { top: 512px; left: 337px; }
-.canvasRow4 { top: 592px; left: 300px; }
-.canvasRow5 { top: 675px; left: 259px; }
+.canvasRow1 {
+  top: 350px;
+  left: 412px;
+}
+.canvasRow2 {
+  top: 430px;
+  left: 370px;
+}
+.canvasRow3 {
+  top: 512px;
+  left: 337px;
+}
+.canvasRow4 {
+  top: 592px;
+  left: 300px;
+}
+.canvasRow5 {
+  top: 675px;
+  left: 259px;
+}
 
 .canvasRow:focus-visible {
   outline: 2px solid #23b14d;
   outline-offset: 4px;
+}
+
+.canvasRowActive {
+  color: #23b14d;
+}
+
+.canvasCalloutFrameStart,
+.canvasCalloutFrameEnd {
+  position: absolute;
+  z-index: 4;
+  width: 79px;
+  height: 98px;
+  pointer-events: none;
+}
+
+.canvasCalloutFrameStart {
+  top: 509px;
+  left: 663px;
+}
+
+.canvasCalloutFrameEnd {
+  top: 508px;
+  left: 1074px;
+  width: 79.5px;
+  height: 99px;
+  transform: rotate(180deg);
+}
+
+.canvasCallout {
+  position: absolute;
+  z-index: 5;
+  top: 519px;
+  left: 723px;
+  width: 407px;
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 36px;
 }
 
 .canvasRightHeading {
@@ -136,6 +202,7 @@
   left: 1227px;
   width: 834px;
   margin: 0;
+  color: #23b14d;
   font-size: 21px;
   font-weight: 600;
   font-style: italic;
@@ -171,6 +238,14 @@
 
 .canvasRightList span {
   display: block;
+  padding-left: 33px;
+  position: relative;
+}
+
+.canvasRightList span::before {
+  position: absolute;
+  left: 10px;
+  content: "•";
 }
 
 .canvasRightList span:not(:last-child) {
@@ -203,19 +278,15 @@
   white-space: pre-line;
 }
 
-.canvasBottomQuote span {
-  color: #23b14d;
-}
-
-.canvasApplyCta,
-.canvasProspectusCta {
+.canvasApplyCta.canvasApplyCta,
+.canvasProspectusCta.canvasProspectusCta {
   position: absolute;
   z-index: 7;
   height: 52px;
   min-height: 52px;
-  justify-content: space-between !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
+  justify-content: center;
+  gap: 12px;
+  padding: 0;
   font-size: 16px;
   font-weight: 600;
 }
@@ -247,6 +318,9 @@
   .canvasSubtitle,
   .canvasDescription,
   .canvasRows,
+  .canvasCalloutFrameStart,
+  .canvasCalloutFrameEnd,
+  .canvasCallout,
   .canvasRightHeading,
   .canvasRightQuote,
   .canvasRightIntro,
