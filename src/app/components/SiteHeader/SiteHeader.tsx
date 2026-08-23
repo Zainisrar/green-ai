@@ -110,108 +110,130 @@ export default function SiteHeader({
     return () => window.removeEventListener("scroll", updateHeader);
   }, []);
 
-  if (isNavigationOpen && navigationData) {
-    return (
-      <Navigation
-        navigationData={navigationData}
-        activeSection={activeSection}
-        setActiveSection={setActiveSection}
-        featuredChild={featuredChild}
-        currentPath={pathname}
-        onClose={closeNavigation}
-      />
-    );
-  }
-
   return (
-    <header
-      className={`${styles.header} ${layout === "figmaCanvas" ? styles.canvasHeader : ""} ${layout === "productCanvas" ? styles.productCanvasHeader : ""} ${neutralNavigation ? styles.neutralNavigation : ""} ${isScrolled ? styles.scrolled : ""}`}
-      data-site-header
-      data-node-id={layout !== "viewport" ? "7077:3756" : undefined}
-    >
-      {brand === "green" ? (
-        <FigmaBrandPanel
-          className={
-            layout !== "viewport"
-              ? `${styles.canvasBrandPanel} ${figmaPanelVariant === "flagship" ? styles.flagshipCanvasBrandPanel : ""}`
-              : styles.brandPanel
-          }
-          compactLogo={compactLogo}
-          fixedCanvasSize={layout === "figmaCanvas"}
-          variant={figmaPanelVariant}
-          showPanel={panel === "full"}
-        />
-      ) : (
-        <Link
-          href="/home/renewable-energy-the-core"
-          className={`${styles.logo} ${styles.sunshineLogo} ${productLogo ? styles.productLogo : ""} ${brandClassName}`}
-          aria-label="GREEN home"
-        >
-          <Image
-            src={headerBrand.src}
-            alt={headerBrand.alt}
-            width={headerBrand.width}
-            height={headerBrand.height}
-            priority
+    <>
+      <header
+        className={`${styles.header} ${layout === "figmaCanvas" ? styles.canvasHeader : ""} ${layout === "productCanvas" ? styles.productCanvasHeader : ""} ${neutralNavigation ? styles.neutralNavigation : ""} ${isScrolled ? styles.scrolled : ""} ${isNavigationOpen ? styles.navigationOpen : ""}`}
+        data-site-header
+        data-node-id={layout !== "viewport" ? "7077:3756" : undefined}
+      >
+        {brand === "green" ? (
+          <FigmaBrandPanel
+            className={
+              layout !== "viewport"
+                ? `${styles.canvasBrandPanel} ${figmaPanelVariant === "flagship" ? styles.flagshipCanvasBrandPanel : ""}`
+                : styles.brandPanel
+            }
+            compactLogo={compactLogo}
+            fixedCanvasSize={layout === "figmaCanvas"}
+            variant={figmaPanelVariant}
+            showPanel={panel === "full"}
           />
-        </Link>
-      )}
-
-      {showEmpawaProductLink ? (
-        <Link
-          href="/engineering/products/green-empawa"
-          className={styles.productEmpawaLink}
-          aria-label="View GREEN Em’Pawa products"
-        />
-      ) : null}
-
-      <nav className={styles.navigation} aria-label="Primary navigation">
-        {navigationItems.map((item) => {
-          const active = highlightActive && isItemActive(pathname, item.label);
-          return (
-            <Link
-              href={item.href}
-              key={item.label}
-              className={active ? styles.active : undefined}
-              aria-current={active ? "page" : undefined}
-            >
-              {item.label}
-            </Link>
-          );
-        })}
-        {layout === "viewport" ? (
-          <button
-            type="button"
-            onClick={openNavigation}
-            className={styles.menuButton}
-            aria-label="Open navigation menu"
+        ) : (
+          <Link
+            href="/home/renewable-energy-the-core"
+            className={`${styles.logo} ${styles.sunshineLogo} ${productLogo ? styles.productLogo : ""} ${brandClassName}`}
+            aria-label="GREEN home"
           >
             <Image
-              src="/images/heroSection/lighting.svg"
-              alt=""
-              width={42}
-              height={42}
+              src={headerBrand.src}
+              alt={headerBrand.alt}
+              width={headerBrand.width}
+              height={headerBrand.height}
+              priority
             />
+          </Link>
+        )}
+
+        {showEmpawaProductLink ? (
+          <Link
+            href="/engineering/products/green-empawa"
+            className={styles.productEmpawaLink}
+            aria-label="View GREEN Em’Pawa products"
+          />
+        ) : null}
+
+        <nav className={styles.navigation} aria-label="Primary navigation">
+          {navigationItems.map((item) => {
+            const active =
+              highlightActive && isItemActive(pathname, item.label);
+            return (
+              <Link
+                href={item.href}
+                key={item.label}
+                className={active ? styles.active : undefined}
+                aria-current={active ? "page" : undefined}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+          {layout === "viewport" ? (
+            <button
+              type="button"
+              onClick={isNavigationOpen ? closeNavigation : openNavigation}
+              className={`${styles.menuButton} ${isNavigationOpen ? styles.menuCloseButton : ""}`}
+              aria-label={
+                isNavigationOpen
+                  ? "Close navigation menu"
+                  : "Open navigation menu"
+              }
+            >
+              {isNavigationOpen ? (
+                <>
+                  <span />
+                  <span />
+                </>
+              ) : (
+                <Image
+                  src="/images/heroSection/lighting.svg"
+                  alt=""
+                  width={42}
+                  height={42}
+                />
+              )}
+            </button>
+          ) : null}
+        </nav>
+
+        {layout !== "viewport" ? (
+          <button
+            type="button"
+            onClick={isNavigationOpen ? closeNavigation : openNavigation}
+            className={`${styles.menuButton} ${styles.canvasMenuButton} ${isNavigationOpen ? styles.menuCloseButton : ""}`}
+            aria-label={
+              isNavigationOpen
+                ? "Close navigation menu"
+                : "Open navigation menu"
+            }
+            data-node-id="I7077:3756;7077:14065"
+          >
+            {isNavigationOpen ? (
+              <>
+                <span />
+                <span />
+              </>
+            ) : (
+              <Image
+                src="/images/shared/figma-brand-panel/bolt.png"
+                alt=""
+                width={85}
+                height={85}
+              />
+            )}
           </button>
         ) : null}
-      </nav>
-
-      {layout !== "viewport" ? (
-        <button
-          type="button"
-          onClick={openNavigation}
-          className={`${styles.menuButton} ${styles.canvasMenuButton}`}
-          aria-label="Open navigation menu"
-          data-node-id="I7077:3756;7077:14065"
-        >
-          <Image
-            src="/images/shared/figma-brand-panel/bolt.png"
-            alt=""
-            width={85}
-            height={85}
-          />
-        </button>
+      </header>
+      {isNavigationOpen && navigationData ? (
+        <Navigation
+          navigationData={navigationData}
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+          featuredChild={featuredChild}
+          currentPath={pathname}
+          onClose={closeNavigation}
+        />
       ) : null}
-    </header>
+    </>
   );
 }

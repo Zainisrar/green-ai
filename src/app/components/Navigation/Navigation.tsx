@@ -1,5 +1,6 @@
 "use client";
 
+import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { NavigationItem, NavigationText } from "../../hooks/useNavigation";
@@ -28,6 +29,7 @@ export default function Navigation({
   const [selectedParent, setSelectedParent] = useState<NavigationItem | null>(
     null,
   );
+  const reduceMotion = useReducedMotion();
   const drawerRef = useRef<HTMLElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -79,8 +81,8 @@ export default function Navigation({
     featuredChild?.text?.description ||
     "Explore our comprehensive solutions and services";
   const highlight = featuredChild?.text?.highlighted;
-  const visibleItems =
-    selectedParent?.children ?? activeSection?.children ?? [];
+  const visibleItems = activeSection?.children ?? [];
+  const sections = navigationData.slice().sort((a, b) => a.id - b.id);
   const isCurrent = (item: NavigationItem) =>
     currentPath === item.slug ||
     Boolean(item.slug && currentPath?.startsWith(`${item.slug}/`));
@@ -109,7 +111,16 @@ export default function Navigation({
           <span />
           <span />
         </button>
-        <div className={styles.content}>
+        <motion.div
+          key={activeSection?.id ?? "navigation"}
+          className={styles.content}
+          initial={reduceMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: reduceMotion ? 0 : 0.3,
+            ease: [0, 0, 0.58, 1],
+          }}
+        >
           <div className={styles.feature}>
             {featuredChild?.image ? (
               <img
@@ -119,24 +130,21 @@ export default function Navigation({
             ) : null}
           </div>
           <div className={styles.subNavigation}>
-            {selectedParent ? (
-              <button
-                className={styles.back}
-                type="button"
-                onClick={() => setSelectedParent(null)}
-              >
-                ‹ {activeSection?.name}
-              </button>
-            ) : null}
             {visibleItems.map((item) =>
               item.children?.length ? (
                 <button
                   key={item.id}
                   type="button"
-                  className={isCurrent(item) ? styles.activeItem : undefined}
-                  onClick={() => setSelectedParent(item)}
+                  className={`${styles.subMenuTrigger} ${isCurrent(item) ? styles.activeItem : ""}`}
+                  aria-expanded={selectedParent?.id === item.id}
+                  onClick={() =>
+                    setSelectedParent((selected) =>
+                      selected?.id === item.id ? null : item,
+                    )
+                  }
                 >
                   {item.name}
+                  <span aria-hidden="true">›</span>
                 </button>
               ) : (
                 <Link
@@ -150,6 +158,18 @@ export default function Navigation({
               ),
             )}
           </div>
+          {selectedParent?.children?.length ? (
+            <nav
+              className={styles.nestedNavigation}
+              aria-label={`${selectedParent.name} navigation`}
+            >
+              {selectedParent.children.map((item) => (
+                <Link key={item.id} href={item.slug} onClick={onClose}>
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
+          ) : null}
           <blockquote className={styles.quote}>
             “
             {highlight && quote.includes(highlight) ? (
@@ -163,29 +183,37 @@ export default function Navigation({
             )}
             ”
           </blockquote>
-        </div>
+        </motion.div>
         <div className={styles.divider} />
         <nav className={styles.sections} aria-label="Navigation sections">
-          {navigationData
-            .slice()
-            .sort((a, b) => a.id - b.id)
-            .map((section) => (
+          {sections.map((section) => {
+            const isActive = activeSection?.id === section.id;
+
+            return (
               <button
                 key={section.id}
                 type="button"
-                className={
-                  activeSection?.id === section.id
-                    ? styles.activeSection
-                    : undefined
-                }
+                className={isActive ? styles.activeSection : undefined}
+                aria-pressed={isActive}
                 onClick={() => {
                   setActiveSection(section);
                   setSelectedParent(null);
                 }}
               >
+                {isActive ? (
+                  <motion.span
+                    className={styles.sectionMarker}
+                    layoutId="active-navigation-section-marker"
+                    transition={{
+                      duration: reduceMotion ? 0 : 0.3,
+                      ease: [0, 0, 0.58, 1],
+                    }}
+                  />
+                ) : null}
                 {section.name}
               </button>
-            ))}
+            );
+          })}
         </nav>
         <div className={styles.actions}>
           <Link href="/engage/reach-us" onClick={onClose}>

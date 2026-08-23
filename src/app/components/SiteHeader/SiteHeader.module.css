@@ -16,6 +16,11 @@
   font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
 
+/* Figma keeps the primary header above the open navigation drawer. */
+.navigationOpen {
+  z-index: 10001;
+}
+
 .scrolled {
   background: rgb(255 255 255 / 94%);
   box-shadow: 0 5px 18px rgb(0 0 0 / 8%);
@@ -120,6 +125,25 @@
   width: 42px;
   height: 42px;
   object-fit: contain;
+}
+
+.menuCloseButton {
+  position: relative;
+}
+
+.menuCloseButton span {
+  position: absolute;
+  width: 42px;
+  height: 4px;
+  background: #202b3a;
+}
+
+.menuCloseButton span:first-child {
+  transform: rotate(45deg);
+}
+
+.menuCloseButton span:last-child {
+  transform: rotate(-45deg);
 }
 
 .canvasHeader {

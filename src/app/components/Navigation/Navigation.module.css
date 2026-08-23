@@ -97,13 +97,50 @@
     sans-serif;
   text-align: left;
   text-decoration: none;
-  white-space: nowrap;
+  /* The Evolution labels intentionally wrap onto two lines in the Figma
+     panel; keeping these single-line made the longer labels cross the
+     vertical section divider. */
+  white-space: normal;
   cursor: pointer;
 }
 .subNavigation a:hover,
 .subNavigation button:hover,
 .activeItem {
   color: #23b14d !important;
+}
+.subMenuTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.subMenuTrigger span {
+  color: currentcolor;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 0.8;
+}
+.nestedNavigation {
+  position: absolute;
+  top: 440px;
+  left: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: min(307px, calc(100% - 72px));
+}
+.nestedNavigation a {
+  color: #303030;
+  font:
+    700 18px / 1.35 var(--font-montserrat),
+    Montserrat,
+    sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.nestedNavigation a:first-child,
+.nestedNavigation a:hover {
+  color: #23b14d;
 }
 .back {
   margin-bottom: 2px;
@@ -136,13 +173,6 @@
   margin: 0;
   background: #9ca3af;
 }
-.divider::before {
-  display: block;
-  width: 2px;
-  height: 62px;
-  content: "";
-  background: #23b14d;
-}
 .sections {
   position: absolute;
   top: 0;
@@ -152,6 +182,7 @@
   padding: 145px 30px 170px 23px;
 }
 .sections button {
+  position: relative;
   display: block;
   width: 100%;
   margin: 0 0 55px;
@@ -165,11 +196,30 @@
     sans-serif;
   text-align: left;
   text-transform: uppercase;
+  transition:
+    color 300ms cubic-bezier(0, 0, 0.58, 1),
+    font-size 300ms cubic-bezier(0, 0, 0.58, 1);
   cursor: pointer;
 }
 .sections button:hover,
 .sections .activeSection {
   color: #23b14d;
+  font-size: 30px;
+}
+
+.sectionMarker {
+  position: absolute;
+  top: -8px;
+  left: -25px;
+  width: 2px;
+  height: 62px;
+  background: #23b14d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sections button {
+    transition: none;
+  }
 }
 .actions {
   position: absolute;
@@ -254,6 +304,12 @@
   .subNavigation {
     position: static;
     width: min(100%, 250px);
+    margin-top: 26px;
+  }
+
+  .nestedNavigation {
+    position: static;
+    width: min(100%, 307px);
     margin-top: 26px;
   }
 
