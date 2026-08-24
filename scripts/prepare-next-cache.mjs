@@ -3,16 +3,20 @@ import { join } from "node:path";
 import { platform } from "node:os";
 
 const projectRoot = process.cwd();
-const nextPath = join(projectRoot, ".next");
+// Dev and production builds use separate dist directories (see next.config.ts),
+// so this script must prepare whichever one the caller is about to write to.
+const distDir = process.argv[2] || ".next";
+const nextPath = join(projectRoot, distDir);
 const isWin = platform() === "win32";
 
 if (!isWin) {
-  // On macOS/Linux, if .next is a symlink to an old cache directory, remove it so Next uses a clean local .next
+  // On macOS/Linux, if the dist dir is a symlink to an old cache directory,
+  // remove it so Next uses a clean local directory.
   if (existsSync(nextPath)) {
     const stat = lstatSync(nextPath);
     if (stat.isSymbolicLink()) {
       rmSync(nextPath, { recursive: true, force: true });
-      console.log("Cleaned old symbolic link for .next");
+      console.log(`Cleaned old symbolic link for ${distDir}`);
     }
   }
   process.exit(0);
@@ -21,7 +25,7 @@ if (!isWin) {
 const cacheDir = join(
   process.env.LOCALAPPDATA || process.env.TMP || "/tmp",
   "next-cache",
-  "greenai-master",
+  `greenai-master${distDir === ".next" ? "" : distDir}`,
 );
 
 mkdirSync(cacheDir, { recursive: true });
@@ -35,14 +39,16 @@ if (existsSync(stalePages)) {
 if (existsSync(nextPath)) {
   const stat = lstatSync(nextPath);
   if (stat.isDirectory() && !stat.isSymbolicLink()) {
-    console.log("Removing local .next folder (OneDrive sync causes cache corruption)...");
+    console.log(
+      `Removing local ${distDir} folder (OneDrive sync causes cache corruption)...`,
+    );
     rmSync(nextPath, { recursive: true, force: true });
   } else {
-    console.log(".next already points to local cache.");
+    console.log(`${distDir} already points to local cache.`);
     process.exit(0);
   }
 }
 
 symlinkSync(cacheDir, nextPath, "junction");
-console.log(`Linked .next -> ${cacheDir}`);
+console.log(`Linked ${distDir} -> ${cacheDir}`);
 

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Chatbot from "./Chatbot";
+import D6Chatbot from "./D6Chatbot";
 import TopNavigation from "./TopNavigation/TopNavigation";
 
 type NavigationProps = {
@@ -156,7 +157,6 @@ const MiningInsightScreen = () => (
   <main className="mining-insight">
     <div className="mining-insight__photo" aria-hidden="true" />
     <div className="mining-insight__wash" aria-hidden="true" />
-    <div className="mining-insight__accent" aria-hidden="true" />
 
     <TopNavigation />
 
@@ -220,21 +220,21 @@ const MiningInsightScreen = () => (
       </div>
     </section>
 
-    <div className="mining-insight__chat" aria-label="Chat with GREEN">
-      <img
-        className="insight-chat__panel"
-        src="/images/insight1/figma/chat-panel.svg"
-        alt=""
-        aria-hidden="true"
-      />
-      <span className="insight-chat__label">Let’s Talk Energy</span>
-      <img
-        className="insight-chat__microphone"
-        src="/images/insight1/figma/chat-microphone.svg"
-        alt=""
-        aria-hidden="true"
-      />
-    </div>
+    <D6Chatbot
+      canvasAnchored
+      triggerVariant="figmaCanvas"
+      figmaPlaceholder="Let’s Talk Energy"
+      figmaMicScale={0.82}
+      triggerStyle={{
+        top: "auto",
+        right: 4,
+        bottom: 19,
+        left: "auto",
+        // Same 418px width at Figma's 1920px canvas, scaled proportionally
+        // on narrower viewports instead of remaining oversized.
+        width: "min(21.77vw, 418px)",
+      }}
+    />
   </main>
 );
 

@@ -11,6 +11,7 @@ export interface Vector7366Props {
   inputRef?: React.RefObject<HTMLInputElement | null>;
   variant?: "figmaCanvas" | "responsive";
   className?: string;
+  placeholder?: string;
   micIconSrc?: string;
   micScale?: number;
 }
@@ -33,6 +34,7 @@ export const Vector7366: React.FC<Vector7366Props> = ({
   inputRef,
   variant = "figmaCanvas",
   className = "",
+  placeholder = "Let's Talk Energy",
   micIconSrc = "/images/mike.svg",
   micScale = 1,
 }) => {
@@ -43,7 +45,6 @@ export const Vector7366: React.FC<Vector7366Props> = ({
         <img
           src="/images/letstalkenergy.png"
           alt=""
-          role="presentation"
           draggable={false}
           className={styles.canvasBgImage}
         />
@@ -55,8 +56,8 @@ export const Vector7366: React.FC<Vector7366Props> = ({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={onKeyDown}
-          placeholder="Let's Talk Energy"
-          aria-label="Let's Talk Energy"
+          placeholder={placeholder}
+          aria-label={placeholder}
           className={styles.canvasInput}
         />
 
@@ -85,7 +86,6 @@ export const Vector7366: React.FC<Vector7366Props> = ({
       <img
         src="/images/letstalkenergy.png"
         alt=""
-        role="presentation"
         draggable={false}
         className={styles.responsiveBgImage}
       />
@@ -97,8 +97,8 @@ export const Vector7366: React.FC<Vector7366Props> = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         onKeyDown={onKeyDown}
-        placeholder="Let's Talk Energy"
-        aria-label="Let's Talk Energy"
+        placeholder={placeholder}
+        aria-label={placeholder}
         className={styles.responsiveInput}
       />
 
@@ -109,11 +109,11 @@ export const Vector7366: React.FC<Vector7366Props> = ({
         onClick={onSubmit}
         className={styles.responsiveMicButton}
       >
-          <img
-            src={micIconSrc}
-            alt="Send message"
-            className={styles.responsiveMicIcon}
-            style={{ transform: `scale(${micScale})` }}
+        <img
+          src={micIconSrc}
+          alt="Send message"
+          className={styles.responsiveMicIcon}
+          style={{ transform: `scale(${micScale})` }}
         />
       </button>
     </div>

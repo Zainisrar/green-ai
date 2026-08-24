@@ -60,6 +60,7 @@ interface SiteHeaderProps {
   figmaPanelVariant?: "default" | "flagship";
   highlightActive?: boolean;
   neutralNavigation?: boolean;
+  showBrand?: boolean;
 }
 
 const isItemActive = (pathname: string, label: string) => {
@@ -91,6 +92,7 @@ export default function SiteHeader({
   figmaPanelVariant = "default",
   highlightActive = true,
   neutralNavigation = false,
+  showBrand = true,
 }: SiteHeaderProps) {
   const pathname = usePathname();
   const headerBrand = headerBrands[brand];
@@ -117,7 +119,7 @@ export default function SiteHeader({
         data-site-header
         data-node-id={layout !== "viewport" ? "7077:3756" : undefined}
       >
-        {brand === "green" ? (
+        {showBrand && brand === "green" ? (
           <FigmaBrandPanel
             className={
               layout !== "viewport"

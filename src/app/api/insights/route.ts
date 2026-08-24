@@ -7,6 +7,9 @@ export async function GET() {
         'Content-Type': 'application/json',
       },
       cache: 'no-store', // Disable caching
+      // Without a timeout an unresponsive CMS holds every request open until the
+      // client gives up, which stacks up connections under any real traffic.
+      signal: AbortSignal.timeout(8000),
     });
 
     if (!response.ok) {

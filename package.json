@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "predev": "node scripts/prepare-next-cache.mjs",
+    "predev": "node scripts/prepare-next-cache.mjs .next-dev",
     "dev": "next dev --port 5005",
     "dev:turbo": "next dev --turbopack --port 5005",
     "prebuild": "node scripts/prepare-next-cache.mjs",

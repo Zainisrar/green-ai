@@ -69,8 +69,10 @@ export const articleStructuredData = (article: {
   title: string;
   description: string;
   url: string;
-  datePublished: string;
-  dateModified: string;
+  // Optional: the CMS does not guarantee these. Emitting an empty string here
+  // produces invalid schema.org output, so omit the keys instead.
+  datePublished?: string;
+  dateModified?: string;
   author?: string;
   image?: string;
 }) => ({
@@ -79,8 +81,12 @@ export const articleStructuredData = (article: {
   headline: article.title,
   description: article.description,
   url: article.url,
-  datePublished: article.datePublished,
-  dateModified: article.dateModified,
+  ...(article.datePublished
+    ? { datePublished: article.datePublished }
+    : undefined),
+  ...(article.dateModified
+    ? { dateModified: article.dateModified }
+    : undefined),
   author: {
     "@type": "Organization",
     name: article.author || "GREEN Limited",

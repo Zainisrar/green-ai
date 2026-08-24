@@ -14,6 +14,11 @@ import WorkWithUs from "./Modals/WorkWithUs";
 import { useTeamGreen } from "../../../hooks/useTeamGreen";
 import { useInteractiveZIndex } from "../../../hooks/useInteractiveZIndex";
 
+const TEAM_BRIEF_CTA = {
+  href: "mailto:careers.support@green.com.pg?subject=Team%20GREEN%20Brief%20Request",
+  text: "Request GREEN Team Brief",
+};
+
 const FALLBACK_DATA = {
   id: 0,
   createdAt: "",
@@ -32,7 +37,7 @@ const FALLBACK_DATA = {
     ],
     cta: [
       { href: "#work-with-us", text: "Work With Us" },
-      { href: "mailto:careers.support@green.com.pg?subject=Team%20GREEN%20Brief%20Request", text: "Request GREEN Team Brief" },
+      TEAM_BRIEF_CTA,
     ],
   },
   whoWeAreModal: { img: { src: "/images/team-green/mainImg.png", alt: "Team GREEN", highlighted: "GREEN" }, quote: { text: "Different disciplines. One mission.", highlighted: "mission" }, title: "Who We Are", title2: "", description: "We bring practical expertise and shared purpose to every project.", description2: "" },
@@ -122,7 +127,7 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
         </div>
         <div className={styles.canvasCtas}>
           <FigmaAngledCta className={styles.canvasWorkCta} onClick={() => setIsWorkWithUsOpen(true)}>{data.mainPage.cta[0]?.text || "Work With Us"}</FigmaAngledCta>
-          <FigmaAngledCta className={styles.canvasBriefCta} href={data.mainPage.cta[1]?.href || "mailto:careers.support@green.com.pg?subject=Team%20GREEN%20Brief%20Request"} icon="chevron">Request GREEN People &amp; Culture Brief</FigmaAngledCta>
+          <FigmaAngledCta className={styles.canvasBriefCta} href={data.mainPage.cta[1]?.href || TEAM_BRIEF_CTA.href} icon="chevron">{data.mainPage.cta[1]?.text || TEAM_BRIEF_CTA.text}</FigmaAngledCta>
         </div>
         <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
         <WhoWeAre isOpen={isWhoWeAreOpen} onClose={() => setIsWhoWeAreOpen(false)} data={data.whoWeAreModal} />
@@ -272,9 +277,6 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
                         ) : (
                           <a
                             href={cta.href || "#"}
-                            download
-                            target="_blank"
-                            rel="noopener noreferrer"
                             className="cursor-pointer block"
                           >
                             {img}

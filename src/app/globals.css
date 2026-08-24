@@ -114,18 +114,6 @@ body {
   pointer-events: none;
 }
 
-.mining-insight__accent {
-  position: absolute;
-  z-index: 1;
-  top: -2.24vw;
-  left: -2.97vw;
-  width: 21.35vw;
-  height: 38.83vw;
-  background:
-    url("/images/insight1/figma/left-shape-b.svg") center / 100% 100% no-repeat;
-  pointer-events: none;
-}
-
 .mining-insight__header {
   position: absolute;
   inset: 0 0 auto;
@@ -289,15 +277,6 @@ body {
   font-weight: 500;
 }
 
-.mining-insight__chat {
-  position: absolute;
-  z-index: 2;
-  right: 4px;
-  bottom: 19px;
-  width: 418px;
-  height: 52px;
-}
-
 @media (max-width: 1200px) and (min-width: 901px) {
   .mining-insight__nav {
     gap: 16px;
@@ -371,9 +350,6 @@ body {
     mask-image: none;
     opacity: 0.28;
   }
-  .mining-insight__accent {
-    display: none;
-  }
   .mining-insight__header {
     height: 70px;
   }
@@ -428,11 +404,6 @@ body {
   }
   .mining-insight__facts p {
     font-size: 13px;
-  }
-  .mining-insight__chat {
-    position: static;
-    width: 42%;
-    margin: 28px 0 0 auto;
   }
   .mining-insight__tag {
     position: static;
@@ -492,11 +463,6 @@ body {
   .mining-insight__facts p {
     margin-top: 4px;
     font-size: 14px;
-  }
-  .mining-insight__chat {
-    width: 58%;
-    min-width: 0;
-    margin-top: 30px;
   }
 }
 

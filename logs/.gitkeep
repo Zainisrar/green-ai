@@ -1,0 +1,2 @@
+# PM2 writes pm2-out.log / pm2-error.log here (see ecosystem.config.js).
+# Without this directory PM2 silently retains no crash output.

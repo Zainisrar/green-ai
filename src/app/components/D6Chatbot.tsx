@@ -33,7 +33,6 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
   triggerStyle,
   triggerVariant = "default",
 }) => {
-  const hasResponsiveTrigger = Boolean(triggerClassName);
   const isFigmaCanvasTrigger = triggerVariant === "figmaCanvas";
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -412,6 +411,7 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
           onSubmit={handlePromptSubmit}
           inputRef={promptInputRef}
           variant={isFigmaCanvasTrigger ? "figmaCanvas" : "responsive"}
+          placeholder={figmaPlaceholder}
           micIconSrc={figmaMicIconSrc}
           micScale={figmaMicScale}
         />

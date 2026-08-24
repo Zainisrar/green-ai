@@ -30,7 +30,11 @@ export async function fetchApi<T>(
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), DEFAULT_TIMEOUT_MS);
   const abortFromCaller = () => controller.abort(options?.signal?.reason);
-  options?.signal?.addEventListener("abort", abortFromCaller, { once: true });
+  if (options?.signal?.aborted) {
+    abortFromCaller();
+  } else {
+    options?.signal?.addEventListener("abort", abortFromCaller, { once: true });
+  }
 
   const headers = new Headers(options?.headers);
   headers.set("Accept", "application/json");

@@ -4,11 +4,15 @@ import { execSync } from "node:child_process";
 import { platform } from "node:os";
 
 const projectRoot = process.cwd();
-const nextPath = join(projectRoot, ".next");
-const cacheDir = join(
-  process.env.LOCALAPPDATA || process.env.TMP || "/tmp",
-  "next-cache",
-  "greenai-master",
+// Both dist directories must be cleaned (see next.config.ts): `.next` for
+// build/start, `.next-dev` for the dev server.
+const distDirs = [".next", ".next-dev"];
+const cacheDirs = distDirs.map((distDir) =>
+  join(
+    process.env.LOCALAPPDATA || process.env.TMP || "/tmp",
+    "next-cache",
+    `greenai-master${distDir === ".next" ? "" : distDir}`,
+  ),
 );
 
 const removePath = (target) => {
@@ -24,20 +28,19 @@ const removePath = (target) => {
   }
 };
 
-if (existsSync(nextPath)) {
-  const stat = lstatSync(nextPath);
-  if (stat.isSymbolicLink()) {
-    removePath(nextPath);
-    console.log("Removed .next junction link.");
-  } else {
-    removePath(nextPath);
-    console.log("Removed .next folder.");
-  }
+for (const distDir of distDirs) {
+  const nextPath = join(projectRoot, distDir);
+  if (!existsSync(nextPath)) continue;
+  const isLink = lstatSync(nextPath).isSymbolicLink();
+  removePath(nextPath);
+  console.log(`Removed ${distDir} ${isLink ? "junction link" : "folder"}.`);
 }
 
-if (existsSync(cacheDir)) {
-  removePath(cacheDir);
-  console.log(`Cleared cache at ${cacheDir}`);
+for (const cacheDir of cacheDirs) {
+  if (existsSync(cacheDir)) {
+    removePath(cacheDir);
+    console.log(`Cleared cache at ${cacheDir}`);
+  }
 }
 
 console.log("Next.js cache cleared. Run pnpm dev to restart.");

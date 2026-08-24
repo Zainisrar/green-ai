@@ -1,6 +1,34 @@
-export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://green.com.pg"
-).replace(/\/$/, "");
+const FALLBACK_SITE_URL = "https://green.com.pg";
+
+/**
+ * Resolve the canonical site origin.
+ *
+ * `SITE_URL` is fed to `new URL()` in the root layout's `metadataBase`, which is
+ * evaluated at module scope. A malformed value there (e.g. NEXT_PUBLIC_SITE_URL
+ * set to "green.com.pg" with no scheme) throws while the layout module is being
+ * imported -- a 500 on every route that no error boundary can catch. So validate
+ * here and fall back rather than trusting the env var.
+ */
+const resolveSiteUrl = (): string => {
+  const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (!configured) return FALLBACK_SITE_URL;
+
+  try {
+    const parsed = new URL(configured);
+    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+      throw new Error(`unsupported protocol "${parsed.protocol}"`);
+    }
+    return configured.replace(/\/$/, "");
+  } catch {
+    console.warn(
+      `[seo-config] Ignoring invalid NEXT_PUBLIC_SITE_URL ("${configured}"); ` +
+        `falling back to ${FALLBACK_SITE_URL}. Expected an absolute http(s) URL.`,
+    );
+    return FALLBACK_SITE_URL;
+  }
+};
+
+export const SITE_URL = resolveSiteUrl();
 
 export const seoConfig = {
   defaultTitle: "GREEN Limited - Sustainable Energy Solutions",
