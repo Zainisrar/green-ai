@@ -51,15 +51,19 @@ oversized: list[tuple[str, int, tuple[int, int]]] = []
 def process(path: str) -> tuple[int, int, str] | None:
     """Return (before, after, note) if the file was (or would be) improved."""
     before = os.path.getsize(path)
-    if before < MIN_BYTES:
-        return None
-
     ext = path.lower().rsplit(".", 1)[-1]
     try:
         im = Image.open(path)
         # Check dimensions from the header before committing to a full decode.
         if im.size[0] * im.size[1] > MAX_PIXELS:
             oversized.append((path, before, im.size))
+            im.close()
+            return None
+        # Small files are not worth re-encoding, but their dimensions still
+        # need checking above so highly compressed oversized images are
+        # included in the safety report.
+        if before < MIN_BYTES:
+            im.close()
             return None
         im.load()
     except Exception as exc:  # unreadable / not actually an image
@@ -67,6 +71,11 @@ def process(path: str) -> tuple[int, int, str] | None:
         return None
 
     original_dims = im.size
+    # Pillow does not carry these through every resize/convert operation. Keep
+    # them explicitly so replacing a JPEG never changes its display rotation
+    # or colour profile.
+    jpeg_exif = im.info.get("exif") if ext != "png" else None
+    jpeg_icc_profile = im.info.get("icc_profile") if ext != "png" else None
     width, height = im.size
     resized = False
     if width > MAX_WIDTH:
@@ -85,7 +94,16 @@ def process(path: str) -> tuple[int, int, str] | None:
             # JPEG has no alpha; flatten only if the source carried one.
             if im.mode in ("RGBA", "LA", "P"):
                 im = im.convert("RGB")
-            im.save(tmp, "JPEG", quality=JPEG_QUALITY, optimize=True, progressive=True)
+            save_options = {
+                "quality": JPEG_QUALITY,
+                "optimize": True,
+                "progressive": True,
+            }
+            if jpeg_exif:
+                save_options["exif"] = jpeg_exif
+            if jpeg_icc_profile:
+                save_options["icc_profile"] = jpeg_icc_profile
+            im.save(tmp, "JPEG", **save_options)
 
         after = os.path.getsize(tmp)
         # The whole point is to get smaller. If re-encoding made it bigger
@@ -124,22 +142,21 @@ def main() -> None:
 
     if not results:
         print(f"scanned {scanned} images; nothing to improve.")
-        return
+    else:
+        results.sort(key=lambda r: -(r[0] - r[1]))
+        before_total = sum(r[0] for r in results)
+        after_total = sum(r[1] for r in results)
 
-    results.sort(key=lambda r: -(r[0] - r[1]))
-    before_total = sum(r[0] for r in results)
-    after_total = sum(r[1] for r in results)
-
-    verb = "would shrink" if DRY_RUN else "shrank"
-    print(f"scanned {scanned} images; {verb} {len(results)}")
-    print(
-        f"{before_total / 1048576:.1f} MB -> {after_total / 1048576:.1f} MB "
-        f"(saved {(before_total - after_total) / 1048576:.1f} MB, "
-        f"{100 - 100 * after_total / before_total:.0f}%)"
-    )
-    print("\nlargest reductions:")
-    for before, after, path, note in results[:20]:
-        print(f"  {before / 1048576:6.2f}M -> {after / 1048576:5.2f}M  {note:<22} {path}")
+        verb = "would shrink" if DRY_RUN else "shrank"
+        print(f"scanned {scanned} images; {verb} {len(results)}")
+        print(
+            f"{before_total / 1048576:.1f} MB -> {after_total / 1048576:.1f} MB "
+            f"(saved {(before_total - after_total) / 1048576:.1f} MB, "
+            f"{100 - 100 * after_total / before_total:.0f}%)"
+        )
+        print("\nlargest reductions:")
+        for before, after, path, note in results[:20]:
+            print(f"  {before / 1048576:6.2f}M -> {after / 1048576:5.2f}M  {note:<22} {path}")
 
     if oversized:
         print(

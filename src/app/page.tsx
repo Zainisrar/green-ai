@@ -209,7 +209,7 @@ export default function HomePage() {
         button1: item.cta1.text,
         link1: item.cta1.link,
         button2: item.cta2.text,
-        link2: "/home/renewable-energy-the-core",
+        link2: item.cta2.link || "/home/renewable-energy-the-core",
       },
       logo: "/images/heroSection/logo.png",
     };

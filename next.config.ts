@@ -48,7 +48,38 @@ const nextConfig = (phase: string): NextConfig => ({
   },
 
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [
+      { source: "/:path*", headers: securityHeaders },
+      // Static images under public/ are served by Next with `max-age=0`, so a
+      // browser revalidates EVERY image on EVERY navigation. Image-heavy pages
+      // here reference 20-45 files, which means dozens of blocking round trips
+      // per route change -- painful on the high-latency links much of this
+      // audience is on. These files are design assets that change rarely, so
+      // cache them for 30 days and revalidate in the background.
+      //
+      // Trade-off: replacing an image without renaming it means returning
+      // visitors can see the old one for up to 30 days. If that matters for a
+      // given asset, change its filename (or add a ?v=2 query) to bust the
+      // cache -- which is also why hashed filenames are the better long-term fix.
+      {
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=2592000, stale-while-revalidate=86400",
+          },
+        ],
+      },
+      {
+        source: "/:all*(svg|jpg|jpeg|png|webp|avif|ico|woff|woff2)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=2592000, stale-while-revalidate=86400",
+          },
+        ],
+      },
+    ];
   },
 
   async redirects() {

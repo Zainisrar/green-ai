@@ -65,30 +65,45 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
   if (slide.figmaExport) {
     return (
       <div
-        className="relative h-screen w-full overflow-hidden bg-cover bg-center"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        className="relative h-[100dvh] min-h-[100svh] w-full overflow-hidden bg-cover bg-center"
         style={{ backgroundImage: `url("${slide.backgroundImage}")` }}
       >
+        <section className="sr-only" aria-label={`${slide.headline} insight`}>
+          <h1>{slide.headline}</h1>
+          {slide.subheadline ? <p>{slide.subheadline}</p> : null}
+          <p>{slide.description}</p>
+          {slide.keys.length > 0 ? (
+            <ul>
+              {slide.keys.map((key) => (
+                <li key={key.description}>{key.description}</li>
+              ))}
+            </ul>
+          ) : null}
+          {slide.tag ? <p>{slide.tag}</p> : null}
+        </section>
         <Link
           href={slide.cta.link1}
           aria-label={`Read more: ${slide.headline}`}
-          className="absolute left-[60.89vw] top-[84.23vh] z-10 h-[10.1vh] w-[17.7vw]"
+          className="absolute left-[60.89vw] top-[84.23vh] z-10 h-[10.1vh] w-[17.7vw] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#23B14D]"
         />
         <Link
           href={slide.cta.link2}
           aria-label={`Explore: ${slide.headline}`}
-          className="absolute left-[78.96vw] top-[84.23vh] z-10 h-[10.1vh] w-[17.7vw]"
+          className="absolute left-[78.96vw] top-[84.23vh] z-10 h-[10.1vh] w-[17.7vw] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#23B14D]"
         />
         <button
           type="button"
           onClick={goPrev}
           aria-label="Previous slide"
-          className="absolute left-[2.13vw] top-[48.35vh] z-10 h-[4vh] w-[3vw]"
+          className="absolute left-[2.13vw] top-[48.35vh] z-10 h-[4vh] w-[3vw] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#23B14D]"
         />
         <button
           type="button"
           onClick={goNext}
           aria-label="Next slide"
-          className="absolute right-[2.13vw] top-[48.35vh] z-10 h-[4vh] w-[3vw]"
+          className="absolute right-[2.13vw] top-[48.35vh] z-10 h-[4vh] w-[3vw] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#23B14D]"
         />
       </div>
     );
@@ -100,7 +115,7 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
     <div
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      className="relative w-full h-screen max-h-screen flex flex-col justify-between text-white transition-[background-image] duration-700 font-sans overflow-hidden select-none"
+      className="relative flex h-[100dvh] min-h-[100svh] w-full flex-col justify-between overflow-hidden font-sans text-white transition-[background-image] duration-700 select-none"
       style={{
         backgroundImage: `url("${slide.backgroundImage}")`,
         backgroundRepeat: "no-repeat",
@@ -112,7 +127,7 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-0"></div>
       <Link
         href="/home/renewable-energy-the-core"
-        className="absolute right-[1.46vw] top-[2.01vw] z-[60] block w-[min(19.53vw,375px)]"
+        className="absolute right-[1.46vw] top-[2.01dvh] z-[60] block w-[clamp(120px,19.53vw,375px)]"
         aria-label="GREEN home"
       >
         <Image
@@ -129,10 +144,10 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
         className="relative w-full h-full z-10 animate-fadeIn overflow-hidden"
       >
         {/* Main Content Area */}
-        <div className="absolute left-[6.04vw] top-[14.74vh] w-[82.19vw]">
+        <div className="absolute left-[6.04vw] top-[14.74dvh] w-[82.19vw] max-md:right-5 max-md:left-5 max-md:top-[14svh] max-md:w-auto">
           {/* Main Title (Headline) */}
           {slide.headline ? (
-            <div className="text-left uppercase font-bold text-[min(3.96vw,76px)] text-white tracking-tight leading-[1.05] drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+            <div className="text-left text-[clamp(30px,3.96vw,76px)] font-bold leading-[1.05] tracking-tight text-white uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
               {slide.headline}
             </div>
           ) : slide.slug ? (
@@ -152,7 +167,7 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
 
           {/* Subheadline with Highlighted Term */}
           {slide.subheadline && (
-            <div className="mt-[3.4vh] text-left font-extrabold italic uppercase text-[min(2.34vw,45px)] text-white leading-[0.8] drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+            <div className="mt-[3.4dvh] text-left text-[clamp(20px,2.34vw,45px)] font-extrabold leading-[0.9] text-white italic uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
               {(() => {
                 if (
                   !slide.highlighted ||
@@ -185,16 +200,16 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
           )}
 
           {/* Description */}
-          <p className="mt-[5.5vh] font-normal text-[min(1.3vw,25px)] text-white leading-[1.2] max-w-[82.19vw] drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
+          <p className="mt-[5.5dvh] max-w-[82.19vw] text-[clamp(15px,1.3vw,25px)] leading-[1.2] font-normal text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] max-md:max-w-none">
             {slide.description}
           </p>
 
           {/* Key Stats / Column Icons */}
           <div
-            className={`absolute left-[-0.3vw] top-[38.6vh] w-[88vw] grid gap-0 justify-items-center items-start ${
+            className={`absolute left-[-0.3vw] top-[38.6dvh] grid w-[88vw] items-start justify-items-center gap-0 max-md:relative max-md:left-auto max-md:top-auto max-md:mt-[5dvh] max-md:w-full max-md:gap-3 ${
               slide.keys.length >= 4
-                ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
-                : "grid-cols-1 md:grid-cols-3"
+                ? "grid-cols-2 lg:grid-cols-4"
+                : "grid-cols-3"
             }`}
           >
             {slide.keys.map((key, idx) => (
@@ -202,7 +217,7 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
                 key={idx}
                 className="flex flex-col items-center text-center max-w-sm"
               >
-                <div className="h-[min(7vw,135px)] w-[min(7vw,135px)] flex items-center justify-center mb-[1.5vh]">
+                <div className="mb-[1.5dvh] flex h-[clamp(48px,7vw,135px)] w-[clamp(48px,7vw,135px)] items-center justify-center">
                   {typeof key.icon === "string" ? (
                     <img
                       className="max-h-full max-w-full object-contain filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
@@ -216,8 +231,8 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
                 <span
                   className={`font-black text-center text-white leading-snug drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] ${
                     slide.keys.length >= 4
-                      ? "text-[min(1.15vw,22px)] max-w-[340px]"
-                      : "text-[min(1.3vw,25px)]"
+                      ? "max-w-[340px] text-[clamp(12px,1.15vw,22px)]"
+                      : "text-[clamp(12px,1.3vw,25px)]"
                   }`}
                 >
                   {key.description}
@@ -228,7 +243,7 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
         </div>
 
         {/* Bottom Section: Tag on Left, CTA Buttons on Right */}
-        <div className="absolute inset-x-0 top-[84.2vh] z-20">
+        <div className="absolute inset-x-0 top-[84.2dvh] z-20 max-md:top-auto max-md:bottom-4">
           {/* Bottom Left Parallelogram Skewed Tag */}
           <div
             style={{
@@ -239,7 +254,7 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
               backdropFilter: "blur(7.5px)",
               WebkitBackdropFilter: "blur(7.5px)",
             }}
-            className="absolute left-[1vw] transform -skew-x-[45deg] flex items-center justify-center border-0 border-none shrink-0"
+            className="absolute left-[1vw] flex shrink-0 transform items-center justify-center border-0 border-none -skew-x-[45deg] max-md:hidden"
           >
             <div className="transform skew-x-[45deg] font-semibold italic text-base md:text-lg lg:text-[25px] text-black tracking-wide whitespace-nowrap">
               {categoryTag}
@@ -247,7 +262,7 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
           </div>
 
           {/* Bottom Right CTA Buttons (Parallelogram Skewed Glassmorphism Buttons) */}
-          <div className="absolute right-[3.35vw] flex items-center gap-[1.1vw]">
+          <div className="absolute right-[3.35vw] flex items-center gap-[1.1vw] max-md:right-4 max-md:left-4 max-md:justify-end max-md:gap-2">
             {/* Button 1 */}
             <div {...cta1Props.getContainerProps()}>
               <Link
@@ -258,9 +273,9 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
                   boxShadow: "4px 4px 20px rgba(93, 223, 60, 0.25)",
                   backdropFilter: "blur(7.5px)",
                 }}
-                className="group relative inline-flex h-[10.1vh] w-[17.7vw] items-center justify-center transform -skew-x-[20deg] border border-white/60 hover:scale-[1.02] hover:brightness-110 transition-all cursor-pointer"
+                className="group relative inline-flex h-[clamp(48px,10.1dvh,108px)] w-[min(17.7vw,340px)] min-w-[150px] transform cursor-pointer items-center justify-center border border-white/60 transition-all -skew-x-[20deg] hover:scale-[1.02] hover:brightness-110"
               >
-                <div className="transform skew-x-[20deg] flex items-center gap-3 font-semibold italic text-lg lg:text-2xl 2xl:text-[28px] text-black capitalize whitespace-nowrap">
+                <div className="flex transform items-center gap-3 text-[clamp(14px,1.46vw,28px)] font-semibold text-black italic capitalize whitespace-nowrap skew-x-[20deg] max-md:gap-1">
                   <span>
                     {typeof slide.cta.button1 === "string"
                       ? slide.cta.button1
@@ -291,9 +306,9 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
                   boxShadow: "4px 4px 20px rgba(93, 223, 60, 0.25)",
                   backdropFilter: "blur(7.5px)",
                 }}
-                className="group relative inline-flex h-[10.1vh] w-[17.7vw] items-center justify-center transform -skew-x-[20deg] border border-white/60 hover:scale-[1.02] hover:brightness-110 transition-all cursor-pointer"
+                className="group relative inline-flex h-[clamp(48px,10.1dvh,108px)] w-[min(17.7vw,340px)] min-w-[150px] transform cursor-pointer items-center justify-center border border-white/60 transition-all -skew-x-[20deg] hover:scale-[1.02] hover:brightness-110"
               >
-                <div className="transform skew-x-[20deg] flex items-center gap-3 font-semibold italic text-lg lg:text-2xl 2xl:text-[28px] text-black capitalize whitespace-nowrap">
+                <div className="flex transform items-center gap-3 text-[clamp(14px,1.46vw,28px)] font-semibold text-black italic capitalize whitespace-nowrap skew-x-[20deg] max-md:gap-1">
                   <span>
                     {typeof slide.cta.button2 === "string"
                       ? slide.cta.button2
@@ -318,7 +333,7 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
       </div>
 
       {/* Carousel Navigation Chevron Arrows (Left & Right) */}
-      <div className="pointer-events-none absolute inset-x-0 top-[48.35vh] z-50 flex justify-between px-[2.13vw]">
+      <div className="pointer-events-none absolute inset-x-0 top-[48.35dvh] z-50 flex justify-between px-[2.13vw]">
         <div
           {...prevButtonProps.getContainerProps()}
           className="pointer-events-auto"
