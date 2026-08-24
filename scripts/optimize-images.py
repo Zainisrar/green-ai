@@ -26,6 +26,7 @@ import os
 import sys
 import shutil
 import tempfile
+import time
 
 try:
     from PIL import Image, ImageFile
@@ -43,6 +44,16 @@ JPEG_QUALITY = 82
 # letting the whole run die on one pathological file.
 MAX_PIXELS = 40_000_000
 DRY_RUN = "--dry-run" in sys.argv
+
+# Progress is recorded here so an interrupted run can be resumed, and so no file
+# is ever re-encoded twice (each JPEG re-encode costs a little quality).
+# Delete this file to force a full re-scan.
+STATE_FILE = ".image-optimizer-state"
+
+# Stop cleanly after this many seconds instead of being killed mid-file. Some of
+# these PNGs take 10-20s each, so a full pass over ~900 files does not fit in one
+# run; the state file makes repeated runs converge. 0 disables the budget.
+TIME_BUDGET = float(os.environ.get("IMAGE_OPT_BUDGET", "150"))
 
 # Files too large to decode safely; reported at the end.
 oversized: list[tuple[str, int, tuple[int, int]]] = []
@@ -127,36 +138,73 @@ def process(path: str) -> tuple[int, int, str] | None:
 
 
 def main() -> None:
-    results = []
-    scanned = 0
+    # Resume support. Re-encoding a JPEG repeatedly degrades it a little each
+    # time, so remember what has already been handled and never touch it twice.
+    # Also lets a long run be stopped and restarted without losing progress.
+    done: set[str] = set()
+    if os.path.exists(STATE_FILE):
+        with open(STATE_FILE, encoding="utf8") as fh:
+            done = {line.strip() for line in fh if line.strip()}
+
+    candidates: list[tuple[int, str]] = []
     for dirpath, _dirnames, filenames in os.walk(ROOT):
         for name in filenames:
             ext = name.lower().rsplit(".", 1)[-1] if "." in name else ""
             if ext not in ("png", "jpg", "jpeg"):
                 continue
+            p = os.path.join(dirpath, name)
+            if p in done:
+                continue
+            try:
+                candidates.append((os.path.getsize(p), p))
+            except OSError:
+                continue
+
+    # Biggest files first: that is where the payload actually lives, and it means
+    # an interrupted run still delivers most of the benefit.
+    candidates.sort(reverse=True)
+
+    results = []
+    scanned = 0
+    started = time.monotonic()
+    timed_out = False
+
+    state = open(STATE_FILE, "a", encoding="utf8")
+    try:
+        for _size, path in candidates:
+            if TIME_BUDGET and time.monotonic() - started > TIME_BUDGET:
+                timed_out = True
+                break
             scanned += 1
-            outcome = process(os.path.join(dirpath, name))
+            outcome = process(path)
+            if not DRY_RUN:
+                state.write(path + "\n")
+                state.flush()
             if outcome:
                 before, after, note = outcome
-                results.append((before, after, os.path.join(dirpath, name), note))
+                results.append((before, after, path, note))
+                print(
+                    f"  {before / 1048576:6.2f}M -> {after / 1048576:5.2f}M  "
+                    f"{note:<22} {path}",
+                    flush=True,
+                )
+    finally:
+        state.close()
 
-    if not results:
-        print(f"scanned {scanned} images; nothing to improve.")
-    else:
+    remaining = len(candidates) - scanned
+    if results:
         results.sort(key=lambda r: -(r[0] - r[1]))
         before_total = sum(r[0] for r in results)
         after_total = sum(r[1] for r in results)
-
         verb = "would shrink" if DRY_RUN else "shrank"
-        print(f"scanned {scanned} images; {verb} {len(results)}")
+        print(f"\nprocessed {scanned} images; {verb} {len(results)}")
         print(
             f"{before_total / 1048576:.1f} MB -> {after_total / 1048576:.1f} MB "
             f"(saved {(before_total - after_total) / 1048576:.1f} MB, "
             f"{100 - 100 * after_total / before_total:.0f}%)"
         )
-        print("\nlargest reductions:")
-        for before, after, path, note in results[:20]:
-            print(f"  {before / 1048576:6.2f}M -> {after / 1048576:5.2f}M  {note:<22} {path}")
+    else:
+        print(f"\nprocessed {scanned} images; nothing to improve.")
 
     if oversized:
         print(
@@ -165,6 +213,12 @@ def main() -> None:
         )
         for path, size, dims in sorted(oversized, key=lambda r: -r[1]):
             print(f"  {size / 1048576:6.2f}M  {dims[0]}x{dims[1]}  {path}")
+
+    if timed_out or remaining:
+        print(
+            f"\n{remaining} file(s) not yet examined. Run the script again to continue "
+            f"(already-processed files are recorded in {STATE_FILE} and will be skipped)."
+        )
 
 
 if __name__ == "__main__":

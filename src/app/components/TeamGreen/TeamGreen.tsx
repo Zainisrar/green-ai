@@ -100,9 +100,9 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
       <main className={styles.canvasPage} data-node-id="7077:21015">
         <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
         <div className={styles.canvasArtwork} aria-hidden="true">
-          <img loading="lazy" decoding="async" src="/images/team-green/mainImg.png" alt="" />
+          <img loading="eager" decoding="async" src="/images/team-green/mainImg.png" alt="" />
         </div>
-        <img loading="lazy" decoding="async" className={styles.canvasVerticalTitle} src="/images/team-green/team-green.png" alt="Team GREEN" />
+        <img loading="eager" decoding="async" className={styles.canvasVerticalTitle} src="/images/team-green/team-green.png" alt="Team GREEN" />
         <section className={styles.canvasHeader}>
           <h1>Team <span>GREEN</span></h1>
           <h2>{data.mainPage.subHeadline}</h2>
@@ -143,14 +143,14 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
     <React.Fragment>
       <div className="">
         <div className="absolute top-0 left-0 -z-10">
-          <img loading="lazy" decoding="async" src="/images/team-green/mainImg.png" className=" lg:block hidden lg:w-10/12 lg:h-[145vh]" alt="img" />
+          <img loading="eager" decoding="async" src="/images/team-green/mainImg.png" className=" lg:block hidden lg:w-10/12 lg:h-[145vh]" alt="img" />
         </div>
         <TopNavigation />
         <div className="flex h-full">
           {/* Left Side - GLOBAL SNAPSHOT Text */}
           <div className="w-1/6 flex items-center justify-center">
             <div className="fixed top-1/2 lg:top-1/4 left-4 lg:left-14">
-              <img loading="lazy" decoding="async"
+              <img loading="eager" decoding="async"
                 src="/images/team-green/team-green.png"
                 alt="team-green"
                 className="w-6 lg:w-14"

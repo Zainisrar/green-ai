@@ -48,3 +48,4 @@ next-env.d.ts
 scratch/
 .agents/
 ers-api-backend-history-work/
+.image-optimizer-state

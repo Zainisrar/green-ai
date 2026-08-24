@@ -121,7 +121,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
       <main className={styles.canvasPage} data-node-id="7077:19753">
         <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
         <div className={styles.canvasArtwork} aria-hidden="true">
-          <img loading="lazy" decoding="async" src="/images/women-in-energy/mainImg.png" alt="" />
+          <img loading="eager" decoding="async" src="/images/women-in-energy/mainImg.png" alt="" />
         </div>
         <img loading="lazy" decoding="async"
           className={styles.canvasVerticalTitle}
@@ -169,7 +169,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                 alt=""
                 aria-hidden="true"
               />
-              <img loading="lazy" decoding="async" className={styles.canvasCardImage} src={card.image} alt="" />
+              <img loading="eager" decoding="async" className={styles.canvasCardImage} src={card.image} alt="" />
               <p className={styles.canvasCardDescription}>{card.description}</p>
               <FigmaAngledCta
                 className={styles.canvasCardCta}

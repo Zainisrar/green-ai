@@ -88,7 +88,7 @@ export default function JoinUs() {
             data-node-id="7077:2823"
             aria-hidden="true"
           >
-            <img loading="lazy" decoding="async" src="/images/join-us/bg.jpg" alt="" />
+            <img loading="eager" decoding="async" src="/images/join-us/bg.jpg" alt="" />
           </motion.div>
 
           <motion.section

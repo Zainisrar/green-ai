@@ -156,10 +156,12 @@ export default function HomePage() {
   const { data: insightsData } = useQuery({
     queryKey: queryKeys.insights(),
     queryFn: api.getInsights,
-    staleTime: 0,
-    gcTime: 0,
-    refetchOnWindowFocus: true,
-    refetchOnMount: true,
+    // These previously forced staleTime/gcTime to 0 with refetchOnMount, which
+    // meant every single return to the homepage re-fetched the insights feed
+    // from the CMS and blocked the carousel on a network round trip -- the
+    // cached copy was thrown away the moment the user navigated away.
+    // The shared defaults in lib/queryClient.ts (60s stale, 5min gc) are the
+    // right behaviour for marketing content that changes a few times a week.
   });
 
   const slides = insightsData?.data?.map((item: Insight) => {

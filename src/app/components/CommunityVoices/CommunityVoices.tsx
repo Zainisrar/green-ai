@@ -59,7 +59,7 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
       <main className={styles.canvasPage} data-node-id="7077:21678">
         <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
         <div className={styles.canvasArtwork} aria-hidden="true">
-          <img loading="lazy" decoding="async" src="/images/community-voices/mainImg.png" alt="" />
+          <img loading="eager" decoding="async" src="/images/community-voices/mainImg.png" alt="" />
         </div>
         <img loading="lazy" decoding="async"
           className={styles.canvasVerticalTitle}
@@ -203,7 +203,7 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
           <div className="lg:flex justify-between">
             <div>
               <div className="absolute  left-0 opacity-70">
-                <img loading="lazy" decoding="async" src="/images/community-voices/mainImg.png" alt="img" />
+                <img loading="eager" decoding="async" src="/images/community-voices/mainImg.png" alt="img" />
               </div>
               <div className="text-xl font-bold flex justify-center lg:h-[60vh] flex-col ">
                 <div className="relative">

@@ -64,7 +64,7 @@ useEffect(() => {
         <div className="flex h-full">
           <div className=" lg:w-1/6 hidden lg:flex items-center justify-center">
             <div className="absolute bottom-4 2xl:left-24">
-              <img loading="lazy" decoding="async"
+              <img loading="eager" decoding="async"
                 src="/images/supply-partners/supply-partner.png"
                 alt="supply-partners"
               />
