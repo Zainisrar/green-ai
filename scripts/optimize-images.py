@@ -57,6 +57,10 @@ def process(path: str) -> tuple[int, int, str] | None:
     ext = path.lower().rsplit(".", 1)[-1]
     try:
         im = Image.open(path)
+        # Check dimensions from the header before committing to a full decode.
+        if im.size[0] * im.size[1] > MAX_PIXELS:
+            oversized.append((path, before, im.size))
+            return None
         im.load()
     except Exception as exc:  # unreadable / not actually an image
         print(f"  !! skipped {path}: {exc}")
@@ -136,6 +140,14 @@ def main() -> None:
     print("\nlargest reductions:")
     for before, after, path, note in results[:20]:
         print(f"  {before / 1048576:6.2f}M -> {after / 1048576:5.2f}M  {note:<22} {path}")
+
+    if oversized:
+        print(
+            f"\nskipped {len(oversized)} file(s) too large to decode safely "
+            f"(over {MAX_PIXELS / 1_000_000:.0f} megapixels). These need manual attention:"
+        )
+        for path, size, dims in sorted(oversized, key=lambda r: -r[1]):
+            print(f"  {size / 1048576:6.2f}M  {dims[0]}x{dims[1]}  {path}")
 
 
 if __name__ == "__main__":
