@@ -30,7 +30,7 @@ const WhyWeEngage = ({ isOpen, onClose }: Props) => {
                 }}
                 className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
               >
-                <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
               </button>
             </div>
             {/* Modal Content */}
@@ -75,7 +75,7 @@ const WhyWeEngage = ({ isOpen, onClose }: Props) => {
 
                 {/* Right Column - Solar Panel Image */}
                 <div className="flex-shrink-0">
-                  <img 
+                  <img loading="lazy" decoding="async" 
                     src="/images/public-events-volunteering/why-we-engage-model.png" 
                     alt="Solar panel installation" 
                     className="w-96"

@@ -64,9 +64,9 @@ const CareerGreen = ({ canvas = false }: { canvas?: boolean }) => {
       <main className={styles.canvasPage} data-node-id="7077:16449">
         <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
         <div className={styles.canvasArtwork} aria-hidden="true">
-          <img src="/images/careers-green/mainImg.png" alt="" />
+          <img loading="lazy" decoding="async" src="/images/careers-green/mainImg.png" alt="" />
         </div>
-        <img className={styles.canvasVerticalTitle} src="/images/careers-green/industry-affiliations-certifications.png" alt="Industry Affiliations & Certifications" />
+        <img loading="lazy" decoding="async" className={styles.canvasVerticalTitle} src="/images/careers-green/industry-affiliations-certifications.png" alt="Industry Affiliations & Certifications" />
         <h1 className={styles.canvasTitle}>Careers at GREEN</h1>
         <p className={styles.canvasSubtitle}>Build More Than a Career. Build the Future of Energy.</p>
         <p className={styles.canvasDescription}>GREEN isn’t a job. It’s a calling. If you’re ready to solve real problems, power real communities, and leave systems behind that last — we’re hiring.</p>
@@ -98,7 +98,7 @@ const CareerGreen = ({ canvas = false }: { canvas?: boolean }) => {
     <React.Fragment>
       <div className="">
         <div className="lg:block hidden absolute top-0  right-0 -z-10">
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/careers-green/mainImg.png"
             className="  h-[145vh]"
             alt="img"
@@ -109,7 +109,7 @@ const CareerGreen = ({ canvas = false }: { canvas?: boolean }) => {
           {/* Left Side - GLOBAL SNAPSHOT Text */}
           <div className="w-1/6 flex items-center justify-center">
             <div className="fixed top-[20%] left-4 lg:left-14">
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/careers-green/industry-affiliations-certifications.png"
                 alt="Careers at GREEN"
                 className="w-5 lg:w-6"
@@ -169,7 +169,7 @@ const CareerGreen = ({ canvas = false }: { canvas?: boolean }) => {
                         }}
                         className="cursor-pointer"
                       >
-                        <img
+                        <img loading="lazy" decoding="async"
                           src="/images/team-green/exploreBtn.png"
                           alt="explore"
                         />
@@ -202,13 +202,13 @@ const CareerGreen = ({ canvas = false }: { canvas?: boolean }) => {
 
             <div>
               <div className=" flex justify-end my-8  cursor-pointer">
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/team-green/work-with-us.png"
                   alt="Work with us"
                 />
               </div>
               <div className=" flex justify-end my-8  cursor-pointer">
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/team-green/green.png"
                   alt="GREEN People & Culture Brief"
                 />

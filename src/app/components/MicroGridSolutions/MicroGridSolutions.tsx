@@ -86,7 +86,7 @@ export default function MicroGridSolutions() {
 
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:5239">
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.backgroundArt}
         src="/images/microgrid-solutions/mainImg.png"
         alt=""
@@ -94,7 +94,7 @@ export default function MicroGridSolutions() {
         height="970"
       />
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.verticalTitle}
         src="/images/microgrid-solutions/hybridLogo.png"
         alt=""
@@ -150,7 +150,7 @@ export default function MicroGridSolutions() {
       </p>
 
       <section className={styles.quote} data-node-id="7077:5265">
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/microgrid-solutions/vector.png"
           alt=""
           width="82"
@@ -163,7 +163,7 @@ export default function MicroGridSolutions() {
 
       <div className={styles.actions}>
         <button type="button" onClick={() => setIsArchitectOpen(true)}>
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/microgrid-solutions/systemarchitect.png"
             alt=""
             width="301"
@@ -173,7 +173,7 @@ export default function MicroGridSolutions() {
             {microgridData?.callToActions?.[0]?.text ||
               "Talk to a System Architect"}
           </span>
-          <img
+          <img loading="lazy" decoding="async"
             className={styles.actionArrow}
             src="/images/microgrid-solutions/figma-action-arrow.svg"
             alt=""
@@ -181,7 +181,7 @@ export default function MicroGridSolutions() {
           />
         </button>
         <button type="button" onClick={() => setIsDeploymentReviewOpen(true)}>
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/microgrid-solutions/book.png"
             alt=""
             width="351"
@@ -191,7 +191,7 @@ export default function MicroGridSolutions() {
             {microgridData?.callToActions?.[1]?.text ||
               "Book a Deployment Review"}
           </span>
-          <img
+          <img loading="lazy" decoding="async"
             className={styles.actionArrow}
             src="/images/microgrid-solutions/figma-action-arrow.svg"
             alt=""
@@ -199,7 +199,7 @@ export default function MicroGridSolutions() {
           />
         </button>
         <Link href={microgridData?.callToActions?.[2]?.href || "#"}>
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/microgrid-solutions/downloadhybrid.png"
             alt=""
             width="441"
@@ -209,7 +209,7 @@ export default function MicroGridSolutions() {
             {microgridData?.callToActions?.[2]?.text ||
               "Download Our Hybrid & Microgrid Overview"}
           </span>
-          <img
+          <img loading="lazy" decoding="async"
             className={styles.actionDownload}
             src="/images/microgrid-solutions/figma-download-icon.png"
             alt=""
@@ -275,7 +275,7 @@ export default function MicroGridSolutions() {
         <div className={styles.mobileActions}>
           <button type="button" onClick={() => setIsArchitectOpen(true)}>
             <span>Talk to a System Architect</span>
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/microgrid-solutions/figma-action-arrow.svg"
               alt=""
               aria-hidden="true"
@@ -283,7 +283,7 @@ export default function MicroGridSolutions() {
           </button>
           <button type="button" onClick={() => setIsDeploymentReviewOpen(true)}>
             <span>Book a Deployment Review</span>
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/microgrid-solutions/figma-action-arrow.svg"
               alt=""
               aria-hidden="true"
@@ -294,7 +294,7 @@ export default function MicroGridSolutions() {
               {microgridData?.callToActions?.[2]?.text ||
                 "Download Our Hybrid & Microgrid Overview"}
             </span>
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/microgrid-solutions/figma-download-icon.png"
               alt=""
               aria-hidden="true"

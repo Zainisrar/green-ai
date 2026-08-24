@@ -74,7 +74,7 @@ const OurProcurementEthos = ({
                     className="flex items-start gap-3"
                   >
                     <span className="shrink-0">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/grid-intel/lighting.png"
                         className="-mt-3 w-12 sm:w-14"
                         alt="lighting"
@@ -89,7 +89,7 @@ const OurProcurementEthos = ({
 
               {/* Right Column - Image */}
               <div className="w-full shrink-0 lg:w-[440px]">
-                <img
+                <img loading="lazy" decoding="async"
                   src={img?.src || "/images/handbook/procrument-ethos.png"}
                   alt={img?.alt || "Business Handshake"}
                   className="h-auto w-full"

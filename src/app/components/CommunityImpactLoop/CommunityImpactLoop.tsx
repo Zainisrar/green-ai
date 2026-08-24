@@ -48,7 +48,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
         <div className="grid grid-cols-2 gap-0 mb-8">
           <div className="flex items-center space-x-2">
             <span>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 "
                 alt="lighting"
@@ -60,7 +60,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
           </div>
           <div className="flex items-center space-x-2">
             <span>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 "
                 alt="lighting"
@@ -72,7 +72,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
           </div>
           <div className="flex items-center space-x-2">
             <span>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 "
                 alt="lighting"
@@ -84,7 +84,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
           </div>
           <div className="flex items-center space-x-2">
             <span>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 "
                 alt="lighting"
@@ -96,7 +96,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
           </div>
           <div className="flex items-center space-x-2">
             <span>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 "
                 alt="lighting"
@@ -108,7 +108,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
           </div>
           <div className="flex items-center space-x-2">
             <span>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 "
                 alt="lighting"
@@ -161,7 +161,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
               ).map((k, idx) => (
                 <div key={idx} className="flex  items-center space-x-2">
                   <span>
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/grid-intel/lighting.png"
                       className="w-14 "
                       alt="lighting"
@@ -331,7 +331,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
             {/* Partnership Image */}
             <div className="mb-6">
               <div className="relative">
-                <img
+                <img loading="lazy" decoding="async"
                   src={
                     join?.img?.src ??
                     "/images/community-impact-loop/join-the-loop.png"
@@ -380,7 +380,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
     <React.Fragment>
       <div className={canvas ? styles.canvasPage : ""}>
       <div className={canvas ? styles.canvasBackground : "lg:block hidden absolute top-0 left-32"}>
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/community-impact-loop/mainImg.png"
           className="h-[160vh]"
           alt="bg"
@@ -392,7 +392,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
           {/* Left Side - GLOBAL SNAPSHOT Text */}
           <div className={canvas ? styles.canvasVertical : "w-1/10 flex items-center justify-center"}>
             <div className={canvas ? styles.canvasVerticalImage : "fixed top-1/2 lg:top-1/5 left-4 lg:left-14"}>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/community-impact-loop/community-impact-loop.png"
                 alt="communityimpactloop"
                 className=" w-4 lg:w-7"
@@ -447,7 +447,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
               </div>
      <div className=" flex my-20 lg:hidden p-2   relative ">
                   <div className="absolute -left-14 top-12">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/community-impact-loop/shape.png"
                       alt="Technology You Can Trust"
                       className="w-14"
@@ -463,7 +463,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
                     </h3>
                   </div>
                   <div className="-mt-4">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/community-impact-loop/shape2.png"
                       alt="Technology You Can Trust"
                       className="w-14"
@@ -566,7 +566,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
 
                 <div className={canvas ? styles.canvasCallout : " lg:flex hidden p-2   relative "}>
                   <div className="absolute -left-14 top-12">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/community-impact-loop/shape.png"
                       alt="Technology You Can Trust"
                       className="w-14"
@@ -582,7 +582,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
                     </h3>
                   </div>
                   <div className="-mt-4">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/community-impact-loop/shape2.png"
                       alt="Technology You Can Trust"
                       className="w-14"
@@ -645,7 +645,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
                 onClick={() => setIsProposalOpen(true)}
                 className="relative flex justify-end cursor-pointer"
               >
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/community-impact-loop/submit.png"
                   alt="Submit Proposal / Collaboration Inquiry"
                 />
@@ -657,7 +657,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
                 href={main.cta[1]?.href ?? main.cta[0].href}
                 className="relative flex justify-end cursor-pointer"
               >
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/community-impact-loop/green.png"
                   alt="GREEN Innovation Partnership Framework (PDF)"
                 />
@@ -688,14 +688,14 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
                 onClick={() => setIsProposalOpen(true)}
                 className="cursor-pointer"
               >
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/community-impact-loop/submit.png"
                   alt="Submit Proposal / Collaboration Inquiry"
                 />
               </button>
             </div>
             <div className="flex justify-end my-8 cursor-pointer">
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/community-impact-loop/green.png"
                 alt="GREEN Innovation Partnership Framework (PDF)"
               />

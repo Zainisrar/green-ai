@@ -46,7 +46,7 @@ const Solves = ({ isOpen, onClose, data }: Props) => {
             {leftColumn.map((solution, index) => (
               <div key={index} className="flex items-start space-x-3">
                 <span>
-                  <img
+                  <img loading="lazy" decoding="async"
                     src="/images/grid-intel/lighting.png"
                     className="w-14 -mt-4"
                     alt="lighting"
@@ -64,7 +64,7 @@ const Solves = ({ isOpen, onClose, data }: Props) => {
             {rightColumn.map((solution, index) => (
               <div key={index} className="flex items-start space-x-3">
                 <span>
-                  <img
+                  <img loading="lazy" decoding="async"
                     src="/images/grid-intel/lighting.png"
                     className="w-14 -mt-4"
                     alt="lighting"
@@ -87,7 +87,7 @@ const Solves = ({ isOpen, onClose, data }: Props) => {
         <div className="space-y-6">
           <div className="flex items-start space-x-3">
             <span>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 -mt-4"
                 alt="lighting"
@@ -100,7 +100,7 @@ const Solves = ({ isOpen, onClose, data }: Props) => {
 
           <div className="flex items-start space-x-3">
             <span>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 -mt-4"
                 alt="lighting"
@@ -113,7 +113,7 @@ const Solves = ({ isOpen, onClose, data }: Props) => {
 
           <div className="flex items-start space-x-3">
             <span>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 -mt-4"
                 alt="lighting"
@@ -129,7 +129,7 @@ const Solves = ({ isOpen, onClose, data }: Props) => {
         <div className="space-y-6">
           <div className="flex items-start space-x-3">
             <span>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 -mt-4"
                 alt="lighting"
@@ -142,7 +142,7 @@ const Solves = ({ isOpen, onClose, data }: Props) => {
 
           <div className="flex items-start space-x-3">
             <span>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 -mt-4"
                 alt="lighting"
@@ -155,7 +155,7 @@ const Solves = ({ isOpen, onClose, data }: Props) => {
 
           <div className="flex items-start space-x-3">
             <span>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 -mt-4"
                 alt="lighting"

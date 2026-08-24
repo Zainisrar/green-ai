@@ -73,7 +73,7 @@ const InvestmentInstruments: React.FC<InvestmentInstrumentsProps> = ({
             key={idx}
             className="flex items-start space-x-3 p-4 "
           >
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/grid-intel/lighting.png"
               className="w-10 -mt-2"
               alt="check"
@@ -107,7 +107,7 @@ const InvestmentInstruments: React.FC<InvestmentInstrumentsProps> = ({
                   onClick={onClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                 </button>
               </div>
 
@@ -131,7 +131,7 @@ const InvestmentInstruments: React.FC<InvestmentInstrumentsProps> = ({
                   }}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
                 >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                 </button>
               </div>
 

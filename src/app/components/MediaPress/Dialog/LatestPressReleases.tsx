@@ -30,7 +30,7 @@ const LatestPressReleases = ({ isOpen, onClose }: Props) => {
                 }}
                 className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
               >
-                <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
               </button>
             </div>
             {/* Modal Content */}
@@ -52,14 +52,14 @@ const LatestPressReleases = ({ isOpen, onClose }: Props) => {
                 {/* Press Release 1 */}
                 <div className=" relative">
                   <div className="absolute bottom-2 -left-6">
-                    <img src="/images/media-press/shape.png" alt="vector" />
+                    <img loading="lazy" decoding="async" src="/images/media-press/shape.png" alt="vector" />
                   </div>
                   <div className="absolute -top-4 -right-8">
-                    <img src="/images/media-press/shape2.png" alt="vector2" />
+                    <img loading="lazy" decoding="async" src="/images/media-press/shape2.png" alt="vector2" />
                   </div>
                   <div className="ml-10">
                     <div className="mb-4">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/media-press/easter-higherlands.png"
                         alt="GREEN Launches GRID-INTEL"
                         className=""
@@ -75,7 +75,7 @@ const LatestPressReleases = ({ isOpen, onClose }: Props) => {
                       <div className="flex items-center space-x-4">
                         <div className="flex items-center gap-2">
                           <div className="w-8">
-                            <img
+                            <img loading="lazy" decoding="async"
                               src="/images/media-press/calendar.png"
                               alt="Calendar"
                             />
@@ -85,7 +85,7 @@ const LatestPressReleases = ({ isOpen, onClose }: Props) => {
                           </span>
                         </div>
                         <span title="Press release link unavailable" className="inline-block w-32 opacity-50">
-                          <img
+                          <img loading="lazy" decoding="async"
                             src="/images/media-press/read-more.png"
                             className=""
                             alt="Read More"
@@ -98,14 +98,14 @@ const LatestPressReleases = ({ isOpen, onClose }: Props) => {
               
                 <div className=" relative">
                   <div className="absolute bottom-2 -left-6">
-                    <img src="/images/media-press/shape.png" alt="vector" />
+                    <img loading="lazy" decoding="async" src="/images/media-press/shape.png" alt="vector" />
                   </div>
                   <div className="absolute -top-4 -right-8">
-                    <img src="/images/media-press/shape2.png" alt="vector2" />
+                    <img loading="lazy" decoding="async" src="/images/media-press/shape2.png" alt="vector2" />
                   </div>
                   <div className="ml-10">
                     <div className="mb-4">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/media-press/easter-higherlands.png"
                         alt="GREEN Launches GRID-INTEL"
                         className=""
@@ -121,7 +121,7 @@ const LatestPressReleases = ({ isOpen, onClose }: Props) => {
                       <div className="flex items-center space-x-4">
                         <div className="flex items-center gap-2">
                           <div className="w-8">
-                            <img
+                            <img loading="lazy" decoding="async"
                               src="/images/media-press/calendar.png"
                               alt="Calendar"
                             />
@@ -131,7 +131,7 @@ const LatestPressReleases = ({ isOpen, onClose }: Props) => {
                           </span>
                         </div>
                         <span title="Press release link unavailable" className="inline-block w-32 opacity-50">
-                          <img
+                          <img loading="lazy" decoding="async"
                             src="/images/media-press/read-more.png"
                             className=""
                             alt="Read More"
@@ -144,14 +144,14 @@ const LatestPressReleases = ({ isOpen, onClose }: Props) => {
               
                 <div className=" relative">
                   <div className="absolute bottom-2 -left-6">
-                    <img src="/images/media-press/shape.png" alt="vector" />
+                    <img loading="lazy" decoding="async" src="/images/media-press/shape.png" alt="vector" />
                   </div>
                   <div className="absolute -top-4 -right-8">
-                    <img src="/images/media-press/shape2.png" alt="vector2" />
+                    <img loading="lazy" decoding="async" src="/images/media-press/shape2.png" alt="vector2" />
                   </div>
                   <div className="ml-10">
                     <div className="mb-4">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/media-press/easter-higherlands.png"
                         alt="GREEN Launches GRID-INTEL"
                         className=""
@@ -167,7 +167,7 @@ const LatestPressReleases = ({ isOpen, onClose }: Props) => {
                       <div className="flex items-center space-x-4">
                         <div className="flex items-center gap-2">
                           <div className="w-8">
-                            <img
+                            <img loading="lazy" decoding="async"
                               src="/images/media-press/calendar.png"
                               alt="Calendar"
                             />
@@ -177,7 +177,7 @@ const LatestPressReleases = ({ isOpen, onClose }: Props) => {
                           </span>
                         </div>
                         <span title="Press release link unavailable" className="inline-block w-32 opacity-50">
-                          <img
+                          <img loading="lazy" decoding="async"
                             src="/images/media-press/read-more.png"
                             className=""
                             alt="Read More"
@@ -197,7 +197,7 @@ const LatestPressReleases = ({ isOpen, onClose }: Props) => {
                 <span className="text-gray-500 flex items-center space-x-4 text-lg">
                   <span className="italic">More press releases coming soon</span>{" "}
                   <div>
-                    <img src="/images/media-press/arrow.png" alt="" />
+                    <img loading="lazy" decoding="async" src="/images/media-press/arrow.png" alt="" />
                   </div>
                 </span>
               </div>

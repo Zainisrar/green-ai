@@ -52,7 +52,7 @@ const AboutUs: React.FC<AboutUsProps> = ({ canvas = false }) => {
 
         {/* Left Image & CLEAN LEAN GREEN Parallelogram Banner */}
         <div className={styles.leftImageContainer}>
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/about-us/figma-masked-bg.png"
             alt="Children in sunshine"
             className={styles.leftImage}
@@ -60,7 +60,7 @@ const AboutUs: React.FC<AboutUsProps> = ({ canvas = false }) => {
         </div>
 
         <div className={styles.cleanLeanBanner} aria-hidden="true">
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/about-us/figma-clean-lean-bg.png"
             alt=""
             className={styles.cleanLeanBg}
@@ -117,7 +117,7 @@ const AboutUs: React.FC<AboutUsProps> = ({ canvas = false }) => {
       <SiteHeader panel="logoOnly" />
       <div className={styles.mobileElements}>
         <div className={styles.mobileHero}>
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/about-us/figma-masked-bg.png"
             alt="Children in sunshine"
             className={styles.mobileHeroImg}

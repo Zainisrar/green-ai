@@ -122,7 +122,7 @@ export default function Handbook({ canvas = false }: HandbookProps) {
 
       {/* Washed left collage (mask group at -472,408) */}
       <div className={styles.leftCollage}>
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/supplier-code-of-conduct/collage.png"
           alt=""
           aria-hidden="true"
@@ -143,7 +143,7 @@ export default function Handbook({ canvas = false }: HandbookProps) {
       {/* Cards: parallelogram image masks, headings, Explore pills */}
       {cards.map((card) => (
         <React.Fragment key={card.key}>
-          <img
+          <img loading="lazy" decoding="async"
             src={card.img}
             alt={card.imgAlt}
             className={styles.cardImg}
@@ -173,13 +173,13 @@ export default function Handbook({ canvas = false }: HandbookProps) {
 
       {/* Left statement with angled brackets */}
       <div className={styles.statementBlock}>
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/supplier-code-of-conduct/quote_left.png"
           alt=""
           className={styles.statementBracketLeft}
           aria-hidden="true"
         />
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/supplier-code-of-conduct/quote_right.png"
           alt=""
           className={styles.statementBracketRight}

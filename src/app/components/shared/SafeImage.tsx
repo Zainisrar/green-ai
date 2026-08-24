@@ -26,7 +26,7 @@ const SafeImage = ({ src, fallbackSrc, alt, className, ...props }: SafeImageProp
     img.src = resolvedCandidate;
   }, [resolvedCandidate, fallbackSrc]);
   return (
-    <img
+    <img loading="lazy" decoding="async"
       {...props}
       src={resolvedSrc}
       alt={alt}

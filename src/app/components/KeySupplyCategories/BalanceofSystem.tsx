@@ -140,7 +140,7 @@ const BalanceofSystem = ({ isOpen, onClose, data }: Props) => {
                   onClick={onClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                 </button>
               </div>
 
@@ -165,7 +165,7 @@ const BalanceofSystem = ({ isOpen, onClose, data }: Props) => {
                   }}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
                 >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                 </button>
               </div>
 

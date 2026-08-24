@@ -65,7 +65,7 @@ const UseCases = ({ isOpen, onClose, data }: Props) => {
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((item, idx) => (
           <div key={idx} className="overflow-hidden">
-            <img
+            <img loading="lazy" decoding="async"
               src={item.img.src}
               alt={item.img.alt}
               className="h-48 w-full object-cover"

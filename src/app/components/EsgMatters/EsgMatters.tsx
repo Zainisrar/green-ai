@@ -97,7 +97,7 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
           <div className="space-y-2 italic">
             <div className="flex items-center  space-x-2">
               <span>
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/grid-intel/lighting.png"
                   className="w-14 -mt-4"
                   alt="lighting"
@@ -112,7 +112,7 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
             </div>
             <div className="flex items-center -ml-10 space-x-2">
               <span>
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/grid-intel/lighting.png"
                   className="w-14 -mt-4"
                   alt="lighting"
@@ -127,7 +127,7 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
             </div>
             <div className="flex items-center -ml-16 space-x-2">
               <span>
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/grid-intel/lighting.png"
                   className="w-14 -mt-4"
                   alt="lighting"
@@ -139,7 +139,7 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
             </div>
             <div className="flex items-center -ml-20 space-x-2">
               <span>
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/grid-intel/lighting.png"
                   className="w-14 -mt-4"
                   alt="lighting"
@@ -187,7 +187,7 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
                       style={{ marginLeft: `-${idx * 10}px` }}
                     >
                       <span>
-                        <img
+                        <img loading="lazy" decoding="async"
                           src="/images/grid-intel/lighting.png"
                           className="w-14 -mt-4"
                           alt="lighting"
@@ -300,7 +300,7 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
                   <div key={idx} className="flex items-start gap-3">
                     <div className="flex-shrink-0 mt-1">
                       <span>
-                        <img
+                        <img loading="lazy" decoding="async"
                           src="/images/grid-intel/lighting.png"
                           className="w-14 -mt-4"
                           alt="lighting"
@@ -342,7 +342,7 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
                   <div key={idx} className="flex items-start gap-3">
                     <div className="flex-shrink-0 mt-1">
                       <span>
-                        <img
+                        <img loading="lazy" decoding="async"
                           src="/images/grid-intel/lighting.png"
                           className="w-14 -mt-4"
                           alt="lighting"
@@ -436,9 +436,9 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
       <main className={styles.canvasPage} data-node-id="7077:18427">
         <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
         <div className={styles.canvasBackground} aria-hidden="true">
-          <img src="/images/why-esg-matters-to-green/bg.jpg" alt="" />
+          <img loading="lazy" decoding="async" src="/images/why-esg-matters-to-green/bg.jpg" alt="" />
         </div>
-        <img className={styles.canvasVerticalTitle} src="/images/why-esg-matters-to-green/why-esg-matters-to-green.png" alt="Impact Measurement & ESG" />
+        <img loading="lazy" decoding="async" className={styles.canvasVerticalTitle} src="/images/why-esg-matters-to-green/why-esg-matters-to-green.png" alt="Impact Measurement & ESG" />
         <section className={styles.canvasHeader}>
           <h1>IMPACT <span>MEASUREMENT</span> &amp; ESG</h1>
           <h2>{pageData.mainPage.subHeadline}</h2>
@@ -451,14 +451,14 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
         </nav>
         <div className={styles.canvasDetail}>{canvasDetail}</div>
         <div className={styles.canvasMonitoring}>
-          <img src="/images/why-esg-matters-to-green/shape.png" alt="" aria-hidden="true" />
+          <img loading="lazy" decoding="async" src="/images/why-esg-matters-to-green/shape.png" alt="" aria-hidden="true" />
           <p>All metrics are monitored via <span>{pageData.mainPage.quote.highlighted}</span> and third-party field audits.</p>
-          <img src="/images/why-esg-matters-to-green/shape2.png" alt="" aria-hidden="true" />
+          <img loading="lazy" decoding="async" src="/images/why-esg-matters-to-green/shape2.png" alt="" aria-hidden="true" />
         </div>
         <div className={styles.canvasStatement}>
-          <img src="/images/why-esg-matters-to-green/shape.png" alt="" aria-hidden="true" />
+          <img loading="lazy" decoding="async" src="/images/why-esg-matters-to-green/shape.png" alt="" aria-hidden="true" />
           <h3><span>GREEN doesn’t just talk ESG.</span><br />We operationalize it, measure it, and report it — project by project.</h3>
-          <img src="/images/why-esg-matters-to-green/shape2.png" alt="" aria-hidden="true" />
+          <img loading="lazy" decoding="async" src="/images/why-esg-matters-to-green/shape2.png" alt="" aria-hidden="true" />
         </div>
         <div className={styles.canvasCtas}>
           <FigmaAngledCta href={pageData.mainPage.cta[0]?.href || "/engage/contact-us"}>{pageData.mainPage.cta[0]?.text || "GREEN ESG Policy Brief"}</FigmaAngledCta>
@@ -478,7 +478,7 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
           {/* Left Side  */}
           <div className="w-1/8 flex items-center justify-center">
             <div className="fixed top-1/4 left-4 lg:left-14">
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/why-esg-matters-to-green/why-esg-matters-to-green.png"
                 alt="esg-matters-to-green"
                 className="w-4 lg:w-8"
@@ -513,7 +513,7 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
  <div className="z-[20] flex lg:hidden relative   ">
           <div className="relative flex items-center">
             <div className=" absolute top-12 -left-16">
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/why-esg-matters-to-green/shape.png"
                 alt="shape"
                 className="w-12"
@@ -529,7 +529,7 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
               </p>
             </div>
             <div>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/why-esg-matters-to-green/shape2.png"
                 alt="shape"
                 className="w-12 absolute -right-14 -top-5 "
@@ -597,7 +597,7 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
                 </div>
               </div>
               <div className="lg:block hidden">
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/why-esg-matters-to-green/line.png"
                   alt="line"
                 />
@@ -612,7 +612,7 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
         <div className="z-[20] lg:flex hidden relative  justify-end pr-4">
           <div className="relative flex items-center">
             <div className=" absolute top-12 -left-16">
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/why-esg-matters-to-green/shape.png"
                 alt="shape"
                 className="w-12"
@@ -628,7 +628,7 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
               </p>
             </div>
             <div>
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/why-esg-matters-to-green/shape2.png"
                 alt="shape"
                 className="w-12 absolute right-0 -top-5 "
@@ -648,7 +648,7 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
         </div>
         <div className="z-[20] relative flex flex-col items-end gap-6 mt-4 mb-20 cursor-pointer">
           <a href={pageData.mainPage.cta[0]?.href || "#"} target="_blank" rel="noopener noreferrer">
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/why-esg-matters-to-green/green.png"
               alt={pageData.mainPage.cta[0]?.text || "GREEN ESG Policy Brief"}
             />
@@ -658,7 +658,7 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
             onClick={() => setIsSampleOpen(true)}
             className="cursor-pointer hover:opacity-80 transition-opacity"
           >
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/why-esg-matters-to-green/sample.png"
               alt={pageData.mainPage.cta[1]?.text || "Sample Impact Report or M&E Framework"}
             />

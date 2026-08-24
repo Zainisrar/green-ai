@@ -88,7 +88,7 @@ export default function JoinUs() {
             data-node-id="7077:2823"
             aria-hidden="true"
           >
-            <img src="/images/join-us/bg.jpg" alt="" />
+            <img loading="lazy" decoding="async" src="/images/join-us/bg.jpg" alt="" />
           </motion.div>
 
           <motion.section
@@ -118,7 +118,7 @@ export default function JoinUs() {
               onClick={() => setIsExistingUsersOpen(true)}
               aria-label="Log in as an existing user"
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/join-us/existing-users.png"
                 alt="Existing Users"
               />
@@ -129,7 +129,7 @@ export default function JoinUs() {
               onClick={() => setIsNewUsersOpen(true)}
               aria-label="Register as a new user"
             >
-              <img src="/images/join-us/new-users.png" alt="New Users" />
+              <img loading="lazy" decoding="async" src="/images/join-us/new-users.png" alt="New Users" />
             </button>
 
             <h2 className={styles.accessHeading}>
@@ -142,7 +142,7 @@ export default function JoinUs() {
                 className={`${styles.feature} ${feature.className}`}
                 key={feature.title}
               >
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/join-us/lighting.png"
                   alt=""
                   aria-hidden="true"
@@ -174,11 +174,11 @@ export default function JoinUs() {
               href={data?.email?.href || "mailto:careers.support@green.com.pg"}
               className={`${styles.contactCard} ${styles.emailCard}`}
             >
-              <img src="/images/join-us/mail.png" alt="" />
+              <img loading="lazy" decoding="async" src="/images/join-us/mail.png" alt="" />
               <span>{data?.email?.text || "careers.support@green.com.pg"}</span>
             </Link>
             <div className={`${styles.contactCard} ${styles.phoneCard}`}>
-              <img src="/images/join-us/call.png" alt="" />
+              <img loading="lazy" decoding="async" src="/images/join-us/call.png" alt="" />
               <span>
                 {data?.phone?.text || "+675 XXX XXX XXX (Careers Desk)"}
               </span>
@@ -188,7 +188,7 @@ export default function JoinUs() {
               href={data?.cta?.[0]?.href || "#"}
               className={`${styles.cta} ${styles.vacancies}`}
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/join-us/view-current-vacancies.png"
                 alt="View Current Vacancies"
               />
@@ -197,14 +197,14 @@ export default function JoinUs() {
               href={data?.cta?.[1]?.href || "#"}
               className={`${styles.cta} ${styles.privacy}`}
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/join-us/view-our-recruitment-privacy-policy.png"
                 alt="View our Recruitment Privacy Policy (PDF)"
               />
             </Link>
           </motion.section>
 
-          <img
+          <img loading="lazy" decoding="async"
             className={styles.verticalLabel}
             src="/images/join-us/industry-affiliations-certifications.png"
             alt="Industry affiliations and certifications"

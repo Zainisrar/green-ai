@@ -74,7 +74,7 @@ const ListofCertificates = ({
             onClick={onClose}
             className="absolute top-24 right-6 z-10 cursor-pointer"
           >
-            <img src="/images/certifications-accredication/close-icon.png" alt="Close" className="w-8 h-8" />
+            <img loading="lazy" decoding="async" src="/images/certifications-accredication/close-icon.png" alt="Close" className="w-8 h-8" />
           </button>
 
           {/* Left Arrow */}
@@ -82,7 +82,7 @@ const ListofCertificates = ({
             onClick={prevCertificate}
             className="absolute left-2 lg:left-6 z-10 cursor-pointer"
           >
-            <img src="/images/certifications-accredication/left-arrow.png" alt="Previous" className="w-8 h-8 lg:w-12 lg:h-12" />
+            <img loading="lazy" decoding="async" src="/images/certifications-accredication/left-arrow.png" alt="Previous" className="w-8 h-8 lg:w-12 lg:h-12" />
           </button>
 
           {/* Certificate Display Area */}
@@ -100,7 +100,7 @@ const ListofCertificates = ({
                         : 'flex-1 max-w-xl scale-90'
                   }`}
                 >
-                  <img 
+                  <img loading="lazy" decoding="async" 
                     src={certInfo.src} 
                     alt={`Certificate ${index + 1}`}
                     className={`w-full h-auto object-contain rounded-lg shadow-lg ${
@@ -117,7 +117,7 @@ const ListofCertificates = ({
             onClick={nextCertificate}
             className="absolute right-6 z-10 cursor-pointer"
           >
-            <img src="/images/certifications-accredication/right-arrow.png" alt="Next" className="w-12 h-12" />
+            <img loading="lazy" decoding="async" src="/images/certifications-accredication/right-arrow.png" alt="Next" className="w-12 h-12" />
           </button>
         </div>
       </div>

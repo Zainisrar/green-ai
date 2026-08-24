@@ -30,7 +30,7 @@ const WhoCanJoin = ({ isOpen, onClose }: Props) => {
                 }}
                 className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
               >
-                <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
               </button>
             </div>
             {/* Modal Content */}
@@ -52,7 +52,7 @@ const WhoCanJoin = ({ isOpen, onClose }: Props) => {
                 {/* Secondary & University Students */}
                 <div className="flex items-start gap-6">
                   <div className="w-16 h-16 flex-shrink-0">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       src="/images/public-events-volunteering/university-students.png" 
                       alt="Student Icon" 
                       className="w-full h-full object-contain"
@@ -71,7 +71,7 @@ const WhoCanJoin = ({ isOpen, onClose }: Props) => {
                 {/* Local NGOs, youth groups, and church networks */}
                 <div className="flex items-start gap-6">
                   <div className="w-16 h-16 flex-shrink-0">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       src="/images/public-events-volunteering/university-students.png" 
                       alt="Community Icon" 
                       className="w-full h-full object-contain"
@@ -87,7 +87,7 @@ const WhoCanJoin = ({ isOpen, onClose }: Props) => {
                 {/* Individual volunteers passionate about energy & sustainability */}
                 <div className="flex items-start gap-6">
                   <div className="w-16 h-16 flex-shrink-0">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       src="/images/public-events-volunteering/church-networks.png" 
                       alt="Volunteer Icon" 
                       className="w-full h-full object-contain"
@@ -103,7 +103,7 @@ const WhoCanJoin = ({ isOpen, onClose }: Props) => {
                 {/* Educators and STEM facilitators */}
                 <div className="flex items-start gap-6">
                   <div className="w-16 h-16 flex-shrink-0">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       src="/images/public-events-volunteering/energy-sustainability.png" 
                       alt="Educator Icon" 
                       className="w-full h-full object-contain"
@@ -119,7 +119,7 @@ const WhoCanJoin = ({ isOpen, onClose }: Props) => {
                 {/* Community leaders and ward-level organisers */}
                 <div className="flex items-start gap-6 col-span-2 justify-center">
                   <div className="w-16 h-16 flex-shrink-0">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       src="/images/public-events-volunteering/ward-level-organisers.png" 
                       alt="Leader Icon" 
                       className="w-full h-full object-contain"

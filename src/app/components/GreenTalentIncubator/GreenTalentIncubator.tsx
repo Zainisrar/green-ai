@@ -253,9 +253,9 @@ const GreenTalentIncubator = ({ canvas = false }: { canvas?: boolean }) => {
       <main className={styles.canvasPage} data-node-id="7077:15370">
         <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
         <div className={styles.canvasArtwork} aria-hidden="true">
-          <img src="/images/green-talent-incubator/mainImg.png" alt="" />
+          <img loading="lazy" decoding="async" src="/images/green-talent-incubator/mainImg.png" alt="" />
         </div>
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.canvasVerticalTitle}
           src="/images/green-talent-incubator/icn.png"
           alt="GREEN Talent Incubator"
@@ -285,13 +285,13 @@ const GreenTalentIncubator = ({ canvas = false }: { canvas?: boolean }) => {
             </button>
           ))}
         </div>
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.canvasCalloutFrameStart}
           src="/images/green-talent-incubator/figma/callout-frame-left.svg"
           alt=""
           aria-hidden="true"
         />
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.canvasCalloutFrameEnd}
           src="/images/green-talent-incubator/figma/callout-frame-right.svg"
           alt=""
@@ -348,7 +348,7 @@ const GreenTalentIncubator = ({ canvas = false }: { canvas?: boolean }) => {
   return (
     <React.Fragment>
       <div className="lg:block hidden absolute top-0 left-32">
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/green-talent-incubator/mainImg.png"
           className="h-[140vh]"
           alt="bg"
@@ -359,7 +359,7 @@ const GreenTalentIncubator = ({ canvas = false }: { canvas?: boolean }) => {
         <div className="flex h-full">
           <div className="w-1/10 flex items-center justify-center">
             <div className="fixed top-1/2 lg:top-[20%] left-4 lg:left-14">
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/green-talent-incubator/icn.png"
                 alt="talent-incubator"
                 className="w-4 lg:w-7"
@@ -415,7 +415,7 @@ const GreenTalentIncubator = ({ canvas = false }: { canvas?: boolean }) => {
 
               <div className="flex my-20 lg:hidden p-2 relative">
                 <div className="absolute -left-14 top-12">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src="/images/community-impact-loop/shape.png"
                     alt="shape"
                     className="w-14"
@@ -430,7 +430,7 @@ const GreenTalentIncubator = ({ canvas = false }: { canvas?: boolean }) => {
                   </h3>
                 </div>
                 <div className="-mt-4">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src="/images/community-impact-loop/shape2.png"
                     alt="shape"
                     className="w-14"
@@ -548,7 +548,7 @@ const GreenTalentIncubator = ({ canvas = false }: { canvas?: boolean }) => {
 
                 <div className="lg:flex hidden p-2 relative">
                   <div className="absolute -left-14 top-12">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/community-impact-loop/shape.png"
                       alt="shape"
                       className="w-14"
@@ -563,7 +563,7 @@ const GreenTalentIncubator = ({ canvas = false }: { canvas?: boolean }) => {
                     </h3>
                   </div>
                   <div className="-mt-4">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/community-impact-loop/shape2.png"
                       alt="shape"
                       className="w-14"
@@ -593,7 +593,7 @@ const GreenTalentIncubator = ({ canvas = false }: { canvas?: boolean }) => {
               onClick={() => setIsApplyOpen(true)}
               className="relative flex justify-end cursor-pointer"
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/green-talent-incubator/apply-program.png"
                 alt="Apply for a Program"
               />
@@ -605,7 +605,7 @@ const GreenTalentIncubator = ({ canvas = false }: { canvas?: boolean }) => {
               href={data.mainPage.cta[1]?.href ?? "#"}
               className="relative flex justify-end cursor-pointer"
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/green-talent-incubator/green.png"
                 alt="Partnership Brief"
               />
@@ -622,13 +622,13 @@ const GreenTalentIncubator = ({ canvas = false }: { canvas?: boolean }) => {
               onClick={() => setIsApplyOpen(true)}
               className="flex justify-end my-8 cursor-pointer"
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/green-talent-incubator/apply-program.png"
                 alt="Apply for a Program"
               />
             </button>
             <div className="flex justify-end my-8 cursor-pointer">
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/green-talent-incubator/green.png"
                 alt="Partnership Brief"
               />

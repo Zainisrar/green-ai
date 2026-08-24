@@ -29,7 +29,7 @@ export default function FigmaBrandPanel({
     >
       {showPanel ? (
         <div className={styles.rectangle} data-node-id="7077:3754">
-          <img
+          <img loading="lazy" decoding="async"
             src={`${ASSET_ROOT}/rectangle.svg`}
             alt=""
             width="394"
@@ -44,7 +44,7 @@ export default function FigmaBrandPanel({
         aria-label="GREEN home"
         data-node-id="7077:3755"
       >
-        <img
+        <img loading="lazy" decoding="async"
           src={`${ASSET_ROOT}/logo.png`}
           alt="GREEN — Future: Envisioned"
           width="255"

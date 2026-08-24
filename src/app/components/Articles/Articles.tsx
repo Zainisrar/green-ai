@@ -76,7 +76,7 @@ export default function Articles({ canvas = false }: ArticlesProps) {
       data-node-id="7080:58112"
     >
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.verticalTitle}
         src="/images/articles/insights-articles.png"
         alt="Insights and Articles"
@@ -111,7 +111,7 @@ export default function Articles({ canvas = false }: ArticlesProps) {
                   >
                     <h4>{article.title}</h4>
                     <div className={styles.cardDetails}>
-                      <img src={article.img} alt="" />
+                      <img loading="lazy" decoding="async" src={article.img} alt="" />
                       <p>{article.description}</p>
                     </div>
                     <span className={styles.readMore}>
@@ -139,7 +139,7 @@ export default function Articles({ canvas = false }: ArticlesProps) {
         </section>
 
         <div className={styles.contribute}>
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/articles/want.png"
             alt="Want to contribute or feature GREEN's work?"
           />

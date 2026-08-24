@@ -56,7 +56,7 @@ const BecomeSupplierCanvas = () => {
     <main className={styles.canvasPage} data-node-id="7077:28549">
       <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
 
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.canvasGhost}
         src="/images/supplier/bg_ghost.png"
         alt=""
@@ -95,19 +95,19 @@ const BecomeSupplierCanvas = () => {
       </p>
 
       {/* Figma brackets sit behind the card photos */}
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.canvasBracketL}
         src="/images/rfp/quote_bracket_l.png"
         alt=""
         style={{ top: 356, left: 275 }}
       />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.canvasBracketL}
         src="/images/rfp/quote_bracket_l.png"
         alt=""
         style={{ top: 513, left: 275 }}
       />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.canvasBracketL}
         src="/images/rfp/quote_bracket_l.png"
         alt=""
@@ -116,7 +116,7 @@ const BecomeSupplierCanvas = () => {
 
       {cards.map((card) => (
         <div className={styles.canvasCard} key={card.key} style={{ top: card.rowTop }}>
-          <img
+          <img loading="lazy" decoding="async"
             className={styles.canvasCardImg}
             src={card.image}
             alt=""
@@ -142,12 +142,12 @@ const BecomeSupplierCanvas = () => {
         </div>
       ))}
 
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.canvasQuoteBracketL}
         src="/images/rfp/quote_bracket_l.png"
         alt=""
       />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.canvasQuoteBracketR}
         src="/images/rfp/quote_bracket_r.png"
         alt=""

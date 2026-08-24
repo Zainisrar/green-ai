@@ -93,7 +93,7 @@ export default function BookAConsultation({
 
       {/* Right faint collage (masked photo collage) */}
       <div className={styles.rightCollage} aria-hidden="true">
-        <img src="/images/book-consulation/collage.png" alt="" />
+        <img loading="lazy" decoding="async" src="/images/book-consulation/collage.png" alt="" />
       </div>
 
       {/* Header block */}
@@ -133,7 +133,7 @@ export default function BookAConsultation({
         Booking Details
       </h2>
 
-      <img
+      <img loading="lazy" decoding="async"
         src="/images/book-consulation/figma-bolt.png"
         alt=""
         className={styles.boltIcon}
@@ -146,14 +146,14 @@ export default function BookAConsultation({
         <span className={styles.spacer} />
       </p>
 
-      <img
+      <img loading="lazy" decoding="async"
         src="/images/book-consulation/figma-bolt.png"
         alt=""
         className={styles.boltIcon}
         style={{ left: 262, top: 745 }}
       />
 
-      <img
+      <img loading="lazy" decoding="async"
         src="/images/book-consulation/figma-bolt.png"
         alt=""
         className={styles.boltIcon}
@@ -165,13 +165,13 @@ export default function BookAConsultation({
 
       {/* Availability pills */}
       <div className={styles.pill} style={{ left: 262, top: 845 }}>
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/book-consulation/availability-window.svg"
           alt=""
           aria-hidden="true"
           className={styles.pillFrame}
         />
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/book-consulation/availability-calendar.svg"
           alt=""
           aria-hidden="true"
@@ -183,7 +183,7 @@ export default function BookAConsultation({
         </span>
       </div>
       <div className={styles.pill} style={{ left: 798, top: 845 }}>
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/book-consulation/availability-window.svg"
           alt=""
           aria-hidden="true"
@@ -220,13 +220,13 @@ export default function BookAConsultation({
 
       {/* Right quote over collage */}
       <div className={styles.quoteBlock}>
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/book-consulation/quote-bracket-left.svg"
           alt=""
           aria-hidden="true"
           className={styles.quoteBracketLeft}
         />
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/book-consulation/quote-bracket-right.svg"
           alt=""
           aria-hidden="true"

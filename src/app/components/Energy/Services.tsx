@@ -112,14 +112,14 @@ const Services = () => {
     <React.Fragment>
       <TopNavigation />
       <div className="absolute lg:block  -z-10 top-0 hidden   lg:left-0">
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/service/lgImg.png"
           className="w-8/12 lg:h-[150vh]  "
           alt="mainBg"
         />
       </div>
       <div className="absolute   -z-10 top-0 lg:hidden   right-0">
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/service/mbImg.png"
           className="w-full   "
           alt="mainBg"
@@ -161,7 +161,7 @@ const Services = () => {
 
                     {index != 3 && (
                       <div className="-ml-6">
-                        <img
+                        <img loading="lazy" decoding="async"
                           className="w-8 xl:w-10"
                           src="/images/service/arrow.png"
                           alt="arrow"
@@ -202,7 +202,7 @@ const Services = () => {
                   </div>
                   {/* Right arrow */}
                   <div className="absolute -right-3 top-1/2 transform -translate-y-1/2 z-10">
-                    <img
+                    <img loading="lazy" decoding="async"
                       className="w-6"
                       src="/images/service/arrow.png"
                       alt="arrow"
@@ -235,7 +235,7 @@ const Services = () => {
                   </div>
                   {/* Down arrow */}
                   <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 z-10">
-                    <img
+                    <img loading="lazy" decoding="async"
                       className="w-6 rotate-90"
                       src="/images/service/arrow.png"
                       alt="arrow"
@@ -269,7 +269,7 @@ const Services = () => {
                   </div>
                   {/* Left arrow */}
                   <div className="absolute -right-3 top-1/2 transform -translate-y-1/2 z-10">
-                    <img
+                    <img loading="lazy" decoding="async"
                       className="w-6 rotate-180"
                       src="/images/service/arrow.png"
                       alt="arrow"
@@ -305,7 +305,7 @@ const Services = () => {
             </div>
           </div>
           <div className="lg:block fixed top-20 lg:top-1/3 left-4 ">
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/service/services.svg"
               alt="Services"
               className=" w-5 lg:w-14 object-contain"
@@ -452,7 +452,7 @@ const Services = () => {
             className="cursor-pointer"
             onClick={() => setIsEnquiryOpen(true)}
           >
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/service/enquiry.svg"
               alt={energyData?.cta?.text || "Enquiry"}
               className=""

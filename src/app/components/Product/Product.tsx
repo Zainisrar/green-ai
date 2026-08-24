@@ -235,7 +235,7 @@ const Product = ({ slug }: ProductProps) => {
               } as React.CSSProperties
             }
           >
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/product/bg.jpg"
               alt=""
               className="product-figma-background"
@@ -247,12 +247,12 @@ const Product = ({ slug }: ProductProps) => {
             />
             <h1 className="product-figma-heading">Products</h1>
 
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/product/product.png"
               alt="Products"
               className="product-figma-label"
             />
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/product/green-sunshine.png"
               alt="GREEN SunShine"
               className="product-figma-brand"
@@ -293,7 +293,7 @@ const Product = ({ slug }: ProductProps) => {
                       prefersReducedMotion ? { duration: 0 } : gallerySpring
                     }
                   >
-                    <img src={`/images/product/${image.thumbnail}`} alt="" />
+                    <img loading="lazy" decoding="async" src={`/images/product/${image.thumbnail}`} alt="" />
                   </motion.button>
                 ))}
               </div>
@@ -333,11 +333,11 @@ const Product = ({ slug }: ProductProps) => {
               className="product-figma-specifications"
               aria-label="Product specifications"
             >
-              <img src="/images/product/boxKeyImg.png" alt="" />
+              <img loading="lazy" decoding="async" src="/images/product/boxKeyImg.png" alt="" />
               <div className="product-figma-specification-list">
                 {lightingSystemItems.map((item) => (
                   <article key={item.name}>
-                    <img src={`/images/product/${item.icon}`} alt="" />
+                    <img loading="lazy" decoding="async" src={`/images/product/${item.icon}`} alt="" />
                     <h3>{item.name}</h3>
                     <p>{item.detail}</p>
                     {item.duration && <span>{item.duration}</span>}
@@ -354,12 +354,12 @@ const Product = ({ slug }: ProductProps) => {
 
         <div className="min-[1201px]:hidden">
           <div className="px-6 pt-24 text-center">
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/product/green-sunshine.png"
               alt="GREEN SunShine"
               className="mx-auto w-44"
             />
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/product/featuredProduct1.png"
               alt="GREEN SunShine lighting system"
               className="mx-auto mt-8 w-full max-w-md"
@@ -471,7 +471,7 @@ const Product = ({ slug }: ProductProps) => {
     <div className="relative pb-12 lg:pb-0">
       <SiteHeader />
       <div className="lg:block hidden absolute -z-10 right-0 top-0 bottom-0">
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/product/mainImg.png"
           className=" h-full w-[66vw] object-fill "
           alt="mainImg"
@@ -481,7 +481,7 @@ const Product = ({ slug }: ProductProps) => {
         {/* Left Side Image */}
         <div className="lg:block  w-1/6 flex items-center justify-center">
           <div className="fixed top-1/3 left-3 lg:left-14">
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/product/product.png"
               className="w-8 lg:w-14"
               alt="Products Text"
@@ -499,7 +499,7 @@ const Product = ({ slug }: ProductProps) => {
               </h1>
             </div>
             <div className="flex items-center">
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/product/green-sunshine.png"
                 alt="GREEN SunShine Logo"
                 className="w-32"
@@ -513,7 +513,7 @@ const Product = ({ slug }: ProductProps) => {
             <div className="lg:w-1/2">
               {/* Main Product Image */}
               <div className="lg:mb-6 flex items-center justify-center">
-                <img
+                <img loading="lazy" decoding="async"
                   src={
                     // @ts-expect-error
                     activeImg[active].imgSrc
@@ -531,7 +531,7 @@ const Product = ({ slug }: ProductProps) => {
                 {
                   // @ts-expect-error
                   activeImg.map((img, index) => (
-                    <img
+                    <img loading="lazy" decoding="async"
                       key={img.id}
                       src={img.thumbSrc}
                       alt={img.altText}
@@ -553,7 +553,7 @@ const Product = ({ slug }: ProductProps) => {
                   className="cursor-pointer"
                   onClick={() => setIsEnquiryOpen(true)}
                 >
-                  <img
+                  <img loading="lazy" decoding="async"
                     src="/images/product/enquiry.png"
                     alt={currentProduct?.ctaButton?.text || "Enquiry"}
                   />
@@ -605,7 +605,7 @@ const Product = ({ slug }: ProductProps) => {
                         key={index}
                         className="flex flex-col items-center lg:items-start lg:w-28"
                       >
-                        <img
+                        <img loading="lazy" decoding="async"
                           src={key.icon.src}
                           alt={key.icon.alt}
                           className="w-14 lg:w-24 mb-2"

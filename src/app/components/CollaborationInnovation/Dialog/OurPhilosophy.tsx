@@ -52,7 +52,7 @@ const OurPhilosophy = ({ isOpen, onClose, data }: Props) => {
                 onClick={onClose}
                 className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
               >
-                <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
               </button>
             </div>
             {/* Modal Content */}
@@ -79,7 +79,7 @@ const OurPhilosophy = ({ isOpen, onClose, data }: Props) => {
                   {keys.map((k, idx) => (
                     <div key={idx} className="flex items-start gap-3">
                       <div className="flex-shrink-0 mt-1">
-                        <img src="/images/grid-intel/lighting.png" className="w-14 -mt-4" alt="lighting" />
+                        <img loading="lazy" decoding="async" src="/images/grid-intel/lighting.png" className="w-14 -mt-4" alt="lighting" />
                       </div>
                       <span className="text-gray-700 text-sm leading-relaxed">{k}</span>
                     </div>
@@ -88,7 +88,7 @@ const OurPhilosophy = ({ isOpen, onClose, data }: Props) => {
 
                 {/* Right Column - Image */}
                 <div className="flex-shrink-0 lg:w-[500px]">
-                  <img src={imgSrc} alt={imgAlt} />
+                  <img loading="lazy" decoding="async" src={imgSrc} alt={imgAlt} />
                 </div>
               </div>
             </div>
@@ -109,7 +109,7 @@ const OurPhilosophy = ({ isOpen, onClose, data }: Props) => {
                 }}
                 className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
               >
-                <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
               </button>
             </div>
             {/* Modal Content */}
@@ -140,7 +140,7 @@ const OurPhilosophy = ({ isOpen, onClose, data }: Props) => {
                   {keys.map((k, idx) => (
                     <div key={idx} className="flex items-start gap-3">
                       <div className="flex-shrink-0 mt-1">
-                        <img src="/images/grid-intel/lighting.png" className="w-14 -mt-4" alt="lighting" />
+                        <img loading="lazy" decoding="async" src="/images/grid-intel/lighting.png" className="w-14 -mt-4" alt="lighting" />
                       </div>
                       <span className="text-gray-700 text-sm leading-relaxed">{k}</span>
                     </div>
@@ -149,7 +149,7 @@ const OurPhilosophy = ({ isOpen, onClose, data }: Props) => {
 
                 {/* Right Column - Image */}
                 <div className="flex-shrink-0 lg:w-[500px]">
-                  <img src={imgSrc} alt={imgAlt} />
+                  <img loading="lazy" decoding="async" src={imgSrc} alt={imgAlt} />
                 </div>
               </div>
             </div>

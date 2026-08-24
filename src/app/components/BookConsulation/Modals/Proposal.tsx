@@ -232,7 +232,7 @@ const Proposal = ({ isOpen, onClose }: Props) => {
             disabled={isLoading}
             className="shrink-0 cursor-pointer self-end disabled:opacity-50"
           >
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/book-consulation/formBtn.png"
               className="w-28 sm:w-40"
               alt="Submit proposal"

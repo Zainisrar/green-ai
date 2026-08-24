@@ -308,7 +308,7 @@ export default function Expertise() {
             }
           >
             <div className={styles.leftBackdrop} aria-hidden="true">
-              <img
+              <img loading="lazy" decoding="async"
                 src={`${ASSET_ROOT}/background.png`}
                 alt=""
                 data-node-id="7077:3687"
@@ -323,7 +323,7 @@ export default function Expertise() {
               POWERING <span>HEALTHCARE</span>
             </h1>
 
-            <img
+            <img loading="lazy" decoding="async"
               className={`${styles.verticalLabel} ${
                 view === "slider" ? styles.sliderWatermark : ""
               }`}
@@ -357,13 +357,13 @@ export default function Expertise() {
                   onClick={openHealthcareDetail}
                   aria-label="Explore Powering Healthcare"
                 >
-                  <img
+                  <img loading="lazy" decoding="async"
                     className={styles.exploreShape}
                     src={`${ASSET_ROOT}/explore-button.svg`}
                     alt=""
                   />
                   <span>Explore</span>
-                  <img
+                  <img loading="lazy" decoding="async"
                     className={styles.exploreArrow}
                     src={`${ASSET_ROOT}/explore-arrow.svg`}
                     alt=""
@@ -397,7 +397,7 @@ export default function Expertise() {
                         onClick={() => setSelectedIndex(card.item)}
                         aria-label={`Select ${item.label}`}
                       >
-                        <img src={item.src} alt={item.alt} />
+                        <img loading="lazy" decoding="async" src={item.src} alt={item.alt} />
                         <span aria-hidden="true" />
                       </button>
                     );
@@ -412,12 +412,12 @@ export default function Expertise() {
                     }
                     aria-label={`Selected solution: ${activeGalleryItem.label}. Show next solution.`}
                   >
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={activeGalleryItem.src}
                       alt={activeGalleryItem.alt}
                     />
                     <span className={styles.selectedLabel}>
-                      <img src={`${ASSET_ROOT}/selected-label.svg`} alt="" />
+                      <img loading="lazy" decoding="async" src={`${ASSET_ROOT}/selected-label.svg`} alt="" />
                       <b>{activeGalleryItem.label}</b>
                     </span>
                   </button>
@@ -523,7 +523,7 @@ export default function Expertise() {
                             <span
                               className={`${styles.sliderAsset} ${styles[panel.assetClass]}`}
                             >
-                              <img src={panel.src} alt={item.alt} />
+                              <img loading="lazy" decoding="async" src={panel.src} alt={item.alt} />
                             </span>
                             {panel.label ? (
                               <span
@@ -543,9 +543,9 @@ export default function Expertise() {
 
             {view === "grid" ? (
               <div className={styles.pagination} aria-hidden="true">
-                <img src={`${ASSET_ROOT}/dot-active.svg`} alt="" />
-                <img src={`${ASSET_ROOT}/dot.svg`} alt="" />
-                <img src={`${ASSET_ROOT}/dot.svg`} alt="" />
+                <img loading="lazy" decoding="async" src={`${ASSET_ROOT}/dot-active.svg`} alt="" />
+                <img loading="lazy" decoding="async" src={`${ASSET_ROOT}/dot.svg`} alt="" />
+                <img loading="lazy" decoding="async" src={`${ASSET_ROOT}/dot.svg`} alt="" />
               </div>
             ) : (
               <div className={styles.sliderPagination} aria-hidden="true" />
@@ -610,7 +610,7 @@ export default function Expertise() {
                 selectedIndex === index ? styles.mobileSelected : undefined
               }
             >
-              <img src={item.src} alt={item.alt} />
+              <img loading="lazy" decoding="async" src={item.src} alt={item.alt} />
               <span>{item.label}</span>
             </button>
           ))}

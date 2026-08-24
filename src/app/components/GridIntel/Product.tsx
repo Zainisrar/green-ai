@@ -33,7 +33,7 @@ const Product = ({ isOpen, onClose, data }: Props) => {
     if (data?.items) {
       return data.items.map((item, index) => (
         <div key={index} className="flex items-start space-x-3">
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/grid-intel/lighting.png"
             className="w-14 -mt-4"
             alt="lighting"
@@ -50,7 +50,7 @@ const Product = ({ isOpen, onClose, data }: Props) => {
     return (
       <>
         <div className="flex items-start space-x-3">
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/grid-intel/lighting.png"
             className="w-14 -mt-4"
             alt="lighting"
@@ -61,7 +61,7 @@ const Product = ({ isOpen, onClose, data }: Props) => {
         </div>
 
         <div className="flex items-start space-x-3">
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/grid-intel/lighting.png"
             className="w-14 -mt-4"
             alt="lighting"
@@ -72,7 +72,7 @@ const Product = ({ isOpen, onClose, data }: Props) => {
         </div>
 
         <div className="flex items-start space-x-3">
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/grid-intel/lighting.png"
             className="w-14 -mt-4"
             alt="lighting"

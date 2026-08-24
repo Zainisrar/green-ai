@@ -70,7 +70,7 @@ export default function ThoughtsLeadership({
       data-node-id="7077:15063"
     >
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.verticalTitle}
         src="/images/thoughts-leadership/thought.png"
         alt="Thought leadership"
@@ -101,7 +101,7 @@ export default function ThoughtsLeadership({
                 key={`${editorial.title}-${index}`}
               >
                 <div className={styles.cardHeading}>
-                  <img src={editorial.image} alt="" />
+                  <img loading="lazy" decoding="async" src={editorial.image} alt="" />
                   <h4>{editorial.title}</h4>
                 </div>
                 <p>{editorial.description}</p>

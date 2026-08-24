@@ -20,7 +20,7 @@ const ContactUs = () => {
 
         {/* Decorative vertical label (desktop only) */}
         <div className="hidden lg:block fixed top-1/4 left-6 z-10">
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/reach-us/reach-us.png"
             className="w-12 xl:w-16"
             alt="contact-us"
@@ -40,7 +40,7 @@ const ContactUs = () => {
               onClick={openForm}
               className="shrink-0 cursor-pointer"
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/reach-us/enquiry.png"
                 alt="Contact Button"
                 className="w-40 sm:w-44 lg:w-48"
@@ -75,12 +75,12 @@ const ContactUs = () => {
 
           {/* Promo Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl">
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/reach-us/transformation.png"
               alt="Transformation Card"
               className="w-full h-auto rounded-lg"
             />
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/reach-us/join-us.png"
               alt="Join Us Card"
               className="w-full h-auto rounded-lg"

@@ -53,7 +53,7 @@ const OpenRoles = ({ isOpen, onClose, data }: Props) => {
             <div className="flex items-start gap-3">
               <div className="flex-shrink-0 mt-1">
                 <span>
-                  <img
+                  <img loading="lazy" decoding="async"
                     src="/images/grid-intel/lighting.png"
                     className="w-14 -mt-4"
                     alt="lighting"

@@ -52,7 +52,7 @@ const TrustedBy = ({ isOpen, onClose }: Props) => {
       <div className="grid grid-cols-2 items-center gap-8 md:grid-cols-4">
         {logos.map((logo, idx) => (
           <div key={idx} className="flex items-center justify-center">
-            <img
+            <img loading="lazy" decoding="async"
               src={logo.src}
               alt={logo.alt}
               className="max-h-20 w-auto object-contain"

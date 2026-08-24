@@ -245,7 +245,7 @@ const SupplyChainRegistration = () => {
         <TopNavigation />
 
         <div className="absolute left-0 top-1/4 -z-10 hidden lg:block">
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/supply-partners/supply-partner.png"
             alt=""
             role="presentation"
@@ -327,7 +327,7 @@ const SupplyChainRegistration = () => {
                     <div className={fieldWrap}>
                       <label className={labelClass}>Country <Required /></label>
                       <div className="flex items-center gap-2 border-b border-gray-300 py-1.5">
-                        <img src="/images/book-consulation/countryCode.png" alt="" className="h-4 w-5" />
+                        <img loading="lazy" decoding="async" src="/images/book-consulation/countryCode.png" alt="" className="h-4 w-5" />
                         <input name="country" value={form.country} onChange={handleChange} className="w-full bg-transparent text-sm text-gray-700 focus:outline-none" required />
                       </div>
                     </div>
@@ -345,7 +345,7 @@ const SupplyChainRegistration = () => {
                     <div className={fieldWrap}>
                       <label className={labelClass}>Under the law of <Required /></label>
                       <div className="flex items-center gap-2 border-b border-gray-300 py-1.5">
-                        <img src="/images/book-consulation/countryCode.png" alt="" className="h-4 w-5" />
+                        <img loading="lazy" decoding="async" src="/images/book-consulation/countryCode.png" alt="" className="h-4 w-5" />
                         <input name="underLawOf" value={form.underLawOf} onChange={handleChange} className="w-full bg-transparent text-sm text-gray-700 focus:outline-none" required />
                       </div>
                     </div>

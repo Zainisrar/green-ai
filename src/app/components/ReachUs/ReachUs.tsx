@@ -93,7 +93,7 @@ export default function ReachUs() {
           style={{ transform: `translateX(-50%) scale(${canvasScale})` }}
           data-node-id="7077:13486"
         >
-          <img
+          <img loading="lazy" decoding="async"
             className={styles.background}
             src="/images/reach-us/bg.jpg"
             alt=""
@@ -105,36 +105,36 @@ export default function ReachUs() {
             away? Let&apos;s connect!
           </p>
 
-          <img
+          <img loading="lazy" decoding="async"
             className={styles.verticalLabel}
             src="/images/reach-us/reach-us.png"
             alt="Reach us"
           />
 
           <div className={styles.mapViewport} data-node-id="7077:13498">
-            <img
+            <img loading="lazy" decoding="async"
               className={styles.map}
               src="/images/reach-us/world-map.png"
               alt="World map showing GREEN global offices"
             />
 
             <div className={styles.pins} aria-hidden="true">
-              <img
+              <img loading="lazy" decoding="async"
                 className={styles.indiaPin}
                 src="/images/reach-us/pin-india.svg"
                 alt=""
               />
-              <img
+              <img loading="lazy" decoding="async"
                 className={styles.pngPin}
                 src="/images/reach-us/pin-png.svg"
                 alt=""
               />
-              <img
+              <img loading="lazy" decoding="async"
                 className={styles.singaporePin}
                 src="/images/reach-us/pin-singapore.svg"
                 alt=""
               />
-              <img
+              <img loading="lazy" decoding="async"
                 className={styles.australiaPin}
                 src="/images/reach-us/pin-australia.svg"
                 alt=""
@@ -160,7 +160,7 @@ export default function ReachUs() {
                     }`}
                   >
                     {isActive && (
-                      <img
+                      <img loading="lazy" decoding="async"
                         className={styles.officeFlag}
                         src={office.flag}
                         alt=""
@@ -187,16 +187,16 @@ export default function ReachUs() {
             aria-label="Open enquiry form"
             data-node-id="7077:13531"
           >
-            <img src="/images/reach-us/enquiry.png" alt="Enquiry" />
+            <img loading="lazy" decoding="async" src="/images/reach-us/enquiry.png" alt="Enquiry" />
           </button>
 
           <div className={styles.sideCards}>
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/reach-us/transformation.png"
               alt="Transformation"
               data-node-id="7077:13537"
             />
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/reach-us/join-us.png"
               alt="Join us"
               data-node-id="7077:13542"
@@ -217,10 +217,10 @@ export default function ReachUs() {
           className={styles.mobileEnquiry}
           onClick={() => setIsFormOpen(true)}
         >
-          <img src="/images/reach-us/enquiry.png" alt="Enquiry" />
+          <img loading="lazy" decoding="async" src="/images/reach-us/enquiry.png" alt="Enquiry" />
         </button>
         <div className={styles.mobileMapFrame}>
-          <img
+          <img loading="lazy" decoding="async"
             className={styles.mobileMap}
             src="/images/reach-us/world-map.png"
             alt="World map showing GREEN global offices"
@@ -239,8 +239,8 @@ export default function ReachUs() {
           </motion.div>
         </div>
         <div className={styles.mobileCards}>
-          <img src="/images/reach-us/transformation.png" alt="Transformation" />
-          <img src="/images/reach-us/join-us.png" alt="Join us" />
+          <img loading="lazy" decoding="async" src="/images/reach-us/transformation.png" alt="Transformation" />
+          <img loading="lazy" decoding="async" src="/images/reach-us/join-us.png" alt="Join us" />
         </div>
         <D6Chatbot />
       </section>

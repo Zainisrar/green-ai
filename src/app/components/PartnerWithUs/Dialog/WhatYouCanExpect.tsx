@@ -35,7 +35,7 @@ const WhatYouCanExpect = ({ isOpen, onClose }: Props) => {
       <div className="grid grid-cols-1 gap-x-10 gap-y-6 md:grid-cols-2">
         {expectations.map((item, idx) => (
           <div key={idx} className="flex items-center gap-3">
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/grid-intel/lighting.png"
               className="w-12 shrink-0"
               alt="lighting"

@@ -51,7 +51,7 @@ const ExpertiseDetail = ({ slug }: ExpertiseDetailProps) => {
 
         {/* Background */}
         <div className="absolute inset-0 w-full overflow-hidden -z-10">
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/expertise/img.png"
             className="object-cover w-full h-full opacity-30"
             alt="mainBg"
@@ -96,7 +96,7 @@ const ExpertiseDetail = ({ slug }: ExpertiseDetailProps) => {
                   {expertise.icons.map((icon, index) => (
                     <div key={index} className="flex space-x-4">
                       <div>
-                        <img
+                        <img loading="lazy" decoding="async"
                   src={icon.img.src}
                   alt={icon.img.alt || icon.title}
                   className="w-28 lg:w-32"
@@ -122,7 +122,7 @@ const ExpertiseDetail = ({ slug }: ExpertiseDetailProps) => {
         {/* Bottom Elements */}
 
         <div className="fixed top-1/3 lg:top-1/4 z-10 left-4 lg:left-10">
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/expertise/SOLUTIONS.png"
             className="w-7 lg:w-12"
             alt="solution"
@@ -130,7 +130,7 @@ const ExpertiseDetail = ({ slug }: ExpertiseDetailProps) => {
         </div>
         <div className="">
           <Link href={`#`} className="flex justify-end cursor-pointer">
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/expertise/letStartBtn.png"
               alt="letStart"
               className="w-32 lg:w-auto"
@@ -141,7 +141,7 @@ const ExpertiseDetail = ({ slug }: ExpertiseDetailProps) => {
           <div className="hidden lg:flex my-20 mt-32 justify-center">
             <div className="flex relative w-full top-12 left-4 justify-end max-w-2xl">
               <div className="absolute left-0 -top-10">
-                <img
+                <img loading="lazy" decoding="async"
                   src={expertise.image}
                   alt={expertise.title || "expertise"}
                   className="rounded-2xl w-32 h-32 object-cover"
@@ -221,7 +221,7 @@ const StackedMobileImages = ({ images }: { images: string[] }) => {
           style = { display: "none" };
         }
         return (
-          <img
+          <img loading="lazy" decoding="async"
             key={i}
             src={src}
             alt={`detail-${i}`}
@@ -280,7 +280,7 @@ const StackedImages = ({ images }: { images: string[] }) => {
             style = { display: "none" };
           }
           return (
-            <img
+            <img loading="lazy" decoding="async"
               key={i}
               src={src}
               alt={`detail-${i}`}
@@ -298,7 +298,7 @@ const StackedImages = ({ images }: { images: string[] }) => {
                 onClick={() => setFront(index)}
                 className="cursor-pointer"
               >
-                <img
+                <img loading="lazy" decoding="async"
                   style={{
                     transform: "skewX(-16deg)",
                   }}
@@ -323,14 +323,14 @@ const StackedImages = ({ images }: { images: string[] }) => {
             }
             aria-label="Previous"
           >
-            <img src="/images/expertise/leftarrow.svg" alt="left" />
+            <img loading="lazy" decoding="async" src="/images/expertise/leftarrow.svg" alt="left" />
           </button>
           <button
             className="cursor-pointer"
             onClick={() => setFront((front + 1) % images.length)}
             aria-label="Next"
           >
-            <img src="/images/expertise/rightarrow.svg" alt="right" />
+            <img loading="lazy" decoding="async" src="/images/expertise/rightarrow.svg" alt="right" />
           </button>
         </div>
       </div>

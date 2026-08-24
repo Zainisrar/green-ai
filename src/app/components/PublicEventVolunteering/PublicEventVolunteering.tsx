@@ -105,7 +105,7 @@ export default function PublicEventVolunteering({
         className={styles.bgWrap}
         aria-hidden="true"
       >
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/public-events-volunteering/mainImg.png"
           alt=""
           className={styles.bgImg}

@@ -14,7 +14,7 @@ const RequestProposal = () => {
         <div className="flex h-full">
           <div className=" lg:w-1/6 hidden lg:flex items-center justify-center">
             <div className=" fixed top-[20%] left-14">
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/book-consulation/book-consulation.png"
                 alt="globalsnapshot"
                 className="w-10"
@@ -119,7 +119,7 @@ const RequestProposal = () => {
                 </div>
               </div>
               <div className="absolute top-0 right-0 -z-10">
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/book-consulation/requestProposalMainImg.png"
                   alt="mainImg"
                 />
@@ -133,7 +133,7 @@ const RequestProposal = () => {
                 <div className="grid md:grid-cols-2 gap-4 mb-8">
                   <div className="flex items-center space-x-3">
                     <span>
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/grid-intel/lighting.png"
                         className="w-14 -mt-4"
                         alt="lighting"
@@ -145,7 +145,7 @@ const RequestProposal = () => {
                   </div>
                   <div className="flex items-center space-x-3">
                     <span>
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/grid-intel/lighting.png"
                         className="w-14 -mt-4"
                         alt="lighting"
@@ -157,7 +157,7 @@ const RequestProposal = () => {
                   </div>
                   <div className="flex items-center space-x-3">
                     <span>
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/grid-intel/lighting.png"
                         className="w-14 -mt-4"
                         alt="lighting"
@@ -170,7 +170,7 @@ const RequestProposal = () => {
 
                   <div className="flex items-center space-x-3">
                     <span>
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/grid-intel/lighting.png"
                         className="w-14 -mt-4"
                         alt="lighting"
@@ -183,7 +183,7 @@ const RequestProposal = () => {
 
                   <div className="flex items-center space-x-3 md:col-span-2">
                     <span>
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/grid-intel/lighting.png"
                         className="w-14 -mt-4"
                         alt="lighting"
@@ -197,7 +197,7 @@ const RequestProposal = () => {
                 <div className="  max-w-xs ">
                   <div className="relative flex items-center ">
                     <div className="absolute -left-12 top-10">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/book-consulation/shape.png"
                         alt="shape"
                         className="w-14"
@@ -214,7 +214,7 @@ const RequestProposal = () => {
                       </p>
                     </div>
                     <div className="absolute -right-8 -top-6">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/book-consulation/shape2.png"
                         alt="shape"
                         className="w-14"
@@ -232,7 +232,7 @@ const RequestProposal = () => {
                 }}
                 className="flex items-center  border-[#f0f9da] p-4 border-3 px-20 space-x-3 ">
                   <span>
-                    <img
+                    <img loading="lazy" decoding="async"
                      style={{
                         transform:"skewX(16deg)"
                      }}
@@ -256,7 +256,7 @@ const RequestProposal = () => {
                   className="relative z-10 flex cursor-pointer justify-end lg:mt-10"
                   onClick={() => setIsProposalOpen(true)}
                 >
-                  <img
+                  <img loading="lazy" decoding="async"
                     src="/images/book-consulation/requestProposal.png"
                     alt="Request proposal"
                   />

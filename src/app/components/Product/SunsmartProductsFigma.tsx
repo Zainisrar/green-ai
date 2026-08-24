@@ -43,24 +43,24 @@ export default function SunsmartProductsFigma() {
 
   const desktop = (
     <main className={styles.desktop} data-node-id="7077:25900">
-      <img className={styles.background} src="/images/product/bg.jpg" alt="" />
+      <img loading="lazy" decoding="async" className={styles.background} src="/images/product/bg.jpg" alt="" />
       <SiteHeader layout="productCanvas" brand="sunsmart" productLogo />
       <div className={styles.sunsmartPrimaryBrand}>
-        <img src="/images/product/green-sunsmart.png" alt={productName} />
+        <img loading="lazy" decoding="async" src="/images/product/green-sunsmart.png" alt={productName} />
       </div>
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.pageTitleImg}
         src="/images/product/title_h1.png"
         alt=""
       />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.verticalTitle}
         src="/images/product/product_vert.png"
         alt=""
       />
 
       <section className={styles.gallery} aria-label={`${productName} gallery`}>
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.hero}
           src={`/images/product/sunsmart/${gallery[active][0]}`}
           alt={gallery[active][1]}
@@ -79,7 +79,7 @@ export default function SunsmartProductsFigma() {
               aria-label={`Show ${productName} product ${index + 1}`}
               aria-pressed={active === index}
             >
-              <img src={`/images/product/sunsmart/${image}`} alt={alt} />
+              <img loading="lazy" decoding="async" src={`/images/product/sunsmart/${image}`} alt={alt} />
             </button>
           ))}
         </div>
@@ -93,7 +93,7 @@ export default function SunsmartProductsFigma() {
       </section>
 
       <section className={styles.story} aria-labelledby="sunsmart-story-title">
-        <img src="/images/product/boxImg.png" alt="" />
+        <img loading="lazy" decoding="async" src="/images/product/boxImg.png" alt="" />
         <h2 id="sunsmart-story-title">
           Lighting Up
           <br />
@@ -110,7 +110,7 @@ export default function SunsmartProductsFigma() {
         className={styles.specifications}
         aria-label="Product specifications"
       >
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.specificationPanel}
           src="/images/product/boxKeyImg.png"
           alt=""
@@ -118,7 +118,7 @@ export default function SunsmartProductsFigma() {
         <div className={styles.specificationList}>
           {specifications.map(([icon, name, detail, duration]) => (
             <article key={name}>
-              <img src={`/images/product/${icon}`} alt="" />
+              <img loading="lazy" decoding="async" src={`/images/product/${icon}`} alt="" />
               <h3>{name}</h3>
               <p>{detail}</p>
               <span>{duration}</span>
@@ -147,12 +147,12 @@ export default function SunsmartProductsFigma() {
       <SiteHeader panel="logoOnly" />
       <div className={styles.mobileContent}>
         <p className={styles.eyebrow}>Products</p>
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.mobileBrand}
           src="/images/product/green-sunsmart.png"
           alt={productName}
         />
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.mobileHero}
           src={`/images/product/sunsmart/${gallery[active][0]}`}
           alt={gallery[active][1]}
@@ -166,7 +166,7 @@ export default function SunsmartProductsFigma() {
               aria-label={`Show ${productName} product ${index + 1}`}
               aria-pressed={active === index}
             >
-              <img src={`/images/product/sunsmart/${image}`} alt="" />
+              <img loading="lazy" decoding="async" src={`/images/product/sunsmart/${image}`} alt="" />
             </button>
           ))}
         </div>

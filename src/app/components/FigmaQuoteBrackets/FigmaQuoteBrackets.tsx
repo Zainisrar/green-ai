@@ -23,7 +23,7 @@ export default function FigmaQuoteBrackets({
   return (
     <span className={`${styles.brackets} ${className}`.trim()} aria-hidden="true">
       {showLeft ? (
-        <img
+        <img loading="lazy" decoding="async"
           src={leftSrc}
           alt=""
           className={styles.left}
@@ -31,7 +31,7 @@ export default function FigmaQuoteBrackets({
         />
       ) : null}
       {showRight ? (
-        <img
+        <img loading="lazy" decoding="async"
           src={rightSrc}
           alt=""
           className={styles.right}

@@ -49,21 +49,21 @@ export default function EpcmServices() {
         highlightActive={false}
         figmaPanelVariant="flagship"
       />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.collage}
         src="/images/solar-epcm/mask_composite_solar.png"
         alt=""
         width="1108"
         height="1297"
       />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.verticalTitle}
         src="/images/solar-epcm/title_vert.png"
         alt=""
         width="82"
         height="698"
       />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.pageTitle}
         src="/images/solar-epcm/title_h1.png"
         alt="Solar EPCM Services"
@@ -96,7 +96,7 @@ export default function EpcmServices() {
               ][i]
             }
           >
-            <img
+            <img loading="lazy" decoding="async"
               className={styles.cardPanel}
               src="/images/solar-epcm/card_panel.png"
               alt=""
@@ -114,7 +114,7 @@ export default function EpcmServices() {
         ))}
       </section>
       <blockquote className={styles.embedQuote}>
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.quotePanel}
           src="/images/solar-epcm/quote_panel.png"
           alt=""

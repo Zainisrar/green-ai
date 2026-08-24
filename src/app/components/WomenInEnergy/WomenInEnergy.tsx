@@ -121,9 +121,9 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
       <main className={styles.canvasPage} data-node-id="7077:19753">
         <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
         <div className={styles.canvasArtwork} aria-hidden="true">
-          <img src="/images/women-in-energy/mainImg.png" alt="" />
+          <img loading="lazy" decoding="async" src="/images/women-in-energy/mainImg.png" alt="" />
         </div>
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.canvasVerticalTitle}
           src="/images/women-in-energy/women-in-energy.png"
           alt="Women in Energy"
@@ -157,19 +157,19 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
               }}
             >
               <h2>{card.title}</h2>
-              <img
+              <img loading="lazy" decoding="async"
                 className={styles.canvasCardFrameStart}
                 src="/images/women-in-energy/shape1.png"
                 alt=""
                 aria-hidden="true"
               />
-              <img
+              <img loading="lazy" decoding="async"
                 className={styles.canvasCardFrameEnd}
                 src="/images/women-in-energy/shape2.png"
                 alt=""
                 aria-hidden="true"
               />
-              <img className={styles.canvasCardImage} src={card.image} alt="" />
+              <img loading="lazy" decoding="async" className={styles.canvasCardImage} src={card.image} alt="" />
               <p className={styles.canvasCardDescription}>{card.description}</p>
               <FigmaAngledCta
                 className={styles.canvasCardCta}
@@ -183,13 +183,13 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
             </div>
           ))}
         </div>
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.canvasQuoteFrameStart}
           src="/images/women-in-energy/figma/quote-frame-left.svg"
           alt=""
           aria-hidden="true"
         />
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.canvasQuoteFrameEnd}
           src="/images/women-in-energy/figma/quote-frame-right.svg"
           alt=""
@@ -259,7 +259,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
       <div className="flex h-full">
         <div className="w-1/6 flex items-center justify-center">
           <div className="fixed top-1/3 left-4 lg:left-14">
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/women-in-energy/women-in-energy.png"
               alt="women-in-energy"
               className="w-6 lg:w-8"
@@ -298,21 +298,21 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                 </h3>
                 <div>
                   <div className="absolute -bottom-8 -left-14">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/women-in-energy/shape1.png"
                       alt="vector"
                       className="w-14"
                     />
                   </div>
                   <div className="absolute -top-2 -right-4">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/women-in-energy/shape2.png"
                       alt="vector"
                       className="w-14"
                     />
                   </div>
                 </div>
-                <img
+                <img loading="lazy" decoding="async"
                   src={cards[0].img}
                   className="w-9/12 mx-auto"
                   alt={data.modal.whyThisMatters.img.alt}
@@ -320,7 +320,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                 <div className="flex justify-between relative space-x-4">
                   <p className="w-6/12 text-xs">{cards[0].description}</p>
                   <button className="absolute bottom-0 right-4">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/women-in-energy/cta.png"
                       className="w-28"
                       alt="Cta"
@@ -339,21 +339,21 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                 </h3>
                 <div>
                   <div className="absolute -bottom-8 -left-14">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/women-in-energy/shape1.png"
                       alt="vector"
                       className="w-14"
                     />
                   </div>
                   <div className="absolute -top-2 -right-4">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/women-in-energy/shape2.png"
                       alt="vector"
                       className="w-14"
                     />
                   </div>
                 </div>
-                <img
+                <img loading="lazy" decoding="async"
                   src={cards[1].img}
                   className="w-9/12 mx-auto"
                   alt={cards[1].description}
@@ -361,7 +361,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                 <div className="flex justify-between relative space-x-4">
                   <p className="w-6/12 text-xs">{cards[1].description}</p>
                   <button className="absolute bottom-0 right-4">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/women-in-energy/cta.png"
                       className="w-28"
                       alt="Cta"
@@ -380,21 +380,21 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                 </h3>
                 <div>
                   <div className="absolute -bottom-8 -left-14">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/women-in-energy/shape1.png"
                       alt="vector"
                       className="w-14"
                     />
                   </div>
                   <div className="absolute -top-2 -right-4">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/women-in-energy/shape2.png"
                       alt="vector"
                       className="w-14"
                     />
                   </div>
                 </div>
-                <img
+                <img loading="lazy" decoding="async"
                   src={cards[2].img}
                   className="w-9/12 mx-auto"
                   alt={cards[2].description}
@@ -402,7 +402,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                 <div className="flex justify-between relative space-x-4">
                   <p className="w-6/12 text-xs">{cards[2].description}</p>
                   <button className="absolute bottom-0 right-4">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/women-in-energy/cta.png"
                       className="w-28"
                       alt="Cta"
@@ -421,21 +421,21 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                 </h3>
                 <div>
                   <div className="absolute -bottom-8 -left-14">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/women-in-energy/shape1.png"
                       alt="vector"
                       className="w-14"
                     />
                   </div>
                   <div className="absolute -top-2 -right-4">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/women-in-energy/shape2.png"
                       alt="vector"
                       className="w-14"
                     />
                   </div>
                 </div>
-                <img
+                <img loading="lazy" decoding="async"
                   src={cards[3].img}
                   className="w-9/12 mx-auto"
                   alt={cards[3].description}
@@ -443,7 +443,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                 <div className="flex justify-between relative space-x-4">
                   <p className="w-6/12 text-xs">{cards[3].description}</p>
                   <button className="absolute bottom-0 right-4">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/women-in-energy/cta.png"
                       className="w-28"
                       alt="Cta"
@@ -454,7 +454,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
             </div>
           </div>
           <div className="absolute  right-0 -z-10">
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/women-in-energy/mainImg.png"
               alt=""
               role="presentation"
@@ -462,10 +462,10 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
           </div>
           <div className="my-20 flex justify-end relative">
             <div className="lg:block hidden absolute -bottom-4 left-[70%]">
-              <img src="/images/women-in-energy/shape1.png" alt="vector" />
+              <img loading="lazy" decoding="async" src="/images/women-in-energy/shape1.png" alt="vector" />
             </div>
             <div className="lg:block hidden absolute -top-8 -right-4">
-              <img src="/images/women-in-energy/shape2.png" alt="vector" />
+              <img loading="lazy" decoding="async" src="/images/women-in-energy/shape2.png" alt="vector" />
             </div>
             <div className=" capitalize lg:text-xl font-bold whitespace-pre-line">
               {data.mainPage.quote1.text}
@@ -487,7 +487,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                     href={data.mainPage.cta[0].href || "#"}
                     className="relative cursor-pointer"
                   >
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/women-in-energy/womenBtn.png"
                       alt={"submit interest"}
                     />
@@ -502,7 +502,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                     onClick={() => setOpenModal("joinNetwork")}
                     className="relative cursor-pointer"
                   >
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/women-in-energy/joinNetworkBtn.png"
                       alt={"join the network"}
                     />

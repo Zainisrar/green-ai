@@ -271,7 +271,7 @@ const SupplyPartners = () => {
     <React.Fragment>
       <div className="   ">
         <div className="absolute top-0 lg:block hidden left-0 lg:left-40">
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/supply-partners/mainImg.png"
             className="w-screen lg:w-auto lg:h-[160vh]"
             alt="bg"
@@ -284,7 +284,7 @@ const SupplyPartners = () => {
           {/* Left Side  */}
           <div className=" hidden  lg:w-1/8  lg:flex items-center justify-center">
             <div className="fixed top-1/3 left-14">
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/supply-partners/supply-partner.png"
                 alt="supply-partner"
                 className="w-10"
@@ -341,7 +341,7 @@ const SupplyPartners = () => {
                   className="relative cursor-pointer flex space-x-2 items-center"
                 >
                   <div className="absolute -left-4">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/supply-partners/shape.png"
                       alt="Global Sourcing Strategy"
                     />
@@ -359,7 +359,7 @@ const SupplyPartners = () => {
                   className="relative flex space-x-2 mt-10  cursor-pointer  items-center"
                 >
                   <div className="absolute -left-8">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/supply-partners/shape.png"
                       alt="Global Sourcing Strategy"
                     />
@@ -377,7 +377,7 @@ const SupplyPartners = () => {
                   className="relative flex space-x-2 mt-10  cursor-pointer  items-center"
                 >
                   <div className="absolute -left-12">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/supply-partners/shape.png"
                       alt="Global Sourcing Strategy"
                     />
@@ -395,7 +395,7 @@ const SupplyPartners = () => {
                   className="relative flex space-x-2 mt-10 cursor-pointer  items-center"
                 >
                   <div className="absolute z-50 -left-16">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/supply-partners/shape.png"
                       alt="Global Sourcing Strategy"
                     />
@@ -411,7 +411,7 @@ const SupplyPartners = () => {
               {/* Right Column - Content */}
               <div className="mb-8 relative mt-16 lg:ml-10 flex space-x-2 items-center">
                 <div className="absolute lg:block hidden -left-20">
-                  <img src="/images/supply-partners/shape1.png" alt="shape" />
+                  <img loading="lazy" decoding="async" src="/images/supply-partners/shape1.png" alt="shape" />
                 </div>
                 {/* Technology Section */}
                 <div className=" ">
@@ -424,7 +424,7 @@ const SupplyPartners = () => {
                 </div>
 
                 <div className="lg:block hidden">
-                  <img src="/images/supply-partners/shape2.png" alt="shape" />
+                  <img loading="lazy" decoding="async" src="/images/supply-partners/shape2.png" alt="shape" />
                 </div>
               </div>
               <div className="lg:w-[500px]">{ActiveItem(activeIndex)}</div>
@@ -461,7 +461,7 @@ const SupplyPartners = () => {
                 className="lg:flex-row flex justify-center my-4  flex-col items-center   lg:justify-start space-y-8 lg:space-x-8 ">
                   {data?.mainPage?.partnerSpotlight?.icons?.map(
                     (icon: PartnerIcon, index: number) => (
-                      <img
+                      <img loading="lazy" decoding="async"
                         key={index}
                         src={icon.src}
                         alt={icon.alt || `Partner logo ${index + 1}`}
@@ -474,27 +474,27 @@ const SupplyPartners = () => {
                     )
                   ) || (
                     <>
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/supply-partners/clenergy.png"
                         alt="Clenergy logo"
                         className="h-12 "
                       />
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/supply-partners/fimer.png"
                         alt="Fimer logo"
                         className="h-12 "
                       />
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/supply-partners/tecnocraft.png"
                         alt="Tecnocraft logo"
                         className="h-25 "
                       />
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/supply-partners/catl.png"
                         alt="CATL logo"
                         className="h-25 "
                       />
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/supply-partners/grace-solar.png"
                         alt="Grace Solar logo"
                         className="h-12 "
@@ -512,7 +512,7 @@ const SupplyPartners = () => {
               href={data?.mainPage?.cta?.[1]?.href || "#"}
               className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/supply-partners/contact-supply-chain-team.png"
                 alt={
                   data?.mainPage?.cta?.[1]?.text || "Contact supply chain team"
@@ -525,7 +525,7 @@ const SupplyPartners = () => {
               href={data?.mainPage?.cta?.[0]?.href || "#"}
               className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/supply-partners/become-supply-partner.png"
                 alt={
                   data?.mainPage?.cta?.[0]?.text || "Become a supply partner"

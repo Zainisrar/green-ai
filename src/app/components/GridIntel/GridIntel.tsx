@@ -48,7 +48,7 @@ export default function GridIntel() {
     "GRID-INTEL™ is GREEN’s proprietary platform that controls, balances, and predicts energy flows across solar, battery, diesel, and grid infrastructure — in real time.";
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:4592">
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.backgroundArt}
         src="/images/grid-intel/collage_mask.png"
         alt=""
@@ -57,7 +57,7 @@ export default function GridIntel() {
         style={{ left: 450 }}
       />
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.verticalTitle}
         src="/images/grid-intel/title_gridintel.png"
         alt=""
@@ -103,14 +103,14 @@ export default function GridIntel() {
         <br />
         Scale Without <span>Uncertainty.</span>
       </p>
-      <img
+      <img loading="lazy" decoding="async"
         className={`${styles.bracket} ${styles.bracketLeft}`}
         src="/images/grid-intel/v_7077_7374.png"
         alt=""
         width="79"
         height="98"
       />
-      <img
+      <img loading="lazy" decoding="async"
         className={`${styles.bracket} ${styles.bracketRight}`}
         src="/images/grid-intel/v_7077_7375.png"
         alt=""
@@ -125,7 +125,7 @@ export default function GridIntel() {
             onClick={() => setOpen(i)}
             className={i === 2 ? styles.active : ""}
           >
-            <img
+            <img loading="lazy" decoding="async"
               src={`/images/grid-intel/v_7077_${[7382, 7377, 7378, 7379, 7380, 7381][i]}.png`}
               alt=""
               width={i === 2 ? 263 : 78}
@@ -137,7 +137,7 @@ export default function GridIntel() {
       </nav>
       <div className={styles.actions}>
         <button type="button" onClick={() => setDeep(true)}>
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/grid-intel/schedule.png"
             alt=""
             width="349"
@@ -146,7 +146,7 @@ export default function GridIntel() {
           <span>Schedule a Technical Deep-Dive</span>
         </button>
         <button type="button" onClick={() => setTeam(true)}>
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/grid-intel/engage.png"
             alt=""
             width="389"
@@ -155,7 +155,7 @@ export default function GridIntel() {
           <span>Engage Our System Architecture Team</span>
         </button>
         <Link href={d?.ctaButtons?.[2]?.href || "#"}>
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/grid-intel/download.png"
             alt=""
             width="459"

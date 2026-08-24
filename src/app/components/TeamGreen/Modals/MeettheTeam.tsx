@@ -235,7 +235,7 @@ const MeettheTeam = ({ isOpen, onClose, data }: Props) => {
                     <div className="">
                       <div className="">
                         <div className={` w-[200px] relative mx-auto lg:mx-0`}>
-                          <img
+                          <img loading="lazy" decoding="async"
                             src={memberImage}
                             alt={memberName}
                             className={`object-cover lg:z-0 z-30 lg:static relative `}
@@ -251,7 +251,7 @@ const MeettheTeam = ({ isOpen, onClose, data }: Props) => {
                             } }
                           />
                          
-                          <img
+                          <img loading="lazy" decoding="async"
                             src="/images/our-team/maskImg.png"
                             alt=""
                             className="absolute top-10 -left-4 w-[200px] z-20 lg:-z-10"
@@ -302,7 +302,7 @@ const MeettheTeam = ({ isOpen, onClose, data }: Props) => {
                     onClick={onClose}
                     className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                   >
-                    <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                    <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                   </button>
                 </div>
               </div>
@@ -328,7 +328,7 @@ const MeettheTeam = ({ isOpen, onClose, data }: Props) => {
                     }}
                     className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
                   >
-                    <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                    <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                   </button>
                 </div>
               </div>

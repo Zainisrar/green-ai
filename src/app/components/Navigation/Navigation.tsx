@@ -160,7 +160,7 @@ export default function Navigation({
         >
           <div className={styles.feature}>
             {featuredChild?.image ? (
-              <img
+              <img loading="lazy" decoding="async"
                 src={featuredChild.image.src}
                 alt={featuredChild.image.alt}
               />

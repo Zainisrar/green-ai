@@ -32,7 +32,7 @@ const TechInfoModal = ({
 
   const imageBlock = (
     <div className="w-full shrink-0 lg:w-5/12">
-      <img
+      <img loading="lazy" decoding="async"
         src={img?.src || fallbackImg}
         alt={img?.alt || title}
         className="h-auto w-full"
@@ -46,7 +46,7 @@ const TechInfoModal = ({
       {keys?.map((k, i) => (
         <div key={i} className="flex items-start gap-3">
           <span className="shrink-0">
-            <img src="/images/grid-intel/lighting.png" className="-mt-3 w-12 sm:w-14" alt="lighting" />
+            <img loading="lazy" decoding="async" src="/images/grid-intel/lighting.png" className="-mt-3 w-12 sm:w-14" alt="lighting" />
           </span>
           <div className="text-sm text-gray-700 sm:text-base">
             <span>{k.text}</span>

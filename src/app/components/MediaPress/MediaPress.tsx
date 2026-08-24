@@ -87,7 +87,7 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
 
       {/* Right faint collage */}
       <div className={styles.rightCollage} aria-hidden="true">
-        <img src="/images/media-press/mainImg.png" alt="" />
+        <img loading="lazy" decoding="async" src="/images/media-press/mainImg.png" alt="" />
       </div>
 
       {/* Header block */}
@@ -172,14 +172,14 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
         onClick={() => setQuoteOpen(true)}
         type="button"
       >
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.ctaQuoteFrame}
           src="/images/media-press/request-quote-appearance-frame.svg"
           alt=""
           aria-hidden="true"
         />
         <span>Request Quote Or Appearance</span>
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.ctaQuoteArrow}
           src="/images/media-press/cta-arrow.svg"
           alt=""

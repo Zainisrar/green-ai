@@ -40,9 +40,9 @@ const Insight24: React.FC<Props> = ({
       className={`solar-home-insight${isHotel ? " solar-home-insight--hotel" : ""}`}
     >
       <div className="solar-home-insight__solar" aria-hidden="true">
-        <img src={backroundImg} alt="" />
+        <img loading="lazy" decoding="async" src={backroundImg} alt="" />
       </div>
-      <img
+      <img loading="lazy" decoding="async"
         className="solar-home-insight__left-shape"
         src="/images/insight1/figma/left-shape-b.svg"
         alt=""
@@ -71,7 +71,7 @@ const Insight24: React.FC<Props> = ({
             className={`solar-home-insight__fact solar-home-insight__fact--${index + 1}`}
             key={index}
           >
-            <img src={point.icon} alt="" />
+            <img loading="lazy" decoding="async" src={point.icon} alt="" />
             <p>{point.text}</p>
           </article>
         ))}
@@ -109,14 +109,14 @@ const Insight24: React.FC<Props> = ({
         type="button"
         aria-label="Open chat"
       >
-        <img
+        <img loading="lazy" decoding="async"
           className="insight-chat__panel"
           src="/images/insight1/figma/chat-panel.svg"
           alt=""
           aria-hidden="true"
         />
         <span className="insight-chat__label">Let’s Talk Energy</span>
-        <img
+        <img loading="lazy" decoding="async"
           className="insight-chat__microphone"
           src="/images/insight1/figma/chat-microphone.svg"
           alt=""

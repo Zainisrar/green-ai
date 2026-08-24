@@ -92,7 +92,7 @@ const OurCultureinAction = ({ isOpen, onClose, data }: Props) => {
               <div key={index} className="flex items-start gap-3">
                 <div className="flex-shrink-0 mt-1">
                   <span>
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/grid-intel/lighting.png"
                       className="w-14 -mt-4"
                       alt="lighting"
@@ -187,7 +187,7 @@ const OurCultureinAction = ({ isOpen, onClose, data }: Props) => {
         </div>
           {data?.img && (
           <div className={`${isMobile ? "w-full" : "w-7/12"}`}>
-            <img
+            <img loading="lazy" decoding="async"
               src={data.img}
               alt="Our Culture in Action"
               className="w-full "
@@ -232,7 +232,7 @@ const OurCultureinAction = ({ isOpen, onClose, data }: Props) => {
                     onClick={onClose}
                     className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                   >
-                    <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                    <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                   </button>
                 </div>
               </div>
@@ -258,7 +258,7 @@ const OurCultureinAction = ({ isOpen, onClose, data }: Props) => {
                     }}
                     className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
                   >
-                    <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                    <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                   </button>
                 </div>
               </div>

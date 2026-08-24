@@ -43,7 +43,7 @@ export default function MediaMentions({ canvas = false }: MediaMentionsProps) {
       data-node-id="7077:5840"
     >
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.verticalTitle}
         src="/images/media-mentions/media-mentions.png"
         alt="Media and mentions"
@@ -70,7 +70,7 @@ export default function MediaMentions({ canvas = false }: MediaMentionsProps) {
                 className={styles.card}
                 key={`${highlight.title}-${index}`}
               >
-                <img src={highlight.image} alt="" />
+                <img loading="lazy" decoding="async" src={highlight.image} alt="" />
                 <div>
                   <h4>{highlight.title}</h4>
                   <p>{highlight.source}</p>

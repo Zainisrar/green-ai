@@ -37,7 +37,7 @@ export default function NewsletterSignup({ canvas = false }: NewsletterSignupPro
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
       {/* Large left collage (Figma mask group) */}
-      <img
+      <img loading="lazy" decoding="async"
         src="/images/newsletter/mainImg.png"
         alt=""
         className={styles.leftCollage}

@@ -110,7 +110,7 @@ const NewsletterSignupModal = ({ isOpen, onClose }: Props) => {
 
         <div className="flex justify-end">
           <button type="submit" disabled={isLoading} className="cursor-pointer disabled:opacity-50">
-            <img src="/images/book-consulation/formBtn.png" className="w-28 sm:w-40" alt="Subscribe" />
+            <img loading="lazy" decoding="async" src="/images/book-consulation/formBtn.png" className="w-28 sm:w-40" alt="Subscribe" />
           </button>
         </div>
       </form>

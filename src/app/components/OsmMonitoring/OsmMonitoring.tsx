@@ -71,7 +71,7 @@ export default function OsmMonitoring() {
 
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:4516">
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.backgroundArt}
         src="/images/osm-monitoring/mainImg.png"
         alt=""
@@ -79,7 +79,7 @@ export default function OsmMonitoring() {
         height="970"
       />
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.verticalTitle}
         src="/images/osm-monitoring/osm.png"
         alt=""
@@ -98,7 +98,7 @@ export default function OsmMonitoring() {
         <h2>{omData?.philosophy?.heading || "Our O&M Philosophy"}</h2>
         {philosophy.slice(0, 3).map((item) => (
           <article key={item.title}>
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/osm-monitoring/lighting.png"
               alt=""
               width="60"
@@ -128,7 +128,7 @@ export default function OsmMonitoring() {
       <section className={styles.services} aria-label="O&M services">
         {services.slice(0, 7).map(([serviceTitle, serviceDescription]) => (
           <article key={serviceTitle}>
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/osm-monitoring/lighting.png"
               alt=""
               width="41"
@@ -141,7 +141,7 @@ export default function OsmMonitoring() {
       </section>
       <div className={styles.actions}>
         <button type="button" onClick={() => setIsOMProposalOpen(true)}>
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/osm-monitoring/request.png"
             alt=""
             width="301"
@@ -153,7 +153,7 @@ export default function OsmMonitoring() {
           <b>›</b>
         </button>
         <button type="button" onClick={() => setIsLiveDemoOpen(true)}>
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/osm-monitoring/book.png"
             alt=""
             width="351"

@@ -84,7 +84,7 @@ export default function KeySupplyCategories({
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
       {/* Existing Figma canvas background artwork */}
-      <img
+      <img loading="lazy" decoding="async"
         src="/images/key-supplier-categories/bg.jpg"
         alt=""
         className={styles.backgroundArtwork}
@@ -92,7 +92,7 @@ export default function KeySupplyCategories({
       />
 
       {/* Vertical Side Title */}
-      <img
+      <img loading="lazy" decoding="async"
         src="/images/key-supplier-categories/figma-vertical-title.svg"
         alt="Key Supply Categories"
         className={styles.verticalTitle}
@@ -152,7 +152,7 @@ export default function KeySupplyCategories({
 
       {/* Left Bottom Quote Block */}
       <div className={styles.leftQuoteBlock}>
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/handbook/figma-quote-left.svg"
           alt=""
           className={styles.quoteShapeLeft}
@@ -163,7 +163,7 @@ export default function KeySupplyCategories({
           <br />
           We Share Stories That Prove What <span className={styles.greenText}>Energy</span> Can Do.
         </p>
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/handbook/figma-quote-right.svg"
           alt=""
           className={styles.quoteShapeRight}

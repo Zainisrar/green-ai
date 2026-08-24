@@ -378,7 +378,7 @@ const Form = ({ isOpen, onClose }: Props) => {
                 disabled={isLoading}
                 className="cursor-pointer flex justify-center disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/book-consulation/formBtn.png"
                   className={`${isMobile ? 'w-32' : 'w-44'}`}
                   alt={isLoading ? "Submitting..." : "submit"}
@@ -422,7 +422,7 @@ const Form = ({ isOpen, onClose }: Props) => {
                   onClick={handleClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-xl"
                 >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" className="w-5 h-5" />
+                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" className="w-5 h-5" />
                 </button>
               </div>
 
@@ -448,7 +448,7 @@ const Form = ({ isOpen, onClose }: Props) => {
                   }}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
                 >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                 </button>
               </div>
               {/* Modal Content */}

@@ -103,7 +103,7 @@ const ClientDashboard = () => {
         <div className="flex items-center gap-2 text-right">
           <span className="text-[10px] text-gray-400">Sites</span>
           <div className="w-16 h-10 overflow-hidden rounded border border-gray-200 relative">
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/client-value-engineering/bg.jpg"
               alt="site"
               className="w-full h-full object-cover"

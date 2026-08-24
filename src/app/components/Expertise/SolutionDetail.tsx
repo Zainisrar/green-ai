@@ -83,7 +83,7 @@ export default function SolutionDetail({
       }
       transition={reduceMotion ? { duration: 0 } : DETAIL_SPRING}
     >
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.detailWatermark}
         src="/images/expertise/SOLUTIONS.png"
         alt=""
@@ -92,19 +92,19 @@ export default function SolutionDetail({
 
       <div className={styles.detailMedia}>
         <div className={styles.detailImageStack} aria-hidden="true">
-          <img
+          <img loading="lazy" decoding="async"
             src={images[(activeImage + 2) % images.length].src}
             alt=""
             className={styles.detailStackBack}
           />
-          <img
+          <img loading="lazy" decoding="async"
             src={images[(activeImage + 1) % images.length].src}
             alt=""
             className={styles.detailStackMiddle}
           />
         </div>
 
-        <img
+        <img loading="lazy" decoding="async"
           key={`${image.src}-backing`}
           className={styles.detailMainBacking}
           src={image.src}
@@ -128,14 +128,14 @@ export default function SolutionDetail({
             onClick={() => changeImage(-1)}
             aria-label={`Previous ${highlightedTitle.toLowerCase()} image`}
           >
-            <img src="/images/expertise/leftarrow.svg" alt="" />
+            <img loading="lazy" decoding="async" src="/images/expertise/leftarrow.svg" alt="" />
           </button>
           <button
             type="button"
             onClick={() => changeImage(1)}
             aria-label={`Next ${highlightedTitle.toLowerCase()} image`}
           >
-            <img src="/images/expertise/rightarrow.svg" alt="" />
+            <img loading="lazy" decoding="async" src="/images/expertise/rightarrow.svg" alt="" />
           </button>
         </div>
 
@@ -151,7 +151,7 @@ export default function SolutionDetail({
               aria-label={`Show ${highlightedTitle.toLowerCase()} image ${index + 1}`}
               aria-pressed={index === activeImage}
             >
-              <img src={thumbnail.src} alt="" />
+              <img loading="lazy" decoding="async" src={thumbnail.src} alt="" />
             </button>
           ))}
         </div>
@@ -167,7 +167,7 @@ export default function SolutionDetail({
         <div className={styles.detailFeatures}>
           {features.map((feature) => (
             <article key={feature.title}>
-              <img src={feature.icon} alt="" />
+              <img loading="lazy" decoding="async" src={feature.icon} alt="" />
               <div>
                 <h3>{feature.title}</h3>
                 <p>{feature.description}</p>
@@ -183,7 +183,7 @@ export default function SolutionDetail({
             onClick={onBack}
             aria-label={`Return from ${activeCategoryLabel}`}
           >
-            <img src={activeCategoryImage} alt="" />
+            <img loading="lazy" decoding="async" src={activeCategoryImage} alt="" />
             <span>{activeCategoryLabel}</span>
           </button>
           {categories.map((category) => (

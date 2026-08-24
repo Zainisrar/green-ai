@@ -72,7 +72,7 @@ const WhyInvestGreen: React.FC<WhyInvestGreenProps> = ({ isOpen, onClose }) => {
           >
             <div className="">
               {item.icon.src ? (
-                <img
+                <img loading="lazy" decoding="async"
                   src={item.icon.src}
                   alt={item.icon.alt}
                   className="w-10"
@@ -110,7 +110,7 @@ const WhyInvestGreen: React.FC<WhyInvestGreenProps> = ({ isOpen, onClose }) => {
                   onClick={onClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                 </button>
               </div>
 
@@ -134,7 +134,7 @@ const WhyInvestGreen: React.FC<WhyInvestGreenProps> = ({ isOpen, onClose }) => {
                   }}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
                 >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                 </button>
               </div>
 

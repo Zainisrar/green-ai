@@ -30,7 +30,7 @@ const WaystoGetInvolved = ({ isOpen, onClose }: Props) => {
                 }}
                 className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
               >
-                <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
               </button>
             </div>
             {/* Modal Content */}
@@ -52,7 +52,7 @@ const WaystoGetInvolved = ({ isOpen, onClose }: Props) => {
                 {/* Clean Energy Campaigns */}
                 <div className="flex ">
                   <div className="w-96">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/public-events-volunteering/clean-energy-campaigns.png"
                       alt="Clean Energy Campaigns"
                     />
@@ -65,7 +65,7 @@ const WaystoGetInvolved = ({ isOpen, onClose }: Props) => {
                       Awareness drives, solar literacy, rural connections
                     </p>
                     <button className="flex justify-end w-full">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/global-snapshot/exploreBtn.png"
                         alt="explore"
                         className="w-28 "
@@ -77,7 +77,7 @@ const WaystoGetInvolved = ({ isOpen, onClose }: Props) => {
 
                 <div className="flex ">
                   <div className="w-96">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/public-events-volunteering/school-campus-outreach.png"
                       alt="Clean Energy Campaigns"
                     />
@@ -90,7 +90,7 @@ const WaystoGetInvolved = ({ isOpen, onClose }: Props) => {
                       STEM sessions, hands-on tech demos, GreenTalks
                     </p>
                     <button className="flex justify-end w-full">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/global-snapshot/exploreBtn.png"
                         alt="explore"
                         className="w-28 "
@@ -102,7 +102,7 @@ const WaystoGetInvolved = ({ isOpen, onClose }: Props) => {
 
                 <div className="flex mt-10 ">
                   <div className="w-96">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/public-events-volunteering/community-volunteer-days.png"
                       alt="Clean Energy Campaigns"
                     />
@@ -116,7 +116,7 @@ const WaystoGetInvolved = ({ isOpen, onClose }: Props) => {
                       cleanup
                     </p>
                     <button className="flex justify-end w-full">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/global-snapshot/exploreBtn.png"
                         alt="explore"
                         className="w-28 "
@@ -128,7 +128,7 @@ const WaystoGetInvolved = ({ isOpen, onClose }: Props) => {
 
                 <div className="flex mt-10 ">
                   <div className="w-96">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/public-events-volunteering/energy-advocacy.png"
                       alt="Clean Energy Campaigns"
                     />
@@ -142,7 +142,7 @@ const WaystoGetInvolved = ({ isOpen, onClose }: Props) => {
                       cleanup
                     </p>
                     <button className="flex justify-end w-full">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/global-snapshot/exploreBtn.png"
                         alt="explore"
                         className="w-28 "
@@ -154,7 +154,7 @@ const WaystoGetInvolved = ({ isOpen, onClose }: Props) => {
 
                 <div className="flex mt-10 ">
                   <div className="w-96">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/public-events-volunteering/events-exhibitions.png"
                       alt="Clean Energy Campaigns"
                     />
@@ -167,7 +167,7 @@ const WaystoGetInvolved = ({ isOpen, onClose }: Props) => {
                       Attend GREEN public expos, launch days, and energy fairs
                     </p>
                     <button className="flex justify-end w-full">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/global-snapshot/exploreBtn.png"
                         alt="explore"
                         className="w-28 "

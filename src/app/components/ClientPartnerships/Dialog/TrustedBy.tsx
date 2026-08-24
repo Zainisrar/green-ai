@@ -61,7 +61,7 @@ const TrustedBy = ({ isOpen, onClose, data }: Props) => {
 
       <div className="grid grid-cols-2 items-center justify-items-center gap-8 md:grid-cols-3">
         {icons.map((icon, idx) => (
-          <img
+          <img loading="lazy" decoding="async"
             key={idx}
             src={icon.src}
             alt={icon.alt}

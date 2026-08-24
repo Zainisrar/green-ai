@@ -71,7 +71,7 @@ const GreenInTheNews: React.FC<GreenInTheNewsProps> = ({ isOpen, onClose }) => {
             className="flex"
           >
             <div className="relative ">
-              <img
+              <img loading="lazy" decoding="async"
                 src={item.image}
                 alt={item.title}
                 className=" object-cover"
@@ -85,7 +85,7 @@ const GreenInTheNews: React.FC<GreenInTheNewsProps> = ({ isOpen, onClose }) => {
                 {item.title}
               </h3>
               <span title="Article link unavailable" className="inline-block opacity-50">
-                <img src="/images/media-press/ctanews.png" className="w-32" alt="Article link unavailable" />
+                <img loading="lazy" decoding="async" src="/images/media-press/ctanews.png" className="w-32" alt="Article link unavailable" />
               </span>
             </div>
           </div>
@@ -109,7 +109,7 @@ const GreenInTheNews: React.FC<GreenInTheNewsProps> = ({ isOpen, onClose }) => {
                   onClick={onClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                 </button>
               </div>
 
@@ -133,7 +133,7 @@ const GreenInTheNews: React.FC<GreenInTheNewsProps> = ({ isOpen, onClose }) => {
                   }}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
                 >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                 </button>
               </div>
 

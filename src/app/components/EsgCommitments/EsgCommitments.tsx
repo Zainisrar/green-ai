@@ -76,7 +76,7 @@ function EsgPillar({ section, index, mobile = false }: PillarProps) {
       className={`${styles.pillar} ${mobile ? styles.mobilePillar : ""}`}
       data-node-id={section.nodeId}
     >
-      <img className={styles.cardShape} src={section.card} alt="" />
+      <img loading="lazy" decoding="async" className={styles.cardShape} src={section.card} alt="" />
       <div className={styles.pillarContent}>
         <h2>{section.heading}</h2>
         <p>{section.intro}</p>
@@ -86,7 +86,7 @@ function EsgPillar({ section, index, mobile = false }: PillarProps) {
           ))}
         </ul>
       </div>
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.pillarIcon}
         src={section.icon}
         alt=""
@@ -117,7 +117,7 @@ export default function EsgCommitments() {
 
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:6707">
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.background}
         src="/images/esg-commitments/mask_composite.png"
         alt=""
@@ -125,7 +125,7 @@ export default function EsgCommitments() {
         height="1297"
       />
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.verticalTitle}
         src="/images/esg-commitments/title_vert.png"
         alt=""
@@ -133,7 +133,7 @@ export default function EsgCommitments() {
         width="49"
         height="837"
       />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.pageTitle}
         src="/images/esg-commitments/title_h1.png"
         alt="Sustainability & ESG Commitments"
@@ -155,7 +155,7 @@ export default function EsgCommitments() {
           “
         </span>
       </blockquote>
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.tomorrowPanel}
         src="/images/esg-commitments/tomorrow_panel.png"
         alt=""

@@ -129,14 +129,14 @@ export default function InvestorRelations({
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
       {/* Left vertical side title */}
-      <img
+      <img loading="lazy" decoding="async"
         src="/images/investor-relations/investor-relations.png"
         alt="Investor Relations"
         className={styles.verticalTitle}
       />
 
       {/* Faint right-side photo collage (baked from Figma render) */}
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.rightCollageImg}
         src="/images/investor-relations/collage.png"
         alt=""
@@ -168,7 +168,7 @@ export default function InvestorRelations({
             onClick={() => setOpenModal(row.key)}
             aria-label={`Open ${row.title}`}
           >
-            <img src={row.image} alt={row.title} />
+            <img loading="lazy" decoding="async" src={row.image} alt={row.title} />
             <span
               className={styles.rowBracket}
               aria-hidden="true"
@@ -212,13 +212,13 @@ export default function InvestorRelations({
       ))}
 
       {/* Right quote card */}
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.quoteBracketL}
         src="/images/rfp/quote_bracket_l.png"
         alt=""
         aria-hidden="true"
       />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.quoteBracketR}
         src="/images/rfp/quote_bracket_r.png"
         alt=""

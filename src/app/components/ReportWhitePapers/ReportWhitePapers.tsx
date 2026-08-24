@@ -132,7 +132,7 @@ export default function ReportWhitePapers({
   return (
     <main className={styles.page} data-node-id="7077:5298">
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.verticalTitle}
         src="/images/reports/reports.png"
         alt="Reports and Whitepapers"
@@ -168,7 +168,7 @@ export default function ReportWhitePapers({
                   onClick={() => setView("list")}
                   aria-label="List view"
                 >
-                  <img src="/images/reports/threeBar.png" alt="" />
+                  <img loading="lazy" decoding="async" src="/images/reports/threeBar.png" alt="" />
                 </button>
                 <button
                   type="button"
@@ -176,7 +176,7 @@ export default function ReportWhitePapers({
                   onClick={() => setView("grid")}
                   aria-label="Grid view"
                 >
-                  <img src="/images/reports/grid.png" alt="" />
+                  <img loading="lazy" decoding="async" src="/images/reports/grid.png" alt="" />
                 </button>
               </div>
             </div>
@@ -193,7 +193,7 @@ export default function ReportWhitePapers({
               <div className={styles.cards}>
                 {visibleReports.map((report) => (
                   <article className={styles.card} key={report.id}>
-                    <img
+                    <img loading="lazy" decoding="async"
                       className={styles.cardImage}
                       src={report.image}
                       alt=""
@@ -234,7 +234,7 @@ export default function ReportWhitePapers({
               ))}
             </div>
             <div className={styles.quote}>
-              <img
+              <img loading="lazy" decoding="async"
                 className={styles.quoteLeft}
                 src="/images/reports/shape1.png"
                 alt=""
@@ -244,7 +244,7 @@ export default function ReportWhitePapers({
                 <br />
                 We Build <strong>Evidence.</strong>
               </p>
-              <img
+              <img loading="lazy" decoding="async"
                 className={styles.quoteRight}
                 src="/images/reports/shape2.png"
                 alt=""
@@ -274,14 +274,14 @@ function ReportActions({ report }: { report: Report }) {
   return (
     <div className={styles.actions}>
       <a href={href} download={Boolean(report.href)}>
-        <img src="/images/reports/download.png" alt="Download report" />
+        <img loading="lazy" decoding="async" src="/images/reports/download.png" alt="Download report" />
       </a>
       <a
         href={href}
         target={report.href ? "_blank" : undefined}
         rel={report.href ? "noopener noreferrer" : undefined}
       >
-        <img src="/images/reports/view.png" alt="View report" />
+        <img loading="lazy" decoding="async" src="/images/reports/view.png" alt="View report" />
       </a>
     </div>
   );

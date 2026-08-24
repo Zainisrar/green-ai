@@ -70,7 +70,7 @@ const IndustryAffiliationsCertifications = () => {
     <React.Fragment>
       <div className=" ">
         <div className="absolute lg:block hidden -z-10 top-0 right-0">
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/industry-affiliations-certifications/mainImg.png"
             alt="mainImg"
             className=" h-[140vh]"
@@ -81,7 +81,7 @@ const IndustryAffiliationsCertifications = () => {
           {/* Left Side  */}
           <div className="w-1/6 flex items-center justify-center">
             <div className="fixed top-1/4 left-4 lg:left-14">
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/industry-affiliations-certifications/industry-affiliations-certifications.png"
                 alt="Industry Affiliations & Certifications"
                 className="w-4 lg:w-6"
@@ -146,7 +146,7 @@ const IndustryAffiliationsCertifications = () => {
                     onClick={handleWhyCertOpen}
                     className="cursor-pointer"
                   >
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/collaboration-innovation/explore.png"
                       alt="explore"
                     />
@@ -168,7 +168,7 @@ const IndustryAffiliationsCertifications = () => {
                     onClick={handleOurCurrentCertOpen}
                     className="cursor-pointer"
                   >
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/collaboration-innovation/explore.png"
                       alt="explore"
                     />
@@ -190,7 +190,7 @@ const IndustryAffiliationsCertifications = () => {
                     onClick={handleIndustryAffiliationsOpen}
                     className="cursor-pointer"
                   >
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/collaboration-innovation/explore.png"
                       alt="explore"
                     />
@@ -212,7 +212,7 @@ const IndustryAffiliationsCertifications = () => {
                     onClick={handleWhatThisMeansForClientsOpen}
                     className="cursor-pointer"
                   >
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/collaboration-innovation/explore.png"
                       alt="explore"
                     />
@@ -258,7 +258,7 @@ const IndustryAffiliationsCertifications = () => {
             <div className="  flex justify-end  cursor-pointer">
               {mainPage?.cta?.[0]?.href ? (
                 <Link href={mainPage.cta[0].href}>
-                  <img
+                  <img loading="lazy" decoding="async"
                     src="/images/industry-affiliations-certifications/green.png"
                     alt={
                       mainPage?.cta?.[0]?.text || "GREEN Certification Dossier"
@@ -267,7 +267,7 @@ const IndustryAffiliationsCertifications = () => {
                   />
                 </Link>
               ) : (
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/industry-affiliations-certifications/green.png"
                   alt="GREEN Certification Dossier"
                 />
@@ -279,7 +279,7 @@ const IndustryAffiliationsCertifications = () => {
                 onClick={() => setIsIndividualCertOpen(true)}
                 className="cursor-pointer hover:opacity-80 transition-opacity"
               >
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/industry-affiliations-certifications/individual.png"
                   alt={
                     mainPage?.cta?.[1]?.text ||

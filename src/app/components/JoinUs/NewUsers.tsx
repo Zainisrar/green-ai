@@ -109,7 +109,7 @@ export default function NewUsers({ isOpen, onClose }: Props) {
               onClick={() => setShowPassword((current) => !current)}
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
-              <img src="/images/join-us/arrow.png" alt="" />
+              <img loading="lazy" decoding="async" src="/images/join-us/arrow.png" alt="" />
             </button>
           </label>
 
@@ -133,7 +133,7 @@ export default function NewUsers({ isOpen, onClose }: Props) {
             />
             <label className={styles.fieldShape} htmlFor="resume-upload">
               <span>{resume?.name || "RESUME UPLOAD"}</span>
-              <img src="/images/join-us/upload.png" alt="" />
+              <img loading="lazy" decoding="async" src="/images/join-us/upload.png" alt="" />
             </label>
             <p>
               (Formats: <strong>PDF/DOC</strong>, Size:{" "}
@@ -153,7 +153,7 @@ export default function NewUsers({ isOpen, onClose }: Props) {
           </label>
 
           <button type="submit" className={styles.sendButton}>
-            <img src="/images/join-us/send.png" alt="Send" />
+            <img loading="lazy" decoding="async" src="/images/join-us/send.png" alt="Send" />
           </button>
         </form>
       </div>

@@ -132,7 +132,7 @@ export default function FastFactStats() {
 
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:6529">
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.rightImage}
         src="/images/facts/lgImage.png"
         alt=""
@@ -141,7 +141,7 @@ export default function FastFactStats() {
       <h1 className={styles.pageTitle} data-node-id="7077:6542">
         Fast <strong>Facts</strong> <span>&amp; Stats</span>
       </h1>
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.watermark}
         src="/images/facts/fast-facts-stats.png"
         alt=""
@@ -157,7 +157,7 @@ export default function FastFactStats() {
             key={block.title}
             data-node-id={`7077:${6572 + index}`}
           >
-            <img src={block.image} alt="" />
+            <img loading="lazy" decoding="async" src={block.image} alt="" />
             <div>
               <h2>{block.title}</h2>
               {block.lines.map(([value, text]) => (
@@ -172,7 +172,7 @@ export default function FastFactStats() {
       <section className={styles.impactCards} aria-label="Impact summary">
         {cards.map((card, index) => (
           <article key={card.title} data-node-id={`7077:${6530 + index}`}>
-            <img src="/images/facts/figma-impact-card.svg" alt="" />
+            <img loading="lazy" decoding="async" src="/images/facts/figma-impact-card.svg" alt="" />
             <div>
               <strong>{card.title}</strong>
               {index === 3 ? <small>tones annually</small> : null}
@@ -183,7 +183,7 @@ export default function FastFactStats() {
         ))}
       </section>
       <section className={styles.quoteBox} data-node-id="7077:6554">
-        <img src="/images/facts/figma-real-impact.svg" alt="" />
+        <img loading="lazy" decoding="async" src="/images/facts/figma-real-impact.svg" alt="" />
         <h2>
           {impactWordStart >= 0
             ? quoteHeadline.slice(0, impactWordStart)
@@ -232,7 +232,7 @@ export default function FastFactStats() {
           onClick={() => setIsConnectOpen(true)}
           data-node-id="7077:6563"
         >
-          <img src="/images/facts/connectwithgreen.png" alt="" />
+          <img loading="lazy" decoding="async" src="/images/facts/connectwithgreen.png" alt="" />
           <span>
             {impactSummarySection?.cta[0]?.text || "Connect with GREEN"}
           </span>
@@ -242,7 +242,7 @@ export default function FastFactStats() {
           href={impactSummarySection?.cta[1]?.link || "#"}
           data-node-id="7077:6569"
         >
-          <img src="/images/facts/downloadimpactsummary.png" alt="" />
+          <img loading="lazy" decoding="async" src="/images/facts/downloadimpactsummary.png" alt="" />
           <span>
             {impactSummarySection?.cta[1]?.text || "Download Impact Summary"}
           </span>
@@ -266,7 +266,7 @@ export default function FastFactStats() {
   const mobile = (
     <main className={styles.mobilePage} data-node-id="7077:6529-mobile">
       <SiteHeader panel="logoOnly" />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.mobileImage}
         src="/images/facts/fast-facts-stats-mbImg.png"
         alt=""
@@ -277,7 +277,7 @@ export default function FastFactStats() {
         <p className={styles.mobileIntro}>{description}</p>
         {factBlocks.map((block) => (
           <article className={styles.mobileFact} key={block.title}>
-            <img src={block.image} alt="" />
+            <img loading="lazy" decoding="async" src={block.image} alt="" />
             <div>
               <h3>{block.title}</h3>
               {block.lines.map(([value, text]) => (

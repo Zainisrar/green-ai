@@ -52,13 +52,13 @@ export default function Vision() {
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:6846">
       <div className={styles.eyeArtwork} aria-hidden="true">
-        <img src="/images/our-vision/figma-eye.png" alt="" />
+        <img loading="lazy" decoding="async" src="/images/our-vision/figma-eye.png" alt="" />
       </div>
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
       <h1 className={styles.pageTitle} data-node-id="7077:6867">
         {titleStart}:<span>{titleEnd.trim()}</span>
       </h1>
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.watermark}
         src="/images/our-vision/vision.png"
         alt=""
@@ -68,12 +68,12 @@ export default function Vision() {
         className={`${styles.card} ${styles.visionCard}`}
         data-node-id="7077:6847"
       >
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.cardShape}
           src="/images/our-vision/figma-vision-card.svg"
           alt=""
         />
-        <img className={styles.cardIcon} src={vision.icon} alt="" />
+        <img loading="lazy" decoding="async" className={styles.cardIcon} src={vision.icon} alt="" />
         <h2>{vision.title}</h2>
         <p className={styles.description}>{vision.description}</p>
         <p className={styles.quote}>
@@ -87,12 +87,12 @@ export default function Vision() {
         className={`${styles.card} ${styles.missionCard}`}
         data-node-id="7077:6848"
       >
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.cardShape}
           src="/images/our-vision/figma-mission-card.svg"
           alt=""
         />
-        <img className={styles.cardIcon} src={mission.icon} alt="" />
+        <img loading="lazy" decoding="async" className={styles.cardIcon} src={mission.icon} alt="" />
         <h2>{mission.title}</h2>
         <p className={styles.description}>{mission.description}</p>
         <p className={styles.quote}>
@@ -127,7 +127,7 @@ export default function Vision() {
   const mobile = (
     <main className={styles.mobilePage} data-node-id="7077:6885-mobile">
       <SiteHeader panel="logoOnly" />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.mobileEye}
         src="/images/our-vision/mainImg.png"
         alt=""
@@ -139,7 +139,7 @@ export default function Vision() {
         {[vision, mission].map((item) => (
           <article key={item.title}>
             <div>
-              <img src={item.icon} alt="" />
+              <img loading="lazy" decoding="async" src={item.icon} alt="" />
               <h2>{item.title}</h2>
             </div>
             <p>{item.description}</p>

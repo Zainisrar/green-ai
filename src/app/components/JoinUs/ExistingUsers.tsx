@@ -74,7 +74,7 @@ export default function ExistingUsers({ isOpen, onClose }: Props) {
           </label>
 
           <button type="submit" className={styles.imageSubmit}>
-            <img src="/images/join-us/login.png" alt="Login" />
+            <img loading="lazy" decoding="async" src="/images/join-us/login.png" alt="Login" />
           </button>
 
           <p className={styles.resetCopy}>

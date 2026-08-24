@@ -57,7 +57,7 @@ const PartnerwithUs = ({ isOpen, onClose }: Props) => {
                     onClick={onClose}
                     className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                   >
-                    <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                    <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                   </button>
                 </div>
               </div>
@@ -87,7 +87,7 @@ const PartnerwithUs = ({ isOpen, onClose }: Props) => {
                       <div key={idx} className="flex items-start gap-3">
                         <div className="flex-shrink-0 mt-1">
                           <span>
-                            <img
+                            <img loading="lazy" decoding="async"
                               src="/images/grid-intel/lighting.png"
                               className="w-14 -mt-4"
                               alt="lighting"
@@ -105,7 +105,7 @@ const PartnerwithUs = ({ isOpen, onClose }: Props) => {
 
                   {/* Right Column - Image */}
                   <div className="w-full lg:w-6/12">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={modalData.img.src}
                       alt={modalData.img.alt}
                       className="w-full rounded-lg"
@@ -138,7 +138,7 @@ const PartnerwithUs = ({ isOpen, onClose }: Props) => {
                     }}
                     className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
                   >
-                    <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                    <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                   </button>
                 </div>
               </div>
@@ -172,7 +172,7 @@ const PartnerwithUs = ({ isOpen, onClose }: Props) => {
                       <div key={idx} className="flex items-start gap-3">
                         <div className="flex-shrink-0 mt-1">
                           <span>
-                            <img
+                            <img loading="lazy" decoding="async"
                               src="/images/grid-intel/lighting.png"
                               className="w-14 -mt-4"
                               alt="lighting"
@@ -190,7 +190,7 @@ const PartnerwithUs = ({ isOpen, onClose }: Props) => {
 
                   {/* Right Column - Image */}
                   <div className="w-6/12">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={modalData.img.src}
                       alt={modalData.img.alt}
                       className="w-full rounded-lg"

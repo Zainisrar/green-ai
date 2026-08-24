@@ -91,7 +91,7 @@ const BecomeASupplier = () => {
                   className="group flex h-36 items-stretch overflow-hidden border border-[#a3d977] bg-gradient-to-r from-[#23B14D]/10 to-[#FFFE50]/10 text-left shadow-sm transition hover:shadow-md hover:brightness-[1.02]"
                   style={{ clipPath: "polygon(5% 0, 100% 0, 95% 100%, 0 100%)" }}
                 >
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={card.image}
                     alt={card.title}
                     className="h-full w-2/5 shrink-0 object-cover"

@@ -424,7 +424,7 @@ const FigmaLayer = ({
   height: number;
   z: number;
 }) => (
-  <img
+  <img loading="lazy" decoding="async"
     src={src}
     alt=""
     role="presentation"
@@ -520,14 +520,14 @@ const D6Template = (_props: D6TemplateProps) => {
         <SiteHeader panel="logoOnly" />
         {/* Exact image aspect → diagonals land at fixed % on every device (no object-cover crop) */}
         <div className="relative w-screen overflow-hidden aspect-[360/800]">
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/d6/mobileBg.png"
             alt=""
             role="presentation"
             className="absolute inset-0 -z-10 h-full w-full"
           />
           <div className="mt-4">
-            <img src="/images/d6/greenFuture.png" alt="" role="presentation" />
+            <img loading="lazy" decoding="async" src="/images/d6/greenFuture.png" alt="" role="presentation" />
           </div>
           {/* G hidden. Each image: one letter on the left, its heading at the top-right inside. */}
           <div className="pointer-events-none absolute inset-0 z-0">
@@ -596,7 +596,7 @@ const D6Template = (_props: D6TemplateProps) => {
               imgHeight?: number;
             };
             return (
-              <img
+              <img loading="lazy" decoding="async"
                 key={`panel-${i}`}
                 src={layer.src}
                 alt=""
@@ -619,7 +619,7 @@ const D6Template = (_props: D6TemplateProps) => {
             );
           })}
           {FIGMA_LAYERS.diagonals.map((layer, i) => (
-            <img
+            <img loading="lazy" decoding="async"
               key={`diag-${i}`}
               src={layer.src}
               alt=""
@@ -641,7 +641,7 @@ const D6Template = (_props: D6TemplateProps) => {
               move with the shared gentle transition below. */}
           <div className="d6-live-art" aria-hidden="true">
             {EXPANDED_STATE_ART.map((state) => (
-              <img
+              <img loading="lazy" decoding="async"
                 key={state.panel}
                 src={state.src}
                 alt=""
@@ -687,7 +687,7 @@ const D6Template = (_props: D6TemplateProps) => {
                 opacity: expandedPanel === 1 || i === 0 ? 1 : 0,
               }}
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src={letter.src}
                 alt=""
                 role="presentation"
@@ -824,7 +824,7 @@ const D6Template = (_props: D6TemplateProps) => {
 
           <div className="d6-fixed-right-wedge" aria-hidden="true" />
           <div className="group-1171280893" style={{ zIndex: 20 }}>
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/d6/companysnapshot.png"
               alt="Company snapshots in 90 seconds"
               className="company-snapshots-art"

@@ -67,7 +67,7 @@ const WhyWorkWithGreen = ({ isOpen, onClose, data }: Props) => {
         {data?.icons?.map((icon, index) => (
           <div key={index} className="flex items-start gap-4">
             <div className="flex-shrink-0">
-              <img
+              <img loading="lazy" decoding="async"
                 src={icon.img.src}
                 alt={icon.img.alt}
                 className="w-12 h-12"

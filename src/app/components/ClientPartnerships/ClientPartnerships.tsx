@@ -135,7 +135,7 @@ export default function ClientPartnerships({
 
       {/* Right-side photo collage (Mask group at 1063,-59, 1003×2134) */}
       <div className={styles.rightCollage} aria-hidden="true">
-        <img src="/images/client-partnerships/mask_composite.png" alt="" />
+        <img loading="lazy" decoding="async" src="/images/client-partnerships/mask_composite.png" alt="" />
       </div>
 
       {/* Header section */}
@@ -212,14 +212,14 @@ export default function ClientPartnerships({
 
       {/* Bracketed statement (Vectors 7374 / 7375) */}
       <div className={styles.statementBlock}>
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/client-partnerships/quote_left.png"
           alt=""
           className={styles.statementBracketLeft}
           aria-hidden="true"
         />
         <p className={styles.statementText}>{d.statement}</p>
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/client-partnerships/quote_right.png"
           alt=""
           className={styles.statementBracketRight}

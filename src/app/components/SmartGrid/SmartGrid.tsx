@@ -61,7 +61,7 @@ export default function SmartGrid() {
 
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:6475">
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.backgroundArt}
         src="/images/smart-grid/mainImg.png"
         alt=""
@@ -69,7 +69,7 @@ export default function SmartGrid() {
         height="970"
       />
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.verticalTitle}
         src="/images/smart-grid/smard-grid.png"
         alt=""
@@ -115,7 +115,7 @@ export default function SmartGrid() {
       </p>
       <div className={styles.actions}>
         <button type="button" onClick={() => setIsDispatchArchitectOpen(true)}>
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/smart-grid/talk.png"
             alt=""
             width="341"
@@ -128,7 +128,7 @@ export default function SmartGrid() {
           <b aria-hidden="true">›</b>
         </button>
         <button type="button" onClick={() => setIsStorageReviewOpen(true)}>
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/smart-grid/book.png"
             alt=""
             width="351"
@@ -141,7 +141,7 @@ export default function SmartGrid() {
           <b aria-hidden="true">›</b>
         </button>
         <Link href={smartGridData?.callToActions?.[2]?.href || "#"}>
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/smart-grid/download.png"
             alt=""
             width="441"

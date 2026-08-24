@@ -219,7 +219,7 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
               >
                 <div className="mb-[1.5dvh] flex h-[clamp(48px,7vw,135px)] w-[clamp(48px,7vw,135px)] items-center justify-center">
                   {typeof key.icon === "string" ? (
-                    <img
+                    <img loading="lazy" decoding="async"
                       className="max-h-full max-w-full object-contain filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
                       src={key.icon}
                       alt="icon"

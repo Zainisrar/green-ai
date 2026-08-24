@@ -60,7 +60,7 @@ const ProcurementNotes = ({ isOpen, onClose }: Props) => {
           >
             {!isMobile && (
               <div className="flex-shrink-0 mt-1">
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/grid-intel/lighting.png"
                   className="w-10 lg:w-14 -mt-2 lg:-mt-4"
                   alt="lighting"
@@ -102,7 +102,7 @@ const ProcurementNotes = ({ isOpen, onClose }: Props) => {
                   onClick={onClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                 </button>
               </div>
 
@@ -127,7 +127,7 @@ const ProcurementNotes = ({ isOpen, onClose }: Props) => {
                   }}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
                 >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                 </button>
               </div>
 

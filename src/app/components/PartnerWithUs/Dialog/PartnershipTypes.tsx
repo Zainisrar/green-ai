@@ -50,7 +50,7 @@ const PartnershipTypes = ({ isOpen, onClose }: Props) => {
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         {types.map((type, idx) => (
           <div key={idx} className="flex items-start gap-4">
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/grid-intel/lighting.png"
               className="-mt-3 w-12 shrink-0"
               alt="lighting"

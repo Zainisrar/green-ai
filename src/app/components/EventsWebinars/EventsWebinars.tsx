@@ -56,7 +56,7 @@ export default function EventsWebinars({
       data-node-id="7080:57600"
     >
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.verticalTitle}
         src="/images/events/events.png"
         alt="Events and Webinars"
@@ -77,17 +77,17 @@ export default function EventsWebinars({
           <div className={styles.grid}>
             {cards.map((event, index) => (
               <article className={styles.card} key={`${event.title}-${index}`}>
-                <img className={styles.cardImage} src={event.image} alt="" />
+                <img loading="lazy" decoding="async" className={styles.cardImage} src={event.image} alt="" />
                 <div className={styles.cardBody}>
                   <h4>{event.title}</h4>
                   <p>{event.description}</p>
                   <div className={styles.metadata}>
                     <span>
-                      <img src="/images/events/calendar.png" alt="" />
+                      <img loading="lazy" decoding="async" src="/images/events/calendar.png" alt="" />
                       {event.date}
                     </span>
                     <span>
-                      <img src="/images/events/location.png" alt="" />
+                      <img loading="lazy" decoding="async" src="/images/events/location.png" alt="" />
                       Port Moresby
                     </span>
                   </div>

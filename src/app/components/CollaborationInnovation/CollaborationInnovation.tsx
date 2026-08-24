@@ -96,7 +96,7 @@ export default function CollaborationInnovation({
 
       {/* Left green/yellow angled panel (Group 1171277870, 326×662 at -15,-1) */}
       <div className={styles.leftPanel} aria-hidden="true" />
-      <img
+      <img loading="lazy" decoding="async"
         src="/images/collaboration-innovation/logo_green.png"
         alt="GREEN Future: Envisioned"
         className={styles.panelLogo}
@@ -107,7 +107,7 @@ export default function CollaborationInnovation({
 
       {/* Faint left collage (Mask group at -472,408, 1152×1888) */}
       <div className={styles.leftCollage} aria-hidden="true">
-        <img src="/images/collaboration-innovation/collage_main.png" alt="" />
+        <img loading="lazy" decoding="async" src="/images/collaboration-innovation/collage_main.png" alt="" />
       </div>
 
       {/* Header section */}
@@ -158,7 +158,7 @@ export default function CollaborationInnovation({
               onClick={() => setOpenModal(card.key)}
               aria-label={`Open ${card.title}`}
             >
-              <img src={card.image} alt={card.title} />
+              <img loading="lazy" decoding="async" src={card.image} alt={card.title} />
               <span className={styles.cardImageAccent} aria-hidden="true" />
             </button>
             <p
@@ -188,7 +188,7 @@ export default function CollaborationInnovation({
 
       {/* Bottom-left quote with angled brackets (Vectors 7374 / 7375) */}
       <div className={styles.bottomQuote}>
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/collaboration-innovation/quote_left.png"
           alt=""
           className={styles.quoteBracketLeft}
@@ -200,7 +200,7 @@ export default function CollaborationInnovation({
             d.quote1.highlighted
           )}
         </h2>
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/collaboration-innovation/quote_right.png"
           alt=""
           className={styles.quoteBracketRight}

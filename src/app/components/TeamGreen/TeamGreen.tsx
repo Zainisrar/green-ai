@@ -100,9 +100,9 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
       <main className={styles.canvasPage} data-node-id="7077:21015">
         <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
         <div className={styles.canvasArtwork} aria-hidden="true">
-          <img src="/images/team-green/mainImg.png" alt="" />
+          <img loading="lazy" decoding="async" src="/images/team-green/mainImg.png" alt="" />
         </div>
-        <img className={styles.canvasVerticalTitle} src="/images/team-green/team-green.png" alt="Team GREEN" />
+        <img loading="lazy" decoding="async" className={styles.canvasVerticalTitle} src="/images/team-green/team-green.png" alt="Team GREEN" />
         <section className={styles.canvasHeader}>
           <h1>Team <span>GREEN</span></h1>
           <h2>{data.mainPage.subHeadline}</h2>
@@ -118,9 +118,9 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
           ))}
         </div>
         <div className={styles.canvasDayQuote}>
-          <img src="/images/handbook/shape.png" alt="" aria-hidden="true" />
+          <img loading="lazy" decoding="async" src="/images/handbook/shape.png" alt="" aria-hidden="true" />
           <p>“A Day with Team <span>GREEN</span></p>
-          <img src="/images/handbook/shape2.png" alt="" aria-hidden="true" />
+          <img loading="lazy" decoding="async" src="/images/handbook/shape2.png" alt="" aria-hidden="true" />
         </div>
         <div className={styles.canvasQuote}>
           <p>{canvasQuoteText}</p>
@@ -143,14 +143,14 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
     <React.Fragment>
       <div className="">
         <div className="absolute top-0 left-0 -z-10">
-          <img src="/images/team-green/mainImg.png" className=" lg:block hidden lg:w-10/12 lg:h-[145vh]" alt="img" />
+          <img loading="lazy" decoding="async" src="/images/team-green/mainImg.png" className=" lg:block hidden lg:w-10/12 lg:h-[145vh]" alt="img" />
         </div>
         <TopNavigation />
         <div className="flex h-full">
           {/* Left Side - GLOBAL SNAPSHOT Text */}
           <div className="w-1/6 flex items-center justify-center">
             <div className="fixed top-1/2 lg:top-1/4 left-4 lg:left-14">
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/team-green/team-green.png"
                 alt="team-green"
                 className="w-6 lg:w-14"
@@ -222,7 +222,7 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
                           onClick={onClick}
                           className="cursor-pointer"
                         >
-                          <img
+                          <img loading="lazy" decoding="async"
                             src="/images/team-green/exploreBtn.png"
                             alt="explore"
                           />
@@ -237,7 +237,7 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
             <div className="my-20 mb-32 lg:mb-0  lg:my-0 lg:flex justify-between">
               <div className=" hidden lg:flex relative space-x-4 items-center">
                 <div className="absolute lg:block hidden -left-14 top-14">
-                  <img src="/images/handbook/shape.png" className="w-14" alt="shape" />
+                  <img loading="lazy" decoding="async" src="/images/handbook/shape.png" className="w-14" alt="shape" />
                 </div>
                 <div>
                   <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
@@ -247,7 +247,7 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
                   </h3>
                 </div>
                 <div className="-ml-16 lg:block hidden absolute -right-10  top-14 -mt-2">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src="/images/handbook/shape2.png"
                     className="w-14"
                     alt="shape"
@@ -258,7 +258,7 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
                 {data?.mainPage.cta.map((cta, index) => {
                   const ctaProps = index === 0 ? workWithUsProps : cultureBriefProps;
                   const img = (
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={index === 0 ? "/images/team-green/work-with-us.png" : "/images/team-green/green.png"}
                       alt={cta.text}
                     />

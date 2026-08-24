@@ -69,7 +69,7 @@ const Procrument = ({ isOpen, onClose, data }: Props) => {
             ).map((key, index) => (
               <div key={index} className="flex items-start space-x-4">
                 <div className="flex-shrink-0">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src="/images/grid-intel/lighting.png"
                     className="w-10 lg:w-14 -mt-2 lg:-mt-4"
                     alt="lighting"
@@ -86,7 +86,7 @@ const Procrument = ({ isOpen, onClose, data }: Props) => {
         {/* Image */}
         <div className="flex-shrink-0">
           <div className="relative">
-            <img
+            <img loading="lazy" decoding="async"
               src={
                 data?.img?.src ||
                 "/images/our-procurement-philosophy/procrumentDialog.png"
@@ -130,7 +130,7 @@ const Procrument = ({ isOpen, onClose, data }: Props) => {
                   onClick={onClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                 </button>
               </div>
 
@@ -147,7 +147,7 @@ const Procrument = ({ isOpen, onClose, data }: Props) => {
                   onClick={onClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                 </button>
               </div>
 

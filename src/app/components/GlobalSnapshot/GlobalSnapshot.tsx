@@ -124,7 +124,7 @@ export default function GlobalSnapshot() {
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:14856">
       <div className={styles.network} aria-hidden="true">
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/global-snapshot/figma-network.jpg"
           alt=""
           width="4096"
@@ -136,7 +136,7 @@ export default function GlobalSnapshot() {
       <h1 className={styles.pageTitle} data-node-id="7077:14861">
         <strong>{title.highlight}</strong> {titleRemainder}
       </h1>
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.watermark}
         src="/images/global-snapshot/globalsnapshot.png"
         alt=""
@@ -164,7 +164,7 @@ export default function GlobalSnapshot() {
             key={stat.label}
             data-node-id={`7077:${14901 + index}`}
           >
-            <img src={stat.image} alt={stat.alt} />
+            <img loading="lazy" decoding="async" src={stat.image} alt={stat.alt} />
             <p>
               <strong>{stat.value}</strong> <span>{stat.label}</span>
             </p>
@@ -177,19 +177,19 @@ export default function GlobalSnapshot() {
         href={exploreHref}
         data-node-id="7077:14920"
       >
-        <img src="/images/global-snapshot/exploreBtn.png" alt="" />
+        <img loading="lazy" decoding="async" src="/images/global-snapshot/exploreBtn.png" alt="" />
         <span>{actions?.buttons[0]?.text || "Explore"}</span>
         <b aria-hidden="true">›</b>
       </Link>
 
       <section className={styles.highlight} data-node-id="7077:14908">
-        <img src="/images/global-snapshot/sh1.png" alt="" />
+        <img loading="lazy" decoding="async" src="/images/global-snapshot/sh1.png" alt="" />
         <div>
           {highlightLines.map((line) => (
             <p key={line}>{line}</p>
           ))}
         </div>
-        <img src="/images/global-snapshot/sh2.png" alt="" />
+        <img loading="lazy" decoding="async" src="/images/global-snapshot/sh2.png" alt="" />
       </section>
 
       <section className={styles.locations} data-node-id="7077:14912">
@@ -207,7 +207,7 @@ export default function GlobalSnapshot() {
         <div className={styles.featureList}>
           {features.map((feature) => (
             <article key={feature}>
-              <img src="/images/global-snapshot/lighting.png" alt="" />
+              <img loading="lazy" decoding="async" src="/images/global-snapshot/lighting.png" alt="" />
               <p>{feature}</p>
             </article>
           ))}
@@ -224,12 +224,12 @@ export default function GlobalSnapshot() {
           onClick={() => setIsConsultationOpen(true)}
           data-node-id="7077:14892"
         >
-          <img src="/images/global-snapshot/consulation.png" alt="" />
+          <img loading="lazy" decoding="async" src="/images/global-snapshot/consulation.png" alt="" />
           <span>{actions?.buttons[1]?.text || "Request a Consultation"}</span>
           <b aria-hidden="true">›</b>
         </button>
         <Link href={portfolioHref} data-node-id="7077:14886">
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/global-snapshot/globalprojectportfolioBtn.png"
             alt=""
           />
@@ -260,7 +260,7 @@ export default function GlobalSnapshot() {
   const mobile = (
     <main className={styles.mobilePage} data-node-id="7077:14856-mobile">
       <SiteHeader panel="logoOnly" />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.mobileNetwork}
         src="/images/global-snapshot/mainImg.png"
         alt=""
@@ -279,7 +279,7 @@ export default function GlobalSnapshot() {
         <div className={styles.mobileStats}>
           {stats.map((stat) => (
             <article key={stat.label}>
-              <img src={stat.image} alt="" />
+              <img loading="lazy" decoding="async" src={stat.image} alt="" />
               <p>
                 <strong>{stat.value}</strong> <span>{stat.label}</span>
               </p>
@@ -304,7 +304,7 @@ export default function GlobalSnapshot() {
           </h2>
           {features.map((feature) => (
             <article key={feature}>
-              <img src="/images/global-snapshot/lighting.png" alt="" />
+              <img loading="lazy" decoding="async" src="/images/global-snapshot/lighting.png" alt="" />
               <p>{feature}</p>
             </article>
           ))}

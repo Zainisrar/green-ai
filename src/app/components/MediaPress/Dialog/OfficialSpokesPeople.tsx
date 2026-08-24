@@ -88,7 +88,7 @@ const OfficialSpokesPeople: React.FC<OfficialSpokesPeopleProps> = ({
             className=""
           >
             <div className="">
-              <img
+              <img loading="lazy" decoding="async"
                 src={person.image}
                 alt={person.name}
                 className="w-full h-full object-cover"
@@ -124,7 +124,7 @@ const OfficialSpokesPeople: React.FC<OfficialSpokesPeopleProps> = ({
                   onClick={onClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                 </button>
               </div>
 
@@ -148,7 +148,7 @@ const OfficialSpokesPeople: React.FC<OfficialSpokesPeopleProps> = ({
                   }}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
                 >
-                  <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                 </button>
               </div>
 

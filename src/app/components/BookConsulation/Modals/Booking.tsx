@@ -196,7 +196,7 @@ const Booking = ({ isOpen, onClose }: Props) => {
             <input type="text" placeholder="Enter captcha" value={captchaInput} onChange={(e) => setCaptchaInput(e.target.value)} className={`${formFieldClass} sm:max-w-[200px]`} required />
           </div>
           <button type="submit" disabled={isLoading} className="shrink-0 cursor-pointer self-end disabled:opacity-50">
-            <img src="/images/book-consulation/formBtn.png" className="w-28 sm:w-40" alt="Submit" />
+            <img loading="lazy" decoding="async" src="/images/book-consulation/formBtn.png" className="w-28 sm:w-40" alt="Submit" />
           </button>
         </div>
 

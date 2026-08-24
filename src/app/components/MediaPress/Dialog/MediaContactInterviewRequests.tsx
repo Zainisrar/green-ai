@@ -31,7 +31,7 @@ const MediaContactInterviewRequests = ({ isOpen, onClose }: Props) => {
                 }}
                 className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
               >
-                <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
               </button>
             </div>
             {/* Modal Content */}
@@ -57,7 +57,7 @@ const MediaContactInterviewRequests = ({ isOpen, onClose }: Props) => {
                     <li className="font-bold">Speaking Engagements</li>
                     <li className="mt-20">
                       <div className="flex items-center space-x-2 border border-[#4CAF50] px-4 py-2 ">
-                        <img
+                        <img loading="lazy" decoding="async"
                           src="/images/media-press/phone.png"
                           alt="Phone Icon"
                           className="w-6 h-6"
@@ -91,7 +91,7 @@ const MediaContactInterviewRequests = ({ isOpen, onClose }: Props) => {
                     </li>
                     <li className="mt-20">
                       <div className="flex items-center space-x-2 border border-[#4CAF50] px-4 py-2 ">
-                        <img
+                        <img loading="lazy" decoding="async"
                           src="/images/media-press/calendar.png"
                           alt="Calendar Icon"
                           className="w-6 h-6"

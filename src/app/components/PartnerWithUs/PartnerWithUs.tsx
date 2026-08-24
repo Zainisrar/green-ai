@@ -39,7 +39,7 @@ const PartnerWithUs = ({ canvas = false }: { canvas?: boolean }) => {
     return (
       <main className={styles.canvasPage} data-node-id="7077:23359">
         <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.canvasArtwork}
           src="/images/partner/photo_card.png"
           alt=""
@@ -134,7 +134,7 @@ const PartnerWithUs = ({ canvas = false }: { canvas?: boolean }) => {
                       onClick={() => setOpenModal(section.key)}
                       className="shrink-0 cursor-pointer"
                     >
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/client-partnerships/explore.png"
                         alt={`Explore ${section.title}`}
                       />
@@ -145,7 +145,7 @@ const PartnerWithUs = ({ canvas = false }: { canvas?: boolean }) => {
 
               {/* Right column - image */}
               <div className="my-10 lg:my-0 lg:w-5/12">
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/client-partnerships/future-visions-business-technology.png"
                   alt="GREEN energy infrastructure"
                   className="w-full rounded-lg object-cover shadow-lg"

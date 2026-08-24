@@ -42,7 +42,7 @@ export const Vector7366: React.FC<Vector7366Props> = ({
     return (
       <div className={`${styles.canvasContainer} ${className}`}>
         {/* Background glow and slanted parallelogram vector */}
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/letstalkenergy.png"
           alt=""
           draggable={false}
@@ -68,7 +68,7 @@ export const Vector7366: React.FC<Vector7366Props> = ({
           onClick={onSubmit}
           className={styles.canvasMicButton}
         >
-          <img
+          <img loading="lazy" decoding="async"
             src={micIconSrc}
             alt="Send message"
             className={styles.canvasMicIcon}
@@ -83,7 +83,7 @@ export const Vector7366: React.FC<Vector7366Props> = ({
   return (
     <div className={`${styles.responsiveContainer} ${className}`}>
       {/* Background glow and slanted parallelogram vector */}
-      <img
+      <img loading="lazy" decoding="async"
         src="/images/letstalkenergy.png"
         alt=""
         draggable={false}
@@ -109,7 +109,7 @@ export const Vector7366: React.FC<Vector7366Props> = ({
         onClick={onSubmit}
         className={styles.responsiveMicButton}
       >
-        <img
+        <img loading="lazy" decoding="async"
           src={micIconSrc}
           alt="Send message"
           className={styles.responsiveMicIcon}

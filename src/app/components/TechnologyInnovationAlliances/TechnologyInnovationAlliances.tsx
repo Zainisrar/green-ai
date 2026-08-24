@@ -139,7 +139,7 @@ export default function TechnologyInnovationAlliances({
 
       {/* Faint right-side photo collage (Mask group at 1023,444) */}
       <div className={styles.rightCollage} aria-hidden="true">
-        <img src="/images/technology-innovation-alliances/collage_bg.png" alt="" />
+        <img loading="lazy" decoding="async" src="/images/technology-innovation-alliances/collage_bg.png" alt="" />
       </div>
 
       {/* Header section */}
@@ -175,7 +175,7 @@ export default function TechnologyInnovationAlliances({
             onClick={() => setOpenModal(card.key)}
             aria-label={`Open ${card.title}`}
           >
-            <img src={card.image} alt={card.title} />
+            <img loading="lazy" decoding="async" src={card.image} alt={card.title} />
             <span className={styles.cardImageAccent} aria-hidden="true" />
           </button>
 
@@ -232,7 +232,7 @@ export default function TechnologyInnovationAlliances({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : 0.35, ease: "easeOut" }}
       >
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/technology-innovation-alliances/quote_left.png"
           alt=""
           className={styles.quoteBracketLeft}
@@ -241,7 +241,7 @@ export default function TechnologyInnovationAlliances({
         <h2>
           {highlightText(d.quote1.text, d.quote1.highlighted)}
         </h2>
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/technology-innovation-alliances/quote_right.png"
           alt=""
           className={styles.quoteBracketRight}

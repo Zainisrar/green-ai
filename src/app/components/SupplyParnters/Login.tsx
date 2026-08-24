@@ -48,7 +48,7 @@ const Login = () => {
         <div className={`overflow-hidden flex h-full ${nav.isNavigationOpen?"":"z-[9999999999999999]"} relative`}>
           <div className=" lg:w-1/8 hidden lg:flex items-center justify-center">
             <div className="fixed top-1/4 left-10">
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/supply-partners/supply-partner.png"
                 alt="supply-partner"
                 className="w-10"
@@ -203,7 +203,7 @@ const Login = () => {
             onClick={() => setIsFormOpen(true)}
             className={`${enquiryProps.className} flex justify-end my-8 mb-40 cursor-pointer`}
           >
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/supply-partners/login/enquiry.png"
               alt="Enquiry"
             />

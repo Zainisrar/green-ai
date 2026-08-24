@@ -87,7 +87,7 @@ const OurClientPartnershipModel = ({ isOpen, onClose, data }: Props) => {
           ))}
         </div>
         <div className="w-full shrink-0 lg:w-[300px]">
-          <img src={imgSrc} alt={imgAlt} className="h-auto w-full" />
+          <img loading="lazy" decoding="async" src={imgSrc} alt={imgAlt} className="h-auto w-full" />
         </div>
       </div>
 

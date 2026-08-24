@@ -88,7 +88,7 @@ const VoicesofPower = ({ isOpen, onClose }: Props) => {
             {modalData.items.map((testimonial, idx) => (
               <div key={idx} className="overflow-hidden">
                 <div className="relative">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={testimonial.img.src}
                     alt={testimonial.img.alt}
                     className="w-full h-full object-cover"
@@ -125,7 +125,7 @@ const VoicesofPower = ({ isOpen, onClose }: Props) => {
                     onClick={onClose}
                     className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                   >
-                    <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                    <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                   </button>
                 </div>
               </div>
@@ -148,7 +148,7 @@ const VoicesofPower = ({ isOpen, onClose }: Props) => {
                     }}
                     className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
                   >
-                    <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                    <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
                   </button>
                 </div>
               </div>

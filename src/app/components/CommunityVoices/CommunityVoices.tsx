@@ -59,9 +59,9 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
       <main className={styles.canvasPage} data-node-id="7077:21678">
         <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
         <div className={styles.canvasArtwork} aria-hidden="true">
-          <img src="/images/community-voices/mainImg.png" alt="" />
+          <img loading="lazy" decoding="async" src="/images/community-voices/mainImg.png" alt="" />
         </div>
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.canvasVerticalTitle}
           src="/images/community-voices/community-voices.png"
           alt="Community Voices"
@@ -94,7 +94,7 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
               }}
             >
               <span className={styles.canvasRowImage} aria-hidden="true">
-                <img src={row.image} alt="" />
+                <img loading="lazy" decoding="async" src={row.image} alt="" />
               </span>
               <h2 className={styles.canvasRowTitle}>{row.title}</h2>
               <FigmaAngledCta
@@ -114,13 +114,13 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
           <br />
           We Call Them <span>People.</span>
         </p>
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.canvasQuoteFrameLeft}
           src="/images/community-voices/figma/quote-frame-left.svg"
           alt=""
           aria-hidden="true"
         />
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.canvasQuoteFrameRight}
           src="/images/community-voices/figma/quote-frame-right.svg"
           alt=""
@@ -176,7 +176,7 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
       <div className="flex h-full">
         <div className="w-1/6 flex items-center justify-center">
           <div className="fixed top-1/3 left-4 lg:left-14">
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/community-voices/community-voices.png"
               alt="community-voices"
               className="w-6 lg:w-8"
@@ -203,12 +203,12 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
           <div className="lg:flex justify-between">
             <div>
               <div className="absolute  left-0 opacity-70">
-                <img src="/images/community-voices/mainImg.png" alt="img" />
+                <img loading="lazy" decoding="async" src="/images/community-voices/mainImg.png" alt="img" />
               </div>
               <div className="text-xl font-bold flex justify-center lg:h-[60vh] flex-col ">
                 <div className="relative">
                   <div className="hidden absolute -left-20 lg:block ">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/community-voices/shape1.png"
                       alt="vector"
                     />
@@ -226,7 +226,7 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
                     )}
                   </div>
                   <div className="hidden absolute -top-10 -right-20 lg:block ">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/community-voices/shape2.png"
                       alt="vector"
                     />
@@ -245,7 +245,7 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
                   return (
                     <React.Fragment key={idx}>
                       <div className="cursor-pointer" onClick={onClick}>
-                        <img src={modal.img.src} alt={modal.img.alt} />
+                        <img loading="lazy" decoding="async" src={modal.img.src} alt={modal.img.alt} />
                       </div>
                       <p
                         className="text-gray-800 font-bold text-lg cursor-pointer"
@@ -254,7 +254,7 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
                         {modal.cta}
                       </p>
                       <button className="cursor-pointer" onClick={onClick}>
-                        <img
+                        <img loading="lazy" decoding="async"
                           src="/images/community-voices/exploreBtn.png"
                           alt="exploreBtn"
                         />
@@ -285,7 +285,7 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
                   onClick={() => setOpenModal("submitTestimonial")}
                   className="cursor-pointer relative"
                 >
-                  <img
+                  <img loading="lazy" decoding="async"
                     src="/images/community-voices/submit.png"
                     alt="submit a testimonial"
                   />
@@ -297,7 +297,7 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
                   onClick={() => setOpenModal("uploadPhotoVideo")}
                   className="cursor-pointer relative"
                 >
-                  <img
+                  <img loading="lazy" decoding="async"
                     src="/images/community-voices/upload.png"
                     alt="upload a photo / video"
                   />

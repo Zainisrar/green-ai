@@ -51,7 +51,7 @@ export default function LearningHub({ canvas = false }: LearningHubProps) {
       data-node-id="pattern-derived-learning-hub"
     >
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.verticalTitle}
         src="/images/articles/insights-articles.png"
         alt="Learning Hub"
@@ -78,7 +78,7 @@ export default function LearningHub({ canvas = false }: LearningHubProps) {
           <div className={styles.cards}>
             {learningCards.map((card) => (
               <Link className={styles.card} href={card.href} key={card.title}>
-                <img src={card.image} alt="" />
+                <img loading="lazy" decoding="async" src={card.image} alt="" />
                 <div className={styles.cardBody}>
                   <span>{card.category}</span>
                   <h4>{card.title}</h4>

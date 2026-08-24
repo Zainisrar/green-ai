@@ -43,24 +43,24 @@ export default function EmpawaProductsFigma() {
 
   const desktop = (
     <main className={styles.desktop} data-node-id="7077:25663">
-      <img className={styles.background} src="/images/product/bg.jpg" alt="" />
+      <img loading="lazy" decoding="async" className={styles.background} src="/images/product/bg.jpg" alt="" />
       <SiteHeader layout="productCanvas" brand="empawa" productLogo />
       <div className={styles.empawaPrimaryBrand}>
-        <img src="/images/product/green-empawa.png" alt={productName} />
+        <img loading="lazy" decoding="async" src="/images/product/green-empawa.png" alt={productName} />
       </div>
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.pageTitleImg}
         src="/images/product/title_h1.png"
         alt=""
       />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.verticalTitle}
         src="/images/product/product_vert.png"
         alt=""
       />
 
       <section className={styles.gallery} aria-label={`${productName} gallery`}>
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.hero}
           src={`/images/product/empawa/${gallery[active][0]}`}
           alt={gallery[active][1]}
@@ -79,7 +79,7 @@ export default function EmpawaProductsFigma() {
               aria-label={`Show ${productName} product ${index + 1}`}
               aria-pressed={active === index}
             >
-              <img src={`/images/product/empawa/${image}`} alt={alt} />
+              <img loading="lazy" decoding="async" src={`/images/product/empawa/${image}`} alt={alt} />
             </button>
           ))}
         </div>
@@ -93,7 +93,7 @@ export default function EmpawaProductsFigma() {
       </section>
 
       <section className={styles.story} aria-labelledby="empawa-story-title">
-        <img src="/images/product/boxImg.png" alt="" />
+        <img loading="lazy" decoding="async" src="/images/product/boxImg.png" alt="" />
         <h2 id="empawa-story-title">
           Lighting Up
           <br />
@@ -110,7 +110,7 @@ export default function EmpawaProductsFigma() {
         className={styles.specifications}
         aria-label="Product specifications"
       >
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.specificationPanel}
           src="/images/product/boxKeyImg.png"
           alt=""
@@ -118,7 +118,7 @@ export default function EmpawaProductsFigma() {
         <div className={styles.specificationList}>
           {specifications.map(([icon, name, detail, duration]) => (
             <article key={name}>
-              <img src={`/images/product/${icon}`} alt="" />
+              <img loading="lazy" decoding="async" src={`/images/product/${icon}`} alt="" />
               <h3>{name}</h3>
               <p>{detail}</p>
               <span>{duration}</span>
@@ -147,12 +147,12 @@ export default function EmpawaProductsFigma() {
       <SiteHeader panel="logoOnly" />
       <div className={styles.mobileContent}>
         <p className={styles.eyebrow}>Products</p>
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.mobileBrand}
           src="/images/product/green-empawa.png"
           alt={productName}
         />
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.mobileHero}
           src={`/images/product/empawa/${gallery[active][0]}`}
           alt={gallery[active][1]}
@@ -166,7 +166,7 @@ export default function EmpawaProductsFigma() {
               aria-label={`Show ${productName} product ${index + 1}`}
               aria-pressed={active === index}
             >
-              <img src={`/images/product/empawa/${image}`} alt="" />
+              <img loading="lazy" decoding="async" src={`/images/product/empawa/${image}`} alt="" />
             </button>
           ))}
         </div>

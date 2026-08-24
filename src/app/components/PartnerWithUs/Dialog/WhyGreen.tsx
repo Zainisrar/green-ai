@@ -50,7 +50,7 @@ const WhyGreen = ({ isOpen, onClose }: Props) => {
       <div className="space-y-5">
         {points.map((point, idx) => (
           <div key={idx} className="flex items-start gap-3">
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/grid-intel/lighting.png"
               className="-mt-3 w-12 shrink-0"
               alt="lighting"

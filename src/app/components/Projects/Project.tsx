@@ -233,7 +233,7 @@ export default function Project() {
       ) : (
         <section className={styles.stage} aria-label="Project portfolio">
           <div className={styles.mainPhoto}>
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/projects/mask_7077_7014.png"
               alt={currentProject.title}
               className={styles.figmaMainPhoto}
@@ -639,14 +639,14 @@ function ProjectPreview({
     >
       <span className={styles.previewWash} />
       <span className={styles.previewCard}>
-        <img src={project.image} alt="" />
+        <img loading="lazy" decoding="async" src={project.image} alt="" />
       </span>
       <span className={styles.previewCaption}>{label}</span>
       <span
         className={styles.previewArrow}
         aria-hidden="true"
       >
-        <img
+        <img loading="lazy" decoding="async"
           src={isPrevious ? "/images/projects/arrow_7077_7037.png" : "/images/projects/arrow_7077_7036.png"}
           alt=""
           width={40}

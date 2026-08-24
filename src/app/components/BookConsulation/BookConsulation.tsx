@@ -14,7 +14,7 @@ const BookConsulation = () => {
         <div className="flex h-full">
           <div className=" lg:w-1/6 hidden lg:flex items-center justify-center">
             <div className="fixed top-1/4 left-14">
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/book-consulation/book-consulation.png"
                 alt="globalsnapshot"
                 className="w-10"
@@ -115,7 +115,7 @@ const BookConsulation = () => {
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 <div className="flex items-center space-x-3">
                   <span>
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/grid-intel/lighting.png"
                       className="w-14 -mt-4"
                       alt="lighting"
@@ -128,7 +128,7 @@ const BookConsulation = () => {
 
                 <div className="flex items-center space-x-3">
                   <span>
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/grid-intel/lighting.png"
                       className="w-14 -mt-4"
                       alt="lighting"
@@ -141,7 +141,7 @@ const BookConsulation = () => {
 
                 <div className="flex items-center space-x-3 md:col-span-2">
                   <span>
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/grid-intel/lighting.png"
                       className="w-14 -mt-4"
                       alt="lighting"
@@ -161,7 +161,7 @@ const BookConsulation = () => {
                  }}
                 className="flex items-center  border-[#f0f9da] p-4 border-3  px-6 space-x-3 ">
                   <span>
-                    <img
+                    <img loading="lazy" decoding="async"
                       style={
                         {
                           transform:"skewX(16deg)"
@@ -208,13 +208,13 @@ const BookConsulation = () => {
             </div>
           </div>
           <div className=" absolute right-0 bottom-0   -z-10">
-            <img src="/images/book-consulation/mainImg.png" alt="bg" />
+            <img loading="lazy" decoding="async" src="/images/book-consulation/mainImg.png" alt="bg" />
           </div>
           {/* Sidebar Content */}
           <div className="hidden  lg:flex flex-col items-center h-screen justify-center max-w-xs">
             <div className="relative flex items-center ">
               <div className="absolute -left-16 top-20">
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/book-consulation/shape.png"
                   className="w-12"
                   alt="shape"
@@ -230,7 +230,7 @@ const BookConsulation = () => {
                 </p>
               </div>
               <div className="absolute right-4 -top-2">
-                <img
+                <img loading="lazy" decoding="async"
                   src="/images/book-consulation/shape2.png"
                   className="w-12"
                   alt="shape"
@@ -246,7 +246,7 @@ const BookConsulation = () => {
              setBooking(true);
            }}
           className=" flex justify-end cursor-pointer">
-            <img
+            <img loading="lazy" decoding="async"
               src="/images/book-consulation/book-my-consulation.png"
               alt="book-my-consulation"
             />

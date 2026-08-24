@@ -30,7 +30,7 @@ const PastHighlights = ({ isOpen, onClose }: Props) => {
                 }}
                 className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
               >
-                <img src="/images/join-us/xicon.png" alt="Close Icon" />
+                <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
               </button>
             </div>
             {/* Modal Content */}
@@ -52,7 +52,7 @@ const PastHighlights = ({ isOpen, onClose }: Props) => {
                 {/* Solar Literacy Drive */}
                 <div className="space-y-3">
                   <div className="relative">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       src="/images/public-events-volunteering/solar-literacy.png" 
                       alt="Solar Literacy Drive" 
                       
@@ -80,7 +80,7 @@ const PastHighlights = ({ isOpen, onClose }: Props) => {
                 {/* Women In Energy */}
                 <div className="space-y-3">
                   <div className="relative">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       src="/images/public-events-volunteering/women-in-energy.png" 
                       alt="Women In Energy" 
                     />
@@ -107,7 +107,7 @@ const PastHighlights = ({ isOpen, onClose }: Props) => {
                 {/* Village Grid Demo Days */}
                 <div className="space-y-3">
                   <div className="relative">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       src="/images/public-events-volunteering/grid-demo-guys.png" 
                       alt="Village Grid Demo Days" 
                     />
@@ -134,7 +134,7 @@ const PastHighlights = ({ isOpen, onClose }: Props) => {
                 {/* Plastic-To-Power Campaign */}
                 <div className="space-y-3">
                   <div className="relative">
-                    <img 
+                    <img loading="lazy" decoding="async" 
                       src="/images/public-events-volunteering/plastic-to-power-campaign.png" 
                       alt="Plastic-To-Power Campaign" 
                       

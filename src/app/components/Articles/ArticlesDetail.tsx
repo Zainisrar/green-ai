@@ -22,7 +22,7 @@ const ArticlesDetail = ({ slug }: ArticlesDetailProps) => {
           {/* Left Side - */}
           <div className="lg:block  lg:w-1/6 flex items-center justify-center">
             <div className="fixed top-1/4 left-4 lg:left-24">
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/articles/insights-articles.png"
                 alt="insights and articles"
                 className="w-5 lg:w-10"
@@ -49,7 +49,7 @@ const ArticlesDetail = ({ slug }: ArticlesDetailProps) => {
                     className="flex items-center text-gray-600 border border-green-600 px-8 p-2  hover:text-gray-800"
                   >
                     <span className="mr-2">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src="/images/articles/arrowBack.png"
                         alt="arrowBtn"
                       />
@@ -77,7 +77,7 @@ const ArticlesDetail = ({ slug }: ArticlesDetailProps) => {
 
                 <div className="mb-6 flex justify-end">
                   <a href={article.cta.href} className="cursor-pointer">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src="/images/media-press/explore.png"
                       alt={article.cta.text}
                     />
@@ -87,7 +87,7 @@ const ArticlesDetail = ({ slug }: ArticlesDetailProps) => {
 
               {/* Right Image */}
               <div className="lg:w-1/2">
-                <img
+                <img loading="lazy" decoding="async"
                   src={article.featuredImg.src}
                   alt={article.featuredImg.alt}
                   className="w-full h-full  lg:h-64 lg:object-cover  lg:rounded-lg shadow-md"
@@ -115,7 +115,7 @@ const ArticlesDetail = ({ slug }: ArticlesDetailProps) => {
                       />
                       <div className="ml-4">
                         <a href={article.cta.href} className="cursor-pointer">
-                          <img
+                          <img loading="lazy" decoding="async"
                             src="/images/media-press/explore.png"
                             alt={article.cta.text}
                           />

@@ -75,14 +75,14 @@ export default function Accrediations() {
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:3221">
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.watermark}
         src="/images/certifications/figma-background.png"
         alt=""
         width="755"
         height="755"
       />
-      <img
+      <img loading="lazy" decoding="async"
         className={styles.verticalTitleImg}
         src="/images/certifications/title_vert.png"
         alt=""
@@ -91,7 +91,7 @@ export default function Accrediations() {
         height="555"
       />
       <h1 className={styles.pageTitle} data-node-id="7077:3249">
-        <img
+        <img loading="lazy" decoding="async"
           className={styles.pageTitleImg}
           src="/images/certifications/title_h1.png"
           alt={title}
@@ -105,7 +105,7 @@ export default function Accrediations() {
         onClick={() => setIsCertificatesOpen(true)}
         data-node-id="7077:3263"
       >
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/certifications/quote_panel.png"
           alt=""
           width="606"
@@ -147,7 +147,7 @@ export default function Accrediations() {
               onClick={() => setIsCertificatesOpen(true)}
               data-node-id={certificate.nodeId}
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src={certificate.image}
                 alt={`${certificate.name} certification`}
                 width="145"
@@ -171,7 +171,7 @@ export default function Accrediations() {
               "Australian industry association that represents businesses involved in renewable energy and energy storage"}
           </p>
         </div>
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/certifications/cec_logo.png"
           alt="Clean Energy Council"
           width="262"
@@ -184,7 +184,7 @@ export default function Accrediations() {
         onClick={() => setIsStartOpen(true)}
         data-node-id="7077:3275"
       >
-        <img
+        <img loading="lazy" decoding="async"
           src="/images/certifications/cta_panel.png"
           alt=""
           width="178"
@@ -248,7 +248,7 @@ export default function Accrediations() {
                 key={certificate.name}
                 onClick={() => setIsCertificatesOpen(true)}
               >
-                <img
+                <img loading="lazy" decoding="async"
                   src={certificate.image}
                   alt={`${certificate.name} certification`}
                   width="145"
@@ -269,7 +269,7 @@ export default function Accrediations() {
                 "Australian industry association that represents businesses involved in renewable energy and energy storage"}
             </p>
           </div>
-          <img
+          <img loading="lazy" decoding="async"
             src="/images/certifications/cec_logo.png"
             alt="Clean Energy Council"
             width="262"

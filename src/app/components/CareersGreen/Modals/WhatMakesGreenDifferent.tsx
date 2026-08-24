@@ -63,7 +63,7 @@ const WhatMakesGreenDifferent = ({ isOpen, onClose, data }: Props) => {
             <div key={index} className="flex items-start gap-3">
               <div className="flex-shrink-0 mt-1">
                 <span>
-                  <img
+                  <img loading="lazy" decoding="async"
                     src="/images/grid-intel/lighting.png"
                     className="w-14 -mt-4"
                     alt="lighting"
@@ -83,7 +83,7 @@ const WhatMakesGreenDifferent = ({ isOpen, onClose, data }: Props) => {
         {/* Image Column */}
         {data?.featuredImg && (
           <div className={`${isMobile ? "w-full" : "w-7/12"}`}>
-            <img
+            <img loading="lazy" decoding="async"
               src={data.featuredImg.src}
               alt={data.featuredImg.alt}
               className="w-full rounded-lg"
