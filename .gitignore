@@ -49,3 +49,4 @@ scratch/
 .agents/
 ers-api-backend-history-work/
 .image-optimizer-state
+__pycache__/

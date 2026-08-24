@@ -164,64 +164,71 @@ export default function HomePage() {
     // right behaviour for marketing content that changes a few times a week.
   });
 
-  const slides = insightsData?.data?.map((item: Insight) => {
-    const slug = item.cta1?.link?.includes("/insights/")
-      ? item.cta1.link.split("/insights/")[1]
-      : item.headline
-          .toLowerCase()
-          .replace(/[^a-z0-9\s-]/g, "")
-          .replace(/\s+/g, "-")
-          .replace(/-+/g, "-")
-          .trim();
+  const cmsInsights =
+    insightsData?.success && Array.isArray(insightsData.data)
+      ? insightsData.data
+      : [];
+  const slides =
+    cmsInsights.length > 0
+      ? cmsInsights.map((item: Insight) => {
+          const slug = item.cta1?.link?.includes("/insights/")
+            ? item.cta1.link.split("/insights/")[1]
+            : item.headline
+                .toLowerCase()
+                .replace(/[^a-z0-9\s-]/g, "")
+                .replace(/\s+/g, "-")
+                .replace(/-+/g, "-")
+                .trim();
 
-    const getCategoryTag = (id: number, headline: string) => {
-      const normalizedHeadline = headline.toLowerCase();
-      if (normalizedHeadline.includes("mining"))
-        return `# Mining  Insight 0${id}`;
-      if (
-        normalizedHeadline.includes("home") ||
-        normalizedHeadline.includes("solar")
-      )
-        return `# Home  Insight 0${id}`;
-      if (
-        normalizedHeadline.includes("cities") ||
-        normalizedHeadline.includes("urban") ||
-        normalizedHeadline.includes("electricity")
-      )
-        return `# Urban  Insight 0${id}`;
-      if (normalizedHeadline.includes("hotel"))
-        return `# Hotel  Insight 0${id}`;
-      return `# Insight 0${id}`;
-    };
+          const getCategoryTag = (id: number, headline: string) => {
+            const normalizedHeadline = headline.toLowerCase();
+            if (normalizedHeadline.includes("mining"))
+              return `# Mining  Insight 0${id}`;
+            if (
+              normalizedHeadline.includes("home") ||
+              normalizedHeadline.includes("solar")
+            )
+              return `# Home  Insight 0${id}`;
+            if (
+              normalizedHeadline.includes("cities") ||
+              normalizedHeadline.includes("urban") ||
+              normalizedHeadline.includes("electricity")
+            )
+              return `# Urban  Insight 0${id}`;
+            if (normalizedHeadline.includes("hotel"))
+              return `# Hotel  Insight 0${id}`;
+            return `# Insight 0${id}`;
+          };
 
-    return {
-      id: item.id,
-      slug,
-      headline: item.headline,
-      subheadline: item.subheadline,
-      highlighted: item.highlighted,
-      tag: getCategoryTag(item.id, item.headline),
-      description: item.description,
-      backgroundImage: item.bgImg,
-      keys: item.keys.map((key) => ({
-        icon: key.icon,
-        description: key.text,
-      })),
-      cta: {
-        button1: item.cta1.text,
-        link1: item.cta1.link,
-        button2: item.cta2.text,
-        link2: item.cta2.link || "/home/renewable-energy-the-core",
-      },
-      logo: "/images/heroSection/logo.png",
-    };
-  });
+          return {
+            id: item.id,
+            slug,
+            headline: item.headline,
+            subheadline: item.subheadline,
+            highlighted: item.highlighted,
+            tag: getCategoryTag(item.id, item.headline),
+            description: item.description,
+            backgroundImage: item.bgImg,
+            keys: item.keys.map((key) => ({
+              icon: key.icon,
+              description: key.text,
+            })),
+            cta: {
+              button1: item.cta1.text,
+              link1: item.cta1.link,
+              button2: item.cta2.text,
+              link2: item.cta2.link || "/home/renewable-energy-the-core",
+            },
+            logo: "/images/heroSection/logo.png",
+          };
+        })
+      : FALLBACK_INSIGHT_SLIDES;
 
   return (
     <React.Fragment>
       <StructuredData data={organizationStructuredData} />
       <StructuredData data={websiteStructuredData} />
-      <Header slides={slides || FALLBACK_INSIGHT_SLIDES} />
+      <Header slides={slides} />
     </React.Fragment>
   );
 }
