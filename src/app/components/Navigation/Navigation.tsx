@@ -245,7 +245,11 @@ export default function Navigation({
                       type="button"
                       className={`${styles.subMenuTrigger} ${isActiveMenuItem(item, index) || selectedParent?.id === item.id ? `${styles.activeItem} ${isEngageLayout ? "" : styles.underlinedActiveItem}` : ""}`}
                       aria-expanded={selectedParent?.id === item.id}
-                      onClick={() => setSelectedParent(item)}
+                      onClick={() =>
+                        setSelectedParent(
+                          selectedParent?.id === item.id ? null : item,
+                        )
+                      }
                     >
                       {item.name}
                       <span aria-hidden="true">›</span>

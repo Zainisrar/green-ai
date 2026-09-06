@@ -197,6 +197,21 @@ export default function EpcmServices() {
                 </ul>
               </section>
             ))}
+            <div className={styles.mobileActions}>
+              <button
+                type="button"
+                onClick={() => setIsTechnicalDebriefOpen(true)}
+              >
+                Request a Technical Debrief
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsDiscoveryConsultationOpen(true)}
+              >
+                Book a Discovery Consultation
+              </button>
+            </div>
+            <D6Chatbot />
           </main>
         }
       />

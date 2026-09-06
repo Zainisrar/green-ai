@@ -203,3 +203,23 @@
   font-size: 14px;
   line-height: 1.6;
 }
+
+.mobileActions {
+  display: grid;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.mobileActions button {
+  min-height: 50px;
+  padding: 12px 20px;
+  border: 1px solid #23b14d;
+  background: linear-gradient(110deg, #75d994, #effc97);
+  color: #000;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
+}
+
