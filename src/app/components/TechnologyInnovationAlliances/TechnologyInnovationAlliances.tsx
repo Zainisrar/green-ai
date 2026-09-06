@@ -275,7 +275,7 @@ export default function TechnologyInnovationAlliances({
             top: 904,
             right: "auto",
             bottom: "auto",
-            left: 207,
+            left: 1489,
             width: 418,
           }}
         />

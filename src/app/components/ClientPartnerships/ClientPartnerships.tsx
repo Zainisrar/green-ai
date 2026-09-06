@@ -3,7 +3,6 @@ import React from "react";
 import { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
-import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import styles from "./ClientPartnerships.module.css";
 import OurClientPartnershipModel from "./Dialog/OurClientPartnershipModel";
@@ -11,6 +10,7 @@ import PartnershipOnboarding from "./Dialog/PartnershipOnboarding";
 import UseCases from "./Dialog/UseCases";
 import WhatSetsGREENApart from "./Dialog/WhatSetsGREENApart";
 import WhoWePartnerWith from "./Dialog/WhoWePartnerWith";
+import BookDiscoveryCall from "./Modals/BookDiscoveryCall";
 
 // Figma-locked design content (node 7077:15858). Rows open the same
 // data-driven dialogs; canvas geometry is exact to the Figma node tree.
@@ -92,7 +92,8 @@ const FALLBACK = {
       lineY: 767,
     },
   ],
-  quote1: "\u201cISO Compliant \u2022 Donor Trusted \u2022 Built Across PNG\u201d",
+  quote1:
+    "\u201cISO Compliant \u2022 Donor Trusted \u2022 Built Across PNG\u201d",
   quote2: "From Brief to  Commissioning in 90 Days",
   statement: "Let\u2019s Build What Your Nation or Enterprise Needs Next.",
 };
@@ -112,7 +113,6 @@ export default function ClientPartnerships({
   const [isPartnershipOnboardingOpen, setIsPartnershipOnboardingOpen] =
     useState(false);
   const [isBookCallOpen, setIsBookCallOpen] = useState(false);
-
 
   return (
     <main className={styles.page} data-node-id="7077:15858">
@@ -135,7 +135,12 @@ export default function ClientPartnerships({
 
       {/* Right-side photo collage (Mask group at 1063,-59, 1003×2134) */}
       <div className={styles.rightCollage} aria-hidden="true">
-        <img loading="lazy" decoding="async" src="/images/client-partnerships/mask_composite.png" alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/client-partnerships/mask_composite.png"
+          alt=""
+        />
       </div>
 
       {/* Header section */}
@@ -189,7 +194,8 @@ export default function ClientPartnerships({
             className={styles.rowCta}
             style={{ position: "absolute", left: row.ctaX, top: row.ctaY }}
             onClick={
-              row.key === "partnershipOnboarding" || row.key === "clientPartnerLogin"
+              row.key === "partnershipOnboarding" ||
+              row.key === "clientPartnerLogin"
                 ? () => setIsPartnershipOnboardingOpen(true)
                 : () =>
                     row.key === "whoWePartnerWith"
@@ -212,14 +218,18 @@ export default function ClientPartnerships({
 
       {/* Bracketed statement (Vectors 7374 / 7375) */}
       <div className={styles.statementBlock}>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/client-partnerships/quote_left.png"
           alt=""
           className={styles.statementBracketLeft}
           aria-hidden="true"
         />
         <p className={styles.statementText}>{d.statement}</p>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/client-partnerships/quote_right.png"
           alt=""
           className={styles.statementBracketRight}
@@ -243,7 +253,11 @@ export default function ClientPartnerships({
       >
         Request Client Partnership Prospectus
       </FigmaAngledCta>
-      <a className={styles.readMore} href="#read-more" style={{ position: "absolute", left: 1521, top: 799 }}>
+      <a
+        className={styles.readMore}
+        href="#read-more"
+        style={{ position: "absolute", left: 1521, top: 799 }}
+      >
         Read more
       </a>
 
@@ -288,21 +302,9 @@ export default function ClientPartnerships({
       />
 
       {/* Discovery Call Inquiry Modal */}
-      <ProductEnquiry
+      <BookDiscoveryCall
         isOpen={isBookCallOpen}
         onClose={() => setIsBookCallOpen(false)}
-        titlePrefix="BOOK A"
-        titleAccent="DISCOVERY CALL"
-        interestLabel="AREA OF INTEREST"
-        interestOptions={[
-          "Government & Utilities",
-          "Donors & Development Banks",
-          "Private Sector Enterprise",
-          "Institutions (Health, Education, Telecom)",
-          "Commercial & Industrial EPC",
-          "Other",
-        ]}
-        defaultInterest="Government & Utilities"
       />
     </main>
   );

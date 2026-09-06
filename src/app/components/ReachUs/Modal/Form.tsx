@@ -1,17 +1,14 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
+import { ProductEnquiryFrame } from "@/app/components/Product/Modals/ProductEnquiry";
 import {
   buildReachUsPayload,
   generateCaptcha,
   submitReachUs,
 } from "@/app/lib/forms";
-import EngineeringFormModal, {
-  captchaInputGroupClass,
-  captchaRowClass,
-  formFieldClass,
-  formGridClass,
-} from "@/app/components/shared/EngineeringFormModal";
+import styles from "./Form.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -107,7 +104,9 @@ const Form = ({ isOpen, onClose }: Props) => {
   if (!isOpen) return null;
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value, type } = e.target;
 
@@ -168,11 +167,15 @@ const Form = ({ isOpen, onClose }: Props) => {
           setSuccessMessage("");
         }, 2000);
       } else {
-        setErrorMessage(data.Message || "Failed to submit enquiry. Please try again.");
+        setErrorMessage(
+          data.Message || "Failed to submit enquiry. Please try again.",
+        );
       }
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "An error occurred while submitting the form.",
+        error instanceof Error
+          ? error.message
+          : "An error occurred while submitting the form.",
       );
     } finally {
       setIsLoading(false);
@@ -180,57 +183,94 @@ const Form = ({ isOpen, onClose }: Props) => {
   };
 
   return (
-    <EngineeringFormModal
-      isOpen={isOpen}
+    <ProductEnquiryFrame
+      labelledBy="reach-us-title"
       onClose={onClose}
-      maxWidthClass="max-w-6xl"
-      title={
-        <>
-          REACH <span className="text-green-600">US</span>
-        </>
-      }
-      subtitle="Let's connect and power your future."
+      closeLabel="Close Reach Us form"
+      closeRight={74.34}
+      closeTop={44.75}
+      designCanvasWidth={1920}
+      designCanvasHeight={970}
+      designCanvasX={169}
+      designCanvasY={57}
+      width={1718}
+      height={835}
+      maxScale={2}
+      maximizeRight={116}
+      maximizeTop={44.75}
+      surfaceImage="/images/reach-us/contact-form-window.svg"
+      surfaceImageInset="-2.22% -1.56% -3.17% -1.09%"
+      surfaceImageWidth="102.65%"
+      surfaceImageHeight="105.39%"
+      overlayClassName={styles.figmaEnter}
     >
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.4fr_1fr] lg:gap-12">
-        {/* Form Section */}
-        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-          <div className={formGridClass}>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        <h2 id="reach-us-title" className={styles.visuallyHidden}>
+          Reach Us
+        </h2>
+
+        <div className={styles.nameFields}>
+          <div className={styles.fieldShell}>
             <input
               type="text"
               name="firstname"
               placeholder="FIRST NAME"
               value={formData.firstname}
               onChange={handleInputChange}
-              className={formFieldClass}
+              className={styles.field}
+              autoComplete="given-name"
               required
             />
+          </div>
+          <div className={styles.fieldShell}>
             <input
               type="text"
               name="lastname"
               placeholder="LAST NAME"
               value={formData.lastname}
               onChange={handleInputChange}
-              className={formFieldClass}
+              className={styles.field}
+              autoComplete="family-name"
             />
           </div>
+        </div>
 
+        <div className={`${styles.fieldShell} ${styles.emailField}`}>
           <input
             type="email"
             name="email"
             placeholder="E-MAIL ID"
             value={formData.email}
             onChange={handleInputChange}
-            className={formFieldClass}
+            className={styles.field}
+            autoComplete="email"
             required
           />
+        </div>
 
-          <div className={formGridClass}>
+        <div className={styles.phoneField}>
+          <span className={styles.phoneLabel}>PHONE</span>
+          <div className={styles.countryCode}>
+            <span className={styles.countryFlag} aria-hidden="true">
+              {formData.phone_country_code === "pg" ? (
+                <img src="/images/book-consulation/countryCode.png" alt="" />
+              ) : (
+                formData.phone_country_code
+                  .toUpperCase()
+                  .split("")
+                  .map((letter) =>
+                    String.fromCodePoint(127397 + letter.charCodeAt(0)),
+                  )
+                  .join("")
+              )}
+            </span>
+            <span className={styles.countryArrow} aria-hidden="true" />
+            <span className={styles.dialCode}>{formData.phone_dial_code}</span>
             <select
               name="phone_country"
               value={formData.phone_country_code}
               onChange={handleInputChange}
-              className={`${formFieldClass} cursor-pointer`}
-              required
+              aria-label="Country code"
             >
               {COUNTRIES.map((country) => (
                 <option key={country.code} value={country.code}>
@@ -238,92 +278,75 @@ const Form = ({ isOpen, onClose }: Props) => {
                 </option>
               ))}
             </select>
-            <div className="flex min-w-0">
-              <div className="flex shrink-0 items-center rounded-l-lg border border-r-0 border-gray-300 bg-white px-2 py-2.5 sm:px-3 sm:py-3">
-                <span className="text-sm text-gray-700 sm:text-base">
-                  {formData.phone_dial_code}
-                </span>
-              </div>
-              <input
-                type="tel"
-                name="phone"
-                placeholder="PHONE"
-                value={formData.phone}
-                onChange={handleInputChange}
-                className={`${formFieldClass} rounded-l-none`}
-                required
-              />
-            </div>
           </div>
-
-          <div className="flex items-center gap-3">
-            <input
-              type="checkbox"
-              id="reachus-whatsapp"
-              name="is_whatsapp_number"
-              checked={formData.is_whatsapp_number}
-              onChange={handleInputChange}
-              className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
-            />
-            <label htmlFor="reachus-whatsapp" className="text-sm text-gray-700 sm:text-base">
-              Is this your WhatsApp number?
-            </label>
-          </div>
-
-          <textarea
-            name="message"
-            placeholder="MESSAGE"
-            value={formData.message}
+          <input
+            type="tel"
+            name="phone"
+            value={formData.phone}
             onChange={handleInputChange}
-            rows={4}
-            className={`${formFieldClass} resize-none`}
+            aria-label="Phone number"
+            autoComplete="tel"
             required
           />
-
-          {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
-          {successMessage && <p className="text-sm text-green-600">{successMessage}</p>}
-
-          <div className={captchaRowClass}>
-            <div className={captchaInputGroupClass}>
-              <div className="rounded border bg-gray-200 px-3 py-2 sm:px-4">
-                <span className="font-mono text-base tracking-widest sm:text-lg">
-                  {captcha}
-                </span>
-              </div>
-              <input
-                type="text"
-                placeholder="Enter captcha"
-                value={captchaInput}
-                onChange={(e) => setCaptchaInput(e.target.value)}
-                className={`${formFieldClass} sm:max-w-[200px]`}
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="shrink-0 cursor-pointer self-end disabled:opacity-50"
-            >
-              <img loading="lazy" decoding="async"
-                src="/images/book-consulation/formBtn.png"
-                className="w-28 sm:w-40"
-                alt={isLoading ? "Submitting..." : "Submit"}
-              />
-            </button>
-          </div>
-        </form>
-
-        {/* Marketing Message */}
-        <div className="flex flex-col items-center justify-center text-center lg:items-start lg:text-left">
-          <h3 className="mb-3 text-2xl font-bold italic text-green-600 sm:text-3xl lg:text-4xl">
-            &quot;Power Your Future&quot;
-          </h3>
-          <h2 className="text-2xl font-bold leading-tight text-gray-800 sm:text-3xl lg:text-4xl">
-            Get a Free <span className="italic">Solar</span> Quote Today!
-          </h2>
         </div>
-      </div>
-    </EngineeringFormModal>
+
+        <label className={styles.whatsApp} htmlFor="reachus-whatsapp">
+          <input
+            id="reachus-whatsapp"
+            type="checkbox"
+            name="is_whatsapp_number"
+            checked={formData.is_whatsapp_number}
+            onChange={handleInputChange}
+          />
+          <span>Is this your WhatsApp number?</span>
+        </label>
+
+        <div className={styles.messageShell}>
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleInputChange}
+            className={styles.message}
+            aria-label="Message"
+            required
+          />
+        </div>
+
+        <aside className={styles.callout} aria-label="Contact us promotion">
+          <p>
+            &quot;<span>Power Your Future</span>&quot;
+          </p>
+          <h3>
+            Get a Free Solar
+            <br />
+            Quote Today!
+          </h3>
+        </aside>
+
+        <div className={styles.captchaGroup}>
+          <output className={styles.captcha} aria-label="Captcha code">
+            {captcha.replace(/\s/g, "")}
+          </output>
+          <input
+            type="text"
+            value={captchaInput}
+            onChange={(event) => setCaptchaInput(event.target.value)}
+            className={styles.captchaInput}
+            aria-label="Enter captcha"
+            required
+          />
+        </div>
+
+        {errorMessage ? <p className={styles.error}>{errorMessage}</p> : null}
+        {successMessage ? (
+          <p className={styles.success}>{successMessage}</p>
+        ) : null}
+
+        <button type="submit" disabled={isLoading} className={styles.submit}>
+          {isLoading ? "Sending…" : "Send"}
+        </button>
+      </form>
+    </ProductEnquiryFrame>
   );
 };
 

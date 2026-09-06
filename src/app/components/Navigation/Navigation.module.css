@@ -3,7 +3,6 @@
   z-index: 10000;
   inset: 0;
   width: 100vw;
-  height: 100vh;
   height: 100dvh;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
@@ -23,12 +22,12 @@
   display: block;
   width: min(100vw, 942px);
   height: auto;
-  min-height: 100vh;
   min-height: 100dvh;
   color: #202020;
   background: rgb(255 255 255 / 80%);
   box-shadow: 0 10px 30px rgb(0 0 0 / 25%);
   backdrop-filter: blur(40px);
+  overflow: hidden;
 }
 .close {
   position: absolute;
@@ -64,10 +63,14 @@
   padding: 147px 36px 46px;
 }
 .feature {
+  position: relative;
+  overflow: hidden;
   width: min(100%, 307px);
   height: 205px;
 }
 .feature img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
@@ -102,6 +105,12 @@
      vertical section divider. */
   white-space: normal;
   cursor: pointer;
+}
+.menuItems {
+  display: flex;
+  flex-direction: column;
+  gap: inherit;
+  width: 100%;
 }
 .subNavigation a:hover,
 .subNavigation button:hover,
@@ -176,6 +185,9 @@
   color: #23b14d;
   font-style: italic;
 }
+.quoteContent {
+  display: block;
+}
 
 /* Empower and Engage use Figma's feature-led composition: quote above the
    feature image and its links, rather than the default bottom quote. */
@@ -215,6 +227,55 @@
 .engineeringDrawer .quote {
   top: min(690px, calc(100vh - 210px));
   bottom: auto;
+}
+
+/* Each desktop Figma variant places the 307 x 205 feature image at a
+   different canvas coordinate. Keep the shared drawer structure, but do not
+   force every section into Explore's image position. */
+@media (min-width: 901px) {
+  .evolutionDrawer .feature,
+  .engineeringDrawer .feature,
+  .endeavorsDrawer .feature,
+  .enlightenDrawer .feature,
+  .ecosystemDrawer .feature,
+  .empowerDrawer .feature,
+  .engageDrawer .feature {
+    position: absolute;
+    left: 36px;
+  }
+
+  .evolutionDrawer .feature {
+    top: 234px;
+  }
+
+  .engineeringDrawer .feature {
+    top: 216px;
+  }
+
+  .engineeringDrawer .nestedNavigation {
+    top: 514px;
+    left: 124px;
+  }
+
+  .endeavorsDrawer .feature {
+    top: 410px;
+  }
+
+  .enlightenDrawer .feature {
+    top: 295px;
+  }
+
+  .ecosystemDrawer .feature {
+    top: 465px;
+  }
+
+  .empowerDrawer .feature {
+    top: 428px;
+  }
+
+  .engageDrawer .feature {
+    top: 319px;
+  }
 }
 .divider {
   position: absolute;
@@ -313,11 +374,8 @@
 
   .quote {
     bottom: clamp(125px, 17vh, 155px);
-  }
-
-  .engineeringDrawer .quote {
-    top: min(690px, calc(100vh - 210px));
-    bottom: auto;
+    font-size: clamp(20px, 3vh, 26px);
+    line-height: 1.35;
   }
 
   .divider {
@@ -336,27 +394,91 @@
   }
 
   .actions {
-    bottom: 28px;
+    bottom: clamp(14px, 3vh, 28px);
   }
 
-  .engineeringDrawer .nestedNavigation {
-    top: 400px;
+  .nestedNavigation {
+    top: clamp(320px, 45vh, 400px);
     gap: 8px;
   }
 
+  .engineeringDrawer .nestedNavigation {
+    top: 52.72dvh;
+    left: 124px;
+  }
+
+  .nestedNavigation a,
   .engineeringDrawer .nestedNavigation a {
     font-size: 15px;
     line-height: 1.2;
   }
 
   .engineeringDrawer .quote {
-    top: 550px;
+    top: calc(100dvh - 205px);
+    bottom: auto;
     width: min(500px, calc(100% - 90px));
     font-size: 22px;
     line-height: 1.35;
   }
 
-  /* The Engage panel has nine links, including the two-line Public Events
+  .featureLedDrawer .quote {
+    top: clamp(96px, 15vh, 135px);
+    right: auto;
+    bottom: auto;
+    left: 36px;
+    width: min(590px, calc(100% - 48px));
+    font-size: clamp(20px, 3.2vh, 26px);
+    line-height: 1.18;
+  }
+
+  .evolutionDrawer .feature {
+    top: 24dvh;
+  }
+
+  .engineeringDrawer .feature {
+    top: 22.15dvh;
+  }
+
+  .endeavorsDrawer .feature {
+    top: 42.05dvh;
+  }
+
+  .enlightenDrawer .feature {
+    top: 30.26dvh;
+  }
+
+  .ecosystemDrawer .feature {
+    top: 47.69dvh;
+  }
+
+  .empowerDrawer .feature {
+    top: 43.9dvh;
+  }
+
+  .engageDrawer .feature {
+    top: 32.72dvh;
+  }
+
+  .featureLedDrawer .feature {
+    left: 36px;
+    width: 270px;
+    height: 180px;
+  }
+
+  .featureLedDrawer .subNavigation {
+    top: clamp(185px, 26vh, 235px);
+    left: 326px;
+    width: min(303px, calc(100% - 338px));
+    gap: clamp(5px, 1vh, 9px);
+  }
+
+  .featureLedDrawer .subNavigation a,
+  .featureLedDrawer .subNavigation button {
+    font-size: clamp(15px, 2.2vh, 17px);
+    line-height: 1.18;
+  }
+
+  /* The Engage panel has ten links, including the two-line Public Events
      item. Its original Figma spacing exceeds short browser windows and puts
      the action buttons on top of Request a Proposal / Find Us Globally. */
   .engageDrawer .subNavigation {
@@ -364,7 +486,7 @@
   }
 
   .engageDrawer .actions {
-    bottom: 12px;
+    bottom: clamp(10px, 2vh, 18px);
   }
 
   .engageDrawer .actions a {
@@ -381,7 +503,7 @@
 /* A retina-sized browser can have a 900–1100px CSS viewport even though the
    captured image is much wider. Keep the Figma desktop columns, but compact
    Engineering's expanded product group so it never enters the quote lane. */
-@media (min-width: 901px) and (max-width: 1100px) {
+@media (min-width: 901px) and (max-width: 1100px) and (min-height: 901px) {
   .engineeringDrawer .nestedNavigation {
     top: 400px;
     gap: 8px;
@@ -419,10 +541,24 @@
     width: 100%;
     max-width: 307px;
   }
+
+  .featureLedDrawer .feature {
+    position: static;
+    width: 100%;
+    height: 205px;
+  }
+
   .subNavigation {
     position: static;
     width: min(100%, 250px);
     margin-top: 26px;
+  }
+
+  .featureLedDrawer .subNavigation {
+    position: static;
+    width: min(100%, 307px);
+    margin-top: 26px;
+    padding-left: 12px;
   }
 
   .nestedNavigation {
@@ -436,6 +572,16 @@
     margin-top: 52px;
     font-size: 24px;
   }
+
+  .featureLedDrawer .quote,
+  .engineeringDrawer .quote {
+    position: static;
+    width: auto;
+    margin-top: 52px;
+    font-size: 24px;
+    line-height: 1.35;
+    text-align: left;
+  }
   .divider,
   .sections {
     display: none;
@@ -443,5 +589,232 @@
   .actions {
     right: 28px;
     bottom: 34px;
+  }
+}
+
+/* State-specific desktop compositions from the 942 x 975 Figma drawer.
+   These rules position the feature, its related links, and the quote as a
+   single composition instead of moving the image independently. */
+@media (min-width: 901px) {
+  .evolutionDrawer .subNavigation {
+    top: 232px;
+  }
+  .engineeringDrawer .subNavigation {
+    top: 211px;
+  }
+  .endeavorsDrawer .subNavigation {
+    top: 411px;
+  }
+  .enlightenDrawer .subNavigation {
+    top: 293px;
+  }
+  .ecosystemDrawer .subNavigation {
+    top: 253px;
+  }
+  .empowerDrawer .subNavigation {
+    top: 431px;
+  }
+  .engageDrawer .subNavigation {
+    top: 318px;
+  }
+
+  .evolutionDrawer .quote,
+  .engineeringDrawer .quote,
+  .endeavorsDrawer .quote,
+  .enlightenDrawer .quote,
+  .ecosystemDrawer .quote,
+  .empowerDrawer .quote,
+  .engageDrawer .quote {
+    right: auto;
+    bottom: auto;
+    color: #303030;
+    font-size: 32px;
+    line-height: 1.2;
+  }
+  .evolutionDrawer .quote,
+  .engineeringDrawer .quote {
+    top: 721px;
+    left: 72px;
+    width: 538px;
+  }
+  .endeavorsDrawer .quote {
+    top: 789px;
+    left: 83px;
+    width: 520px;
+  }
+  .enlightenDrawer .quote {
+    top: 707px;
+    left: 58px;
+    width: 552px;
+  }
+  .ecosystemDrawer .quote {
+    top: 763px;
+    left: 54px;
+    width: 550px;
+  }
+  .supplyEcosystemDrawer .quote {
+    top: 730px;
+  }
+  .empowerDrawer .quote {
+    top: 310px;
+    left: 84px;
+    width: 520px;
+    text-align: left;
+  }
+  .engageDrawer .quote {
+    top: 159px;
+    left: 73px;
+    width: 518px;
+  }
+
+  .enlightenDrawer .nestedNavigation {
+    top: 534px;
+    left: 65px;
+  }
+  .ecosystemDrawer .nestedNavigation {
+    top: 254px;
+    left: 70px;
+    width: 270px;
+    gap: 23px;
+  }
+  .ecosystemDrawer .nestedNavigation a {
+    font-size: 18px;
+    line-height: 1.35;
+  }
+  .supplyEcosystemDrawer .nestedNavigation {
+    gap: 21px;
+  }
+
+  .ecosystemDrawer .feature {
+    top: 430px;
+  }
+  .supplyEcosystemDrawer .feature {
+    top: 465px;
+  }
+  .empowerDrawer .feature {
+    width: 307px;
+    height: 211px;
+  }
+  .engageDrawer .feature {
+    width: 307px;
+    height: 205px;
+  }
+
+  .evolutionDrawer .actions,
+  .engineeringDrawer .actions,
+  .endeavorsDrawer .actions,
+  .enlightenDrawer .actions,
+  .ecosystemDrawer .actions,
+  .empowerDrawer .actions,
+  .engageDrawer .actions {
+    top: auto;
+    bottom: 64px;
+  }
+}
+
+@media (min-width: 901px) and (max-height: 900px) {
+  .evolutionDrawer .subNavigation {
+    top: 23.79dvh;
+  }
+  .engineeringDrawer .subNavigation {
+    top: 21.64dvh;
+  }
+  .endeavorsDrawer .subNavigation {
+    top: 42.15dvh;
+  }
+  .enlightenDrawer .subNavigation {
+    top: 30.05dvh;
+  }
+  .ecosystemDrawer .subNavigation {
+    top: 25.95dvh;
+    gap: 12px;
+  }
+  .ecosystemDrawer .subNavigation a,
+  .ecosystemDrawer .subNavigation button {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  .empowerDrawer .subNavigation {
+    top: 44.21dvh;
+  }
+  .engageDrawer .subNavigation {
+    top: 32.62dvh;
+  }
+
+  .evolutionDrawer .quote,
+  .engineeringDrawer .quote {
+    top: 73.95dvh;
+  }
+  .endeavorsDrawer .quote {
+    top: 80.92dvh;
+  }
+  .enlightenDrawer .quote {
+    top: 72.51dvh;
+  }
+  .ecosystemDrawer .quote {
+    top: 78.26dvh;
+    width: 500px;
+    font-size: 22px;
+    line-height: 1.25;
+  }
+  .supplyEcosystemDrawer .quote {
+    top: max(78.26dvh, calc(50dvh + 215px));
+  }
+  .empowerDrawer .quote {
+    top: 31.79dvh;
+  }
+  .engageDrawer .quote {
+    top: 16.31dvh;
+  }
+
+  .engineeringDrawer .nestedNavigation {
+    top: 52.72dvh;
+  }
+  .enlightenDrawer .nestedNavigation {
+    top: calc(30.26dvh + 225px);
+    left: 65px;
+  }
+  .ecosystemDrawer .nestedNavigation {
+    top: 26.05dvh;
+    gap: 6px;
+  }
+  .ecosystemDrawer .nestedNavigation a {
+    font-size: 14px;
+    line-height: 1.15;
+  }
+  .ecosystemDrawer .feature {
+    top: 44.1dvh;
+  }
+  .supplyEcosystemDrawer .feature {
+    top: 50dvh;
+  }
+
+  .featureLedDrawer .feature {
+    width: 307px;
+  }
+  .featureLedDrawer .subNavigation {
+    left: 352px;
+    width: 277px;
+  }
+  .featureLedDrawer .subNavigation a,
+  .featureLedDrawer .subNavigation button {
+    font-size: 18px;
+  }
+  .empowerDrawer .feature {
+    height: 211px;
+  }
+  .engageDrawer .feature {
+    height: 205px;
+  }
+
+  .evolutionDrawer .actions,
+  .engineeringDrawer .actions,
+  .endeavorsDrawer .actions,
+  .enlightenDrawer .actions,
+  .ecosystemDrawer .actions,
+  .empowerDrawer .actions,
+  .engageDrawer .actions {
+    top: 88.72dvh;
+    bottom: auto;
   }
 }

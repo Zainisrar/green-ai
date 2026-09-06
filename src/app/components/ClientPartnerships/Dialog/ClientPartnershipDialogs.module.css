@@ -1,0 +1,172 @@
+.dialogHeader {
+  padding-bottom: 18px;
+  border-bottom: 1px solid #b9b9b9;
+}
+
+.dialogTitle {
+  margin: 0;
+  color: #050505;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.dialogSubtitle {
+  margin: 5px 0 0 18px;
+  color: #23b14d;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.model,
+.useCases,
+.trusted {
+  padding: 2px 48px 16px;
+}
+
+.intro {
+  margin: 31px 0 24px;
+  color: #050505;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.modelBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 290px;
+  align-items: start;
+  gap: 54px;
+}
+
+.modelRows {
+  display: grid;
+  gap: 25px;
+}
+
+.modelRow {
+  display: grid;
+  grid-template-columns: 290px minmax(0, 1fr);
+  align-items: baseline;
+  gap: 18px;
+  font-size: 18px;
+}
+
+.modelLabel {
+  text-align: right;
+  font-weight: 800;
+}
+
+.modelDescription {
+  font-weight: 500;
+}
+
+.modelImage {
+  display: block;
+  width: 290px;
+  height: 198px;
+  object-fit: cover;
+}
+
+.modelQuote {
+  margin: 62px 0 0;
+  color: #050505;
+  font-size: 24px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.55;
+}
+
+.caseGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 48px;
+  padding-top: 45px;
+}
+
+.caseCard {
+  min-width: 0;
+}
+
+.caseImage {
+  display: block;
+  width: 100%;
+  height: 145px;
+  object-fit: cover;
+  clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
+}
+
+.caseQuote,
+.caseReference {
+  margin: 14px 0 0;
+  font-size: 17px;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.caseReference {
+  margin-top: 2px;
+  color: #23b14d;
+}
+
+.logoGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: 42px 70px;
+  padding: 46px 25px 0;
+}
+
+.partnerLogo {
+  display: block;
+  width: 100%;
+  max-width: 235px;
+  height: 120px;
+  object-fit: contain;
+}
+
+@media (max-width: 900px) {
+  .model,
+  .useCases,
+  .trusted {
+    padding: 0;
+  }
+
+  .dialogTitle {
+    font-size: 24px;
+  }
+
+  .dialogSubtitle {
+    margin-left: 0;
+    font-size: 17px;
+  }
+
+  .modelBody,
+  .modelRow {
+    grid-template-columns: 1fr;
+  }
+
+  .modelLabel {
+    text-align: left;
+  }
+
+  .modelImage {
+    width: 100%;
+    max-width: 360px;
+  }
+
+  .caseGrid,
+  .logoGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+}
+
+@media (max-width: 560px) {
+  .caseGrid,
+  .logoGrid {
+    grid-template-columns: 1fr;
+  }
+}

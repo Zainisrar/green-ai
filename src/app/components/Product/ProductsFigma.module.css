@@ -38,9 +38,11 @@
   place-items: center;
 }
 .sunsmartPrimaryBrand img {
-  width: 230px;
+  /* The panel narrows toward its lower-right diagonal. Keep the full
+     SunSmart mark inside that safe area at the rendered Figma scale. */
+  width: 205px;
   height: auto;
-  max-height: 80px;
+  max-height: 70px;
   object-fit: contain;
 }
 .empawaPrimaryBrand {
@@ -57,24 +59,46 @@
   place-items: center;
 }
 .empawaPrimaryBrand img {
-  width: 230px;
+  /* The Em’Pawa bolt extends furthest right, so it needs the same inset. */
+  width: 205px;
   height: auto;
-  max-height: 80px;
+  max-height: 70px;
   object-fit: contain;
 }
-.sunsmartProductLink {
+.productBrandSwitcher {
   position: absolute;
-  z-index: 4;
-  top: 190px;
+  z-index: 10;
+  inset: 0;
+  pointer-events: none;
+}
+.productBrandSwitcher a {
+  position: absolute;
   left: 0;
   display: block;
-  width: 255px;
-  height: 82px;
   cursor: pointer;
+  pointer-events: auto;
 }
-.sunsmartProductLink:focus-visible {
+.sunshineBrandLink {
+  top: 0;
+  width: 320px;
+  height: 126px;
+}
+.empawaBrandLink {
+  top: 128px;
+  width: 190px;
+  height: 66px;
+}
+.sunsmartBrandLink {
+  top: 202px;
+  width: 205px;
+  height: 68px;
+}
+.productBrandSwitcher a:focus-visible {
   outline: 3px solid #23b14d;
   outline-offset: -4px;
+}
+.productBrandSwitcher a[aria-current="page"] {
+  cursor: pointer;
 }
 .verticalTitle {
   position: absolute;

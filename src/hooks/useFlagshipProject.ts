@@ -34,7 +34,7 @@ interface FlagshipProjectData {
 }
 
 const fetchFlagshipProject = async (): Promise<FlagshipProjectData> => {
-  const response = await fetch('https://g-stack.green.com.pg/api/endeavors/flagship-projects/get');
+  const response = await fetch('https://greencms.percepco.co.uk/api/endeavors/flagship-projects/get');
   
   if (!response.ok) {
     throw new Error('Failed to fetch flagship project data');

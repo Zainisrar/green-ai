@@ -16,7 +16,7 @@ interface HomeApiResponse {
 const CORE_SLUG = "/home/renewable-energy-the-core";
 
 const fetchAllHome = async (): Promise<HomeData[]> => {
-  const response = await fetch("https://g-stack.green.com.pg/api/home");
+  const response = await fetch("https://greencms.percepco.co.uk/api/home");
   if (!response.ok) throw new Error("Failed to fetch home data");
   const result: HomeApiResponse = await response.json();
   return result.data;

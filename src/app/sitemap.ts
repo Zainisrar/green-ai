@@ -114,15 +114,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const dynamicPages = await Promise.all([
     fetchDynamicRoutes(
-      "https://g-stack.green.com.pg/api/enlighten/insights-articles",
+      "https://greencms.percepco.co.uk/api/enlighten/insights-articles",
       "/enlighten/insights-articles",
     ),
     fetchDynamicRoutes(
-      "https://g-stack.green.com.pg/api/engineering/products",
+      "https://greencms.percepco.co.uk/api/engineering/products",
       "/engineering/products",
     ),
     fetchDynamicRoutes(
-      "https://g-stack.green.com.pg/api/expertise",
+      "https://greencms.percepco.co.uk/api/expertise",
       "/expertise",
     ),
   ]);

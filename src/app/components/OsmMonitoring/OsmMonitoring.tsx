@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useOMMonitoring } from "../../../hooks/useOMMonitoring";
 import D6Chatbot from "../D6Chatbot";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import LiveDemoPOC from "./Modals/LiveDemoPOC";
@@ -140,31 +141,19 @@ export default function OsmMonitoring() {
         ))}
       </section>
       <div className={styles.actions}>
-        <button type="button" onClick={() => setIsOMProposalOpen(true)}>
-          <img loading="lazy" decoding="async"
-            src="/images/osm-monitoring/request.png"
-            alt=""
-            width="301"
-            height="53"
-          />
-          <span>
-            {omData?.callToActions?.[0]?.text || "Request an O&M Proposal"}
-          </span>
-          <b>›</b>
-        </button>
-        <button type="button" onClick={() => setIsLiveDemoOpen(true)}>
-          <img loading="lazy" decoding="async"
-            src="/images/osm-monitoring/book.png"
-            alt=""
-            width="351"
-            height="53"
-          />
-          <span>
-            {omData?.callToActions?.[1]?.text ||
-              "Book a Live Demo of GREEN POC"}
-          </span>
-          <b>›</b>
-        </button>
+        <FigmaAngledCta
+          onClick={() => setIsOMProposalOpen(true)}
+          style={{ position: "absolute", top: 741, right: 32, width: 301 }}
+        >
+          {omData?.callToActions?.[0]?.text || "Request an O&M Proposal"}
+        </FigmaAngledCta>
+        <FigmaAngledCta
+          onClick={() => setIsLiveDemoOpen(true)}
+          style={{ position: "absolute", top: 820, right: 32, width: 351 }}
+        >
+          {omData?.callToActions?.[1]?.text ||
+            "Book a Live Demo of GREEN POC"}
+        </FigmaAngledCta>
       </div>
       <D6Chatbot
         canvasAnchored

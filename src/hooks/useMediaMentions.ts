@@ -46,7 +46,7 @@ interface MediaMentionsResponse {
 }
 
 const fetchMediaMentions = async (): Promise<MediaMentionsData> => {
-  const response = await fetch('https://g-stack.green.com.pg/api/enlighten/media-mentions');
+  const response = await fetch('https://greencms.percepco.co.uk/api/enlighten/media-mentions');
   
   if (!response.ok) {
     throw new Error('Failed to fetch media mentions data');

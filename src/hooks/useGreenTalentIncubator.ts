@@ -108,7 +108,7 @@ export const useGreenTalentIncubator = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://g-stack.green.com.pg/api/empower/green-talent-incubator"
+          "https://greencms.percepco.co.uk/api/empower/green-talent-incubator"
         );
         
         if (!response.ok) {

@@ -89,7 +89,7 @@ const ClientInfoModal = ({
         ref={dialogRef}
         className={`relative z-10 my-2 w-full ${widthClass} sm:my-auto ${
           geometry === "consultation"
-            ? enquiryStyles.consultationWindow
+            ? `${enquiryStyles.consultationWindow} ${styles.enquiryWindow}`
             : enquiryStyles.window
         }`}
         role="dialog"

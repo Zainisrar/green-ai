@@ -2,11 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
-import EngineeringFormModal, {
-  formFieldClass,
-  formGridClass,
-} from "@/app/components/shared/EngineeringFormModal";
-import PhoneInput from "@/app/components/shared/PhoneInput";
+import { ProductEnquiryFrame } from "@/app/components/Product/Modals/ProductEnquiry";
+import styles from "@/app/components/Product/Modals/ProductEnquiry.module.css";
+import CountryCodeDropdown from "@/app/components/shared/CountryCodeDropdown";
 
 interface Props {
   isOpen: boolean;
@@ -119,24 +117,23 @@ const DiscoveryConsultation = ({ isOpen, onClose }: Props) => {
   };
 
   return (
-    <EngineeringFormModal
-      isOpen={isOpen}
+    <ProductEnquiryFrame
+      labelledBy="epcm-discovery-title"
       onClose={onClose}
-      title={
-        <>
-          BOOK A <span className="text-green-600">DISCOVERY CONSULTATION</span>
-        </>
-      }
+      closeLabel="Close discovery consultation"
     >
-      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-        <div className={formGridClass}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <h2 id="epcm-discovery-title" className={styles.title}>
+          BOOK A <span>DISCOVERY CONSULTATION</span>
+        </h2>
+        <div className={styles.grid}>
           <input
             type="text"
             name="fullName"
             placeholder="FULL NAME"
             value={formData.fullName}
             onChange={handleInputChange}
-            className={formFieldClass}
+            className={`${styles.field} ${styles.skewForward}`}
             required
           />
           <input
@@ -145,37 +142,41 @@ const DiscoveryConsultation = ({ isOpen, onClose }: Props) => {
             placeholder="EMAIL ID"
             value={formData.email}
             onChange={handleInputChange}
-            className={formFieldClass}
+            className={`${styles.field} ${styles.skewBack}`}
             required
           />
-        </div>
-
-        <div className={formGridClass}>
-          <PhoneInput
-            phone={formData.phone}
-            onPhoneChange={handleInputChange}
-            dialCode={phoneCountry.dial_code}
-            countryCode={phoneCountry.country_code}
-            onCountryChange={(dial_code, country_code) => setPhoneCountry({ dial_code, country_code })}
-          />
+          <div className={`${styles.phoneField} ${styles.skewForward}`}>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="PHONE"
+              value={formData.phone}
+              onChange={handleInputChange}
+              required
+              aria-label={`Phone number, dial code ${phoneCountry.dial_code}`}
+            />
+            <CountryCodeDropdown
+              dialCode={phoneCountry.dial_code}
+              countryCode={phoneCountry.country_code}
+              onSelect={(dial_code, country_code) => setPhoneCountry({ dial_code, country_code })}
+              className={styles.countryCode}
+            />
+          </div>
           <input
             type="text"
             name="organization"
             placeholder="ORGANIZATION"
             value={formData.organization}
             onChange={handleInputChange}
-            className={formFieldClass}
+            className={`${styles.field} ${styles.skewBack}`}
             required
           />
-        </div>
-
-        <div className={formGridClass}>
           <select
             name="consultationType"
             value={formData.consultationType}
             onChange={handleInputChange}
-            className={`${formFieldClass} cursor-pointer ${
-              formData.consultationType ? "text-gray-700" : "text-gray-500"
+            className={`${styles.field} ${styles.select} ${styles.skewForward} ${
+              formData.consultationType ? styles.hasValue : ""
             }`}
             required
           >
@@ -188,8 +189,8 @@ const DiscoveryConsultation = ({ isOpen, onClose }: Props) => {
             name="helpWith"
             value={formData.helpWith}
             onChange={handleInputChange}
-            className={`${formFieldClass} cursor-pointer ${
-              formData.helpWith ? "text-gray-700" : "text-gray-500"
+            className={`${styles.field} ${styles.select} ${styles.skewBack} ${
+              formData.helpWith ? styles.hasValue : ""
             }`}
             required
           >
@@ -209,48 +210,45 @@ const DiscoveryConsultation = ({ isOpen, onClose }: Props) => {
           value={formData.message}
           onChange={handleInputChange}
           rows={3}
-          className={`${formFieldClass} resize-none`}
+          className={`${styles.field} ${styles.message}`}
         />
 
-        <div className="flex items-start gap-3">
+        <div className={styles.agreement}>
           <input
             type="checkbox"
             id="epcm-discovery-agree"
             checked={agreed}
             onChange={(e) => setAgreed(e.target.checked)}
-            className="mt-1 h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
           />
-          <label htmlFor="epcm-discovery-agree" className="text-sm text-gray-700 sm:text-base">
+          <label htmlFor="epcm-discovery-agree">
             I agree that GREEN may contact me about this request.
           </label>
         </div>
 
-        {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
-        {successMessage && <p className="text-sm text-green-600">{successMessage}</p>}
+        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+        {successMessage && <p className={styles.success}>{successMessage}</p>}
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:justify-end sm:gap-6">
+        <div className={styles.actions}>
           <button
             type="button"
             onClick={resetForm}
             disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
+            className={styles.action}
           >
-            <span className="block text-sm font-bold text-gray-800 sm:text-base">
-              Reset
-            </span>
+            <span>Reset</span>
           </button>
           <button
             type="submit"
             disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
+            className={`${styles.action} ${styles.submit}`}
           >
-            <span className="block text-sm font-bold text-gray-900 sm:text-base">
+            <span>
               {isLoading ? "Submitting..." : "Book Consultation"}
             </span>
           </button>
         </div>
       </form>
-    </EngineeringFormModal>
+    </ProductEnquiryFrame>
   );
 };
 

@@ -137,10 +137,24 @@
 
 /* ---------- Row pills ---------- */
 .rowCta {
-  width: 141px;
-  height: 46px;
+  --figma-cta-slant: 19px;
+
+  width: 136px;
+  height: 42px;
   font-size: 12px;
   z-index: 3;
+}
+
+/* Exact exported Vector 7368 geometry and off-canvas gradient coordinates. */
+.rowCta::before {
+  background:
+    url("/images/client-partnerships/explore-button-bg.svg") center / 100% 100%
+    no-repeat;
+  clip-path: none;
+}
+
+.rowCta::after {
+  display: none;
 }
 
 /* ---------- Right-column quote over collage ---------- */
@@ -241,7 +255,6 @@
   text-decoration: none;
   z-index: 4;
 }
-
 
 @media (max-width: 1200px) {
   .page {

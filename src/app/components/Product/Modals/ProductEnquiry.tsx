@@ -1,7 +1,8 @@
 "use client";
 
 import type React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import CountryCodeDropdown from "@/app/components/shared/CountryCodeDropdown";
 import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
 import styles from "./ProductEnquiry.module.css";
@@ -19,37 +20,99 @@ interface Props {
 
 interface ProductEnquiryFrameProps {
   children: React.ReactNode;
+  closeRight?: number;
   labelledBy: string;
   onClose: () => void;
   closeLabel?: string;
+  closeTop?: number;
   compact?: boolean;
+  designCanvasHeight?: number;
+  designCanvasWidth?: number;
+  designCanvasX?: number;
+  designCanvasY?: number;
   height?: number;
+  maxScale?: number;
+  maximizeRight?: number;
+  maximizeTop?: number;
+  overlayClassName?: string;
   shape?: string;
+  surfaceClassName?: string;
+  surfaceImage?: string;
+  surfaceImageHeight?: string;
+  surfaceImageInset?: string;
+  surfaceImageWidth?: string;
+  surfaceSrc?: string;
+  stageClassName?: string;
+  showMaximize?: boolean;
   width?: number;
 }
 
 export const ProductEnquiryFrame = ({
   children,
+  closeRight,
   labelledBy,
   onClose,
   closeLabel = "Close dialog",
+  closeTop,
   compact = false,
-  height = 665,
+  designCanvasHeight,
+  designCanvasWidth,
+  designCanvasX = 0,
+  designCanvasY = 0,
+  height = 702,
+  maxScale = 1,
+  maximizeRight,
+  maximizeTop,
+  overlayClassName,
   shape,
-  width = 1688,
+  surfaceClassName,
+  surfaceImage,
+  surfaceImageHeight,
+  surfaceImageInset,
+  surfaceImageWidth,
+  surfaceSrc = "/images/shared/engineering-form-window.svg",
+  stageClassName,
+  showMaximize = true,
+  width = 1710,
 }: ProductEnquiryFrameProps) => {
   const [desktopScale, setDesktopScale] = useState(1);
+  const [desktopPosition, setDesktopPosition] = useState<{
+    left: number;
+    top: number;
+  } | null>(null);
+  const stageRef = useRef<HTMLElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const updateDesktopScale = () => {
       if (window.innerWidth <= 1200) {
         setDesktopScale(1);
+        setDesktopPosition(null);
         return;
       }
 
+      if (designCanvasWidth && designCanvasHeight) {
+        const scale = Math.min(
+          maxScale,
+          window.innerWidth / designCanvasWidth,
+          window.innerHeight / designCanvasHeight,
+        );
+        setDesktopScale(scale);
+        setDesktopPosition({
+          left:
+            (window.innerWidth - designCanvasWidth * scale) / 2 +
+            designCanvasX * scale,
+          top:
+            (window.innerHeight - designCanvasHeight * scale) / 2 +
+            designCanvasY * scale,
+        });
+        return;
+      }
+
+      setDesktopPosition(null);
       setDesktopScale(
         Math.min(
-          1,
+          maxScale,
           (window.innerWidth - 36) / width,
           (window.innerHeight - 36) / height,
         ),
@@ -59,10 +122,65 @@ export const ProductEnquiryFrame = ({
     updateDesktopScale();
     window.addEventListener("resize", updateDesktopScale);
     return () => window.removeEventListener("resize", updateDesktopScale);
-  }, [height, width]);
+  }, [
+    designCanvasHeight,
+    designCanvasWidth,
+    designCanvasX,
+    designCanvasY,
+    height,
+    maxScale,
+    width,
+  ]);
 
-  return (
-    <div className={styles.overlay} role="presentation">
+  useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      previouslyFocused?.focus();
+    };
+  }, [onClose]);
+
+  const trapFocus = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key !== "Tab") return;
+
+    const focusable = stageRef.current?.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    );
+    if (!focusable?.length) {
+      event.preventDefault();
+      return;
+    }
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  };
+
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
+    <div
+      className={`${styles.overlay} ${overlayClassName ?? ""}`}
+      role="presentation"
+    >
       <button
         type="button"
         className={styles.backdropClose}
@@ -70,7 +188,9 @@ export const ProductEnquiryFrame = ({
         aria-label={closeLabel}
       />
       <section
-        className={`${styles.stage} ${compact ? styles.compactStage : ""}`}
+        ref={stageRef}
+        onKeyDown={trapFocus}
+        className={`${styles.stage} ${compact ? styles.compactStage : ""} ${stageClassName ?? ""}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby={labelledBy}
@@ -79,29 +199,69 @@ export const ProductEnquiryFrame = ({
             "--product-enquiry-scale": desktopScale,
             "--product-enquiry-width": `${width}px`,
             "--product-enquiry-height": `${height}px`,
+            ...(closeRight !== undefined
+              ? { "--product-enquiry-close-right": `${closeRight}px` }
+              : {}),
+            ...(closeTop !== undefined
+              ? { "--product-enquiry-close-top": `${closeTop}px` }
+              : {}),
+            ...(maximizeRight !== undefined
+              ? { "--product-enquiry-maximize-right": `${maximizeRight}px` }
+              : {}),
+            ...(maximizeTop !== undefined
+              ? { "--product-enquiry-maximize-top": `${maximizeTop}px` }
+              : {}),
+            ...(surfaceImageInset
+              ? { "--product-enquiry-surface-inset": surfaceImageInset }
+              : {}),
+            ...(surfaceImageWidth
+              ? { "--product-enquiry-surface-width": surfaceImageWidth }
+              : {}),
+            ...(surfaceImageHeight
+              ? { "--product-enquiry-surface-height": surfaceImageHeight }
+              : {}),
             ...(shape ? { "--product-enquiry-shape": shape } : {}),
+            ...(desktopPosition
+              ? {
+                  position: "fixed",
+                  left: `${desktopPosition.left}px`,
+                  top: `${desktopPosition.top}px`,
+                }
+              : {}),
           } as React.CSSProperties
         }
       >
         <div className={styles.modal}>
-          <div className={styles.surface} aria-hidden="true" />
+          <div
+            className={`${styles.surface} ${surfaceClassName ?? ""}`}
+            aria-hidden="true"
+          >
+            {!surfaceImage ? (
+              <img className={styles.surfaceVector} src={surfaceSrc} alt="" />
+            ) : null}
+            {surfaceImage ? (
+              <img alt="" className={styles.surfaceImage} src={surfaceImage} />
+            ) : null}
+          </div>
           <button
+            ref={closeButtonRef}
             type="button"
             onClick={onClose}
             className={styles.close}
             aria-label={closeLabel}
           >
-            <span />
-            <span />
+            <img src="/images/job-openings/job-query-close.svg" alt="" />
           </button>
-          <span className={styles.maximize} aria-hidden="true">
-            <span />
-            <span />
-          </span>
+          {showMaximize ? (
+            <span className={styles.maximize} aria-hidden="true">
+              <img src="/images/join-us/solar_maximize.png" alt="" />
+            </span>
+          ) : null}
           {children}
         </div>
       </section>
-    </div>
+    </div>,
+    document.body,
   );
 };
 
@@ -239,6 +399,7 @@ const ProductEnquiry = ({
       labelledBy="product-enquiry-title"
       onClose={onClose}
       closeLabel="Close product enquiry"
+      surfaceClassName={styles.opaqueSurface}
     >
       <form onSubmit={handleSubmit} className={styles.form}>
         <h2 id="product-enquiry-title" className={styles.title}>

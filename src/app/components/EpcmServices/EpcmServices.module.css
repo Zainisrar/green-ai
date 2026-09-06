@@ -85,13 +85,14 @@
 
 .cardPoints {
   position: absolute;
-  top: 85px;
-  left: 73px;
-  right: 19px;
+  top: 88px;
+  left: 15px;
+  width: 460px;
   z-index: 1;
   margin: 0;
   padding: 0;
   list-style: none;
+  overflow-wrap: anywhere;
 }
 
 .cardPoints li {
@@ -99,6 +100,8 @@
   font-size: 14px;
   font-weight: 600;
   line-height: 17px;
+  white-space: normal;
+  text-align: center;
 }
 
 .embedQuote {

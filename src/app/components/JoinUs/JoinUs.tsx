@@ -185,7 +185,7 @@ export default function JoinUs() {
             </div>
 
             <Link
-              href={data?.cta?.[0]?.href || "#"}
+              href={data?.cta?.[0]?.href || "/empower/job-openings"}
               className={`${styles.cta} ${styles.vacancies}`}
             >
               <img loading="lazy" decoding="async"

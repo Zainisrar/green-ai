@@ -62,13 +62,6 @@ const MeettheTeam = ({ isOpen, onClose, data }: Props) => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Also check on every render as backup
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.innerWidth < 768) {
-      setIsMobile(true);
-    }
-  });
-
   // Update selected category when data changes
   useEffect(() => {
     if (data?.designations && data.designations.length > 0) {

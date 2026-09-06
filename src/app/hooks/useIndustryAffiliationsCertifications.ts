@@ -63,7 +63,7 @@ export const useIndustryAffiliationsCertifications = () => {
         setError(null);
 
         const res = await fetch(
-          "https://g-stack.green.com.pg/api/ecosystem/industry-affiliations-certifications",
+          "https://greencms.percepco.co.uk/api/ecosystem/industry-affiliations-certifications",
           { next: { revalidate: 60 } as any }
         );
 

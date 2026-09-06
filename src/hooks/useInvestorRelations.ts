@@ -98,7 +98,7 @@ export const useInvestorRelations = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://g-stack.green.com.pg/api/engage/investor-relations",
+          "https://greencms.percepco.co.uk/api/engage/investor-relations",
           {
             next: { revalidate: 60 },
           }

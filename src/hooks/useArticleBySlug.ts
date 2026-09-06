@@ -32,7 +32,7 @@ const fetchArticleBySlug = async (
   slug: string
 ): Promise<ArticleDetailData | null> => {
   const response = await fetch(
-    "https://g-stack.green.com.pg/api/enlighten/insights-articles"
+    "https://greencms.percepco.co.uk/api/enlighten/insights-articles"
   );
 
   if (!response.ok) {

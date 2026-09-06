@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 import { useEnergyStorageSmartGrid } from "../../../hooks/useEnergyStorageSmartGrid";
 import D6Chatbot from "../D6Chatbot";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import DispatchArchitect from "./Modals/DispatchArchitect";
@@ -114,45 +114,28 @@ export default function SmartGrid() {
         <br />— <span>{statementDescription}</span>
       </p>
       <div className={styles.actions}>
-        <button type="button" onClick={() => setIsDispatchArchitectOpen(true)}>
-          <img loading="lazy" decoding="async"
-            src="/images/smart-grid/talk.png"
-            alt=""
-            width="341"
-            height="53"
-          />
-          <span>
-            {smartGridData?.callToActions?.[0]?.text ||
-              "Talk to Our Dispatch Architects"}
-          </span>
-          <b aria-hidden="true">›</b>
-        </button>
-        <button type="button" onClick={() => setIsStorageReviewOpen(true)}>
-          <img loading="lazy" decoding="async"
-            src="/images/smart-grid/book.png"
-            alt=""
-            width="351"
-            height="53"
-          />
-          <span>
-            {smartGridData?.callToActions?.[1]?.text ||
-              "Book a Storage System Review"}
-          </span>
-          <b aria-hidden="true">›</b>
-        </button>
-        <Link href={smartGridData?.callToActions?.[2]?.href || "#"}>
-          <img loading="lazy" decoding="async"
-            src="/images/smart-grid/download.png"
-            alt=""
-            width="441"
-            height="53"
-          />
-          <span>
-            {smartGridData?.callToActions?.[2]?.text ||
-              "Download Our Smart Grid & Storage Dossier"}
-          </span>
-          <b aria-hidden="true">⇩</b>
-        </Link>
+        <FigmaAngledCta
+          onClick={() => setIsDispatchArchitectOpen(true)}
+          style={{ position: "absolute", top: 637, right: 32, width: 341 }}
+        >
+          {smartGridData?.callToActions?.[0]?.text ||
+            "Talk to Our Dispatch Architects"}
+        </FigmaAngledCta>
+        <FigmaAngledCta
+          onClick={() => setIsStorageReviewOpen(true)}
+          style={{ position: "absolute", top: 718, right: 32, width: 351 }}
+        >
+          {smartGridData?.callToActions?.[1]?.text ||
+            "Book a Storage System Review"}
+        </FigmaAngledCta>
+        <FigmaAngledCta
+          href={smartGridData?.callToActions?.[2]?.href || "#"}
+          icon="download"
+          style={{ position: "absolute", top: 793, right: 32, width: 441 }}
+        >
+          {smartGridData?.callToActions?.[2]?.text ||
+            "Download Our Smart Grid & Storage Dossier"}
+        </FigmaAngledCta>
       </div>
       <D6Chatbot
         canvasAnchored

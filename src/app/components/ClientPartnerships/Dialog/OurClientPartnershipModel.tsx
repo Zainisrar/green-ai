@@ -1,8 +1,9 @@
 "use client";
 
-import React from "react";
+import { Fragment } from "react";
 import type { ClientPartnershipsOurClientPartnership } from "../../../lib/api";
 import ClientInfoModal from "./ClientInfoModal";
+import styles from "./ClientPartnershipDialogs.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -51,59 +52,45 @@ const OurClientPartnershipModel = ({ isOpen, onClose, data }: Props) => {
 
   return (
     <ClientInfoModal isOpen={isOpen} onClose={onClose}>
-      <div className="mb-6 sm:mb-8">
-        <h2 className="text-2xl font-black text-gray-800 sm:text-3xl">
-          {title}
-        </h2>
-        <div className="mt-2 flex items-center">
-          <span className="mr-2 text-2xl font-bold text-black">-</span>
-          <h3 className="text-lg font-semibold text-[#4CAF50] sm:text-xl">
-            {subHeadline}
-          </h3>
-        </div>
-        <div className="mt-4 h-0.5 w-full bg-gray-300" />
-      </div>
+      <div className={styles.model}>
+        <header className={styles.dialogHeader}>
+          <h2 className={styles.dialogTitle}>{title}</h2>
+          <p className={styles.dialogSubtitle}>- {subHeadline}</p>
+        </header>
+        <p className={styles.intro}>{description}</p>
 
-      <div className="mb-6">
-        <p className="text-base font-medium text-gray-700 sm:text-lg">
-          {description}
-        </p>
-      </div>
-
-      <div className="flex flex-col items-start gap-8 lg:flex-row lg:gap-12">
-        <div className="flex-1 space-y-5">
-          {items.map((item, idx) => (
-            <div
-              key={idx}
-              className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
-            >
-              <div className="text-base font-bold text-gray-800 sm:text-lg">
-                {item.title}
+        <div className={styles.modelBody}>
+          <div className={styles.modelRows}>
+            {items.map((item) => (
+              <div key={item.title} className={styles.modelRow}>
+                <div className={styles.modelLabel}>{item.title}</div>
+                <div className={styles.modelDescription}>
+                  – {item.description}
+                </div>
               </div>
-              <div className="text-sm text-gray-700 sm:text-base">
-                - {item.description}
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          <img
+            loading="lazy"
+            decoding="async"
+            src={imgSrc}
+            alt={imgAlt}
+            className={styles.modelImage}
+          />
         </div>
-        <div className="w-full shrink-0 lg:w-[300px]">
-          <img loading="lazy" decoding="async" src={imgSrc} alt={imgAlt} className="h-auto w-full" />
-        </div>
-      </div>
 
-      <div className="mt-10 text-center">
-        <p className="text-lg font-bold italic text-gray-800 sm:text-xl">
+        <p className={styles.modelQuote}>
           {quoteText
             .split(new RegExp(`(${quoteHighlighted.join("|")})`, "gi"))
-            .map((part, i) =>
+            .map((part) =>
               quoteHighlighted.some(
                 (h) => h.toLowerCase() === part.toLowerCase(),
               ) ? (
-                <span key={i} className="text-[#4CAF50]">
+                <span key={`highlight-${part}`} className="text-[#4CAF50]">
                   {part}
                 </span>
               ) : (
-                <React.Fragment key={i}>{part}</React.Fragment>
+                <Fragment key={`quote-${part}`}>{part}</Fragment>
               ),
             )}
         </p>

@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
+import { ProductEnquiryFrame } from "@/app/components/Product/Modals/ProductEnquiry";
+import enquiryStyles from "@/app/components/Product/Modals/ProductEnquiry.module.css";
+import CountryCodeDropdown from "@/app/components/shared/CountryCodeDropdown";
 import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
-import EngineeringFormModal, {
-  formFieldClass,
-  formGridClass,
-} from "@/app/components/shared/EngineeringFormModal";
-import PhoneInput from "@/app/components/shared/PhoneInput";
+import styles from "./BookDiscoveryCall.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -124,124 +124,141 @@ const BookDiscoveryCall = ({ isOpen, onClose }: Props) => {
   };
 
   return (
-    <EngineeringFormModal
-      isOpen={isOpen}
+    <ProductEnquiryFrame
       onClose={onClose}
-      title={
-        <>
-          BOOK A <span className="text-green-600">DISCOVERY CALL</span>
-        </>
-      }
+      labelledBy="client-discovery-call-title"
+      closeLabel="Close discovery call form"
+      width={1688}
+      height={665}
+      maxScale={1.14}
+      surfaceClassName={styles.surface}
+      surfaceSrc="/images/client-partnerships/discovery-call-window.svg"
     >
-      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-        <div className={formGridClass}>
-          <input
-            type="text"
-            name="fullName"
-            placeholder="FULL NAME"
-            value={formData.fullName}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="EMAIL ID"
-            value={formData.email}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-        </div>
+      <form
+        onSubmit={handleSubmit}
+        className={`${enquiryStyles.form} ${styles.form}`}
+      >
+        <h2
+          id="client-discovery-call-title"
+          className={`${enquiryStyles.title} ${styles.title}`}
+        >
+          BOOK A DISCOVERY CALL
+        </h2>
 
-        <div className={formGridClass}>
-          <PhoneInput
-            phone={formData.phone}
-            onPhoneChange={handleInputChange}
-            dialCode={phoneCountry.dial_code}
-            countryCode={phoneCountry.country_code}
-            onCountryChange={(dial_code, country_code) =>
-              setPhoneCountry({ dial_code, country_code })
-            }
-          />
-          <select
-            name="areaOfInterest"
-            value={formData.areaOfInterest}
-            onChange={handleInputChange}
-            className={`${formFieldClass} cursor-pointer ${
-              formData.areaOfInterest ? "text-gray-700" : "text-gray-500"
-            }`}
-            required
+        <div className={`${enquiryStyles.grid} ${styles.grid}`}>
+          <div className={`${styles.fieldShell} ${styles.activeField}`}>
+            <input
+              type="text"
+              name="fullName"
+              placeholder="FULL NAME"
+              value={formData.fullName}
+              onChange={handleInputChange}
+              className={`${enquiryStyles.field} ${enquiryStyles.skewForward}`}
+              required
+            />
+          </div>
+          <div className={styles.fieldShell}>
+            <input
+              type="email"
+              name="email"
+              placeholder="EMAIL ID"
+              value={formData.email}
+              onChange={handleInputChange}
+              className={`${enquiryStyles.field} ${enquiryStyles.skewBack}`}
+              required
+            />
+          </div>
+          <div
+            className={`${enquiryStyles.phoneField} ${enquiryStyles.skewBack} ${styles.phoneField}`}
           >
-            <option value="">AREA OF INTEREST</option>
-            <option value="government-utilities">
-              Government &amp; Utilities
-            </option>
-            <option value="donors-development">
-              Donors &amp; Development Banks
-            </option>
-            <option value="private-sector">Private Sector Enterprise</option>
-            <option value="institutions">
-              Institutions (Health, Education, Telecom)
-            </option>
-            <option value="other">Other</option>
-          </select>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="PHONE"
+              value={formData.phone}
+              onChange={handleInputChange}
+              required
+              aria-label={`Phone number, dial code ${phoneCountry.dial_code}`}
+            />
+            <CountryCodeDropdown
+              dialCode={phoneCountry.dial_code}
+              countryCode={phoneCountry.country_code}
+              onSelect={(dial_code, country_code) =>
+                setPhoneCountry({ dial_code, country_code })
+              }
+              className={`${enquiryStyles.countryCode} ${styles.countryCode}`}
+            />
+          </div>
+          <div className={styles.fieldShell}>
+            <select
+              name="areaOfInterest"
+              value={formData.areaOfInterest}
+              onChange={handleInputChange}
+              className={`${enquiryStyles.field} ${enquiryStyles.select} ${enquiryStyles.skewForward} ${
+                formData.areaOfInterest ? enquiryStyles.hasValue : ""
+              }`}
+              required
+            >
+              <option value="">AREA OF INTEREST</option>
+              <option value="government-utilities">
+                Government &amp; Utilities
+              </option>
+              <option value="donors-development">
+                Donors &amp; Development Banks
+              </option>
+              <option value="private-sector">Private Sector Enterprise</option>
+              <option value="institutions">
+                Institutions (Health, Education, Telecom)
+              </option>
+              <option value="other">Other</option>
+            </select>
+          </div>
         </div>
 
-        <textarea
-          name="message"
-          placeholder="BRIEF MESSAGE"
-          value={formData.message}
-          onChange={handleInputChange}
-          rows={3}
-          className={`${formFieldClass} resize-none`}
-        />
+        <div className={styles.messageShell}>
+          <textarea
+            name="message"
+            placeholder="BRIEF MESSAGE"
+            value={formData.message}
+            onChange={handleInputChange}
+            rows={3}
+            className={`${enquiryStyles.field} ${styles.message}`}
+          />
+        </div>
 
-        <div className="flex items-start gap-3">
+        <label className={`${enquiryStyles.agreement} ${styles.agreement}`}>
           <input
             type="checkbox"
-            id="discovery-call-agree"
             checked={agreed}
             onChange={(e) => setAgreed(e.target.checked)}
-            className="mt-1 h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
           />
-          <label
-            htmlFor="discovery-call-agree"
-            className="text-sm text-gray-700 sm:text-base"
-          >
-            I agree that GREEN may contact me about this request.
-          </label>
-        </div>
+          <span>I agree that GREEN may contact me about this request.</span>
+        </label>
 
-        {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
+        {errorMessage && <p className={enquiryStyles.error}>{errorMessage}</p>}
         {successMessage && (
-          <p className="text-sm text-green-600">{successMessage}</p>
+          <p className={enquiryStyles.success}>{successMessage}</p>
         )}
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:justify-end sm:gap-6">
+        <div className={`${enquiryStyles.actions} ${styles.actions}`}>
           <button
             type="button"
             onClick={resetForm}
             disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
+            className={enquiryStyles.action}
           >
-            <span className="block text-sm font-bold text-gray-800 sm:text-base">
-              Reset
-            </span>
+            Reset
           </button>
           <button
             type="submit"
             disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
+            className={`${enquiryStyles.action} ${enquiryStyles.submit}`}
           >
-            <span className="block text-sm font-bold text-gray-900 sm:text-base">
-              {isLoading ? "Submitting..." : "Book Call"}
-            </span>
+            {isLoading ? "Submitting..." : "Book Call"}
           </button>
         </div>
       </form>
-    </EngineeringFormModal>
+    </ProductEnquiryFrame>
   );
 };
 

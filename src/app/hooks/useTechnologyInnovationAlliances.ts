@@ -37,7 +37,7 @@ export const useTechnologyInnovationAlliances = () => {
       try {
         setLoading(true);
         setError(null);
-        const res = await fetch("https://g-stack.green.com.pg/api/ecosystem/technology-innovation-alliances", { next: { revalidate: 60 } as any });
+        const res = await fetch("https://greencms.percepco.co.uk/api/ecosystem/technology-innovation-alliances", { next: { revalidate: 60 } as any });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json: TIAResponse = await res.json();
         const first = json?.data?.[0] ?? null;

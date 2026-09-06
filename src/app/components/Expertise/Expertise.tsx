@@ -46,6 +46,45 @@ const GALLERY = [
   },
 ] as const;
 
+const SOLUTION_COPY = [
+  {
+    title: "POWERING",
+    highlighted: "HEALTHCARE",
+    description:
+      "Renewable energy and medical technology augmentation for sustainable healthcare systems.",
+  },
+  {
+    title: "POWERING",
+    highlighted: "COMMUNITIES",
+    description:
+      "Reliable, clean energy solutions that enable stronger and more resilient communities.",
+  },
+  {
+    title: "POWERING",
+    highlighted: "AGRICULTURE",
+    description:
+      "Solar-powered systems that improve productivity, irrigation, and dependable energy access for agriculture.",
+  },
+  {
+    title: "POWERING",
+    highlighted: "INDUSTRY",
+    description:
+      "Efficient renewable energy systems built for businesses, industry, and essential commercial operations.",
+  },
+  {
+    title: "POWERING",
+    highlighted: "TELECOM",
+    description:
+      "Resilient solar energy infrastructure that keeps remote and critical telecommunications connected.",
+  },
+  {
+    title: "POWERING",
+    highlighted: "HOME",
+    description:
+      "Sustainable, affordable power solutions that bring dependable energy to homes and rural households.",
+  },
+] as const;
+
 const GRID_CARDS = [
   { nodeId: "7077:3725", item: 0, left: 1031.6, top: 140 },
   { nodeId: "7077:3726", item: 1, left: 1308.5, top: 140 },
@@ -207,10 +246,25 @@ export default function Expertise() {
     return () => window.removeEventListener("resize", updateScale);
   }, []);
 
-  const activeExpertise =
-    expertiseItems?.[selectedIndex] ?? expertiseItems?.[0];
+  // Do not fall back to index 0 when selectedIndex exceeds the API array —
+  // undefined here lets the SOLUTION_COPY[selectedIndex] fallbacks below take
+  // effect correctly for each card position.
+  const activeExpertise = expertiseItems?.[selectedIndex];
   const exploreHref = activeExpertise?.slug || "/expertise/powering-healthcare";
   const activeGalleryItem = GALLERY[selectedIndex % GALLERY.length];
+  const fallbackSolution = SOLUTION_COPY[selectedIndex % SOLUTION_COPY.length];
+  const activeHighlighted =
+    activeExpertise?.highlightedTitle ||
+    activeExpertise?.highlighted ||
+    fallbackSolution.highlighted;
+  const suppliedTitle = activeExpertise?.title || fallbackSolution.title;
+  const activeTitle =
+    suppliedTitle
+      .replace(new RegExp(activeHighlighted.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"), "")
+      .trim() ||
+    fallbackSolution.title;
+  const activeDescription =
+    activeExpertise?.description || fallbackSolution.description;
 
   const scrollSlider = (direction: 1 | -1) => {
     sliderViewportRef.current?.scrollBy({
@@ -308,7 +362,9 @@ export default function Expertise() {
             }
           >
             <div className={styles.leftBackdrop} aria-hidden="true">
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src={`${ASSET_ROOT}/background.png`}
                 alt=""
                 data-node-id="7077:3687"
@@ -320,10 +376,12 @@ export default function Expertise() {
               }`}
               data-node-id="7077:3711"
             >
-              POWERING <span>HEALTHCARE</span>
+              {activeTitle} <span>{activeHighlighted}</span>
             </h1>
 
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               className={`${styles.verticalLabel} ${
                 view === "slider" ? styles.sliderWatermark : ""
               }`}
@@ -343,38 +401,35 @@ export default function Expertise() {
                     <br />
                     An Ultimate Target
                   </h2>
-                  <p data-node-id="7077:3710">
-                    In an era where sustainability and environmental
-                    consciousness are paramount, the quest for a greener future
-                    is more important than ever
-                  </p>
+                  <p data-node-id="7077:3710">{activeDescription}</p>
                 </section>
 
-                <button
-                  type="button"
+                <Link
+                  href={exploreHref}
                   className={styles.exploreButton}
                   data-node-id="7077:3746"
-                  onClick={openHealthcareDetail}
-                  aria-label="Explore Powering Healthcare"
+                  aria-label={`Explore ${activeGalleryItem.label}`}
                 >
-                  <img loading="lazy" decoding="async"
+                  <img
+                    loading="lazy"
+                    decoding="async"
                     className={styles.exploreShape}
                     src={`${ASSET_ROOT}/explore-button.svg`}
                     alt=""
                   />
                   <span>Explore</span>
-                  <img loading="lazy" decoding="async"
+                  <img
+                    loading="lazy"
+                    decoding="async"
                     className={styles.exploreArrow}
                     src={`${ASSET_ROOT}/explore-arrow.svg`}
                     alt=""
                   />
-                </button>
+                </Link>
               </>
             ) : (
               <p className={styles.sliderDescription} data-node-id="7077:3769">
-                In an era where sustainability and environmental consciousness
-                are paramount, the quest for a greener future is more important
-                than ever
+                {activeDescription}
               </p>
             )}
 
@@ -397,7 +452,12 @@ export default function Expertise() {
                         onClick={() => setSelectedIndex(card.item)}
                         aria-label={`Select ${item.label}`}
                       >
-                        <img loading="lazy" decoding="async" src={item.src} alt={item.alt} />
+                        <img
+                          loading="lazy"
+                          decoding="async"
+                          src={item.src}
+                          alt={item.alt}
+                        />
                         <span aria-hidden="true" />
                       </button>
                     );
@@ -412,12 +472,19 @@ export default function Expertise() {
                     }
                     aria-label={`Selected solution: ${activeGalleryItem.label}. Show next solution.`}
                   >
-                    <img loading="lazy" decoding="async"
+                    <img
+                      loading="lazy"
+                      decoding="async"
                       src={activeGalleryItem.src}
                       alt={activeGalleryItem.alt}
                     />
                     <span className={styles.selectedLabel}>
-                      <img loading="lazy" decoding="async" src={`${ASSET_ROOT}/selected-label.svg`} alt="" />
+                      <img
+                        loading="lazy"
+                        decoding="async"
+                        src={`${ASSET_ROOT}/selected-label.svg`}
+                        alt=""
+                      />
                       <b>{activeGalleryItem.label}</b>
                     </span>
                   </button>
@@ -512,9 +579,6 @@ export default function Expertise() {
                             onClick={() => {
                               if (!sliderDidDrag.current) {
                                 setSelectedIndex(panel.item);
-                                if (panel.item === 0) {
-                                  openHealthcareDetail();
-                                }
                               }
                             }}
                             className={styles.sliderPanel}
@@ -523,7 +587,12 @@ export default function Expertise() {
                             <span
                               className={`${styles.sliderAsset} ${styles[panel.assetClass]}`}
                             >
-                              <img loading="lazy" decoding="async" src={panel.src} alt={item.alt} />
+                              <img
+                                loading="lazy"
+                                decoding="async"
+                                src={panel.src}
+                                alt={item.alt}
+                              />
                             </span>
                             {panel.label ? (
                               <span
@@ -543,9 +612,24 @@ export default function Expertise() {
 
             {view === "grid" ? (
               <div className={styles.pagination} aria-hidden="true">
-                <img loading="lazy" decoding="async" src={`${ASSET_ROOT}/dot-active.svg`} alt="" />
-                <img loading="lazy" decoding="async" src={`${ASSET_ROOT}/dot.svg`} alt="" />
-                <img loading="lazy" decoding="async" src={`${ASSET_ROOT}/dot.svg`} alt="" />
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={`${ASSET_ROOT}/dot-active.svg`}
+                  alt=""
+                />
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={`${ASSET_ROOT}/dot.svg`}
+                  alt=""
+                />
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={`${ASSET_ROOT}/dot.svg`}
+                  alt=""
+                />
               </div>
             ) : (
               <div className={styles.sliderPagination} aria-hidden="true" />
@@ -585,18 +669,14 @@ export default function Expertise() {
         <div className={styles.mobileHero}>
           <p>Solutions</p>
           <h1>
-            POWERING <span>HEALTHCARE</span>
+            {activeTitle} <span>{activeHighlighted}</span>
           </h1>
           <h2>
             A <span>GREENER</span> FUTURE,
             <br />
             An Ultimate Target
           </h2>
-          <p>
-            In an era where sustainability and environmental consciousness are
-            paramount, the quest for a greener future is more important than
-            ever.
-          </p>
+          <p>{activeDescription}</p>
           <Link href={exploreHref}>Explore →</Link>
         </div>
 
@@ -610,7 +690,12 @@ export default function Expertise() {
                 selectedIndex === index ? styles.mobileSelected : undefined
               }
             >
-              <img loading="lazy" decoding="async" src={item.src} alt={item.alt} />
+              <img
+                loading="lazy"
+                decoding="async"
+                src={item.src}
+                alt={item.alt}
+              />
               <span>{item.label}</span>
             </button>
           ))}

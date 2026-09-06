@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
-import { formFieldClass } from "@/app/components/shared/EngineeringFormModal";
+import type React from "react";
 import CountryCodeDropdown from "@/app/components/shared/CountryCodeDropdown";
+import { formFieldClass } from "@/app/components/shared/EngineeringFormModal";
 
 interface PhoneInputProps {
   /** Current phone number value. */
@@ -18,6 +18,7 @@ interface PhoneInputProps {
   name?: string;
   placeholder?: string;
   required?: boolean;
+  className?: string;
 }
 
 const PhoneInput = ({
@@ -29,24 +30,27 @@ const PhoneInput = ({
   name = "phone",
   placeholder = "PHONE",
   required = true,
+  className = "",
 }: PhoneInputProps) => {
   return (
-    <div className="flex min-w-0">
-      <CountryCodeDropdown
-        dialCode={dialCode}
-        countryCode={countryCode}
-        onSelect={onCountryChange}
-        className="flex items-center gap-1 self-stretch rounded-l-lg border border-r-0 border-gray-300 bg-white px-2 py-2.5 text-sm text-gray-700 focus:border-green-500 focus:outline-none sm:px-3 sm:py-3 sm:text-base"
-      />
+    <div
+      className={`${formFieldClass} flex min-w-0 items-center p-0 ${className}`}
+    >
       <input
         type="tel"
         name={name}
         placeholder={placeholder}
         value={phone}
         onChange={onPhoneChange}
-        className={`${formFieldClass} rounded-l-none`}
+        className="h-full min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-gray-700 placeholder-gray-500 focus:outline-none sm:text-base"
         required={required}
         aria-label={`Phone number, dial code ${dialCode}`}
+      />
+      <CountryCodeDropdown
+        dialCode={dialCode}
+        countryCode={countryCode}
+        onSelect={onCountryChange}
+        className="flex h-full shrink-0 items-center gap-2 border-0 bg-transparent px-5 text-sm text-gray-700 focus:outline-none sm:text-base"
       />
     </div>
   );

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 // Image Interface
 interface Image {
@@ -102,43 +102,28 @@ interface UseCommunityVoicesReturn {
 }
 
 export const useCommunityVoices = (): UseCommunityVoicesReturn => {
-  const [data, setData] = useState<CommunityVoicesData | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(
-          "https://g-stack.green.com.pg/api/empower/community-voices",
-          {
-            next: { revalidate: 60 },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const result: ApiResponse = await response.json();
-
-        if (result.success && result.data) {
-          setData(result.data);
-        } else {
-          throw new Error("Invalid API response structure");
-        }
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "An error occurred");
-      } finally {
-        setLoading(false);
+  const query = useQuery({
+    queryKey: ["community-voices"],
+    queryFn: async ({ signal }): Promise<CommunityVoicesData> => {
+      const response = await fetch(
+        "https://greencms.percepco.co.uk/api/empower/community-voices",
+        { signal },
+      );
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const result: ApiResponse = await response.json();
+      if (!result.success || !result.data) {
+        throw new Error("Invalid API response structure");
       }
-    };
+      return result.data;
+    },
+    staleTime: 60_000,
+  });
 
-    fetchData();
-  }, []);
-
-  return { data, loading, error };
+  return {
+    data: query.data ?? null,
+    loading: query.isPending,
+    error: query.error?.message ?? null,
+  };
 };
 
 export type {

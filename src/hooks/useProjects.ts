@@ -21,7 +21,7 @@ interface ProjectData {
 }
 
 const fetchProjects = async (): Promise<ProjectData[]> => {
-  const response = await fetch('https://g-stack.green.com.pg/api/endeavors/projects');
+  const response = await fetch('https://greencms.percepco.co.uk/api/endeavors/projects');
   
   if (!response.ok) {
     throw new Error('Failed to fetch projects data');

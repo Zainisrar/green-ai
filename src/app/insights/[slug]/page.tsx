@@ -67,7 +67,7 @@ const fallbackInsight = (slug: string): RawInsight | null =>
 async function getInsight(slug: string): Promise<RawInsight | null> {
   try {
     const response = await fetch(
-      "https://g-stack.green.com.pg/api/insight-details",
+      "https://greencms.percepco.co.uk/api/insight-details",
       { next: { revalidate: 300 }, signal: AbortSignal.timeout(8000) },
     );
     if (!response.ok) return fallbackInsight(slug);

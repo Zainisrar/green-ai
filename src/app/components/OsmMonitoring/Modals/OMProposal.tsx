@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
+import Image from "next/image";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 import EngineeringFormModal, {
   formFieldClass,
   formGridClass,
 } from "@/app/components/shared/EngineeringFormModal";
+import styles from "@/app/components/shared/EngineeringFormModal.module.css";
 import PhoneInput from "@/app/components/shared/PhoneInput";
+import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
 
 interface Props {
   isOpen: boolean;
@@ -34,10 +37,15 @@ const initialFormData: FormData = {
 };
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
+const EMAIL_REGEX =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
 const OMProposal = ({ isOpen, onClose }: Props) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const [phoneCountry, setPhoneCountry] = useState({ dial_code: "+675", country_code: "pg" });
+  const [phoneCountry, setPhoneCountry] = useState({
+    dial_code: "+675",
+    country_code: "pg",
+  });
   const [agreed, setAgreed] = useState(false);
   const [fileName, setFileName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +63,9 @@ const OMProposal = ({ isOpen, onClose }: Props) => {
   if (!isOpen) return null;
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -91,8 +101,20 @@ const OMProposal = ({ isOpen, onClose }: Props) => {
     setErrorMessage("");
     setSuccessMessage("");
 
+    if (Object.values(formData).some((value) => !value.trim())) {
+      setErrorMessage("Please complete all required fields.");
+      return;
+    }
+
+    if (!EMAIL_REGEX.test(formData.email.trim())) {
+      setErrorMessage("Please enter a valid email address.");
+      return;
+    }
+
     if (!agreed) {
-      setErrorMessage("Please agree that GREEN may contact you about this request.");
+      setErrorMessage(
+        "Please agree that GREEN may contact you about this request.",
+      );
       return;
     }
 
@@ -122,7 +144,8 @@ const OMProposal = ({ isOpen, onClose }: Props) => {
 
       if (data.Code === "001") {
         setSuccessMessage(
-          data.Message || "Your O&M proposal request has been submitted successfully!",
+          data.Message ||
+            "Your O&M proposal request has been submitted successfully!",
         );
         resetForm();
         setTimeout(() => {
@@ -130,11 +153,15 @@ const OMProposal = ({ isOpen, onClose }: Props) => {
           setSuccessMessage("");
         }, 2000);
       } else {
-        setErrorMessage(data.Message || "Failed to submit request. Please try again.");
+        setErrorMessage(
+          data.Message || "Failed to submit request. Please try again.",
+        );
       }
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "An error occurred while submitting the form.",
+        error instanceof Error
+          ? error.message
+          : "An error occurred while submitting the form.",
       );
     } finally {
       setIsLoading(false);
@@ -145,13 +172,10 @@ const OMProposal = ({ isOpen, onClose }: Props) => {
     <EngineeringFormModal
       isOpen={isOpen}
       onClose={onClose}
-      title={
-        <>
-          REQUEST AN <span className="text-green-600">O&amp;M PROPOSAL</span>
-        </>
-      }
+      title={<span className="text-black">REQUEST AN O&amp;M PROPOSAL</span>}
+      geometry="om"
     >
-      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+      <form noValidate onSubmit={handleSubmit} className={styles.proposalForm}>
         <div className={formGridClass}>
           <input
             type="text"
@@ -188,7 +212,10 @@ const OMProposal = ({ isOpen, onClose }: Props) => {
             onPhoneChange={handleInputChange}
             dialCode={phoneCountry.dial_code}
             countryCode={phoneCountry.country_code}
-            onCountryChange={(dial_code, country_code) => setPhoneCountry({ dial_code, country_code })}
+            onCountryChange={(dial_code, country_code) =>
+              setPhoneCountry({ dial_code, country_code })
+            }
+            className={styles.proposalPhoneField}
           />
         </div>
 
@@ -218,7 +245,7 @@ const OMProposal = ({ isOpen, onClose }: Props) => {
           </select>
         </div>
 
-        <div className={formGridClass}>
+        <div className={`${formGridClass} items-start`}>
           <select
             name="helpWith"
             value={formData.helpWith}
@@ -244,20 +271,13 @@ const OMProposal = ({ isOpen, onClose }: Props) => {
               <span className="truncate text-gray-500">
                 {fileName || "UPLOAD SUPPORTING DOCUMENTS"}
               </span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="ml-2 h-5 w-5 shrink-0 text-gray-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.8}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 16V4m0 0L8 8m4-4l4 4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
-                />
-              </svg>
+              <Image
+                src="/images/osm-monitoring/upload.svg"
+                alt=""
+                aria-hidden="true"
+                width={30}
+                height={27}
+              />
             </button>
             <input
               ref={fileInputRef}
@@ -266,13 +286,13 @@ const OMProposal = ({ isOpen, onClose }: Props) => {
               onChange={handleFileChange}
               className="hidden"
             />
-            <p className="mt-1 text-xs text-[#23B14D]">
+            <p className="mt-1 text-right text-xs text-[#23B14D]">
               (Formats: PDF/DOC, Size: Below 2Mb)
             </p>
           </div>
         </div>
 
-        <div className="flex items-start gap-3">
+        <div className={`flex items-start gap-3 ${styles.proposalAgreement}`}>
           <input
             type="checkbox"
             id="omproposal-agree"
@@ -280,15 +300,22 @@ const OMProposal = ({ isOpen, onClose }: Props) => {
             onChange={(e) => setAgreed(e.target.checked)}
             className="mt-1 h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
           />
-          <label htmlFor="omproposal-agree" className="text-sm text-gray-700 sm:text-base">
+          <label
+            htmlFor="omproposal-agree"
+            className="text-sm text-gray-700 sm:text-base"
+          >
             I agree that GREEN may contact me about this request.
           </label>
         </div>
 
         {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
-        {successMessage && <p className="text-sm text-green-600">{successMessage}</p>}
+        {successMessage && (
+          <p className="text-sm text-green-600">{successMessage}</p>
+        )}
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:justify-end sm:gap-6">
+        <div
+          className={`flex flex-col gap-4 sm:flex-row sm:justify-end sm:gap-6 ${styles.proposalActions}`}
+        >
           <button
             type="button"
             onClick={resetForm}

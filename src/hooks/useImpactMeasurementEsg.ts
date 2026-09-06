@@ -86,7 +86,7 @@ export const useImpactMeasurementEsg = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://g-stack.green.com.pg/api/ecosystem/impact-measurement-esg",
+          "https://greencms.percepco.co.uk/api/ecosystem/impact-measurement-esg",
           {
             next: { revalidate: 60 },
           }

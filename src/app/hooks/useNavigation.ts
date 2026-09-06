@@ -211,18 +211,6 @@ const fallbackNavigation: NavigationItem[] = [
         top: false,
       },
       {
-        id: 44,
-        name: "GREEN SunShine Deployments",
-        slug: "/engineering/products",
-        top: false,
-      },
-      {
-        id: 45,
-        name: "GREEN Em’Pawa Sites",
-        slug: "/engineering/products/green-empawa",
-        top: false,
-      },
-      {
         id: 46,
         name: "Community Energy Stories",
         slug: "/endeavors/flagship-projects",
@@ -308,43 +296,112 @@ const fallbackNavigation: NavigationItem[] = [
     children: [
       {
         id: 61,
-        name: "Client Partners",
-        slug: "/ecosystem/client-partnerships",
+        name: "Our Value Chain",
+        slug: "/ecosystem/our-value-chain",
         top: false,
-        image: { src: "/images/nav/6.png", alt: "GREEN supply ecosystem" },
-        text: {
-          description: "The world of partners that power our promise",
-          highlighted: "partners",
-        },
       },
       {
         id: 62,
         name: "Supply Partners",
         slug: "/ecosystem/supply-partners",
         top: false,
+        image: { src: "/images/nav/6.png", alt: "GREEN supply ecosystem" },
+        text: {
+          description: "The world of partners that power our promise",
+          highlighted: "promise",
+        },
+        children: [
+          {
+            id: 621,
+            name: "Our Procurement Philosophy",
+            slug: "/ecosystem/our-procurement-philosophy",
+            top: false,
+          },
+          {
+            id: 622,
+            name: "Key Supply Categories",
+            slug: "/ecosystem/key-supply-categories",
+            top: false,
+          },
+          {
+            id: 623,
+            name: "Become a Supplier",
+            slug: "/engage/become-a-supplier",
+            top: false,
+          },
+          {
+            id: 624,
+            name: "Supplier Code of Conduct / Handbook",
+            slug: "/ecosystem/supplier-code-of-conduct",
+            top: false,
+          },
+        ],
       },
       {
         id: 63,
-        name: "Technology & Innovation Alliances",
-        slug: "/ecosystem/technology-innovation-alliances",
+        name: "Client Partners",
+        slug: "/ecosystem/client-partnerships",
         top: false,
+        image: { src: "/images/nav/6.png", alt: "GREEN client ecosystem" },
+        text: {
+          description: "The world of partners that power our promise",
+          highlighted: "promise",
+        },
+        children: [
+          {
+            id: 631,
+            name: "Industries We Serve",
+            slug: "/ecosystem/client-partnerships",
+            top: false,
+          },
+          {
+            id: 632,
+            name: "Partner Success Stories",
+            slug: "/ecosystem/client-partnerships/partner-success-stories",
+            top: false,
+          },
+          {
+            id: 633,
+            name: "Client Testimonials",
+            slug: "/ecosystem/client-partnerships/client-testimonials",
+            top: false,
+          },
+          {
+            id: 634,
+            name: "Partner With GREEN",
+            slug: "/engage/partner-with-us",
+            top: false,
+          },
+        ],
       },
       {
         id: 64,
-        name: "Development & Funding Partners",
+        name: "Collaboration & Innovation",
         slug: "/ecosystem/collaboration-innovation",
         top: false,
       },
       {
         id: 65,
-        name: "Strategic Collaborations",
-        slug: "/ecosystem/collaboration-innovation",
+        name: "Industry Affiliations & Certifications",
+        slug: "/ecosystem/industry-affiliations-certifications",
         top: false,
       },
       {
         id: 66,
-        name: "Industry Affiliations & Certifications",
-        slug: "/ecosystem/industry-affiliations-certifications",
+        name: "Community Impact Loop",
+        slug: "/ecosystem/community-impact-loop",
+        top: false,
+      },
+      {
+        id: 67,
+        name: "Impact Measurement & ESG",
+        slug: "/ecosystem/why-esg-matters-to-green",
+        top: false,
+      },
+      {
+        id: 68,
+        name: "Technology & Innovation Alliances",
+        slug: "/ecosystem/technology-innovation-alliances",
         top: false,
       },
     ],
@@ -507,6 +564,10 @@ export const useNavigation = (isOpen: boolean, currentPath?: string) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!isOpen) return;
+    let active = true;
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
     const fetchNavigationData = async () => {
       if (!isOpen) return;
 
@@ -517,8 +578,6 @@ export const useNavigation = (isOpen: boolean, currentPath?: string) => {
       setNavigationData(fallbackNavigation);
       setActiveSection(fallbackSection || fallbackNavigation[0]);
 
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 10000);
 
       try {
         setLoading(true);
@@ -536,6 +595,7 @@ export const useNavigation = (isOpen: boolean, currentPath?: string) => {
         }
 
         const data: NavigationData = await response.json();
+        if (!active) return;
 
         if (data.success && data.data?.length) {
           setNavigationData(data.data);
@@ -553,14 +613,19 @@ export const useNavigation = (isOpen: boolean, currentPath?: string) => {
       } catch {
         // Network errors and aborts leave the already-rendered local fallback
         // in place. This is deliberate for a navigation overlay.
-        setError(null);
+        if (active) setError(null);
       } finally {
         clearTimeout(timeout);
-        setLoading(false);
+        if (active) setLoading(false);
       }
     };
 
     fetchNavigationData();
+    return () => {
+      active = false;
+      clearTimeout(timeout);
+      controller.abort();
+    };
   }, [isOpen, currentPath]);
 
   // Find the featured child item (one with image and text)

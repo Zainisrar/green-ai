@@ -101,9 +101,6 @@ export default function SiteHeader({
     useNavigationState();
   const { navigationData, activeSection, setActiveSection, featuredChild } =
     useNavigation(isNavigationOpen, pathname);
-  const showEmpawaProductLink =
-    (layout === "productCanvas" && brand === "sunshine") ||
-    brandClassName === "product-figma-header-logo";
 
   useEffect(() => {
     const updateHeader = () => setIsScrolled(window.scrollY > 32);
@@ -119,40 +116,34 @@ export default function SiteHeader({
         data-site-header
         data-node-id={layout !== "viewport" ? "7077:3756" : undefined}
       >
-        {showBrand && brand === "green" ? (
-          <FigmaBrandPanel
-            className={
-              layout !== "viewport"
-                ? `${styles.canvasBrandPanel} ${figmaPanelVariant === "flagship" ? styles.flagshipCanvasBrandPanel : ""}`
-                : styles.brandPanel
-            }
-            compactLogo={compactLogo}
-            fixedCanvasSize={layout === "figmaCanvas"}
-            variant={figmaPanelVariant}
-            showPanel={panel === "full"}
-          />
-        ) : (
-          <Link
-            href="/home/renewable-energy-the-core"
-            className={`${styles.logo} ${styles.sunshineLogo} ${productLogo ? styles.productLogo : ""} ${brandClassName}`}
-            aria-label="GREEN home"
-          >
-            <Image
-              src={headerBrand.src}
-              alt={headerBrand.alt}
-              width={headerBrand.width}
-              height={headerBrand.height}
-              priority
+        {showBrand ? (
+          brand === "green" ? (
+            <FigmaBrandPanel
+              className={
+                layout !== "viewport"
+                  ? `${styles.canvasBrandPanel} ${figmaPanelVariant === "flagship" ? styles.flagshipCanvasBrandPanel : ""}`
+                  : styles.brandPanel
+              }
+              compactLogo={compactLogo}
+              fixedCanvasSize={layout === "figmaCanvas"}
+              variant={figmaPanelVariant}
+              showPanel={panel === "full"}
             />
-          </Link>
-        )}
-
-        {showEmpawaProductLink ? (
-          <Link
-            href="/engineering/products/green-empawa"
-            className={styles.productEmpawaLink}
-            aria-label="View GREEN Em’Pawa products"
-          />
+          ) : (
+            <Link
+              href="/home/renewable-energy-the-core"
+              className={`${styles.logo} ${styles.sunshineLogo} ${productLogo ? styles.productLogo : ""} ${brandClassName}`}
+              aria-label="GREEN home"
+            >
+              <Image
+                src={headerBrand.src}
+                alt={headerBrand.alt}
+                width={headerBrand.width}
+                height={headerBrand.height}
+                priority
+              />
+            </Link>
+          )
         ) : null}
 
         <nav className={styles.navigation} aria-label="Primary navigation">
@@ -187,8 +178,11 @@ export default function SiteHeader({
                   <span />
                 </>
               ) : (
+                /* Keep the viewport header on the same raster bolt used by
+                   the Figma canvas header. The prior embedded-image SVG
+                   intermittently rendered as a broken image on mobile. */
                 <Image
-                  src="/images/heroSection/lighting.svg"
+                  src="/images/shared/figma-brand-panel/bolt.png"
                   alt=""
                   width={42}
                   height={42}

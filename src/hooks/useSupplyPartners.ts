@@ -73,7 +73,7 @@ interface SupplyPartnersData {
 }
 
 const fetchSupplyPartners = async (): Promise<SupplyPartnersData> => {
-  const response = await fetch('https://g-stack.green.com.pg/api/ecosystem/supply-partners');
+  const response = await fetch('https://greencms.percepco.co.uk/api/ecosystem/supply-partners');
   
   if (!response.ok) {
     throw new Error('Failed to fetch supply partners data');

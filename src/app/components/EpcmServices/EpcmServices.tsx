@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import D6Chatbot from "../D6Chatbot";
 import SiteHeader from "../SiteHeader/SiteHeader";
+import DiscoveryConsultation from "./Modals/DiscoveryConsultation";
+import TechnicalDebrief from "./Modals/TechnicalDebrief";
 import styles from "./EpcmServices.module.css";
 
 const features = [
@@ -42,6 +45,10 @@ const features = [
 ];
 
 export default function EpcmServices() {
+  const [isTechnicalDebriefOpen, setIsTechnicalDebriefOpen] = useState(false);
+  const [isDiscoveryConsultationOpen, setIsDiscoveryConsultationOpen] =
+    useState(false);
+
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:6595">
       <SiteHeader
@@ -133,10 +140,16 @@ export default function EpcmServices() {
         >
           Download EPCM Capabilities Brief
         </FigmaAngledCta>
-        <FigmaAngledCta style={{ top: 752, left: 1621, width: 299 }}>
+        <FigmaAngledCta
+          style={{ top: 752, left: 1621, width: 299 }}
+          onClick={() => setIsTechnicalDebriefOpen(true)}
+        >
           Request a Technical Debrief
         </FigmaAngledCta>
-        <FigmaAngledCta style={{ top: 823, left: 1587, width: 329 }}>
+        <FigmaAngledCta
+          style={{ top: 823, left: 1587, width: 329 }}
+          onClick={() => setIsDiscoveryConsultationOpen(true)}
+        >
           Book a Discovery Consultation
         </FigmaAngledCta>
       </div>
@@ -163,28 +176,38 @@ export default function EpcmServices() {
   );
 
   return (
-    <FigmaPageCanvas
-      desktop={desktop}
-      nodeId="7077:6595"
-      mobile={
-        <main className={styles.mobilePage}>
-          <h1>Solar EPCM Services</h1>
-          <p>
-            Designed for Complexity. Delivered with Precision. Managed to
-            Scale.
-          </p>
-          {features.map((f) => (
-            <section key={f.name}>
-              <h2>{f.name}</h2>
-              <ul>
-                {f.points.map((p) => (
-                  <li key={p}>{p}</li>
-                ))}
-              </ul>
-            </section>
-          ))}
-        </main>
-      }
-    />
+    <>
+      <FigmaPageCanvas
+        desktop={desktop}
+        nodeId="7077:6595"
+        mobile={
+          <main className={styles.mobilePage}>
+            <h1>Solar EPCM Services</h1>
+            <p>
+              Designed for Complexity. Delivered with Precision. Managed to
+              Scale.
+            </p>
+            {features.map((f) => (
+              <section key={f.name}>
+                <h2>{f.name}</h2>
+                <ul>
+                  {f.points.map((p) => (
+                    <li key={p}>{p}</li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </main>
+        }
+      />
+      <TechnicalDebrief
+        isOpen={isTechnicalDebriefOpen}
+        onClose={() => setIsTechnicalDebriefOpen(false)}
+      />
+      <DiscoveryConsultation
+        isOpen={isDiscoveryConsultationOpen}
+        onClose={() => setIsDiscoveryConsultationOpen(false)}
+      />
+    </>
   );
 }

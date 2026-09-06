@@ -3,8 +3,8 @@
 import { motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 import D6Chatbot from "../D6Chatbot";
-import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
+import ReachUsForm from "./Modal/Form";
 import styles from "./ReachUs.module.css";
 
 const DESIGN_WIDTH = 1920;
@@ -13,7 +13,7 @@ const OFFICES = [
   {
     id: "papuaNewGuinea",
     name: "PAPUA NEW GUINEA",
-    flag: "/images/reach-us/flag-png.png",
+    flag: "/images/book-consulation/countryCode.png",
     address: [
       "PO Box 1243, Port Moresby",
       "Section 405, Allotment 4, Waigani Drive,",
@@ -52,9 +52,13 @@ const OFFICES = [
 
 const MAP_EASE = [0, 0, 0.58, 1] as const;
 
-export default function ReachUs() {
+interface ReachUsProps {
+  initialFormOpen?: boolean;
+}
+
+export default function ReachUs({ initialFormOpen = false }: ReachUsProps) {
   const [currentOfficeIndex, setCurrentOfficeIndex] = useState(0);
-  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(initialFormOpen);
   const [canvasScale, setCanvasScale] = useState(1);
   const reduceMotion = useReducedMotion();
 
@@ -84,8 +88,9 @@ export default function ReachUs() {
 
   return (
     <main className={styles.page}>
-      {/* The Reach Us background already renders the left brand panel. */}
-      <SiteHeader panel="logoOnly" />
+      <div className={styles.mobileHeader}>
+        <SiteHeader panel="logoOnly" />
+      </div>
 
       <section className={styles.desktopStage} aria-label="Reach GREEN">
         <div
@@ -93,48 +98,69 @@ export default function ReachUs() {
           style={{ transform: `translateX(-50%) scale(${canvasScale})` }}
           data-node-id="7077:13486"
         >
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             className={styles.background}
             src="/images/reach-us/bg.jpg"
             alt=""
             aria-hidden="true"
           />
 
+          {/* Keep the header in the same 1920px coordinate system as the
+              Figma canvas. This prevents viewport scaling from shifting the
+              menu away from the enquiry control. */}
+          <SiteHeader layout="figmaCanvas" panel="logoOnly" />
+
           <p className={styles.intro} data-node-id="7077:13496">
             Are you prepared to get started on your Energy Requirement right
             away? Let&apos;s connect!
           </p>
 
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             className={styles.verticalLabel}
             src="/images/reach-us/reach-us.png"
             alt="Reach us"
           />
 
           <div className={styles.mapViewport} data-node-id="7077:13498">
-            <img loading="lazy" decoding="async"
+            <motion.img
               className={styles.map}
               src="/images/reach-us/world-map.png"
               alt="World map showing GREEN global offices"
+              data-node-id="7077:13642"
+              initial={reduceMotion ? false : { width: 1339.43017578125 }}
+              animate={{ width: 1203.1922607421875 }}
+              transition={{ duration: reduceMotion ? 0 : 0.3, ease: MAP_EASE }}
             />
 
             <div className={styles.pins} aria-hidden="true">
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 className={styles.indiaPin}
                 src="/images/reach-us/pin-india.svg"
                 alt=""
               />
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 className={styles.pngPin}
                 src="/images/reach-us/pin-png.svg"
                 alt=""
               />
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 className={styles.singaporePin}
                 src="/images/reach-us/pin-singapore.svg"
                 alt=""
               />
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 className={styles.australiaPin}
                 src="/images/reach-us/pin-australia.svg"
                 alt=""
@@ -160,7 +186,9 @@ export default function ReachUs() {
                     }`}
                   >
                     {isActive && (
-                      <img loading="lazy" decoding="async"
+                      <img
+                        loading="lazy"
+                        decoding="async"
                         className={styles.officeFlag}
                         src={office.flag}
                         alt=""
@@ -187,16 +215,25 @@ export default function ReachUs() {
             aria-label="Open enquiry form"
             data-node-id="7077:13531"
           >
-            <img loading="lazy" decoding="async" src="/images/reach-us/enquiry.png" alt="Enquiry" />
+            <img
+              loading="lazy"
+              decoding="async"
+              src="/images/reach-us/enquiry.png"
+              alt="Enquiry"
+            />
           </button>
 
           <div className={styles.sideCards}>
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/reach-us/transformation.png"
               alt="Transformation"
               data-node-id="7077:13537"
             />
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/reach-us/join-us.png"
               alt="Join us"
               data-node-id="7077:13542"
@@ -217,10 +254,17 @@ export default function ReachUs() {
           className={styles.mobileEnquiry}
           onClick={() => setIsFormOpen(true)}
         >
-          <img loading="lazy" decoding="async" src="/images/reach-us/enquiry.png" alt="Enquiry" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/reach-us/enquiry.png"
+            alt="Enquiry"
+          />
         </button>
         <div className={styles.mobileMapFrame}>
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             className={styles.mobileMap}
             src="/images/reach-us/world-map.png"
             alt="World map showing GREEN global offices"
@@ -239,17 +283,23 @@ export default function ReachUs() {
           </motion.div>
         </div>
         <div className={styles.mobileCards}>
-          <img loading="lazy" decoding="async" src="/images/reach-us/transformation.png" alt="Transformation" />
-          <img loading="lazy" decoding="async" src="/images/reach-us/join-us.png" alt="Join us" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/reach-us/transformation.png"
+            alt="Transformation"
+          />
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/reach-us/join-us.png"
+            alt="Join us"
+          />
         </div>
         <D6Chatbot />
       </section>
 
-      <ProductEnquiry
-        isOpen={isFormOpen}
-        onClose={() => setIsFormOpen(false)}
-        productName="Energy Requirement"
-      />
+      <ReachUsForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
     </main>
   );
 }

@@ -170,12 +170,12 @@ for (const bug of selectedBugs) {
       await page.locator("body").waitFor({ state: "visible" });
       if (
         [
-          21, 22, 23, 24, 25, 26, 27, 28, 30, 31, 32, 33, 34, 35, 36, 39,
-          40, 41, 42, 43, 45, 46, 47, 48, 49, 50, 73, 79,
+          21, 22, 23, 24, 25, 26, 27, 28, 30, 31, 32, 33, 34, 35, 36, 39, 40,
+          41, 42, 43, 45, 46, 47, 48, 49, 50, 73, 79,
         ].includes(bug.id)
       ) {
         await page.waitForFunction(
-          ({ expectedWidth, expectedHeight }) => {
+          ({ expectedWidth, expectedHeight, containLayout }) => {
             if (expectedWidth <= 1200) {
               return Boolean(
                 document.querySelector('[data-figma-responsive="mobile"]'),
@@ -189,15 +189,18 @@ for (const bug of selectedBugs) {
             if (Math.abs(canvas.getBoundingClientRect().top) > 0.5) {
               return false;
             }
-            const expectedScale = Math.min(
-              expectedWidth / 1920,
-              expectedHeight / 970,
-            );
+            const expectedScale = containLayout
+              ? Math.min(expectedWidth / 1920, expectedHeight / 970)
+              : expectedWidth / 1920;
             const transform = getComputedStyle(canvas).transform;
             if (transform === "none") return expectedScale === 1;
             return Math.abs(new DOMMatrix(transform).a - expectedScale) < 0.001;
           },
-          { expectedWidth: width, expectedHeight: height },
+          {
+            expectedWidth: width,
+            expectedHeight: height,
+            containLayout: bug.id === 30,
+          },
         );
       } else {
         await page.waitForTimeout(750);
@@ -430,11 +433,11 @@ for (const bug of selectedBugs) {
       await expect(
         page
           .getByRole("dialog")
-          .getByRole("heading", { name: "SUPPLYING TO GREEN" }),
+          .getByRole("heading", { name: "SUPPLYING TO GREEN?" }),
       ).toBeVisible();
       await page
         .getByRole("dialog")
-        .getByLabel("Close product enquiry")
+        .getByLabel("Close supplying to GREEN form")
         .click();
     }
 
@@ -478,7 +481,7 @@ for (const bug of selectedBugs) {
       ).toBeVisible();
       await page
         .getByRole("dialog")
-        .getByLabel("Close product enquiry")
+        .getByLabel("Close discovery call form")
         .click();
     }
 

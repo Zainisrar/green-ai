@@ -42,7 +42,7 @@ const nextConfig = (phase: string): NextConfig => ({
   // does not start throwing at request time.
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "g-stack.green.com.pg" },
+      { protocol: "https", hostname: "greencms.percepco.co.uk" },
       { protocol: "https", hostname: "app-gsolve.green.com.pg" },
     ],
   },

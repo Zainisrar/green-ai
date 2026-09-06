@@ -204,47 +204,6 @@
   position: absolute;
   inset: 0;
 }
-.actions button,
-.actions a {
-  position: absolute;
-  height: 53px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: #000;
-  font-family: inherit;
-  cursor: pointer;
-}
-.actions button:nth-child(1) {
-  top: 658px;
-  left: 1570px;
-  width: 349px;
-}
-.actions button:nth-child(2) {
-  top: 732px;
-  left: 1527px;
-  width: 389px;
-}
-.actions a {
-  top: 812px;
-  left: 1457px;
-  width: 459px;
-}
-.actions img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 52px;
-}
-.actions span {
-  position: absolute;
-  inset: 6px 28px 0;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 40px;
-  text-align: center;
-  white-space: nowrap;
-}
 .chatTrigger {
   z-index: 3;
 }

@@ -18,7 +18,7 @@ interface ReportData {
 }
 
 const fetchReportsWhitepapers = async (): Promise<ReportData[]> => {
-  const response = await fetch('https://g-stack.green.com.pg/api/enlighten/reports-whitepapers');
+  const response = await fetch('https://greencms.percepco.co.uk/api/enlighten/reports-whitepapers');
   
   if (!response.ok) {
     throw new Error('Failed to fetch reports and whitepapers data');

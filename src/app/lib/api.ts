@@ -63,78 +63,78 @@ export async function fetchApi<T>(
 export const api = {
   getInsights: () => fetchApi<InsightsResponse>("/api/insights"),
   getEnergyServices: () =>
-    fetchApi<EnergyServicesResponse>("https://g-stack.green.com.pg/api/energy"),
+    fetchApi<EnergyServicesResponse>("https://greencms.percepco.co.uk/api/energy"),
   getAboutUs: () =>
     fetchApi<AboutUsResponse>(
-      "https://g-stack.green.com.pg/api/explore/about-us",
+      "https://greencms.percepco.co.uk/api/explore/about-us",
     ),
   getWhyGreen: () =>
     fetchApi<WhyGreenResponse>(
-      "https://g-stack.green.com.pg/api/explore/why-green",
+      "https://greencms.percepco.co.uk/api/explore/why-green",
     ),
   getGlobalSnapshot: () =>
     fetchApi<GlobalSnapshotResponse>(
-      "https://g-stack.green.com.pg/api/explore/global-snapshot",
+      "https://greencms.percepco.co.uk/api/explore/global-snapshot",
     ),
   getFastFactStats: () =>
     fetchApi<FastFactStatsResponse>(
-      "https://g-stack.green.com.pg/api/explore/fast-fact-stats",
+      "https://greencms.percepco.co.uk/api/explore/fast-fact-stats",
     ),
   getOurStory: () =>
     fetchApi<OurStoryResponse>(
-      "https://g-stack.green.com.pg/api/evolution/our-story-milestone",
+      "https://greencms.percepco.co.uk/api/evolution/our-story-milestone",
     ),
   getVisionMission: () =>
     fetchApi<VisionMissionResponse>(
-      "https://g-stack.green.com.pg/api/evolution/vision-mission",
+      "https://greencms.percepco.co.uk/api/evolution/vision-mission",
     ),
   getLeadershipTeam: () =>
     fetchApi<LeadershipTeamResponse>(
-      "https://g-stack.green.com.pg/api/evolution/leadership-team",
+      "https://greencms.percepco.co.uk/api/evolution/leadership-team",
     ),
   getCertificationsAccreditations: () =>
     fetchApi<CertificationsAccreditationsResponse>(
-      "https://g-stack.green.com.pg/api/evolution/certifications-accreditations",
+      "https://greencms.percepco.co.uk/api/evolution/certifications-accreditations",
     ),
   getSustainabilityESG: () =>
     fetchApi<SustainabilityESGResponse>(
-      "https://g-stack.green.com.pg/api/evolution/sustainability-esg-commitments",
+      "https://greencms.percepco.co.uk/api/evolution/sustainability-esg-commitments",
     ),
   getSolarEPCMServices: () =>
     fetchApi<SolarEPCMServicesResponse>(
-      "https://g-stack.green.com.pg/api/engineering/solar-epcm-services",
+      "https://greencms.percepco.co.uk/api/engineering/solar-epcm-services",
     ),
   getHybridMicrogridSolutions: () =>
     fetchApi<HybridMicrogridSolutionsResponse>(
-      "https://g-stack.green.com.pg/api/engineering/hybrid-microgrid-solutions",
+      "https://greencms.percepco.co.uk/api/engineering/hybrid-microgrid-solutions",
     ),
   getEnergyStorageSmartGrid: () =>
     fetchApi<EnergyStorageSmartGridResponse>(
-      "https://g-stack.green.com.pg/api/engineering/energy-storage-smart-grid",
+      "https://greencms.percepco.co.uk/api/engineering/energy-storage-smart-grid",
     ),
   getOMMonitoring: () =>
     fetchApi<OMMonitoringResponse>(
-      "https://g-stack.green.com.pg/api/engineering/om-monitoring",
+      "https://greencms.percepco.co.uk/api/engineering/om-monitoring",
     ),
   getGridIntel: () =>
     fetchApi<GridIntelResponse>(
-      "https://g-stack.green.com.pg/api/engineering/grid-intel",
+      "https://greencms.percepco.co.uk/api/engineering/grid-intel",
     ),
   getBecomeSupplier: () =>
     fetchApi<BecomeSupplierResponse>(
-      "https://g-stack.green.com.pg/api/ecosystem/become-a-supplier",
+      "https://greencms.percepco.co.uk/api/ecosystem/become-a-supplier",
     ),
   getClientPartnerships: () =>
     fetchApi<ClientPartnershipsResponse>(
-      "https://g-stack.green.com.pg/api/ecosystem/client-partnerships",
+      "https://greencms.percepco.co.uk/api/ecosystem/client-partnerships",
     ),
   getCollaborationInnovation: () =>
     fetchApi<CollaborationInnovationResponse>(
-      "https://g-stack.green.com.pg/api/ecosystem/collaboration-innovation",
+      "https://greencms.percepco.co.uk/api/ecosystem/collaboration-innovation",
     ),
   getCommunityImpactLoop: () =>
     fetchApi<CommunityImpactLoopResponse>(
-      "https://g-stack.green.com.pg/api/ecosystem/community-impact-loop",
+      "https://greencms.percepco.co.uk/api/ecosystem/community-impact-loop",
     ),
 };
 

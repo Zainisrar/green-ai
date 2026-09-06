@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useHybridMicrogridSolutions } from "../../../hooks/useHybridMicrogridSolutions";
 import D6Chatbot from "../D6Chatbot";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import styles from "./MicroGridSolutions.module.css";
@@ -162,60 +163,28 @@ export default function MicroGridSolutions() {
       </section>
 
       <div className={styles.actions}>
-        <button type="button" onClick={() => setIsArchitectOpen(true)}>
-          <img loading="lazy" decoding="async"
-            src="/images/microgrid-solutions/systemarchitect.png"
-            alt=""
-            width="301"
-            height="53"
-          />
-          <span>
-            {microgridData?.callToActions?.[0]?.text ||
-              "Talk to a System Architect"}
-          </span>
-          <img loading="lazy" decoding="async"
-            className={styles.actionArrow}
-            src="/images/microgrid-solutions/figma-action-arrow.svg"
-            alt=""
-            aria-hidden="true"
-          />
-        </button>
-        <button type="button" onClick={() => setIsDeploymentReviewOpen(true)}>
-          <img loading="lazy" decoding="async"
-            src="/images/microgrid-solutions/book.png"
-            alt=""
-            width="351"
-            height="53"
-          />
-          <span>
-            {microgridData?.callToActions?.[1]?.text ||
-              "Book a Deployment Review"}
-          </span>
-          <img loading="lazy" decoding="async"
-            className={styles.actionArrow}
-            src="/images/microgrid-solutions/figma-action-arrow.svg"
-            alt=""
-            aria-hidden="true"
-          />
-        </button>
-        <Link href={microgridData?.callToActions?.[2]?.href || "#"}>
-          <img loading="lazy" decoding="async"
-            src="/images/microgrid-solutions/downloadhybrid.png"
-            alt=""
-            width="441"
-            height="53"
-          />
-          <span>
-            {microgridData?.callToActions?.[2]?.text ||
-              "Download Our Hybrid & Microgrid Overview"}
-          </span>
-          <img loading="lazy" decoding="async"
-            className={styles.actionDownload}
-            src="/images/microgrid-solutions/figma-download-icon.png"
-            alt=""
-            aria-hidden="true"
-          />
-        </Link>
+        <FigmaAngledCta
+          onClick={() => setIsArchitectOpen(true)}
+          style={{ position: "absolute", top: 634, right: 32, width: 301 }}
+        >
+          {microgridData?.callToActions?.[0]?.text ||
+            "Talk to a System Architect"}
+        </FigmaAngledCta>
+        <FigmaAngledCta
+          onClick={() => setIsDeploymentReviewOpen(true)}
+          style={{ position: "absolute", top: 716, right: 32, width: 351 }}
+        >
+          {microgridData?.callToActions?.[1]?.text ||
+            "Book a Deployment Review"}
+        </FigmaAngledCta>
+        <FigmaAngledCta
+          href={microgridData?.callToActions?.[2]?.href || "#"}
+          icon="download"
+          style={{ position: "absolute", top: 793, right: 32, width: 441 }}
+        >
+          {microgridData?.callToActions?.[2]?.text ||
+            "Download Our Hybrid & Microgrid Overview"}
+        </FigmaAngledCta>
       </div>
       <D6Chatbot
         canvasAnchored

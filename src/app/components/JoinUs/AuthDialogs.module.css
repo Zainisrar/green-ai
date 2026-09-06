@@ -69,18 +69,23 @@
   display: flex;
   width: 100%;
   height: 69px;
-  overflow: hidden;
-  border: 1px solid #dadedc;
-  border-radius: 1px;
-  background: #fff;
-  box-shadow: 1px 7px 6px rgb(34 36 34 / 16%);
-  clip-path: polygon(2.5% 0, 100% 0, 97.5% 100%, 0 100%);
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background:
+    transparent url("/images/reach-us/form-field.svg") center / 100% 100%
+    no-repeat;
+  box-shadow: none;
+  clip-path: none;
   align-items: center;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
 
 .fieldShape.activeField {
-  border-color: #83c342;
-  box-shadow: 0 4px 6px rgb(35 177 77 / 23%);
+  background:
+    transparent url("/images/reach-us/form-first-name.svg") center / 100% 100%
+    no-repeat;
+  box-shadow: none;
 }
 
 .fieldShape > input {
@@ -89,16 +94,18 @@
   height: 100%;
   padding: 0 34px;
   border: 0;
-  color: #616b7d;
+  color: rgb(48 48 48 / 80%);
   background: transparent;
-  font: inherit;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-weight: 400;
   font-size: 14px;
+  line-height: normal;
   font-style: italic;
   outline: 0;
 }
 
 .fieldShape > input::placeholder {
-  color: #70798b;
+  color: rgb(48 48 48 / 80%);
   opacity: 1;
 }
 
@@ -123,6 +130,11 @@
   width: 225px;
   height: 53px;
   margin-top: 23px;
+}
+
+.trackContent .imageSubmit {
+  position: relative;
+  left: 9%;
 }
 
 .imageSubmit img,
@@ -166,8 +178,11 @@
   border-right: 1px solid #d4d8e0;
   border-radius: 0;
   background: transparent;
-  color: #616b7d;
-  font-size: 16px;
+  color: rgb(48 48 48 / 40%);
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .phoneField input {
@@ -176,8 +191,11 @@
   border: 0;
   border-radius: 0;
   background: transparent;
-  color: #616b7d;
-  font-size: 16px;
+  color: rgb(48 48 48 / 80%);
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
   font-style: italic;
 }
 
@@ -209,8 +227,11 @@
 .uploadGroup .fieldShape > span {
   flex: 1;
   padding-left: 27px;
-  color: #70798b;
-  font-size: 17px;
+  color: rgb(48 48 48 / 80%);
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
   font-style: italic;
 }
 

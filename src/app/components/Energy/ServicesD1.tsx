@@ -18,6 +18,9 @@ const phases = [
       "GREEN Solar provides a range of engineering services from yield assessments to executive design and technical supervision.",
       "Implementation of solar energy projects of any capacity is a complex process and it is best to entrust experts with a proven track record in the industry to carry out your project. Overseen and executed by our team experts, your solar project will deliver the forecasted yield and the highest possible return of investment.",
     ],
+    backgroundImage: "/images/service/phases/engineering.png",
+    backgroundPosition: "center center",
+    backgroundOpacity: 1,
   },
   {
     name: "Procurement",
@@ -32,6 +35,9 @@ const phases = [
     detail: [
       "Using a robust global Supply Chain and a highly experienced Procurement team, GREEN will procure and coordinate delivery for lengthy lead time items that can be a hindrance on large projects, ensuring delivery on time and pursuant to budget.",
     ],
+    backgroundImage: "/images/service/phases/procurement.png",
+    backgroundPosition: "center center",
+    backgroundOpacity: 0.1,
   },
   {
     name: "Construction",
@@ -49,6 +55,9 @@ const phases = [
       "In the construction of Solar Power Plants, our entrepreneurial spirit propels our capacity to provide openness and rapidly adapt.",
       "Our team is adept at overcoming unforeseen obstacles such as inclement weather and supply chain problems. We provide solutions, as opposed to problems. We accomplish your goals with accuracy, diligence, and care, ensuring the security of our teams and the prosperity of the communities we serve.",
     ],
+    backgroundImage: "/images/service/phases/construction.png",
+    backgroundPosition: "center center",
+    backgroundOpacity: 0.1,
   },
   {
     name: "Operations & Maintenance",
@@ -66,6 +75,9 @@ const phases = [
       "GREEN Solar supports project performance long after commissioning through tailored operations and maintenance services.",
       "We combine proactive monitoring, practical maintenance, and transparent reporting to protect uptime and maximise the value of every asset.",
     ],
+    backgroundImage: "/images/service/phases/operations-maintenance.png",
+    backgroundPosition: "center center",
+    backgroundOpacity: 0.1,
   },
 ];
 
@@ -76,6 +88,16 @@ export default function ServicesD1() {
   return (
     <main className={styles.page}>
       <div className={styles.background} aria-hidden="true" />
+      <div aria-hidden="true" className={styles.phaseBackgroundBase} />
+      <div
+        aria-hidden="true"
+        className={styles.phaseBackground}
+        style={{
+          backgroundImage: `url("${selectedPhase.backgroundImage}")`,
+          backgroundPosition: selectedPhase.backgroundPosition,
+          opacity: selectedPhase.backgroundOpacity,
+        }}
+      />
       <SiteHeader compactLogo panel="logoOnly" />
       <Image
         className={styles.verticalTitle}

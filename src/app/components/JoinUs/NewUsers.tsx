@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ProductEnquiryFrame } from "@/app/components/Product/Modals/ProductEnquiry";
 import PhoneInput from "@/app/components/shared/PhoneInput";
+import sharedStyles from "@/app/components/shared/EngineeringFormModal.module.css";
 import styles from "./AuthDialogs.module.css";
 
 interface Props {
@@ -63,7 +64,9 @@ export default function NewUsers({ isOpen, onClose }: Props) {
           className={styles.newForm}
           onSubmit={(event) => event.preventDefault()}
         >
-          <label className={`${styles.fieldShape} ${styles.activeField}`}>
+          <label
+            className={`${styles.fieldShape} ${styles.activeField} ${sharedStyles.sharedFormField} ${sharedStyles.initialFocusField}`}
+          >
             <span className={styles.srOnly}>First name</span>
             <input
               type="text"
@@ -73,7 +76,9 @@ export default function NewUsers({ isOpen, onClose }: Props) {
             />
           </label>
 
-          <label className={styles.fieldShape}>
+          <label
+            className={`${styles.fieldShape} ${sharedStyles.sharedFormField}`}
+          >
             <span className={styles.srOnly}>Email address</span>
             <input
               type="email"
@@ -83,7 +88,9 @@ export default function NewUsers({ isOpen, onClose }: Props) {
             />
           </label>
 
-          <div className={`${styles.fieldShape} ${styles.phoneField}`}>
+          <div
+            className={`${styles.fieldShape} ${styles.phoneField} ${sharedStyles.sharedFormField}`}
+          >
             <PhoneInput
               phone={phone}
               onPhoneChange={(event) => setPhone(event.target.value)}
@@ -96,7 +103,9 @@ export default function NewUsers({ isOpen, onClose }: Props) {
             />
           </div>
 
-          <label className={`${styles.fieldShape} ${styles.passwordField}`}>
+          <label
+            className={`${styles.fieldShape} ${styles.passwordField} ${sharedStyles.sharedFormField}`}
+          >
             <span className={styles.srOnly}>Password</span>
             <input
               type={showPassword ? "text" : "password"}
@@ -109,11 +118,18 @@ export default function NewUsers({ isOpen, onClose }: Props) {
               onClick={() => setShowPassword((current) => !current)}
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
-              <img loading="lazy" decoding="async" src="/images/join-us/arrow.png" alt="" />
+              <img
+                loading="lazy"
+                decoding="async"
+                src="/images/join-us/arrow.png"
+                alt=""
+              />
             </button>
           </label>
 
-          <label className={styles.fieldShape}>
+          <label
+            className={`${styles.fieldShape} ${sharedStyles.sharedFormField}`}
+          >
             <span className={styles.srOnly}>Confirm password</span>
             <input
               type="password"
@@ -131,9 +147,17 @@ export default function NewUsers({ isOpen, onClose }: Props) {
               className={styles.fileInput}
               id="resume-upload"
             />
-            <label className={styles.fieldShape} htmlFor="resume-upload">
+            <label
+              className={`${styles.fieldShape} ${sharedStyles.sharedFormField}`}
+              htmlFor="resume-upload"
+            >
               <span>{resume?.name || "RESUME UPLOAD"}</span>
-              <img loading="lazy" decoding="async" src="/images/join-us/upload.png" alt="" />
+              <img
+                loading="lazy"
+                decoding="async"
+                src="/images/join-us/upload.png"
+                alt=""
+              />
             </label>
             <p>
               (Formats: <strong>PDF/DOC</strong>, Size:{" "}
@@ -153,7 +177,12 @@ export default function NewUsers({ isOpen, onClose }: Props) {
           </label>
 
           <button type="submit" className={styles.sendButton}>
-            <img loading="eager" decoding="async" src="/images/join-us/send.png" alt="Send" />
+            <img
+              loading="eager"
+              decoding="async"
+              src="/images/join-us/send.png"
+              alt="Send"
+            />
           </button>
         </form>
       </div>

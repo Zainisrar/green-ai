@@ -42,7 +42,7 @@ interface KeySupplyCategoriesData {
 }
 
 const fetchKeySupplyCategories = async (): Promise<KeySupplyCategoriesData> => {
-  const response = await fetch('https://g-stack.green.com.pg/api/ecosystem/key-supply-categories');
+  const response = await fetch('https://greencms.percepco.co.uk/api/ecosystem/key-supply-categories');
   
   if (!response.ok) {
     throw new Error('Failed to fetch key supply categories data');

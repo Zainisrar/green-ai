@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const NAVIGATION_API = "https://g-stack.green.com.pg/api/navigation";
+const NAVIGATION_API = "https://greencms.percepco.co.uk/api/navigation";
 
 export async function GET() {
   try {

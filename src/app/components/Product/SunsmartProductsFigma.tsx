@@ -5,6 +5,7 @@ import D6Chatbot from "../D6Chatbot";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import ProductEnquiry from "./Modals/ProductEnquiry";
+import ProductBrandSwitcher from "./ProductBrandSwitcher";
 import styles from "./ProductsFigma.module.css";
 
 const gallery = [
@@ -45,6 +46,7 @@ export default function SunsmartProductsFigma() {
     <main className={styles.desktop} data-node-id="7077:25900">
       <img loading="lazy" decoding="async" className={styles.background} src="/images/product/bg.jpg" alt="" />
       <SiteHeader layout="productCanvas" brand="sunsmart" productLogo />
+      <ProductBrandSwitcher current="GREEN SunSmart" />
       <div className={styles.sunsmartPrimaryBrand}>
         <img loading="lazy" decoding="async" src="/images/product/green-sunsmart.png" alt={productName} />
       </div>

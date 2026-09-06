@@ -1,8 +1,8 @@
 "use client";
-import Link from "next/link";
 import { useState } from "react";
 import { useGridIntel } from "../../../hooks/useGridIntel";
 import D6Chatbot from "../D6Chatbot";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import Challenge from "./Challenge";
@@ -136,33 +136,25 @@ export default function GridIntel() {
         ))}
       </nav>
       <div className={styles.actions}>
-        <button type="button" onClick={() => setDeep(true)}>
-          <img loading="lazy" decoding="async"
-            src="/images/grid-intel/schedule.png"
-            alt=""
-            width="349"
-            height="52"
-          />
-          <span>Schedule a Technical Deep-Dive</span>
-        </button>
-        <button type="button" onClick={() => setTeam(true)}>
-          <img loading="lazy" decoding="async"
-            src="/images/grid-intel/engage.png"
-            alt=""
-            width="389"
-            height="52"
-          />
-          <span>Engage Our System Architecture Team</span>
-        </button>
-        <Link href={d?.ctaButtons?.[2]?.href || "#"}>
-          <img loading="lazy" decoding="async"
-            src="/images/grid-intel/download.png"
-            alt=""
-            width="459"
-            height="52"
-          />
-          <span>Download the GRID-INTEL™ Product Dossier</span>
-        </Link>
+        <FigmaAngledCta
+          onClick={() => setDeep(true)}
+          style={{ position: "absolute", top: 658, right: 32, width: 349 }}
+        >
+          Schedule a Technical Deep-Dive
+        </FigmaAngledCta>
+        <FigmaAngledCta
+          onClick={() => setTeam(true)}
+          style={{ position: "absolute", top: 732, right: 32, width: 389 }}
+        >
+          Engage Our System Architecture Team
+        </FigmaAngledCta>
+        <FigmaAngledCta
+          href={d?.ctaButtons?.[2]?.href || "#"}
+          icon="download"
+          style={{ position: "absolute", top: 812, right: 32, width: 459 }}
+        >
+          Download the GRID-INTEL™ Product Dossier
+        </FigmaAngledCta>
       </div>
       <D6Chatbot
         canvasAnchored

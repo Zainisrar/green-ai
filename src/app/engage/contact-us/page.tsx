@@ -1,10 +1,7 @@
-import React from "react";
-import ContactUs from "@/app/components/ContactUs/ContactUs";
+import ReachUs from "@/app/components/ReachUs/ReachUs";
 
 const page = () => {
-  return <React.Fragment>
-    <ContactUs/>
-  </React.Fragment>;
+  return <ReachUs initialFormOpen />;
 };
 
 export default page;

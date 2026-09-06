@@ -265,7 +265,7 @@ export default function ReportWhitePapers({
 
 function reportUrl(href: string) {
   return href
-    ? "https://g-stack.green.com.pg/" + href.replace(/^\/+/, "")
+    ? "https://greencms.percepco.co.uk/" + href.replace(/^\/+/, "")
     : "#";
 }
 

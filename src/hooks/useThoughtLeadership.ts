@@ -57,7 +57,7 @@ interface ThoughtLeadershipResponse {
 }
 
 const fetchThoughtLeadership = async (): Promise<ThoughtLeadershipData> => {
-  const response = await fetch('https://g-stack.green.com.pg/api/enlighten/thought-leadership');
+  const response = await fetch('https://greencms.percepco.co.uk/api/enlighten/thought-leadership');
   
   if (!response.ok) {
     throw new Error('Failed to fetch thought leadership data');

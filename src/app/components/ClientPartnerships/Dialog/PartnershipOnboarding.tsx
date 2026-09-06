@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
 import ClientInfoModal from "./ClientInfoModal";
+import styles from "./ClientPartnershipDialogs.module.css";
 
 interface PartnerLogo {
   src: string;
@@ -50,28 +50,24 @@ const PartnershipOnboarding = ({ isOpen, onClose, data }: Props) => {
 
   return (
     <ClientInfoModal isOpen={isOpen} onClose={onClose}>
-      <div className="mb-6 sm:mb-8">
-        <h2 className="text-2xl font-black text-gray-800 sm:text-3xl">
-          {title}
-        </h2>
-        <div className="mt-2 flex items-center">
-          <span className="mr-2 text-2xl font-bold text-black">-</span>
-          <h3 className="text-base font-semibold text-[#4CAF50] sm:text-xl">
-            {subHeadline}
-          </h3>
-        </div>
-        <div className="mt-4 h-0.5 w-full bg-gray-300" />
-      </div>
+      <div className={styles.trusted}>
+        <header className={styles.dialogHeader}>
+          <h2 className={styles.dialogTitle}>{title}</h2>
+          <p className={styles.dialogSubtitle}>- {subHeadline}</p>
+        </header>
 
-      <div className="grid grid-cols-2 items-center justify-items-center gap-8 md:grid-cols-3">
-        {partners.map((partner, idx) => (
-          <img loading="lazy" decoding="async"
-            key={idx}
-            src={partner.src}
-            alt={partner.alt}
-            className="h-24 object-contain sm:h-32 lg:h-40"
-          />
-        ))}
+        <div className={styles.logoGrid}>
+          {partners.map((partner) => (
+            <img
+              loading="lazy"
+              decoding="async"
+              key={partner.src}
+              src={partner.src}
+              alt={partner.alt}
+              className={styles.partnerLogo}
+            />
+          ))}
+        </div>
       </div>
     </ClientInfoModal>
   );

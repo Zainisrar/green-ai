@@ -1,4 +1,4 @@
-const API_ORIGIN = "https://g-stack.green.com.pg";
+const API_ORIGIN = "https://greencms.percepco.co.uk";
 
 export function resolveApiAssetUrl(src?: string | null): string | undefined {
   if (!src) return undefined;

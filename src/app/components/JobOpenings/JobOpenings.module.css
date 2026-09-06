@@ -1,0 +1,333 @@
+.page {
+  position: relative;
+  width: 1920px;
+  min-height: 970px;
+  overflow: hidden;
+  color: #0c0c0c;
+  background: #fff;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.artwork {
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  width: 930px;
+  height: 1110px;
+  opacity: 0.11;
+  pointer-events: none;
+}
+
+.artwork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.verticalLabel {
+  position: absolute;
+  top: 529px;
+  left: 45px;
+  display: flex;
+  width: 60px;
+  height: 386px;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-family: var(--font-raleway), Raleway, sans-serif;
+  font-size: 51px;
+  font-weight: 900;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.verticalLabel span {
+  color: transparent;
+  -webkit-text-stroke: 2px rgb(12 12 12 / 13%);
+  white-space: nowrap;
+  transform: rotate(-90deg);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  padding: 127px 0 0 243px;
+  width: 1406px;
+}
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+.intro {
+  width: 1007px;
+  margin: 0 0 11px 49px;
+  color: #23b14d;
+  font-size: 30px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 36px;
+  text-align: right;
+}
+.intro span {
+  display: block;
+  color: #111;
+}
+.openings,
+.categories {
+  margin-left: 0;
+  width: 1163px;
+}
+.openings {
+  position: relative;
+}
+.openings h2,
+.categories h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+}
+.rule {
+  height: 2px;
+  margin-top: 18px;
+  background: #23b14d;
+}
+.featuredJob {
+  min-height: 136px;
+}
+.jobs {
+  display: grid;
+  gap: 0;
+}
+.job {
+  display: grid;
+  grid-template-columns: 308px 225px 195px 290px 1fr;
+  align-items: center;
+  min-height: 79px;
+}
+.job h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+.job p,
+.job > span,
+.job time,
+.job strong {
+  margin: 5px 0 0;
+  color: #999;
+  font-size: 16px;
+  font-style: normal;
+}
+.job > span,
+.job time,
+.job strong {
+  margin: 0;
+  font-size: 20px;
+}
+.job time {
+  display: block;
+  margin-top: 4px;
+  font-size: 16px;
+}
+.apply {
+  position: relative;
+  display: grid;
+  width: 136px;
+  height: 42px;
+  align-items: center;
+  justify-items: center;
+  justify-self: end;
+  color: #111;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.apply img {
+  position: absolute;
+  inset: 0;
+  width: 136px;
+  height: 42px;
+}
+.apply span {
+  position: relative;
+}
+.featuredPagination {
+  position: absolute;
+  top: 155px;
+  left: 549px;
+  width: 65px;
+  height: 11px;
+}
+.categories {
+  margin-top: 27px;
+}
+.categoryButtons {
+  display: flex;
+  gap: 28px;
+  padding-top: 23px;
+}
+.categoryRule {
+  height: 2px;
+  margin-top: 24px;
+  background: #23b14d;
+}
+.categoryButtons button {
+  min-width: 205px;
+  padding: 0;
+  border: 0;
+  color: #0c0c0c;
+  background: transparent;
+  font:
+    700 20px / 30px var(--font-montserrat),
+    Montserrat,
+    sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+.categoryButtons button small {
+  display: block;
+  color: #999;
+  font-size: 16px;
+  font-weight: 600;
+}
+.categoryButtons .selected {
+  color: #23b14d;
+}
+.programmes {
+  position: absolute;
+  z-index: 1;
+  top: 238px;
+  left: 1480px;
+  width: 400px;
+}
+.programmes p {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 50px;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  font-style: italic;
+}
+.programmes img {
+  display: block;
+  width: 27px;
+  height: 27px;
+  flex: 0 0 27px;
+  object-fit: contain;
+}
+.actions {
+  position: absolute;
+  z-index: 2;
+  right: 4px;
+  bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18px;
+}
+.actions button {
+  position: relative;
+  display: grid;
+  width: 302px;
+  height: 52px;
+  align-items: center;
+  grid-template-columns: 1fr auto;
+  box-sizing: border-box;
+  padding: 0 27px;
+  border: 0;
+  color: #111;
+  background: transparent;
+  clip-path: none;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.actions button:first-child {
+  width: 212px;
+}
+.actions button > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.actions button > span {
+  position: relative;
+}
+.actions button > span:last-child {
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+@media (max-width: 1200px) {
+  .page {
+    width: 100%;
+    min-height: 100svh;
+    overflow: hidden;
+  }
+  .artwork {
+    right: -40%;
+    width: 100%;
+    opacity: 0.08;
+  }
+  .verticalLabel {
+    display: none;
+  }
+  .content {
+    width: auto;
+    padding: 125px 28px 210px;
+  }
+  .content h1 {
+    font-size: clamp(36px, 10vw, 56px);
+  }
+  .intro {
+    width: auto;
+    margin: 24px 0 44px;
+    font-size: clamp(21px, 5vw, 30px);
+    text-align: left;
+  }
+  .openings,
+  .categories {
+    width: auto;
+  }
+  .job {
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    padding: 16px 0;
+  }
+  .job > span,
+  .job time,
+  .job strong {
+    display: none;
+  }
+  .apply {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .featuredPagination {
+    display: none;
+  }
+  .categoryButtons {
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .programmes {
+    display: none;
+  }
+  .actions {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    margin: 0 28px 36px;
+  }
+}

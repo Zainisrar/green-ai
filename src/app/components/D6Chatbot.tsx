@@ -5,6 +5,8 @@ import { Vector7366 } from "./Vector7366";
 
 interface D6ChatbotProps {
   canvasAnchored?: boolean;
+  /** Keep the compact trigger in page flow on phones so it cannot cover text. */
+  flowOnMobile?: boolean;
   triggerClassName?: string;
   /** Page-specific placeholder text for the figmaCanvas trigger */
   figmaPlaceholder?: string;
@@ -26,6 +28,7 @@ interface Message {
 
 const D6Chatbot: React.FC<D6ChatbotProps> = ({
   canvasAnchored = false,
+  flowOnMobile = true,
   triggerClassName = "",
   figmaPlaceholder,
   figmaMicIconSrc,
@@ -381,7 +384,9 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
 
       {/* Chat Trigger */}
       <div
-        className={`${canvasAnchored ? "absolute" : "fixed"} z-[50] ${
+        className={`${canvasAnchored ? "absolute" : "fixed"} ${
+          !canvasAnchored && flowOnMobile ? "d6-flow-on-mobile" : ""
+        } z-[50] ${
           canvasAnchored ? "" : "right-4 lg:right-6 bottom-4 lg:bottom-5"
         } ${triggerClassName}`}
         style={

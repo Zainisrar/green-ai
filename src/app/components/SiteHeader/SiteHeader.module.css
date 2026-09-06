@@ -82,7 +82,7 @@
   /* Match the 1920px Figma canvas navigation lane used by Explore. The
      previous 45px desktop gap made viewport pages begin roughly 50px earlier. */
   gap: clamp(24px, 1.85vw, 36px);
-  font-size: clamp(14px, 0.98vw, 20px);
+  font-size: clamp(18px, 1.2vw, 26px);
   font-weight: 500;
   line-height: 1;
   text-transform: uppercase;
@@ -266,22 +266,6 @@
 .productCanvasHeader .sunshineLogo {
   opacity: 0;
   pointer-events: none;
-}
-
-.productEmpawaLink {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 384px;
-  height: 128px;
-  cursor: pointer;
-  pointer-events: auto;
-}
-.productEmpawaLink:focus-visible {
-  outline: 3px solid #23b14d;
-  outline-offset: -4px;
 }
 
 .productCanvasHeader .navigation {

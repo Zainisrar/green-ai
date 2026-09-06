@@ -47,7 +47,7 @@
   position: absolute;
   z-index: 4;
   top: 92px;
-  left: 234px;
+  left: 269px;
   width: 1502px;
 }
 
@@ -66,7 +66,7 @@
 }
 
 .canvasHeader h2 {
-  margin: 9px 0 0 30px;
+  margin: 9px 0 0 3px;
   font-size: 22px;
   font-weight: 700;
   line-height: 36px;
@@ -74,7 +74,7 @@
 
 .canvasHeader p {
   width: 985px;
-  margin: 9px 0 0 30px;
+  margin: 9px 0 0;
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;

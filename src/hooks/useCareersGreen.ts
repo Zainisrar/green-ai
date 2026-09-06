@@ -81,7 +81,7 @@ export interface CareersGreenData {
 }
 
 const fetchCareersGreen = async (): Promise<CareersGreenData> => {
-  const response = await fetch('https://g-stack.green.com.pg/api/empower/careers-at-green');
+  const response = await fetch('https://greencms.percepco.co.uk/api/empower/careers-at-green');
   
   if (!response.ok) {
     throw new Error(`Failed to fetch careers green data: ${response.status}`);

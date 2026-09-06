@@ -7,6 +7,7 @@ import EngineeringFormModal, {
   formGridClass,
 } from "@/app/components/shared/EngineeringFormModal";
 import PhoneInput from "@/app/components/shared/PhoneInput";
+import styles from "./LetsStart.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -192,25 +193,21 @@ const LetsStart = ({ isOpen, onClose }: Props) => {
         {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
         {successMessage && <p className="text-sm text-green-600">{successMessage}</p>}
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:justify-end sm:gap-6">
+        <div className={styles.actions}>
           <button
             type="button"
             onClick={resetForm}
             disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
+            className={styles.action}
           >
-            <span className="block text-sm font-bold text-gray-800 sm:text-base">
-              Reset
-            </span>
+            Reset
           </button>
           <button
             type="submit"
             disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
+            className={`${styles.action} ${styles.submit}`}
           >
-            <span className="block text-sm font-bold text-gray-900 sm:text-base">
-              {isLoading ? "Submitting..." : "Get Started"}
-            </span>
+            {isLoading ? "Submitting..." : "Get Started"}
           </button>
         </div>
       </form>

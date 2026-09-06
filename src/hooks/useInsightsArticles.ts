@@ -29,7 +29,7 @@ interface ArticleData {
 }
 
 const fetchInsightsArticles = async (): Promise<ArticleData[]> => {
-  const response = await fetch('https://g-stack.green.com.pg/api/enlighten/insights-articles');
+  const response = await fetch('https://greencms.percepco.co.uk/api/enlighten/insights-articles');
   
   if (!response.ok) {
     throw new Error('Failed to fetch insights articles data');

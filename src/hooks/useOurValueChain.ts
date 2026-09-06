@@ -37,7 +37,7 @@ interface OurValueChainData {
 }
 
 const fetchOurValueChain = async (): Promise<OurValueChainData> => {
-  const response = await fetch('https://g-stack.green.com.pg/api/ecosystem/our-value-chain');
+  const response = await fetch('https://greencms.percepco.co.uk/api/ecosystem/our-value-chain');
   
   if (!response.ok) {
     throw new Error('Failed to fetch our value chain data');

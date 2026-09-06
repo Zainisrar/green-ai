@@ -62,11 +62,11 @@ async function fetchDynamicSlugs(): Promise<string[]> {
   const routes: string[] = [];
 
   const apiFetches: Array<{ pattern: string; url: string; slugKey?: string }> = [
-    { pattern: '/home/[slug]', url: 'https://g-stack.green.com.pg/api/home', slugKey: 'slug' },
-    { pattern: '/expertise/[slug]', url: 'https://g-stack.green.com.pg/api/expertise' },
-    { pattern: '/engineering/products/[slug]', url: 'https://g-stack.green.com.pg/api/engineering/products' },
-    { pattern: '/enlighten/insights-articles/[slug]', url: 'https://g-stack.green.com.pg/api/enlighten/insights-articles' },
-    { pattern: '/insights/[slug]', url: 'https://g-stack.green.com.pg/api/insights' },
+    { pattern: '/home/[slug]', url: 'https://greencms.percepco.co.uk/api/home', slugKey: 'slug' },
+    { pattern: '/expertise/[slug]', url: 'https://greencms.percepco.co.uk/api/expertise' },
+    { pattern: '/engineering/products/[slug]', url: 'https://greencms.percepco.co.uk/api/engineering/products' },
+    { pattern: '/enlighten/insights-articles/[slug]', url: 'https://greencms.percepco.co.uk/api/enlighten/insights-articles' },
+    { pattern: '/insights/[slug]', url: 'https://greencms.percepco.co.uk/api/insights' },
   ];
 
   for (const { pattern, url, slugKey } of apiFetches) {
@@ -244,7 +244,7 @@ async function auditPage(page: Page, url: string) {
       req.includes('hot-update') ||
       req.includes('webpack') ||
       req.includes('_rsc=') ||
-      req.includes('g-stack.green.com.pg') ||
+      req.includes('greencms.percepco.co.uk') ||
       (req.includes('ERR_ABORTED') && req.includes('cloudinary'))
     ) continue;
     addBug({

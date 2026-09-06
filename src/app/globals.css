@@ -11,9 +11,25 @@
 
 html,
 body {
+  width: 100%;
+  max-width: 100%;
   margin: 0 !important;
   padding: 0;
+  overflow-x: clip;
   overscroll-behavior: none;
+}
+
+/* The compact chat CTA belongs after page content on phones. Keeping it fixed
+   caused it to overlap text and form controls while the user scrolled. */
+@media (max-width: 767px) {
+  .d6-flow-on-mobile {
+    position: relative !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: fit-content;
+    margin: 1.5rem auto calc(1.5rem + env(safe-area-inset-bottom));
+  }
 }
 
 body {

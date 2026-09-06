@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import type { NavigationItem, NavigationText } from "../../hooks/useNavigation";
 import styles from "./Navigation.module.css";
 
@@ -30,6 +31,11 @@ export default function Navigation({
     null,
   );
   const reduceMotion = useReducedMotion();
+  const figmaTransition = {
+    duration: reduceMotion ? 0 : 0.3,
+    ease: [0, 0, 0.58, 1] as [number, number, number, number],
+  };
+  const dissolveInitial = reduceMotion ? false : { opacity: 0 };
   const drawerRef = useRef<HTMLElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -44,11 +50,26 @@ export default function Navigation({
   // section. Engineering opens Products & Systems and Enlighten opens
   // Learning Hub without requiring an extra click.
   useEffect(() => {
-    const nestedParent = activeSection?.children?.find(
-      (item) => item.children?.length,
+    const nestedParents =
+      activeSection?.children?.filter((item) => item.children?.length) ?? [];
+    const currentParent = nestedParents.find(
+      (item) =>
+        item.slug === currentPath ||
+        Boolean(item.slug && currentPath?.startsWith(`${item.slug}/`)) ||
+        item.children?.some(
+          (child) =>
+            child.slug === currentPath ||
+            Boolean(child.slug && currentPath?.startsWith(`${child.slug}/`)),
+        ),
     );
-    setSelectedParent(nestedParent ?? null);
-  }, [activeSection]);
+    const sectionDefaultParent = nestedParents.find(
+      (item) => item.slug === activeSection?.slug,
+    );
+
+    setSelectedParent(
+      currentParent ?? sectionDefaultParent ?? nestedParents[0] ?? null,
+    );
+  }, [activeSection, currentPath]);
 
   useEffect(() => {
     const previouslyFocused = document.activeElement as HTMLElement | null;
@@ -87,16 +108,37 @@ export default function Navigation({
     }
   };
 
+  const activeFeature =
+    selectedParent?.image && selectedParent.text
+      ? selectedParent
+      : featuredChild;
   const quote =
-    featuredChild?.text?.description ||
+    activeFeature?.text?.description ||
     "Explore our comprehensive solutions and services";
-  const highlight = featuredChild?.text?.highlighted;
+  const highlight = activeFeature?.text?.highlighted;
   const visibleItems = activeSection?.children ?? [];
   const sections = navigationData.slice().sort((a, b) => a.id - b.id);
-  const isFeatureLedLayout = activeSection?.id === 7 || activeSection?.id === 8;
-  const isEngineeringLayout = activeSection?.id === 3;
-  const isEmpowerLayout = activeSection?.id === 7;
-  const isEngageLayout = activeSection?.id === 8;
+  // CMS record IDs vary between environments. Layout selection must use the
+  // section's stable identity instead of development-database IDs.
+  const activeSectionName = activeSection?.name.trim().toLowerCase() ?? "";
+  const activeSectionSlug = activeSection?.slug.toLowerCase() ?? "";
+  const matchesSection = (name: string) =>
+    activeSectionName === name ||
+    activeSectionSlug === name ||
+    activeSectionSlug === `/${name}` ||
+    activeSectionSlug.startsWith(`/${name}/`) ||
+    activeSectionSlug.startsWith(`${name}/`);
+  const isEngineeringLayout = matchesSection("engineering");
+  const isEvolutionLayout = matchesSection("evolution");
+  const isEndeavorsLayout = matchesSection("endeavors");
+  const isEnlightenLayout = matchesSection("enlighten");
+  const isEcosystemLayout = matchesSection("ecosystem");
+  const isEmpowerLayout = matchesSection("empower");
+  const isEngageLayout = matchesSection("engage");
+  const isSupplyEcosystemLayout =
+    isEcosystemLayout &&
+    selectedParent?.name.trim().toLowerCase() === "supply partners";
+  const isFeatureLedLayout = isEmpowerLayout || isEngageLayout;
   const isCurrent = (item: NavigationItem) =>
     currentPath === item.slug ||
     Boolean(item.slug && currentPath?.startsWith(`${item.slug}/`));
@@ -105,7 +147,7 @@ export default function Navigation({
     // Engineering opens on Products & Systems in the Figma panel. Treat that
     // expandable parent as the only active top-level item while its products
     // are visible, even if the underlying page is Solar EPC Services.
-    if (isEngineeringLayout && selectedParent) {
+    if ((isEngineeringLayout || isEcosystemLayout) && selectedParent) {
       return item.id === selectedParent.id;
     }
 
@@ -120,7 +162,14 @@ export default function Navigation({
     return `${styles.activeItem} ${isEngageLayout ? "" : styles.underlinedActiveItem}`;
   };
 
-  return (
+  // Several Figma-authored pages scale their entire canvas with a CSS
+  // transform. A fixed element inside that canvas is fixed to (and scaled
+  // with) the transformed ancestor, rather than the browser viewport. Keep
+  // this global dialog at the document root so its responsive breakpoints and
+  // viewport units always describe the actual window.
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
     <div
       className={styles.overlay}
       role="dialog"
@@ -134,7 +183,7 @@ export default function Navigation({
         aria-label="Close navigation"
       />
       <aside
-        className={`${styles.drawer} ${isFeatureLedLayout ? styles.featureLedDrawer : ""} ${isEngineeringLayout ? styles.engineeringDrawer : ""} ${isEngageLayout ? styles.engageDrawer : ""}`}
+        className={`${styles.drawer} ${isFeatureLedLayout ? styles.featureLedDrawer : ""} ${isEvolutionLayout ? styles.evolutionDrawer : ""} ${isEngineeringLayout ? styles.engineeringDrawer : ""} ${isEndeavorsLayout ? styles.endeavorsDrawer : ""} ${isEnlightenLayout ? styles.enlightenDrawer : ""} ${isEcosystemLayout ? styles.ecosystemDrawer : ""} ${isSupplyEcosystemLayout ? styles.supplyEcosystemDrawer : ""} ${isEmpowerLayout ? styles.empowerDrawer : ""} ${isEngageLayout ? styles.engageDrawer : ""}`}
         ref={drawerRef}
         onKeyDown={trapFocus}
       >
@@ -149,94 +198,145 @@ export default function Navigation({
           <span />
         </button>
         <motion.div
-          key={activeSection?.id ?? "navigation"}
           className={styles.content}
           initial={reduceMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{
-            duration: reduceMotion ? 0 : 0.3,
-            ease: [0, 0, 0.58, 1],
-          }}
+          transition={figmaTransition}
         >
-          <div className={styles.feature}>
-            {featuredChild?.image ? (
-              <img loading="lazy" decoding="async"
-                src={featuredChild.image.src}
-                alt={featuredChild.image.alt}
-              />
-            ) : null}
-          </div>
-          <div className={styles.subNavigation}>
-            {visibleItems.map((item, index) =>
-              item.children?.length ? (
-                <button
-                  key={item.id}
-                  type="button"
-                  className={`${styles.subMenuTrigger} ${isActiveMenuItem(item, index) || selectedParent?.id === item.id ? `${styles.activeItem} ${isEngageLayout ? "" : styles.underlinedActiveItem}` : ""}`}
-                  aria-expanded={selectedParent?.id === item.id}
-                  onClick={() =>
-                    setSelectedParent((selected) =>
-                      selected?.id === item.id ? null : item,
-                    )
-                  }
-                >
-                  {item.name}
-                  <span aria-hidden="true">›</span>
-                </button>
-              ) : (
-                <Link
-                  key={item.id}
-                  href={item.slug}
-                  className={activeMenuClassName(item, index) || undefined}
-                  onClick={onClose}
-                >
-                  {item.name}
-                </Link>
-              ),
-            )}
-          </div>
-          {selectedParent?.children?.length ? (
-            <nav
-              className={styles.nestedNavigation}
-              aria-label={`${selectedParent.name} navigation`}
-            >
-              {selectedParent.children.map((item) => (
-                <Link key={item.id} href={item.slug} onClick={onClose}>
-                  {item.name}
-                </Link>
-              ))}
-            </nav>
-          ) : null}
-          <blockquote className={styles.quote}>
-            {isEngageLayout ? (
-              <>
-                <span>
-                  “Let&apos;s <em>Connect</em> and
-                </span>
-                <span>
-                  Define <em>Future</em> Together”
-                </span>
-              </>
-            ) : isEmpowerLayout ? (
-              <span>
-                “People-First. <em>Talent-Driven.</em>”
-              </span>
-            ) : (
-              <>
-                “
-                {highlight && quote.includes(highlight) ? (
-                  <>
-                    {quote.split(highlight)[0]}
-                    <em>{highlight}</em>
-                    {quote.split(highlight).slice(1).join(highlight)}
-                  </>
-                ) : (
-                  quote
+          <motion.div
+            layout="position"
+            className={styles.feature}
+            transition={figmaTransition}
+          >
+            <AnimatePresence initial={false} mode="sync">
+              {activeFeature?.image ? (
+                <motion.img
+                  key={activeFeature.image.src}
+                  loading="lazy"
+                  decoding="async"
+                  src={activeFeature.image.src}
+                  alt={activeFeature.image.alt}
+                  initial={dissolveInitial}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={figmaTransition}
+                />
+              ) : null}
+            </AnimatePresence>
+          </motion.div>
+          <motion.div
+            layout="position"
+            className={styles.subNavigation}
+            transition={figmaTransition}
+          >
+            <AnimatePresence initial={false} mode="wait">
+              <motion.div
+                key={activeSection?.id ?? "navigation"}
+                className={styles.menuItems}
+                initial={dissolveInitial}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={figmaTransition}
+              >
+                {visibleItems.map((item, index) =>
+                  item.children?.length ? (
+                    <button
+                      key={item.id}
+                      type="button"
+                      className={`${styles.subMenuTrigger} ${isActiveMenuItem(item, index) || selectedParent?.id === item.id ? `${styles.activeItem} ${isEngageLayout ? "" : styles.underlinedActiveItem}` : ""}`}
+                      aria-expanded={selectedParent?.id === item.id}
+                      onClick={() => setSelectedParent(item)}
+                    >
+                      {item.name}
+                      <span aria-hidden="true">›</span>
+                    </button>
+                  ) : (
+                    <Link
+                      key={item.id}
+                      href={item.slug}
+                      className={activeMenuClassName(item, index) || undefined}
+                      onClick={onClose}
+                    >
+                      {item.name}
+                    </Link>
+                  ),
                 )}
-                ”
-              </>
-            )}
-          </blockquote>
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
+          <AnimatePresence initial={false} mode="wait">
+            {selectedParent?.children?.length ? (
+              <motion.nav
+                layout="position"
+                key={selectedParent.id}
+                className={styles.nestedNavigation}
+                aria-label={`${selectedParent.name} navigation`}
+                initial={dissolveInitial}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={figmaTransition}
+              >
+                {selectedParent.children.map((item) => (
+                  <Link
+                    key={item.id}
+                    href={item.slug}
+                    className={isCurrent(item) ? styles.activeItem : undefined}
+                    onClick={onClose}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </motion.nav>
+            ) : null}
+          </AnimatePresence>
+          <motion.blockquote
+            layout="position"
+            className={styles.quote}
+            transition={figmaTransition}
+          >
+            <motion.span
+              key={`${activeSection?.id ?? "navigation"}-${quote}`}
+              className={styles.quoteContent}
+              initial={dissolveInitial}
+              animate={{ opacity: 1 }}
+              transition={figmaTransition}
+            >
+              {isEngageLayout ? (
+                <>
+                  <span>
+                    “Let&apos;s <em>Connect</em> and
+                  </span>
+                  <span>
+                    Define <em>Future</em> Together”
+                  </span>
+                </>
+              ) : isEmpowerLayout ? (
+                <span>
+                  “People-First. <em>Talent-Driven.</em>”
+                </span>
+              ) : isEnlightenLayout ? (
+                <span>
+                  “<em>Knowledge</em> sharing, thought leadership, and market
+                  {` `}
+                  <em>insight</em>”
+                </span>
+              ) : (
+                <>
+                  “
+                  {highlight && quote.includes(highlight) ? (
+                    <>
+                      {quote.split(highlight)[0]}
+                      <em>{highlight}</em>
+                      {quote.split(highlight).slice(1).join(highlight)}
+                    </>
+                  ) : (
+                    quote
+                  )}
+                  ”
+                </>
+              )}
+            </motion.span>
+          </motion.blockquote>
         </motion.div>
         <div className={styles.divider} />
         <nav className={styles.sections} aria-label="Navigation sections">
@@ -278,6 +378,7 @@ export default function Navigation({
           </Link>
         </div>
       </aside>
-    </div>
+    </div>,
+    document.body,
   );
 }

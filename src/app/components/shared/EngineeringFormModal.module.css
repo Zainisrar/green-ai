@@ -18,7 +18,878 @@
 .consultationPanel > div[aria-hidden] {
   border-color: #bde85d;
   border-radius: 0;
-  background: rgb(255 255 255 / 96%);
+  background: #f3f8f4;
+}
+
+/* Shared Elements enquiry shell for CTA forms that use EngineeringFormModal. */
+.standardCtaWindow {
+  width: min(1710px, calc(100vw - 36px));
+  height: 702px;
+  max-width: none;
+  animation: consultation-window-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.standardCtaPanel {
+  height: 702px;
+  min-height: 702px;
+}
+
+.standardCtaPanel > div[aria-hidden] {
+  inset: 0;
+  border: 0;
+  border-radius: 0;
+  background:
+    #f3f8f4 url("/images/shared/engineering-form-window.svg") center / 100% 100%
+    no-repeat;
+  box-shadow: none;
+  /* Match the artwork's panel edge while keeping its interior fully opaque. */
+  clip-path: polygon(9.82% 2.48%, 98.47% 2.48%, 89.64% 96.45%, 1.07% 96.45%);
+}
+
+.standardCtaContent {
+  padding: 3.4rem 10.25rem 2.25rem 14.75rem;
+}
+
+/* Shared Figma form controls used by every EngineeringFormModal CTA. */
+.sharedFormField {
+  min-height: 69px;
+  border: 0;
+  border-radius: 0;
+  /* The SVG paints the white card itself. Keeping this layer transparent
+     prevents a rectangular white halo around the angled field edges. */
+  background: transparent url("/images/reach-us/form-field.svg") center / 100% 100%
+    no-repeat;
+  box-shadow: none;
+  filter: none;
+  clip-path: none;
+}
+
+/* Every common popup shares the same focused field treatment. */
+.sharedFormField:focus,
+.sharedFormField:focus-within {
+  outline: 0;
+  background:
+    transparent url("/images/reach-us/form-first-name.svg") center / 100% 100%
+    no-repeat;
+  box-shadow: none;
+  filter: none;
+}
+
+/* Use when a Figma popup opens with its first text field already active. */
+.initialFocusField {
+  background:
+    transparent url("/images/reach-us/form-first-name.svg") center / 100% 100%
+    no-repeat;
+  box-shadow: none;
+  filter: none;
+}
+
+/* Use the supplied Figma chevron rather than browser-specific select arrows. */
+select.sharedFormField {
+  appearance: none;
+  background-color: transparent;
+  background-image:
+    url("/images/osm-monitoring/select-chevron.svg"),
+    url("/images/reach-us/form-field.svg");
+  background-position:
+    right 1.55rem center,
+    center;
+  background-repeat: no-repeat;
+  background-size:
+    0.875rem 0.5rem,
+    100% 100%;
+}
+
+.standardCtaPanel textarea {
+  min-height: 107px;
+}
+
+.standardCtaClose {
+  top: 44.75px;
+  right: 74.34px;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+}
+
+.standardCtaClose img {
+  width: 100%;
+  height: 100%;
+}
+
+/* O&M live demo popup — Figma node 7118:8465 (1687.97 × 665px). */
+.liveDemoWindow {
+  width: min(1688px, calc(100vw - 36px));
+  height: 665px;
+  max-width: none;
+  animation: consultation-window-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.liveDemoPanel {
+  height: 665px;
+  min-height: 665px;
+  /* The Figma frame itself is 1687.975px wide; do not shrink it with the
+     shared modal gutter. */
+  margin: 0 !important;
+}
+
+.liveDemoPanel > div[aria-hidden] {
+  inset: 0;
+  border: 0;
+  border-radius: 0;
+  background:
+    #f3f8f4 url("/images/shared/engineering-form-window.svg") center / 100% 100%
+    no-repeat;
+  box-shadow: none;
+  clip-path: polygon(9.82% 2.48%, 98.47% 2.48%, 89.64% 96.45%, 1.07% 96.45%);
+}
+
+.liveDemoContent {
+  padding: 3rem 10rem 2rem 12rem;
+}
+
+.liveDemoPanel textarea.sharedFormField {
+  min-height: 6.6875rem;
+}
+
+/* Job Query — Figma node 7077:17321 (1687.975 × 665px).
+   Its form follows the diagonal left edge row by row, rather than a regular
+   two-column grid. The measurements below are relative to that exact frame. */
+.jobQueryForm {
+  padding-top: 1.25rem;
+}
+
+/* Node 7077:17321 uses Montserrat Regular 14px throughout its field labels.
+   Keep these values local to Job Query: the shared modal control is 16px at
+   desktop breakpoints, which makes this compact Figma layout collide. */
+.liveDemoContent > div:first-child h2 {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.jobQueryForm .sharedFormField,
+.jobQueryForm :global(input),
+.jobQueryForm :global(select),
+.jobQueryForm :global(textarea),
+.jobQueryForm :global(button[aria-label="Select country code"]) {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+}
+
+.jobQueryForm :global(input:not([name="phone"])),
+.jobQueryForm :global(select) {
+  padding-inline: 31px;
+}
+
+/* The phone field is a composite control; its placeholder begins 38px in,
+   while its country selector has its own Figma-sized hit area. */
+.jobQueryForm :global(input[name="phone"]) {
+  padding-left: 38px;
+}
+
+.jobQueryForm :global(button[aria-label="Select country code"]) {
+  padding-inline: 20px;
+}
+
+.jobQueryForm :global(textarea) {
+  padding: 22px 50px;
+}
+
+.jobQueryForm .sharedFormField::placeholder,
+.jobQueryForm :global(input)::placeholder,
+.jobQueryForm :global(textarea)::placeholder {
+  color: rgb(48 48 48 / 80%);
+  opacity: 1;
+}
+
+.jobQueryForm > :global(.grid) {
+  width: calc(100% + 1.1875rem);
+  gap: 1.5rem 2.6875rem;
+}
+
+.jobQueryForm > :global(.grid):nth-child(1) {
+  transform: translateX(-0.5625rem);
+}
+
+.jobQueryForm > :global(.grid):nth-child(2) {
+  gap: 1.5rem 2.375rem;
+  margin-top: 1.5rem !important;
+  transform: translateX(-1.625rem);
+}
+
+.jobQueryForm > :global(.grid):nth-child(3) {
+  gap: 1.5rem 2.4375rem;
+  margin-top: 1.9375rem !important;
+  transform: translateX(-3rem);
+}
+
+.jobQueryForm > :global(textarea) {
+  width: calc(100% + 1.375rem);
+  margin-top: 0 !important;
+  transform: translateX(-5.1875rem);
+}
+
+.jobQueryActions {
+  margin-top: 0.4375rem !important;
+  gap: 2.3125rem !important;
+  transform: translateX(-5.875rem);
+}
+
+.liveDemoActions.jobQueryActions > button {
+  width: 11.25rem;
+  height: 3.625rem;
+  min-height: 3.625rem;
+}
+
+.liveDemoActions.jobQueryActions > button:last-child {
+  width: 14.7775rem;
+}
+
+/* Track Your Candidature — Figma node 7077:17465 (1097.98 × 535px). */
+.trackWindow {
+  width: min(1098px, calc(100vw - 36px));
+  height: 535px;
+  max-width: none;
+  animation: consultation-window-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.trackPanel {
+  height: 535px;
+  min-height: 535px;
+  margin: 0 !important;
+}
+
+.trackPanel > div[aria-hidden] {
+  inset: 0;
+  box-sizing: border-box;
+  border-radius: 0;
+  border: 3px solid transparent;
+  background:
+    linear-gradient(0deg, rgb(255 255 255 / 90%), rgb(255 255 255 / 90%))
+      padding-box,
+    linear-gradient(
+        193.74deg,
+        rgb(35 177 77 / 50%) 30.41%,
+        rgb(255 254 80 / 50%) 113.84%
+      )
+      border-box;
+  /* Vector 7368 is composited over white in Figma. Without this base, the
+     translucent fill takes on the darkened page beneath the dialog. */
+  background-color: #fff;
+  box-shadow: 4px 4px 20px rgb(34 36 34 / 25%);
+  backdrop-filter: blur(20px);
+  clip-path: polygon(21.087% 0, 100% 0, 78.516% 100%, 0 100%);
+}
+
+.trackContent {
+  height: 535px;
+  padding: 0;
+}
+
+.trackContent > div:first-child {
+  position: absolute;
+  top: 50px;
+  left: 256px;
+  margin: 0;
+}
+
+.trackContent > div:first-child h2 {
+  color: #000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  /* Node 7077:17485: Montserrat ExtraBold, 30px, normal line height. */
+  line-height: 36px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.trackContent > div:first-child p {
+  width: 470px;
+  margin-top: 4px;
+  color: rgb(48 48 48 / 80%);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.trackForm {
+  position: absolute;
+  inset: 0;
+}
+
+.trackFields {
+  position: absolute;
+  top: 113px;
+  left: 256px;
+  display: flex;
+  width: 677.5px;
+  flex-direction: column;
+  /* Rectangle 712 ends at 182.661px; Rectangle 724 begins at 213px. */
+  gap: 30.839px;
+}
+
+.trackFields .sharedFormField {
+  padding-inline: 36px;
+  color: rgb(48 48 48 / 80%);
+  font-size: 14px;
+}
+
+/* Figma Rectangle 712 — 677.5 × 69.161px at (256, 113). */
+.trackFields .initialFocusField {
+  width: 677.5px;
+  min-height: 69.161px;
+  height: 69.161px;
+  /* Rectangle 712 is exported with an 8px shadow bleed below the 69.161px
+     control. Its 1.407px horizontal bleed is also retained. */
+  background-image: url("/images/join-us/existing-users-first-name.svg");
+  background-position: -1.084px 0;
+  background-size: calc(100% + 1.407px) calc(100% + 8px);
+  background-repeat: no-repeat;
+  /* Backgrounds are clipped to the input's border box, so the SVG export's
+     8px shadow bleed cannot render outside it. A drop-shadow follows the
+     opaque angled artwork rather than producing a rectangular second box. */
+  filter: drop-shadow(0 4px 4px rgb(35 209 75 / 22%));
+}
+
+.trackFields .sharedFormField::placeholder {
+  color: rgb(48 48 48 / 80%);
+  opacity: 1;
+}
+
+.trackPassword {
+  /* Figma Rectangle 724 — 676.373 × 68.173px at (212, 213). */
+  width: 676.373px;
+  min-height: 68.173px;
+  height: 68.173px;
+  /* The exported Rectangle 724 already contains Figma's 0 4 4 #000/25%
+     shadow. Do not add a CSS box-shadow here: it would create a second,
+     rectangular layer behind the angled vector. */
+  overflow: visible;
+  border-radius: 0;
+  box-shadow: none;
+  filter: drop-shadow(0 4px 4px rgb(0 0 0 / 25%));
+  transform: translateX(-44px);
+  /* Rectangle 724 uses the same precise shadow bleed but its own polygon. */
+  background-image: url("/images/join-us/existing-users-email.svg");
+  background-position: -1.001px 0;
+  background-size: calc(100% + 1.418px) calc(100% + 8px);
+  background-repeat: no-repeat;
+}
+
+.trackLogin {
+  position: absolute;
+  top: 341px;
+  left: 412px;
+  width: 251.44px;
+  height: 58.3px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.trackLogin img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.trackResetCopy {
+  position: absolute;
+  top: 412px;
+  left: 420px;
+  margin: 0;
+  color: rgb(48 48 48 / 80%);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.trackResetCopy button {
+  padding: 0;
+  border: 0;
+  color: #23b14d;
+  background: transparent;
+  font: inherit;
+  font-weight: 800;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  cursor: pointer;
+}
+
+.trackClose {
+  top: 23px;
+  /* Node 7077:17479 is 1,038.5px from the left of the 1,097.975px frame. */
+  right: 44px;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+}
+
+.trackClose img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Two classes intentionally beat the shared .expandControl rule below.
+   The Figma controls share the same vertical centre line. */
+.expandControl.trackExpand {
+  top: 23px;
+  right: 88.4px;
+  width: 18.585px;
+  height: 17.784px;
+}
+
+/* Figma's live-demo actions use their own light, outlined treatment. */
+.liveDemoActions > button {
+  width: 11.5rem;
+  min-width: 0;
+  height: 3.75rem;
+  min-height: 3.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background:
+    url("/images/osm-monitoring/live-demo-action.svg") center / 100% 100%
+    no-repeat;
+  box-shadow: none;
+  transform: none;
+}
+
+.liveDemoActions > button:last-child {
+  width: 14.875rem;
+}
+
+.liveDemoActions > button > span {
+  color: #000;
+  font-style: normal;
+}
+
+/* The O&M proposal uses the slimmer control stack from node 7117:8175. */
+.proposalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.proposalForm > * + * {
+  margin-top: 0 !important;
+}
+
+.proposalForm :global(.grid) {
+  gap: 1.5rem 4.2rem;
+}
+
+/* Follow the left diagonal of the window instead of leaving a growing empty
+   gutter beside the lower input rows. */
+.proposalForm > :global(.grid):nth-child(1) {
+  transform: translateX(-1rem);
+}
+
+.proposalForm > :global(.grid):nth-child(2) {
+  transform: translateX(-2.25rem);
+}
+
+.proposalForm > :global(.grid):nth-child(3) {
+  transform: translateX(-3.5rem);
+}
+
+.proposalForm > :global(.grid):nth-child(4) {
+  transform: translateX(-4.75rem);
+}
+
+.proposalAgreement {
+  transform: translateX(-6rem);
+}
+
+.proposalActions {
+  transform: translateX(-5rem);
+}
+
+.proposalForm .sharedFormField {
+  min-height: 4.3125rem;
+  padding: 0.65rem 1.35rem;
+  color: #596278;
+  font-size: 0.875rem;
+  font-weight: 400;
+  filter: none;
+  /* The form-field vector includes Figma's 0 4 4 #000/25% drop shadow. */
+  box-shadow: none;
+}
+
+.proposalForm .sharedFormField::placeholder {
+  color: #737b8c;
+  font-size: 0.875rem;
+  font-weight: 400;
+  opacity: 1;
+}
+
+.proposalForm .sharedFormField:focus {
+  outline: 0;
+  background:
+    transparent url("/images/reach-us/form-first-name.svg") center / 100% 100%
+    no-repeat;
+  box-shadow: none;
+}
+
+/* The reference opens with Full Name active. Its vector carries the
+   #98FAAE (76%) stroke and replaces the standard shadowed field artwork. */
+.proposalForm input[name="fullName"] {
+  background:
+    transparent url("/images/reach-us/form-first-name.svg") center / 100% 100%
+    no-repeat;
+  box-shadow: none;
+}
+
+.proposalForm .proposalPhoneField {
+  padding: 0;
+}
+
+.proposalForm .proposalPhoneField:focus-within {
+  background:
+    transparent url("/images/reach-us/form-first-name.svg") center / 100% 100%
+    no-repeat;
+  box-shadow: none;
+}
+
+.proposalForm .proposalPhoneField input,
+.proposalForm .proposalPhoneField button {
+  color: #596278;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.proposalForm .proposalPhoneField input {
+  flex: 0 0 8rem;
+  padding-left: 1.35rem;
+}
+
+.proposalForm .proposalPhoneField input::placeholder {
+  color: #737b8c;
+  font-size: 0.875rem;
+  font-weight: 400;
+  opacity: 1;
+}
+
+.proposalActions > button {
+  width: 11.5rem;
+  min-width: 0;
+  height: 3.75rem;
+  min-height: 3.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background:
+    url("/images/osm-monitoring/live-demo-action.svg") center / 100% 100%
+    no-repeat;
+  box-shadow: none;
+  transform: none;
+}
+
+.proposalActions > button:last-child {
+  width: 14.875rem;
+}
+
+.proposalActions > button > span {
+  color: #000;
+  font-style: normal;
+}
+
+/* O&M Monitoring request windows (Figma 7117:8223 / 7118:8356). */
+.omWindow {
+  width: min(1870px, calc(100vw - 36px));
+  height: 940px;
+  max-width: none;
+  animation: consultation-window-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.omPanel {
+  height: 940px;
+  min-height: 940px;
+  clip-path: polygon(1.55% 0, 100% 0, 92.4% 100%, 0 100%);
+}
+
+.omPanel > div[aria-hidden] {
+  inset: 0;
+  border: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(#f7fbf8, #fffff8) padding-box,
+    linear-gradient(100deg, #23b14d, #fffe50) border-box;
+  box-shadow: 4px 4px 20px rgb(34 36 34 / 25%);
+}
+
+.omContent {
+  padding: 3.3rem 11.25rem 4.5rem 18.75rem;
+}
+
+.omContent > div:first-child {
+  margin-bottom: 2.4rem;
+}
+
+.omContent h2 {
+  font-size: 2.62rem;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.omForm {
+  display: flex;
+  flex-direction: column;
+  gap: 2.15rem;
+}
+
+.omForm > * + * {
+  margin-top: 0 !important;
+}
+
+.omForm :global(.grid) {
+  gap: 2.15rem 4.2rem;
+}
+
+.omForm :global(input:not([type="checkbox"])),
+.omForm :global(select),
+.omForm :global(button[aria-label="Select country code"]),
+.omUpload :global(button[type="button"]) {
+  min-height: 6rem;
+  padding: 1.25rem 2rem;
+  border: 0;
+  border-radius: 0;
+  background: #fff url("/images/reach-us/form-field.svg") center / 100% 100%
+    no-repeat;
+  box-shadow: none;
+  color: #344056;
+  font-size: 1.35rem;
+}
+
+.omForm :global(button[aria-label="Select country code"]) {
+  width: 11.25rem;
+  border-right: 1px solid #d7dce2;
+  background-color: #fff;
+  background-image: none;
+}
+
+.omForm :global(input[type="checkbox"]) {
+  width: 1.55rem;
+  height: 1.55rem;
+  min-height: 0;
+  padding: 0;
+  border: 1px solid #5c6470;
+  border-radius: 0;
+  background: #fff;
+}
+
+.omForm :global(label) {
+  color: #344056;
+  font-size: 1.35rem;
+}
+
+.omUpload {
+  position: relative;
+}
+
+.omUpload :global(button[type="button"]) {
+  width: 100%;
+}
+
+.omUpload :global(button[type="button"]) img {
+  width: 1.875rem;
+  height: 1.69rem;
+}
+
+.omUpload :global(p) {
+  margin-top: 0.8rem;
+  color: #23b14d;
+  font-size: 1.05rem;
+}
+
+.omAgreement {
+  margin-top: 0.6rem;
+}
+
+.omActions {
+  margin-top: 1.8rem;
+  justify-content: flex-end;
+  gap: 2.25rem !important;
+}
+
+.omActions :global(button) {
+  min-width: 11.8rem;
+  min-height: 4.45rem;
+  padding: 0.75rem 2.7rem;
+  border: 1px solid #6dcc72;
+  border-radius: 0;
+  background: linear-gradient(105deg, #7bcf83 0%, #fbff78 100%);
+  box-shadow: 3px 6px 11px rgb(34 36 34 / 16%);
+  color: #16233d;
+  font-size: 1.35rem;
+  font-style: italic;
+}
+
+.omActions :global(button:last-child) {
+  min-width: 20.5rem;
+}
+
+/* Solar EPCM Figma popup frame: node 7114:7462, 1710 × 702px. */
+.epcmWindow {
+  width: min(1640px, calc(100vw - 36px));
+  max-width: none;
+  animation: consultation-window-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.epcmPanel {
+  min-height: min(670px, calc(100dvh - 4.5rem));
+  clip-path: polygon(7.8% 0, 100% 0, 92.1% 100%, 0 100%);
+}
+
+.epcmPanel > div[aria-hidden] {
+  border-color: transparent;
+  border-radius: 0;
+  background:
+    linear-gradient(rgb(247 251 248 / 94%), rgb(255 255 248 / 94%)) padding-box,
+    linear-gradient(100deg, #23b14d, #fffe50) border-box;
+  box-shadow: 4px 4px 20px rgb(34 36 34 / 25%);
+}
+
+/* Keep controls inside the angled edges instead of using the generic modal gutter. */
+.epcmContent {
+  padding: 4.2rem 8.6rem 2.3rem 12.1rem;
+}
+
+.expandControl {
+  position: absolute;
+  right: 116px;
+  top: 44.75px;
+  z-index: 30;
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.expandControl img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.epcmForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.55rem;
+}
+
+.epcmForm > * + * {
+  margin-top: 0 !important;
+}
+
+.epcmGrid {
+  gap: 1.55rem 2.7rem !important;
+}
+
+.epcmGrid:nth-of-type(2) {
+  width: calc(100% + 1.1rem);
+  transform: translateX(-1.1rem);
+}
+
+.epcmGrid:nth-of-type(3) {
+  width: calc(100% + 2.55rem);
+  transform: translate(-2.55rem, 1.1rem);
+}
+
+.epcmForm :global(input:not([type="checkbox"])),
+.epcmForm :global(select),
+.epcmForm :global(textarea) {
+  min-height: 4.25rem;
+  padding: 0.9rem 2rem;
+  border: 0;
+  border-radius: 0;
+  background: #fff url("/images/reach-us/form-field.svg") center / 100% 100%
+    no-repeat;
+  box-shadow: none;
+  filter: none;
+  clip-path: none;
+  font-size: 0.875rem;
+}
+
+.epcmForm :global(button[aria-label="Select country code"]) {
+  min-height: 4.25rem;
+  border: 0;
+  border-radius: 0;
+  border-right: 1px solid rgb(209 213 219);
+  background: #fff;
+}
+
+.epcmForm :global(input:not([type="checkbox"])):focus,
+.epcmForm :global(select):focus,
+.epcmForm :global(textarea):focus {
+  box-shadow: 0 3px 8px rgb(35 177 77 / 36%);
+}
+
+.epcmForm :global(textarea) {
+  min-height: 6.7rem;
+  background-image: url("/images/reach-us/form-message.svg");
+  transform: translate(-5rem, 1.5rem);
+  width: calc(100% + 5rem);
+}
+
+.epcmAgreement {
+  transform: translate(-4.7rem, 0.55rem);
+}
+
+.epcmActions {
+  margin-left: 57.8%;
+  justify-content: flex-start !important;
+  gap: 3.35rem !important;
+  transform: translate(0.5rem, 1.2rem);
+}
+
+.epcmActions > button {
+  width: 10.2rem;
+  min-width: 0;
+  min-height: 3.65rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0;
+  border: 1px solid #6dcc72;
+  background: linear-gradient(105deg, #a9df82 0%, #faff78 100%);
+  box-shadow: none;
+  white-space: nowrap;
+}
+
+.epcmActions > button:last-child {
+  width: 13.7rem;
+}
+
+.epcmActions > button span {
+  font-size: 1.25rem;
+  font-style: normal;
+}
+
+.epcmContent > div:first-child {
+  margin-left: 2rem;
+}
+
+@media (min-width: 1200px) {
+  .epcmWindow {
+    top: -1.25rem;
+    left: 0;
+  }
+
+  .epcmClose {
+    right: 74.34px;
+    top: 44.75px;
+  }
+
+  .expandControl {
+    right: 116px;
+  }
 }
 
 @keyframes modal-window-in {
@@ -47,7 +918,342 @@
 
 @media (prefers-reduced-motion: reduce) {
   .window,
-  .consultationWindow {
+  .consultationWindow,
+  .standardCtaWindow,
+  .liveDemoWindow,
+  .trackWindow,
+  .epcmWindow,
+  .omWindow {
     animation: none;
+  }
+}
+
+/* The desktop artwork is exact at its native 1,098px width. Below that width
+   it must reflow as a form, rather than scale the artwork and let the 677px
+   controls escape the angled panel. */
+@media (min-width: 768px) and (max-width: 1133px) {
+  .trackWindow,
+  .trackPanel {
+    height: auto;
+    min-height: 0;
+  }
+
+  .trackPanel > div[aria-hidden] {
+    inset: 0;
+    border: 1px solid #bde85d;
+    border-radius: 12px;
+    background: #f7fbf8;
+  }
+
+  .trackContent {
+    height: auto;
+    padding: 5rem 3rem 2.5rem;
+  }
+
+  .trackContent > div:first-child,
+  .trackForm,
+  .trackFields,
+  .trackLogin,
+  .trackResetCopy {
+    position: static;
+    transform: none;
+  }
+
+  .trackContent > div:first-child {
+    margin-bottom: 2rem;
+  }
+
+  .trackForm,
+  .trackFields {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .trackFields {
+    gap: 1.25rem;
+  }
+
+  .trackPassword {
+    width: 100%;
+    height: auto;
+    transform: none;
+  }
+
+  .trackFields .initialFocusField {
+    width: 100%;
+    height: auto;
+  }
+
+  .trackLogin {
+    align-self: center;
+    margin-top: 2rem;
+  }
+
+  .trackResetCopy {
+    margin-top: 1rem;
+    text-align: center;
+  }
+}
+
+/* Tablet and phone layouts use a flowing dialog. Keeping the fixed Figma
+   coordinates up to 1199px caused fields and actions to collide or escape the
+   angled panel on iPad-sized viewports. */
+@media (max-width: 1199px) {
+  .standardCtaWindow,
+  .standardCtaPanel,
+  .liveDemoWindow,
+  .liveDemoPanel,
+  .trackWindow,
+  .trackPanel {
+    height: auto;
+    min-height: 0;
+  }
+
+  .standardCtaPanel > div[aria-hidden],
+  .liveDemoPanel > div[aria-hidden],
+  .trackPanel > div[aria-hidden] {
+    inset: 0;
+    border: 1px solid #bde85d;
+    border-radius: 12px;
+    /* The dialog must remain opaque when its mobile fallback is used. */
+    background: #f7fbf8;
+    clip-path: none;
+  }
+
+  .sharedFormField {
+    min-height: 0;
+    border: 1px solid #ebebeb;
+    border-radius: 0.5rem;
+    background: #fff;
+    box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+    clip-path: none;
+  }
+
+  .sharedFormField:focus,
+  .sharedFormField:focus-within,
+  .initialFocusField {
+    border-color: rgb(35 209 75 / 45%);
+    background: #fff;
+    box-shadow: 0 4px 4px rgb(35 209 75 / 22%);
+  }
+
+  select.sharedFormField {
+    background-color: #fff;
+    background-image: url("/images/osm-monitoring/select-chevron.svg");
+    background-position: right 1.25rem center;
+    background-repeat: no-repeat;
+    background-size: 0.875rem 0.5rem;
+  }
+
+  .standardCtaContent,
+  .liveDemoContent {
+    padding-inline: 1.5rem;
+  }
+
+  .trackContent {
+    height: auto;
+    padding: 4rem 1.5rem 2rem;
+  }
+
+  .trackContent > div:first-child,
+  .trackForm,
+  .trackFields,
+  .trackLogin,
+  .trackResetCopy {
+    position: static;
+    transform: none;
+  }
+
+  .trackContent > div:first-child {
+    margin-bottom: 1.5rem;
+  }
+
+  .trackContent > div:first-child h2 {
+    font-size: 1.65rem;
+    line-height: 1.15;
+  }
+
+  .trackContent > div:first-child p {
+    width: auto;
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+
+  .trackForm,
+  .trackFields {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .trackFields {
+    gap: 1rem;
+  }
+
+  .trackPassword {
+    width: 100%;
+    height: auto;
+    transform: none;
+  }
+
+  .trackFields .sharedFormField {
+    min-height: 3.5rem;
+    padding-inline: 1.125rem;
+  }
+
+  .trackFields .initialFocusField {
+    width: 100%;
+    height: auto;
+  }
+
+  .trackLogin {
+    align-self: center;
+    margin-top: 1.5rem;
+  }
+
+  .trackResetCopy {
+    margin-top: 0.9rem;
+    text-align: center;
+  }
+
+  .proposalForm > :global(.grid):nth-child(1),
+  .proposalForm > :global(.grid):nth-child(2),
+  .proposalForm > :global(.grid):nth-child(3),
+  .proposalForm > :global(.grid):nth-child(4) {
+    transform: none;
+  }
+
+  .proposalAgreement,
+  .proposalActions {
+    transform: none;
+  }
+
+  .liveDemoActions > button,
+  .liveDemoActions > button:last-child,
+  .proposalActions > button,
+  .proposalActions > button:last-child {
+    width: 100%;
+  }
+
+  .jobQueryForm {
+    padding-top: 0;
+  }
+
+  .jobQueryForm > :global(.grid),
+  .jobQueryForm > :global(.grid):nth-child(2),
+  .jobQueryForm > :global(.grid):nth-child(3),
+  .jobQueryForm > :global(textarea),
+  .jobQueryActions {
+    width: 100%;
+    margin-top: 1rem !important;
+    transform: none;
+  }
+
+  .jobQueryForm > :global(.grid) {
+    gap: 1rem;
+  }
+
+  .jobQueryActions > button,
+  .jobQueryActions > button:last-child {
+    width: 100%;
+  }
+
+  .standardCtaClose {
+    top: 18px;
+    right: 20px;
+  }
+
+  .epcmPanel {
+    min-height: 0;
+    clip-path: none;
+  }
+
+  .epcmContent {
+    padding: 2rem 3rem 2.5rem 1.5rem;
+  }
+
+  .expandControl {
+    right: 56px;
+    top: 18px;
+  }
+
+  .epcmContent > div:first-child {
+    margin-left: 0;
+  }
+
+  .epcmForm :global(textarea),
+  .epcmAgreement {
+    width: 100%;
+    transform: none;
+  }
+
+  .epcmActions {
+    margin-left: 0;
+    transform: none;
+  }
+
+  .omWindow,
+  .omPanel {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+  }
+
+  .omPanel {
+    clip-path: none;
+  }
+
+  .omPanel > div[aria-hidden] {
+    border: 1px solid #bde85d;
+    border-radius: 12px;
+    background: #f7fbf8;
+  }
+
+  .omContent {
+    padding: 4rem 1.5rem 2rem;
+  }
+
+  .omContent > div:first-child {
+    margin-bottom: 1.5rem;
+  }
+
+  .omContent h2 {
+    font-size: 1.8rem;
+  }
+
+  .omForm {
+    gap: 1rem;
+  }
+
+  .omForm :global(.grid) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .omForm :global(input:not([type="checkbox"])),
+  .omForm :global(select),
+  .omForm :global(button[aria-label="Select country code"]),
+  .omUpload :global(button[type="button"]) {
+    min-height: 4.25rem;
+    padding: 0.9rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .omForm :global(label) {
+    font-size: 0.95rem;
+  }
+
+  .omActions {
+    margin-top: 0.5rem;
+    gap: 0.75rem !important;
+  }
+
+  .omActions :global(button),
+  .omActions :global(button:last-child) {
+    width: 100%;
+    min-width: 0;
+    min-height: 3.5rem;
+    font-size: 1rem;
   }
 }

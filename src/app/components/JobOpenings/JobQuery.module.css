@@ -1,0 +1,246 @@
+.overlay { background: rgb(0 0 0 / 40%); }
+
+.content {
+  position: absolute;
+  inset: 0;
+  color: #0c0c0c;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.content h2 {
+  position: absolute;
+  top: 10%;
+  left: 12.55%;
+  margin: 0;
+  color: #050505;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.content h2 span { color: #23b14d; }
+
+.fields {
+  position: absolute;
+  top: 19.2%;
+  left: 10.85%;
+  display: grid;
+  width: 80.2%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(3, 69px) 107px;
+  gap: 27px 42px;
+}
+
+.fields input,
+.fields select,
+.fields textarea {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #dadedc;
+  border-radius: 1px;
+  background: #fff;
+  box-shadow: 1px 7px 6px rgb(34 36 34 / 16%);
+  color: #303030;
+  font: 400 14px / 1.2 var(--font-montserrat), Montserrat, sans-serif;
+  /* outline:none is intentionally removed — :focus-visible below restores a
+     high-contrast indicator for keyboard and assistive-technology users. */
+  outline: none;
+}
+
+.fields input:focus-visible,
+.fields select:focus-visible,
+.fields textarea:focus-visible {
+  outline: 2px solid #23b14d;
+  outline-offset: 2px;
+}
+
+.fields input,
+.fields select { height: 69px; padding: 0 32px; }
+
+.skewField {
+  height: 69px;
+  min-width: 0;
+  filter: drop-shadow(1px 7px 6px rgb(34 36 34 / 16%));
+}
+
+.skewField > input,
+.skewField > select {
+  height: 69px;
+  clip-path: polygon(2.5% 0, 100% 0, 97.5% 100%, 0 100%);
+}
+
+.skewField:first-child > input {
+  border-color: #8feaa3;
+  box-shadow: 0 4px 6px rgb(35 177 77 / 23%);
+}
+
+.fields input::placeholder,
+.fields textarea::placeholder,
+.fields select { color: rgb(48 48 48 / 72%); opacity: 1; }
+
+.fields select {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #707770 50%),
+    linear-gradient(135deg, #707770 50%, transparent 50%);
+  background-position: calc(100% - 32px) 31px, calc(100% - 26px) 31px;
+  background-repeat: no-repeat;
+  background-size: 6px 6px, 6px 6px;
+}
+
+.queryField {
+  grid-column: 1 / -1;
+  height: 107px;
+  width: 100%;
+  margin-left: -74px;
+}
+
+.skewField > textarea {
+  height: 107px;
+  padding: 26px 50px;
+  resize: vertical;
+  clip-path: polygon(1.5% 0, 100% 0, 98.5% 100%, 0 100%);
+}
+
+.skewField > textarea:focus {
+  border-color: #dadedc;
+}
+
+.phoneField {
+  position: relative;
+  height: 69px;
+}
+
+.fields > :nth-child(3),
+.fields > :nth-child(4) {
+  transform: translateX(-20px);
+}
+
+.fields > :nth-child(5),
+.fields > :nth-child(6) {
+  transform: translateX(-41px);
+}
+
+.phoneField input {
+  height: 100%;
+  padding: 0 32px;
+}
+
+.countryCode {
+  position: absolute;
+  top: 0;
+  left: 148px;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  gap: 7px;
+  color: rgb(48 48 48 / 40%);
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.countryCode img {
+  width: 20px;
+  height: 16px;
+}
+
+.countryCode span:first-of-type {
+  color: rgb(48 48 48 / 35%);
+  font-size: 13px;
+  transform: translateY(-2px);
+}
+
+.actions {
+  position: absolute;
+  right: 15.1%;
+  bottom: 7.1%;
+  display: flex;
+  gap: 37px;
+}
+
+.actions button,
+.success button {
+  position: relative;
+  display: grid;
+  height: 58px;
+  align-items: center;
+  justify-items: center;
+  border: 0;
+  background: transparent;
+  color: #080808;
+  font: 600 20px / 1 var(--font-montserrat), Montserrat, sans-serif;
+  cursor: pointer;
+}
+
+.reset { width: 180px; }
+.submit { width: 236px; }
+
+.actions img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.actions span { position: relative; }
+
+.success {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.success h3 { margin: 0; color: #23b14d; font-size: 34px; }
+.success p { max-width: 570px; margin: 16px 0; font-size: 18px; line-height: 1.5; }
+.success button {
+  width: 180px;
+  background: linear-gradient(105deg, #d5f7a5, #ffffac);
+  clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
+}
+
+@media (max-width: 767px) {
+  /* Switch to a flow layout so .fields takes up layout space and .actions
+     appears below it rather than overlapping the heading. */
+  .content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 52px 28px 0;
+  }
+
+  .content h2 {
+    position: static;
+    margin-bottom: 14px;
+  }
+
+  .fields {
+    position: static;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+  }
+
+  .queryField {
+    grid-column: auto;
+    width: auto;
+    margin-left: 0;
+  }
+
+  .fields > :nth-child(3),
+  .fields > :nth-child(4),
+  .fields > :nth-child(5),
+  .fields > :nth-child(6) {
+    transform: none;
+  }
+
+  .actions {
+    position: static;
+    justify-content: flex-end;
+    padding: 28px 0 42px;
+  }
+}

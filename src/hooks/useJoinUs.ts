@@ -36,7 +36,7 @@ export interface JoinUsData {
 }
 
 const fetchJoinUs = async (): Promise<JoinUsData> => {
-  const response = await fetch('https://g-stack.green.com.pg/api/empower/join-us');
+  const response = await fetch('https://greencms.percepco.co.uk/api/empower/join-us');
   
   if (!response.ok) {
     throw new Error(`Failed to fetch join us data: ${response.status}`);

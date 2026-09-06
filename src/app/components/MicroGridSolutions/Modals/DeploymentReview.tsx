@@ -124,7 +124,7 @@ const DeploymentReview = ({ isOpen, onClose }: Props) => {
       onClose={onClose}
       title={
         <>
-          BOOK A <span className="text-green-600">DEPLOYMENT REVIEW</span>
+          BOOK A DEPLOYMENT REVIEW
         </>
       }
     >

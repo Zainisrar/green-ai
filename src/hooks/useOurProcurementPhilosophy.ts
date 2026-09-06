@@ -72,7 +72,7 @@ interface OurProcurementPhilosophyData {
 }
 
 const fetchOurProcurementPhilosophy = async (): Promise<OurProcurementPhilosophyData> => {
-  const response = await fetch('https://g-stack.green.com.pg/api/ecosystem/our-procurement-philosophy');
+  const response = await fetch('https://greencms.percepco.co.uk/api/ecosystem/our-procurement-philosophy');
   
   if (!response.ok) {
     throw new Error('Failed to fetch our procurement philosophy data');

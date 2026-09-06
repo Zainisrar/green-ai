@@ -12,7 +12,7 @@ const FALLBACK_VISION = {
     "Envisioning the Energy needs and Envisaging the Environmental Impacts on the Globe, GREEN delivers Clean, lean and Green Solutions",
   quote:
     "Our aspiration is to empower lives with Sustainable Living and Renewable Energy Solutions",
-  icon: "/images/our-vision/figma-vision-icon.png",
+  icon: "/images/our-vision/visionicn.png",
 };
 
 const FALLBACK_MISSION = {
@@ -21,7 +21,7 @@ const FALLBACK_MISSION = {
     "Sustainable Living and Renewable Energy Solutions for all. To Spearhead the Renewable Energy Movement for Greener environment globally & contribute to Sustainable Development Goals",
   quote:
     "Innovating, Developing and Delivering Sustainable Renewable Energy based Solutions and Products for a greener social and industrial environment and thereby to ensure community welfare and rural empowerment",
-  icon: "/images/our-vision/figma-mission-icon.png",
+  icon: "/images/our-vision/missionicon.png",
 };
 
 export default function Vision() {
@@ -73,7 +73,13 @@ export default function Vision() {
           src="/images/our-vision/figma-vision-card.svg"
           alt=""
         />
-        <img loading="lazy" decoding="async" className={styles.cardIcon} src={vision.icon} alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          className={styles.cardIcon}
+          src="/images/our-vision/visionicn.png"
+          alt=""
+        />
         <h2>{vision.title}</h2>
         <p className={styles.description}>{vision.description}</p>
         <p className={styles.quote}>
@@ -92,7 +98,13 @@ export default function Vision() {
           src="/images/our-vision/figma-mission-card.svg"
           alt=""
         />
-        <img loading="lazy" decoding="async" className={styles.cardIcon} src={mission.icon} alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          className={styles.cardIcon}
+          src="/images/our-vision/missionicon.png"
+          alt=""
+        />
         <h2>{mission.title}</h2>
         <p className={styles.description}>{mission.description}</p>
         <p className={styles.quote}>

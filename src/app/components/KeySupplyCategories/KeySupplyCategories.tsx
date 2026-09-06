@@ -4,11 +4,11 @@ import { useState } from "react";
 import { useKeySupplyCategories } from "@/hooks/useKeySupplyCategories";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
-import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import BalanceofSystem from "./BalanceofSystem";
 import EnergyStorageSystems from "./EnergyStorageSystems";
 import styles from "./KeySupplyCategories.module.css";
+import SupplyingToGreen from "./Modals/SupplyingToGreen";
 import PowerConversionSystems from "./PowerConversionSystems";
 import ProcurementNotes from "./ProcurementNotes";
 import SolarGenerationEquipment from "./SolarGenerationEquipment";
@@ -30,7 +30,6 @@ export default function KeySupplyCategories({
   const [isProcurementOpen, setIsProcurementOpen] = useState(false);
   const [isSupplyingOpen, setIsSupplyingOpen] = useState(false);
 
-  const title = apiData?.mainPage?.title || "KEY SUPPLY CATEGORIES";
   const subHeadline =
     apiData?.mainPage?.subHeadline || "What We Source — And Why It Matters.";
   const description =
@@ -81,10 +80,15 @@ export default function KeySupplyCategories({
       className={`${styles.page} ${canvas ? styles.canvasPage : ""}`}
       data-node-id="7077:27873"
     >
-      <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
+      <SiteHeader
+        layout={canvas ? "figmaCanvas" : "viewport"}
+        showBrand={false}
+      />
 
       {/* Existing Figma canvas background artwork */}
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         src="/images/key-supplier-categories/bg.jpg"
         alt=""
         className={styles.backgroundArtwork}
@@ -92,7 +96,9 @@ export default function KeySupplyCategories({
       />
 
       {/* Vertical Side Title */}
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         src="/images/key-supplier-categories/figma-vertical-title.svg"
         alt="Key Supply Categories"
         className={styles.verticalTitle}
@@ -152,7 +158,9 @@ export default function KeySupplyCategories({
 
       {/* Left Bottom Quote Block */}
       <div className={styles.leftQuoteBlock}>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/handbook/figma-quote-left.svg"
           alt=""
           className={styles.quoteShapeLeft}
@@ -161,9 +169,12 @@ export default function KeySupplyCategories({
         <p className={styles.quoteText}>
           We Don’t Tell Stories To Impress.
           <br />
-          We Share Stories That Prove What <span className={styles.greenText}>Energy</span> Can Do.
+          We Share Stories That Prove What{" "}
+          <span className={styles.greenText}>Energy</span> Can Do.
         </p>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/handbook/figma-quote-right.svg"
           alt=""
           className={styles.quoteShapeRight}
@@ -192,7 +203,8 @@ export default function KeySupplyCategories({
       <div className={styles.mobileElements}>
         <div className={styles.mobileQuoteBox}>
           <p>
-            “We Don’t Tell Stories To Impress. We Share Stories That Prove What Energy Can Do.”
+            “We Don’t Tell Stories To Impress. We Share Stories That Prove What
+            Energy Can Do.”
           </p>
         </div>
         <div className={styles.mobileCtas}>
@@ -258,21 +270,9 @@ export default function KeySupplyCategories({
       />
 
       {/* Supplier Inquiry / Application Modal */}
-      <ProductEnquiry
+      <SupplyingToGreen
         isOpen={isSupplyingOpen}
         onClose={() => setIsSupplyingOpen(false)}
-        titlePrefix="SUPPLYING TO"
-        titleAccent="GREEN"
-        interestLabel="WHAT CATEGORY DO YOU SUPPLY?"
-        interestOptions={[
-          "Solar Generation Equipment",
-          "Power Conversion Systems",
-          "Energy Storage Systems",
-          "System Intelligence & Data",
-          "Balance of System (BoS)",
-          "Supply Chain & BOS Hardware",
-        ]}
-        defaultInterest="Solar Generation Equipment"
       />
     </main>
   );

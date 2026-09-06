@@ -50,3 +50,10 @@ scratch/
 ers-api-backend-history-work/
 .image-optimizer-state
 __pycache__/
+
+# private / sensitive libraries and directories
+/src/lib/
+/earning-backend-hotfix/
+/scripts/
+
+

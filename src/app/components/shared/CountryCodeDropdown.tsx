@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { COUNTRIES } from "@/app/lib/countries";
 
@@ -9,6 +10,20 @@ const countryFlag = (code: string) =>
     .split("")
     .map((letter) => String.fromCodePoint(127397 + letter.charCodeAt(0)))
     .join("");
+
+const CountryFlag = ({ code }: { code: string }) =>
+  code === "pg" ? (
+    <Image
+      src="/images/book-consulation/countryCode.png"
+      alt=""
+      width={20}
+      height={16}
+      unoptimized
+      className="h-4 w-5 object-cover"
+    />
+  ) : (
+    countryFlag(code)
+  );
 
 interface CountryCodeDropdownProps {
   /** Currently selected dial code, e.g. "+675" (shown in the collapsed field). */
@@ -53,16 +68,15 @@ const CountryCodeDropdown = ({
         className={className}
       >
         <span aria-hidden="true" className="text-base leading-none">
-          {countryFlag(countryCode)}
+          <CountryFlag code={countryCode} />
         </span>
         <span>{dialCode}</span>
         <svg
           className="h-3 w-3 text-gray-500"
           viewBox="0 0 20 20"
           fill="currentColor"
-          aria-label="Open country list"
+          aria-hidden="true"
         >
-          <title>Open country list</title>
           <path
             fillRule="evenodd"
             d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
@@ -88,7 +102,7 @@ const CountryCodeDropdown = ({
                 }`}
               >
                 <span aria-hidden="true" className="text-base leading-none">
-                  {countryFlag(c.code)}
+                  <CountryFlag code={c.code} />
                 </span>
                 <span className="w-12 shrink-0 text-gray-500">
                   {c.dial_code}

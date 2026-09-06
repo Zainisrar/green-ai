@@ -30,7 +30,7 @@ export interface Product {
 }
 
 const fetchProducts = async (): Promise<Product[]> => {
-  const response = await fetch('https://g-stack.green.com.pg/api/engineering/products');
+  const response = await fetch('https://greencms.percepco.co.uk/api/engineering/products');
   
   if (!response.ok) {
     throw new Error('Failed to fetch products');

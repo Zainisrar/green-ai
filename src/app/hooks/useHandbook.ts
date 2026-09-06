@@ -34,7 +34,7 @@ export const useHandbook = () => {
       try {
         setLoading(true);
         setError(null);
-        const res = await fetch("https://g-stack.green.com.pg/api/ecosystem/handbook", { next: { revalidate: 60 } as any });
+        const res = await fetch("https://greencms.percepco.co.uk/api/ecosystem/handbook", { next: { revalidate: 60 } as any });
         if (!res.ok) throw new Error(`HTTP error ${res.status}`);
         const json: HandbookResponse = await res.json();
         if (mounted) setData(json);

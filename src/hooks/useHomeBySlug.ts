@@ -43,7 +43,7 @@ interface HomeApiResponse {
 }
 
 const fetchHomeBySlug = async (slug: string): Promise<HomeData | null> => {
-  const response = await fetch("https://g-stack.green.com.pg/api/home");
+  const response = await fetch("https://greencms.percepco.co.uk/api/home");
 
   if (!response.ok) {
     throw new Error("Failed to fetch home data");

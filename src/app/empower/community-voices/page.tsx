@@ -5,7 +5,7 @@ export default function CommunityVoicesPage() {
   return (
     <FigmaPageCanvas
       desktop={<CommunityVoices canvas />}
-      mobile={<CommunityVoices canvas />}
+      mobile={<CommunityVoices />}
       nodeId="7077:21678"
       fitCanvasHeight
     />

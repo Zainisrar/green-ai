@@ -47,28 +47,46 @@ const FALLBACK_INSIGHT_SLIDES: SlideProps[] = [
   {
     id: 2,
     slug: "solar-powered-homes",
-    headline: "Powering Homes with Solar",
-    subheadline: "Clean Energy for Every Community",
-    highlighted: "Clean Energy",
+    title: (
+      <>
+        <div className="text-[clamp(30px,3.96vw,76px)] font-bold leading-[1.05] tracking-tight text-white uppercase">
+          Powering Homes with Solar :
+        </div>
+        <div className="mt-[0.75dvh] text-[clamp(25px,3.125vw,60px)] font-medium leading-[1] italic uppercase text-white">
+          Achieving{" "}
+          <span className="font-extrabold text-[#23B14D]">
+            ESG &amp; Net-Zero
+          </span>{" "}
+          Targets
+        </div>
+      </>
+    ),
     description:
       "Delivering access to clean energy, fostering decent work and innovation, promoting sustainable consumption, and driving climate action.",
-    backgroundImage: "/images/insight1/figma/slide-2.png",
-    figmaExport: true,
+    backgroundImage: "/images/insight1/figma/slider/slide-2-background.png",
+    contentTop: "12.89dvh",
+    descriptionMarginTop: "10.5dvh",
+    keysTop: "37.73dvh",
     tag: "# Home Insight 02",
     keys: [
       {
-        icon: "/images/insight1/figma/renewable-energy.png",
+        icon: "/images/insight1/figma/slider/slide-2-icon-1.png",
         description:
           "Solar reduces CO₂ emissions, supporting net-zero targets globally and in PNG.",
       },
       {
-        icon: "/images/insight1/figma/automation.png",
+        icon: "/images/insight1/figma/slider/slide-2-icon-2.png",
         description:
           "Homes powered by solar contribute to the global clean energy transition.",
       },
       {
-        icon: "/images/insight1/figma/save-the-world.png",
+        icon: "/images/insight1/figma/slider/slide-2-icon-3.png",
         description: "Improves quality of life and fosters economic growth.",
+      },
+      {
+        icon: "/images/insight1/figma/slider/slide-2-icon-4.png",
+        description:
+          "Driving Growth - Promotes energy equity and drives development across communities",
       },
     ],
     cta: {
@@ -81,27 +99,42 @@ const FALLBACK_INSIGHT_SLIDES: SlideProps[] = [
   {
     id: 3,
     slug: "powering-urban-futures",
-    headline: "Powering Urban Futures",
-    subheadline: "Cities at the Centre of Change",
-    highlighted: "Cities",
+    title: (
+      <>
+        <div className="text-[clamp(30px,3.96vw,76px)] font-bold leading-[1.05] tracking-tight text-white uppercase">
+          Why Does Reliable Electricity Remain
+        </div>
+        <div className="mt-[0.75dvh] text-[clamp(25px,3.33vw,64px)] font-semibold leading-[1] italic uppercase text-[#23B14D]">
+          Out of Reach in Fast-Growing Cities?
+        </div>
+      </>
+    ),
     description:
       "Delivering access to clean energy, fostering decent work and innovation, promoting sustainable consumption, and driving climate action.",
-    backgroundImage: "/images/insight1/figma/slide-3.png",
-    figmaExport: true,
+    backgroundImage: "/images/insight1/figma/slider/slide-3-background.png",
+    contentTop: "14.64dvh",
+    descriptionMarginTop: "8.7dvh",
+    keysTop: "36dvh",
     tag: "# Urban Insight 03",
     keys: [
       {
-        icon: "/images/insight1/figma/renewable-energy.png",
+        icon: "/images/insight1/figma/slider/slide-3-icon-1.png",
         description:
           "70% of global energy-related emissions originate in urban areas.",
       },
       {
-        icon: "/images/insight1/figma/automation.png",
+        icon: "/images/insight1/figma/slider/slide-3-icon-2.png",
         description: "75% of global energy demand is concentrated in cities.",
       },
       {
-        icon: "/images/insight1/figma/save-the-world.png",
-        description: "Cities are at the centre of energy-climate challenges.",
+        icon: "/images/insight1/figma/slider/slide-3-icon-3.png",
+        description:
+          "55% of city dwellers face frequent blackouts or lack reliable access.",
+      },
+      {
+        icon: "/images/insight1/figma/slider/slide-3-icon-4.png",
+        description:
+          "Cities are at the center of the energy-climate challenges.",
       },
     ],
     cta: {
@@ -114,33 +147,41 @@ const FALLBACK_INSIGHT_SLIDES: SlideProps[] = [
   {
     id: 4,
     slug: "hotel-net-zero",
-    headline:
-      "What Does It Take for Hotels to Reach Net-Zero and Sustainability Goals?",
-    subheadline: "Net-Zero and Sustainability Goals?",
-    highlighted: "Net-Zero",
+    title: (
+      <>
+        <div className="text-[clamp(30px,3.96vw,76px)] font-bold leading-[1.05] tracking-tight text-white uppercase">
+          What Does It Take for Hotels to Reach
+        </div>
+        <div className="mt-[0.75dvh] text-[clamp(25px,3.33vw,64px)] font-semibold leading-[1] italic uppercase text-[#23B14D]">
+          Net-Zero and Sustainability Goals?
+        </div>
+      </>
+    ),
     description:
       "Delivering access to clean energy, fostering decent work and innovation, promoting sustainable consumption, and driving climate action.",
-    backgroundImage: "/images/insight1/figma/slide-4.png",
-    figmaExport: true,
+    backgroundImage: "/images/insight1/figma/slider/slide-4-background.png",
+    contentTop: "15.98dvh",
+    descriptionMarginTop: "4.5dvh",
+    keysTop: "34.64dvh",
     tag: "# Hotel Insight 04",
     keys: [
       {
-        icon: "/images/insight1/figma/renewable-energy.png",
+        icon: "/images/insight1/figma/slider/slide-4-icon-1.png",
         description:
-          "Net-Zero aligns with ESG goals, reducing risks and boosting brand value.",
+          "Net-Zero aligns with Environmental, Social and Governance (ESG) goals, reducing risks and boosting brand value.",
       },
       {
-        icon: "/images/insight1/figma/automation.png",
+        icon: "/images/insight1/figma/slider/slide-4-icon-2.png",
         description: "Hotels consume high energy, driving carbon emissions.",
       },
       {
-        icon: "/images/insight1/figma/save-the-world.png",
+        icon: "/images/insight1/figma/slider/slide-4-icon-3.png",
         description: "Rising demand for ESG compliance.",
       },
       {
-        icon: "/images/insight1/figma/mining-3.png",
+        icon: "/images/insight1/figma/slider/slide-4-icon-4.png",
         description:
-          "Empower hotels to lead in sustainability and climate responsibility.",
+          "Empower Hotels as leadership in sustainability and climate responsibility.",
       },
     ],
     cta: {
@@ -151,6 +192,10 @@ const FALLBACK_INSIGHT_SLIDES: SlideProps[] = [
     },
   },
 ];
+
+const FIGMA_SLIDES_BY_SLUG = new Map(
+  FALLBACK_INSIGHT_SLIDES.map((slide) => [slide.slug, slide]),
+);
 
 export default function HomePage() {
   const { data: insightsData } = useQuery({
@@ -199,6 +244,23 @@ export default function HomePage() {
               return `# Hotel  Insight 0${id}`;
             return `# Insight 0${id}`;
           };
+
+          // The CMS previously supplied exported Figma canvases as the image
+          // source for these four stories. Keep CMS links/data fresh, but use
+          // the clean Figma photo fills and responsive content layers instead.
+          const figmaSlide = FIGMA_SLIDES_BY_SLUG.get(slug);
+          if (figmaSlide) {
+            return {
+              ...figmaSlide,
+              id: item.id,
+              cta: {
+                button1: item.cta1.text || figmaSlide.cta.button1,
+                link1: item.cta1.link || figmaSlide.cta.link1,
+                button2: item.cta2.text || figmaSlide.cta.button2,
+                link2: item.cta2.link || figmaSlide.cta.link2,
+              },
+            };
+          }
 
           return {
             id: item.id,

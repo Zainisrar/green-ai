@@ -7,6 +7,7 @@ import D6Chatbot from "../D6Chatbot";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import ProductEnquiry from "./Modals/ProductEnquiry";
+import ProductBrandSwitcher from "./ProductBrandSwitcher";
 import styles from "./ProductsFigma.module.css";
 
 const PRODUCT_SLUG = "lighting-up-and-lifting-up-living-standards";
@@ -64,11 +65,7 @@ export default function ProductsFigma() {
     >
       <img loading="lazy" decoding="async" className={styles.background} src="/images/product/bg.jpg" alt="" />
       <SiteHeader layout="productCanvas" brand="sunshine" productLogo />
-      <Link
-        href="/engineering/products/green-sunsmart"
-        className={styles.sunsmartProductLink}
-        aria-label="View GREEN SunSmart products"
-      />
+      <ProductBrandSwitcher current="GREEN SunShine" />
       <img loading="lazy" decoding="async"
         className={styles.pageTitleImg}
         src="/images/product/title_h1.png"
@@ -181,7 +178,7 @@ export default function ProductsFigma() {
           alt="GREEN SunShine"
         />
         <Link
-          href="/engineering/products/green-empawa"
+          href="/engineering/products/green-em-pawa"
           className={styles.mobileEmpawaLink}
         >
           View GREEN Em’Pawa products

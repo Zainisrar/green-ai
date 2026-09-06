@@ -12,7 +12,9 @@ interface EngineeringFormModalProps {
   children: React.ReactNode;
   maxWidthClass?: string;
   /** Use the large angular window from the Book a Consultation Figma popup. */
-  geometry?: "default" | "consultation";
+  geometry?: "default" | "consultation" | "epcm" | "liveDemo" | "om" | "track";
+  /** Decorative expand control used by the Solar EPCM Figma windows. */
+  showExpandControl?: boolean;
 }
 
 const EngineeringFormModal = ({
@@ -23,9 +25,12 @@ const EngineeringFormModal = ({
   children,
   maxWidthClass = "max-w-5xl",
   geometry = "consultation",
+  showExpandControl = false,
 }: EngineeringFormModalProps) => {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const usesStandardCtaFrame =
+    geometry === "consultation" && maxWidthClass === "max-w-5xl";
 
   useEffect(() => {
     if (!isOpen) return;
@@ -74,7 +79,9 @@ const EngineeringFormModal = ({
   return (
     <div
       className={`scrollbar-hide fixed inset-0 z-[2147483647] flex items-start justify-center overflow-y-auto p-3 sm:items-center sm:p-4 ${
-        geometry === "consultation" ? styles.consultationOverlay : "bg-black/20"
+        geometry === "consultation" || geometry === "epcm"
+          ? styles.consultationOverlay
+          : "bg-black/20"
       }`}
     >
       <button
@@ -85,10 +92,20 @@ const EngineeringFormModal = ({
       />
       <div
         ref={dialogRef}
-        className={`relative z-10 my-2 w-full ${maxWidthClass} sm:my-auto ${
-          geometry === "consultation"
-            ? styles.consultationWindow
-            : styles.window
+        className={`relative z-10 my-2 sm:my-auto ${
+          usesStandardCtaFrame
+            ? styles.standardCtaWindow
+            : geometry === "consultation"
+              ? `w-full ${maxWidthClass} ${styles.consultationWindow}`
+              : geometry === "epcm"
+                ? `w-full ${maxWidthClass} ${styles.epcmWindow}`
+                : geometry === "om"
+                  ? styles.omWindow
+                  : geometry === "liveDemo"
+                      ? styles.liveDemoWindow
+                      : geometry === "track"
+                        ? styles.trackWindow
+                      : `w-full ${maxWidthClass} ${styles.window}`
         }`}
         role="dialog"
         aria-modal="true"
@@ -97,37 +114,94 @@ const EngineeringFormModal = ({
           ref={closeButtonRef}
           type="button"
           onClick={onClose}
-          className="absolute right-4 top-2 z-30 cursor-pointer p-1.5 text-gray-700 transition hover:text-gray-900 sm:right-8 sm:top-4"
+          className={`absolute right-4 top-2 z-30 cursor-pointer p-1.5 text-gray-700 transition hover:text-gray-900 sm:right-8 sm:top-4 ${
+            geometry === "epcm"
+              ? styles.epcmClose
+                : geometry === "om"
+                  ? styles.standardCtaClose
+                : geometry === "liveDemo"
+                    ? styles.standardCtaClose
+                    : geometry === "track"
+                      ? styles.trackClose
+                    : usesStandardCtaFrame
+                      ? styles.standardCtaClose
+                      : geometry === "consultation"
+                        ? styles.standardCtaClose
+                        : ""
+          }`}
           aria-label="Close modal"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
+          <img
+            src={
+              geometry === "track"
+                ? "/images/job-openings/track-close.svg"
+                : "/images/job-openings/job-query-close.svg"
+            }
+            alt=""
             className="h-6 w-6 sm:h-8 sm:w-8"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2.5}
+          />
+        </button>
+
+        {(showExpandControl ||
+          geometry === "consultation" ||
+          geometry === "epcm" ||
+          geometry === "om" ||
+          geometry === "liveDemo" ||
+          geometry === "track") && (
+          <span
+            className={`${styles.expandControl} ${
+              geometry === "track" ? styles.trackExpand : ""
+            }`}
             aria-hidden="true"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 6l12 12M18 6L6 18"
+            <img
+              src={
+                geometry === "track"
+                  ? "/images/job-openings/track-maximize.png"
+                  : "/images/join-us/solar_maximize.png"
+              }
+              alt=""
             />
-          </svg>
-        </button>
+          </span>
+        )}
 
         <div className="scrollbar-hide max-h-[calc(100dvh-1.5rem)] overflow-y-auto sm:max-h-[90dvh]">
           <div
             className={`relative mx-2 sm:mx-3 ${
-              geometry === "consultation" ? styles.consultationPanel : ""
+              geometry === "consultation"
+                ? usesStandardCtaFrame
+                  ? styles.standardCtaPanel
+                  : styles.consultationPanel
+                : geometry === "epcm"
+                  ? styles.epcmPanel
+                  : geometry === "om"
+                    ? styles.omPanel
+                    : geometry === "liveDemo"
+                        ? styles.liveDemoPanel
+                        : geometry === "track"
+                          ? styles.trackPanel
+                        : ""
             }`}
           >
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 rounded-lg border border-lime-300 bg-[#eff5f1] shadow-2xl"
             />
-            <div className="relative z-10 min-w-0 px-6 py-8 pr-12 sm:px-12 sm:py-12 sm:pr-16 lg:px-14 lg:pr-20">
+            <div
+              className={`relative z-10 min-w-0 px-6 py-8 pr-12 sm:px-12 sm:py-12 sm:pr-16 lg:px-14 lg:pr-20 ${
+                geometry === "epcm"
+                  ? styles.epcmContent
+                  : geometry === "om"
+                    ? styles.omContent
+                    : geometry === "liveDemo"
+                        ? styles.liveDemoContent
+                        : geometry === "track"
+                          ? styles.trackContent
+                        : usesStandardCtaFrame
+                          ? styles.standardCtaContent
+                          : ""
+              }`}
+            >
               <div className="mb-5 sm:mb-6">
                 <h2 className="text-xl font-black leading-tight text-gray-800 sm:text-2xl lg:text-3xl">
                   {title}
@@ -147,10 +221,10 @@ const EngineeringFormModal = ({
   );
 };
 
-export const formFieldClass =
-  "w-full min-w-0 rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-sm text-gray-700 placeholder-gray-500 focus:border-green-500 focus:outline-none sm:px-4 sm:py-3 sm:text-base";
+export const formFieldClass = `w-full min-w-0 border border-gray-300 px-3 py-2.5 text-sm text-gray-700 placeholder-gray-500 focus:border-green-500 focus:outline-none sm:px-4 sm:py-3 sm:text-base ${styles.sharedFormField}`;
 
-export const formGridClass = "grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2";
+export const formGridClass =
+  "grid grid-cols-1 gap-y-4 sm:gap-y-6 md:grid-cols-2 md:gap-x-10";
 
 export const captchaRowClass =
   "flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between";

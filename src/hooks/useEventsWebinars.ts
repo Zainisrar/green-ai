@@ -52,7 +52,7 @@ interface EventsWebinarsResponse {
 }
 
 const fetchEventsWebinars = async (): Promise<EventsWebinarsData> => {
-  const response = await fetch('https://g-stack.green.com.pg/api/enlighten/events-webinars');
+  const response = await fetch('https://greencms.percepco.co.uk/api/enlighten/events-webinars');
   
   if (!response.ok) {
     throw new Error('Failed to fetch events and webinars data');

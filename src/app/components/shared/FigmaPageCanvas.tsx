@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import styles from "./FigmaPageCanvas.module.css";
 
 const DESIGN_WIDTH = 1920;
@@ -37,7 +37,7 @@ export default function FigmaPageCanvas({
     height: DESIGN_HEIGHT,
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const updateViewport = () =>
       setViewport({ width: window.innerWidth, height: window.innerHeight });
 
@@ -75,15 +75,15 @@ export default function FigmaPageCanvas({
     );
   }
 
+  // Most Figma pages previously used `fitCanvasHeight`, which letterboxed the
+  // 1920 × 970 artwork on wider or taller devices. Width fitting keeps both
+  // viewport edges flush and lets the shell scroll if the scaled artwork is
+  // slightly taller than the available screen. Explicit `contain` layouts
+  // retain their original behavior.
   const scale =
-    fitCanvasHeight || scaleToViewport === "contain"
+    scaleToViewport === "contain" && !fitCanvasHeight
       ? Math.min(viewport.width / DESIGN_WIDTH, viewport.height / designHeight)
-      : scaleToViewport === "width"
-        ? viewport.width / DESIGN_WIDTH
-        : Math.min(
-            viewport.width / DESIGN_WIDTH,
-            viewport.height / designHeight,
-          );
+      : viewport.width / DESIGN_WIDTH;
 
   // The shell always fills the full viewport (100svh). The canvas scales to
   // fit inside. This prevents the white-space gap below on narrower screens.
@@ -94,7 +94,7 @@ export default function FigmaPageCanvas({
         data-figma-responsive="desktop"
         style={{
           top: 0,
-          left: (viewport.width - DESIGN_WIDTH * scale) / 2,
+          left: 0,
           height: designHeight,
           transform: `scale(${scale})`,
         }}

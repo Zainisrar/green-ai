@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
+import FigmaAngledCta from "@/app/components/FigmaAngledCta/FigmaAngledCta";
+import { ProductEnquiryFrame } from "@/app/components/Product/Modals/ProductEnquiry";
+import CountryCodeDropdown from "@/app/components/shared/CountryCodeDropdown";
 import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
-import EngineeringFormModal, {
-  formFieldClass,
-  formGridClass,
-} from "@/app/components/shared/EngineeringFormModal";
-import PhoneInput from "@/app/components/shared/PhoneInput";
+import styles from "./SupplyingToGreen.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -50,12 +50,12 @@ const SupplyingToGreen = ({ isOpen, onClose }: Props) => {
   if (!isOpen) return null;
 
   const handleInputChange = (
-    e: React.ChangeEvent<
+    event: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
     >,
   ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const { name, value } = event.target;
+    setFormData((current) => ({ ...current, [name]: value }));
   };
 
   const resetForm = () => {
@@ -65,8 +65,8 @@ const SupplyingToGreen = ({ isOpen, onClose }: Props) => {
     setSuccessMessage("");
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     setErrorMessage("");
     setSuccessMessage("");
 
@@ -78,7 +78,6 @@ const SupplyingToGreen = ({ isOpen, onClose }: Props) => {
     }
 
     setIsLoading(true);
-
     const message = [
       "Supplying to GREEN (Key Supply Categories)",
       `What they supply: ${formData.supplyType}`,
@@ -123,119 +122,134 @@ const SupplyingToGreen = ({ isOpen, onClose }: Props) => {
   };
 
   return (
-    <EngineeringFormModal
-      isOpen={isOpen}
+    <ProductEnquiryFrame
+      labelledBy="supplying-to-green-title"
       onClose={onClose}
-      title={
-        <>
-          SUPPLYING TO <span className="text-green-600">GREEN?</span>
-        </>
-      }
+      closeLabel="Close supplying to GREEN form"
+      width={1688}
+      height={665}
+      stageClassName={styles.stage}
+      surfaceImage="/images/key-supplier-categories/supplying-form-window.svg"
+      surfaceImageInset="-18.5px -26.8px -26.5px -18.9px"
+      surfaceImageWidth="auto"
+      surfaceImageHeight="auto"
     >
-      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-        <div className={formGridClass}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <h2 id="supplying-to-green-title" className={styles.title}>
+          SUPPLYING TO GREEN?
+        </h2>
+
+        <input
+          type="text"
+          name="fullName"
+          aria-label="Full name"
+          placeholder="FULL NAME"
+          value={formData.fullName}
+          onChange={handleInputChange}
+          className={`${styles.field} ${styles.fullName}`}
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          aria-label="Email address"
+          placeholder="EMAIL ID"
+          value={formData.email}
+          onChange={handleInputChange}
+          className={`${styles.field} ${styles.email}`}
+          required
+        />
+
+        <div className={styles.phoneField}>
           <input
-            type="text"
-            name="fullName"
-            placeholder="FULL NAME"
-            value={formData.fullName}
+            type="tel"
+            name="phone"
+            placeholder="PHONE"
+            value={formData.phone}
             onChange={handleInputChange}
-            className={formFieldClass}
             required
+            aria-label={`Phone number, dial code ${phoneCountry.dial_code}`}
           />
-          <input
-            type="email"
-            name="email"
-            placeholder="EMAIL ID"
-            value={formData.email}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
+          <CountryCodeDropdown
+            dialCode={phoneCountry.dial_code}
+            countryCode={phoneCountry.country_code}
+            onSelect={(dial_code, country_code) =>
+              setPhoneCountry({ dial_code, country_code })
+            }
+            className={styles.countryCode}
           />
         </div>
 
-        <div className={formGridClass}>
-          <PhoneInput
-            phone={formData.phone}
-            onPhoneChange={handleInputChange}
-            dialCode={phoneCountry.dial_code}
-            countryCode={phoneCountry.country_code}
-            onCountryChange={(dial_code, country_code) =>
-              setPhoneCountry({ dial_code, country_code })
-            }
-          />
-          <select
-            name="supplyType"
-            value={formData.supplyType}
-            onChange={handleInputChange}
-            className={`${formFieldClass} cursor-pointer ${
-              formData.supplyType ? "text-gray-700" : "text-gray-500"
-            }`}
-            required
-          >
-            <option value="">WHAT DO YOU SUPPLY?</option>
-            <option value="solar-generation">Solar Generation Equipment</option>
-            <option value="power-conversion">Power Conversion Systems</option>
-            <option value="energy-storage">Energy Storage Systems</option>
-            <option value="system-intelligence">System Intelligence</option>
-            <option value="balance-of-system">Balance of System</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
+        <select
+          name="supplyType"
+          aria-label="What do you supply?"
+          value={formData.supplyType}
+          onChange={handleInputChange}
+          className={`${styles.field} ${styles.supplyType} ${
+            formData.supplyType ? styles.hasValue : ""
+          }`}
+          required
+        >
+          <option value="">WHAT DO YOU SUPPLY?</option>
+          <option value="solar-generation">Solar Generation Equipment</option>
+          <option value="power-conversion">Power Conversion Systems</option>
+          <option value="energy-storage">Energy Storage Systems</option>
+          <option value="system-intelligence">
+            System Intelligence &amp; Data
+          </option>
+          <option value="balance-of-system">Balance of System (BoS)</option>
+          <option value="supply-chain">Supply Chain &amp; BOS Hardware</option>
+          <option value="other">Other</option>
+        </select>
 
         <textarea
           name="details"
+          aria-label="Brief details"
           placeholder="BRIEF DETAILS"
           value={formData.details}
           onChange={handleInputChange}
           rows={3}
-          className={`${formFieldClass} resize-none`}
+          className={`${styles.field} ${styles.details}`}
         />
 
-        <div className="flex items-start gap-3">
+        <div className={styles.agreement}>
           <input
             type="checkbox"
             id="supplying-green-agree"
             checked={agreed}
-            onChange={(e) => setAgreed(e.target.checked)}
-            className="mt-1 h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
+            onChange={(event) => setAgreed(event.target.checked)}
           />
-          <label
-            htmlFor="supplying-green-agree"
-            className="text-sm text-gray-700 sm:text-base"
-          >
+          <label htmlFor="supplying-green-agree">
             I agree that GREEN may contact me about this request.
           </label>
         </div>
 
-        {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
-        {successMessage && (
-          <p className="text-sm text-green-600">{successMessage}</p>
-        )}
+        {errorMessage ? <p className={styles.error}>{errorMessage}</p> : null}
+        {successMessage ? (
+          <p className={styles.success}>{successMessage}</p>
+        ) : null}
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:justify-end sm:gap-6">
-          <button
+        <div className={styles.actions}>
+          <FigmaAngledCta
             type="button"
             onClick={resetForm}
             disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
+            showArrow={false}
+            className={styles.reset}
           >
-            <span className="block text-sm font-bold text-gray-800 sm:text-base">
-              Reset
-            </span>
-          </button>
-          <button
+            Reset
+          </FigmaAngledCta>
+          <FigmaAngledCta
             type="submit"
             disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
+            showArrow={false}
+            className={styles.submit}
           >
-            <span className="block text-sm font-bold text-gray-900 sm:text-base">
-              {isLoading ? "Submitting..." : "Submit"}
-            </span>
-          </button>
+            {isLoading ? "Submitting..." : "Submit"}
+          </FigmaAngledCta>
         </div>
       </form>
-    </EngineeringFormModal>
+    </ProductEnquiryFrame>
   );
 };
 

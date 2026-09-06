@@ -30,7 +30,10 @@ export interface SlideProps {
   logo?: string;
   carouselLeft?: React.ReactNode;
   carouselRight?: React.ReactNode;
-  figmaExport?: boolean;
+  /** Desktop offsets derived from the individual Figma slider frames. */
+  contentTop?: string;
+  keysTop?: string;
+  descriptionMarginTop?: string;
 }
 
 interface HeaderProps {
@@ -61,53 +64,6 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
   }, [paused, slides]);
 
   if (!slide) return null;
-
-  if (slide.figmaExport) {
-    return (
-      <div
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-        className="relative h-[100dvh] min-h-[100svh] w-full overflow-hidden bg-cover bg-center"
-        style={{ backgroundImage: `url("${slide.backgroundImage}")` }}
-      >
-        <section className="sr-only" aria-label={`${slide.headline} insight`}>
-          <h1>{slide.headline}</h1>
-          {slide.subheadline ? <p>{slide.subheadline}</p> : null}
-          <p>{slide.description}</p>
-          {slide.keys.length > 0 ? (
-            <ul>
-              {slide.keys.map((key) => (
-                <li key={key.description}>{key.description}</li>
-              ))}
-            </ul>
-          ) : null}
-          {slide.tag ? <p>{slide.tag}</p> : null}
-        </section>
-        <Link
-          href={slide.cta.link1}
-          aria-label={`Read more: ${slide.headline}`}
-          className="absolute left-[60.89vw] top-[84.23vh] z-10 h-[10.1vh] w-[17.7vw] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#23B14D]"
-        />
-        <Link
-          href={slide.cta.link2}
-          aria-label={`Explore: ${slide.headline}`}
-          className="absolute left-[78.96vw] top-[84.23vh] z-10 h-[10.1vh] w-[17.7vw] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#23B14D]"
-        />
-        <button
-          type="button"
-          onClick={goPrev}
-          aria-label="Previous slide"
-          className="absolute left-[2.13vw] top-[48.35vh] z-10 h-[4vh] w-[3vw] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#23B14D]"
-        />
-        <button
-          type="button"
-          onClick={goNext}
-          aria-label="Next slide"
-          className="absolute right-[2.13vw] top-[48.35vh] z-10 h-[4vh] w-[3vw] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#23B14D]"
-        />
-      </div>
-    );
-  }
 
   const categoryTag =
     slide.tag || `# Mining Insight 0${slide.id || current + 1}`;
@@ -144,7 +100,10 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
         className="relative w-full h-full z-10 animate-fadeIn overflow-hidden"
       >
         {/* Main Content Area */}
-        <div className="absolute left-[6.04vw] top-[14.74dvh] w-[82.19vw] max-md:right-5 max-md:left-5 max-md:top-[14svh] max-md:w-auto">
+        <div
+          className="absolute left-[6.04vw] w-[82.19vw] max-md:right-5 max-md:left-5 max-md:top-[14svh] max-md:w-auto"
+          style={{ top: slide.contentTop || "14.74dvh" }}
+        >
           {/* Main Title (Headline) */}
           {slide.headline ? (
             <div className="text-left text-[clamp(30px,3.96vw,76px)] font-bold leading-[1.05] tracking-tight text-white uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">
@@ -200,26 +159,32 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
           )}
 
           {/* Description */}
-          <p className="mt-[5.5dvh] max-w-[82.19vw] text-[clamp(15px,1.3vw,25px)] leading-[1.2] font-normal text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] max-md:max-w-none">
+          <p
+            className="max-w-[82.19vw] text-[clamp(15px,1.3vw,25px)] leading-[1.2] font-normal text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] max-md:max-w-none"
+            style={{ marginTop: slide.descriptionMarginTop || "5.5dvh" }}
+          >
             {slide.description}
           </p>
 
           {/* Key Stats / Column Icons */}
           <div
-            className={`absolute left-[-0.3vw] top-[38.6dvh] grid w-[88vw] items-start justify-items-center gap-0 max-md:relative max-md:left-auto max-md:top-auto max-md:mt-[5dvh] max-md:w-full max-md:gap-3 ${
+            className={`absolute left-[-0.3vw] grid w-[88vw] items-start justify-items-center gap-0 max-md:relative max-md:left-auto max-md:top-auto max-md:mt-[5dvh] max-md:w-full max-md:gap-3 ${
               slide.keys.length >= 4
                 ? "grid-cols-2 lg:grid-cols-4"
                 : "grid-cols-3"
             }`}
+            style={{ top: slide.keysTop || "37.7dvh" }}
           >
             {slide.keys.map((key, idx) => (
               <div
                 key={idx}
                 className="flex flex-col items-center text-center max-w-sm"
               >
-                <div className="mb-[1.5dvh] flex h-[clamp(48px,7vw,135px)] w-[clamp(48px,7vw,135px)] items-center justify-center">
+                <div className="mb-[1.5dvh] flex h-[clamp(64px,7.05vw,135px)] w-[clamp(64px,7.05vw,135px)] items-center justify-center">
                   {typeof key.icon === "string" ? (
-                    <img loading="lazy" decoding="async"
+                    <img
+                      loading="lazy"
+                      decoding="async"
                       className="max-h-full max-w-full object-contain filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.3)]"
                       src={key.icon}
                       alt="icon"
@@ -231,8 +196,8 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
                 <span
                   className={`font-black text-center text-white leading-snug drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] ${
                     slide.keys.length >= 4
-                      ? "max-w-[340px] text-[clamp(12px,1.15vw,22px)]"
-                      : "text-[clamp(12px,1.3vw,25px)]"
+                      ? "max-w-[340px] text-[clamp(15px,1.3vw,25px)]"
+                      : "text-[clamp(15px,1.3vw,25px)]"
                   }`}
                 >
                   {key.description}
@@ -242,40 +207,23 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
           </div>
         </div>
 
-        {/* Bottom Section: Tag on Left, CTA Buttons on Right */}
+        {/* CTA buttons are a separate layer so the category ribbon stays at Figma's lower position. */}
         <div className="absolute inset-x-0 top-[84.2dvh] z-20 max-md:top-auto max-md:bottom-4">
-          {/* Bottom Left Parallelogram Skewed Tag */}
-          <div
-            style={{
-              width: "371px",
-              height: "41px",
-              background: "rgba(169, 163, 163, 0.3)",
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
-              backdropFilter: "blur(7.5px)",
-              WebkitBackdropFilter: "blur(7.5px)",
-            }}
-            className="absolute left-[1vw] flex shrink-0 transform items-center justify-center border-0 border-none -skew-x-[45deg] max-md:hidden"
-          >
-            <div className="transform skew-x-[45deg] font-semibold italic text-base md:text-lg lg:text-[25px] text-black tracking-wide whitespace-nowrap">
-              {categoryTag}
-            </div>
-          </div>
-
-          {/* Bottom Right CTA Buttons (Parallelogram Skewed Glassmorphism Buttons) */}
+          {/* Bottom right Figma CTA buttons. */}
           <div className="absolute right-[3.35vw] flex items-center gap-[1.1vw] max-md:right-4 max-md:left-4 max-md:justify-end max-md:gap-2">
             {/* Button 1 */}
             <div {...cta1Props.getContainerProps()}>
               <Link
                 href={slide.cta.link1}
-                style={{
-                  background:
-                    "linear-gradient(26.97deg, rgba(35, 209, 75, 0.228) 17.38%, rgba(255, 229, 0, 0.21) 75.79%), rgba(255, 255, 255, 0.5)",
-                  boxShadow: "4px 4px 20px rgba(93, 223, 60, 0.25)",
-                  backdropFilter: "blur(7.5px)",
-                }}
-                className="group relative inline-flex h-[clamp(48px,10.1dvh,108px)] w-[min(17.7vw,340px)] min-w-[150px] transform cursor-pointer items-center justify-center border border-white/60 transition-all -skew-x-[20deg] hover:scale-[1.02] hover:brightness-110"
+                className="group relative inline-flex h-[clamp(62px,10.1dvh,98px)] w-[min(17.7vw,340px)] min-w-[150px] cursor-pointer items-center justify-center transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#23D14B]"
               >
-                <div className="flex transform items-center gap-3 text-[clamp(14px,1.46vw,28px)] font-semibold text-black italic capitalize whitespace-nowrap skew-x-[20deg] max-md:gap-1">
+                <img
+                  src="/images/insight1/figma/slider/slider-cta.svg"
+                  alt=""
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -left-[5.77%] -top-[19.31%] h-[146.77%] w-[113.88%] max-w-none"
+                />
+                <div className="relative z-10 flex items-center gap-3 text-[clamp(16px,1.46vw,28px)] font-semibold text-black italic capitalize whitespace-nowrap max-md:gap-1">
                   <span>
                     {typeof slide.cta.button1 === "string"
                       ? slide.cta.button1
@@ -300,15 +248,15 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
             <div {...cta2Props.getContainerProps()}>
               <Link
                 href={slide.cta.link2}
-                style={{
-                  background:
-                    "linear-gradient(26.97deg, rgba(35, 209, 75, 0.228) 17.38%, rgba(255, 229, 0, 0.21) 75.79%), rgba(255, 255, 255, 0.5)",
-                  boxShadow: "4px 4px 20px rgba(93, 223, 60, 0.25)",
-                  backdropFilter: "blur(7.5px)",
-                }}
-                className="group relative inline-flex h-[clamp(48px,10.1dvh,108px)] w-[min(17.7vw,340px)] min-w-[150px] transform cursor-pointer items-center justify-center border border-white/60 transition-all -skew-x-[20deg] hover:scale-[1.02] hover:brightness-110"
+                className="group relative inline-flex h-[clamp(62px,10.1dvh,98px)] w-[min(17.7vw,340px)] min-w-[150px] cursor-pointer items-center justify-center transition-transform hover:scale-[1.02] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#23D14B]"
               >
-                <div className="flex transform items-center gap-3 text-[clamp(14px,1.46vw,28px)] font-semibold text-black italic capitalize whitespace-nowrap skew-x-[20deg] max-md:gap-1">
+                <img
+                  src="/images/insight1/figma/slider/slider-cta.svg"
+                  alt=""
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -left-[5.77%] -top-[19.31%] h-[146.77%] w-[113.88%] max-w-none"
+                />
+                <div className="relative z-10 flex items-center gap-3 text-[clamp(16px,1.46vw,28px)] font-semibold text-black italic capitalize whitespace-nowrap max-md:gap-1">
                   <span>
                     {typeof slide.cta.button2 === "string"
                       ? slide.cta.button2
@@ -328,6 +276,22 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
                 </div>
               </Link>
             </div>
+          </div>
+        </div>
+
+        <div
+          style={{
+            width: "371px",
+            height: "41px",
+            background: "rgba(169, 163, 163, 0.3)",
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
+            backdropFilter: "blur(7.5px)",
+            WebkitBackdropFilter: "blur(7.5px)",
+          }}
+          className="absolute left-[1vw] top-[94.02dvh] z-20 flex shrink-0 items-center justify-center -skew-x-[45deg] max-md:hidden"
+        >
+          <div className="skew-x-[45deg] whitespace-nowrap text-[25px] font-semibold italic tracking-wide text-black">
+            {categoryTag}
           </div>
         </div>
       </div>

@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
 import type { ClientPartnershipsUseCases } from "../../../lib/api";
 import ClientInfoModal from "./ClientInfoModal";
+import styles from "./ClientPartnershipDialogs.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -55,31 +55,26 @@ const UseCases = ({ isOpen, onClose, data }: Props) => {
 
   return (
     <ClientInfoModal isOpen={isOpen} onClose={onClose}>
-      <div className="mb-6 sm:mb-8">
-        <h2 className="text-2xl font-black text-gray-800 sm:text-3xl">
-          {title}
-        </h2>
-        <div className="mt-4 h-0.5 w-full bg-gray-300" />
-      </div>
+      <div className={styles.useCases}>
+        <header className={styles.dialogHeader}>
+          <h2 className={styles.dialogTitle}>{title}</h2>
+        </header>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {items.map((item, idx) => (
-          <div key={idx} className="overflow-hidden">
-            <img loading="lazy" decoding="async"
-              src={item.img.src}
-              alt={item.img.alt}
-              className="h-48 w-full object-cover"
-            />
-            <div className="pt-4">
-              <p className="mb-3 text-sm font-medium italic leading-relaxed text-gray-800">
-                {item.title}
-              </p>
-              <p className="text-xs font-semibold text-[#4CAF50]">
-                {item.reference}
-              </p>
-            </div>
-          </div>
-        ))}
+        <div className={styles.caseGrid}>
+          {items.map((item) => (
+            <article key={item.title} className={styles.caseCard}>
+              <img
+                loading="lazy"
+                decoding="async"
+                src={item.img.src}
+                alt={item.img.alt}
+                className={styles.caseImage}
+              />
+              <p className={styles.caseQuote}>{item.title}</p>
+              <p className={styles.caseReference}>{item.reference}</p>
+            </article>
+          ))}
+        </div>
       </div>
     </ClientInfoModal>
   );

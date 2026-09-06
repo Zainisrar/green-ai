@@ -160,14 +160,14 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 24px 20px 48px;
+  padding: 0 0 48px;
   box-sizing: border-box;
 }
 
 .mobileHero {
   position: relative;
   width: 100%;
-  border-radius: 12px;
+  border-radius: 0;
   overflow: hidden;
   margin-bottom: 24px;
 }
@@ -182,6 +182,12 @@
 .mobileCleanLean {
   margin: 20px 0 28px;
   text-align: center;
+}
+
+/* The artwork is edge-to-edge on small screens. Text keeps a readable gutter
+   below, rather than inheriting a second page-level inset around the hero. */
+.mobileContent {
+  padding-inline: 20px;
 }
 
 .mobileCleanLean h1 {

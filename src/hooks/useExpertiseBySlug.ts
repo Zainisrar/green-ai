@@ -43,7 +43,7 @@ interface ExpertiseResponse {
 }
 
 const fetchExpertiseBySlug = async (slug: string): Promise<ExpertiseDetailData | null> => {
-  const response = await fetch('https://g-stack.green.com.pg/api/expertise');
+  const response = await fetch('https://greencms.percepco.co.uk/api/expertise');
   
   if (!response.ok) {
     throw new Error('Failed to fetch expertise data');
