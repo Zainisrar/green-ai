@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useId, useRef } from "react";
 import styles from "./EngineeringFormModal.module.css";
 
 interface EngineeringFormModalProps {
@@ -15,6 +15,10 @@ interface EngineeringFormModalProps {
   geometry?: "default" | "consultation" | "epcm" | "liveDemo" | "om" | "track";
   /** Decorative expand control used by the Solar EPCM Figma windows. */
   showExpandControl?: boolean;
+  /** Optional custom ID for the modal */
+  id?: string;
+  /** Optional accessible name override */
+  ariaLabel?: string;
 }
 
 const EngineeringFormModal = ({
@@ -26,7 +30,11 @@ const EngineeringFormModal = ({
   maxWidthClass = "max-w-5xl",
   geometry = "consultation",
   showExpandControl = false,
+  id,
+  ariaLabel,
 }: EngineeringFormModalProps) => {
+  const generatedId = useId();
+  const titleId = id ? `${id}-title` : `modal-title-${generatedId.replace(/:/g, "")}`;
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const usesStandardCtaFrame =
@@ -109,6 +117,8 @@ const EngineeringFormModal = ({
         }`}
         role="dialog"
         aria-modal="true"
+        aria-labelledby={ariaLabel ? undefined : titleId}
+        aria-label={ariaLabel}
       >
         <button
           ref={closeButtonRef}
@@ -203,7 +213,10 @@ const EngineeringFormModal = ({
               }`}
             >
               <div className="mb-5 sm:mb-6">
-                <h2 className="text-xl font-black leading-tight text-gray-800 sm:text-2xl lg:text-3xl">
+                <h2
+                  id={titleId}
+                  className="text-xl font-black leading-tight text-gray-800 sm:text-2xl lg:text-3xl"
+                >
                   {title}
                 </h2>
                 {subtitle && (

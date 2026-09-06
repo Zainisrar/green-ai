@@ -77,7 +77,7 @@ export default function Vision() {
           loading="lazy"
           decoding="async"
           className={styles.cardIcon}
-          src="/images/our-vision/visionicn.png"
+          src={vision.icon}
           alt=""
         />
         <h2>{vision.title}</h2>
@@ -102,7 +102,7 @@ export default function Vision() {
           loading="lazy"
           decoding="async"
           className={styles.cardIcon}
-          src="/images/our-vision/missionicon.png"
+          src={mission.icon}
           alt=""
         />
         <h2>{mission.title}</h2>
