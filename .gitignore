@@ -56,4 +56,27 @@ __pycache__/
 /earning-backend-hotfix/
 /scripts/
 
+# tests and test scripts
+tests/
+test/
+*.spec.ts
+*.spec.js
+*.test.ts
+*.test.js
+playwright.config.ts
+
+# figma tooling
+figma-mcp/
+
+# logs
+logs/
+*.log
+*.log*
+
+# markdown files
+*.md
+**/*.md
+
+
+
 
