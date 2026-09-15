@@ -115,8 +115,6 @@ export default function Navigation({
   const quote =
     activeFeature?.text?.description ||
     "Explore our comprehensive solutions and services";
-  const highlight = activeFeature?.text?.highlighted;
-  const visibleItems = activeSection?.children ?? [];
   const sections = navigationData.slice().sort((a, b) => a.id - b.id);
   // CMS record IDs vary between environments. Layout selection must use the
   // section's stable identity instead of development-database IDs.
@@ -135,19 +133,39 @@ export default function Navigation({
   const isEcosystemLayout = matchesSection("ecosystem");
   const isEmpowerLayout = matchesSection("empower");
   const isEngageLayout = matchesSection("engage");
+  const isExploreLayout = matchesSection("explore");
   const isSupplyEcosystemLayout =
     isEcosystemLayout &&
     selectedParent?.name.trim().toLowerCase() === "supply partners";
   const isFeatureLedLayout = isEmpowerLayout || isEngageLayout;
+  const engageItemOrder = [
+    "partner with us",
+    "become a supplier",
+    "investor relations",
+    "media & press",
+    "public events & volunteering",
+    "contact us",
+    "book a consultation",
+    "request a proposal (rfp)",
+    "find us globally (map)",
+    "newsletter signup",
+  ];
+  const visibleItems = [...(activeSection?.children ?? [])].sort((a, b) => {
+    if (!isEngageLayout) return 0;
+
+    const aOrder = engageItemOrder.indexOf(a.name.trim().toLowerCase());
+    const bOrder = engageItemOrder.indexOf(b.name.trim().toLowerCase());
+    return (
+      (aOrder === -1 ? Number.MAX_SAFE_INTEGER : aOrder) -
+      (bOrder === -1 ? Number.MAX_SAFE_INTEGER : bOrder)
+    );
+  });
   const isCurrent = (item: NavigationItem) =>
     currentPath === item.slug ||
     Boolean(item.slug && currentPath?.startsWith(`${item.slug}/`));
   const hasCurrentMenuItem = visibleItems.some(isCurrent);
   const isActiveMenuItem = (item: NavigationItem, index: number) => {
-    // Engineering opens on Products & Systems in the Figma panel. Treat that
-    // expandable parent as the only active top-level item while its products
-    // are visible, even if the underlying page is Solar EPC Services.
-    if ((isEngineeringLayout || isEcosystemLayout) && selectedParent) {
+    if (selectedParent) {
       return item.id === selectedParent.id;
     }
 
@@ -169,6 +187,8 @@ export default function Navigation({
   // viewport units always describe the actual window.
   if (typeof document === "undefined") return null;
 
+  const hasNestedChildren = Boolean(selectedParent?.children?.length);
+
   return createPortal(
     <div
       className={styles.overlay}
@@ -183,7 +203,7 @@ export default function Navigation({
         aria-label="Close navigation"
       />
       <aside
-        className={`${styles.drawer} ${isFeatureLedLayout ? styles.featureLedDrawer : ""} ${isEvolutionLayout ? styles.evolutionDrawer : ""} ${isEngineeringLayout ? styles.engineeringDrawer : ""} ${isEndeavorsLayout ? styles.endeavorsDrawer : ""} ${isEnlightenLayout ? styles.enlightenDrawer : ""} ${isEcosystemLayout ? styles.ecosystemDrawer : ""} ${isSupplyEcosystemLayout ? styles.supplyEcosystemDrawer : ""} ${isEmpowerLayout ? styles.empowerDrawer : ""} ${isEngageLayout ? styles.engageDrawer : ""}`}
+        className={`${styles.drawer} ${isExploreLayout ? styles.exploreDrawer : ""} ${isFeatureLedLayout ? styles.featureLedDrawer : ""} ${isEvolutionLayout ? styles.evolutionDrawer : ""} ${isEngineeringLayout ? styles.engineeringDrawer : ""} ${isEndeavorsLayout ? styles.endeavorsDrawer : ""} ${isEnlightenLayout ? styles.enlightenDrawer : ""} ${isEcosystemLayout ? styles.ecosystemDrawer : ""} ${isSupplyEcosystemLayout ? styles.supplyEcosystemDrawer : ""} ${isEmpowerLayout ? styles.empowerDrawer : ""} ${isEngageLayout ? styles.engageDrawer : ""} ${hasNestedChildren ? styles.hasNestedNavigation : ""}`.trim()}
         ref={drawerRef}
         onKeyDown={trapFocus}
       >
@@ -243,7 +263,7 @@ export default function Navigation({
                     <button
                       key={item.id}
                       type="button"
-                      className={`${styles.subMenuTrigger} ${isActiveMenuItem(item, index) || selectedParent?.id === item.id ? `${styles.activeItem} ${isEngageLayout ? "" : styles.underlinedActiveItem}` : ""}`}
+                      className={`${styles.subMenuTrigger} ${selectedParent?.id === item.id ? `${styles.activeItem} ${isEngageLayout ? "" : styles.underlinedActiveItem}` : ""}`}
                       aria-expanded={selectedParent?.id === item.id}
                       onClick={() =>
                         setSelectedParent(
@@ -251,8 +271,24 @@ export default function Navigation({
                         )
                       }
                     >
-                      {item.name}
-                      <span aria-hidden="true">›</span>
+                      <span>{item.name}</span>
+                      <svg
+                        className={styles.chevron}
+                        width="6"
+                        height="10"
+                        viewBox="0 0 6 10"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M1 1L5 5L1 9"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
                     </button>
                   ) : (
                     <Link
@@ -316,28 +352,40 @@ export default function Navigation({
                 </>
               ) : isEmpowerLayout ? (
                 <span>
-                  “People-First. <em>Talent-Driven.</em>”
+                  “People-First. <em>Talent</em>-Driven.”
                 </span>
               ) : isEnlightenLayout ? (
                 <span>
-                  “<em>Knowledge</em> sharing, thought leadership, and market
+                  “<em>Knowledge</em> Sharing, Thought Leadership, and Market
                   {` `}
-                  <em>insight</em>”
+                  <em>Insight</em>”
+                </span>
+              ) : isEngineeringLayout ? (
+                <span>
+                  “Our Technical{` `}
+                  <em>Capabilities, Services, and Flagship</em>
+                  {` `}Products”
+                </span>
+              ) : isEndeavorsLayout ? (
+                <span>
+                  “Real <em>Projects.</em> Real Impact”
+                </span>
+              ) : isEcosystemLayout ? (
+                <span>
+                  “The World Of Partners That Power Our{` `}
+                  <em>Promise</em>”
+                </span>
+              ) : isEvolutionLayout ? (
+                <span>
+                  “Our Journey From <em>PNG</em> Roots To Global Energy Leader”
+                </span>
+              ) : isExploreLayout ? (
+                <span>
+                  “Start Here. <em>GREEN’s</em> Mission, Impact, and World In
+                  Motion”
                 </span>
               ) : (
-                <>
-                  “
-                  {highlight && quote.includes(highlight) ? (
-                    <>
-                      {quote.split(highlight)[0]}
-                      <em>{highlight}</em>
-                      {quote.split(highlight).slice(1).join(highlight)}
-                    </>
-                  ) : (
-                    quote
-                  )}
-                  ”
-                </>
+                <span>“{quote.replace(/^[“”"']+|[“”"']+$/g, "").trim()}”</span>
               )}
             </motion.span>
           </motion.blockquote>

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 interface EditorialImage {
   alt: string;
@@ -57,19 +57,21 @@ interface ThoughtLeadershipResponse {
 }
 
 const fetchThoughtLeadership = async (): Promise<ThoughtLeadershipData> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/enlighten/thought-leadership');
-  
+  const response = await fetch(
+    "https://greencms.percepco.co.uk/api/enlighten/thought-leadership",
+  );
+
   if (!response.ok) {
-    throw new Error('Failed to fetch thought leadership data');
+    throw new Error("Failed to fetch thought leadership data");
   }
-  
+
   const result: ThoughtLeadershipResponse = await response.json();
   return result.data;
 };
 
 export const useThoughtLeadership = () => {
   return useQuery({
-    queryKey: ['thought-leadership'],
+    queryKey: ["thought-leadership"],
     queryFn: fetchThoughtLeadership,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes

@@ -14,14 +14,18 @@ const phases = [
 const ProjectMonitoring = () => {
   return (
     <div>
-      <h2 className="text-lg font-semibold text-gray-800 mb-4">Project Monitoring</h2>
+      <h2 className="text-lg font-semibold text-gray-800 mb-4">
+        Project Monitoring
+      </h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left column */}
         <div className="space-y-6">
           <Card>
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-semibold text-gray-700">Current Progress Data</h3>
+              <h3 className="text-sm font-semibold text-gray-700">
+                Current Progress Data
+              </h3>
               <TrendingUp className="h-4 w-4 text-[#4CAF50]" />
             </div>
             <ul className="text-xs text-gray-600 space-y-2">
@@ -32,7 +36,9 @@ const ProjectMonitoring = () => {
           </Card>
 
           <Card>
-            <h3 className="text-sm font-semibold text-gray-700 mb-2">Overall Progress</h3>
+            <h3 className="text-sm font-semibold text-gray-700 mb-2">
+              Overall Progress
+            </h3>
             <div className="flex justify-center">
               <ProgressGauge value={100} />
             </div>
@@ -40,16 +46,29 @@ const ProjectMonitoring = () => {
 
           <Card>
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-semibold text-gray-700">Safety Statistics</h3>
+              <h3 className="text-sm font-semibold text-gray-700">
+                Safety Statistics
+              </h3>
               <ShieldCheck className="h-4 w-4 text-[#4CAF50]" />
             </div>
             <ul className="text-xs text-gray-600 space-y-2">
-              <li className="flex justify-between"><span>Total M-hrs</span><span>17,360</span></li>
-              <li className="flex justify-between"><span>Lost Time Injury</span><span>0</span></li>
-              <li className="flex justify-between"><span>M-hrs/Lost Time Injury</span><span>17,360</span></li>
+              <li className="flex justify-between">
+                <span>Total M-hrs</span>
+                <span>17,360</span>
+              </li>
+              <li className="flex justify-between">
+                <span>Lost Time Injury</span>
+                <span>0</span>
+              </li>
+              <li className="flex justify-between">
+                <span>M-hrs/Lost Time Injury</span>
+                <span>17,360</span>
+              </li>
             </ul>
             <div className="mt-4 border-t border-gray-100 pt-3">
-              <p className="text-sm font-semibold text-gray-700 mb-2">Man-Hours (M-hrs)</p>
+              <p className="text-sm font-semibold text-gray-700 mb-2">
+                Man-Hours (M-hrs)
+              </p>
               <div className="flex justify-between text-xs">
                 <div>
                   <p className="text-gray-400">Planned</p>
@@ -68,7 +87,9 @@ const ProjectMonitoring = () => {
         <div className="lg:col-span-2 space-y-6">
           <Card>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-semibold text-gray-700">Project Calendar</h3>
+              <h3 className="text-sm font-semibold text-gray-700">
+                Project Calendar
+              </h3>
               <CalendarDays className="h-4 w-4 text-[#4CAF50]" />
             </div>
             <div className="grid grid-cols-3 text-center">
@@ -107,16 +128,20 @@ const ProjectMonitoring = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {phases.map((p) => (
               <Card key={p.title}>
-                <p className="text-xs font-semibold text-gray-700 mb-2">{p.title}</p>
+                <p className="text-xs font-semibold text-gray-700 mb-2">
+                  {p.title}
+                </p>
                 <div className="flex justify-center">
                   <DonutChart value={100} centerLabel="100.0%" />
                 </div>
                 <div className="mt-2 text-[10px] text-gray-500 space-y-1">
                   <p className="flex items-center gap-1">
-                    <span className="inline-block h-2 w-2 rounded-full bg-[#F5A623]" /> Remaining Task 0
+                    <span className="inline-block h-2 w-2 rounded-full bg-[#F5A623]" />{" "}
+                    Remaining Task 0
                   </p>
                   <p className="flex items-center gap-1">
-                    <span className="inline-block h-2 w-2 rounded-full bg-[#4CAF50]" /> Completed Task {p.completed}
+                    <span className="inline-block h-2 w-2 rounded-full bg-[#4CAF50]" />{" "}
+                    Completed Task {p.completed}
                   </p>
                 </div>
               </Card>
@@ -128,7 +153,10 @@ const ProjectMonitoring = () => {
   );
 };
 
-const CalItem: React.FC<{ label: string; value: string }> = ({ label, value }) => (
+const CalItem: React.FC<{ label: string; value: string }> = ({
+  label,
+  value,
+}) => (
   <div>
     <p className="text-xs text-gray-400 mb-2">{label}</p>
     <p className="text-3xl font-extrabold text-gray-800">{value}</p>

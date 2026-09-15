@@ -8,6 +8,7 @@ export default function NewsletterPage() {
       mobile={<NewsletterSignup canvas />}
       nodeId="7077:14996"
       fitCanvasHeight
+      scaleMobileToViewport
     />
   );
 }

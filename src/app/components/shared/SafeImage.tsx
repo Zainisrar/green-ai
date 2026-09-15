@@ -8,8 +8,16 @@ interface SafeImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   fallbackSrc: string;
 }
 
-const SafeImage = ({ src, fallbackSrc, alt, className, ...props }: SafeImageProps) => {
-  const resolvedCandidate = resolveApiAssetUrl(typeof src === "string" ? src : undefined) ?? fallbackSrc;
+const SafeImage = ({
+  src,
+  fallbackSrc,
+  alt,
+  className,
+  ...props
+}: SafeImageProps) => {
+  const resolvedCandidate =
+    resolveApiAssetUrl(typeof src === "string" ? src : undefined) ??
+    fallbackSrc;
   const [resolvedSrc, setResolvedSrc] = useState(fallbackSrc);
 
   useEffect(() => {
@@ -26,7 +34,9 @@ const SafeImage = ({ src, fallbackSrc, alt, className, ...props }: SafeImageProp
     img.src = resolvedCandidate;
   }, [resolvedCandidate, fallbackSrc]);
   return (
-    <img loading="lazy" decoding="async"
+    <img
+      loading="lazy"
+      decoding="async"
       {...props}
       src={resolvedSrc}
       alt={alt}

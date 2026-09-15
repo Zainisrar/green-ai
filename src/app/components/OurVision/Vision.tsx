@@ -52,13 +52,20 @@ export default function Vision() {
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:6846">
       <div className={styles.eyeArtwork} aria-hidden="true">
-        <img loading="lazy" decoding="async" src="/images/our-vision/figma-eye.png" alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/our-vision/figma-eye.png"
+          alt=""
+        />
       </div>
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
       <h1 className={styles.pageTitle} data-node-id="7077:6867">
         {titleStart}:<span>{titleEnd.trim()}</span>
       </h1>
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.watermark}
         src="/images/our-vision/vision.png"
         alt=""
@@ -68,7 +75,9 @@ export default function Vision() {
         className={`${styles.card} ${styles.visionCard}`}
         data-node-id="7077:6847"
       >
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           className={styles.cardShape}
           src="/images/our-vision/figma-vision-card.svg"
           alt=""
@@ -93,7 +102,9 @@ export default function Vision() {
         className={`${styles.card} ${styles.missionCard}`}
         data-node-id="7077:6848"
       >
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           className={styles.cardShape}
           src="/images/our-vision/figma-mission-card.svg"
           alt=""
@@ -139,7 +150,9 @@ export default function Vision() {
   const mobile = (
     <main className={styles.mobilePage} data-node-id="7077:6885-mobile">
       <SiteHeader panel="logoOnly" />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.mobileEye}
         src="/images/our-vision/mainImg.png"
         alt=""

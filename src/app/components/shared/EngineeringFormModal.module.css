@@ -8,17 +8,102 @@
 
 /* Matches the large, lime-edged enquiry window shown in frame 7077:16531. */
 .consultationWindow {
+  --modal-slant: 95px;
+  width: min(1520px, calc(100vw - 32px));
+  max-width: 1520px;
+  margin: auto;
   animation: consultation-window-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.25));
+}
+
+@media (max-width: 1024px) {
+  .consultationWindow {
+    --modal-slant: 45px;
+  }
+}
+
+@media (max-width: 768px) {
+  .consultationWindow {
+    --modal-slant: 0px;
+    width: 100%;
+    filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.18));
+  }
 }
 
 .consultationPanel {
-  clip-path: polygon(2.1% 0, 100% 0, 97.7% 100%, 0 100%);
+  position: relative;
+  clip-path: polygon(
+    var(--modal-slant) 0,
+    100% 0,
+    calc(100% - var(--modal-slant)) 100%,
+    0 100%
+  );
+  border-radius: 0;
+}
+
+@media (max-width: 768px) {
+  .consultationPanel {
+    clip-path: none;
+    border-radius: 16px;
+  }
 }
 
 .consultationPanel > div[aria-hidden] {
-  border-color: #bde85d;
+  inset: 0;
   border-radius: 0;
-  background: #f3f8f4;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#f3f8f4, #f3f8f4) padding-box,
+    linear-gradient(90deg, #23b14d 0%, #fffe50 100%) border-box;
+  clip-path: polygon(
+    var(--modal-slant) 0,
+    100% 0,
+    calc(100% - var(--modal-slant)) 100%,
+    0 100%
+  );
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .consultationPanel > div[aria-hidden] {
+    clip-path: none;
+    border-radius: 16px;
+    border: 1.5px solid #23b14d;
+    background: #f3f8f4;
+  }
+}
+
+.consultationContent {
+  padding: 3.25rem clamp(6.5rem, 9.5vw, 10rem) 3.75rem
+    clamp(6.5rem, 9vw, 9.5rem);
+}
+
+@media (max-width: 1200px) {
+  .consultationContent {
+    padding: 2.75rem clamp(5rem, 8vw, 8rem) 3.25rem clamp(5rem, 7.5vw, 7.5rem);
+  }
+}
+
+@media (max-width: 1024px) {
+  .consultationContent {
+    padding: 2.25rem 3.5rem 2.75rem 3.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .consultationContent {
+    padding: 2rem 1.25rem 1.75rem 1.25rem;
+  }
+}
+
+.consultationHeader {
+  padding-left: clamp(14px, 1.8vw, 24px);
+}
+
+@media (max-width: 1024px) {
+  .consultationHeader {
+    padding-left: 0;
+  }
 }
 
 /* Shared Elements enquiry shell for CTA forms that use EngineeringFormModal. */
@@ -50,14 +135,90 @@
   padding: 3.4rem 10.25rem 2.25rem 14.75rem;
 }
 
+/* Newsletter signup — a compact version of the angular Figma popup. */
+.newsletterWindow {
+  --modal-slant: 84px;
+  width: min(1520px, calc(100vw - 32px));
+  max-width: 1520px;
+  margin: auto;
+  animation: consultation-window-in 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.25));
+}
+
+.newsletterPanel {
+  position: relative;
+  margin: 0;
+  clip-path: polygon(
+    var(--modal-slant) 0,
+    100% 0,
+    calc(100% - var(--modal-slant)) 100%,
+    0 100%
+  );
+}
+
+.newsletterPanel > div[aria-hidden] {
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: 0;
+  background:
+    linear-gradient(#f4f8f5, #f4f8f5) padding-box,
+    linear-gradient(90deg, #23b14d, #fffe50) border-box;
+  box-shadow: none;
+  clip-path: inherit;
+}
+
+.newsletterContent {
+  padding: 3.7rem 7rem 2.3rem;
+}
+
+@media (max-width: 900px) {
+  .newsletterWindow {
+    --modal-slant: 42px;
+    width: min(720px, calc(100vw - 24px));
+    height: auto;
+  }
+
+  .newsletterPanel {
+    height: auto;
+    min-height: 0;
+  }
+
+  .newsletterContent {
+    padding: 3.5rem 2.5rem 2rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .newsletterWindow {
+    --modal-slant: 0px;
+    width: 100%;
+  }
+
+  .newsletterPanel,
+  .newsletterPanel > div[aria-hidden] {
+    clip-path: none;
+    border-radius: 14px;
+  }
+
+  .newsletterPanel > div[aria-hidden] {
+    border-color: #23b14d;
+    background: #f4f8f5;
+  }
+
+  .newsletterContent {
+    padding: 3.25rem 1.25rem 1.5rem;
+  }
+}
+
 /* Shared Figma form controls used by every EngineeringFormModal CTA. */
 .sharedFormField {
-  min-height: 69px;
+  min-height: 69.2px;
   border: 0;
-  border-radius: 0;
+  border-radius: 5px;
   /* The SVG paints the white card itself. Keeping this layer transparent
      prevents a rectangular white halo around the angled field edges. */
-  background: transparent url("/images/reach-us/form-field.svg") center / 100% 100%
+  background:
+    transparent url("/images/shared/field-normal.svg") center / 100% 100%
     no-repeat;
   box-shadow: none;
   filter: none;
@@ -69,7 +230,7 @@
 .sharedFormField:focus-within {
   outline: 0;
   background:
-    transparent url("/images/reach-us/form-first-name.svg") center / 100% 100%
+    transparent url("/images/shared/field-active.svg") center / 100% 100%
     no-repeat;
   box-shadow: none;
   filter: none;
@@ -78,7 +239,7 @@
 /* Use when a Figma popup opens with its first text field already active. */
 .initialFocusField {
   background:
-    transparent url("/images/reach-us/form-first-name.svg") center / 100% 100%
+    transparent url("/images/shared/field-active.svg") center / 100% 100%
     no-repeat;
   box-shadow: none;
   filter: none;
@@ -271,13 +432,13 @@ select.sharedFormField {
   border: 3px solid transparent;
   background:
     linear-gradient(0deg, rgb(255 255 255 / 90%), rgb(255 255 255 / 90%))
-      padding-box,
+    padding-box,
     linear-gradient(
-        193.74deg,
-        rgb(35 177 77 / 50%) 30.41%,
-        rgb(255 254 80 / 50%) 113.84%
-      )
-      border-box;
+      193.74deg,
+      rgb(35 177 77 / 50%) 30.41%,
+      rgb(255 254 80 / 50%) 113.84%
+    )
+    border-box;
   /* Vector 7368 is composited over white in Figma. Without this base, the
      translucent fill takes on the darkened page beneath the dialog. */
   background-color: #fff;
@@ -662,8 +823,8 @@ select.sharedFormField {
   padding: 1.25rem 2rem;
   border: 0;
   border-radius: 0;
-  background: #fff url("/images/reach-us/form-field.svg") center / 100% 100%
-    no-repeat;
+  background:
+    #fff url("/images/reach-us/form-field.svg") center / 100% 100% no-repeat;
   box-shadow: none;
   color: #344056;
   font-size: 1.35rem;
@@ -811,8 +972,8 @@ select.sharedFormField {
   padding: 0.9rem 2rem;
   border: 0;
   border-radius: 0;
-  background: #fff url("/images/reach-us/form-field.svg") center / 100% 100%
-    no-repeat;
+  background:
+    #fff url("/images/reach-us/form-field.svg") center / 100% 100% no-repeat;
   box-shadow: none;
   filter: none;
   clip-path: none;

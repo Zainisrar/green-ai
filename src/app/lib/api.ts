@@ -63,7 +63,9 @@ export async function fetchApi<T>(
 export const api = {
   getInsights: () => fetchApi<InsightsResponse>("/api/insights"),
   getEnergyServices: () =>
-    fetchApi<EnergyServicesResponse>("https://greencms.percepco.co.uk/api/energy"),
+    fetchApi<EnergyServicesResponse>(
+      "https://greencms.percepco.co.uk/api/energy",
+    ),
   getAboutUs: () =>
     fetchApi<AboutUsResponse>(
       "https://greencms.percepco.co.uk/api/explore/about-us",

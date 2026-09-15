@@ -18,7 +18,9 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ARG NEXT_PUBLIC_SITE_URL=https://greenai.percepco.co.uk
 ENV NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
-RUN pnpm run build
+# Turbopack is the Next 16 default, but this image is deployed through a
+# production build where Webpack has been the stable compiler for this project.
+RUN pnpm exec next build --webpack
 
 FROM base AS runner
 WORKDIR /app

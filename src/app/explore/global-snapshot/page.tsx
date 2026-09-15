@@ -1,12 +1,12 @@
-import React from 'react'
-import GlobalSnapshot from '@/app/components/GlobalSnapshot/GlobalSnapshot'
+import React from "react";
+import GlobalSnapshot from "@/app/components/GlobalSnapshot/GlobalSnapshot";
 
 const page = () => {
   return (
     <React.Fragment>
-        <GlobalSnapshot/>
+      <GlobalSnapshot />
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default page
+export default page;

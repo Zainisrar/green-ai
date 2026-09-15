@@ -116,27 +116,70 @@
   line-height: 23px;
 }
 
-.canvasRow1 { top: 0; height: 48px; }
-.canvasRow2 { top: 94px; height: 38px; }
-.canvasRow3 { top: 184px; height: 38px; }
-.canvasRow4 { top: 268px; height: 38px; }
+.canvasRow1 {
+  top: 0;
+  height: 56px;
+  padding-bottom: 8px;
+}
+.canvasRow2 {
+  top: 84px;
+  height: 62px;
+  padding-bottom: 10px;
+}
+.canvasRow3 {
+  top: 174px;
+  height: 44px;
+  padding-bottom: 8px;
+}
+.canvasRow4 {
+  top: 248px;
+  height: 44px;
+  padding-bottom: 8px;
+}
 
-.canvasRow h3 { transform: translateY(4px); }
-.canvasRow1 h3 { width: 173px; }
-.canvasRow2 h3 { width: 369px; }
-.canvasRow3 h3 { width: 204px; }
-.canvasRow4 h3 { width: 291px; }
-.canvasRow1 p { width: 341px; transform: translateY(2px); }
-.canvasRow2 p { width: 316px; transform: translateY(2px); }
-.canvasRow3 p { width: 392px; transform: translateY(9px); font-size: 18px; line-height: 16px; }
-.canvasRow4 p { width: 353px; transform: translateY(12px); font-size: 18px; line-height: 16px; }
+.canvasRow h3 {
+  transform: translateY(4px);
+}
+.canvasRow1 h3 {
+  width: 173px;
+}
+.canvasRow2 h3 {
+  width: 369px;
+}
+.canvasRow3 h3 {
+  width: 204px;
+}
+.canvasRow4 h3 {
+  width: 291px;
+}
+.canvasRow1 p {
+  width: 341px;
+  transform: translateY(2px);
+}
+.canvasRow2 p {
+  width: 420px;
+  transform: translateY(0);
+}
+.canvasRow3 p {
+  width: 392px;
+  transform: translateY(6px);
+  font-size: 18px;
+  line-height: 20px;
+}
+.canvasRow4 p {
+  width: 353px;
+  transform: translateY(6px);
+  font-size: 18px;
+  line-height: 20px;
+}
 
 .canvasExploreCta {
   width: 122px;
   height: 36px;
   min-height: 36px;
-  justify-content: space-between !important;
-  padding: 0 13px 0 27px !important;
+  justify-content: center !important;
+  gap: 8px;
+  padding: 0 14px 0 18px !important;
   font-size: 14px;
   font-weight: 600;
 }
@@ -214,9 +257,9 @@
 .canvasCtas > * {
   height: 52px;
   flex: 0 0 52px;
-  justify-content: space-between !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
+  justify-content: center !important;
+  gap: 12px;
+  padding: 0 24px 0 32px !important;
   font-size: 16px;
   font-weight: 600;
 }
@@ -231,7 +274,6 @@
   width: 379px;
   margin-left: 0;
 }
-
 
 @media (max-width: 1200px) {
   .canvasPage {

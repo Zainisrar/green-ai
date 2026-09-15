@@ -1,5 +1,5 @@
-import WomenInEnergy from "@/app/components/WomenInEnergy/WomenInEnergy";
 import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
+import WomenInEnergy from "@/app/components/WomenInEnergy/WomenInEnergy";
 
 export default function WomenInEnergyPage() {
   return (
@@ -8,6 +8,7 @@ export default function WomenInEnergyPage() {
       mobile={<WomenInEnergy canvas />}
       nodeId="7077:19753"
       fitCanvasHeight
+      scaleMobileToViewport
     />
   );
 }

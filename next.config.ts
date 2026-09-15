@@ -41,6 +41,15 @@ const nextConfig = (phase: string): NextConfig => ({
   // Allowlist the CMS host so that switching any remote <img> to next/image
   // does not start throwing at request time.
   images: {
+    // Prefer a fast, broadly supported modern format. AVIF is smaller but
+    // noticeably slower to encode on the first request on this self-hosted
+    // deployment, so WebP gives visitors the better cold-load experience.
+    formats: ["image/webp"],
+    qualities: [60, 75],
+    // Optimized remote CMS images are reused across many routes. Keep the
+    // generated variants long enough for production visits to hit the disk/CDN
+    // cache instead of re-encoding on every deployment window.
+    minimumCacheTTL: 2_592_000,
     remotePatterns: [
       { protocol: "https", hostname: "greencms.percepco.co.uk" },
       { protocol: "https", hostname: "app-gsolve.green.com.pg" },
@@ -84,6 +93,123 @@ const nextConfig = (phase: string): NextConfig => ({
 
   async redirects() {
     return [
+      // Keep previously shared and pre-release URLs working after the
+      // Ecosystem navigation was consolidated under the current routes.
+      {
+        source: "/supply-partners/login",
+        destination: "/ecosystem/supply-partners/login",
+        permanent: true,
+      },
+      {
+        source: "/ecosystem/client-partners",
+        destination: "/ecosystem/client-partnerships",
+        permanent: true,
+      },
+      {
+        source: "/ecosystem/client-partners/partner-with-green",
+        destination: "/engage/partner-with-us",
+        permanent: true,
+      },
+      {
+        source: "/ecosystem/client-partners/industries-we-serve",
+        destination: "/ecosystem/client-partnerships",
+        permanent: true,
+      },
+      {
+        source: "/ecosystem/client-partners/partner-success-stories",
+        destination: "/ecosystem/client-partnerships",
+        permanent: true,
+      },
+      {
+        source: "/ecosystem/client-partners/client-testimonials",
+        destination: "/ecosystem/client-partnerships",
+        permanent: true,
+      },
+      {
+        source: "/ecosystem/client-partnerships/industries-we-serve",
+        destination: "/ecosystem/client-partnerships",
+        permanent: true,
+      },
+      {
+        source: "/ecosystem/client-partnerships/partner-success-stories",
+        destination: "/ecosystem/client-partnerships",
+        permanent: true,
+      },
+      {
+        source: "/ecosystem/client-partnerships/client-testimonials",
+        destination: "/ecosystem/client-partnerships",
+        permanent: true,
+      },
+      {
+        source: "/engineering",
+        destination: "/engineering/solar-epcm-services",
+        permanent: true,
+      },
+      {
+        source: "/explore",
+        destination: "/explore/welcome-to-green",
+        permanent: true,
+      },
+      {
+        source: "/evolution",
+        destination: "/evolution/our-story-milestones",
+        permanent: true,
+      },
+      {
+        source: "/endeavors",
+        destination: "/endeavors/project-portfolio",
+        permanent: true,
+      },
+      {
+        source: "/endeavors/case-studies",
+        destination: "/endeavors/project-portfolio",
+        permanent: true,
+      },
+      {
+        source: "/endeavors/community-energy-stories",
+        destination: "/endeavors/flagship-projects",
+        permanent: true,
+      },
+      {
+        source: "/enlighten",
+        destination: "/enlighten/insights-articles",
+        permanent: true,
+      },
+      {
+        source: "/enlighten/learning-hub/training-certifications",
+        destination: "/enlighten/learning-hub",
+        permanent: true,
+      },
+      {
+        source: "/enlighten/learning-hub/knowledge-base",
+        destination: "/enlighten/learning-hub",
+        permanent: true,
+      },
+      {
+        source: "/enlighten/learning-hub/green-academy",
+        destination: "/enlighten/learning-hub",
+        permanent: true,
+      },
+      {
+        source: "/ecosystem",
+        destination: "/ecosystem/client-partnerships",
+        permanent: true,
+      },
+      {
+        source: "/empower",
+        destination: "/empower/join-us",
+        permanent: true,
+      },
+      {
+        source: "/ecosystem/client-partners/login",
+        destination: "/client-value-engineering",
+        permanent: true,
+      },
+      {
+        source: "/ecosystem/client-partnerships/login",
+        destination: "/client-value-engineering",
+        permanent: true,
+      },
       {
         source: "/elements",
         destination:

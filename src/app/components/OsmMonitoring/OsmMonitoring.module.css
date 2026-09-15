@@ -34,7 +34,7 @@
   text-transform: uppercase;
 }
 .pageTitle span,
-.systemsQuote span,
+.greenWord,
 .whyMatters span {
   color: #23b14d;
 }
@@ -97,17 +97,54 @@
   line-height: 20px;
   letter-spacing: 0.28px;
 }
+.quoteWrapper {
+  position: absolute;
+  top: 340px;
+  left: 773px;
+  width: 575px;
+  height: 149px;
+  pointer-events: none;
+}
+.quoteBracketTR {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 82px;
+  height: 102px;
+  display: block;
+}
+.quoteBracketBL {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 82px;
+  height: 101px;
+  display: block;
+}
 .systemsQuote {
   position: absolute;
-  top: 338px;
-  left: 812px;
-  width: 482px;
+  top: 6px;
+  left: 30px;
   margin: 0;
   font-size: 37px;
   font-style: italic;
   font-weight: 700;
-  line-height: normal;
-  text-align: center;
+  line-height: 45px;
+  text-align: left;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+.quoteLine1 {
+  display: block;
+  padding-left: 80px;
+}
+.quoteLine2 {
+  display: block;
+  padding-left: 40px;
+}
+.quoteLine3 {
+  display: block;
+  padding-left: 0;
 }
 .whyMatters {
   position: absolute;

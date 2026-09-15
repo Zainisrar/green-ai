@@ -167,8 +167,34 @@
 .categories h3:first-child span {
   text-decoration: underline;
 }
+.category {
+  margin-bottom: 14px;
+}
+.categoryTrigger {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #121212;
+  font: 700 18px / 1 var(--font-montserrat), Montserrat, sans-serif;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.categoryTrigger strong {
+  color: #23b14d;
+  font: inherit;
+}
+.categoryTrigger[aria-expanded="true"] span {
+  color: #23b14d;
+  text-decoration: underline;
+}
+.categoryTrigger[aria-expanded="true"] strong {
+  color: #121212;
+}
 .categories ul {
-  margin: 0 0 20px;
+  margin: 9px 0 0;
   padding: 7px 0 0 13px;
   list-style: none;
   border-left: 1px solid #1cb34c;
@@ -176,7 +202,8 @@
 .categories li {
   margin-bottom: 15px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
+  line-height: 6px;
   white-space: nowrap;
 }
 .sidebarCtas {

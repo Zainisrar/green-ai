@@ -1,12 +1,12 @@
-import React from 'react'
-import Team from '@/app/components/LeaderShip/Team'
+import React from "react";
+import Team from "@/app/components/LeaderShip/Team";
 
 const page = () => {
   return (
     <React.Fragment>
-        <Team/>
+      <Team />
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -40,8 +40,12 @@ const OurCurrentCertifications = ({ isOpen, onClose, title, items }: Props) => {
                 <td className="px-4 py-3 font-semibold text-gray-800 sm:px-6 sm:py-4">
                   {item.certification}
                 </td>
-                <td className="px-4 py-3 text-gray-700 sm:px-6 sm:py-4">{item.issuingBody}</td>
-                <td className="px-4 py-3 text-gray-700 sm:px-6 sm:py-4">{item.scope}</td>
+                <td className="px-4 py-3 text-gray-700 sm:px-6 sm:py-4">
+                  {item.issuingBody}
+                </td>
+                <td className="px-4 py-3 text-gray-700 sm:px-6 sm:py-4">
+                  {item.scope}
+                </td>
               </tr>
             ))}
           </tbody>

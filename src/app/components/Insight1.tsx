@@ -96,12 +96,6 @@ const UrbanInsightScreen: React.FC<
     <div className="urban-insight__photo" aria-hidden="true">
       <img loading="lazy" decoding="async" src={bgImg} alt="" />
     </div>
-    <img loading="lazy" decoding="async"
-      className="urban-insight__left-shape"
-      src="/images/insight1/figma/left-shape-b.svg"
-      alt=""
-      aria-hidden="true"
-    />
     <TopNavigation />
     <div className="urban-insight__name">
       <span>{name1}</span>
@@ -136,14 +130,18 @@ const UrbanInsightScreen: React.FC<
       type="button"
       aria-label="Open chat"
     >
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className="insight-chat__panel"
         src="/images/insight1/figma/chat-panel.svg"
         alt=""
         aria-hidden="true"
       />
       <span className="insight-chat__label">Let’s Talk Energy</span>
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className="insight-chat__microphone"
         src="/images/insight1/figma/chat-microphone.svg"
         alt=""
@@ -186,7 +184,12 @@ const MiningInsightScreen = () => (
       </p>
       <div className="mining-insight__facts">
         <article>
-          <img loading="lazy" decoding="async" src={miningAssets.solar} alt="" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src={miningAssets.solar}
+            alt=""
+          />
           <p>
             Total emissions: 4–7% of
             <br />
@@ -194,7 +197,12 @@ const MiningInsightScreen = () => (
           </p>
         </article>
         <article>
-          <img loading="lazy" decoding="async" src={miningAssets.operations} alt="" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src={miningAssets.operations}
+            alt=""
+          />
           <p>
             Direct operations
             <br />
@@ -202,7 +210,12 @@ const MiningInsightScreen = () => (
           </p>
         </article>
         <article>
-          <img loading="lazy" decoding="async" src={miningAssets.methane} alt="" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src={miningAssets.methane}
+            alt=""
+          />
           <p>
             Fugitive methane emissions from
             <br />
@@ -210,7 +223,12 @@ const MiningInsightScreen = () => (
           </p>
         </article>
         <article>
-          <img loading="lazy" decoding="async" src={miningAssets.downstream} alt="" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src={miningAssets.downstream}
+            alt=""
+          />
           <p>
             Downstream emissions (Scope 3):
             <br />
@@ -278,7 +296,9 @@ const Insight1: React.FC<Props> = ({
       <div className="relative w-full h-screen max-h-screen bg-white overflow-hidden flex flex-col justify-between select-none">
         {/* Left Side Background Diagonal Image Overlay */}
         <div className="absolute top-0 left-0 h-full -z-10 pointer-events-none overflow-hidden">
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src={bgImg}
             className="h-screen w-auto object-cover object-left"
             alt="Background banner"
@@ -338,7 +358,9 @@ const Insight1: React.FC<Props> = ({
                     className="flex flex-col items-center text-center group"
                   >
                     <div className="h-14 lg:h-18 2xl:h-20 w-14 lg:w-18 2xl:w-20 flex items-center justify-center mb-2">
-                      <img loading="lazy" decoding="async"
+                      <img
+                        loading="lazy"
+                        decoding="async"
                         src={point.icon}
                         alt={`keypoint icon ${index + 1}`}
                         className="max-h-full max-w-full object-contain filter drop-shadow-sm"

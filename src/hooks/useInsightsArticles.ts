@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 interface ArticleImage {
   alt: string;
@@ -29,18 +29,20 @@ interface ArticleData {
 }
 
 const fetchInsightsArticles = async (): Promise<ArticleData[]> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/enlighten/insights-articles');
-  
+  const response = await fetch(
+    "https://greencms.percepco.co.uk/api/enlighten/insights-articles",
+  );
+
   if (!response.ok) {
-    throw new Error('Failed to fetch insights articles data');
+    throw new Error("Failed to fetch insights articles data");
   }
-  
+
   return response.json();
 };
 
 export const useInsightsArticles = () => {
   return useQuery({
-    queryKey: ['insights-articles'],
+    queryKey: ["insights-articles"],
     queryFn: fetchInsightsArticles,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes

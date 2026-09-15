@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 interface ProjectData {
   id: number;
@@ -21,18 +21,20 @@ interface ProjectData {
 }
 
 const fetchProjects = async (): Promise<ProjectData[]> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/endeavors/projects');
-  
+  const response = await fetch(
+    "https://greencms.percepco.co.uk/api/endeavors/projects",
+  );
+
   if (!response.ok) {
-    throw new Error('Failed to fetch projects data');
+    throw new Error("Failed to fetch projects data");
   }
-  
+
   return response.json();
 };
 
 export const useProjects = () => {
   return useQuery({
-    queryKey: ['projects'],
+    queryKey: ["projects"],
     queryFn: fetchProjects,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes

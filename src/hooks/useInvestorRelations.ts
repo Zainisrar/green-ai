@@ -101,7 +101,7 @@ export const useInvestorRelations = () => {
           "https://greencms.percepco.co.uk/api/engage/investor-relations",
           {
             next: { revalidate: 60 },
-          }
+          },
         );
 
         if (!response.ok) {

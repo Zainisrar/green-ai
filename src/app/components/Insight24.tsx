@@ -42,13 +42,6 @@ const Insight24: React.FC<Props> = ({
       <div className="solar-home-insight__solar" aria-hidden="true">
         <img loading="lazy" decoding="async" src={backroundImg} alt="" />
       </div>
-      <img loading="lazy" decoding="async"
-        className="solar-home-insight__left-shape"
-        src="/images/insight1/figma/left-shape-b.svg"
-        alt=""
-        aria-hidden="true"
-      />
-
       <TopNavigation />
 
       <div className="solar-home-insight__name">
@@ -109,14 +102,18 @@ const Insight24: React.FC<Props> = ({
         type="button"
         aria-label="Open chat"
       >
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           className="insight-chat__panel"
           src="/images/insight1/figma/chat-panel.svg"
           alt=""
           aria-hidden="true"
         />
         <span className="insight-chat__label">Let’s Talk Energy</span>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           className="insight-chat__microphone"
           src="/images/insight1/figma/chat-microphone.svg"
           alt=""

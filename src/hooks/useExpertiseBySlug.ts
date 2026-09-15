@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 interface ExpertiseImage {
   alt: string;
@@ -42,39 +42,41 @@ interface ExpertiseResponse {
   data: ExpertiseDetailData[];
 }
 
-const fetchExpertiseBySlug = async (slug: string): Promise<ExpertiseDetailData | null> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/expertise');
-  
+const fetchExpertiseBySlug = async (
+  slug: string,
+): Promise<ExpertiseDetailData | null> => {
+  const response = await fetch("https://greencms.percepco.co.uk/api/expertise");
+
   if (!response.ok) {
-    throw new Error('Failed to fetch expertise data');
+    throw new Error("Failed to fetch expertise data");
   }
-  
+
   const result: ExpertiseResponse = await response.json();
-  
+
   // Try to match the slug in different ways
-  const expertise = result.data.find(item => {
+  const expertise = result.data.find((item) => {
     // First try exact match
     if (item.slug === slug) return true;
-    
+
     // Try matching with /expertise/ prefix
     if (item.slug === `/expertise/${slug}`) return true;
-    
+
     // Try matching without /expertise/ prefix
-    if (item.slug.replace('/expertise/', '') === slug) return true;
-    
+    if (item.slug.replace("/expertise/", "") === slug) return true;
+
     return false;
   });
-  
+
   if (!expertise) {
-    throw new Error('Expertise not found');
+    throw new Error("Expertise not found");
   }
-  
+
   return expertise;
 };
 
 export const useExpertiseBySlug = (slug: string) => {
   return useQuery({
-    queryKey: ['expertise', slug],
+    queryKey: ["expertise", slug],
     queryFn: () => fetchExpertiseBySlug(slug),
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes

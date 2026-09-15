@@ -125,8 +125,29 @@
   font-weight: 500;
   line-height: 1;
 }
+.year {
+  margin-bottom: 13px;
+}
+.yearTrigger {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #121212;
+  font: 500 18px / 1 var(--font-montserrat), Montserrat, sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+.yearTrigger strong {
+  color: #23b14d;
+  font: inherit;
+}
+.yearTrigger[aria-expanded="true"] {
+  font-weight: 700;
+}
 .yearList ul {
-  margin: 0 0 21px;
+  margin: 9px 0 0;
   padding: 7px 0 0 13px;
   list-style: none;
   border-left: 1px solid #1cb34c;

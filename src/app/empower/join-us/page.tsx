@@ -1,12 +1,12 @@
-import React from 'react'
-import JoinUs from '@/app/components/JoinUs/JoinUs'
+import React from "react";
+import JoinUs from "@/app/components/JoinUs/JoinUs";
 
 const page = () => {
   return (
     <React.Fragment>
-        <JoinUs/>
+      <JoinUs />
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default page
+export default page;

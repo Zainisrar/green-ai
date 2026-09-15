@@ -14,7 +14,8 @@
   width: 967px;
   height: 1297px;
   max-width: none;
-  opacity: 0.24;
+  opacity: 1;
+  pointer-events: none;
 }
 .verticalTitle {
   position: absolute;
@@ -23,11 +24,27 @@
   width: 49px;
   height: 837px;
   max-width: none;
+  pointer-events: none;
 }
-.pageTitle {
+.pageTitleButton {
   position: absolute;
   top: 101px;
   left: 285px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 2;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+.pageTitleButton:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+.pageTitle {
+  display: block;
   width: 1030px;
   height: 37px;
   max-width: none;
@@ -195,6 +212,218 @@
 }
 .chatTrigger {
   z-index: 3;
+}
+
+/* State 2 (7077:6671) styles */
+.backgroundAlt {
+  position: absolute;
+  top: -132px;
+  left: -15px;
+  width: 896px;
+  height: 1297px;
+  max-width: none;
+  pointer-events: none;
+}
+
+.pageTitleButtonAlt {
+  position: absolute;
+  top: 271px;
+  left: 212px;
+  width: 502px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 2;
+  text-align: left;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 50px;
+  font-weight: 800;
+  line-height: 61px;
+  text-transform: uppercase;
+  color: #000;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.pageTitleButtonAlt:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.pageTitleButtonAlt span {
+  color: #23b14d;
+}
+
+.tomorrowPanelAlt {
+  position: absolute;
+  top: 685px;
+  left: 212px;
+  width: 506px;
+  height: 125px;
+  max-width: none;
+  pointer-events: none;
+}
+
+.tomorrowAlt {
+  position: absolute;
+  top: 689px;
+  left: 257px;
+  width: 452px;
+  font-size: 40px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 49px;
+  color: #23b14d;
+  z-index: 2;
+}
+
+.tomorrowAlt strong {
+  display: block;
+  font-weight: 600;
+  color: #202020;
+}
+
+.altRightSection {
+  position: absolute;
+  inset: 0;
+}
+
+.missionHeader {
+  position: absolute;
+  top: 189px;
+  left: 797px;
+  width: 1102px;
+}
+
+.missionTitle {
+  margin: 0 0 10px 0;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 36px;
+  letter-spacing: 0;
+  color: #000;
+}
+
+.missionSubtitle {
+  margin: 0;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 24px;
+  color: #000;
+}
+
+.missionSubtitle span {
+  font-weight: 900;
+  color: #23b14d;
+  font-style: italic;
+}
+
+.altPillarEnv {
+  position: absolute;
+  top: 380px;
+  left: 781px;
+  width: 530px;
+}
+
+.altPillarSocial {
+  position: absolute;
+  top: 380px;
+  left: 1354px;
+  width: 550px;
+}
+
+.altPillarGov {
+  position: absolute;
+  top: 669px;
+  left: 777px;
+  width: 630px;
+}
+
+.altPillarItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.altPillarIcon {
+  flex-shrink: 0;
+  margin-top: 4px;
+  object-fit: contain;
+}
+
+.altPillarBody {
+  flex: 1;
+}
+
+.altPillarTitle {
+  margin: 0 0 6px 0;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 36px;
+  color: #000;
+}
+
+.altPillarIntro {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 20px;
+  color: #202020;
+}
+
+.altPillarList {
+  margin: 0;
+  padding-left: 18px;
+  list-style-type: disc;
+}
+
+.altPillarList li {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 28px;
+  color: #202020;
+}
+
+.altQuote {
+  position: absolute;
+  top: 675px;
+  left: 1468px;
+  width: 386px;
+  margin: 0;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 28px;
+  color: #23b14d;
+}
+
+.altQuoteMark {
+  color: #000;
+  font-size: 50px;
+  line-height: 1;
+  font-style: normal;
+  vertical-align: top;
+  margin-right: 4px;
+}
+
+.altQuoteMarkEnd {
+  color: #000;
+  font-size: 50px;
+  line-height: 1;
+  font-style: normal;
+  vertical-align: bottom;
+  margin-left: 4px;
+}
+
+.stateTransitionWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 .mobilePage {
   min-height: 100svh;

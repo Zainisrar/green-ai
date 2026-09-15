@@ -1,12 +1,11 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
-import EngineeringFormModal, {
-  formFieldClass,
-  formGridClass,
-} from "@/app/components/shared/EngineeringFormModal";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
+import { ProductEnquiryFrame } from "@/app/components/Product/Modals/ProductEnquiry";
+import modalStyles from "@/app/components/SmartGrid/Modals/SmartGridModals.module.css";
 import PhoneInput from "@/app/components/shared/PhoneInput";
+import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
 
 interface Props {
   isOpen: boolean;
@@ -37,7 +36,10 @@ const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 
 const SubmitEOI = ({ isOpen, onClose }: Props) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const [phoneCountry, setPhoneCountry] = useState({ dial_code: "+675", country_code: "pg" });
+  const [phoneCountry, setPhoneCountry] = useState({
+    dial_code: "+675",
+    country_code: "pg",
+  });
   const [agreed, setAgreed] = useState(false);
   const [fileName, setFileName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +57,9 @@ const SubmitEOI = ({ isOpen, onClose }: Props) => {
   if (!isOpen) return null;
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -92,7 +96,9 @@ const SubmitEOI = ({ isOpen, onClose }: Props) => {
     setSuccessMessage("");
 
     if (!agreed) {
-      setErrorMessage("Please agree that GREEN may contact you about this request.");
+      setErrorMessage(
+        "Please agree that GREEN may contact you about this request.",
+      );
       return;
     }
 
@@ -122,7 +128,8 @@ const SubmitEOI = ({ isOpen, onClose }: Props) => {
 
       if (data.Code === "001") {
         setSuccessMessage(
-          data.Message || "Your expression of interest has been submitted successfully!",
+          data.Message ||
+            "Your expression of interest has been submitted successfully!",
         );
         resetForm();
         setTimeout(() => {
@@ -130,11 +137,15 @@ const SubmitEOI = ({ isOpen, onClose }: Props) => {
           setSuccessMessage("");
         }, 2000);
       } else {
-        setErrorMessage(data.Message || "Failed to submit EOI. Please try again.");
+        setErrorMessage(
+          data.Message || "Failed to submit EOI. Please try again.",
+        );
       }
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "An error occurred while submitting the form.",
+        error instanceof Error
+          ? error.message
+          : "An error occurred while submitting the form.",
       );
     } finally {
       setIsLoading(false);
@@ -142,175 +153,179 @@ const SubmitEOI = ({ isOpen, onClose }: Props) => {
   };
 
   return (
-    <EngineeringFormModal
-      isOpen={isOpen}
+    <ProductEnquiryFrame
+      labelledBy="submit-eoi-title"
       onClose={onClose}
-      title={
-        <>
-          SUBMIT AN <span className="text-green-600">EXPRESSION OF INTEREST</span>
-        </>
-      }
+      closeLabel="Close expression of interest form"
     >
-      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-        <div className={formGridClass}>
-          <input
-            type="text"
-            name="fullName"
-            placeholder="FULL NAME"
-            value={formData.fullName}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-          <input
-            type="text"
-            name="organization"
-            placeholder="ORGANIZATION"
-            value={formData.organization}
-            onChange={handleInputChange}
-            className={formFieldClass}
-          />
-        </div>
+      <div className={modalStyles.content}>
+        <header className={modalStyles.dialogHeader}>
+          <h2 id="submit-eoi-title">
+            SUBMIT AN <strong>EXPRESSION OF INTEREST</strong>
+          </h2>
+        </header>
 
-        <div className={formGridClass}>
-          <input
-            type="email"
-            name="email"
-            placeholder="EMAIL ID"
-            value={formData.email}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-          <PhoneInput
-            phone={formData.phone}
-            onPhoneChange={handleInputChange}
-            dialCode={phoneCountry.dial_code}
-            countryCode={phoneCountry.country_code}
-            onCountryChange={(dial_code, country_code) => setPhoneCountry({ dial_code, country_code })}
-          />
-        </div>
+        <form className={modalStyles.form} onSubmit={handleSubmit}>
+          <div className={`${modalStyles.row} ${modalStyles.row1}`}>
+            <label className={modalStyles.fieldShape}>
+              <input
+                type="text"
+                name="fullName"
+                placeholder="FULL NAME"
+                value={formData.fullName}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+            <label className={modalStyles.fieldShape}>
+              <input
+                type="text"
+                name="organization"
+                placeholder="ORGANIZATION"
+                value={formData.organization}
+                onChange={handleInputChange}
+              />
+            </label>
+          </div>
 
-        <div className={formGridClass}>
-          <select
-            name="country"
-            value={formData.country}
-            onChange={handleInputChange}
-            className={`${formFieldClass} cursor-pointer ${
-              formData.country ? "text-gray-700" : "text-gray-500"
-            }`}
-            required
-          >
-            <option value="">COUNTRY / REGION</option>
-            <option value="papua-new-guinea">Papua New Guinea</option>
-            <option value="pacific-islands">Pacific Islands</option>
-            <option value="australia">Australia</option>
-            <option value="asia">Asia</option>
-            <option value="other">Other</option>
-          </select>
-          <select
-            name="eoiType"
-            value={formData.eoiType}
-            onChange={handleInputChange}
-            className={`${formFieldClass} cursor-pointer ${
-              formData.eoiType ? "text-gray-700" : "text-gray-500"
-            }`}
-            required
-          >
-            <option value="">EOI TYPE</option>
-            <option value="equity-investment">Equity Investment</option>
-            <option value="debt-bonds">Debt / Green Bonds</option>
-            <option value="grant-concessional">Grant / Concessional Capital</option>
-            <option value="strategic-partnership">Strategic Partnership</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
+          <div className={`${modalStyles.row} ${modalStyles.row2}`}>
+            <label className={modalStyles.fieldShape}>
+              <input
+                type="email"
+                name="email"
+                placeholder="EMAIL ID"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+            <div
+              className={`${modalStyles.fieldShape} ${modalStyles.phoneField}`}
+            >
+              <PhoneInput
+                phone={formData.phone}
+                onPhoneChange={handleInputChange}
+                dialCode={phoneCountry.dial_code}
+                countryCode={phoneCountry.country_code}
+                onCountryChange={(dial_code, country_code) =>
+                  setPhoneCountry({ dial_code, country_code })
+                }
+              />
+            </div>
+          </div>
 
-        <div className={formGridClass}>
-          <input
-            type="text"
-            name="message"
-            placeholder="BRIEF MESSAGE"
-            value={formData.message}
-            onChange={handleInputChange}
-            className={formFieldClass}
-          />
-          <div className="min-w-0">
+          <div className={`${modalStyles.row} ${modalStyles.row3}`}>
+            <div className={modalStyles.fieldShape}>
+              <select
+                name="country"
+                value={formData.country}
+                onChange={handleInputChange}
+                className={formData.country ? modalStyles.hasValue : ""}
+                required
+              >
+                <option value="">COUNTRY / REGION</option>
+                <option value="papua-new-guinea">Papua New Guinea</option>
+                <option value="pacific-islands">Pacific Islands</option>
+                <option value="australia">Australia</option>
+                <option value="asia">Asia</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div className={modalStyles.fieldShape}>
+              <select
+                name="eoiType"
+                value={formData.eoiType}
+                onChange={handleInputChange}
+                className={formData.eoiType ? modalStyles.hasValue : ""}
+                required
+              >
+                <option value="">EOI TYPE</option>
+                <option value="equity-investment">Equity Investment</option>
+                <option value="debt-bonds">Debt / Green Bonds</option>
+                <option value="grant-concessional">
+                  Grant / Concessional Capital
+                </option>
+                <option value="strategic-partnership">
+                  Strategic Partnership
+                </option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div className={`${modalStyles.row} ${modalStyles.row4}`}>
+            <label className={modalStyles.fieldShape}>
+              <input
+                type="text"
+                name="message"
+                placeholder="BRIEF MESSAGE"
+                value={formData.message}
+                onChange={handleInputChange}
+              />
+            </label>
+            <div className={modalStyles.fieldShape}>
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="flex h-full w-full items-center justify-between px-[34px] text-left text-sm text-[rgb(48_48_48_/_80%)]"
+              >
+                <span className="truncate">
+                  {fileName || "UPLOAD SUPPORTING DOCUMENT"}
+                </span>
+                <span aria-hidden="true" className="ml-3 text-xl">
+                  ⇧
+                </span>
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".pdf,.doc,.docx"
+                onChange={handleFileChange}
+                className="hidden"
+              />
+            </div>
+          </div>
+          <p className="-mt-4 ml-2 text-xs text-[#23B14D]">
+            (Formats: PDF/DOC, Size: Below 2Mb)
+          </p>
+
+          <div className={`${modalStyles.agreement} ${modalStyles.row5}`}>
+            <input
+              type="checkbox"
+              id="submiteoi-agree"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+            />
+            <label htmlFor="submiteoi-agree">
+              I agree that GREEN may contact me about this request.
+            </label>
+          </div>
+
+          {errorMessage && <p className={modalStyles.error}>{errorMessage}</p>}
+          {successMessage && (
+            <p className={modalStyles.success}>{successMessage}</p>
+          )}
+
+          <div className={`${modalStyles.row} ${modalStyles.row6}`}>
             <button
               type="button"
-              onClick={() => fileInputRef.current?.click()}
-              className={`${formFieldClass} flex items-center justify-between text-left`}
+              onClick={resetForm}
+              disabled={isLoading}
+              className={modalStyles.btnReset}
             >
-              <span className="truncate text-gray-500">
-                {fileName || "UPLOAD SUPPORTING DOCUMENT"}
-              </span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="ml-2 h-5 w-5 shrink-0 text-gray-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.8}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 16V4m0 0L8 8m4-4l4 4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
-                />
-              </svg>
+              <span>Reset</span>
             </button>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".pdf,.doc,.docx"
-              onChange={handleFileChange}
-              className="hidden"
-            />
-            <p className="mt-1 text-xs text-[#23B14D]">
-              (Formats: PDF/DOC, Size: Below 2Mb)
-            </p>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={modalStyles.btnSubmit}
+            >
+              <span>{isLoading ? "Submitting..." : "Submit EOI"}</span>
+            </button>
           </div>
-        </div>
-
-        <div className="flex items-start gap-3">
-          <input
-            type="checkbox"
-            id="submiteoi-agree"
-            checked={agreed}
-            onChange={(e) => setAgreed(e.target.checked)}
-            className="mt-1 h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
-          />
-          <label htmlFor="submiteoi-agree" className="text-sm text-gray-700 sm:text-base">
-            I agree that GREEN may contact me about this request.
-          </label>
-        </div>
-
-        {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
-        {successMessage && <p className="text-sm text-green-600">{successMessage}</p>}
-
-        <div className="flex flex-col gap-4 sm:flex-row sm:justify-end sm:gap-6">
-          <button
-            type="button"
-            onClick={resetForm}
-            disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
-          >
-            <span className="block text-sm font-bold text-gray-800 sm:text-base">
-              Reset
-            </span>
-          </button>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
-          >
-            <span className="block text-sm font-bold text-gray-900 sm:text-base">
-              {isLoading ? "Submitting..." : "Submit EOI"}
-            </span>
-          </button>
-        </div>
-      </form>
-    </EngineeringFormModal>
+        </form>
+      </div>
+    </ProductEnquiryFrame>
   );
 };
 

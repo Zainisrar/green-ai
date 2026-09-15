@@ -11,12 +11,12 @@
 .rightCollageImg {
   position: absolute;
   top: 0;
-  left: 1000px;
-  width: 920px;
+  right: 0;
+  width: 642px;
   height: 970px;
   object-fit: cover;
-  object-position: right top;
-  opacity: 0.5;
+  object-position: left top;
+  opacity: 0.1;
   z-index: 0;
   pointer-events: none;
 }
@@ -83,9 +83,9 @@
 
 .rowImage {
   display: block;
+  position: relative;
   width: 260px;
   height: 108px;
-  overflow: hidden;
   border: 0;
   background: none;
   padding: 0;
@@ -94,26 +94,50 @@
 
 .rowImage img {
   display: block;
-  width: 262px;
-  height: 143px;
-  object-fit: cover;
-  clip-path: polygon(19px 0, 100% 0, calc(100% - 19px) 100%, 0 100%);
+  width: 260px;
+  height: 108px;
+  object-fit: contain;
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
 }
 
-.rowBracket {
+.rowImage:hover img {
+  transform: scale(1.03);
+  filter: brightness(1.05);
+}
+
+.quoteBracketL {
   position: absolute;
+  z-index: 2;
+  top: 421px;
+  left: 1413px;
   width: 79px;
   height: 98px;
-  background: url("/images/rfp/quote_bracket_l.png") no-repeat center / contain;
-  z-index: -1;
+  pointer-events: none;
+}
+.quoteBracketR {
+  position: absolute;
+  z-index: 2;
+  top: 418px;
+  left: 1764px;
+  width: 79.5px;
+  height: 99px;
   pointer-events: none;
 }
 
-.quoteBracketL { position: absolute; z-index: 2; top: 421px; left: 1413px; width: 79px; height: 98px; pointer-events: none; }
-.quoteBracketR { position: absolute; z-index: 2; top: 418px; left: 1764px; width: 79.5px; height: 99px; pointer-events: none; }
-
 .rowText {
   width: 460px;
+}
+
+.rowTitleBtn {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-align: left;
+  display: block;
 }
 
 .rowTitle {
@@ -122,6 +146,12 @@
   font-weight: 700;
   line-height: 1.25;
   color: #000;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.rowTitle:hover {
+  color: #23b14d;
 }
 
 .rowSubtitle {
@@ -141,15 +171,6 @@
   font-size: 13px;
   font-weight: 600;
   padding: 0 12px 0 16px;
-}
-
-.rowDivider {
-  position: absolute;
-  bottom: 0;
-  left: 262px;
-  right: 262px;
-  border: 0;
-  border-bottom: 1px solid #c8d9cc;
 }
 
 /* Right quote card */

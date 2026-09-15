@@ -1,11 +1,17 @@
-import { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../store/store';
-import { openNavigation, closeNavigation, toggleNavigation } from '../store/navigationSlice';
+import { useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../store/store";
+import {
+  openNavigation,
+  closeNavigation,
+  toggleNavigation,
+} from "../store/navigationSlice";
 
 export const useNavigationState = () => {
   const dispatch = useDispatch();
-  const isNavigationOpen = useSelector((state: RootState) => state.navigation.isNavigationOpen);
+  const isNavigationOpen = useSelector(
+    (state: RootState) => state.navigation.isNavigationOpen,
+  );
 
   const handleOpenNavigation = useCallback(() => {
     dispatch(openNavigation());

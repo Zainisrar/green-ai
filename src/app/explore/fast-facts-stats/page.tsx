@@ -1,12 +1,12 @@
-import React from 'react'
-import FastFactStats from '@/app/components/FastFactStats/FastFactStats'
+import React from "react";
+import FastFactStats from "@/app/components/FastFactStats/FastFactStats";
 
 const page = () => {
   return (
     <React.Fragment>
-        <FastFactStats/>
+      <FastFactStats />
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default page
+export default page;

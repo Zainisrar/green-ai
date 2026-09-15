@@ -7,6 +7,7 @@ export default function KeySupplyCategoriesPage() {
       desktop={<KeySupplyCategories canvas />}
       mobile={<KeySupplyCategories />}
       nodeId="7077:27873"
+      desktopBreakpoint={1200}
       fitCanvasHeight
     />
   );

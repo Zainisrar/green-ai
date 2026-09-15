@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 interface CTA {
   href: string;
@@ -73,18 +73,20 @@ interface SupplyPartnersData {
 }
 
 const fetchSupplyPartners = async (): Promise<SupplyPartnersData> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/ecosystem/supply-partners');
-  
+  const response = await fetch(
+    "https://greencms.percepco.co.uk/api/ecosystem/supply-partners",
+  );
+
   if (!response.ok) {
-    throw new Error('Failed to fetch supply partners data');
+    throw new Error("Failed to fetch supply partners data");
   }
-  
+
   return response.json();
 };
 
 export const useSupplyPartners = () => {
   return useQuery<SupplyPartnersData>({
-    queryKey: ['supplyPartners'],
+    queryKey: ["supplyPartners"],
     queryFn: fetchSupplyPartners,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)

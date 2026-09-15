@@ -1,5 +1,8 @@
 "use client";
-import React, { useEffect } from "react";
+
+import type React from "react";
+import { useEffect, useRef } from "react";
+import styles from "./SupplierDialogs.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -9,162 +12,145 @@ interface Props {
   imgSrc?: string;
   imgAlt?: string;
 }
-const WhyGreen = ({
+
+const DEFAULT_WHY_ITEMS = [
+  "Supply certified, field-proven products",
+  "Demonstrate transparency, traceability, and reliability",
+  "Share our commitment to climate-resilient infrastructure",
+  "Can deliver to or within the Pacific region",
+  "Engage in continuous improvement & collaboration",
+];
+
+const WhyGreen: React.FC<Props> = ({
   isOpen,
   onClose,
   title = "Why GREEN?",
   keys,
-  imgSrc = "/images/become-supplier/why-green-modal.png",
-  imgAlt = "Why GREEN",
-}: Props) => {
-  if (!isOpen) return null;
-  const [isMobile, setIsMobile] = React.useState(false);
+  imgSrc = "/images/become-supplier/why-green-card-photo.png",
+  imgAlt = "Why GREEN Infrastructure",
+}) => {
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768); // Example breakpoint for mobile
+    if (!isOpen) return;
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeBtnRef.current?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
     };
-    handleResize(); // Check on mount
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  const items = keys && keys.length > 0 ? keys : DEFAULT_WHY_ITEMS;
+
+  const renderTitle = (text: string) => {
+    if (text.includes("GREEN")) {
+      const parts = text.split("GREEN");
+      return (
+        <>
+          {parts[0]}
+          <span className={styles.greenHighlight}>GREEN</span>
+          {parts.slice(1).join("GREEN")}
+        </>
+      );
+    }
+    return text;
+  };
 
   return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed inset-0 bg-black/20 z-50 flex items-center justify-center">
-        {/* Modal Container */}
-        <div className="relative w-full max-w-6xl mx-4">
-          {/* Skewed Modal Background */}
-          {isMobile ? (
-            <div className="bg-gray-100 transform  py-14 border-2 border-[#4CAF50] px-4 relative shadow-2xl">
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  onClick={onClose}
-                  className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 "
-                >
-                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
-              {/* Modal Content */}
-              <div className="lg:max-w-5xl lg:mx-auto">
-                {/* Title Section */}
-                <div className="mb-8">
-                  <h2 className="text-3xl font-black text-gray-800 mb-4">
-                    {title}
-                  </h2>
-                  <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
-                </div>
-
-                {/* Content Layout - Text and Image */}
-                <div className="flex flex-col lg:flex-row items-start gap-8">
-                  {/* Left Column - Benefits List */}
-                  <div className="flex-1 space-y-5">
-                    {(keys && keys.length
-                      ? keys
-                      : [
-                          "Supply certified, field-proven products",
-                          "Demonstrate transparency, traceability, and reliability",
-                          "Share our commitment to climate-resilient infrastructure",
-                          "Can deliver to or within the Pacific region",
-                          "Engage in continuous improvement & collaboration",
-                        ]
-                    ).map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-3">
-                        <div className="flex-shrink-0 mt-1">
-                          <img loading="lazy" decoding="async"
-                            src="/images/grid-intel/lighting.png"
-                            className="w-14 -mt-4"
-                            alt="lighting"
-                          />
-                        </div>
-                        <span className="text-gray-700 text-sm leading-relaxed">
-                          {item}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Right Column - Image */}
-                  <div className="lg:flex-shrink-0  lg:w-[450px] mt-10">
-                    <img loading="lazy" decoding="async" src={imgSrc} alt={imgAlt} className="w-full h-full" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div
-              className="bg-gray-100 transform  py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-              style={{
-                clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
-                transform: "skewX(-12deg)",
-              }}
-            >
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  onClick={onClose}
-                  className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
-                  style={{ transform: "skewX(12deg)" }}
-                >
-                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
-              {/* Modal Content */}
-              <div
-                style={{
-                  transform: "skewX(6deg)",
-                }}
-                className="transform  max-w-5xl mx-auto"
+    <div className={styles.overlay}>
+      <button
+        type="button"
+        className="absolute inset-0 cursor-default"
+        onClick={onClose}
+        aria-label="Close dialog backdrop"
+      />
+      <div
+        className={styles.modalWindow}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="why-green-title"
+      >
+        <div className={styles.modalPanel}>
+          <div className={styles.modalContent}>
+            <div className={styles.modalHeader}>
+              <h2 id="why-green-title" className={styles.modalTitle}>
+                {renderTitle(title)}
+              </h2>
+              <button
+                ref={closeBtnRef}
+                type="button"
+                className={styles.closeBtn}
+                onClick={onClose}
+                aria-label="Close dialog"
               >
-                {/* Title Section */}
-                <div className="mb-8">
-                  <h2 className="text-3xl font-black text-gray-800 mb-4">
-                    {title}
-                  </h2>
-                  <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
-                </div>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M3 3L17 17M17 3L3 17"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
 
-                {/* Content Layout - Text and Image */}
-                <div className="flex flex-col lg:flex-row items-start gap-8">
-                  {/* Left Column - Benefits List */}
-                  <div className="flex-1 space-y-5">
-                    {(keys && keys.length
-                      ? keys
-                      : [
-                          "Supply certified, field-proven products",
-                          "Demonstrate transparency, traceability, and reliability",
-                          "Share our commitment to climate-resilient infrastructure",
-                          "Can deliver to or within the Pacific region",
-                          "Engage in continuous improvement & collaboration",
-                        ]
-                    ).map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-3">
-                        <div className="flex-shrink-0 mt-1">
-                          <img loading="lazy" decoding="async"
-                            src="/images/grid-intel/lighting.png"
-                            className="w-14 -mt-4"
-                            alt="lighting"
-                          />
-                        </div>
-                        <span className="text-gray-700 text-sm leading-relaxed">
-                          {item}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+            <div className={styles.divider} />
 
-                  {/* Right Column - Image */}
-                  <div className="flex-shrink-0 lg:w-[450px] mt-10">
-                    <img loading="lazy" decoding="async" src={imgSrc} alt={imgAlt} className="" />
+            <div className={styles.whyGreenLayout}>
+              <div className={styles.benefitsList}>
+                {items.map((item) => (
+                  <div key={item} className={styles.item}>
+                    <img
+                      src="/images/become-supplier/bolt.png"
+                      alt=""
+                      className={styles.boltIcon}
+                      width={36}
+                      height={36}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <p className={styles.itemText}>{item}</p>
                   </div>
-                </div>
+                ))}
+              </div>
+
+              <div className={styles.photoContainer}>
+                <img
+                  src={imgSrc}
+                  alt={imgAlt}
+                  className={styles.cardPhoto}
+                  width={710}
+                  height={276}
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             </div>
-          )}
+          </div>
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

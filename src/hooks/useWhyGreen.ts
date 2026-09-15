@@ -8,7 +8,8 @@ export const useWhyGreen = () => {
     queryFn: api.getWhyGreen,
   });
 
-  const whyGreenData = data?.success && data.data.length > 0 ? data.data[0] : null;
+  const whyGreenData =
+    data?.success && data.data.length > 0 ? data.data[0] : null;
 
   return {
     whyGreenData,

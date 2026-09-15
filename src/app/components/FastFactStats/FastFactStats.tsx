@@ -4,10 +4,10 @@ import Link from "next/link";
 import { useState } from "react";
 import { useFastFactStats } from "../../../hooks/useFastFactStats";
 import D6Chatbot from "../D6Chatbot";
+import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import styles from "./FastFactStats.module.css";
-import ConnectWithGreen from "./Modals/ConnectWithGreen";
 
 const FALLBACK_CARDS = [
   {
@@ -132,7 +132,9 @@ export default function FastFactStats() {
 
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:6529">
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.rightImage}
         src="/images/facts/lgImage.png"
         alt=""
@@ -141,7 +143,9 @@ export default function FastFactStats() {
       <h1 className={styles.pageTitle} data-node-id="7077:6542">
         Fast <strong>Facts</strong> <span>&amp; Stats</span>
       </h1>
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.watermark}
         src="/images/facts/fast-facts-stats.png"
         alt=""
@@ -172,7 +176,12 @@ export default function FastFactStats() {
       <section className={styles.impactCards} aria-label="Impact summary">
         {cards.map((card, index) => (
           <article key={card.title} data-node-id={`7077:${6530 + index}`}>
-            <img loading="lazy" decoding="async" src="/images/facts/figma-impact-card.svg" alt="" />
+            <img
+              loading="lazy"
+              decoding="async"
+              src="/images/facts/figma-impact-card.svg"
+              alt=""
+            />
             <div>
               <strong>{card.title}</strong>
               {index === 3 ? <small>tones annually</small> : null}
@@ -183,7 +192,12 @@ export default function FastFactStats() {
         ))}
       </section>
       <section className={styles.quoteBox} data-node-id="7077:6554">
-        <img loading="lazy" decoding="async" src="/images/facts/figma-real-impact.svg" alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/facts/figma-real-impact.svg"
+          alt=""
+        />
         <h2>
           {impactWordStart >= 0
             ? quoteHeadline.slice(0, impactWordStart)
@@ -232,7 +246,12 @@ export default function FastFactStats() {
           onClick={() => setIsConnectOpen(true)}
           data-node-id="7077:6563"
         >
-          <img loading="lazy" decoding="async" src="/images/facts/connectwithgreen.png" alt="" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/facts/connectwithgreen.png"
+            alt=""
+          />
           <span>
             {impactSummarySection?.cta[0]?.text || "Connect with GREEN"}
           </span>
@@ -242,7 +261,12 @@ export default function FastFactStats() {
           href={impactSummarySection?.cta[1]?.link || "#"}
           data-node-id="7077:6569"
         >
-          <img loading="lazy" decoding="async" src="/images/facts/downloadimpactsummary.png" alt="" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/facts/downloadimpactsummary.png"
+            alt=""
+          />
           <span>
             {impactSummarySection?.cta[1]?.text || "Download Impact Summary"}
           </span>
@@ -266,7 +290,9 @@ export default function FastFactStats() {
   const mobile = (
     <main className={styles.mobilePage} data-node-id="7077:6529-mobile">
       <SiteHeader panel="logoOnly" />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.mobileImage}
         src="/images/facts/fast-facts-stats-mbImg.png"
         alt=""
@@ -297,6 +323,13 @@ export default function FastFactStats() {
             </article>
           ))}
         </div>
+        <button
+          type="button"
+          className={styles.mobileConnect}
+          onClick={() => setIsConnectOpen(true)}
+        >
+          {impactSummarySection?.cta[0]?.text || "Connect with GREEN"}
+        </button>
       </div>
       <D6Chatbot />
     </main>
@@ -305,9 +338,22 @@ export default function FastFactStats() {
   return (
     <>
       <FigmaPageCanvas desktop={desktop} mobile={mobile} nodeId="7077:6529" />
-      <ConnectWithGreen
+      <ProductEnquiry
+        productName="Fast Facts & Stats"
         isOpen={isConnectOpen}
         onClose={() => setIsConnectOpen(false)}
+        titlePrefix="CONNECT WITH"
+        titleAccent="GREEN"
+        interestLabel="HOW CAN WE HELP?"
+        interestOptions={[
+          "Fast Facts & Stats",
+          "Project information",
+          "Partnership opportunities",
+          "Media enquiry",
+          "Other",
+        ]}
+        defaultInterest="Fast Facts & Stats"
+        submitButtonText="Submit Message"
       />
     </>
   );

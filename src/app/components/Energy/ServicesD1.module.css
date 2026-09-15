@@ -6,40 +6,67 @@
   background: #fff;
   font-family: var(--font-montserrat), "Montserrat", sans-serif;
 }
+
+.desktopStage {
+  position: relative;
+  width: 100vw;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 970px;
+  overflow: hidden;
+  transform-origin: top left;
+  background: #fff;
+}
+
 .background {
   position: absolute;
   z-index: 0;
   inset: 0;
+  width: 1920px;
+  height: 970px;
   background: url("/images/service/bg.svg") center top / cover no-repeat;
   pointer-events: none;
 }
+
 .phaseBackground {
   position: absolute;
   z-index: 2;
   top: 0;
   bottom: 0;
   left: 0;
-  width: 67.5%;
+  width: 1296px;
+  height: 970px;
   background-repeat: no-repeat;
   background-size: cover;
   clip-path: polygon(0 0, 100% 0, 59% 100%, 0 100%);
   pointer-events: none;
-  transition:
-    background-image 180ms ease-out,
-    background-position 180ms ease-out;
+  /* `background-image` is a discrete property. Transitioning it lets some
+     browsers retain the previous phase bitmap while the next asset decodes,
+     which made Procurement flash before Engineering. Swap the image
+     immediately; only its position may animate safely. */
+  transition: background-position 180ms ease-out;
 }
+
 .phaseBackgroundBase {
   position: absolute;
   z-index: 1;
   top: 0;
   bottom: 0;
   left: 0;
-  width: 67.5%;
+  width: 1296px;
+  height: 970px;
   background: rgb(255 255 255 / 92%);
   clip-path: polygon(0 0, 100% 0, 59% 100%, 0 100%);
   pointer-events: none;
 }
-.header,
+
 .processFlow,
 .detail,
 .heading,
@@ -50,219 +77,187 @@
   position: absolute;
   z-index: 2;
 }
-.header {
-  inset: 0 0 auto;
-  height: 5.469vw;
-}
-.logo {
-  position: absolute;
-  top: 0.977vw;
-  left: 0.586vw;
-  display: block;
-  width: 13.037vw;
-}
-.logo img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.navigation {
-  position: absolute;
-  top: 1.709vw;
-  right: 1.025vw;
-  display: flex;
-  align-items: center;
-  gap: 2.1vw;
-  color: #292929;
-  font-size: 0.977vw;
-  font-weight: 500;
-  line-height: 1;
-  text-transform: uppercase;
-}
-.navigation a {
-  color: inherit;
-  text-decoration: none;
-}
-.navigation a:hover,
-.navigation a:focus-visible {
-  color: #23b14d;
-}
-.navigation .activeNavigationItem {
-  color: #23b14d;
-}
-.navigation button {
-  display: grid;
-  width: 2.051vw;
-  height: 2.637vw;
-  margin-left: 0.537vw;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  place-items: center;
-  transform: translateY(-0.977vw);
-}
-.navigation button img {
-  width: 2.051vw;
-  height: 2.637vw;
-}
+
 .verticalTitle {
-  top: 22.9vw;
-  left: 2.686vw;
-  width: 3.564vw;
+  top: 440px;
+  left: 52px;
+  width: 68px;
   height: auto;
 }
+
 .processFlow {
-  top: 16.65vw;
-  left: 8.2%;
+  top: 320px;
+  left: 157px;
   display: flex;
   align-items: center;
 }
+
 .flowItem {
   display: flex;
   align-items: center;
 }
+
 .flowCard {
   box-sizing: border-box;
-  width: 9.619vw;
-  height: 6.348vw;
-  padding: 0.684vw 0.488vw 0.488vw 1.221vw;
-  border: max(3px, 0.244vw) solid #d6ec4d;
+  width: 185px;
+  height: 122px;
+  padding: 13px 9px 9px 23px;
+  border: 4px solid #d6ec4d;
   background: rgb(255 255 255 / 88%);
-  box-shadow: 0 0.586vw 1.074vw rgb(0 0 0 / 14%);
+  box-shadow: 0 11px 21px rgb(0 0 0 / 14%);
   transform: skewX(-13deg);
 }
+
 .flowCardContent {
   transform: skewX(13deg);
 }
+
 .flowCard h2 {
-  margin: 0 0 0.635vw;
+  margin: 0 0 12px;
   color: #23b14d;
-  font-size: 0.635vw;
+  font-size: 12px;
   font-weight: 800;
   line-height: 1;
   text-transform: uppercase;
 }
+
 .flowCard ul {
   margin: 0;
   padding: 0;
   color: #1f1f1f;
-  font-size: 0.586vw;
+  font-size: 11px;
   font-weight: 700;
   line-height: 1.12;
   list-style: none;
 }
+
 .flowArrow {
-  width: 2.295vw;
+  width: 44px;
   height: auto;
-  margin: 0 -0.049vw;
+  margin: 0 -1px;
 }
+
 .detail {
-  top: 8.85vw;
-  right: 4.6%;
-  width: 30.6%;
+  top: 170px;
+  right: 88px;
+  width: 588px;
 }
+
 .detail h1 {
-  margin: 0 0 1.367vw;
+  margin: 0 0 26px;
   color: #000;
-  font-size: 3.564vw;
+  font-size: 68px;
   font-weight: 700;
   letter-spacing: -0.055em;
   line-height: 0.96;
 }
+
 .detail p {
   margin: 0;
-  font-size: 0.83vw;
+  font-size: 16px;
   font-weight: 500;
   line-height: 1.67;
 }
+
 .detail p + p {
-  margin-top: 0.586vw;
+  margin-top: 11px;
 }
+
 .heading {
-  top: 40.19vw;
+  top: 772px;
   bottom: auto;
-  left: 9%;
-  width: 27.832vw;
+  left: 173px;
+  width: 534px;
   text-transform: uppercase;
 }
+
 .heading h2 {
-  margin: 0 0 0.635vw;
+  margin: 0 0 12px;
   color: #000;
-  font-size: 2.979vw;
+  font-size: 57px;
   font-weight: 900;
   letter-spacing: -0.045em;
   line-height: 0.9;
 }
+
 .heading p {
-  max-width: 28.32vw;
+  max-width: 544px;
   margin: 0;
   color: #23b14d;
-  font-size: 1.66vw;
+  font-size: 32px;
   font-weight: 800;
   letter-spacing: -0.028em;
   line-height: 1.17;
 }
+
 .servicesPanel {
-  top: 26.758vw;
+  top: 514px;
   bottom: auto;
-  left: 45.4%;
+  left: 872px;
   box-sizing: border-box;
-  width: 24.414vw;
-  height: 21.289vw;
-  padding: 1.875vw 1.709vw 1.172vw 5.078vw;
+  width: 469px;
+  height: 409px;
+  padding: 36px 33px 23px 97.5px;
   background:
     linear-gradient(
       90deg,
       rgb(35 177 77 / 20%) -147.34%,
       rgb(255 254 80 / 20%) 100%
-    ), rgb(241 238 238 / 30%);
+    ),
+    rgb(241 238 238 / 30%);
   box-shadow: 0 3px 10px rgb(0 0 0 / 25%);
   -webkit-backdrop-filter: blur(7.5px);
   backdrop-filter: blur(7.5px);
   transform: skewX(-21deg);
 }
+
 .servicesPanelContent {
   min-width: 0;
   transform: skewX(21deg);
 }
+
 .servicesPanel h2 {
-  margin: 0 0 2.95vw;
+  margin: 0 0 57px;
   color: #303030;
-  font-size: 1.465vw;
+  font-size: 28px;
   font-weight: 700;
   line-height: 1;
   text-transform: uppercase;
-  transform: translateX(0.9vw);
+  transform: translateX(17px);
 }
+
 .serviceOptions {
-  --active-line-end: 4.639vw;
-  --active-line-start: 0vw;
+  --active-line-end: 89px;
+  --active-line-start: 0px;
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 1.65vw;
+  gap: 32px;
   min-width: 0;
-  width: calc(100% + 3.5vw);
+  width: calc(100% + 67px);
 }
+
 .serviceOptions:has(button:nth-child(2).selectedService) {
-  --active-line-end: 7.739vw;
-  --active-line-start: 3.1vw;
+  --active-line-end: 149px;
+  --active-line-start: 60px;
 }
+
 .serviceOptions:has(button:nth-child(3).selectedService) {
-  --active-line-end: 10.839vw;
-  --active-line-start: 6.2vw;
+  --active-line-end: 208px;
+  --active-line-start: 119px;
 }
+
 .serviceOptions:has(button:nth-child(4).selectedService) {
-  --active-line-end: 13.939vw;
-  --active-line-start: 9.3vw;
+  --active-line-end: 268px;
+  --active-line-start: 179px;
 }
+
 .serviceOptions::before {
   position: absolute;
-  top: -0.488vw;
+  top: -9px;
   bottom: 0;
-  left: -4.15vw;
-  width: max(2px, 0.146vw);
+  left: -80px;
+  width: 3px;
   background: linear-gradient(
     to bottom,
     rgb(255 255 255 / 92%) 0 var(--active-line-start),
@@ -273,8 +268,9 @@
   pointer-events: none;
   transform: skewX(-21deg);
 }
+
 .serviceOptions button {
-  --service-row-offset: 0vw;
+  --service-row-offset: 0px;
   position: relative;
   display: block;
   width: 100%;
@@ -285,7 +281,7 @@
   background: transparent;
   color: #303030;
   font: inherit;
-  font-size: 1.318vw;
+  font-size: 25px;
   font-weight: 500;
   line-height: 1.1;
   text-align: left;
@@ -294,79 +290,103 @@
   cursor: pointer;
   transform: translateX(var(--service-row-offset));
 }
+
 .serviceOptions button:nth-child(2) {
-  --service-row-offset: -2.25vw;
+  --service-row-offset: -43px;
 }
+
 .serviceOptions button:nth-child(3) {
-  --service-row-offset: -3.5vw;
+  --service-row-offset: -67px;
 }
+
 .serviceOptions button:nth-child(4) {
-  --service-row-offset: -5vw;
+  --service-row-offset: -96px;
 }
+
 .serviceOptions button:hover,
 .serviceOptions button:focus-visible {
   color: #23b14d;
   outline: none;
 }
+
 .serviceOptions .selectedService {
-  min-height: 4.004vw;
-  margin-bottom: -1.125vw;
-  padding-left: 1.709vw;
+  min-height: 77px;
+  margin-bottom: -22px;
+  padding-left: 33px;
   color: #23b14d;
-  font-size: 1.416vw;
+  font-size: 27px;
   font-weight: 800;
-  transform: translateX(calc(var(--service-row-offset) - 1.709vw));
+  transform: translateX(calc(var(--service-row-offset) - 33px));
 }
+
 .selectedService small {
   display: block;
-  max-width: 21vw;
-  margin-top: 0.391vw;
+  max-width: 403px;
+  margin-top: 7.5px;
   color: #5a5a5a;
-  font-size: 0.781vw;
+  font-size: 15px;
   font-weight: 500;
   line-height: 1.25;
   overflow-wrap: normal;
   white-space: normal;
 }
+
 .enquiryButton {
   z-index: 3;
-  right: 0.391vw;
-  top: 42.773vw;
+  right: 8px;
+  top: 821px;
   bottom: auto;
   display: block;
-  width: 7.324vw;
+  width: 141px;
   padding: 0;
   border: 0;
   background: transparent;
   cursor: pointer;
 }
+
 .enquiryButton img {
   display: block;
   width: 100%;
   height: auto;
 }
+
 .chat {
   position: static;
   z-index: 2;
 }
+
 .chatTrigger {
   position: absolute;
-  /* Figma node 7077:13149: x=1498, y=899, w=418 on a 1920px canvas. */
-  top: 46.823vw;
-  right: 0.208vw;
+  top: 899px;
+  right: 4px;
   bottom: auto;
-  width: 21.771vw;
+  width: 418px;
   max-width: none;
 }
+
 .chatTrigger > div > img {
   width: 100%;
   height: auto;
 }
-/* The skewed right edge needs more clearance than the default chat trigger. */
+
 .chatTrigger > div > div:last-child {
   right: 16%;
 }
-@media (max-width: 900px) {
+
+@media (max-width: 1023px) {
+  .desktopStage {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .canvas {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    transform: none !important;
+  }
   .page {
     min-height: auto;
     overflow: visible;
@@ -471,29 +491,34 @@
     bottom: auto;
     left: auto;
     width: auto;
-    margin: 55px 26px 0;
+    margin: 40px 20px 0;
   }
   .heading h2 {
-    font-size: 49px;
+    font-size: clamp(30px, 8vw, 44px);
   }
   .heading p {
-    font-size: 24px;
+    font-size: clamp(18px, 4.5vw, 22px);
   }
   .servicesPanel {
     top: auto;
     bottom: auto;
     left: auto;
-    width: auto;
+    width: calc(100% - 32px);
+    max-width: 440px;
     height: auto;
-    min-height: 390px;
-    margin: 35px 35px 30px 65px;
-    /* Keep all mobile copy clear of the panel's angled upper-left edge. */
-    padding: 31px 44px 35px 31%;
+    min-height: 360px;
+    margin: 28px auto;
+    box-sizing: border-box;
+    padding: 24px 20px 28px 24px;
+    transform: none;
+  }
+  .servicesPanelContent {
+    transform: none;
   }
   .servicesPanel h2 {
-    margin-bottom: 36px;
-    font-size: 26px;
-    transform: translateX(14px);
+    margin-bottom: 24px;
+    font-size: 22px;
+    transform: none;
   }
   .serviceOptions {
     --active-line-end: 88px;
@@ -514,24 +539,24 @@
   }
   .serviceOptions::before {
     top: -8px;
-    left: -45px;
+    left: -15px;
   }
   .servicesPanel .serviceOptions button {
     --service-row-offset: 0px;
-    font-size: 22px;
+    font-size: 18px;
     overflow-wrap: anywhere;
     white-space: normal;
   }
   .serviceOptions .selectedService {
-    min-height: 78px;
+    min-height: 72px;
     margin-bottom: 0;
-    padding-left: 30px;
-    font-size: 24px;
-    transform: translateX(-30px);
+    padding-left: 10px;
+    font-size: 20px;
+    transform: none;
   }
   .selectedService small {
-    max-width: 340px;
-    margin-top: 8px;
+    max-width: 100%;
+    margin-top: 6px;
     font-size: 13px;
   }
   .enquiryButton {

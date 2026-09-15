@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 interface ValueChainItem {
   img: {
@@ -37,18 +37,20 @@ interface OurValueChainData {
 }
 
 const fetchOurValueChain = async (): Promise<OurValueChainData> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/ecosystem/our-value-chain');
-  
+  const response = await fetch(
+    "https://greencms.percepco.co.uk/api/ecosystem/our-value-chain",
+  );
+
   if (!response.ok) {
-    throw new Error('Failed to fetch our value chain data');
+    throw new Error("Failed to fetch our value chain data");
   }
-  
+
   return response.json();
 };
 
 export const useOurValueChain = () => {
   return useQuery<OurValueChainData>({
-    queryKey: ['ourValueChain'],
+    queryKey: ["ourValueChain"],
     queryFn: fetchOurValueChain,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes

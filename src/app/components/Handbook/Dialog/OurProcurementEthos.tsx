@@ -1,5 +1,7 @@
 "use client";
 import React from "react";
+import HandbookModalFrame from "./HandbookModalFrame";
+import styles from "./HandbookDialogs.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -21,85 +23,46 @@ const OurProcurementEthos = ({
   if (!isOpen) return null;
 
   return (
-    <div className="scrollbar-hide fixed inset-0 z-[9999999999999999999] flex items-start justify-center overflow-y-auto bg-black/20 p-3 sm:items-center sm:p-4">
-      <div className="relative my-2 w-full max-w-6xl sm:my-auto">
-        <button
-          type="button"
-          onClick={onClose}
-          className="absolute right-4 top-2 z-30 cursor-pointer p-1.5 text-gray-700 transition hover:text-gray-900 sm:right-8 sm:top-4"
-          aria-label="Close modal"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 sm:h-8 sm:w-8"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2.5}
-            role="img"
-            aria-label="Close"
+    <HandbookModalFrame
+      isOpen={isOpen}
+      onClose={onClose}
+      variant="ethos"
+      label={title || "Our Procurement Ethos"}
+    >
+      <div className={styles.ethosContent}>
+        <h2 className={styles.ethosTitle}>
+          {title || "Our Procurement Ethos"}
+        </h2>
+        <div className={styles.divider} aria-hidden="true" />
+        <p className={styles.ethosLead}>{description}</p>
+
+        {keys?.map((key, index) => (
+          <div
+            key={`${key}-${index}`}
+            className={`${styles.ethosBullet} ${index === 0 ? styles.ethosBulletOne : styles.ethosBulletTwo
+              }`}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 6l12 12M18 6L6 18"
+            <img
+              loading="lazy"
+              decoding="async"
+              src="/images/technology-innovation-alliances/modal_bolt.png"
+              className={styles.ethosBolt}
+              alt=""
+              aria-hidden="true"
             />
-          </svg>
-        </button>
-
-        <div className="scrollbar-hide max-h-[calc(100dvh-1.5rem)] overflow-y-auto sm:max-h-[90dvh]">
-          <div className="relative mx-2 rounded-lg border-2 border-[#4CAF50] bg-gray-100 px-6 py-10 pr-12 shadow-2xl sm:mx-3 sm:px-12 sm:py-12 sm:pr-16 lg:px-16 lg:pr-20">
-            {/* Title Section */}
-            <div className="mb-6 sm:mb-8">
-              <h2 className="text-2xl font-black text-gray-800 sm:text-3xl">
-                {title || "Our Procurement Ethos"}
-              </h2>
-              <div className="mt-4 h-0.5 w-full bg-gray-300" />
-            </div>
-
-            {/* Quote Section */}
-            <div className="mb-6 sm:mb-8">
-              <p className="whitespace-pre-line text-base font-bold italic text-gray-800 sm:text-lg">
-                {description}
-              </p>
-            </div>
-
-            {/* Content Layout - Text and Image */}
-            <div className="flex flex-col items-start gap-8 lg:flex-row">
-              {/* Left Column - Ethos Points */}
-              <div className="flex-1 space-y-5">
-                {keys?.map((k, idx) => (
-                  <div
-                    key={`${idx}-${k.slice(0, 20)}`}
-                    className="flex items-start gap-3"
-                  >
-                    <span className="shrink-0">
-                      <img loading="lazy" decoding="async"
-                        src="/images/grid-intel/lighting.png"
-                        className="-mt-3 w-12 sm:w-14"
-                        alt="lighting"
-                      />
-                    </span>
-                    <span className="text-sm leading-relaxed text-gray-700 sm:text-base">
-                      {k}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Right Column - Image */}
-              <div className="w-full shrink-0 lg:w-[440px]">
-                <img loading="lazy" decoding="async"
-                  src={img?.src || "/images/handbook/procrument-ethos.png"}
-                  alt={img?.alt || "Business Handshake"}
-                  className="h-auto w-full"
-                />
-              </div>
-            </div>
+            <span>{key}</span>
           </div>
-        </div>
+        ))}
+
+        <img
+          loading="lazy"
+          decoding="async"
+          src={img?.src || "/images/handbook/procrument-ethos.png"}
+          alt={img?.alt || "Business Handshake"}
+          className={styles.ethosImage}
+        />
       </div>
-    </div>
+    </HandbookModalFrame>
   );
 };
 

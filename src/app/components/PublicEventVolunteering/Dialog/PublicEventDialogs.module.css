@@ -1,0 +1,432 @@
+/* Shared dialog content styles for Public Events & Volunteering */
+
+/* ── 1. Why We Engage ── */
+.engageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.engageTextCol {
+  position: absolute;
+  left: 320px;
+  top: 45px;
+  width: 720px;
+}
+
+.engageParagraph {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #1a1a1a;
+  margin: 0 0 28px;
+}
+
+.engageHighlight {
+  color: #23b14d;
+  font-weight: 700;
+}
+
+.engageStrong {
+  color: #000000;
+  font-weight: 700;
+}
+
+.engageImageFrame {
+  position: absolute;
+  left: 1060px;
+  top: 35px;
+  width: 611px;
+  height: 255px;
+  overflow: visible;
+}
+
+.engageImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.engageQuoteRow {
+  position: absolute;
+  left: 0;
+  top: 430px;
+  width: 100%;
+  text-align: center;
+}
+
+.engageQuoteText {
+  margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  font-style: italic;
+  color: #000000;
+}
+
+/* ── 2. Ways to Get Involved (Staggered 2-column slant) ── */
+.waysContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.waysItem {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 620px;
+}
+
+.waysImgFrame {
+  position: relative;
+  width: 250px;
+  height: 105px;
+  flex-shrink: 0;
+  clip-path: polygon(20px 0, 100% 0, calc(100% - 20px) 100%, 0 100%);
+  border-left: 2px solid #23b14d;
+  border-bottom: 2px solid #23b14d;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.waysImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.waysInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.waysTitle {
+  margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #000000;
+  line-height: 1.25;
+}
+
+.waysDesc {
+  margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #444444;
+  line-height: 1.35;
+  max-width: 320px;
+}
+
+.waysCta {
+  margin-top: 4px;
+  width: 110px;
+  height: 28px;
+  font-size: 13px;
+}
+
+.waysBottomLink {
+  position: absolute;
+  left: 820px;
+  top: 440px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 19px;
+  font-weight: 500;
+  font-style: italic;
+  color: #000000;
+  text-decoration: none;
+}
+
+.waysBottomLinkAccent {
+  color: #23b14d;
+  text-decoration: underline;
+  font-weight: 700;
+  font-style: normal;
+  margin-left: 6px;
+}
+
+/* ── 3. Who Can Join (Clean icon + text slant) ── */
+.whoContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.whoItem {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  width: 580px;
+}
+
+.whoIcon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.whoText {
+  margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 21px;
+  font-weight: 700;
+  color: #000000;
+  line-height: 1.35;
+}
+
+/* ── 4. Volunteer Sign-Up (Clean Slanted Step Table) ── */
+.volunteerContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.volunteerHeaderRow {
+  position: absolute;
+  left: 415px;
+  top: 35px;
+  display: flex;
+  gap: 160px;
+}
+
+.volunteerColHeader {
+  margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: #23b14d;
+}
+
+.volunteerStepItem {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.volunteerStepLabel {
+  width: 220px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.volunteerActionWrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.volunteerActionText {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.volunteerJoinLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: #23b14d;
+  color: #ffffff;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition:
+    background 160ms ease,
+    transform 160ms ease;
+}
+
+.volunteerJoinLink:hover {
+  background: #1e9942;
+  transform: translateY(-2px);
+}
+
+.volunteerNote {
+  position: absolute;
+  left: 0;
+  top: 440px;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  font-style: italic;
+  color: #555555;
+}
+
+/* ── 5. Past Highlights (Video Players side-by-side) ── */
+.highlightsContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.highlightsRow {
+  position: absolute;
+  left: 245px;
+  top: 35px;
+  display: flex;
+  gap: 22px;
+}
+
+.highlightVideoCard {
+  width: 312px;
+  display: flex;
+  flex-direction: column;
+}
+
+.videoThumbWrap {
+  position: relative;
+  width: 100%;
+  height: 195px;
+  clip-path: polygon(18px 0, 100% 0, calc(100% - 18px) 100%, 0 100%);
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.videoThumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+  display: block;
+}
+
+.playBtnOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    background 160ms ease;
+}
+
+.playBtnOverlay:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: rgba(35, 177, 77, 0.8);
+}
+
+.videoControlsBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 28px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+.videoProgressBar {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  position: relative;
+  border-radius: 2px;
+}
+
+.videoProgressFill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 45%;
+  background: #23b14d;
+  border-radius: 2px;
+}
+
+.videoControlIcon {
+  color: #ffffff;
+  font-size: 11px;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.highlightMeta {
+  margin-top: 14px;
+}
+
+.highlightTitle {
+  margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  font-style: italic;
+  color: #000000;
+  line-height: 1.25;
+}
+
+.highlightLocation {
+  margin: 3px 0 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000;
+}
+
+.highlightYear {
+  margin: 3px 0 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #23b14d;
+}
+
+.highlightsGalleryLinkWrap {
+  position: absolute;
+  left: 0;
+  top: 440px;
+  width: 100%;
+  text-align: center;
+}
+
+.highlightsGalleryLink {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #23b14d;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition:
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.highlightsGalleryLink:hover {
+  color: #178a38;
+  transform: translateX(4px);
+}

@@ -1,6 +1,7 @@
 "use client";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Vector7366 } from "./Vector7366";
 
 interface D6ChatbotProps {
@@ -42,13 +43,21 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
   const [inputValue, setInputValue] = useState<string>("");
   const [promptInputValue, setPromptInputValue] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const promptInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const behavior = messages.length > 0 ? "smooth" : "auto";
-    messagesEndRef.current?.scrollIntoView({ behavior });
+    const messagesContainer = messagesContainerRef.current;
+    if (!messagesContainer) return;
+
+    // Do not use scrollIntoView here. The Figma pages are transformed canvases,
+    // and scrollIntoView can scroll their outer shell horizontally when a chat
+    // message is added. Only the message pane itself should move.
+    messagesContainer.scrollTo({
+      top: messagesContainer.scrollHeight,
+      behavior: messages.length > 0 ? "smooth" : "auto",
+    });
   }, [messages]);
 
   useEffect(() => {
@@ -201,166 +210,30 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
   return (
     <>
       {/* Chat Dialog */}
-      {isOpen && (
-        <div className="fixed z-[60] right-4 bottom-20 w-80 lg:w-96 h-[500px] bg-white rounded-lg shadow-2xl border border-gray-200 flex flex-col">
-          {/* Header */}
-          <div className="bg-[#23B14D] text-white p-3 rounded-t-lg flex justify-between items-center">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
-                <span className="text-[#23B14D] font-bold text-lg">G</span>
-              </div>
-              <div>
-                <h3 className="font-semibold text-sm">Have a question?</h3>
-              </div>
-            </div>
-            <button
-              type="button"
-              onClick={toggleChat}
-              className="text-white hover:bg-green-600 rounded-full p-1 transition-colors"
-              aria-label="Close chat"
+      {isOpen && typeof document !== "undefined"
+        ? createPortal(
+            <div
+              className="fixed z-[2147483000] right-4 bottom-20 w-80 lg:w-96 h-[500px] bg-white rounded-lg shadow-2xl border border-gray-200 flex flex-col"
+              role="dialog"
+              aria-modal="false"
+              aria-label="Talk Energy chat"
             >
-              <svg
-                aria-hidden="true"
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </button>
-          </div>
-
-          {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50">
-            {messages.length === 0 && (
-              <div className="flex items-start space-x-3">
-                <div className="w-8 h-8 bg-[#23B14D] rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="text-white font-bold text-sm">G</span>
+              {/* Header */}
+              <div className="bg-[#23B14D] text-white p-3 rounded-t-lg flex justify-between items-center">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">
+                    <span className="text-[#23B14D] font-bold text-lg">G</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-sm">Have a question?</h3>
+                  </div>
                 </div>
-                <div className="bg-gray-200 rounded-lg p-3 max-w-[80%]">
-                  <p className="text-sm text-gray-700">
-                    Enter your question below and a representative will get
-                    right back to you.
-                  </p>
-                  <p className="text-xs text-gray-500 mt-2">
-                    {new Date().toLocaleDateString("en-GB", {
-                      day: "2-digit",
-                      month: "short",
-                    })}
-                    , {formatTime(new Date())}
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex items-start space-x-3 ${
-                  message.sender === "user"
-                    ? "flex-row-reverse space-x-reverse"
-                    : ""
-                }`}
-              >
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                    message.sender === "user" ? "bg-gray-300" : "bg-[#23B14D]"
-                  }`}
+                <button
+                  type="button"
+                  onClick={toggleChat}
+                  className="text-white hover:bg-green-600 rounded-full p-1 transition-colors"
+                  aria-label="Close chat"
                 >
-                  <span
-                    className={`font-bold text-sm ${
-                      message.sender === "user" ? "text-gray-600" : "text-white"
-                    }`}
-                  >
-                    {message.sender === "user" ? "U" : "G"}
-                  </span>
-                </div>
-                <div
-                  className={`rounded-lg p-3 max-w-[80%] ${
-                    message.sender === "user"
-                      ? "bg-white border border-gray-200"
-                      : "bg-gray-200"
-                  }`}
-                >
-                  <p className="text-sm text-gray-700 whitespace-pre-wrap">
-                    {message.text}
-                  </p>
-                  {message.isStreaming && (
-                    <div className="flex items-center mt-2">
-                      <div className="flex space-x-1">
-                        <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                        <div
-                          className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                          style={{ animationDelay: "0.1s" }}
-                        ></div>
-                        <div
-                          className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                          style={{ animationDelay: "0.2s" }}
-                        ></div>
-                      </div>
-                    </div>
-                  )}
-                  <p className="text-xs text-gray-500 mt-2">
-                    {new Date(message.timestamp).toLocaleDateString("en-GB", {
-                      day: "2-digit",
-                      month: "short",
-                    })}
-                    , {formatTime(message.timestamp)}
-                  </p>
-                </div>
-              </div>
-            ))}
-            <div ref={messagesEndRef} />
-          </div>
-
-          {/* Input */}
-          <div className="p-4 bg-white rounded-b-lg border-t border-gray-200">
-            <div className="flex items-center space-x-2">
-              <input
-                ref={inputRef}
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder="Type a message"
-                disabled={isLoading}
-                className="flex-1 p-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#23B14D] focus:border-transparent text-sm disabled:opacity-50"
-              />
-              <button
-                type="button"
-                onClick={() => handleSendMessage()}
-                disabled={!inputValue.trim() || isLoading}
-                className="bg-[#23B14D] text-white p-3 rounded-full hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                aria-label="Send message"
-              >
-                {isLoading ? (
-                  <svg
-                    aria-hidden="true"
-                    className="w-5 h-5 animate-spin"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                    ></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    ></path>
-                  </svg>
-                ) : (
                   <svg
                     aria-hidden="true"
                     className="w-5 h-5"
@@ -372,15 +245,168 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       strokeWidth={2}
-                      d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                      d="M19 9l-7 7-7-7"
                     />
                   </svg>
+                </button>
+              </div>
+
+              {/* Messages */}
+              <div
+                ref={messagesContainerRef}
+                className="flex-1 overflow-x-hidden overflow-y-auto p-4 space-y-4 bg-gray-50"
+              >
+                {messages.length === 0 && (
+                  <div className="flex items-start space-x-3">
+                    <div className="w-8 h-8 bg-[#23B14D] rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-white font-bold text-sm">G</span>
+                    </div>
+                    <div className="bg-gray-200 rounded-lg p-3 max-w-[80%]">
+                      <p className="text-sm text-gray-700">
+                        Enter your question below and a representative will get
+                        right back to you.
+                      </p>
+                      <p className="text-xs text-gray-500 mt-2">
+                        {new Date().toLocaleDateString("en-GB", {
+                          day: "2-digit",
+                          month: "short",
+                        })}
+                        , {formatTime(new Date())}
+                      </p>
+                    </div>
+                  </div>
                 )}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
+                {messages.map((message) => (
+                  <div
+                    key={message.id}
+                    className={`flex items-start space-x-3 ${
+                      message.sender === "user"
+                        ? "flex-row-reverse space-x-reverse"
+                        : ""
+                    }`}
+                  >
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                        message.sender === "user"
+                          ? "bg-gray-300"
+                          : "bg-[#23B14D]"
+                      }`}
+                    >
+                      <span
+                        className={`font-bold text-sm ${
+                          message.sender === "user"
+                            ? "text-gray-600"
+                            : "text-white"
+                        }`}
+                      >
+                        {message.sender === "user" ? "U" : "G"}
+                      </span>
+                    </div>
+                    <div
+                      className={`min-w-0 break-words rounded-lg p-3 max-w-[80%] ${
+                        message.sender === "user"
+                          ? "bg-white border border-gray-200"
+                          : "bg-gray-200"
+                      }`}
+                    >
+                      <p className="text-sm text-gray-700 whitespace-pre-wrap">
+                        {message.text}
+                      </p>
+                      {message.isStreaming && (
+                        <div className="flex items-center mt-2">
+                          <div className="flex space-x-1">
+                            <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                            <div
+                              className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                              style={{ animationDelay: "0.1s" }}
+                            ></div>
+                            <div
+                              className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                              style={{ animationDelay: "0.2s" }}
+                            ></div>
+                          </div>
+                        </div>
+                      )}
+                      <p className="text-xs text-gray-500 mt-2">
+                        {new Date(message.timestamp).toLocaleDateString(
+                          "en-GB",
+                          {
+                            day: "2-digit",
+                            month: "short",
+                          },
+                        )}
+                        , {formatTime(message.timestamp)}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Input */}
+              <div className="p-4 bg-white rounded-b-lg border-t border-gray-200">
+                <div className="flex items-center space-x-2">
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Type a message"
+                    disabled={isLoading}
+                    className="flex-1 p-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-[#23B14D] focus:border-transparent text-sm disabled:opacity-50"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleSendMessage()}
+                    disabled={!inputValue.trim() || isLoading}
+                    className="bg-[#23B14D] text-white p-3 rounded-full hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    aria-label="Send message"
+                  >
+                    {isLoading ? (
+                      <svg
+                        aria-hidden="true"
+                        className="w-5 h-5 animate-spin"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                    ) : (
+                      <svg
+                        aria-hidden="true"
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                        />
+                      </svg>
+                    )}
+                  </button>
+                </div>
+              </div>
+            </div>,
+            document.body,
+          )
+        : null}
 
       {/* Chat Trigger */}
       <div

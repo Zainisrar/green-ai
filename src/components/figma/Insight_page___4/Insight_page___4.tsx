@@ -1,60 +1,81 @@
-import React from 'react';
-import styles from './Insight_page___4.module.css';
+import React from "react";
+import styles from "./Insight_page___4.module.css";
 
-const img0 = require('./Insight_page___4/assets/7077:2899.png');
-const img1 = require('./Insight_page___4/assets/7077:2900.png');
-const img2 = require('./Insight_page___4/assets/7077:2901.png');
-const img3 = require('./Insight_page___4/assets/I7077:2902;5207:29710.png');
-const img4 = require('./Insight_page___4/assets/I7077:2903;5207:29712.png');
-const img5 = require('./Insight_page___4/assets/I7077:2903;5207:29713.png');
-const img6 = require('./Insight_page___4/assets/I7077:2904;5207:29715.png');
-const img7 = require('./Insight_page___4/assets/I7077:2904;5207:29716.png');
-const img8 = require('./Insight_page___4/assets/I7077:2905;5207:29718.png');
-const img9 = require('./Insight_page___4/assets/I7077:2906;5207:29720.png');
-const img10 = require('./Insight_page___4/assets/7077:2908.png');
-const img11 = require('./Insight_page___4/assets/7077:2910.png');
-const img12 = require('./Insight_page___4/assets/7077:2911.png');
-const img13 = require('./Insight_page___4/assets/7077:2912.png');
-const img14 = require('./Insight_page___4/assets/7077:2913.png');
-const img15 = require('./Insight_page___4/assets/7077:2915.png');
-const img16 = require('./Insight_page___4/assets/7077:2917.png');
-const img17 = require('./Insight_page___4/assets/7077:2919.png');
-const img18 = require('./Insight_page___4/assets/7077:2921.png');
-const img19 = require('./Insight_page___4/assets/7077:2927.png');
-const img20 = require('./Insight_page___4/assets/7077:2930.png');
-const img21 = require('./Insight_page___4/assets/7077:2935.png');
-const img22 = require('./Insight_page___4/assets/7077:2938.png');
-const img23 = require('./Insight_page___4/assets/7077:2945.png');
-const img24 = require('./Insight_page___4/assets/7077:2946.png');
-const img25 = require('./Insight_page___4/assets/7077:2947.png');
-const img26 = require('./Insight_page___4/assets/7077:2950.png');
-const img27 = require('./Insight_page___4/assets/7077:2951.png');
-const img28 = require('./Insight_page___4/assets/7077:2952.png');
-const img29 = require('./Insight_page___4/assets/7077:2953.png');
-const img30 = require('./Insight_page___4/assets/7077:2954.png');
-const img31 = require('./Insight_page___4/assets/7077:2956.png');
-const img32 = require('./Insight_page___4/assets/7077:2957.png');
-const img33 = require('./Insight_page___4/assets/7077:2959.png');
+const img0 = require("./Insight_page___4/assets/7077:2899.png");
+const img1 = require("./Insight_page___4/assets/7077:2900.png");
+const img2 = require("./Insight_page___4/assets/7077:2901.png");
+const img3 = require("./Insight_page___4/assets/I7077:2902;5207:29710.png");
+const img4 = require("./Insight_page___4/assets/I7077:2903;5207:29712.png");
+const img5 = require("./Insight_page___4/assets/I7077:2903;5207:29713.png");
+const img6 = require("./Insight_page___4/assets/I7077:2904;5207:29715.png");
+const img7 = require("./Insight_page___4/assets/I7077:2904;5207:29716.png");
+const img8 = require("./Insight_page___4/assets/I7077:2905;5207:29718.png");
+const img9 = require("./Insight_page___4/assets/I7077:2906;5207:29720.png");
+const img10 = require("./Insight_page___4/assets/7077:2908.png");
+const img11 = require("./Insight_page___4/assets/7077:2910.png");
+const img12 = require("./Insight_page___4/assets/7077:2911.png");
+const img13 = require("./Insight_page___4/assets/7077:2912.png");
+const img14 = require("./Insight_page___4/assets/7077:2913.png");
+const img15 = require("./Insight_page___4/assets/7077:2915.png");
+const img16 = require("./Insight_page___4/assets/7077:2917.png");
+const img17 = require("./Insight_page___4/assets/7077:2919.png");
+const img18 = require("./Insight_page___4/assets/7077:2921.png");
+const img19 = require("./Insight_page___4/assets/7077:2927.png");
+const img20 = require("./Insight_page___4/assets/7077:2930.png");
+const img21 = require("./Insight_page___4/assets/7077:2935.png");
+const img22 = require("./Insight_page___4/assets/7077:2938.png");
+const img23 = require("./Insight_page___4/assets/7077:2945.png");
+const img24 = require("./Insight_page___4/assets/7077:2946.png");
+const img25 = require("./Insight_page___4/assets/7077:2947.png");
+const img26 = require("./Insight_page___4/assets/7077:2950.png");
+const img27 = require("./Insight_page___4/assets/7077:2951.png");
+const img28 = require("./Insight_page___4/assets/7077:2952.png");
+const img29 = require("./Insight_page___4/assets/7077:2953.png");
+const img30 = require("./Insight_page___4/assets/7077:2954.png");
+const img31 = require("./Insight_page___4/assets/7077:2956.png");
+const img32 = require("./Insight_page___4/assets/7077:2957.png");
+const img33 = require("./Insight_page___4/assets/7077:2959.png");
 
-export default function Insight_page___4(){
+export default function Insight_page___4() {
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>Insight page - 4</h2>
-      <p key="text-0" className={styles.sectionText}>LET’S CHAT</p>
-      <p key="text-1" className={styles.sectionText}>Delivering access to clean energy, fostering decent work and innovation, promoting sustainable consumption, and driving climate action</p>
-      <p key="text-2" className={styles.sectionText}>Net-Zero aligns with Environmental, Social and Governance (ESG) goals, reducing risks and boosting brand value.
-</p>
-      <p key="text-3" className={styles.sectionText}>Hotels consume high energy, driving carbon emissions.
-</p>
-      <p key="text-4" className={styles.sectionText}>Rising demand for Environmental, Social and Governance compliance.
-</p>
-      <p key="text-5" className={styles.sectionText}>Empower Hotels as leadership in sustainability and climate responsibility.</p>
-      <p key="text-6" className={styles.sectionText}>D1</p>
-      <p key="text-7" className={styles.sectionText}>Explore</p>
-      <p key="text-8" className={styles.sectionText}>Read more..</p>
-      <p key="text-9" className={styles.sectionText}># Hotel  Insight 04</p>
-      <p key="text-10" className={styles.sectionText}>What Does It Take for Hotels to Reach
-Net-Zero and Sustainability Goals?</p>
+      <p key="text-0" className={styles.sectionText}>
+        LET’S CHAT
+      </p>
+      <p key="text-1" className={styles.sectionText}>
+        Delivering access to clean energy, fostering decent work and innovation,
+        promoting sustainable consumption, and driving climate action
+      </p>
+      <p key="text-2" className={styles.sectionText}>
+        Net-Zero aligns with Environmental, Social and Governance (ESG) goals,
+        reducing risks and boosting brand value.
+      </p>
+      <p key="text-3" className={styles.sectionText}>
+        Hotels consume high energy, driving carbon emissions.
+      </p>
+      <p key="text-4" className={styles.sectionText}>
+        Rising demand for Environmental, Social and Governance compliance.
+      </p>
+      <p key="text-5" className={styles.sectionText}>
+        Empower Hotels as leadership in sustainability and climate
+        responsibility.
+      </p>
+      <p key="text-6" className={styles.sectionText}>
+        D1
+      </p>
+      <p key="text-7" className={styles.sectionText}>
+        Explore
+      </p>
+      <p key="text-8" className={styles.sectionText}>
+        Read more..
+      </p>
+      <p key="text-9" className={styles.sectionText}>
+        # Hotel Insight 04
+      </p>
+      <p key="text-10" className={styles.sectionText}>
+        What Does It Take for Hotels to Reach Net-Zero and Sustainability Goals?
+      </p>
       <img key="img-0" src={img0.default || img0} alt="7077:2899" />
       <img key="img-1" src={img1.default || img1} alt="7077:2900" />
       <img key="img-2" src={img2.default || img2} alt="7077:2901" />

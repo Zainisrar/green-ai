@@ -56,21 +56,27 @@ export default function EpcmServices() {
         highlightActive={false}
         figmaPanelVariant="flagship"
       />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.collage}
         src="/images/solar-epcm/mask_composite_solar.png"
         alt=""
         width="1108"
         height="1297"
       />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.verticalTitle}
         src="/images/solar-epcm/title_vert.png"
         alt=""
         width="82"
         height="698"
       />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.pageTitle}
         src="/images/solar-epcm/title_h1.png"
         alt="Solar EPCM Services"
@@ -83,8 +89,8 @@ export default function EpcmServices() {
       <p className={styles.description}>
         At GREEN, EPCM is not coordination — it’s control.
         <br />
-        We transform technical ambition into clean energy infrastructure
-        through a seamless, standards-driven delivery model.
+        We transform technical ambition into clean energy infrastructure through
+        a seamless, standards-driven delivery model.
         <br />
         From feasibility to commissioning, we manage every milestone with zero
         compromise.
@@ -103,7 +109,9 @@ export default function EpcmServices() {
               ][i]
             }
           >
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               className={styles.cardPanel}
               src="/images/solar-epcm/card_panel.png"
               alt=""
@@ -121,7 +129,9 @@ export default function EpcmServices() {
         ))}
       </section>
       <blockquote className={styles.embedQuote}>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           className={styles.quotePanel}
           src="/images/solar-epcm/quote_panel.png"
           alt=""
@@ -136,7 +146,7 @@ export default function EpcmServices() {
       <div className={styles.actions}>
         <FigmaAngledCta
           icon="download"
-          style={{ top: 681, left: 1585, width: 339 }}
+          style={{ top: 681, left: 1545, width: 375 }}
         >
           Download EPCM Capabilities Brief
         </FigmaAngledCta>

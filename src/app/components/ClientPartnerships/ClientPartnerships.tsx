@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from "react";
 import { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
@@ -168,11 +169,44 @@ export default function ClientPartnerships({
             className={styles.rowText}
             style={{ position: "absolute", left: 266, top: row.titleY }}
           >
-            <h3
-              className={styles.rowTitle}
-              onClick={
-                row.key === "clientPartnerLogin"
-                  ? undefined
+            <h3 className={styles.rowTitle}>
+              {row.key === "clientPartnerLogin" ? (
+                <Link href="/client-value-engineering">{row.title}</Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() =>
+                    row.key === "whoWePartnerWith"
+                      ? setIsWhoWePartnerOpen(true)
+                      : row.key === "ourClientPartnership"
+                        ? setIsOurModelOpen(true)
+                        : row.key === "whatSetsGreenApart"
+                          ? setIsWhatSetsOpen(true)
+                          : row.key === "partnershipOnboarding"
+                            ? setIsPartnershipOnboardingOpen(true)
+                            : setIsUseCasesOpen(true)
+                  }
+                >
+                  {row.title}
+                </button>
+              )}
+            </h3>
+            <p className={styles.rowSubtitle}>{row.subtitle}</p>
+          </div>
+          <FigmaAngledCta
+            className={styles.rowCta}
+            size="sm"
+            style={{ position: "absolute", left: row.ctaX, top: row.ctaY }}
+            href={
+              row.key === "clientPartnerLogin"
+                ? "/client-value-engineering"
+                : undefined
+            }
+            onClick={
+              row.key === "clientPartnerLogin"
+                ? undefined
+                : row.key === "partnershipOnboarding"
+                  ? () => setIsPartnershipOnboardingOpen(true)
                   : () =>
                       row.key === "whoWePartnerWith"
                         ? setIsWhoWePartnerOpen(true)
@@ -180,31 +214,7 @@ export default function ClientPartnerships({
                           ? setIsOurModelOpen(true)
                           : row.key === "whatSetsGreenApart"
                             ? setIsWhatSetsOpen(true)
-                            : row.key === "partnershipOnboarding"
-                              ? setIsPartnershipOnboardingOpen(true)
-                              : setIsUseCasesOpen(true)
-              }
-              style={{ cursor: "pointer" }}
-            >
-              {row.title}
-            </h3>
-            <p className={styles.rowSubtitle}>{row.subtitle}</p>
-          </div>
-          <FigmaAngledCta
-            className={styles.rowCta}
-            style={{ position: "absolute", left: row.ctaX, top: row.ctaY }}
-            onClick={
-              row.key === "partnershipOnboarding" ||
-              row.key === "clientPartnerLogin"
-                ? () => setIsPartnershipOnboardingOpen(true)
-                : () =>
-                    row.key === "whoWePartnerWith"
-                      ? setIsWhoWePartnerOpen(true)
-                      : row.key === "ourClientPartnership"
-                        ? setIsOurModelOpen(true)
-                        : row.key === "whatSetsGreenApart"
-                          ? setIsWhatSetsOpen(true)
-                          : setIsUseCasesOpen(true)
+                            : setIsUseCasesOpen(true)
             }
           >
             {row.cta}

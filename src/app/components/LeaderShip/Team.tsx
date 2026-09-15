@@ -55,7 +55,9 @@ export default function Team() {
 
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:6769">
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.backgroundArtwork}
         src="/images/our-team/mainImg.png"
         alt=""
@@ -65,7 +67,9 @@ export default function Team() {
         {titleStart}
         <span>{titleEnd}</span>
       </h1>
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.watermark}
         src="/images/our-team/team.png"
         alt=""
@@ -78,12 +82,16 @@ export default function Team() {
             key={`${member.name}-${index}`}
             data-node-id={`7077:${6800 + index}`}
           >
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               className={styles.frame}
               src="/images/our-team/figma-member-frame.svg"
               alt=""
             />
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               className={styles.portrait}
               src={member.image}
               alt={member.alt}
@@ -101,12 +109,12 @@ export default function Team() {
         triggerVariant="figmaCanvas"
         triggerClassName={styles.chatTrigger}
         triggerStyle={{
-            top: 899,
-            right: "auto",
-            bottom: "auto",
-            left: 1498,
-            width: 418,
-          }}
+          top: 899,
+          right: "auto",
+          bottom: "auto",
+          left: 1498,
+          width: 418,
+        }}
       />
     </main>
   );
@@ -114,7 +122,9 @@ export default function Team() {
   const mobile = (
     <main className={styles.mobilePage} data-node-id="7077:6769-mobile">
       <SiteHeader panel="logoOnly" />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.mobileArtwork}
         src="/images/our-team/mainImg.png"
         alt=""
@@ -127,8 +137,18 @@ export default function Team() {
           {members.map((member, index) => (
             <article key={`${member.name}-mobile-${index}`}>
               <div>
-                <img loading="lazy" decoding="async" src="/images/our-team/maskImg.png" alt="" />
-                <img loading="lazy" decoding="async" src={member.image} alt={member.alt} />
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="/images/our-team/maskImg.png"
+                  alt=""
+                />
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={member.image}
+                  alt={member.alt}
+                />
               </div>
               <h2>{member.name}</h2>
               <p>{member.designation}</p>

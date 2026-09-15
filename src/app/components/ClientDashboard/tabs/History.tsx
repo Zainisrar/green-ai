@@ -13,7 +13,10 @@ const History = () => {
       <div className="flex items-center justify-between mb-4">
         <SectionTitle>Service and Support</SectionTitle>
         <div className="flex items-center gap-1 text-xs text-gray-500 border border-gray-200 rounded px-2 py-1">
-          Filter : <select className="bg-transparent focus:outline-none"><option>All</option></select>
+          Filter :{" "}
+          <select className="bg-transparent focus:outline-none">
+            <option>All</option>
+          </select>
         </div>
       </div>
 
@@ -25,7 +28,9 @@ const History = () => {
                 key={t}
                 onClick={() => setSubTab(i)}
                 className={`rounded-md border px-4 py-2 text-sm ${
-                  subTab === i ? "border-[#4CAF50] text-gray-800 shadow-sm" : "border-gray-200 text-gray-500"
+                  subTab === i
+                    ? "border-[#4CAF50] text-gray-800 shadow-sm"
+                    : "border-gray-200 text-gray-500"
                 }`}
               >
                 {t}
@@ -42,13 +47,19 @@ const History = () => {
                 Closed
               </span>
             </div>
-            <p className="text-xs text-[#4CAF50] mb-4">• 08-Sep-2023 at 04:53 PM</p>
+            <p className="text-xs text-[#4CAF50] mb-4">
+              • 08-Sep-2023 at 04:53 PM
+            </p>
 
             <div className="grid grid-cols-2 md:grid-cols-6 gap-4 text-xs">
               <Meta label="Site Location" value="Pimaga" />
               <Meta label="Raised by" value="Mr.Wilson Mondo" />
               <Meta label="Service / Issue Type" value="Technical Support" />
-              <Meta label="Priority" value="High" valueClass="text-orange-500" />
+              <Meta
+                label="Priority"
+                value="High"
+                valueClass="text-orange-500"
+              />
               <div className="col-span-2">
                 <p className="text-gray-400 mb-1">Related Document</p>
                 <span className="flex items-center gap-1 text-[#4CAF50]">
@@ -58,8 +69,8 @@ const History = () => {
               <div className="col-span-2 md:col-span-6">
                 <p className="text-gray-400 mb-1">Description</p>
                 <p className="text-gray-600">
-                  Power Terminal block in the GDB from cable output to Load, Blue Phase
-                  experience burnt and ongoing sparks.
+                  Power Terminal block in the GDB from cable output to Load,
+                  Blue Phase experience burnt and ongoing sparks.
                 </p>
               </div>
             </div>
@@ -67,8 +78,12 @@ const History = () => {
 
           <div className="flex items-center justify-end gap-2 mt-4 text-xs text-gray-500">
             <span>1-1 of 1</span>
-            <button className="border border-gray-200 rounded px-3 py-1">Prev</button>
-            <button className="border border-gray-200 rounded px-3 py-1">Next</button>
+            <button className="border border-gray-200 rounded px-3 py-1">
+              Prev
+            </button>
+            <button className="border border-gray-200 rounded px-3 py-1">
+              Next
+            </button>
           </div>
         </div>
 
@@ -87,11 +102,20 @@ const History = () => {
 
           <Card>
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-sm font-semibold text-gray-700">Service Logs</h3>
+              <h3 className="text-sm font-semibold text-gray-700">
+                Service Logs
+              </h3>
               <ChartMenu />
             </div>
             <SimpleBarChart
-              categories={["Open", "Answered", "Resolved", "Verified", "Closed", "Reopen"]}
+              categories={[
+                "Open",
+                "Answered",
+                "Resolved",
+                "Verified",
+                "Closed",
+                "Reopen",
+              ]}
               values={[0, 0, 0, 0, 1, 0]}
               highlightIndex={4}
             />

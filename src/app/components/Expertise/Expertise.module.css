@@ -16,11 +16,11 @@
 .canvas {
   position: absolute;
   top: 0;
-  left: 50%;
+  left: 0;
   width: 1920px;
   height: 970px;
   overflow: hidden;
-  transform-origin: top center;
+  transform-origin: top left;
   background: #fff;
 }
 
@@ -68,14 +68,16 @@
 .sliderHeroHeading {
   top: 162px;
   left: 252px;
-  width: 720px;
+  width: 900px;
   font-size: 40px;
   letter-spacing: -0.8px;
+  z-index: 5;
+  white-space: nowrap;
 }
 
 .sliderDescription {
   position: absolute;
-  z-index: 3;
+  z-index: 5;
   top: 226px;
   left: 252px;
   width: 1040px;
@@ -471,13 +473,23 @@
   top: 39.5px;
 }
 
+.sliderPanelActive {
+  box-shadow:
+    0 0 0 2px #23b14d,
+    0 7.656px 65.08px rgb(0 0 0 / 15%);
+}
+
 .sliderWatermark {
+  position: absolute;
   z-index: 5;
-  top: 848px;
-  left: 42px;
-  width: 68px;
-  height: 558px;
+  top: 850px;
+  left: 35px;
+  width: 440px;
+  height: auto;
+  max-width: none;
   transform: none;
+  pointer-events: none;
+  user-select: none;
 }
 
 .sliderPagination {
@@ -638,7 +650,7 @@
 .detailContent {
   position: absolute;
   z-index: 2;
-  top: 138px;
+  top: 130px;
   left: 938px;
   width: 924px;
 }
@@ -657,7 +669,7 @@
 }
 
 .detailContent h2 {
-  margin: 22px 0 0;
+  margin: 20px 0 0;
   font-size: 19px;
   font-weight: 600;
   line-height: 1.2;
@@ -665,19 +677,21 @@
 
 .detailDescription {
   width: 920px;
-  margin: 37px 0 0;
+  margin: 36px 0 0;
   color: #303030;
-  font-size: 16px;
+  font-family: var(--font-raleway), Raleway, sans-serif;
+  font-size: 20px;
   font-weight: 400;
   line-height: 28px;
+  letter-spacing: 0.4px;
   text-align: justify;
 }
 
 .detailFeatures {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 34px 72px;
-  margin-top: 36px;
+  grid-template-columns: 400px 1fr;
+  gap: 32px 68px;
+  margin-top: 38px;
 }
 
 .detailFeatures article {
@@ -700,14 +714,15 @@
 }
 
 .detailFeatures p {
-  margin: 8px 0 0;
-  font-size: 13px;
-  line-height: 18px;
+  margin: 7px 0 0;
+  font-family: var(--font-raleway), Raleway, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .detailCategories {
   position: absolute;
-  top: 660px;
+  top: 673px;
   left: -22px;
   display: flex;
   height: 144px;
@@ -757,7 +772,7 @@
 
 .detailStartButton {
   position: absolute;
-  top: 658px;
+  top: 667px;
   right: -59px;
   display: grid;
   width: 176px;
@@ -848,8 +863,6 @@
   background: #b8e0c4;
 }
 
-
-
 .mobileLayout {
   display: none;
 }
@@ -896,6 +909,15 @@
     margin: 54px 0 0;
     font-size: clamp(26px, 7vw, 40px);
     line-height: 1.16;
+  }
+
+  .mobileHero > img {
+    display: block;
+    width: 100%;
+    max-height: 300px;
+    margin: 28px 0;
+    object-fit: cover;
+    clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
   }
 
   .mobileHero > p:not(:first-child) {

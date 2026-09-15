@@ -1,4 +1,6 @@
-.overlay { background: rgb(0 0 0 / 40%); }
+.overlay {
+  background: rgb(0 0 0 / 40%);
+}
 
 .content {
   position: absolute;
@@ -19,7 +21,9 @@
   text-transform: uppercase;
 }
 
-.content h2 span { color: #23b14d; }
+.content h2 span {
+  color: #23b14d;
+}
 
 .fields {
   position: absolute;
@@ -42,7 +46,10 @@
   background: #fff;
   box-shadow: 1px 7px 6px rgb(34 36 34 / 16%);
   color: #303030;
-  font: 400 14px / 1.2 var(--font-montserrat), Montserrat, sans-serif;
+  font:
+    400 14px / 1.2 var(--font-montserrat),
+    Montserrat,
+    sans-serif;
   /* outline:none is intentionally removed — :focus-visible below restores a
      high-contrast indicator for keyboard and assistive-technology users. */
   outline: none;
@@ -56,7 +63,10 @@
 }
 
 .fields input,
-.fields select { height: 69px; padding: 0 32px; }
+.fields select {
+  height: 69px;
+  padding: 0 32px;
+}
 
 .skewField {
   height: 69px;
@@ -77,16 +87,23 @@
 
 .fields input::placeholder,
 .fields textarea::placeholder,
-.fields select { color: rgb(48 48 48 / 72%); opacity: 1; }
+.fields select {
+  color: rgb(48 48 48 / 72%);
+  opacity: 1;
+}
 
 .fields select {
   appearance: none;
   background-image:
     linear-gradient(45deg, transparent 50%, #707770 50%),
     linear-gradient(135deg, #707770 50%, transparent 50%);
-  background-position: calc(100% - 32px) 31px, calc(100% - 26px) 31px;
+  background-position:
+    calc(100% - 32px) 31px,
+    calc(100% - 26px) 31px;
   background-repeat: no-repeat;
-  background-size: 6px 6px, 6px 6px;
+  background-size:
+    6px 6px,
+    6px 6px;
 }
 
 .queryField {
@@ -169,12 +186,19 @@
   border: 0;
   background: transparent;
   color: #080808;
-  font: 600 20px / 1 var(--font-montserrat), Montserrat, sans-serif;
+  font:
+    600 20px / 1 var(--font-montserrat),
+    Montserrat,
+    sans-serif;
   cursor: pointer;
 }
 
-.reset { width: 180px; }
-.submit { width: 236px; }
+.reset {
+  width: 180px;
+}
+.submit {
+  width: 236px;
+}
 
 .actions img {
   position: absolute;
@@ -184,7 +208,9 @@
   pointer-events: none;
 }
 
-.actions span { position: relative; }
+.actions span {
+  position: relative;
+}
 
 .success {
   position: absolute;
@@ -195,8 +221,17 @@
   text-align: center;
 }
 
-.success h3 { margin: 0; color: #23b14d; font-size: 34px; }
-.success p { max-width: 570px; margin: 16px 0; font-size: 18px; line-height: 1.5; }
+.success h3 {
+  margin: 0;
+  color: #23b14d;
+  font-size: 34px;
+}
+.success p {
+  max-width: 570px;
+  margin: 16px 0;
+  font-size: 18px;
+  line-height: 1.5;
+}
 .success button {
   width: 180px;
   background: linear-gradient(105deg, #d5f7a5, #ffffac);

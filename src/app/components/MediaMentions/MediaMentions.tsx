@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
@@ -7,20 +8,28 @@ import styles from "./MediaMentions.module.css";
 
 const highlights = [
   {
+    id: "powering-change",
     title: "Powering Change in the Pacific",
     source: "— The Guardian (March 2025)",
     image: "/images/media-mentions/figma-powering-change.png",
   },
   {
+    id: "ai-grid",
     title: "PNG’s AI Grid Pioneer: GRID-INTEL™",
     source: "IEEE Energy Magazine",
     image: "/images/media-mentions/figma-ai-grid.png",
   },
   {
+    id: "epcs",
     title: "Top 10 EPCs in Renewable Asia-Pacific",
     source: "Renewable World Digest",
     image: "/images/media-mentions/figma-epcs.png",
   },
+];
+
+const visibleHighlights = [
+  ...highlights.map((highlight) => ({ ...highlight, id: `${highlight.id}-a` })),
+  ...highlights.map((highlight) => ({ ...highlight, id: `${highlight.id}-b` })),
 ];
 
 const mentions = [
@@ -32,18 +41,29 @@ const mentions = [
   { id: "epcs-2", label: "Top 10 EPCs in Renewable Asia-Pacific" },
 ];
 
+const years = [
+  { id: "2025", label: "2025", count: 26, items: mentions },
+  { id: "2024", label: "2024", count: 42, items: [] },
+  { id: "2023", label: "2023", count: 36, items: [] },
+  { id: "2022", label: "2022", count: 25, items: [] },
+];
+
 interface MediaMentionsProps {
   canvas?: boolean;
 }
 
 export default function MediaMentions({ canvas = false }: MediaMentionsProps) {
+  const [openYear, setOpenYear] = useState("2025");
+
   return (
     <main
       className={`${styles.page} ${canvas ? styles.canvasPage : ""}`}
       data-node-id="7077:5840"
     >
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.verticalTitle}
         src="/images/media-mentions/media-mentions.png"
         alt="Media and mentions"
@@ -65,12 +85,14 @@ export default function MediaMentions({ canvas = false }: MediaMentionsProps) {
         >
           <h3 id="recent-highlights">Recent Highlights</h3>
           <div className={styles.grid}>
-            {[...highlights, ...highlights].map((highlight, index) => (
-              <article
-                className={styles.card}
-                key={`${highlight.title}-${index}`}
-              >
-                <img loading="lazy" decoding="async" src={highlight.image} alt="" />
+            {visibleHighlights.map((highlight) => (
+              <article className={styles.card} key={highlight.id}>
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={highlight.image}
+                  alt=""
+                />
                 <div>
                   <h4>{highlight.title}</h4>
                   <p>{highlight.source}</p>
@@ -85,23 +107,31 @@ export default function MediaMentions({ canvas = false }: MediaMentionsProps) {
       </div>
       <aside className={styles.sidebar} aria-label="Media mentions by year">
         <section className={styles.yearList}>
-          <h3>
-            2025 <span>(26)</span>
-          </h3>
-          <ul>
-            {mentions.map((mention) => (
-              <li key={mention.id}>{mention.label}</li>
-            ))}
-          </ul>
-          <h3>
-            2024 <span>(42)</span>
-          </h3>
-          <h3>
-            2023 <span>(36)</span>
-          </h3>
-          <h3>
-            2023 <span>(25)</span>
-          </h3>
+          {years.map((year) => {
+            const isOpen = openYear === year.id;
+            const panelId = `year-${year.id}-panel`;
+
+            return (
+              <div className={styles.year} key={year.id}>
+                <button
+                  aria-controls={panelId}
+                  aria-expanded={isOpen}
+                  className={styles.yearTrigger}
+                  onClick={() => setOpenYear(isOpen ? "" : year.id)}
+                  type="button"
+                >
+                  {year.label} <strong>({year.count})</strong>
+                </button>
+                {isOpen && year.items.length > 0 ? (
+                  <ul id={panelId}>
+                    {year.items.map((mention) => (
+                      <li key={mention.id}>{mention.label}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+            );
+          })}
         </section>
         <FigmaAngledCta className={styles.request}>
           Submit Media Request

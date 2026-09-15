@@ -23,7 +23,6 @@ const staticRoutes = [
   "/empower/women-in-energy",
   "/endeavors/flagship-projects",
   "/endeavors/project-portfolio",
-  "/engage/become-a-supplier",
   "/engage/book-a-consultation",
   "/engage/contact-us",
   "/engage/investor-relations",

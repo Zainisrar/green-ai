@@ -1,61 +1,80 @@
-import React from 'react';
-import styles from './Insight_page__3.module.css';
+import React from "react";
+import styles from "./Insight_page__3.module.css";
 
-const img0 = require('./Insight_page__3/assets/7077:2960.png');
-const img1 = require('./Insight_page__3/assets/7077:2961.png');
-const img2 = require('./Insight_page__3/assets/7077:2962.png');
-const img3 = require('./Insight_page__3/assets/I7077:2963;5207:29710.png');
-const img4 = require('./Insight_page__3/assets/I7077:2964;5207:29712.png');
-const img5 = require('./Insight_page__3/assets/I7077:2964;5207:29713.png');
-const img6 = require('./Insight_page__3/assets/I7077:2965;5207:29715.png');
-const img7 = require('./Insight_page__3/assets/I7077:2965;5207:29716.png');
-const img8 = require('./Insight_page__3/assets/I7077:2966;5207:29718.png');
-const img9 = require('./Insight_page__3/assets/I7077:2967;5207:29720.png');
-const img10 = require('./Insight_page__3/assets/7077:2969.png');
-const img11 = require('./Insight_page__3/assets/7077:2971.png');
-const img12 = require('./Insight_page__3/assets/7077:2972.png');
-const img13 = require('./Insight_page__3/assets/7077:2973.png');
-const img14 = require('./Insight_page__3/assets/7077:2974.png');
-const img15 = require('./Insight_page__3/assets/7077:2976.png');
-const img16 = require('./Insight_page__3/assets/7077:2978.png');
-const img17 = require('./Insight_page__3/assets/7077:2980.png');
-const img18 = require('./Insight_page__3/assets/7077:2982.png');
-const img19 = require('./Insight_page__3/assets/7077:2988.png');
-const img20 = require('./Insight_page__3/assets/7077:2991.png');
-const img21 = require('./Insight_page__3/assets/7077:2996.png');
-const img22 = require('./Insight_page__3/assets/7077:2999.png');
-const img23 = require('./Insight_page__3/assets/7077:3006.png');
-const img24 = require('./Insight_page__3/assets/7077:3007.png');
-const img25 = require('./Insight_page__3/assets/7077:3008.png');
-const img26 = require('./Insight_page__3/assets/7077:3011.png');
-const img27 = require('./Insight_page__3/assets/7077:3012.png');
-const img28 = require('./Insight_page__3/assets/7077:3013.png');
-const img29 = require('./Insight_page__3/assets/7077:3014.png');
-const img30 = require('./Insight_page__3/assets/7077:3015.png');
-const img31 = require('./Insight_page__3/assets/7077:3017.png');
-const img32 = require('./Insight_page__3/assets/7077:3018.png');
-const img33 = require('./Insight_page__3/assets/7077:3020.png');
+const img0 = require("./Insight_page__3/assets/7077:2960.png");
+const img1 = require("./Insight_page__3/assets/7077:2961.png");
+const img2 = require("./Insight_page__3/assets/7077:2962.png");
+const img3 = require("./Insight_page__3/assets/I7077:2963;5207:29710.png");
+const img4 = require("./Insight_page__3/assets/I7077:2964;5207:29712.png");
+const img5 = require("./Insight_page__3/assets/I7077:2964;5207:29713.png");
+const img6 = require("./Insight_page__3/assets/I7077:2965;5207:29715.png");
+const img7 = require("./Insight_page__3/assets/I7077:2965;5207:29716.png");
+const img8 = require("./Insight_page__3/assets/I7077:2966;5207:29718.png");
+const img9 = require("./Insight_page__3/assets/I7077:2967;5207:29720.png");
+const img10 = require("./Insight_page__3/assets/7077:2969.png");
+const img11 = require("./Insight_page__3/assets/7077:2971.png");
+const img12 = require("./Insight_page__3/assets/7077:2972.png");
+const img13 = require("./Insight_page__3/assets/7077:2973.png");
+const img14 = require("./Insight_page__3/assets/7077:2974.png");
+const img15 = require("./Insight_page__3/assets/7077:2976.png");
+const img16 = require("./Insight_page__3/assets/7077:2978.png");
+const img17 = require("./Insight_page__3/assets/7077:2980.png");
+const img18 = require("./Insight_page__3/assets/7077:2982.png");
+const img19 = require("./Insight_page__3/assets/7077:2988.png");
+const img20 = require("./Insight_page__3/assets/7077:2991.png");
+const img21 = require("./Insight_page__3/assets/7077:2996.png");
+const img22 = require("./Insight_page__3/assets/7077:2999.png");
+const img23 = require("./Insight_page__3/assets/7077:3006.png");
+const img24 = require("./Insight_page__3/assets/7077:3007.png");
+const img25 = require("./Insight_page__3/assets/7077:3008.png");
+const img26 = require("./Insight_page__3/assets/7077:3011.png");
+const img27 = require("./Insight_page__3/assets/7077:3012.png");
+const img28 = require("./Insight_page__3/assets/7077:3013.png");
+const img29 = require("./Insight_page__3/assets/7077:3014.png");
+const img30 = require("./Insight_page__3/assets/7077:3015.png");
+const img31 = require("./Insight_page__3/assets/7077:3017.png");
+const img32 = require("./Insight_page__3/assets/7077:3018.png");
+const img33 = require("./Insight_page__3/assets/7077:3020.png");
 
-export default function Insight_page__3(){
+export default function Insight_page__3() {
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>Insight page -3</h2>
-      <p key="text-0" className={styles.sectionText}>LET’S CHAT</p>
-      <p key="text-1" className={styles.sectionText}>Delivering access to clean energy, fostering decent work and innovation, promoting sustainable consumption, and driving climate action</p>
-      <p key="text-2" className={styles.sectionText}>70% of global energy-related emissions originate in urban areas
-</p>
-      <p key="text-3" className={styles.sectionText}>75% of global energy demand is concentrated in cities
-</p>
-      <p key="text-4" className={styles.sectionText}>55% of city dwellers face frequent blackouts or lack reliable access
-</p>
-      <p key="text-5" className={styles.sectionText}>Cities are at the center of the energy-climate challenges
-</p>
-      <p key="text-6" className={styles.sectionText}>D1</p>
-      <p key="text-7" className={styles.sectionText}>Explore</p>
-      <p key="text-8" className={styles.sectionText}>Read more..</p>
-      <p key="text-9" className={styles.sectionText}># Urban  Insight 03</p>
-      <p key="text-10" className={styles.sectionText}>Why does reliable electricity remain 
-out of reach in fast-growing cities?</p>
+      <p key="text-0" className={styles.sectionText}>
+        LET’S CHAT
+      </p>
+      <p key="text-1" className={styles.sectionText}>
+        Delivering access to clean energy, fostering decent work and innovation,
+        promoting sustainable consumption, and driving climate action
+      </p>
+      <p key="text-2" className={styles.sectionText}>
+        70% of global energy-related emissions originate in urban areas
+      </p>
+      <p key="text-3" className={styles.sectionText}>
+        75% of global energy demand is concentrated in cities
+      </p>
+      <p key="text-4" className={styles.sectionText}>
+        55% of city dwellers face frequent blackouts or lack reliable access
+      </p>
+      <p key="text-5" className={styles.sectionText}>
+        Cities are at the center of the energy-climate challenges
+      </p>
+      <p key="text-6" className={styles.sectionText}>
+        D1
+      </p>
+      <p key="text-7" className={styles.sectionText}>
+        Explore
+      </p>
+      <p key="text-8" className={styles.sectionText}>
+        Read more..
+      </p>
+      <p key="text-9" className={styles.sectionText}>
+        # Urban Insight 03
+      </p>
+      <p key="text-10" className={styles.sectionText}>
+        Why does reliable electricity remain out of reach in fast-growing
+        cities?
+      </p>
       <img key="img-0" src={img0.default || img0} alt="7077:2960" />
       <img key="img-1" src={img1.default || img1} alt="7077:2961" />
       <img key="img-2" src={img2.default || img2} alt="7077:2962" />

@@ -1,13 +1,20 @@
 .shell {
   position: relative;
   width: 100%;
-  min-width: 100%;
+  max-width: 100%;
+  min-width: 0;
   height: 100svh;
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   background: #fff;
-  /* Prevent any content below the scaled canvas from creating scrollable whitespace */
   max-height: 100svh;
+}
+
+.shellScrollable {
+  height: auto;
+  min-height: 100svh;
+  max-height: none;
+  overflow-y: visible;
+  touch-action: pan-y;
 }
 
 .canvas {
@@ -20,8 +27,18 @@
   transform-origin: top left;
 }
 
+/* The design canvas is absolutely positioned so transform scaling does not
+   affect document flow. This matching spacer gives long Figma frames their
+   scaled scroll height, preventing bottom controls from being clipped. */
+.canvasSizer {
+  width: 1px;
+  pointer-events: none;
+}
+
 .mobile {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   min-height: 100svh;
   overflow-x: hidden;
   background: #fff;

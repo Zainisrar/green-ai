@@ -1,17 +1,34 @@
 "use client";
 
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { useProjects } from "@/hooks/useProjects";
 import D6Chatbot from "../D6Chatbot";
+import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
-import LetsStart from "./Modals/LetsStart";
 import styles from "./Project.module.css";
+
+const springTransition = {
+  type: "spring" as const,
+  mass: 1,
+  stiffness: 100,
+  damping: 15,
+};
+
+type ProjectPreviewInfo = {
+  title: string;
+  image: string;
+  projectIndex: number;
+};
 
 type ProjectSlide = {
   id: number;
   title: string;
+  shortTitle?: string;
   image: string;
+  leftPreview?: ProjectPreviewInfo;
+  rightPreview?: ProjectPreviewInfo;
   systems: string;
   days: string;
   totalGeneration: string;
@@ -25,58 +42,149 @@ type ProjectSlide = {
   dailyGeneration: string;
 };
 
-const fallbackProject: ProjectSlide = {
-  id: 1,
-  title:
-    "PNG’s First Utility-Scale Grid-Connected Solar Power Plant, 3MW, Baiyer (2025)",
-  image: "/images/projects/image.png",
-  systems: "1",
-  days: "265",
-  totalGeneration: "1000 kWh",
-  batteryPercentage: "68",
-  coalA: "3.37",
-  emissionReduction: "8.78",
-  treesPlanted: "603",
-  capacity: "93.15 kWh",
-  toDateProduction: "10800 kWh",
-  consumption: "1298.7 kWh",
-  dailyGeneration: "109 kWh",
-};
-
-const fallbackProjects = [
-  fallbackProject,
+const defaultProjects: ProjectSlide[] = [
   {
-    ...fallbackProject,
+    id: 1,
+    title:
+      "PNG’s First Utility-Scale Grid-Connected Solar Power Plant, 3MW, Baiyer (2025)",
+    shortTitle: "Baiyer Solar Plant 2025",
+    image: "/images/projects/mask_7077_7014_baiyer.png",
+    leftPreview: {
+      title: "Pimaga Health Centre 2023",
+      image: "/images/projects/mask_7077_7170_pimaga.png",
+      projectIndex: 1,
+    },
+    rightPreview: {
+      title: "Mongal Health Centre 2020",
+      image: "/images/projects/mask_7077_7960_mongal.png",
+      projectIndex: 2,
+    },
+    systems: "1",
+    days: "265",
+    totalGeneration: "1000 kWh",
+    batteryPercentage: "68",
+    coalA: "3.37",
+    emissionReduction: "8.78",
+    treesPlanted: "603",
+    capacity: "93.15 kWh",
+    toDateProduction: "10800 kWh",
+    consumption: "1298.7 kWh",
+    dailyGeneration: "109 kWh",
+  },
+  {
     id: 2,
-    title: "Mongal Health Centre 2020",
-    image: "/images/projects/image2.png",
-  },
-  {
-    ...fallbackProject,
-    id: 3,
-    title: "Wildlife Conservation Society 2025",
-    image: "/images/projects/featuredProjectImg1.png",
-  },
-];
-
-const supplementalProjects: ProjectSlide[] = [
-  {
-    ...fallbackProject,
-    id: -1,
     title: "Pimaga Health Centre 2023",
-    image: "/images/projects/pimaga-health-centre-2023.png",
+    shortTitle: "Pimaga Health Centre 2023",
+    image: "/images/projects/mask_7077_7170_pimaga.png",
+    leftPreview: {
+      title: "Mongol Health Centre 2020",
+      image: "/images/projects/mask_7077_7960_mongal.png",
+      projectIndex: 2,
+    },
+    rightPreview: {
+      title: "Baiyer Solar Plant 2025",
+      image: "/images/projects/mask_7077_7014_baiyer.png",
+      projectIndex: 0,
+    },
+    systems: "1",
+    days: "265",
+    totalGeneration: "1000 kWh",
+    batteryPercentage: "68",
+    coalA: "3.37",
+    emissionReduction: "8.78",
+    treesPlanted: "603",
+    capacity: "93.15 kWh",
+    toDateProduction: "10800 kWh",
+    consumption: "1298.7 kWh",
+    dailyGeneration: "109 kWh",
+  },
+  {
+    id: 3,
+    title: "Mongal Health Centre 2020",
+    shortTitle: "Mongal Health Centre 2020",
+    image: "/images/projects/mask_7077_7960_mongal.png",
+    leftPreview: {
+      title: "Baiyer Solar Plant 2025",
+      image: "/images/projects/mask_7077_7014_baiyer.png",
+      projectIndex: 0,
+    },
+    rightPreview: {
+      title: "Wildlife Conservation Society 2025",
+      image: "/images/projects/mask_7077_7327_wildlife.png",
+      projectIndex: 3,
+    },
+    systems: "1",
+    days: "265",
+    totalGeneration: "1000 kWh",
+    batteryPercentage: "68",
+    coalA: "3.37",
+    emissionReduction: "8.78",
+    treesPlanted: "603",
+    capacity: "93.15 kWh",
+    toDateProduction: "10800 kWh",
+    consumption: "1298.7 kWh",
+    dailyGeneration: "109 kWh",
+  },
+  {
+    id: 4,
+    title: "Wildlife Conservation Society 2025",
+    shortTitle: "Wildlife Conservation Society 2025",
+    image: "/images/projects/mask_7077_7327_wildlife.png",
+    leftPreview: {
+      title: "Baiyer Solar Plant 2025",
+      image: "/images/projects/mask_7077_7014_baiyer.png",
+      projectIndex: 0,
+    },
+    rightPreview: {
+      title: "Mongal Health Centre 2020",
+      image: "/images/projects/mask_7077_7960_mongal.png",
+      projectIndex: 2,
+    },
+    systems: "1",
+    days: "265",
+    totalGeneration: "1000 kWh",
+    batteryPercentage: "68",
+    coalA: "3.37",
+    emissionReduction: "8.78",
+    treesPlanted: "603",
+    capacity: "93.15 kWh",
+    toDateProduction: "10800 kWh",
+    consumption: "1298.7 kWh",
+    dailyGeneration: "109 kWh",
   },
 ];
 
 const valueWithoutUnit = (value: string | undefined, unit: string) =>
   value?.replace(unit, "").trim() || "—";
 
-const previewTitle = (title: string) => {
-  if (title.toLowerCase().includes("baiyer")) {
-    return "Baiyer Solar Plant 2025";
+type PreviewLabel = {
+  name: string;
+  year: string;
+};
+
+const formatPreviewTitle = (title: string): PreviewLabel => {
+  const t = title.toLowerCase();
+  if (t.includes("baiyer")) {
+    return { name: "Baiyer Solar Plant", year: "2025" };
+  }
+  if (t.includes("pimaga")) {
+    return { name: "Pimaga Health Centre", year: "2023" };
+  }
+  if (t.includes("mongal") || t.includes("mongol")) {
+    return { name: "Mongal Health Centre", year: "2020" };
+  }
+  if (t.includes("kagua")) {
+    return { name: "Kagua Health Centre", year: "2020" };
+  }
+  if (t.includes("wildlife")) {
+    return { name: "Wildlife Conservation Society", year: "2025" };
   }
 
-  return title;
+  const match = title.match(/^(.*?)[\s,]+(\d{4})\)?$/);
+  if (match) {
+    return { name: match[1].trim(), year: match[2] };
+  }
+  return { name: title, year: "" };
 };
 
 const timelineCards = [
@@ -151,54 +259,62 @@ export default function Project() {
   }, []);
 
   const projects = useMemo(() => {
-    const liveProjects = apiProjects?.length
-      ? apiProjects.map((project) => ({
-          id: project.id,
-          title: project.title?.trim() || fallbackProject.title,
-          image: project.featuredImg || fallbackProject.image,
-          systems: valueWithoutUnit(project.numberofsystems, ""),
-          days: valueWithoutUnit(project.noofdays, ""),
-          totalGeneration:
-            project.totalgeneration || fallbackProject.totalGeneration,
-          batteryPercentage: valueWithoutUnit(project.battery, "%"),
-          coalA: project.coalA || fallbackProject.coalA,
-          emissionReduction:
-            project.emissionreduction || fallbackProject.emissionReduction,
-          treesPlanted: project.treesplanted || fallbackProject.treesPlanted,
-          capacity: project.capacity || fallbackProject.capacity,
-          toDateProduction:
-            project.todateproduct || fallbackProject.toDateProduction,
-          consumption: project.consumption || fallbackProject.consumption,
-          dailyGeneration:
-            project.totalenergydaily || fallbackProject.dailyGeneration,
-        }))
-      : fallbackProjects;
+    if (!apiProjects?.length) return defaultProjects;
 
-    return [
-      ...liveProjects,
-      ...supplementalProjects.filter(
-        (supplemental) =>
-          !liveProjects.some(
-            (project) =>
-              project.title.toLowerCase() === supplemental.title.toLowerCase(),
-          ),
-      ),
-    ];
+    return defaultProjects.map((dp) => {
+      const live = apiProjects.find(
+        (p) =>
+          p.title?.toLowerCase().includes(dp.shortTitle?.toLowerCase() || "") ||
+          dp.title.toLowerCase().includes(p.title?.toLowerCase() || ""),
+      );
+      if (!live) return dp;
+
+      return {
+        ...dp,
+        systems: valueWithoutUnit(live.numberofsystems, "") || dp.systems,
+        days: valueWithoutUnit(live.noofdays, "") || dp.days,
+        totalGeneration: live.totalgeneration || dp.totalGeneration,
+        batteryPercentage:
+          valueWithoutUnit(live.battery, "%") || dp.batteryPercentage,
+        coalA: live.coalA || dp.coalA,
+        emissionReduction: live.emissionreduction || dp.emissionReduction,
+        treesPlanted: live.treesplanted || dp.treesPlanted,
+        capacity: live.capacity || dp.capacity,
+        toDateProduction: live.todateproduct || dp.toDateProduction,
+        consumption: live.consumption || dp.consumption,
+        dailyGeneration: live.totalenergydaily || dp.dailyGeneration,
+      };
+    });
   }, [apiProjects]);
 
   const activeIndex = currentProjectIndex % projects.length;
   const currentProject = projects[activeIndex];
-  const isPimagaProject = currentProject.title
-    .toLowerCase()
-    .includes("pimaga health centre");
-  const previousProject =
-    projects[(activeIndex - 1 + projects.length) % projects.length];
-  const nextProject = projects[(activeIndex + 1) % projects.length];
+
+  const currentLeftPreview = currentProject.leftPreview || {
+    title:
+      projects[(activeIndex - 1 + projects.length) % projects.length].title,
+    image:
+      projects[(activeIndex - 1 + projects.length) % projects.length].image,
+    projectIndex: (activeIndex - 1 + projects.length) % projects.length,
+  };
+
+  const currentRightPreview = currentProject.rightPreview || {
+    title: projects[(activeIndex + 1) % projects.length].title,
+    image: projects[(activeIndex + 1) % projects.length].image,
+    projectIndex: (activeIndex + 1) % projects.length,
+  };
+
   const moveProject = (amount: number) => {
     setViewMode("slide");
-    setCurrentProjectIndex(
-      (index) => (index + amount + projects.length) % projects.length,
-    );
+    if (amount < 0 && currentProject.leftPreview) {
+      setCurrentProjectIndex(currentProject.leftPreview.projectIndex);
+    } else if (amount > 0 && currentProject.rightPreview) {
+      setCurrentProjectIndex(currentProject.rightPreview.projectIndex);
+    } else {
+      setCurrentProjectIndex(
+        (index) => (index + amount + projects.length) % projects.length,
+      );
+    }
   };
   const openInView = () => {
     setTimelineRun((run) => run + 1);
@@ -232,24 +348,28 @@ export default function Project() {
         <InViewTimeline key={timelineRun} onExplore={openTimelineProject} />
       ) : (
         <section className={styles.stage} aria-label="Project portfolio">
-          <div className={styles.mainPhoto}>
-            <img loading="lazy" decoding="async"
-              src="/images/projects/mask_7077_7014.png"
+          <motion.div
+            className={styles.mainPhoto}
+            animate={{
+              scale: isProjectsOpen ? 0.958 : 1,
+            }}
+            transition={springTransition}
+          >
+            <img
+              loading="eager"
+              decoding="async"
+              src={currentProject.image}
               alt={currentProject.title}
               className={styles.figmaMainPhoto}
             />
             <div className={styles.photoShade} />
-          </div>
+          </motion.div>
 
           <div className={styles.titlePanel}>
             <h1>{currentProject.title}</h1>
           </div>
 
-          <span className={styles.bottomRect} aria-hidden="true" />
-          <span className={styles.bottomLineA} aria-hidden="true" />
-          <span className={styles.bottomLineB} aria-hidden="true" />
-
-          <button
+          <motion.button
             type="button"
             className={styles.collapseButton}
             onClick={() => setIsProjectsOpen((open) => !open)}
@@ -259,104 +379,126 @@ export default function Project() {
                 ? "Collapse project details"
                 : "Expand project details"
             }
+            initial={false}
+            animate={{
+              rotate: isProjectsOpen ? 180 : 0,
+              top: isProjectsOpen ? 389 : 865,
+              left: isProjectsOpen ? 1006 : 844,
+            }}
+            transition={springTransition}
           >
             <svg
-              viewBox="0 0 24 24"
+              width="59"
+              height="34"
+              viewBox="0 0 59 34"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
-              className={isProjectsOpen ? "" : styles.rotated}
             >
-              <path d="m6 9 6 6 6-6" />
+              <path
+                d="M5 29L29.5 5L54 29"
+                stroke="white"
+                strokeWidth="8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
-          </button>
+          </motion.button>
 
-          {isProjectsOpen && (
-            <section
-              className={styles.statsPanel}
-              aria-label="Project performance data"
-            >
-              <div className={styles.primaryStats}>
-                <Stat label="No. of systems" value={currentProject.systems} />
-                <Stat label="No. of days" value={currentProject.days} />
-                <Stat
-                  label="Total Generation"
-                  value={currentProject.totalGeneration}
-                  large
-                />
-                <div className={styles.battery}>
-                  <span>
-                    <Image
-                      src="/images/projects/batteryPercentage.png"
-                      width={26}
-                      height={27}
-                      alt=""
-                    />
-                  </span>
-                  <strong>{currentProject.batteryPercentage}%</strong>
-                </div>
-              </div>
-              <div className={styles.impactStats}>
-                <Impact
-                  icon="/images/projects/coal.png"
-                  label="Coal A"
-                  value={currentProject.coalA}
-                />
-                <span className={styles.divider}>/</span>
-                <Impact
-                  icon="/images/projects/co2.png"
-                  label={
-                    <>
-                      Emission
-                      <br />
-                      reduction
-                    </>
-                  }
-                  value={currentProject.emissionReduction}
-                />
-                <span className={styles.divider}>/</span>
-                <Impact
-                  icon="/images/projects/tree.png"
-                  label="Trees Planted"
-                  value={currentProject.treesPlanted}
-                />
-                <Impact
-                  icon="/images/projects/capacity.png"
-                  label="Capacity"
-                  value={currentProject.capacity}
-                />
-                <Impact
-                  icon="/images/projects/totalProduction.png"
-                  label="To date Production"
-                  value={currentProject.toDateProduction}
-                />
-                <Impact
-                  icon="/images/projects/consumption.png"
-                  label="Consumption"
-                  value={currentProject.consumption}
-                />
-              </div>
-              <div className={styles.chartRow}>
-                <div className={styles.periods}>
-                  {["Day", "Week", "Month", "Year"].map((period) => (
-                    <button type="button" key={period}>
-                      {period}
-                    </button>
-                  ))}
-                </div>
-                <div className={styles.graph}>
-                  <p>
-                    Total Generation daily : {currentProject.dailyGeneration}
-                  </p>
-                  <Image
-                    src="/images/projects/graph.png"
-                    alt="Daily energy generation graph"
-                    width={342}
-                    height={148}
+          <AnimatePresence>
+            {isProjectsOpen && (
+              <motion.section
+                className={styles.statsPanel}
+                aria-label="Project performance data"
+                initial={{ opacity: 0, y: 562 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 562 }}
+                transition={springTransition}
+              >
+                <div className={styles.primaryStats}>
+                  <Stat label="No. of systems" value={currentProject.systems} />
+                  <Stat label="No. of days" value={currentProject.days} />
+                  <Stat
+                    label="Total Generation"
+                    value={currentProject.totalGeneration}
+                    large
                   />
-                  <span>Today</span>
+                  <div className={styles.battery}>
+                    <span>
+                      <Image
+                        src="/images/projects/batteryPercentage.png"
+                        width={26}
+                        height={27}
+                        alt=""
+                      />
+                    </span>
+                    <strong>{currentProject.batteryPercentage}%</strong>
+                  </div>
                 </div>
-              </div>
-            </section>
-          )}
+                <div className={styles.impactStats}>
+                  <Impact
+                    icon="/images/projects/coal.png"
+                    label="Coal A"
+                    value={currentProject.coalA}
+                  />
+                  <span className={styles.divider}>/</span>
+                  <Impact
+                    icon="/images/projects/co2.png"
+                    label={
+                      <>
+                        Emission
+                        <br />
+                        reduction
+                      </>
+                    }
+                    value={currentProject.emissionReduction}
+                  />
+                  <span className={styles.divider}>/</span>
+                  <Impact
+                    icon="/images/projects/tree.png"
+                    label="Trees Planted"
+                    value={currentProject.treesPlanted}
+                  />
+                  <Impact
+                    icon="/images/projects/capacity.png"
+                    label="Capacity"
+                    value={currentProject.capacity}
+                  />
+                  <Impact
+                    icon="/images/projects/totalProduction.png"
+                    label="To date Production"
+                    value={currentProject.toDateProduction}
+                  />
+                  <Impact
+                    icon="/images/projects/consumption.png"
+                    label="Consumption"
+                    value={currentProject.consumption}
+                  />
+                </div>
+                <div className={styles.chartRow}>
+                  <div className={styles.periods}>
+                    {["Day", "Week", "Month", "Year"].map((period) => (
+                      <button type="button" key={period}>
+                        {period}
+                      </button>
+                    ))}
+                  </div>
+                  <div className={styles.graph}>
+                    <p>
+                      Total Generation daily : {currentProject.dailyGeneration}
+                    </p>
+                    <Image
+                      src="/images/projects/graph.png"
+                      alt="Daily energy generation graph"
+                      width={342}
+                      height={148}
+                    />
+                    <span>Today</span>
+                  </div>
+                </div>
+              </motion.section>
+            )}
+          </AnimatePresence>
         </section>
       )}
 
@@ -383,12 +525,14 @@ export default function Project() {
       {viewMode === "slide" && (
         <>
           <ProjectPreview
-            project={previousProject}
+            title={currentLeftPreview.title}
+            image={currentLeftPreview.image}
             direction="previous"
             onClick={() => moveProject(-1)}
           />
           <ProjectPreview
-            project={nextProject}
+            title={currentRightPreview.title}
+            image={currentRightPreview.image}
             direction="next"
             onClick={() => moveProject(1)}
           />
@@ -425,22 +569,47 @@ export default function Project() {
         </>
       )}
       {isDesktop ? (
-        <D6Chatbot
-          canvasAnchored
-          triggerVariant="figmaCanvas"
-          triggerClassName={styles.chatTrigger}
-          triggerStyle={{
-            top: 899,
-            right: "auto",
-            bottom: "auto",
-            left: 1498,
-            width: 418,
+        <motion.div
+          animate={{
+            x: isProjectsOpen ? -7 : 0,
+            y: isProjectsOpen ? -4 : 0,
           }}
-        />
+          transition={springTransition}
+        >
+          <D6Chatbot
+            canvasAnchored
+            triggerVariant="figmaCanvas"
+            triggerClassName={styles.chatTrigger}
+            triggerStyle={{
+              top: 899,
+              right: "auto",
+              bottom: "auto",
+              left: 1498,
+              width: 418,
+            }}
+          />
+        </motion.div>
       ) : (
         <D6Chatbot />
       )}
-      <LetsStart isOpen={isStartOpen} onClose={() => setIsStartOpen(false)} />
+      <ProductEnquiry
+        isOpen={isStartOpen}
+        onClose={() => setIsStartOpen(false)}
+        titlePrefix="LET'S"
+        titleAccent="START"
+        interestLabel="PROJECT TYPE"
+        interestOptions={[
+          "Project Portfolio",
+          "Solar EPCM",
+          "Hybrid microgrid",
+          "Energy storage",
+          "Grid integration",
+          "Rural electrification",
+          "Other",
+        ]}
+        defaultInterest="Project Portfolio"
+        submitButtonText="Get Started"
+      />
     </main>
   );
 }
@@ -619,35 +788,57 @@ function Arrow({ direction }: { direction: "left" | "right" }) {
 }
 
 function ProjectPreview({
-  project,
+  title,
+  image,
   direction,
   onClick,
 }: {
-  project: ProjectSlide;
+  title: string;
+  image: string;
   direction: "previous" | "next";
   onClick: () => void;
 }) {
   const isPrevious = direction === "previous";
-  const label = previewTitle(project.title);
+  const { name, year } = formatPreviewTitle(title);
+  const fullLabel = year ? `${name} ${year}` : name;
 
   return (
     <button
       type="button"
       className={`${styles.preview} ${isPrevious ? styles.previousPreview : styles.nextPreview}`}
       onClick={onClick}
-      aria-label={`${isPrevious ? "Previous" : "Next"} project: ${label}`}
+      aria-label={`${isPrevious ? "Previous" : "Next"} project: ${fullLabel}`}
     >
-      <span className={styles.previewWash} />
-      <span className={styles.previewCard}>
-        <img loading="lazy" decoding="async" src={project.image} alt="" />
+      {/* 1. Back Layer: Clear unblurred framed photo */}
+      <span className={styles.previewBackFrame}>
+        <img loading="lazy" decoding="async" src={image} alt="" />
       </span>
-      <span className={styles.previewCaption}>{label}</span>
-      <span
-        className={styles.previewArrow}
-        aria-hidden="true"
-      >
-        <img loading="lazy" decoding="async"
-          src={isPrevious ? "/images/projects/arrow_7077_7037.png" : "/images/projects/arrow_7077_7036.png"}
+
+      {/* 2. Front Layer: Frosted glass blurred card */}
+      <span className={styles.previewFrontCard}>
+        <img
+          loading="lazy"
+          decoding="async"
+          src={image}
+          alt=""
+          className={styles.previewFrontImg}
+        />
+        <span className={styles.previewCaption}>
+          <span>{name}</span>
+          {year && <span className={styles.previewYear}>{year}</span>}
+        </span>
+      </span>
+
+      {/* 3. Directional arrow */}
+      <span className={styles.previewArrow} aria-hidden="true">
+        <img
+          loading="lazy"
+          decoding="async"
+          src={
+            isPrevious
+              ? "/images/projects/arrow_7077_7037.png"
+              : "/images/projects/arrow_7077_7036.png"
+          }
           alt=""
           width={40}
           height={23}

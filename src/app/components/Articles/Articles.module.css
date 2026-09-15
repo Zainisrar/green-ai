@@ -146,14 +146,25 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  min-width: 98px;
-  padding: 6px 15px;
-  background: #f1ff9c;
+  display: inline-flex;
+  width: 97px;
+  height: 29.326px;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-image: linear-gradient(90deg, #23b14d, #fffe50) 1;
+  background: linear-gradient(
+    90deg,
+    rgb(35 177 77 / 50%),
+    rgb(255 254 80 / 50%)
+  );
   clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
   margin-top: auto;
-  color: #23b14d;
-  font-size: 13px;
-  font-weight: 700;
+  color: #000;
+  font-size: 12px;
+  font-weight: 600;
 }
 .rowArrow {
   position: absolute;

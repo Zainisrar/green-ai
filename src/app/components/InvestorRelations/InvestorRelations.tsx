@@ -1,14 +1,14 @@
 "use client";
+
 import { useState } from "react";
-import Link from "next/link";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
-import styles from "./InvestorRelations.module.css";
-import WhyInvestGreen from "./Dialog/WhyInvestGreen";
 import InvestmentFocusArea from "./Dialog/InvestmentFocusArea";
-import PerformanceSnapshots from "./Dialog/PerformanceSnapshots";
 import InvestmentInstruments from "./Dialog/InvestmentInstruments";
+import PerformanceSnapshots from "./Dialog/PerformanceSnapshots";
+import WhyInvestGreen from "./Dialog/WhyInvestGreen";
+import styles from "./InvestorRelations.module.css";
 import SubmitEOI from "./Modals/SubmitEOI";
 
 const FALLBACK = {
@@ -53,9 +53,10 @@ export default function InvestorRelations({
     const parts = text.split(new RegExp(`(${pattern})`, "gi"));
     return parts.map((part, index) => {
       const shouldHighlight = highlightTerms.some(
-        (term) => part.toLowerCase() === term.toLowerCase()
+        (term) => part.toLowerCase() === term.toLowerCase(),
       );
       return shouldHighlight ? (
+        // biome-ignore lint/suspicious/noArrayIndexKey: parts from string split
         <span key={index} className={styles.highlight}>
           {part}
         </span>
@@ -73,7 +74,8 @@ export default function InvestorRelations({
     {
       key: "whyInvestGreen",
       title: "Why Invest in GREEN?",
-      subtitle: "Infrastructure without integrity is a risk. With GREEN, resilience is engineered.",
+      subtitle:
+        "Infrastructure without integrity is a risk. With GREEN, resilience is engineered.",
       image: "/images/investor-relations/card1.png",
       x: 291,
       y: 330,
@@ -129,14 +131,18 @@ export default function InvestorRelations({
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
       {/* Left vertical side title */}
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         src="/images/investor-relations/investor-relations.png"
         alt="Investor Relations"
         className={styles.verticalTitle}
       />
 
       {/* Faint right-side photo collage (baked from Figma render) */}
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.rightCollageImg}
         src="/images/investor-relations/collage.png"
         alt=""
@@ -168,28 +174,36 @@ export default function InvestorRelations({
             onClick={() => setOpenModal(row.key)}
             aria-label={`Open ${row.title}`}
           >
-            <img loading="lazy" decoding="async" src={row.image} alt={row.title} />
-            <span
-              className={styles.rowBracket}
-              aria-hidden="true"
-              style={{ top: 10, left: -19 }}
+            <img
+              loading="lazy"
+              decoding="async"
+              src={row.image}
+              alt={row.title}
             />
           </button>
 
           <div
             className={styles.rowText}
-            style={{ position: "absolute", left: row.titleX, top: row.titleY - row.y }}
+            style={{
+              position: "absolute",
+              left: row.titleX,
+              top: row.titleY - row.y,
+            }}
           >
-            <h3
-              className={styles.rowTitle}
+            <button
+              type="button"
+              className={styles.rowTitleBtn}
               onClick={() => setOpenModal(row.key)}
-              style={{ cursor: "pointer" }}
             >
-              {row.title}
-            </h3>
+              <h3 className={styles.rowTitle}>{row.title}</h3>
+            </button>
             <p
               className={styles.rowSubtitle}
-              style={{ position: "absolute", left: 0, top: row.subY - row.titleY }}
+              style={{
+                position: "absolute",
+                left: 0,
+                top: row.subY - row.titleY,
+              }}
             >
               {row.subtitle}
             </p>
@@ -206,45 +220,43 @@ export default function InvestorRelations({
           >
             Explore
           </FigmaAngledCta>
-
-          <div className={styles.rowDivider} />
         </div>
       ))}
 
       {/* Right quote card */}
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.quoteBracketL}
         src="/images/rfp/quote_bracket_l.png"
         alt=""
         aria-hidden="true"
       />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.quoteBracketR}
         src="/images/rfp/quote_bracket_r.png"
         alt=""
         aria-hidden="true"
       />
       <div className={styles.quoteCard}>
-        <p>
-          {highlightText(d.quote1.text, d.quote1.highlighted)}
-        </p>
+        <p>{highlightText(d.quote1.text, d.quote1.highlighted)}</p>
       </div>
 
       {/* Bottom-left closing quote */}
       <div className={styles.bottomQuote}>
-        <h2>
-          {highlightText(d.quote2.text, d.quote2.highlighted)}
-        </h2>
+        <h2>{highlightText(d.quote2.text, d.quote2.highlighted)}</h2>
       </div>
 
       {/* Bottom-right CTAs */}
       <FigmaAngledCta
         className={styles.downloadCta}
         style={{ position: "absolute", left: 1569, top: 741 }}
-        icon="chevron"
+        icon="download"
         href={ctaLinks.investorPack}
       >
-        Request Investor Pack
+        Download Investor Pack (PDF)
       </FigmaAngledCta>
       <FigmaAngledCta
         className={styles.eoiCta}

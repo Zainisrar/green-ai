@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 export interface CareersGreenData {
   success: boolean;
@@ -81,18 +81,20 @@ export interface CareersGreenData {
 }
 
 const fetchCareersGreen = async (): Promise<CareersGreenData> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/empower/careers-at-green');
-  
+  const response = await fetch(
+    "https://greencms.percepco.co.uk/api/empower/careers-at-green",
+  );
+
   if (!response.ok) {
     throw new Error(`Failed to fetch careers green data: ${response.status}`);
   }
-  
+
   return response.json();
 };
 
 export const useCareersGreen = () => {
   return useQuery({
-    queryKey: ['careers-green'],
+    queryKey: ["careers-green"],
     queryFn: fetchCareersGreen,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes

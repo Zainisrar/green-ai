@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 
-
 import { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
@@ -61,7 +60,10 @@ export default function CollaborationInnovation({
 
   const d = FALLBACK;
 
-  const highlightText = (text: string, highlight: string): React.ReactNode | string => {
+  const highlightText = (
+    text: string,
+    highlight: string,
+  ): React.ReactNode | string => {
     if (!highlight) return text;
     const highlightTerms = highlight.trim().split(/\s+/);
     const pattern = highlightTerms
@@ -70,7 +72,7 @@ export default function CollaborationInnovation({
     const parts = text.split(new RegExp(`(${pattern})`, "gi"));
     return parts.map((part, index) => {
       const shouldHighlight = highlightTerms.some(
-        (term) => part.toLowerCase() === term.toLowerCase()
+        (term) => part.toLowerCase() === term.toLowerCase(),
       );
       return shouldHighlight ? (
         <span key={index} className={styles.greenHighlight}>
@@ -96,7 +98,9 @@ export default function CollaborationInnovation({
 
       {/* Left green/yellow angled panel (Group 1171277870, 326×662 at -15,-1) */}
       <div className={styles.leftPanel} aria-hidden="true" />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         src="/images/collaboration-innovation/logo_green.png"
         alt="GREEN Future: Envisioned"
         className={styles.panelLogo}
@@ -107,19 +111,25 @@ export default function CollaborationInnovation({
 
       {/* Faint left collage (Mask group at -472,408, 1152×1888) */}
       <div className={styles.leftCollage} aria-hidden="true">
-        <img loading="lazy" decoding="async" src="/images/collaboration-innovation/collage_main.png" alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/collaboration-innovation/collage_main.png"
+          alt=""
+        />
       </div>
 
       {/* Header section */}
       <div className={styles.headerBlock}>
         <h1 className={styles.mainTitle}>
-          COLLABORATION &amp; <span className={styles.greenText}>INNOVATION</span>
+          COLLABORATION &amp;{" "}
+          <span className={styles.greenText}>INNOVATION</span>
         </h1>
         <p className={styles.subHeadline}>{d.subHeadline}</p>
         <p className={styles.description}>
           {highlightText(
             d.description.text.replace(/\r?\n/g, " "),
-            d.description.highlighted
+            d.description.highlighted,
           )}
         </p>
       </div>
@@ -154,11 +164,20 @@ export default function CollaborationInnovation({
             <button
               type="button"
               className={styles.cardImage}
-              style={{ position: "absolute", left: imgLeft - cardLeft, top: imgTop - [341, 338, 339][idx] }}
+              style={{
+                position: "absolute",
+                left: imgLeft - cardLeft,
+                top: imgTop - [341, 338, 339][idx],
+              }}
               onClick={() => setOpenModal(card.key)}
               aria-label={`Open ${card.title}`}
             >
-              <img loading="lazy" decoding="async" src={card.image} alt={card.title} />
+              <img
+                loading="lazy"
+                decoding="async"
+                src={card.image}
+                alt={card.title}
+              />
               <span className={styles.cardImageAccent} aria-hidden="true" />
             </button>
             <p
@@ -188,7 +207,9 @@ export default function CollaborationInnovation({
 
       {/* Bottom-left quote with angled brackets (Vectors 7374 / 7375) */}
       <div className={styles.bottomQuote}>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/collaboration-innovation/quote_left.png"
           alt=""
           className={styles.quoteBracketLeft}
@@ -197,10 +218,12 @@ export default function CollaborationInnovation({
         <h2 className={styles.quoteText}>
           {highlightText(
             d.quote1.text.slice(1, d.quote1.text.length - 1),
-            d.quote1.highlighted
+            d.quote1.highlighted,
           )}
         </h2>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/collaboration-innovation/quote_right.png"
           alt=""
           className={styles.quoteBracketRight}
@@ -212,7 +235,7 @@ export default function CollaborationInnovation({
       <p className={styles.legacyQuote}>
         {highlightText(
           d.quote2.text.replace(/\r?\n/g, " "),
-          d.quote2.highlighted
+          d.quote2.highlighted,
         )}
       </p>
 

@@ -19,8 +19,15 @@
 /* The drawer provides its own close control and section navigation. Keeping
    this header above it produced two overlapping crosses and duplicate, scaled
    menu labels on Figma canvas pages. */
-.navigationOpen {
-  visibility: hidden;
+.header.navigationOpen {
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.navigationOpen .navigation,
+.navigationOpen .menuButton {
+  display: none;
 }
 
 .scrolled {
@@ -82,10 +89,12 @@
   /* Match the 1920px Figma canvas navigation lane used by Explore. The
      previous 45px desktop gap made viewport pages begin roughly 50px earlier. */
   gap: clamp(24px, 1.85vw, 36px);
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: clamp(18px, 1.2vw, 26px);
   font-weight: 500;
   line-height: 1;
   text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .navigation a {
@@ -112,8 +121,8 @@
 .menuButton {
   display: grid;
   flex: 0 0 auto;
-  width: 42px;
-  height: 54px;
+  width: clamp(64px, 4.427vw, 85px);
+  height: clamp(64px, 4.427vw, 85px);
   margin: 0 0 0 4px;
   padding: 0;
   border: 0;
@@ -124,28 +133,34 @@
 
 .menuButton img {
   display: block;
-  width: 42px;
-  height: 42px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
 .menuCloseButton {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .menuCloseButton span {
   position: absolute;
-  width: 42px;
-  height: 4px;
+  top: 50%;
+  left: 50%;
+  width: clamp(26px, 1.8vw, 34px);
+  height: 3.5px;
   background: #202b3a;
+  border-radius: 2px;
 }
 
 .menuCloseButton span:first-child {
-  transform: rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .menuCloseButton span:last-child {
-  transform: rotate(-45deg);
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 .canvasHeader {
@@ -174,6 +189,7 @@
 }
 
 .canvasHeader .navigation {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
   position: absolute;
   top: 47px;
   right: 87px;
@@ -182,7 +198,9 @@
   margin: 0;
   font-size: 20px;
   font-weight: 500;
-  line-height: normal;
+  line-height: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .canvasHeader .navigation a {
@@ -215,6 +233,16 @@
   font-weight: 500;
 }
 
+/* A few Figma canvases, such as the Expertise detail state, explicitly show
+   their current navigation item in GREEN. Keep that state opt-in so the D6
+   product canvases retain their neutral navigation treatment. */
+.canvasHeader.canvasActiveNavigation .navigation a:hover,
+.canvasHeader.canvasActiveNavigation .navigation a:focus-visible,
+.canvasHeader.canvasActiveNavigation .navigation .active {
+  color: #23b14d;
+  font-weight: 600;
+}
+
 .canvasHeader .navigation a:nth-child(4) {
   left: 385px;
 }
@@ -230,7 +258,7 @@
 .canvasMenuButton {
   position: absolute;
   top: 16px;
-  left: 1574px;
+  left: 1568px;
   width: 85px;
   height: 85px;
   margin: 0;
@@ -269,6 +297,7 @@
 }
 
 .productCanvasHeader .navigation {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
   position: absolute;
   top: 47px;
   /* Unlike `.canvasHeader`, this header begins at x=0 (rather than x=262).
@@ -277,7 +306,9 @@
   margin: 0;
   font-size: 20px;
   font-weight: 500;
-  line-height: normal;
+  line-height: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0;
 }
 
 .productCanvasHeader .navigation a {
@@ -316,7 +347,174 @@
 
 .productCanvasHeader .canvasMenuButton {
   top: 16px;
-  left: 1827px;
+  left: 1830px;
+}
+
+@media (min-width: 1200px) {
+  .header:not(.canvasHeader):not(.productCanvasHeader) {
+    --site-header-height: clamp(86px, 6.04167vw, 116px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: var(--site-header-height);
+    padding: 0;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader) .brandPanel,
+  .header:not(.canvasHeader):not(.productCanvasHeader) .logo,
+  .header:not(.canvasHeader):not(.productCanvasHeader) .navigation,
+  .header:not(.canvasHeader):not(.productCanvasHeader) .menuButton {
+    pointer-events: auto;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader) .brandPanel {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader) .navigation {
+    position: absolute;
+    top: clamp(35px, 2.4479vw, 47px);
+    left: 56.04167vw;
+    margin: 0;
+    font-size: clamp(15px, 1.04167vw, 20px);
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader) .navigation a {
+    position: absolute;
+    top: 0;
+    display: block;
+    height: clamp(18px, 1.25vw, 24px);
+    line-height: clamp(18px, 1.25vw, 24px);
+    white-space: nowrap;
+    font-size: inherit;
+    font-weight: 500;
+    color: #202020;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader)
+    .navigation
+    a:nth-child(1) {
+    left: 0;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader)
+    .navigation
+    a:nth-child(2) {
+    left: 6.61458vw;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader)
+    .navigation
+    a:nth-child(3) {
+    left: 12.65625vw;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader)
+    .navigation
+    a:nth-child(4) {
+    left: 20.05208vw;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader)
+    .navigation
+    a:nth-child(5) {
+    left: 27.70833vw;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader)
+    .navigation
+    a:nth-child(6) {
+    left: 33.80208vw;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader) .menuButton {
+    position: absolute;
+    top: clamp(12px, 0.8333vw, 16px);
+    left: calc(100vw - clamp(64px, 4.427vw, 85px) - clamp(4px, 0.26vw, 6px));
+    width: clamp(64px, 4.427vw, 85px);
+    height: clamp(64px, 4.427vw, 85px);
+    margin: 0;
+    padding: 0;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader) .menuButton img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (min-width: 1920px) {
+  .header:not(.canvasHeader):not(.productCanvasHeader) {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1920px;
+    height: 116px;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader) .navigation {
+    top: 47px;
+    left: 1076px;
+    font-size: 20px;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader) .navigation a {
+    height: 24px;
+    line-height: 24px;
+    font-size: 20px;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader)
+    .navigation
+    a:nth-child(1) {
+    left: 0;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader)
+    .navigation
+    a:nth-child(2) {
+    left: 127px;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader)
+    .navigation
+    a:nth-child(3) {
+    left: 243px;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader)
+    .navigation
+    a:nth-child(4) {
+    left: 385px;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader)
+    .navigation
+    a:nth-child(5) {
+    left: 532px;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader)
+    .navigation
+    a:nth-child(6) {
+    left: 649px;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader) .menuButton {
+    top: 16px;
+    left: 1830px;
+    width: 85px;
+    height: 85px;
+  }
 }
 
 @media (max-width: 900px) {

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 interface EventImage {
   alt: string;
@@ -52,19 +52,21 @@ interface EventsWebinarsResponse {
 }
 
 const fetchEventsWebinars = async (): Promise<EventsWebinarsData> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/enlighten/events-webinars');
-  
+  const response = await fetch(
+    "https://greencms.percepco.co.uk/api/enlighten/events-webinars",
+  );
+
   if (!response.ok) {
-    throw new Error('Failed to fetch events and webinars data');
+    throw new Error("Failed to fetch events and webinars data");
   }
-  
+
   const result: EventsWebinarsResponse = await response.json();
   return result.data;
 };
 
 export const useEventsWebinars = () => {
   return useQuery({
-    queryKey: ['events-webinars'],
+    queryKey: ["events-webinars"],
     queryFn: fetchEventsWebinars,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes

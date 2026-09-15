@@ -26,3 +26,99 @@
   position: relative;
   z-index: 1;
 }
+
+/* Supplier detail dialogs — Figma nodes 7077:19448, 19335, 19221, 19570. */
+.supplierWindow {
+  width: min(1866.2px, calc(100vw - 36px));
+  height: 699.6px;
+}
+
+.supplierPanel {
+  height: 699.6px;
+  min-height: 699.6px;
+  margin: 0 !important;
+  isolation: isolate;
+  overflow: hidden;
+  border: 0 !important;
+  border-radius: 0;
+  background: linear-gradient(90deg, #23b14d 0%, #fffe50 100%) !important;
+  clip-path: polygon(16.33% 0, 100% 0, 80.84% 100%, 0 100%);
+  padding: 44px 300px 48px 344px !important;
+}
+
+.supplierPanel::before {
+  position: absolute;
+  z-index: 0;
+  inset: 2px;
+  content: "";
+  background: #fff;
+  clip-path: polygon(16.33% 0, 100% 0, 80.84% 100%, 0 100%);
+}
+
+.supplierPanel > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Supplier handbook dialogs — Figma nodes 7077:28940 and 7077:29052.
+   This is intentionally narrower and taller than the supplier-page detail
+   frame, while retaining the same parallel angled sides. */
+.handbookWindow {
+  width: min(1492px, calc(100vw - 36px)) !important;
+  height: 560px;
+  max-width: none !important;
+}
+
+.handbookPanel {
+  height: 560px;
+  min-height: 560px;
+  margin: 0 !important;
+  isolation: isolate;
+  overflow: hidden;
+  border: 0 !important;
+  border-radius: 0;
+  background: linear-gradient(90deg, #23b14d 0%, #fffe50 100%) !important;
+  clip-path: polygon(16.33% 0, 100% 0, 80.84% 100%, 0 100%);
+  padding: 44px 250px 48px 344px !important;
+}
+
+.handbookPanel::before {
+  position: absolute;
+  z-index: 0;
+  inset: 2px;
+  content: "";
+  background: #fff;
+  clip-path: polygon(16.33% 0, 100% 0, 80.84% 100%, 0 100%);
+}
+
+.handbookPanel > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 767px) {
+  .supplierWindow,
+  .supplierPanel,
+  .handbookWindow,
+  .handbookPanel {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+  }
+
+  .handbookWindow {
+    width: 100% !important;
+  }
+
+  .supplierPanel,
+  .supplierPanel::before,
+  .handbookPanel,
+  .handbookPanel::before {
+    clip-path: none;
+  }
+
+  .supplierPanel,
+  .handbookPanel {
+    padding: 2rem 1.5rem !important;
+  }
+}

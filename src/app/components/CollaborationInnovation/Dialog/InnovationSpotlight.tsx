@@ -53,7 +53,12 @@ const InnovationSpotlight = ({ isOpen, onClose, data }: Props) => {
                   onClick={onClose}
                   className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
                 >
-                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/join-us/xicon.png"
+                    alt="Close Icon"
+                  />
                 </button>
               </div>
               {/* Modal Content */}
@@ -72,7 +77,9 @@ const InnovationSpotlight = ({ isOpen, onClose, data }: Props) => {
                     <div key={idx} className="space-y-3">
                       <div className="flex items-start gap-3">
                         <div className="flex-shrink-0 mt-1">
-                          <img loading="lazy" decoding="async"
+                          <img
+                            loading="lazy"
+                            decoding="async"
                             src="/images/grid-intel/lighting.png"
                             className="w-14 -mt-4"
                             alt="lighting"
@@ -95,28 +102,35 @@ const InnovationSpotlight = ({ isOpen, onClose, data }: Props) => {
           ) : (
             <div
               className="bg-gray-100 transform  py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-              style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
-                transform:"skewX(-12deg)"
-               }}
+              style={{
+                clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
+                transform: "skewX(-12deg)",
+              }}
             >
               {/* Close Button */}
               <div className="flex justify-end w-full">
                 <button
                   onClick={onClose}
                   style={{
-                    transform:"skewX(12deg)"
+                    transform: "skewX(12deg)",
                   }}
                   className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
                 >
-                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/join-us/xicon.png"
+                    alt="Close Icon"
+                  />
                 </button>
               </div>
               {/* Modal Content */}
               <div
-              style={{
-                transform:"skewX(6deg)"
-              }}
-              className="transform  max-w-5xl mx-auto">
+                style={{
+                  transform: "skewX(6deg)",
+                }}
+                className="transform  max-w-5xl mx-auto"
+              >
                 {/* Title Section */}
                 <div className="mb-8">
                   <h2 className="text-3xl font-black text-gray-800 mb-4">
@@ -131,7 +145,9 @@ const InnovationSpotlight = ({ isOpen, onClose, data }: Props) => {
                     <div key={idx} className="space-y-3">
                       <div className="flex items-start gap-3">
                         <div className="flex-shrink-0 mt-1">
-                          <img loading="lazy" decoding="async"
+                          <img
+                            loading="lazy"
+                            decoding="async"
                             src="/images/grid-intel/lighting.png"
                             className="w-14 -mt-4"
                             alt="lighting"

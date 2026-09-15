@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useJoinUs } from "../../../hooks/useJoinUs";
 import D6Chatbot from "../D6Chatbot";
-import TopNavigation from "../TopNavigation/TopNavigation";
+import SiteHeader from "../SiteHeader/SiteHeader";
 import ExistingUsers from "./ExistingUsers";
 import styles from "./JoinUs.module.css";
 import NewUsers from "./NewUsers";
@@ -46,11 +46,24 @@ export default function JoinUs() {
   const { data: joinUsData } = useJoinUs();
   const [isExistingUsersOpen, setIsExistingUsersOpen] = useState(false);
   const [isNewUsersOpen, setIsNewUsersOpen] = useState(false);
-  const [canvasScale, setCanvasScale] = useState(1);
+  const [canvasScale, setCanvasScale] = useState({ x: 1, y: 1 });
+  const [isMobile, setIsMobile] = useState(false);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    const updateScale = () => setCanvasScale(window.innerWidth / FIGMA_WIDTH);
+    const updateScale = () => {
+      const mobile = window.innerWidth <= 1023;
+      setIsMobile(mobile);
+      if (mobile) {
+        const s = window.innerWidth / FIGMA_WIDTH;
+        setCanvasScale({ x: s, y: s });
+      } else {
+        setCanvasScale({
+          x: window.innerWidth / FIGMA_WIDTH,
+          y: window.innerHeight / FIGMA_HEIGHT,
+        });
+      }
+    };
     updateScale();
     window.addEventListener("resize", updateScale, { passive: true });
     return () => window.removeEventListener("resize", updateScale);
@@ -69,17 +82,26 @@ export default function JoinUs() {
   const fadeInitial = reduceMotion ? false : { opacity: 0 };
   return (
     <>
-      <TopNavigation />
+      {isMobile ? <SiteHeader /> : null}
 
       <main
         className={styles.pageShell}
-        style={{ height: Math.max(FIGMA_HEIGHT * canvasScale, 1) }}
+        style={{
+          height: isMobile
+            ? Math.max(FIGMA_HEIGHT * canvasScale.x, 1)
+            : "100svh",
+        }}
       >
         <div
           className={styles.canvas}
-          style={{ transform: `scale(${canvasScale})` }}
+          style={{
+            transform: isMobile
+              ? `scale(${canvasScale.x})`
+              : `scale(${canvasScale.x}, ${canvasScale.y})`,
+          }}
           data-node-id="7077:17046"
         >
+          {!isMobile && <SiteHeader layout="figmaCanvas" />}
           <motion.div
             className={styles.scenicArt}
             initial={scenicInitial}
@@ -88,7 +110,12 @@ export default function JoinUs() {
             data-node-id="7077:2823"
             aria-hidden="true"
           >
-            <img loading="eager" decoding="async" src="/images/join-us/bg.jpg" alt="" />
+            <img
+              loading="eager"
+              decoding="async"
+              src="/images/join-us/bg.jpg"
+              alt=""
+            />
           </motion.div>
 
           <motion.section
@@ -118,7 +145,9 @@ export default function JoinUs() {
               onClick={() => setIsExistingUsersOpen(true)}
               aria-label="Log in as an existing user"
             >
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/join-us/existing-users.png"
                 alt="Existing Users"
               />
@@ -129,7 +158,12 @@ export default function JoinUs() {
               onClick={() => setIsNewUsersOpen(true)}
               aria-label="Register as a new user"
             >
-              <img loading="lazy" decoding="async" src="/images/join-us/new-users.png" alt="New Users" />
+              <img
+                loading="lazy"
+                decoding="async"
+                src="/images/join-us/new-users.png"
+                alt="New Users"
+              />
             </button>
 
             <h2 className={styles.accessHeading}>
@@ -142,7 +176,9 @@ export default function JoinUs() {
                 className={`${styles.feature} ${feature.className}`}
                 key={feature.title}
               >
-                <img loading="lazy" decoding="async"
+                <img
+                  loading="lazy"
+                  decoding="async"
                   src="/images/join-us/lighting.png"
                   alt=""
                   aria-hidden="true"
@@ -174,11 +210,21 @@ export default function JoinUs() {
               href={data?.email?.href || "mailto:careers.support@green.com.pg"}
               className={`${styles.contactCard} ${styles.emailCard}`}
             >
-              <img loading="lazy" decoding="async" src="/images/join-us/mail.png" alt="" />
+              <img
+                loading="lazy"
+                decoding="async"
+                src="/images/join-us/mail.png"
+                alt=""
+              />
               <span>{data?.email?.text || "careers.support@green.com.pg"}</span>
             </Link>
             <div className={`${styles.contactCard} ${styles.phoneCard}`}>
-              <img loading="lazy" decoding="async" src="/images/join-us/call.png" alt="" />
+              <img
+                loading="lazy"
+                decoding="async"
+                src="/images/join-us/call.png"
+                alt=""
+              />
               <span>
                 {data?.phone?.text || "+675 XXX XXX XXX (Careers Desk)"}
               </span>
@@ -188,7 +234,9 @@ export default function JoinUs() {
               href={data?.cta?.[0]?.href || "/empower/job-openings"}
               className={`${styles.cta} ${styles.vacancies}`}
             >
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/join-us/view-current-vacancies.png"
                 alt="View Current Vacancies"
               />
@@ -197,14 +245,18 @@ export default function JoinUs() {
               href={data?.cta?.[1]?.href || "#"}
               className={`${styles.cta} ${styles.privacy}`}
             >
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/join-us/view-our-recruitment-privacy-policy.png"
                 alt="View our Recruitment Privacy Policy (PDF)"
               />
             </Link>
           </motion.section>
 
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             className={styles.verticalLabel}
             src="/images/join-us/industry-affiliations-certifications.png"
             alt="Industry affiliations and certifications"

@@ -1,17 +1,15 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
+import CountryCodeDropdown from "@/app/components/shared/CountryCodeDropdown";
+import EngineeringFormModal from "@/app/components/shared/EngineeringFormModal";
 import {
   buildReachUsPayload,
   generateCaptcha,
   submitReachUs,
 } from "@/app/lib/forms";
-import EngineeringFormModal, {
-  captchaInputGroupClass,
-  captchaRowClass,
-  formFieldClass,
-  formGridClass,
-} from "@/app/components/shared/EngineeringFormModal";
+import styles from "./ConsultationModal.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -37,6 +35,10 @@ const Proposal = ({ isOpen, onClose }: Props) => {
     projectType: "",
     projectDescription: "",
     captcha: "",
+  });
+  const [phoneCountry, setPhoneCountry] = useState({
+    dial_code: "+675",
+    country_code: "pg",
   });
   const [captcha, setCaptcha] = useState(generateCaptcha());
   const [captchaInput, setCaptchaInput] = useState("");
@@ -92,6 +94,8 @@ const Proposal = ({ isOpen, onClose }: Props) => {
           lastname: formData.organization,
           email: formData.email,
           phone: formData.phone,
+          phone_dial_code: phoneCountry.dial_code,
+          phone_country_code: phoneCountry.country_code,
           message,
         }),
       );
@@ -138,111 +142,161 @@ const Proposal = ({ isOpen, onClose }: Props) => {
       isOpen={isOpen}
       onClose={onClose}
       geometry="consultation"
-      maxWidthClass="max-w-[1698px]"
+      maxWidthClass="max-w-[1520px]"
       title={
         <>
-          REQUEST A <span className="text-green-600">PROPOSAL</span>
+          REQUEST A <span className="text-[#23B14D]">PROPOSAL</span> (RFP)
         </>
       }
     >
-      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-        <div className={formGridClass}>
-          <input
-            type="text"
-            name="contactName"
-            placeholder="CONTACT NAME"
-            value={formData.contactName}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-          <input
-            type="text"
-            name="organization"
-            placeholder="ORGANIZATION"
-            value={formData.organization}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-        </div>
-
-        <div className={formGridClass}>
-          <input
-            type="email"
-            name="email"
-            placeholder="E-MAIL ID"
-            value={formData.email}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-          <input
-            type="tel"
-            name="phone"
-            placeholder="PHONE"
-            value={formData.phone}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-        </div>
-
-        <select
-          name="projectType"
-          value={formData.projectType}
-          onChange={handleInputChange}
-          className={formFieldClass}
-          required
-        >
-          <option value="">PROJECT TYPE</option>
-          <option value="solar-epcm">Solar EPCM</option>
-          <option value="microgrid">Hybrid Microgrid</option>
-          <option value="energy-storage">Energy Storage</option>
-          <option value="grid-integration">Grid Integration</option>
-          <option value="other">Other</option>
-        </select>
-
-        <textarea
-          name="projectDescription"
-          placeholder="PROJECT DESCRIPTION / REQUIREMENTS"
-          value={formData.projectDescription}
-          onChange={handleInputChange}
-          rows={3}
-          className={`${formFieldClass} resize-none`}
-          required
-        />
-
-        <div className={captchaRowClass}>
-          <div className={captchaInputGroupClass}>
-            <div className="rounded border bg-gray-200 px-3 py-2 sm:px-4">
-              <span className="font-mono text-base sm:text-lg">{captcha}</span>
-            </div>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        {/* Row 1: Contact Name | Organization */}
+        <div className={`${styles.grid} ${styles.rowStagger1}`}>
+          <div className={styles.fieldWrap}>
             <input
               type="text"
-              placeholder="Enter captcha"
-              value={captchaInput}
-              onChange={(e) => setCaptchaInput(e.target.value)}
-              className={`${formFieldClass} sm:max-w-[200px]`}
+              name="contactName"
+              placeholder="CONTACT NAME"
+              value={formData.contactName}
+              onChange={handleInputChange}
+              className={styles.input}
               required
             />
+          </div>
+          <div className={styles.fieldWrap}>
+            <input
+              type="text"
+              name="organization"
+              placeholder="ORGANIZATION"
+              value={formData.organization}
+              onChange={handleInputChange}
+              className={styles.input}
+              required
+            />
+          </div>
+        </div>
+
+        {/* Row 2: E-Mail ID | Phone */}
+        <div className={`${styles.grid} ${styles.rowStagger2}`}>
+          <div className={styles.fieldWrap}>
+            <input
+              type="email"
+              name="email"
+              placeholder="E-MAIL ID"
+              value={formData.email}
+              onChange={handleInputChange}
+              className={styles.input}
+              required
+            />
+          </div>
+          <div className={styles.fieldWrap}>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="PHONE"
+              value={formData.phone}
+              onChange={handleInputChange}
+              className={`${styles.input} pr-28`}
+              required
+            />
+            <div className="absolute right-4 top-1/2 z-10 -translate-y-1/2">
+              <CountryCodeDropdown
+                dialCode={phoneCountry.dial_code}
+                countryCode={phoneCountry.country_code}
+                onSelect={(dial_code, country_code) =>
+                  setPhoneCountry({ dial_code, country_code })
+                }
+                className="flex cursor-pointer items-center gap-1.5 bg-transparent text-xs text-gray-700 sm:text-sm"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Row 3: Project Type */}
+        <div className={`${styles.fieldWrap} ${styles.rowStagger3}`}>
+          <select
+            name="projectType"
+            value={formData.projectType}
+            onChange={handleInputChange}
+            className={styles.select}
+            required
+          >
+            <option value="">PROJECT TYPE</option>
+            <option value="solar-epcm">Solar EPCM</option>
+            <option value="microgrid">Hybrid Microgrid</option>
+            <option value="energy-storage">Energy Storage</option>
+            <option value="grid-integration">Grid Integration</option>
+            <option value="other">Other</option>
+          </select>
+          <span className={styles.dropdownIcon} aria-hidden="true">
+            <svg width="12" height="7" viewBox="0 0 12 7" fill="none">
+              <title>Dropdown icon</title>
+              <path
+                d="M1 1L6 6L11 1"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
+        </div>
+
+        {/* Row 4: Project Description */}
+        <div className={`${styles.textareaWrap} ${styles.rowStaggerTextarea}`}>
+          <textarea
+            name="projectDescription"
+            placeholder="PROJECT DESCRIPTION / REQUIREMENTS"
+            value={formData.projectDescription}
+            onChange={handleInputChange}
+            className={styles.textarea}
+            required
+          />
+        </div>
+
+        {/* Row 5: Captcha & Send Button */}
+        <div className={`${styles.footerRow} ${styles.rowStaggerFooter}`}>
+          <div className={styles.captchaGroup}>
+            <button
+              type="button"
+              className={styles.captchaBox}
+              onClick={() => setCaptcha(generateCaptcha())}
+              title="Click to refresh captcha"
+              aria-label={`Captcha code ${captcha}. Click to refresh`}
+            >
+              <span className={styles.captchaText}>{captcha}</span>
+            </button>
+            <div className={styles.captchaInputWrap}>
+              <input
+                type="text"
+                placeholder="Enter captcha"
+                value={captchaInput}
+                onChange={(e) => setCaptchaInput(e.target.value)}
+                className={styles.captchaInput}
+                required
+              />
+            </div>
           </div>
           <button
             type="submit"
             disabled={isLoading}
-            className="shrink-0 cursor-pointer self-end disabled:opacity-50"
+            className={styles.sendButton}
           >
-            <img loading="lazy" decoding="async"
-              src="/images/book-consulation/formBtn.png"
-              className="w-28 sm:w-40"
-              alt="Submit proposal"
-            />
+            <span className={styles.sendButtonText}>
+              {isLoading ? "Sending..." : "Send"}
+            </span>
           </button>
         </div>
 
-        {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
+        {errorMessage && (
+          <p className={`${styles.statusMessage} ${styles.statusError}`}>
+            {errorMessage}
+          </p>
+        )}
         {successMessage && (
-          <p className="text-sm text-green-600">{successMessage}</p>
+          <p className={`${styles.statusMessage} ${styles.statusSuccess}`}>
+            {successMessage}
+          </p>
         )}
       </form>
     </EngineeringFormModal>

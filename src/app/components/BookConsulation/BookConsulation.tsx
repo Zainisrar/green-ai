@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
+import TopNavigation from "../TopNavigation/TopNavigation";
 import Booking from "./Modals/Booking";
 
 const BookConsulation = () => {
@@ -14,7 +14,9 @@ const BookConsulation = () => {
         <div className="flex h-full">
           <div className=" lg:w-1/6 hidden lg:flex items-center justify-center">
             <div className="fixed top-1/4 left-14">
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/book-consulation/book-consulation.png"
                 alt="globalsnapshot"
                 className="w-10"
@@ -110,12 +112,16 @@ const BookConsulation = () => {
               </div>
 
               {/* Booking Details */}
-              <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">Booking Details</h2>
+              <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
+                Booking Details
+              </h2>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 <div className="flex items-center space-x-3">
                   <span>
-                    <img loading="lazy" decoding="async"
+                    <img
+                      loading="lazy"
+                      decoding="async"
                       src="/images/grid-intel/lighting.png"
                       className="w-14 -mt-4"
                       alt="lighting"
@@ -128,7 +134,9 @@ const BookConsulation = () => {
 
                 <div className="flex items-center space-x-3">
                   <span>
-                    <img loading="lazy" decoding="async"
+                    <img
+                      loading="lazy"
+                      decoding="async"
                       src="/images/grid-intel/lighting.png"
                       className="w-14 -mt-4"
                       alt="lighting"
@@ -141,7 +149,9 @@ const BookConsulation = () => {
 
                 <div className="flex items-center space-x-3 md:col-span-2">
                   <span>
-                    <img loading="lazy" decoding="async"
+                    <img
+                      loading="lazy"
+                      decoding="async"
                       src="/images/grid-intel/lighting.png"
                       className="w-14 -mt-4"
                       alt="lighting"
@@ -156,42 +166,44 @@ const BookConsulation = () => {
               {/* Schedule Info */}
               <div className="flex space-x-2  items-center mb-4">
                 <div
-                 style={{
-                  transform:"skewX(-16deg)"
-                 }}
-                className="flex items-center  border-[#f0f9da] p-4 border-3  px-6 space-x-3 ">
+                  style={{
+                    transform: "skewX(-16deg)",
+                  }}
+                  className="flex items-center  border-[#f0f9da] p-4 border-3  px-6 space-x-3 "
+                >
                   <span>
-                    <img loading="lazy" decoding="async"
-                      style={
-                        {
-                          transform:"skewX(16deg)"
-                        }
-                      }
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      style={{
+                        transform: "skewX(16deg)",
+                      }}
                       src="/images/book-consulation/calendar.png"
                       className="w-6"
                       alt="lighting"
                     />
                   </span>
                   <span
-                   style={{
-                    transform:"skewX(16deg)"
-                   }}
-                  className="font-semibold  italic">
+                    style={{
+                      transform: "skewX(16deg)",
+                    }}
+                    className="font-semibold  italic"
+                  >
                     Monday-Friday | 9 AM To 5 PM GMT+10
                   </span>
                 </div>
                 <div
-                style={{
-                  transform:"skewX(-16deg)"
-                }}
-                className="flex border-3 p-4  px-4  border-[#f0f9da] items-center space-x-3">
+                  style={{
+                    transform: "skewX(-16deg)",
+                  }}
+                  className="flex border-3 p-4  px-4  border-[#f0f9da] items-center space-x-3"
+                >
                   <p
-                  style={
-                    {
-                      transform:"skewX(16deg)"
-                    }
-                  }
-                  className="font-semibold  italic ">
+                    style={{
+                      transform: "skewX(16deg)",
+                    }}
+                    className="font-semibold  italic "
+                  >
                     Other Slots By Request (For Global Partners)
                   </p>
                 </div>
@@ -208,13 +220,20 @@ const BookConsulation = () => {
             </div>
           </div>
           <div className=" absolute right-0 bottom-0   -z-10">
-            <img loading="lazy" decoding="async" src="/images/book-consulation/mainImg.png" alt="bg" />
+            <img
+              loading="lazy"
+              decoding="async"
+              src="/images/book-consulation/mainImg.png"
+              alt="bg"
+            />
           </div>
           {/* Sidebar Content */}
           <div className="hidden  lg:flex flex-col items-center h-screen justify-center max-w-xs">
             <div className="relative flex items-center ">
               <div className="absolute -left-16 top-20">
-                <img loading="lazy" decoding="async"
+                <img
+                  loading="lazy"
+                  decoding="async"
                   src="/images/book-consulation/shape.png"
                   className="w-12"
                   alt="shape"
@@ -230,7 +249,9 @@ const BookConsulation = () => {
                 </p>
               </div>
               <div className="absolute right-4 -top-2">
-                <img loading="lazy" decoding="async"
+                <img
+                  loading="lazy"
+                  decoding="async"
                   src="/images/book-consulation/shape2.png"
                   className="w-12"
                   alt="shape"
@@ -241,23 +262,24 @@ const BookConsulation = () => {
         </div>
 
         <div className="flex lg:block space-x-2 mb-32 p-2 my-4">
-          <div 
-           onClick={()=>{
-             setBooking(true);
-           }}
-          className=" flex justify-end cursor-pointer">
-            <img loading="lazy" decoding="async"
+          <button
+            type="button"
+            onClick={() => {
+              setBooking(true);
+            }}
+            className="flex cursor-pointer justify-end border-0 bg-transparent p-0"
+          >
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/book-consulation/book-my-consulation.png"
               alt="book-my-consulation"
             />
-          </div>
+          </button>
         </div>
       </div>
       <Chatbot />
-      <Booking
-        isOpen={booking}
-        onClose={() => setBooking(false)}
-      />
+      <Booking isOpen={booking} onClose={() => setBooking(false)} />
     </React.Fragment>
   );
 };

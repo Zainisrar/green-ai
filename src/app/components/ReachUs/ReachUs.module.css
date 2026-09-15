@@ -20,11 +20,11 @@
 .canvas {
   position: absolute;
   top: 0;
-  left: 50%;
+  left: 0;
   width: 1920px;
   height: 970px;
   overflow: hidden;
-  transform-origin: top center;
+  transform-origin: top left;
   background: #fff;
 }
 
@@ -82,40 +82,54 @@
   object-fit: fill;
 }
 
-.pins,
+.pins {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 5;
+}
+
 .officeLabels {
   position: absolute;
   inset: 0;
   overflow: visible;
   pointer-events: none;
+  z-index: 2;
 }
 
 .pins img {
   position: absolute;
   display: block;
-  width: 30px;
-  height: 38px;
   max-width: none;
 }
 
 .indiaPin {
   top: 258px;
   left: 761px;
+  width: 30px;
+  height: 37px;
 }
 
 .pngPin {
   top: 318px;
-  left: 949px;
+  left: 948px;
+  width: 30px;
+  height: 38px;
 }
 
 .singaporePin {
   top: 298px;
   left: 847px;
+  width: 29px;
+  height: 39px;
 }
 
 .australiaPin {
   top: 395px;
   left: 966px;
+  width: 31px;
+  height: 36px;
 }
 
 .officeCard {
@@ -126,8 +140,10 @@
   margin: 0;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
   filter: drop-shadow(10px 13px 13px rgba(0, 0, 0, 0.13));
   isolation: isolate;
+  pointer-events: auto;
 }
 
 .officeCard::before {
@@ -158,6 +174,7 @@
 
 .officeCard h2 {
   margin: 0;
+  padding: 0;
   color: #23b14d;
   font-size: 15px;
   font-weight: 800;
@@ -170,20 +187,36 @@
 }
 
 .officeCardActive {
-  width: 373px;
-  height: 111px;
+  --active-card-width: 373px;
+  --active-card-height: 111px;
+  --active-accent-width: 58.637px;
+
+  width: var(--active-card-width);
+  height: var(--active-card-height);
   align-items: flex-start;
   justify-content: flex-start;
-  /* The active flag occupies the left 50px lane; the office title begins
-     after it, as in the Figma address-hover state. */
-  padding: 7px 14px 12px 95px;
+  filter: none;
+  padding: 10px 14px 12px 99px;
 }
 
 .officeCardActive::before {
-  top: -2px;
-  left: -1px;
-  width: 59px;
-  height: 116px;
+  top: 0;
+  left: 0;
+  width: var(--active-accent-width);
+  height: calc(var(--active-card-height) + 5.307px);
+  background:
+    url("/images/reach-us/office-card-accent.svg") center / 100% 100% no-repeat;
+  transform: none;
+}
+
+.officeCardActive::after {
+  top: -17.328px;
+  left: -20.54px;
+  width: calc(var(--active-card-width) + 47.792px);
+  height: calc(var(--active-card-height) + 47.948px);
+  background:
+    url("/images/reach-us/office-card-active.svg") center / 100% 100% no-repeat;
+  transform: none;
 }
 
 .officeCardActive h2 {
@@ -198,29 +231,49 @@
 
 .officeCardActive p {
   position: absolute;
-  top: 36px;
-  left: 58px;
+  top: 38px;
+  left: 99px;
   display: block;
-  width: 276px;
+  width: calc(var(--active-card-width) - 113px);
   margin: 0;
   color: #000;
   font-size: 12px;
   font-weight: 500;
   line-height: 16px;
-  text-align: center;
+  text-align: left;
 }
 
 .officeCardActive p span {
   display: block;
+  white-space: nowrap;
+  transform: translateX(
+    calc(var(--line-index, 0) * var(--address-line-shift, -7.5px))
+  );
+}
+
+.officeCardActive p span:nth-child(1) {
+  --line-index: 0;
+}
+
+.officeCardActive p span:nth-child(2) {
+  --line-index: 1;
+}
+
+.officeCardActive p span:nth-child(3) {
+  --line-index: 2;
+}
+
+.officeCardActive p span:nth-child(4) {
+  --line-index: 3;
 }
 
 .officeFlag {
   position: absolute;
-  top: 3px;
-  left: 45px;
+  top: 5.5px;
+  left: 49px;
   width: 50px;
   height: 28px;
-  object-fit: fill;
+  object-fit: contain;
 }
 
 .india {
@@ -230,53 +283,50 @@
 }
 
 .india.officeCardActive {
-  /* Keep the expanded India card above its pin so it clears the Papua and
-     Singapore labels. */
-  top: 95px;
-  left: 600px;
-  width: 373px;
-  height: 111px;
+  top: 166px;
+  left: 778px;
+  --active-card-width: 350px;
 }
 
 .singapore {
   top: 324px;
-  left: 711px;
-  width: 149px;
+  left: 683px;
+  width: 177px;
 }
 
 .singapore.officeCardActive {
-  /* Expanded below-left of the Singapore pin; Australia remains visible. */
-  top: 335px;
-  left: 500px;
-  width: 373px;
-  height: 111px;
+  top: 314px;
+  left: 548px;
+  --active-card-width: 295px;
+  --active-card-height: 96px;
+  --active-accent-width: 51.23px;
 }
 
 .papuaNewGuinea {
   top: 280px;
-  left: 970px;
+  left: 963px;
   width: 234px;
 }
 
 .papuaNewGuinea.officeCardActive {
-  top: 211px;
-  left: 967px;
+  top: 208px;
+  left: 963px;
   width: 373px;
   height: 111px;
 }
 
 .australia {
-  /* Leave a clear vertical lane for Singapore's expanded address card. */
-  top: 455px;
-  left: 989px;
-  width: 157px;
+  top: 357px;
+  left: 963px;
+  width: 183px;
 }
 
 .australia.officeCardActive {
-  top: 390px;
-  left: 990px;
-  width: 373px;
-  height: 111px;
+  top: 357px;
+  left: 963px;
+  --active-card-width: 325px;
+  --active-card-height: 96px;
+  --active-accent-width: 51.23px;
 }
 
 .enquiry {

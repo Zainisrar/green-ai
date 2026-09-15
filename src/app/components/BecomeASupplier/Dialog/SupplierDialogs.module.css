@@ -1,0 +1,445 @@
+/* Shared typography and layouts for Become a Supplier dialogs */
+
+.greenText {
+  color: #23b14d;
+}
+
+.footerQuote {
+  margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.35;
+  color: #000000;
+}
+
+/* ========================================================
+   1. What We Look For (Figma 7077:19448)
+   ======================================================== */
+.lookForContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-top: 30px;
+  box-sizing: border-box;
+}
+
+.lookForLeftCol {
+  position: absolute;
+  top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.lookForRightCol {
+  position: absolute;
+  top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.lookForItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.lookForBolt {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.lookForText {
+  margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.lookForFooter {
+  position: absolute;
+  top: 390px;
+  left: 360px;
+  max-width: 960px;
+}
+
+/* ========================================================
+   2. Key Supply Categories (Figma 7077:19335)
+   ======================================================== */
+.categoriesContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.categoriesHeader {
+  position: relative;
+  height: 38px;
+  margin-top: 14px;
+  margin-bottom: 6px;
+}
+
+.categoryColHead {
+  position: absolute;
+  left: 306px;
+  top: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #23b14d;
+}
+
+.examplesColHead {
+  position: absolute;
+  left: 814px;
+  top: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #23b14d;
+}
+
+.categoriesRows {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.categoryRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  line-height: 48px;
+}
+
+.categoryName {
+  margin: 0;
+  width: 480px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.categoryExamples {
+  margin: 0;
+  width: 700px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+  white-space: nowrap;
+}
+
+/* ========================================================
+   3. How to Get Started (Figma 7077:19221)
+   ======================================================== */
+.getStartedContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.getStartedHeader {
+  position: relative;
+  height: 38px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.stepColHead {
+  position: absolute;
+  left: 450px;
+  top: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #23b14d;
+}
+
+.actionColHead {
+  position: absolute;
+  left: 790px;
+  top: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #23b14d;
+}
+
+.stepsRows {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.stepRow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  line-height: 50px;
+}
+
+.stepName {
+  margin: 0;
+  width: 320px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.stepAction {
+  margin: 0;
+  width: 720px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.stepRegisterBtn {
+  margin-left: 6px;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  color: #23b14d;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: opacity 160ms ease;
+}
+
+.stepRegisterBtn:hover {
+  opacity: 0.8;
+}
+
+.getStartedFooter {
+  position: absolute;
+  top: 380px;
+  left: 402px;
+  max-width: 900px;
+}
+
+.portalLink {
+  color: #23b14d;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 160ms ease;
+}
+
+.portalLink:hover {
+  opacity: 0.8;
+}
+
+/* ========================================================
+   4. Tenders and RFQs (Figma 7077:19570)
+   ======================================================== */
+.tendersContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.tendersRows {
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+  padding-top: 50px;
+}
+
+.tendersRow1 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 341px;
+}
+
+.tendersRow2 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 299px;
+}
+
+.tendersRow3 {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: 271px;
+}
+
+.tenderCta {
+  flex: none;
+  height: 52px;
+  padding: 0 24px 0 32px !important;
+}
+
+.tenderCta span[class*="inner"] {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.tendersFooter {
+  position: absolute;
+  top: 390px;
+  left: 375px;
+  max-width: 960px;
+}
+
+/* ========================================================
+   Mobile responsiveness (< 768px)
+   ======================================================== */
+@media (max-width: 767px) {
+  .lookForContainer,
+  .categoriesContainer,
+  .getStartedContainer,
+  .tendersContainer {
+    position: static;
+    padding: 0;
+    height: auto;
+  }
+
+  .lookForLeftCol,
+  .lookForRightCol {
+    position: static;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+
+  .lookForText {
+    font-size: 15px;
+    white-space: normal;
+  }
+
+  .lookForBolt {
+    width: 32px;
+    height: 32px;
+  }
+
+  .lookForFooter,
+  .getStartedFooter,
+  .tendersFooter {
+    position: static;
+    margin-top: 20px;
+  }
+
+  .footerQuote {
+    font-size: 15px;
+  }
+
+  /* Categories Mobile */
+  .categoriesHeader {
+    display: none;
+  }
+
+  .categoriesRows {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .categoryRow {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    line-height: 1.4;
+    margin-left: 0 !important;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .categoryName {
+    width: 100%;
+    font-size: 15px;
+    color: #23b14d;
+    white-space: normal;
+  }
+
+  .categoryExamples {
+    width: 100%;
+    font-size: 14px;
+    color: #404040;
+    white-space: normal;
+  }
+
+  /* How to Get Started Mobile */
+  .getStartedHeader {
+    display: none;
+  }
+
+  .stepsRows {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .stepRow {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    line-height: 1.4;
+    margin-left: 0 !important;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .stepName {
+    width: 100%;
+    font-size: 15px;
+    color: #23b14d;
+    white-space: normal;
+  }
+
+  .stepAction {
+    width: 100%;
+    font-size: 14px;
+    white-space: normal;
+  }
+
+  /* Tenders Mobile */
+  .tendersRows {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 0;
+  }
+
+  .tendersRow1,
+  .tendersRow2,
+  .tendersRow3 {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-left: 0;
+  }
+
+  .tenderCta {
+    width: 100% !important;
+    padding: 0 16px 0 20px !important;
+  }
+}

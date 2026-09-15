@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 export interface JoinUsData {
   success: boolean;
@@ -36,18 +36,20 @@ export interface JoinUsData {
 }
 
 const fetchJoinUs = async (): Promise<JoinUsData> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/empower/join-us');
-  
+  const response = await fetch(
+    "https://greencms.percepco.co.uk/api/empower/join-us",
+  );
+
   if (!response.ok) {
     throw new Error(`Failed to fetch join us data: ${response.status}`);
   }
-  
+
   return response.json();
 };
 
 export const useJoinUs = () => {
   return useQuery({
-    queryKey: ['join-us'],
+    queryKey: ["join-us"],
     queryFn: fetchJoinUs,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes

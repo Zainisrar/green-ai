@@ -14,11 +14,11 @@
 
 .maskBg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 989px;
-  height: 970px;
-  object-fit: fill;
+  top: 289px;
+  left: -308px;
+  width: 988px;
+  height: 988px;
+  object-fit: cover;
   pointer-events: none;
   z-index: 1;
 }

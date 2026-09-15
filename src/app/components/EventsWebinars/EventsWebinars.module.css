@@ -113,14 +113,19 @@
 }
 .register {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  width: 116px;
-  height: 22px;
+  right: 3.2px;
+  bottom: 2.1px;
+  width: 114.28px;
+  height: 20.91px;
+  min-height: 20.91px;
+  max-height: 20.91px;
+  --figma-cta-slant: 9.77px;
+  padding: 0;
   font:
-    700 9px / 1 var(--font-montserrat),
+    600 8px / 1 var(--font-montserrat),
     Montserrat,
     sans-serif;
+  letter-spacing: 0;
 }
 .pagination {
   position: absolute;
@@ -143,6 +148,7 @@
 .yearList h3 {
   margin: 0 0 12px;
   font-size: 18px;
+  font-weight: 700;
   line-height: 1;
 }
 .yearList ul {
@@ -154,7 +160,8 @@
 .yearList li {
   margin: 0 0 15px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
+  line-height: 6px;
   white-space: nowrap;
 }
 .quote {

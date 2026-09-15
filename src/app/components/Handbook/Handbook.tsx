@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useHandbook } from "@/app/hooks/useHandbook";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
@@ -28,6 +27,7 @@ interface CardRow {
   ctaX: number;
   ctaY: number;
   dialogKey?: "ethos" | "conduct";
+  href?: string;
 }
 
 export default function Handbook({ canvas = false }: HandbookProps) {
@@ -36,7 +36,9 @@ export default function Handbook({ canvas = false }: HandbookProps) {
   const [isCodeOfConductOpen, setIsCodeOfConductOpen] = useState(false);
   const { data } = useHandbook();
 
-  const title = data?.mainPage?.title || "Supplier Code of Conduct / Handbook";
+  const title = (
+    data?.mainPage?.title || "Supplier Code of Conduct / Handbook"
+  ).toUpperCase();
   const subHeadline =
     data?.mainPage?.subHeadline || "We don’t buy parts. We procure proof.";
   const description =
@@ -48,8 +50,8 @@ export default function Handbook({ canvas = false }: HandbookProps) {
       key: "ethos",
       img: "/images/supplier-code-of-conduct/card_ethos.png",
       imgAlt: "Our Procurement Ethos",
-      maskX: 719,
-      maskY: 314,
+      maskX: 714,
+      maskY: 312,
       outlineX: 730,
       outlineY: 306,
       titleX: 1059,
@@ -63,8 +65,8 @@ export default function Handbook({ canvas = false }: HandbookProps) {
       key: "conduct",
       img: "/images/supplier-code-of-conduct/card_conduct.png",
       imgAlt: "Code of Conduct (Rewritten)",
-      maskX: 1346,
-      maskY: 314,
+      maskX: 1341,
+      maskY: 312,
       outlineX: 1357,
       outlineY: 306,
       titleX: 1694,
@@ -78,8 +80,8 @@ export default function Handbook({ canvas = false }: HandbookProps) {
       key: "checklist",
       img: "/images/supplier-code-of-conduct/card_checklist.png",
       imgAlt: "The GREEN Vendor Checklist (Editable PDF Style)",
-      maskX: 596,
-      maskY: 545,
+      maskX: 591,
+      maskY: 543,
       outlineX: 607,
       outlineY: 538,
       titleX: 936,
@@ -87,13 +89,14 @@ export default function Handbook({ canvas = false }: HandbookProps) {
       title: "The GREEN Vendor Checklist (Editable PDF Style)",
       ctaX: 882,
       ctaY: 633,
+      href: "/supplier-handbook.pdf",
     },
     {
       key: "certification",
       img: "/images/supplier-code-of-conduct/card_certification.png",
       imgAlt: "Certification & Signature Page",
-      maskX: 1247,
-      maskY: 536,
+      maskX: 1242,
+      maskY: 534,
       outlineX: 1258,
       outlineY: 528,
       titleX: 1594,
@@ -120,9 +123,11 @@ export default function Handbook({ canvas = false }: HandbookProps) {
       {/* Vertical outlined side title */}
       <h2 className={styles.verticalTitle}>{title}</h2>
 
-      {/* Washed left collage (mask group at -472,408) */}
+      {/* Figma's supplied washed background mask behind the side label. */}
       <div className={styles.leftCollage}>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/supplier-code-of-conduct/collage.png"
           alt=""
           aria-hidden="true"
@@ -143,7 +148,9 @@ export default function Handbook({ canvas = false }: HandbookProps) {
       {/* Cards: parallelogram image masks, headings, Explore pills */}
       {cards.map((card) => (
         <React.Fragment key={card.key}>
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src={card.img}
             alt={card.imgAlt}
             className={styles.cardImg}
@@ -165,6 +172,7 @@ export default function Handbook({ canvas = false }: HandbookProps) {
                   ? () => setIsCodeOfConductOpen(true)
                   : undefined
             }
+            href={card.href}
           >
             Explore
           </FigmaAngledCta>
@@ -173,13 +181,17 @@ export default function Handbook({ canvas = false }: HandbookProps) {
 
       {/* Left statement with angled brackets */}
       <div className={styles.statementBlock}>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/supplier-code-of-conduct/quote_left.png"
           alt=""
           className={styles.statementBracketLeft}
           aria-hidden="true"
         />
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/supplier-code-of-conduct/quote_right.png"
           alt=""
           className={styles.statementBracketRight}
@@ -203,11 +215,11 @@ export default function Handbook({ canvas = false }: HandbookProps) {
       <FigmaAngledCta
         className={styles.loginCta}
         style={{ position: "absolute", left: 1650, top: 792 }}
-        href="/supply-partners/login"
+        href="/ecosystem/supply-partners/login"
       >
         Supplier Login
       </FigmaAngledCta>
-      <a className={styles.readMore} href="/supply-partners/login">
+      <a className={styles.readMore} href="/ecosystem/supply-partners/login">
         Read more
         <svg
           width="25"
@@ -216,7 +228,13 @@ export default function Handbook({ canvas = false }: HandbookProps) {
           fill="none"
           aria-hidden="true"
         >
-          <path d="M0 3.5H23M23 3.5L19 0.5M23 3.5L19 6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path
+            d="M0 3.5H23M23 3.5L19 0.5M23 3.5L19 6.5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </a>
 
@@ -245,7 +263,7 @@ export default function Handbook({ canvas = false }: HandbookProps) {
         <div className={styles.mobileCtas}>
           <FigmaAngledCta
             className={styles.loginBtn}
-            href="/supply-partners/login"
+            href="/ecosystem/supply-partners/login"
           >
             Supplier Login
           </FigmaAngledCta>

@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useState } from "react";
 import { useFlagshipProject } from "../../../hooks/useFlagshipProject";
 import D6Chatbot from "../D6Chatbot";
+import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import styles from "./FlagShip.module.css";
-import RequestConsultation from "./Modals/RequestConsultation";
 
 const fallbackProjectData = {
   title:
@@ -177,17 +177,32 @@ export default function FlagShip() {
         triggerVariant="figmaCanvas"
         triggerClassName={styles.chatTrigger}
         triggerStyle={{
-            top: 899,
-            right: "auto",
-            bottom: "auto",
-            left: 1498,
-            width: 418,
-          }}
+          top: 899,
+          right: "auto",
+          bottom: "auto",
+          left: 1498,
+          width: 418,
+        }}
       />
 
-      <RequestConsultation
+      <ProductEnquiry
+        productName="Flagship Projects"
         isOpen={isConsultationOpen}
         onClose={() => setIsConsultationOpen(false)}
+        titlePrefix="REQUEST A"
+        titleAccent="CONSULTATION"
+        interestLabel="SERVICE NEEDED"
+        interestOptions={[
+          "Flagship Projects",
+          "Solar EPCM",
+          "Hybrid microgrid",
+          "Energy storage",
+          "Grid integration",
+          "O&M and monitoring",
+          "Other",
+        ]}
+        defaultInterest="Flagship Projects"
+        submitButtonText="Submit Request"
       />
     </main>
   );

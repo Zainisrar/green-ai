@@ -1,12 +1,12 @@
-import React from 'react'
-import WhyGreen from '@/app/components/WhyGreen/WhyGreen'
+import React from "react";
+import WhyGreen from "@/app/components/WhyGreen/WhyGreen";
 
 const page = () => {
   return (
     <div>
-        <WhyGreen/>
+      <WhyGreen />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -317,11 +317,18 @@
 }
 .actions span {
   position: absolute;
-  top: 6px;
-  left: 16px;
-  right: 36px;
+  top: 0;
+  bottom: 0;
+  left: 18px;
+  right: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-wrap: anywhere;
+  font-size: clamp(12px, 1.05vw, 16px);
+  line-height: 1.15;
   text-align: center;
-  white-space: nowrap;
+  white-space: normal;
 }
 .actions b {
   position: absolute;
@@ -421,6 +428,23 @@
 .mobileCards p {
   margin: 0;
   font-size: 11px;
+}
+.mobileConnect {
+  display: block;
+  width: 100%;
+  min-height: 53px;
+  margin-top: 30px;
+  padding: 12px 48px 12px 28px;
+  border: 1px solid #23b14d;
+  background: rgb(213 255 180 / 80%);
+  color: #111;
+  font-family: inherit;
+  font-size: clamp(15px, 4.8vw, 22px);
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  text-align: center;
+  clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
 }
 @media (max-width: 480px) {
   .mobileCards {

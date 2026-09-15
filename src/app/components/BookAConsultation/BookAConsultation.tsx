@@ -55,10 +55,7 @@ const FREE_NOTE_PARTS = [
   ", and registered local businesses.",
 ];
 
-const highlight = (
-  parts: string[],
-  colorClass: string,
-): React.ReactNode => {
+const highlight = (parts: string[], colorClass: string): React.ReactNode => {
   return parts.map((part, i) =>
     i === 1 ? (
       <span key={i} className={colorClass}>
@@ -66,7 +63,7 @@ const highlight = (
       </span>
     ) : (
       <span key={i}>{part}</span>
-    )
+    ),
   );
 };
 
@@ -93,7 +90,12 @@ export default function BookAConsultation({
 
       {/* Right faint collage (masked photo collage) */}
       <div className={styles.rightCollage} aria-hidden="true">
-        <img loading="lazy" decoding="async" src="/images/book-consulation/collage.png" alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/book-consulation/collage.png"
+          alt=""
+        />
       </div>
 
       {/* Header block */}
@@ -101,7 +103,9 @@ export default function BookAConsultation({
         <h1 className={styles.mainTitle}>
           BOOK A <span className={styles.greenText}>CONSULTATION</span>
         </h1>
-        <p className={styles.subHeadline}>Let&rsquo;s Solve Energy, Together.</p>
+        <p className={styles.subHeadline}>
+          Let&rsquo;s Solve Energy, Together.
+        </p>
         <p className={styles.description}>
           {highlight(DESCRIPTION_PARTS, styles.greenText)}
         </p>
@@ -133,7 +137,9 @@ export default function BookAConsultation({
         Booking Details
       </h2>
 
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         src="/images/book-consulation/figma-bolt.png"
         alt=""
         className={styles.boltIcon}
@@ -146,14 +152,18 @@ export default function BookAConsultation({
         <span className={styles.spacer} />
       </p>
 
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         src="/images/book-consulation/figma-bolt.png"
         alt=""
         className={styles.boltIcon}
         style={{ left: 262, top: 745 }}
       />
 
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         src="/images/book-consulation/figma-bolt.png"
         alt=""
         className={styles.boltIcon}
@@ -165,13 +175,17 @@ export default function BookAConsultation({
 
       {/* Availability pills */}
       <div className={styles.pill} style={{ left: 262, top: 845 }}>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/book-consulation/availability-window.svg"
           alt=""
           aria-hidden="true"
           className={styles.pillFrame}
         />
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/book-consulation/availability-calendar.svg"
           alt=""
           aria-hidden="true"
@@ -183,7 +197,9 @@ export default function BookAConsultation({
         </span>
       </div>
       <div className={styles.pill} style={{ left: 798, top: 845 }}>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/book-consulation/availability-window.svg"
           alt=""
           aria-hidden="true"
@@ -220,13 +236,17 @@ export default function BookAConsultation({
 
       {/* Right quote over collage */}
       <div className={styles.quoteBlock}>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/book-consulation/quote-bracket-left.svg"
           alt=""
           aria-hidden="true"
           className={styles.quoteBracketLeft}
         />
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/book-consulation/quote-bracket-right.svg"
           alt=""
           aria-hidden="true"

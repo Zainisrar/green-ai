@@ -1,339 +1,154 @@
 "use client";
-import React, { useState } from "react";
-import TopNavigation from "../TopNavigation/TopNavigation";
-import Chatbot from "../Chatbot";
-import { useExpertiseBySlug } from "../../../hooks/useExpertiseBySlug";
+
 import Link from "next/link";
-import { handleImageError } from "../lib/utils";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import D6Chatbot from "../D6Chatbot";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import styles from "./Expertise.module.css";
+import SolutionDetail from "./SolutionDetail";
+
+const DESIGN_WIDTH = 1920;
+const DESIGN_HEIGHT = 970;
 
 interface ExpertiseDetailProps {
   slug: string;
 }
 
-const ExpertiseDetail = ({ slug }: ExpertiseDetailProps) => {
-  const { data: expertise, isLoading, isError } = useExpertiseBySlug(slug);
+// Nodes 7077:3843, 7077:3970 and 7077:4093 are carousel states of this
+// fixed Figma detail screen.  The CMS overview record is intentionally not
+// used here: it currently mixes the Education title with Healthcare content.
+const FIGMA_DETAIL = {
+  title: "POWERING",
+  highlightedTitle: "HEALTHCARE",
+  subtitle:
+    "Renewable Energy and Medical Technology Augmentation for Sustainable Healthcare System",
+  description:
+    "Powering the Healthcare initiative, GREEN Limited equips healthcare facilities with renewable energy-based power production augmented with medical technology to impart enabling and empowering capabilities for Sustainable Healthcare Facilities. The Sustainable Healthcare System provides vital, modern, and life-saving medical equipment that meets the standards and requirements of the healthcare industry. This solution promotes health and well-being for all those who employ it. Enhance Healthcare Facilities Using the Powering Healthcare Program",
+  images: [
+    {
+      src: "/images/expertise/powerhealthcare1.png",
+      alt: "Solar panels installed on a healthcare facility roof",
+    },
+    {
+      src: "/images/expertise/powerhealthcare2.png",
+      alt: "Aerial view of a healthcare facility and water tank",
+    },
+    {
+      src: "/images/expertise/powerhealthcare3.png",
+      alt: "Solar powered healthcare facility surrounded by forest",
+    },
+  ],
+  features: [
+    {
+      icon: "/images/expertise/medicalservices.svg",
+      title: "Medical Services & Lighting",
+      description:
+        "Enable effective delivery of health services with energy efficient lifesaving medical devices and lighting etc.",
+    },
+    {
+      icon: "/images/expertise/diseasetreatement.svg",
+      title: "Disease Treatment & Prevention",
+      description:
+        "Enables Healthcare sectors to broaden services for prevention and treatment of non-communicable diseases and other diseases.",
+    },
+    {
+      icon: "/images/expertise/medicalservices.svg",
+      title: "Maternal Care",
+      description:
+        "Reduce maternal infant mortality rate with effective obstetric procedures and surgery with reliable lighting and advanced medical equipment etc.",
+    },
+    {
+      icon: "/images/expertise/diseasetreatement.svg",
+      title: "Disease Diagnosis & Emergency Procedures",
+      description:
+        "Broaden services for prevention and treatment of non-communicable diseases and other diseases.",
+    },
+  ],
+  categories: [
+    { id: "education", label: "Powering Education" },
+    { id: "agriculture", label: "Powering Agriculture" },
+    { id: "home", label: "Powering Home" },
+    { id: "education-alt", label: "Powering Education" },
+  ],
+  categoryImage: "/images/expertise/figma-slider/rectangle-428.png",
+} as const;
 
-  if (isLoading) {
-    return (
-      <React.Fragment>
-        <TopNavigation />
-        <div className="flex min-h-[60vh] items-center justify-center text-lg font-medium text-gray-600">
-          Loading…
-        </div>
-      </React.Fragment>
-    );
-  }
+/** The route uses the same fixed Figma detail composition as node 7077:3843. */
+const DETAILS_BY_SLUG = {
+  "powering-healthcare": FIGMA_DETAIL,
+} as const;
 
-  if (isError || !expertise) {
-    return (
-      <React.Fragment>
-        <TopNavigation />
-        <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4 px-8 text-center">
-          <h1 className="text-2xl font-bold">Solution not found</h1>
-          <p className="text-gray-600">
-            We couldn&apos;t find the expertise you were looking for.
-          </p>
-          <Link
-            href="/expertise"
-            className="font-semibold text-[#23B14D] hover:underline"
-          >
-            ← Back to all solutions
-          </Link>
-        </div>
-      </React.Fragment>
-    );
-  }
+export default function ExpertiseDetail({ slug }: ExpertiseDetailProps) {
+  const router = useRouter();
+  const [desktopScale, setDesktopScale] = useState(1);
 
-  return (
-    <React.Fragment>
-      <div className="relative lg:mb-0 mb-40">
-        <TopNavigation />
+  useEffect(() => {
+    const updateScale = () => {
+      setDesktopScale(
+        Math.min(
+          window.innerWidth / DESIGN_WIDTH,
+          window.innerHeight / DESIGN_HEIGHT,
+        ),
+      );
+    };
 
-        {/* Background */}
-        <div className="absolute inset-0 w-full overflow-hidden -z-10">
-          <img loading="lazy" decoding="async"
-            src="/images/expertise/img.png"
-            className="object-cover w-full h-full opacity-30"
-            alt="mainBg"
-          />
-        </div>
+    updateScale();
+    window.addEventListener("resize", updateScale);
+    return () => window.removeEventListener("resize", updateScale);
+  }, []);
 
-        {/* Main Content Layout */}
-        <div className="grid grid-cols-1  lg:grid-cols-2 gap-8 pt-20 px-8">
-          {/* Left Side - Images */}
-          <div className="flex items-center justify-center">
-            <div className="relative w-[400px] lg:block hidden">
-              <StackedImages
-                images={expertise.carousel.map((item) => item.img.src)}
-              />
-            </div>
-            <div className="relative w-[400px] lg:hidden">
-              <StackedMobileImages
-                images={expertise.carousel.map((item) => item.img.src)}
-              />
-            </div>
-          </div>
-
-          {/* Right Side - Text Content */}
-          <div className="flex flex-col justify-center">
-            <div className="max-w-2xl">
-              <div className="font-bold text-3xl lg:text-4xl">
-                {expertise.title.split(" ")[0]} {` `}
-                <span className="text-[#23B14D] font-bold">
-                  {expertise.highlightedTitle}
-                </span>
-              </div>
-              <div className="text-[#23B14D] font-bold text-xl lg:text-2xl mt-4">
-                {expertise.subtitlePage}
-              </div>
-              <div className="mt-6 text-base lg:text-lg font-light">
-                {expertise.descriptionPage}
-              </div>
-
-              {/* Features Grid */}
-              <div className="mt-10">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {expertise.icons.map((icon, index) => (
-                    <div key={index} className="flex space-x-4">
-                      <div>
-                        <img loading="lazy" decoding="async"
-                  src={icon.img.src}
-                  alt={icon.img.alt || icon.title}
-                  className="w-28 lg:w-32"
-                  onError={(e) => handleImageError(e, "/images/expertise/img.png")}
-                />
-                      </div>
-                      <div className="flex flex-col space-y-2">
-                        <div className="font-semibold text-base lg:text-lg">
-                          {icon.title}
-                        </div>
-                        <div className="text-sm lg:text-base">
-                          {icon.description}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Elements */}
-
-        <div className="fixed top-1/3 lg:top-1/4 z-10 left-4 lg:left-10">
-          <img loading="lazy" decoding="async"
-            src="/images/expertise/SOLUTIONS.png"
-            className="w-7 lg:w-12"
-            alt="solution"
-          />
-        </div>
-        <div className="">
-          <Link href={`#`} className="flex justify-end cursor-pointer">
-            <img loading="lazy" decoding="async"
-              src="/images/expertise/letStartBtn.png"
-              alt="letStart"
-              className="w-32 lg:w-auto"
-            />
-          </Link>
-          <Chatbot />
-          {/* Categories Text Section */}
-          <div className="hidden lg:flex my-20 mt-32 justify-center">
-            <div className="flex relative w-full top-12 left-4 justify-end max-w-2xl">
-              <div className="absolute left-0 -top-10">
-                <img loading="lazy" decoding="async"
-                  src={expertise.image}
-                  alt={expertise.title || "expertise"}
-                  className="rounded-2xl w-32 h-32 object-cover"
-                  onError={(e) => handleImageError(e, "/images/expertise/img.png")}
-                />
-              </div>
-              {expertise.keys.map((key, index) => (
-                <div
-                  key={index}
-                  className={`absolute bg-gray-100 py-20 -top-20 shadow-2xl rounded-md`}
-                  style={{ left: `${200 + index * 130}px` }}
-                >
-                  <div className="transform -rotate-90 font-bold text-gray-800 whitespace-nowrap">
-                    {key.text.split(" ").map((word, wordIndex) => (
-                      <React.Fragment key={wordIndex}>
-                        {word}
-                        {wordIndex === 0 && <br />}
-                        {wordIndex > 0 &&
-                          wordIndex < key.text.split(" ").length - 1 &&
-                          " "}
-                      </React.Fragment>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </React.Fragment>
-  );
-};
-
-export default ExpertiseDetail;
-
-const StackedMobileImages = ({ images }: { images: string[] }) => {
-  const [front, setFront] = useState(0);
-  return (
-    <div className=" lg:hidden relative left-32 -top-20 w-[200px] h-[300px] ">
-      {images.map((src, i) => {
-        const isFront = i === front;
-        const isSecond = i === (front + 1) % images.length;
-        const isThird = i === (front + 2) % images.length;
-        let style = {};
-        let className =
-          "  absolute transition-transform duration-500 ease-in-out  ";
-        if (isFront) {
-          style = {
-            width: 250,
-            height: 350,
-            opacity: 1,
-            left: 0,
-            zIndex: 40,
-            transform: "skewX(-14deg)",
-          };
-        } else if (isSecond) {
-          style = {
-            width: 200,
-            height: 300,
-            opacity: 1,
-            paddingTop: 20,
-            left: -20,
-            zIndex: 30,
-            transform: "skewX(-14deg)",
-          };
-        } else if (isThird) {
-          style = {
-            width: 200,
-            height: 300,
-            opacity: 0.3,
-            paddingTop: 32,
-            left: -60,
-            zIndex: 20,
-            transform: "skewX(-14deg)",
-          };
-        } else {
-          style = { display: "none" };
-        }
-        return (
-          <img loading="lazy" decoding="async"
-            key={i}
-            src={src}
-            alt={`detail-${i}`}
-            className={className}
-            style={style}
-            onError={(e) => handleImageError(e, "/images/expertise/img.png")}
-          />
-        );
-      })}
-    </div>
-  );
-};
-
-const StackedImages = ({ images }: { images: string[] }) => {
-  const [front, setFront] = useState(0);
+  const detail =
+    DETAILS_BY_SLUG[slug as keyof typeof DETAILS_BY_SLUG] || FIGMA_DETAIL;
 
   return (
-    <React.Fragment>
-      <div className="w-full h-full flex items-center justify-center relative">
-        {images.map((src, i) => {
-          const isFront = i === front;
-          const isSecond = i === (front + 1) % images.length;
-          const isThird = i === (front + 2) % images.length;
-          let style = {};
-          let className =
-            "absolute  transition-transform duration-500 ease-in-out  ";
-          if (isFront) {
-            style = {
-              width: 400,
-              height: 650,
-              opacity: 1,
-              left: 0,
-              zIndex: 40,
-              transform: "skewX(-14deg)",
-            };
-          } else if (isSecond) {
-            style = {
-              width: 300,
-              height: 600,
-              opacity: 1,
-              paddingTop: 20,
-              left: -40,
-              zIndex: 30,
-              transform: "skewX(-14deg)",
-            };
-          } else if (isThird) {
-            style = {
-              width: 300,
-              height: 550,
-              opacity: 0.3,
-              paddingTop: 32,
-              left: -100,
-              zIndex: 20,
-            };
-          } else {
-            style = { display: "none" };
-          }
-          return (
-            <img loading="lazy" decoding="async"
-              key={i}
-              src={src}
-              alt={`detail-${i}`}
-              className={className}
-              style={style}
-              onError={(e) => handleImageError(e, "/images/expertise/img.png")}
-            />
-          );
-        })}
-        <div className=" absolute top-86 -left-10 z-50">
-          <div className="flex space-x-4 items-center">
-            {images.map((image, index) => (
-              <div
-                key={index}
-                onClick={() => setFront(index)}
-                className="cursor-pointer"
-              >
-                <img loading="lazy" decoding="async"
-                  style={{
-                    transform: "skewX(-16deg)",
-                  }}
-                  className={`w-24  ${
-                    front === index
-                      ? "border-2 p-1 border-[#23B14D]"
-                      : "opacity-50"
-                  }`}
-                  src={image}
-                  alt={`thumbnail-${index}`}
-                  onError={(e) => handleImageError(e, "/images/expertise/img.png")}
-                />
-              </div>
-            ))}
-          </div>
+    <main className={styles.page}>
+      <section
+        className={styles.desktopStage}
+        aria-label={detail.highlightedTitle}
+      >
+        <div
+          className={styles.canvas}
+          data-node-id="7077:3843"
+          data-name="Solutions page -D1"
+          style={{ transform: `translateX(-50%) scale(${desktopScale})` }}
+        >
+          <SiteHeader layout="figmaCanvas" canvasActiveNavigation />
+          <SolutionDetail
+            nodeId="7077:3843"
+            title={detail.title}
+            highlightedTitle={detail.highlightedTitle}
+            subtitle={detail.subtitle}
+            description={detail.description}
+            images={detail.images}
+            features={detail.features}
+            categories={detail.categories}
+            activeCategoryImage={detail.categoryImage}
+            activeCategoryLabel="Powering Healthcare"
+            startHref="/engage/contact-us"
+            onBack={() => router.push("/expertise")}
+          />
+          <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
         </div>
-        <div className=" absolute flex space-x-10  -right-20 top-40 z-50">
-          <button
-            className=" cursor-pointer"
-            onClick={() =>
-              setFront((front - 1 + images.length) % images.length)
-            }
-            aria-label="Previous"
-          >
-            <img loading="lazy" decoding="async" src="/images/expertise/leftarrow.svg" alt="left" />
-          </button>
-          <button
-            className="cursor-pointer"
-            onClick={() => setFront((front + 1) % images.length)}
-            aria-label="Next"
-          >
-            <img loading="lazy" decoding="async" src="/images/expertise/rightarrow.svg" alt="right" />
-          </button>
+      </section>
+
+      <section
+        className={styles.mobileLayout}
+        aria-label={detail.highlightedTitle}
+      >
+        <SiteHeader />
+        <div className={styles.mobileHero}>
+          <p>Solutions</p>
+          <h1>
+            {detail.title} <span>{detail.highlightedTitle}</span>
+          </h1>
+          <h2>{detail.subtitle}</h2>
+          <img src={detail.images[0].src} alt={detail.images[0].alt} />
+          <p>{detail.description}</p>
+          <Link href="/engage/contact-us">Let&apos;s Start</Link>
         </div>
-      </div>
-    </React.Fragment>
+        <D6Chatbot />
+      </section>
+    </main>
   );
-};
+}

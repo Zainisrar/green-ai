@@ -1,5 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { api, type CertificationsAccreditationsResponse, type CertificationsAccreditationsData } from "../app/lib/api";
+import {
+  api,
+  type CertificationsAccreditationsResponse,
+  type CertificationsAccreditationsData,
+} from "../app/lib/api";
 import { queryKeys } from "../app/hooks/useQuery";
 
 export const useCertificationsAccreditations = () => {
@@ -16,4 +20,7 @@ export const useCertificationsAccreditations = () => {
   };
 };
 
-export type { CertificationsAccreditationsData, CertificationsAccreditationsResponse };
+export type {
+  CertificationsAccreditationsData,
+  CertificationsAccreditationsResponse,
+};

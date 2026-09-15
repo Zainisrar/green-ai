@@ -37,7 +37,10 @@ const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 
 const ApplyForProgram = ({ isOpen, onClose }: Props) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const [phoneCountry, setPhoneCountry] = useState({ dial_code: "+675", country_code: "pg" });
+  const [phoneCountry, setPhoneCountry] = useState({
+    dial_code: "+675",
+    country_code: "pg",
+  });
   const [agreed, setAgreed] = useState(false);
   const [fileName, setFileName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +58,9 @@ const ApplyForProgram = ({ isOpen, onClose }: Props) => {
   if (!isOpen) return null;
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -92,7 +97,9 @@ const ApplyForProgram = ({ isOpen, onClose }: Props) => {
     setSuccessMessage("");
 
     if (!agreed) {
-      setErrorMessage("Please agree that GREEN may contact you about this request.");
+      setErrorMessage(
+        "Please agree that GREEN may contact you about this request.",
+      );
       return;
     }
 
@@ -130,11 +137,15 @@ const ApplyForProgram = ({ isOpen, onClose }: Props) => {
           setSuccessMessage("");
         }, 2000);
       } else {
-        setErrorMessage(data.Message || "Failed to submit application. Please try again.");
+        setErrorMessage(
+          data.Message || "Failed to submit application. Please try again.",
+        );
       }
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "An error occurred while submitting the form.",
+        error instanceof Error
+          ? error.message
+          : "An error occurred while submitting the form.",
       );
     } finally {
       setIsLoading(false);
@@ -187,7 +198,9 @@ const ApplyForProgram = ({ isOpen, onClose }: Props) => {
             onPhoneChange={handleInputChange}
             dialCode={phoneCountry.dial_code}
             countryCode={phoneCountry.country_code}
-            onCountryChange={(dial_code, country_code) => setPhoneCountry({ dial_code, country_code })}
+            onCountryChange={(dial_code, country_code) =>
+              setPhoneCountry({ dial_code, country_code })
+            }
           />
         </div>
 
@@ -205,7 +218,9 @@ const ApplyForProgram = ({ isOpen, onClose }: Props) => {
             <option value="apprenticeship">Apprenticeship</option>
             <option value="internship">Internship</option>
             <option value="graduate-program">Graduate Program</option>
-            <option value="field-technician-training">Field Technician Training</option>
+            <option value="field-technician-training">
+              Field Technician Training
+            </option>
             <option value="leadership-track">Leadership Track</option>
             <option value="other">Other</option>
           </select>
@@ -281,13 +296,18 @@ const ApplyForProgram = ({ isOpen, onClose }: Props) => {
             onChange={(e) => setAgreed(e.target.checked)}
             className="mt-1 h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
           />
-          <label htmlFor="applyprogram-agree" className="text-sm text-gray-700 sm:text-base">
+          <label
+            htmlFor="applyprogram-agree"
+            className="text-sm text-gray-700 sm:text-base"
+          >
             I agree that GREEN may contact me about this request.
           </label>
         </div>
 
         {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
-        {successMessage && <p className="text-sm text-green-600">{successMessage}</p>}
+        {successMessage && (
+          <p className="text-sm text-green-600">{successMessage}</p>
+        )}
 
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-end sm:gap-6">
           <button

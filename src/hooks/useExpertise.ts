@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 interface ExpertiseImage {
   alt: string;
@@ -43,19 +43,19 @@ interface ExpertiseResponse {
 }
 
 const fetchExpertise = async (): Promise<ExpertiseData[]> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/expertise');
-  
+  const response = await fetch("https://greencms.percepco.co.uk/api/expertise");
+
   if (!response.ok) {
-    throw new Error('Failed to fetch expertise data');
+    throw new Error("Failed to fetch expertise data");
   }
-  
+
   const result: ExpertiseResponse = await response.json();
   return result.data;
 };
 
 export const useExpertise = () => {
   return useQuery({
-    queryKey: ['expertise'],
+    queryKey: ["expertise"],
     queryFn: fetchExpertise,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes

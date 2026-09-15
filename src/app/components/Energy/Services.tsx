@@ -112,14 +112,18 @@ const Services = () => {
     <React.Fragment>
       <TopNavigation />
       <div className="absolute lg:block  -z-10 top-0 hidden   lg:left-0">
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/service/lgImg.png"
           className="w-8/12 lg:h-[150vh]  "
           alt="mainBg"
         />
       </div>
       <div className="absolute   -z-10 top-0 lg:hidden   right-0">
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/service/mbImg.png"
           className="w-full   "
           alt="mainBg"
@@ -161,7 +165,9 @@ const Services = () => {
 
                     {index != 3 && (
                       <div className="-ml-6">
-                        <img loading="lazy" decoding="async"
+                        <img
+                          loading="lazy"
+                          decoding="async"
                           className="w-8 xl:w-10"
                           src="/images/service/arrow.png"
                           alt="arrow"
@@ -179,30 +185,34 @@ const Services = () => {
                 {/* Top row: Engineering -> Procurement */}
                 <div className="flex justify-center relative">
                   <div
-                   style={{
-                            transform: "skewX(-16deg)",
-                          }}
-                  className="p-[8px] w-full max-w-[140px] overflow-hidden  border-4 border-[#d9e74b] bg-white">
+                    style={{
+                      transform: "skewX(-16deg)",
+                    }}
+                    className="p-[8px] w-full max-w-[140px] overflow-hidden  border-4 border-[#d9e74b] bg-white"
+                  >
                     <div className="p-1 pl-4">
                       <h4
-                       style={{
-                            transform: "skewX(16deg)",
-                          }}
-                      className=" text-[#23B14D] mb-2 font-bold text-xs">
+                        style={{
+                          transform: "skewX(16deg)",
+                        }}
+                        className=" text-[#23B14D] mb-2 font-bold text-xs"
+                      >
                         {points[0]?.name}
                       </h4>
                       <ul className="font-bold text-xs text-gray-700 space-y-1">
                         {points[0]?.items.map(
                           (listItem: string, index: number) => {
                             return <li key={index}>{listItem}</li>;
-                          }
+                          },
                         )}
                       </ul>
                     </div>
                   </div>
                   {/* Right arrow */}
                   <div className="absolute -right-3 top-1/2 transform -translate-y-1/2 z-10">
-                    <img loading="lazy" decoding="async"
+                    <img
+                      loading="lazy"
+                      decoding="async"
                       className="w-6"
                       src="/images/service/arrow.png"
                       alt="arrow"
@@ -212,30 +222,34 @@ const Services = () => {
 
                 <div className="flex justify-center relative">
                   <div
-                   style={{
-                            transform: "skewX(-16deg)",
-                          }}
-                  className="p-[8px] w-full max-w-[140px] overflow-hidden  border-4 border-[#d9e74b] bg-white">
+                    style={{
+                      transform: "skewX(-16deg)",
+                    }}
+                    className="p-[8px] w-full max-w-[140px] overflow-hidden  border-4 border-[#d9e74b] bg-white"
+                  >
                     <div className="p-1 pl-4">
                       <h4
-                       style={{
-                            transform: "skewX(16deg)",
-                          }}
-                      className=" text-[#23B14D] mb-2 font-bold text-xs">
+                        style={{
+                          transform: "skewX(16deg)",
+                        }}
+                        className=" text-[#23B14D] mb-2 font-bold text-xs"
+                      >
                         {points[1]?.name}
                       </h4>
                       <ul className="font-bold text-xs text-gray-700 space-y-1">
                         {points[1]?.items.map(
                           (listItem: string, index: number) => {
                             return <li key={index}>{listItem}</li>;
-                          }
+                          },
                         )}
                       </ul>
                     </div>
                   </div>
                   {/* Down arrow */}
                   <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 z-10">
-                    <img loading="lazy" decoding="async"
+                    <img
+                      loading="lazy"
+                      decoding="async"
                       className="w-6 rotate-90"
                       src="/images/service/arrow.png"
                       alt="arrow"
@@ -246,30 +260,34 @@ const Services = () => {
                 {/* Bottom row: Management <- Construction */}
                 <div className="flex justify-center relative">
                   <div
-                   style={{
-                            transform: "skewX(-16deg)",
-                          }}
-                  className="p-[8px] w-full max-w-[140px] overflow-hidden  border-4 border-[#d9e74b] bg-white">
+                    style={{
+                      transform: "skewX(-16deg)",
+                    }}
+                    className="p-[8px] w-full max-w-[140px] overflow-hidden  border-4 border-[#d9e74b] bg-white"
+                  >
                     <div className="p-1 pl-4">
                       <h4
-                       style={{
-                            transform: "skewX(16deg)",
-                          }}
-                      className=" text-[#23B14D] mb-2 font-bold text-xs">
+                        style={{
+                          transform: "skewX(16deg)",
+                        }}
+                        className=" text-[#23B14D] mb-2 font-bold text-xs"
+                      >
                         {points[3]?.name}
                       </h4>
                       <ul className="font-bold text-xs text-gray-700 space-y-1">
                         {points[3]?.items.map(
                           (listItem: string, index: number) => {
                             return <li key={index}>{listItem}</li>;
-                          }
+                          },
                         )}
                       </ul>
                     </div>
                   </div>
                   {/* Left arrow */}
                   <div className="absolute -right-3 top-1/2 transform -translate-y-1/2 z-10">
-                    <img loading="lazy" decoding="async"
+                    <img
+                      loading="lazy"
+                      decoding="async"
                       className="w-6 rotate-180"
                       src="/images/service/arrow.png"
                       alt="arrow"
@@ -279,23 +297,25 @@ const Services = () => {
 
                 <div className="flex justify-center">
                   <div
-                  style={{
-                    transform:"skewX(-16deg)"
-                  }}
-                  className="p-[8px] w-full max-w-[140px] overflow-hidden  border-4 border-[#d9e74b] bg-white">
+                    style={{
+                      transform: "skewX(-16deg)",
+                    }}
+                    className="p-[8px] w-full max-w-[140px] overflow-hidden  border-4 border-[#d9e74b] bg-white"
+                  >
                     <div className="p-1 pl-4">
                       <h4
-                      style={{
-                        transform:"skewX(16deg)"
-                      }}
-                      className=" text-[#23B14D] mb-2 font-bold text-xs">
+                        style={{
+                          transform: "skewX(16deg)",
+                        }}
+                        className=" text-[#23B14D] mb-2 font-bold text-xs"
+                      >
                         {points[2]?.name}
                       </h4>
                       <ul className="font-bold text-xs text-gray-700 space-y-1">
                         {points[2]?.items.map(
                           (listItem: string, index: number) => {
                             return <li key={index}>{listItem}</li>;
-                          }
+                          },
                         )}
                       </ul>
                     </div>
@@ -305,7 +325,9 @@ const Services = () => {
             </div>
           </div>
           <div className="lg:block fixed top-20 lg:top-1/3 left-4 ">
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/service/services.svg"
               alt="Services"
               className=" w-5 lg:w-14 object-contain"
@@ -326,17 +348,18 @@ const Services = () => {
                 {data.find((item) => item.active)?.title}
               </h1>
               <div
-              style={{
-                transform:"skewX(-16deg)"
-              }}
-              className="border-2 lg:hidden p-2 font-bold text-gray-400 flex space-x-4 border-lime-300 ">
+                style={{
+                  transform: "skewX(-16deg)",
+                }}
+                className="border-2 lg:hidden p-2 font-bold text-gray-400 flex space-x-4 border-lime-300 "
+              >
                 <div
                   className="cursor-pointer"
                   onClick={() => {
                     handleServiceClick(
                       activeServiceIndex === 0
                         ? data.length - 1
-                        : activeServiceIndex - 1
+                        : activeServiceIndex - 1,
                     );
                   }}
                 >
@@ -405,10 +428,11 @@ const Services = () => {
           </div>
           <div className=" lg:relative lg:block hidden  ">
             <div
-             style={{
-              transform:"skewX(-16deg)"
-             }}
-            className="p-6  bg-[#f8f9d9]   shadow-xl lg:h-[350px]  lg:w-[300px]  to-[#FFFE30] transform  relative">
+              style={{
+                transform: "skewX(-16deg)",
+              }}
+              className="p-6  bg-[#f8f9d9]   shadow-xl lg:h-[350px]  lg:w-[300px]  to-[#FFFE30] transform  relative"
+            >
               <div className="absolute inset-0 pointer-events-none">
                 {/* <div className="absolute rotate-90 top-72 -left-42   w-[388px] h-1 bg-white" /> */}
               </div>
@@ -452,7 +476,9 @@ const Services = () => {
             className="cursor-pointer"
             onClick={() => setIsEnquiryOpen(true)}
           >
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/service/enquiry.svg"
               alt={energyData?.cta?.text || "Enquiry"}
               className=""

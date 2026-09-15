@@ -1,14 +1,10 @@
 "use client";
 
-import type React from "react";
-import { useEffect, useState } from "react";
-import EngineeringFormModal, {
-  formFieldClass,
-  formGridClass,
-} from "@/app/components/shared/EngineeringFormModal";
-import styles from "@/app/components/shared/EngineeringFormModal.module.css";
-import PhoneInput from "@/app/components/shared/PhoneInput";
+import React, { useEffect, useState } from "react";
 import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
+import { ProductEnquiryFrame } from "@/app/components/Product/Modals/ProductEnquiry";
+import PhoneInput from "@/app/components/shared/PhoneInput";
+import styles from "@/app/components/SmartGrid/Modals/SmartGridModals.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -78,7 +74,7 @@ const LiveDemoPOC = ({ isOpen, onClose }: Props) => {
 
     if (!agreed) {
       setErrorMessage(
-        "Please agree that GREEN may contact you about this request.",
+        "Please agree that GREEN may contact me about this request.",
       );
       return;
     }
@@ -133,143 +129,149 @@ const LiveDemoPOC = ({ isOpen, onClose }: Props) => {
   };
 
   return (
-    <EngineeringFormModal
-      isOpen={isOpen}
+    <ProductEnquiryFrame
+      labelledBy="live-demo-title"
       onClose={onClose}
-      title={<>BOOK A LIVE DEMO OF GREEN POC</>}
-      geometry="liveDemo"
+      closeLabel="Close live demo dialog"
     >
-      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-        <div className={formGridClass}>
-          <input
-            type="text"
-            name="fullName"
-            placeholder="FULL NAME"
-            value={formData.fullName}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-          <input
-            type="text"
-            name="organization"
-            placeholder="ORGANIZATION"
-            value={formData.organization}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-        </div>
+      <div className={styles.content}>
+        <header className={styles.dialogHeader}>
+          <h2 id="live-demo-title">
+            BOOK A LIVE DEMO OF <strong>GREEN POC</strong>
+          </h2>
+        </header>
 
-        <div className={formGridClass}>
-          <input
-            type="email"
-            name="email"
-            placeholder="EMAIL ID"
-            value={formData.email}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-          <PhoneInput
-            phone={formData.phone}
-            onPhoneChange={handleInputChange}
-            dialCode={phoneCountry.dial_code}
-            countryCode={phoneCountry.country_code}
-            onCountryChange={(dial_code, country_code) =>
-              setPhoneCountry({ dial_code, country_code })
-            }
-          />
-        </div>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={`${styles.row} ${styles.row1}`}>
+            <label className={`${styles.fieldShape} ${styles.activeField}`}>
+              <input
+                type="text"
+                name="fullName"
+                placeholder="FULL NAME"
+                value={formData.fullName}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
 
-        <div className={formGridClass}>
-          <select
-            name="interest"
-            value={formData.interest}
-            onChange={handleInputChange}
-            className={`${formFieldClass} cursor-pointer ${
-              formData.interest ? "text-gray-700" : "text-gray-500"
-            }`}
-            required
-          >
-            <option value="">WHAT ARE YOU INTERESTED IN?</option>
-            <option value="live-demo">Live Platform Demo</option>
-            <option value="proof-of-concept">Proof of Concept (POC)</option>
-            <option value="remote-monitoring">Remote Monitoring</option>
-            <option value="om-services">O&amp;M Services</option>
-            <option value="other">Other</option>
-          </select>
-          <select
-            name="consultationType"
-            value={formData.consultationType}
-            onChange={handleInputChange}
-            className={`${formFieldClass} cursor-pointer ${
-              formData.consultationType ? "text-gray-700" : "text-gray-500"
-            }`}
-            required
-          >
-            <option value="">PREFERRED CONSULTATION TYPE</option>
-            <option value="virtual">Virtual (Zoom / Google Meet)</option>
-            <option value="in-person">In-Person</option>
-            <option value="phone-call">Phone Call</option>
-          </select>
-        </div>
+            <label className={styles.fieldShape}>
+              <input
+                type="text"
+                name="organization"
+                placeholder="ORGANIZATION"
+                value={formData.organization}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+          </div>
 
-        <textarea
-          name="message"
-          placeholder="BRIEF MESSAGE"
-          value={formData.message}
-          onChange={handleInputChange}
-          rows={3}
-          className={`${formFieldClass} resize-none`}
-        />
+          <div className={`${styles.row} ${styles.row2}`}>
+            <label className={styles.fieldShape}>
+              <input
+                type="email"
+                name="email"
+                placeholder="EMAIL ID"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
 
-        <div className="flex items-start gap-3">
-          <input
-            type="checkbox"
-            id="livedemo-agree"
-            checked={agreed}
-            onChange={(e) => setAgreed(e.target.checked)}
-            className="mt-1 h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
-          />
-          <label
-            htmlFor="livedemo-agree"
-            className="text-sm text-gray-700 sm:text-base"
-          >
-            I agree that GREEN may contact me about this request.
-          </label>
-        </div>
+            <div className={`${styles.fieldShape} ${styles.phoneField}`}>
+              <PhoneInput
+                phone={formData.phone}
+                onPhoneChange={handleInputChange}
+                dialCode={phoneCountry.dial_code}
+                countryCode={phoneCountry.country_code}
+                onCountryChange={(dial_code, country_code) =>
+                  setPhoneCountry({ dial_code, country_code })
+                }
+              />
+            </div>
+          </div>
 
-        {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
-        {successMessage && (
-          <p className="text-sm text-green-600">{successMessage}</p>
-        )}
+          <div className={`${styles.row} ${styles.row3}`}>
+            <div className={styles.fieldShape}>
+              <select
+                name="interest"
+                value={formData.interest}
+                onChange={handleInputChange}
+                className={formData.interest ? styles.hasValue : ""}
+                required
+              >
+                <option value="">WHAT ARE YOU INTERESTED IN?</option>
+                <option value="live-demo">Live Platform Demo</option>
+                <option value="proof-of-concept">Proof of Concept (POC)</option>
+                <option value="remote-monitoring">Remote Monitoring</option>
+                <option value="om-services">O&amp;M Services</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
 
-        <div
-          className={`flex flex-col gap-4 sm:flex-row sm:justify-end sm:gap-6 ${styles.liveDemoActions}`}
-        >
-          <button
-            type="button"
-            onClick={resetForm}
-            disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
-          >
-            <span className="block text-sm font-bold text-gray-800 sm:text-base">
-              Reset
-            </span>
-          </button>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
-          >
-            <span className="block text-sm font-bold text-gray-900 sm:text-base">
-              {isLoading ? "Submitting..." : "Book Demo"}
-            </span>
-          </button>
-        </div>
-      </form>
-    </EngineeringFormModal>
+            <div className={styles.fieldShape}>
+              <select
+                name="consultationType"
+                value={formData.consultationType}
+                onChange={handleInputChange}
+                className={formData.consultationType ? styles.hasValue : ""}
+                required
+              >
+                <option value="">PREFERRED CONSULTATION TYPE</option>
+                <option value="virtual">Virtual (Zoom / Google Meet)</option>
+                <option value="in-person">In-Person</option>
+                <option value="phone-call">Phone Call</option>
+              </select>
+            </div>
+          </div>
+
+          <div className={`${styles.row} ${styles.row4}`}>
+            <div className={`${styles.fieldShape} ${styles.messageShape}`}>
+              <textarea
+                name="message"
+                placeholder="BRIEF MESSAGE"
+                value={formData.message}
+                onChange={handleInputChange}
+                rows={3}
+              />
+            </div>
+          </div>
+
+          <div className={`${styles.agreement} ${styles.row5}`}>
+            <input
+              type="checkbox"
+              id="livedemo-agree"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+            />
+            <label htmlFor="livedemo-agree">
+              I agree that GREEN may contact me about this request.
+            </label>
+          </div>
+
+          {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+          {successMessage && <p className={styles.success}>{successMessage}</p>}
+
+          <div className={`${styles.row} ${styles.row6}`}>
+            <button
+              type="button"
+              onClick={resetForm}
+              disabled={isLoading}
+              className={styles.btnReset}
+            >
+              <span>Reset</span>
+            </button>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={styles.btnSubmit}
+            >
+              <span>{isLoading ? "Submitting..." : "Book Demo"}</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </ProductEnquiryFrame>
   );
 };
 

@@ -1,160 +1,56 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { useInteractiveZIndex } from "../../../../hooks/useInteractiveZIndex";
-
-interface WhatMakesGreenDifferentData {
-  title: string;
-  keyPoints: Array<{
-    text1: string;
-    text2: string;
-  }>;
-  featuredImg: {
-    alt: string;
-    src: string;
-  };
-}
+import styles from "./CareersModal.module.css";
+import CareersModalShell from "./CareersModalShell";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  data?: WhatMakesGreenDifferentData;
+  data?: {
+    title: string;
+    keyPoints: Array<{ text1: string; text2: string }>;
+    featuredImg?: { src: string; alt: string };
+  };
 }
-
-const WhatMakesGreenDifferent = ({ isOpen, onClose, data }: Props) => {
-  const [isMobile, setIsMobile] = useState(false);
-  const closeButtonProps = useInteractiveZIndex();
-
-  useEffect(() => {
-    const checkMobile = () => {
-      if (typeof window !== "undefined") {
-        const mobile = window.innerWidth < 768;
-        setIsMobile(mobile);
-      }
-    };
-
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  if (!isOpen) return null;
-
-  const renderContent = () => (
-    <>
-      {/* Title Section */}
-      <div className="mb-8">
-        <h2 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
-          {data?.title || "What Makes GREEN Different"}
-        </h2>
-        <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
-      </div>
-
-      {/* Content Layout - Text and Image */}
-      <div
-        className={`${
-          isMobile
-            ? "flex flex-col space-y-6"
-            : "flex flex-col lg:flex-row items-start gap-8"
-        }`}
-      >
-        {/* Key Points Column */}
-        <div className="flex-1 space-y-6">
-          {data?.keyPoints?.map((point, index) => (
-            <div key={index} className="flex items-start gap-3">
-              <div className="flex-shrink-0 mt-1">
-                <span>
-                  <img loading="lazy" decoding="async"
-                    src="/images/grid-intel/lighting.png"
-                    className="w-14 -mt-4"
-                    alt="lighting"
-                  />
-                </span>
-              </div>
+const fallback = [
+  ["You deploy what you design", "— real exposure"],
+  ["We hire for attitude and potential", "— not just degrees"],
+  ["We grow talent from within", "— clear internal promotion paths"],
+  ["You’re never just a number", "— you’re part of a transformation"],
+];
+export default function WhatMakesGreenDifferent({
+  isOpen,
+  onClose,
+  data,
+}: Props) {
+  const points = fallback.map(([text1, text2]) => ({ text1, text2 }));
+  return (
+    <CareersModalShell
+      isOpen={isOpen}
+      onClose={onClose}
+      panelClassName={styles.differentPanel}
+    >
+      <h2 className={styles.heading}>What Makes GREEN Different</h2>
+      <div className={styles.rule} />
+      <div className={styles.differentContent}>
+        <div className={styles.points}>
+          {points.map((point) => (
+            <article className={styles.point} key={point.text1}>
+              <img src="/images/book-consulation/figma-bolt.png" alt="" />
               <div>
-                <div className="text-gray-800 font-bold text-lg mb-1">
-                  {point.text1}
-                </div>
-                <div className="text-gray-600 text-sm">{point.text2}</div>
+                <h3>{point.text1}</h3>
+                <p>{point.text2}</p>
               </div>
-            </div>
+            </article>
           ))}
         </div>
-
-        {/* Image Column */}
         {data?.featuredImg && (
-          <div className={`${isMobile ? "w-full" : "w-7/12"}`}>
-            <img loading="lazy" decoding="async"
-              src={data.featuredImg.src}
-              alt={data.featuredImg.alt}
-              className="w-full rounded-lg"
-            />
-          </div>
+          <img
+            className={styles.featureImage}
+            src={data.featuredImg.src}
+            alt={data.featuredImg.alt}
+          />
         )}
       </div>
-    </>
+    </CareersModalShell>
   );
-
-  return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed inset-0 bg-black/20 z-[99999999999999999999999999] flex items-center justify-center">
-        {/* Modal Container */}
-        <div className="relative w-full lg:max-w-6xl mx-4">
-          {/* Mobile Layout */}
-          {isMobile ? (
-            <div className="bg-white h-[80vh] p-6 overflow-y-auto border-2 border-[#4CAF50] relative shadow-2xl">
-              {/* Close Button */}
-              <div className="flex justify-end w-full mb-4">
-                <div {...closeButtonProps.getContainerProps()}>
-                  <button
-                    onClick={onClose}
-                    className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl"
-                  >
-                    ✕
-                  </button>
-                </div>
-              </div>
-
-              {/* Modal Content */}
-              <div className="mx-auto">{renderContent()}</div>
-            </div>
-          ) : (
-            /* Desktop Layout - Skewed design */
-            <div
-              className="bg-white transform  py-10 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-              style={{
-                transform: "skewX(-12deg)",
-              }}
-            >
-              {/* Close Button */}
-              <div className="flex justify-end w-full mb-4">
-                <div {...closeButtonProps.getContainerProps()}>
-                  <button
-                  style={{
-                     transform:"skewX(12deg)"
-                  }}
-                    onClick={onClose}
-                    className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl transform"
-                  >
-                    ✕
-                  </button>
-                </div>
-              </div>
-
-              {/* Modal Content */}
-              <div
-              style={{
-                transform:"skewX(12deg)"
-              }}
-              className="transform  max-w-5xl mx-auto">
-                {renderContent()}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    </React.Fragment>
-  );
-};
-
-export default WhatMakesGreenDifferent;
+}

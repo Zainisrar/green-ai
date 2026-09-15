@@ -180,7 +180,7 @@
   content: "";
 }
 
-.phoneField>* {
+.phoneField > * {
   position: relative;
   z-index: 1;
 }

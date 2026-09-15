@@ -1,16 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
 import styles from "./Expertise.module.css";
-
-const DETAIL_SPRING = {
-  type: "spring",
-  mass: 1,
-  stiffness: 100,
-  damping: 15,
-} as const;
 
 export interface SolutionDetailImage {
   src: string;
@@ -57,9 +49,9 @@ export default function SolutionDetail({
   startHref,
   onBack,
 }: SolutionDetailProps) {
-  const [activeImage, setActiveImage] = useState(0);
-  const reduceMotion = useReducedMotion();
-
+  // Figma node 7077:3970 opens with the water-tank facility at the front.
+  // The remaining images are deliberately layered behind it.
+  const [activeImage, setActiveImage] = useState(1);
   const changeImage = (direction: 1 | -1) => {
     setActiveImage(
       (image) => (image + direction + images.length) % images.length,
@@ -69,21 +61,10 @@ export default function SolutionDetail({
   const image = images[activeImage];
 
   return (
-    <motion.section
-      className={styles.healthcareDetail}
-      data-node-id={nodeId}
-      initial={
-        reduceMotion ? false : { opacity: 0, scale: 0.985, x: 24, y: 10 }
-      }
-      animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-      exit={
-        reduceMotion
-          ? { opacity: 0 }
-          : { opacity: 0, scale: 0.985, x: 24, y: 10 }
-      }
-      transition={reduceMotion ? { duration: 0 } : DETAIL_SPRING}
-    >
-      <img loading="lazy" decoding="async"
+    <section className={styles.healthcareDetail} data-node-id={nodeId}>
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.detailWatermark}
         src="/images/expertise/SOLUTIONS.png"
         alt=""
@@ -92,19 +73,25 @@ export default function SolutionDetail({
 
       <div className={styles.detailMedia}>
         <div className={styles.detailImageStack} aria-hidden="true">
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src={images[(activeImage + 2) % images.length].src}
             alt=""
             className={styles.detailStackBack}
           />
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src={images[(activeImage + 1) % images.length].src}
             alt=""
             className={styles.detailStackMiddle}
           />
         </div>
 
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           key={`${image.src}-backing`}
           className={styles.detailMainBacking}
           src={image.src}
@@ -112,14 +99,10 @@ export default function SolutionDetail({
           aria-hidden="true"
         />
 
-        <motion.img
-          key={image.src}
+        <img
           className={styles.detailMainImage}
           src={image.src}
           alt={image.alt}
-          initial={reduceMotion ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={reduceMotion ? { duration: 0 } : DETAIL_SPRING}
         />
 
         <div className={styles.detailArrows}>
@@ -128,14 +111,24 @@ export default function SolutionDetail({
             onClick={() => changeImage(-1)}
             aria-label={`Previous ${highlightedTitle.toLowerCase()} image`}
           >
-            <img loading="lazy" decoding="async" src="/images/expertise/leftarrow.svg" alt="" />
+            <img
+              loading="lazy"
+              decoding="async"
+              src="/images/expertise/leftarrow.svg"
+              alt=""
+            />
           </button>
           <button
             type="button"
             onClick={() => changeImage(1)}
             aria-label={`Next ${highlightedTitle.toLowerCase()} image`}
           >
-            <img loading="lazy" decoding="async" src="/images/expertise/rightarrow.svg" alt="" />
+            <img
+              loading="lazy"
+              decoding="async"
+              src="/images/expertise/rightarrow.svg"
+              alt=""
+            />
           </button>
         </div>
 
@@ -183,7 +176,12 @@ export default function SolutionDetail({
             onClick={onBack}
             aria-label={`Return from ${activeCategoryLabel}`}
           >
-            <img loading="lazy" decoding="async" src={activeCategoryImage} alt="" />
+            <img
+              loading="lazy"
+              decoding="async"
+              src={activeCategoryImage}
+              alt=""
+            />
             <span>{activeCategoryLabel}</span>
           </button>
           {categories.map((category) => (
@@ -197,6 +195,6 @@ export default function SolutionDetail({
           Let&apos;s Start
         </Link>
       </div>
-    </motion.section>
+    </section>
   );
 }

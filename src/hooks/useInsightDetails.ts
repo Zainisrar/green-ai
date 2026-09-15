@@ -37,7 +37,7 @@ interface ApiResponse {
 
 const fetchInsightDetails = async (): Promise<ApiResponse> => {
   const response = await fetch(
-    "https://greencms.percepco.co.uk/api/insight-details"
+    "https://greencms.percepco.co.uk/api/insight-details",
   );
   if (!response.ok) {
     throw new Error("Failed to fetch insight details");

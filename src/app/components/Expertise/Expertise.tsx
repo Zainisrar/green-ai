@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useExpertise } from "../../../hooks/useExpertise";
 import D6Chatbot from "../D6Chatbot";
-import TopNavigation from "../TopNavigation/TopNavigation";
+import SiteHeader from "../SiteHeader/SiteHeader";
 import styles from "./Expertise.module.css";
 import SolutionDetail from "./SolutionDetail";
 
@@ -18,31 +18,37 @@ const GALLERY = [
     src: `${ASSET_ROOT}/healthcare.png`,
     alt: "Solar installation powering a healthcare complex",
     label: "Powering Healthcare",
+    slug: "/expertise/powering-healthcare",
   },
   {
     src: `${ASSET_ROOT}/community-solar.png`,
     alt: "Community solar installation",
     label: "Powering Communities",
+    slug: "/expertise/powering-communities",
   },
   {
     src: `${ASSET_ROOT}/solar-pump.png`,
     alt: "Solar array beside a water source",
-    label: "Powering Agriculture",
+    label: "Powering Rural",
+    slug: "/expertise/powering-rural",
   },
   {
     src: `${ASSET_ROOT}/commercial-solar.png`,
     alt: "Commercial building with rooftop solar",
-    label: "Powering Industry",
+    label: "Powering Corporate",
+    slug: "/expertise/powering-corporate",
   },
   {
     src: `${ASSET_ROOT}/telecom-solar.png`,
     alt: "Remote solar and telecommunications installation",
     label: "Powering Telecom",
+    slug: "/expertise/powering-telecom",
   },
   {
     src: `${ASSET_ROOT}/home-solar.png`,
     alt: "Home powered by rooftop solar",
-    label: "Powering Homes",
+    label: "Powering Home",
+    slug: "/expertise/powering-home",
   },
 ] as const;
 
@@ -51,7 +57,7 @@ const SOLUTION_COPY = [
     title: "POWERING",
     highlighted: "HEALTHCARE",
     description:
-      "Renewable energy and medical technology augmentation for sustainable healthcare systems.",
+      "In an era where sustainability and environmental consciousness are paramount, the quest for a greener future is more important than ever",
   },
   {
     title: "POWERING",
@@ -61,13 +67,13 @@ const SOLUTION_COPY = [
   },
   {
     title: "POWERING",
-    highlighted: "AGRICULTURE",
+    highlighted: "RURAL",
     description:
-      "Solar-powered systems that improve productivity, irrigation, and dependable energy access for agriculture.",
+      "Solar-powered systems that improve productivity, irrigation, and dependable energy access for agriculture and rural communities.",
   },
   {
     title: "POWERING",
-    highlighted: "INDUSTRY",
+    highlighted: "CORPORATE",
     description:
       "Efficient renewable energy systems built for businesses, industry, and essential commercial operations.",
   },
@@ -98,6 +104,38 @@ const GRID_CARDS = [
   { nodeId: "7077:3735", item: 1, left: 1308.5, top: 731.39 },
 ] as const;
 
+function parseTitle(
+  title?: string,
+  highlighted?: string,
+  defaultTitle = "POWERING",
+  defaultHighlight = "HEALTHCARE",
+) {
+  if (!title) return { title: defaultTitle, highlighted: defaultHighlight };
+  const parts = title.trim().split(/\s+/);
+  if (parts.length >= 2 && parts[0].toUpperCase() === "POWERING") {
+    return {
+      title: parts[0],
+      highlighted: parts.slice(1).join(" ").toUpperCase(),
+    };
+  }
+  if (highlighted && title.toUpperCase().includes(highlighted.toUpperCase())) {
+    const cleaned = title
+      .replace(
+        new RegExp(highlighted.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"),
+        "",
+      )
+      .trim();
+    return {
+      title: cleaned || defaultTitle,
+      highlighted: highlighted.toUpperCase(),
+    };
+  }
+  return {
+    title: parts[0] || defaultTitle,
+    highlighted: parts.slice(1).join(" ").toUpperCase() || defaultHighlight,
+  };
+}
+
 const SLIDER_ITEMS = [
   {
     nodeId: "7077:3787",
@@ -106,6 +144,11 @@ const SLIDER_ITEMS = [
     assetClass: "sliderAssetHealthcare",
     label: "",
     labelClass: "",
+    title: "POWERING",
+    highlighted: "HEALTHCARE",
+    description:
+      "In an era where sustainability and environmental consciousness are paramount, the quest for a greener future is more important than ever",
+    slug: "/expertise/powering-healthcare",
   },
   {
     nodeId: "7077:3790",
@@ -114,6 +157,11 @@ const SLIDER_ITEMS = [
     assetClass: "sliderAssetHome",
     label: "Powering Home",
     labelClass: "",
+    title: "POWERING",
+    highlighted: "HOME",
+    description:
+      "Sustainable, affordable power solutions that bring dependable energy to homes and rural households.",
+    slug: "/expertise/powering-home",
   },
   {
     nodeId: "7077:3796",
@@ -122,6 +170,11 @@ const SLIDER_ITEMS = [
     assetClass: "sliderAssetCorporate",
     label: "Powering Corporate",
     labelClass: "sliderPanelCorporate",
+    title: "POWERING",
+    highlighted: "CORPORATE",
+    description:
+      "Efficient renewable energy systems built for businesses, industry, and essential commercial operations.",
+    slug: "/expertise/powering-corporate",
   },
   {
     nodeId: "7077:3802",
@@ -130,6 +183,11 @@ const SLIDER_ITEMS = [
     assetClass: "sliderAssetRural",
     label: "Powering Rural",
     labelClass: "sliderPanelRural",
+    title: "POWERING",
+    highlighted: "RURAL",
+    description:
+      "Solar-powered systems that improve productivity, irrigation, and dependable energy access for agriculture and rural communities.",
+    slug: "/expertise/powering-rural",
   },
   {
     nodeId: "7077:3807",
@@ -138,14 +196,24 @@ const SLIDER_ITEMS = [
     assetClass: "sliderAssetTelecom",
     label: "",
     labelClass: "",
+    title: "POWERING",
+    highlighted: "TELECOM",
+    description:
+      "Resilient solar energy infrastructure that keeps remote and critical telecommunications connected.",
+    slug: "/expertise/powering-telecom",
   },
   {
     nodeId: "7077:3810",
-    item: 5,
+    item: 1,
     src: "/images/expertise/figma-slider/rectangle-365.png",
     assetClass: "sliderAssetResidence",
     label: "",
     labelClass: "",
+    title: "POWERING",
+    highlighted: "COMMUNITIES",
+    description:
+      "Reliable, clean energy solutions that enable stronger and more resilient communities.",
+    slug: "/expertise/powering-communities",
   },
   {
     nodeId: "7077:3813",
@@ -154,6 +222,11 @@ const SLIDER_ITEMS = [
     assetClass: "sliderAssetCorporateRepeat",
     label: "",
     labelClass: "",
+    title: "POWERING",
+    highlighted: "CORPORATE",
+    description:
+      "Efficient renewable energy systems built for businesses, industry, and essential commercial operations.",
+    slug: "/expertise/powering-corporate",
   },
   {
     nodeId: "7077:3816",
@@ -162,6 +235,11 @@ const SLIDER_ITEMS = [
     assetClass: "sliderAssetRuralRepeat",
     label: "",
     labelClass: "",
+    title: "POWERING",
+    highlighted: "RURAL",
+    description:
+      "Solar-powered systems that improve productivity, irrigation, and dependable energy access for agriculture and rural communities.",
+    slug: "/expertise/powering-rural",
   },
 ] as const;
 
@@ -218,7 +296,7 @@ export default function Expertise() {
   const [sliderScreen, setSliderScreen] = useState<SliderScreen>("overview");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isSliderDragging, setIsSliderDragging] = useState(false);
-  const [desktopScale, setDesktopScale] = useState(1);
+  const [desktopScale, setDesktopScale] = useState({ x: 1, y: 1 });
   const sliderViewportRef = useRef<HTMLElement>(null);
   const sliderDragStart = useRef<{
     pointerId: number;
@@ -233,12 +311,10 @@ export default function Expertise() {
 
   useEffect(() => {
     const updateScale = () => {
-      setDesktopScale(
-        Math.min(
-          window.innerWidth / DESIGN_WIDTH,
-          window.innerHeight / DESIGN_HEIGHT,
-        ),
-      );
+      setDesktopScale({
+        x: window.innerWidth / DESIGN_WIDTH,
+        y: window.innerHeight / DESIGN_HEIGHT,
+      });
     };
 
     updateScale();
@@ -246,25 +322,63 @@ export default function Expertise() {
     return () => window.removeEventListener("resize", updateScale);
   }, []);
 
-  // Do not fall back to index 0 when selectedIndex exceeds the API array —
-  // undefined here lets the SOLUTION_COPY[selectedIndex] fallbacks below take
-  // effect correctly for each card position.
-  const activeExpertise = expertiseItems?.[selectedIndex];
-  const exploreHref = activeExpertise?.slug || "/expertise/powering-healthcare";
+  const [activeSliderIndex, setActiveSliderIndex] = useState(0);
+
+  const selectSolution = (galleryIndex: number) => {
+    const safeIndex = (galleryIndex + GALLERY.length) % GALLERY.length;
+    setSelectedIndex(safeIndex);
+    const matchingSliderIndex = SLIDER_ITEMS.findIndex(
+      (panel) => panel.item === safeIndex,
+    );
+    if (matchingSliderIndex >= 0) {
+      setActiveSliderIndex(matchingSliderIndex);
+    }
+  };
+
+  const currentSliderItem = SLIDER_ITEMS[activeSliderIndex] ?? SLIDER_ITEMS[0];
   const activeGalleryItem = GALLERY[selectedIndex % GALLERY.length];
   const fallbackSolution = SOLUTION_COPY[selectedIndex % SOLUTION_COPY.length];
-  const activeHighlighted =
-    activeExpertise?.highlightedTitle ||
-    activeExpertise?.highlighted ||
-    fallbackSolution.highlighted;
-  const suppliedTitle = activeExpertise?.title || fallbackSolution.title;
-  const activeTitle =
-    suppliedTitle
-      .replace(new RegExp(activeHighlighted.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"), "")
-      .trim() ||
-    fallbackSolution.title;
-  const activeDescription =
-    activeExpertise?.description || fallbackSolution.description;
+
+  const activeExpertise = expertiseItems?.find((item) => {
+    const targetSlug = `/expertise/${activeGalleryItem.label.toLowerCase().replace(/\s+/g, "-")}`;
+    const cleanLabel = activeGalleryItem.label
+      .toLowerCase()
+      .replace("powering ", "");
+    return (
+      item.slug === targetSlug ||
+      item.slug?.includes(cleanLabel) ||
+      (cleanLabel === "rural" && item.slug?.includes("agriculture")) ||
+      (cleanLabel === "corporate" && item.slug?.includes("industry")) ||
+      (cleanLabel === "home" && item.slug?.includes("homes"))
+    );
+  });
+
+  let activeTitle: string;
+  let activeHighlighted: string;
+  let activeDescription: string;
+  let exploreHref: string;
+
+  if (view === "slider") {
+    activeTitle = currentSliderItem.title;
+    activeHighlighted = currentSliderItem.highlighted;
+    activeDescription = currentSliderItem.description;
+    exploreHref = currentSliderItem.slug;
+  } else {
+    const parsed = parseTitle(
+      activeExpertise?.title,
+      activeExpertise?.highlightedTitle || activeExpertise?.highlighted,
+      fallbackSolution.title,
+      fallbackSolution.highlighted,
+    );
+    activeTitle = parsed.title;
+    activeHighlighted = parsed.highlighted;
+    activeDescription =
+      activeExpertise?.description || fallbackSolution.description;
+    exploreHref =
+      activeExpertise?.slug ||
+      activeGalleryItem.slug ||
+      "/expertise/powering-healthcare";
+  }
 
   const scrollSlider = (direction: 1 | -1) => {
     sliderViewportRef.current?.scrollBy({
@@ -315,23 +429,19 @@ export default function Expertise() {
     }, 80);
   };
 
-  const openHealthcareDetail = () => {
-    setSliderScreen("healthcare");
-  };
-
   return (
     <main className={styles.page}>
-      <TopNavigation />
-
       <section className={styles.desktopStage} aria-label="GREEN solutions">
         <div
           className={styles.canvas}
           data-node-id="7077:3678"
           data-name="Solutions page -D2"
           style={{
-            transform: `translateX(-50%) scale(${desktopScale})`,
+            transform: `scale(${desktopScale.x}, ${desktopScale.y})`,
           }}
         >
+          <SiteHeader layout="figmaCanvas" canvasActiveNavigation />
+
           <AnimatePresence initial={false}>
             {sliderScreen === "healthcare" ? (
               <SolutionDetail
@@ -379,16 +489,25 @@ export default function Expertise() {
               {activeTitle} <span>{activeHighlighted}</span>
             </h1>
 
-            <img
-              loading="lazy"
-              decoding="async"
-              className={`${styles.verticalLabel} ${
-                view === "slider" ? styles.sliderWatermark : ""
-              }`}
-              src="/images/expertise/figma-d2/expertise_vert.png"
-              alt=""
-              data-node-id="7077:3713"
-            />
+            {view === "slider" ? (
+              <img
+                loading="lazy"
+                decoding="async"
+                className={styles.sliderWatermark}
+                src="/images/expertise/sliderSolution.png"
+                alt="SOLUTIONS"
+                data-node-id="7077:3713"
+              />
+            ) : (
+              <img
+                loading="lazy"
+                decoding="async"
+                className={styles.verticalLabel}
+                src="/images/expertise/figma-d2/expertise_vert.png"
+                alt="SOLUTIONS"
+                data-node-id="7077:3713"
+              />
+            )}
 
             {view === "grid" ? (
               <>
@@ -449,7 +568,7 @@ export default function Expertise() {
                         className={styles.galleryCard}
                         data-node-id={card.nodeId}
                         style={{ left: card.left, top: card.top }}
-                        onClick={() => setSelectedIndex(card.item)}
+                        onClick={() => selectSolution(card.item)}
                         aria-label={`Select ${item.label}`}
                       >
                         <img
@@ -467,9 +586,7 @@ export default function Expertise() {
                     type="button"
                     className={styles.selectedCard}
                     data-node-id="7077:3738"
-                    onClick={() =>
-                      setSelectedIndex((selectedIndex + 1) % GALLERY.length)
-                    }
+                    onClick={() => selectSolution(selectedIndex + 1)}
                     aria-label={`Selected solution: ${activeGalleryItem.label}. Show next solution.`}
                   >
                     <img
@@ -513,8 +630,6 @@ export default function Expertise() {
                         velocity: 0,
                       };
                       sliderDidDrag.current = false;
-                      setIsSliderDragging(true);
-                      event.currentTarget.setPointerCapture(event.pointerId);
                     }}
                     onPointerMove={(event) => {
                       const dragStart = sliderDragStart.current;
@@ -525,17 +640,32 @@ export default function Expertise() {
                         return;
 
                       const dragDistance =
-                        (event.clientX - dragStart.x) / desktopScale;
+                        (event.clientX - dragStart.x) / desktopScale.x;
                       const now = performance.now();
                       const elapsed = Math.max(now - dragStart.lastTime, 1);
                       dragStart.velocity =
                         (dragStart.lastX - event.clientX) /
-                        desktopScale /
+                        desktopScale.x /
                         elapsed;
                       dragStart.lastX = event.clientX;
                       dragStart.lastTime = now;
-                      if (Math.abs(dragDistance) > 4)
+                      if (Math.abs(dragDistance) > 4) {
                         sliderDidDrag.current = true;
+                        setIsSliderDragging(true);
+                        try {
+                          if (
+                            !event.currentTarget.hasPointerCapture(
+                              event.pointerId,
+                            )
+                          ) {
+                            event.currentTarget.setPointerCapture(
+                              event.pointerId,
+                            );
+                          }
+                        } catch {
+                          // ignore capture error
+                        }
+                      }
                       event.currentTarget.scrollLeft =
                         dragStart.scrollLeft - dragDistance;
                     }}
@@ -555,7 +685,7 @@ export default function Expertise() {
 
                       if (!canScroll) return;
                       event.preventDefault();
-                      viewport.scrollLeft += delta / desktopScale;
+                      viewport.scrollLeft += delta / desktopScale.x;
                     }}
                     onKeyDown={(event) => {
                       if (event.key === "ArrowLeft") {
@@ -569,8 +699,8 @@ export default function Expertise() {
                     }}
                   >
                     <div className={styles.sliderTrack}>
-                      {SLIDER_ITEMS.map((panel) => {
-                        const item = GALLERY[panel.item];
+                      {SLIDER_ITEMS.map((panel, index) => {
+                        const isActive = activeSliderIndex === index;
                         return (
                           <button
                             type="button"
@@ -578,11 +708,15 @@ export default function Expertise() {
                             data-node-id={panel.nodeId}
                             onClick={() => {
                               if (!sliderDidDrag.current) {
+                                setActiveSliderIndex(index);
                                 setSelectedIndex(panel.item);
                               }
                             }}
-                            className={styles.sliderPanel}
-                            aria-label={`Select ${item.label}`}
+                            className={`${styles.sliderPanel} ${
+                              isActive ? styles.sliderPanelActive : ""
+                            }`}
+                            aria-label={`Select ${panel.title} ${panel.highlighted}`}
+                            aria-pressed={isActive}
                           >
                             <span
                               className={`${styles.sliderAsset} ${styles[panel.assetClass]}`}
@@ -591,7 +725,7 @@ export default function Expertise() {
                                 loading="lazy"
                                 decoding="async"
                                 src={panel.src}
-                                alt={item.alt}
+                                alt={panel.highlighted}
                               />
                             </span>
                             {panel.label ? (
@@ -631,9 +765,7 @@ export default function Expertise() {
                   alt=""
                 />
               </div>
-            ) : (
-              <div className={styles.sliderPagination} aria-hidden="true" />
-            )}
+            ) : null}
 
             <fieldset className={styles.viewSwitch}>
               <legend className={styles.srOnly}>Choose gallery view</legend>
@@ -652,6 +784,24 @@ export default function Expertise() {
                 onClick={() => {
                   setSliderScreen("overview");
                   setView("slider");
+                  const matchingSliderIndex = SLIDER_ITEMS.findIndex(
+                    (panel) => panel.item === selectedIndex,
+                  );
+                  const targetIndex =
+                    matchingSliderIndex >= 0 ? matchingSliderIndex : 0;
+                  setActiveSliderIndex(targetIndex);
+                  requestAnimationFrame(() => {
+                    if (sliderViewportRef.current) {
+                      sliderViewportRef.current.scrollTo({
+                        left: targetIndex * SLIDER_CARD_STEP,
+                        behavior: window.matchMedia(
+                          "(prefers-reduced-motion: reduce)",
+                        ).matches
+                          ? "auto"
+                          : "smooth",
+                      });
+                    }
+                  });
                 }}
                 aria-pressed={view === "slider"}
                 data-node-id="7077:3722"
@@ -685,7 +835,7 @@ export default function Expertise() {
             <button
               type="button"
               key={item.src}
-              onClick={() => setSelectedIndex(index)}
+              onClick={() => selectSolution(index)}
               className={
                 selectedIndex === index ? styles.mobileSelected : undefined
               }

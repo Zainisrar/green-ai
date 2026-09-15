@@ -1,0 +1,330 @@
+.page {
+  position: relative;
+  min-height: 100svh;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.canvasPage {
+  position: relative;
+  width: 1920px;
+  height: 1450px;
+  min-height: 1450px;
+  overflow: visible;
+}
+
+.verticalTitle {
+  position: fixed;
+  top: 180px;
+  left: 35px;
+  z-index: 1;
+  width: 56px;
+  height: 745px;
+}
+
+.canvasPage .verticalTitle {
+  position: absolute;
+}
+
+.canvasPage .article {
+  position: absolute;
+  top: 0;
+  width: 1536px;
+  margin-right: 0;
+  margin-left: 264px;
+  padding: 0;
+  height: 1450px;
+}
+
+.canvasPage .header {
+  position: absolute;
+  top: 168px;
+  left: 0;
+  max-width: 1451px;
+}
+
+.canvasPage .header h1 {
+  width: 1451px;
+  max-width: none;
+  font-size: 40px;
+  letter-spacing: normal;
+  white-space: nowrap;
+}
+
+.canvasPage .lead {
+  position: absolute;
+  top: 289px;
+  left: 0;
+  grid-template-columns: 719px 746px;
+  gap: 65px;
+  margin: 0;
+}
+
+.canvasPage .copy {
+  position: relative;
+  height: 408px;
+}
+
+.canvasPage .body {
+  position: absolute;
+  left: 0;
+  width: 1536px;
+  padding: 0 0 1px;
+}
+
+.canvasPage .body:nth-of-type(2) {
+  top: 674px;
+}
+
+.canvasPage .body:nth-of-type(3) {
+  top: 976px;
+}
+
+.canvasPage .body h2 {
+  margin-bottom: 32px;
+}
+
+.canvasPage .closing {
+  position: absolute;
+  top: 1274px;
+  left: 0;
+  padding: 0;
+}
+
+.article {
+  position: relative;
+  width: min(1536px, calc(100% - 384px));
+  margin-left: 264px;
+  padding: 168px 0 180px;
+}
+
+.header {
+  max-width: 1451px;
+}
+
+.header h1 {
+  width: 1451px;
+  max-width: 100%;
+  margin: 0;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.body h2 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.chatTrigger {
+  z-index: 5;
+}
+
+.header > p {
+  margin: 18px 0 0;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+}
+
+.header > p strong {
+  color: #23b14d;
+  font-weight: 800;
+}
+
+.back {
+  position: absolute;
+  top: 183px;
+  right: 0;
+  width: 97px;
+  height: 29.326px;
+  min-height: 29.326px;
+  padding: 0 10px;
+  font-size: 12px;
+}
+
+.lead {
+  display: grid;
+  grid-template-columns: minmax(0, 719px) minmax(360px, 746px);
+  gap: 65px;
+  align-items: start;
+  margin-top: 28px;
+}
+
+.copy p,
+.body p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 34px;
+  text-align: justify;
+}
+
+.featureImage {
+  width: 100%;
+  height: 358px;
+  object-fit: cover;
+}
+
+.explore {
+  width: 134px;
+  height: 40.538px;
+  min-height: 40.538px;
+  margin-top: 22px;
+  padding: 0 14px;
+  font-size: 12px;
+}
+
+.sectionExplore {
+  width: 134px;
+  height: 40.538px;
+  min-height: 40.538px;
+  margin-top: 22px;
+  padding: 0 14px;
+  font-size: 12px;
+}
+
+.canvasPage .explore {
+  position: absolute;
+  top: 313px;
+  right: -6px;
+  margin: 0;
+}
+
+.canvasPage .sectionExplore {
+  position: absolute;
+  top: 210px;
+  right: 0;
+  margin: 0;
+}
+
+.body {
+  padding: 26px 0 34px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.body h2 {
+  margin-bottom: 20px;
+}
+
+.closing {
+  max-width: 1172px;
+  padding: 24px 0 180px;
+}
+
+.closing p {
+  margin: 0;
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 36px;
+}
+
+.closing p::first-line {
+  font-weight: 700;
+}
+
+@media (max-width: 1600px) {
+  .article {
+    width: auto;
+    margin-right: 48px;
+    margin-left: 180px;
+  }
+
+  .lead {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: 40px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .canvasPage {
+    width: auto;
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+
+  .verticalTitle {
+    display: none;
+  }
+
+  .article {
+    width: auto;
+    margin: 0;
+    padding: 132px 28px 120px;
+  }
+
+  .header {
+    max-width: none;
+  }
+
+  .header h1 {
+    width: auto;
+    white-space: normal;
+  }
+
+  .chatTrigger {
+    position: fixed !important;
+    top: auto !important;
+    right: 1rem !important;
+    bottom: 1.25rem !important;
+    left: auto !important;
+    width: min(418px, calc(100vw - 2rem)) !important;
+    height: 52px !important;
+  }
+
+  .lead {
+    grid-template-columns: 1fr;
+  }
+
+  .closing {
+    padding-bottom: 100px;
+  }
+
+  .closing p {
+    font-size: 22px;
+    line-height: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .article {
+    padding: 110px 20px 100px;
+  }
+
+  .header {
+    padding-right: 0;
+  }
+
+  .back {
+    position: static;
+    margin-bottom: 26px;
+  }
+
+  .header h1 {
+    font-size: 25px;
+  }
+
+  .body h2 {
+    font-size: 23px;
+  }
+
+  .lead {
+    gap: 28px;
+  }
+
+  .featureImage {
+    height: auto;
+    aspect-ratio: 746 / 358;
+  }
+
+  .copy p,
+  .body p {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+}

@@ -1,16 +1,14 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
+import EngineeringFormModal from "@/app/components/shared/EngineeringFormModal";
 import {
   buildReachUsPayload,
   generateCaptcha,
   submitReachUs,
 } from "@/app/lib/forms";
-import EngineeringFormModal, {
-  captchaInputGroupClass,
-  captchaRowClass,
-  formFieldClass,
-} from "@/app/components/shared/EngineeringFormModal";
+import styles from "./NewsletterSignupModal.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -57,12 +55,15 @@ const NewsletterSignupModal = ({ isOpen, onClose }: Props) => {
           firstname: firstName || "Newsletter",
           lastname: "Subscriber",
           email,
-          message: "Newsletter subscription request from GREEN Insights signup page.",
+          message:
+            "Newsletter subscription request from GREEN Insights signup page.",
         }),
       );
 
       if (data.Code === "001") {
-        setSuccessMessage(data.Message || "You have been subscribed successfully!");
+        setSuccessMessage(
+          data.Message || "You have been subscribed successfully!",
+        );
         setEmail("");
         setFirstName("");
         setCaptcha(generateCaptcha());
@@ -72,11 +73,15 @@ const NewsletterSignupModal = ({ isOpen, onClose }: Props) => {
           setSuccessMessage("");
         }, 2000);
       } else {
-        setErrorMessage(data.Message || "Subscription failed. Please try again.");
+        setErrorMessage(
+          data.Message || "Subscription failed. Please try again.",
+        );
       }
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "An error occurred while subscribing.",
+        error instanceof Error
+          ? error.message
+          : "An error occurred while subscribing.",
       );
     } finally {
       setIsLoading(false);
@@ -87,32 +92,86 @@ const NewsletterSignupModal = ({ isOpen, onClose }: Props) => {
     <EngineeringFormModal
       isOpen={isOpen}
       onClose={onClose}
-      maxWidthClass="max-w-lg"
+      geometry="consultation"
+      maxWidthClass="max-w-[1520px]"
       title={
         <>
-          NEWSLETTER <span className="text-green-600">SIGNUP</span>
+          NEWSLETTER <span className="text-[#23B14D]">SIGNUP</span>
         </>
       }
     >
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input type="text" name="firstName" placeholder="FIRST NAME (OPTIONAL)" value={firstName} onChange={(e) => setFirstName(e.target.value)} className={formFieldClass} />
-        <input type="email" name="email" placeholder="E-MAIL ID" value={email} onChange={(e) => setEmail(e.target.value)} className={formFieldClass} required />
-
-        <div className={captchaInputGroupClass}>
-          <div className="flex shrink-0 items-center justify-center rounded-lg border border-gray-300 bg-gray-100 px-5 py-2.5 sm:py-3">
-            <span className="select-none whitespace-nowrap font-mono text-lg font-bold tracking-[0.35em] text-gray-700">{captcha}</span>
-          </div>
-          <input type="text" placeholder="Enter captcha" value={captchaInput} onChange={(e) => setCaptchaInput(e.target.value)} className={formFieldClass} required />
+      <form onSubmit={handleSubmit} className={styles.form}>
+        {/* Row 1: First Name */}
+        <div className={`${styles.fieldWrap} ${styles.rowStagger1}`}>
+          <input
+            type="text"
+            name="firstName"
+            placeholder="FIRST NAME (OPTIONAL)"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            className={styles.input}
+            autoComplete="given-name"
+          />
         </div>
 
-        {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
-        {successMessage && <p className="text-sm text-green-600">{successMessage}</p>}
+        {/* Row 2: E-Mail ID */}
+        <div className={`${styles.fieldWrap} ${styles.rowStagger2}`}>
+          <input
+            type="email"
+            name="email"
+            placeholder="E-MAIL ID"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className={styles.input}
+            autoComplete="email"
+            required
+          />
+        </div>
 
-        <div className="flex justify-end">
-          <button type="submit" disabled={isLoading} className="cursor-pointer disabled:opacity-50">
-            <img loading="lazy" decoding="async" src="/images/book-consulation/formBtn.png" className="w-28 sm:w-40" alt="Subscribe" />
+        {/* Row 3: Captcha & Send Button */}
+        <div className={`${styles.footerRow} ${styles.rowStaggerFooter}`}>
+          <div className={styles.captchaGroup}>
+            <button
+              type="button"
+              className={styles.captchaBox}
+              onClick={() => setCaptcha(generateCaptcha())}
+              title="Click to refresh captcha"
+              aria-label={`Captcha code ${captcha}. Click to refresh`}
+            >
+              <span className={styles.captchaText}>{captcha}</span>
+            </button>
+            <div className={styles.captchaInputWrap}>
+              <input
+                type="text"
+                placeholder="Enter captcha"
+                value={captchaInput}
+                onChange={(e) => setCaptchaInput(e.target.value)}
+                className={styles.captchaInput}
+                required
+              />
+            </div>
+          </div>
+          <button
+            type="submit"
+            disabled={isLoading}
+            className={styles.sendButton}
+          >
+            <span className={styles.sendButtonText}>
+              {isLoading ? "Sending..." : "Send"}
+            </span>
           </button>
         </div>
+
+        {errorMessage && (
+          <p className={`${styles.statusMessage} ${styles.statusError}`}>
+            {errorMessage}
+          </p>
+        )}
+        {successMessage && (
+          <p className={`${styles.statusMessage} ${styles.statusSuccess}`}>
+            {successMessage}
+          </p>
+        )}
       </form>
     </EngineeringFormModal>
   );

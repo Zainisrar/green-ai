@@ -1,12 +1,5 @@
-import React from "react";
 import SupplyChainRegistration from "@/app/components/SupplyParnters/SupplyChainRegistration";
 
-const page = () => {
-  return (
-    <React.Fragment>
-      <SupplyChainRegistration />
-    </React.Fragment>
-  );
-};
+const page = () => <SupplyChainRegistration />;
 
 export default page;

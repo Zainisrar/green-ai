@@ -48,7 +48,9 @@ export default function GridIntel() {
     "GRID-INTEL™ is GREEN’s proprietary platform that controls, balances, and predicts energy flows across solar, battery, diesel, and grid infrastructure — in real time.";
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:4592">
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.backgroundArt}
         src="/images/grid-intel/collage_mask.png"
         alt=""
@@ -57,7 +59,9 @@ export default function GridIntel() {
         style={{ left: 450 }}
       />
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.verticalTitle}
         src="/images/grid-intel/title_gridintel.png"
         alt=""
@@ -103,14 +107,18 @@ export default function GridIntel() {
         <br />
         Scale Without <span>Uncertainty.</span>
       </p>
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={`${styles.bracket} ${styles.bracketLeft}`}
         src="/images/grid-intel/v_7077_7374.png"
         alt=""
         width="79"
         height="98"
       />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={`${styles.bracket} ${styles.bracketRight}`}
         src="/images/grid-intel/v_7077_7375.png"
         alt=""
@@ -125,7 +133,9 @@ export default function GridIntel() {
             onClick={() => setOpen(i)}
             className={i === 2 ? styles.active : ""}
           >
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src={`/images/grid-intel/v_7077_${[7382, 7377, 7378, 7379, 7380, 7381][i]}.png`}
               alt=""
               width={i === 2 ? 263 : 78}
@@ -161,12 +171,12 @@ export default function GridIntel() {
         triggerVariant="figmaCanvas"
         triggerClassName={styles.chatTrigger}
         triggerStyle={{
-            top: 899,
-            right: "auto",
-            bottom: "auto",
-            left: 1498,
-            width: 418,
-          }}
+          top: 899,
+          right: "auto",
+          bottom: "auto",
+          left: 1498,
+          width: 418,
+        }}
       />
     </main>
   );

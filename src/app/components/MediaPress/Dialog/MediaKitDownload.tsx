@@ -1,149 +1,116 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import MediaDialogFrame from "./MediaDialogFrame";
+import styles from "./MediaKitDownload.module.css";
 
 interface MediaKitDownloadProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const MediaKitDownload: React.FC<MediaKitDownloadProps> = ({ isOpen, onClose }) => {
-  const [isMobile, setIsMobile] = useState(false);
+const ROWS = [
+  // Row 0
+  [
+    {
+      id: "1",
+      label: "Brand Logo Files (PNG, SVG)",
+      file: "/media-kit/brand-logos.zip",
+    },
+    {
+      id: "2",
+      label: "Executive Headshots",
+      file: "/media-kit/executive-headshots.zip",
+    },
+    {
+      id: "3",
+      label: "Company Profile (PDF)",
+      file: "/media-kit/company-profile.pdf",
+    },
+  ],
+  // Row 1
+  [
+    {
+      id: "4",
+      label: "Fast Facts & Stats Sheet",
+      file: "/media-kit/fast-facts-stats-sheet.pdf",
+    },
+    {
+      id: "5",
+      label: "Approved Images For Press Use",
+      file: "/media-kit/approved-press-images.zip",
+    },
+    {
+      id: "6",
+      label: "Quote Sheet / Boilerplate",
+      file: "/media-kit/quote-sheet-boilerplate.pdf",
+    },
+  ],
+];
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+const rowClasses = [
+  styles.row0,
+  styles.row1,
+  styles.row2,
+  styles.row3,
+  styles.row4,
+];
 
-  if (!isOpen) return null;
-
-  const downloadItems = [
-    { label: "Brand Logo Files (PNG, SVG)", color: "bg-[#C8E67C]" },
-    { label: "Executive Headshots", color: "bg-[#C8E67C]" },
-    { label: "Company Profile (PDF)", color: "bg-[#C8E67C]" },
-    { label: "Fact Packs & Data Sheet", color: "bg-[#C8E67C]" },
-    { label: "Approved Images for Press Use", color: "bg-[#C8E67C]" },
-    { label: "Quote Sheet / Boilerplate", color: "bg-[#C8E67C]" },
-    { label: "Brand Logo Files (PNG, SVG)", color: "bg-[#C8E67C]" },
-    { label: "Executive Headshots", color: "bg-[#C8E67C]" },
-    { label: "Company Profile (PDF)", color: "bg-[#C8E67C]" },
-    { label: "Fact Packs & Data Sheet", color: "bg-[#C8E67C]" },
-    { label: "Approved Images for Press Use", color: "bg-[#C8E67C]" },
-    { label: "Quote Sheet / Boilerplate", color: "bg-[#C8E67C]" },
-  ];
-
-  const renderContent = () => (
-    <>
-      {/* Title Section */}
-      <div className="mb-8">
-        <h2 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
-          Media Kit Download
-        </h2>
-        <div className="flex items-center justify-between">
-          <div className="lg:flex items-center">
-            {!isMobile && (
-              <span className="text-lg text-[#23B14D] font-bold mr-2">
-                Download <span className="text-black italic">GREEN Media Kit (ZIP)</span>
-              </span>
-            )}
-          </div>
-        </div>
-        <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
-      </div>
-
-      {/* Download Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        {downloadItems.map((item, idx) => (
-          <div
-            key={idx}
-           
-            className={`${item.color} p-4  cursor-pointer hover:opacity-80 transition-opacity transform hover:-skew-x-2`}
-          >
-            <div className="flex items-center justify-between">
-              <span className="text-gray-900 font-semibold text-sm">
-                {item.label}
-              </span>
-              <svg
-                className="w-5 h-5 text-gray-900"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
-            </div>
-          </div>
-        ))}
-      </div>
-    </>
-  );
-
+export default function MediaKitDownload({
+  isOpen,
+  onClose,
+}: MediaKitDownloadProps) {
   return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed inset-0 bg-black/20 z-[99999999999999999999999999] flex items-center justify-center">
-        {/* Modal Container */}
-        <div className="relative w-full lg:max-w-6xl mx-4">
-          {/* Mobile Layout */}
-          {isMobile ? (
-            <div className="bg-gray-100 h-[80vh] p-3 overflow-y-auto py-14 border-2 border-[#23B14D] relative shadow-2xl">
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  onClick={onClose}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
-                >
-                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div className="mx-auto">{renderContent()}</div>
-            </div>
-          ) : (
-            /* Desktop Layout */
+    <MediaDialogFrame
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Media Kit Download"
+      titleExtra={
+        <a
+          href="/media-kit/green-media-kit.zip"
+          download
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          Download <em>GREEN Media Kit (ZIP)</em>
+        </a>
+      }
+      labelledBy="media-kit-title"
+    >
+      <div className={styles.container}>
+        <div className={styles.grid}>
+          {ROWS.map((row, index) => (
             <div
-
-              className="bg-gray-100 transform  py-14 border-2 border-[#23B14D] px-16 relative shadow-2xl overflow-y-auto max-h-[85vh]"
-              style={{
-                transform:"skewX(-12deg)"
-               }}
+              key={`row-${row[0]?.id || "group"}`}
+              className={`${styles.row} ${rowClasses[index] || ""}`}
             >
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  onClick={onClose}
-                  style={{
-                    transform:"skewX(12deg)"
-                  }}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
+              {row.map((item) => (
+                <a
+                  key={item.id}
+                  href={item.file}
+                  download
+                  className={styles.downloadBtn}
                 >
-                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div 
-              style={{
-                transform:"skewX(12deg)"
-              }}
-              className="transform  max-w-5xl mx-auto">
-                {renderContent()}
-              </div>
+                  <span className={styles.btnLabel}>{item.label}</span>
+                  {/* Download Tray Icon */}
+                  <svg
+                    className={styles.downloadIcon}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                </a>
+              ))}
             </div>
-          )}
+          ))}
         </div>
       </div>
-    </React.Fragment>
+    </MediaDialogFrame>
   );
-};
-
-export default MediaKitDownload;
+}

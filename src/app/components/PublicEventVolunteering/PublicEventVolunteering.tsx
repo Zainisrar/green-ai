@@ -11,7 +11,7 @@ import WaystoGetInvolved from "./Dialog/WaystoGetInvolved";
 import WhoCanJoin from "./Dialog/WhoCanJoin";
 import VolunteerSignUp from "./Dialog/VolunteerSignUp";
 import PastHighlights from "./Dialog/PastHighlights";
-import SignUpToVolunteer from "./Modals/SignUpToVolunteer";
+import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 
 interface PublicEventVolunteeringProps {
   canvas?: boolean;
@@ -23,11 +23,7 @@ export default function PublicEventVolunteering({
   const [openModal, setOpenModal] = useState<string | null>(null);
   const [isSignUpFormOpen, setIsSignUpFormOpen] = useState(false);
 
-  const highlightText = (
-    text: string,
-    highlight: string,
-    wordCase = true
-  ) => {
+  const highlightText = (text: string, highlight: string, wordCase = true) => {
     if (!highlight) return text;
     const parts = text.split(new RegExp(`(${highlight})`, "gi"));
     return parts.map((part, index) => {
@@ -48,78 +44,104 @@ export default function PublicEventVolunteering({
     {
       key: "whyWeEngage",
       title: "Why We Engage",
-      subtitle: "Our mission isn’t just to install systems — it’s to shift systems.",
-      x: 793,
+      subtitle:
+        "Our mission isn’t just to install systems — it’s to shift systems.",
+      titleX: 793,
+      subX: 780,
+      lineX: 768,
       y: 286,
       subY: 320,
       ctaX: 1586,
       ctaY: 296,
+      lineWidth: 915,
     },
     {
       key: "waysToGetInvolved",
       title: "Ways to Get Involved",
       subtitle: "Awareness drives, solar literacy, rural demonstrations",
-      x: 747,
+      titleX: 747,
+      subX: 729,
+      lineX: 720,
       y: 381,
       subY: 420,
       ctaX: 1540,
       ctaY: 396,
+      lineWidth: 914,
     },
     {
       key: "whoCanJoin",
       title: "Who Can Join?",
       subtitle: "No prior experience needed. Just willingness to act.",
-      x: 704,
+      titleX: 704,
+      subX: 679,
+      lineX: 679,
       y: 484,
       subY: 528,
       ctaX: 1492,
       ctaY: 501,
+      lineWidth: 914,
     },
     {
       key: "volunteerSignUp",
       title: "Volunteer Sign-Up",
       subtitle: "All GREEN events are coordinated by trained staff",
-      x: 656,
+      titleX: 656,
+      subX: 630,
+      lineX: 622,
       y: 588,
       subY: 630,
       ctaX: 1431,
       ctaY: 599,
+      lineWidth: 914,
     },
     {
       key: "pastHighlights",
       title: "Past Highlights",
       subtitle: "All Events and stories",
-      x: 599,
+      titleX: 599,
+      subX: 583,
+      lineX: 0,
       y: 695,
       subY: 741,
       ctaX: 1374,
       ctaY: 706,
+      lineWidth: 0,
     },
   ];
 
   return (
-    <div className={styles.page} data-node-id="7077:24270">
+    <div
+      className={`${styles.page} ${canvas ? styles.canvasPage : ""}`}
+      data-node-id="7077:24270"
+    >
       {/* Background */}
-      <div
-        style={{ transform: "skewX(-8deg)" }}
-        className={styles.bgWrap}
-        aria-hidden="true"
-      >
-        <img loading="lazy" decoding="async"
-          src="/images/public-events-volunteering/mainImg.png"
+      <div className={styles.bgWrap} aria-hidden="true">
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/public-events-volunteering/figma-mask-group.png"
           alt=""
           className={styles.bgImg}
         />
       </div>
-      <div className={styles.bgFade} aria-hidden="true" />
 
       {/* Site header */}
-      <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
+      <SiteHeader
+        layout={canvas ? "figmaCanvas" : "viewport"}
+        figmaPanelVariant="flagship"
+      />
 
       {/* Vertical side title */}
-      <div className={styles.verticalTitleWrap}>
-        <p className={styles.verticalTitle}>PUBLIC EVENTS &amp; VOLUNTEERING</p>
-      </div>
+      <img
+        loading="lazy"
+        decoding="async"
+        src="/images/public-events-volunteering/figma-vertical-title.svg"
+        alt="Public Events & Volunteering"
+        className={styles.verticalTitle}
+        width={34}
+        height={668}
+        aria-hidden="true"
+      />
 
       {/* Page header */}
       <header className={styles.pageHeader}>
@@ -140,13 +162,17 @@ export default function PublicEventVolunteering({
       {/* Rows */}
       {rows.map((row, index) => (
         <div key={row.key} className={styles.row} style={{ top: row.y }}>
-          <h3 className={styles.rowTitle} style={{ left: row.x }}>
+          <h3 className={styles.rowTitle} style={{ left: row.titleX }}>
             {row.title}
           </h3>
-          <p className={styles.rowSub} style={{ left: row.x - 13, top: row.subY - row.y }}>
+          <p
+            className={styles.rowSub}
+            style={{ left: row.subX, top: row.subY - row.y }}
+          >
             {row.subtitle}
           </p>
           <FigmaAngledCta
+            data-testid={`public-events-explore-${row.key}`}
             className={styles.rowCta}
             style={{
               position: "absolute",
@@ -157,7 +183,12 @@ export default function PublicEventVolunteering({
           >
             Explore
           </FigmaAngledCta>
-          {index < rows.length - 1 && <div className={styles.rowDivider} />}
+          {index < rows.length - 1 && (
+            <div
+              className={styles.rowDivider}
+              style={{ left: row.lineX, width: row.lineWidth }}
+            />
+          )}
         </div>
       ))}
 
@@ -168,13 +199,15 @@ export default function PublicEventVolunteering({
           rightStyle={{ right: -42, top: -16 }}
         />
         <h2 className={styles.bottomQuoteText}>
-          You Don’t Need To Be An <span className={styles.highlight}>Engineer</span> To
-          Power Change. You Just Need To Show Up. We’ll Show You How.
+          You Don’t Need To Be An{" "}
+          <span className={styles.highlight}>Engineer</span> To Power Change.
+          You Just Need To Show Up. We’ll Show You How.
         </h2>
       </div>
 
       {/* Bottom-right CTAs */}
       <FigmaAngledCta
+        data-testid="public-events-sign-up"
         className={styles.ctaSignUp}
         style={{ position: "absolute", left: 1631, top: 660 }}
         onClick={() => setIsSignUpFormOpen(true)}
@@ -217,12 +250,18 @@ export default function PublicEventVolunteering({
       )}
 
       {/* Modals */}
-      <WhyWeEngage isOpen={openModal === "whyWeEngage"} onClose={() => setOpenModal(null)} />
+      <WhyWeEngage
+        isOpen={openModal === "whyWeEngage"}
+        onClose={() => setOpenModal(null)}
+      />
       <WaystoGetInvolved
         isOpen={openModal === "waysToGetInvolved"}
         onClose={() => setOpenModal(null)}
       />
-      <WhoCanJoin isOpen={openModal === "whoCanJoin"} onClose={() => setOpenModal(null)} />
+      <WhoCanJoin
+        isOpen={openModal === "whoCanJoin"}
+        onClose={() => setOpenModal(null)}
+      />
       <VolunteerSignUp
         isOpen={openModal === "volunteerSignUp"}
         onClose={() => setOpenModal(null)}
@@ -235,9 +274,23 @@ export default function PublicEventVolunteering({
         isOpen={openModal === "pastHighlights"}
         onClose={() => setOpenModal(null)}
       />
-      <SignUpToVolunteer
+      {/* Reusing Elements page enquiry modal for "Sign Up to Volunteer" */}
+      <ProductEnquiry
         isOpen={isSignUpFormOpen}
         onClose={() => setIsSignUpFormOpen(false)}
+        productName="Public Events & Volunteering"
+        titlePrefix="SIGN UP TO"
+        titleAccent="VOLUNTEER"
+        interestLabel="AREA OF INTEREST"
+        interestOptions={[
+          "Community Volunteer Days",
+          "School & Campus Outreach",
+          "Clean Energy Campaigns",
+          "Events & Exhibitions",
+          "Energy Advocacy",
+          "General Volunteering",
+        ]}
+        defaultInterest="Community Volunteer Days"
       />
     </div>
   );

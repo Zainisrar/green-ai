@@ -1,11 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import styles from "./ServicesD1.module.css";
+
+const DESIGN_WIDTH = 1920;
+const DESIGN_HEIGHT = 970;
 
 const phases = [
   {
@@ -20,6 +23,7 @@ const phases = [
     ],
     backgroundImage: "/images/service/phases/engineering.png",
     backgroundPosition: "center center",
+    // Engineering intentionally uses the full-strength project artwork.
     backgroundOpacity: 1,
   },
   {
@@ -84,100 +88,156 @@ const phases = [
 export default function ServicesD1() {
   const [activePhase, setActivePhase] = useState(0);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [scale, setScale] = useState({ x: 1, y: 1 });
+
+  useEffect(() => {
+    const updateScale = () => {
+      const mobile = window.innerWidth <= 1023;
+      setIsMobile(mobile);
+      if (!mobile) {
+        setScale({
+          x: window.innerWidth / DESIGN_WIDTH,
+          y: window.innerHeight / DESIGN_HEIGHT,
+        });
+      }
+    };
+    updateScale();
+    window.addEventListener("resize", updateScale);
+    return () => window.removeEventListener("resize", updateScale);
+  }, []);
+
   const selectedPhase = phases[activePhase];
   return (
     <main className={styles.page}>
-      <div className={styles.background} aria-hidden="true" />
-      <div aria-hidden="true" className={styles.phaseBackgroundBase} />
-      <div
-        aria-hidden="true"
-        className={styles.phaseBackground}
-        style={{
-          backgroundImage: `url("${selectedPhase.backgroundImage}")`,
-          backgroundPosition: selectedPhase.backgroundPosition,
-          opacity: selectedPhase.backgroundOpacity,
-        }}
-      />
-      <SiteHeader compactLogo panel="logoOnly" />
-      <Image
-        className={styles.verticalTitle}
-        src="/images/service/services.svg"
-        alt="Services"
-        width={73}
-        height={507}
-        priority
-      />
-      <section
-        className={styles.processFlow}
-        aria-label="EPCM delivery process"
-      >
-        {phases.map((phase, index) => (
-          <div className={styles.flowItem} key={phase.name}>
-            <article className={styles.flowCard}>
-              <div className={styles.flowCardContent}>
-                <h2>{phase.flowName}</h2>
-                <ul>
-                  {phase.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
+      {isMobile ? <SiteHeader /> : null}
+      <div className={styles.desktopStage}>
+        <div
+          className={styles.canvas}
+          style={{
+            transform: isMobile ? undefined : `scale(${scale.x}, ${scale.y})`,
+          }}
+          data-node-id="7077:12900"
+        >
+          {!isMobile && (
+            <SiteHeader layout="figmaCanvas" canvasActiveNavigation />
+          )}
+          <div className={styles.background} aria-hidden="true" />
+          <div aria-hidden="true" className={styles.phaseBackgroundBase} />
+          <div
+            aria-hidden="true"
+            className={styles.phaseBackground}
+            style={{
+              backgroundImage: `url("${selectedPhase.backgroundImage}")`,
+              backgroundPosition: selectedPhase.backgroundPosition,
+              opacity: selectedPhase.backgroundOpacity,
+            }}
+          />
+          <Image
+            className={styles.verticalTitle}
+            src="/images/service/services.svg"
+            alt="Services"
+            width={73}
+            height={507}
+            priority
+          />
+          <section
+            className={styles.processFlow}
+            aria-label="EPCM delivery process"
+          >
+            {phases.map((phase, index) => (
+              <div className={styles.flowItem} key={phase.name}>
+                <article className={styles.flowCard}>
+                  <div className={styles.flowCardContent}>
+                    <h2>{phase.flowName}</h2>
+                    <ul>
+                      {phase.points.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </article>
+                {index < phases.length - 1 && (
+                  <Image
+                    className={styles.flowArrow}
+                    src="/images/service/arrow.png"
+                    alt=""
+                    width={65}
+                    height={24}
+                  />
+                )}
               </div>
-            </article>
-            {index < phases.length - 1 && (
-              <Image
-                className={styles.flowArrow}
-                src="/images/service/arrow.png"
-                alt=""
-                width={65}
-                height={24}
-              />
-            )}
-          </div>
-        ))}
-      </section>
-      <section className={styles.detail} aria-live="polite">
-        <h1>{selectedPhase.name}</h1>
-        {selectedPhase.detail.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
-      </section>
-      <section className={styles.heading} aria-label="EPCM">
-        <h2>EPCM</h2>
-        <p>Integrated Renewable Energy Transformation</p>
-      </section>
-      <section className={styles.servicesPanel} aria-labelledby="our-services">
-        <div className={styles.servicesPanelContent}>
-          <h2 id="our-services">Our Services</h2>
-          <div className={styles.serviceOptions}>
-            {phases.map((phase, index) => {
-              const isActive = activePhase === index;
-              return (
-                <button
-                  className={isActive ? styles.selectedService : undefined}
-                  key={phase.name}
-                  onClick={() => setActivePhase(index)}
-                  type="button"
-                >
-                  <span>{phase.name}</span>
-                  {isActive && <small>{phase.description}</small>}
-                </button>
-              );
-            })}
+            ))}
+          </section>
+          <section className={styles.detail} aria-live="polite">
+            <h1>{selectedPhase.name}</h1>
+            {selectedPhase.detail.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </section>
+          <section className={styles.heading} aria-label="EPCM">
+            <h2>EPCM</h2>
+            <p>Integrated Renewable Energy Transformation</p>
+          </section>
+          <section
+            className={styles.servicesPanel}
+            aria-labelledby="our-services"
+          >
+            <div className={styles.servicesPanelContent}>
+              <h2 id="our-services">Our Services</h2>
+              <div className={styles.serviceOptions}>
+                {phases.map((phase, index) => {
+                  const isActive = activePhase === index;
+                  return (
+                    <button
+                      className={isActive ? styles.selectedService : undefined}
+                      key={phase.name}
+                      onClick={() => setActivePhase(index)}
+                      type="button"
+                    >
+                      <span>{phase.name}</span>
+                      {isActive && <small>{phase.description}</small>}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+          <button
+            className={styles.enquiryButton}
+            onClick={() => setIsEnquiryOpen(true)}
+            type="button"
+          >
+            <Image
+              src="/images/service/enquiry.svg"
+              alt="Submit an enquiry"
+              width={169}
+              height={52}
+            />
+          </button>
+          <div className={styles.chat}>
+            <D6Chatbot
+              canvasAnchored
+              triggerVariant="figmaCanvas"
+              triggerClassName={styles.chatTrigger}
+              figmaMicIconSrc="/images/energy/figma-mic.svg"
+              figmaMicScale={0.78}
+              triggerStyle={
+                isMobile
+                  ? undefined
+                  : {
+                      top: "899px",
+                      right: "4px",
+                      bottom: "auto",
+                      left: "auto",
+                      width: "418px",
+                      height: "auto",
+                    }
+              }
+            />
           </div>
         </div>
-      </section>
-      <button
-        className={styles.enquiryButton}
-        onClick={() => setIsEnquiryOpen(true)}
-        type="button"
-      >
-        <Image
-          src="/images/service/enquiry.svg"
-          alt="Submit an enquiry"
-          width={169}
-          height={52}
-        />
-      </button>
+      </div>
       <ProductEnquiry
         defaultInterest={selectedPhase.name}
         interestLabel="SERVICE OF INTEREST"
@@ -187,23 +247,6 @@ export default function ServicesD1() {
         titleAccent="ENQUIRY"
         titlePrefix="EPCM"
       />
-      <div className={styles.chat}>
-        <D6Chatbot
-          canvasAnchored
-          triggerVariant="figmaCanvas"
-          triggerClassName={styles.chatTrigger}
-          figmaMicIconSrc="/images/energy/figma-mic.svg"
-          figmaMicScale={0.78}
-          triggerStyle={{
-            top: "46.823vw",
-            right: "0.208vw",
-            bottom: "auto",
-            left: "auto",
-            width: "21.771vw",
-            height: "auto",
-          }}
-        />
-      </div>
     </main>
   );
 }

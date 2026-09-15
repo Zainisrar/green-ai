@@ -1,0 +1,590 @@
+/* Consultation & RFP Modal Form Styling matching Figma node 7077:16531 */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .form {
+    gap: 20px;
+  }
+}
+
+/* Row stagger on desktop to follow the window's angled left edge */
+@media (min-width: 1024px) {
+  .rowStagger1 {
+    transform: translateX(18px);
+  }
+  .rowStagger2 {
+    transform: translateX(9px);
+  }
+  .rowStagger3 {
+    transform: translateX(0px);
+  }
+  .rowStaggerCheckbox {
+    transform: translateX(2px);
+  }
+  .rowStaggerTextarea {
+    transform: translateX(-10px);
+  }
+  .rowStaggerFooter {
+    transform: translateX(-18px);
+  }
+}
+
+/* Two-column grid for input rows */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 28px;
+    row-gap: 18px;
+  }
+}
+
+/* Angled parallelogram field wrapper */
+.fieldWrap {
+  --field-slant: 11px;
+  position: relative;
+  height: 64px;
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
+}
+
+@media (max-width: 640px) {
+  .fieldWrap {
+    --field-slant: 0px;
+    height: 52px;
+  }
+}
+
+/* 1px border stroke layer */
+.fieldWrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #ebebeb;
+  clip-path: polygon(
+    var(--field-slant) 0,
+    100% 0,
+    calc(100% - var(--field-slant)) 100%,
+    0 100%
+  );
+  border-radius: 5px;
+  transition: background 0.2s ease;
+  pointer-events: none;
+}
+
+.fieldWrap:focus-within::before {
+  background: #23b14d;
+}
+
+/* White interior card */
+.fieldWrap::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: #ffffff;
+  clip-path: polygon(
+    var(--field-slant) 0,
+    100% 0,
+    calc(100% - var(--field-slant)) 100%,
+    0 100%
+  );
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* Input text */
+.input {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 0 24px 0 28px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #303030;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .input {
+    padding: 0 16px;
+    font-size: 13px;
+  }
+}
+
+.input::placeholder {
+  color: rgba(48, 48, 48, 0.65);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+/* Select element */
+.select {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 0 48px 0 28px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #303030;
+  text-transform: uppercase;
+  appearance: none;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .select {
+    padding: 0 40px 0 16px;
+    font-size: 13px;
+  }
+}
+
+.select option {
+  background: #ffffff;
+  color: #303030;
+  text-transform: none;
+}
+
+.dropdownIcon {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  color: #565252;
+}
+
+@media (max-width: 640px) {
+  .dropdownIcon {
+    right: 16px;
+  }
+}
+
+/* Calendar icon inside date field */
+.calendarIcon {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 640px) {
+  .calendarIcon {
+    right: 14px;
+  }
+}
+
+/* Checkbox row */
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+  padding: 2px 4px;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  border: 1.5px solid #565252;
+  accent-color: #23b14d;
+  cursor: pointer;
+}
+
+.checkboxLabel {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(48, 48, 48, 0.85);
+  cursor: pointer;
+}
+
+/* Textarea card */
+.textareaWrap {
+  --field-slant: 24px;
+  position: relative;
+  min-height: 150px;
+  width: 100%;
+  min-width: 0;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
+}
+
+@media (max-width: 640px) {
+  .textareaWrap {
+    --field-slant: 0px;
+    min-height: 110px;
+  }
+}
+
+.textareaWrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #ebebeb;
+  clip-path: polygon(
+    var(--field-slant) 0,
+    100% 0,
+    calc(100% - var(--field-slant)) 100%,
+    0 100%
+  );
+  border-radius: 5px;
+  transition: background 0.2s ease;
+  pointer-events: none;
+}
+
+.textareaWrap:focus-within::before {
+  background: #23b14d;
+}
+
+.textareaWrap::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: #ffffff;
+  clip-path: polygon(
+    var(--field-slant) 0,
+    100% 0,
+    calc(100% - var(--field-slant)) 100%,
+    0 100%
+  );
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.textarea {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 20px 28px 20px 38px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #303030;
+  text-transform: uppercase;
+  resize: none;
+}
+
+@media (max-width: 640px) {
+  .textarea {
+    min-height: 110px;
+    padding: 14px 16px;
+    font-size: 13px;
+  }
+}
+
+.textarea::placeholder {
+  color: rgba(48, 48, 48, 0.65);
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+/* Footer row: Captcha + Send Button */
+.footerRow {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: stretch;
+  width: 100%;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+@media (min-width: 640px) {
+  .footerRow {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.captchaGroup {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* Captcha display box */
+.captchaBox {
+  --field-slant: 11px;
+  position: relative;
+  width: 160px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  cursor: pointer;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06));
+}
+
+@media (max-width: 640px) {
+  .captchaBox {
+    --field-slant: 0px;
+    width: 130px;
+    height: 48px;
+  }
+}
+
+.captchaBox::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(35, 177, 77, 0.76);
+  clip-path: polygon(
+    var(--field-slant) 0,
+    100% 0,
+    calc(100% - var(--field-slant)) 100%,
+    0 100%
+  );
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.captchaBox::after {
+  content: "";
+  position: absolute;
+  inset: 1.5px;
+  background: #ffffff;
+  clip-path: polygon(
+    var(--field-slant) 0,
+    100% 0,
+    calc(100% - var(--field-slant)) 100%,
+    0 100%
+  );
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.captchaText {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-poppins), "Poppins", sans-serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 22px;
+  color: #303030;
+  letter-spacing: 5px;
+  text-decoration: line-through;
+  text-decoration-color: rgba(35, 177, 77, 0.6);
+  text-decoration-thickness: 1.5px;
+}
+
+/* Captcha input box */
+.captchaInputWrap {
+  --field-slant: 11px;
+  position: relative;
+  width: 180px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.06));
+}
+
+@media (max-width: 640px) {
+  .captchaInputWrap {
+    --field-slant: 0px;
+    width: 150px;
+    height: 48px;
+  }
+}
+
+.captchaInputWrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(35, 177, 77, 0.76);
+  clip-path: polygon(
+    var(--field-slant) 0,
+    100% 0,
+    calc(100% - var(--field-slant)) 100%,
+    0 100%
+  );
+  border-radius: 4px;
+  transition: background 0.2s ease;
+  pointer-events: none;
+}
+
+.captchaInputWrap:focus-within::before {
+  background: #23b14d;
+}
+
+.captchaInputWrap::after {
+  content: "";
+  position: absolute;
+  inset: 1.5px;
+  background: #ffffff;
+  clip-path: polygon(
+    var(--field-slant) 0,
+    100% 0,
+    calc(100% - var(--field-slant)) 100%,
+    0 100%
+  );
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.captchaInput {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 0 18px 0 24px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #303030;
+}
+
+@media (max-width: 640px) {
+  .captchaInput {
+    padding: 0 12px;
+    font-size: 13px;
+  }
+}
+
+.captchaInput::placeholder {
+  color: rgba(48, 48, 48, 0.6);
+  font-size: 13px;
+}
+
+/* Send Button */
+.sendButton {
+  --field-slant: 12px;
+  position: relative;
+  height: 56px;
+  width: 220px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    filter 0.15s ease,
+    transform 0.15s ease;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
+}
+
+@media (max-width: 640px) {
+  .sendButton {
+    --field-slant: 0px;
+    width: 100%;
+    height: 50px;
+  }
+}
+
+.sendButton::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #23b14d 0%, #fffe50 100%);
+  clip-path: polygon(
+    var(--field-slant) 0,
+    100% 0,
+    calc(100% - var(--field-slant)) 100%,
+    0 100%
+  );
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.sendButton::after {
+  content: "";
+  position: absolute;
+  inset: 1.5px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.45) 0%,
+      rgba(255, 254, 80, 0.45) 100%
+    ),
+    #ffffff;
+  clip-path: polygon(
+    var(--field-slant) 0,
+    100% 0,
+    calc(100% - var(--field-slant)) 100%,
+    0 100%
+  );
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.sendButtonText {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+  line-height: 1;
+}
+
+.sendButton:hover {
+  filter: brightness(1.04) drop-shadow(0 6px 10px rgba(0, 0, 0, 0.12));
+}
+
+.sendButton:active {
+  transform: scale(0.98);
+}
+
+.sendButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Status messages */
+.statusMessage {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.statusError {
+  color: #e53e3e;
+}
+
+.statusSuccess {
+  color: #23b14d;
+}

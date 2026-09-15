@@ -33,23 +33,25 @@ const Scenerios = ({ isOpen, onClose, data }: Props) => {
     if (data?.scenarios) {
       return data.scenarios.map((scenario, index) => (
         <div key={index} className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/grid-intel/lighting.png"
             className="w-14 -mt-4"
             alt="lighting"
           />
-          <p className="text-gray-800 font-medium italic">
-            {scenario.text}
-          </p>
+          <p className="text-gray-800 font-medium italic">{scenario.text}</p>
         </div>
       ));
     }
-    
+
     // Fallback static content
     return (
       <>
         <div className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/grid-intel/lighting.png"
             className="w-14 -mt-4"
             alt="lighting"
@@ -59,7 +61,9 @@ const Scenerios = ({ isOpen, onClose, data }: Props) => {
           </p>
         </div>
         <div className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/grid-intel/lighting.png"
             className="w-14 -mt-4"
             alt="lighting"
@@ -69,7 +73,9 @@ const Scenerios = ({ isOpen, onClose, data }: Props) => {
           </p>
         </div>
         <div className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/grid-intel/lighting.png"
             className="w-14 -mt-4"
             alt="lighting"
@@ -79,7 +85,9 @@ const Scenerios = ({ isOpen, onClose, data }: Props) => {
           </p>
         </div>
         <div className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/grid-intel/lighting.png"
             className="w-14 -mt-4"
             alt="lighting"
@@ -89,7 +97,9 @@ const Scenerios = ({ isOpen, onClose, data }: Props) => {
           </p>
         </div>
         <div className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/grid-intel/lighting.png"
             className="w-14 -mt-4"
             alt="lighting"
@@ -110,7 +120,9 @@ const Scenerios = ({ isOpen, onClose, data }: Props) => {
           {data?.title || "Built for These Scenarios"}
         </h2>
         <div className="flex items-center">
-          <span className="mr-2 hidden text-2xl font-bold text-black md:inline">-</span>
+          <span className="mr-2 hidden text-2xl font-bold text-black md:inline">
+            -
+          </span>
           <h3 className="text-xl font-semibold text-[#4CAF50]">
             {data?.subtitle || "Where GRID-INTEL™ Is Already Running"}
           </h3>
@@ -123,13 +135,12 @@ const Scenerios = ({ isOpen, onClose, data }: Props) => {
         <div className="flex-1">
           <div className="mb-8">
             <p className="text-gray-700 text-lg font-medium mb-6">
-              {data?.description || "GRID-INTEL™ is deployed in critical scenarios where intelligent energy management is essential:"}
+              {data?.description ||
+                "GRID-INTEL™ is deployed in critical scenarios where intelligent energy management is essential:"}
             </p>
 
             {/* Scenarios List */}
-            <div className="space-y-4">
-              {renderScenarios()}
-            </div>
+            <div className="space-y-4">{renderScenarios()}</div>
           </div>
         </div>
 

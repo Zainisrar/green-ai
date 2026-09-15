@@ -89,7 +89,7 @@ export const useImpactMeasurementEsg = () => {
           "https://greencms.percepco.co.uk/api/ecosystem/impact-measurement-esg",
           {
             next: { revalidate: 60 },
-          }
+          },
         );
 
         if (!response.ok) {

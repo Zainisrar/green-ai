@@ -1,0 +1,221 @@
+.ethosContent,
+.conductContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  color: #000;
+}
+
+.ethosTitle,
+.conductTitle {
+  position: absolute;
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 37px;
+}
+
+.ethosTitle {
+  top: 72px;
+  left: 338px;
+}
+
+.conductTitle {
+  top: 77px;
+  left: 312px;
+}
+
+.divider {
+  position: absolute;
+  top: 146px;
+  left: 306px;
+  width: 1255px;
+  height: 1px;
+  background: #a8a8a8;
+}
+
+.ethosLead {
+  position: absolute;
+  top: 192px;
+  left: 311px;
+  width: 1230px;
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 37px;
+}
+
+.ethosBullet {
+  position: absolute;
+  display: flex;
+  align-items: flex-start;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.ethosBulletOne {
+  top: 343px;
+  left: 251px;
+}
+
+.ethosBulletTwo {
+  top: 454px;
+  left: 197px;
+  max-width: 760px;
+}
+
+.ethosBolt {
+  width: 70px;
+  height: 70px;
+  margin: -11px 0 0;
+  object-fit: contain;
+}
+
+.ethosBullet span {
+  display: block;
+  padding-left: 5px;
+}
+
+.ethosImage {
+  position: absolute;
+  top: 306px;
+  left: 1000px;
+  width: 622px;
+  height: 246px;
+  object-fit: contain;
+}
+
+.conductDivider {
+  top: 146px;
+  left: 275px;
+}
+
+.conductTable {
+  position: absolute;
+  top: 202px;
+  left: 181px;
+  width: 1355px;
+  border-collapse: separate;
+  border-spacing: 0 17px;
+  table-layout: fixed;
+}
+
+.conductCategoryColumn {
+  width: 370px;
+}
+
+.conductTable th,
+.conductTable td {
+  padding: 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.conductTable thead th {
+  padding-bottom: 6px;
+  color: #23b14d;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.conductTable thead th:first-child {
+  padding-left: 119px;
+}
+
+.conductTable tbody th,
+.conductTable tbody td {
+  font-size: 22px;
+  line-height: 33px;
+}
+
+.conductTable tbody th {
+  font-weight: 700;
+  text-align: right;
+  padding-right: 50px;
+}
+
+.conductTable tbody td {
+  font-weight: 500;
+}
+
+@media (max-width: 767px) {
+  .ethosContent,
+  .conductContent {
+    height: auto;
+  }
+
+  .ethosTitle,
+  .conductTitle,
+  .divider,
+  .ethosLead,
+  .ethosBullet,
+  .ethosImage,
+  .conductTable {
+    position: static;
+    width: auto;
+  }
+
+  .ethosTitle,
+  .conductTitle {
+    margin-bottom: 1rem;
+    font-size: 24px;
+  }
+
+  .divider {
+    margin: 1rem 0;
+  }
+
+  .ethosLead {
+    margin-bottom: 1.5rem;
+    font-size: 18px;
+    line-height: 1.45;
+  }
+
+  .ethosBullet {
+    margin: 1rem 0;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .ethosImage {
+    display: block;
+    height: auto;
+    margin: 1.5rem auto 0;
+  }
+
+  .conductTable {
+    display: table;
+    table-layout: auto;
+    border-spacing: 0 0.75rem;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .conductCategoryColumn {
+    width: 40%;
+  }
+
+  .conductTable thead th {
+    padding-bottom: 0.25rem;
+    font-size: 17px;
+  }
+
+  .conductTable thead th:first-child {
+    padding-left: 0;
+  }
+
+  .conductTable tbody th,
+  .conductTable tbody td {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .conductTable tbody th {
+    padding-right: 0;
+    text-align: left;
+  }
+}

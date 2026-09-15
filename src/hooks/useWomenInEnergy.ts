@@ -107,7 +107,8 @@ export const useWomenInEnergy = (): UseWomenInEnergyReturn => {
         "https://greencms.percepco.co.uk/api/empower/women-in-energy",
         { signal },
       );
-      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      if (!response.ok)
+        throw new Error(`HTTP error! status: ${response.status}`);
       const result: ApiResponse = await response.json();
       if (!result.success || !result.data) {
         throw new Error("Invalid API response structure");

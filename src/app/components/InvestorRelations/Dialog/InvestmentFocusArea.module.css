@@ -1,0 +1,82 @@
+.tableWrap {
+  width: 100%;
+  max-width: 1255px;
+  margin: 10px 0 20px;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 300fr) minmax(0, 450fr) minmax(0, 480fr);
+  column-gap: 32px;
+  margin-bottom: 24px;
+}
+
+.colHeading {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #23b14d;
+  line-height: 1.3;
+}
+
+.tableBody {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: minmax(0, 300fr) minmax(0, 450fr) minmax(0, 480fr);
+  column-gap: 32px;
+  align-items: flex-start;
+}
+
+.focusAreaCell {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000000;
+  line-height: 1.35;
+}
+
+.capitalUseCell {
+  font-size: 19px;
+  font-weight: 600;
+  color: #000000;
+  line-height: 1.35;
+}
+
+.returnProfileCell {
+  font-size: 19px;
+  font-weight: 600;
+  color: #000000;
+  line-height: 1.35;
+}
+
+@media (max-width: 1024px) {
+  .tableHeader {
+    display: none;
+  }
+
+  .tableBody {
+    gap: 24px;
+  }
+
+  .tableRow {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  .focusAreaCell {
+    font-size: 18px;
+    color: #23b14d;
+  }
+
+  .capitalUseCell,
+  .returnProfileCell {
+    font-size: 16px;
+  }
+}

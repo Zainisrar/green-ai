@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 export interface TeamGreenData {
   success: boolean;
@@ -94,18 +94,20 @@ export interface TeamGreenData {
 }
 
 const fetchTeamGreen = async (): Promise<TeamGreenData> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/empower/team-green');
-  
+  const response = await fetch(
+    "https://greencms.percepco.co.uk/api/empower/team-green",
+  );
+
   if (!response.ok) {
     throw new Error(`Failed to fetch team green data: ${response.status}`);
   }
-  
+
   return response.json();
 };
 
 export const useTeamGreen = () => {
   return useQuery({
-    queryKey: ['team-green'],
+    queryKey: ["team-green"],
     queryFn: fetchTeamGreen,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes

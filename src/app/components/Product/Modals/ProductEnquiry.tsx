@@ -1,9 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import type React from "react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import CountryCodeDropdown from "@/app/components/shared/CountryCodeDropdown";
+import modalStyles from "@/app/components/SmartGrid/Modals/SmartGridModals.module.css";
+import PhoneInput from "@/app/components/shared/PhoneInput";
 import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
 import styles from "./ProductEnquiry.module.css";
 
@@ -16,6 +18,8 @@ interface Props {
   interestLabel?: string;
   interestOptions?: string[];
   defaultInterest?: string;
+  subtitle?: string;
+  submitButtonText?: string;
 }
 
 interface ProductEnquiryFrameProps {
@@ -237,10 +241,22 @@ export const ProductEnquiryFrame = ({
             aria-hidden="true"
           >
             {!surfaceImage ? (
-              <img className={styles.surfaceVector} src={surfaceSrc} alt="" />
+              <Image
+                className={styles.surfaceVector}
+                src={surfaceSrc}
+                alt=""
+                fill
+                sizes="100vw"
+              />
             ) : null}
             {surfaceImage ? (
-              <img alt="" className={styles.surfaceImage} src={surfaceImage} />
+              <Image
+                alt=""
+                className={styles.surfaceImage}
+                src={surfaceImage}
+                fill
+                sizes="100vw"
+              />
             ) : null}
           </div>
           <button
@@ -250,11 +266,21 @@ export const ProductEnquiryFrame = ({
             className={styles.close}
             aria-label={closeLabel}
           >
-            <img src="/images/job-openings/job-query-close.svg" alt="" />
+            <Image
+              src="/images/job-openings/job-query-close.svg"
+              alt=""
+              width={25}
+              height={25}
+            />
           </button>
           {showMaximize ? (
             <span className={styles.maximize} aria-hidden="true">
-              <img src="/images/join-us/solar_maximize.png" alt="" />
+              <Image
+                src="/images/join-us/solar_maximize.png"
+                alt=""
+                width={19}
+                height={18}
+              />
             </span>
           ) : null}
           {children}
@@ -294,6 +320,8 @@ const ProductEnquiry = ({
   interestLabel = "PRODUCT / SYSTEM OF INTEREST",
   interestOptions,
   defaultInterest,
+  subtitle,
+  submitButtonText,
 }: Props) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [phoneCountry, setPhoneCountry] = useState({
@@ -349,9 +377,9 @@ const ProductEnquiry = ({
     setIsLoading(true);
 
     const message = [
-      "Product Enquiry (GREEN SunShine)",
+      `${titlePrefix} ${titleAccent} (${productName || "GREEN SunShine"})`,
       `Organization: ${formData.organization}`,
-      `Product / system of interest: ${formData.productInterest}`,
+      `${interestLabel}: ${formData.productInterest}`,
       `Preferred consultation type: ${formData.consultationType}`,
       `Brief message: ${formData.message || "None"}`,
     ].join("\n");
@@ -399,136 +427,161 @@ const ProductEnquiry = ({
       labelledBy="product-enquiry-title"
       onClose={onClose}
       closeLabel="Close product enquiry"
-      surfaceClassName={styles.opaqueSurface}
     >
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <h2 id="product-enquiry-title" className={styles.title}>
-          {titlePrefix} <span>{titleAccent}</span>
-        </h2>
+      <div className={modalStyles.content}>
+        <header className={modalStyles.dialogHeader}>
+          <h2 id="product-enquiry-title">
+            {titlePrefix} <strong>{titleAccent}</strong>
+          </h2>
+          {subtitle ? <p>{subtitle}</p> : null}
+        </header>
 
-        <div className={styles.grid}>
-          <input
-            type="text"
-            name="fullName"
-            placeholder="FULL NAME"
-            value={formData.fullName}
-            onChange={handleInputChange}
-            className={`${styles.field} ${styles.skewForward}`}
-            required
-          />
-          <input
-            type="text"
-            name="organization"
-            placeholder="ORGANIZATION"
-            value={formData.organization}
-            onChange={handleInputChange}
-            className={`${styles.field} ${styles.skewBack}`}
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="EMAIL ID"
-            value={formData.email}
-            onChange={handleInputChange}
-            className={`${styles.field} ${styles.skewForward}`}
-            required
-          />
-          <div className={`${styles.phoneField} ${styles.skewBack}`}>
-            <input
-              type="tel"
-              name="phone"
-              placeholder="PHONE"
-              value={formData.phone}
-              onChange={handleInputChange}
-              required
-              aria-label={`Phone number, dial code ${phoneCountry.dial_code}`}
-            />
-            <CountryCodeDropdown
-              dialCode={phoneCountry.dial_code}
-              countryCode={phoneCountry.country_code}
-              onSelect={(dial_code, country_code) =>
-                setPhoneCountry({ dial_code, country_code })
-              }
-              className={styles.countryCode}
-            />
+        <form className={modalStyles.form} onSubmit={handleSubmit}>
+          <div className={`${modalStyles.row} ${modalStyles.row1}`}>
+            <label
+              className={`${modalStyles.fieldShape} ${modalStyles.activeField}`}
+            >
+              <input
+                type="text"
+                name="fullName"
+                placeholder="FULL NAME"
+                value={formData.fullName}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+
+            <label className={modalStyles.fieldShape}>
+              <input
+                type="text"
+                name="organization"
+                placeholder="ORGANIZATION"
+                value={formData.organization}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
           </div>
-          <select
-            name="productInterest"
-            value={formData.productInterest}
-            onChange={handleInputChange}
-            className={`${styles.field} ${styles.select} ${styles.skewForward} ${
-              formData.productInterest ? styles.hasValue : ""
-            }`}
-            required
-          >
-            <option value="">{interestLabel}</option>
-            {(interestOptions ?? [productName || "GREEN SunShine"]).map(
-              (option) => (
-                <option value={option} key={option}>
-                  {option}
-                </option>
-              ),
-            )}
-          </select>
-          <select
-            name="consultationType"
-            value={formData.consultationType}
-            onChange={handleInputChange}
-            className={`${styles.field} ${styles.select} ${styles.skewBack} ${
-              formData.consultationType ? styles.hasValue : ""
-            }`}
-            required
-          >
-            <option value="">PREFERRED CONSULTATION TYPE</option>
-            <option value="virtual">Virtual (Zoom / Google Meet)</option>
-            <option value="in-person">In-Person</option>
-            <option value="phone-call">Phone Call</option>
-          </select>
-        </div>
 
-        <textarea
-          name="message"
-          placeholder="BRIEF MESSAGE"
-          value={formData.message}
-          onChange={handleInputChange}
-          rows={3}
-          className={`${styles.field} ${styles.message}`}
-        />
+          <div className={`${modalStyles.row} ${modalStyles.row2}`}>
+            <label className={modalStyles.fieldShape}>
+              <input
+                type="email"
+                name="email"
+                placeholder="EMAIL ID"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
 
-        <div className={styles.agreement}>
-          <input
-            type="checkbox"
-            id="product-enquiry-agree"
-            checked={agreed}
-            onChange={(e) => setAgreed(e.target.checked)}
-          />
-          <label htmlFor="product-enquiry-agree">
-            I agree that GREEN may contact me about this request.
-          </label>
-        </div>
+            <div
+              className={`${modalStyles.fieldShape} ${modalStyles.phoneField}`}
+            >
+              <PhoneInput
+                phone={formData.phone}
+                onPhoneChange={handleInputChange}
+                dialCode={phoneCountry.dial_code}
+                countryCode={phoneCountry.country_code}
+                onCountryChange={(dial_code, country_code) =>
+                  setPhoneCountry({ dial_code, country_code })
+                }
+              />
+            </div>
+          </div>
 
-        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
-        {successMessage && <p className={styles.success}>{successMessage}</p>}
+          <div className={`${modalStyles.row} ${modalStyles.row3}`}>
+            <div className={modalStyles.fieldShape}>
+              <select
+                name="productInterest"
+                value={formData.productInterest}
+                onChange={handleInputChange}
+                className={formData.productInterest ? modalStyles.hasValue : ""}
+                required
+              >
+                <option value="">{interestLabel}</option>
+                {(interestOptions ?? [productName || "GREEN SunShine"]).map(
+                  (option) => (
+                    <option value={option} key={option}>
+                      {option}
+                    </option>
+                  ),
+                )}
+              </select>
+            </div>
 
-        <div className={styles.actions}>
-          <button
-            type="button"
-            onClick={resetForm}
-            disabled={isLoading}
-            className={styles.action}
-          >
-            <span>Reset</span>
-          </button>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className={`${styles.action} ${styles.submit}`}
-          >
-            <span>{isLoading ? "Submitting..." : "Send Enquiry"}</span>
-          </button>
-        </div>
-      </form>
+            <div className={modalStyles.fieldShape}>
+              <select
+                name="consultationType"
+                value={formData.consultationType}
+                onChange={handleInputChange}
+                className={
+                  formData.consultationType ? modalStyles.hasValue : ""
+                }
+                required
+              >
+                <option value="">PREFERRED CONSULTATION TYPE</option>
+                <option value="virtual">Virtual (Zoom / Google Meet)</option>
+                <option value="in-person">In-Person</option>
+                <option value="phone-call">Phone Call</option>
+              </select>
+            </div>
+          </div>
+
+          <div className={`${modalStyles.row} ${modalStyles.row4}`}>
+            <div
+              className={`${modalStyles.fieldShape} ${modalStyles.messageShape}`}
+            >
+              <textarea
+                name="message"
+                placeholder="BRIEF MESSAGE"
+                value={formData.message}
+                onChange={handleInputChange}
+                rows={3}
+              />
+            </div>
+          </div>
+
+          <div className={`${modalStyles.agreement} ${modalStyles.row5}`}>
+            <input
+              type="checkbox"
+              id="product-enquiry-agree"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+            />
+            <label htmlFor="product-enquiry-agree">
+              I agree that GREEN may contact me about this request.
+            </label>
+          </div>
+
+          {errorMessage && <p className={modalStyles.error}>{errorMessage}</p>}
+          {successMessage && (
+            <p className={modalStyles.success}>{successMessage}</p>
+          )}
+
+          <div className={`${modalStyles.row} ${modalStyles.row6}`}>
+            <button
+              type="button"
+              onClick={resetForm}
+              disabled={isLoading}
+              className={modalStyles.btnReset}
+            >
+              <span>Reset</span>
+            </button>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={modalStyles.btnSubmit}
+            >
+              <span>
+                {isLoading
+                  ? "Submitting..."
+                  : submitButtonText || "Send Enquiry"}
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
     </ProductEnquiryFrame>
   );
 };

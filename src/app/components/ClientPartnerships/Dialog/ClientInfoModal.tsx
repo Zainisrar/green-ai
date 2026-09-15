@@ -10,7 +10,7 @@ interface ClientInfoModalProps {
   onClose: () => void;
   children: React.ReactNode;
   maxWidthClass?: string;
-  geometry?: "default" | "consultation";
+  geometry?: "default" | "consultation" | "supplier" | "handbook";
 }
 
 const ClientInfoModal = ({
@@ -22,7 +22,6 @@ const ClientInfoModal = ({
 }: ClientInfoModalProps) => {
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-
   useEffect(() => {
     if (!isOpen) return;
 
@@ -67,14 +66,18 @@ const ClientInfoModal = ({
 
   if (!isOpen) return null;
   const widthClass =
-    geometry === "consultation"
+    geometry === "consultation" ||
+    geometry === "supplier" ||
+    geometry === "handbook"
       ? "max-w-none sm:w-[calc(100vw-3rem)]"
       : maxWidthClass;
 
   return (
     <div
       className={`scrollbar-hide fixed inset-0 z-[2147483647] flex items-start justify-center overflow-y-auto p-3 sm:items-center sm:p-4 ${
-        geometry === "consultation"
+        geometry === "consultation" ||
+        geometry === "supplier" ||
+        geometry === "handbook"
           ? enquiryStyles.consultationOverlay
           : "bg-black/20"
       }`}
@@ -88,8 +91,16 @@ const ClientInfoModal = ({
       <div
         ref={dialogRef}
         className={`relative z-10 my-2 w-full ${widthClass} sm:my-auto ${
-          geometry === "consultation"
-            ? `${enquiryStyles.consultationWindow} ${styles.enquiryWindow}`
+          geometry === "consultation" ||
+          geometry === "supplier" ||
+          geometry === "handbook"
+            ? `${enquiryStyles.consultationWindow} ${
+                geometry === "supplier"
+                  ? styles.supplierWindow
+                  : geometry === "handbook"
+                    ? styles.handbookWindow
+                    : styles.enquiryWindow
+              }`
             : enquiryStyles.window
         }`}
         role="dialog"
@@ -123,7 +134,13 @@ const ClientInfoModal = ({
         <div className="scrollbar-hide max-h-[calc(100dvh-1.5rem)] overflow-y-auto sm:max-h-[90dvh]">
           <div
             className={`relative mx-2 border-2 border-[#4CAF50] bg-white px-6 py-10 pr-12 shadow-2xl sm:mx-3 sm:px-12 sm:py-12 sm:pr-16 lg:px-16 lg:pr-20 ${
-              geometry === "consultation" ? styles.enquiryPanel : "rounded-lg"
+              geometry === "supplier"
+                ? styles.supplierPanel
+                : geometry === "handbook"
+                  ? styles.handbookPanel
+                  : geometry === "consultation"
+                    ? styles.enquiryPanel
+                    : "rounded-lg"
             }`}
           >
             {children}

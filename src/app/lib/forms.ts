@@ -21,16 +21,23 @@ export interface GsolveResponse {
 }
 
 export function generateCaptcha() {
-  return Array.from({ length: 4 }, () => Math.floor(Math.random() * 10)).join(" ");
+  return Array.from({ length: 4 }, () => Math.floor(Math.random() * 10)).join(
+    " ",
+  );
 }
 
 export function getCsrfToken() {
   if (typeof document === "undefined") return "";
-  return document.querySelector('meta[name="csrf-token"]')?.getAttribute("content") ?? "";
+  return (
+    document
+      .querySelector('meta[name="csrf-token"]')
+      ?.getAttribute("content") ?? ""
+  );
 }
 
 export function buildReachUsPayload(
-  overrides: Partial<ReachUsPayload> & Pick<ReachUsPayload, "email" | "message">,
+  overrides: Partial<ReachUsPayload> &
+    Pick<ReachUsPayload, "email" | "message">,
 ): ReachUsPayload {
   return {
     firstname: "",
@@ -47,7 +54,9 @@ export function buildReachUsPayload(
   };
 }
 
-export async function submitReachUs(payload: ReachUsPayload): Promise<GsolveResponse> {
+export async function submitReachUs(
+  payload: ReachUsPayload,
+): Promise<GsolveResponse> {
   const response = await fetch(`${GSOLVE_API}/submit/reach_us/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -61,6 +70,60 @@ export async function submitReachUs(payload: ReachUsPayload): Promise<GsolveResp
   return response.json();
 }
 
+export interface LoginResponse extends GsolveResponse {
+  token?: string;
+  user?: {
+    id?: string | number;
+    email?: string;
+    name?: string;
+    role?: string;
+  };
+}
+
+async function handleLoginErrorResponse(response: Response): Promise<never> {
+  let serverMessage = "";
+  try {
+    const errData = await response.json();
+    serverMessage =
+      errData?.Message ||
+      errData?.message ||
+      errData?.detail ||
+      (typeof errData?.error === "string" ? errData.error : "");
+  } catch {
+    // Response is not JSON
+  }
+
+  if (
+    response.status === 400 ||
+    response.status === 401 ||
+    response.status === 403
+  ) {
+    throw new Error(
+      serverMessage ||
+        "Invalid email or password. Please check your credentials and try again.",
+    );
+  }
+
+  if (response.status === 429) {
+    throw new Error(
+      serverMessage ||
+        "Too many login attempts. Please wait a moment and try again.",
+    );
+  }
+
+  if (response.status >= 500) {
+    throw new Error(
+      serverMessage ||
+        "Authentication service is temporarily unavailable. Please try again shortly.",
+    );
+  }
+
+  throw new Error(
+    serverMessage ||
+      `Login request failed (${response.status}). Please try again.`,
+  );
+}
+
 export async function loginSupplyPartner(
   email: string,
   password: string,
@@ -72,7 +135,24 @@ export async function loginSupplyPartner(
   });
 
   if (!response.ok) {
-    throw new Error("Invalid email or password. Please try again.");
+    await handleLoginErrorResponse(response);
+  }
+
+  return response.json();
+}
+
+export async function loginClient(
+  email: string,
+  password: string,
+): Promise<LoginResponse> {
+  const response = await fetch(`${GSOLVE_API}/login/user/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+
+  if (!response.ok) {
+    await handleLoginErrorResponse(response);
   }
 
   return response.json();

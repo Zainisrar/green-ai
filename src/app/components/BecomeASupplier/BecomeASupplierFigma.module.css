@@ -1,0 +1,520 @@
+.page {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+.backgroundArtwork {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 1920px;
+  height: 970px;
+  object-fit: fill;
+  pointer-events: none;
+}
+.verticalTitle {
+  position: absolute;
+  z-index: 2;
+  top: 176px;
+  left: 34px;
+  width: 73px;
+  height: 623px;
+  object-fit: contain;
+  pointer-events: none;
+}
+.title {
+  position: absolute;
+  z-index: 3;
+  top: 97px;
+  left: 264px;
+  margin: 0;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 67px;
+  text-transform: uppercase;
+}
+.title span,
+.description strong,
+.vendorQuote span,
+.bottomStatement span {
+  color: #23b14d;
+}
+.subtitle {
+  position: absolute;
+  z-index: 3;
+  top: 169px;
+  left: 279px;
+  width: 715px;
+  margin: 0;
+  color: #23b14d;
+  font-size: 22px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 36px;
+}
+.description {
+  position: absolute;
+  z-index: 3;
+  top: 229px;
+  left: 272px;
+  width: 1384px;
+  margin: 0;
+  font-size: 18px;
+  line-height: 24px;
+  letter-spacing: 0.36px;
+}
+.card {
+  position: absolute;
+  width: 700px;
+  height: 181px;
+  isolation: isolate;
+}
+.card::before {
+  position: absolute;
+  z-index: -1;
+  top: -3px;
+  right: -7px;
+  bottom: -9px;
+  left: -7px;
+  content: "";
+  background:
+    url("/images/become-supplier/figma-card-frame.svg") center / 100% 100%
+    no-repeat;
+}
+.cardOne {
+  top: 314px;
+  left: 541px;
+}
+.cardTwo {
+  top: 316px;
+  left: 1185px;
+}
+.cardThree {
+  top: 533px;
+  left: 536px;
+}
+.cardFour {
+  top: 535px;
+  left: 1180px;
+}
+.cardImage {
+  position: absolute;
+  z-index: 1;
+  /* The Figma mask path occupies (5,2) → (372,147) in a 377 × 155 export.
+     Use the same geometry as an opaque clip: CSS alpha-masking the export
+     incorrectly applies its decorative 30% white fill to the photograph. */
+  top: 13px;
+  left: 26px;
+  width: 377px;
+  height: 155px;
+  object-fit: cover;
+  opacity: 1;
+  filter: none;
+  clip-path: polygon(98.67% 1.29%, 21.09% 1.29%, 1.33% 94.84%, 79.02% 94.84%);
+}
+.card h2 {
+  position: absolute;
+  z-index: 2;
+  top: 2px;
+  left: 409px;
+  width: 296px;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 28px;
+}
+.card p {
+  position: absolute;
+  z-index: 2;
+  top: 63px;
+  left: 381px;
+  /* Keep copy inside the white portion of the parallelogram.  A fixed width
+     reaches into the right slanted frame at desktop scale. */
+  right: 88px;
+  width: auto;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+.exploreButton {
+  position: absolute;
+  z-index: 4;
+  right: 72px;
+  bottom: 0;
+  width: 122px;
+  height: 37px;
+  min-height: 37px;
+  padding: 0 12px 0 17px;
+  font-size: 13px;
+}
+.cardOne h2 {
+  width: 244px;
+}
+.cardThree h2,
+.cardFour h2 {
+  top: 17px;
+  left: 406px;
+  width: 244px;
+}
+.cardThree p {
+  top: 74px;
+  left: 383px;
+}
+.cardFour h2 {
+  top: 33px;
+  width: 225px;
+}
+.cardFour p {
+  top: 71px;
+  left: 378px;
+}
+.vendorQuote {
+  position: absolute;
+  z-index: 3;
+  top: 614px;
+  left: 114px;
+  width: 447px;
+  height: 102px;
+}
+.vendorQuote img {
+  position: absolute;
+  width: 79px;
+  height: 98px;
+  object-fit: contain;
+}
+.vendorQuote img:last-child {
+  right: 0;
+  top: -15px;
+}
+.vendorQuote p {
+  position: absolute;
+  top: 8px;
+  left: 41px;
+  width: 310px;
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 29px;
+}
+.bottomStatement {
+  position: absolute;
+  z-index: 3;
+  top: 833px;
+  left: 355px;
+  width: 1095px;
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 36px;
+}
+.handbookButton,
+.registerButton {
+  position: absolute;
+  z-index: 4;
+  height: 52px;
+  min-height: 52px;
+  justify-content: center;
+  gap: 12px;
+  padding: 0 24px 0 32px;
+  font-size: 16px;
+}
+.handbookButton {
+  background:
+    url("/images/become-supplier/figma-download-handbook.svg") center / 100%
+    100% no-repeat;
+}
+.registerButton {
+  background:
+    url("/images/become-supplier/figma-register-inquiry.svg") center / 100% 100%
+    no-repeat;
+}
+.handbookButton::before,
+.handbookButton::after,
+.registerButton::before,
+.registerButton::after {
+  display: none;
+}
+.handbookButton {
+  top: 749px;
+  left: 1631px;
+  width: 289px;
+}
+.registerButton {
+  top: 827px;
+  left: 1551px;
+  width: 369px;
+}
+
+/* Responsive Mobile Tree Styles */
+.mobilePage {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  background: #ffffff;
+  color: #111827;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  box-sizing: border-box;
+}
+
+.mobileContainer {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  box-sizing: border-box;
+}
+
+.mobileIntro {
+  margin-bottom: 24px;
+}
+
+.mobileBadge {
+  display: inline-block;
+  padding: 4px 10px;
+  background: rgba(35, 177, 77, 0.1);
+  color: #23b14d;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.mobileTitle {
+  margin: 0 0 6px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #111827;
+  line-height: 32px;
+  text-transform: uppercase;
+}
+
+.mobileTitle span {
+  color: #23b14d;
+}
+
+.mobileSubtitle {
+  margin: 0 0 12px;
+  font-size: 16px;
+  font-weight: 700;
+  font-style: italic;
+  color: #23b14d;
+  line-height: 22px;
+}
+
+.mobileDescription {
+  margin: 0;
+  font-size: 14px;
+  line-height: 22px;
+  color: #4b5563;
+}
+
+.mobileDescription strong {
+  color: #23b14d;
+  font-weight: 700;
+}
+
+.mobileCardsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.mobileCard {
+  display: flex;
+  flex-direction: column;
+  border: 1.5px solid #a3d977;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(35, 177, 77, 0.04) 0%,
+    rgba(255, 254, 80, 0.04) 100%
+  );
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.mobileCardImageWrap {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.mobileCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mobileCardBody {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mobileCardTitle {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 24px;
+}
+
+.mobileCardDesc {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 20px;
+  color: #6b7280;
+}
+
+.mobileExploreBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  align-self: flex-start;
+  min-height: 44px;
+  padding: 0 18px;
+  margin-top: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(35, 177, 77, 0.16) 0%,
+    rgba(255, 254, 80, 0.16) 100%
+  );
+  border: 1.5px solid #23b14d;
+  border-radius: 6px;
+  color: #111827;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s ease;
+}
+
+.mobileExploreBtn:hover,
+.mobileExploreBtn:focus-visible {
+  background: linear-gradient(
+    90deg,
+    rgba(35, 177, 77, 0.28) 0%,
+    rgba(255, 254, 80, 0.28) 100%
+  );
+  outline: none;
+}
+
+.mobileExploreArrow {
+  color: #23b14d;
+  font-size: 18px;
+  font-weight: 900;
+  margin-left: 8px;
+}
+
+.mobileQuoteBox {
+  margin: 24px 0;
+  padding: 18px 20px;
+  background: #f9fafb;
+  border-left: 4px solid #23b14d;
+  border-radius: 0 8px 8px 0;
+  text-align: center;
+}
+
+.mobileQuoteBox p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  font-style: italic;
+  color: #1f2937;
+  line-height: 22px;
+}
+
+.mobileQuoteBox span {
+  color: #23b14d;
+}
+
+.mobileBottomStatement {
+  margin: 0 0 28px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #374151;
+  text-align: center;
+}
+
+.mobileBottomStatement span {
+  color: #23b14d;
+}
+
+.mobileActions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.mobileHandbookBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 20px;
+  background: #23b14d;
+  color: #ffffff !important;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  box-sizing: border-box;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
+  box-shadow: 0 2px 6px rgba(35, 177, 77, 0.3);
+}
+
+.mobileHandbookBtn:hover,
+.mobileHandbookBtn:focus-visible {
+  background: #1e9942;
+  outline: none;
+}
+
+.mobileRegisterBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 20px;
+  background: #ffffff;
+  color: #1f2937;
+  border: 2px solid #23b14d;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-family: inherit;
+  transition: all 0.15s ease;
+}
+
+.mobileRegisterBtn:hover,
+.mobileRegisterBtn:focus-visible {
+  background: #f0fdf4;
+  outline: none;
+}

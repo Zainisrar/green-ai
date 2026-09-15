@@ -1,200 +1,109 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import React from "react";
+import Link from "next/link";
+import PublicEventModalFrame from "./PublicEventModalFrame";
+import FigmaAngledCta from "../../FigmaAngledCta/FigmaAngledCta";
+import styles from "./PublicEventDialogs.module.css";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
-const WaystoGetInvolved = ({ isOpen, onClose }: Props) => {
-  if (!isOpen) return null;
 
+interface InitiativeItem {
+  title: string;
+  desc: string;
+  image: string;
+  left: number;
+  top: number;
+}
+
+const INITIATIVES: InitiativeItem[] = [
+  // Left Column (slanted down-left)
+  {
+    title: "Clean Energy Campaigns",
+    desc: "Awareness drives, solar literacy, rural demonstrations",
+    image: "/images/public-events-volunteering/clean-energy-campaigns.png",
+    left: 275,
+    top: 30,
+  },
+  {
+    title: "Community Volunteer Days",
+    desc: "Mini-grid site visits, solar install support, environment cleanup",
+    image: "/images/public-events-volunteering/community-volunteer-days.png",
+    left: 193,
+    top: 170,
+  },
+  {
+    title: "Events & Exhibitions",
+    desc: "Attend GREEN public expos, launch days, and energy fairs",
+    image: "/images/public-events-volunteering/events-exhibitions.png",
+    left: 111,
+    top: 310,
+  },
+  // Right Column (slanted down-left)
+  {
+    title: "School & Campus Outreach",
+    desc: "STEM sessions, hands-on tech demos, GreenTalks",
+    image: "/images/public-events-volunteering/school-campus-outreach.png",
+    left: 919,
+    top: 30,
+  },
+  {
+    title: "Energy Advocacy",
+    desc: "Join our efforts to raise voices on energy justice, access, and equity",
+    image: "/images/public-events-volunteering/energy-advocacy.png",
+    left: 828,
+    top: 170,
+  },
+];
+
+export default function WaystoGetInvolved({ isOpen, onClose }: Props) {
   return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed inset-0 bg-black/20 z-[99999999999999] flex items-center justify-center">
-        {/* Modal Container */}
-        <div className="relative w-full max-w-6xl mx-4">
-          {/* Skewed Modal Background */}
+    <PublicEventModalFrame
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Ways to Get Involved"
+      titleDash="- From community action to grassroots advocacy:"
+    >
+      <div className={styles.waysContainer}>
+        {INITIATIVES.map((item, idx) => (
           <div
-            className="bg-gray-100 transform  py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-            style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
-              transform:"skewX(-12deg)"
-             }}
+            key={idx}
+            className={styles.waysItem}
+            style={{ left: item.left, top: item.top }}
           >
-            {/* Close Button */}
-            <div className="flex justify-end w-full">
-              <button
-                onClick={onClose}
-                style={{
-                  transform:"skewX(12deg)"
-                }}
-                className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
-              >
-                <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
-              </button>
+            <div className={styles.waysImgFrame}>
+              <img
+                src={item.image}
+                alt={item.title}
+                className={styles.waysImg}
+                loading="lazy"
+                decoding="async"
+              />
             </div>
-            {/* Modal Content */}
-            <div
-            style={{
-              transform:"skewX(6deg)"
-            }}
-            className="transform  max-w-5xl mx-auto">
-              {/* Header */}
-              <div className="mb-8">
-                <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                  Ways to Get Involved
-                </h2>
-                <div className="w-full h-px bg-gray-400 mb-8"></div>
-              </div>
-
-              {/* Grid Layout */}
-              <div className="grid grid-cols-2  mb-8">
-                {/* Clean Energy Campaigns */}
-                <div className="flex ">
-                  <div className="w-96">
-                    <img loading="lazy" decoding="async"
-                      src="/images/public-events-volunteering/clean-energy-campaigns.png"
-                      alt="Clean Energy Campaigns"
-                    />
-                  </div>
-                  <div className="">
-                    <h3 className="font-bold text-gray-800 mb-1">
-                      Clean Energy Campaigns
-                    </h3>
-                    <p className="text-sm text-gray-600 mb-2">
-                      Awareness drives, solar literacy, rural connections
-                    </p>
-                    <button className="flex justify-end w-full">
-                      <img loading="lazy" decoding="async"
-                        src="/images/global-snapshot/exploreBtn.png"
-                        alt="explore"
-                        className="w-28 "
-                      />
-                    </button>
-                  </div>
-                </div>
-                {/* School & Campus Outreach */}
-
-                <div className="flex ">
-                  <div className="w-96">
-                    <img loading="lazy" decoding="async"
-                      src="/images/public-events-volunteering/school-campus-outreach.png"
-                      alt="Clean Energy Campaigns"
-                    />
-                  </div>
-                  <div className="">
-                    <h3 className="font-bold text-gray-800 mb-1">
-                      School & Campus Outreach
-                    </h3>
-                    <p className="text-sm text-gray-600 mb-2">
-                      STEM sessions, hands-on tech demos, GreenTalks
-                    </p>
-                    <button className="flex justify-end w-full">
-                      <img loading="lazy" decoding="async"
-                        src="/images/global-snapshot/exploreBtn.png"
-                        alt="explore"
-                        className="w-28 "
-                      />
-                    </button>
-                  </div>
-                </div>
-              {/* Community Volunteer Days */}
-
-                <div className="flex mt-10 ">
-                  <div className="w-96">
-                    <img loading="lazy" decoding="async"
-                      src="/images/public-events-volunteering/community-volunteer-days.png"
-                      alt="Clean Energy Campaigns"
-                    />
-                  </div>
-                  <div className="">
-                   <h3 className="font-bold text-gray-800 mb-1">
-                      Community Volunteer Days
-                    </h3>
-                    <p className="text-sm text-gray-600 mb-2">
-                      Mini-grid site visits, solar install support, environment
-                      cleanup
-                    </p>
-                    <button className="flex justify-end w-full">
-                      <img loading="lazy" decoding="async"
-                        src="/images/global-snapshot/exploreBtn.png"
-                        alt="explore"
-                        className="w-28 "
-                      />
-                    </button>
-                  </div>
-                </div>
-              {/* Energy Advocacy */}
-
-                <div className="flex mt-10 ">
-                  <div className="w-96">
-                    <img loading="lazy" decoding="async"
-                      src="/images/public-events-volunteering/energy-advocacy.png"
-                      alt="Clean Energy Campaigns"
-                    />
-                  </div>
-                  <div className="">
-                   <h3 className="font-bold text-gray-800 mb-1">
-                      Community Volunteer Days
-                    </h3>
-                    <p className="text-sm text-gray-600 mb-2">
-                      Mini-grid site visits, solar install support, environment
-                      cleanup
-                    </p>
-                    <button className="flex justify-end w-full">
-                      <img loading="lazy" decoding="async"
-                        src="/images/global-snapshot/exploreBtn.png"
-                        alt="explore"
-                        className="w-28 "
-                      />
-                    </button>
-                  </div>
-                </div>
-                  {/* Events & Exhibitions */}
-
-                <div className="flex mt-10 ">
-                  <div className="w-96">
-                    <img loading="lazy" decoding="async"
-                      src="/images/public-events-volunteering/events-exhibitions.png"
-                      alt="Clean Energy Campaigns"
-                    />
-                  </div>
-                  <div className="">
-                      <h3 className="font-bold text-gray-800 mb-1">
-                      Events & Exhibitions
-                    </h3>
-                    <p className="text-sm text-gray-600 mb-2">
-                      Attend GREEN public expos, launch days, and energy fairs
-                    </p>
-                    <button className="flex justify-end w-full">
-                      <img loading="lazy" decoding="async"
-                        src="/images/global-snapshot/exploreBtn.png"
-                        alt="explore"
-                        className="w-28 "
-                      />
-                    </button>
-                  </div>
-                </div>
-
-              
-
-              </div>
-
-              {/* Download Section */}
-              <div className="text-right mt-8">
-                <p className="text-gray-700">
-                  <span className="italic">Download</span>{" "}
-                  <a href="/volunteer-welcome-pack.pdf" download className="text-[#23B14D] font-medium underline">
-                    Volunteer Welcome Pack (PDF)
-                  </a>
-                </p>
-              </div>
+            <div className={styles.waysInfo}>
+              <h4 className={styles.waysTitle}>{item.title}</h4>
+              <p className={styles.waysDesc}>{item.desc}</p>
+              <FigmaAngledCta className={styles.waysCta}>
+                Explore
+              </FigmaAngledCta>
             </div>
           </div>
-        </div>
-      </div>
-    </React.Fragment>
-  );
-};
+        ))}
 
-export default WaystoGetInvolved;
+        <Link
+          href="/volunteer-welcome-pack.pdf"
+          className={styles.waysBottomLink}
+          style={{ left: 828, top: 330 }}
+        >
+          <em>Download</em>
+          <span className={styles.waysBottomLinkAccent}>
+            Volunteer Welcome Pack (PDF)
+          </span>
+        </Link>
+      </div>
+    </PublicEventModalFrame>
+  );
+}

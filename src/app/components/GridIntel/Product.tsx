@@ -33,7 +33,9 @@ const Product = ({ isOpen, onClose, data }: Props) => {
     if (data?.items) {
       return data.items.map((item, index) => (
         <div key={index} className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/grid-intel/lighting.png"
             className="w-14 -mt-4"
             alt="lighting"
@@ -50,7 +52,9 @@ const Product = ({ isOpen, onClose, data }: Props) => {
     return (
       <>
         <div className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/grid-intel/lighting.png"
             className="w-14 -mt-4"
             alt="lighting"
@@ -61,7 +65,9 @@ const Product = ({ isOpen, onClose, data }: Props) => {
         </div>
 
         <div className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/grid-intel/lighting.png"
             className="w-14 -mt-4"
             alt="lighting"
@@ -72,7 +78,9 @@ const Product = ({ isOpen, onClose, data }: Props) => {
         </div>
 
         <div className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/grid-intel/lighting.png"
             className="w-14 -mt-4"
             alt="lighting"
@@ -91,7 +99,9 @@ const Product = ({ isOpen, onClose, data }: Props) => {
           {data?.title || "Product Integration"}
         </h2>
         <div className="flex items-center">
-          <span className="mr-2 hidden text-2xl font-bold text-black md:inline">-</span>
+          <span className="mr-2 hidden text-2xl font-bold text-black md:inline">
+            -
+          </span>
           <h3 className="text-xl font-semibold text-[#4CAF50]">
             {data?.subtitle || "GRID-INTEL™ is fully integrated with."}
           </h3>

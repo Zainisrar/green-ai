@@ -1,156 +1,103 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import Image from "next/image";
+import MediaDialogFrame from "./MediaDialogFrame";
+import styles from "./GreenInTheNews.module.css";
 
 interface GreenInTheNewsProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const GreenInTheNews: React.FC<GreenInTheNewsProps> = ({ isOpen, onClose }) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  if (!isOpen) return null;
-
-  const newsItems = [
+const newsRows = [
+  [
     {
+      id: "national-1",
       source: "The National",
       title: "GREEN Brings Solar to Remote Health Posts",
-      image: "/images/media-press/newsplaceholder.png",
+      image: "/images/media-press/easter-higherlands.png",
     },
     {
+      id: "cleantech-1",
       source: "CleanTech Wire",
       title: "GRID-INTEL™ Puts PNG on the Energy Data Map",
-      image: "/images/media-press/newsplaceholder.png",
+      image: "/images/media-press/mini-grids.png",
     },
+  ],
+  [
     {
+      id: "national-2",
       source: "The National",
       title: "GREEN Brings Solar to Remote Health Posts",
-      image: "/images/media-press/newsplaceholder.png",
+      image: "/images/media-press/easter-higherlands.png",
     },
     {
+      id: "cleantech-2",
       source: "CleanTech Wire",
       title: "GRID-INTEL™ Puts PNG on the Energy Data Map",
-      image: "/images/media-press/newsplaceholder.png",
+      image: "/images/media-press/mini-grids.png",
     },
+  ],
+  [
     {
+      id: "national-3",
       source: "The National",
       title: "GREEN Brings Solar to Remote Health Posts",
-      image: "/images/media-press/newsplaceholder.png",
+      image: "/images/media-press/easter-higherlands.png",
     },
     {
+      id: "cleantech-3",
       source: "CleanTech Wire",
       title: "GRID-INTEL™ Puts PNG on the Energy Data Map",
-      image: "/images/media-press/newsplaceholder.png",
+      image: "/images/media-press/mini-grids.png",
     },
-  ];
+  ],
+];
 
-  const renderContent = () => (
-    <>
-      {/* Title Section */}
-      <div className="mb-8">
-        <h2 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
-          GREEN in the News
-        </h2>
-        <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
-      </div>
+const rowClasses = [styles.row0, styles.row1, styles.row2];
 
-      {/* News Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 gap-y-0 ">
-        {newsItems.map((item, idx) => (
-          <div
-            key={idx}
-            className="flex"
-          >
-            <div className="relative ">
-              <img loading="lazy" decoding="async"
-                src={item.image}
-                alt={item.title}
-                className=" object-cover"
-              />
-            </div>
-            <div className="p-4">
-              <p className="text-sm  font-semibold mb-2">
-                {item.source}
-              </p>
-              <h3 className="text-gray-900 font-bold text-base mb-3">
-                {item.title}
-              </h3>
-              <span title="Article link unavailable" className="inline-block opacity-50">
-                <img loading="lazy" decoding="async" src="/images/media-press/ctanews.png" className="w-32" alt="Article link unavailable" />
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </>
-  );
-
+export default function GreenInTheNews({
+  isOpen,
+  onClose,
+}: GreenInTheNewsProps) {
   return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed inset-0 bg-black/20 z-[99999999999999999999999999] flex items-center justify-center">
-        {/* Modal Container */}
-        <div className="relative w-full lg:max-w-6xl mx-4">
-          {/* Mobile Layout */}
-          {isMobile ? (
-            <div className="bg-gray-100 h-[80vh] p-3 overflow-y-auto py-14 border-2 border-[#23B14D] relative shadow-2xl">
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  onClick={onClose}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
-                >
-                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div className="mx-auto">{renderContent()}</div>
-            </div>
-          ) : (
-            /* Desktop Layout */
+    <MediaDialogFrame
+      isOpen={isOpen}
+      onClose={onClose}
+      title="GREEN in the News"
+      labelledBy="green-news-title"
+    >
+      <div className={styles.container}>
+        <div className={styles.rowsContainer}>
+          {newsRows.map((row, rowIndex) => (
             <div
-              className="bg-gray-100 transform  py-14 border-2 border-[#23B14D] px-16 relative shadow-2xl  max-h-[85vh]"
-              style={{
-                transform:"skewX(-12deg)"
-               }}
+              key={rowIndex}
+              className={`${styles.newsRow} ${rowClasses[rowIndex] || ""}`}
             >
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  onClick={onClose}
-                  style={{
-                    transform:"skewX(12deg)"
-                  }}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
-                >
-                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div
-              style={{
-                transform:"skewX(12deg)"
-              }}
-              className="transform  max-w-5xl mx-auto">
-                {renderContent()}
-              </div>
+              {row.map((item) => (
+                <article className={styles.newsItem} key={item.id}>
+                  <div className={styles.imageShape}>
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 240px"
+                      className={styles.img}
+                    />
+                  </div>
+                  <div className={styles.copy}>
+                    <p className={styles.source}>{item.source}</p>
+                    <h3 className={styles.headline}>{item.title}</h3>
+                    <button type="button" className={styles.readBtn}>
+                      Read <span>›</span>
+                    </button>
+                  </div>
+                </article>
+              ))}
             </div>
-          )}
+          ))}
         </div>
       </div>
-    </React.Fragment>
+    </MediaDialogFrame>
   );
-};
-
-export default GreenInTheNews;
+}

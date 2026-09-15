@@ -72,7 +72,9 @@ export default function OsmMonitoring() {
 
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:4516">
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.backgroundArt}
         src="/images/osm-monitoring/mainImg.png"
         alt=""
@@ -80,7 +82,9 @@ export default function OsmMonitoring() {
         height="970"
       />
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.verticalTitle}
         src="/images/osm-monitoring/osm.png"
         alt=""
@@ -99,7 +103,9 @@ export default function OsmMonitoring() {
         <h2>{omData?.philosophy?.heading || "Our O&M Philosophy"}</h2>
         {philosophy.slice(0, 3).map((item) => (
           <article key={item.title}>
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/osm-monitoring/lighting.png"
               alt=""
               width="60"
@@ -110,13 +116,41 @@ export default function OsmMonitoring() {
           </article>
         ))}
       </section>
-      <p className={styles.systemsQuote} data-node-id="7077:4533">
-        <span>Sustaining</span> Systems.
-        <br />
-        <span>Securing</span> Performance.
-        <br />
-        <span>Scaling</span> Trust.
-      </p>
+      <div className={styles.quoteWrapper} data-node-id="7077:4533">
+        <img
+          loading="lazy"
+          decoding="async"
+          className={styles.quoteBracketTR}
+          src="/images/osm-monitoring/quote-bracket-tr.svg"
+          alt=""
+          aria-hidden="true"
+          width="82"
+          height="102"
+          data-node-id="7077:4557"
+        />
+        <p className={styles.systemsQuote}>
+          <span className={styles.quoteLine1}>
+            <span className={styles.greenWord}>Sustaining</span> Systems.
+          </span>
+          <span className={styles.quoteLine2}>
+            <span className={styles.greenWord}>Securing</span> Performance.
+          </span>
+          <span className={styles.quoteLine3}>
+            <span className={styles.greenWord}>Scaling</span> Trust.
+          </span>
+        </p>
+        <img
+          loading="lazy"
+          decoding="async"
+          className={styles.quoteBracketBL}
+          src="/images/osm-monitoring/quote-bracket-bl.svg"
+          alt=""
+          aria-hidden="true"
+          width="82"
+          height="101"
+          data-node-id="7077:4556"
+        />
+      </div>
       <section className={styles.whyMatters} data-node-id="7077:4568">
         <h2>{omData?.whyMatters?.heading || "Why This Matters"}</h2>
         <p>
@@ -129,7 +163,9 @@ export default function OsmMonitoring() {
       <section className={styles.services} aria-label="O&M services">
         {services.slice(0, 7).map(([serviceTitle, serviceDescription]) => (
           <article key={serviceTitle}>
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/osm-monitoring/lighting.png"
               alt=""
               width="41"
@@ -151,8 +187,7 @@ export default function OsmMonitoring() {
           onClick={() => setIsLiveDemoOpen(true)}
           style={{ position: "absolute", top: 820, right: 32, width: 351 }}
         >
-          {omData?.callToActions?.[1]?.text ||
-            "Book a Live Demo of GREEN POC"}
+          {omData?.callToActions?.[1]?.text || "Book a Live Demo of GREEN POC"}
         </FigmaAngledCta>
       </div>
       <D6Chatbot
@@ -160,12 +195,12 @@ export default function OsmMonitoring() {
         triggerVariant="figmaCanvas"
         triggerClassName={styles.chatTrigger}
         triggerStyle={{
-            top: 899,
-            right: "auto",
-            bottom: "auto",
-            left: 1498,
-            width: 418,
-          }}
+          top: 899,
+          right: "auto",
+          bottom: "auto",
+          left: 1498,
+          width: 418,
+        }}
       />
     </main>
   );

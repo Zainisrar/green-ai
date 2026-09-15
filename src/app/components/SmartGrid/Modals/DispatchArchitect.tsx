@@ -2,11 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
-import EngineeringFormModal, {
-  formFieldClass,
-  formGridClass,
-} from "@/app/components/shared/EngineeringFormModal";
+import { ProductEnquiryFrame } from "@/app/components/Product/Modals/ProductEnquiry";
 import PhoneInput from "@/app/components/shared/PhoneInput";
+import styles from "./SmartGridModals.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -35,7 +33,10 @@ const initialFormData: FormData = {
 
 const DispatchArchitect = ({ isOpen, onClose }: Props) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const [phoneCountry, setPhoneCountry] = useState({ dial_code: "+675", country_code: "pg" });
+  const [phoneCountry, setPhoneCountry] = useState({
+    dial_code: "+675",
+    country_code: "pg",
+  });
   const [agreed, setAgreed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -51,7 +52,9 @@ const DispatchArchitect = ({ isOpen, onClose }: Props) => {
   if (!isOpen) return null;
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -70,7 +73,9 @@ const DispatchArchitect = ({ isOpen, onClose }: Props) => {
     setSuccessMessage("");
 
     if (!agreed) {
-      setErrorMessage("Please agree that GREEN may contact you about this request.");
+      setErrorMessage(
+        "Please agree that GREEN may contact you about this request.",
+      );
       return;
     }
 
@@ -107,11 +112,15 @@ const DispatchArchitect = ({ isOpen, onClose }: Props) => {
           setSuccessMessage("");
         }, 2000);
       } else {
-        setErrorMessage(data.Message || "Failed to submit request. Please try again.");
+        setErrorMessage(
+          data.Message || "Failed to submit request. Please try again.",
+        );
       }
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "An error occurred while submitting the form.",
+        error instanceof Error
+          ? error.message
+          : "An error occurred while submitting the form.",
       );
     } finally {
       setIsLoading(false);
@@ -119,132 +128,151 @@ const DispatchArchitect = ({ isOpen, onClose }: Props) => {
   };
 
   return (
-    <EngineeringFormModal
-      isOpen={isOpen}
+    <ProductEnquiryFrame
+      labelledBy="dispatch-architect-title"
       onClose={onClose}
-      title={
-        <>
-          TALK TO OUR <span className="text-green-600">DISPATCH ARCHITECTS</span>
-        </>
-      }
+      closeLabel="Close dispatch architect dialog"
     >
-      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-        <div className={formGridClass}>
-          <input
-            type="text"
-            name="fullName"
-            placeholder="FULL NAME"
-            value={formData.fullName}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="EMAIL ID"
-            value={formData.email}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-        </div>
+      <div className={styles.content}>
+        <header className={styles.dialogHeader}>
+          <h2 id="dispatch-architect-title">
+            TALK TO OUR <strong>DISPATCH ARCHITECTS</strong>
+          </h2>
+          <p>
+            Connect with our dispatch architecture team for energy storage &amp;
+            smart grid solutions.
+          </p>
+        </header>
 
-        <div className={formGridClass}>
-          <PhoneInput
-            phone={formData.phone}
-            onPhoneChange={handleInputChange}
-            dialCode={phoneCountry.dial_code}
-            countryCode={phoneCountry.country_code}
-            onCountryChange={(dial_code, country_code) => setPhoneCountry({ dial_code, country_code })}
-          />
-          <input
-            type="text"
-            name="organization"
-            placeholder="ORGANIZATION"
-            value={formData.organization}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-        </div>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={`${styles.row} ${styles.row1}`}>
+            <label className={`${styles.fieldShape} ${styles.activeField}`}>
+              <input
+                type="text"
+                name="fullName"
+                placeholder="FULL NAME"
+                value={formData.fullName}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
 
-        <div className={formGridClass}>
-          <input
-            type="text"
-            name="projectName"
-            placeholder="PROJECT / SYSTEM NAME"
-            value={formData.projectName}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-          <select
-            name="helpWith"
-            value={formData.helpWith}
-            onChange={handleInputChange}
-            className={`${formFieldClass} cursor-pointer ${
-              formData.helpWith ? "text-gray-700" : "text-gray-500"
-            }`}
-            required
-          >
-            <option value="">WHAT DO YOU NEED HELP WITH?</option>
-            <option value="dispatch-control">Dispatch &amp; Control</option>
-            <option value="energy-storage">Energy Storage</option>
-            <option value="smart-grid">Smart Grid Integration</option>
-            <option value="grid-stability">Grid Stability</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
+            <label className={styles.fieldShape}>
+              <input
+                type="email"
+                name="email"
+                placeholder="EMAIL ID"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+          </div>
 
-        <textarea
-          name="message"
-          placeholder="BRIEF MESSAGE"
-          value={formData.message}
-          onChange={handleInputChange}
-          rows={3}
-          className={`${formFieldClass} resize-none`}
-        />
+          <div className={`${styles.row} ${styles.row2}`}>
+            <div className={`${styles.fieldShape} ${styles.phoneField}`}>
+              <PhoneInput
+                phone={formData.phone}
+                onPhoneChange={handleInputChange}
+                dialCode={phoneCountry.dial_code}
+                countryCode={phoneCountry.country_code}
+                onCountryChange={(dial_code, country_code) =>
+                  setPhoneCountry({ dial_code, country_code })
+                }
+              />
+            </div>
 
-        <div className="flex items-start gap-3">
-          <input
-            type="checkbox"
-            id="dispatch-agree"
-            checked={agreed}
-            onChange={(e) => setAgreed(e.target.checked)}
-            className="mt-1 h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
-          />
-          <label htmlFor="dispatch-agree" className="text-sm text-gray-700 sm:text-base">
-            I agree that GREEN may contact me about this request.
-          </label>
-        </div>
+            <label className={styles.fieldShape}>
+              <input
+                type="text"
+                name="organization"
+                placeholder="ORGANIZATION"
+                value={formData.organization}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+          </div>
 
-        {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
-        {successMessage && <p className="text-sm text-green-600">{successMessage}</p>}
+          <div className={`${styles.row} ${styles.row3}`}>
+            <label className={styles.fieldShape}>
+              <input
+                type="text"
+                name="projectName"
+                placeholder="PROJECT / SYSTEM NAME"
+                value={formData.projectName}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:justify-end sm:gap-6">
-          <button
-            type="button"
-            onClick={resetForm}
-            disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
-          >
-            <span className="block text-sm font-bold text-gray-800 sm:text-base">
-              Reset
-            </span>
-          </button>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
-          >
-            <span className="block text-sm font-bold text-gray-900 sm:text-base">
-              {isLoading ? "Submitting..." : "Talk to Dispatch Team"}
-            </span>
-          </button>
-        </div>
-      </form>
-    </EngineeringFormModal>
+            <div className={styles.fieldShape}>
+              <select
+                name="helpWith"
+                value={formData.helpWith}
+                onChange={handleInputChange}
+                className={formData.helpWith ? styles.hasValue : ""}
+                required
+              >
+                <option value="">WHAT DO YOU NEED HELP WITH?</option>
+                <option value="dispatch-control">Dispatch &amp; Control</option>
+                <option value="energy-storage">Energy Storage</option>
+                <option value="smart-grid">Smart Grid Integration</option>
+                <option value="grid-stability">Grid Stability</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div className={`${styles.row} ${styles.row4}`}>
+            <div className={`${styles.fieldShape} ${styles.messageShape}`}>
+              <textarea
+                name="message"
+                placeholder="BRIEF MESSAGE"
+                value={formData.message}
+                onChange={handleInputChange}
+                rows={3}
+              />
+            </div>
+          </div>
+
+          <div className={`${styles.agreement} ${styles.row5}`}>
+            <input
+              type="checkbox"
+              id="dispatch-agree"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+            />
+            <label htmlFor="dispatch-agree">
+              I agree that GREEN may contact me about this request.
+            </label>
+          </div>
+
+          {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+          {successMessage && <p className={styles.success}>{successMessage}</p>}
+
+          <div className={`${styles.row} ${styles.row6}`}>
+            <button
+              type="button"
+              onClick={resetForm}
+              disabled={isLoading}
+              className={styles.btnReset}
+            >
+              <span>Reset</span>
+            </button>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={styles.btnSubmit}
+            >
+              <span>
+                {isLoading ? "Submitting..." : "Talk to Dispatch Team"}
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </ProductEnquiryFrame>
   );
 };
 

@@ -1,5 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { api, type FastFactStatsResponse, type FastFactStatsData, type FastFactStatsSection, type FastFactStatsImpactSection } from "../app/lib/api";
+import {
+  api,
+  type FastFactStatsResponse,
+  type FastFactStatsData,
+  type FastFactStatsSection,
+  type FastFactStatsImpactSection,
+} from "../app/lib/api";
 import { queryKeys } from "../app/hooks/useQuery";
 
 export const useFastFactStats = () => {
@@ -9,8 +15,12 @@ export const useFastFactStats = () => {
   });
 
   // Extract sections from the response
-  const fastFactsSection = data?.sections?.find(section => section.id === 'fast-facts') as FastFactStatsSection | undefined;
-  const impactSummarySection = data?.sections?.find(section => section.id === 'impact-summary') as FastFactStatsImpactSection | undefined;
+  const fastFactsSection = data?.sections?.find(
+    (section) => section.id === "fast-facts",
+  ) as FastFactStatsSection | undefined;
+  const impactSummarySection = data?.sections?.find(
+    (section) => section.id === "impact-summary",
+  ) as FastFactStatsImpactSection | undefined;
 
   return {
     data,
@@ -22,9 +32,9 @@ export const useFastFactStats = () => {
   };
 };
 
-export type { 
-  FastFactStatsResponse, 
-  FastFactStatsData, 
-  FastFactStatsSection, 
-  FastFactStatsImpactSection 
+export type {
+  FastFactStatsResponse,
+  FastFactStatsData,
+  FastFactStatsSection,
+  FastFactStatsImpactSection,
 };

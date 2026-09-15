@@ -1,7 +1,8 @@
 "use client";
 
 import type React from "react";
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import styles from "./EngineeringFormModal.module.css";
 
 interface EngineeringFormModalProps {
@@ -12,7 +13,14 @@ interface EngineeringFormModalProps {
   children: React.ReactNode;
   maxWidthClass?: string;
   /** Use the large angular window from the Book a Consultation Figma popup. */
-  geometry?: "default" | "consultation" | "epcm" | "liveDemo" | "om" | "track";
+  geometry?:
+    | "default"
+    | "consultation"
+    | "epcm"
+    | "liveDemo"
+    | "om"
+    | "track"
+    | "newsletter";
   /** Decorative expand control used by the Solar EPCM Figma windows. */
   showExpandControl?: boolean;
   /** Optional custom ID for the modal */
@@ -34,11 +42,18 @@ const EngineeringFormModal = ({
   ariaLabel,
 }: EngineeringFormModalProps) => {
   const generatedId = useId();
-  const titleId = id ? `${id}-title` : `modal-title-${generatedId.replace(/:/g, "")}`;
+  const titleId = id
+    ? `${id}-title`
+    : `modal-title-${generatedId.replace(/:/g, "")}`;
   const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null);
   const usesStandardCtaFrame =
     geometry === "consultation" && maxWidthClass === "max-w-5xl";
+
+  useEffect(() => {
+    setPortalTarget(document.body);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -82,12 +97,14 @@ const EngineeringFormModal = ({
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen || !portalTarget) return null;
 
-  return (
+  return createPortal(
     <div
       className={`scrollbar-hide fixed inset-0 z-[2147483647] flex items-start justify-center overflow-y-auto p-3 sm:items-center sm:p-4 ${
-        geometry === "consultation" || geometry === "epcm"
+        geometry === "consultation" ||
+        geometry === "epcm" ||
+        geometry === "newsletter"
           ? styles.consultationOverlay
           : "bg-black/20"
       }`}
@@ -110,10 +127,12 @@ const EngineeringFormModal = ({
                 : geometry === "om"
                   ? styles.omWindow
                   : geometry === "liveDemo"
-                      ? styles.liveDemoWindow
-                      : geometry === "track"
-                        ? styles.trackWindow
-                      : `w-full ${maxWidthClass} ${styles.window}`
+                    ? styles.liveDemoWindow
+                    : geometry === "track"
+                      ? styles.trackWindow
+                      : geometry === "newsletter"
+                        ? styles.newsletterWindow
+                        : `w-full ${maxWidthClass} ${styles.window}`
         }`}
         role="dialog"
         aria-modal="true"
@@ -127,17 +146,19 @@ const EngineeringFormModal = ({
           className={`absolute right-4 top-2 z-30 cursor-pointer p-1.5 text-gray-700 transition hover:text-gray-900 sm:right-8 sm:top-4 ${
             geometry === "epcm"
               ? styles.epcmClose
-                : geometry === "om"
-                  ? styles.standardCtaClose
+              : geometry === "om"
+                ? styles.standardCtaClose
                 : geometry === "liveDemo"
-                    ? styles.standardCtaClose
-                    : geometry === "track"
-                      ? styles.trackClose
-                    : usesStandardCtaFrame
+                  ? styles.standardCtaClose
+                  : geometry === "track"
+                    ? styles.trackClose
+                    : geometry === "newsletter"
                       ? styles.standardCtaClose
-                      : geometry === "consultation"
+                      : usesStandardCtaFrame
                         ? styles.standardCtaClose
-                        : ""
+                        : geometry === "consultation"
+                          ? styles.standardCtaClose
+                          : ""
           }`}
           aria-label="Close modal"
         >
@@ -157,7 +178,8 @@ const EngineeringFormModal = ({
           geometry === "epcm" ||
           geometry === "om" ||
           geometry === "liveDemo" ||
-          geometry === "track") && (
+          geometry === "track" ||
+          geometry === "newsletter") && (
           <span
             className={`${styles.expandControl} ${
               geometry === "track" ? styles.trackExpand : ""
@@ -187,10 +209,12 @@ const EngineeringFormModal = ({
                   : geometry === "om"
                     ? styles.omPanel
                     : geometry === "liveDemo"
-                        ? styles.liveDemoPanel
-                        : geometry === "track"
-                          ? styles.trackPanel
-                        : ""
+                      ? styles.liveDemoPanel
+                      : geometry === "track"
+                        ? styles.trackPanel
+                        : geometry === "newsletter"
+                          ? styles.newsletterPanel
+                          : ""
             }`}
           >
             <div
@@ -198,21 +222,31 @@ const EngineeringFormModal = ({
               className="pointer-events-none absolute inset-0 rounded-lg border border-lime-300 bg-[#eff5f1] shadow-2xl"
             />
             <div
-              className={`relative z-10 min-w-0 px-6 py-8 pr-12 sm:px-12 sm:py-12 sm:pr-16 lg:px-14 lg:pr-20 ${
+              className={`relative z-10 min-w-0 ${
                 geometry === "epcm"
                   ? styles.epcmContent
                   : geometry === "om"
                     ? styles.omContent
                     : geometry === "liveDemo"
-                        ? styles.liveDemoContent
-                        : geometry === "track"
-                          ? styles.trackContent
-                        : usesStandardCtaFrame
-                          ? styles.standardCtaContent
-                          : ""
+                      ? styles.liveDemoContent
+                      : geometry === "track"
+                        ? styles.trackContent
+                        : geometry === "newsletter"
+                          ? styles.newsletterContent
+                          : usesStandardCtaFrame
+                            ? styles.standardCtaContent
+                            : geometry === "consultation"
+                              ? styles.consultationContent
+                              : "px-6 py-8 pr-12 sm:px-12 sm:py-12 sm:pr-16 lg:px-14 lg:pr-20"
               }`}
             >
-              <div className="mb-5 sm:mb-6">
+              <div
+                className={`mb-5 sm:mb-6 ${
+                  geometry === "consultation" || geometry === "newsletter"
+                    ? styles.consultationHeader
+                    : ""
+                }`}
+              >
                 <h2
                   id={titleId}
                   className="text-xl font-black leading-tight text-gray-800 sm:text-2xl lg:text-3xl"
@@ -230,7 +264,8 @@ const EngineeringFormModal = ({
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    portalTarget,
   );
 };
 

@@ -1,200 +1,34 @@
 "use client";
-import React from "react";
-import { useInteractiveZIndex } from "../../../../hooks/useInteractiveZIndex";
-import { useWomenInEnergy } from "../../../../hooks/useWomenInEnergy";
 
-interface Props {
-  isOpen: boolean;
-  onClose: () => void;
-}
+import { useWomenInEnergy } from "@/hooks/useWomenInEnergy";
+import WomenEnergyModalShell from "./WomenEnergyModalShell";
+import styles from "./WomenEnergyModals.module.css";
 
-const InitiativesUnderway = ({ isOpen, onClose }: Props) => {
-  const closeButtonProps = useInteractiveZIndex();
+interface Props { isOpen: boolean; onClose: () => void; }
+
+export default function InitiativesUnderway({ isOpen, onClose }: Props) {
   const { data } = useWomenInEnergy();
-  
-  const [isMobile, setIsMobile] = React.useState(false);
-
-  React.useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  if (!isOpen || !data) return null;
-
-  const modalData = data.modal.initiativesUnderway;
-
-  // Helper function to highlight text
-  const highlightText = (text: string, highlight: string) => {
-    if (!highlight) return text;
-    
-    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
-    return parts.map((part, index) => 
-      part.toLowerCase() === highlight.toLowerCase() ? (
-        <span key={index} className="text-green-600">{part}</span>
-      ) : (
-        part
-      )
-    );
-  };
+  if (!data) return null;
+  const modal = data.modal.initiativesUnderway;
 
   return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed z-[9999999999999999999] inset-0 bg-black/20 flex items-center justify-center">
-        {/* Modal Container */}
-        <div className="relative w-full max-w-6xl mx-4">
-          {/* Skewed Modal Background */}
-          {isMobile ? (
-            <div className="bg-gray-100 h-[80vh] overflow-y-auto py-14 border-2 border-[#4CAF50] px-4 relative shadow-2xl">
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <div {...closeButtonProps.getContainerProps()}>
-                  <button
-                    onClick={onClose}
-                    className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
-                  >
-                    <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Modal Content */}
-              <div className="">
-                {/* Title Section */}
-                <div className="mb-8">
-                  <h2 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
-                    {modalData.title}
-                  </h2>
-                  <h3 className="text-lg mb-4">
-                    <span className="text-green-600 italic">
-                      {modalData.subHeadline}
-                    </span>
-                  </h3>
-                  <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
-                </div>
-
-                {/* Table */}
-                <div className="mb-8 overflow-x-auto">
-                  <table className="w-full border-collapse">
-                    <thead>
-                      <tr className="bg-gray-200">
-                        <th className="px-4 py-3 text-left text-lg font-bold text-gray-800 border-b-2 border-gray-300">
-                          Program
-                        </th>
-                        <th className="px-4 py-3 text-left text-lg font-bold text-gray-800 border-b-2 border-gray-300">
-                          Description
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {modalData.key.map((initiative, idx) => (
-                        <tr key={idx} className="border-b border-gray-200">
-                          <td className="px-4 py-4 font-semibold text-gray-800">
-                            {initiative.program}
-                          </td>
-                          <td className="px-4 py-4 text-gray-700">
-                            {initiative.description}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-
-                {/* Quote Section */}
-                <div className="mt-12 pt-8 border-t border-gray-300">
-                  <blockquote className="text-xl font-bold text-center text-gray-800 italic leading-relaxed">
-                    {highlightText(modalData.quote.text, modalData.quote.highlighted)}
-                  </blockquote>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div
-              className="bg-gray-100 transform  py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-              style={{
-                transform:"skewX(-12deg)"
-               }}
-            >
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <div {...closeButtonProps.getContainerProps()}>
-                  <button
-                    onClick={onClose}
-                    style={{
-                      transform:"skewX(12deg)"
-                    }}
-                    className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
-                  >
-                    <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Modal Content */}
-              <div
-              style={{
-                transform:"skewX(12deg)"
-              }}
-              className="transform max-w-5xl mx-auto">
-                {/* Title Section */}
-                <div className="mb-8">
-                  <h2 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
-                    {modalData.title}
-                  </h2>
-                  <h3 className="text-lg mb-4">
-                    <span className="text-green-600 italic">
-                      {modalData.subHeadline}
-                    </span>
-                  </h3>
-                  <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
-                </div>
-
-                {/* Table */}
-                <div className="mb-8 overflow-hidden">
-                  <table className="w-full border-collapse">
-                    <thead>
-                      <tr className="bg-gray-200">
-                        <th className="px-4 py-3 text-left text-lg font-bold text-gray-800 border-b-2 border-gray-300">
-                          Program
-                        </th>
-                        <th className="px-4 py-3 text-left text-lg font-bold text-gray-800 border-b-2 border-gray-300">
-                          Description
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {modalData.key.map((initiative, idx) => (
-                        <tr key={idx} className="border-b border-gray-200">
-                          <td className="px-4 py-4 font-semibold text-gray-800">
-                            {initiative.program}
-                          </td>
-                          <td className="px-4 py-4 text-gray-700">
-                            {initiative.description}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-
-                {/* Quote Section */}
-                <div className="mt-12 pt-8 border-t border-gray-300">
-                  <blockquote className="text-xl font-bold text-center text-gray-800 italic leading-relaxed">
-                    {highlightText(modalData.quote.text, modalData.quote.highlighted)}
-                  </blockquote>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
+    <WomenEnergyModalShell isOpen={isOpen} onClose={onClose}>
+      <header className={styles.standardHeader}>
+        <h2 className={styles.heading}>Initiatives Underway</h2>
+        <p className={styles.subheading}>- Energy access is only transformational if it includes everyone</p>
+      </header>
+      <div className={styles.rule} />
+      <div className={styles.tableHeader}><span>Program</span><span>Description</span></div>
+      <div className={styles.tableRows}>
+        {modal.key.map((initiative) => (
+          <div className={styles.tableRow} key={`${initiative.program}-${initiative.description}`}>
+            <p>{initiative.program}</p><p>{initiative.description}</p>
+          </div>
+        ))}
       </div>
-    </React.Fragment>
+      <blockquote className={styles.quote}>
+        “<strong>GREEN’s workforce is now 39% female</strong> in technical roles — and growing”
+      </blockquote>
+    </WomenEnergyModalShell>
   );
-};
-
-export default InitiativesUnderway;
+}

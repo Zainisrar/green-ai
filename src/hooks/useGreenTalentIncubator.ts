@@ -108,15 +108,15 @@ export const useGreenTalentIncubator = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://greencms.percepco.co.uk/api/empower/green-talent-incubator"
+          "https://greencms.percepco.co.uk/api/empower/green-talent-incubator",
         );
-        
+
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
 
         const result: ApiResponse = await response.json();
-        
+
         if (result.success) {
           setData(result.data);
         } else {

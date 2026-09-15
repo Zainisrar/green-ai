@@ -81,6 +81,7 @@ const figmaReports: Report[] = [
 
 const yearGroups = [
   {
+    id: "2025-current",
     year: 2025,
     count: 36,
     items: [
@@ -92,9 +93,9 @@ const yearGroups = [
       "Microgrid Feasibility in Islanded PNG (2025)",
     ],
   },
-  { year: 2024, count: 145, items: [] },
-  { year: 2023, count: 135, items: [] },
-  { year: 2023, count: 95, items: [] },
+  { id: "2024", year: 2024, count: 145, items: [] },
+  { id: "2023-primary", year: 2023, count: 135, items: [] },
+  { id: "2023-archive", year: 2023, count: 95, items: [] },
 ] as const;
 
 interface ReportWhitePapersProps {
@@ -106,6 +107,7 @@ export default function ReportWhitePapers({
 }: ReportWhitePapersProps) {
   const [view, setView] = useState<"list" | "grid">("list");
   const [year, setYear] = useState<number | null>(null);
+  const [expandedYear, setExpandedYear] = useState("2025-current");
   const [page, setPage] = useState(1);
   const { data: apiReports } = useReportsWhitepapers();
 
@@ -132,7 +134,9 @@ export default function ReportWhitePapers({
   return (
     <main className={styles.page} data-node-id="7077:5298">
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.verticalTitle}
         src="/images/reports/reports.png"
         alt="Reports and Whitepapers"
@@ -168,7 +172,12 @@ export default function ReportWhitePapers({
                   onClick={() => setView("list")}
                   aria-label="List view"
                 >
-                  <img loading="lazy" decoding="async" src="/images/reports/threeBar.png" alt="" />
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/reports/threeBar.png"
+                    alt=""
+                  />
                 </button>
                 <button
                   type="button"
@@ -176,7 +185,12 @@ export default function ReportWhitePapers({
                   onClick={() => setView("grid")}
                   aria-label="Grid view"
                 >
-                  <img loading="lazy" decoding="async" src="/images/reports/grid.png" alt="" />
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/reports/grid.png"
+                    alt=""
+                  />
                 </button>
               </div>
             </div>
@@ -193,7 +207,9 @@ export default function ReportWhitePapers({
               <div className={styles.cards}>
                 {visibleReports.map((report) => (
                   <article className={styles.card} key={report.id}>
-                    <img loading="lazy" decoding="async"
+                    <img
+                      loading="lazy"
+                      decoding="async"
                       className={styles.cardImage}
                       src={report.image}
                       alt=""
@@ -214,18 +230,25 @@ export default function ReportWhitePapers({
 
           <aside className={styles.sidebar} aria-label="Reports by year">
             <div className={styles.filters}>
-              {yearGroups.map((group, index) => (
-                <div className={styles.yearGroup} key={`${group.year}-${index}`}>
+              {yearGroups.map((group) => (
+                <div className={styles.yearGroup} key={group.id}>
                   <button
                     type="button"
-                    className={year === group.year ? styles.active : ""}
-                    onClick={() => setYear(year === group.year ? null : group.year)}
+                    className={expandedYear === group.id ? styles.active : ""}
+                    aria-expanded={expandedYear === group.id}
+                    aria-controls={`reports-year-${group.id}`}
+                    onClick={() => {
+                      const isExpanded = expandedYear === group.id;
+                      setExpandedYear(isExpanded ? "" : group.id);
+                      setYear(isExpanded ? null : group.year);
+                    }}
                   >
                     {group.year} ({group.count})
                   </button>
-                  {group.items.length ? (
-                    <ul>
+                  {expandedYear === group.id && group.items.length ? (
+                    <ul id={`reports-year-${group.id}`}>
                       {group.items.map((item, itemIndex) => (
+                        // biome-ignore lint/suspicious/noArrayIndexKey: Curated Figma labels include duplicate titles.
                         <li key={`${item}-${itemIndex}`}>{item}</li>
                       ))}
                     </ul>
@@ -234,7 +257,9 @@ export default function ReportWhitePapers({
               ))}
             </div>
             <div className={styles.quote}>
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 className={styles.quoteLeft}
                 src="/images/reports/shape1.png"
                 alt=""
@@ -244,7 +269,9 @@ export default function ReportWhitePapers({
                 <br />
                 We Build <strong>Evidence.</strong>
               </p>
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 className={styles.quoteRight}
                 src="/images/reports/shape2.png"
                 alt=""
@@ -265,7 +292,7 @@ export default function ReportWhitePapers({
 
 function reportUrl(href: string) {
   return href
-    ? "https://greencms.percepco.co.uk/" + href.replace(/^\/+/, "")
+    ? `https://greencms.percepco.co.uk/${href.replace(/^\/+/, "")}`
     : "#";
 }
 
@@ -274,14 +301,24 @@ function ReportActions({ report }: { report: Report }) {
   return (
     <div className={styles.actions}>
       <a href={href} download={Boolean(report.href)}>
-        <img loading="lazy" decoding="async" src="/images/reports/download.png" alt="Download report" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/reports/download.png"
+          alt="Download report"
+        />
       </a>
       <a
         href={href}
         target={report.href ? "_blank" : undefined}
         rel={report.href ? "noopener noreferrer" : undefined}
       >
-        <img loading="lazy" decoding="async" src="/images/reports/view.png" alt="View report" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/reports/view.png"
+          alt="View report"
+        />
       </a>
     </div>
   );
@@ -297,10 +334,20 @@ function ReportRow({ report }: { report: Report }) {
   );
 }
 
-function Pagination({ page, onChange }: { page: number; onChange: (page: number) => void }) {
+function Pagination({
+  page,
+  onChange,
+}: {
+  page: number;
+  onChange: (page: number) => void;
+}) {
   return (
     <nav className={styles.pagination} aria-label="Reports pages">
-      <button type="button" aria-label="Previous page" onClick={() => onChange(Math.max(1, page - 1))}>
+      <button
+        type="button"
+        aria-label="Previous page"
+        onClick={() => onChange(Math.max(1, page - 1))}
+      >
         ‹‹
       </button>
       {Array.from({ length: 6 }, (_, index) => index + 1).map((item) => (
@@ -314,7 +361,11 @@ function Pagination({ page, onChange }: { page: number; onChange: (page: number)
           {item}
         </button>
       ))}
-      <button type="button" aria-label="Next page" onClick={() => onChange(Math.min(6, page + 1))}>
+      <button
+        type="button"
+        aria-label="Next page"
+        onClick={() => onChange(Math.min(6, page + 1))}
+      >
         ››
       </button>
     </nav>

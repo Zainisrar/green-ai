@@ -19,9 +19,9 @@ interface TechnologyData {
 }
 
 interface Props {
-    isOpen: boolean;
-    onClose: () => void;
-    data?: TechnologyData;
+  isOpen: boolean;
+  onClose: () => void;
+  data?: TechnologyData;
 }
 const Technology = ({ isOpen, onClose, data }: Props) => {
   if (!isOpen) return null;
@@ -30,58 +30,94 @@ const Technology = ({ isOpen, onClose, data }: Props) => {
     if (data?.features) {
       return data.features.map((feature, index) => (
         <div key={index} className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async" 
-            src="/images/grid-intel/lighting.png" 
-            className='w-14 -mt-4' 
-            alt="lighting" 
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/grid-intel/lighting.png"
+            className="w-14 -mt-4"
+            alt="lighting"
           />
-          <p className="text-gray-800 font-medium italic">
-            {feature.text}
-          </p>
+          <p className="text-gray-800 font-medium italic">{feature.text}</p>
         </div>
       ));
     }
-    
+
     // Fallback static content
     return (
       <>
         <div className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async" src="/images/grid-intel/lighting.png" className='w-14 -mt-4' alt="lighting" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/grid-intel/lighting.png"
+            className="w-14 -mt-4"
+            alt="lighting"
+          />
           <p className="text-gray-800 font-medium italic">
             Embedded IoT controller with field-grade resilience
           </p>
         </div>
-        
+
         <div className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async" src="/images/grid-intel/lighting.png" className='w-14 -mt-4' alt="lighting" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/grid-intel/lighting.png"
+            className="w-14 -mt-4"
+            alt="lighting"
+          />
           <p className="text-gray-800 font-medium italic">
             Solar, battery, diesel, and grid synchronization logic
           </p>
         </div>
-        
+
         <div className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async" src="/images/grid-intel/lighting.png" className='w-14 -mt-4' alt="lighting" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/grid-intel/lighting.png"
+            className="w-14 -mt-4"
+            alt="lighting"
+          />
           <p className="text-gray-800 font-medium italic">
             Remote-access dashboard with real-time insights
           </p>
         </div>
-        
+
         <div className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async" src="/images/grid-intel/lighting.png" className='w-14 -mt-4' alt="lighting" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/grid-intel/lighting.png"
+            className="w-14 -mt-4"
+            alt="lighting"
+          />
           <p className="text-gray-800 font-medium italic">
             Predictive fault detection and alerts
           </p>
         </div>
 
         <div className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async" src="/images/grid-intel/lighting.png" className='w-14 -mt-4' alt="lighting" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/grid-intel/lighting.png"
+            className="w-14 -mt-4"
+            alt="lighting"
+          />
           <p className="text-gray-800 font-medium italic">
             Offline-operable with local override
           </p>
         </div>
 
         <div className="flex items-start space-x-3">
-          <img loading="lazy" decoding="async" src="/images/grid-intel/lighting.png" className='w-14 -mt-4' alt="lighting" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/grid-intel/lighting.png"
+            className="w-14 -mt-4"
+            alt="lighting"
+          />
           <p className="text-gray-800 font-medium italic">
             Optional satellite uplink for disconnected zones
           </p>
@@ -120,15 +156,14 @@ const Technology = ({ isOpen, onClose, data }: Props) => {
                 data.description
               ) : (
                 <>
-                  <span className="font-bold text-[#4CAF50]">GRID-INTEL™</span> Includes:
+                  <span className="font-bold text-[#4CAF50]">GRID-INTEL™</span>{" "}
+                  Includes:
                 </>
               )}
             </p>
 
             {/* Technology Features List */}
-            <div className="space-y-4">
-              {renderFeatures()}
-            </div>
+            <div className="space-y-4">{renderFeatures()}</div>
           </div>
         </div>
       </div>

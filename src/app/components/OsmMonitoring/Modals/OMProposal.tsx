@@ -1,15 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import type React from "react";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import EngineeringFormModal, {
-  formFieldClass,
-  formGridClass,
-} from "@/app/components/shared/EngineeringFormModal";
-import styles from "@/app/components/shared/EngineeringFormModal.module.css";
+import { ProductEnquiryFrame } from "@/app/components/Product/Modals/ProductEnquiry";
 import PhoneInput from "@/app/components/shared/PhoneInput";
 import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
+import styles from "@/app/components/SmartGrid/Modals/SmartGridModals.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -113,7 +110,7 @@ const OMProposal = ({ isOpen, onClose }: Props) => {
 
     if (!agreed) {
       setErrorMessage(
-        "Please agree that GREEN may contact you about this request.",
+        "Please agree that GREEN may contact me about this request.",
       );
       return;
     }
@@ -169,175 +166,202 @@ const OMProposal = ({ isOpen, onClose }: Props) => {
   };
 
   return (
-    <EngineeringFormModal
-      isOpen={isOpen}
+    <ProductEnquiryFrame
+      labelledBy="om-proposal-title"
       onClose={onClose}
-      title={<span className="text-black">REQUEST AN O&amp;M PROPOSAL</span>}
-      geometry="om"
+      closeLabel="Close O&M proposal dialog"
     >
-      <form noValidate onSubmit={handleSubmit} className={styles.proposalForm}>
-        <div className={formGridClass}>
-          <input
-            type="text"
-            name="fullName"
-            placeholder="FULL NAME"
-            value={formData.fullName}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-          <input
-            type="text"
-            name="organization"
-            placeholder="ORGANIZATION"
-            value={formData.organization}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-        </div>
+      <div className={styles.content}>
+        <header className={styles.dialogHeader}>
+          <h2 id="om-proposal-title">
+            REQUEST AN <strong>O&amp;M PROPOSAL</strong>
+          </h2>
+        </header>
 
-        <div className={formGridClass}>
-          <input
-            type="email"
-            name="email"
-            placeholder="EMAIL ID"
-            value={formData.email}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-          <PhoneInput
-            phone={formData.phone}
-            onPhoneChange={handleInputChange}
-            dialCode={phoneCountry.dial_code}
-            countryCode={phoneCountry.country_code}
-            onCountryChange={(dial_code, country_code) =>
-              setPhoneCountry({ dial_code, country_code })
-            }
-            className={styles.proposalPhoneField}
-          />
-        </div>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={`${styles.row} ${styles.row1}`}>
+            <label className={`${styles.fieldShape} ${styles.activeField}`}>
+              <input
+                type="text"
+                name="fullName"
+                placeholder="FULL NAME"
+                value={formData.fullName}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
 
-        <div className={formGridClass}>
-          <input
-            type="text"
-            name="proposalTitle"
-            placeholder="PROJECT / PROPOSAL TITLE"
-            value={formData.proposalTitle}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-          <select
-            name="consultationType"
-            value={formData.consultationType}
-            onChange={handleInputChange}
-            className={`${formFieldClass} cursor-pointer ${
-              formData.consultationType ? "text-gray-700" : "text-gray-500"
-            }`}
-            required
-          >
-            <option value="">PREFERRED CONSULTATION TYPE</option>
-            <option value="virtual">Virtual (Zoom / Google Meet)</option>
-            <option value="in-person">In-Person</option>
-            <option value="phone-call">Phone Call</option>
-          </select>
-        </div>
+            <label className={styles.fieldShape}>
+              <input
+                type="text"
+                name="organization"
+                placeholder="ORGANIZATION"
+                value={formData.organization}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+          </div>
 
-        <div className={`${formGridClass} items-start`}>
-          <select
-            name="helpWith"
-            value={formData.helpWith}
-            onChange={handleInputChange}
-            className={`${formFieldClass} cursor-pointer ${
-              formData.helpWith ? "text-gray-700" : "text-gray-500"
-            }`}
-            required
-          >
-            <option value="">WHAT DO YOU NEED HELP WITH?</option>
-            <option value="om-services">O&amp;M Services</option>
-            <option value="monitoring">Remote Monitoring</option>
-            <option value="performance-audit">Performance Audit</option>
-            <option value="asset-health">Asset Health Reports</option>
-            <option value="other">Other</option>
-          </select>
-          <div className="min-w-0">
+          <div className={`${styles.row} ${styles.row2}`}>
+            <label className={styles.fieldShape}>
+              <input
+                type="email"
+                name="email"
+                placeholder="EMAIL ID"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+
+            <div className={`${styles.fieldShape} ${styles.phoneField}`}>
+              <PhoneInput
+                phone={formData.phone}
+                onPhoneChange={handleInputChange}
+                dialCode={phoneCountry.dial_code}
+                countryCode={phoneCountry.country_code}
+                onCountryChange={(dial_code, country_code) =>
+                  setPhoneCountry({ dial_code, country_code })
+                }
+              />
+            </div>
+          </div>
+
+          <div className={`${styles.row} ${styles.row3}`}>
+            <label className={styles.fieldShape}>
+              <input
+                type="text"
+                name="proposalTitle"
+                placeholder="PROJECT / PROPOSAL TITLE"
+                value={formData.proposalTitle}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+
+            <div className={styles.fieldShape}>
+              <select
+                name="consultationType"
+                value={formData.consultationType}
+                onChange={handleInputChange}
+                className={formData.consultationType ? styles.hasValue : ""}
+                required
+              >
+                <option value="">PREFERRED CONSULTATION TYPE</option>
+                <option value="virtual">Virtual (Zoom / Google Meet)</option>
+                <option value="in-person">In-Person</option>
+                <option value="phone-call">Phone Call</option>
+              </select>
+            </div>
+          </div>
+
+          <div className={`${styles.row} ${styles.row4}`}>
+            <div className={styles.fieldShape}>
+              <select
+                name="helpWith"
+                value={formData.helpWith}
+                onChange={handleInputChange}
+                className={formData.helpWith ? styles.hasValue : ""}
+                required
+              >
+                <option value="">WHAT DO YOU NEED HELP WITH?</option>
+                <option value="om-services">O&amp;M Services</option>
+                <option value="monitoring">Remote Monitoring</option>
+                <option value="performance-audit">Performance Audit</option>
+                <option value="asset-health">Asset Health Reports</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className={styles.fieldShape}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "0 34px",
+                  cursor: "pointer",
+                  color: "inherit",
+                }}
+              >
+                <span
+                  style={{
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    color: "rgba(48, 48, 48, 0.8)",
+                    fontSize: 14,
+                  }}
+                >
+                  {fileName || "UPLOAD SUPPORTING DOCUMENTS"}
+                </span>
+                <Image
+                  src="/images/osm-monitoring/upload.svg"
+                  alt=""
+                  aria-hidden="true"
+                  width={24}
+                  height={22}
+                />
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".pdf,.doc,.docx"
+                onChange={handleFileChange}
+                style={{ display: "none" }}
+              />
+              <span
+                style={{
+                  alignSelf: "flex-end",
+                  fontSize: 11,
+                  color: "#23B14D",
+                  marginTop: 4,
+                }}
+              >
+                (Formats: PDF/DOC, Size: Below 2Mb)
+              </span>
+            </div>
+          </div>
+
+          <div className={`${styles.agreement} ${styles.row5}`}>
+            <input
+              type="checkbox"
+              id="om-proposal-agree"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+            />
+            <label htmlFor="om-proposal-agree">
+              I agree that GREEN may contact me about this request.
+            </label>
+          </div>
+
+          {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+          {successMessage && <p className={styles.success}>{successMessage}</p>}
+
+          <div className={`${styles.row} ${styles.row6}`}>
             <button
               type="button"
-              onClick={() => fileInputRef.current?.click()}
-              className={`${formFieldClass} flex items-center justify-between text-left`}
+              onClick={resetForm}
+              disabled={isLoading}
+              className={styles.btnReset}
             >
-              <span className="truncate text-gray-500">
-                {fileName || "UPLOAD SUPPORTING DOCUMENTS"}
-              </span>
-              <Image
-                src="/images/osm-monitoring/upload.svg"
-                alt=""
-                aria-hidden="true"
-                width={30}
-                height={27}
-              />
+              <span>Reset</span>
             </button>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".pdf,.doc,.docx"
-              onChange={handleFileChange}
-              className="hidden"
-            />
-            <p className="mt-1 text-right text-xs text-[#23B14D]">
-              (Formats: PDF/DOC, Size: Below 2Mb)
-            </p>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={styles.btnSubmit}
+            >
+              <span>{isLoading ? "Submitting..." : "Request Proposal"}</span>
+            </button>
           </div>
-        </div>
-
-        <div className={`flex items-start gap-3 ${styles.proposalAgreement}`}>
-          <input
-            type="checkbox"
-            id="omproposal-agree"
-            checked={agreed}
-            onChange={(e) => setAgreed(e.target.checked)}
-            className="mt-1 h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
-          />
-          <label
-            htmlFor="omproposal-agree"
-            className="text-sm text-gray-700 sm:text-base"
-          >
-            I agree that GREEN may contact me about this request.
-          </label>
-        </div>
-
-        {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
-        {successMessage && (
-          <p className="text-sm text-green-600">{successMessage}</p>
-        )}
-
-        <div
-          className={`flex flex-col gap-4 sm:flex-row sm:justify-end sm:gap-6 ${styles.proposalActions}`}
-        >
-          <button
-            type="button"
-            onClick={resetForm}
-            disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
-          >
-            <span className="block text-sm font-bold text-gray-800 sm:text-base">
-              Reset
-            </span>
-          </button>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
-          >
-            <span className="block text-sm font-bold text-gray-900 sm:text-base">
-              {isLoading ? "Submitting..." : "Request Proposal"}
-            </span>
-          </button>
-        </div>
-      </form>
-    </EngineeringFormModal>
+        </form>
+      </div>
+    </ProductEnquiryFrame>
   );
 };
 

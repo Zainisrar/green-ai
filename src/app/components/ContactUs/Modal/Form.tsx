@@ -69,7 +69,9 @@ const COUNTRIES = [
 ];
 
 const generateCaptcha = () => {
-  return Array.from({ length: 4 }, () => Math.floor(Math.random() * 10)).join(" ");
+  return Array.from({ length: 4 }, () => Math.floor(Math.random() * 10)).join(
+    " ",
+  );
 };
 
 const Form = ({ isOpen, onClose }: Props) => {
@@ -97,12 +99,12 @@ const Form = ({ isOpen, onClose }: Props) => {
 
   useEffect(() => {
     const checkMobile = () => {
-      if (typeof window !== 'undefined') {
+      if (typeof window !== "undefined") {
         const mobile = window.innerWidth < 768;
         setIsMobile(mobile);
       }
     };
-    
+
     checkMobile();
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
@@ -111,7 +113,9 @@ const Form = ({ isOpen, onClose }: Props) => {
   useEffect(() => {
     // Get CSRF token from meta tag or create a default one
     const getCsrfToken = () => {
-      const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+      const token = document
+        .querySelector('meta[name="csrf-token"]')
+        ?.getAttribute("content");
       if (token) {
         setFormData((prev) => ({
           ...prev,
@@ -119,7 +123,7 @@ const Form = ({ isOpen, onClose }: Props) => {
         }));
       }
     };
-    
+
     getCsrfToken();
   }, []);
 
@@ -128,10 +132,10 @@ const Form = ({ isOpen, onClose }: Props) => {
   const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     const { name, value, type } = e.target;
-    
+
     if (type === "checkbox") {
       const { checked } = e.target as HTMLInputElement;
       setFormData((prev) => ({
@@ -140,7 +144,7 @@ const Form = ({ isOpen, onClose }: Props) => {
       }));
     } else if (name === "phone_country") {
       // Handle country selection
-      const selected = COUNTRIES.find(c => c.code === value);
+      const selected = COUNTRIES.find((c) => c.code === value);
       if (selected) {
         setFormData((prev) => ({
           ...prev,
@@ -180,13 +184,15 @@ const Form = ({ isOpen, onClose }: Props) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
-        }
+        },
       );
 
       const data = await response.json();
 
       if (data.Code === "001") {
-        setSuccessMessage(data.Message || "Your enquiry has been submitted successfully!");
+        setSuccessMessage(
+          data.Message || "Your enquiry has been submitted successfully!",
+        );
         // Reset form
         setFormData((prev) => ({
           ...prev,
@@ -205,11 +211,15 @@ const Form = ({ isOpen, onClose }: Props) => {
           setSuccessMessage("");
         }, 2000);
       } else {
-        setErrorMessage(data.Message || "Failed to submit enquiry. Please try again.");
+        setErrorMessage(
+          data.Message || "Failed to submit enquiry. Please try again.",
+        );
       }
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "An error occurred while submitting the form."
+        error instanceof Error
+          ? error.message
+          : "An error occurred while submitting the form.",
       );
     } finally {
       setIsLoading(false);
@@ -227,7 +237,9 @@ const Form = ({ isOpen, onClose }: Props) => {
   const renderContent = () => (
     <>
       {/* Main Content Layout */}
-      <div className={`${isMobile ? 'flex flex-col space-y-6' : 'grid grid-cols-[2fr_1.5fr] gap-4'}`}>
+      <div
+        className={`${isMobile ? "flex flex-col space-y-6" : "grid grid-cols-[2fr_1.5fr] gap-4"}`}
+      >
         {/* Mobile: Marketing Message First, Desktop: Form First */}
         {isMobile && (
           <div className="flex flex-col justify-center items-center text-center">
@@ -246,7 +258,9 @@ const Form = ({ isOpen, onClose }: Props) => {
         <div>
           <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
             {/* First Row */}
-            <div className={`${isMobile ? 'space-y-4' : 'grid grid-cols-2 gap-4'}`}>
+            <div
+              className={`${isMobile ? "space-y-4" : "grid grid-cols-2 gap-4"}`}
+            >
               <div>
                 <input
                   type="text"
@@ -254,7 +268,7 @@ const Form = ({ isOpen, onClose }: Props) => {
                   placeholder="FIRST NAME"
                   value={formData.firstname}
                   onChange={handleInputChange}
-                  className={`w-full ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border border-gray-300 rounded-lg bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:border-green-500`}
+                  className={`w-full ${isMobile ? "px-3 py-2 text-sm" : "px-4 py-3"} border border-gray-300 rounded-lg bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:border-green-500`}
                   required
                 />
               </div>
@@ -265,7 +279,7 @@ const Form = ({ isOpen, onClose }: Props) => {
                   placeholder="LAST NAME"
                   value={formData.lastname}
                   onChange={handleInputChange}
-                  className={`w-full ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border border-gray-300 rounded-lg bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:border-green-500`}
+                  className={`w-full ${isMobile ? "px-3 py-2 text-sm" : "px-4 py-3"} border border-gray-300 rounded-lg bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:border-green-500`}
                 />
               </div>
             </div>
@@ -278,20 +292,20 @@ const Form = ({ isOpen, onClose }: Props) => {
                 placeholder="E-MAIL ID"
                 value={formData.email}
                 onChange={handleInputChange}
-                className={`w-full ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border border-gray-300 rounded-lg bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:border-green-500`}
+                className={`w-full ${isMobile ? "px-3 py-2 text-sm" : "px-4 py-3"} border border-gray-300 rounded-lg bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:border-green-500`}
                 required
               />
             </div>
 
             {/* Phone */}
             <div className="relative">
-              <div className={`${isMobile ? 'space-y-2' : 'flex gap-2'}`}>
+              <div className={`${isMobile ? "space-y-2" : "flex gap-2"}`}>
                 {/* Country Dropdown */}
                 <select
                   name="phone_country"
                   value={formData.phone_country_code}
                   onChange={handleInputChange}
-                  className={`${isMobile ? 'w-full' : 'flex-1'} ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border border-gray-300 rounded-lg bg-white text-gray-700 focus:outline-none focus:border-green-500`}
+                  className={`${isMobile ? "w-full" : "flex-1"} ${isMobile ? "px-3 py-2 text-sm" : "px-4 py-3"} border border-gray-300 rounded-lg bg-white text-gray-700 focus:outline-none focus:border-green-500`}
                   required
                 >
                   {COUNTRIES.map((country) => (
@@ -308,7 +322,7 @@ const Form = ({ isOpen, onClose }: Props) => {
                   placeholder="PHONE"
                   value={formData.phone}
                   onChange={handleInputChange}
-                  className={`${isMobile ? 'w-full' : 'flex-1'} ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border border-gray-300 rounded-lg bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:border-green-500`}
+                  className={`${isMobile ? "w-full" : "flex-1"} ${isMobile ? "px-3 py-2 text-sm" : "px-4 py-3"} border border-gray-300 rounded-lg bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:border-green-500`}
                   required
                 />
               </div>
@@ -321,11 +335,11 @@ const Form = ({ isOpen, onClose }: Props) => {
                 name="is_whatsapp_number"
                 checked={formData.is_whatsapp_number}
                 onChange={handleInputChange}
-                className={`${isMobile ? 'w-3 h-3' : 'w-4 h-4'} text-green-600 border-gray-300 rounded focus:ring-green-500`}
+                className={`${isMobile ? "w-3 h-3" : "w-4 h-4"} text-green-600 border-gray-300 rounded focus:ring-green-500`}
               />
               <label
                 htmlFor="is_whatsapp_number"
-                className={`text-gray-700 ${isMobile ? 'text-xs' : 'text-sm'}`}
+                className={`text-gray-700 ${isMobile ? "text-xs" : "text-sm"}`}
               >
                 Is this your WhatsApp number?
               </label>
@@ -339,7 +353,7 @@ const Form = ({ isOpen, onClose }: Props) => {
                 value={formData.message}
                 onChange={handleInputChange}
                 rows={isMobile ? 4 : 6}
-                className={`w-full ${isMobile ? 'px-3 py-2 text-sm' : 'px-4 py-3'} border border-gray-300 rounded-lg bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:border-green-500 resize-none`}
+                className={`w-full ${isMobile ? "px-3 py-2 text-sm" : "px-4 py-3"} border border-gray-300 rounded-lg bg-white text-gray-700 placeholder-gray-500 focus:outline-none focus:border-green-500 resize-none`}
                 required
               />
             </div>
@@ -357,30 +371,42 @@ const Form = ({ isOpen, onClose }: Props) => {
             )}
 
             {/* Captcha */}
-            <div className={`${isMobile ? 'flex flex-col space-y-2 items-center' : 'flex items-center gap-4'}`}>
-              <div className={`bg-gray-200 ${isMobile ? 'px-3 py-2' : 'px-4 py-2'} rounded border font-mono tracking-widest`}>
-                <span className={`${isMobile ? 'text-base' : 'text-lg'} font-bold`}>{captcha}</span>
+            <div
+              className={`${isMobile ? "flex flex-col space-y-2 items-center" : "flex items-center gap-4"}`}
+            >
+              <div
+                className={`bg-gray-200 ${isMobile ? "px-3 py-2" : "px-4 py-2"} rounded border font-mono tracking-widest`}
+              >
+                <span
+                  className={`${isMobile ? "text-base" : "text-lg"} font-bold`}
+                >
+                  {captcha}
+                </span>
               </div>
               <input
                 type="text"
                 placeholder="Enter captcha"
                 value={captchaInput}
                 onChange={(e) => setCaptchaInput(e.target.value)}
-                className={`${isMobile ? 'px-3 py-2 text-sm w-32' : 'px-4 py-2 w-40'} border border-gray-300 rounded-lg bg-white text-gray-700 focus:outline-none focus:border-green-500`}
+                className={`${isMobile ? "px-3 py-2 text-sm w-32" : "px-4 py-2 w-40"} border border-gray-300 rounded-lg bg-white text-gray-700 focus:outline-none focus:border-green-500`}
                 required
               />
             </div>
 
             {/* Submit Button */}
-            <div className={`${isMobile ? 'flex flex-col space-y-4 items-center' : 'flex items-center justify-end'}`}>
+            <div
+              className={`${isMobile ? "flex flex-col space-y-4 items-center" : "flex items-center justify-end"}`}
+            >
               <button
                 type="submit"
                 disabled={isLoading}
                 className="cursor-pointer flex justify-center disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <img loading="lazy" decoding="async"
+                <img
+                  loading="lazy"
+                  decoding="async"
                   src="/images/book-consulation/formBtn.png"
-                  className={`${isMobile ? 'w-32' : 'w-44'}`}
+                  className={`${isMobile ? "w-32" : "w-44"}`}
                   alt={isLoading ? "Submitting..." : "submit"}
                 />
               </button>
@@ -412,7 +438,9 @@ const Form = ({ isOpen, onClose }: Props) => {
       {/* Modal Overlay */}
       <div className="fixed z-[9999999999999999999] inset-0 bg-black/20 flex items-center justify-center p-4">
         {/* Modal Container */}
-        <div className={`relative w-full ${isMobile ? 'max-w-sm' : 'max-w-6xl'} mx-4`}>
+        <div
+          className={`relative w-full ${isMobile ? "max-w-sm" : "max-w-6xl"} mx-4`}
+        >
           {/* Mobile Layout */}
           {isMobile ? (
             <div className="bg-[#eff5f1] p-4 border-lime-300 border relative shadow-2xl rounded-lg max-h-[90vh] overflow-y-auto">
@@ -422,41 +450,52 @@ const Form = ({ isOpen, onClose }: Props) => {
                   onClick={handleClose}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-xl"
                 >
-                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" className="w-5 h-5" />
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/join-us/xicon.png"
+                    alt="Close Icon"
+                    className="w-5 h-5"
+                  />
                 </button>
               </div>
 
               {/* Modal Content */}
-              <div className="mx-auto">
-                {renderContent()}
-              </div>
+              <div className="mx-auto">{renderContent()}</div>
             </div>
           ) : (
             /* Desktop Layout - Skewed Modal Background */
             <div
               className="bg-[#eff5f1] transform  border-lime-300 border py-10 px-16 relative shadow-2xl max-h-[90vh] overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-              style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
-              transform:"skewX(-16deg)"
-               }}
+              style={{
+                clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
+                transform: "skewX(-16deg)",
+              }}
             >
               {/* Close Button */}
               <div className="flex justify-end w-full">
                 <button
                   onClick={handleClose}
                   style={{
-                    transform:"skewX(12deg)"
+                    transform: "skewX(12deg)",
                   }}
                   className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
                 >
-                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/join-us/xicon.png"
+                    alt="Close Icon"
+                  />
                 </button>
               </div>
               {/* Modal Content */}
               <div
-              style={{
-                transform:"skewX(6deg)"
-              }}
-              className="transform  max-w-5xl mx-auto">
+                style={{
+                  transform: "skewX(6deg)",
+                }}
+                className="transform  max-w-5xl mx-auto"
+              >
                 {renderContent()}
               </div>
             </div>

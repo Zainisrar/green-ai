@@ -50,7 +50,8 @@ export interface IndustryAffiliationsCertificationsResponse {
 }
 
 export const useIndustryAffiliationsCertifications = () => {
-  const [data, setData] = useState<IndustryAffiliationsCertificationsResponse | null>(null);
+  const [data, setData] =
+    useState<IndustryAffiliationsCertificationsResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -64,14 +65,15 @@ export const useIndustryAffiliationsCertifications = () => {
 
         const res = await fetch(
           "https://greencms.percepco.co.uk/api/ecosystem/industry-affiliations-certifications",
-          { next: { revalidate: 60 } as any }
+          { next: { revalidate: 60 } as any },
         );
 
         if (!res.ok) {
           throw new Error(`HTTP error! status: ${res.status}`);
         }
 
-        const json = (await res.json()) as IndustryAffiliationsCertificationsResponse;
+        const json =
+          (await res.json()) as IndustryAffiliationsCertificationsResponse;
         if (isMounted) setData(json);
       } catch (e: any) {
         if (isMounted) setError(e?.message ?? "Failed to load data");

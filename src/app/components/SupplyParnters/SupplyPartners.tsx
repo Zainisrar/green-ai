@@ -81,7 +81,7 @@ interface SupplyPartnersData {
 const SupplyPartners = () => {
   const { data: apiData } = useSupplyPartners();
   const [activeIndex, setActiveIndex] = useState(0);
-  const nav=useNavigationState();
+  const nav = useNavigationState();
 
   // Type assertion to help TypeScript understand the data structure
   const data = apiData as SupplyPartnersData | undefined;
@@ -130,7 +130,7 @@ const SupplyPartners = () => {
                 {data?.globalSourcingStrategy?.keyPoints?.map(
                   (point: string, index: number) => (
                     <li key={index}>• {point}</li>
-                  )
+                  ),
                 ) || (
                   <>
                     <li>
@@ -168,7 +168,7 @@ const SupplyPartners = () => {
                     {data?.whatWeProcure?.item?.map(
                       (item: ProcurementItem, index: number) => (
                         <li key={index}>{item.category}</li>
-                      )
+                      ),
                     ) || (
                       <>
                         <li>Solar Modules</li>
@@ -189,7 +189,7 @@ const SupplyPartners = () => {
                     {data?.whatWeProcure?.item?.map(
                       (item: ProcurementItem, index: number) => (
                         <li key={index}>{item.example}</li>
-                      )
+                      ),
                     ) || (
                       <>
                         <li>Mono PERC, Bifacial, Flexible PV</li>
@@ -230,7 +230,7 @@ const SupplyPartners = () => {
                     {data?.howBecomeGreenSupplier?.item?.map(
                       (item: SupplierStep, index: number) => (
                         <li key={index}>Step {item.step}</li>
-                      )
+                      ),
                     ) || (
                       <>
                         <li>Step 1</li>
@@ -249,7 +249,7 @@ const SupplyPartners = () => {
                     {data?.howBecomeGreenSupplier?.item?.map(
                       (item: SupplierStep, index: number) => (
                         <li key={index}>{item.action}</li>
-                      )
+                      ),
                     ) || (
                       <>
                         <li>Submit your Supplier Introduction Form</li>
@@ -271,7 +271,9 @@ const SupplyPartners = () => {
     <React.Fragment>
       <div className="   ">
         <div className="absolute top-0 lg:block hidden left-0 lg:left-40">
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/supply-partners/mainImg.png"
             className="w-screen lg:w-auto lg:h-[160vh]"
             alt="bg"
@@ -279,12 +281,15 @@ const SupplyPartners = () => {
         </div>
         <TopNavigation />
 
-
-        <div className={` flex h-full ${nav.isNavigationOpen?"":"z-[9999999999999999]"} relative`}>
+        <div
+          className={` flex h-full ${nav.isNavigationOpen ? "" : "z-[9999999999999999]"} relative`}
+        >
           {/* Left Side  */}
           <div className=" hidden  lg:w-1/8  lg:flex items-center justify-center">
             <div className="fixed top-1/3 left-14">
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/supply-partners/supply-partner.png"
                 alt="supply-partner"
                 className="w-10"
@@ -308,7 +313,7 @@ const SupplyPartners = () => {
                   <>
                     {
                       data.mainPage.description.text.split(
-                        data.mainPage.description.highlighted
+                        data.mainPage.description.highlighted,
                       )[0]
                     }
                     <span className="text-[#23B14D] font-semibold">
@@ -316,7 +321,7 @@ const SupplyPartners = () => {
                     </span>
                     {
                       data.mainPage.description.text.split(
-                        data.mainPage.description.highlighted
+                        data.mainPage.description.highlighted,
                       )[1]
                     }
                   </>
@@ -341,7 +346,9 @@ const SupplyPartners = () => {
                   className="relative cursor-pointer flex space-x-2 items-center"
                 >
                   <div className="absolute -left-4">
-                    <img loading="lazy" decoding="async"
+                    <img
+                      loading="lazy"
+                      decoding="async"
                       src="/images/supply-partners/shape.png"
                       alt="Global Sourcing Strategy"
                     />
@@ -359,7 +366,9 @@ const SupplyPartners = () => {
                   className="relative flex space-x-2 mt-10  cursor-pointer  items-center"
                 >
                   <div className="absolute -left-8">
-                    <img loading="lazy" decoding="async"
+                    <img
+                      loading="lazy"
+                      decoding="async"
                       src="/images/supply-partners/shape.png"
                       alt="Global Sourcing Strategy"
                     />
@@ -377,7 +386,9 @@ const SupplyPartners = () => {
                   className="relative flex space-x-2 mt-10  cursor-pointer  items-center"
                 >
                   <div className="absolute -left-12">
-                    <img loading="lazy" decoding="async"
+                    <img
+                      loading="lazy"
+                      decoding="async"
                       src="/images/supply-partners/shape.png"
                       alt="Global Sourcing Strategy"
                     />
@@ -395,7 +406,9 @@ const SupplyPartners = () => {
                   className="relative flex space-x-2 mt-10 cursor-pointer  items-center"
                 >
                   <div className="absolute z-50 -left-16">
-                    <img loading="lazy" decoding="async"
+                    <img
+                      loading="lazy"
+                      decoding="async"
                       src="/images/supply-partners/shape.png"
                       alt="Global Sourcing Strategy"
                     />
@@ -411,7 +424,12 @@ const SupplyPartners = () => {
               {/* Right Column - Content */}
               <div className="mb-8 relative mt-16 lg:ml-10 flex space-x-2 items-center">
                 <div className="absolute lg:block hidden -left-20">
-                  <img loading="lazy" decoding="async" src="/images/supply-partners/shape1.png" alt="shape" />
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/supply-partners/shape1.png"
+                    alt="shape"
+                  />
                 </div>
                 {/* Technology Section */}
                 <div className=" ">
@@ -424,7 +442,12 @@ const SupplyPartners = () => {
                 </div>
 
                 <div className="lg:block hidden">
-                  <img loading="lazy" decoding="async" src="/images/supply-partners/shape2.png" alt="shape" />
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/supply-partners/shape2.png"
+                    alt="shape"
+                  />
                 </div>
               </div>
               <div className="lg:w-[500px]">{ActiveItem(activeIndex)}</div>
@@ -433,22 +456,25 @@ const SupplyPartners = () => {
             {/* Partner Spotlight Section */}
             <div className="mb-20 lg:mb-4 -mt-4">
               <div
-              style={{
-                transform:isDesktop?"skewX(-12deg)":"none"
-              }}
-              className="bg-[#f8f9d9]/40 max-w-4xl  p-4 shadow-2xl">
+                style={{
+                  transform: isDesktop ? "skewX(-12deg)" : "none",
+                }}
+                className="bg-[#f8f9d9]/40 max-w-4xl  p-4 shadow-2xl"
+              >
                 <h4
-                 style={{
-                transform:isDesktop?"skewX(12deg)":"none"
-              }}
-                className="text-xl lg:text-2xl font-bold text-[#23B14D] mb-4 ">
+                  style={{
+                    transform: isDesktop ? "skewX(12deg)" : "none",
+                  }}
+                  className="text-xl lg:text-2xl font-bold text-[#23B14D] mb-4 "
+                >
                   Partner Spotlight
                 </h4>
                 <p
-                   style={{
-                transform:isDesktop?"skewX(12deg)":"none"
-              }}
-                className="text-gray-600 text-lg font-semibold mb-6 ">
+                  style={{
+                    transform: isDesktop ? "skewX(12deg)" : "none",
+                  }}
+                  className="text-gray-600 text-lg font-semibold mb-6 "
+                >
                   {data?.mainPage?.partnerSpotlight?.text ||
                     "OSDA | Reno Dee | Fimer | PowerPlus | Clenergy | Grace Solar | Tecnocraft | Danish"}
                 </p>
@@ -456,12 +482,15 @@ const SupplyPartners = () => {
                 {/* Partner Logos */}
                 <div
                   style={{
-                    transform:isDesktop?"skewX(12deg)":"none"
+                    transform: isDesktop ? "skewX(12deg)" : "none",
                   }}
-                className="lg:flex-row flex justify-center my-4  flex-col items-center   lg:justify-start space-y-8 lg:space-x-8 ">
+                  className="lg:flex-row flex justify-center my-4  flex-col items-center   lg:justify-start space-y-8 lg:space-x-8 "
+                >
                   {data?.mainPage?.partnerSpotlight?.icons?.map(
                     (icon: PartnerIcon, index: number) => (
-                      <img loading="lazy" decoding="async"
+                      <img
+                        loading="lazy"
+                        decoding="async"
                         key={index}
                         src={icon.src}
                         alt={icon.alt || `Partner logo ${index + 1}`}
@@ -471,30 +500,40 @@ const SupplyPartners = () => {
                           target.src = "/images/supply-partners/clenergy.png";
                         }}
                       />
-                    )
+                    ),
                   ) || (
                     <>
-                      <img loading="lazy" decoding="async"
+                      <img
+                        loading="lazy"
+                        decoding="async"
                         src="/images/supply-partners/clenergy.png"
                         alt="Clenergy logo"
                         className="h-12 "
                       />
-                      <img loading="lazy" decoding="async"
+                      <img
+                        loading="lazy"
+                        decoding="async"
                         src="/images/supply-partners/fimer.png"
                         alt="Fimer logo"
                         className="h-12 "
                       />
-                      <img loading="lazy" decoding="async"
+                      <img
+                        loading="lazy"
+                        decoding="async"
                         src="/images/supply-partners/tecnocraft.png"
                         alt="Tecnocraft logo"
                         className="h-25 "
                       />
-                      <img loading="lazy" decoding="async"
+                      <img
+                        loading="lazy"
+                        decoding="async"
                         src="/images/supply-partners/catl.png"
                         alt="CATL logo"
                         className="h-25 "
                       />
-                      <img loading="lazy" decoding="async"
+                      <img
+                        loading="lazy"
+                        decoding="async"
                         src="/images/supply-partners/grace-solar.png"
                         alt="Grace Solar logo"
                         className="h-12 "
@@ -512,7 +551,9 @@ const SupplyPartners = () => {
               href={data?.mainPage?.cta?.[1]?.href || "#"}
               className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
             >
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/supply-partners/contact-supply-chain-team.png"
                 alt={
                   data?.mainPage?.cta?.[1]?.text || "Contact supply chain team"
@@ -525,7 +566,9 @@ const SupplyPartners = () => {
               href={data?.mainPage?.cta?.[0]?.href || "#"}
               className="cursor-pointer hover:opacity-80 transition-opacity duration-200"
             >
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/supply-partners/become-supply-partner.png"
                 alt={
                   data?.mainPage?.cta?.[0]?.text || "Become a supply partner"

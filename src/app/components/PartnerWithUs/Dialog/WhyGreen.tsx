@@ -27,7 +27,8 @@ const points = [
   },
   {
     title: "Digital By Design",
-    description: "GRID-INTEL™ Platform For Monitoring, Reporting, And Diagnostics",
+    description:
+      "GRID-INTEL™ Platform For Monitoring, Reporting, And Diagnostics",
   },
 ];
 
@@ -50,21 +51,24 @@ const WhyGreen = ({ isOpen, onClose }: Props) => {
       <div className="space-y-5">
         {points.map((point, idx) => (
           <div key={idx} className="flex items-start gap-3">
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/grid-intel/lighting.png"
               className="-mt-3 w-12 shrink-0"
               alt="lighting"
             />
             <p className="text-base text-gray-800 sm:text-lg">
-              <span className="font-bold">{point.title}</span> — {point.description}
+              <span className="font-bold">{point.title}</span> —{" "}
+              {point.description}
             </p>
           </div>
         ))}
       </div>
 
       <p className="mt-8 text-base font-bold text-gray-800 sm:text-lg">
-        <span className="text-green-600">GREEN</span> is not an idea-stage partner.
-        We&apos;re a results-stage partner.
+        <span className="text-green-600">GREEN</span> is not an idea-stage
+        partner. We&apos;re a results-stage partner.
       </p>
     </ClientInfoModal>
   );

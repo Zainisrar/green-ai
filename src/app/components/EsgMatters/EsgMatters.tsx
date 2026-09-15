@@ -5,19 +5,19 @@ import SiteHeader from "../SiteHeader/SiteHeader";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import D6Chatbot from "../D6Chatbot";
 import Chatbot from "../Chatbot";
+import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import styles from "./EsgMatters.module.css";
 import { useImpactMeasurementEsg } from "../../../hooks/useImpactMeasurementEsg";
-import SampleImpactReport from "./Modals/SampleImpactReport";
 
 const FALLBACK_DATA = {
-  id: 0,
-  createdAt: "",
-  updatedAt: "",
+  id: 6,
+  createdAt: "2025-11-09T15:27:06.160Z",
+  updatedAt: "2025-11-09T14:45:13.998Z",
   mainPage: {
     title: "Impact Measurement & ESG",
     subHeadline: "We Don’t Just Deliver Energy. We Quantify Its Impact.",
     description: {
-      text: "At GREEN, every installation is tracked, audited, and tied to real-world outcomes. Our ESG commitment is engineered into every project — from rural solar to hybrid grid infrastructure.",
+      text: "At GREEN, every installation is tracked, audited, and tied to real-world outcomes.\nOur ESG commitment is engineered into every project — from rural solar to hybrid grid infrastructure.",
       highlighted: "GREEN",
     },
     quote: {
@@ -25,49 +25,122 @@ const FALLBACK_DATA = {
       highlighted: "GRID-INTEL™",
     },
     cta: [
-      { href: "/engage/contact-us", text: "GREEN ESG Policy Brief" },
-      { href: "#sample-impact-report", text: "Sample Impact Report or M&E Framework" },
+      { href: "/engage/contact-us", text: "GREEN ESG Policy Brief (PDF)" },
+      {
+        href: "#sample-impact-report",
+        text: "Sample Impact Report or M&E Framework",
+      },
     ],
   },
   whyEsgMattersGreen: {
     title: "Why ESG Matters to GREEN",
-    subHeadline: "“We operate in environments where energy is everything. So impact isn't an afterthought — it's the foundation.”",
-    description: "GREEN’s projects are designed and reported in full alignment with:",
+    subHeadline:
+      "“We operate in environments where energy is everything. So impact isn't an afterthought — it's the foundation.”",
+    description:
+      "GREEN’s projects are designed and reported in full alignment with:",
     keys: [
-      { text: "ESG frameworks (Environmental, Social, Governance)", highlighted: "(Environmental, Social, Governance)" },
-      { text: "UN SDGs (especially SDG 7, 9, 13, and 17)", highlighted: "(especially SDG 7, 9, 13, and 17)" },
+      {
+        text: "ESG frameworks (Environmental, Social, Governance)",
+        highlighted: "(Environmental, Social, Governance)",
+      },
+      {
+        text: "UN SDGs (especially SDG 7, 9, 13, and 17)",
+        highlighted: "(especially SDG 7, 9, 13, and 17)",
+      },
       { text: "Donor and Ministry reporting protocols", highlighted: "" },
       { text: "Community-led verification models", highlighted: "" },
     ],
   },
   howWeMeasureImpact: {
     metrics: [
-      { category: "Reliability", keyMetricsTracked: "Availability, uptime, and service continuity" },
-      { category: "Livelihoods", keyMetricsTracked: "Productive use and household outcomes" },
-      { category: "Environment", keyMetricsTracked: "Emissions avoided and resource efficiency" },
+      {
+        category: "Environmental",
+        keyMetricsTracked:
+          "Diesel displacement (litres/year), CO₂ offset (tCO₂e), recyclability of components",
+      },
+      {
+        category: "Social",
+        keyMetricsTracked:
+          "Households served, jobs created, clinics/schools powered, hours of reliable power",
+      },
+      {
+        category: "Governance",
+        keyMetricsTracked:
+          "Compliance audits passed, contractor standards upheld, local hiring & training stats",
+      },
     ],
-    quote: { text: "We measure to learn, adapt, and improve.", highlighted: "improve" },
+    quote: {
+      text: "“All metrics are monitored via GRID-INTEL™ and third-party field audits.”",
+      highlighted: "GRID-INTEL™",
+    },
   },
   esgIntegrationProjectLifeCycle: {
     title: "ESG Integration in Project Lifecycle",
     items: [
-      { title: "Design", description: "Set measurable environmental and social outcomes before delivery begins." },
-      { title: "Deliver", description: "Track performance and community value through implementation." },
-      { title: "Report", description: "Turn verified project data into transparent learning." },
+      {
+        title: "Planning",
+        description: "ESG risk mapping, impact projections",
+      },
+      {
+        title: "Design",
+        description: "Material selection, recyclability, efficiency standards",
+      },
+      {
+        title: "Deployment",
+        description: "Local labor, safety compliance, community engagement",
+      },
+      {
+        title: "Operation",
+        description: "Data monitoring, fault tracking, social feedback",
+      },
+      {
+        title: "Reporting",
+        description: "Custom dashboards, donor-compliant impact reports",
+      },
     ],
-    quote: { text: "Good systems create lasting value.", highlighted: "lasting" },
+    quote: {
+      text: "“All metrics are monitored via GRID-INTEL™ and third-party field audits.”",
+      highlighted: "GRID-INTEL™",
+    },
   },
   trustSignals: {
     title: "Trust Signals",
-    items: ["Transparent metrics", "Local participation", "Continuous improvement"],
-    quote: { text: "Trust is built in the details.", highlighted: "details" },
+    items: [
+      "Third-party M&E (Monitoring & Evaluation) partnerships",
+      "Impact dashboards per project — real-time + historical",
+      "End-of-life & recovery standards for equipment",
+      "Donor-approved auditing model and transparent field data",
+    ],
+    quote: {
+      text: "“All metrics are monitored via GRID-INTEL™ and third-party field audits.”",
+      highlighted: "GRID-INTEL™",
+    },
   },
   sampleMetricsSnapshot: {
     title: "Sample Metrics Snapshot",
-    description: { text: "A clear view of progress helps every partner make better decisions.", highlighted: "progress" },
-    keys: [],
+    description: {
+      text: "2022–2025 GREEN Impact (PNG Projects)",
+      highlighted: "2022–2025",
+    },
+    keys: [
+      { text: "+3.913 MW clean energy installed", highlighted: "+3.913 MW" },
+      { text: "796,270 beneficiaries reached", highlighted: "796,270" },
+      { text: "6,126 tonnes CO₂ displaced", highlighted: "6,126" },
+      { text: "223 new local technical jobs created", highlighted: "223" },
+      {
+        text: "52% of systems supported via local O&M teams",
+        highlighted: "52%",
+      },
+    ],
   },
 };
+
+const SAMPLE_IMPACT_INTEREST_OPTIONS = [
+  "Sample Impact Report",
+  "M&E Framework",
+  "ESG Policy Brief",
+  "Other",
+];
 
 const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
   const { data } = useImpactMeasurementEsg();
@@ -80,75 +153,40 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
   }>({
     index: 0,
     data: (
-      <div className="mt-8 lg:ml-4 ">
-        {/* Why ESG Matters Box */}
-        <div className="">
+      <div className="mt-8 lg:ml-4">
+        <div>
           <h3 className="text-xl lg:text-2xl lg:ml-8 font-bold text-gray-800 mb-4">
-            Why ESG Matters to GREEN
+            {FALLBACK_DATA.whyEsgMattersGreen.title}
           </h3>
           <p className="lg:ml-6 text-[#23B14D] text-lg font-semibold italic mb-4">
-            "We operate in environments where energy is everything.
-            <br />
-            So impact isn't an afterthought — it's the foundation."
+            {FALLBACK_DATA.whyEsgMattersGreen.subHeadline}
           </p>
-          <p className="text-gray-600 ml-4 text-lg  italic mb-4">
-            GREEN's projects are designed and reported in full alignment with:
+          <p className="text-gray-600 lg:ml-4 text-lg italic mb-4">
+            {FALLBACK_DATA.whyEsgMattersGreen.description}
           </p>
-          <div className="space-y-2 italic">
-            <div className="flex items-center  space-x-2">
-              <span>
-                <img loading="lazy" decoding="async"
-                  src="/images/grid-intel/lighting.png"
-                  className="w-14 -mt-4"
-                  alt="lighting"
+          <div className="space-y-3 italic">
+            {FALLBACK_DATA.whyEsgMattersGreen.keys.map((key, idx) => (
+              <div key={idx} className="flex items-center gap-3">
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="/images/why-esg-matters-to-green/green_bolt.png"
+                  className="w-7 h-7 object-contain flex-shrink-0"
+                  alt=""
                 />
-              </span>
-              <span className="text-sm font-semibold text-gray-800">
-                ESG frameworks{" "}
-                <span className="text-[#23B14D]">
-                  (Environmental, Social, Governance){" "}
+                <span className="text-sm font-semibold text-gray-800">
+                  {key.highlighted ? (
+                    <>
+                      {key.text.split(key.highlighted)[0]}
+                      <span className="text-[#23B14D]">{key.highlighted}</span>
+                      {key.text.split(key.highlighted)[1]}
+                    </>
+                  ) : (
+                    key.text
+                  )}
                 </span>
-              </span>
-            </div>
-            <div className="flex items-center -ml-10 space-x-2">
-              <span>
-                <img loading="lazy" decoding="async"
-                  src="/images/grid-intel/lighting.png"
-                  className="w-14 -mt-4"
-                  alt="lighting"
-                />
-              </span>
-              <span className="text-sm font-semibold text-gray-800">
-                UN SDGs{" "}
-                <span className="text-[#23B14D]">
-                  (Sustainable Development Goals)
-                </span>{" "}
-              </span>
-            </div>
-            <div className="flex items-center -ml-16 space-x-2">
-              <span>
-                <img loading="lazy" decoding="async"
-                  src="/images/grid-intel/lighting.png"
-                  className="w-14 -mt-4"
-                  alt="lighting"
-                />
-              </span>
-              <span className="text-sm font-semibold text-gray-800">
-                Donor and Ministry reporting protocols
-              </span>
-            </div>
-            <div className="flex items-center -ml-20 space-x-2">
-              <span>
-                <img loading="lazy" decoding="async"
-                  src="/images/grid-intel/lighting.png"
-                  className="w-14 -mt-4"
-                  alt="lighting"
-                />
-              </span>
-              <span className="text-sm font-semibold text-gray-800">
-                Community-led verification models
-              </span>
-            </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -168,8 +206,8 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
         setActive({
           index: 0,
           data: (
-            <div className="mt-8 lg:ml-4 ">
-              <div className="">
+            <div className="mt-8 lg:ml-4">
+              <div>
                 <h3 className="text-xl lg:text-2xl lg:ml-8 font-bold text-gray-800 mb-4">
                   {pageData.whyEsgMattersGreen.title}
                 </h3>
@@ -179,25 +217,23 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
                 <p className="text-gray-600 lg:ml-4 text-lg italic mb-4">
                   {pageData.whyEsgMattersGreen.description}
                 </p>
-                <div className="space-y-2 italic">
+                <div className="space-y-3 italic">
                   {pageData.whyEsgMattersGreen.keys.map((key, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center space-x-2"
-                      style={{ marginLeft: `-${idx * 10}px` }}
-                    >
-                      <span>
-                        <img loading="lazy" decoding="async"
-                          src="/images/grid-intel/lighting.png"
-                          className="w-14 -mt-4"
-                          alt="lighting"
-                        />
-                      </span>
-                      <span className="text-sm font-semibold text-gray-800">
+                    <div key={idx} className="flex items-center gap-3">
+                      <img
+                        loading="lazy"
+                        decoding="async"
+                        src="/images/why-esg-matters-to-green/green_bolt.png"
+                        className="w-7 h-7 object-contain flex-shrink-0"
+                        alt=""
+                      />
+                      <span className="text-sm lg:text-base font-semibold text-gray-800">
                         {key.highlighted ? (
                           <>
                             {key.text.split(key.highlighted)[0]}
-                            <span className="text-[#23B14D]">{key.highlighted}</span>
+                            <span className="text-[#23B14D]">
+                              {key.highlighted}
+                            </span>
                             {key.text.split(key.highlighted)[1]}
                           </>
                         ) : (
@@ -216,27 +252,25 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
         setActive({
           index: 1,
           data: (
-            <div className="mt-8 lg:ml-4 lg:w-[40%]">
+            <div className="mt-8 lg:ml-4 lg:w-[70%]">
               <h3 className="text-xl lg:text-2xl lg:ml-8 font-bold text-gray-800 mb-6">
                 How We Measure Impact
               </h3>
-
-              {/* Impact Measurement Table */}
-              <div className="lg:ml-4 overflow-hidden">
-                <table className="w-full">
+              <div className="lg:ml-4 overflow-x-auto">
+                <table className="w-full text-left border-collapse">
                   <thead>
                     <tr>
-                      <th className="px-4 py-3 text-left text-lg font-bold text-[#23B14D]">
+                      <th className="px-4 py-3 text-lg font-bold text-[#23B14D]">
                         Category
                       </th>
-                      <th className="px-4 py-3 text-left text-lg font-bold text-[#23B14D]">
+                      <th className="px-4 py-3 text-lg font-bold text-[#23B14D]">
                         Key Metrics Tracked
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     {pageData.howWeMeasureImpact.metrics.map((metric, idx) => (
-                      <tr key={idx}>
+                      <tr key={idx} className="border-t border-green-200">
                         <td className="px-4 py-3 font-semibold text-gray-800 italic">
                           {metric.category}
                         </td>
@@ -247,11 +281,9 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
                     ))}
                   </tbody>
                 </table>
-                    
-                      <div className=" text-green-600 italic">
-                        “All metrics are monitored via GRID-INTEL™ and
-                        third-party field audits.”
-                      </div>
+                <p className="mt-6 text-[#23B14D] font-bold italic text-base lg:text-lg">
+                  {pageData.howWeMeasureImpact.quote.text}
+                </p>
               </div>
             </div>
           ),
@@ -265,22 +297,26 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
               <h3 className="text-xl lg:text-2xl lg:ml-8 font-bold text-gray-800 mb-6">
                 {pageData.esgIntegrationProjectLifeCycle.title}
               </h3>
-
-              {/* ESG Integration List */}
               <div className="lg:ml-4 space-y-4">
-                {pageData.esgIntegrationProjectLifeCycle.items.map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-6">
-                    <div className="w-32">
-                      <h4 className="font-bold text-gray-800 italic text-lg lg:text-xl">
+                {pageData.esgIntegrationProjectLifeCycle.items.map(
+                  (item, idx) => (
+                    <div
+                      key={idx}
+                      className="flex flex-col sm:flex-row sm:items-start gap-1 sm:gap-6"
+                    >
+                      <h4 className="font-bold text-gray-800 italic text-lg sm:w-32 flex-shrink-0">
                         {item.title}
                       </h4>
+                      <p className="text-gray-700 italic flex-1">
+                        {item.description}
+                      </p>
                     </div>
-                    <div className="flex-1">
-                      <p className="text-gray-700 italic">{item.description}</p>
-                    </div>
-                  </div>
-                ))}
+                  ),
+                )}
               </div>
+              <p className="mt-6 lg:ml-4 text-[#23B14D] font-bold italic text-base lg:text-lg">
+                {pageData.esgIntegrationProjectLifeCycle.quote.text}
+              </p>
             </div>
           ),
         });
@@ -293,26 +329,28 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
               <h3 className="text-xl lg:text-2xl lg:ml-8 font-bold text-gray-800 mb-6">
                 {pageData.trustSignals.title}
               </h3>
-
-              {/* Trust Signals List */}
               <div className="lg:ml-4 space-y-4">
-                {pageData.trustSignals.items.map((item, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <div className="flex-shrink-0 mt-1">
-                      <span>
-                        <img loading="lazy" decoding="async"
-                          src="/images/grid-intel/lighting.png"
-                          className="w-14 -mt-4"
-                          alt="lighting"
-                        />
-                      </span>
-                    </div>
-                    <p className="text-gray-700 italic leading-relaxed">
+                {(pageData.trustSignals.items.length
+                  ? pageData.trustSignals.items
+                  : FALLBACK_DATA.trustSignals.items
+                ).map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-3">
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src="/images/why-esg-matters-to-green/green_bolt.png"
+                      className="w-7 h-7 object-contain flex-shrink-0"
+                      alt=""
+                    />
+                    <p className="text-gray-900 font-semibold italic text-base lg:text-lg">
                       {item}
                     </p>
                   </div>
                 ))}
               </div>
+              <p className="mt-6 lg:ml-4 text-[#23B14D] font-bold italic text-base lg:text-lg">
+                {pageData.trustSignals.quote.text}
+              </p>
             </div>
           ),
         });
@@ -322,40 +360,31 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
           index: 4,
           data: (
             <div className="mt-8 lg:ml-4">
-              <h3 className="text-xl lg:text-2xl lg:ml-8 font-bold text-gray-800 mb-6">
+              <h3 className="text-xl lg:text-2xl lg:ml-8 font-bold text-gray-800 mb-2">
                 {pageData.sampleMetricsSnapshot.title}
               </h3>
-
-              {/* Year Range and Project Type */}
-              <div className="lg:ml-4 mb-8">
-                <h4 className="text-lg font-semibold text-gray-800 mb-2">
-                  {pageData.sampleMetricsSnapshot.description.highlighted && (
-                    <span className="font-bold">{pageData.sampleMetricsSnapshot.description.highlighted}</span>
-                  )}
-                  {pageData.sampleMetricsSnapshot.description.text.replace(pageData.sampleMetricsSnapshot.description.highlighted, '')}
-                </h4>
-              </div>
-
-              {/* Metrics List */}
+              <p className="lg:ml-8 text-base lg:text-lg text-gray-800 mb-6">
+                <strong className="font-bold">2022–2025</strong> GREEN Impact
+                (PNG Projects)
+              </p>
               <div className="lg:ml-4 space-y-4">
-                {pageData.sampleMetricsSnapshot.keys.map((key, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <div className="flex-shrink-0 mt-1">
-                      <span>
-                        <img loading="lazy" decoding="async"
-                          src="/images/grid-intel/lighting.png"
-                          className="w-14 -mt-4"
-                          alt="lighting"
-                        />
+                {(pageData.sampleMetricsSnapshot.keys.length
+                  ? pageData.sampleMetricsSnapshot.keys
+                  : FALLBACK_DATA.sampleMetricsSnapshot.keys
+                ).map((metric, idx) => (
+                  <div key={idx} className="flex items-center gap-3">
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src="/images/why-esg-matters-to-green/green_bolt.png"
+                      className="w-7 h-7 object-contain flex-shrink-0"
+                      alt=""
+                    />
+                    <p className="text-gray-900 font-semibold italic text-base lg:text-lg">
+                      <span className="text-[#23B14D] font-extrabold text-lg lg:text-xl mr-2">
+                        {metric.highlighted}
                       </span>
-                    </div>
-                    <p className="text-gray-700 italic leading-relaxed">
-                      {key.highlighted && (
-                        <span className="text-[#23B14D] font-bold text-lg">
-                          {key.highlighted}
-                        </span>
-                      )}{" "}
-                      {key.text.replace(key.highlighted, "")}
+                      {metric.text.replace(metric.highlighted, "").trim()}
                     </p>
                   </div>
                 ))}
@@ -382,103 +411,301 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
       case 1:
         return (
           <div className={styles.canvasDetailInner}>
-            <h3>How We Measure Impact</h3>
+            <h3 className={styles.canvasTab1Heading}>How We Measure Impact</h3>
             <table className={styles.canvasMetricsTable}>
-              <thead><tr><th>Category</th><th>Key Metrics Tracked</th></tr></thead>
-              <tbody>{pageData.howWeMeasureImpact.metrics.map((metric, index) => (
-                <tr key={`${metric.category}-${index}`}><td>{metric.category}</td><td>{metric.keyMetricsTracked}</td></tr>
-              ))}</tbody>
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Key Metrics Tracked</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pageData.howWeMeasureImpact.metrics.map((metric, index) => (
+                  <tr key={`${metric.category}-${index}`}>
+                    <td>{metric.category}</td>
+                    <td>{metric.keyMetricsTracked}</td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
-            <p className={styles.canvasPanelNote}>{pageData.howWeMeasureImpact.quote.text}</p>
+            <p className={styles.canvasPanelNote}>
+              {pageData.howWeMeasureImpact.quote.text}
+            </p>
           </div>
         );
       case 2:
         return (
           <div className={styles.canvasDetailInner}>
-            <h3>{pageData.esgIntegrationProjectLifeCycle.title}</h3>
-            <div className={styles.canvasDetailList}>{pageData.esgIntegrationProjectLifeCycle.items.map((item, index) => (
-              <div key={`${item.title}-${index}`}><strong>{item.title}</strong><span>{item.description}</span></div>
-            ))}</div>
+            <h3 className={styles.canvasTab2Heading}>
+              {pageData.esgIntegrationProjectLifeCycle.title}
+            </h3>
+            <div className={styles.canvasDetailList}>
+              {pageData.esgIntegrationProjectLifeCycle.items.map(
+                (item, index) => (
+                  <div key={`${item.title}-${index}`}>
+                    <strong>{item.title}</strong>
+                    <span>{item.description}</span>
+                  </div>
+                ),
+              )}
+            </div>
+            <p className={styles.canvasPanelNote}>
+              {pageData.esgIntegrationProjectLifeCycle.quote.text}
+            </p>
           </div>
         );
-      case 3:
+      case 3: {
+        const trustList = pageData.trustSignals.items.length
+          ? pageData.trustSignals.items
+          : FALLBACK_DATA.trustSignals.items;
+        const offsets = [43, 79, 108, 131];
+        return (
+          <div className={styles.canvasTrustContainer}>
+            <h3 className={styles.canvasTrustHeading}>
+              {pageData.trustSignals.title}
+            </h3>
+            <div className={styles.canvasSteppedList}>
+              {trustList.map((item, index) => (
+                <div
+                  key={`${item}-${index}`}
+                  className={styles.canvasSteppedItem}
+                  style={{ marginLeft: `-${offsets[index] ?? index * 30}px` }}
+                >
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/why-esg-matters-to-green/green_bolt.png"
+                    className={styles.canvasBoltIcon}
+                    alt=""
+                  />
+                  <span className={styles.canvasSteppedText}>{item}</span>
+                </div>
+              ))}
+            </div>
+            <p className={styles.canvasTrustQuote}>
+              {pageData.trustSignals.quote.text}
+            </p>
+          </div>
+        );
+      }
+      case 4: {
+        const metricList = pageData.sampleMetricsSnapshot.keys.length
+          ? pageData.sampleMetricsSnapshot.keys
+          : FALLBACK_DATA.sampleMetricsSnapshot.keys;
+        const offsets = [56, 77, 100, 126, 147];
+        return (
+          <div className={styles.canvasSampleContainer}>
+            <h3 className={styles.canvasSampleHeading}>
+              {pageData.sampleMetricsSnapshot.title}
+            </h3>
+            <p className={styles.canvasSampleSubtitle}>
+              <strong>2022–2025</strong> GREEN Impact (PNG Projects)
+            </p>
+            <div className={styles.canvasSteppedList}>
+              {metricList.map((metric, index) => {
+                const numPart = metric.highlighted.trim();
+                const textPart = metric.text
+                  .replace(metric.highlighted, "")
+                  .trim();
+                return (
+                  <div
+                    key={`${metric.text}-${index}`}
+                    className={styles.canvasSteppedItem}
+                    style={{ marginLeft: `-${offsets[index] ?? index * 20}px` }}
+                  >
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src="/images/why-esg-matters-to-green/green_bolt.png"
+                      className={styles.canvasBoltIcon}
+                      alt=""
+                    />
+                    <span className={styles.canvasSteppedText}>
+                      <strong className={styles.canvasMetricNum}>
+                        {numPart}
+                      </strong>{" "}
+                      {textPart}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      }
+      default: {
+        const offsets = [129, 148, 172, 194];
         return (
           <div className={styles.canvasDetailInner}>
-            <h3>{pageData.trustSignals.title}</h3>
-            <div className={styles.canvasDetailList}>{pageData.trustSignals.items.map((item, index) => (
-              <div key={`${item}-${index}`}><strong>{item}</strong><span>Verified through transparent project reporting and local participation.</span></div>
-            ))}</div>
+            <h3 className={styles.canvasTab0Heading}>
+              {pageData.whyEsgMattersGreen.title}
+            </h3>
+            <p className={styles.canvasPanelQuote}>
+              {pageData.whyEsgMattersGreen.subHeadline}
+            </p>
+            <p className={styles.canvasPanelLead}>
+              {pageData.whyEsgMattersGreen.description}
+            </p>
+            <div className={styles.canvasEsgKeys}>
+              {pageData.whyEsgMattersGreen.keys.map((key, index) => (
+                <div
+                  key={`${key.text}-${index}`}
+                  className={styles.canvasSteppedItem}
+                  style={{ marginLeft: `-${offsets[index] ?? index * 20}px` }}
+                >
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/why-esg-matters-to-green/green_bolt.png"
+                    className={styles.canvasBoltIcon}
+                    alt=""
+                  />
+                  <span className={styles.canvasSteppedText}>
+                    {key.highlighted ? (
+                      <>
+                        {key.text.split(key.highlighted)[0]}
+                        <span className="text-[#23B14D]">
+                          {key.highlighted}
+                        </span>
+                        {key.text.split(key.highlighted)[1]}
+                      </>
+                    ) : (
+                      key.text
+                    )}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         );
-      case 4:
-        return (
-          <div className={styles.canvasDetailInner}>
-            <h3>{pageData.sampleMetricsSnapshot.title}</h3>
-            <p className={styles.canvasPanelLead}>{pageData.sampleMetricsSnapshot.description.text}</p>
-          </div>
-        );
-      default:
-        return (
-          <div className={styles.canvasDetailInner}>
-            <h3>{pageData.whyEsgMattersGreen.title}</h3>
-            <p className={styles.canvasPanelQuote}>{pageData.whyEsgMattersGreen.subHeadline}</p>
-            <p className={styles.canvasPanelLead}>{pageData.whyEsgMattersGreen.description}</p>
-            <div className={styles.canvasEsgKeys}>{pageData.whyEsgMattersGreen.keys.map((key, index) => (
-              <div key={`${key.text}-${index}`}><span className={styles.canvasKeyMark} /><span>{key.text}</span></div>
-            ))}</div>
-          </div>
-        );
+      }
     }
   })();
 
   if (canvas) {
+    const showDiagonalLine =
+      active.index === 0 || active.index === 3 || active.index === 4;
     return (
       <main className={styles.canvasPage} data-node-id="7077:18427">
         <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
         <div className={styles.canvasBackground} aria-hidden="true">
-          <img loading="lazy" decoding="async" src="/images/why-esg-matters-to-green/bg.jpg" alt="" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/why-esg-matters-to-green/mask_right.png"
+            alt=""
+          />
         </div>
-        <img loading="lazy" decoding="async" className={styles.canvasVerticalTitle} src="/images/why-esg-matters-to-green/why-esg-matters-to-green.png" alt="Impact Measurement & ESG" />
+        <img
+          loading="lazy"
+          decoding="async"
+          className={styles.canvasVerticalTitle}
+          src="/images/why-esg-matters-to-green/why-esg-matters-to-green.png"
+          alt="Impact Measurement & ESG"
+        />
         <section className={styles.canvasHeader}>
-          <h1>IMPACT <span>MEASUREMENT</span> &amp; ESG</h1>
+          <h1>
+            IMPACT <span>MEASUREMENT</span> &amp; ESG
+          </h1>
           <h2>{pageData.mainPage.subHeadline}</h2>
           <p>{pageData.mainPage.description.text}</p>
         </section>
-        <nav className={styles.canvasMenu} aria-label="Impact measurement sections">
+        <nav
+          className={styles.canvasMenu}
+          aria-label="Impact measurement sections"
+        >
           {canvasMenuItems.map((item) => (
-            <button key={item.index} type="button" className={active.index === item.index ? styles.canvasMenuActive : ""} onClick={() => handleActive(item.index)}>{item.label}</button>
+            <button
+              key={item.index}
+              type="button"
+              className={
+                active.index === item.index ? styles.canvasMenuActive : ""
+              }
+              onClick={() => handleActive(item.index)}
+            >
+              {item.label}
+            </button>
           ))}
         </nav>
+        {showDiagonalLine && (
+          <img
+            loading="lazy"
+            decoding="async"
+            className={styles.canvasDiagonalLine}
+            src="/images/why-esg-matters-to-green/diagonal_line.svg"
+            alt=""
+            aria-hidden="true"
+          />
+        )}
         <div className={styles.canvasDetail}>{canvasDetail}</div>
         <div className={styles.canvasMonitoring}>
-          <img loading="lazy" decoding="async" src="/images/why-esg-matters-to-green/shape.png" alt="" aria-hidden="true" />
-          <p>All metrics are monitored via <span>{pageData.mainPage.quote.highlighted}</span> and third-party field audits.</p>
-          <img loading="lazy" decoding="async" src="/images/why-esg-matters-to-green/shape2.png" alt="" aria-hidden="true" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/why-esg-matters-to-green/shape.png"
+            alt=""
+            aria-hidden="true"
+          />
+          <p>
+            All metrics are monitored via{" "}
+            <span>{pageData.mainPage.quote.highlighted}</span> and third-party
+            field audits.
+          </p>
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/why-esg-matters-to-green/shape2.png"
+            alt=""
+            aria-hidden="true"
+          />
         </div>
         <div className={styles.canvasStatement}>
-          <img loading="lazy" decoding="async" src="/images/why-esg-matters-to-green/shape.png" alt="" aria-hidden="true" />
-          <h3><span>GREEN doesn’t just talk ESG.</span><br />We operationalize it, measure it, and report it — project by project.</h3>
-          <img loading="lazy" decoding="async" src="/images/why-esg-matters-to-green/shape2.png" alt="" aria-hidden="true" />
+          <h3>
+            <span>GREEN</span> Doesn’t Just Talk <span>ESG</span>.
+            <br />
+            We Operationalize It, Measure It, And Report It —{" "}
+            <span>Project By Project</span>.
+          </h3>
         </div>
         <div className={styles.canvasCtas}>
-          <FigmaAngledCta href={pageData.mainPage.cta[0]?.href || "/engage/contact-us"}>{pageData.mainPage.cta[0]?.text || "GREEN ESG Policy Brief"}</FigmaAngledCta>
-          <FigmaAngledCta icon="download" onClick={() => setIsSampleOpen(true)}>{pageData.mainPage.cta[1]?.text || "Sample Impact Report or M&E Framework"}</FigmaAngledCta>
+          <FigmaAngledCta
+            icon="download"
+            href={pageData.mainPage.cta[0]?.href || "/engage/contact-us"}
+          >
+            {pageData.mainPage.cta[0]?.text || "GREEN ESG Policy Brief (PDF)"}
+          </FigmaAngledCta>
+          <FigmaAngledCta onClick={() => setIsSampleOpen(true)}>
+            {pageData.mainPage.cta[1]?.text ||
+              "Sample Impact Report or M&E Framework"}
+          </FigmaAngledCta>
         </div>
         <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
-        <SampleImpactReport isOpen={isSampleOpen} onClose={() => setIsSampleOpen(false)} />
+        <ProductEnquiry
+          isOpen={isSampleOpen}
+          onClose={() => setIsSampleOpen(false)}
+          productName="Impact Measurement & ESG"
+          titlePrefix="SAMPLE IMPACT REPORT OR"
+          titleAccent="M&E FRAMEWORK"
+          interestLabel="REQUEST TYPE"
+          interestOptions={SAMPLE_IMPACT_INTEREST_OPTIONS}
+          defaultInterest="Sample Impact Report"
+          submitButtonText="Request Sample"
+        />
       </main>
     );
   }
 
   return (
     <React.Fragment>
-      <div className='bg-fixed bg-cover bg-center bg-no-repeat lg:bg-[url("/images/why-esg-matters-to-green/bg.jpg")]'>
+      <div className='min-h-screen bg-fixed bg-cover bg-center bg-no-repeat lg:bg-[url("/images/why-esg-matters-to-green/mask_right.png")]'>
         <TopNavigation />
-        <div className="flex h-full z-[20] relative">
+        <div className="relative z-[20] flex min-h-full">
           {/* Left Side  */}
-          <div className="w-1/8 flex items-center justify-center">
+          <div className="hidden w-1/8 items-center justify-center lg:flex">
             <div className="fixed top-1/4 left-4 lg:left-14">
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/why-esg-matters-to-green/why-esg-matters-to-green.png"
                 alt="esg-matters-to-green"
                 className="w-4 lg:w-8"
@@ -487,7 +714,7 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
           </div>
 
           {/* Main Content Area */}
-          <div className=" px-8 pl-14 lg:pl-20 pt-8">
+          <div className="w-full px-5 pt-28 sm:px-8 lg:w-auto lg:px-8 lg:pl-20 lg:pt-8">
             {/* Main Title */}
             <div className="mb-8">
               <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
@@ -496,49 +723,67 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
               <h2 className="text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-4">
                 {pageData.mainPage.subHeadline}
               </h2>
-              <p className="text-gray-600 text-lg mb-4" style={{ whiteSpace: "pre-line" }}>
+              <p
+                className="text-gray-600 text-lg mb-4"
+                style={{ whiteSpace: "pre-line" }}
+              >
                 {pageData.mainPage.description.highlighted ? (
                   <>
-                    {pageData.mainPage.description.text.split(pageData.mainPage.description.highlighted)[0]}
+                    {
+                      pageData.mainPage.description.text.split(
+                        pageData.mainPage.description.highlighted,
+                      )[0]
+                    }
                     <span className="text-[#23B14D] font-semibold">
                       {pageData.mainPage.description.highlighted}
                     </span>
-                    {pageData.mainPage.description.text.split(pageData.mainPage.description.highlighted)[1]}
+                    {
+                      pageData.mainPage.description.text.split(
+                        pageData.mainPage.description.highlighted,
+                      )[1]
+                    }
                   </>
                 ) : (
                   pageData.mainPage.description.text
                 )}
               </p>
             </div>
- <div className="z-[20] flex lg:hidden relative   ">
-          <div className="relative flex items-center">
-            <div className=" absolute top-12 -left-16">
-              <img loading="lazy" decoding="async"
-                src="/images/why-esg-matters-to-green/shape.png"
-                alt="shape"
-                className="w-12"
-              />
+            <div className="z-[20] flex lg:hidden relative   ">
+              <div className="relative flex items-center">
+                <div className=" absolute top-12 -left-16">
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/why-esg-matters-to-green/shape.png"
+                    alt="shape"
+                    className="w-12"
+                  />
+                </div>
+                <div>
+                  <p className="text-xl font-bold text-gray-800 mb-2">
+                    All metrics are monitored via
+                    <br />
+                    <span className="text-[#23B14D]">
+                      {pageData.mainPage.quote.highlighted}
+                    </span>{" "}
+                    and third-party
+                    <br />
+                    field audits.
+                  </p>
+                </div>
+                <div>
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/why-esg-matters-to-green/shape2.png"
+                    alt="shape"
+                    className="w-12 absolute -right-14 -top-5 "
+                  />
+                </div>
+              </div>
             </div>
-            <div>
-              <p className="text-xl font-bold text-gray-800 mb-2">
-                All metrics are monitored via
-                <br />
-                <span className="text-[#23B14D]">{pageData.mainPage.quote.highlighted}</span> and third-party
-                <br />
-                field audits.
-              </p>
-            </div>
-            <div>
-              <img loading="lazy" decoding="async"
-                src="/images/why-esg-matters-to-green/shape2.png"
-                alt="shape"
-                className="w-12 absolute -right-14 -top-5 "
-              />
-            </div>
-          </div>
-        </div>
             {/* Content Layout */}
-            <div className="lg:flex  mt-16">
+            <div className="mt-10 lg:mt-16 lg:flex">
               {/* Left Column - Content List */}
               <div className=" space-y-8">
                 {/* Why ESG Matters to GREEN */}
@@ -597,7 +842,9 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
                 </div>
               </div>
               <div className="lg:block hidden">
-                <img loading="lazy" decoding="async"
+                <img
+                  loading="lazy"
+                  decoding="async"
                   src="/images/why-esg-matters-to-green/line.png"
                   alt="line"
                 />
@@ -612,7 +859,9 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
         <div className="z-[20] lg:flex hidden relative  justify-end pr-4">
           <div className="relative flex items-center">
             <div className=" absolute top-12 -left-16">
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/why-esg-matters-to-green/shape.png"
                 alt="shape"
                 className="w-12"
@@ -622,13 +871,18 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
               <p className="text-xl mr-12 font-bold text-gray-800 mb-2">
                 All metrics are monitored via
                 <br />
-                <span className="text-[#23B14D]">{pageData.mainPage.quote.highlighted}</span> and third-party
+                <span className="text-[#23B14D]">
+                  {pageData.mainPage.quote.highlighted}
+                </span>{" "}
+                and third-party
                 <br />
                 field audits.
               </p>
             </div>
             <div>
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/why-esg-matters-to-green/shape2.png"
                 alt="shape"
                 className="w-12 absolute right-0 -top-5 "
@@ -647,8 +901,14 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
           </h3>
         </div>
         <div className="z-[20] relative flex flex-col items-end gap-6 mt-4 mb-20 cursor-pointer">
-          <a href={pageData.mainPage.cta[0]?.href || "#"} target="_blank" rel="noopener noreferrer">
-            <img loading="lazy" decoding="async"
+          <a
+            href={pageData.mainPage.cta[0]?.href || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/why-esg-matters-to-green/green.png"
               alt={pageData.mainPage.cta[0]?.text || "GREEN ESG Policy Brief"}
             />
@@ -658,15 +918,30 @@ const EsgMatters = ({ canvas = false }: { canvas?: boolean }) => {
             onClick={() => setIsSampleOpen(true)}
             className="cursor-pointer hover:opacity-80 transition-opacity"
           >
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/why-esg-matters-to-green/sample.png"
-              alt={pageData.mainPage.cta[1]?.text || "Sample Impact Report or M&E Framework"}
+              alt={
+                pageData.mainPage.cta[1]?.text ||
+                "Sample Impact Report or M&E Framework"
+              }
             />
           </button>
         </div>
       </div>
       <Chatbot />
-      <SampleImpactReport isOpen={isSampleOpen} onClose={() => setIsSampleOpen(false)} />
+      <ProductEnquiry
+        isOpen={isSampleOpen}
+        onClose={() => setIsSampleOpen(false)}
+        productName="Impact Measurement & ESG"
+        titlePrefix="SAMPLE IMPACT REPORT OR"
+        titleAccent="M&E FRAMEWORK"
+        interestLabel="REQUEST TYPE"
+        interestOptions={SAMPLE_IMPACT_INTEREST_OPTIONS}
+        defaultInterest="Sample Impact Report"
+        submitButtonText="Request Sample"
+      />
     </React.Fragment>
   );
 };

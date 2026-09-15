@@ -1,5 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { api, type LeadershipTeamResponse, type LeadershipTeamData } from "../app/lib/api";
+import {
+  api,
+  type LeadershipTeamResponse,
+  type LeadershipTeamData,
+} from "../app/lib/api";
 import { queryKeys } from "../app/hooks/useQuery";
 
 export const useLeadershipTeam = () => {

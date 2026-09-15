@@ -1,144 +1,106 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
 import { useInvestorRelations } from "../../../../hooks/useInvestorRelations";
+import styles from "./InvestmentFocusArea.module.css";
+import InvestorModalShell from "./InvestorModalShell";
 
 interface InvestmentFocusAreaProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const InvestmentFocusArea: React.FC<InvestmentFocusAreaProps> = ({
+const FALLBACK_ROWS = [
+  {
+    focusArea: "Mini-Grid Portfolios",
+    capitalUse: "Cluster deployments in underserved regions",
+    returnProfile: "Long-term cash flows & development impact",
+  },
+  {
+    focusArea: "Energy Storage Expansion",
+    capitalUse: "Battery banks, microgrid stability",
+    returnProfile: "Grid service revenue, resilience metrics",
+  },
+  {
+    focusArea: "O&M Platform Scaling",
+    capitalUse: "Technician training, remote diagnostics",
+    returnProfile: "Cost efficiency, regional service contracts",
+  },
+  {
+    focusArea: "GRID-INTEL™ Technology",
+    capitalUse: "AI + data infrastructure",
+    returnProfile: "Monetizable IP, SaaS integration models",
+  },
+];
+
+export default function InvestmentFocusArea({
   isOpen,
   onClose,
-}) => {
+}: InvestmentFocusAreaProps) {
   const { data } = useInvestorRelations();
-  const [isMobile, setIsMobile] = useState(false);
+  const modalData = data?.investmentFocusArea;
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const title = modalData?.title?.trim() || "Our Investment Focus Areas";
+  const headline =
+    modalData?.headline ||
+    "- Financial models and IRR simulations available on request";
 
-  if (!isOpen || !data) return null;
-
-  const modalData = data.investmentFocusArea;
-
-  const renderContent = () => (
-    <>
-      {/* Title Section */}
-      <div className="mb-8">
-        <h2 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
-          {modalData.title}
-        </h2>
-        <div className="lg:flex items-center">
-        
-          <h3 className="text-xl text-[#23B14D] font-semibold">
-            {modalData.headline}
-          </h3>
-        </div>
-        <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
-      </div>
-
-      {/* Table Content */}
-      <div className="overflow-x-auto">
-        <table className="">
-          <thead>
-            <tr className="">
-              <th className="p-4 text-left">
-                Focus Area
-              </th>
-              <th className="p-4 text-left">
-                Capital Use
-              </th>
-              <th className="p-4 text-left">
-                Return Profile
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {modalData.focusArea.items.map((_, idx) => (
-              <tr
-                key={idx}
-                className=""
-              >
-                <td className="p-4">
-                  {modalData.focusArea.items[idx]}
-                </td>
-                <td className="p-4">
-                  {modalData.capitalUse.items[idx]}
-                </td>
-                <td className="p-4">
-                  {modalData.returnProfile.items[idx]}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </>
+  const focusAreaItems = modalData?.focusArea?.items;
+  const capitalUseItems = modalData?.capitalUse?.items;
+  const returnProfileItems = modalData?.returnProfile?.items;
+  const rowCount = Math.max(
+    focusAreaItems?.length ?? 0,
+    capitalUseItems?.length ?? 0,
+    returnProfileItems?.length ?? 0,
   );
+
+  const rows =
+    rowCount > 0
+      ? Array.from({ length: rowCount }, (_, idx) => ({
+          focusArea:
+            focusAreaItems?.[idx]?.trim() ||
+            FALLBACK_ROWS[idx]?.focusArea ||
+            "",
+          capitalUse:
+            capitalUseItems?.[idx]?.trim() ||
+            FALLBACK_ROWS[idx]?.capitalUse ||
+            "",
+          returnProfile:
+            returnProfileItems?.[idx]?.trim() ||
+            FALLBACK_ROWS[idx]?.returnProfile ||
+            "",
+        }))
+      : FALLBACK_ROWS;
 
   return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed inset-0 bg-black/20 z-[99999999999999999999999999] flex items-center justify-center">
-        {/* Modal Container */}
-        <div className="relative w-full lg:max-w-6xl mx-4">
-          {/* Mobile Layout */}
-          {isMobile ? (
-            <div className="bg-gray-100 h-[80vh] p-3 overflow-y-auto py-14 border-2 border-[#23B14D] relative shadow-2xl">
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  onClick={onClose}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
-                >
-                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
+    <InvestorModalShell
+      isOpen={isOpen}
+      onClose={onClose}
+      title={title}
+      headline={headline}
+    >
+      <div className={styles.tableWrap}>
+        <div className={styles.tableHeader}>
+          <h3 className={styles.colHeading}>Focus Area</h3>
+          <h3 className={styles.colHeading}>Capital Use</h3>
+          <h3 className={styles.colHeading}>Return Profile</h3>
+        </div>
 
-              {/* Modal Content */}
-              <div className="mx-auto">{renderContent()}</div>
-            </div>
-          ) : (
-            /* Desktop Layout */
-            <div
-              className="bg-gray-100 transform  py-14 border-2 border-[#23B14D] px-16 relative shadow-2xl overflow-y-auto max-h-[85vh]"
-              style={{ clipPath: "polygon(0 0, 95% 0, 100% 100%, 5% 100%)",
-                transform:"skewX(-12deg)"
-               }}
-            >
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  onClick={onClose}
-                  style={{
-                    transform:"skewX(12deg)"
-                  }}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
-                >
-                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
+        <div className={styles.tableBody}>
+          {rows.map((row, idx) => {
+            const rowKey = `investment-focus-row-${idx}`;
 
-              {/* Modal Content */}
-              <div
-              style={{
-                transform:"skewX(6deg)"
-              }}
-              className="transform  max-w-5xl mx-auto">
-                {renderContent()}
+            return (
+              <div key={rowKey} className={styles.tableRow}>
+                <div className={styles.focusAreaCell}>{row.focusArea}</div>
+                <div className={styles.capitalUseCell}>{row.capitalUse}</div>
+                <div className={styles.returnProfileCell}>
+                  {row.returnProfile}
+                </div>
               </div>
-            </div>
-          )}
+            );
+          })}
         </div>
       </div>
-    </React.Fragment>
+    </InvestorModalShell>
   );
-};
-
-export default InvestmentFocusArea;
+}

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 export interface ProductImage {
   alt: string;
@@ -30,23 +30,25 @@ export interface Product {
 }
 
 const fetchProducts = async (): Promise<Product[]> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/engineering/products');
-  
+  const response = await fetch(
+    "https://greencms.percepco.co.uk/api/engineering/products",
+  );
+
   if (!response.ok) {
-    throw new Error('Failed to fetch products');
+    throw new Error("Failed to fetch products");
   }
-  
+
   return response.json();
 };
 
 const fetchProductBySlug = async (slug: string): Promise<Product | null> => {
   const products = await fetchProducts();
-  return products.find(product => product.slug === slug) || null;
+  return products.find((product) => product.slug === slug) || null;
 };
 
 export const useProducts = () => {
   return useQuery<Product[]>({
-    queryKey: ['products'],
+    queryKey: ["products"],
     queryFn: fetchProducts,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes (updated from cacheTime)
@@ -55,7 +57,7 @@ export const useProducts = () => {
 
 export const useProductBySlug = (slug: string) => {
   return useQuery<Product | null>({
-    queryKey: ['product', slug],
+    queryKey: ["product", slug],
     queryFn: () => fetchProductBySlug(slug),
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes (updated from cacheTime)

@@ -73,8 +73,13 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
   const [spokesOpen, setSpokesOpen] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(false);
 
-  const open =
-    { latest: setLatestOpen, contact: setContactOpen, kit: setKitOpen, news: setNewsOpen, spokes: setSpokesOpen } as const;
+  const open = {
+    latest: setLatestOpen,
+    contact: setContactOpen,
+    kit: setKitOpen,
+    news: setNewsOpen,
+    spokes: setSpokesOpen,
+  } as const;
 
   return (
     <main className={styles.page} data-node-id="7077:23952">
@@ -87,7 +92,12 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
 
       {/* Right faint collage */}
       <div className={styles.rightCollage} aria-hidden="true">
-        <img loading="lazy" decoding="async" src="/images/media-press/mainImg.png" alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/media-press/mainImg.png"
+          alt=""
+        />
       </div>
 
       {/* Header block */}
@@ -99,10 +109,10 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
           Telling the Energy Story — The Right Way.
         </p>
         <p className={styles.description}>
-          <span className={styles.greenText}>GREEN</span> Limited is shaping
-          the future of energy access in PNG and the Pacific. For accurate
-          information, interviews, brand assets, and official statements —
-          this is your source.
+          <span className={styles.greenText}>GREEN</span> Limited is shaping the
+          future of energy access in PNG and the Pacific. For accurate
+          information, interviews, brand assets, and official statements — this
+          is your source.
         </p>
       </div>
 
@@ -172,14 +182,18 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
         onClick={() => setQuoteOpen(true)}
         type="button"
       >
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           className={styles.ctaQuoteFrame}
           src="/images/media-press/request-quote-appearance-frame.svg"
           alt=""
           aria-hidden="true"
         />
         <span>Request Quote Or Appearance</span>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           className={styles.ctaQuoteArrow}
           src="/images/media-press/cta-arrow.svg"
           alt=""
@@ -205,12 +219,24 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
         <D6Chatbot />
       )}
 
-      <LatestPressReleases isOpen={latestOpen} onClose={() => setLatestOpen(false)} />
-      <MediaContactInterviewRequests isOpen={contactOpen} onClose={() => setContactOpen(false)} />
+      <LatestPressReleases
+        isOpen={latestOpen}
+        onClose={() => setLatestOpen(false)}
+      />
+      <MediaContactInterviewRequests
+        isOpen={contactOpen}
+        onClose={() => setContactOpen(false)}
+      />
       <MediaKitDownload isOpen={kitOpen} onClose={() => setKitOpen(false)} />
       <GreenInTheNews isOpen={newsOpen} onClose={() => setNewsOpen(false)} />
-      <OfficialSpokesPeople isOpen={spokesOpen} onClose={() => setSpokesOpen(false)} />
-      <RequestQuoteAppointment isOpen={quoteOpen} onClose={() => setQuoteOpen(false)} />
+      <OfficialSpokesPeople
+        isOpen={spokesOpen}
+        onClose={() => setSpokesOpen(false)}
+      />
+      <RequestQuoteAppointment
+        isOpen={quoteOpen}
+        onClose={() => setQuoteOpen(false)}
+      />
     </main>
   );
 }

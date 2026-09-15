@@ -13,7 +13,7 @@ const OFFICES = [
   {
     id: "papuaNewGuinea",
     name: "PAPUA NEW GUINEA",
-    flag: "/images/book-consulation/countryCode.png",
+    flag: "/images/reach-us/flag-png.png",
     address: [
       "PO Box 1243, Port Moresby",
       "Section 405, Allotment 4, Waigani Drive,",
@@ -59,17 +59,17 @@ interface ReachUsProps {
 export default function ReachUs({ initialFormOpen = false }: ReachUsProps) {
   const [currentOfficeIndex, setCurrentOfficeIndex] = useState(0);
   const [isFormOpen, setIsFormOpen] = useState(initialFormOpen);
-  const [canvasScale, setCanvasScale] = useState(1);
+  const [canvasScale, setCanvasScale] = useState({ x: 1, y: 1 });
+  const [isMobile, setIsMobile] = useState(false);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     const updateScale = () => {
-      setCanvasScale(
-        Math.min(
-          window.innerWidth / DESIGN_WIDTH,
-          window.innerHeight / DESIGN_HEIGHT,
-        ),
-      );
+      setIsMobile(window.innerWidth <= 1023);
+      setCanvasScale({
+        x: window.innerWidth / DESIGN_WIDTH,
+        y: window.innerHeight / DESIGN_HEIGHT,
+      });
     };
 
     updateScale();
@@ -77,25 +77,18 @@ export default function ReachUs({ initialFormOpen = false }: ReachUsProps) {
     return () => window.removeEventListener("resize", updateScale);
   }, []);
 
-  useEffect(() => {
-    if (reduceMotion) return undefined;
-    const interval = window.setInterval(() => {
-      setCurrentOfficeIndex((index) => (index + 1) % OFFICES.length);
-    }, 3000);
-
-    return () => window.clearInterval(interval);
-  }, [reduceMotion]);
-
   return (
     <main className={styles.page}>
-      <div className={styles.mobileHeader}>
-        <SiteHeader panel="logoOnly" />
-      </div>
+      {isMobile ? (
+        <div className={styles.mobileHeader}>
+          <SiteHeader panel="logoOnly" />
+        </div>
+      ) : null}
 
       <section className={styles.desktopStage} aria-label="Reach GREEN">
         <div
           className={styles.canvas}
-          style={{ transform: `translateX(-50%) scale(${canvasScale})` }}
+          style={{ transform: `scale(${canvasScale.x}, ${canvasScale.y})` }}
           data-node-id="7077:13486"
         >
           <img
@@ -110,7 +103,7 @@ export default function ReachUs({ initialFormOpen = false }: ReachUsProps) {
           {/* Keep the header in the same 1920px coordinate system as the
               Figma canvas. This prevents viewport scaling from shifting the
               menu away from the enquiry control. */}
-          <SiteHeader layout="figmaCanvas" panel="logoOnly" />
+          {!isMobile && <SiteHeader layout="figmaCanvas" panel="logoOnly" />}
 
           <p className={styles.intro} data-node-id="7077:13496">
             Are you prepared to get started on your Energy Requirement right
@@ -167,14 +160,7 @@ export default function ReachUs({ initialFormOpen = false }: ReachUsProps) {
               />
             </div>
 
-            <motion.div
-              key={currentOfficeIndex}
-              className={styles.officeLabels}
-              initial={reduceMotion ? false : { opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: reduceMotion ? 0 : 0.2, ease: MAP_EASE }}
-              aria-live="polite"
-            >
+            <div className={styles.officeLabels} aria-live="polite">
               {OFFICES.map((office, index) => {
                 const isActive = index === currentOfficeIndex;
 
@@ -184,6 +170,17 @@ export default function ReachUs({ initialFormOpen = false }: ReachUsProps) {
                     className={`${styles.officeCard} ${styles[office.id]} ${
                       isActive ? styles.officeCardActive : ""
                     }`}
+                    role="button"
+                    tabIndex={0}
+                    onPointerEnter={() => setCurrentOfficeIndex(index)}
+                    onFocus={() => setCurrentOfficeIndex(index)}
+                    onClick={() => setCurrentOfficeIndex(index)}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        setCurrentOfficeIndex(index);
+                      }
+                    }}
                   >
                     {isActive && (
                       <img
@@ -195,17 +192,26 @@ export default function ReachUs({ initialFormOpen = false }: ReachUsProps) {
                       />
                     )}
                     <h2>{office.name}</h2>
-                    {isActive && (
+                    {isActive ? (
                       <p>
-                        {office.address.map((line) => (
-                          <span key={line}>{line}</span>
+                        {office.address.map((line, lineIndex) => (
+                          <span
+                            key={line}
+                            style={
+                              {
+                                "--line-index": lineIndex,
+                              } as React.CSSProperties
+                            }
+                          >
+                            {line}
+                          </span>
                         ))}
                       </p>
-                    )}
+                    ) : null}
                   </article>
                 );
               })}
-            </motion.div>
+            </div>
           </div>
 
           <button

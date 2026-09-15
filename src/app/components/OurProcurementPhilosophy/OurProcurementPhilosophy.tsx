@@ -42,7 +42,9 @@ export default function OurProcurementPhilosophy({
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
       {/* Background Mask Artwork */}
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         src="/images/our-procurement-philosophy/figma-mask-bg.png"
         alt=""
         className={styles.maskBg}
@@ -50,7 +52,9 @@ export default function OurProcurementPhilosophy({
       />
 
       {/* Vertical Side Title */}
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         src="/images/our-procurement-philosophy/figma-vertical-title.svg"
         alt="Our Procurement Philosophy"
         className={styles.verticalTitle}
@@ -74,7 +78,9 @@ export default function OurProcurementPhilosophy({
         <div className={styles.cardRow}>
           {/* Card 1: Core Principles */}
           <article className={styles.card} data-node-id="7077:21825">
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/our-procurement-philosophy/figma-card-1.png"
               alt="Core Principles"
               className={styles.cardThumb}
@@ -93,7 +99,9 @@ export default function OurProcurementPhilosophy({
 
           {/* Card 2: What We Won't Compromise */}
           <article className={styles.card} data-node-id="7077:21827">
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/our-procurement-philosophy/figma-card-2.png"
               alt="What We Won’t Compromise"
               className={styles.cardThumb}
@@ -121,7 +129,9 @@ export default function OurProcurementPhilosophy({
         <div className={styles.cardRow}>
           {/* Card 3: Procurement Aligned with Impact */}
           <article className={styles.card} data-node-id="7077:21826">
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/our-procurement-philosophy/figma-card-3.png"
               alt="Procurement Aligned with Impact"
               className={styles.cardThumb}
@@ -146,7 +156,9 @@ export default function OurProcurementPhilosophy({
 
           {/* Card 4: Strategic Vendor Relationships */}
           <article className={styles.card} data-node-id="7077:21828">
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/our-procurement-philosophy/figma-card-4.png"
               alt="Strategic Vendor Relationships"
               className={styles.cardThumb}
@@ -173,7 +185,9 @@ export default function OurProcurementPhilosophy({
 
       {/* Left Quote Block */}
       <div className={styles.leftQuoteBlock} data-node-id="7077:21801">
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/handbook/figma-quote-left.svg"
           alt=""
           className={styles.quoteShapeLeft}
@@ -184,7 +198,9 @@ export default function OurProcurementPhilosophy({
           <br />
           We Call Them <span className={styles.greenText}>People.</span>
         </p>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/handbook/figma-quote-right.svg"
           alt=""
           className={styles.quoteShapeRight}

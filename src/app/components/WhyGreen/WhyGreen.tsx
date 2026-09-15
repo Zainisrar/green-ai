@@ -101,7 +101,9 @@ export default function WhyGreen() {
 
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:4467">
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.heroImage}
         src="/images/why-green/mainImg.png"
         alt="Solar panels at sunrise"
@@ -115,7 +117,9 @@ export default function WhyGreen() {
       </h1>
 
       <div className={styles.watermark} data-node-id="7077:4515">
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/why-green/whygreen.png"
           alt=""
           width="61"
@@ -153,7 +157,9 @@ export default function WhyGreen() {
               key={solution.title}
               data-node-id={SOLUTION_NODE_IDS[index]}
             >
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src={solution.image}
                 alt=""
                 width={solution.width}
@@ -173,12 +179,12 @@ export default function WhyGreen() {
         triggerVariant="figmaCanvas"
         triggerClassName={styles.chatTrigger}
         triggerStyle={{
-            top: 899,
-            right: "auto",
-            bottom: "auto",
-            left: 1498,
-            width: 418,
-          }}
+          top: 899,
+          right: "auto",
+          bottom: "auto",
+          left: 1498,
+          width: 418,
+        }}
       />
     </main>
   );
@@ -187,7 +193,12 @@ export default function WhyGreen() {
     <main className={styles.mobilePage} data-node-id="7077:4467-mobile">
       <SiteHeader panel="logoOnly" />
       <div className={styles.mobileHero}>
-        <img loading="lazy" decoding="async" src="/images/why-green/mobileMainImg.png" alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/why-green/mobileMainImg.png"
+          alt=""
+        />
         <h1>
           Why <strong>GREEN</strong>
         </h1>
@@ -207,7 +218,9 @@ export default function WhyGreen() {
         <div className={styles.mobileGrid}>
           {solutions.map((solution) => (
             <article key={solution.title}>
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src={solution.image}
                 alt=""
                 width={solution.width}

@@ -20,19 +20,23 @@ export default function OurStory() {
     <main className={styles.desktopPage} data-node-id="7077:6983">
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
 
-      <img loading="lazy" decoding="async"
+      <img
+        decoding="async"
         className={styles.collage}
         src="/images/our-story/collage.png"
         alt=""
       />
 
-      <img loading="lazy" decoding="async"
+      <img
+        decoding="async"
         className={styles.pageTitleImg}
         src="/images/our-story/title_h1.png"
         alt="Our Story & Milestone"
       />
 
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.watermark}
         src="/images/our-story/mile_vert.png"
         alt=""
@@ -45,14 +49,18 @@ export default function OurStory() {
 
       <section className={styles.milestones}>
         <h2 className={styles.milestonesTitle}>{milestoneTitle}</h2>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           className={styles.milestoneMap}
           src={MILESTONE_MAP}
           alt="Map of GREEN milestones across Papua New Guinea"
         />
         <a className={styles.readMore} href="#read-more">
           <span>Read more</span>
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             className={styles.readMoreArrow}
             src="/images/our-story/readmore_arrow.png"
             alt=""
@@ -72,7 +80,8 @@ export default function OurStory() {
   const mobile = (
     <main className={styles.mobilePage}>
       <SiteHeader panel="logoOnly" />
-      <img loading="lazy" decoding="async"
+      <img
+        decoding="async"
         className={styles.mobileArtwork}
         src="/images/our-story/mainImg.png"
         alt=""
@@ -87,7 +96,9 @@ export default function OurStory() {
         </section>
         <section>
           <h2>{milestoneTitle}</h2>
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src={
               ourStoryData?.ourMilestone?.maps?.secondaryImg || MILESTONE_MAP
             }

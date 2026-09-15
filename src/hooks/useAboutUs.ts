@@ -8,7 +8,8 @@ export const useAboutUs = () => {
     queryFn: api.getAboutUs,
   });
 
-  const aboutUsData = data?.success && data.data.length > 0 ? data.data[0] : null;
+  const aboutUsData =
+    data?.success && data.data.length > 0 ? data.data[0] : null;
 
   return {
     aboutUsData,

@@ -31,7 +31,9 @@ const WhyCertificationAffiliationMatter = ({
       </div>
 
       <div className="mb-6 sm:mb-8">
-        <p className="text-base leading-relaxed text-gray-700 sm:text-lg">{description}</p>
+        <p className="text-base leading-relaxed text-gray-700 sm:text-lg">
+          {description}
+        </p>
       </div>
 
       <div className="flex flex-col items-start gap-8 lg:flex-row">
@@ -39,7 +41,13 @@ const WhyCertificationAffiliationMatter = ({
           {keys?.map((k, idx) => (
             <div key={idx} className="flex items-start gap-3">
               <span className="shrink-0">
-                <img loading="lazy" decoding="async" src="/images/grid-intel/lighting.png" className="-mt-3 w-12 sm:w-14" alt="lighting" />
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="/images/grid-intel/lighting.png"
+                  className="-mt-3 w-12 sm:w-14"
+                  alt="lighting"
+                />
               </span>
               <div className="text-sm sm:text-base">
                 <span className="font-bold text-gray-800">{k.highlighted}</span>
@@ -52,8 +60,13 @@ const WhyCertificationAffiliationMatter = ({
         </div>
 
         <div className="w-full shrink-0 lg:w-[400px]">
-          <img loading="lazy" decoding="async"
-            src={img?.src || "/images/industry-affiliations-certifications/why-certification-model.png"}
+          <img
+            loading="lazy"
+            decoding="async"
+            src={
+              img?.src ||
+              "/images/industry-affiliations-certifications/why-certification-model.png"
+            }
             alt={img?.alt || "Standards and Certification"}
             className="h-auto w-full"
           />

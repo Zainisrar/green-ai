@@ -1,26 +1,26 @@
 "use client";
 
-import React, { useState } from "react";
-import { useRouter } from "next/navigation";
 import {
+  Activity,
+  Gauge,
   Headphones,
   History as HistoryIcon,
-  Gauge,
-  Leaf,
-  Activity,
   LayoutDashboard,
-  Receipt,
+  Leaf,
   LogOut,
+  Receipt,
   Zap,
 } from "lucide-react";
-
-import ServiceSupport from "./tabs/ServiceSupport";
-import History from "./tabs/History";
-import FinancialROI from "./tabs/FinancialROI";
-import EnvironmentalSaving from "./tabs/EnvironmentalSaving";
-import SiteMonitoring from "./tabs/SiteMonitoring";
-import ProjectMonitoring from "./tabs/ProjectMonitoring";
+import { useRouter } from "next/navigation";
+import type React from "react";
+import { useState } from "react";
 import AccountsStatement from "./tabs/AccountsStatement";
+import EnvironmentalSaving from "./tabs/EnvironmentalSaving";
+import FinancialROI from "./tabs/FinancialROI";
+import History from "./tabs/History";
+import ProjectMonitoring from "./tabs/ProjectMonitoring";
+import ServiceSupport from "./tabs/ServiceSupport";
+import SiteMonitoring from "./tabs/SiteMonitoring";
 
 type TabKey =
   | "service"
@@ -103,7 +103,9 @@ const ClientDashboard = () => {
         <div className="flex items-center gap-2 text-right">
           <span className="text-[10px] text-gray-400">Sites</span>
           <div className="w-16 h-10 overflow-hidden rounded border border-gray-200 relative">
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/client-value-engineering/bg.jpg"
               alt="site"
               className="w-full h-full object-cover"
@@ -137,6 +139,7 @@ const ClientDashboard = () => {
             const isActive = active === t.key;
             return (
               <button
+                type="button"
                 key={t.key}
                 onClick={() => setActive(t.key)}
                 className={`shrink-0 lg:w-full min-w-[74px] lg:min-w-0 flex flex-col items-center gap-1 px-2 lg:px-1 py-2.5 lg:py-3 rounded-md lg:rounded-none text-[10px] leading-tight text-center transition-colors border-b-2 lg:border-b-0 lg:border-l-2 ${
@@ -151,7 +154,15 @@ const ClientDashboard = () => {
             );
           })}
           <button
-            onClick={() => router.push("/client-value-engineering")}
+            type="button"
+            onClick={() => {
+              if (typeof window !== "undefined") {
+                sessionStorage.removeItem("green_client_session");
+                localStorage.removeItem("green_client_session");
+                document.cookie = "client_session=; path=/; max-age=0";
+              }
+              router.push("/client-value-engineering");
+            }}
             className="shrink-0 lg:w-full min-w-[74px] lg:min-w-0 flex flex-col items-center gap-1 px-2 lg:px-1 py-2.5 lg:py-3 rounded-md lg:rounded-none text-[10px] leading-tight text-center text-gray-500 hover:text-red-500 border-b-2 lg:border-b-0 lg:border-l-2 border-transparent lg:mt-2"
           >
             <LogOut className="h-5 w-5" />

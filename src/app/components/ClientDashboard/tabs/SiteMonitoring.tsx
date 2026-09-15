@@ -5,11 +5,11 @@ import { Sun, Zap, BatteryCharging, Home, Grid3x3 } from "lucide-react";
 import { Card, SectionTitle, Legend } from "../ui";
 import { LineChart } from "../charts/Charts";
 
-const StatBox: React.FC<{ label: string; value: string; icon: React.ElementType }> = ({
-  label,
-  value,
-  icon: Icon,
-}) => (
+const StatBox: React.FC<{
+  label: string;
+  value: string;
+  icon: React.ElementType;
+}> = ({ label, value, icon: Icon }) => (
   <div className="rounded-xl border border-gray-100 shadow-sm p-4">
     <div className="flex items-center justify-between">
       <span className="text-xs text-gray-500">{label}</span>
@@ -19,7 +19,10 @@ const StatBox: React.FC<{ label: string; value: string; icon: React.ElementType 
   </div>
 );
 
-const FlowNode: React.FC<{ icon: React.ElementType; label?: string }> = ({ icon: Icon, label }) => (
+const FlowNode: React.FC<{ icon: React.ElementType; label?: string }> = ({
+  icon: Icon,
+  label,
+}) => (
   <div className="flex flex-col items-center">
     <div className="h-12 w-12 rounded-lg border border-[#4CAF50]/40 bg-[#4CAF50]/5 flex items-center justify-center">
       <Icon className="h-5 w-5 text-[#4CAF50]" />
@@ -46,7 +49,8 @@ const SiteMonitoring = () => {
         <Card>
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-semibold text-gray-700">
-              Power Flow <span className="text-gray-400 font-normal">(hourly)</span>
+              Power Flow{" "}
+              <span className="text-gray-400 font-normal">(hourly)</span>
             </h3>
             <span className="text-[10px] text-[#4CAF50] border border-[#4CAF50]/40 rounded px-2 py-0.5">
               Active
@@ -72,7 +76,8 @@ const SiteMonitoring = () => {
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-3">
           <div>
             <h3 className="text-sm font-semibold text-gray-700">
-              Production and Consumption History <span className="text-[#4CAF50]">#</span>
+              Production and Consumption History{" "}
+              <span className="text-[#4CAF50]">#</span>
             </h3>
             <div className="mt-2">
               <Legend

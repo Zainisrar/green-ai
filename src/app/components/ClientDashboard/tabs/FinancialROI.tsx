@@ -22,14 +22,20 @@ const FinancialROI = () => {
         <StatCard label="Invested Amount" value="K 770,743" />
         <StatCard label="Payback Period" value="4.4 years" />
         <StatCard label="ROI" value="563 %" sub="25 Years" />
-        <StatCard label="Total Expected Saving" value="K 4,340,322" sub="25 Years" />
+        <StatCard
+          label="Total Expected Saving"
+          value="K 4,340,322"
+          sub="25 Years"
+        />
         <StatCard label="LCOE" value="K 0.39/kWh" sub="25 Years" />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <Card>
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-sm font-semibold text-gray-700">Payback Period</h3>
+            <h3 className="text-sm font-semibold text-gray-700">
+              Payback Period
+            </h3>
             <div className="flex items-center gap-3">
               <Legend
                 items={[
@@ -49,7 +55,9 @@ const FinancialROI = () => {
 
         <Card>
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-sm font-semibold text-gray-700">Net Present Value</h3>
+            <h3 className="text-sm font-semibold text-gray-700">
+              Net Present Value
+            </h3>
             <Legend items={[{ color: "#4CAF50", label: "NPV" }]} />
           </div>
           <LineChart

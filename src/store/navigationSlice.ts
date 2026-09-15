@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface NavigationState {
   isNavigationOpen: boolean;
@@ -9,7 +9,7 @@ const initialState: NavigationState = {
 };
 
 const navigationSlice = createSlice({
-  name: 'navigation',
+  name: "navigation",
   initialState,
   reducers: {
     openNavigation: (state) => {
@@ -24,5 +24,6 @@ const navigationSlice = createSlice({
   },
 });
 
-export const { openNavigation, closeNavigation, toggleNavigation } = navigationSlice.actions;
+export const { openNavigation, closeNavigation, toggleNavigation } =
+  navigationSlice.actions;
 export default navigationSlice.reducer;

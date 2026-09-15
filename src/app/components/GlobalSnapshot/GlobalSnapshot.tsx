@@ -12,10 +12,10 @@ import type {
   GlobalSnapshotStatsSection,
 } from "../../lib/api";
 import D6Chatbot from "../D6Chatbot";
+import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import styles from "./GlobalSnapshot.module.css";
-import RequestConsultation from "./Modals/RequestConsultation";
 
 const FALLBACK_STATS = [
   {
@@ -124,7 +124,9 @@ export default function GlobalSnapshot() {
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:14856">
       <div className={styles.network} aria-hidden="true">
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/global-snapshot/figma-network.jpg"
           alt=""
           width="4096"
@@ -136,7 +138,9 @@ export default function GlobalSnapshot() {
       <h1 className={styles.pageTitle} data-node-id="7077:14861">
         <strong>{title.highlight}</strong> {titleRemainder}
       </h1>
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.watermark}
         src="/images/global-snapshot/globalsnapshot.png"
         alt=""
@@ -164,7 +168,12 @@ export default function GlobalSnapshot() {
             key={stat.label}
             data-node-id={`7077:${14901 + index}`}
           >
-            <img loading="lazy" decoding="async" src={stat.image} alt={stat.alt} />
+            <img
+              loading="lazy"
+              decoding="async"
+              src={stat.image}
+              alt={stat.alt}
+            />
             <p>
               <strong>{stat.value}</strong> <span>{stat.label}</span>
             </p>
@@ -177,19 +186,34 @@ export default function GlobalSnapshot() {
         href={exploreHref}
         data-node-id="7077:14920"
       >
-        <img loading="lazy" decoding="async" src="/images/global-snapshot/exploreBtn.png" alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/global-snapshot/exploreBtn.png"
+          alt=""
+        />
         <span>{actions?.buttons[0]?.text || "Explore"}</span>
         <b aria-hidden="true">›</b>
       </Link>
 
       <section className={styles.highlight} data-node-id="7077:14908">
-        <img loading="lazy" decoding="async" src="/images/global-snapshot/sh1.png" alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/global-snapshot/sh1.png"
+          alt=""
+        />
         <div>
           {highlightLines.map((line) => (
             <p key={line}>{line}</p>
           ))}
         </div>
-        <img loading="lazy" decoding="async" src="/images/global-snapshot/sh2.png" alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/global-snapshot/sh2.png"
+          alt=""
+        />
       </section>
 
       <section className={styles.locations} data-node-id="7077:14912">
@@ -207,7 +231,12 @@ export default function GlobalSnapshot() {
         <div className={styles.featureList}>
           {features.map((feature) => (
             <article key={feature}>
-              <img loading="lazy" decoding="async" src="/images/global-snapshot/lighting.png" alt="" />
+              <img
+                loading="lazy"
+                decoding="async"
+                src="/images/global-snapshot/lighting.png"
+                alt=""
+              />
               <p>{feature}</p>
             </article>
           ))}
@@ -224,12 +253,19 @@ export default function GlobalSnapshot() {
           onClick={() => setIsConsultationOpen(true)}
           data-node-id="7077:14892"
         >
-          <img loading="lazy" decoding="async" src="/images/global-snapshot/consulation.png" alt="" />
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/global-snapshot/consulation.png"
+            alt=""
+          />
           <span>{actions?.buttons[1]?.text || "Request a Consultation"}</span>
           <b aria-hidden="true">›</b>
         </button>
         <Link href={portfolioHref} data-node-id="7077:14886">
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/global-snapshot/globalprojectportfolioBtn.png"
             alt=""
           />
@@ -247,12 +283,12 @@ export default function GlobalSnapshot() {
         figmaPlaceholder="Let's Talk Energy"
         triggerClassName={styles.chatTrigger}
         triggerStyle={{
-            top: 899,
-            right: "auto",
-            bottom: "auto",
-            left: 1498,
-            width: 418,
-          }}
+          top: 899,
+          right: "auto",
+          bottom: "auto",
+          left: 1498,
+          width: 418,
+        }}
       />
     </main>
   );
@@ -260,7 +296,9 @@ export default function GlobalSnapshot() {
   const mobile = (
     <main className={styles.mobilePage} data-node-id="7077:14856-mobile">
       <SiteHeader panel="logoOnly" />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.mobileNetwork}
         src="/images/global-snapshot/mainImg.png"
         alt=""
@@ -304,19 +342,30 @@ export default function GlobalSnapshot() {
           </h2>
           {features.map((feature) => (
             <article key={feature}>
-              <img loading="lazy" decoding="async" src="/images/global-snapshot/lighting.png" alt="" />
+              <img
+                loading="lazy"
+                decoding="async"
+                src="/images/global-snapshot/lighting.png"
+                alt=""
+              />
               <p>{feature}</p>
             </article>
           ))}
         </section>
         <p className={styles.mobileCredibility}>{credibility}</p>
-        <button
-          type="button"
-          className={styles.mobileConsultation}
-          onClick={() => setIsConsultationOpen(true)}
-        >
-          Request a Consultation
-        </button>
+        <div className={styles.mobileActions}>
+          <button
+            type="button"
+            className={styles.mobileConsultation}
+            onClick={() => setIsConsultationOpen(true)}
+          >
+            {actions?.buttons[1]?.text || "Request a Consultation"}
+          </button>
+          <Link className={styles.mobilePortfolio} href={portfolioHref}>
+            {actions?.buttons[2]?.text ||
+              "Explore our global project portfolio"}
+          </Link>
+        </div>
       </div>
       <D6Chatbot />
     </main>
@@ -325,9 +374,24 @@ export default function GlobalSnapshot() {
   return (
     <>
       <FigmaPageCanvas desktop={desktop} mobile={mobile} nodeId="7077:14856" />
-      <RequestConsultation
+      <ProductEnquiry
+        productName="Global Snapshot"
         isOpen={isConsultationOpen}
         onClose={() => setIsConsultationOpen(false)}
+        titlePrefix="REQUEST A"
+        titleAccent="CONSULTATION"
+        interestLabel="WHAT DO YOU NEED HELP WITH?"
+        interestOptions={[
+          "Global Snapshot",
+          "Project planning",
+          "Solar EPCM advisory",
+          "Policy and energy access",
+          "Donor and development",
+          "Technology vendors",
+          "Other",
+        ]}
+        defaultInterest="Global Snapshot"
+        submitButtonText="Submit Request"
       />
     </>
   );

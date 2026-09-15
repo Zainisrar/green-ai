@@ -52,7 +52,8 @@
       90deg,
       rgba(35, 177, 77, 0.5) 0%,
       rgba(255, 254, 80, 0.5) 100%
-    ), #ffffff;
+    ),
+    #ffffff;
   backdrop-filter: blur(15px);
   clip-path: polygon(
     var(--figma-cta-slant) 0,
@@ -60,6 +61,30 @@
     calc(100% - var(--figma-cta-slant)) 100%,
     0 100%
   );
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  max-width: 100%;
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+.innerSmall {
+  gap: 8px;
+}
+
+.label {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  min-width: 0;
+  white-space: nowrap;
 }
 
 .cta span {
@@ -73,9 +98,29 @@
   position: relative;
   z-index: 1;
   flex: 0 0 auto;
-  width: 10px;
+  width: 9px;
+  height: 15px;
+}
+
+.smallArrow {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: 7px;
+  height: 12px;
+}
+
+.arrowLeft {
+  transform: scaleX(-1);
+}
+
+.downloadIcon {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  width: 18px;
   height: 18px;
-  margin-inline-start: 4px;
+  display: block;
 }
 
 .cta:hover,

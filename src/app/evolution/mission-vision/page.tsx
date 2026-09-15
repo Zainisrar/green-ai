@@ -1,12 +1,12 @@
-import React from 'react'
-import Vision from '@/app/components/OurVision/Vision'
+import React from "react";
+import Vision from "@/app/components/OurVision/Vision";
 
 const page = () => {
   return (
     <React.Fragment>
-        <Vision/>
+      <Vision />
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default page
+export default page;

@@ -1,5 +1,5 @@
 "use client";
-import { motion, useReducedMotion } from "motion/react";
+
 import { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
@@ -9,10 +9,9 @@ import WhyWePartner from "./Modals/WhyWePartner";
 import CurrentTechnologyCollaborators from "./Modals/CurrentTechnologyCollaborators";
 import ResearchCoDevelopment from "./Modals/ResearchCoDevelopment";
 import InnovativePartner from "./Modals/InnovativePartner";
-import BecomeTechnologyPartner from "./Modals/BecomeTechnologyPartner";
+import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 
-// Figma-locked design content (node 7077:22719). Keep the API hook import
-// available for future CMS wiring without changing the pixel geometry.
+// Figma-locked design content (node 7077:22719).
 const FALLBACK = {
   title: "TECHNOLOGY & INNOVATION ALLIANCES",
   subHeadline: "Built on Collaboration. Powered by Innovation.",
@@ -32,8 +31,9 @@ const FALLBACK = {
     {
       key: "whyWePartner",
       title: "Why We Partner",
-      subtitle: "We believe that no single player has all the answers. That\u2019s why GREEN seeks out:",
-      image: "/images/technology-innovation-alliances/whywepartner.png",
+      subtitle:
+        "We believe that no single player has all the answers. That's why GREEN seeks out:",
+      image: "/images/technology-innovation-alliances/card_why_we_partner.png",
       x: 198,
       y: 347,
       titleX: 531,
@@ -44,9 +44,11 @@ const FALLBACK = {
     },
     {
       key: "currentTechnologyCollaborators",
-      title: "Current Technology Collaborators",
-      subtitle: "We believe that no single player has all the answers. That\u2019s why GREEN seeks out:",
-      image: "/images/technology-innovation-alliances/currenttechnologycollaborators.png",
+      title: "Current Technology\nCollaborators",
+      subtitle:
+        "We believe that no single player has all the answers. That's why GREEN seeks out:",
+      image:
+        "/images/technology-innovation-alliances/card_current_collaborators.png",
       x: 883,
       y: 347,
       titleX: 1218,
@@ -58,8 +60,9 @@ const FALLBACK = {
     {
       key: "researchCoDevelopment",
       title: "Research & Co-Development",
-      subtitle: "We believe that no single player has all the answers. That\u2019s why GREEN seeks out:",
-      image: "/images/technology-innovation-alliances/researchdevelopment.png",
+      subtitle:
+        "We believe that no single player has all the answers. That's why GREEN seeks out:",
+      image: "/images/technology-innovation-alliances/card_research_co_dev.png",
       x: 202,
       y: 549,
       titleX: 531,
@@ -70,9 +73,11 @@ const FALLBACK = {
     },
     {
       key: "becomeInnovationPartner",
-      title: "Become an Innovation Partner",
-      subtitle: "We believe that no single player has all the answers. That\u2019s why GREEN seeks out:",
-      image: "/images/technology-innovation-alliances/innovationpartner.png",
+      title: "Become an Innovation\nPartner",
+      subtitle:
+        "We believe that no single player has all the answers. That's why GREEN seeks out:",
+      image:
+        "/images/technology-innovation-alliances/card_innovation_partner.png",
       x: 875,
       y: 541,
       titleX: 1218,
@@ -92,7 +97,6 @@ export default function TechnologyInnovationAlliances({
   canvas = false,
 }: TechnologyInnovationAlliancesProps) {
   const [openModal, setOpenModal] = useState<string | null>(null);
-  const reduceMotion = useReducedMotion();
   const [isBecomeTechnologyPartnerOpen, setIsBecomeTechnologyPartnerOpen] =
     useState(false);
 
@@ -105,7 +109,7 @@ export default function TechnologyInnovationAlliances({
     const parts = text.split(new RegExp(`(${pattern})`, "gi"));
     return parts.map((part, index) => {
       const shouldHighlight = highlightTerms.some(
-        (term) => part.toLowerCase() === term.toLowerCase()
+        (term) => part.toLowerCase() === term.toLowerCase(),
       );
       return shouldHighlight ? (
         <span key={index} className={styles.highlight}>
@@ -130,16 +134,23 @@ export default function TechnologyInnovationAlliances({
         figmaPanelVariant={canvas ? "flagship" : "default"}
       />
 
-      {/* Vertical outlined side title */}
-      <h2 className={styles.verticalTitle}>
-        TECHNOLOGY &amp; INNOVATION
-        <br />
-        ALLIANCES
-      </h2>
+      {/* Vertical outlined side title image (81x574 at left: 71px, top: 356px) */}
+      <img
+        src="/images/technology-innovation-alliances/technology-innovation-alliances.png"
+        alt="Technology & Innovation Alliances"
+        className={styles.verticalTitleImg}
+        loading="lazy"
+        decoding="async"
+      />
 
-      {/* Faint right-side photo collage (Mask group at 1023,444) */}
+      {/* Right-side solar farm collage background */}
       <div className={styles.rightCollage} aria-hidden="true">
-        <img loading="lazy" decoding="async" src="/images/technology-innovation-alliances/collage_bg.png" alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/technology-innovation-alliances/collage_bg.png"
+          alt=""
+        />
       </div>
 
       {/* Header section */}
@@ -155,28 +166,25 @@ export default function TechnologyInnovationAlliances({
       </div>
 
       {/* Partnership pillars (exact Figma coordinates) */}
-      {d.cards.map((card, index) => (
-        <motion.div
+      {d.cards.map((card) => (
+        <div
           key={card.key}
           className={styles.card}
           style={{ top: card.y, left: 0 }}
-          initial={reduceMotion ? false : { opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: reduceMotion ? 0 : 0.45,
-            delay: reduceMotion ? 0 : index * 0.08,
-            ease: "easeOut",
-          }}
         >
           <button
             type="button"
             className={styles.cardImage}
             style={{ position: "absolute", left: card.x, top: 0 }}
             onClick={() => setOpenModal(card.key)}
-            aria-label={`Open ${card.title}`}
+            aria-label={`Open ${card.title.replace("\n", " ")}`}
           >
-            <img loading="lazy" decoding="async" src={card.image} alt={card.title} />
-            <span className={styles.cardImageAccent} aria-hidden="true" />
+            <img
+              loading="lazy"
+              decoding="async"
+              src={card.image}
+              alt={card.title.replace("\n", " ")}
+            />
           </button>
 
           <div
@@ -202,7 +210,7 @@ export default function TechnologyInnovationAlliances({
                 top: card.subY - card.titleY,
               }}
             >
-              {card.subtitle}
+              {highlightText(card.subtitle, "GREEN")}
             </p>
           </div>
 
@@ -217,37 +225,34 @@ export default function TechnologyInnovationAlliances({
           >
             Explore
           </FigmaAngledCta>
-        </motion.div>
+        </div>
       ))}
 
-      {/* Goal note over the collage */}
+      {/* Goal note over the collage - shifted left for breathing room */}
       <p className={styles.goalNote}>
         {highlightText(d.goal.text, d.goal.highlighted)}
       </p>
 
       {/* Bottom-left quote with angled brackets (Vectors 7374 / 7375) */}
-      <motion.div
-        className={styles.bottomQuote}
-        initial={reduceMotion ? false : { opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: reduceMotion ? 0 : 0.45, delay: reduceMotion ? 0 : 0.35, ease: "easeOut" }}
-      >
-        <img loading="lazy" decoding="async"
+      <div className={styles.bottomQuote}>
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/technology-innovation-alliances/quote_left.png"
           alt=""
           className={styles.quoteBracketLeft}
           aria-hidden="true"
         />
-        <h2>
-          {highlightText(d.quote1.text, d.quote1.highlighted)}
-        </h2>
-        <img loading="lazy" decoding="async"
+        <h2>{highlightText(d.quote1.text, d.quote1.highlighted)}</h2>
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/technology-innovation-alliances/quote_right.png"
           alt=""
           className={styles.quoteBracketRight}
           aria-hidden="true"
         />
-      </motion.div>
+      </div>
 
       {/* Bottom-right CTAs */}
       <FigmaAngledCta
@@ -260,10 +265,10 @@ export default function TechnologyInnovationAlliances({
       <FigmaAngledCta
         className={styles.frameworkCta}
         style={{ position: "absolute", left: 1428, top: 824 }}
-        icon="chevron"
-        href={ctaLinks.innovationFramework}
+        icon="download"
+        href="/green-innovation-partnership-framework.pdf"
       >
-        Request Innovation Partnership Framework
+        GREEN Innovation Partnership Framework (PDF)
       </FigmaAngledCta>
 
       {/* Chatbot */}
@@ -283,50 +288,34 @@ export default function TechnologyInnovationAlliances({
         <D6Chatbot />
       )}
 
-      {/* Modals */}
+      {/* Pop-up Windows matching Figma nodes */}
       <WhyWePartner
         isOpen={openModal === "whyWePartner"}
         onClose={() => setOpenModal(null)}
-        title={""}
-        subHeadline={""}
-        description={""}
-        img={{ alt: "Why We Partner", src: "" }}
-        keys={[]}
-        quote={{ text: "", highlighted: "" }}
       />
       <CurrentTechnologyCollaborators
         isOpen={openModal === "currentTechnologyCollaborators"}
         onClose={() => setOpenModal(null)}
-        title={""}
-        subHeadline={""}
-        description={""}
-        img={{ alt: "Current Technology Collaborators", src: "" }}
-        keys={[]}
-        quote={{ text: "", highlighted: "" }}
       />
       <ResearchCoDevelopment
         isOpen={openModal === "researchCoDevelopment"}
         onClose={() => setOpenModal(null)}
-        title={""}
-        subHeadline={""}
-        description={""}
-        img={{ alt: "Research & Co-Development", src: "" }}
-        keys={[]}
-        quote={{ text: "", highlighted: "" }}
       />
       <InnovativePartner
         isOpen={openModal === "becomeInnovationPartner"}
         onClose={() => setOpenModal(null)}
-        title={""}
-        subHeadline={""}
-        description={""}
-        img={{ alt: "Become an Innovation Partner", src: "" }}
-        keys={[]}
-        quote={{ text: "", highlighted: "" }}
       />
-      <BecomeTechnologyPartner
+
+      {/* Elements page enquiry component reused for "Become a Technology Partner" */}
+      <ProductEnquiry
         isOpen={isBecomeTechnologyPartnerOpen}
         onClose={() => setIsBecomeTechnologyPartnerOpen(false)}
+        productName="Technology & Innovation Alliances"
+        titlePrefix="BECOME A"
+        titleAccent="TECHNOLOGY PARTNER"
+        interestLabel="TECHNOLOGY AREA OF INTEREST"
+        interestOptions={["Technology Alliances"]}
+        defaultInterest="Technology Alliances"
       />
     </main>
   );

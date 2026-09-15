@@ -3,10 +3,9 @@
 import type React from "react";
 import { useEffect, useState } from "react";
 import { ProductEnquiryFrame } from "@/app/components/Product/Modals/ProductEnquiry";
-import enquiryStyles from "@/app/components/Product/Modals/ProductEnquiry.module.css";
-import CountryCodeDropdown from "@/app/components/shared/CountryCodeDropdown";
+import PhoneInput from "@/app/components/shared/PhoneInput";
 import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
-import styles from "./BookDiscoveryCall.module.css";
+import styles from "@/app/components/SmartGrid/Modals/SmartGridModals.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -128,136 +127,124 @@ const BookDiscoveryCall = ({ isOpen, onClose }: Props) => {
       onClose={onClose}
       labelledBy="client-discovery-call-title"
       closeLabel="Close discovery call form"
-      width={1688}
-      height={665}
-      maxScale={1.14}
-      surfaceClassName={styles.surface}
-      surfaceSrc="/images/client-partnerships/discovery-call-window.svg"
     >
-      <form
-        onSubmit={handleSubmit}
-        className={`${enquiryStyles.form} ${styles.form}`}
-      >
-        <h2
-          id="client-discovery-call-title"
-          className={`${enquiryStyles.title} ${styles.title}`}
-        >
-          BOOK A DISCOVERY CALL
-        </h2>
+      <div className={styles.content}>
+        <header className={styles.dialogHeader}>
+          <h2 id="client-discovery-call-title">
+            BOOK A <strong>DISCOVERY CALL</strong>
+          </h2>
+        </header>
 
-        <div className={`${enquiryStyles.grid} ${styles.grid}`}>
-          <div className={`${styles.fieldShell} ${styles.activeField}`}>
-            <input
-              type="text"
-              name="fullName"
-              placeholder="FULL NAME"
-              value={formData.fullName}
-              onChange={handleInputChange}
-              className={`${enquiryStyles.field} ${enquiryStyles.skewForward}`}
-              required
-            />
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={`${styles.row} ${styles.row1}`}>
+            <label className={`${styles.fieldShape} ${styles.activeField}`}>
+              <input
+                type="text"
+                name="fullName"
+                placeholder="FULL NAME"
+                value={formData.fullName}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+
+            <label className={styles.fieldShape}>
+              <input
+                type="email"
+                name="email"
+                placeholder="EMAIL ID"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
           </div>
-          <div className={styles.fieldShell}>
-            <input
-              type="email"
-              name="email"
-              placeholder="EMAIL ID"
-              value={formData.email}
-              onChange={handleInputChange}
-              className={`${enquiryStyles.field} ${enquiryStyles.skewBack}`}
-              required
-            />
+
+          <div className={`${styles.row} ${styles.row2}`}>
+            <div className={`${styles.fieldShape} ${styles.phoneField}`}>
+              <PhoneInput
+                phone={formData.phone}
+                onPhoneChange={handleInputChange}
+                dialCode={phoneCountry.dial_code}
+                countryCode={phoneCountry.country_code}
+                onCountryChange={(dial_code, country_code) =>
+                  setPhoneCountry({ dial_code, country_code })
+                }
+              />
+            </div>
+
+            <div className={styles.fieldShape}>
+              <select
+                name="areaOfInterest"
+                value={formData.areaOfInterest}
+                onChange={handleInputChange}
+                className={formData.areaOfInterest ? styles.hasValue : ""}
+                required
+              >
+                <option value="">AREA OF INTEREST</option>
+                <option value="government-utilities">
+                  Government &amp; Utilities
+                </option>
+                <option value="donors-development">
+                  Donors &amp; Development Banks
+                </option>
+                <option value="private-sector">
+                  Private Sector Enterprise
+                </option>
+                <option value="institutions">
+                  Institutions (Health, Education, Telecom)
+                </option>
+                <option value="other">Other</option>
+              </select>
+            </div>
           </div>
-          <div
-            className={`${enquiryStyles.phoneField} ${enquiryStyles.skewBack} ${styles.phoneField}`}
-          >
-            <input
-              type="tel"
-              name="phone"
-              placeholder="PHONE"
-              value={formData.phone}
-              onChange={handleInputChange}
-              required
-              aria-label={`Phone number, dial code ${phoneCountry.dial_code}`}
-            />
-            <CountryCodeDropdown
-              dialCode={phoneCountry.dial_code}
-              countryCode={phoneCountry.country_code}
-              onSelect={(dial_code, country_code) =>
-                setPhoneCountry({ dial_code, country_code })
-              }
-              className={`${enquiryStyles.countryCode} ${styles.countryCode}`}
-            />
+
+          <div className={`${styles.row} ${styles.row2FieldMessage}`}>
+            <div className={`${styles.fieldShape} ${styles.messageShape}`}>
+              <textarea
+                name="message"
+                placeholder="BRIEF MESSAGE"
+                value={formData.message}
+                onChange={handleInputChange}
+                rows={3}
+              />
+            </div>
           </div>
-          <div className={styles.fieldShell}>
-            <select
-              name="areaOfInterest"
-              value={formData.areaOfInterest}
-              onChange={handleInputChange}
-              className={`${enquiryStyles.field} ${enquiryStyles.select} ${enquiryStyles.skewForward} ${
-                formData.areaOfInterest ? enquiryStyles.hasValue : ""
-              }`}
-              required
+
+          <div className={`${styles.agreement} ${styles.row2FieldAgreement}`}>
+            <input
+              type="checkbox"
+              id="client-discovery-agree"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+            />
+            <label htmlFor="client-discovery-agree">
+              I agree that GREEN may contact me about this request.
+            </label>
+          </div>
+
+          {errorMessage && <p className={styles.error}>{errorMessage}</p>}
+          {successMessage && <p className={styles.success}>{successMessage}</p>}
+
+          <div className={`${styles.row} ${styles.row6}`}>
+            <button
+              type="button"
+              onClick={resetForm}
+              disabled={isLoading}
+              className={styles.btnReset}
             >
-              <option value="">AREA OF INTEREST</option>
-              <option value="government-utilities">
-                Government &amp; Utilities
-              </option>
-              <option value="donors-development">
-                Donors &amp; Development Banks
-              </option>
-              <option value="private-sector">Private Sector Enterprise</option>
-              <option value="institutions">
-                Institutions (Health, Education, Telecom)
-              </option>
-              <option value="other">Other</option>
-            </select>
+              <span>Reset</span>
+            </button>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={styles.btnSubmit}
+            >
+              <span>{isLoading ? "Submitting..." : "Book Call"}</span>
+            </button>
           </div>
-        </div>
-
-        <div className={styles.messageShell}>
-          <textarea
-            name="message"
-            placeholder="BRIEF MESSAGE"
-            value={formData.message}
-            onChange={handleInputChange}
-            rows={3}
-            className={`${enquiryStyles.field} ${styles.message}`}
-          />
-        </div>
-
-        <label className={`${enquiryStyles.agreement} ${styles.agreement}`}>
-          <input
-            type="checkbox"
-            checked={agreed}
-            onChange={(e) => setAgreed(e.target.checked)}
-          />
-          <span>I agree that GREEN may contact me about this request.</span>
-        </label>
-
-        {errorMessage && <p className={enquiryStyles.error}>{errorMessage}</p>}
-        {successMessage && (
-          <p className={enquiryStyles.success}>{successMessage}</p>
-        )}
-
-        <div className={`${enquiryStyles.actions} ${styles.actions}`}>
-          <button
-            type="button"
-            onClick={resetForm}
-            disabled={isLoading}
-            className={enquiryStyles.action}
-          >
-            Reset
-          </button>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className={`${enquiryStyles.action} ${enquiryStyles.submit}`}
-          >
-            {isLoading ? "Submitting..." : "Book Call"}
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </ProductEnquiryFrame>
   );
 };

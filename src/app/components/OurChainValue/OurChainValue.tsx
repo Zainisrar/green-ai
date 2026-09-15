@@ -77,7 +77,9 @@ export default function OurChainValue({ canvas = false }: OurChainValueProps) {
       />
 
       {/* Background Artwork */}
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         src="/images/our-value-chain/bg.jpg"
         alt=""
         className={styles.maskBg}
@@ -85,7 +87,9 @@ export default function OurChainValue({ canvas = false }: OurChainValueProps) {
       />
 
       {/* Vertical Side Title */}
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         src="/images/our-value-chain/our-value-chain.png"
         alt="Our Value Chain"
         className={styles.verticalTitle}
@@ -109,7 +113,9 @@ export default function OurChainValue({ canvas = false }: OurChainValueProps) {
       {/* Left Elements (Desktop) */}
       <div className={styles.leftElements}>
         <div className={styles.ecosystemCard}>
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/our-value-chain/figma-ecosystem-card.svg"
             alt=""
             className={styles.ecosystemCardBg}
@@ -136,7 +142,9 @@ export default function OurChainValue({ canvas = false }: OurChainValueProps) {
         <div className={styles.stripGrid}>
           {fallbackCapabilities.map((item) => (
             <article className={styles.stripItem} key={item.id}>
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src={item.icon}
                 alt=""
                 className={styles.stripIcon}

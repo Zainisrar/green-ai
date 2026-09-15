@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 interface ReportImage {
   alt: string;
@@ -18,18 +18,20 @@ interface ReportData {
 }
 
 const fetchReportsWhitepapers = async (): Promise<ReportData[]> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/enlighten/reports-whitepapers');
-  
+  const response = await fetch(
+    "https://greencms.percepco.co.uk/api/enlighten/reports-whitepapers",
+  );
+
   if (!response.ok) {
-    throw new Error('Failed to fetch reports and whitepapers data');
+    throw new Error("Failed to fetch reports and whitepapers data");
   }
-  
+
   return response.json();
 };
 
 export const useReportsWhitepapers = () => {
   return useQuery({
-    queryKey: ['reports-whitepapers'],
+    queryKey: ["reports-whitepapers"],
     queryFn: fetchReportsWhitepapers,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes

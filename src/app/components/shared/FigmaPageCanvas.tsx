@@ -16,7 +16,7 @@ interface FigmaPageCanvasProps {
   /** Height of the source Figma frame. Most screens are 1920 x 970. */
   designHeight?: number;
   /** Long Figma pages should preserve the 1920px design width and scroll. */
-  scaleToViewport?: "contain" | "width";
+  scaleToViewport?: "contain" | "width" | "fill";
   /** Scale a desktop-only Figma frame down on narrow screens instead of clipping it. */
   scaleMobileToViewport?: boolean;
 }
@@ -26,10 +26,10 @@ export default function FigmaPageCanvas({
   desktop,
   mobile,
   nodeId,
-  desktopBreakpoint = 1200,
+  desktopBreakpoint = 1023,
   fitCanvasHeight = false,
   designHeight = DESIGN_HEIGHT,
-  scaleToViewport = "width",
+  scaleToViewport = "fill",
   scaleMobileToViewport = false,
 }: FigmaPageCanvasProps) {
   const [viewport, setViewport] = useState({
@@ -39,7 +39,13 @@ export default function FigmaPageCanvas({
 
   useLayoutEffect(() => {
     const updateViewport = () =>
-      setViewport({ width: window.innerWidth, height: window.innerHeight });
+      // clientWidth excludes the reserved Windows scrollbar gutter. Using
+      // innerWidth here made a scaled 1920px canvas a few pixels wider than
+      // the document, which showed as a horizontal sliver or clipped edge.
+      setViewport({
+        width: document.documentElement.clientWidth,
+        height: window.innerHeight,
+      });
 
     updateViewport();
     window.addEventListener("resize", updateViewport);
@@ -52,6 +58,11 @@ export default function FigmaPageCanvas({
 
       return (
         <div className={styles.shell} data-figma-page-node={nodeId}>
+          <div
+            className={styles.canvasSizer}
+            aria-hidden="true"
+            style={{ height: designHeight * mobileScale }}
+          />
           <div
             className={styles.canvas}
             data-figma-responsive="mobile"
@@ -75,18 +86,64 @@ export default function FigmaPageCanvas({
     );
   }
 
-  // Most Figma pages previously used `fitCanvasHeight`, which letterboxed the
-  // 1920 × 970 artwork on wider or taller devices. Width fitting keeps both
-  // viewport edges flush and lets the shell scroll if the scaled artwork is
-  // slightly taller than the available screen. Explicit `contain` layouts
-  // retain their original behavior.
-  const scale =
-    scaleToViewport === "contain" && !fitCanvasHeight
-      ? Math.min(viewport.width / DESIGN_WIDTH, viewport.height / designHeight)
-      : viewport.width / DESIGN_WIDTH;
+  // Scrollable width-fitting mode for long multi-section Figma pages
+  if (scaleToViewport === "width" && !fitCanvasHeight) {
+    const scale = viewport.width / DESIGN_WIDTH;
+    return (
+      <div
+        className={`${styles.shell} ${styles.shellScrollable}`}
+        data-figma-page-node={nodeId}
+      >
+        <div
+          className={styles.canvasSizer}
+          aria-hidden="true"
+          style={{ height: designHeight * scale }}
+        />
+        <div
+          className={styles.canvas}
+          data-figma-responsive="desktop"
+          style={{
+            top: 0,
+            left: 0,
+            height: designHeight,
+            transform: `scale(${scale})`,
+          }}
+        >
+          {desktop}
+        </div>
+      </div>
+    );
+  }
 
-  // The shell always fills the full viewport (100svh). The canvas scales to
-  // fit inside. This prevents the white-space gap below on narrower screens.
+  if (scaleToViewport === "contain") {
+    const scale = Math.min(
+      viewport.width / DESIGN_WIDTH,
+      viewport.height / designHeight,
+    );
+    return (
+      <div className={styles.shell} data-figma-page-node={nodeId}>
+        <div
+          className={styles.canvas}
+          data-figma-responsive="desktop"
+          style={{
+            top: "50%",
+            left: "50%",
+            height: designHeight,
+            transform: `translate(-50%, -50%) scale(${scale})`,
+          }}
+        >
+          {desktop}
+        </div>
+      </div>
+    );
+  }
+
+  // Default full-viewport mode ("fill"):
+  // Scales 100vw x 100vh so 13", 15", and widescreen monitors have 0px side white space,
+  // 0px bottom content clipping, and 0px unwanted vertical scrollbars.
+  const scaleX = viewport.width / DESIGN_WIDTH;
+  const scaleY = viewport.height / designHeight;
+
   return (
     <div className={styles.shell} data-figma-page-node={nodeId}>
       <div
@@ -96,7 +153,7 @@ export default function FigmaPageCanvas({
           top: 0,
           left: 0,
           height: designHeight,
-          transform: `scale(${scale})`,
+          transform: `scale(${scaleX}, ${scaleY})`,
         }}
       >
         {desktop}

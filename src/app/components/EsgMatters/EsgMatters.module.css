@@ -17,18 +17,25 @@
   width: 1237px;
   height: 971px;
   overflow: hidden;
-  opacity: 0.24;
   pointer-events: none;
 }
 
 .canvasBackground img {
   display: block;
   width: 1237px;
-  height: 971px;
+  height: 1309px;
   max-width: none;
-  object-fit: cover;
-  object-position: top right;
-  filter: saturate(0.25) brightness(1.12);
+  object-fit: fill;
+}
+
+.canvasDiagonalLine {
+  position: absolute;
+  z-index: 4;
+  top: 311px;
+  left: 634px;
+  width: 215px;
+  height: 431px;
+  pointer-events: none;
 }
 
 .canvasVerticalTitle {
@@ -104,7 +111,9 @@
   line-height: 44px;
   text-align: left;
   cursor: pointer;
-  transition: color 180ms ease, transform 180ms ease;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
 }
 
 .canvasMenu button:hover,
@@ -120,84 +129,83 @@
 .canvasDetail {
   position: absolute;
   z-index: 5;
-  top: 337px;
-  left: 869px;
-  width: 600px;
-  min-height: 380px;
+  top: 300px;
+  left: 885px;
+  width: 550px;
+  min-height: 450px;
 }
 
 .canvasDetailInner {
-  width: 600px;
+  width: 550px;
 }
 
-.canvasDetailInner h3 {
-  margin: 0;
+.canvasTab0Heading {
+  margin: 37px 0 0 -16px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 24px;
   font-weight: 700;
   line-height: 44px;
+  color: #000;
+}
+
+.canvasTab1Heading,
+.canvasTab2Heading {
+  margin: 37px 0 0 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 44px;
+  color: #000;
 }
 
 .canvasPanelQuote {
   width: 614px;
-  margin: 12px 0 20px;
+  margin: 12px 0 20px -37px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 20px;
   font-weight: 700;
   line-height: 24px;
+  color: #000;
 }
 
 .canvasPanelLead {
   width: 719px;
-  margin: 12px 0 22px;
+  margin: 12px 0 22px -106px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 20px;
   font-weight: 500;
   line-height: 30px;
+  color: #000;
 }
 
 .canvasEsgKeys {
   display: flex;
   width: 720px;
   flex-direction: column;
-  gap: 0;
-  margin-left: -140px;
-  margin-top: 12px;
-}
-
-.canvasEsgKeys > div {
-  display: flex;
-  min-height: 50px;
-  align-items: center;
-  gap: 12px;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 50px;
-}
-
-.canvasKeyMark {
-  display: block;
-  width: 42px;
-  height: 42px;
-  flex: 0 0 42px;
-  background: url("/images/grid-intel/lighting.png") center / contain no-repeat;
+  gap: 16px;
+  margin-top: 16px;
 }
 
 .canvasMetricsTable {
-  width: 690px;
+  width: 540px;
   margin-top: 16px;
   border-collapse: collapse;
-  font-size: 18px;
-  line-height: 26px;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .canvasMetricsTable th {
   padding: 8px 12px;
   color: #23b14d;
   text-align: left;
+  font-size: 17px;
 }
 
 .canvasMetricsTable td {
   padding: 10px 12px;
   border-top: 1px solid rgba(35, 177, 77, 0.2);
   font-style: italic;
+  font-size: 15px;
 }
 
 .canvasPanelNote {
@@ -205,27 +213,117 @@
   color: #23b14d;
   font-size: 18px;
   font-style: italic;
+  font-weight: 600;
 }
 
 .canvasDetailList {
   display: flex;
-  width: 700px;
+  width: 540px;
   flex-direction: column;
-  gap: 22px;
-  margin-top: 24px;
+  gap: 12px;
+  margin-top: 16px;
 }
 
 .canvasDetailList > div {
   display: grid;
-  grid-template-columns: 190px 1fr;
-  gap: 16px;
-  font-size: 18px;
-  line-height: 26px;
+  grid-template-columns: 140px 1fr;
+  gap: 12px;
+  font-size: 15px;
+  line-height: 22px;
 }
 
 .canvasDetailList strong {
+  font-size: 16px;
+  font-style: italic;
+}
+
+/* Trust Signals Tab 3 */
+.canvasTrustContainer {
+  width: 550px;
+}
+
+.canvasTrustHeading {
+  margin: 30px 0 24px 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 29px;
+  color: #000;
+}
+
+.canvasSteppedList {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.canvasSteppedItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+}
+
+.canvasBoltIcon {
+  width: 33px;
+  height: 35px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.canvasSteppedText {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 20px;
   font-style: italic;
+  font-weight: 600;
+  line-height: 28px;
+  color: #000;
+}
+
+.canvasMetricNum {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 800;
+  color: #23b14d;
+}
+
+.canvasTrustQuote {
+  margin: 36px 0 0 -113px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 26px;
+  color: #23b14d;
+  width: 540px;
+}
+
+/* Sample Metrics Snapshot Tab 4 */
+.canvasSampleContainer {
+  width: 550px;
+}
+
+.canvasSampleHeading {
+  margin: 0 0 10px 4px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 29px;
+  color: #000;
+}
+
+.canvasSampleSubtitle {
+  margin: 0 0 24px -10px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #000;
+}
+
+.canvasSampleSubtitle strong {
+  font-weight: 700;
 }
 
 .canvasMonitoring {
@@ -239,9 +337,15 @@
 
 .canvasMonitoring p {
   margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 26px;
   font-weight: 600;
   line-height: 36px;
+  color: #000;
+}
+
+.canvasMonitoring p span {
+  color: #23b14d;
 }
 
 .canvasMonitoring img:first-child {
@@ -266,38 +370,19 @@
   top: 783px;
   left: 262px;
   width: 980px;
-  height: 108px;
 }
 
 .canvasStatement h3 {
   margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 26px;
   font-weight: 700;
   line-height: 36px;
+  color: #000;
 }
 
 .canvasStatement h3 span {
   color: #23b14d;
-}
-
-.canvasStatement h3::first-line {
-  color: #23b14d;
-}
-
-.canvasStatement img:first-child {
-  position: absolute;
-  top: -20px;
-  left: -64px;
-  width: 82px;
-  height: 101px;
-}
-
-.canvasStatement img:last-child {
-  position: absolute;
-  top: -5px;
-  right: -6px;
-  width: 82px;
-  height: 102px;
 }
 
 .canvasCtas {
@@ -314,9 +399,9 @@
 .canvasCtas > * {
   height: 52px;
   flex: 0 0 52px;
-  justify-content: space-between !important;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
+  justify-content: center !important;
+  gap: 12px;
+  padding: 0 24px 0 32px !important;
   font-size: 16px;
   font-weight: 600;
 }
@@ -328,28 +413,4 @@
 
 .canvasCtas > :last-child {
   width: 429px;
-}
-
-@media (max-width: 1200px) {
-  .canvasPage {
-    position: static;
-    width: auto;
-    height: auto;
-    min-height: 0;
-    overflow: visible;
-  }
-
-  .canvasBackground,
-  .canvasVerticalTitle,
-  .canvasHeader,
-  .canvasMenu,
-  .canvasDetail,
-  .canvasMonitoring,
-  .canvasStatement,
-  .canvasCtas {
-    position: static;
-    width: auto;
-    height: auto;
-    min-height: 0;
-  }
 }

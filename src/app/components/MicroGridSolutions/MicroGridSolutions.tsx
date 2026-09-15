@@ -87,7 +87,9 @@ export default function MicroGridSolutions() {
 
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:5239">
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.backgroundArt}
         src="/images/microgrid-solutions/mainImg.png"
         alt=""
@@ -95,7 +97,9 @@ export default function MicroGridSolutions() {
         height="970"
       />
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.verticalTitle}
         src="/images/microgrid-solutions/hybridLogo.png"
         alt=""
@@ -151,7 +155,9 @@ export default function MicroGridSolutions() {
       </p>
 
       <section className={styles.quote} data-node-id="7077:5265">
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/microgrid-solutions/vector.png"
           alt=""
           width="82"
@@ -191,12 +197,12 @@ export default function MicroGridSolutions() {
         triggerVariant="figmaCanvas"
         triggerClassName={styles.chatTrigger}
         triggerStyle={{
-            top: 899,
-            right: "auto",
-            bottom: "auto",
-            left: 1498,
-            width: 418,
-          }}
+          top: 899,
+          right: "auto",
+          bottom: "auto",
+          left: 1498,
+          width: 418,
+        }}
       />
     </main>
   );
@@ -244,7 +250,9 @@ export default function MicroGridSolutions() {
         <div className={styles.mobileActions}>
           <button type="button" onClick={() => setIsArchitectOpen(true)}>
             <span>Talk to a System Architect</span>
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/microgrid-solutions/figma-action-arrow.svg"
               alt=""
               aria-hidden="true"
@@ -252,7 +260,9 @@ export default function MicroGridSolutions() {
           </button>
           <button type="button" onClick={() => setIsDeploymentReviewOpen(true)}>
             <span>Book a Deployment Review</span>
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/microgrid-solutions/figma-action-arrow.svg"
               alt=""
               aria-hidden="true"
@@ -263,7 +273,9 @@ export default function MicroGridSolutions() {
               {microgridData?.callToActions?.[2]?.text ||
                 "Download Our Hybrid & Microgrid Overview"}
             </span>
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/microgrid-solutions/figma-download-icon.png"
               alt=""
               aria-hidden="true"
@@ -277,12 +289,7 @@ export default function MicroGridSolutions() {
 
   return (
     <>
-      <FigmaPageCanvas
-        desktop={desktop}
-        mobile={mobile}
-        nodeId="7077:5239"
-        scaleToViewport="contain"
-      />
+      <FigmaPageCanvas desktop={desktop} mobile={mobile} nodeId="7077:5239" />
       <SystemArchitect
         isOpen={isArchitectOpen}
         onClose={() => setIsArchitectOpen(false)}

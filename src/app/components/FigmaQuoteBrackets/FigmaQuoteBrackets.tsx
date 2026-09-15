@@ -21,9 +21,14 @@ export default function FigmaQuoteBrackets({
   rightSrc = "/images/handbook/figma-quote-right.svg",
 }: FigmaQuoteBracketsProps) {
   return (
-    <span className={`${styles.brackets} ${className}`.trim()} aria-hidden="true">
+    <span
+      className={`${styles.brackets} ${className}`.trim()}
+      aria-hidden="true"
+    >
       {showLeft ? (
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src={leftSrc}
           alt=""
           className={styles.left}
@@ -31,7 +36,9 @@ export default function FigmaQuoteBrackets({
         />
       ) : null}
       {showRight ? (
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src={rightSrc}
           alt=""
           className={styles.right}

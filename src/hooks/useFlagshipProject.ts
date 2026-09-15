@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 interface FlagshipProjectIcon {
   img: {
@@ -34,18 +34,20 @@ interface FlagshipProjectData {
 }
 
 const fetchFlagshipProject = async (): Promise<FlagshipProjectData> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/endeavors/flagship-projects/get');
-  
+  const response = await fetch(
+    "https://greencms.percepco.co.uk/api/endeavors/flagship-projects/get",
+  );
+
   if (!response.ok) {
-    throw new Error('Failed to fetch flagship project data');
+    throw new Error("Failed to fetch flagship project data");
   }
-  
+
   return response.json();
 };
 
 export const useFlagshipProject = () => {
   return useQuery({
-    queryKey: ['flagship-project'],
+    queryKey: ["flagship-project"],
     queryFn: fetchFlagshipProject,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes

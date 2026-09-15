@@ -1,15 +1,13 @@
 {
   "name": "figma-mcp",
-  "version": "0.1.0",
   "private": true,
-  "type": "commonjs",
   "scripts": {
     "start": "node server.js",
     "pull": "node generate.js"
   },
   "dependencies": {
-    "body-parser": "^2.3.0",
-    "express": "^5.2.1",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2",
     "node-fetch": "^3.3.2"
   }
 }

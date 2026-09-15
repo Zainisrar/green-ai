@@ -95,10 +95,12 @@
 .chips {
   position: absolute;
   inset: 0;
+  pointer-events: none;
 }
 
 .chip {
   position: absolute;
+  pointer-events: auto;
   isolation: isolate;
   display: grid;
   place-items: center;

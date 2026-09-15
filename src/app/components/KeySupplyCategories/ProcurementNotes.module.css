@@ -1,0 +1,124 @@
+.dialog {
+  position: relative;
+  width: 1826.185px;
+  height: 579.575px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  color: #000;
+}
+
+.title {
+  position: absolute;
+  top: 54px;
+  left: 304px;
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.divider {
+  position: absolute;
+  top: 113px;
+  left: 273px;
+  width: 1255px;
+  height: 1px;
+  background: #a9a9a9;
+}
+
+.notes {
+  position: absolute;
+  top: 162px;
+  left: 0;
+  width: 100%;
+}
+
+.note {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  width: 1450px;
+  min-height: 68px;
+}
+
+.note:nth-child(1) {
+  margin-left: 243px;
+}
+
+.note:nth-child(2) {
+  margin-top: 22px;
+  margin-left: 210px;
+}
+
+.note:nth-child(3) {
+  margin-top: 0;
+  margin-left: 177px;
+}
+
+.note:nth-child(4) {
+  margin-top: 0;
+  margin-left: 144px;
+}
+
+.bolt {
+  display: block;
+  width: 70px;
+  height: 70px;
+  flex: 0 0 70px;
+  margin: -16px 13px 0 0;
+  background: url("/images/grid-intel/lighting.png") center / contain no-repeat;
+}
+
+.note p {
+  max-width: 1280px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.note strong {
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .dialog {
+    width: auto;
+    height: auto;
+  }
+
+  .title,
+  .divider,
+  .notes {
+    position: static;
+    width: auto;
+  }
+
+  .title {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+  }
+
+  .divider {
+    height: 1px;
+    margin-bottom: 1.5rem;
+  }
+
+  .note,
+  .note:nth-child(n) {
+    width: auto;
+    min-height: 0;
+    margin: 0 0 1rem;
+  }
+
+  .bolt {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+    margin: 0 0.5rem 0 0;
+  }
+
+  .note p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}

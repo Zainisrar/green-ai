@@ -1,0 +1,162 @@
+.dialog {
+  position: relative;
+  width: 1835.185px;
+  height: 601.575px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-style: normal;
+  color: #000;
+}
+
+.title {
+  position: absolute;
+  top: 54px;
+  left: 313px;
+  width: 1054px;
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: normal;
+  transform: skewX(-6deg);
+  transform-origin: left center;
+}
+
+.compactTitle {
+  top: 44px;
+  left: 308px;
+}
+
+.divider {
+  position: absolute;
+  top: 116px;
+  left: 306.5px;
+  width: 1255px;
+  height: 1px;
+  background: #a9a9a9;
+}
+
+.headings {
+  position: absolute;
+  top: 167px;
+  left: 306.5px;
+  display: grid;
+  grid-template-columns: 384.168px minmax(0, 1fr);
+  width: 1000px;
+}
+
+.headings h3 {
+  margin: 0;
+  color: #23b14d;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: normal;
+  transform: skewX(-6deg);
+  transform-origin: left center;
+}
+
+.rows {
+  position: absolute;
+  top: 238px;
+  left: 181px;
+  width: 1464px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 490.25px minmax(0, 1fr);
+  min-height: 101px;
+}
+
+/* Each Figma row follows the diagonal of the Vector 7376 dialog frame. */
+.row:nth-child(2) {
+  margin-left: -40px;
+}
+
+.row:nth-child(3) {
+  margin-left: -80px;
+}
+
+.component,
+.note {
+  margin: 0;
+  font-size: 22px;
+  line-height: 35px;
+  font-style: italic;
+  transform: skewX(-6deg);
+  transform-origin: left center;
+}
+
+.component {
+  align-self: start;
+  padding-left: 175px;
+  font-weight: 700;
+}
+
+.note {
+  min-width: 0;
+  max-width: 900px;
+  padding-right: 48px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 767px) {
+  .dialog {
+    width: auto;
+    height: auto;
+  }
+
+  .title,
+  .divider,
+  .headings,
+  .rows {
+    position: static;
+    width: auto;
+  }
+
+  .title {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+    transform: none;
+  }
+
+  .compactTitle {
+    margin: 0 0 1rem;
+  }
+
+  .divider {
+    height: 1px;
+    margin-bottom: 1.5rem;
+  }
+
+  .headings {
+    display: none;
+  }
+
+  .row {
+    display: block;
+    min-height: 0;
+    margin-bottom: 1.25rem;
+  }
+
+  .row:nth-child(n) {
+    margin-left: 0;
+  }
+
+  .component {
+    padding: 0;
+    color: #23b14d;
+  }
+
+  .component,
+  .note {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-style: normal;
+    transform: none;
+  }
+
+  .note {
+    max-width: none;
+    padding-right: 0;
+  }
+}

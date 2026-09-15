@@ -1,0 +1,425 @@
+.overlay {
+  position: fixed;
+  z-index: 2147483647;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.backdrop {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border: 0;
+  background: transparent;
+}
+
+.stage {
+  position: relative;
+  z-index: 1;
+  width: calc(1866.185px * var(--modal-scale));
+  height: calc(699.575px * var(--modal-scale));
+  flex: none;
+}
+
+.panel {
+  position: relative;
+  box-sizing: border-box;
+  width: 1866.185px;
+  height: 699.575px;
+  min-height: 699.575px;
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+  clip-path: polygon(16.25% 0, 100% 0, 80.7% 100%, 0 100%);
+  filter: drop-shadow(0 20px 18px rgba(0, 0, 0, 0.22));
+  transform: scale(var(--modal-scale));
+  transform-origin: top left;
+}
+
+.panel::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: "";
+  background: linear-gradient(110deg, #23b14d 0%, #fffe50 100%);
+  clip-path: polygon(16.25% 0, 100% 0, 80.7% 100%, 0 100%);
+}
+
+.panel::after {
+  position: absolute;
+  z-index: -1;
+  inset: 2px;
+  content: "";
+  background: #fff;
+  clip-path: polygon(16.25% 0, 100% 0, 80.7% 100%, 0 100%);
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 34px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #171717;
+  font-family: Arial, sans-serif;
+  font-size: 39px;
+  font-weight: 200;
+  line-height: 24px;
+  cursor: pointer;
+}
+
+.heading {
+  margin: 0;
+  color: #000;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 37px;
+}
+
+.rule {
+  position: absolute;
+  top: 146px;
+  left: 16.4%;
+  width: 67.25%;
+  height: 1px;
+  margin: 0;
+  background: #969696;
+}
+
+.whyHeading {
+  position: absolute;
+  top: 54px;
+  left: 18.43%;
+  display: grid;
+  gap: 2px;
+}
+
+.whySubheading {
+  margin: 0;
+  color: #23b14d;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.whyGrid {
+  position: absolute;
+  top: 253px;
+  left: 18.97%;
+  width: 59%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 92px;
+  row-gap: 56px;
+  margin: 0;
+}
+
+.whyItem {
+  display: grid;
+  grid-template-columns: 62px 1fr;
+  align-items: start;
+  gap: 20px;
+}
+
+.whyItem img {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+}
+
+.whyItem:nth-child(2) img {
+  width: 48px;
+  height: 48px;
+}
+
+.whyItem h3 {
+  margin: 4px 0 0;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 31px;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.whyItem p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 23px;
+}
+
+.whyQuote {
+  position: absolute;
+  top: 521px;
+  left: 22.5%;
+  width: 48.55%;
+  margin: 0;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.68px;
+  line-height: 32px;
+}
+
+.whyQuote p {
+  margin: 0;
+}
+
+.whyQuote footer {
+  color: #23b14d;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.tracksPanel {
+  min-height: 700px;
+  top: 21px;
+}
+
+.whyPanel {
+  top: -9px;
+}
+
+.tracksPanel .heading,
+.differentPanel .heading,
+.rolesPanel .heading {
+  position: absolute;
+  top: 89px;
+  left: 17.8%;
+}
+
+.tracksGrid {
+  position: absolute;
+  top: 176px;
+  left: 16.4%;
+  width: 67.25%;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  column-gap: 1px;
+  margin: 0;
+}
+
+.tracksGrid h3 {
+  margin: 0 0 7px;
+  color: #23b14d;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 32px;
+}
+
+.tracksGrid p {
+  margin: 0;
+  font-size: 20px;
+  line-height: 60px;
+}
+
+.tracksGrid p:first-of-type {
+  font-weight: 700;
+}
+
+.differentPanel,
+.rolesPanel {
+  padding: 0;
+}
+
+.differentContent {
+  position: static;
+  margin: 0;
+}
+
+.points {
+  position: static;
+}
+
+.point {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  align-items: start;
+  gap: 0;
+  width: 680px;
+}
+
+.point:nth-child(1) {
+  left: 321px;
+  top: 209px;
+}
+
+.point:nth-child(2) {
+  left: 278px;
+  top: 304px;
+}
+
+.point:nth-child(3) {
+  left: 234px;
+  top: 399px;
+}
+
+.point:nth-child(4) {
+  left: 189px;
+  top: 483px;
+}
+
+.point img,
+.role img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.point h3 {
+  margin: 0;
+  font-size: 28px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 30px;
+  text-transform: capitalize;
+}
+
+.point p {
+  margin: 0;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 30px;
+  text-transform: capitalize;
+}
+
+.featureImage {
+  position: absolute;
+  top: 228px;
+  left: 883px;
+  width: 752px;
+  height: 294px;
+  object-fit: cover;
+  clip-path: polygon(18% 0, 100% 0, 82% 100%, 0 100%);
+}
+
+.rolesGrid {
+  position: absolute;
+  top: 228px;
+  left: 416px;
+  width: 1150px;
+  display: grid;
+  grid-template-columns: 500px 1fr;
+  column-gap: 180px;
+  row-gap: 72px;
+  margin: 0;
+}
+
+.role {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 12px;
+}
+
+.role h3 {
+  margin: 0;
+  font-size: 28px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 33px;
+  text-transform: capitalize;
+}
+
+.role .place {
+  margin: 0;
+  color: #23b14d;
+  font-size: 25px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 33px;
+}
+
+.role .closing {
+  margin: 0;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 33px;
+}
+
+@media (max-width: 1024px) {
+  .overlay {
+    align-items: start;
+    padding: 14px;
+  }
+
+  .panel,
+  .tracksPanel {
+    width: 100%;
+    min-height: 0;
+    height: auto;
+    padding: 64px 42px 48px;
+    clip-path: none;
+  }
+
+  .panel::before,
+  .panel::after {
+    clip-path: none;
+  }
+
+  .close {
+    top: 18px;
+    right: 19px;
+  }
+
+  .whyGrid,
+  .differentContent,
+  .rolesGrid {
+    grid-template-columns: 1fr;
+    margin: 48px 0 0;
+  }
+
+  .heading,
+  .tracksPanel .heading,
+  .differentPanel .heading,
+  .rolesPanel .heading,
+  .whyHeading,
+  .rule,
+  .whyGrid,
+  .whyQuote,
+  .tracksGrid,
+  .differentContent,
+  .rolesGrid {
+    position: static;
+    width: auto;
+  }
+
+  .rule {
+    margin-top: 25px;
+  }
+
+  .whyGrid {
+    row-gap: 26px;
+  }
+
+  .whyQuote {
+    margin: 48px 0 0;
+  }
+
+  .tracksGrid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .tracksGrid p {
+    line-height: 32px;
+    margin-bottom: 18px;
+  }
+
+  .differentContent {
+    gap: 36px;
+  }
+
+  .rolesGrid {
+    row-gap: 36px;
+  }
+}

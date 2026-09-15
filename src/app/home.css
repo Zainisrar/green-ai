@@ -82,7 +82,8 @@
       rgba(35, 209, 75, 0.608) 24.12%,
       rgba(0, 0, 0, 0.16) 68.16%,
       rgba(255, 229, 0, 0.464) 79.45%
-    ), url("/images/home/WhatsApp Image 2023-10-12 at 9.08.49 AM (6) 1.png");
+    ),
+    url("/images/home/WhatsApp Image 2023-10-12 at 9.08.49 AM (6) 1.png");
   background-size: cover;
   background-position: center;
 }
@@ -237,10 +238,23 @@
 }
 
 .panel-headline-r {
+  font-family: var(--font-raleway), Raleway, sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 40px;
-  line-height: 49px;
+  line-height: 48.76px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.home-page-d6 .panel-headline-r .panel-headline-text {
+  font-family: var(--font-raleway), Raleway, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 48.76px;
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
 
 .home-page-d6 .panel-headline-about .panel-headline-text {

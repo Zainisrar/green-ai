@@ -37,7 +37,9 @@ export default function BecomeSupplier({
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
       {/* Existing Figma canvas background artwork */}
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         src="/images/become-supplier/bg.jpg"
         alt=""
         className={styles.backgroundArtwork}
@@ -45,7 +47,9 @@ export default function BecomeSupplier({
       />
 
       {/* Vertical Side Title */}
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         src="/images/become-supplier/become-supplier.png"
         alt="Become a Supplier"
         className={styles.verticalTitle}
@@ -67,7 +71,9 @@ export default function BecomeSupplier({
       >
         {/* Card 1: Supplier Login & Registration */}
         <article className={styles.card}>
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/become-supplier/supplierlogin.png"
             alt="Supplier Login & Registration"
             className={styles.cardThumb}
@@ -89,7 +95,9 @@ export default function BecomeSupplier({
 
         {/* Card 2: What You'll Need */}
         <article className={styles.card}>
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/become-supplier/what-you-need.png"
             alt="What You'll Need"
             className={styles.cardThumb}
@@ -108,7 +116,9 @@ export default function BecomeSupplier({
 
         {/* Card 3: Why GREEN? */}
         <article className={styles.card}>
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/become-supplier/why-green.png"
             alt="Why GREEN?"
             className={styles.cardThumb}
@@ -128,16 +138,21 @@ export default function BecomeSupplier({
 
       {/* Middle Right Quote Callout */}
       <div className={styles.quoteCallout}>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/handbook/figma-quote-left.svg"
           alt=""
           className={styles.quoteShapeLeft}
           aria-hidden="true"
         />
         <p>
-          This Portal Is Your First Step Toward Becoming Part Of Our Global Energy Supply Network
+          This Portal Is Your First Step Toward Becoming Part Of Our Global
+          Energy Supply Network
         </p>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/handbook/figma-quote-right.svg"
           alt=""
           className={styles.quoteShapeRight}
@@ -173,7 +188,8 @@ export default function BecomeSupplier({
       <div className={styles.mobileElements}>
         <div className={styles.mobileQuoteBox}>
           <p>
-            “This Portal Is Your First Step Toward Becoming Part Of Our Global Energy Supply Network”
+            “This Portal Is Your First Step Toward Becoming Part Of Our Global
+            Energy Supply Network”
           </p>
         </div>
         <p className={styles.mobileBottomStatement}>

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 interface MediaImage {
   alt: string;
@@ -46,19 +46,21 @@ interface MediaMentionsResponse {
 }
 
 const fetchMediaMentions = async (): Promise<MediaMentionsData> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/enlighten/media-mentions');
-  
+  const response = await fetch(
+    "https://greencms.percepco.co.uk/api/enlighten/media-mentions",
+  );
+
   if (!response.ok) {
-    throw new Error('Failed to fetch media mentions data');
+    throw new Error("Failed to fetch media mentions data");
   }
-  
+
   const result: MediaMentionsResponse = await response.json();
   return result.data;
 };
 
 export const useMediaMentions = () => {
   return useQuery({
-    queryKey: ['media-mentions'],
+    queryKey: ["media-mentions"],
     queryFn: fetchMediaMentions,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes

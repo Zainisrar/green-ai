@@ -1,84 +1,52 @@
 .page {
   position: relative;
-  height: 970px;
-  min-height: 970px;
+  width: 100%;
+  min-height: 100svh;
   overflow: hidden;
   background: #ffffff;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
 
-/* Background hands collage behind left panel */
+.canvasPage {
+  width: 1920px;
+  height: 970px;
+  min-height: 970px;
+  overflow: hidden;
+}
+
+/* Background hands collage and top-left green panel */
 .bgWrap {
   position: absolute;
-  top: -191px;
-  left: -212px;
-  width: 1201px;
-  height: 1998px;
+  top: 0;
+  left: 0;
+  width: 1920px;
+  height: 970px;
   z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 
 .bgImg {
-  width: 963px;
-  height: 963px;
-  object-fit: cover;
-  opacity: 0.9;
-}
-
-/* Left green gradient panel */
-.greenPanel {
   position: absolute;
   top: -1px;
-  left: -15px;
-  width: 326px;
-  height: 662px;
-  background: linear-gradient(
-    120deg,
-    rgba(200, 233, 156, 0.95) 0%,
-    rgba(140, 205, 95, 0.75) 45%,
-    rgba(120, 196, 85, 0.0) 100%
-  );
-  z-index: 1;
+  left: -52px;
+  width: 963px;
+  height: 963px;
+  object-fit: fill;
+  display: block;
+  z-index: 0;
 }
 
-.bgFade {
-  position: absolute;
-  top: -191px;
-  left: -212px;
-  width: 1201px;
-  height: 1998px;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0.88) 0%,
-    rgba(255, 255, 255, 0.55) 12%,
-    rgba(255, 255, 255, 0) 30%
-  );
-  z-index: 1;
-}
-
-/* Left vertical title (Raleway 900 rotated) */
-.verticalTitleWrap {
-  position: absolute;
-  top: 263px;
-  left: 66px;
-  width: 94px;
-  height: 668px;
-  z-index: 3;
-  overflow: visible;
-}
-
+/* Left vertical title */
 .verticalTitle {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  margin: 0;
-  font-family: var(--font-raleway), Raleway, sans-serif;
-  font-size: 40px;
-  font-weight: 900;
-  line-height: 1;
-  color: rgba(255, 255, 255, 0.55);
-  transform: rotate(-90deg) translateX(-100%);
-  transform-origin: left bottom;
-  white-space: nowrap;
+  top: 263px;
+  left: 73px;
+  width: 34px;
+  height: 668px;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
 }
 
 /* Page header */
@@ -96,6 +64,10 @@
   line-height: 1.02;
   color: #000;
   letter-spacing: 0.5px;
+}
+
+.green {
+  color: #23b14d;
 }
 
 .subHeadline {
@@ -156,9 +128,7 @@
 
 .rowDivider {
   position: absolute;
-  top: 67px;
-  left: 598px;
-  width: 914px;
+  top: 71px;
   border: 0;
   border-bottom: 1px solid #7dc98f;
 }

@@ -55,7 +55,9 @@ export default function RequestProposalCanvas() {
           BOOK A CONSULTATION
         </text>
       </svg>
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.collage}
         src="/images/rfp/collage.png"
         alt=""
@@ -97,7 +99,9 @@ export default function RequestProposalCanvas() {
           className={styles.delivRow}
           style={{ top: d.top, left: 265 }}
         >
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             className={styles.bolt}
             src="/images/rfp/bolt.png"
             alt=""
@@ -113,7 +117,9 @@ export default function RequestProposalCanvas() {
           className={styles.delivRow}
           style={{ top: d.top, left: 873 }}
         >
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             className={styles.bolt}
             src="/images/rfp/bolt.png"
             alt=""
@@ -124,7 +130,9 @@ export default function RequestProposalCanvas() {
         </div>
       ))}
       <div className={styles.quoteWrap} style={{ top: 533, left: 1441 }}>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           className={styles.bracketL}
           src="/images/rfp/quote_bracket_l.png"
           alt=""
@@ -136,7 +144,9 @@ export default function RequestProposalCanvas() {
           <span className={styles.quoteGreen}>GREEN</span>, Every RFP Is A
           Strategic Partnership In The Making.&rdquo;
         </blockquote>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           className={styles.bracketR}
           src="/images/rfp/quote_bracket_r.png"
           alt=""
@@ -146,7 +156,9 @@ export default function RequestProposalCanvas() {
       </div>
       <div className={styles.emailBox}>
         <div className={styles.emailSkew}>
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             className={styles.calendarIcon}
             src="/images/book-consulation/calendar.png"
             alt=""

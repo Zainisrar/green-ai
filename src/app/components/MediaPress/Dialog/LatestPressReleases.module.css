@@ -1,0 +1,184 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-left: 290px;
+  padding-top: 36px;
+  box-sizing: border-box;
+}
+
+.cardsRow {
+  display: flex;
+  gap: 36px;
+  align-items: flex-start;
+}
+
+.card {
+  position: relative;
+  width: 370px;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 367px;
+  height: 145px;
+}
+
+.bracketTr {
+  position: absolute;
+  top: -12px;
+  right: -8px;
+  width: 79px;
+  height: 98px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.bracketBl {
+  position: absolute;
+  bottom: -12px;
+  left: -8px;
+  width: 79px;
+  height: 98px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.imageShape {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(14% 0, 100% 0, 86% 100%, 0 100%);
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.img {
+  object-fit: cover;
+}
+
+.cardTitle {
+  margin: 18px 0 0 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #080808;
+  width: 360px;
+  min-height: 54px;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 367px;
+  margin-top: 24px;
+}
+
+.date {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #171717;
+}
+
+.calendarIcon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.readMoreBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  padding: 0 24px;
+  background: linear-gradient(100deg, #c5ed9a 0%, #f7f77a 100%);
+  border: 1px solid #48bd61;
+  clip-path: polygon(9% 0, 100% 0, 91% 100%, 0 100%);
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #111111;
+  cursor: pointer;
+  transition:
+    filter 160ms ease,
+    transform 160ms ease;
+}
+
+.readMoreBtn:hover {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+.viewAllBtn {
+  position: absolute;
+  left: 1120px;
+  bottom: 36px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  font-style: italic;
+  color: #69707a;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 160ms ease;
+}
+
+.viewAllBtn:hover {
+  color: #23b14d;
+}
+
+.viewAllBtn span {
+  font-size: 24px;
+  font-style: normal;
+}
+
+/* Mobile responsive */
+@media (max-width: 767px) {
+  .container {
+    padding-left: 0;
+    padding-top: 0;
+  }
+
+  .cardsRow {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .imageWrapper,
+  .cardTitle,
+  .metaRow {
+    width: 100%;
+  }
+
+  .cardTitle {
+    min-height: auto;
+    font-size: 18px;
+  }
+
+  .viewAllBtn {
+    position: static;
+    margin-top: 24px;
+    display: block;
+    text-align: right;
+    width: 100%;
+  }
+}

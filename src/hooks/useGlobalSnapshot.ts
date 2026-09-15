@@ -1,5 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { api, type GlobalSnapshotResponse, type GlobalSnapshotData } from "../app/lib/api";
+import {
+  api,
+  type GlobalSnapshotResponse,
+  type GlobalSnapshotData,
+} from "../app/lib/api";
 import { queryKeys } from "../app/hooks/useQuery";
 
 export const useGlobalSnapshot = () => {
@@ -8,7 +12,8 @@ export const useGlobalSnapshot = () => {
     queryFn: api.getGlobalSnapshot,
   });
 
-  const globalSnapshotData = data?.success && data.data.length > 0 ? data.data[0] : null;
+  const globalSnapshotData =
+    data?.success && data.data.length > 0 ? data.data[0] : null;
 
   return {
     globalSnapshotData,

@@ -36,6 +36,16 @@
   z-index: 2;
 }
 
+.verticalTitleImg {
+  position: absolute;
+  left: 71px;
+  top: 356px;
+  width: 80px;
+  height: 574px;
+  z-index: 2;
+  pointer-events: none;
+}
+
 /* ── Vertical side title (outlined, bottom-up, Raleway 900) ── */
 .verticalTitle {
   position: absolute;
@@ -54,7 +64,7 @@
   z-index: 2;
 }
 
-/* ── Right faint photo collage (Mask group at 1023,444) ── */
+/* ── Right solar farm photo collage (Mask group at 1023,444) ── */
 .rightCollage {
   position: absolute;
   top: 444px;
@@ -63,7 +73,7 @@
   height: 526px;
   z-index: 0;
   overflow: hidden;
-  opacity: 0.22;
+  pointer-events: none;
 }
 
 .rightCollage img {
@@ -72,39 +82,50 @@
   height: 526px;
   object-fit: cover;
   object-position: top left;
-  filter: blur(5px) saturate(0.2) brightness(1.15);
+  opacity: 0.88;
 }
 
 /* ── Header block ── */
 .headerBlock {
   position: absolute;
-  top: 104px;
-  left: 260px;
-  width: 1502px;
+  inset: 0;
   z-index: 3;
 }
 
 .mainTitle {
+  position: absolute;
+  top: 104px;
+  left: 260px;
+  width: 1502px;
   margin: 0;
-  font-size: 51px;
+  font-size: 50px;
   font-weight: 800;
-  line-height: 1.2;
+  line-height: normal;
   color: #000;
 }
 
 .subHeadline {
-  margin: 13px 0 0;
-  font-size: 24px;
+  position: absolute;
+  top: 169px;
+  left: 262px;
+  width: 715px;
+  margin: 0;
+  font-size: 22px;
   font-weight: 700;
   font-style: italic;
+  line-height: 36px;
   color: #23b14d;
 }
 
 .description {
-  margin: 12px 0 0;
+  position: absolute;
+  top: 216px;
+  left: 262px;
+  width: 1384px;
+  margin: 0;
   font-size: 18px;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 24px;
   color: #000;
   max-width: 1384px;
 }
@@ -120,40 +141,39 @@
   left: 0;
   width: 1668px;
   z-index: 3;
+  pointer-events: none;
 }
 
 .cardImage {
   display: block;
-  width: 310px;
-  height: 123px;
-  overflow: hidden;
+  width: 334px;
+  height: 148px;
   border: 0;
   background: none;
   padding: 0;
   cursor: pointer;
+  overflow: visible;
+  pointer-events: auto;
+  transition:
+    transform 180ms ease,
+    filter 180ms ease;
+}
+
+.cardImage:hover {
+  transform: translateY(-2px) scale(1.02);
+  filter: brightness(1.05);
 }
 
 .cardImage img {
   display: block;
-  width: 312px;
-  height: 146px;
-  object-fit: cover;
-  clip-path: polygon(19px 0, 100% 0, calc(100% - 19px) 100%, 0 100%);
-}
-
-.cardImageAccent {
-  position: absolute;
-  left: -19px;
-  top: 10px;
-  width: 79px;
-  height: 98px;
-  background: #23b14d;
-  clip-path: polygon(100% 0, 100% 100%, 0 100%, 14% 0%);
-  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .cardText {
   width: 460px;
+  pointer-events: none;
 }
 
 .cardTitle {
@@ -162,16 +182,21 @@
   font-weight: 700;
   line-height: 1.25;
   color: #000;
+  white-space: pre-line;
+  pointer-events: auto;
+  display: inline-block;
 }
 
 .cardSubtitle {
   position: absolute;
   margin: 0;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.4;
+  font-size: 13px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 16px;
   color: #000;
   max-width: 250px;
+  pointer-events: none;
 }
 
 .cardCta {
@@ -181,19 +206,20 @@
   font-size: 13px;
   font-weight: 600;
   padding: 0 12px 0 16px;
+  pointer-events: auto;
 }
 
 /* ── Goal note over the collage ── */
 .goalNote {
   position: absolute;
   top: 612px;
-  left: 1535px;
+  left: 1542px;
   width: 344px;
   margin: 0;
-  font-size: 19px;
+  font-size: 20px;
   font-style: italic;
-  font-weight: 700;
-  line-height: 1.35;
+  font-weight: 600;
+  line-height: 27px;
   color: #000;
   z-index: 3;
 }
@@ -238,6 +264,9 @@
   height: 52px;
   font-size: 16px;
   font-weight: 600;
+  z-index: 4;
+  cursor: pointer;
+  pointer-events: auto;
 }
 
 .frameworkCta {
@@ -246,4 +275,19 @@
   height: 52px;
   font-size: 16px;
   font-weight: 600;
+  z-index: 4;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* Keep the label and chevron inside their Figma-sized parallelograms. */
+.partnerCta > span,
+.frameworkCta > span {
+  width: 100%;
+  justify-content: center;
+  gap: 10px;
+}
+
+.frameworkCta > span > span {
+  font-size: 15px;
 }

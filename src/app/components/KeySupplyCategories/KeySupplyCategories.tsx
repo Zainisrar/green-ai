@@ -82,8 +82,21 @@ export default function KeySupplyCategories({
     >
       <SiteHeader
         layout={canvas ? "figmaCanvas" : "viewport"}
-        showBrand={false}
+        showBrand={!canvas}
       />
+
+      {canvas && (
+        <a
+          className={styles.figmaLogo}
+          href="/home/renewable-energy-the-core"
+          aria-label="GREEN home"
+        >
+          <img
+            src="/images/heroSection/logo.png"
+            alt="GREEN — Future: Envisioned"
+          />
+        </a>
+      )}
 
       {/* Existing Figma canvas background artwork */}
       <img

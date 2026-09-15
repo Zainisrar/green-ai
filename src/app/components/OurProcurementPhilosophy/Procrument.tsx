@@ -1,16 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
+import HandbookModalFrame from "../Handbook/Dialog/HandbookModalFrame";
+import styles from "./ProcurementModal.module.css";
 
 interface Image {
   alt: string;
   src: string;
 }
-
 interface Quote {
   text: string;
   highlighted: string;
 }
-
 interface ProcurementAlignedImpactData {
   img: Image;
   keys: string[];
@@ -18,147 +18,76 @@ interface ProcurementAlignedImpactData {
   title: string;
   description: string;
 }
-
 interface Props {
   isOpen: boolean;
   onClose: () => void;
   data?: ProcurementAlignedImpactData;
 }
-const Procrument = ({ isOpen, onClose, data }: Props) => {
-  const [isMobile, setIsMobile] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+const fallbackKeys = [
+  ["Energy access reliability", "for remote communities"],
+  ["O&M predictability", "for donor-funded projects"],
+  ["Technical integrity", "for national infrastructure"],
+  ["Carbon responsibility", "via recyclable or low-impact components"],
+] as const;
 
-  const renderContent = () => (
+function impactCopy(value: string, index: number) {
+  const [emphasis, rest] = fallbackKeys[index] || ["", value];
+  if (!value.startsWith(emphasis)) return value;
+  return (
     <>
-      {/* Title Section */}
-      <div className="mb-8">
-        <h2 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
-          {data?.title || "Procurement Aligned with Impact"}
-        </h2>
-        <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
-      </div>
-
-      {/* Description */}
-      <p className="text-gray-800 font-medium text-base lg:text-lg mb-6 lg:mb-8 italic">
-        {data?.description ||
-          "GREEN's procurement decisions are directly tied to:"}
-      </p>
-
-      {/* Main Content */}
-      <div
-        className={`${isMobile ? "space-y-8" : "flex items-start space-x-12"}`}
-      >
-        {/* Content List */}
-        <div className="flex-1">
-          <div className="space-y-4 lg:space-y-6">
-            {(
-              data?.keys || [
-                "Energy access reliability for remote communities",
-                "O&M predictability for donor-funded projects",
-                "Technical integrity  for national infrastructure",
-                "Carbon responsibility via recyclable or low-impact components",
-              ]
-            ).map((key, index) => (
-              <div key={index} className="flex items-start space-x-4">
-                <div className="flex-shrink-0">
-                  <img loading="lazy" decoding="async"
-                    src="/images/grid-intel/lighting.png"
-                    className="w-10 lg:w-14 -mt-2 lg:-mt-4"
-                    alt="lighting"
-                  />
-                </div>
-                <p className="text-gray-800 font-medium text-base lg:text-lg">
-                  {key}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Image */}
-        <div className="flex-shrink-0">
-          <div className="relative">
-            <img loading="lazy" decoding="async"
-              src={
-                data?.img?.src ||
-                "/images/our-procurement-philosophy/procrumentDialog.png"
-              }
-              alt={data?.img?.alt || "Solar panels in field"}
-              className={`${isMobile ? "w-full max-w-sm mx-auto" : "w-[520px]"} ${!isMobile && "mt-16"}`}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.src =
-                  "/images/our-procurement-philosophy/procrumentDialog.png";
-              }}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom Quote */}
-      <div className="mt-8 lg:mt-12 text-center">
-        <p className="text-gray-800 font-bold text-lg lg:text-xl italic">
-          {data?.quote?.text || '"Sustainable Choices. Long-Term Results."'}
-        </p>
-      </div>
+      <strong>{emphasis}</strong>
+      {` ${rest}`}
     </>
   );
+}
 
-  if (!isOpen) return null;
+export default function Procrument({ isOpen, onClose, data }: Props) {
+  const title = data?.title || "Procurement Aligned with Impact";
+  const keys = data?.keys?.length
+    ? data.keys
+    : fallbackKeys.map(([emphasis, rest]) => `${emphasis} ${rest}`);
 
   return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed inset-0 bg-black/20 z-[99999999999999999999999999] flex items-center justify-center">
-        {/* Modal Container */}
-        <div className="relative w-full lg:max-w-6xl mx-4">
-          {/* Mobile Layout */}
-          {isMobile ? (
-            <div className="bg-gray-100 h-[80vh] p-3 overflow-y-auto py-14 border-2 border-[#4CAF50] relative shadow-2xl">
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
-                >
-                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div className="mx-auto">{renderContent()}</div>
+    <HandbookModalFrame
+      isOpen={isOpen}
+      onClose={onClose}
+      variant="ethos"
+      label={title}
+    >
+      <section>
+        <h2 className={styles.contentTitle}>{title}</h2>
+        <div className={styles.rule} />
+        <p className={styles.lead}>
+          {data?.description ||
+            "GREEN’s procurement decisions are directly tied to:"}
+        </p>
+        <div className={styles.boltList}>
+          {keys.map((key, index) => (
+            <div className={styles.boltItem} key={key}>
+              <img
+                className={styles.bolt}
+                src="/images/our-procurement-philosophy/lighting.png"
+                alt=""
+                aria-hidden="true"
+              />
+              <p className={styles.boltCopy}>{impactCopy(key, index)}</p>
             </div>
-          ) : (
-            /* Desktop Layout */
-            <div className="bg-gray-100 max-h-[90vh] overflow-y-auto rounded-lg py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl">
-              {/* Close Button */}
-              <div className="flex justify-end w-full">
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10"
-                >
-                  <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div className="max-w-5xl mx-auto">{renderContent()}</div>
-            </div>
-          )}
+          ))}
         </div>
-      </div>
-    </React.Fragment>
+        <div className={styles.imagePanel}>
+          <img
+            src={
+              data?.img?.src ||
+              "/images/our-procurement-philosophy/procrumentDialog.png"
+            }
+            alt={data?.img?.alt || "Solar panels in field"}
+          />
+        </div>
+        <p className={styles.quote}>
+          {data?.quote?.text || "“Sustainable Choices. Long-Term Results.”"}
+        </p>
+      </section>
+    </HandbookModalFrame>
   );
-};
-
-export default Procrument;
+}

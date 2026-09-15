@@ -8,6 +8,7 @@ export default function PublicEventsVolunteeringPage() {
       mobile={<PublicEventVolunteering canvas />}
       nodeId="7077:24270"
       fitCanvasHeight
+      scaleMobileToViewport
     />
   );
 }

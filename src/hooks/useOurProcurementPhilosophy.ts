@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 interface CTA {
   href: string;
@@ -71,19 +71,22 @@ interface OurProcurementPhilosophyData {
   updatedAt: string;
 }
 
-const fetchOurProcurementPhilosophy = async (): Promise<OurProcurementPhilosophyData> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/ecosystem/our-procurement-philosophy');
-  
-  if (!response.ok) {
-    throw new Error('Failed to fetch our procurement philosophy data');
-  }
-  
-  return response.json();
-};
+const fetchOurProcurementPhilosophy =
+  async (): Promise<OurProcurementPhilosophyData> => {
+    const response = await fetch(
+      "https://greencms.percepco.co.uk/api/ecosystem/our-procurement-philosophy",
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch our procurement philosophy data");
+    }
+
+    return response.json();
+  };
 
 export const useOurProcurementPhilosophy = () => {
   return useQuery<OurProcurementPhilosophyData>({
-    queryKey: ['ourProcurementPhilosophy'],
+    queryKey: ["ourProcurementPhilosophy"],
     queryFn: fetchOurProcurementPhilosophy,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes

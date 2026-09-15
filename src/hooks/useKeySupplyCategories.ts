@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 
 interface CTA {
   href: string;
@@ -42,18 +42,20 @@ interface KeySupplyCategoriesData {
 }
 
 const fetchKeySupplyCategories = async (): Promise<KeySupplyCategoriesData> => {
-  const response = await fetch('https://greencms.percepco.co.uk/api/ecosystem/key-supply-categories');
-  
+  const response = await fetch(
+    "https://greencms.percepco.co.uk/api/ecosystem/key-supply-categories",
+  );
+
   if (!response.ok) {
-    throw new Error('Failed to fetch key supply categories data');
+    throw new Error("Failed to fetch key supply categories data");
   }
-  
+
   return response.json();
 };
 
 export const useKeySupplyCategories = () => {
   return useQuery<KeySupplyCategoriesData>({
-    queryKey: ['keySupplyCategories'],
+    queryKey: ["keySupplyCategories"],
     queryFn: fetchKeySupplyCategories,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes

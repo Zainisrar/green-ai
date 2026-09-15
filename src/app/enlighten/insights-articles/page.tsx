@@ -8,7 +8,6 @@ const page = () => (
     nodeId="7080:58112"
     designHeight={1890}
     scaleToViewport="width"
-    fitCanvasHeight
   />
 );
 

@@ -1,8 +1,17 @@
 import { useEffect, useState } from "react";
 
-export interface TIAImage { alt: string; src: string }
-export interface TIAKey { text: string; highlighted: string }
-export interface TIAQuote { text: string; highlighted: string }
+export interface TIAImage {
+  alt: string;
+  src: string;
+}
+export interface TIAKey {
+  text: string;
+  highlighted: string;
+}
+export interface TIAQuote {
+  text: string;
+  highlighted: string;
+}
 export interface TIAModal {
   img: TIAImage;
   keys: TIAKey[];
@@ -24,7 +33,10 @@ export interface TIAItem {
   createdAt: string;
   updatedAt: string;
 }
-export interface TIAResponse { success: boolean; data: TIAItem[] }
+export interface TIAResponse {
+  success: boolean;
+  data: TIAItem[];
+}
 
 export const useTechnologyInnovationAlliances = () => {
   const [data, setData] = useState<TIAItem | null>(null);
@@ -37,7 +49,10 @@ export const useTechnologyInnovationAlliances = () => {
       try {
         setLoading(true);
         setError(null);
-        const res = await fetch("https://greencms.percepco.co.uk/api/ecosystem/technology-innovation-alliances", { next: { revalidate: 60 } as any });
+        const res = await fetch(
+          "https://greencms.percepco.co.uk/api/ecosystem/technology-innovation-alliances",
+          { next: { revalidate: 60 } as any },
+        );
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json: TIAResponse = await res.json();
         const first = json?.data?.[0] ?? null;
@@ -49,7 +64,9 @@ export const useTechnologyInnovationAlliances = () => {
       }
     };
     run();
-    return () => { mounted = false };
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   return { data, loading, error };

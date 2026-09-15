@@ -1,212 +1,100 @@
 "use client";
-import React from "react";
+
+import Image from "next/image";
+import styles from "./LatestPressReleases.module.css";
+import MediaDialogFrame from "./MediaDialogFrame";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
 }
-const LatestPressReleases = ({ isOpen, onClose }: Props) => {
-  if (!isOpen) return null;
 
+const releases = [
+  {
+    id: "grid",
+    title: "GREEN Launches GRID-INTEL™ in Eastern Highlands",
+    date: "10 July 2025",
+    image: "/images/media-press/easter-higherlands.png",
+  },
+  {
+    id: "mou",
+    title: "MoU Signed with Dept. of Energy for 200 Mini-Grids",
+    date: "28 June 2025",
+    image: "/images/media-press/mini-grids.png",
+  },
+  {
+    id: "battery",
+    title: "GREEN Expands Battery Deployment with New Global Partner",
+    date: "01 June 2025",
+    image: "/images/media-press/global-partner.png",
+  },
+];
+
+export default function LatestPressReleases({ isOpen, onClose }: Props) {
   return (
-    <React.Fragment>
-      {/* Modal Overlay */}
-      <div className="fixed inset-0 bg-black/20 z-50 flex items-center justify-center">
-        {/* Modal Container */}
-        <div className="relative w-full max-w-6xl mx-4">
-          {/* Skewed Modal Background */}
-          <div
-            className="bg-gray-100 transform  py-14 border-2 border-[#4CAF50] px-16 relative shadow-2xl"
-            style={{
-              transform:"skewX(-12deg)"
-             }}
-          >
-            {/* Close Button */}
-            <div className="flex justify-end w-full">
-              <button
-                onClick={onClose}
-                style={{
-                  transform:"skewX(12deg)"
-                }}
-                className="   cursor-pointer text-gray-600 hover:text-gray-800 text-2xl z-10 transform "
-              >
-                <img loading="lazy" decoding="async" src="/images/join-us/xicon.png" alt="Close Icon" />
-              </button>
-            </div>
-            {/* Modal Content */}
-            <div 
-            style={{
-              transform:"skewX(12deg)"
-            }}
-            className="transform  max-w-5xl mx-auto">
-              {/* Header */}
-              <div className="mb-10">
-                <h2 className="text-4xl font-bold text-gray-800 mb-4">
-                  Latest Press Releases
-                </h2>
-                <div className="w-full h-px bg-gray-400 mb-8"></div>
+    <MediaDialogFrame
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Latest Press Releases"
+      labelledBy="latest-press-title"
+    >
+      <div className={styles.container}>
+        <div className={styles.cardsRow}>
+          {releases.map((release) => (
+            <article className={styles.card} key={release.id}>
+              {/* Image with decorative angled brackets */}
+              <div className={styles.imageWrapper}>
+                <img
+                  src="/images/media-press/card-bracket-tr.svg"
+                  alt=""
+                  aria-hidden="true"
+                  className={styles.bracketTr}
+                />
+                <img
+                  src="/images/media-press/card-bracket-bl.svg"
+                  alt=""
+                  aria-hidden="true"
+                  className={styles.bracketBl}
+                />
+                <div className={styles.imageShape}>
+                  <Image
+                    src={release.image}
+                    alt={release.title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 367px"
+                    className={styles.img}
+                  />
+                </div>
               </div>
 
-              {/* Press Release Cards Grid */}
-              <div className="grid grid-cols-3  mb-12">
-                {/* Press Release 1 */}
-                <div className=" relative">
-                  <div className="absolute bottom-2 -left-6">
-                    <img loading="lazy" decoding="async" src="/images/media-press/shape.png" alt="vector" />
-                  </div>
-                  <div className="absolute -top-4 -right-8">
-                    <img loading="lazy" decoding="async" src="/images/media-press/shape2.png" alt="vector2" />
-                  </div>
-                  <div className="ml-10">
-                    <div className="mb-4">
-                      <img loading="lazy" decoding="async"
-                        src="/images/media-press/easter-higherlands.png"
-                        alt="GREEN Launches GRID-INTEL"
-                        className=""
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <h3 className="font-bold text-gray-800 ">
-                        GREEN Launches GRID-INTEL™
-                      </h3>
-                      <h3 className="font-bold text-gray-800  mb-3">
-                        in Eastern Highlands
-                      </h3>
-                      <div className="flex items-center space-x-4">
-                        <div className="flex items-center gap-2">
-                          <div className="w-8">
-                            <img loading="lazy" decoding="async"
-                              src="/images/media-press/calendar.png"
-                              alt="Calendar"
-                            />
-                          </div>
-                          <span className="text-sm text-gray-600">
-                            10 July 2025
-                          </span>
-                        </div>
-                        <span title="Press release link unavailable" className="inline-block w-32 opacity-50">
-                          <img loading="lazy" decoding="async"
-                            src="/images/media-press/read-more.png"
-                            className=""
-                            alt="Read More"
-                          />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              
-                <div className=" relative">
-                  <div className="absolute bottom-2 -left-6">
-                    <img loading="lazy" decoding="async" src="/images/media-press/shape.png" alt="vector" />
-                  </div>
-                  <div className="absolute -top-4 -right-8">
-                    <img loading="lazy" decoding="async" src="/images/media-press/shape2.png" alt="vector2" />
-                  </div>
-                  <div className="ml-10">
-                    <div className="mb-4">
-                      <img loading="lazy" decoding="async"
-                        src="/images/media-press/easter-higherlands.png"
-                        alt="GREEN Launches GRID-INTEL"
-                        className=""
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <h3 className="font-bold text-gray-800 ">
-                        GREEN Launches GRID-INTEL™
-                      </h3>
-                      <h3 className="font-bold text-gray-800  mb-3">
-                        in Eastern Highlands
-                      </h3>
-                      <div className="flex items-center space-x-4">
-                        <div className="flex items-center gap-2">
-                          <div className="w-8">
-                            <img loading="lazy" decoding="async"
-                              src="/images/media-press/calendar.png"
-                              alt="Calendar"
-                            />
-                          </div>
-                          <span className="text-sm text-gray-600">
-                            10 July 2025
-                          </span>
-                        </div>
-                        <span title="Press release link unavailable" className="inline-block w-32 opacity-50">
-                          <img loading="lazy" decoding="async"
-                            src="/images/media-press/read-more.png"
-                            className=""
-                            alt="Read More"
-                          />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              
-                <div className=" relative">
-                  <div className="absolute bottom-2 -left-6">
-                    <img loading="lazy" decoding="async" src="/images/media-press/shape.png" alt="vector" />
-                  </div>
-                  <div className="absolute -top-4 -right-8">
-                    <img loading="lazy" decoding="async" src="/images/media-press/shape2.png" alt="vector2" />
-                  </div>
-                  <div className="ml-10">
-                    <div className="mb-4">
-                      <img loading="lazy" decoding="async"
-                        src="/images/media-press/easter-higherlands.png"
-                        alt="GREEN Launches GRID-INTEL"
-                        className=""
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <h3 className="font-bold text-gray-800 ">
-                        GREEN Launches GRID-INTEL™
-                      </h3>
-                      <h3 className="font-bold text-gray-800  mb-3">
-                        in Eastern Highlands
-                      </h3>
-                      <div className="flex items-center space-x-4">
-                        <div className="flex items-center gap-2">
-                          <div className="w-8">
-                            <img loading="lazy" decoding="async"
-                              src="/images/media-press/calendar.png"
-                              alt="Calendar"
-                            />
-                          </div>
-                          <span className="text-sm text-gray-600">
-                            10 July 2025
-                          </span>
-                        </div>
-                        <span title="Press release link unavailable" className="inline-block w-32 opacity-50">
-                          <img loading="lazy" decoding="async"
-                            src="/images/media-press/read-more.png"
-                            className=""
-                            alt="Read More"
-                          />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              
+              {/* Title */}
+              <h3 className={styles.cardTitle}>{release.title}</h3>
 
-              
-              </div>
-
-              {/* View All Link */}
-              <div className="flex justify-end">
-                <span className="text-gray-500 flex items-center space-x-4 text-lg">
-                  <span className="italic">More press releases coming soon</span>{" "}
-                  <div>
-                    <img loading="lazy" decoding="async" src="/images/media-press/arrow.png" alt="" />
-                  </div>
+              {/* Date & Button */}
+              <div className={styles.metaRow}>
+                <span className={styles.date}>
+                  <img
+                    src="/images/media-press/calendar.png"
+                    alt=""
+                    aria-hidden="true"
+                    className={styles.calendarIcon}
+                  />
+                  {release.date}
                 </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </React.Fragment>
-  );
-};
 
-export default LatestPressReleases;
+                <button type="button" className={styles.readMoreBtn}>
+                  Read more ›
+                </button>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        {/* Bottom-right link */}
+        <button type="button" className={styles.viewAllBtn}>
+          View All Press Releases <span>›</span>
+        </button>
+      </div>
+    </MediaDialogFrame>
+  );
+}

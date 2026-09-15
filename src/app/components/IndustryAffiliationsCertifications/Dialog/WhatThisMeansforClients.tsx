@@ -10,7 +10,13 @@ interface Props {
   img: { alt: string; src: string };
 }
 
-const WhatThisMeansforClients = ({ isOpen, onClose, title, keys, img }: Props) => {
+const WhatThisMeansforClients = ({
+  isOpen,
+  onClose,
+  title,
+  keys,
+  img,
+}: Props) => {
   return (
     <CertInfoModal isOpen={isOpen} onClose={onClose}>
       <div className="mb-6 sm:mb-8">
@@ -25,19 +31,34 @@ const WhatThisMeansforClients = ({ isOpen, onClose, title, keys, img }: Props) =
           {keys?.map((k, idx) => (
             <div key={`${k.title}-${idx}`} className="flex items-start gap-3">
               <span className="shrink-0">
-                <img loading="lazy" decoding="async" src="/images/grid-intel/lighting.png" className="-mt-3 w-12 sm:w-14" alt="lighting" />
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="/images/grid-intel/lighting.png"
+                  className="-mt-3 w-12 sm:w-14"
+                  alt="lighting"
+                />
               </span>
               <div>
-                <h3 className="text-base font-bold text-gray-800 sm:text-lg">{k.title}</h3>
-                <p className="text-sm italic leading-relaxed text-gray-600">{k.description}</p>
+                <h3 className="text-base font-bold text-gray-800 sm:text-lg">
+                  {k.title}
+                </h3>
+                <p className="text-sm italic leading-relaxed text-gray-600">
+                  {k.description}
+                </p>
               </div>
             </div>
           ))}
         </div>
 
         <div className="w-full shrink-0 lg:w-[400px]">
-          <img loading="lazy" decoding="async"
-            src={img?.src || "/images/industry-affiliations-certifications/WhatThisMeansforClients.png"}
+          <img
+            loading="lazy"
+            decoding="async"
+            src={
+              img?.src ||
+              "/images/industry-affiliations-certifications/WhatThisMeansforClients.png"
+            }
             alt={img?.alt || "Client Partnership"}
             className="h-auto w-full"
           />

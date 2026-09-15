@@ -1,0 +1,14 @@
+<svg preserveAspectRatio="none" overflow="visible" width="182" height="59" viewBox="0 0 182 59" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path data-figma-bg-blur-radius="15" d="M180.592 0.5H10.4171L0.591797 58.5H170.837L180.592 0.5Z" fill="url(#paint0_linear_7115_7712)" stroke="url(#paint1_linear_7115_7712)"/>
+<defs>
+<clipPath id="bgblur_0_7115_7712_clip_path" transform="translate(15 15)"><path d="M180.592 0.5H10.4171L0.591797 58.5H170.837L180.592 0.5Z"/>
+</clipPath><linearGradient id="paint0_linear_7115_7712" x1="-276.474" y1="29.5" x2="188.641" y2="29.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#23B14D" stop-opacity="0.5"/>
+<stop offset="1" stop-color="#FFFE50" stop-opacity="0.5"/>
+</linearGradient>
+<linearGradient id="paint1_linear_7115_7712" x1="-22.2189" y1="29.5" x2="188.605" y2="33.6186" gradientUnits="userSpaceOnUse">
+<stop stop-color="#23B14D"/>
+<stop offset="1" stop-color="#FFFE50"/>
+</linearGradient>
+</defs>
+</svg>

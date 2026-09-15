@@ -4,7 +4,7 @@
   height: 970px;
   min-height: 0;
   overflow: hidden;
-  background: #fff;
+  background: #fff url("/images/projects/bg.jpg") no-repeat center / cover;
   color: #fff;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
@@ -524,62 +524,25 @@
   width: 1295px;
   overflow: hidden;
   clip-path: polygon(38.7% 0, 100% 0, 66% 100%, 0 100%);
-}
-
-.pimagaPhoto img {
-  position: absolute;
-  top: -14.7%;
-  left: -12.5%;
-  transform: scale(1.25);
-  transform-origin: top left;
+  transform-origin: center center;
 }
 
 .mainPhoto img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center top;
 }
 
 .figmaMainPhoto {
   width: 100%;
   height: 100%;
-  object-fit: none;
-  object-position: top left;
+  object-fit: cover;
+  object-position: center top;
 }
 
 .photoShade {
   display: none;
-}
-
-.bottomRect {
-  position: absolute;
-  z-index: 6;
-  top: 540px;
-  left: 1074px;
-  width: 290px;
-  height: 54px;
-  border: 1px solid rgb(178, 177, 177);
-  background: transparent;
-}
-
-.bottomLineA,
-.bottomLineB {
-  position: absolute;
-  z-index: 6;
-  width: 35px;
-  height: 72px;
-  border-left: 1px solid rgb(104, 103, 103);
-}
-
-.bottomLineA {
-  top: 643px;
-  left: 661px;
-}
-
-.bottomLineB {
-  top: 643px;
-  left: 785px;
 }
 
 .titlePanel {
@@ -589,19 +552,21 @@
   left: 820px;
   display: block;
   width: 672px;
-  min-height: 158px;
-  padding: 10px 44px;
-  background: rgb(230, 225, 225);
+  min-height: 72px;
+  padding: 14px 44px;
+  background: rgba(230, 225, 225, 0.78);
   clip-path: polygon(6% 0, 100% 0, 94% 100%, 0 100%);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
 
 .titlePanel h1 {
   width: 585px;
   margin: 0;
   color: #030303;
-  font-size: 36px;
+  font-size: 32px;
   font-weight: 700;
-  line-height: 1.08;
+  line-height: 1.12;
   text-align: left;
   overflow-wrap: anywhere;
   text-wrap: wrap;
@@ -610,50 +575,38 @@
 
 .collapseButton {
   position: absolute;
-  z-index: 7;
-  top: 842px;
-  left: 832px;
-  display: grid;
+  z-index: 10;
   width: 71px;
-  min-width: 55px;
-  aspect-ratio: 1;
+  height: 48px;
   padding: 0;
   border: 0;
   background: transparent;
   cursor: pointer;
+  display: grid;
   place-items: center;
+  transform-origin: center center;
 }
 
-.collapseButton svg,
-.previewArrow svg,
-.mobileArrow svg {
-  width: 74%;
-  fill: none;
-  stroke: #fff;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2.5;
-  transition: transform 0.2s ease;
-}
-
-.collapseButton .rotated {
-  transform: rotate(180deg);
+.collapseButton svg {
+  display: block;
+  width: 59px;
+  height: 34px;
 }
 
 .statsPanel {
   position: absolute;
   z-index: 5;
-  top: 46.1vh;
-  left: 19.75vw;
-  width: 53.8vw;
-  height: 46.5vh;
-  min-height: 365px;
-  padding: 5.1vh 4.6vw 3vh 7.9vw;
+  top: 442px;
+  left: 427px;
+  width: 993.5px;
+  height: 465px;
+  padding: 40px 48px 24px 72px;
   overflow: hidden;
-  background: rgb(26 28 35 / 0.58);
-  clip-path: polygon(8.5% 0, 100% 0, 78.5% 100%, 0 100%);
+  background: rgba(26, 28, 35, 0.58);
+  clip-path: polygon(23.2% 0, 100% 0, 78.96% 100%, 0% 100%);
   -webkit-backdrop-filter: blur(11px);
   backdrop-filter: blur(11px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
 
 .primaryStats {
@@ -661,8 +614,8 @@
   grid-template-columns: 0.8fr 0.85fr 1.18fr 1.6fr;
   align-items: center;
   gap: 1.4vw;
-  width: 86%;
-  margin-left: 14%;
+  width: 72%;
+  margin-left: 26.5%;
 }
 
 .stat {
@@ -727,10 +680,10 @@
   display: flex;
   align-items: start;
   justify-content: space-between;
-  gap: 0.75vw;
-  width: 94%;
+  gap: 0.5vw;
+  width: 72%;
   margin-top: 2.6vh;
-  margin-left: 6%;
+  margin-left: 20.5%;
 }
 
 .impact {
@@ -744,21 +697,21 @@
 
 .impact img {
   width: auto;
-  height: clamp(21px, 1.55vw, 32px);
+  height: clamp(20px, 1.4vw, 28px);
   object-fit: contain;
 }
 
 .impact span {
   min-height: 2.4em;
   color: #d6d6d6;
-  font-size: clamp(8px, 0.52vw, 11px);
+  font-size: clamp(8px, 0.52vw, 10px);
   line-height: 1.22;
   white-space: nowrap;
 }
 
 .impact strong {
   color: #fff;
-  font-size: clamp(14px, 1.04vw, 21px);
+  font-size: clamp(12px, 0.85vw, 16px);
   font-weight: 600;
   white-space: nowrap;
 }
@@ -767,18 +720,18 @@
   align-self: center;
   margin: 0 -0.2vw;
   color: rgb(255 255 255 / 0.45);
-  font-size: clamp(18px, 1.3vw, 27px);
+  font-size: clamp(16px, 1.1vw, 22px);
   font-weight: 300;
 }
 
 .chartRow {
   display: grid;
-  grid-template-columns: 31% 1fr;
-  gap: 2.6vw;
+  grid-template-columns: 28% 1fr;
+  gap: 2vw;
   align-items: center;
-  width: 71%;
+  width: 63%;
   margin-top: 2.1vh;
-  margin-left: 14%;
+  margin-left: 21%;
 }
 
 .periods {
@@ -837,10 +790,7 @@
 .preview {
   position: absolute;
   z-index: 8;
-  top: 327px;
   display: block;
-  width: 464px;
-  height: 346px;
   min-height: 0;
   padding: 0;
   border: 0;
@@ -849,119 +799,151 @@
 }
 
 .previousPreview {
-  left: 190px;
+  top: 327px;
+  left: 160px;
+  width: 494px;
+  height: 346px;
 }
 
 .nextPreview {
+  top: 328px;
   right: auto;
   left: 1380px;
+  width: 485px;
+  height: 346px;
 }
 
+/* 1. Back Layer: Clear unblurred framed photo */
+.previewBackFrame {
+  position: absolute;
+  display: block;
+  width: 339px;
+  height: 278px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.previousPreview .previewBackFrame {
+  top: 38px;
+  left: 0px;
+  clip-path: polygon(43.1% 0, 100% 0, 64.1% 100%, 0 100%);
+}
+
+.nextPreview .previewBackFrame {
+  top: 41px;
+  left: 119px;
+  clip-path: polygon(37% 0, 100% 0, 64.1% 100%, 0 100%);
+}
+
+.previewBackFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.previewBackFrame::after {
+  position: absolute;
+  inset: 0;
+  background: rgba(30, 30, 30, 0.12);
+  content: "";
+}
+
+/* 2. Front Layer: Frosted glass blurred overlay card */
+.previewFrontCard {
+  position: absolute;
+  display: block;
+  overflow: hidden;
+  z-index: 2;
+  background: rgba(235, 239, 239, 0.45);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12);
+}
+
+.previousPreview .previewFrontCard {
+  top: 0px;
+  left: 30px;
+  width: 464px;
+  height: 346px;
+  clip-path: polygon(40.8% 0, 100% 0, 60% 100%, 0 100%);
+}
+
+.nextPreview .previewFrontCard {
+  top: 0px;
+  left: 0px;
+  width: 422px;
+  height: 346px;
+  clip-path: polygon(37% 0, 100% 0, 64.1% 100%, 0 100%);
+}
+
+.previewFrontImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+  filter: blur(8px);
+  transform: scale(1.08);
+}
+
+/* Caption text in center of front card */
+.previewCaption {
+  position: absolute;
+  z-index: 3;
+  color: #050505;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-wrap: anywhere;
+}
+
+.previousPreview .previewCaption {
+  top: 138px;
+  left: 122px;
+  width: 251px;
+}
+
+.nextPreview .previewCaption {
+  top: 135px;
+  left: 86px;
+  width: 251px;
+}
+
+.previewYear {
+  font-weight: 600;
+}
+
+/* Directional Arrow */
 .previewArrow {
   position: absolute;
-  z-index: 9;
+  z-index: 4;
   display: block;
   width: 40px;
   height: 23px;
 }
 
 .previousPreview .previewArrow {
-  left: -30px;
+  left: 10px;
   top: 146px;
 }
 
 .nextPreview .previewArrow {
-  right: -61px;
-  top: 158px;
+  left: 425px;
+  top: 157px;
 }
 
 .previewArrow img {
   display: block;
   width: 40px;
   height: 23px;
-}
-
-.previewWash {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: block;
-  width: 464px;
-  height: 346px;
-}
-
-.previousPreview .previewWash {
-  transform: translate(-30px, 1px);
-}
-
-.nextPreview .previewWash {
-  transform: translate(119px, 42px) scale(0.91);
-}
-
-.previewCard {
-  position: absolute;
-  top: 38px;
-  left: -30px;
-  display: block;
-  width: 339px;
-  height: 278px;
-}
-
-.nextPreview .previewCard {
-  left: 119px;
-}
-
-.previewCard img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  clip-path: polygon(44% 0, 100% 0, 56% 100%, 0 100%);
-}
-
-.previewCaption {
-  position: absolute;
-  z-index: 10;
-  top: 138px;
-  left: 122px;
-  width: 251px;
-  color: #050505;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 1.08;
-  text-align: center;
-  overflow-wrap: anywhere;
-}
-
-.nextPreview .previewCaption {
-  left: 99px;
-}
-
-.previewCard::after {
-  position: absolute;
-  z-index: 2;
-  inset: 0;
-  /* Figma's side-card wash keeps the project image visible underneath it. */
-  background: rgb(235 239 239 / 0.46);
-  clip-path: polygon(40% 0, 100% 0, 61% 100%, 6% 100%);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  content: "";
-}
-
-.previewCard span {
-  position: absolute;
-  z-index: 3;
-  top: 39%;
-  left: 29%;
-  width: 57%;
-  color: #050505;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 1.08;
-  text-align: center;
-  overflow-wrap: anywhere;
 }
 
 .startButton {
@@ -983,20 +965,20 @@
 }
 
 .viewToggle {
-  display: none;
+  display: grid;
   position: absolute;
   z-index: 11;
   top: 921px;
-  bottom: auto;
   left: 771px;
   grid-template-columns: repeat(2, 1fr);
   width: 206px;
-  min-width: 190px;
-  height: 30px;
-  min-height: 30px;
+  height: 28px;
   margin: 0;
-  padding: 0;
+  padding: 2px;
   border: 0;
+  border-radius: 9999px;
+  background: rgba(231, 238, 233, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .screenReaderOnly {
@@ -1011,18 +993,25 @@
 }
 
 .viewToggle button {
+  display: grid;
+  place-items: center;
   padding: 0;
   border: 0;
-  background: #e7eee9;
+  border-radius: 9999px;
+  background: transparent;
   color: #252525;
   font:
-    700 clamp(11px, 0.73vw, 15px) / 1 var(--font-montserrat),
+    700 13px / 1 var(--font-montserrat),
     sans-serif;
   cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 .viewToggle .activeView {
   background: #bdeccf;
+  color: #0b4f26;
 }
 
 .mobileArrow {

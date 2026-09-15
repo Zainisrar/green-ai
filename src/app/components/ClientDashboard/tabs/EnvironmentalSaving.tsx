@@ -21,7 +21,9 @@ const EnvironmentalSaving = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <Card className="min-h-[240px]">
-          <h3 className="text-sm font-semibold text-gray-700 mb-4">Monthly Carbon Offset</h3>
+          <h3 className="text-sm font-semibold text-gray-700 mb-4">
+            Monthly Carbon Offset
+          </h3>
           <LineChart
             points={[12, 28, 22, 40, 55, 48, 70, 82, 76, 90]}
             labels={["Jan", "Mar", "May", "Jul", "Sep", "Nov"]}
@@ -34,7 +36,8 @@ const EnvironmentalSaving = () => {
         <Card className="min-h-[240px]">
           <div className="flex items-center justify-between mb-2">
             <h3 className="text-sm font-semibold text-gray-700">
-              Total Carbon Emission Saved <span className="text-[#4CAF50]">*</span>
+              Total Carbon Emission Saved{" "}
+              <span className="text-[#4CAF50]">*</span>
             </h3>
             <select className="border border-gray-200 rounded px-2 py-1 text-xs text-gray-600">
               <option>2023</option>
@@ -53,7 +56,8 @@ const EnvironmentalSaving = () => {
       <div className="flex items-center gap-2 mb-4">
         <Leaf className="h-4 w-4 text-[#4CAF50]" />
         <h3 className="text-sm font-semibold text-gray-700">
-          Project Environment Factors <span className="text-gray-400 font-normal">(Per Annum)</span>
+          Project Environment Factors{" "}
+          <span className="text-gray-400 font-normal">(Per Annum)</span>
         </h3>
       </div>
 

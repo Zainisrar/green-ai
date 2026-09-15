@@ -61,7 +61,9 @@ export default function SmartGrid() {
 
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:6475">
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.backgroundArt}
         src="/images/smart-grid/mainImg.png"
         alt=""
@@ -69,7 +71,9 @@ export default function SmartGrid() {
         height="970"
       />
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.verticalTitle}
         src="/images/smart-grid/smard-grid.png"
         alt=""
@@ -142,12 +146,12 @@ export default function SmartGrid() {
         triggerVariant="figmaCanvas"
         triggerClassName={styles.chatTrigger}
         triggerStyle={{
-            top: 899,
-            right: "auto",
-            bottom: "auto",
-            left: 1498,
-            width: 418,
-          }}
+          top: 899,
+          right: "auto",
+          bottom: "auto",
+          left: 1498,
+          width: 418,
+        }}
       />
     </main>
   );

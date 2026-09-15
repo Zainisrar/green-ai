@@ -14,7 +14,7 @@
   overflow: hidden;
 }
 
-  /* ---------- Left gradient panel (Group 1171277870: 326×662 at -15,-1) ---------- */
+/* ---------- Left gradient panel (Group 1171277870: 326×662 at -15,-1) ---------- */
 
 .leftPanel {
   position: absolute;
@@ -49,30 +49,29 @@
   text-stroke: 1px rgba(152, 152, 152, 0.9);
   transform: rotate(-90deg);
   transform-origin: left top;
+  text-transform: uppercase;
   white-space: nowrap;
   z-index: 2;
 }
 
-/* ---------- Washed left collage (mask group at -472,408, 1152×1888) ---------- */
+/* ---------- Figma washed left background mask ---------- */
 .leftCollage {
   position: absolute;
-  top: 408px;
+  /* Figma mask group: it begins below the logo treatment, not at page top. */
+  top: 407.5px;
   left: -472px;
-  width: 1152px;
-  height: 1888px;
+  width: 988px;
+  height: 988px;
   overflow: hidden;
-  z-index: 1;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .leftCollage img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1152px;
-  height: 1888px;
-  object-fit: none;
-  object-position: 0 0;
-  opacity: 0.42;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* ---------- Header ---------- */
@@ -121,9 +120,9 @@
 /* ---------- Card images (parallelogram masks with composite outline) ---------- */
 .cardImg {
   position: absolute;
-  width: 310px;
-  height: 123px;
-  object-fit: none;
+  width: 321px;
+  height: 133px;
+  object-fit: contain;
   z-index: 3;
 }
 

@@ -31,7 +31,10 @@ const initialFormData: FormData = {
 
 const WorkWithUs = ({ isOpen, onClose }: Props) => {
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const [phoneCountry, setPhoneCountry] = useState({ dial_code: "+675", country_code: "pg" });
+  const [phoneCountry, setPhoneCountry] = useState({
+    dial_code: "+675",
+    country_code: "pg",
+  });
   const [agreed, setAgreed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -47,7 +50,9 @@ const WorkWithUs = ({ isOpen, onClose }: Props) => {
   if (!isOpen) return null;
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -66,7 +71,9 @@ const WorkWithUs = ({ isOpen, onClose }: Props) => {
     setSuccessMessage("");
 
     if (!agreed) {
-      setErrorMessage("Please agree that GREEN may contact you about your application.");
+      setErrorMessage(
+        "Please agree that GREEN may contact you about your application.",
+      );
       return;
     }
 
@@ -92,7 +99,8 @@ const WorkWithUs = ({ isOpen, onClose }: Props) => {
 
       if (data.Code === "001") {
         setSuccessMessage(
-          data.Message || "Thank you! Your details have been submitted successfully.",
+          data.Message ||
+            "Thank you! Your details have been submitted successfully.",
         );
         resetForm();
         setTimeout(() => {
@@ -100,11 +108,15 @@ const WorkWithUs = ({ isOpen, onClose }: Props) => {
           setSuccessMessage("");
         }, 2000);
       } else {
-        setErrorMessage(data.Message || "Failed to submit your details. Please try again.");
+        setErrorMessage(
+          data.Message || "Failed to submit your details. Please try again.",
+        );
       }
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "An error occurred while submitting the form.",
+        error instanceof Error
+          ? error.message
+          : "An error occurred while submitting the form.",
       );
     } finally {
       setIsLoading(false);
@@ -150,7 +162,9 @@ const WorkWithUs = ({ isOpen, onClose }: Props) => {
             onPhoneChange={handleInputChange}
             dialCode={phoneCountry.dial_code}
             countryCode={phoneCountry.country_code}
-            onCountryChange={(dial_code, country_code) => setPhoneCountry({ dial_code, country_code })}
+            onCountryChange={(dial_code, country_code) =>
+              setPhoneCountry({ dial_code, country_code })
+            }
           />
           <select
             name="areaOfInterest"
@@ -165,7 +179,9 @@ const WorkWithUs = ({ isOpen, onClose }: Props) => {
             <option value="engineering">Engineering &amp; Technical</option>
             <option value="operations">Operations &amp; Field</option>
             <option value="project-management">Project Management</option>
-            <option value="community-impact">Community &amp; Social Impact</option>
+            <option value="community-impact">
+              Community &amp; Social Impact
+            </option>
             <option value="corporate">Corporate &amp; Administration</option>
             <option value="internship">Internship / Graduate Program</option>
             <option value="other">Other</option>
@@ -189,13 +205,18 @@ const WorkWithUs = ({ isOpen, onClose }: Props) => {
             onChange={(e) => setAgreed(e.target.checked)}
             className="mt-1 h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
           />
-          <label htmlFor="work-with-us-agree" className="text-sm text-gray-700 sm:text-base">
+          <label
+            htmlFor="work-with-us-agree"
+            className="text-sm text-gray-700 sm:text-base"
+          >
             I agree that GREEN may contact me about my application.
           </label>
         </div>
 
         {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
-        {successMessage && <p className="text-sm text-green-600">{successMessage}</p>}
+        {successMessage && (
+          <p className="text-sm text-green-600">{successMessage}</p>
+        )}
 
         <div className="flex flex-col gap-4 sm:flex-row sm:justify-end sm:gap-6">
           <button

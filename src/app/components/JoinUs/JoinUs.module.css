@@ -352,8 +352,6 @@
   object-fit: contain;
 }
 
-
-
 @media (prefers-reduced-motion: reduce) {
   .scenicArt,
   .content {

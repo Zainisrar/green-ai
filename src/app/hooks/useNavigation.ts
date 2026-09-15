@@ -27,6 +27,51 @@ interface NavigationData {
   data: NavigationItem[];
 }
 
+/**
+ * These destinations are application routes, not CMS content URLs. Keeping
+ * them here prevents an outdated CMS navigation record from sending a user to
+ * a different screen with the same broad subject (for example, Login instead
+ * of the Become a Supplier landing page).
+ */
+const canonicalNavigationRoutes: Record<string, string> = {
+  explore: "/explore/welcome-to-green",
+  evolution: "/evolution/our-story-milestones",
+  engineering: "/engineering/solar-epcm-services",
+  endeavors: "/endeavors/project-portfolio",
+  enlighten: "/enlighten/insights-articles",
+  ecosystem: "/ecosystem/client-partnerships",
+  empower: "/empower/join-us",
+  engage: "/engage/reach-us",
+  "become a supplier": "/ecosystem/become-a-supplier",
+  "partner with green": "/engage/partner-with-us",
+  "client partners": "/ecosystem/client-partnerships",
+  "client partner login": "/client-value-engineering",
+  "client login": "/client-value-engineering",
+  "industries we serve": "/ecosystem/client-partnerships",
+  "partner success stories": "/ecosystem/client-partnerships",
+  "client testimonials": "/ecosystem/client-partnerships",
+  "case studies": "/endeavors/project-portfolio",
+  "community energy stories": "/endeavors/flagship-projects",
+  "green academy": "/enlighten/learning-hub",
+  "training & certifications": "/enlighten/learning-hub",
+  "knowledge base": "/enlighten/learning-hub",
+  "future offerings": "/engineering/products",
+};
+
+const normalizeNavigationRoutes = (items: NavigationItem[]): NavigationItem[] =>
+  items.map((item) => {
+    const canonicalSlug =
+      canonicalNavigationRoutes[item.name.toLowerCase().trim()];
+
+    return {
+      ...item,
+      ...(canonicalSlug ? { slug: canonicalSlug } : {}),
+      ...(item.children
+        ? { children: normalizeNavigationRoutes(item.children) }
+        : {}),
+    };
+  });
+
 /** Keeps the Figma navigation usable when the CMS endpoint is unavailable. */
 const fallbackNavigation: NavigationItem[] = [
   {
@@ -326,7 +371,7 @@ const fallbackNavigation: NavigationItem[] = [
           {
             id: 623,
             name: "Become a Supplier",
-            slug: "/engage/become-a-supplier",
+            slug: "/ecosystem/become-a-supplier",
             top: false,
           },
           {
@@ -357,13 +402,13 @@ const fallbackNavigation: NavigationItem[] = [
           {
             id: 632,
             name: "Partner Success Stories",
-            slug: "/ecosystem/client-partnerships/partner-success-stories",
+            slug: "/ecosystem/client-partnerships",
             top: false,
           },
           {
             id: 633,
             name: "Client Testimonials",
-            slug: "/ecosystem/client-partnerships/client-testimonials",
+            slug: "/ecosystem/client-partnerships",
             top: false,
           },
           {
@@ -469,7 +514,7 @@ const fallbackNavigation: NavigationItem[] = [
       {
         id: 82,
         name: "Become a Supplier",
-        slug: "/engage/become-a-supplier",
+        slug: "/ecosystem/become-a-supplier",
         top: false,
       },
       {
@@ -556,9 +601,17 @@ const findSectionByPath = (
 };
 
 export const useNavigation = (isOpen: boolean, currentPath?: string) => {
-  const [navigationData, setNavigationData] = useState<NavigationItem[]>([]);
+  // Start with local data rather than an empty array. An empty array is
+  // truthy, so rendering the drawer before this effect populated it produced
+  // a blank navigation panel while the CMS request was still pending.
+  const [navigationData, setNavigationData] =
+    useState<NavigationItem[]>(fallbackNavigation);
   const [activeSection, setActiveSection] = useState<NavigationItem | null>(
-    null,
+    () =>
+      currentPath
+        ? findSectionByPath(fallbackNavigation, currentPath) ||
+          fallbackNavigation[0]
+        : fallbackNavigation[0],
   );
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -577,7 +630,6 @@ export const useNavigation = (isOpen: boolean, currentPath?: string) => {
         : null;
       setNavigationData(fallbackNavigation);
       setActiveSection(fallbackSection || fallbackNavigation[0]);
-
 
       try {
         setLoading(true);
@@ -598,14 +650,18 @@ export const useNavigation = (isOpen: boolean, currentPath?: string) => {
         if (!active) return;
 
         if (data.success && data.data?.length) {
-          setNavigationData(data.data);
+          const normalizedData = normalizeNavigationRoutes(data.data);
+          setNavigationData(normalizedData);
 
           // Try to find section based on current path
           if (currentPath) {
-            const matchedSection = findSectionByPath(data.data, currentPath);
-            setActiveSection(matchedSection || data.data[0]);
+            const matchedSection = findSectionByPath(
+              normalizedData,
+              currentPath,
+            );
+            setActiveSection(matchedSection || normalizedData[0]);
           } else {
-            setActiveSection(data.data[0]); // Set first item as default active
+            setActiveSection(normalizedData[0]); // Set first item as default active
           }
         } else {
           return;
@@ -663,4 +719,4 @@ export const useNavigation = (isOpen: boolean, currentPath?: string) => {
   };
 };
 
-export type { NavigationItem, NavigationImage, NavigationText };
+export type { NavigationImage, NavigationItem, NavigationText };

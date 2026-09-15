@@ -59,6 +59,7 @@ interface SiteHeaderProps {
   layout?: "viewport" | "figmaCanvas" | "productCanvas";
   figmaPanelVariant?: "default" | "flagship";
   highlightActive?: boolean;
+  canvasActiveNavigation?: boolean;
   neutralNavigation?: boolean;
   showBrand?: boolean;
 }
@@ -91,6 +92,7 @@ export default function SiteHeader({
   layout = "viewport",
   figmaPanelVariant = "default",
   highlightActive = true,
+  canvasActiveNavigation = false,
   neutralNavigation = false,
   showBrand = true,
 }: SiteHeaderProps) {
@@ -112,7 +114,7 @@ export default function SiteHeader({
   return (
     <>
       <header
-        className={`${styles.header} ${layout === "figmaCanvas" ? styles.canvasHeader : ""} ${layout === "productCanvas" ? styles.productCanvasHeader : ""} ${neutralNavigation ? styles.neutralNavigation : ""} ${isScrolled ? styles.scrolled : ""} ${isNavigationOpen ? styles.navigationOpen : ""}`}
+        className={`${styles.header} ${layout === "figmaCanvas" ? styles.canvasHeader : ""} ${layout === "productCanvas" ? styles.productCanvasHeader : ""} ${canvasActiveNavigation ? styles.canvasActiveNavigation : ""} ${neutralNavigation ? styles.neutralNavigation : ""} ${isScrolled ? styles.scrolled : ""} ${isNavigationOpen ? styles.navigationOpen : ""}`}
         data-site-header
         data-node-id={layout !== "viewport" ? "7077:3756" : undefined}
       >
@@ -161,64 +163,31 @@ export default function SiteHeader({
               </Link>
             );
           })}
-          {layout === "viewport" ? (
-            <button
-              type="button"
-              onClick={isNavigationOpen ? closeNavigation : openNavigation}
-              className={`${styles.menuButton} ${isNavigationOpen ? styles.menuCloseButton : ""}`}
-              aria-label={
-                isNavigationOpen
-                  ? "Close navigation menu"
-                  : "Open navigation menu"
-              }
-            >
-              {isNavigationOpen ? (
-                <>
-                  <span />
-                  <span />
-                </>
-              ) : (
-                /* Keep the viewport header on the same raster bolt used by
-                   the Figma canvas header. The prior embedded-image SVG
-                   intermittently rendered as a broken image on mobile. */
-                <Image
-                  src="/images/shared/figma-brand-panel/bolt.png"
-                  alt=""
-                  width={42}
-                  height={42}
-                />
-              )}
-            </button>
-          ) : null}
         </nav>
 
-        {layout !== "viewport" ? (
-          <button
-            type="button"
-            onClick={isNavigationOpen ? closeNavigation : openNavigation}
-            className={`${styles.menuButton} ${styles.canvasMenuButton} ${isNavigationOpen ? styles.menuCloseButton : ""}`}
-            aria-label={
-              isNavigationOpen
-                ? "Close navigation menu"
-                : "Open navigation menu"
-            }
-            data-node-id="I7077:3756;7077:14065"
-          >
-            {isNavigationOpen ? (
-              <>
-                <span />
-                <span />
-              </>
-            ) : (
-              <Image
-                src="/images/shared/figma-brand-panel/bolt.png"
-                alt=""
-                width={85}
-                height={85}
-              />
-            )}
-          </button>
-        ) : null}
+        <button
+          type="button"
+          onClick={isNavigationOpen ? closeNavigation : openNavigation}
+          className={`${styles.menuButton} ${layout === "figmaCanvas" ? styles.canvasMenuButton : ""} ${layout === "productCanvas" ? styles.canvasMenuButton : ""} ${isNavigationOpen ? styles.menuCloseButton : ""}`}
+          aria-label={
+            isNavigationOpen ? "Close navigation menu" : "Open navigation menu"
+          }
+          data-node-id="I7077:3756;7077:14065"
+        >
+          {isNavigationOpen ? (
+            <>
+              <span />
+              <span />
+            </>
+          ) : (
+            <Image
+              src="/images/shared/figma-brand-panel/bolt.png"
+              alt=""
+              width={85}
+              height={85}
+            />
+          )}
+        </button>
       </header>
       {isNavigationOpen && navigationData ? (
         <Navigation

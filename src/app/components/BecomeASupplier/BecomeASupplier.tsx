@@ -74,10 +74,11 @@ const BecomeASupplier = () => {
                 Supply Us. Be an Impact Partner.
               </h2>
               <p className="mb-8 max-w-4xl text-base text-gray-600 lg:text-lg">
-                Join <span className="font-semibold text-[#23B14D]">GREEN</span>&apos;s
-                trusted network of global and local vendors delivering mission-critical
-                energy infrastructure across Papua New Guinea and the Pacific. If you bring
-                quality, transparency, and speed — we&apos;re ready to do business.
+                Join <span className="font-semibold text-[#23B14D]">GREEN</span>
+                &apos;s trusted network of global and local vendors delivering
+                mission-critical energy infrastructure across Papua New Guinea
+                and the Pacific. If you bring quality, transparency, and speed —
+                we&apos;re ready to do business.
               </p>
             </div>
 
@@ -89,9 +90,13 @@ const BecomeASupplier = () => {
                   type="button"
                   onClick={() => setOpenModal(card.key)}
                   className="group flex h-36 items-stretch overflow-hidden border border-[#a3d977] bg-gradient-to-r from-[#23B14D]/10 to-[#FFFE50]/10 text-left shadow-sm transition hover:shadow-md hover:brightness-[1.02]"
-                  style={{ clipPath: "polygon(5% 0, 100% 0, 95% 100%, 0 100%)" }}
+                  style={{
+                    clipPath: "polygon(5% 0, 100% 0, 95% 100%, 0 100%)",
+                  }}
                 >
-                  <img loading="lazy" decoding="async"
+                  <img
+                    loading="lazy"
+                    decoding="async"
                     src={card.image}
                     alt={card.title}
                     className="h-full w-2/5 shrink-0 object-cover"
@@ -114,33 +119,38 @@ const BecomeASupplier = () => {
             {/* Quote */}
             <div className="my-10 max-w-md">
               <p className="text-lg font-bold italic text-gray-800">
-                &quot;<span className="text-[#23B14D]">GREEN</span> vendors become part of
-                our extended ecosystem.&quot;
+                &quot;<span className="text-[#23B14D]">GREEN</span> vendors
+                become part of our extended ecosystem.&quot;
               </p>
             </div>
 
             {/* Bottom row */}
             <div className="mb-32 lg:flex lg:items-end lg:justify-between">
               <h3 className="max-w-xl text-lg font-bold text-gray-800 lg:text-xl">
-                Supplying <span className="text-[#23B14D]">GREEN</span> means more than
-                shipping goods. It means joining a supply chain that powers clinics,
-                schools, and futures.
+                Supplying <span className="text-[#23B14D]">GREEN</span> means
+                more than shipping goods. It means joining a supply chain that
+                powers clinics, schools, and futures.
               </h3>
 
               <div className="mt-8 flex flex-col items-stretch gap-4 lg:mt-0 lg:items-end">
                 <a
-                  href="mailto:procurement@green.com.pg?subject=Supplier%20Handbook%20Request"
+                  href="/supplier-handbook.pdf"
+                  download="GREEN-Supplier-Handbook.pdf"
                   className="flex items-center justify-between gap-4 border border-[#4CAF50] bg-gradient-to-r from-[#23B14D]/15 to-[#FFFE50]/15 px-6 py-3 text-sm font-bold text-gray-800 shadow-sm transition hover:brightness-105 sm:text-base"
-                  style={{ clipPath: "polygon(6% 0, 100% 0, 94% 100%, 0 100%)" }}
+                  style={{
+                    clipPath: "polygon(6% 0, 100% 0, 94% 100%, 0 100%)",
+                  }}
                 >
-                  <span>Request Supplier Handbook</span>
+                  <span>Download Supplier Handbook</span>
                   <span className="text-[#23B14D]">›</span>
                 </a>
                 <button
                   type="button"
                   onClick={() => setIsRegisterOpen(true)}
                   className="flex items-center justify-between gap-4 border border-[#4CAF50] bg-gradient-to-r from-[#23B14D]/15 to-[#FFFE50]/15 px-6 py-3 text-sm font-bold text-gray-800 shadow-sm transition hover:brightness-105 sm:text-base"
-                  style={{ clipPath: "polygon(6% 0, 100% 0, 94% 100%, 0 100%)" }}
+                  style={{
+                    clipPath: "polygon(6% 0, 100% 0, 94% 100%, 0 100%)",
+                  }}
                 >
                   <span>Register Now | Send an Inquiry</span>
                   <span className="text-[#23B14D]">›</span>

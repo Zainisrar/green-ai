@@ -206,7 +206,7 @@ const PANEL_COPY = [
   {
     headlineLeft: 317.67,
     headlineTop: 343,
-    headlineWidth: 360,
+    headlineWidth: 460,
     headlineStyle: "panel-headline panel-headline-r",
     descLeft: 317.67,
     descTop: 457,
@@ -254,7 +254,7 @@ const PANELS = [
     href: "/explore/welcome-to-green",
   },
   {
-    label: "RENEWABLE ENERGY THE CORE",
+    label: "RENEWABLE ENERGY\nTHE CORE",
     description:
       "Renewables: Providing cleaner energy to our world. Renewable energy is at the core of the solutions we provide to address our clients' varied requirements. Thus, sustaiablity assured, the green way!",
     href: "/engineering/solar-epcm-services",
@@ -405,6 +405,18 @@ const MOBILE_PANELS = [
 ] as const;
 
 const stackHeadline = (text: string) => {
+  if (text.includes("\n")) {
+    return (
+      <span className="panel-headline-text">
+        {text.split("\n").map((part, i) => (
+          <React.Fragment key={i}>
+            {i > 0 && <br />}
+            {part.trim()}
+          </React.Fragment>
+        ))}
+      </span>
+    );
+  }
   const line = text.trim().replace(/\s+/g, " ");
   return <span className="panel-headline-text">{line}</span>;
 };
@@ -424,7 +436,9 @@ const FigmaLayer = ({
   height: number;
   z: number;
 }) => (
-  <img loading="lazy" decoding="async"
+  <img
+    loading="lazy"
+    decoding="async"
     src={src}
     alt=""
     role="presentation"
@@ -520,14 +534,22 @@ const D6Template = (_props: D6TemplateProps) => {
         <SiteHeader panel="logoOnly" />
         {/* Exact image aspect → diagonals land at fixed % on every device (no object-cover crop) */}
         <div className="relative w-screen overflow-hidden aspect-[360/800]">
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/d6/mobileBg.png"
             alt=""
             role="presentation"
             className="absolute inset-0 -z-10 h-full w-full"
           />
           <div className="mt-4">
-            <img loading="lazy" decoding="async" src="/images/d6/greenFuture.png" alt="" role="presentation" />
+            <img
+              loading="lazy"
+              decoding="async"
+              src="/images/d6/greenFuture.png"
+              alt=""
+
+            />
           </div>
           {/* G hidden. Each image: one letter on the left, its heading at the top-right inside. */}
           <div className="pointer-events-none absolute inset-0 z-0">
@@ -596,7 +618,9 @@ const D6Template = (_props: D6TemplateProps) => {
               imgHeight?: number;
             };
             return (
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 key={`panel-${i}`}
                 src={layer.src}
                 alt=""
@@ -619,7 +643,9 @@ const D6Template = (_props: D6TemplateProps) => {
             );
           })}
           {FIGMA_LAYERS.diagonals.map((layer, i) => (
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               key={`diag-${i}`}
               src={layer.src}
               alt=""
@@ -641,7 +667,9 @@ const D6Template = (_props: D6TemplateProps) => {
               move with the shared gentle transition below. */}
           <div className="d6-live-art" aria-hidden="true">
             {EXPANDED_STATE_ART.map((state) => (
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 key={state.panel}
                 src={state.src}
                 alt=""
@@ -687,7 +715,9 @@ const D6Template = (_props: D6TemplateProps) => {
                 opacity: expandedPanel === 1 || i === 0 ? 1 : 0,
               }}
             >
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src={letter.src}
                 alt=""
                 role="presentation"
@@ -716,11 +746,11 @@ const D6Template = (_props: D6TemplateProps) => {
               (COLLAPSED_LABEL_LINES[i] * COLLAPSED_LABEL_LINE_HEIGHT) / 2;
             const headlineLeft = isCollapsedPanel
               ? centeredPanelHeadingLeft(
-                  i,
-                  headlineVisualMidY,
-                  isCollapsedAbout ? 190 : copy.headlineWidth,
-                  PANEL_EDGES[expandedPanel] ?? PANEL_EDGES[1],
-                ) - panel.left
+                i,
+                headlineVisualMidY,
+                isCollapsedAbout ? 190 : copy.headlineWidth,
+                PANEL_EDGES[expandedPanel] ?? PANEL_EDGES[1],
+              ) - panel.left
               : copy.headlineLeft;
             const detailHref = isCollapsedAbout
               ? "/explore/welcome-to-green"
@@ -824,7 +854,9 @@ const D6Template = (_props: D6TemplateProps) => {
 
           <div className="d6-fixed-right-wedge" aria-hidden="true" />
           <div className="group-1171280893" style={{ zIndex: 20 }}>
-            <img loading="lazy" decoding="async"
+            <img
+              loading="lazy"
+              decoding="async"
               src="/images/d6/companysnapshot.png"
               alt="Company snapshots in 90 seconds"
               className="company-snapshots-art"

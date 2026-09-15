@@ -8,6 +8,7 @@ export default function InvestorRelationsPage() {
       mobile={<InvestorRelations canvas />}
       nodeId="7077:19989"
       fitCanvasHeight
+      scaleMobileToViewport
     />
   );
 }

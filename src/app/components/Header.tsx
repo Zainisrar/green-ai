@@ -230,6 +230,7 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
                       : slide.cta.button1}
                   </span>
                   <svg
+                    aria-hidden="true"
                     className="w-5 h-5 lg:w-7 lg:h-7 stroke-black stroke-[3.5] transition-transform group-hover:translate-x-1"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -280,19 +281,49 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
         </div>
 
         <div
+          data-node-id="7077:2828"
           style={{
-            width: "371px",
-            height: "41px",
-            background: "rgba(169, 163, 163, 0.3)",
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
-            backdropFilter: "blur(7.5px)",
-            WebkitBackdropFilter: "blur(7.5px)",
+            width: "clamp(260px, 19.32vw, 371px)",
+            height: "clamp(29px, 2.135vw, 41px)",
           }}
-          className="absolute left-[1vw] top-[94.02dvh] z-20 flex shrink-0 items-center justify-center -skew-x-[45deg] max-md:hidden"
+          className="absolute left-[clamp(12px,1vw,19px)] bottom-[clamp(12px,1.75vh,17px)] z-20 flex items-center select-none pointer-events-none max-md:hidden"
         >
-          <div className="skew-x-[45deg] whitespace-nowrap text-[25px] font-semibold italic tracking-wide text-black">
+          <svg
+            className="absolute inset-0 w-full h-full"
+            viewBox="0 0 371 41"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            style={{
+              filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25))",
+            }}
+          >
+            <path
+              d="M371 0H62.3529L0 41H308.647L371 0Z"
+              fill="#A9A3A3"
+              fillOpacity="0.3"
+            />
+          </svg>
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              backdropFilter: "blur(7.5px)",
+              WebkitBackdropFilter: "blur(7.5px)",
+              clipPath: "polygon(16.8% 0%, 100% 0%, 83.2% 100%, 0% 100%)",
+            }}
+          />
+          <span
+            data-node-id="7077:2829"
+            className="relative z-10 text-black whitespace-nowrap font-semibold italic"
+            style={{
+              paddingLeft: "clamp(38px, 3.02vw, 58px)",
+              fontFamily: "var(--font-montserrat), Montserrat, sans-serif",
+              fontSize: "clamp(16px, 1.3vw, 25px)",
+              lineHeight: "1",
+            }}
+          >
             {categoryTag}
-          </div>
+          </span>
         </div>
       </div>
 

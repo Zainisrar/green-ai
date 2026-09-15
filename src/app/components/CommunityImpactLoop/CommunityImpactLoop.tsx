@@ -48,7 +48,9 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
         <div className="grid grid-cols-2 gap-0 mb-8">
           <div className="flex items-center space-x-2">
             <span>
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 "
                 alt="lighting"
@@ -60,7 +62,9 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
           </div>
           <div className="flex items-center space-x-2">
             <span>
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 "
                 alt="lighting"
@@ -72,7 +76,9 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
           </div>
           <div className="flex items-center space-x-2">
             <span>
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 "
                 alt="lighting"
@@ -84,7 +90,9 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
           </div>
           <div className="flex items-center space-x-2">
             <span>
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 "
                 alt="lighting"
@@ -96,7 +104,9 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
           </div>
           <div className="flex items-center space-x-2">
             <span>
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 "
                 alt="lighting"
@@ -108,7 +118,9 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
           </div>
           <div className="flex items-center space-x-2">
             <span>
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/grid-intel/lighting.png"
                 className="w-14 "
                 alt="lighting"
@@ -144,7 +156,6 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
                   It's our model to maximize every watt we deploy.
                 </p>
               )}
-           
             </div>
 
             {/* Impact Flow Grid */}
@@ -161,7 +172,9 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
               ).map((k, idx) => (
                 <div key={idx} className="flex  items-center space-x-2">
                   <span>
-                    <img loading="lazy" decoding="async"
+                    <img
+                      loading="lazy"
+                      decoding="async"
                       src="/images/grid-intel/lighting.png"
                       className="w-14 "
                       alt="lighting"
@@ -212,7 +225,13 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
                 },
               ]
             ).map((item, idx) => {
-              const offsets = ["", "lg:-ml-4", "lg:-ml-16", "lg:-ml-24", "lg:-ml-32"];
+              const offsets = [
+                "",
+                "lg:-ml-4",
+                "lg:-ml-16",
+                "lg:-ml-24",
+                "lg:-ml-32",
+              ];
               const ml = offsets[idx] ?? "";
               return (
                 <div key={idx} className={`${ml} space-y-4 flex flex-col my-4`}>
@@ -331,7 +350,9 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
             {/* Partnership Image */}
             <div className="mb-6">
               <div className="relative">
-                <img loading="lazy" decoding="async"
+                <img
+                  loading="lazy"
+                  decoding="async"
                   src={
                     join?.img?.src ??
                     "/images/community-impact-loop/join-the-loop.png"
@@ -379,333 +400,396 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
   return (
     <React.Fragment>
       <div className={canvas ? styles.canvasPage : ""}>
-      <div className={canvas ? styles.canvasBackground : "lg:block hidden absolute top-0 left-32"}>
-        <img loading="lazy" decoding="async"
-          src="/images/community-impact-loop/mainImg.png"
-          className="h-[160vh]"
-          alt="bg"
-        />
-      </div>
-      <div className={canvas ? styles.canvasFlow : "mb-40"}>
-        {canvas ? <SiteHeader layout="figmaCanvas" /> : <TopNavigation />}
-        <div className={canvas ? styles.canvasLayout : "flex h-full "}>
-          {/* Left Side - GLOBAL SNAPSHOT Text */}
-          <div className={canvas ? styles.canvasVertical : "w-1/10 flex items-center justify-center"}>
-            <div className={canvas ? styles.canvasVerticalImage : "fixed top-1/2 lg:top-1/5 left-4 lg:left-14"}>
-              <img loading="lazy" decoding="async"
-                src="/images/community-impact-loop/community-impact-loop.png"
-                alt="communityimpactloop"
-                className=" w-4 lg:w-7"
-              />
+        <div
+          className={
+            canvas
+              ? styles.canvasBackground
+              : "lg:block hidden absolute top-0 left-32"
+          }
+        >
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/community-impact-loop/mainImg.png"
+            className="h-[160vh]"
+            alt="bg"
+          />
+        </div>
+        <div className={canvas ? styles.canvasFlow : "mb-40"}>
+          {canvas ? <SiteHeader layout="figmaCanvas" /> : <TopNavigation />}
+          <div className={canvas ? styles.canvasLayout : "flex h-full "}>
+            {/* Left Side - GLOBAL SNAPSHOT Text */}
+            <div
+              className={
+                canvas
+                  ? styles.canvasVertical
+                  : "w-1/10 flex items-center justify-center"
+              }
+            >
+              <div
+                className={
+                  canvas
+                    ? styles.canvasVerticalImage
+                    : "fixed top-1/2 lg:top-1/5 left-4 lg:left-14"
+                }
+              >
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="/images/community-impact-loop/community-impact-loop.png"
+                  alt="communityimpactloop"
+                  className=" w-4 lg:w-7"
+                />
+              </div>
             </div>
-          </div>
 
-          {/* Main Content Area */}
-          <div className={canvas ? styles.canvasMain : "pl-14 lg:pl-24 relative z-20 pr-4 pt-8"}>
-            {/* Main Title */}
-            <div className={canvas ? styles.canvasHeaderContent : ""}>
-              <div className="mb-8">
-                <h1 className=" text-2xl lg:text-3xl font-black text-gray-800 mb-4">
-                  {main?.title ? (
-                    <>
-                      {main.title.includes("Impact") ? (
-                        <>
-                          {main.title.split("Impact")[0]}
-                          <span className="text-[#23B14D]">Impact</span>
-                          {main.title.split("Impact")[1] ?? ""}
-                        </>
-                      ) : (
-                        main.title
-                      )}
-                    </>
+            {/* Main Content Area */}
+            <div
+              className={
+                canvas
+                  ? styles.canvasMain
+                  : "pl-14 lg:pl-24 relative z-20 pr-4 pt-8"
+              }
+            >
+              {/* Main Title */}
+              <div className={canvas ? styles.canvasHeaderContent : ""}>
+                <div className="mb-8">
+                  <h1 className=" text-2xl lg:text-3xl font-black text-gray-800 mb-4">
+                    {main?.title ? (
+                      <>
+                        {main.title.includes("Impact") ? (
+                          <>
+                            {main.title.split("Impact")[0]}
+                            <span className="text-[#23B14D]">Impact</span>
+                            {main.title.split("Impact")[1] ?? ""}
+                          </>
+                        ) : (
+                          main.title
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        COMMUNITY <span className="text-[#23B14D]">IMPACT</span>{" "}
+                        LOOP
+                      </>
+                    )}
+                  </h1>
+                  <h2 className=" text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-4">
+                    {main?.subHeadline ??
+                      "From Access to Impact. From Energy to Empowerment."}
+                  </h2>
+                  {main?.description ? (
+                    <div className="text-gray-600 font-semibold text-lg mb-8 whitespace-pre-line">
+                      {main.description}
+                    </div>
                   ) : (
-                    <>
-                      COMMUNITY <span className="text-[#23B14D]">IMPACT</span>{" "}
-                      LOOP
-                    </>
+                    <p className="text-gray-600 font-semibold text-lg mb-8">
+                      When GREEN electrifies a region, we don't stop at
+                      switching the lights on.
+                      <br />
+                      We create a loop — where clean energy powers education,
+                      health, productivity,
+                      <br />
+                      and lasting transformation.
+                    </p>
                   )}
-                </h1>
-                <h2 className=" text-xl lg:text-2xl font-bold text-[#23B14D] italic mb-4">
-                  {main?.subHeadline ??
-                    "From Access to Impact. From Energy to Empowerment."}
-                </h2>
-                {main?.description ? (
-                  <div className="text-gray-600 font-semibold text-lg mb-8 whitespace-pre-line">
-                    {main.description}
+                </div>
+                <div className=" flex my-20 lg:hidden p-2   relative ">
+                  <div className="absolute -left-14 top-12">
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src="/images/community-impact-loop/shape.png"
+                      alt="Technology You Can Trust"
+                      className="w-14"
+                    />
                   </div>
+                  <div>
+                    <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
+                      <span className="text-[#23B14D]">Technology</span> You Can
+                      Trust.
+                    </h3>
+                    <h3 className="text-lg lg:text-xl font-bold text-gray-800">
+                      Partners Who Deliver.
+                    </h3>
+                  </div>
+                  <div className="-mt-4">
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      src="/images/community-impact-loop/shape2.png"
+                      alt="Technology You Can Trust"
+                      className="w-14"
+                    />
+                  </div>
+                </div>
+                {/* Content Layout */}
+                <div
+                  className={canvas ? styles.canvasGrid : "lg:flex space-x-8"}
+                >
+                  {/* Left Column - Content List */}
+                  <div className={canvas ? styles.canvasMenu : " space-y-8"}>
+                    {/* What is the GREEN Community Impact Loop? */}
+                    <div
+                      className=" cursor-pointer"
+                      onClick={() => {
+                        handleActive(0);
+                        const newData = handleData(0);
+                        if (newData) {
+                          setActive((prev) => ({ ...prev, data: newData }));
+                        }
+                      }}
+                    >
+                      <h3
+                        className={`text-lg lg:text-xl font-bold ${
+                          active.activeIndex === 0
+                            ? "text-[#23B14D]"
+                            : "text-gray-800"
+                        } mb-2`}
+                      >
+                        {gcil?.title ??
+                          "What is the GREEN Community Impact Loop?"}
+                      </h3>
+                    </div>
+
+                    {/* How the Loop Works */}
+                    <div
+                      className=" cursor-pointer"
+                      onClick={() => {
+                        handleActive(1);
+                        const newData = handleData(1);
+                        if (newData) {
+                          setActive((prev) => ({ ...prev, data: newData }));
+                        }
+                      }}
+                    >
+                      <h3
+                        className={`text-lg lg:text-xl font-bold ${
+                          active.activeIndex === 1
+                            ? "text-[#23B14D]"
+                            : "text-gray-800"
+                        } mb-2`}
+                      >
+                        {loop?.title ?? "How the Loop Works"}
+                      </h3>
+                    </div>
+
+                    {/* Measured Impact */}
+                    <div
+                      className=" cursor-pointer"
+                      onClick={() => {
+                        handleActive(2);
+                        const newData = handleData(2);
+                        if (newData) {
+                          setActive((prev) => ({ ...prev, data: newData }));
+                        }
+                      }}
+                    >
+                      <h3
+                        className={`text-lg lg:text-xl font-bold ${
+                          active.activeIndex === 2
+                            ? "text-[#23B14D]"
+                            : "text-gray-800"
+                        } mb-2`}
+                      >
+                        {measured?.title ?? "Measured Impact"}
+                      </h3>
+                    </div>
+
+                    {/* Join the Loop */}
+                    <div
+                      className=" cursor-pointer"
+                      onClick={() => {
+                        handleActive(3);
+                        const newData = handleData(3);
+                        if (newData) {
+                          setActive((prev) => ({ ...prev, data: newData }));
+                        }
+                      }}
+                    >
+                      <h3
+                        className={`text-lg lg:text-xl font-bold ${
+                          active.activeIndex === 3
+                            ? "text-[#23B14D]"
+                            : "text-gray-800"
+                        } mb-2`}
+                      >
+                        {join?.title ?? "Join the Loop"}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div
+                    className={
+                      canvas
+                        ? styles.canvasCallout
+                        : " lg:flex hidden p-2   relative "
+                    }
+                  >
+                    <div className="absolute -left-14 top-12">
+                      <img
+                        loading="lazy"
+                        decoding="async"
+                        src="/images/community-impact-loop/shape.png"
+                        alt="Technology You Can Trust"
+                        className="w-14"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
+                        <span className="text-[#23B14D]">Technology</span> You
+                        Can Trust.
+                      </h3>
+                      <h3 className="text-lg lg:text-xl font-bold text-gray-800">
+                        Partners Who Deliver.
+                      </h3>
+                    </div>
+                    <div className="-mt-4">
+                      <img
+                        loading="lazy"
+                        decoding="async"
+                        src="/images/community-impact-loop/shape2.png"
+                        alt="Technology You Can Trust"
+                        className="w-14"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className={
+                      canvas
+                        ? styles.canvasPanel
+                        : "my-12 lg:my-0 lg:w-[420px] lg:shrink-0"
+                    }
+                  >
+                    {active.data}
+                  </div>
+                </div>
+              </div>
+
+              {/* Bottom Flow Statement */}
+              <div className={canvas ? styles.canvasQuote : "mt-12  "}>
+                {main?.quote ? (
+                  <h3 className="text-xl lg:text-2xl max-w-xl  capitalize leading-9  font-bold text-gray-800">
+                    {main.quote.text
+                      .split(main.quote.highlighted)
+                      .map((part, i, arr) => (
+                        <React.Fragment key={i}>
+                          {part}
+                          {i < arr.length - 1 && (
+                            <span className="text-[#23B14D]">
+                              {main.quote.highlighted}
+                            </span>
+                          )}
+                        </React.Fragment>
+                      ))}
+                  </h3>
                 ) : (
-                  <p className="text-gray-600 font-semibold text-lg mb-8">
-                    When GREEN electrifies a region, we don't stop at switching
-                    the lights on.
-                    <br />
-                    We create a loop — where clean energy powers education,
-                    health, productivity,
-                    <br />
-                    and lasting transformation.
-                  </p>
+                  <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
+                    <span className="text-[#23B14D]">Clean Energy</span> →
+                    Enables Activity → Builds Income →{" "}
+                    <span className="text-[#23B14D]">Fuels Demand</span> →<br />
+                    <span className="text-[#23B14D]">Sustains Systems</span> →
+                    Uplifts Communities.
+                  </h3>
                 )}
               </div>
-     <div className=" flex my-20 lg:hidden p-2   relative ">
-                  <div className="absolute -left-14 top-12">
-                    <img loading="lazy" decoding="async"
-                      src="/images/community-impact-loop/shape.png"
-                      alt="Technology You Can Trust"
-                      className="w-14"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
-                      <span className="text-[#23B14D]">Technology</span> You Can
-                      Trust.
-                    </h3>
-                    <h3 className="text-lg lg:text-xl font-bold text-gray-800">
-                      Partners Who Deliver.
-                    </h3>
-                  </div>
-                  <div className="-mt-4">
-                    <img loading="lazy" decoding="async"
-                      src="/images/community-impact-loop/shape2.png"
-                      alt="Technology You Can Trust"
-                      className="w-14"
-                    />
-                  </div>
-                </div>
-              {/* Content Layout */}
-              <div className={canvas ? styles.canvasGrid : "lg:flex space-x-8"}>
-                {/* Left Column - Content List */}
-                <div className={canvas ? styles.canvasMenu : " space-y-8"}>
-                  {/* What is the GREEN Community Impact Loop? */}
-                  <div
-                    className=" cursor-pointer"
-                    onClick={() => {
-                      handleActive(0);
-                      const newData = handleData(0);
-                      if (newData) {
-                        setActive((prev) => ({ ...prev, data: newData }));
-                      }
-                    }}
-                  >
-                    <h3
-                      className={`text-lg lg:text-xl font-bold ${
-                        active.activeIndex === 0
-                          ? "text-[#23B14D]"
-                          : "text-gray-800"
-                      } mb-2`}
-                    >
-                      {gcil?.title ??
-                        "What is the GREEN Community Impact Loop?"}
-                    </h3>
-                  </div>
-
-                  {/* How the Loop Works */}
-                  <div
-                    className=" cursor-pointer"
-                    onClick={() => {
-                      handleActive(1);
-                      const newData = handleData(1);
-                      if (newData) {
-                        setActive((prev) => ({ ...prev, data: newData }));
-                      }
-                    }}
-                  >
-                    <h3
-                      className={`text-lg lg:text-xl font-bold ${
-                        active.activeIndex === 1
-                          ? "text-[#23B14D]"
-                          : "text-gray-800"
-                      } mb-2`}
-                    >
-                      {loop?.title ?? "How the Loop Works"}
-                    </h3>
-                  </div>
-
-                  {/* Measured Impact */}
-                  <div
-                    className=" cursor-pointer"
-                    onClick={() => {
-                      handleActive(2);
-                      const newData = handleData(2);
-                      if (newData) {
-                        setActive((prev) => ({ ...prev, data: newData }));
-                      }
-                    }}
-                  >
-                    <h3
-                      className={`text-lg lg:text-xl font-bold ${
-                        active.activeIndex === 2
-                          ? "text-[#23B14D]"
-                          : "text-gray-800"
-                      } mb-2`}
-                    >
-                      {measured?.title ?? "Measured Impact"}
-                    </h3>
-                  </div>
-
-                  {/* Join the Loop */}
-                  <div
-                    className=" cursor-pointer"
-                    onClick={() => {
-                      handleActive(3);
-                      const newData = handleData(3);
-                      if (newData) {
-                        setActive((prev) => ({ ...prev, data: newData }));
-                      }
-                    }}
-                  >
-                    <h3
-                      className={`text-lg lg:text-xl font-bold ${
-                        active.activeIndex === 3
-                          ? "text-[#23B14D]"
-                          : "text-gray-800"
-                      } mb-2`}
-                    >
-                      {join?.title ?? "Join the Loop"}
-                    </h3>
-                  </div>
-                </div>
-
-                <div className={canvas ? styles.canvasCallout : " lg:flex hidden p-2   relative "}>
-                  <div className="absolute -left-14 top-12">
-                    <img loading="lazy" decoding="async"
-                      src="/images/community-impact-loop/shape.png"
-                      alt="Technology You Can Trust"
-                      className="w-14"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-lg lg:text-xl font-bold text-gray-800 mb-2">
-                      <span className="text-[#23B14D]">Technology</span> You Can
-                      Trust.
-                    </h3>
-                    <h3 className="text-lg lg:text-xl font-bold text-gray-800">
-                      Partners Who Deliver.
-                    </h3>
-                  </div>
-                  <div className="-mt-4">
-                    <img loading="lazy" decoding="async"
-                      src="/images/community-impact-loop/shape2.png"
-                      alt="Technology You Can Trust"
-                      className="w-14"
-                    />
-                  </div>
-                </div>
-                <div className={canvas ? styles.canvasPanel : "my-12 lg:my-0 lg:w-[420px] lg:shrink-0"}>
-                  {active.data}
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom Flow Statement */}
-            <div className={canvas ? styles.canvasQuote : "mt-12  "}>
-              {main?.quote ? (
-                <h3 className="text-xl lg:text-2xl max-w-xl  capitalize leading-9  font-bold text-gray-800">
-                  {main.quote.text
-                    .split(main.quote.highlighted)
-                    .map((part, i, arr) => (
-                      <React.Fragment key={i}>
-                        {part}
-                        {i < arr.length - 1 && (
-                          <span className="text-[#23B14D]">
-                            {main.quote.highlighted}
-                          </span>
-                        )}
-                      </React.Fragment>
-                    ))}
-                </h3>
-              ) : (
-                <h3 className="text-xl lg:text-2xl font-bold text-gray-800">
-                  <span className="text-[#23B14D]">Clean Energy</span> → Enables
-                  Activity → Builds Income →{" "}
-                  <span className="text-[#23B14D]">Fuels Demand</span> →<br />
-                  <span className="text-[#23B14D]">Sustains Systems</span> →
-                  Uplifts Communities.
-                </h3>
-              )}
             </div>
           </div>
-        </div>
 
-        {main?.cta && main.cta.length > 0 ? (
-          canvas ? (
+          {main?.cta && main.cta.length > 0 ? (
+            canvas ? (
+              <div className={styles.canvasCtas}>
+                <FigmaAngledCta onClick={() => setIsProposalOpen(true)}>
+                  {main.cta[0].text}
+                </FigmaAngledCta>
+                <FigmaAngledCta
+                  href={main.cta[1]?.href ?? main.cta[0].href}
+                  icon="download"
+                >
+                  {main.cta[1]?.text ??
+                    "GREEN Innovation Partnership Framework (PDF)"}
+                </FigmaAngledCta>
+              </div>
+            ) : (
+              <div className="flex flex-col items-end gap-8 my-8">
+                <button
+                  type="button"
+                  onClick={() => setIsProposalOpen(true)}
+                  className="relative flex justify-end cursor-pointer"
+                >
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/community-impact-loop/submit.png"
+                    alt="Submit Proposal / Collaboration Inquiry"
+                  />
+                  <div className="absolute inset-0 flex items-center pl-8 lg:pl-12 pr-12 lg:pr-16 text-sm lg:text-base font-bold">
+                    {main.cta[0].text}
+                  </div>
+                </button>
+                <Link
+                  href={main.cta[1]?.href ?? main.cta[0].href}
+                  className="relative flex justify-end cursor-pointer"
+                >
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/community-impact-loop/green.png"
+                    alt="GREEN Innovation Partnership Framework (PDF)"
+                  />
+                  <div className="absolute inset-0 flex items-center pl-8 lg:pl-12 pr-12 lg:pr-16 text-sm lg:text-base font-bold">
+                    {main.cta[1]?.text ??
+                      "GREEN Innovation Partnership Framework (PDF)"}
+                  </div>
+                </Link>
+              </div>
+            )
+          ) : canvas ? (
             <div className={styles.canvasCtas}>
               <FigmaAngledCta onClick={() => setIsProposalOpen(true)}>
-                {main.cta[0].text}
+                Submit Proposal / Collaboration Inquiry
               </FigmaAngledCta>
               <FigmaAngledCta
-                href={main.cta[1]?.href ?? main.cta[0].href}
+                className={styles.canvasDownloadCta}
                 icon="download"
+                showArrow={true}
               >
-                {main.cta[1]?.text ?? "GREEN Innovation Partnership Framework (PDF)"}
+                GREEN Innovation Partnership Framework (PDF)
               </FigmaAngledCta>
             </div>
           ) : (
-            <div className="flex flex-col items-end gap-8 my-8">
-              <button
-                type="button"
-                onClick={() => setIsProposalOpen(true)}
-                className="relative flex justify-end cursor-pointer"
-              >
-                <img loading="lazy" decoding="async"
-                  src="/images/community-impact-loop/submit.png"
-                  alt="Submit Proposal / Collaboration Inquiry"
-                />
-                <div className="absolute inset-0 flex items-center pl-8 lg:pl-12 pr-12 lg:pr-16 text-sm lg:text-base font-bold">
-                  {main.cta[0].text}
-                </div>
-              </button>
-              <Link
-                href={main.cta[1]?.href ?? main.cta[0].href}
-                className="relative flex justify-end cursor-pointer"
-              >
-                <img loading="lazy" decoding="async"
+            <>
+              <div className="flex justify-end my-8 cursor-pointer">
+                <button
+                  type="button"
+                  onClick={() => setIsProposalOpen(true)}
+                  className="cursor-pointer"
+                >
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src="/images/community-impact-loop/submit.png"
+                    alt="Submit Proposal / Collaboration Inquiry"
+                  />
+                </button>
+              </div>
+              <div className="flex justify-end my-8 cursor-pointer">
+                <img
+                  loading="lazy"
+                  decoding="async"
                   src="/images/community-impact-loop/green.png"
                   alt="GREEN Innovation Partnership Framework (PDF)"
                 />
-                <div className="absolute inset-0 flex items-center pl-8 lg:pl-12 pr-12 lg:pr-16 text-sm lg:text-base font-bold">
-                  {main.cta[1]?.text ?? "GREEN Innovation Partnership Framework (PDF)"}
-                </div>
-              </Link>
-            </div>
-          )
-        ) : canvas ? (
-          <div className={styles.canvasCtas}>
-            <FigmaAngledCta onClick={() => setIsProposalOpen(true)}>
-              Submit Proposal / Collaboration Inquiry
-            </FigmaAngledCta>
-            <FigmaAngledCta
-              className={styles.canvasDownloadCta}
-              icon="download"
-              showArrow={true}
-            >
-              GREEN Innovation Partnership Framework (PDF)
-            </FigmaAngledCta>
-          </div>
-        ) : (
-          <>
-            <div className="flex justify-end my-8 cursor-pointer">
-              <button
-                type="button"
-                onClick={() => setIsProposalOpen(true)}
-                className="cursor-pointer"
-              >
-                <img loading="lazy" decoding="async"
-                  src="/images/community-impact-loop/submit.png"
-                  alt="Submit Proposal / Collaboration Inquiry"
-                />
-              </button>
-            </div>
-            <div className="flex justify-end my-8 cursor-pointer">
-              <img loading="lazy" decoding="async"
-                src="/images/community-impact-loop/green.png"
-                alt="GREEN Innovation Partnership Framework (PDF)"
-              />
-            </div>
-          </>
-        )}
-      </div>
+              </div>
+            </>
+          )}
+        </div>
       </div>
       <Chatbot />
-      <SubmitProposal isOpen={isProposalOpen} onClose={() => setIsProposalOpen(false)} />
+      <SubmitProposal
+        isOpen={isProposalOpen}
+        onClose={() => setIsProposalOpen(false)}
+      />
     </React.Fragment>
   );
 };

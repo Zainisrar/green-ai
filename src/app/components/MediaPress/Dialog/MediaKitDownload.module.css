@@ -1,0 +1,106 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-left: 280px;
+  padding-right: 200px;
+  padding-top: 28px;
+  box-sizing: border-box;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.row {
+  display: flex;
+  gap: 28px;
+  transition: transform 160ms ease;
+}
+
+.row0 {
+  margin-left: 60px;
+}
+.row1 {
+  margin-left: 38px;
+}
+.row2 {
+  margin-left: 16px;
+}
+.row3 {
+  margin-left: -6px;
+}
+.row4 {
+  margin-left: -28px;
+}
+
+.downloadBtn {
+  position: relative;
+  width: 360px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px 0 32px;
+  background: linear-gradient(98deg, #8fe082 0%, #edf87e 100%);
+  border: 1px solid rgba(35, 177, 77, 0.45);
+  clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition:
+    filter 160ms ease,
+    transform 160ms ease;
+}
+
+.downloadBtn:hover {
+  filter: brightness(1.06);
+  transform: translateY(-2px);
+}
+
+.btnLabel {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #101927;
+  white-space: nowrap;
+}
+
+.downloadIcon {
+  width: 18px;
+  height: 18px;
+  color: #101927;
+  flex: none;
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+  }
+
+  .grid {
+    gap: 12px;
+  }
+
+  .row {
+    flex-direction: column;
+    gap: 12px;
+    margin-left: 0 !important;
+  }
+
+  .downloadBtn {
+    width: 100%;
+    height: 48px;
+    clip-path: none;
+    border-radius: 6px;
+    padding: 0 18px;
+  }
+
+  .btnLabel {
+    font-size: 13.5px;
+  }
+}

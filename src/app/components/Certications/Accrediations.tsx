@@ -3,11 +3,11 @@
 import { useState } from "react";
 import { useCertificationsAccreditations } from "../../../hooks/useCertificationsAccreditations";
 import D6Chatbot from "../D6Chatbot";
+import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import styles from "./Accrediations.module.css";
 import ListofCertificates from "./ListofCertificates";
-import LetsStart from "./Modals/LetsStart";
 
 const FALLBACK_CERTIFICATES = [
   {
@@ -48,13 +48,10 @@ const FALLBACK_ESG_POINTS = [
   "Environmental: We reduce emissions, conserve resources, and support climate-resilient operations.",
   "Social: We promote diversity, equity, inclusion, employee well-being, and community engagement.",
   "Governance: We ensure transparent leadership, ethical conduct, and regulatory compliance.",
-  (
-    <span key="esg-int">
-      ESG Integration: We align with{" "}
-      <strong>GRI, SASB, and UN SDGs</strong>, with clear reporting and
-      measurable progress.
-    </span>
-  ),
+  <span key="esg-int">
+    ESG Integration: We align with <strong>GRI, SASB, and UN SDGs</strong>, with
+    clear reporting and measurable progress.
+  </span>,
 ] as const;
 
 export default function Accrediations() {
@@ -75,14 +72,18 @@ export default function Accrediations() {
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:3221">
       <SiteHeader layout="figmaCanvas" highlightActive={false} />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.watermark}
         src="/images/certifications/figma-background.png"
         alt=""
         width="755"
         height="755"
       />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.verticalTitleImg}
         src="/images/certifications/title_vert.png"
         alt=""
@@ -91,7 +92,9 @@ export default function Accrediations() {
         height="555"
       />
       <h1 className={styles.pageTitle} data-node-id="7077:3249">
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           className={styles.pageTitleImg}
           src="/images/certifications/title_h1.png"
           alt={title}
@@ -105,7 +108,9 @@ export default function Accrediations() {
         onClick={() => setIsCertificatesOpen(true)}
         data-node-id="7077:3263"
       >
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/certifications/quote_panel.png"
           alt=""
           width="606"
@@ -147,7 +152,9 @@ export default function Accrediations() {
               onClick={() => setIsCertificatesOpen(true)}
               data-node-id={certificate.nodeId}
             >
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src={certificate.image}
                 alt={`${certificate.name} certification`}
                 width="145"
@@ -171,7 +178,9 @@ export default function Accrediations() {
               "Australian industry association that represents businesses involved in renewable energy and energy storage"}
           </p>
         </div>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/certifications/cec_logo.png"
           alt="Clean Energy Council"
           width="262"
@@ -184,7 +193,9 @@ export default function Accrediations() {
         onClick={() => setIsStartOpen(true)}
         data-node-id="7077:3275"
       >
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/certifications/cta_panel.png"
           alt=""
           width="178"
@@ -197,12 +208,12 @@ export default function Accrediations() {
         triggerVariant="figmaCanvas"
         triggerClassName={styles.chatTrigger}
         triggerStyle={{
-            top: 885,
-            right: "auto",
-            bottom: "auto",
-            left: 1497,
-            width: 418,
-          }}
+          top: 885,
+          right: "auto",
+          bottom: "auto",
+          left: 1497,
+          width: 418,
+        }}
       />
     </main>
   );
@@ -248,7 +259,9 @@ export default function Accrediations() {
                 key={certificate.name}
                 onClick={() => setIsCertificatesOpen(true)}
               >
-                <img loading="lazy" decoding="async"
+                <img
+                  loading="lazy"
+                  decoding="async"
                   src={certificate.image}
                   alt={`${certificate.name} certification`}
                   width="145"
@@ -269,7 +282,9 @@ export default function Accrediations() {
                 "Australian industry association that represents businesses involved in renewable energy and energy storage"}
             </p>
           </div>
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/certifications/cec_logo.png"
             alt="Clean Energy Council"
             width="262"
@@ -281,7 +296,7 @@ export default function Accrediations() {
           className={styles.mobileStart}
           onClick={() => setIsStartOpen(true)}
         >
-          Let’s Start
+          {certificationsData?.cta?.text || "Let’s Start"}
         </button>
       </div>
       <D6Chatbot />
@@ -295,7 +310,23 @@ export default function Accrediations() {
         isOpen={isCertificatesOpen}
         onClose={() => setIsCertificatesOpen(false)}
       />
-      <LetsStart isOpen={isStartOpen} onClose={() => setIsStartOpen(false)} />
+      <ProductEnquiry
+        productName="Certifications & Accreditations"
+        isOpen={isStartOpen}
+        onClose={() => setIsStartOpen(false)}
+        titlePrefix="LET'S"
+        titleAccent="START"
+        interestLabel="WHAT DO YOU NEED HELP WITH?"
+        interestOptions={[
+          "Certifications & Accreditations",
+          "ISO standards",
+          "ESG compliance",
+          "Clean Energy Council",
+          "Other",
+        ]}
+        defaultInterest="Certifications & Accreditations"
+        submitButtonText="Get Started"
+      />
     </>
   );
 }

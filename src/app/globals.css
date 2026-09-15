@@ -15,7 +15,12 @@ body {
   max-width: 100%;
   margin: 0 !important;
   padding: 0;
-  overflow-x: clip;
+  /* Figma CTA glows intentionally bleed a few pixels outside their local
+     artwork. They must not turn that visual bleed into a document-wide
+     horizontal scrollbar. `hidden` is used rather than `clip` here because
+     some Chromium builds still expose a horizontal scrollbar for transformed
+     canvas descendants with `clip`. */
+  overflow-x: hidden;
   overscroll-behavior: none;
 }
 

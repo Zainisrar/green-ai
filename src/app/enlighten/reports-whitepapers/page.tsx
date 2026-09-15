@@ -7,6 +7,7 @@ export default function ReportsWhitepapersPage() {
       desktop={<ReportWhitePapers canvas />}
       mobile={<ReportWhitePapers />}
       nodeId="7077:5298"
+      desktopBreakpoint={1200}
       fitCanvasHeight
     />
   );

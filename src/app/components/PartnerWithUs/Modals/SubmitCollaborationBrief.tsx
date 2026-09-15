@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
-import EngineeringFormModal, {
-  formFieldClass,
-  formGridClass,
-} from "@/app/components/shared/EngineeringFormModal";
+import { ProductEnquiryFrame } from "@/app/components/Product/Modals/ProductEnquiry";
 import PhoneInput from "@/app/components/shared/PhoneInput";
+import modalStyles from "@/app/components/SmartGrid/Modals/SmartGridModals.module.css";
+import styles from "./SubmitCollaborationBrief.module.css";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  requestKind?: "brief" | "overview";
 }
 
 interface FormData {
@@ -35,9 +35,20 @@ const initialFormData: FormData = {
 
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 
-const SubmitCollaborationBrief = ({ isOpen, onClose }: Props) => {
+const SubmitCollaborationBrief = ({
+  isOpen,
+  onClose,
+  requestKind = "brief",
+}: Props) => {
+  const isOverviewRequest = requestKind === "overview";
+  const requestLabel = isOverviewRequest
+    ? "Partnership Overview"
+    : "Collaboration Brief";
   const [formData, setFormData] = useState<FormData>(initialFormData);
-  const [phoneCountry, setPhoneCountry] = useState({ dial_code: "+675", country_code: "pg" });
+  const [phoneCountry, setPhoneCountry] = useState({
+    dial_code: "+675",
+    country_code: "pg",
+  });
   const [agreed, setAgreed] = useState(false);
   const [fileName, setFileName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -45,17 +56,27 @@ const SubmitCollaborationBrief = ({ isOpen, onClose }: Props) => {
   const [errorMessage, setErrorMessage] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const resetForm = useCallback(() => {
+    setFormData(initialFormData);
+    setAgreed(false);
+    setFileName("");
+    setErrorMessage("");
+    setSuccessMessage("");
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  }, []);
+
   useEffect(() => {
     if (isOpen) {
-      setSuccessMessage("");
-      setErrorMessage("");
+      resetForm();
     }
-  }, [isOpen]);
+  }, [isOpen, requestKind, resetForm]);
 
   if (!isOpen) return null;
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -77,29 +98,22 @@ const SubmitCollaborationBrief = ({ isOpen, onClose }: Props) => {
     setFileName(file.name);
   };
 
-  const resetForm = () => {
-    setFormData(initialFormData);
-    setAgreed(false);
-    setFileName("");
-    setErrorMessage("");
-    setSuccessMessage("");
-    if (fileInputRef.current) fileInputRef.current.value = "";
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage("");
     setSuccessMessage("");
 
     if (!agreed) {
-      setErrorMessage("Please agree that GREEN may contact you about this request.");
+      setErrorMessage(
+        "Please agree that GREEN may contact you about this request.",
+      );
       return;
     }
 
     setIsLoading(true);
 
     const message = [
-      "Partner With Us — Submit a Collaboration Brief",
+      `Partner With Us — ${isOverviewRequest ? "Request Partnership Overview" : "Submit a Collaboration Brief"}`,
       `Organization: ${formData.organization}`,
       `Country / region: ${formData.country}`,
       `Collaboration type: ${formData.collaborationType}`,
@@ -122,7 +136,8 @@ const SubmitCollaborationBrief = ({ isOpen, onClose }: Props) => {
 
       if (data.Code === "001") {
         setSuccessMessage(
-          data.Message || "Your collaboration brief has been submitted successfully!",
+          data.Message ||
+            `Your ${requestLabel.toLowerCase()} request has been submitted successfully!`,
         );
         resetForm();
         setTimeout(() => {
@@ -130,11 +145,16 @@ const SubmitCollaborationBrief = ({ isOpen, onClose }: Props) => {
           setSuccessMessage("");
         }, 2000);
       } else {
-        setErrorMessage(data.Message || "Failed to submit brief. Please try again.");
+        setErrorMessage(
+          data.Message ||
+            `Failed to submit ${requestLabel.toLowerCase()}. Please try again.`,
+        );
       }
     } catch (error) {
       setErrorMessage(
-        error instanceof Error ? error.message : "An error occurred while submitting the form.",
+        error instanceof Error
+          ? error.message
+          : "An error occurred while submitting the form.",
       );
     } finally {
       setIsLoading(false);
@@ -142,175 +162,220 @@ const SubmitCollaborationBrief = ({ isOpen, onClose }: Props) => {
   };
 
   return (
-    <EngineeringFormModal
-      isOpen={isOpen}
+    <ProductEnquiryFrame
+      labelledBy="collaboration-brief-title"
       onClose={onClose}
-      title={
-        <>
-          SUBMIT A <span className="text-green-600">COLLABORATION BRIEF</span>
-        </>
-      }
+      closeLabel="Close collaboration request"
     >
-      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-        <div className={formGridClass}>
-          <input
-            type="text"
-            name="fullName"
-            placeholder="FULL NAME"
-            value={formData.fullName}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-          <input
-            type="text"
-            name="organization"
-            placeholder="ORGANIZATION"
-            value={formData.organization}
-            onChange={handleInputChange}
-            className={formFieldClass}
-          />
-        </div>
+      <div className={modalStyles.content}>
+        <header className={modalStyles.dialogHeader}>
+          <h2 id="collaboration-brief-title">
+            {isOverviewRequest ? "REQUEST A " : "SUBMIT A "}
+            <strong>
+              {isOverviewRequest
+                ? "PARTNERSHIP OVERVIEW"
+                : "COLLABORATION BRIEF"}
+            </strong>
+          </h2>
+        </header>
 
-        <div className={formGridClass}>
-          <input
-            type="email"
-            name="email"
-            placeholder="EMAIL ID"
-            value={formData.email}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-          <PhoneInput
-            phone={formData.phone}
-            onPhoneChange={handleInputChange}
-            dialCode={phoneCountry.dial_code}
-            countryCode={phoneCountry.country_code}
-            onCountryChange={(dial_code, country_code) => setPhoneCountry({ dial_code, country_code })}
-          />
-        </div>
+        <form className={modalStyles.form} onSubmit={handleSubmit}>
+          <div className={`${modalStyles.row} ${modalStyles.row1}`}>
+            <label
+              className={`${modalStyles.fieldShape} ${modalStyles.activeField}`}
+            >
+              <span className={styles.srOnly}>Full Name</span>
+              <input
+                type="text"
+                name="fullName"
+                placeholder="FULL NAME"
+                aria-label="Full Name"
+                value={formData.fullName}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+            <label className={modalStyles.fieldShape}>
+              <span className={styles.srOnly}>Organization</span>
+              <input
+                type="text"
+                name="organization"
+                placeholder="ORGANIZATION"
+                aria-label="Organization"
+                value={formData.organization}
+                onChange={handleInputChange}
+              />
+            </label>
+          </div>
 
-        <div className={formGridClass}>
-          <select
-            name="country"
-            value={formData.country}
-            onChange={handleInputChange}
-            className={`${formFieldClass} cursor-pointer ${
-              formData.country ? "text-gray-700" : "text-gray-500"
-            }`}
-            required
+          <div className={`${modalStyles.row} ${modalStyles.row2}`}>
+            <label className={modalStyles.fieldShape}>
+              <span className={styles.srOnly}>Email ID</span>
+              <input
+                type="email"
+                name="email"
+                placeholder="EMAIL ID"
+                aria-label="Email ID"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+            <div
+              className={`${modalStyles.fieldShape} ${modalStyles.phoneField}`}
+            >
+              <span className={styles.srOnly}>Phone Number</span>
+              <PhoneInput
+                phone={formData.phone}
+                onPhoneChange={handleInputChange}
+                dialCode={phoneCountry.dial_code}
+                countryCode={phoneCountry.country_code}
+                onCountryChange={(dial_code, country_code) =>
+                  setPhoneCountry({ dial_code, country_code })
+                }
+              />
+            </div>
+          </div>
+
+          <div className={`${modalStyles.row} ${modalStyles.row3}`}>
+            <label className={modalStyles.fieldShape}>
+              <span className={styles.srOnly}>Country or Region</span>
+              <select
+                name="country"
+                aria-label="Country or region"
+                value={formData.country}
+                onChange={handleInputChange}
+                className={formData.country ? modalStyles.hasValue : ""}
+                required
+              >
+                <option value="">COUNTRY / REGION</option>
+                <option value="papua-new-guinea">Papua New Guinea</option>
+                <option value="pacific-islands">Pacific Islands</option>
+                <option value="australia">Australia</option>
+                <option value="asia">Asia</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+            <label className={modalStyles.fieldShape}>
+              <span className={styles.srOnly}>Collaboration Type</span>
+              <select
+                name="collaborationType"
+                aria-label="Collaboration type"
+                value={formData.collaborationType}
+                onChange={handleInputChange}
+                className={
+                  formData.collaborationType ? modalStyles.hasValue : ""
+                }
+                required
+              >
+                <option value="">COLLABORATION TYPE</option>
+                <option value="government">Government Ministry</option>
+                <option value="donor-ngo">Donor &amp; NGO Program</option>
+                <option value="climate-fund-mdb">Climate Fund &amp; MDB</option>
+                <option value="private-sector">Private Sector</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+          </div>
+
+          <div className={`${modalStyles.row} ${styles.documentRow}`}>
+            <label className={modalStyles.fieldShape}>
+              <span className={styles.srOnly}>Brief Description</span>
+              <input
+                type="text"
+                name="description"
+                placeholder="BRIEF DESCRIPTION"
+                aria-label="Brief description"
+                value={formData.description}
+                onChange={handleInputChange}
+              />
+            </label>
+            <div className={styles.uploadFieldWrap}>
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className={`${modalStyles.fieldShape} ${styles.uploadField}`}
+                aria-label={
+                  fileName
+                    ? `Selected file: ${fileName}. Click to change document.`
+                    : "Upload document (PDF or DOC format below 2MB)"
+                }
+              >
+                <span>{fileName || "UPLOAD DOCUMENT"}</span>
+                <span className={styles.uploadIcon} aria-hidden="true">
+                  ↥
+                </span>
+              </button>
+              <label
+                htmlFor="collaboration-brief-file"
+                className={styles.srOnly}
+              >
+                Upload document file
+              </label>
+              <input
+                id="collaboration-brief-file"
+                ref={fileInputRef}
+                type="file"
+                accept=".pdf,.doc,.docx"
+                onChange={handleFileChange}
+                className="hidden"
+                aria-label="Upload document file"
+              />
+              <p>(Formats: PDF/DOC, Size: Below 2Mb)</p>
+            </div>
+          </div>
+
+          <div className={`${modalStyles.agreement} ${styles.agreementRow}`}>
+            <input
+              type="checkbox"
+              id="collaborationbrief-agree"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+            />
+            <label htmlFor="collaborationbrief-agree">
+              I agree that GREEN may contact me about this request.
+            </label>
+          </div>
+
+          {errorMessage && (
+            <p className={modalStyles.error} role="alert" aria-live="assertive">
+              {errorMessage}
+            </p>
+          )}
+          {successMessage && (
+            <p className={modalStyles.success} role="status" aria-live="polite">
+              {successMessage}
+            </p>
+          )}
+
+          <div
+            className={`${modalStyles.row} ${modalStyles.row6} ${styles.actions}`}
           >
-            <option value="">COUNTRY / REGION</option>
-            <option value="papua-new-guinea">Papua New Guinea</option>
-            <option value="pacific-islands">Pacific Islands</option>
-            <option value="australia">Australia</option>
-            <option value="asia">Asia</option>
-            <option value="other">Other</option>
-          </select>
-          <select
-            name="collaborationType"
-            value={formData.collaborationType}
-            onChange={handleInputChange}
-            className={`${formFieldClass} cursor-pointer ${
-              formData.collaborationType ? "text-gray-700" : "text-gray-500"
-            }`}
-            required
-          >
-            <option value="">COLLABORATION TYPE</option>
-            <option value="government">Government Ministry</option>
-            <option value="donor-ngo">Donor &amp; NGO Program</option>
-            <option value="climate-fund-mdb">Climate Fund &amp; MDB</option>
-            <option value="private-sector">Private Sector</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-
-        <div className={formGridClass}>
-          <input
-            type="text"
-            name="description"
-            placeholder="BRIEF DESCRIPTION"
-            value={formData.description}
-            onChange={handleInputChange}
-            className={formFieldClass}
-          />
-          <div className="min-w-0">
             <button
               type="button"
-              onClick={() => fileInputRef.current?.click()}
-              className={`${formFieldClass} flex items-center justify-between text-left`}
+              onClick={resetForm}
+              disabled={isLoading}
+              className={modalStyles.btnReset}
             >
-              <span className="truncate text-gray-500">
-                {fileName || "UPLOAD DOCUMENT"}
-              </span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="ml-2 h-5 w-5 shrink-0 text-gray-500"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={1.8}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 16V4m0 0L8 8m4-4l4 4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
-                />
-              </svg>
+              <span>Reset</span>
             </button>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".pdf,.doc,.docx"
-              onChange={handleFileChange}
-              className="hidden"
-            />
-            <p className="mt-1 text-xs text-[#23B14D]">
-              (Formats: PDF/DOC, Size: Below 2Mb)
-            </p>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={modalStyles.btnSubmit}
+            >
+              <span>
+                {isLoading
+                  ? "Submitting..."
+                  : isOverviewRequest
+                    ? "Request Overview"
+                    : "Submit Brief"}
+              </span>
+            </button>
           </div>
-        </div>
-
-        <div className="flex items-start gap-3">
-          <input
-            type="checkbox"
-            id="collaborationbrief-agree"
-            checked={agreed}
-            onChange={(e) => setAgreed(e.target.checked)}
-            className="mt-1 h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
-          />
-          <label htmlFor="collaborationbrief-agree" className="text-sm text-gray-700 sm:text-base">
-            I agree that GREEN may contact me about this request.
-          </label>
-        </div>
-
-        {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
-        {successMessage && <p className="text-sm text-green-600">{successMessage}</p>}
-
-        <div className="flex flex-col gap-4 sm:flex-row sm:justify-end sm:gap-6">
-          <button
-            type="button"
-            onClick={resetForm}
-            disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
-          >
-            <span className="block text-sm font-bold text-gray-800 sm:text-base">
-              Reset
-            </span>
-          </button>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
-          >
-            <span className="block text-sm font-bold text-gray-900 sm:text-base">
-              {isLoading ? "Submitting..." : "Submit Brief"}
-            </span>
-          </button>
-        </div>
-      </form>
-    </EngineeringFormModal>
+        </form>
+      </div>
+    </ProductEnquiryFrame>
   );
 };
 

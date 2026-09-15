@@ -185,7 +185,7 @@ export const useScreen = (): ScreenInfo => {
             "3840x2160",
             "5120x2880",
             "6016x3384",
-          ].map((r) => [`is${r.replace("x", "x")}`, size === r])
+          ].map((r) => [`is${r.replace("x", "x")}`, size === r]),
         ),
 
         isDesktop: size === "desktop",

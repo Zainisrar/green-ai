@@ -38,11 +38,23 @@ export const Vector7366: React.FC<Vector7366Props> = ({
   micIconSrc = "/images/mike.svg",
   micScale = 1,
 }) => {
+  const keepCanvasFocusInViewport = () => {
+    /*
+     * Browsers calculate focus scrolling from the input's unscaled 1920px
+     * canvas position. On a scaled Figma canvas that can push the document
+     * sideways even though the visible control is already on screen. Restore
+     * the horizontal origin after the native focus scroll has completed.
+     */
+    window.requestAnimationFrame(() => window.scrollTo(0, window.scrollY));
+  };
+
   if (variant === "figmaCanvas") {
     return (
       <div className={`${styles.canvasContainer} ${className}`}>
         {/* Background glow and slanted parallelogram vector */}
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src="/images/letstalkenergy.png"
           alt=""
           draggable={false}
@@ -56,6 +68,7 @@ export const Vector7366: React.FC<Vector7366Props> = ({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={onKeyDown}
+          onFocus={keepCanvasFocusInViewport}
           placeholder={placeholder}
           aria-label={placeholder}
           className={styles.canvasInput}
@@ -68,7 +81,9 @@ export const Vector7366: React.FC<Vector7366Props> = ({
           onClick={onSubmit}
           className={styles.canvasMicButton}
         >
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src={micIconSrc}
             alt="Send message"
             className={styles.canvasMicIcon}
@@ -83,7 +98,9 @@ export const Vector7366: React.FC<Vector7366Props> = ({
   return (
     <div className={`${styles.responsiveContainer} ${className}`}>
       {/* Background glow and slanted parallelogram vector */}
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         src="/images/letstalkenergy.png"
         alt=""
         draggable={false}
@@ -109,7 +126,9 @@ export const Vector7366: React.FC<Vector7366Props> = ({
         onClick={onSubmit}
         className={styles.responsiveMicButton}
       >
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           src={micIconSrc}
           alt="Send message"
           className={styles.responsiveMicIcon}

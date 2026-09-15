@@ -14,7 +14,9 @@ const RequestProposal = () => {
         <div className="flex h-full">
           <div className=" lg:w-1/6 hidden lg:flex items-center justify-center">
             <div className=" fixed top-[20%] left-14">
-              <img loading="lazy" decoding="async"
+              <img
+                loading="lazy"
+                decoding="async"
                 src="/images/book-consulation/book-consulation.png"
                 alt="globalsnapshot"
                 className="w-10"
@@ -27,8 +29,8 @@ const RequestProposal = () => {
             <div className="">
               {/* Main Heading */}
               <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">
-                Request A <span className="text-[#23B14D]">PROPOSAL</span>{" "}
-                {` `} (RFP)
+                Request A <span className="text-[#23B14D]">PROPOSAL</span> {` `}{" "}
+                (RFP)
               </h1>
 
               {/* Subtitle */}
@@ -46,7 +48,9 @@ const RequestProposal = () => {
               </p>
 
               {/* Who Should Use This Section */}
-              <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">Who Should Use This</h2>
+              <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
+                Who Should Use This
+              </h2>
 
               <div className="flex justify-between">
                 <div className="  mb-16 ">
@@ -71,7 +75,7 @@ const RequestProposal = () => {
                       <div>
                         <p
                           style={{
-                            transform:"skewX(-16deg)"
+                            transform: "skewX(-16deg)",
                           }}
                           className=" px-8  border-[#FFE500] border-2 py-3 font-semibold"
                         >
@@ -87,10 +91,11 @@ const RequestProposal = () => {
                     <div className=" flex space-x-8 justify-between">
                       <div>
                         <p
-                        style={{
-                          transform:"skewX(-16deg)"
-                        }}
-                        className=" px-8 border-[#FFE500] border-2  py-3 font-semibold">
+                          style={{
+                            transform: "skewX(-16deg)",
+                          }}
+                          className=" px-8 border-[#FFE500] border-2  py-3 font-semibold"
+                        >
                           <span
                             style={{ transform: "skewX(16deg)" }}
                             className="inline-block"
@@ -102,10 +107,11 @@ const RequestProposal = () => {
 
                       <div>
                         <p
-                         style={{
-                          transform:"skewX(-16deg)"
-                         }}
-                        className=" px-8  border-[#FFE500] border-2  py-3 font-semibold">
+                          style={{
+                            transform: "skewX(-16deg)",
+                          }}
+                          className=" px-8  border-[#FFE500] border-2  py-3 font-semibold"
+                        >
                           <span
                             style={{ transform: "skewX(16deg)" }}
                             className="inline-block"
@@ -119,7 +125,9 @@ const RequestProposal = () => {
                 </div>
               </div>
               <div className="absolute top-0 right-0 -z-10">
-                <img loading="lazy" decoding="async"
+                <img
+                  loading="lazy"
+                  decoding="async"
                   src="/images/book-consulation/requestProposalMainImg.png"
                   alt="mainImg"
                 />
@@ -133,7 +141,9 @@ const RequestProposal = () => {
                 <div className="grid md:grid-cols-2 gap-4 mb-8">
                   <div className="flex items-center space-x-3">
                     <span>
-                      <img loading="lazy" decoding="async"
+                      <img
+                        loading="lazy"
+                        decoding="async"
                         src="/images/grid-intel/lighting.png"
                         className="w-14 -mt-4"
                         alt="lighting"
@@ -145,7 +155,9 @@ const RequestProposal = () => {
                   </div>
                   <div className="flex items-center space-x-3">
                     <span>
-                      <img loading="lazy" decoding="async"
+                      <img
+                        loading="lazy"
+                        decoding="async"
                         src="/images/grid-intel/lighting.png"
                         className="w-14 -mt-4"
                         alt="lighting"
@@ -157,7 +169,9 @@ const RequestProposal = () => {
                   </div>
                   <div className="flex items-center space-x-3">
                     <span>
-                      <img loading="lazy" decoding="async"
+                      <img
+                        loading="lazy"
+                        decoding="async"
                         src="/images/grid-intel/lighting.png"
                         className="w-14 -mt-4"
                         alt="lighting"
@@ -170,7 +184,9 @@ const RequestProposal = () => {
 
                   <div className="flex items-center space-x-3">
                     <span>
-                      <img loading="lazy" decoding="async"
+                      <img
+                        loading="lazy"
+                        decoding="async"
                         src="/images/grid-intel/lighting.png"
                         className="w-14 -mt-4"
                         alt="lighting"
@@ -183,7 +199,9 @@ const RequestProposal = () => {
 
                   <div className="flex items-center space-x-3 md:col-span-2">
                     <span>
-                      <img loading="lazy" decoding="async"
+                      <img
+                        loading="lazy"
+                        decoding="async"
                         src="/images/grid-intel/lighting.png"
                         className="w-14 -mt-4"
                         alt="lighting"
@@ -197,7 +215,9 @@ const RequestProposal = () => {
                 <div className="  max-w-xs ">
                   <div className="relative flex items-center ">
                     <div className="absolute -left-12 top-10">
-                      <img loading="lazy" decoding="async"
+                      <img
+                        loading="lazy"
+                        decoding="async"
                         src="/images/book-consulation/shape.png"
                         alt="shape"
                         className="w-14"
@@ -214,7 +234,9 @@ const RequestProposal = () => {
                       </p>
                     </div>
                     <div className="absolute -right-8 -top-6">
-                      <img loading="lazy" decoding="async"
+                      <img
+                        loading="lazy"
+                        decoding="async"
                         src="/images/book-consulation/shape2.png"
                         alt="shape"
                         className="w-14"
@@ -226,26 +248,30 @@ const RequestProposal = () => {
 
               {/* Schedule Info */}
               <div className="flex justify-between items-center mb-4">
-                <div 
-                style={{
-                  transform:"skewX(-16deg)"
-                }}
-                className="flex items-center  border-[#f0f9da] p-4 border-3 px-20 space-x-3 ">
+                <div
+                  style={{
+                    transform: "skewX(-16deg)",
+                  }}
+                  className="flex items-center  border-[#f0f9da] p-4 border-3 px-20 space-x-3 "
+                >
                   <span>
-                    <img loading="lazy" decoding="async"
-                     style={{
-                        transform:"skewX(16deg)"
-                     }}
+                    <img
+                      loading="lazy"
+                      decoding="async"
+                      style={{
+                        transform: "skewX(16deg)",
+                      }}
                       src="/images/book-consulation/calendar.png"
                       className="w-5"
                       alt="lighting"
                     />
                   </span>
                   <span
-                   style={{
-                    transform:"skewX(16deg)"
-                   }}
-                  className="font-semibold italic">
+                    style={{
+                      transform: "skewX(16deg)",
+                    }}
+                    className="font-semibold italic"
+                  >
                     Email Fallback :{" "}
                     <a href="mailto:solutions@green.com.pg">
                       solutions@green.com.pg
@@ -256,7 +282,9 @@ const RequestProposal = () => {
                   className="relative z-10 flex cursor-pointer justify-end lg:mt-10"
                   onClick={() => setIsProposalOpen(true)}
                 >
-                  <img loading="lazy" decoding="async"
+                  <img
+                    loading="lazy"
+                    decoding="async"
                     src="/images/book-consulation/requestProposal.png"
                     alt="Request proposal"
                   />
@@ -276,7 +304,10 @@ const RequestProposal = () => {
           {/* Sidebar Content */}
         </div>
       </div>
-      <Proposal isOpen={isProposalOpen} onClose={() => setIsProposalOpen(false)} />
+      <Proposal
+        isOpen={isProposalOpen}
+        onClose={() => setIsProposalOpen(false)}
+      />
       <Chatbot />
     </React.Fragment>
   );

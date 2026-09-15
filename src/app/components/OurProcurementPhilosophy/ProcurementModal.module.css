@@ -1,0 +1,326 @@
+.header {
+  position: absolute;
+  top: 54px;
+  left: 275px;
+  width: 1255px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #9a9a9a;
+}
+
+.title {
+  margin: 0 0 0 38px;
+  color: #050505;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.subtitle {
+  display: block;
+  margin-top: 2px;
+  color: #23b14d;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.table {
+  position: absolute;
+  top: 202px;
+  left: 300px;
+  display: grid;
+  grid-template-columns: 270px minmax(0, 1fr);
+  row-gap: 12px;
+  width: 1235px;
+  color: #050505;
+}
+
+.tableHead {
+  margin: 0 0 4px;
+  color: #23b14d;
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.tableCell {
+  display: flex;
+  align-items: center;
+  min-height: 38px;
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.principle {
+  font-weight: 700;
+}
+
+.statement {
+  font-weight: 600;
+}
+
+.contentTitle {
+  position: absolute;
+  top: 72px;
+  left: 344px;
+  margin: 0;
+  color: #050505;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.rule {
+  position: absolute;
+  top: 145px;
+  left: 313px;
+  width: 1255px;
+  height: 1px;
+  background: #9a9a9a;
+}
+
+.lead {
+  position: absolute;
+  top: 177px;
+  left: 333px;
+  max-width: 730px;
+  margin: 0;
+  color: #050505;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.boltList {
+  position: absolute;
+  top: 230px;
+  left: 242px;
+  display: grid;
+  gap: 18px;
+  width: 760px;
+}
+
+.boltItem {
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
+  align-items: start;
+  min-height: 52px;
+}
+
+.boltItem:nth-child(2) {
+  margin-left: -24px;
+}
+
+.boltItem:nth-child(3) {
+  margin-left: -49px;
+}
+
+.boltItem:nth-child(4) {
+  margin-left: -74px;
+}
+
+.boltItem:nth-child(5) {
+  margin-left: -102px;
+}
+
+.bolt {
+  width: 70px;
+  height: 70px;
+  margin-top: -9px;
+  object-fit: contain;
+  transform: rotate(26.55deg);
+}
+
+.boltCopy {
+  margin: 0;
+  color: #050505;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.boltCopy strong {
+  font-weight: 800;
+}
+
+.imagePanel {
+  position: absolute;
+  top: 217px;
+  left: 1055px;
+  width: 622px;
+  height: 246px;
+}
+
+.imagePanel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.compromise .boltList {
+  top: 202px;
+  left: 272px;
+  width: 680px;
+  gap: 17px;
+}
+
+.compromise .imagePanel {
+  top: 232px;
+  left: 933px;
+  width: 707px;
+  height: 279px;
+}
+
+.compromise .imagePanel img {
+  transform: scaleY(-1) rotate(180deg);
+}
+
+.compromise .quote {
+  top: 562px;
+  left: 312px;
+  width: 1053px;
+  text-align: center;
+}
+
+.vendor .copyStack {
+  position: absolute;
+  top: 231px;
+  left: 348px;
+  width: 758px;
+}
+
+.vendor .boltItem {
+  grid-template-columns: 80px minmax(0, 1fr);
+}
+
+.vendor .boltItem+.boltItem {
+  margin-top: 32px;
+  margin-left: -48px;
+}
+
+.vendor .imagePanel {
+  top: 217px;
+}
+
+.copyStack {
+  display: grid;
+  gap: 28px;
+}
+
+.quote {
+  position: absolute;
+  top: 542px;
+  left: 464px;
+  width: 620px;
+  margin: 0;
+  color: #050505;
+  font-size: 27px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.38;
+}
+
+.quote span {
+  color: #23b14d;
+  font-weight: 800;
+}
+
+@media (max-width: 767px) {
+
+  .header,
+  .contentTitle,
+  .rule,
+  .lead,
+  .boltList,
+  .imagePanel,
+  .vendor .copyStack,
+  .quote,
+  .table {
+    position: static;
+    width: auto;
+  }
+
+  .header {
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+  }
+
+  .title,
+  .contentTitle {
+    font-size: 25px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+  }
+
+  .rule {
+    margin: 18px 0 24px;
+  }
+
+  .lead {
+    margin: 0 0 24px;
+    font-size: 18px;
+  }
+
+  .boltList,
+  .compromise .boltList {
+    gap: 16px;
+  }
+
+  .compromise .boltList,
+  .compromise .imagePanel,
+  .compromise .quote {
+    width: auto;
+  }
+
+  .boltItem,
+  .boltItem:nth-child(n),
+  .vendor .boltItem+.boltItem {
+    margin-left: 0;
+  }
+
+  .bolt {
+    width: 38px;
+    height: 38px;
+    margin-top: 0;
+  }
+
+  .boltItem {
+    grid-template-columns: 48px minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .boltCopy {
+    font-size: 16px;
+  }
+
+  .imagePanel,
+  .compromise .imagePanel {
+    height: 190px;
+    margin-top: 28px;
+  }
+
+  .copyStack {
+    gap: 22px;
+  }
+
+  .quote {
+    margin-top: 28px;
+    font-size: 18px;
+  }
+
+  .table {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .tableHead {
+    margin: 10px 0 0;
+    font-size: 21px;
+  }
+
+  .tableCell {
+    min-height: 0;
+    font-size: 16px;
+  }
+}

@@ -8,6 +8,7 @@
 }
 
 .canvasPage {
+  width: 1920px;
   height: 970px;
   min-height: 970px;
 }
@@ -20,6 +21,25 @@
   object-fit: fill;
   pointer-events: none;
   z-index: 0;
+}
+
+/* The background artwork has no embedded GREEN mark. Render one logo on the
+   desktop canvas instead of the full header brand panel. */
+.figmaLogo {
+  position: absolute;
+  top: 19px;
+  left: 9px;
+  z-index: 5;
+  display: block;
+  width: 255px;
+  height: 67px;
+}
+
+.figmaLogo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .verticalTitle {

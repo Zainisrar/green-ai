@@ -37,7 +37,9 @@ const IndustryAffiliations = ({ isOpen, onClose, title, keys }: Props) => {
                 <td className="px-4 py-3 font-semibold text-gray-800 sm:px-6 sm:py-4">
                   {k.organization}
                 </td>
-                <td className="px-4 py-3 text-gray-700 sm:px-6 sm:py-4">{k.purpose}</td>
+                <td className="px-4 py-3 text-gray-700 sm:px-6 sm:py-4">
+                  {k.purpose}
+                </td>
               </tr>
             ))}
           </tbody>

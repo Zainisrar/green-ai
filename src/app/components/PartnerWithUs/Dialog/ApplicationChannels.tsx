@@ -10,8 +10,14 @@ interface Props {
 
 const channels = [
   { channel: "Joint Programs", accessPoint: "programs@green.com.pg" },
-  { channel: "Ministry Coordination", accessPoint: "gov.relations@green.com.pg" },
-  { channel: "Grant-Funded Projects", accessPoint: "dev.partners@green.com.pg" },
+  {
+    channel: "Ministry Coordination",
+    accessPoint: "gov.relations@green.com.pg",
+  },
+  {
+    channel: "Grant-Funded Projects",
+    accessPoint: "dev.partners@green.com.pg",
+  },
   { channel: "Co-branded Pilots", accessPoint: "innovation@green.com.pg" },
   { channel: "Custom RFQ/EOI Submissions", accessPoint: "rfq@green.com.pg" },
 ];

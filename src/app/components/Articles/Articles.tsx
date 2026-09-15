@@ -30,7 +30,7 @@ const fallbackArticles: ArticleCard[] = [
     description:
       "What we’ve learned deploying solar-diesel-battery systems for off-grid clinics.",
     img: "/images/articles/article1.png",
-    href: "/enlighten/insights-articles/energy-for-communities",
+    href: "/enlighten/insights-articles/field-tested-energy",
   },
   {
     id: 3,
@@ -38,7 +38,7 @@ const fallbackArticles: ArticleCard[] = [
     description:
       "What we’ve learned deploying solar-diesel-battery systems for off-grid clinics.",
     img: "/images/articles/article1.png",
-    href: "/enlighten/insights-articles/execution-on-png-terrain",
+    href: "/enlighten/insights-articles/field-tested-energy",
   },
 ];
 
@@ -76,7 +76,9 @@ export default function Articles({ canvas = false }: ArticlesProps) {
       data-node-id="7080:58112"
     >
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.verticalTitle}
         src="/images/articles/insights-articles.png"
         alt="Insights and Articles"
@@ -111,7 +113,12 @@ export default function Articles({ canvas = false }: ArticlesProps) {
                   >
                     <h4>{article.title}</h4>
                     <div className={styles.cardDetails}>
-                      <img loading="lazy" decoding="async" src={article.img} alt="" />
+                      <img
+                        loading="lazy"
+                        decoding="async"
+                        src={article.img}
+                        alt=""
+                      />
                       <p>{article.description}</p>
                     </div>
                     <span className={styles.readMore}>
@@ -139,7 +146,9 @@ export default function Articles({ canvas = false }: ArticlesProps) {
         </section>
 
         <div className={styles.contribute}>
-          <img loading="lazy" decoding="async"
+          <img
+            loading="lazy"
+            decoding="async"
             src="/images/articles/want.png"
             alt="Want to contribute or feature GREEN's work?"
           />

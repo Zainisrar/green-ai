@@ -51,7 +51,9 @@ export default function LearningHub({ canvas = false }: LearningHubProps) {
       data-node-id="pattern-derived-learning-hub"
     >
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.verticalTitle}
         src="/images/articles/insights-articles.png"
         alt="Learning Hub"
@@ -70,7 +72,10 @@ export default function LearningHub({ canvas = false }: LearningHubProps) {
           </p>
         </header>
 
-        <section className={styles.learningSection} aria-labelledby="learning-title">
+        <section
+          className={styles.learningSection}
+          aria-labelledby="learning-title"
+        >
           <div className={styles.sectionHeading}>
             <h3 id="learning-title">Explore the library</h3>
             <span>Learn · Apply · Share</span>

@@ -63,22 +63,42 @@ export default function ProductsFigma() {
       data-node-id="7077:12660"
       data-products-hydrated={hydrated}
     >
-      <img loading="lazy" decoding="async" className={styles.background} src="/images/product/bg.jpg" alt="" />
+      <img
+        loading="lazy"
+        decoding="async"
+        className={styles.background}
+        src="/images/product/bg.jpg"
+        alt=""
+      />
       <SiteHeader layout="productCanvas" brand="sunshine" productLogo />
       <ProductBrandSwitcher current="GREEN SunShine" />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
+        className={`${styles.productTopBrandLogo} ${styles.sunshineTopBrandLogo}`}
+        src="/images/product/green-sunshine.png"
+        alt="GREEN SunShine"
+        data-node-id="7077:12773"
+      />
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.pageTitleImg}
         src="/images/product/title_h1.png"
         alt=""
       />
-      <img loading="lazy" decoding="async"
+      <img
+        loading="lazy"
+        decoding="async"
         className={styles.verticalTitle}
         src="/images/product/product_vert.png"
         alt=""
       />
 
       <section className={styles.gallery} aria-label="Product gallery">
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           className={styles.hero}
           src={`/images/product/${gallery[active][0]}`}
           alt={gallery[active][1]}
@@ -98,7 +118,12 @@ export default function ProductsFigma() {
               aria-label={`Show product image ${index + 1}`}
               aria-pressed={active === index}
             >
-              <img loading="lazy" decoding="async" src={`/images/product/${image}`} alt={alt} />
+              <img
+                loading="lazy"
+                decoding="async"
+                src={`/images/product/${image}`}
+                alt={alt}
+              />
             </button>
           ))}
         </div>
@@ -112,7 +137,12 @@ export default function ProductsFigma() {
       </section>
 
       <section className={styles.story} aria-labelledby="product-story-title">
-        <img loading="lazy" decoding="async" src="/images/product/boxImg.png" alt="" />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/product/boxImg.png"
+          alt=""
+        />
         <h2 id="product-story-title">
           {title === fallbackTitle ? (
             <>
@@ -135,7 +165,9 @@ export default function ProductsFigma() {
         className={styles.specifications}
         aria-label="Product specifications"
       >
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           className={styles.specificationPanel}
           src="/images/product/boxKeyImg.png"
           alt=""
@@ -143,7 +175,12 @@ export default function ProductsFigma() {
         <div className={styles.specificationList}>
           {specifications.map(([icon, name, detail, duration]) => (
             <article key={name}>
-              <img loading="lazy" decoding="async" src={`/images/product/${icon}`} alt="" />
+              <img
+                loading="lazy"
+                decoding="async"
+                src={`/images/product/${icon}`}
+                alt=""
+              />
               <h3>{name}</h3>
               <p>{detail}</p>
               <span>{duration}</span>
@@ -172,7 +209,9 @@ export default function ProductsFigma() {
       <SiteHeader panel="logoOnly" />
       <div className={styles.mobileContent}>
         <p className={styles.eyebrow}>Products</p>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           className={styles.mobileBrand}
           src="/images/product/green-sunshine.png"
           alt="GREEN SunShine"
@@ -189,7 +228,9 @@ export default function ProductsFigma() {
         >
           View GREEN SunSmart products
         </Link>
-        <img loading="lazy" decoding="async"
+        <img
+          loading="lazy"
+          decoding="async"
           className={styles.mobileHero}
           src={`/images/product/${gallery[active][0]}`}
           alt={gallery[active][1]}
@@ -203,7 +244,12 @@ export default function ProductsFigma() {
               aria-label={`Show product image ${index + 1}`}
               aria-pressed={active === index}
             >
-              <img loading="lazy" decoding="async" src={`/images/product/${image}`} alt="" />
+              <img
+                loading="lazy"
+                decoding="async"
+                src={`/images/product/${image}`}
+                alt=""
+              />
             </button>
           ))}
         </div>
@@ -223,12 +269,7 @@ export default function ProductsFigma() {
 
   return (
     <>
-      <FigmaPageCanvas
-        desktop={desktop}
-        mobile={mobile}
-        nodeId="7077:12660"
-        fitCanvasHeight
-      />
+      <FigmaPageCanvas desktop={desktop} mobile={mobile} nodeId="7077:12660" />
       <ProductEnquiry
         isOpen={isEnquiryOpen}
         onClose={() => setIsEnquiryOpen(false)}
