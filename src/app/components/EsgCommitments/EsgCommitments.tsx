@@ -4,13 +4,13 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { useSustainabilityESG } from "../../../hooks/useSustainabilityESG";
 import D6Chatbot from "../D6Chatbot";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
-import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import styles from "./EsgCommitments.module.css";
 import BookTechnicalDebrief from "./Modals/BookTechnicalDebrief";
-import RequestEngineeringDossier from "./Modals/RequestEngineeringDossier";
 import ExploreSystem from "./Modals/ExploreSystem";
+import RequestEngineeringDossier from "./Modals/RequestEngineeringDossier";
 
 const SPRING_TRANSITION = {
   type: "spring" as const,
@@ -499,7 +499,7 @@ export default function EsgCommitments() {
       />
       <RequestEngineeringDossier
         isOpen={isDossierOpen}
-        onClose={() => setIsDebriefOpen(false)}
+        onClose={() => setIsDossierOpen(false)}
       />
       <ExploreSystem
         isOpen={isExploreOpen}

@@ -179,13 +179,13 @@ export default function OsmMonitoring() {
       <div className={styles.actions}>
         <FigmaAngledCta
           onClick={() => setIsOMProposalOpen(true)}
-          style={{ position: "absolute", top: 741, right: 32, width: 301 }}
+          style={{ position: "absolute", top: 741, right: 0, width: 301 }}
         >
           {omData?.callToActions?.[0]?.text || "Request an O&M Proposal"}
         </FigmaAngledCta>
         <FigmaAngledCta
           onClick={() => setIsLiveDemoOpen(true)}
-          style={{ position: "absolute", top: 820, right: 32, width: 351 }}
+          style={{ position: "absolute", top: 820, right: 0, width: 351 }}
         >
           {omData?.callToActions?.[1]?.text || "Book a Live Demo of GREEN POC"}
         </FigmaAngledCta>

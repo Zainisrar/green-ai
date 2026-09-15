@@ -65,8 +65,6 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
 
   if (!slide) return null;
 
-  const categoryTag =
-    slide.tag || `# Mining Insight 0${slide.id || current + 1}`;
   return (
     <div
       onMouseEnter={() => setPaused(true)}
@@ -279,52 +277,6 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
             </div>
           </div>
         </div>
-
-        <div
-          data-node-id="7077:2828"
-          style={{
-            width: "clamp(260px, 19.32vw, 371px)",
-            height: "clamp(29px, 2.135vw, 41px)",
-          }}
-          className="absolute left-[clamp(12px,1vw,19px)] bottom-[clamp(12px,1.75vh,17px)] z-20 flex items-center select-none pointer-events-none max-md:hidden"
-        >
-          <svg
-            className="absolute inset-0 w-full h-full"
-            viewBox="0 0 371 41"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-            style={{
-              filter: "drop-shadow(0px 4px 10px rgba(0, 0, 0, 0.25))",
-            }}
-          >
-            <path
-              d="M371 0H62.3529L0 41H308.647L371 0Z"
-              fill="#A9A3A3"
-              fillOpacity="0.3"
-            />
-          </svg>
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              backdropFilter: "blur(7.5px)",
-              WebkitBackdropFilter: "blur(7.5px)",
-              clipPath: "polygon(16.8% 0%, 100% 0%, 83.2% 100%, 0% 100%)",
-            }}
-          />
-          <span
-            data-node-id="7077:2829"
-            className="relative z-10 text-black whitespace-nowrap font-semibold italic"
-            style={{
-              paddingLeft: "clamp(38px, 3.02vw, 58px)",
-              fontFamily: "var(--font-montserrat), Montserrat, sans-serif",
-              fontSize: "clamp(16px, 1.3vw, 25px)",
-              lineHeight: "1",
-            }}
-          >
-            {categoryTag}
-          </span>
-        </div>
       </div>
 
       {/* Carousel Navigation Chevron Arrows (Left & Right) */}
@@ -334,6 +286,7 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
           className="pointer-events-auto"
         >
           <button
+            type="button"
             onClick={goPrev}
             className="p-1 md:p-2 cursor-pointer hover:scale-125 transition-transform border-0 bg-transparent filter drop-shadow-[0_0_8px_rgba(35,209,75,0.6)]"
             aria-label="Previous Slide"
@@ -357,6 +310,7 @@ const Header: React.FC<HeaderProps> = ({ slides }) => {
           className="pointer-events-auto"
         >
           <button
+            type="button"
             onClick={goNext}
             className="p-1 md:p-2 cursor-pointer hover:scale-125 transition-transform border-0 bg-transparent filter drop-shadow-[0_0_8px_rgba(35,209,75,0.6)]"
             aria-label="Next Slide"

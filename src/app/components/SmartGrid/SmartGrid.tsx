@@ -120,14 +120,14 @@ export default function SmartGrid() {
       <div className={styles.actions}>
         <FigmaAngledCta
           onClick={() => setIsDispatchArchitectOpen(true)}
-          style={{ position: "absolute", top: 637, right: 32, width: 341 }}
+          style={{ position: "absolute", top: 637, right: 0, width: 341 }}
         >
           {smartGridData?.callToActions?.[0]?.text ||
             "Talk to Our Dispatch Architects"}
         </FigmaAngledCta>
         <FigmaAngledCta
           onClick={() => setIsStorageReviewOpen(true)}
-          style={{ position: "absolute", top: 718, right: 32, width: 351 }}
+          style={{ position: "absolute", top: 718, right: 0, width: 351 }}
         >
           {smartGridData?.callToActions?.[1]?.text ||
             "Book a Storage System Review"}
@@ -135,7 +135,7 @@ export default function SmartGrid() {
         <FigmaAngledCta
           href={smartGridData?.callToActions?.[2]?.href || "#"}
           icon="download"
-          style={{ position: "absolute", top: 793, right: 32, width: 441 }}
+          style={{ position: "absolute", top: 793, right: 0, width: 441 }}
         >
           {smartGridData?.callToActions?.[2]?.text ||
             "Download Our Smart Grid & Storage Dossier"}
