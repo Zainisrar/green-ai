@@ -847,7 +847,9 @@
     top: 42.15dvh;
   }
   .enlightenDrawer .subNavigation {
-    top: 30.05dvh;
+    /* Keep the first menu item level with the feature image at every desktop
+       height; the former vh-only offset made the list drift downward. */
+    top: clamp(180px, 24vh, 295px);
   }
   .ecosystemDrawer .subNavigation {
     top: 25.95dvh;
