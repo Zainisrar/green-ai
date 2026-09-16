@@ -17,6 +17,14 @@
   object-fit: cover;
   object-position: center;
   opacity: 0.2;
+  -webkit-mask-image: url("/images/investor-relations/background-mask.svg");
+  -webkit-mask-position: 32px -5px;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 1152px 1888.5px;
+  mask-image: url("/images/investor-relations/background-mask.svg");
+  mask-position: 32px -5px;
+  mask-repeat: no-repeat;
+  mask-size: 1152px 1888.5px;
   z-index: 0;
   pointer-events: none;
 }
