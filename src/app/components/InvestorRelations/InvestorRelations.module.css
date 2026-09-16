@@ -10,12 +10,12 @@
 
 .rightCollageImg {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: 642px;
-  height: 970px;
+  top: -3px;
+  left: 1246px;
+  width: 1590px;
+  height: 1060px;
   object-fit: cover;
-  object-position: left top;
+  object-position: center;
   opacity: 0.2;
   z-index: 0;
   pointer-events: none;

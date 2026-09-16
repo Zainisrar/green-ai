@@ -147,7 +147,7 @@ export default function InvestorRelations({
         loading="lazy"
         decoding="async"
         className={styles.rightCollageImg}
-        src="/images/investor-relations/mainImg.png"
+        src="/images/investor-relations/figma-background.jpg"
         alt=""
         aria-hidden="true"
       />
