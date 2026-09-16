@@ -20,7 +20,7 @@
   right: 0;
   bottom: 0;
   display: block;
-  width: min(100vw, 942px);
+  width: min(100vw, 1040px);
   height: auto;
   min-height: 100dvh;
   color: #202020;
@@ -84,7 +84,7 @@
 .content {
   position: absolute;
   inset: 0 auto 0 0;
-  width: 67%;
+  width: 66%;
   min-height: 0;
   padding: 147px 36px 46px;
 }
@@ -109,7 +109,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  width: 275px;
+  width: 300px;
   padding-left: 10px;
   border-left: 2px solid #23b14d;
 }
@@ -125,7 +125,7 @@
   color: #303030;
   background: transparent;
   font:
-    700 18px / 1.35 var(--font-montserrat),
+    700 20px / 1.35 var(--font-montserrat),
     Montserrat,
     sans-serif;
   text-align: left;
@@ -176,7 +176,7 @@
   width: fit-content;
   white-space: nowrap;
   font:
-    700 18px / 1.35 var(--font-montserrat),
+    700 20px / 1.35 var(--font-montserrat),
     Montserrat,
     sans-serif;
   text-transform: uppercase;
@@ -198,12 +198,12 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: min(307px, calc(100% - 72px));
+  width: min(330px, calc(100% - 72px));
 }
 .nestedNavigation a {
   color: #303030;
   font:
-    700 18px / 1.35 var(--font-montserrat),
+    700 20px / 1.35 var(--font-montserrat),
     Montserrat,
     sans-serif;
   text-decoration: none;
@@ -345,7 +345,7 @@
 .divider {
   position: absolute;
   top: 137px;
-  left: 67%;
+  left: 66%;
   width: 1px;
   height: min(660px, calc(100vh - 178px));
   margin: 0;
@@ -356,7 +356,7 @@
   top: 0;
   right: 0;
   bottom: 0;
-  left: calc(67% + 1px);
+  left: calc(66% + 1px);
   padding: 145px 30px 170px 23px;
 }
 .sections button {
@@ -369,7 +369,7 @@
   color: #202020;
   background: transparent;
   font:
-    700 26px / 1 var(--font-montserrat),
+    700 30px / 1 var(--font-montserrat),
     Montserrat,
     sans-serif;
   text-align: left;
@@ -383,7 +383,7 @@
 }
 .sections .activeSection {
   color: #23b14d;
-  font-size: 30px;
+  font-size: 34px;
   /* Figma title tracks move from x=655/y=656 to x=656/y=660 while
      increasing from 26px to 30px. Apply that only to the selected title:
      the static drawer menu does not expose a pointer-hover state. */
@@ -633,7 +633,7 @@
   .drawer {
     position: fixed;
     grid-template-columns: 1fr;
-    width: min(88vw, 520px);
+    width: min(92vw, 560px);
     overflow-y: auto;
   }
   .content {
@@ -658,6 +658,7 @@
     position: static;
     width: min(100%, 250px);
     margin-top: 26px;
+    font-size: 20px;
   }
 
   .featureLedDrawer .subNavigation {
@@ -671,6 +672,7 @@
     position: static;
     width: min(100%, 307px);
     margin-top: 26px;
+    font-size: 20px;
   }
 
   .quote {
