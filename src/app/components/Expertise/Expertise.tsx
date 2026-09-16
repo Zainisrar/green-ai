@@ -312,7 +312,7 @@ export default function Expertise() {
   useEffect(() => {
     const updateScale = () => {
       setDesktopScale({
-        x: window.innerWidth / DESIGN_WIDTH,
+        x: document.documentElement.clientWidth / DESIGN_WIDTH,
         y: window.innerHeight / DESIGN_HEIGHT,
       });
     };
@@ -561,15 +561,19 @@ export default function Expertise() {
                 <>
                   {GRID_CARDS.map((card) => {
                     const item = GALLERY[card.item];
+                    const isSelected = selectedIndex === card.item;
                     return (
                       <button
                         key={card.nodeId}
                         type="button"
-                        className={styles.galleryCard}
+                        className={`${styles.galleryCard} ${
+                          isSelected ? styles.galleryCardSelected : ""
+                        }`}
                         data-node-id={card.nodeId}
                         style={{ left: card.left, top: card.top }}
                         onClick={() => selectSolution(card.item)}
                         aria-label={`Select ${item.label}`}
+                        aria-pressed={isSelected}
                       >
                         <img
                           loading="lazy"
@@ -586,8 +590,9 @@ export default function Expertise() {
                     type="button"
                     className={styles.selectedCard}
                     data-node-id="7077:3738"
-                    onClick={() => selectSolution(selectedIndex + 1)}
-                    aria-label={`Selected solution: ${activeGalleryItem.label}. Show next solution.`}
+                    onClick={() => selectSolution(selectedIndex)}
+                    aria-label={`Selected solution: ${activeGalleryItem.label}`}
+                    aria-pressed="true"
                   >
                     <img
                       loading="lazy"
