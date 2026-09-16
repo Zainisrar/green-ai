@@ -98,9 +98,6 @@ export default function JobOpenings() {
   return (
     <main className={styles.page} data-node-id="7077:17124">
       <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
-      <div className={styles.artwork} aria-hidden="true">
-        <img src="/images/careers-green/careers-green.png" alt="" />
-      </div>
       <p className={styles.verticalLabel}>
         <span>Job Openings</span>
       </p>
