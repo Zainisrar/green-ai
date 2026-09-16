@@ -841,7 +841,9 @@
     top: 23.79dvh;
   }
   .engineeringDrawer .subNavigation {
-    top: 21.64dvh;
+    /* Match the Engineering feature image instead of drifting below it on
+       compact desktop viewports. */
+    top: clamp(140px, 19vh, 216px);
   }
   .endeavorsDrawer .subNavigation {
     top: 42.15dvh;
