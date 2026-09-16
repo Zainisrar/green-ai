@@ -128,7 +128,10 @@ export default function InvestorRelations({
 
   return (
     <main className={styles.page} data-node-id="7077:19989">
-      <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
+      <SiteHeader
+        layout={canvas ? "figmaCanvas" : "viewport"}
+        figmaPanelVariant="flagship"
+      />
 
       {/* Left vertical side title */}
       <img
@@ -139,12 +142,12 @@ export default function InvestorRelations({
         className={styles.verticalTitle}
       />
 
-      {/* Faint right-side photo collage (baked from Figma render) */}
+      {/* Figma's masked investor background artwork. */}
       <img
         loading="lazy"
         decoding="async"
         className={styles.rightCollageImg}
-        src="/images/investor-relations/collage.png"
+        src="/images/investor-relations/mainImg.png"
         alt=""
         aria-hidden="true"
       />
