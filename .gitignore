@@ -76,6 +76,7 @@ logs/
 # markdown files
 *.md
 **/*.md
+!/README.md
 
 
 
