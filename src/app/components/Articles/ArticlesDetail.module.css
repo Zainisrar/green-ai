@@ -140,9 +140,9 @@
   position: absolute;
   top: 183px;
   right: 0;
-  width: 97px;
-  height: 29.326px;
-  min-height: 29.326px;
+  width: 99px;
+  height: 33px;
+  min-height: 33px;
   padding: 0 10px;
   font-size: 12px;
 }
@@ -170,35 +170,70 @@
 }
 
 .explore {
-  width: 134px;
-  height: 40.538px;
-  min-height: 40.538px;
-  margin-top: 22px;
-  padding: 0 14px;
+  width: 141px;
+  height: 45.6px;
+  min-height: 45.6px;
+  padding: 0 16px;
   font-size: 12px;
 }
 
 .sectionExplore {
-  width: 134px;
-  height: 40.538px;
-  min-height: 40.538px;
-  margin-top: 22px;
-  padding: 0 14px;
+  width: 141px;
+  height: 45.6px;
+  min-height: 45.6px;
+  padding: 0 16px;
   font-size: 12px;
 }
 
-.canvasPage .explore {
-  position: absolute;
-  top: 313px;
-  right: -6px;
-  margin: 0;
+.leadExploreWrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 18px;
 }
 
-.canvasPage .sectionExplore {
-  position: absolute;
-  top: 210px;
-  right: 0;
+.bodyRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 36px;
+  width: 100%;
+}
+
+.bodyRow p {
+  flex: 1;
+  max-width: calc(100% - 180px);
   margin: 0;
+  font-size: 18px;
+  line-height: 34px;
+  text-align: justify;
+}
+
+.sectionExploreWrapper {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-self: center;
+}
+
+.canvasPage .leadExploreWrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 22px;
+}
+
+.canvasPage .bodyRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 48px;
+  width: 100%;
+}
+
+.canvasPage .bodyRow p {
+  flex: 1;
+  max-width: calc(100% - 180px);
 }
 
 .body {
@@ -242,29 +277,190 @@
 
 @media (max-width: 1200px) {
   .canvasPage {
-    width: auto;
-    height: auto;
-    min-height: 100svh;
-    overflow: visible;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 100svh !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+  }
+
+  .canvasPage .article,
+  .canvasPage .header,
+  .canvasPage .lead,
+  .canvasPage .copy,
+  .canvasPage .body,
+  .canvasPage .closing {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .canvasPage .header h1 {
+    width: 100% !important;
+    max-width: 100% !important;
+    white-space: normal !important;
+  }
+
+  .canvasPage .leadExploreWrapper {
+    display: flex !important;
+    justify-content: flex-end !important;
+    width: 100% !important;
+    margin-top: 18px !important;
+  }
+
+  .canvasPage .bodyRow {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 24px !important;
+    width: 100% !important;
+  }
+
+  .canvasPage .bodyRow p {
+    flex: 1 !important;
+    max-width: calc(100% - 150px) !important;
+  }
+
+  .canvasPage .sectionExploreWrapper {
+    flex-shrink: 0 !important;
+    display: flex !important;
+    justify-content: flex-end !important;
   }
 
   .verticalTitle {
-    display: none;
+    display: none !important;
   }
 
   .article {
-    width: auto;
-    margin: 0;
-    padding: 132px 28px 120px;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 860px !important;
+    margin: 0 auto !important;
+    padding: 100px 24px 120px !important;
+    box-sizing: border-box !important;
+  }
+
+  .back {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    display: inline-flex !important;
+    width: auto !important;
+    min-width: 90px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    margin-bottom: 24px !important;
+    align-self: flex-start !important;
   }
 
   .header {
     max-width: none;
+    margin-bottom: 28px;
   }
 
   .header h1 {
     width: auto;
+    font-size: clamp(26px, 6vw, 36px);
+    line-height: 1.15;
     white-space: normal;
+    word-break: break-word;
+    margin: 0 0 16px;
+  }
+
+  .header > p {
+    font-size: clamp(14px, 3.5vw, 16px);
+    line-height: 1.6;
+    color: #444;
+  }
+
+  .lead {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+    margin-top: 24px !important;
+  }
+
+  .copy {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .copy p,
+  .body p {
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+    text-align: left !important;
+    color: #333 !important;
+  }
+
+  .featureImage {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 380px !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+  }
+
+  .leadExploreWrapper {
+    display: flex !important;
+    justify-content: flex-end !important;
+    width: 100% !important;
+    margin-top: 18px !important;
+  }
+
+  .bodyRow {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 24px !important;
+    width: 100% !important;
+  }
+
+  .bodyRow p {
+    flex: 1 !important;
+    max-width: calc(100% - 150px) !important;
+  }
+
+  .sectionExploreWrapper {
+    flex-shrink: 0 !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+  }
+
+  .body {
+    position: static !important;
+    width: 100% !important;
+    padding: 24px 0 !important;
+    border-bottom: 1px solid #e5e5e5 !important;
+  }
+
+  .body h2 {
+    font-size: clamp(20px, 5vw, 26px) !important;
+    font-weight: 700 !important;
+    line-height: 1.25 !important;
+    margin-bottom: 14px !important;
+  }
+
+  .closing {
+    position: static !important;
+    width: 100% !important;
+    padding: 24px 0 100px !important;
+  }
+
+  .closing p {
+    font-size: clamp(16px, 4.5vw, 22px) !important;
+    line-height: 1.5 !important;
   }
 
   .chatTrigger {
@@ -275,56 +471,41 @@
     left: auto !important;
     width: min(418px, calc(100vw - 2rem)) !important;
     height: 52px !important;
-  }
-
-  .lead {
-    grid-template-columns: 1fr;
-  }
-
-  .closing {
-    padding-bottom: 100px;
-  }
-
-  .closing p {
-    font-size: 22px;
-    line-height: 32px;
+    z-index: 50 !important;
   }
 }
 
 @media (max-width: 640px) {
+  .bodyRow {
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    gap: 16px !important;
+  }
+
+  .bodyRow p {
+    max-width: 100% !important;
+  }
+
+  .sectionExploreWrapper {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+  }
+
   .article {
-    padding: 110px 20px 100px;
-  }
-
-  .header {
-    padding-right: 0;
-  }
-
-  .back {
-    position: static;
-    margin-bottom: 26px;
+    padding: 95px 16px 100px !important;
   }
 
   .header h1 {
-    font-size: 25px;
-  }
-
-  .body h2 {
-    font-size: 23px;
+    font-size: clamp(22px, 6.5vw, 28px);
   }
 
   .lead {
-    gap: 28px;
+    gap: 20px !important;
   }
 
   .featureImage {
-    height: auto;
-    aspect-ratio: 746 / 358;
-  }
-
-  .copy p,
-  .body p {
-    font-size: 16px;
-    line-height: 1.7;
+    aspect-ratio: 16 / 9;
+    max-height: 240px !important;
   }
 }

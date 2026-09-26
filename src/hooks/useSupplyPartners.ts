@@ -62,7 +62,7 @@ interface HowBecomeGreenSupplier {
   subHeadline: string;
 }
 
-interface SupplyPartnersData {
+export interface SupplyPartnersData {
   id: number;
   mainPage: MainPage;
   globalSourcingStrategy: GlobalSourcingStrategy;
@@ -72,7 +72,7 @@ interface SupplyPartnersData {
   updatedAt: string;
 }
 
-const fetchSupplyPartners = async (): Promise<SupplyPartnersData> => {
+export const fetchSupplyPartners = async (): Promise<SupplyPartnersData> => {
   const response = await fetch(
     "https://greencms.percepco.co.uk/api/ecosystem/supply-partners",
   );
@@ -84,10 +84,11 @@ const fetchSupplyPartners = async (): Promise<SupplyPartnersData> => {
   return response.json();
 };
 
-export const useSupplyPartners = () => {
+export const useSupplyPartners = (initialData?: SupplyPartnersData | null) => {
   return useQuery<SupplyPartnersData>({
     queryKey: ["supplyPartners"],
     queryFn: fetchSupplyPartners,
+    initialData: initialData ?? undefined,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes (formerly cacheTime)
   });

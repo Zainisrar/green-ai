@@ -197,42 +197,96 @@ export default function RequestProposalCanvas() {
     </main>
   );
 
+  const mobile = (
+    <main className={styles.mobilePage} data-node-id="7077:19854">
+      <SiteHeader layout="viewport" figmaPanelVariant="flagship" />
+
+      <div className={styles.mobileHero}>
+        <h1 className={styles.mobileTitle}>
+          REQUEST A <span className={styles.h1Green}>PROPOSAL</span> (RFP)
+        </h1>
+        <p className={styles.mobileSubtitle}>
+          Let&rsquo;s Build Your Energy Project — From Vision to Reality.
+        </p>
+        <p className={styles.mobileDescription}>
+          Whether you&rsquo;re developing a project, designing a grant, or
+          planning a regional rollout — schedule a tailored consultation with{" "}
+          <strong>GREEN&rsquo;s</strong> technical, strategy, or policy teams.
+        </p>
+      </div>
+
+      <h2 className={styles.mobileSectionTitle}>Who Should Use This</h2>
+      <div className={styles.mobileChipsList}>
+        {chips.map((c) => (
+          <span key={c.text} className={styles.mobileChip}>
+            {c.text}
+          </span>
+        ))}
+      </div>
+
+      <h2 className={styles.mobileSectionTitle}>
+        What GREEN Delivers in Every Proposal
+      </h2>
+      <div className={styles.mobileDelivList}>
+        {[...leftDeliverables, ...rightDeliverables].map((d) => (
+          <div key={d.text} className={styles.mobileDelivItem}>
+            <img
+              src="/images/rfp/bolt.png"
+              alt=""
+              className={styles.mobileDelivIcon}
+            />
+            <span className={styles.mobileDelivText}>{d.text}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className={styles.mobileQuoteCard}>
+        <blockquote className={styles.mobileQuoteText}>
+          &ldquo;Proposals Shouldn&rsquo;t Be Generic. At{" "}
+          <span className={styles.quoteGreen}>GREEN</span>, Every RFP Is A
+          Strategic Partnership In The Making.&rdquo;
+        </blockquote>
+      </div>
+
+      <div className={styles.mobileEmailFallback}>
+        <span className={styles.mobileEmailLabel}>Email Fallback:</span>
+        <a
+          href="mailto:solutions@green.com.pg"
+          className={styles.mobileEmailLink}
+        >
+          solutions@green.com.pg
+        </a>
+      </div>
+
+      <p className={styles.mobileFreeNote}>
+        Consultations are free for{" "}
+        <span className={styles.quoteGreen}>
+          government agencies, donors, NGOs
+        </span>
+        , and registered local businesses.
+      </p>
+
+      <button
+        type="button"
+        className={styles.mobileCtaBtn}
+        onClick={() => setModalOpen(true)}
+      >
+        <span>Request a Proposal (RFP)</span>
+        <span aria-hidden="true">›</span>
+      </button>
+
+      <D6Chatbot />
+
+      <Proposal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+    </main>
+  );
+
   return (
     <FigmaPageCanvas
       desktop={desktop}
       nodeId="7077:19854"
-      mobile={
-        <main className={styles.mobilePage}>
-          <h1>Request a Proposal (RFP)</h1>
-          <p>Let&rsquo;s Build Your Energy Project — From Vision to Reality.</p>
-          <p>
-            Whether you&rsquo;re developing a project, designing a grant, or
-            planning a regional rollout — schedule a tailored consultation with
-            GREEN&rsquo;s technical, strategy, or policy teams. Get real answers
-            from those who deliver real energy systems.
-          </p>
-          <section>
-            <h2>Who Should Use This</h2>
-            <ul>
-              {chips.map((c) => (
-                <li key={c.text}>{c.text}</li>
-              ))}
-            </ul>
-          </section>
-          <section>
-            <h2>What GREEN Delivers in Every Proposal</h2>
-            <ul>
-              {[...leftDeliverables, ...rightDeliverables].map((d) => (
-                <li key={d.text}>{d.text}</li>
-              ))}
-            </ul>
-          </section>
-          <button type="button" onClick={() => setModalOpen(true)}>
-            Request a Proposal (RFP)
-          </button>
-          <Proposal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-        </main>
-      }
+      mobile={mobile}
+      fitCanvasHeight
     />
   );
 }

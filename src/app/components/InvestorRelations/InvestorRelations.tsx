@@ -126,6 +126,114 @@ export default function InvestorRelations({
     },
   ];
 
+  if (!canvas) {
+    return (
+      <main className={styles.mobilePage} data-node-id="7077:19989">
+        <SiteHeader layout="viewport" figmaPanelVariant="flagship" />
+
+        {/* Ambient background decoration */}
+        <div className={styles.mobileBgDecor} aria-hidden="true">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/investor-relations/figma-background.jpg"
+            alt=""
+          />
+        </div>
+
+        {/* Hero Section */}
+        <div className={styles.mobileHero}>
+          <h1 className={styles.mobileTitle}>
+            INVESTOR <span className={styles.greenText}>RELATIONS</span>
+          </h1>
+          <p className={styles.subHeadline}>{d.subHeadline}</p>
+          <p className={styles.mobileDescription}>
+            {highlightText(d.description.text, d.description.highlighted)}
+          </p>
+        </div>
+
+        {/* Rows List */}
+        <div className={styles.mobileRowsList}>
+          {rows.map((row) => (
+            <div key={row.key} className={styles.mobileRowCard}>
+              <div className={styles.mobileRowTop}>
+                <div className={styles.mobileRowThumb}>
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    src={row.image}
+                    alt={row.title}
+                  />
+                </div>
+                <div className={styles.mobileRowHeading}>
+                  <h3 className={styles.mobileRowCardTitle}>{row.title}</h3>
+                  <p className={styles.mobileRowCardSub}>{row.subtitle}</p>
+                </div>
+              </div>
+              <FigmaAngledCta
+                className={styles.mobileExploreBtn}
+                onClick={() => setOpenModal(row.key)}
+              >
+                Explore
+              </FigmaAngledCta>
+            </div>
+          ))}
+        </div>
+
+        {/* Quote Block 1 */}
+        <div className={styles.mobileQuoteBlock}>
+          <p className={styles.mobileQuoteText}>
+            {highlightText(d.quote1.text, d.quote1.highlighted)}
+          </p>
+        </div>
+
+        {/* Quote Block 2 */}
+        <div className={styles.mobileQuoteBlock}>
+          <p className={styles.mobileQuoteText}>
+            {highlightText(d.quote2.text, d.quote2.highlighted)}
+          </p>
+        </div>
+
+        {/* CTAs */}
+        <div className={styles.mobileCtas}>
+          <a href={ctaLinks.investorPack} className={styles.mobileCtaBtn}>
+            <span>Download Investor Pack (PDF)</span>
+            <span aria-hidden="true">›</span>
+          </a>
+
+          <button
+            type="button"
+            className={styles.mobileCtaBtn}
+            onClick={() => setIsEoiOpen(true)}
+          >
+            <span>Submit an Expression of Interest (EOI)</span>
+            <span aria-hidden="true">›</span>
+          </button>
+        </div>
+
+        <D6Chatbot />
+
+        <WhyInvestGreen
+          isOpen={openModal === "whyInvestGreen"}
+          onClose={() => setOpenModal(null)}
+        />
+        <InvestmentFocusArea
+          isOpen={openModal === "investmentFocusArea"}
+          onClose={() => setOpenModal(null)}
+        />
+        <PerformanceSnapshots
+          isOpen={openModal === "performanceSnapshots"}
+          onClose={() => setOpenModal(null)}
+        />
+        <InvestmentInstruments
+          isOpen={openModal === "investmentInstruments"}
+          onClose={() => setOpenModal(null)}
+        />
+        <SubmitEOI isOpen={isEoiOpen} onClose={() => setIsEoiOpen(false)} />
+      </main>
+    );
+  }
+
   return (
     <main className={styles.page} data-node-id="7077:19989">
       <SiteHeader

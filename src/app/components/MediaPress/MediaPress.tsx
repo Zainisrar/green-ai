@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import FigmaQuoteBrackets from "../FigmaQuoteBrackets/FigmaQuoteBrackets";
@@ -72,6 +72,14 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
   const [newsOpen, setNewsOpen] = useState(false);
   const [spokesOpen, setSpokesOpen] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 1023);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const open = {
     latest: setLatestOpen,
@@ -80,6 +88,171 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
     news: setNewsOpen,
     spokes: setSpokesOpen,
   } as const;
+
+  if (!canvas || isMobile) {
+    return (
+      <main className={styles.mobilePage} data-node-id="7077:23952">
+        <SiteHeader layout="viewport" />
+
+        {/* Top ambient decor */}
+        <div className={styles.mobileBgDecor} aria-hidden="true">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/media-press/mainImg.png"
+            alt=""
+          />
+        </div>
+
+        {/* Hero Header */}
+        <div className={styles.mobileHero}>
+          <h1 className={styles.mobileTitle}>
+            MEDIA &amp; <span className={styles.greenText}>PRESS</span>
+          </h1>
+          <p className={styles.mobileSubtitle}>
+            Telling the Energy Story — The Right Way.
+          </p>
+          <p className={styles.mobileDescription}>
+            <span className={styles.greenText}>GREEN</span> Limited is shaping
+            the future of energy access in PNG and the Pacific. For accurate
+            information, interviews, brand assets, and official statements —
+            this is your source.
+          </p>
+        </div>
+
+        {/* Menu rows */}
+        <div className={styles.mobileRowsList}>
+          {ROWS.map((row, idx) => (
+            <div key={row.id} className={styles.mobileRow}>
+              <div className={styles.mobileRowContent}>
+                <h3 className={styles.mobileRowTitle}>{row.title}</h3>
+                <FigmaAngledCta
+                  className={styles.mobileExploreBtn}
+                  onClick={() => open[row.dialog](true)}
+                >
+                  Explore
+                </FigmaAngledCta>
+              </div>
+              {idx < ROWS.length - 1 && (
+                <hr className={styles.mobileRowDivider} aria-hidden="true" />
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom quote */}
+        <div className={styles.mobileQuoteCard}>
+          <p className={styles.mobileQuoteText}>
+            We Don&rsquo;t Tell Stories To Impress.
+            <br />
+            We Share Stories That Prove What{" "}
+            <span className={styles.greenText}>Energy</span> Can Do.
+          </p>
+        </div>
+
+        {/* Bottom CTAs */}
+        <div className={styles.mobileCtas}>
+          <a
+            href={CTA_LINKS.pressKit}
+            className={styles.figmaCtaButton}
+            download="green-press-kit.pdf"
+          >
+            <img
+              loading="lazy"
+              decoding="async"
+              className={styles.figmaCtaFrame}
+              src="/images/media-press/request-quote-appearance-frame.svg"
+              alt=""
+              aria-hidden="true"
+            />
+            <span className={styles.figmaCtaLabel}>Request the Press Kit</span>
+            <img
+              loading="lazy"
+              decoding="async"
+              className={styles.figmaCtaArrow}
+              src="/images/media-press/cta-arrow.svg"
+              alt=""
+              aria-hidden="true"
+            />
+          </a>
+
+          <a
+            href={CTA_LINKS.partnershipFramework}
+            className={styles.figmaCtaButton}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              loading="lazy"
+              decoding="async"
+              className={styles.figmaCtaFrame}
+              src="/images/media-press/request-quote-appearance-frame.svg"
+              alt=""
+              aria-hidden="true"
+            />
+            <span className={styles.figmaCtaLabel}>
+              Request Partnership Framework
+            </span>
+            <img
+              loading="lazy"
+              decoding="async"
+              className={styles.figmaCtaArrow}
+              src="/images/media-press/cta-arrow.svg"
+              alt=""
+              aria-hidden="true"
+            />
+          </a>
+
+          <button
+            type="button"
+            className={styles.figmaCtaButton}
+            onClick={() => setQuoteOpen(true)}
+          >
+            <img
+              loading="lazy"
+              decoding="async"
+              className={styles.figmaCtaFrame}
+              src="/images/media-press/request-quote-appearance-frame.svg"
+              alt=""
+              aria-hidden="true"
+            />
+            <span className={styles.figmaCtaLabel}>
+              Request Quote Or Appearance
+            </span>
+            <img
+              loading="lazy"
+              decoding="async"
+              className={styles.figmaCtaArrow}
+              src="/images/media-press/cta-arrow.svg"
+              alt=""
+              aria-hidden="true"
+            />
+          </button>
+        </div>
+
+        <D6Chatbot />
+
+        <LatestPressReleases
+          isOpen={latestOpen}
+          onClose={() => setLatestOpen(false)}
+        />
+        <MediaContactInterviewRequests
+          isOpen={contactOpen}
+          onClose={() => setContactOpen(false)}
+        />
+        <MediaKitDownload isOpen={kitOpen} onClose={() => setKitOpen(false)} />
+        <GreenInTheNews isOpen={newsOpen} onClose={() => setNewsOpen(false)} />
+        <OfficialSpokesPeople
+          isOpen={spokesOpen}
+          onClose={() => setSpokesOpen(false)}
+        />
+        <RequestQuoteAppointment
+          isOpen={quoteOpen}
+          onClose={() => setQuoteOpen(false)}
+        />
+      </main>
+    );
+  }
 
   return (
     <main className={styles.page} data-node-id="7077:23952">
@@ -158,48 +331,84 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
       </div>
 
       {/* Right CTAs */}
-      <FigmaAngledCta
-        className={styles.ctaDownload}
-        style={{ position: "absolute", left: 1571, top: 695 }}
-        icon="chevron"
-        href={CTA_LINKS.pressKit}
-      >
-        Request the Press Kit
-      </FigmaAngledCta>
+      <div className={styles.desktopCtas}>
+        <a
+          href={CTA_LINKS.pressKit}
+          className={styles.figmaCtaButton}
+          download="green-press-kit.pdf"
+        >
+          <img
+            loading="lazy"
+            decoding="async"
+            className={styles.figmaCtaFrame}
+            src="/images/media-press/request-quote-appearance-frame.svg"
+            alt=""
+            aria-hidden="true"
+          />
+          <span className={styles.figmaCtaLabel}>Request the Press Kit</span>
+          <img
+            loading="lazy"
+            decoding="async"
+            className={styles.figmaCtaArrow}
+            src="/images/media-press/cta-arrow.svg"
+            alt=""
+            aria-hidden="true"
+          />
+        </a>
 
-      {/* PDF link above/beside the quote CTA */}
-      <a
-        href={CTA_LINKS.partnershipFramework}
-        className={styles.pdfLink}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Request GREEN Innovation Partnership Framework
-      </a>
+        <a
+          href={CTA_LINKS.partnershipFramework}
+          className={styles.figmaCtaButton}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            loading="lazy"
+            decoding="async"
+            className={styles.figmaCtaFrame}
+            src="/images/media-press/request-quote-appearance-frame.svg"
+            alt=""
+            aria-hidden="true"
+          />
+          <span className={styles.figmaCtaLabel}>
+            Request Partnership Framework
+          </span>
+          <img
+            loading="lazy"
+            decoding="async"
+            className={styles.figmaCtaArrow}
+            src="/images/media-press/cta-arrow.svg"
+            alt=""
+            aria-hidden="true"
+          />
+        </a>
 
-      <button
-        className={styles.ctaQuote}
-        onClick={() => setQuoteOpen(true)}
-        type="button"
-      >
-        <img
-          loading="lazy"
-          decoding="async"
-          className={styles.ctaQuoteFrame}
-          src="/images/media-press/request-quote-appearance-frame.svg"
-          alt=""
-          aria-hidden="true"
-        />
-        <span>Request Quote Or Appearance</span>
-        <img
-          loading="lazy"
-          decoding="async"
-          className={styles.ctaQuoteArrow}
-          src="/images/media-press/cta-arrow.svg"
-          alt=""
-          aria-hidden="true"
-        />
-      </button>
+        <button
+          type="button"
+          className={styles.figmaCtaButton}
+          onClick={() => setQuoteOpen(true)}
+        >
+          <img
+            loading="lazy"
+            decoding="async"
+            className={styles.figmaCtaFrame}
+            src="/images/media-press/request-quote-appearance-frame.svg"
+            alt=""
+            aria-hidden="true"
+          />
+          <span className={styles.figmaCtaLabel}>
+            Request Quote Or Appearance
+          </span>
+          <img
+            loading="lazy"
+            decoding="async"
+            className={styles.figmaCtaArrow}
+            src="/images/media-press/cta-arrow.svg"
+            alt=""
+            aria-hidden="true"
+          />
+        </button>
+      </div>
 
       {/* Chatbot */}
       {canvas ? (

@@ -38,8 +38,8 @@ export default function FigmaAngledCta({
 }: FigmaAngledCtaProps) {
   const isExplore =
     typeof children === "string" &&
-    children.trim().toLowerCase().startsWith("explore");
-  const isSmall = size === "sm" || isExplore;
+    children.trim().toLowerCase() === "explore";
+  const isSmall = size === "sm" || (size !== "lg" && size !== "md" && isExplore);
 
   const chevronSvg = isSmall ? (
     <svg
@@ -108,14 +108,28 @@ export default function FigmaAngledCta({
     </span>
   );
 
+  const mergedStyle = {
+    ...(props.style?.top !== undefined ||
+    props.style?.bottom !== undefined ||
+    props.style?.left !== undefined ||
+    props.style?.right !== undefined
+      ? { position: "absolute" as const }
+      : {}),
+    ...props.style,
+  };
+
+  const rootClassName = `${styles.cta} ${isSmall ? styles.ctaSmall : ""} ${className}`.trim();
+
   if (href) {
-    const { type: _type, ...anchorProps } =
+    const { type: _type, style: _style, ...anchorProps } =
       props as AnchorHTMLAttributes<HTMLAnchorElement>;
     void _type;
+    void _style;
     return (
       <Link
         href={href}
-        className={`${styles.cta} ${className}`.trim()}
+        className={rootClassName}
+        style={mergedStyle}
         {...anchorProps}
       >
         {content}
@@ -123,10 +137,14 @@ export default function FigmaAngledCta({
     );
   }
 
+  const { style: _style, ...buttonProps } = props;
+  void _style;
+
   return (
     <button
-      {...props}
-      className={`${styles.cta} ${className}`.trim()}
+      {...buttonProps}
+      className={rootClassName}
+      style={mergedStyle}
       type={type}
     >
       {content}

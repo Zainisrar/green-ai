@@ -45,7 +45,6 @@ const AboutUs: React.FC<AboutUsProps> = ({ canvas = false }) => {
       <main
         className={styles.canvasPage}
         data-about-us-hydrated="true"
-        role="main"
         aria-label="Welcome to GREEN"
       >
         <SiteHeader layout="figmaCanvas" />
@@ -82,16 +81,16 @@ const AboutUs: React.FC<AboutUsProps> = ({ canvas = false }) => {
         <section className={styles.rightContent} aria-label="About Content">
           <h2 className={styles.mainTitle}>{mainTitle}</h2>
           <p className={styles.subHeadline}>{subHeadline}</p>
-          {aboutParagraphs.map((paragraph, index) => (
-            <p key={index} className={styles.bodyText}>
+          {aboutParagraphs.map((paragraph) => (
+            <p key={paragraph.slice(0, 32)} className={styles.bodyText}>
               {paragraph}
             </p>
           ))}
 
           <h3 className={styles.sectionTitle}>{whatTitle}</h3>
           <p className={styles.subHeadline}>{whatSubtitle}</p>
-          {whatParagraphs.map((paragraph, index) => (
-            <p key={index} className={styles.bodyText}>
+          {whatParagraphs.map((paragraph) => (
+            <p key={paragraph.slice(0, 32)} className={styles.bodyText}>
               {paragraph}
             </p>
           ))}
@@ -115,10 +114,9 @@ const AboutUs: React.FC<AboutUsProps> = ({ canvas = false }) => {
     <main
       className={styles.mobilePage}
       data-about-us-hydrated="true"
-      role="main"
       aria-label="Welcome to GREEN"
     >
-      <SiteHeader panel="logoOnly" />
+      <SiteHeader />
       <div className={styles.mobileElements}>
         <div className={styles.mobileHero}>
           <img
@@ -130,44 +128,53 @@ const AboutUs: React.FC<AboutUsProps> = ({ canvas = false }) => {
           />
         </div>
 
-        <div className={styles.mobileCleanLean}>
-          <h1>
+        <div className={styles.mobileCleanLean} aria-hidden="true">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/about-us/figma-clean-lean-bg.png"
+            alt=""
+            className={styles.mobileCleanLeanBg}
+          />
+          <div className={styles.mobileCleanLeanText}>
             CLEAN
             <br />
             LEAN
             <br />
             <span className={styles.greenAccent}>GREEN</span>
-          </h1>
+          </div>
         </div>
 
         <div className={styles.mobileContent}>
           <h2>{mainTitle}</h2>
           <p className={styles.mobileSubtitle}>{subHeadline}</p>
-          {aboutParagraphs.map((paragraph, index) => (
-            <p key={index} className={styles.mobileBody}>
+          {aboutParagraphs.map((paragraph) => (
+            <p key={paragraph.slice(0, 32)} className={styles.mobileBody}>
               {paragraph}
             </p>
           ))}
 
           <h3>{whatTitle}</h3>
           <p className={styles.mobileSubtitle}>{whatSubtitle}</p>
-          {whatParagraphs.map((paragraph, index) => (
-            <p key={index} className={styles.mobileBody}>
+          {whatParagraphs.map((paragraph) => (
+            <p key={paragraph.slice(0, 32)} className={styles.mobileBody}>
               {paragraph}
             </p>
           ))}
 
           <div className={styles.mobileQuote}>
-            <p>
+            <p className={styles.mobileQuoteLine1}>
               {quote1} <strong className={styles.greenAccent}>GREEN!</strong>
             </p>
-            <p>
+            <p className={styles.mobileQuoteLine2}>
               {quote2} <strong>BETTER WORLD!</strong>
             </p>
           </div>
         </div>
       </div>
-      <D6Chatbot />
+      <div className={styles.mobileChatWrapper}>
+        <D6Chatbot />
+      </div>
     </main>
   );
 };

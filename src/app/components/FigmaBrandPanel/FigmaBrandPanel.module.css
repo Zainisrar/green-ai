@@ -64,8 +64,45 @@
   width: 78.221%;
 }
 
-@media (max-width: 900px) {
-  .panel {
-    --brand-panel-width: 190px;
+@media (max-width: 1023px) {
+  .panel:not(.fixedCanvasPanel) {
+    --brand-panel-width: 168px;
+    position: relative;
+    width: 168px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+  }
+
+  .panel:not(.fixedCanvasPanel) .rectangle {
+    display: none !important;
+  }
+
+  .panel:not(.fixedCanvasPanel) .logo {
+    position: relative;
+    z-index: 1;
+    top: auto;
+    left: auto;
+    width: 168px;
+    height: auto;
+    aspect-ratio: 255 / 67;
+  }
+
+  .fixedCanvasPanel {
+    --brand-panel-width: 310px !important;
+    position: absolute !important;
+    width: 310px !important;
+    height: calc(310px * 1.633871) !important;
+  }
+
+  .fixedCanvasPanel .rectangle {
+    display: block !important;
+  }
+
+  .fixedCanvasPanel .logo {
+    position: absolute !important;
+    top: 3.9487% !important;
+    left: 2.5806% !important;
+    width: 82.2581% !important;
   }
 }

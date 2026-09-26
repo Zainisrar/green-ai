@@ -179,13 +179,13 @@ export default function OsmMonitoring() {
       <div className={styles.actions}>
         <FigmaAngledCta
           onClick={() => setIsOMProposalOpen(true)}
-          style={{ position: "absolute", top: 741, right: 0, width: 301 }}
+          style={{ position: "absolute", top: 741, right: 32, width: 301 }}
         >
           {omData?.callToActions?.[0]?.text || "Request an O&M Proposal"}
         </FigmaAngledCta>
         <FigmaAngledCta
           onClick={() => setIsLiveDemoOpen(true)}
-          style={{ position: "absolute", top: 820, right: 0, width: 351 }}
+          style={{ position: "absolute", top: 820, right: 32, width: 351 }}
         >
           {omData?.callToActions?.[1]?.text || "Book a Live Demo of GREEN POC"}
         </FigmaAngledCta>
@@ -226,6 +226,15 @@ export default function OsmMonitoring() {
           <span>Sustaining</span> Systems. <span>Securing</span> Performance.{" "}
           <span>Scaling</span> Trust.
         </blockquote>
+        <section className={styles.mobileWhyMatters}>
+          <h2>{omData?.whyMatters?.heading || "Why This Matters"}</h2>
+          <p>
+            — <span>Systems that are not monitored</span> Fail Quietly.
+          </p>
+          <p>
+            — <span>Systems that are not maintained</span> Fail Early.
+          </p>
+        </section>
         <section className={styles.mobileServices}>
           {services.slice(0, 7).map(([serviceTitle, serviceDescription]) => (
             <article key={serviceTitle}>

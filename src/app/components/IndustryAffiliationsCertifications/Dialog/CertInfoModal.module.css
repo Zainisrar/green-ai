@@ -1,0 +1,108 @@
+.overlay {
+  position: fixed;
+  z-index: 2147483647;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: transparent;
+}
+
+.stage {
+  position: relative;
+  width: calc(1866px * var(--modal-scale));
+  height: calc(700px * var(--modal-scale));
+  flex: none;
+  margin: auto;
+}
+
+.window {
+  position: absolute;
+  width: 1866px;
+  height: 700px;
+  transform: scale(var(--modal-scale));
+  transform-origin: top left;
+  filter: drop-shadow(0 3px 40px rgba(0, 0, 0, 0.25));
+}
+
+.surface {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.close {
+  position: absolute;
+  z-index: 2;
+  top: 14px;
+  right: 30px;
+  border: 0;
+  background: transparent;
+  padding: 8px;
+  color: #555;
+  cursor: pointer;
+}
+.close svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+.content {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  height: 100%;
+  /* 1255px is the Figma content rail; the extra right inset keeps copy and
+     images clear of the modal's diagonal edge. */
+  padding: 46px 190px 42px 300px;
+}
+.content > * {
+  max-width: 1255px;
+}
+
+@media (max-width: 899px) {
+  .overlay {
+    overflow-y: auto;
+    padding: 16px 12px;
+  }
+  .stage {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: auto;
+    margin: auto;
+  }
+  .window {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    transform: none;
+    background: #fff;
+    border: 2px solid #23b14d;
+    border-radius: 16px;
+  }
+  .surface {
+    display: none;
+  }
+  .close {
+    top: 10px;
+    right: 10px;
+  }
+  .content {
+    height: auto;
+    padding: 42px 24px 28px;
+  }
+}

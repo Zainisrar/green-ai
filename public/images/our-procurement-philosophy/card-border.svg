@@ -1,0 +1,22 @@
+<svg width="325" height="150" viewBox="0 0 325 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_card_border)">
+<path d="M317.641 3H77.755L6.64062 141H247.277L317.641 3Z" fill="white" fill-opacity="0.3" shape-rendering="crispEdges"/>
+<path d="M317.641 3H77.755L6.64062 141H247.277L317.641 3Z" stroke="url(#paint0_linear_card_border)" stroke-width="2" shape-rendering="crispEdges"/>
+</g>
+<defs>
+<filter id="filter0_d_card_border" x="-10" y="-13" width="344.273" height="170" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="3"/>
+<feGaussianBlur stdDeviation="2.5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_card_border"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_card_border" result="shape"/>
+</filter>
+<linearGradient id="paint0_linear_card_border" x1="269.479" y1="-70.3239" x2="96.2214" y2="245.783" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFE500" stop-opacity="0.95"/>
+<stop offset="1" stop-color="#23D14B" stop-opacity="0.6"/>
+</linearGradient>
+</defs>
+</svg>

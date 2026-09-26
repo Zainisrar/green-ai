@@ -338,12 +338,14 @@
     position: relative;
     top: auto;
     left: auto;
-    width: auto;
-    padding: 72px 48px 48px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 56px 32px 36px;
   }
 
   .dialogHeader {
     margin-left: 0;
+    margin-bottom: 8px;
   }
 
   .row1,
@@ -368,27 +370,155 @@
 
 @media (max-width: 767px) {
   .content {
-    padding: 60px 20px 32px;
+    padding: 36px 16px 18px;
   }
 
   .dialogHeader h2 {
-    font-size: 24px;
+    font-size: 19px !important;
+    line-height: 1.25 !important;
+    font-weight: 800 !important;
+    word-break: break-word;
+  }
+
+  .dialogHeader p {
+    font-size: 12.5px;
+    line-height: 1.35;
+    margin-top: 3px;
+  }
+
+  .form {
+    margin-top: 10px;
   }
 
   .row {
     flex-direction: column;
-    gap: 16px;
-    margin-bottom: 16px;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .fieldShape {
+    height: 38px;
+    border-radius: 6px;
+    clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+    background: #fbfdfb;
+    border: 1px solid #c9d5ca;
+    transition: border-color 150ms ease, box-shadow 150ms ease, background 150ms ease;
+  }
+
+  .fieldShape:focus-within,
+  .fieldShape.activeField {
+    border-color: #23b14d !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 0 1px rgba(35, 177, 77, 0.25) !important;
+  }
+
+  .fieldShape input,
+  .fieldShape select {
+    font-size: 12.5px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .fieldShape select {
+    background-position: right 14px center !important;
+    background-size: 10px 6px !important;
+    padding-right: 32px !important;
+  }
+
+  .phoneField {
+    height: 38px !important;
+  }
+
+  .phoneField input {
+    font-size: 12.5px !important;
+    padding-left: 14px !important;
+  }
+
+  .phoneField button[aria-label="Select country code"] {
+    padding: 0 12px 0 6px !important;
+    font-size: 11.5px !important;
+    gap: 4px !important;
+  }
+
+  .messageShape {
+    height: 68px;
+    border-radius: 6px;
+    clip-path: polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%);
+    background: #fbfdfb;
+    border: 1px solid #c9d5ca;
+  }
+
+  .messageShape textarea {
+    padding: 8px 14px !important;
+    font-size: 12.5px !important;
+    line-height: 1.35 !important;
+  }
+
+  .agreement {
+    font-size: 11.5px;
+    line-height: 1.35;
+    gap: 8px;
+    margin-top: 2px;
+    margin-bottom: 8px;
+    align-items: flex-start;
+  }
+
+  .agreement input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    margin-top: 1px;
   }
 
   .row6 {
-    flex-direction: column;
-    gap: 12px;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin-top: 6px !important;
+    margin-bottom: 0 !important;
+    width: 100% !important;
   }
 
-  .btnReset,
+  .btnReset {
+    width: auto !important;
+    min-width: 86px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    padding: 0 16px !important;
+    background: linear-gradient(135deg, #f5f9e8 0%, #e2f0b8 100%) !important;
+    border: 1px solid #bde85d !important;
+    border-radius: 5px !important;
+    clip-path: polygon(7px 0, 100% 0, calc(100% - 7px) 100%, 0 100%) !important;
+    color: #172033 !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    box-shadow: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+  }
+
   .btnSubmit {
-    width: 100%;
+    width: auto !important;
+    min-width: 130px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    padding: 0 20px !important;
+    background: linear-gradient(135deg, #dcfc62 0%, #23b14d 100%) !important;
+    border: 1px solid #23b14d !important;
+    border-radius: 5px !important;
+    clip-path: polygon(7px 0, 100% 0, calc(100% - 7px) 100%, 0 100%) !important;
+    color: #080808 !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    box-shadow: 0 2px 8px rgba(35, 177, 77, 0.25) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
   }
 }
 

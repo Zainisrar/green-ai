@@ -76,6 +76,123 @@ export default function BookAConsultation({
 }: BookAConsultationProps) {
   const [bookingOpen, setBookingOpen] = useState(false);
 
+  if (!canvas) {
+    return (
+      <main className={styles.mobilePage} data-node-id="7077:19924">
+        <SiteHeader layout="viewport" figmaPanelVariant="flagship" />
+
+        {/* Ambient background decoration */}
+        <div className={styles.mobileBgDecor} aria-hidden="true">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/book-consulation/collage.png"
+            alt=""
+          />
+        </div>
+
+        {/* Header block */}
+        <div className={styles.mobileHero}>
+          <h1 className={styles.mobileTitle}>
+            BOOK A <span className={styles.greenText}>CONSULTATION</span>
+          </h1>
+          <p className={styles.mobileSubtitle}>
+            Let&rsquo;s Solve Energy, Together.
+          </p>
+          <p className={styles.mobileDescription}>
+            {highlight(DESCRIPTION_PARTS, styles.greenText)}
+          </p>
+        </div>
+
+        {/* Consultation Focus Areas */}
+        <h2 className={styles.mobileSectionTitle}>Consultation Focus Areas</h2>
+        <div className={styles.mobileBenefitsList}>
+          {BENEFITS.map((b) => (
+            <div key={b.benefit} className={styles.mobileBenefitCard}>
+              <h3 className={styles.mobileBenefitName}>{b.benefit}</h3>
+              <p className={styles.mobileBenefitDesc}>{b.description}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Booking Details */}
+        <h2 className={styles.mobileSectionTitle}>Booking Details</h2>
+        <div className={styles.mobileDetailsList}>
+          <div className={styles.mobileDetailItem}>
+            <img
+              src="/images/book-consulation/figma-bolt.png"
+              alt=""
+              className={styles.mobileDetailIcon}
+            />
+            <p className={styles.mobileDetailText}>
+              30-Minute Discovery Call (Zoom / Google Meet)
+            </p>
+          </div>
+          <div className={styles.mobileDetailItem}>
+            <img
+              src="/images/book-consulation/figma-bolt.png"
+              alt=""
+              className={styles.mobileDetailIcon}
+            />
+            <p className={styles.mobileDetailText}>
+              In-Person (Port Moresby HQ Or Field Offices)
+            </p>
+          </div>
+          <div className={styles.mobileDetailItem}>
+            <img
+              src="/images/book-consulation/figma-bolt.png"
+              alt=""
+              className={styles.mobileDetailIcon}
+            />
+            <p className={styles.mobileDetailText}>One-Hour Technical Session</p>
+          </div>
+        </div>
+
+        {/* Availability pills */}
+        <div className={styles.mobilePillsList}>
+          <div className={styles.mobilePill}>
+            <img
+              src="/images/book-consulation/availability-calendar.svg"
+              alt=""
+              width={16}
+              height={16}
+            />
+            <span>Monday&ndash;Friday | 9 AM To 5 PM GMT+10</span>
+          </div>
+          <div className={styles.mobilePill}>
+            <span>Other Slots By Request (For Global Partners)</span>
+          </div>
+        </div>
+
+        {/* Free consultation note */}
+        <p className={styles.mobileFreeNote}>
+          {highlight(FREE_NOTE_PARTS, styles.greenText)}
+        </p>
+
+        {/* Quote Block */}
+        <div className={styles.mobileQuoteCard}>
+          <p className={styles.mobileQuoteText}>
+            {highlight(QUOTE_PARTS, styles.greenText)}
+          </p>
+        </div>
+
+        {/* CTA */}
+        <button
+          type="button"
+          className={styles.mobileCtaBtn}
+          onClick={() => setBookingOpen(true)}
+        >
+          <span>Book My Consultation</span>
+          <span aria-hidden="true">›</span>
+        </button>
+
+        <D6Chatbot />
+
+        <Booking isOpen={bookingOpen} onClose={() => setBookingOpen(false)} />
+      </main>
+    );
+  }
+
   return (
     <main className={styles.page} data-node-id="7077:19924">
       <SiteHeader

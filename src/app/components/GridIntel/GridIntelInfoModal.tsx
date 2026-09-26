@@ -1,64 +1,241 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useId, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import styles from "./GridIntelInfoModal.module.css";
 
 interface GridIntelInfoModalProps {
   isOpen: boolean;
   onClose: () => void;
-  children: React.ReactNode;
+  title?: string;
+  subtitle?: string;
+  footerQuote?: React.ReactNode;
   footer?: React.ReactNode;
-  maxWidthClass?: string;
+  children: React.ReactNode;
+  className?: string;
 }
 
-const GridIntelInfoModal = ({
+export default function GridIntelInfoModal({
   isOpen,
   onClose,
-  children,
+  title,
+  subtitle,
+  footerQuote,
   footer,
-  maxWidthClass = "max-w-6xl",
-}: GridIntelInfoModalProps) => {
-  if (!isOpen) return null;
+  children,
+  className = "",
+}: GridIntelInfoModalProps) {
+  const [scale, setScale] = useState(1);
+  const [mounted, setMounted] = useState(false);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+  const stageRef = useRef<HTMLElement>(null);
+  const borderGradId = useId();
 
-  return (
-    <div className="scrollbar-hide fixed inset-0 z-[9999999999999999999] flex items-start justify-center overflow-y-auto bg-black/20 p-3 sm:items-center sm:p-4">
-      <div className={`relative my-2 w-full ${maxWidthClass} sm:my-auto`}>
-        <button
-          type="button"
-          onClick={onClose}
-          className="absolute right-4 top-2 z-30 cursor-pointer p-1.5 text-gray-700 transition hover:text-gray-900 sm:right-8 sm:top-4"
-          aria-label="Close modal"
-        >
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isOpen || !mounted) return;
+
+    previouslyFocusedRef.current = document.activeElement as HTMLElement | null;
+
+    const timer = requestAnimationFrame(() => {
+      closeButtonRef.current?.focus();
+    });
+
+    return () => {
+      cancelAnimationFrame(timer);
+      if (previouslyFocusedRef.current?.isConnected) {
+        previouslyFocusedRef.current.focus();
+      }
+    };
+  }, [isOpen, mounted]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setScale(1);
+        return;
+      }
+      const availableWidth = window.innerWidth - 48;
+      const availableHeight = window.innerHeight - 48;
+      const computedScale = Math.min(
+        1,
+        availableWidth / 1866.2,
+        availableHeight / 699.6,
+      );
+      setScale(Math.max(0.35, computedScale));
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      if (e.key === "Tab" && stageRef.current) {
+        const focusableElements =
+          stageRef.current.querySelectorAll<HTMLElement>(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+          );
+        const focusable = Array.from(focusableElements).filter(
+          (el) =>
+            !el.hasAttribute("disabled") &&
+            el.getAttribute("aria-hidden") !== "true" &&
+            el.offsetParent !== null,
+        );
+
+        if (focusable.length === 0) return;
+
+        const firstElement = focusable[0];
+        const lastElement = focusable[focusable.length - 1];
+
+        if (e.shiftKey) {
+          if (
+            document.activeElement === firstElement ||
+            !stageRef.current.contains(document.activeElement)
+          ) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          if (
+            document.activeElement === lastElement ||
+            !stageRef.current.contains(document.activeElement)
+          ) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen || !mounted) return null;
+
+  const quoteContent = footerQuote || footer;
+
+  return createPortal(
+    <div className={styles.overlay} role="presentation">
+      <button
+        type="button"
+        className={styles.backdrop}
+        onClick={onClose}
+        aria-label="Close dialog overlay"
+      />
+      <section
+        ref={stageRef}
+        className={`${styles.stage} ${className}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label={title || "GRID-INTEL Information"}
+        style={{ "--modal-scale": scale } as React.CSSProperties}
+      >
+        <div className={styles.modal}>
+          {/* Vector 7376 frame with SVG gradient border */}
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 sm:h-8 sm:w-8"
+            className={styles.frameSvg}
+            viewBox="0 0 1866.2 699.6"
+            preserveAspectRatio="none"
             fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={2.5}
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
           >
+            <defs>
+              <linearGradient
+                id={borderGradId}
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="100%"
+              >
+                <stop offset="0%" stopColor="#23B14D" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#FFFE50" stopOpacity="0.9" />
+              </linearGradient>
+            </defs>
             <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6 6l12 12M18 6L6 18"
+              d="M 304.84 0 H 1866.2 L 1508.74 699.6 H 0 Z"
+              fill="#ffffff"
+              stroke={`url(#${borderGradId})`}
+              strokeWidth="3"
+              vectorEffect="non-scaling-stroke"
             />
           </svg>
-        </button>
 
-        <div className="scrollbar-hide max-h-[calc(100dvh-1.5rem)] overflow-y-auto sm:max-h-[90dvh]">
-          <div className="relative mx-2 sm:mx-3">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 rounded-lg border-2 border-[#4CAF50] bg-gray-100 shadow-2xl"
-            />
-            <div className="relative z-10 min-w-0 px-6 py-8 pr-12 sm:px-12 sm:py-12 sm:pr-16 lg:px-14 lg:pr-20 [&_img]:h-auto [&_img]:max-w-full">
-              {children}
-              {footer}
-            </div>
-          </div>
+          <button
+            ref={closeButtonRef}
+            type="button"
+            className={styles.closeBtn}
+            onClick={onClose}
+            aria-label="Close dialog"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+          {title && (
+            <header className={styles.header}>
+              <div className={styles.titleRow}>
+                <h2 className={styles.mainTitle}>{title}</h2>
+                {subtitle && (
+                  <span className={styles.titleDash}>
+                    {subtitle.startsWith("-") || subtitle.startsWith("—") ? (
+                      subtitle
+                    ) : (
+                      `- ${subtitle}`
+                    )}
+                  </span>
+                )}
+              </div>
+            </header>
+          )}
+
+          <div className={styles.divider} aria-hidden="true" />
+
+          <div className={styles.bodyArea}>{children}</div>
+
+          {quoteContent && (
+            <footer className={styles.footerArea}>
+              <div className={styles.footerQuote}>{quoteContent}</div>
+            </footer>
+          )}
         </div>
-      </div>
-    </div>
+      </section>
+    </div>,
+    document.body,
   );
-};
-
-export default GridIntelInfoModal;
+}

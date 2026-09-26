@@ -14,6 +14,9 @@
   height: 970px;
   max-width: none;
   pointer-events: none;
+  /* Keep only the left angled page treatment; the source bitmap also contains
+     a right-side standards collage that is not part of this page variant. */
+  clip-path: polygon(0 0, 78% 0, 58% 100%, 0 100%);
 }
 .verticalTitle {
   position: absolute;
@@ -22,6 +25,15 @@
   left: 76px;
   width: 32px;
   height: 788px;
+  max-width: none;
+}
+.pageLogo {
+  position: absolute;
+  z-index: 3;
+  top: 19px;
+  left: 9px;
+  width: 255px;
+  height: 67px;
   max-width: none;
 }
 .introduction {
@@ -74,7 +86,7 @@
   align-items: center;
   justify-content: space-between;
   width: 1064px;
-  height: 80px;
+  height: 79px;
   margin-left: 146px;
   padding: 0 42px 0 48px;
   filter: drop-shadow(0 11px 9px rgb(0 0 0 / 18%));
@@ -89,22 +101,19 @@
 .exploreCard + .exploreCard + .exploreCard + .exploreCard {
   margin-left: 0;
 }
-.exploreCard::before,
-.exploreCard::after {
+.cardVector {
   position: absolute;
-  inset: 0;
-  content: "";
-  clip-path: polygon(3.2% 0, 100% 0, 96.8% 100%, 0 100%);
-}
-.exploreCard::before {
-  background: linear-gradient(90deg, #f0f2b7, #fffef2);
-}
-.exploreCard::after {
-  inset: 4px;
-  background: rgb(255 255 255 / 94%);
+  top: -3px;
+  left: -6.5px;
+  z-index: 0;
+  width: 1077.01px;
+  height: 91px;
+  max-width: none;
+  pointer-events: none;
 }
 .exploreCard h3,
 .exploreCard button {
+  isolation: isolate;
   position: relative;
   z-index: 1;
 }
@@ -121,18 +130,33 @@
   align-items: center;
   justify-content: center;
   gap: 11px;
-  width: 134px;
-  height: 41px;
+  width: 134.1px;
+  height: 40.5px;
   padding: 0 14px 0 21px;
   border: 0;
-  background: linear-gradient(90deg, #b4e6a8, #fffe92);
-  clip-path: polygon(24px 0, 100% 0, calc(100% - 24px) 100%, 0 100%);
+  background: transparent;
+  clip-path: none;
   color: #171717;
   cursor: pointer;
   font-family: inherit;
   font-size: 14px;
   font-style: italic;
   font-weight: 700;
+}
+.exploreVector {
+  position: absolute;
+  top: -0.5px;
+  left: -0.8px;
+  z-index: 0;
+  width: 135.67px;
+  height: 41.538px;
+  max-width: none;
+  pointer-events: none;
+}
+.exploreCard button span,
+.exploreCard button svg {
+  position: relative;
+  z-index: 1;
 }
 .exploreCard button svg {
   width: 10px;
@@ -193,6 +217,8 @@
   position: absolute;
   z-index: 3;
   inset: 0;
+  /* This full-page positioning layer must not cover the Explore controls. */
+  pointer-events: none;
 }
 .dossierLink,
 .individualLink {
@@ -202,6 +228,7 @@
   border: 0;
   background: transparent;
   cursor: pointer;
+  pointer-events: auto;
 }
 .dossierLink {
   top: 747px;
@@ -231,99 +258,202 @@
   height: 52px;
 }
 .mobilePage {
+  position: relative;
   min-height: 100svh;
   padding-top: 76px;
-  background: linear-gradient(145deg, #fff 0%, #fff 65%, #f1f5f0 100%);
+  background: #ffffff;
   color: #1d2a3e;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
+  overflow-x: hidden;
 }
+
+.mobileWatermark {
+  position: absolute;
+  top: 60px;
+  right: -50px;
+  width: 300px;
+  height: 400px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.38;
+}
+
+.mobileWatermark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right top;
+}
+
 .mobileContent {
-  width: min(100% - 32px, 720px);
+  position: relative;
+  z-index: 1;
+  width: min(100% - 32px, 640px);
   margin: 0 auto;
-  padding: 34px 0 150px;
+  padding: 24px 0 40px;
 }
+
 .mobileContent h1 {
   margin: 0;
-  font-size: clamp(32px, 8vw, 54px);
+  font-size: clamp(26px, 6.5vw, 36px);
   font-weight: 900;
-  line-height: 1.04;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
   text-transform: uppercase;
 }
+
 .mobileContent h2 {
-  margin: 22px 0 0;
+  margin: 16px 0 0;
   color: #23b14d;
-  font-size: clamp(21px, 5vw, 30px);
+  font-size: clamp(17px, 4.2vw, 22px);
   font-style: italic;
+  font-weight: 700;
   line-height: 1.25;
 }
+
 .mobileDescription {
-  margin: 22px 0 0;
+  margin: 16px 0 0;
   color: #657084;
-  font-size: 15px;
+  font-size: 14.5px;
+  font-weight: 500;
   line-height: 1.6;
 }
-.mobileCards {
-  display: grid;
+
+/* ── Mobile Slanted Explore Cards (identical to desktop cards, scaled for mobile) ── */
+.mobileCardList {
+  display: flex;
+  flex-direction: column;
   gap: 16px;
-  margin-top: 34px;
+  margin-top: 28px;
 }
-.mobileCards button,
-.mobileActions a,
-.mobileActions button,
-.mobileActions span {
+
+.mobileExploreCard {
+  position: relative;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  box-sizing: border-box;
-  border: 1px solid #dce5a6;
-  background: rgb(255 255 255 / 94%);
+  min-height: 64px;
+  padding: 12px 16px 12px 22px;
+  gap: 12px;
+  filter: drop-shadow(0 6px 8px rgb(0 0 0 / 14%));
+}
+
+.mobileExploreCard::before,
+.mobileExploreCard::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  clip-path: polygon(14px 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+}
+
+.mobileExploreCard::before {
+  background: linear-gradient(90deg, #f0f2b7, #fffef2);
+}
+
+.mobileExploreCard::after {
+  inset: 3px;
+  background: rgb(255 255 255 / 96%);
+}
+
+.mobileExploreCard h3 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  flex: 1 1 auto;
   color: #1d2a3e;
-  clip-path: polygon(4% 0, 100% 0, 96% 100%, 0 100%);
-  font-family: inherit;
-  font-weight: 700;
-  text-align: left;
-  text-decoration: none;
+  font-size: clamp(14px, 3.8vw, 17px);
+  font-weight: 800;
+  line-height: 1.25;
 }
-.mobileCards button {
-  min-height: 76px;
-  padding: 18px 28px;
+
+.mobileExploreCard button {
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: auto;
+  min-width: 88px;
+  height: 34px;
+  padding: 0 10px 0 15px;
+  border: 0;
+  background: linear-gradient(90deg, #b4e6a8, #fffe92);
+  clip-path: polygon(14px 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+  color: #171717;
   cursor: pointer;
-  font-size: 18px;
+  font-family: inherit;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 700;
+  transition: filter 0.15s ease;
 }
-.mobileCards button span:last-child {
-  color: #23b14d;
-  font-size: 33px;
-  font-weight: 400;
-  line-height: 0;
+
+.mobileExploreCard button svg {
+  width: 8px;
+  height: 14px;
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
 }
+
+.mobileExploreCard button:hover,
+.mobileExploreCard button:focus-visible {
+  filter: brightness(0.96);
+}
+
+/* ── Mobile Compliance Statement ── */
 .mobileQuote {
-  margin-top: 40px;
+  margin-top: 32px;
 }
+
 .mobileQuote p {
-  font-size: clamp(24px, 6vw, 31px);
+  margin: 0;
+  color: #1d2a3e;
+  font-size: clamp(20px, 5.2vw, 26px);
+  font-weight: 800;
+  line-height: 1.3;
 }
+
 .mobileQuote .highlighted {
-  font-size: clamp(22px, 5.5vw, 28px);
+  color: #23b14d;
+  font-size: clamp(18px, 4.8vw, 24px);
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.35;
 }
+
 .mobileContent .bottomQuote {
   position: static;
   width: auto;
-  margin-top: 42px;
-  font-size: 21px;
+  margin-top: 28px;
+  font-size: clamp(15px, 3.8vw, 19px);
+  line-height: 1.4;
 }
+
+/* ── Mobile Actions (CTAs) ── */
 .mobileActions {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 14px;
-  margin-top: 38px;
+  margin-top: 32px;
+  width: 100%;
 }
-.mobileActions a,
-.mobileActions button,
-.mobileActions span {
-  min-height: 56px;
-  padding: 14px 28px;
-  background: linear-gradient(90deg, #b4e6a8, #fffe92);
-  cursor: pointer;
-  font-size: 15px;
-  text-align: center;
+
+.mobileDossierCta,
+.mobileIndividualCta {
+  --figma-cta-slant: 16px;
+  width: 100%;
+  max-width: 380px;
+  min-height: 48px;
+  height: auto;
+  padding: 8px 24px;
+  font-size: clamp(11.5px, 3.2vw, 13.5px);
+  font-weight: 600;
 }

@@ -93,6 +93,25 @@ async function getInsight(slug: string): Promise<RawInsight | null> {
   }
 }
 
+export async function generateStaticParams() {
+  try {
+    const response = await fetch(
+      "https://greencms.percepco.co.uk/api/insight-details",
+      { next: { revalidate: 3600 }, signal: AbortSignal.timeout(5000) },
+    );
+    if (!response.ok) return [{ slug: "solar-mining" }];
+    const payload = (await response.json()) as Partial<InsightResponse>;
+    const records = Array.isArray(payload?.data) ? payload.data : [];
+    const slugs = records
+      .map((item) => String(item?.slug ?? "").replace(/^\/+|\/+$/g, ""))
+      .filter(Boolean);
+    if (!slugs.includes("solar-mining")) slugs.push("solar-mining");
+    return slugs.map((slug) => ({ slug }));
+  } catch {
+    return [{ slug: "solar-mining" }];
+  }
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const insight = await getInsight(slug);

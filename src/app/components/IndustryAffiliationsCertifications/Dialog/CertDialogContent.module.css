@@ -1,0 +1,324 @@
+.header {
+  width: 1255px;
+  margin: 0 0 27px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #b9b9b9;
+}
+.title {
+  margin: 0;
+  color: #050505;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 37px;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.table th {
+  padding: 0 0 24px;
+  color: #23b14d;
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 32px;
+  text-align: left;
+}
+.table td {
+  padding: 0 0 28px;
+  color: #050505;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 32px;
+  vertical-align: top;
+}
+.table td:first-child {
+  font-weight: 700;
+}
+/* Figma places these as three independently-sized text lanes, rather than
+   evenly distributed table columns.  Keeping those measured widths prevents
+   Scope from wrapping and retains the diagonal row progression. */
+.certTable {
+  width: 1899.7px;
+  margin-left: 0;
+}
+.certTable th:nth-child(1),
+.certTable td:nth-child(1) {
+  width: 421px;
+  white-space: nowrap;
+}
+.certTable th:nth-child(2),
+.certTable td:nth-child(2) {
+  width: 540px;
+  white-space: nowrap;
+}
+.certTable th:nth-child(3),
+.certTable td:nth-child(3) {
+  width: 938.7px;
+  white-space: nowrap;
+}
+.certTable tbody tr:nth-child(2) td {
+  transform: translateX(-24px);
+}
+.certTable tbody tr:nth-child(3) td {
+  transform: translateX(-48px);
+}
+.certTable tbody tr:nth-child(4) td {
+  transform: translateX(-72px);
+}
+.certTable tbody tr:nth-child(5) td {
+  transform: translateX(-96px);
+}
+.certTable tbody tr:nth-child(6) td {
+  transform: translateX(-120px);
+}
+.certTable tbody tr:nth-child(7) td {
+  transform: translateX(-144px);
+}
+.certTable tbody tr:nth-child(8) td {
+  transform: translateX(-168px);
+}
+/* The final Scope label sits nearest the angled edge; give it its own final
+   step so the one-line value stays within the dialog shape. */
+.certTable tbody tr:nth-child(8) td:nth-child(3) {
+  transform: translateX(-218px);
+}
+.affiliationTable th:first-child,
+.affiliationTable td:first-child {
+  width: 48%;
+}
+.affiliationHeader {
+  margin-left: -33px;
+}
+.affiliationHeader .title {
+  margin-left: 55px;
+}
+.affiliationTable th:nth-child(2) {
+  transform: translateX(104px);
+}
+.affiliationTable td:nth-child(2) {
+  transform: translateX(31px);
+}
+.affiliationTable tbody tr:nth-child(1) td:first-child {
+  transform: translateX(-30px);
+}
+.affiliationTable tbody tr:nth-child(2) td:first-child {
+  transform: translateX(-53px);
+}
+.affiliationTable tbody tr:nth-child(3) td:first-child {
+  transform: translateX(-78px);
+}
+.affiliationTable tbody tr:nth-child(4) td:first-child {
+  transform: translateX(-101px);
+}
+.affiliationTable tbody tr:nth-child(5) td:first-child {
+  transform: translateX(-121px);
+}
+.affiliationTable tbody tr:nth-child(6) td:first-child {
+  transform: translateX(-134px);
+}
+.affiliationTable tbody tr:nth-child(2) td:nth-child(2) {
+  transform: translateX(-5px);
+}
+.affiliationTable tbody tr:nth-child(3) td:nth-child(2) {
+  transform: translateX(-45px);
+}
+.affiliationTable tbody tr:nth-child(4) td:nth-child(2) {
+  transform: translateX(-81px);
+}
+.affiliationTable tbody tr:nth-child(5) td:nth-child(2) {
+  transform: translateX(-111px);
+}
+.affiliationTable tbody tr:nth-child(6) td:nth-child(2) {
+  transform: translateX(-134px);
+}
+.affiliationQuote {
+  width: 1053px;
+  margin: 32px 0 0 -14px;
+  color: #050505;
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 45px;
+  text-align: center;
+}
+.affiliationQuote strong {
+  color: #23b14d;
+  font-weight: 800;
+}
+.whyIntro {
+  margin: 0 0 30px;
+  color: #050505;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 30px;
+}
+.whyGrid {
+  position: relative;
+  display: block;
+  min-height: 338px;
+  margin-left: 31px;
+}
+.keyList {
+  display: flex;
+  width: 1118px;
+  flex-direction: column;
+  gap: 25px;
+}
+.key {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 22px;
+  line-height: 30px;
+}
+.key:nth-child(2) {
+  transform: translateX(-24px);
+}
+.key:nth-child(3) {
+  transform: translateX(-48px);
+}
+.key:nth-child(4) {
+  transform: translateX(-72px);
+}
+.key img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+.key strong {
+  font-weight: 800;
+}
+.key span {
+  font-weight: 500;
+}
+.featureImage {
+  width: 450px;
+  max-width: none;
+  height: 246px;
+  object-fit: cover;
+  clip-path: polygon(11% 0, 100% 0, 89% 100%, 0 100%);
+}
+/* The dialog is displayed inside a scaled canvas; this deliberate reduction
+   remains visibly smaller at the production viewport while retaining its
+   right alignment. */
+.whyGrid > .featureImage {
+  position: absolute;
+  top: 0;
+  left: 860px;
+  z-index: 2;
+}
+/* Figma places the certification statement directly in the lower whitespace;
+   it has no separator rule above it. */
+.quote {
+  max-width: 1255px;
+  margin: 54px 0 0;
+  color: #050505;
+  font-size: 26px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 36px;
+}
+.clientGrid {
+  position: relative;
+  display: block;
+  min-height: 500px;
+  margin-left: -20px;
+}
+.clientGrid > div:first-child {
+  width: 1118px;
+}
+.clientItem {
+  display: flex;
+  gap: 18px;
+  margin-bottom: 34px;
+}
+.clientItem > img {
+  width: 70.3px;
+  height: 70.3px;
+  flex: 0 0 70.3px;
+  object-fit: contain;
+}
+.clientItem h3 {
+  margin: 0 0 4px;
+  font-size: 24px;
+  line-height: 36px;
+}
+.clientItem p {
+  width: 1118px;
+  margin: 0;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 30px;
+}
+.clientItem:nth-child(2) {
+  transform: translateX(-34px);
+}
+.clientItem:nth-child(3) {
+  transform: translateX(-66px);
+}
+.clientItem:nth-child(4) {
+  transform: translateX(-109px);
+}
+.clientGrid > .featureImage {
+  position: absolute;
+  top: 0;
+  left: 819px;
+  z-index: 2;
+  width: 560px;
+  max-width: none;
+  height: 373px;
+}
+@media (max-width: 899px) {
+  .header {
+    width: auto;
+  }
+  .title {
+    font-size: 22px;
+    line-height: 28px;
+  }
+  .table,
+  .certTable {
+    width: 100%;
+    margin-left: 0;
+  }
+  .table {
+    font-size: 14px;
+  }
+  .table th {
+    font-size: 16px;
+  }
+  .table td {
+    font-size: 14px;
+    line-height: 20px;
+    white-space: normal !important;
+  }
+  .whyGrid,
+  .clientGrid {
+    min-height: 0;
+    margin-left: 0;
+  }
+  .keyList,
+  .clientGrid > div:first-child {
+    width: auto;
+  }
+  .featureImage,
+  .whyGrid > .featureImage,
+  .clientGrid > .featureImage {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+  .clientItem p {
+    width: auto;
+  }
+  .quote {
+    font-size: 18px;
+    line-height: 27px;
+  }
+}

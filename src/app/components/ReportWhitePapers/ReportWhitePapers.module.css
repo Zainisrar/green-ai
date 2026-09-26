@@ -7,6 +7,23 @@
   font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
 
+.canvasPage {
+  width: 1920px;
+  height: 970px;
+  min-height: 970px;
+  max-height: 970px;
+  overflow: hidden;
+}
+
+@media (max-width: 1023px) {
+  .page {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100svh;
+  }
+}
+
 .verticalTitle {
   position: fixed;
   z-index: 1;
@@ -16,13 +33,17 @@
   height: 765px;
 }
 
+.canvasPage .verticalTitle {
+  position: absolute;
+}
+
 .content {
   position: relative;
   z-index: 2;
   width: calc(100% - 480px);
   margin-right: 240px;
   margin-left: 240px;
-  padding: 145px 32px 80px;
+  padding: 96px 32px 40px;
   box-sizing: border-box;
 }
 
@@ -46,26 +67,26 @@
 }
 
 .intro h2 {
-  margin: 32px 0 12px;
-  font-size: clamp(22px, 1.7vw, 28px);
+  margin: 12px 0 8px;
+  font-size: clamp(20px, 1.7vw, 26px);
   font-style: italic;
   font-weight: 700;
   line-height: 1.15;
 }
 
 .intro p {
-  max-width: 1090px;
+  max-width: 1240px;
   margin: 0;
   color: #444;
-  font-size: 16px;
-  line-height: 1.45;
+  font-size: 15px;
+  line-height: 1.4;
 }
 
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 290px;
   gap: 70px;
-  margin-top: 62px;
+  margin-top: 32px;
 }
 
 .results {
@@ -83,33 +104,60 @@
 
 .toolbar h3 {
   margin: 0;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.toolbarPlaceholder {
+  visibility: hidden;
 }
 
 .toggles {
   display: flex;
-  gap: 6px;
+  align-items: center;
+  gap: 8px;
 }
 
-.toggles button {
+.toggleBtn {
   display: grid;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
   border: 0;
+  border-radius: 4px;
   background: transparent;
   cursor: pointer;
   place-items: center;
+  color: #615f5f;
+  transition:
+    color 200ms cubic-bezier(0, 0, 0.58, 1),
+    background-color 200ms cubic-bezier(0, 0, 0.58, 1),
+    transform 200ms cubic-bezier(0, 0, 0.58, 1);
 }
 
-.toggles button.selected,
-.toggles button:hover,
-.toggles button:focus-visible {
-  background: #edf7e9;
+.toggleBtn:hover {
+  background: rgba(35, 177, 77, 0.08);
+}
+
+.toggleBtn.toggleActive {
+  color: #23b14d;
 }
 
 .list {
   border-bottom: 1px solid #d9d9d9;
+  animation: listFadeIn 300ms cubic-bezier(0, 0, 0.58, 1) both;
+}
+
+@keyframes listFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .row {
@@ -120,23 +168,31 @@
   min-height: 64px;
   padding: 8px 18px;
   border-bottom: 1px solid #e5e5e5;
+  transition: background-color 150ms ease;
 }
 
 .row:last-child {
   border-bottom: 0;
 }
 
+.row:hover {
+  background: rgba(35, 177, 77, 0.03);
+}
+
 .row h4 {
   min-width: 0;
   margin: 0;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.2;
+  color: #000000;
 }
 
 .row > span {
   display: block;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #23b14d;
   line-height: 1.2;
 }
 
@@ -147,20 +203,39 @@
   gap: 12px;
 }
 
-.actions a {
-  display: block;
-  transition: opacity 160ms ease;
+.listDownloadBtn,
+.listViewBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    opacity 160ms ease,
+    transform 160ms cubic-bezier(0, 0, 0.58, 1);
+  line-height: 0;
 }
 
-.actions a:hover,
-.actions a:focus-visible {
-  opacity: 0.65;
+.listDownloadBtn:hover,
+.listViewBtn:hover,
+.listDownloadBtn:focus-visible,
+.listViewBtn:focus-visible {
+  opacity: 0.82;
+  transform: scale(1.02);
 }
 
-.actions img {
+.listDownloadBtn img {
   display: block;
   width: auto;
-  height: 39px;
+  height: 38px;
+}
+
+.listViewBtn img {
+  display: block;
+  width: auto;
+  height: 38px;
 }
 
 .pagination {
@@ -197,66 +272,178 @@
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-  padding-top: 22px;
+  grid-template-columns: repeat(3, minmax(0, 355px));
+  gap: 20px 24px;
+  padding-top: 20px;
+  animation: gridFadeIn 300ms cubic-bezier(0, 0, 0.58, 1) both;
+}
+
+@keyframes gridFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .card {
-  overflow: hidden;
-  border: 1px solid rgb(35 177 77 / 35%);
-  background: #fff;
-}
-
-.cardImage {
-  display: block;
+  box-sizing: border-box;
   width: 100%;
-  height: 128px;
-  object-fit: cover;
+  height: 154px;
+  padding: 10px 12px 10px 14px;
+  background: #ffffff;
+  border: 2px solid #23b14d;
+  border-image: linear-gradient(135deg, rgba(35, 177, 77, 0.95) 0%, rgba(255, 255, 80, 0.8) 100%) 2;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  transition:
+    transform 200ms cubic-bezier(0, 0, 0.58, 1),
+    box-shadow 200ms ease;
 }
 
-.card > div {
-  padding: 18px;
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
 }
 
-.card > div > span {
-  color: #23b14d;
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #000000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardSubtitle {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
+  color: #23b14d;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.card h4 {
-  margin: 8px 0;
-  font-size: 18px;
-  line-height: 1.25;
+.cardBody {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  margin-top: 4px;
+  flex: 1;
+  min-height: 0;
 }
 
-.card p {
-  margin: 0 0 18px;
-  color: #555;
-  font-size: 14px;
-  line-height: 1.45;
+.cardThumb {
+  width: 140px;
+  height: 78px;
+  flex-shrink: 0;
+  object-fit: cover;
+  display: block;
+}
+
+.cardDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  min-width: 0;
+}
+
+.cardDesc {
+  margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: #000000;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardActions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.gridDownloadBtn,
+.gridViewBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    opacity 160ms ease,
+    transform 160ms cubic-bezier(0, 0, 0.58, 1);
+  line-height: 0;
+}
+
+.gridDownloadBtn:hover,
+.gridViewBtn:hover,
+.gridDownloadBtn:focus-visible,
+.gridViewBtn:focus-visible {
+  opacity: 0.82;
+  transform: scale(1.03);
+}
+
+.gridDownloadBtn img {
+  height: 21px;
+  width: auto;
+  display: block;
+}
+
+.gridViewBtn img {
+  height: 21px;
+  width: auto;
+  display: block;
 }
 
 .sidebar {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   min-width: 0;
 }
 
-.sidebar::before {
-  position: absolute;
-  top: -6px;
-  left: -28px;
-  width: 1px;
-  height: 280px;
-  background: rgb(35 177 77 / 75%);
-  content: "";
-}
-
 .filters {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+.filters::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -28px;
+  width: 1px;
+  background: rgb(35 177 77 / 75%);
+  content: "";
 }
 
 .yearGroup > button {
@@ -278,6 +465,12 @@
   color: #23b14d;
 }
 
+.yearCount {
+  color: #23b14d;
+  font-weight: 600;
+  transition: color 150ms ease;
+}
+
 .yearGroup ul {
   display: grid;
   gap: 10px;
@@ -296,9 +489,12 @@
 .quote {
   position: relative;
   width: 390px;
-  min-height: 180px;
-  margin: -16px 0 0 -28px;
-  padding: 22px 34px;
+  min-height: 140px;
+  /* Keep the Figma 60–76px breathing room after the last year entry.
+     The chat control is fixed to the viewport, so this must be normal-flow
+     spacing instead of a position that can drift underneath it. */
+  margin: 60px 0 0 -28px;
+  padding: 10px 34px 14px;
   box-sizing: border-box;
 }
 
@@ -306,8 +502,8 @@
   position: relative;
   z-index: 2;
   width: 270px;
-  margin: 38px auto 0;
-  font-size: 22px;
+  margin: 20px auto 0;
+  font-size: 21px;
   font-style: italic;
   font-weight: 700;
   line-height: 1.35;
@@ -321,14 +517,14 @@
 .quoteRight {
   position: absolute;
   z-index: 1;
-  top: 28px;
+  top: 14px;
   display: block;
   width: 82px;
   height: 101px;
 }
 
 .quoteLeft {
-  left: -36px;
+  left: 0;
 }
 
 .quoteRight {
@@ -366,6 +562,135 @@
     width: 100%;
     min-height: 180px;
     margin: 0;
+  }
+}
+
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+  animation: modalFadeIn 300ms cubic-bezier(0, 0, 0.58, 1) both;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.canvasModalBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 100;
+  display: block;
+  background: transparent;
+  pointer-events: auto;
+  animation: modalFadeIn 300ms cubic-bezier(0, 0, 0.58, 1) both;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modalCard {
+  position: relative;
+  width: 806px;
+  max-width: 100%;
+  height: 882px;
+  max-height: calc(100vh - 40px);
+  background: #ffffff;
+  box-shadow: 0 4px 200px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: modalPopIn 300ms cubic-bezier(0, 0, 0.58, 1) both;
+}
+
+.canvasModalBackdrop .modalCard {
+  position: absolute;
+  top: 44px;
+  left: 634px;
+  width: 806px;
+  height: 882px;
+  max-width: none;
+  max-height: none;
+}
+
+@keyframes modalPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modalClose {
+  position: absolute;
+  top: 13px;
+  right: 16px;
+  z-index: 10;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  color: #303030;
+  transition:
+    transform 160ms cubic-bezier(0, 0, 0.58, 1),
+    opacity 160ms ease;
+}
+
+.modalClose:hover {
+  transform: scale(1.15);
+  opacity: 0.75;
+}
+
+.modalScrollTrack {
+  position: absolute;
+  top: 94px;
+  right: 16px;
+  z-index: 5;
+  width: 6px;
+  height: 148px;
+  border-radius: 3px;
+  background: #d9d9d9;
+  pointer-events: none;
+}
+
+.modalDocScroll {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.modalDocScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.modalDocImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1200px) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
   }
 }
 
@@ -423,5 +748,31 @@
 
   .cards {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .card {
+    height: auto;
+    min-height: 154px;
+  }
+
+  .cardBody {
+    flex-direction: row;
+  }
+
+  .modalCard {
+    height: auto;
+    max-height: 85vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardBody {
+    flex-direction: column;
+  }
+
+  .cardThumb {
+    width: 100%;
+    height: 110px;
   }
 }

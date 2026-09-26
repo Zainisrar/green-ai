@@ -454,35 +454,63 @@
 
 @media (max-width: 640px) {
   .form {
-    gap: 16px;
-    padding: 62px 18px 24px;
+    gap: 14px;
+    padding: 50px 16px 24px;
+    background: transparent;
   }
 
   .nameFields {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 14px;
+  }
+
+  .fieldShell::before,
+  .messageShell::before,
+  .phoneField::before {
+    display: none !important;
+  }
+
+  .field,
+  .phoneField,
+  .message,
+  .captchaInput {
+    background: #fbfdfb !important;
+    border: 1px solid #c9d5ca !important;
+    border-radius: 8px !important;
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%) !important;
+    font-size: 13.5px !important;
   }
 
   .field,
   .phoneField {
-    height: 58px;
+    height: 48px;
+  }
+
+  .field {
+    padding: 0 18px;
   }
 
   .phoneLabel {
-    padding-left: 23px;
+    padding-left: 18px;
   }
 
   .countryCode {
-    margin-left: 20px;
+    margin-left: 16px;
   }
 
   .messageShell {
-    height: 150px;
+    height: 110px;
+  }
+
+  .message {
+    height: 110px;
+    padding: 12px 18px;
   }
 
   .captchaGroup {
     flex-direction: column;
     align-items: stretch;
+    gap: 10px;
   }
 
   .captcha,
@@ -491,8 +519,27 @@
     width: 100%;
   }
 
+  .captcha {
+    height: 46px;
+    font-size: 20px;
+  }
+
+  .captchaInput {
+    height: 48px;
+    padding: 0 18px;
+  }
+
   .submit {
-    height: 60px;
+    height: 50px;
+    line-height: 50px;
+    background: linear-gradient(135deg, #dcfc62 0%, #23b14d 100%) !important;
+    border: 1px solid #23b14d !important;
+    border-radius: 8px !important;
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%) !important;
+    color: #080808 !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 14px rgba(35, 177, 77, 0.25) !important;
   }
 }
 

@@ -1,0 +1,696 @@
+/* Desktop Canvas 1920x970 container */
+.desktopCanvas {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  overflow: hidden;
+  background-color: #ffffff;
+  font-family: var(--font-montserrat, "Montserrat", sans-serif);
+}
+
+/* Left angled gradient panel */
+.leftPanel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 530px;
+  height: 970px;
+  background: linear-gradient(135deg, rgba(225, 246, 192, 0.65) 0%, rgba(248, 253, 235, 0.25) 100%);
+  clip-path: polygon(0 0, 530px 0, 190px 100%, 0 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Background Mask / Technician Image */
+.bgMaskImage {
+  position: absolute;
+  top: 0;
+  left: 200px;
+  width: 1720px;
+  height: 970px;
+  object-fit: cover;
+  pointer-events: none;
+  opacity: 0.9;
+  z-index: 0;
+}
+
+/* Left vertical outlined side title */
+.verticalTitle {
+  position: absolute;
+  left: 56px;
+  top: 172px;
+  width: 62px;
+  height: 731px;
+  user-select: none;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.95;
+}
+
+/* Top Header Block */
+.headerBlock {
+  position: absolute;
+  left: 450px;
+  top: 86px;
+  width: 1200px;
+  z-index: 2;
+}
+
+.mainTitle {
+  font-size: 54px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  color: #000000;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.greenText {
+  color: #23b14d;
+}
+
+.greenTextBold {
+  color: #23b14d;
+  font-weight: 800;
+}
+
+.subHeadline {
+  font-size: 24px;
+  font-weight: 700;
+  font-style: italic;
+  color: #23b14d;
+  margin: 8px 0 0 0;
+  letter-spacing: -0.2px;
+}
+
+.description {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #000000;
+  max-width: 890px;
+  margin: 8px 0 0 0;
+}
+
+/* Left Interactive Tabs positioned absolutely */
+.tabItem {
+  position: absolute;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-align: left;
+  z-index: 3;
+  text-decoration: none;
+  display: block;
+}
+
+.tab0 {
+  left: 298px;
+  top: 326px;
+}
+
+.tab1 {
+  left: 256px;
+  top: 406px;
+}
+
+.tab2 {
+  left: 214px;
+  top: 486px;
+}
+
+.tab3 {
+  left: 172px;
+  top: 566px;
+}
+
+.tabSvg {
+  display: block;
+  overflow: visible;
+}
+
+.tabPath {
+  stroke: #b4e88d;
+  stroke-width: 2.5px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: d 0.3s ease, stroke 0.2s ease;
+}
+
+.tabActive .tabPath {
+  stroke: #23b14d;
+}
+
+.tabLabel {
+  position: absolute;
+  left: 32px;
+  bottom: 8px;
+  font-size: 21px;
+  font-weight: 800;
+  color: #000000;
+  letter-spacing: -0.3px;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.tabActive .tabLabel {
+  color: #23b14d;
+}
+
+.tabItem:hover .tabLabel {
+  color: #23b14d;
+}
+
+/* Center Highlight Quote Block */
+.centerQuoteBlock {
+  position: absolute;
+  left: 715px;
+  top: 418px;
+  width: 440px;
+  height: 130px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.quoteBracketLeft {
+  position: absolute;
+  left: 0;
+  top: 18px;
+  width: 80px;
+  height: auto;
+}
+
+.centerQuoteText {
+  position: absolute;
+  left: 45px;
+  top: 32px;
+  font-size: 23px;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.25;
+  color: #000000;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.quoteBracketRight {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 80px;
+  height: auto;
+}
+
+/* Right Content Panel */
+.contentPanel {
+  position: absolute;
+  left: 1215px;
+  top: 275px;
+  width: 650px;
+  z-index: 2;
+}
+
+.contentTitle {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #000000;
+  margin: 0 0 6px 0;
+}
+
+.contentSubtitle {
+  font-size: 24px;
+  font-weight: 700;
+  font-style: italic;
+  color: #23b14d;
+  margin: 0 0 16px 0;
+}
+
+.contentBody {
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #000000;
+  margin: 0 0 18px 0;
+  max-width: 630px;
+}
+
+.bulletList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bulletItem {
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.45;
+  color: #000000;
+  position: relative;
+  padding-left: 20px;
+}
+
+.bulletItem::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #000000;
+}
+
+/* What We Procure 2-column table */
+.procureTable {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 14px 28px;
+  margin-top: 20px;
+}
+
+.procureHeader {
+  font-size: 20px;
+  font-weight: 700;
+  color: #23b14d;
+  padding-bottom: 6px;
+  border-bottom: 2px solid rgba(35, 177, 77, 0.2);
+}
+
+.procureCategory {
+  font-size: 18px;
+  font-weight: 700;
+  font-style: italic;
+  color: #000000;
+  padding: 4px 0;
+}
+
+.procureExample {
+  font-size: 17px;
+  font-weight: 500;
+  font-style: italic;
+  color: #222222;
+  padding: 4px 0;
+}
+
+/* How to Become a Supplier steps */
+.stepsTable {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 14px 24px;
+  margin-top: 20px;
+}
+
+.stepHeader {
+  font-size: 20px;
+  font-weight: 700;
+  color: #23b14d;
+  padding-bottom: 6px;
+  border-bottom: 2px solid rgba(35, 177, 77, 0.2);
+}
+
+.stepNumber {
+  font-size: 18px;
+  font-weight: 700;
+  font-style: italic;
+  color: #000000;
+  padding: 4px 0;
+}
+
+.stepAction {
+  font-size: 17px;
+  font-weight: 500;
+  font-style: italic;
+  color: #222222;
+  padding: 4px 0;
+}
+
+/* Partner Spotlight Slanted Parallelogram Banner */
+.spotlightCard {
+  position: absolute;
+  left: 230px;
+  top: 694px;
+  width: 1255px;
+  height: 271px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.spotlightSvgBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.spotlightContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 30px;
+  box-sizing: border-box;
+  pointer-events: auto;
+}
+
+.spotlightTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: #23b14d;
+  margin: 0 0 6px 0;
+  padding-left: 122px;
+}
+
+.spotlightSubtitle {
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 600;
+  color: #000000;
+  margin: 0 0 24px 0;
+  padding-left: 122px;
+  letter-spacing: -0.2px;
+}
+
+.spotlightLogosRow {
+  display: flex;
+  align-items: center;
+  gap: 52px;
+  padding-left: 112px;
+  flex-wrap: nowrap;
+}
+
+.partnerLogo {
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05));
+  transition: transform 0.2s ease;
+}
+
+.partnerLogo:hover {
+  transform: scale(1.05);
+}
+
+.logoClenergy {
+  height: 38px;
+  width: auto;
+}
+
+.logoFimer {
+  height: 54px;
+  width: auto;
+}
+
+.logoTechnocraft {
+  height: 48px;
+  width: auto;
+}
+
+.logoCatl {
+  height: 36px;
+  width: auto;
+}
+
+.logoGrace {
+  height: 44px;
+  width: auto;
+}
+
+/* Bottom Right Action Buttons */
+.ctaBtn1 {
+  position: absolute;
+  left: 1597px;
+  top: 732px;
+  z-index: 4;
+}
+
+.ctaBtn2 {
+  position: absolute;
+  left: 1576px;
+  top: 812px;
+  z-index: 4;
+}
+
+/* ==========================================================================
+   MOBILE RESPONSIVE LAYOUT (canvas = false)
+   ========================================================================== */
+
+.mobileContainer {
+  min-height: 100vh;
+  background-color: #ffffff;
+  padding: 96px 16px 48px 16px;
+  font-family: var(--font-montserrat, "Montserrat", sans-serif);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+.mobileHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mobileMainTitle {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #000000;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.mobileSubHeadline {
+  font-size: 20px;
+  font-weight: 700;
+  font-style: italic;
+  color: #23b14d;
+  margin: 0;
+}
+
+.mobileDescription {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.55;
+  color: #222222;
+  margin: 0;
+}
+
+/* Mobile Tabs Bar */
+.mobileTabsBar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mobileTabButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8faf5;
+  border: 1.5px solid #e4eedb;
+  border-left: 4px solid #b4e88d;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.mobileTabActive {
+  background: #edf8ee;
+  border-color: #23b14d;
+  border-left: 5px solid #23b14d;
+  color: #23b14d;
+  font-weight: 800;
+}
+
+.mobileTabChevron {
+  width: 8px;
+  height: 12px;
+  stroke: currentColor;
+}
+
+/* Mobile Content Card */
+.mobileContentCard {
+  background: #ffffff;
+  border: 1.5px solid #e2ebd4;
+  border-radius: 12px;
+  padding: 22px 18px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.mobileContentTitle {
+  font-size: 22px;
+  font-weight: 800;
+  color: #000000;
+  margin: 0 0 6px 0;
+}
+
+.mobileContentSubtitle {
+  font-size: 18px;
+  font-weight: 700;
+  font-style: italic;
+  color: #23b14d;
+  margin: 0 0 12px 0;
+}
+
+.mobileContentBody {
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.55;
+  color: #222222;
+  margin: 0 0 16px 0;
+}
+
+.mobileContentCard .procureTable {
+  grid-template-columns: 120px 1fr;
+  gap: 10px 14px;
+  margin-top: 14px;
+}
+
+.mobileContentCard .procureHeader {
+  font-size: 15px;
+  padding-bottom: 4px;
+}
+
+.mobileContentCard .procureCategory {
+  font-size: 14px;
+  padding: 2px 0;
+}
+
+.mobileContentCard .procureExample {
+  font-size: 13px;
+  padding: 2px 0;
+}
+
+.mobileContentCard .stepsTable {
+  grid-template-columns: 68px 1fr;
+  gap: 10px 12px;
+  margin-top: 14px;
+}
+
+.mobileContentCard .stepHeader {
+  font-size: 15px;
+  padding-bottom: 4px;
+}
+
+.mobileContentCard .stepNumber {
+  font-size: 14px;
+  padding: 2px 0;
+}
+
+.mobileContentCard .stepAction {
+  font-size: 13px;
+  padding: 2px 0;
+}
+
+.mobileContentCard .bulletList {
+  gap: 10px;
+}
+
+.mobileContentCard .bulletItem {
+  font-size: 14px;
+  line-height: 1.45;
+  padding-left: 18px;
+}
+
+/* Mobile Quote Banner */
+.mobileQuoteBanner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px 12px;
+  background: #fbfdf9;
+  border: 1.5px solid #eef5e6;
+  border-left: 4px solid #23b14d;
+  border-radius: 8px;
+}
+
+.mobileQuoteBracket {
+  height: 36px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.mobileQuoteText {
+  font-size: 16px;
+  font-weight: 800;
+  font-style: italic;
+  line-height: 1.35;
+  color: #000000;
+  text-align: center;
+  margin: 0;
+}
+
+/* Mobile Spotlight Banner */
+.mobileSpotlightCard {
+  background: linear-gradient(135deg, rgba(246, 252, 235, 0.95) 0%, rgba(254, 255, 245, 0.88) 100%);
+  border: 1.5px solid rgba(215, 240, 190, 0.95);
+  border-radius: 12px;
+  padding: 20px 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.mobileSpotlightTitle {
+  font-size: 19px;
+  font-weight: 700;
+  color: #23b14d;
+  margin: 0 0 4px 0;
+}
+
+.mobileSpotlightSubtitle {
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 600;
+  color: #222222;
+  margin: 0 0 16px 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.mobileLogosGrid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.mobileLogoItem {
+  max-height: 32px;
+  max-width: 120px;
+  object-fit: contain;
+}
+
+/* Mobile Action CTAs */
+.mobileActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.mobileActionCta {
+  width: 100%;
+  max-width: 360px;
+  font-size: 14px;
+}

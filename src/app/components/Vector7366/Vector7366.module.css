@@ -84,10 +84,46 @@
   user-select: none;
 }
 
-@media (max-width: 480px) {
-  .responsiveContainer {
-    width: clamp(220px, 75vw, 290px);
-    max-width: calc(100vw - 24px);
+@media (max-width: 1023px) {
+  .responsiveContainer,
+  .canvasContainer {
+    width: clamp(210px, 58vw, 255px) !important;
+    max-width: calc(100vw - 32px) !important;
+    aspect-ratio: 418 / 52 !important;
+    height: auto !important;
+    margin-left: auto !important;
+  }
+
+  .responsiveInput,
+  .canvasInput {
+    top: 0 !important;
+    left: 8% !important;
+    width: 72% !important;
+    height: 100% !important;
+    font-size: 11.5px !important;
+    text-align: left !important;
+    padding-left: 4px !important;
+  }
+
+  .responsiveInput::placeholder,
+  .canvasInput::placeholder {
+    font-size: 11.5px !important;
+    text-align: left !important;
+  }
+
+  .responsiveMicButton,
+  .canvasMicButton {
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    right: 8% !important;
+    width: 16px !important;
+    height: 20px !important;
+  }
+
+  .responsiveMicIcon,
+  .canvasMicIcon {
+    width: 16px !important;
+    height: 20px !important;
   }
 }
 

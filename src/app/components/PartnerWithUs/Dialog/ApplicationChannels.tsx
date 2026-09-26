@@ -2,6 +2,7 @@
 
 import React from "react";
 import ClientInfoModal from "@/app/components/ClientPartnerships/Dialog/ClientInfoModal";
+import styles from "./PartnerWithUsDialogs.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -24,41 +25,28 @@ const channels = [
 
 const ApplicationChannels = ({ isOpen, onClose }: Props) => {
   return (
-    <ClientInfoModal isOpen={isOpen} onClose={onClose} geometry="consultation">
-      <div className="mb-6 sm:mb-8">
-        <h2 className="text-2xl font-black text-gray-800 sm:text-3xl">
-          Application Channels — Active Collaboration
-        </h2>
-        <div className="mt-2 flex items-center">
-          <span className="mr-2 text-2xl font-bold text-black">-</span>
-          <h3 className="text-lg font-semibold text-[#4CAF50] sm:text-xl">
-            We don&apos;t just build solar systems — we engineer energy impact.
-          </h3>
-        </div>
-        <div className="mt-4 h-0.5 w-full bg-gray-300" />
-      </div>
+    <ClientInfoModal isOpen={isOpen} onClose={onClose} height={570}>
+      <div className={styles.dialogContainer}>
+        <header className={styles.dialogHeader}>
+          <h2 className={styles.dialogTitle}>Abortion Channels Active Coll</h2>
+          <p className={styles.dialogSubtitle}>
+            - We don&apos;t just build solar systems — we engineer energy
+            impact.
+          </p>
+        </header>
 
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[480px]">
+        <table className={styles.channelsTable}>
           <thead>
             <tr>
-              <th className="px-4 py-3 text-left text-base font-bold text-[#4CAF50] sm:px-6 sm:py-4 sm:text-lg">
-                Channel
-              </th>
-              <th className="px-4 py-3 text-left text-base font-bold text-[#4CAF50] sm:px-6 sm:py-4 sm:text-lg">
-                Access Point
-              </th>
+              <th>Channel</th>
+              <th>Access Point</th>
             </tr>
           </thead>
           <tbody>
             {channels.map((item, idx) => (
               <tr key={idx}>
-                <td className="px-4 py-3 font-semibold text-gray-800 sm:px-6 sm:py-4">
-                  {item.channel}
-                </td>
-                <td className="px-4 py-3 text-gray-700 sm:px-6 sm:py-4">
-                  {item.accessPoint}
-                </td>
+                <td>{item.channel}</td>
+                <td>{item.accessPoint}</td>
               </tr>
             ))}
           </tbody>

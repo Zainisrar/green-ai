@@ -5,10 +5,9 @@ export default function PublicEventsVolunteeringPage() {
   return (
     <FigmaPageCanvas
       desktop={<PublicEventVolunteering canvas />}
-      mobile={<PublicEventVolunteering canvas />}
+      mobile={<PublicEventVolunteering canvas={false} />}
       nodeId="7077:24270"
       fitCanvasHeight
-      scaleMobileToViewport
     />
   );
 }

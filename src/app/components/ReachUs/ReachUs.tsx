@@ -1,14 +1,13 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import ReachUsForm from "./Modal/Form";
 import styles from "./ReachUs.module.css";
 
-const DESIGN_WIDTH = 1920;
-const DESIGN_HEIGHT = 970;
 const OFFICES = [
   {
     id: "papuaNewGuinea",
@@ -54,169 +53,30 @@ const MAP_EASE = [0, 0, 0.58, 1] as const;
 
 interface ReachUsProps {
   initialFormOpen?: boolean;
+  canvas?: boolean;
 }
 
-export default function ReachUs({ initialFormOpen = false }: ReachUsProps) {
+export default function ReachUs({
+  initialFormOpen = false,
+  canvas = false,
+}: ReachUsProps) {
   const [currentOfficeIndex, setCurrentOfficeIndex] = useState(0);
   const [isFormOpen, setIsFormOpen] = useState(initialFormOpen);
-  const [canvasScale, setCanvasScale] = useState({ x: 1, y: 1 });
-  const [isMobile, setIsMobile] = useState(false);
   const reduceMotion = useReducedMotion();
 
-  useEffect(() => {
-    const updateScale = () => {
-      setIsMobile(window.innerWidth <= 1023);
-      setCanvasScale({
-        x: window.innerWidth / DESIGN_WIDTH,
-        y: window.innerHeight / DESIGN_HEIGHT,
-      });
-    };
-
-    updateScale();
-    window.addEventListener("resize", updateScale, { passive: true });
-    return () => window.removeEventListener("resize", updateScale);
-  }, []);
-
-  return (
-    <main className={styles.page}>
-      {isMobile ? (
-        <div className={styles.mobileHeader}>
-          <SiteHeader panel="logoOnly" />
-        </div>
-      ) : null}
-
-      <section className={styles.desktopStage} aria-label="Reach GREEN">
-        <div
-          className={styles.canvas}
-          style={{ transform: `scale(${canvasScale.x}, ${canvasScale.y})` }}
-          data-node-id="7077:13486"
-        >
-          <img
-            loading="lazy"
-            decoding="async"
-            className={styles.background}
-            src="/images/reach-us/bg.jpg"
-            alt=""
-            aria-hidden="true"
-          />
-
-          {/* Keep the header in the same 1920px coordinate system as the
-              Figma canvas. This prevents viewport scaling from shifting the
-              menu away from the enquiry control. */}
-          {!isMobile && <SiteHeader layout="figmaCanvas" panel="logoOnly" />}
-
-          <p className={styles.intro} data-node-id="7077:13496">
-            Are you prepared to get started on your Energy Requirement right
-            away? Let&apos;s connect!
+  if (!canvas) {
+    return (
+      <div className={styles.page}>
+        <SiteHeader layout="viewport" />
+        <div className={styles.mobileLayout}>
+          <p className={styles.mobileIntro}>
+            Are you prepared to get started on your Energy Requirement right away?
+            Let&apos;s connect!
           </p>
-
-          <img
-            loading="lazy"
-            decoding="async"
-            className={styles.verticalLabel}
-            src="/images/reach-us/reach-us.png"
-            alt="Reach us"
-          />
-
-          <div className={styles.mapViewport} data-node-id="7077:13498">
-            <motion.img
-              className={styles.map}
-              src="/images/reach-us/world-map.png"
-              alt="World map showing GREEN global offices"
-              data-node-id="7077:13642"
-              initial={reduceMotion ? false : { width: 1339.43017578125 }}
-              animate={{ width: 1203.1922607421875 }}
-              transition={{ duration: reduceMotion ? 0 : 0.3, ease: MAP_EASE }}
-            />
-
-            <div className={styles.pins} aria-hidden="true">
-              <img
-                loading="lazy"
-                decoding="async"
-                className={styles.indiaPin}
-                src="/images/reach-us/pin-india.svg"
-                alt=""
-              />
-              <img
-                loading="lazy"
-                decoding="async"
-                className={styles.pngPin}
-                src="/images/reach-us/pin-png.svg"
-                alt=""
-              />
-              <img
-                loading="lazy"
-                decoding="async"
-                className={styles.singaporePin}
-                src="/images/reach-us/pin-singapore.svg"
-                alt=""
-              />
-              <img
-                loading="lazy"
-                decoding="async"
-                className={styles.australiaPin}
-                src="/images/reach-us/pin-australia.svg"
-                alt=""
-              />
-            </div>
-
-            <div className={styles.officeLabels} aria-live="polite">
-              {OFFICES.map((office, index) => {
-                const isActive = index === currentOfficeIndex;
-
-                return (
-                  <article
-                    key={office.id}
-                    className={`${styles.officeCard} ${styles[office.id]} ${
-                      isActive ? styles.officeCardActive : ""
-                    }`}
-                    role="button"
-                    tabIndex={0}
-                    onPointerEnter={() => setCurrentOfficeIndex(index)}
-                    onFocus={() => setCurrentOfficeIndex(index)}
-                    onClick={() => setCurrentOfficeIndex(index)}
-                    onKeyDown={(event) => {
-                      if (event.key === "Enter" || event.key === " ") {
-                        event.preventDefault();
-                        setCurrentOfficeIndex(index);
-                      }
-                    }}
-                  >
-                    {isActive && (
-                      <img
-                        loading="lazy"
-                        decoding="async"
-                        className={styles.officeFlag}
-                        src={office.flag}
-                        alt=""
-                      />
-                    )}
-                    <h2>{office.name}</h2>
-                    {isActive ? (
-                      <p>
-                        {office.address.map((line, lineIndex) => (
-                          <span
-                            key={line}
-                            style={
-                              {
-                                "--line-index": lineIndex,
-                              } as React.CSSProperties
-                            }
-                          >
-                            {line}
-                          </span>
-                        ))}
-                      </p>
-                    ) : null}
-                  </article>
-                );
-              })}
-            </div>
-          </div>
 
           <button
             type="button"
-            className={styles.enquiry}
+            className={styles.mobileEnquiry}
             onClick={() => setIsFormOpen(true)}
             aria-label="Open enquiry form"
             data-node-id="7077:13531"
@@ -229,81 +89,200 @@ export default function ReachUs({ initialFormOpen = false }: ReachUsProps) {
             />
           </button>
 
-          <div className={styles.sideCards}>
+          <div className={styles.mobileMapFrame}>
+            <img
+              loading="lazy"
+              decoding="async"
+              className={styles.mobileMap}
+              src="/images/reach-us/world-map.png"
+              alt="World map showing GREEN global offices"
+            />
+            <div className={styles.mobileOfficeLabel}>
+              <strong>{OFFICES[currentOfficeIndex].name}</strong>
+              {OFFICES[currentOfficeIndex].address.map((line) => (
+                <span key={line}>{line}</span>
+              ))}
+            </div>
+          </div>
+
+          <div className={styles.mobileCards}>
             <img
               loading="lazy"
               decoding="async"
               src="/images/reach-us/transformation.png"
               alt="Transformation"
-              data-node-id="7077:13537"
             />
             <img
               loading="lazy"
               decoding="async"
               src="/images/reach-us/join-us.png"
               alt="Join us"
-              data-node-id="7077:13542"
             />
           </div>
+        </div>
 
-          <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
-        </div>
-      </section>
-
-      <section className={styles.mobileLayout}>
-        <p className={styles.mobileIntro}>
-          Are you prepared to get started on your Energy Requirement right away?
-          Let&apos;s connect!
-        </p>
-        <button
-          type="button"
-          className={styles.mobileEnquiry}
-          onClick={() => setIsFormOpen(true)}
-        >
-          <img
-            loading="lazy"
-            decoding="async"
-            src="/images/reach-us/enquiry.png"
-            alt="Enquiry"
-          />
-        </button>
-        <div className={styles.mobileMapFrame}>
-          <img
-            loading="lazy"
-            decoding="async"
-            className={styles.mobileMap}
-            src="/images/reach-us/world-map.png"
-            alt="World map showing GREEN global offices"
-          />
-          <motion.div
-            key={currentOfficeIndex}
-            className={styles.mobileOfficeLabel}
-            initial={reduceMotion ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: reduceMotion ? 0 : 0.2, ease: MAP_EASE }}
-          >
-            <strong>{OFFICES[currentOfficeIndex].name}</strong>
-            {OFFICES[currentOfficeIndex].address.map((line) => (
-              <span key={line}>{line}</span>
-            ))}
-          </motion.div>
-        </div>
-        <div className={styles.mobileCards}>
-          <img
-            loading="lazy"
-            decoding="async"
-            src="/images/reach-us/transformation.png"
-            alt="Transformation"
-          />
-          <img
-            loading="lazy"
-            decoding="async"
-            src="/images/reach-us/join-us.png"
-            alt="Join us"
-          />
-        </div>
         <D6Chatbot />
-      </section>
+
+        <ReachUsForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
+      </div>
+    );
+  }
+
+  return (
+    <main className={styles.canvasPage} data-node-id="7077:13486">
+      <img
+        loading="lazy"
+        decoding="async"
+        className={styles.background}
+        src="/images/reach-us/bg.jpg"
+        alt=""
+        aria-hidden="true"
+      />
+
+      <SiteHeader layout="figmaCanvas" />
+
+      <p className={styles.intro} data-node-id="7077:13496">
+        Are you prepared to get started on your Energy Requirement right away?
+        Let&apos;s connect!
+      </p>
+
+      <img
+        loading="lazy"
+        decoding="async"
+        className={styles.verticalLabel}
+        src="/images/reach-us/reach-us.png"
+        alt="Reach us"
+      />
+
+      <div className={styles.mapViewport} data-node-id="7077:13498">
+        <motion.img
+          className={styles.map}
+          src="/images/reach-us/world-map.png"
+          alt="World map showing GREEN global offices"
+          data-node-id="7077:13642"
+          initial={reduceMotion ? false : { width: 1339.43017578125 }}
+          animate={{ width: 1203.1922607421875 }}
+          transition={{ duration: reduceMotion ? 0 : 0.3, ease: MAP_EASE }}
+        />
+
+        <div className={styles.pins} aria-hidden="true">
+          <img
+            loading="lazy"
+            decoding="async"
+            className={styles.indiaPin}
+            src="/images/reach-us/pin-india.svg"
+            alt=""
+          />
+          <img
+            loading="lazy"
+            decoding="async"
+            className={styles.pngPin}
+            src="/images/reach-us/pin-png.svg"
+            alt=""
+          />
+          <img
+            loading="lazy"
+            decoding="async"
+            className={styles.singaporePin}
+            src="/images/reach-us/pin-singapore.svg"
+            alt=""
+          />
+          <img
+            loading="lazy"
+            decoding="async"
+            className={styles.australiaPin}
+            src="/images/reach-us/pin-australia.svg"
+            alt=""
+          />
+        </div>
+
+        <div className={styles.officeLabels} aria-live="polite">
+          {OFFICES.map((office, index) => {
+            const isActive = index === currentOfficeIndex;
+
+            return (
+              <article
+                key={office.id}
+                className={`${styles.officeCard} ${styles[office.id]} ${
+                  isActive ? styles.officeCardActive : ""
+                }`}
+                role="button"
+                tabIndex={0}
+                onPointerEnter={() => setCurrentOfficeIndex(index)}
+                onFocus={() => setCurrentOfficeIndex(index)}
+                onClick={() => setCurrentOfficeIndex(index)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    setCurrentOfficeIndex(index);
+                  }
+                }}
+              >
+                {isActive && (
+                  <img
+                    loading="lazy"
+                    decoding="async"
+                    className={styles.officeFlag}
+                    src={office.flag}
+                    alt=""
+                  />
+                )}
+                <h2>{office.name}</h2>
+                {isActive ? (
+                  <p>
+                    {office.address.map((line, lineIndex) => (
+                      <span
+                        key={line}
+                        style={
+                          {
+                            "--line-index": lineIndex,
+                          } as React.CSSProperties
+                        }
+                      >
+                        {line}
+                      </span>
+                    ))}
+                  </p>
+                ) : null}
+              </article>
+            );
+          })}
+        </div>
+      </div>
+
+      <button
+        type="button"
+        className={styles.enquiry}
+        onClick={() => setIsFormOpen(true)}
+        aria-label="Open enquiry form"
+        data-node-id="7077:13531"
+      >
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/reach-us/enquiry.png"
+          alt="Enquiry"
+        />
+      </button>
+
+      <div className={styles.sideCards}>
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/reach-us/transformation.png"
+          alt="Transformation"
+          data-node-id="7077:13537"
+        />
+        <img
+          loading="lazy"
+          decoding="async"
+          src="/images/reach-us/join-us.png"
+          alt="Join us"
+          data-node-id="7077:13542"
+        />
+      </div>
+
+      <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
 
       <ReachUsForm isOpen={isFormOpen} onClose={() => setIsFormOpen(false)} />
     </main>

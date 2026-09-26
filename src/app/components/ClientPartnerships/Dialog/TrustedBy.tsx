@@ -13,27 +13,27 @@ interface Props {
 const defaultIcons = [
   {
     alt: "Department of Petroleum and Energy PNG",
-    src: "/images/client-partnerships/partners/dept-petroleum-energy.png",
+    src: "/images/client-partnerships/department-of-petroleum-energy-of-papua-new-guinea.png",
   },
   {
     alt: "Department of National Planning and Monitoring PNG",
-    src: "/images/client-partnerships/partners/dept-national-planning.png",
+    src: "/images/client-partnerships/department-of-national-planning.png",
   },
   {
     alt: "United Nations Development Programme",
-    src: "/images/client-partnerships/partners/undp.png",
+    src: "/images/client-partnerships/undp.png",
   },
   {
     alt: "Pacific Power Association",
-    src: "/images/client-partnerships/partners/pacific-power-association.png",
+    src: "/images/client-partnerships/pasic-power.png",
   },
   {
     alt: "Australian Aid",
-    src: "/images/client-partnerships/partners/australian-aid.png",
+    src: "/images/client-partnerships/australian-aid.png",
   },
   {
     alt: "EU Green European Alliance",
-    src: "/images/client-partnerships/partners/eu-green.png",
+    src: "/images/client-partnerships/eu-green.png",
   },
 ];
 

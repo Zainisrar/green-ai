@@ -7,7 +7,7 @@ export default function JobOpeningsPage() {
       desktop={<JobOpenings />}
       mobile={<JobOpenings />}
       nodeId="7077:17124"
-      scaleMobileToViewport
+      desktopBreakpoint={1200}
     />
   );
 }

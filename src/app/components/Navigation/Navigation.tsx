@@ -38,6 +38,23 @@ export default function Navigation({
   const dissolveInitial = reduceMotion ? false : { opacity: 0 };
   const drawerRef = useRef<HTMLElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const activeSectionRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    document.body.classList.add("navigation-open");
+    return () => {
+      document.body.classList.remove("navigation-open");
+    };
+  }, []);
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Scroll active section button into view when active section changes
+  useEffect(() => {
+    activeSectionRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }, [activeSection?.id]);
 
   // The CMS can replace the fallback navigation after the drawer has opened.
   // Do not retain a drill-down item from the previous data set.
@@ -150,15 +167,44 @@ export default function Navigation({
     "find us globally (map)",
     "newsletter signup",
   ];
+  const ecosystemItemOrder = [
+    "our value chain",
+    "supply partners",
+    "client partners",
+    "client partnerships",
+    "collaboration & innovation",
+    "collaboration and innovation",
+    "industry affiliations & certifications",
+    "community impact loop",
+    "impact measurement & esg",
+    "technology & innovation alliances",
+    "technology and innovation alliances",
+  ];
+  const supplyPartnersItemOrder = [
+    "our procurement philosophy",
+    "key supply categories",
+    "become a supplier",
+    "supplier code of conduct / handbook",
+    "supplier code of conduct",
+  ];
   const visibleItems = [...(activeSection?.children ?? [])].sort((a, b) => {
-    if (!isEngageLayout) return 0;
-
-    const aOrder = engageItemOrder.indexOf(a.name.trim().toLowerCase());
-    const bOrder = engageItemOrder.indexOf(b.name.trim().toLowerCase());
-    return (
-      (aOrder === -1 ? Number.MAX_SAFE_INTEGER : aOrder) -
-      (bOrder === -1 ? Number.MAX_SAFE_INTEGER : bOrder)
-    );
+    if (isEngageLayout) {
+      const aOrder = engageItemOrder.indexOf(a.name.trim().toLowerCase());
+      const bOrder = engageItemOrder.indexOf(b.name.trim().toLowerCase());
+      return (
+        (aOrder === -1 ? Number.MAX_SAFE_INTEGER : aOrder) -
+        (bOrder === -1 ? Number.MAX_SAFE_INTEGER : bOrder)
+      );
+    }
+    if (isEcosystemLayout) {
+      const aOrder = ecosystemItemOrder.indexOf(a.name.trim().toLowerCase());
+      const bOrder = ecosystemItemOrder.indexOf(b.name.trim().toLowerCase());
+      return (
+        (aOrder === -1 ? Number.MAX_SAFE_INTEGER : aOrder) -
+        (bOrder === -1 ? Number.MAX_SAFE_INTEGER : bOrder)
+      );
+    }
+    return 0;
   });
   const isCurrent = (item: NavigationItem) =>
     currentPath === item.slug ||
@@ -265,11 +311,18 @@ export default function Navigation({
                       type="button"
                       className={`${styles.subMenuTrigger} ${selectedParent?.id === item.id ? `${styles.activeItem} ${isEngageLayout ? "" : styles.underlinedActiveItem}` : ""}`}
                       aria-expanded={selectedParent?.id === item.id}
-                      onClick={() =>
-                        setSelectedParent(
-                          selectedParent?.id === item.id ? null : item,
-                        )
-                      }
+                      onClick={() => {
+                        if (selectedParent?.id === item.id && item.slug) {
+                          onClose();
+                          if (typeof window !== "undefined") {
+                            window.location.href = item.slug;
+                          }
+                        } else {
+                          setSelectedParent(
+                            selectedParent?.id === item.id ? null : item,
+                          );
+                        }
+                      }}
                     >
                       <span>{item.name}</span>
                       <svg
@@ -316,7 +369,21 @@ export default function Navigation({
                 exit={{ opacity: 0 }}
                 transition={figmaTransition}
               >
-                {selectedParent.children.map((item) => (
+                {(selectedParent.name.trim().toLowerCase() === "supply partners"
+                  ? [...selectedParent.children].sort((a, b) => {
+                      const aOrder = supplyPartnersItemOrder.indexOf(
+                        a.name.trim().toLowerCase(),
+                      );
+                      const bOrder = supplyPartnersItemOrder.indexOf(
+                        b.name.trim().toLowerCase(),
+                      );
+                      return (
+                        (aOrder === -1 ? Number.MAX_SAFE_INTEGER : aOrder) -
+                        (bOrder === -1 ? Number.MAX_SAFE_INTEGER : bOrder)
+                      );
+                    })
+                  : selectedParent.children
+                ).map((item) => (
                   <Link
                     key={item.id}
                     href={item.slug}
@@ -398,6 +465,7 @@ export default function Navigation({
             return (
               <button
                 key={section.id}
+                ref={isActive ? activeSectionRef : undefined}
                 type="button"
                 className={isActive ? styles.activeSection : undefined}
                 aria-pressed={isActive}

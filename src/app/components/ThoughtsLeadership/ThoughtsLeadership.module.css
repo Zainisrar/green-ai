@@ -7,8 +7,10 @@
   font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
 .canvasPage {
+  width: 1920px;
   height: 970px;
   min-height: 970px;
+  overflow: hidden;
 }
 .verticalTitle {
   position: absolute;
@@ -148,6 +150,7 @@
   top: 295px;
   left: 1450px;
   width: 450px;
+  z-index: 10;
 }
 .categories {
   height: 371px;
@@ -210,16 +213,37 @@
   position: absolute;
   top: 457px;
   right: 0;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   gap: 16px;
 }
+.sidebarCtaBtn,
 .sidebarCtas button {
-  width: 330px;
-  height: 54px;
-  font:
-    700 16px / 1 var(--font-montserrat),
-    Montserrat,
-    sans-serif;
+  width: 329px !important;
+  height: 52px !important;
+  box-sizing: border-box;
+  padding: 0 20px 0 29px !important;
+  justify-content: flex-start !important;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: clamp(13px, 1.05vw, 16px);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+.sidebarCtaBtn > span,
+.sidebarCtas button > span {
+  width: 100% !important;
+  margin: 0 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  white-space: nowrap;
+}
+.sidebarCtaBtn > span > span,
+.sidebarCtas button > span > span {
+  white-space: nowrap;
+  text-align: left;
 }
 .statement {
   position: absolute;
@@ -231,44 +255,99 @@
   line-height: 1;
 }
 @media (max-width: 1200px) {
-  .page {
+  .page:not(.canvasPage) {
     overflow: visible;
   }
-  .verticalTitle,
-  .sidebar,
-  .statement {
+  .page:not(.canvasPage) .verticalTitle {
     display: none;
   }
-  .content {
+  .page:not(.canvasPage) .statement {
+    position: static;
+    display: block;
+    margin: 40px auto;
+    font-size: clamp(18px, 4.2vw, 24px);
+    font-style: italic;
+    font-weight: 600;
+    line-height: 1.35;
+    text-align: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    max-width: 760px;
+  }
+  .page:not(.canvasPage) .statement em {
+    color: #23b14d;
+    font-style: italic;
+  }
+  .page:not(.canvasPage) .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    margin: 40px auto 0;
+    padding: 0 28px 40px;
+    box-sizing: border-box;
+  }
+  .page:not(.canvasPage) .categories {
+    height: auto;
+    min-height: 0;
+  }
+  .page:not(.canvasPage) .sidebarCtas {
+    position: static;
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
+  }
+  .page:not(.canvasPage) .sidebarCtaBtn,
+  .page:not(.canvasPage) .sidebarCtas button {
+    width: 100% !important;
+    max-width: 329px;
+    height: 52px !important;
+    font-size: clamp(12px, 3.6vw, 15px);
+    padding: 0 16px 0 26px !important;
+  }
+  .page:not(.canvasPage) .content {
     width: auto;
     margin: 0;
-    padding: 140px 28px 80px;
+    padding: 140px 28px 20px;
   }
-  .intro,
-  .editorialSection > h3 {
+  .page:not(.canvasPage) .intro,
+  .page:not(.canvasPage) .editorialSection > h3 {
     margin-left: 0;
   }
-  .editorialGrid {
+  .page:not(.canvasPage) .editorialGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .card {
+  .page:not(.canvasPage) .card {
     height: 250px;
   }
 }
 @media (max-width: 700px) {
-  .content {
+  .page:not(.canvasPage) .content {
     padding: 120px 18px 70px;
   }
-  .intro h1 {
+  .page:not(.canvasPage) .intro h1 {
     font-size: 38px;
   }
-  .intro h2 {
+  .page:not(.canvasPage) .intro h2 {
     font-size: 23px;
   }
-  .editorialGrid {
+  .page:not(.canvasPage) .editorialGrid {
     grid-template-columns: 1fr;
   }
-  .card p {
+  .page:not(.canvasPage) .card p {
     width: auto;
+  }
+}
+@media (max-width: 480px) {
+  .page:not(.canvasPage) .sidebarCtaBtn,
+  .page:not(.canvasPage) .sidebarCtas button {
+    width: 100% !important;
+    max-width: 100%;
+    height: 48px !important;
+    font-size: clamp(11px, 3.4vw, 13.5px);
+    padding: 0 12px 0 22px !important;
+    --figma-cta-slant: 18px;
   }
 }

@@ -108,7 +108,7 @@ export default function TechInfoModal({
       }
     >
       {bullets.map((b, idx) => (
-        <div key={idx} className={styles.bulletRow}>
+        <div key={`${title}-bullet-${idx}`} className={styles.bulletRow}>
           <img
             src="/images/technology-innovation-alliances/modal_bolt.png"
             alt=""
@@ -199,7 +199,7 @@ export default function TechInfoModal({
                   {titleDash.includes("GREEN") ? (
                     <>
                       {titleDash.split("GREEN").map((part, i, arr) => (
-                        <React.Fragment key={i}>
+                        <React.Fragment key={`${title}-dash-${i}`}>
                           {part}
                           {i < arr.length - 1 && <strong>GREEN</strong>}
                         </React.Fragment>

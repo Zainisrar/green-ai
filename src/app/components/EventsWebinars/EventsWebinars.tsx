@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
@@ -29,13 +30,23 @@ const upcomingEvents: EventCard[] = [
   },
 ];
 
-const years = [
-  "Resilient Energy for Island Communities",
-  "GRID-INTEL™ Masterclass Series",
-  "PNG Clean Energy Forum 2025",
-  "AI for Energy Innovation Series",
-  "Women in Energy: Pacific Edition",
-  "Renewable Energy Integration for Resilience",
+const eventYears = [
+  {
+    id: "2025",
+    label: "2025",
+    count: 26,
+    events: [
+      "Resilient Energy for Island Communities",
+      "GRID-INTEL™ Masterclass Series",
+      "PNG Clean Energy Forum 2025",
+      "AI for Energy Innovation Series",
+      "Women in Energy: Pacific Edition",
+      "Renewable Energy Integration for Resilience",
+    ],
+  },
+  { id: "2024", label: "2024", count: 42, events: [] },
+  { id: "2023", label: "2023", count: 36, events: [] },
+  { id: "2023-archive", label: "2023", count: 25, events: [] },
 ];
 
 interface EventsWebinarsProps {
@@ -45,6 +56,7 @@ interface EventsWebinarsProps {
 export default function EventsWebinars({
   canvas = false,
 }: EventsWebinarsProps) {
+  const [expandedYear, setExpandedYear] = useState("2025");
   const cards = [
     ...Array(4).fill(upcomingEvents[0]),
     ...Array(4).fill(upcomingEvents[1]),
@@ -123,23 +135,37 @@ export default function EventsWebinars({
       </div>
       <aside className={styles.sidebar} aria-label="Events by year">
         <section className={styles.yearList}>
-          <h3>
-            2025 <span>(26)</span>
-          </h3>
-          <ul>
-            {years.map((event) => (
-              <li key={event}>{event}</li>
-            ))}
-          </ul>
-          <h3>
-            2024 <span>(42)</span>
-          </h3>
-          <h3>
-            2023 <span>(36)</span>
-          </h3>
-          <h3>
-            2023 <span>(25)</span>
-          </h3>
+          {eventYears.map((year) => {
+            const isExpanded = expandedYear === year.id;
+            const panelId = `events-year-${year.id}`;
+
+            return (
+              <div className={styles.yearGroup} key={year.id}>
+                <h3>
+                  <button
+                    type="button"
+                    className={styles.yearToggle}
+                    aria-expanded={isExpanded}
+                    aria-controls={panelId}
+                    onClick={() =>
+                      setExpandedYear((current) =>
+                        current === year.id ? "" : year.id,
+                      )
+                    }
+                  >
+                    {year.label} <span>({year.count})</span>
+                  </button>
+                </h3>
+                {isExpanded && year.events.length > 0 ? (
+                  <ul id={panelId} className={styles.yearEvents}>
+                    {year.events.map((event) => (
+                      <li key={event}>{event}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+            );
+          })}
         </section>
         <p className={styles.quote}>
           <svg

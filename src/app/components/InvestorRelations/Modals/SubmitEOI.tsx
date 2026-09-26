@@ -286,7 +286,7 @@ const SubmitEOI = ({ isOpen, onClose }: Props) => {
             </div>
           </div>
           <p className="-mt-4 ml-2 text-xs text-[#23B14D]">
-            (Formats: PDF/DOC, Size: Below 2Mb)
+            (Formats: JPG, PNG, MP4, or PDF; maximum size: 2 MB)
           </p>
 
           <div className={`${modalStyles.agreement} ${modalStyles.row5}`}>

@@ -146,18 +146,20 @@ export default function EpcmServices() {
       <div className={styles.actions}>
         <FigmaAngledCta
           icon="download"
-          style={{ top: 681, left: 1545, width: 375 }}
+          style={{ position: "absolute", top: 681, left: 1545, width: 375 }}
         >
           Download EPCM Capabilities Brief
         </FigmaAngledCta>
         <FigmaAngledCta
-          style={{ top: 752, left: 1621, width: 299 }}
+          className={styles.sidebarCtaBtn}
+          style={{ position: "absolute", top: 752, left: 1621, width: 299 }}
           onClick={() => setIsTechnicalDebriefOpen(true)}
         >
           Request a Technical Debrief
         </FigmaAngledCta>
         <FigmaAngledCta
-          style={{ top: 823, left: 1587, width: 329 }}
+          className={styles.sidebarCtaBtn}
+          style={{ position: "absolute", top: 823, left: 1587, width: 329 }}
           onClick={() => setIsDiscoveryConsultationOpen(true)}
         >
           Book a Discovery Consultation
@@ -192,10 +194,18 @@ export default function EpcmServices() {
         nodeId="7077:6595"
         mobile={
           <main className={styles.mobilePage}>
+            <SiteHeader layout="viewport" panel="logoOnly" />
             <h1>Solar EPCM Services</h1>
-            <p>
+            <p className={styles.mobileSubtitle}>
               Designed for Complexity. Delivered with Precision. Managed to
               Scale.
+            </p>
+            <p className={styles.mobileDescription}>
+              At GREEN, EPCM is not coordination — it&apos;s control. We
+              transform technical ambition into clean energy infrastructure
+              through a seamless, standards-driven delivery model. From
+              feasibility to commissioning, we manage every milestone with zero
+              compromise.
             </p>
             {features.map((f) => (
               <section key={f.name}>
@@ -207,7 +217,28 @@ export default function EpcmServices() {
                 </ul>
               </section>
             ))}
+            <blockquote className={styles.mobileQuote}>
+              We embed it — into every process, every panel, every kilowatt.
+            </blockquote>
+            <p className={styles.mobileTagline}>
+              You Don&apos;t Engage GREEN to Oversee Solar.{" "}
+              <strong>You Engage Us to Deliver It.</strong>
+            </p>
             <div className={styles.mobileActions}>
+              <a
+                href="#download-epcm-brief"
+                className={styles.mobileDownloadBtn}
+                download
+              >
+                <span>Download EPCM Capabilities Brief</span>
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="/images/microgrid-solutions/figma-download-icon.png"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </a>
               <button
                 type="button"
                 onClick={() => setIsTechnicalDebriefOpen(true)}

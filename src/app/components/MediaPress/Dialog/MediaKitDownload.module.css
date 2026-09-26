@@ -2,77 +2,119 @@
   position: relative;
   width: 100%;
   height: 100%;
-  padding-left: 280px;
-  padding-right: 200px;
-  padding-top: 28px;
+  padding-left: 335px;
+  padding-top: 30px;
   box-sizing: border-box;
 }
 
 .grid {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 36px;
 }
 
 .row {
   display: flex;
-  gap: 28px;
+  gap: 38px;
   transition: transform 160ms ease;
 }
 
-.row0 {
-  margin-left: 60px;
-}
-.row1 {
-  margin-left: 38px;
-}
-.row2 {
-  margin-left: 16px;
-}
-.row3 {
-  margin-left: -6px;
-}
-.row4 {
-  margin-left: -28px;
-}
-
 .downloadBtn {
+  --figma-cta-slant: 23px;
   position: relative;
+  isolation: isolate;
   width: 360px;
   height: 52px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 28px 0 32px;
-  background: linear-gradient(98deg, #8fe082 0%, #edf87e 100%);
-  border: 1px solid rgba(35, 177, 77, 0.45);
-  clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
+  border: 0;
+  background: transparent;
+  color: #000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
   text-decoration: none;
   cursor: pointer;
   box-sizing: border-box;
+  flex-shrink: 0;
   transition:
     filter 160ms ease,
     transform 160ms ease;
 }
 
+.col2Btn {
+  width: 406px;
+}
+
+/* Outer 1px stroke (100% saturated gradient) matching Figma Vector 7368 */
+.downloadBtn::before {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(90deg, #23b14d 0%, #fffe50 100%);
+  clip-path: polygon(
+    var(--figma-cta-slant) 0,
+    100% 0,
+    calc(100% - var(--figma-cta-slant)) 100%,
+    0 100%
+  );
+}
+
+/* Inner 50% opacity gradient fill over white background matching Figma Vector 7368 */
+.downloadBtn::after {
+  position: absolute;
+  inset: 1px;
+  z-index: 0;
+  content: "";
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.45) 0%,
+      rgba(255, 254, 80, 0.45) 100%
+    ),
+    #ffffff;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  clip-path: polygon(
+    var(--figma-cta-slant) 0,
+    100% 0,
+    calc(100% - var(--figma-cta-slant)) 100%,
+    0 100%
+  );
+}
+
 .downloadBtn:hover {
-  filter: brightness(1.06);
+  filter: brightness(1.05);
   transform: translateY(-2px);
 }
 
+.downloadBtn:active {
+  filter: brightness(0.97);
+  transform: translateY(0);
+}
+
 .btnLabel {
+  position: relative;
+  z-index: 1;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
-  font-size: 14.5px;
+  font-size: 15px;
   font-weight: 600;
-  color: #101927;
+  color: #000000;
   white-space: nowrap;
+  pointer-events: none;
 }
 
 .downloadIcon {
+  position: relative;
+  z-index: 1;
   width: 18px;
   height: 18px;
-  color: #101927;
+  color: #000000;
   flex: none;
+  pointer-events: none;
 }
 
 @media (max-width: 767px) {
@@ -89,15 +131,15 @@
   .row {
     flex-direction: column;
     gap: 12px;
-    margin-left: 0 !important;
+    transform: none !important;
   }
 
-  .downloadBtn {
+  .downloadBtn,
+  .col2Btn {
     width: 100%;
     height: 48px;
-    clip-path: none;
-    border-radius: 6px;
-    padding: 0 18px;
+    --figma-cta-slant: 14px;
+    padding: 0 20px;
   }
 
   .btnLabel {

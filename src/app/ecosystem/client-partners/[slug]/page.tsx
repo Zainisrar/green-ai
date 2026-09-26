@@ -1,6 +1,19 @@
 import ClientPartnerships from "@/app/components/ClientPartnerships/ClientPartnerships";
 import { redirect } from "next/navigation";
 
+export const revalidate = 86400;
+
+export function generateStaticParams() {
+  return [
+    { slug: "partner-with-green" },
+    { slug: "login" },
+    { slug: "client-login" },
+    { slug: "industries-we-serve" },
+    { slug: "partner-success-stories" },
+    { slug: "client-testimonials" },
+  ];
+}
+
 interface Props {
   params: Promise<{ slug: string }>;
 }

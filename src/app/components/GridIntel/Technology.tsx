@@ -1,21 +1,23 @@
 "use client";
+
 import React from "react";
 import GridIntelInfoModal from "./GridIntelInfoModal";
-import SafeImage from "../shared/SafeImage";
+import SlantedCardImage from "./SlantedCardImage";
+import styles from "./GridIntelModalContent.module.css";
 
 interface TechnologyFeature {
-  icon: string;
+  icon?: string;
   text: string;
 }
 
 interface TechnologyData {
-  image: {
-    alt: string;
-    src: string;
+  image?: {
+    alt?: string;
+    src?: string;
   };
-  title: string;
-  description: string;
-  features: TechnologyFeature[];
+  title?: string;
+  description?: string;
+  features?: TechnologyFeature[];
 }
 
 interface Props {
@@ -23,157 +25,68 @@ interface Props {
   onClose: () => void;
   data?: TechnologyData;
 }
-const Technology = ({ isOpen, onClose, data }: Props) => {
+
+const LOCAL_TECHNOLOGY_IMAGE = "/images/grid-intel/technology.png";
+
+const DEFAULT_FEATURES = [
+  "Embedded IoT controller with field-grade resilience",
+  "Solar, battery, diesel, and grid synchronization logic",
+  "Remote-access dashboard with real-time insights",
+  "Predictive fault detection and alerts",
+  "Offline-operable with local override",
+  "Optional satellite uplink for disconnected zones",
+];
+
+const TECH_OFFSETS = [0, 0, 0, 0, 0, 0];
+
+export default function Technology({ isOpen, onClose, data }: Props) {
   if (!isOpen) return null;
 
-  const renderFeatures = () => {
-    if (data?.features) {
-      return data.features.map((feature, index) => (
-        <div key={index} className="flex items-start space-x-3">
-          <img
-            loading="lazy"
-            decoding="async"
-            src="/images/grid-intel/lighting.png"
-            className="w-14 -mt-4"
-            alt="lighting"
-          />
-          <p className="text-gray-800 font-medium italic">{feature.text}</p>
-        </div>
-      ));
-    }
+  const featuresList = data?.features?.length
+    ? data.features.map((f) => f.text)
+    : DEFAULT_FEATURES;
 
-    // Fallback static content
-    return (
-      <>
-        <div className="flex items-start space-x-3">
-          <img
-            loading="lazy"
-            decoding="async"
-            src="/images/grid-intel/lighting.png"
-            className="w-14 -mt-4"
-            alt="lighting"
-          />
-          <p className="text-gray-800 font-medium italic">
-            Embedded IoT controller with field-grade resilience
-          </p>
-        </div>
+  const title = data?.title || "Technology Stack Overview";
 
-        <div className="flex items-start space-x-3">
-          <img
-            loading="lazy"
-            decoding="async"
-            src="/images/grid-intel/lighting.png"
-            className="w-14 -mt-4"
-            alt="lighting"
-          />
-          <p className="text-gray-800 font-medium italic">
-            Solar, battery, diesel, and grid synchronization logic
-          </p>
-        </div>
-
-        <div className="flex items-start space-x-3">
-          <img
-            loading="lazy"
-            decoding="async"
-            src="/images/grid-intel/lighting.png"
-            className="w-14 -mt-4"
-            alt="lighting"
-          />
-          <p className="text-gray-800 font-medium italic">
-            Remote-access dashboard with real-time insights
-          </p>
-        </div>
-
-        <div className="flex items-start space-x-3">
-          <img
-            loading="lazy"
-            decoding="async"
-            src="/images/grid-intel/lighting.png"
-            className="w-14 -mt-4"
-            alt="lighting"
-          />
-          <p className="text-gray-800 font-medium italic">
-            Predictive fault detection and alerts
-          </p>
-        </div>
-
-        <div className="flex items-start space-x-3">
-          <img
-            loading="lazy"
-            decoding="async"
-            src="/images/grid-intel/lighting.png"
-            className="w-14 -mt-4"
-            alt="lighting"
-          />
-          <p className="text-gray-800 font-medium italic">
-            Offline-operable with local override
-          </p>
-        </div>
-
-        <div className="flex items-start space-x-3">
-          <img
-            loading="lazy"
-            decoding="async"
-            src="/images/grid-intel/lighting.png"
-            className="w-14 -mt-4"
-            alt="lighting"
-          />
-          <p className="text-gray-800 font-medium italic">
-            Optional satellite uplink for disconnected zones
-          </p>
-        </div>
-      </>
-    );
-  };
-
-  const renderContent = () => (
-    <>
-      {/* Title Section */}
-      <div className="mb-8">
-        <h2 className="text-3xl lg:text-4xl font-black text-gray-800 mb-4 leading-tight">
-          {data?.title || "Technology Stack Overview"}
-        </h2>
-        <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex flex-col items-start gap-8 lg:flex-row lg:space-x-12">
-        <div className="shrink-0">
-          <div className="relative">
-            <SafeImage
-              src={data?.image?.src}
-              fallbackSrc="/images/grid-intel/technology.png"
-              alt={data?.image?.alt || "GRID-INTEL Technology Stack"}
-              className="w-full max-w-[240px] pt-4 sm:max-w-[280px] lg:max-w-[320px] lg:pt-6"
-            />
-          </div>
-        </div>
-
-        <div className="flex-1">
-          <div className="mb-8">
-            <p className="mb-6 text-lg font-medium text-gray-700">
-              {data?.description ? (
-                data.description
-              ) : (
-                <>
-                  <span className="font-bold text-[#4CAF50]">GRID-INTEL™</span>{" "}
-                  Includes:
-                </>
-              )}
-            </p>
-
-            {/* Technology Features List */}
-            <div className="space-y-4">{renderFeatures()}</div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
   return (
-    <GridIntelInfoModal isOpen={isOpen} onClose={onClose}>
-      {renderContent()}
+    <GridIntelInfoModal isOpen={isOpen} onClose={onClose} title={title}>
+      <div className={styles.techLayout}>
+        <SlantedCardImage
+          src={data?.image?.src}
+          fallbackSrc={LOCAL_TECHNOLOGY_IMAGE}
+          alt={data?.image?.alt || "Technology Stack Overview"}
+        />
+
+        <div className={styles.techRight}>
+          <h3 className={styles.techSubheading}>
+            <span className={styles.techSubheadingGreen}>GRID-INTEL™</span>{" "}
+            Includes:
+          </h3>
+
+          <div className={styles.techList}>
+            {featuresList.map((text, idx) => (
+              <div
+                key={`tech-feature-${idx}-${text}`}
+                className={styles.bulletItem}
+                style={{
+                  transform: `translateX(${TECH_OFFSETS[idx] ?? -idx * 18}px)`,
+                }}
+              >
+                <img
+                  src="/images/grid-intel/lighting.png"
+                  alt=""
+                  className={styles.boltIcon}
+                  loading="lazy"
+                  decoding="async"
+                  width={36}
+                  height={36}
+                />
+                <p className={styles.techBulletText}>{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </GridIntelInfoModal>
   );
-};
-
-export default Technology;
+}

@@ -134,17 +134,17 @@ export default function TechnologyInnovationAlliances({
         figmaPanelVariant={canvas ? "flagship" : "default"}
       />
 
-      {/* Vertical outlined side title image (81x574 at left: 71px, top: 356px) */}
+      {/* Vertical outlined side title image — desktop only */}
       <img
         src="/images/technology-innovation-alliances/technology-innovation-alliances.png"
         alt="Technology & Innovation Alliances"
-        className={styles.verticalTitleImg}
+        className={`${styles.verticalTitleImg} ${styles.desktopOnly}`}
         loading="lazy"
         decoding="async"
       />
 
-      {/* Right-side solar farm collage background */}
-      <div className={styles.rightCollage} aria-hidden="true">
+      {/* Right-side solar farm collage background — desktop only */}
+      <div className={`${styles.rightCollage} ${styles.desktopOnly}`} aria-hidden="true">
         <img
           loading="lazy"
           decoding="async"
@@ -153,8 +153,8 @@ export default function TechnologyInnovationAlliances({
         />
       </div>
 
-      {/* Header section */}
-      <div className={styles.headerBlock}>
+      {/* Header section — desktop only */}
+      <div className={`${styles.headerBlock} ${styles.desktopOnly}`}>
         <h1 className={styles.mainTitle}>
           TECHNOLOGY &amp; <span className={styles.greenText}>INNOVATION</span>{" "}
           ALLIANCES
@@ -165,11 +165,11 @@ export default function TechnologyInnovationAlliances({
         </p>
       </div>
 
-      {/* Partnership pillars (exact Figma coordinates) */}
+      {/* Partnership pillars — desktop only */}
       {d.cards.map((card) => (
         <div
           key={card.key}
-          className={styles.card}
+          className={`${styles.card} ${styles.desktopOnly}`}
           style={{ top: card.y, left: 0 }}
         >
           <button
@@ -228,13 +228,13 @@ export default function TechnologyInnovationAlliances({
         </div>
       ))}
 
-      {/* Goal note over the collage - shifted left for breathing room */}
-      <p className={styles.goalNote}>
+      {/* Goal note — desktop only */}
+      <p className={`${styles.goalNote} ${styles.desktopOnly}`}>
         {highlightText(d.goal.text, d.goal.highlighted)}
       </p>
 
-      {/* Bottom-left quote with angled brackets (Vectors 7374 / 7375) */}
-      <div className={styles.bottomQuote}>
+      {/* Bottom quote — desktop only */}
+      <div className={`${styles.bottomQuote} ${styles.desktopOnly}`}>
         <img
           loading="lazy"
           decoding="async"
@@ -254,22 +254,95 @@ export default function TechnologyInnovationAlliances({
         />
       </div>
 
-      {/* Bottom-right CTAs */}
+      {/* Bottom-right CTAs — desktop only */}
       <FigmaAngledCta
-        className={styles.partnerCta}
+        className={`${styles.partnerCta} ${styles.desktopOnly}`}
         style={{ position: "absolute", left: 1501, top: 746 }}
         onClick={() => setIsBecomeTechnologyPartnerOpen(true)}
       >
         Become a Technology Partner
       </FigmaAngledCta>
       <FigmaAngledCta
-        className={styles.frameworkCta}
+        className={`${styles.frameworkCta} ${styles.desktopOnly}`}
         style={{ position: "absolute", left: 1428, top: 824 }}
         icon="download"
         href="/green-innovation-partnership-framework.pdf"
       >
         GREEN Innovation Partnership Framework (PDF)
       </FigmaAngledCta>
+
+      {/* ===== MOBILE-ONLY LAYOUT ===== */}
+      {!canvas && (
+        <div className={styles.mobileLayout}>
+          {/* Hero */}
+          <div className={styles.mobileHero}>
+            <h1 className={styles.mobileH1}>
+              TECHNOLOGY &amp;{" "}
+              <span className={styles.greenText}>INNOVATION</span> ALLIANCES
+            </h1>
+            <p className={styles.mobileTagline}>{d.subHeadline}</p>
+            <p className={styles.mobileBlurb}>
+              {highlightText(d.description.text, d.description.highlighted)}
+            </p>
+          </div>
+
+          {/* Cards as tappable rows */}
+          <div className={styles.mobileCardList}>
+            {d.cards.map((card) => (
+              <button
+                key={card.key}
+                type="button"
+                className={styles.mobileCard}
+                onClick={() => setOpenModal(card.key)}
+              >
+                <img
+                  src={card.image}
+                  alt={card.title.replace("\n", " ")}
+                  className={styles.mobileCardThumb}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className={styles.mobileCardBody}>
+                  <span className={styles.mobileCardTitle}>
+                    {card.title.replace("\n", " ")}
+                  </span>
+                  <span className={styles.mobileCardSub}>{card.subtitle}</span>
+                </div>
+                <span className={styles.mobileChevron} aria-hidden="true">
+                  ›
+                </span>
+              </button>
+            ))}
+          </div>
+
+          {/* Goal note */}
+          <p className={styles.mobileGoal}>
+            {highlightText(d.goal.text, d.goal.highlighted)}
+          </p>
+
+          {/* Quote */}
+          <div className={styles.mobileQuote}>
+            <p>{highlightText(d.quote1.text, d.quote1.highlighted)}</p>
+          </div>
+
+          {/* CTAs — same FigmaAngledCta as desktop for exact design parity */}
+          <div className={styles.mobileCtaBar}>
+            <FigmaAngledCta
+              className={styles.mobilePartnerCta}
+              onClick={() => setIsBecomeTechnologyPartnerOpen(true)}
+            >
+              Become a Technology Partner
+            </FigmaAngledCta>
+            <FigmaAngledCta
+              className={styles.mobileFrameworkCta}
+              icon="download"
+              href="/green-innovation-partnership-framework.pdf"
+            >
+              GREEN Innovation Partnership Framework (PDF)
+            </FigmaAngledCta>
+          </div>
+        </div>
+      )}
 
       {/* Chatbot */}
       {canvas ? (
@@ -320,3 +393,4 @@ export default function TechnologyInnovationAlliances({
     </main>
   );
 }
+

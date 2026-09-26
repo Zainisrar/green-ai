@@ -278,7 +278,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
     <React.Fragment>
       <TopNavigation />
       <div className="flex h-full">
-        <div className="w-1/6 flex items-center justify-center">
+        <div className="hidden lg:flex w-1/6 items-center justify-center">
           <div className="fixed top-1/3 left-4 lg:left-14">
             <img
               loading="lazy"
@@ -290,7 +290,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
           </div>
         </div>
 
-        <div className="w-full lg:px-8  pt-8 ">
+        <div className="w-full lg:px-8 pt-24 lg:pt-8">
           {/* Main Title */}
           <div className="mb-8 ">
             <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">

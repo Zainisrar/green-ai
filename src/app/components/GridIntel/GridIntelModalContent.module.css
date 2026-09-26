@@ -1,0 +1,418 @@
+/* Slanted Image Container */
+.slantedImageContainer {
+  position: relative;
+  width: 630px;
+  height: 275px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slantedImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Bullet item with bolt icon */
+.bulletItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: transform 0.2s ease;
+}
+
+.boltIcon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  object-fit: contain;
+  transform: rotate(26.5deg);
+}
+
+.bulletText {
+  margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  color: #000000;
+}
+
+/* Challenge Modal Layout */
+.challengeLayout {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-left: 214px;
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  padding-top: 10px;
+  box-sizing: border-box;
+}
+
+.challengeRight {
+  width: 580px;
+  max-width: 580px;
+  flex-shrink: 0;
+}
+
+.challengeHeading {
+  margin: 0 0 20px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.36;
+  color: #000000;
+}
+
+.challengeList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.challengeBulletText {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  font-style: italic;
+  color: #000000;
+  margin: 0;
+}
+
+/* Solves Modal Layout */
+.solvesGrid {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-left: 309px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-top: 15px;
+  box-sizing: border-box;
+}
+
+.solvesRow {
+  display: flex;
+  align-items: center;
+  gap: 70px;
+  transition: transform 0.2s ease;
+}
+
+.solvesCol {
+  width: 640px;
+  max-width: 640px;
+  flex-shrink: 0;
+}
+
+.solvesBulletText {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+}
+
+/* Table Layout (Why Intel) */
+.tableContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-left: 230px;
+  padding-right: 60px;
+  padding-top: 6px;
+  box-sizing: border-box;
+}
+
+.tableHeaderRow {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 20px;
+  transform: translateX(100px);
+}
+
+.tableHeaderCol1 {
+  width: 380px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #23b14d;
+}
+
+.tableHeaderCol2 {
+  width: 420px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #23b14d;
+}
+
+.tableHeaderCol3 {
+  width: 420px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #23b14d;
+}
+
+.tableBody {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tableRow {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  transition: transform 0.2s ease;
+}
+
+.tableCellCol1 {
+  width: 380px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.tableCellCol2 {
+  width: 420px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.tableCellCol3 {
+  width: 420px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+}
+
+/* Scenarios Modal Layout */
+.scenariosLayout {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-left: 312px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 71px;
+  padding-top: 25px;
+  box-sizing: border-box;
+}
+
+.scenariosLeft {
+  width: 670px;
+  max-width: 670px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.scenariosBulletText {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* Technology Stack Layout */
+.techLayout {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-left: 214px;
+  display: flex;
+  align-items: flex-start;
+  gap: 45px;
+  padding-top: 10px;
+  box-sizing: border-box;
+}
+
+.techRight {
+  width: 680px;
+  max-width: 680px;
+  flex-shrink: 0;
+}
+
+.techSubheading {
+  margin: 0 0 16px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.techSubheadingGreen {
+  color: #23b14d;
+}
+
+.techList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.techBulletText {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+  line-height: 1.3;
+}
+
+/* Product Integration Layout */
+.productLayout {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-left: 309px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 72px;
+  padding-top: 40px;
+  box-sizing: border-box;
+}
+
+.productList {
+  width: 600px;
+  max-width: 600px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.productBulletText {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+}
+
+/* Common text highlight */
+.greenHighlight {
+  color: #23b14d;
+  font-weight: 800;
+  font-style: italic;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 767px) {
+  .challengeLayout,
+  .solvesGrid,
+  .tableContainer,
+  .scenariosLayout,
+  .techLayout,
+  .productLayout {
+    padding-left: 0;
+    padding-right: 0;
+    height: auto;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .slantedImageContainer {
+    width: 100%;
+    height: auto;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .slantedImg {
+    clip-path: none;
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+
+  .challengeRight,
+  .techRight,
+  .scenariosLeft,
+  .productList,
+  .solvesCol {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .challengeHeading {
+    font-size: 17px;
+    margin-bottom: 16px;
+  }
+
+  .challengeBulletText,
+  .solvesBulletText,
+  .scenariosBulletText,
+  .techBulletText,
+  .productBulletText {
+    font-size: 15px;
+  }
+
+  .bulletItem {
+    transform: none !important;
+    gap: 10px;
+  }
+
+  .boltIcon {
+    width: 26px;
+    height: 26px;
+    transform: none;
+  }
+
+  .solvesRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    transform: none !important;
+  }
+
+  /* Table on mobile */
+  .tableContainer {
+    overflow-x: auto;
+    padding-top: 0;
+  }
+
+  .tableHeaderRow {
+    transform: none !important;
+    gap: 16px;
+    min-width: 580px;
+  }
+
+  .tableHeaderCol1,
+  .tableHeaderCol2,
+  .tableHeaderCol3 {
+    font-size: 16px;
+    width: auto;
+    flex: 1;
+  }
+
+  .tableRow {
+    transform: none !important;
+    gap: 16px;
+    min-width: 580px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f3f4f6;
+  }
+
+  .tableCellCol1,
+  .tableCellCol2,
+  .tableCellCol3 {
+    font-size: 14px;
+    width: auto;
+    flex: 1;
+  }
+}

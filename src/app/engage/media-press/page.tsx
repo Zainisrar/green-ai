@@ -5,10 +5,9 @@ export default function MediaPressPage() {
   return (
     <FigmaPageCanvas
       desktop={<MediaPress canvas />}
-      mobile={<MediaPress canvas />}
+      mobile={<MediaPress canvas={false} />}
       nodeId="7077:23952"
       fitCanvasHeight
-      scaleMobileToViewport
     />
   );
 }

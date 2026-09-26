@@ -1,23 +1,25 @@
 "use client";
+
 import React from "react";
 import GridIntelInfoModal from "./GridIntelInfoModal";
+import styles from "./GridIntelModalContent.module.css";
 
 interface SolutionItem {
-  icon: string;
+  icon?: string;
   text?: string;
   title?: string;
   description?: string;
 }
 
 interface SolvesData {
-  title: string;
-  subtitle: string;
-  description: string;
-  solutions: SolutionItem[];
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  solutions?: SolutionItem[];
   tagline?: string;
   bottomStatement?: {
-    highlight: string;
-    text: string;
+    highlight?: string;
+    text?: string;
   };
 }
 
@@ -27,205 +29,110 @@ interface Props {
   data?: SolvesData;
 }
 
-const Solves = ({ isOpen, onClose, data }: Props) => {
+const ROWS = [
+  {
+    col1: "Predicts and maps demand patterns",
+    col2: "Switches sources dynamically and instantly",
+  },
+  {
+    col1: "Prioritizes renewable energy intelligently",
+    col2: "Reduces diesel runtime and fuel consumption",
+  },
+  {
+    col1: "Provides remote monitoring and diagnostics",
+    col2: "Delivers full performance visibility to stakeholders",
+  },
+];
+
+const ROW_OFFSETS = [0, -31, -64];
+
+export default function Solves({ isOpen, onClose, data }: Props) {
   if (!isOpen) return null;
 
-  const getSolutionText = (solution: SolutionItem) =>
-    solution.text || solution.title || solution.description || "";
+  const title = data?.title || "What GRID-INTEL™ Solves";
+  const subtitle =
+    data?.subtitle ||
+    "GRID-INTEL™ Is Built to Solve This — With Embedded Intelligence.";
 
-  const renderSolutions = () => {
-    if (data?.solutions) {
-      const midpoint = Math.ceil(data.solutions.length / 2);
-      const leftColumn = data.solutions.slice(0, midpoint);
-      const rightColumn = data.solutions.slice(midpoint);
-
-      return (
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          {/* Left Column */}
-          <div className="space-y-6">
-            {leftColumn.map((solution, index) => (
-              <div key={index} className="flex items-start space-x-3">
-                <span>
-                  <img
-                    loading="lazy"
-                    decoding="async"
-                    src="/images/grid-intel/lighting.png"
-                    className="w-14 -mt-4"
-                    alt="lighting"
-                  />
-                </span>
-                <p className="font-medium text-gray-800">
-                  {getSolutionText(solution)}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          {/* Right Column */}
-          <div className="space-y-6">
-            {rightColumn.map((solution, index) => (
-              <div key={index} className="flex items-start space-x-3">
-                <span>
-                  <img
-                    loading="lazy"
-                    decoding="async"
-                    src="/images/grid-intel/lighting.png"
-                    className="w-14 -mt-4"
-                    alt="lighting"
-                  />
-                </span>
-                <p className="font-medium text-gray-800">
-                  {getSolutionText(solution)}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      );
+  // If dynamic data solutions exist, map pairs or fallback to exact Figma content
+  const rows = (() => {
+    if (data?.solutions && data.solutions.length >= 2) {
+      const texts = data.solutions
+        .map((s) => s.text || s.title || s.description || "")
+        .filter(Boolean);
+      if (texts.length >= 2) {
+        const pairs: { col1: string; col2: string }[] = [];
+        for (let i = 0; i < texts.length; i += 2) {
+          pairs.push({
+            col1: texts[i],
+            col2: texts[i + 1] || "",
+          });
+        }
+        return pairs;
+      }
     }
+    return ROWS;
+  })();
 
-    // Fallback static content
-    return (
-      <div className="grid md:grid-cols-2 gap-8 mb-12">
-        {/* Left Column */}
-        <div className="space-y-6">
-          <div className="flex items-start space-x-3">
-            <span>
-              <img
-                loading="lazy"
-                decoding="async"
-                src="/images/grid-intel/lighting.png"
-                className="w-14 -mt-4"
-                alt="lighting"
-              />
-            </span>
-            <p className="text-gray-800 font-medium">
-              Predicts And Maps Demand Patterns
-            </p>
-          </div>
-
-          <div className="flex items-start space-x-3">
-            <span>
-              <img
-                loading="lazy"
-                decoding="async"
-                src="/images/grid-intel/lighting.png"
-                className="w-14 -mt-4"
-                alt="lighting"
-              />
-            </span>
-            <p className="text-gray-800 font-medium">
-              Prioritizes Renewable Energy Intelligently
-            </p>
-          </div>
-
-          <div className="flex items-start space-x-3">
-            <span>
-              <img
-                loading="lazy"
-                decoding="async"
-                src="/images/grid-intel/lighting.png"
-                className="w-14 -mt-4"
-                alt="lighting"
-              />
-            </span>
-            <p className="text-gray-800 font-medium">
-              Provides Remote Monitoring And Diagnostics
-            </p>
-          </div>
-        </div>
-
-        {/* Right Column */}
-        <div className="space-y-6">
-          <div className="flex items-start space-x-3">
-            <span>
-              <img
-                loading="lazy"
-                decoding="async"
-                src="/images/grid-intel/lighting.png"
-                className="w-14 -mt-4"
-                alt="lighting"
-              />
-            </span>
-            <p className="text-gray-800 font-medium">
-              Switches Sources Dynamically And Instantly
-            </p>
-          </div>
-
-          <div className="flex items-start space-x-3">
-            <span>
-              <img
-                loading="lazy"
-                decoding="async"
-                src="/images/grid-intel/lighting.png"
-                className="w-14 -mt-4"
-                alt="lighting"
-              />
-            </span>
-            <p className="text-gray-800 font-medium">
-              Reduces Diesel Runtime And Fuel Consumption
-            </p>
-          </div>
-
-          <div className="flex items-start space-x-3">
-            <span>
-              <img
-                loading="lazy"
-                decoding="async"
-                src="/images/grid-intel/lighting.png"
-                className="w-14 -mt-4"
-                alt="lighting"
-              />
-            </span>
-            <p className="text-gray-800 font-medium">
-              Delivers Full Performance Visibility To Stakeholders
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
-  const renderContent = () => (
+  const footerQuote = data?.bottomStatement?.text ? (
     <>
-      {/* Title Section */}
-      <div className="mb-12">
-        <h2 className="text-3xl lg:text-4xl font-black text-gray-800 mb-4 leading-tight">
-          {data?.title || "What GRID-INTEL™ Solves"}
-        </h2>
-        <div className="flex items-center">
-          <span className="mr-2 hidden text-2xl font-bold md:inline">-</span>
-          <h3 className="text-xl font-semibold text-[#4CAF50]">
-            {data?.subtitle ||
-              "GRID-INTEL™ Is Built to Solve This — With Embedded Intelligence."}
-          </h3>
-        </div>
-        <div className="w-full h-0.5 bg-gray-300 mt-4"></div>
-      </div>
-
-      {/* Solutions Grid */}
-      {renderSolutions()}
-
-      {/* Bottom Statement */}
-      <div className="text-center pt-8 border-t border-gray-200">
-        <p className="text-gray-800 font-medium text-lg">
-          <span className="text-[#4CAF50] font-bold">
-            {data?.bottomStatement?.highlight || "GRID-INTEL™"}
-          </span>
-          <span className="italic">
-            {data?.bottomStatement?.text ||
-              data?.tagline ||
-              " turns distributed power systems into orchestrated, intelligent infrastructure."}
-          </span>
-        </p>
-      </div>
+      <span className={styles.greenHighlight}>
+        {data.bottomStatement.highlight || "GRID-INTEL™"}
+      </span>{" "}
+      {data.bottomStatement.text}
+    </>
+  ) : (
+    <>
+      <span className={styles.greenHighlight}>GRID-INTEL™</span> turns
+      distributed power systems into orchestrated, intelligent infrastructure.
     </>
   );
+
   return (
-    <GridIntelInfoModal isOpen={isOpen} onClose={onClose}>
-      {renderContent()}
+    <GridIntelInfoModal
+      isOpen={isOpen}
+      onClose={onClose}
+      title={title}
+      subtitle={subtitle}
+      footerQuote={footerQuote}
+    >
+      <div className={styles.solvesGrid}>
+        {rows.map((row, idx) => (
+          <div
+            key={`solves-row-${idx}-${row.col1}`}
+            className={styles.solvesRow}
+            style={{
+              transform: `translateX(${ROW_OFFSETS[idx] ?? -idx * 31}px)`,
+            }}
+          >
+            <div className={`${styles.bulletItem} ${styles.solvesCol}`}>
+              <img
+                src="/images/grid-intel/lighting.png"
+                alt=""
+                className={styles.boltIcon}
+                loading="lazy"
+                decoding="async"
+                width={36}
+                height={36}
+              />
+              <p className={styles.solvesBulletText}>{row.col1}</p>
+            </div>
+
+            <div className={`${styles.bulletItem} ${styles.solvesCol}`}>
+              <img
+                src="/images/grid-intel/lighting.png"
+                alt=""
+                className={styles.boltIcon}
+                loading="lazy"
+                decoding="async"
+                width={36}
+                height={36}
+              />
+              <p className={styles.solvesBulletText}>{row.col2}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </GridIntelInfoModal>
   );
-};
-
-export default Solves;
+}

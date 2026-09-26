@@ -6,6 +6,17 @@
   font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
 
+.canvasPage {
+  position: relative;
+  width: 1920px;
+  height: 970px;
+  min-height: 970px;
+  overflow: hidden;
+  background: #fff;
+  color: #050505;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
 .desktopStage {
   position: relative;
   width: 100vw;
@@ -397,7 +408,7 @@
     flex-direction: column;
     gap: 28px;
     padding: 110px 20px 130px;
-    background: url("/images/reach-us/bg.jpg") top left / cover no-repeat;
+    background: #ffffff;
   }
 
   .mobileIntro {

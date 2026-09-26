@@ -146,18 +146,40 @@
   padding-left: 35px;
 }
 .yearList h3 {
+  margin: 0;
+}
+.yearGroup {
   margin: 0 0 12px;
+}
+.yearToggle {
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #121212;
+  cursor: pointer;
   font-size: 18px;
   font-weight: 700;
   line-height: 1;
+  text-align: left;
 }
-.yearList ul {
+.yearToggle:hover,
+.yearToggle:focus-visible {
+  color: #23b14d;
+  outline: none;
+}
+.yearToggle:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.yearEvents {
   margin: 18px 0 22px;
   padding: 0 0 0 13px;
   list-style: none;
   border-left: 1px solid #1cb34c;
 }
-.yearList li {
+.yearEvents li {
   margin: 0 0 15px;
   font-size: 12px;
   font-weight: 600;

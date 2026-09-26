@@ -4,6 +4,8 @@ import { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
+import DiscoveryConsultation from "./Modals/DiscoveryConsultation";
+import TechnicalDebrief from "./Modals/TechnicalDebrief";
 import styles from "./ThoughtsLeadership.module.css";
 
 type Editorial = {
@@ -83,6 +85,8 @@ export default function ThoughtsLeadership({
   canvas = false,
 }: ThoughtsLeadershipProps) {
   const [openCategory, setOpenCategory] = useState("opinion");
+  const [isDebriefOpen, setIsDebriefOpen] = useState(false);
+  const [isConsultationOpen, setIsConsultationOpen] = useState(false);
 
   return (
     <main
@@ -177,13 +181,33 @@ export default function ThoughtsLeadership({
           })}
         </section>
         <div className={styles.sidebarCtas}>
-          <FigmaAngledCta>Request a Technical Debrief</FigmaAngledCta>
-          <FigmaAngledCta>Book a Discovery Consultation</FigmaAngledCta>
+          <FigmaAngledCta
+            className={styles.sidebarCtaBtn}
+            onClick={() => setIsDebriefOpen(true)}
+          >
+            Request a Technical Debrief
+          </FigmaAngledCta>
+          <FigmaAngledCta
+            className={styles.sidebarCtaBtn}
+            onClick={() => setIsConsultationOpen(true)}
+          >
+            Book a Discovery Consultation
+          </FigmaAngledCta>
         </div>
       </aside>
       <p className={styles.statement}>
         We Don’t Just Build <em>Systems.</em> We Build <em>Perspectives.</em>
       </p>
+
+      <TechnicalDebrief
+        isOpen={isDebriefOpen}
+        onClose={() => setIsDebriefOpen(false)}
+      />
+      <DiscoveryConsultation
+        isOpen={isConsultationOpen}
+        onClose={() => setIsConsultationOpen(false)}
+      />
+
       {canvas ? (
         <D6Chatbot
           canvasAnchored

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useJoinUs } from "../../../hooks/useJoinUs";
 import D6Chatbot from "../D6Chatbot";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import ExistingUsers from "./ExistingUsers";
 import styles from "./JoinUs.module.css";
@@ -54,10 +55,7 @@ export default function JoinUs() {
     const updateScale = () => {
       const mobile = window.innerWidth <= 1023;
       setIsMobile(mobile);
-      if (mobile) {
-        const s = window.innerWidth / FIGMA_WIDTH;
-        setCanvasScale({ x: s, y: s });
-      } else {
+      if (!mobile) {
         setCanvasScale({
           x: window.innerWidth / FIGMA_WIDTH,
           y: window.innerHeight / FIGMA_HEIGHT,
@@ -84,24 +82,19 @@ export default function JoinUs() {
     <>
       {isMobile ? <SiteHeader /> : null}
 
+      {/* ===== DESKTOP CANVAS LAYOUT (≥ 1024px) ===== */}
       <main
-        className={styles.pageShell}
-        style={{
-          height: isMobile
-            ? Math.max(FIGMA_HEIGHT * canvasScale.x, 1)
-            : "100svh",
-        }}
+        className={`${styles.pageShell} ${styles.desktopOnly}`}
+        style={{ height: "100svh" }}
       >
         <div
           className={styles.canvas}
           style={{
-            transform: isMobile
-              ? `scale(${canvasScale.x})`
-              : `scale(${canvasScale.x}, ${canvasScale.y})`,
+            transform: `scale(${canvasScale.x}, ${canvasScale.y})`,
           }}
           data-node-id="7077:17046"
         >
-          {!isMobile && <SiteHeader layout="figmaCanvas" />}
+          <SiteHeader layout="figmaCanvas" />
           <motion.div
             className={styles.scenicArt}
             initial={scenicInitial}
@@ -265,6 +258,148 @@ export default function JoinUs() {
           <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
         </div>
       </main>
+
+      {/* ===== MOBILE-ONLY LAYOUT (≤ 1023px) ===== */}
+      <div className={styles.mobileLayout}>
+        {/* Hero Section */}
+        <section className={styles.mobileHero}>
+          <h1 className={styles.mobileTitle}>
+            Join Us <span className={styles.greenText}>Login</span>
+          </h1>
+          <p className={styles.mobileSubHeadline}>
+            {data?.subHeadline || "Step Into a Career That Builds the Future."}
+          </p>
+          <p className={styles.mobileDescription}>
+            {data?.description ||
+              "Whether you’re a solar enthusiast, a seasoned engineer, or a fresh graduate, your journey into GREEN begins here. Login to apply, track your applications, and access exclusive career-building resources."}
+          </p>
+        </section>
+
+        {/* Login Action Buttons */}
+        <div className={styles.mobileLoginActions}>
+          <button
+            type="button"
+            className={styles.mobileLoginBtn}
+            onClick={() => setIsExistingUsersOpen(true)}
+            aria-label="Log in as an existing user"
+          >
+            <img
+              src="/images/join-us/existing-users.png"
+              alt="Existing Users"
+              className={styles.mobileLoginImg}
+            />
+          </button>
+          <button
+            type="button"
+            className={styles.mobileLoginBtn}
+            onClick={() => setIsNewUsersOpen(true)}
+            aria-label="Register as a new user"
+          >
+            <img
+              src="/images/join-us/new-users.png"
+              alt="New Users"
+              className={styles.mobileLoginImg}
+            />
+          </button>
+        </div>
+
+        {/* What You'll Access */}
+        <section className={styles.mobileAccessSection}>
+          <h2 className={styles.mobileAccessHeading}>
+            What You’ll Access After Logging In:
+          </h2>
+          <div className={styles.mobileDivider} />
+
+          <div className={styles.mobileFeaturesList}>
+            {FEATURES.map((feature) => (
+              <article className={styles.mobileFeatureItem} key={feature.title}>
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src="/images/join-us/lighting.png"
+                  alt=""
+                  aria-hidden="true"
+                  className={styles.mobileFeatureIcon}
+                />
+                <div className={styles.mobileFeatureContent}>
+                  <h3>{feature.title}</h3>
+                  {"detail" in feature ? <p>{feature.detail}</p> : null}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* Partner Copy Box */}
+        <div className={styles.mobilePartnerBox}>
+          <p className={styles.mobilePartnerText}>
+            Already Working With{" "}
+            <strong className={styles.greenText}>GREEN</strong> As A Trainee Or
+            Partner?
+          </p>
+          <p className={styles.mobilePartnerSub}>Login Via Partner Portal</p>
+        </div>
+
+        {/* Data Policy & Ethics */}
+        <section className={styles.mobilePolicySection}>
+          <h2>{data?.dataPolicyEthics?.title || "Data Policy & Ethics"}</h2>
+          <p>
+            {data?.dataPolicyEthics?.description ||
+              "Your Data Is Secure. GREEN Limited Commits To Using All Submitted Information For Recruitment, Training, And Placement Only. No Third-Party Access Is Granted."}
+          </p>
+        </section>
+
+        {/* Contact Cards */}
+        <div className={styles.mobileContactCards}>
+          <Link
+            href={data?.email?.href || "mailto:careers.support@green.com.pg"}
+            className={styles.mobileContactCard}
+          >
+            <img
+              loading="lazy"
+              decoding="async"
+              src="/images/join-us/mail.png"
+              alt=""
+              className={styles.mobileContactIcon}
+            />
+            <span>{data?.email?.text || "careers.support@green.com.pg"}</span>
+          </Link>
+          <div className={styles.mobileContactCard}>
+            <img
+              loading="lazy"
+              decoding="async"
+              src="/images/join-us/call.png"
+              alt=""
+              className={styles.mobileContactIcon}
+            />
+            <span>
+              {data?.phone?.text || "+675 XXX XXX XXX (Careers Desk)"}
+            </span>
+          </div>
+        </div>
+
+        {/* CTAs — parallel, same dimensions */}
+        <div className={styles.mobileCtaBar}>
+          <FigmaAngledCta
+            className={styles.mobileCtaBtn}
+            href={data?.cta?.[0]?.href || "/empower/job-openings"}
+          >
+            View Current Vacancies
+          </FigmaAngledCta>
+          <FigmaAngledCta
+            className={styles.mobileCtaBtn}
+            href={data?.cta?.[1]?.href || "#"}
+            icon="download"
+          >
+            View our Recruitment Privacy Policy (PDF)
+          </FigmaAngledCta>
+        </div>
+
+        {/* Chatbot */}
+        <div className={styles.mobileChatWrapper}>
+          <D6Chatbot />
+        </div>
+      </div>
 
       <ExistingUsers
         isOpen={isExistingUsersOpen}

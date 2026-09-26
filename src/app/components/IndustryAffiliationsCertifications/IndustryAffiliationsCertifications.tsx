@@ -10,8 +10,9 @@ import IndustryAffiliations from "./Dialog/IndustryAffiliations";
 import OurCurrentCertifications from "./Dialog/OurCurrentCertifications";
 import WhatThisMeansforClients from "./Dialog/WhatThisMeansforClients";
 import WhyCertificationAffiliationMatter from "./Dialog/WhyCertificationAffiliationMatter";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import styles from "./IndustryAffiliationsCertifications.module.css";
-import IndividualCertification from "./Modals/IndividualCertification";
+import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 
 const FALLBACK_TITLE = "Industry Affiliations & Certifications";
 const FALLBACK_SUBHEADLINE =
@@ -125,6 +126,13 @@ export default function IndustryAffiliationsCertifications() {
         showBrand={false}
       />
       <img
+        className={styles.pageLogo}
+        src="/images/client-partnerships/logo_green.png"
+        alt="GREEN — Futures Envisioned"
+        width="255"
+        height="67"
+      />
+      <img
         className={styles.verticalTitle}
         src="/images/industry-affiliations-certifications/industry-affiliations-certifications.png"
         alt=""
@@ -145,12 +153,24 @@ export default function IndustryAffiliationsCertifications() {
       >
         {cards.map((card) => (
           <article className={styles.exploreCard} key={card.label}>
+            <img
+              className={styles.cardVector}
+              src="/images/industry-affiliations-certifications/vector-7364.svg"
+              alt=""
+              aria-hidden="true"
+            />
             <h3>{card.label}</h3>
             <button
               type="button"
               onClick={card.onClick}
               aria-label={`Explore ${card.label}`}
             >
+              <img
+                className={styles.exploreVector}
+                src="/images/industry-affiliations-certifications/vector-7368.svg"
+                alt=""
+                aria-hidden="true"
+              />
               <span>Explore</span>
               <svg viewBox="0 0 11 18" aria-hidden="true">
                 <path d="M1.5 1.5 9 9l-7.5 7.5" />
@@ -220,21 +240,41 @@ export default function IndustryAffiliationsCertifications() {
   const mobile = (
     <main className={styles.mobilePage} data-node-id="7077:15958-mobile">
       <SiteHeader panel="logoOnly" />
+      <div className={styles.mobileWatermark} aria-hidden="true">
+        <img
+          src="/images/industry-affiliations-certifications/mainImg.png"
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
       <div className={styles.mobileContent}>
         <h1>
           <PageTitle title={title} />
         </h1>
         <h2>{subtitle}</h2>
         <p className={styles.mobileDescription}>{description}</p>
-        <div className={styles.mobileCards}>
+        <div className={styles.mobileCardList}>
           {cards.map((card) => (
-            <button type="button" key={card.label} onClick={card.onClick}>
-              <span>{card.label}</span>
-              <span aria-hidden="true">›</span>
-            </button>
+            <article className={styles.mobileExploreCard} key={card.label}>
+              <h3>{card.label}</h3>
+              <button
+                type="button"
+                onClick={card.onClick}
+                aria-label={`Explore ${card.label}`}
+              >
+                <span>Explore</span>
+                <svg viewBox="0 0 11 18" aria-hidden="true">
+                  <path d="M1.5 1.5 9 9l-7.5 7.5" />
+                </svg>
+              </button>
+            </article>
           ))}
         </div>
-        <section className={styles.mobileQuote}>
+        <section
+          className={styles.mobileQuote}
+          aria-label="GREEN compliance statement"
+        >
           {quote.map((line, index) => (
             <p
               className={line.highlighted ? styles.highlighted : ""}
@@ -246,14 +286,22 @@ export default function IndustryAffiliationsCertifications() {
         </section>
         <BottomQuote quote={bottomQuote} />
         <div className={styles.mobileActions}>
-          {mainPage?.cta?.[0]?.href ? (
-            <Link href={mainPage.cta[0].href}>GREEN Certification Dossier</Link>
-          ) : (
-            <span>GREEN Certification Dossier</span>
-          )}
-          <button type="button" onClick={() => setIsIndividualCertOpen(true)}>
-            Individual Certificate or Verification Letter
-          </button>
+          <FigmaAngledCta
+            className={styles.mobileDossierCta}
+            icon="download"
+            href={mainPage?.cta?.[0]?.href || "/green-certification-dossier.pdf"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {mainPage?.cta?.[0]?.text || "GREEN Certification Dossier (PDF)"}
+          </FigmaAngledCta>
+          <FigmaAngledCta
+            className={styles.mobileIndividualCta}
+            onClick={() => setIsIndividualCertOpen(true)}
+          >
+            {mainPage?.cta?.[1]?.text ||
+              "Individual Certificate or Verification Letter"}
+          </FigmaAngledCta>
         </div>
       </div>
       <D6Chatbot figmaPlaceholder="Let’s Talk Energy" />
@@ -299,9 +347,21 @@ export default function IndustryAffiliationsCertifications() {
         keys={data?.whatThisMeansClients?.keys || []}
         img={data?.whatThisMeansClients?.img || { alt: "", src: "" }}
       />
-      <IndividualCertification
+      <ProductEnquiry
         isOpen={isIndividualCertOpen}
         onClose={() => setIsIndividualCertOpen(false)}
+        productName="Industry Affiliations & Certifications"
+        titlePrefix="INDIVIDUAL CERTIFICATION /"
+        titleAccent="VERIFICATION LETTER"
+        interestLabel="TYPE OF REQUEST"
+        interestOptions={[
+          "Individual Certification",
+          "Verification Letter",
+          "Certificate Copy",
+          "Other",
+        ]}
+        subtitle="Request a certification record or verification letter from GREEN."
+        submitButtonText="Submit Request"
       />
     </>
   );

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import CertInfoModal from "./CertInfoModal";
+import styles from "./CertDialogContent.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -21,37 +22,34 @@ const WhyCertificationAffiliationMatter = ({
   quoteText,
   img,
 }: Props) => {
+  const principles = keys.length ? keys : [
+    { highlighted: "Sustainability", text: "of components and practices" },
+    { highlighted: "Performance", text: "of systems under tropical, island, and remote conditions" },
+    { highlighted: "Transparency", text: "for donors, governments, and global clients" },
+  ];
   return (
     <CertInfoModal isOpen={isOpen} onClose={onClose}>
-      <div className="mb-6 sm:mb-8">
-        <h2 className="text-2xl font-black text-gray-800 sm:text-3xl">
+      <div className={styles.header}>
+        <h2 className={styles.title}>
           {title || "Why Certification & Affiliation Matter"}
         </h2>
-        <div className="mt-4 h-0.5 w-full bg-gray-300" />
       </div>
 
-      <div className="mb-6 sm:mb-8">
-        <p className="text-base leading-relaxed text-gray-700 sm:text-lg">
-          {description}
-        </p>
-      </div>
+      <p className={styles.whyIntro}>{description || "GREEN Limited holds and pursues certifications that ensure:"}</p>
 
-      <div className="flex flex-col items-start gap-8 lg:flex-row">
-        <div className="flex-1 space-y-5">
-          {keys?.map((k, idx) => (
-            <div key={idx} className="flex items-start gap-3">
-              <span className="shrink-0">
+      <div className={styles.whyGrid}>
+        <div className={styles.keyList}>
+          {principles.map((k, idx) => (
+            <div key={idx} className={styles.key}>
                 <img
                   loading="lazy"
                   decoding="async"
                   src="/images/grid-intel/lighting.png"
-                  className="-mt-3 w-12 sm:w-14"
                   alt="lighting"
                 />
-              </span>
-              <div className="text-sm sm:text-base">
-                <span className="font-bold text-gray-800">{k.highlighted}</span>
-                <span className="ml-2 text-gray-700">
+              <div>
+                <strong>{k.highlighted}</strong>
+                <span>
                   {k.text.replace(k.highlighted, "").trim() || k.text}
                 </span>
               </div>
@@ -59,7 +57,6 @@ const WhyCertificationAffiliationMatter = ({
           ))}
         </div>
 
-        <div className="w-full shrink-0 lg:w-[400px]">
           <img
             loading="lazy"
             decoding="async"
@@ -68,18 +65,11 @@ const WhyCertificationAffiliationMatter = ({
               "/images/industry-affiliations-certifications/why-certification-model.png"
             }
             alt={img?.alt || "Standards and Certification"}
-            className="h-auto w-full"
+            className={styles.featureImage}
           />
-        </div>
       </div>
 
-      {quoteText && (
-        <div className="mt-10 border-t border-gray-300 pt-8">
-          <blockquote className="text-lg font-medium italic leading-relaxed text-gray-800 sm:text-xl">
-            {quoteText}
-          </blockquote>
-        </div>
-      )}
+      <blockquote className={styles.quote}>{quoteText || "“In energy infrastructure, trust is engineered — through compliance, peer validation, and continuous improvement.”"}</blockquote>
     </CertInfoModal>
   );
 };

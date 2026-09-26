@@ -1,12 +1,13 @@
-import React from "react";
 import ReachUs from "@/app/components/ReachUs/ReachUs";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function ReachUsPage() {
   return (
-    <React.Fragment>
-      <ReachUs />
-    </React.Fragment>
+    <FigmaPageCanvas
+      desktop={<ReachUs canvas />}
+      mobile={<ReachUs canvas={false} />}
+      nodeId="7077:13486"
+      fitCanvasHeight
+    />
   );
-};
-
-export default page;
+}

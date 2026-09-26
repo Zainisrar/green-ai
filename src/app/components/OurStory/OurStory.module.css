@@ -127,7 +127,7 @@
 .mobilePage {
   position: relative;
   min-height: 100svh;
-  overflow: hidden;
+  overflow-x: hidden;
   padding-top: 76px;
   background: #fff;
   color: #111;
@@ -145,7 +145,7 @@
 .mobileContent {
   position: relative;
   z-index: 2;
-  padding: 38px 24px 150px;
+  padding: 38px 24px 24px;
 }
 
 .mobileContent h1 {

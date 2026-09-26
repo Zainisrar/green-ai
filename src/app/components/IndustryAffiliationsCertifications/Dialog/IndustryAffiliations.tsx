@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import CertInfoModal from "./CertInfoModal";
+import styles from "./CertDialogContent.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -10,41 +11,50 @@ interface Props {
 }
 
 const IndustryAffiliations = ({ isOpen, onClose, title, keys }: Props) => {
+  const affiliations = keys.length ? keys : [
+    { organization: "Solar Energy Industries Association (SEIA, US)", purpose: "Global policy alignment, market insights" },
+    { organization: "Sustainable Energy for All (SEforALL)", purpose: "Partnership alignment for island electrification" },
+    { organization: "Pacific Power Association (PPA)", purpose: "Regional collaboration on standards & training" },
+    { organization: "PNG Electrical Contractors Association", purpose: "National contractor network & safety auditing" },
+    { organization: "REEEP (Renewable Energy & Energy Efficiency Partnership)", purpose: "Knowledge exchange, project co-design" },
+    { organization: "IRENA (Observer Level)", purpose: "International Renewable Energy Agency forum access" },
+  ];
   return (
     <CertInfoModal isOpen={isOpen} onClose={onClose}>
-      <div className="mb-6 sm:mb-8">
-        <h2 className="text-2xl font-black text-gray-800 sm:text-3xl">
+      <div className={`${styles.header} ${styles.affiliationHeader}`}>
+        <h2 className={styles.title}>
           {title || "Industry Affiliations"}
         </h2>
-        <div className="mt-4 h-0.5 w-full bg-gray-300" />
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[480px]">
+        <table className={`${styles.table} ${styles.affiliationTable}`}>
           <thead>
             <tr>
-              <th className="px-4 py-3 text-left text-base font-bold text-[#4CAF50] sm:px-6 sm:py-4 sm:text-lg">
+              <th>
                 Organization
               </th>
-              <th className="px-4 py-3 text-left text-base font-bold text-[#4CAF50] sm:px-6 sm:py-4 sm:text-lg">
+              <th>
                 Purpose / Engagement
               </th>
             </tr>
           </thead>
           <tbody>
-            {keys?.map((k, idx) => (
+            {affiliations.map((k, idx) => (
               <tr key={`${k.organization}-${idx}`}>
-                <td className="px-4 py-3 font-semibold text-gray-800 sm:px-6 sm:py-4">
+                <td>
                   {k.organization}
                 </td>
-                <td className="px-4 py-3 text-gray-700 sm:px-6 sm:py-4">
+                <td>
                   {k.purpose}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      <blockquote className={styles.affiliationQuote}>
+        “Our <strong>team</strong> also regularly contributes to whitepapers,
+        policy consultations, and <strong>EPCM</strong> benchmarking studies.”
+      </blockquote>
     </CertInfoModal>
   );
 };

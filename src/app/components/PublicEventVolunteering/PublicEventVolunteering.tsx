@@ -109,6 +109,128 @@ export default function PublicEventVolunteering({
     },
   ];
 
+  if (!canvas) {
+    return (
+      <div className={styles.mobilePage} data-node-id="7077:24270">
+        <SiteHeader layout="viewport" figmaPanelVariant="flagship" />
+
+        {/* Ambient background decoration */}
+        <div className={styles.mobileBgDecor} aria-hidden="true">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/public-events-volunteering/figma-mask-group.png"
+            alt=""
+          />
+        </div>
+
+        {/* Hero Header */}
+        <header className={styles.mobileHero}>
+          <h1 className={styles.mobileTitle}>
+            PUBLIC <span className={styles.green}>EVENTS</span> &amp; VOLUNTEERING
+          </h1>
+          <p className={styles.mobileSubtitle}>
+            Be Part of the Energy Transition. On the Ground. In the Community.
+          </p>
+          <p className={styles.mobileDescription}>
+            From school outreach to community solar cleanups —{" "}
+            <span className={styles.highlight}>GREEN</span> invites individuals,
+            institutions, and future changemakers to participate in hands-on
+            action that matters.
+          </p>
+        </header>
+
+        {/* Stacked Rows */}
+        <div className={styles.mobileRowsList}>
+          {rows.map((row, index) => (
+            <div key={row.key} className={styles.mobileRowItem}>
+              <div className={styles.mobileRowHeader}>
+                <div className={styles.mobileRowText}>
+                  <h3 className={styles.mobileRowItemTitle}>{row.title}</h3>
+                  <p className={styles.mobileRowItemSub}>{row.subtitle}</p>
+                </div>
+                <FigmaAngledCta
+                  data-testid={`public-events-explore-${row.key}`}
+                  size="sm"
+                  className={styles.mobileExploreBtn}
+                  onClick={() => setOpenModal(row.key)}
+                >
+                  Explore
+                </FigmaAngledCta>
+              </div>
+              {index < rows.length - 1 && (
+                <hr className={styles.mobileRowDivider} aria-hidden="true" />
+              )}
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Quote Card */}
+        <div className={styles.mobileQuoteCard}>
+          <h2 className={styles.mobileQuoteText}>
+            You Don’t Need To Be An{" "}
+            <span className={styles.highlight}>Engineer</span> To Power Change.
+            You Just Need To Show Up. We’ll Show You How.
+          </h2>
+        </div>
+
+        {/* CTAs */}
+        <div className={styles.mobileCtas}>
+          <FigmaAngledCta
+            data-testid="public-events-sign-up"
+            className={styles.mobileActionCta}
+            onClick={() => setIsSignUpFormOpen(true)}
+          >
+            Sign Up to Volunteer
+          </FigmaAngledCta>
+
+          <FigmaAngledCta
+            className={styles.mobileActionCta}
+            icon="chevron"
+            href="/enlighten/events-webinars"
+          >
+            View Upcoming Events Calendar
+          </FigmaAngledCta>
+
+          <FigmaAngledCta
+            className={styles.mobileActionCta}
+            icon="download"
+            href="/volunteer-welcome-pack.pdf"
+          >
+            Download Volunteer Welcome Pack (PDF)
+          </FigmaAngledCta>
+        </div>
+
+        <D6Chatbot />
+
+        <WhyWeEngage
+          isOpen={openModal === "whyWeEngage"}
+          onClose={() => setOpenModal(null)}
+        />
+        <WaystoGetInvolved
+          isOpen={openModal === "waysToGetInvolved"}
+          onClose={() => setOpenModal(null)}
+        />
+        <WhoCanJoin
+          isOpen={openModal === "whoCanJoin"}
+          onClose={() => setOpenModal(null)}
+        />
+        <VolunteerSignUp
+          isOpen={openModal === "volunteerSignUp"}
+          onClose={() => setOpenModal(null)}
+        />
+        <PastHighlights
+          isOpen={openModal === "pastHighlights"}
+          onClose={() => setOpenModal(null)}
+        />
+        <ProductEnquiry
+          isOpen={isSignUpFormOpen}
+          onClose={() => setIsSignUpFormOpen(false)}
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       className={`${styles.page} ${canvas ? styles.canvasPage : ""}`}

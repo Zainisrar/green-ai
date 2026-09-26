@@ -1,0 +1,385 @@
+.dialogContainer {
+  width: 100%;
+  max-width: 1255px;
+}
+
+.dialogHeader {
+  width: 100%;
+  max-width: 1255px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(138, 139, 138, 0.4);
+  margin-bottom: 28px;
+}
+
+.dialogTitle {
+  margin: 0;
+  color: #050505;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.dialogTitleAccent {
+  color: #23b14d;
+}
+
+.dialogSubtitle {
+  margin: 0;
+  color: #23b14d;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+/* Why GREEN */
+.whyList {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 24px;
+  max-width: 1255px;
+}
+
+.whyRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Follow the modal's angled left edge rather than forming a vertical stack. */
+.whyRow:nth-child(2) {
+  transform: translateX(-24px);
+}
+.whyRow:nth-child(3) {
+  transform: translateX(-48px);
+}
+.whyRow:nth-child(4) {
+  transform: translateX(-72px);
+}
+.whyRow:nth-child(5) {
+  transform: translateX(-96px);
+}
+
+.whyIcon {
+  width: 31px;
+  height: 31px;
+  flex: 0 0 31px;
+  object-fit: contain;
+}
+
+.whyRow p {
+  margin: 0;
+  color: #000000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.whyRow strong {
+  font-weight: 700;
+}
+
+.whyFooter {
+  margin: 36px 0 0 0;
+  color: #000000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.dialogFooterAccent {
+  color: #23b14d;
+}
+
+/* Partnership Types */
+.partnershipGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 72px;
+  row-gap: 36px;
+  width: 100%;
+  max-width: 1255px;
+  margin-top: 24px;
+}
+
+.partnershipCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.partnershipIcon {
+  width: 72px;
+  height: 72px;
+  flex: 0 0 72px;
+  object-fit: contain;
+}
+
+.partnershipCard h3 {
+  margin: 0 0 8px;
+  color: #050505;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.partnershipCard p {
+  margin: 0;
+  color: #000000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* What You Can Expect */
+.expectationsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 64px;
+  width: 100%;
+  max-width: 1255px;
+  margin-top: 24px;
+}
+
+.expectationItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.expectationIcon {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  object-fit: contain;
+}
+
+.expectationItem p {
+  margin: 0;
+  color: #0c0c0c;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.35;
+}
+
+/* Each lower grid row steps with the dialog's slanted left edge. */
+.expectationItem:nth-child(3),
+.expectationItem:nth-child(4) {
+  transform: translateX(-48px);
+}
+
+.expectationItem:nth-child(5) {
+  transform: translateX(-96px);
+}
+
+/* Application Channels */
+.channelsTable {
+  width: 100%;
+  max-width: 1255px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin-top: 14px;
+}
+
+.channelsTable th {
+  padding: 0 24px 20px 0;
+  color: #23b14d;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  text-align: left;
+}
+
+.channelsTable th:first-child,
+.channelsTable td:first-child {
+  width: 539px;
+}
+
+.channelsTable th:nth-child(2) {
+  transform: translateX(-16px);
+}
+
+.channelsTable td {
+  padding: 10px 24px 18px 0;
+  vertical-align: top;
+  color: #000000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.channelsTable td:last-child {
+  font-weight: 600;
+}
+
+/* The Figma rows step inward with the parallelogram edge. */
+.channelsTable tbody tr:nth-child(1) td {
+  transform: translateX(-24px);
+}
+.channelsTable tbody tr:nth-child(2) td {
+  transform: translateX(-48px);
+}
+.channelsTable tbody tr:nth-child(3) td {
+  transform: translateX(-72px);
+}
+.channelsTable tbody tr:nth-child(4) td {
+  transform: translateX(-96px);
+}
+
+.channelsTable tbody tr:nth-child(5) td {
+  transform: translateX(-120px);
+}
+
+/* Trusted By */
+.trustedLogos {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 36px;
+  width: 100%;
+  max-width: 1255px;
+}
+
+.trustedRow1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.trustedRow2 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 72px;
+  margin-left: 36px;
+}
+
+.trustedLogo {
+  display: block;
+  object-fit: contain;
+}
+
+/* Responsive Mobile (< 900px) */
+@media (max-width: 899px) {
+  .dialogHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+
+  .dialogTitle {
+    font-size: 22px;
+    white-space: normal;
+  }
+
+  .dialogSubtitle {
+    font-size: 16px;
+    white-space: normal;
+  }
+
+  .whyList {
+    gap: 16px;
+    margin-top: 14px;
+  }
+
+  .whyRow p {
+    font-size: 15px;
+  }
+
+  .whyFooter {
+    font-size: 16px;
+    margin-top: 24px;
+  }
+
+  .partnershipGrid {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+    margin-top: 14px;
+  }
+
+  .partnershipIcon {
+    width: 50px;
+    height: 50px;
+    flex: 0 0 50px;
+  }
+
+  .partnershipCard h3 {
+    font-size: 18px;
+  }
+
+  .partnershipCard p {
+    font-size: 15px;
+  }
+
+  .expectationsGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 14px;
+  }
+
+  .expectationIcon {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+  }
+
+  .expectationItem p {
+    font-size: 15px;
+  }
+
+  .channelsTable {
+    table-layout: auto;
+    margin-top: 10px;
+  }
+
+  .channelsTable th {
+    font-size: 18px;
+    padding: 0 12px 12px 0;
+  }
+
+  .channelsTable th:first-child,
+  .channelsTable td:first-child {
+    width: auto;
+  }
+
+  .channelsTable td {
+    font-size: 15px;
+    padding: 8px 12px 12px 0;
+  }
+
+  .trustedLogos {
+    gap: 24px;
+    margin-top: 20px;
+  }
+
+  .trustedRow1,
+  .trustedRow2 {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    margin-left: 0;
+  }
+
+  .trustedLogo {
+    max-width: 160px !important;
+    max-height: 80px !important;
+  }
+}

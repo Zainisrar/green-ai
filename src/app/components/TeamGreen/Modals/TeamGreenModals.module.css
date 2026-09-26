@@ -1,79 +1,108 @@
 /* Shared Team Green Modal Content Styles */
 
 /* ==========================================================================
-   Who We Are Modal
+   Who We Are Modal (Node 7077-21090)
    ========================================================================== */
 .whoWeAreGrid {
-  display: flex;
-  align-items: center;
-  gap: 48px;
-  max-width: 1255px;
+  position: relative;
   width: 100%;
+  height: 100%;
+}
+
+.whoWeAreBody {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .whoWeAreImageWrap {
-  width: 480px;
-  max-width: 44%;
-  flex-shrink: 0;
+  position: absolute;
+  top: 245px;
+  left: 156px;
+  width: 701px;
+  height: 277px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  margin: 0;
 }
 
 .whoWeAreImage {
   width: 100%;
-  height: auto;
-  max-height: 280px;
+  max-width: none;
+  height: 100%;
+  max-height: none;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.12));
 }
 
 .whoWeAreContent {
-  flex: 1;
+  position: absolute;
+  top: 265px;
+  left: 896px;
+  width: 706px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .whoWeAreSubheading {
   margin: 0;
-  font-size: 22px;
-  font-weight: 800;
-  color: #111827;
-  line-height: 1.35;
+  font-size: 24px;
+  font-weight: 700;
+  color: #040404;
+  line-height: 36px;
+}
+
+.greenText {
+  color: #23b14d;
+  font-weight: 700;
 }
 
 .whoWeAreText {
-  margin: 0;
-  font-size: 16px;
+  margin: 20px 0 0;
+  font-size: 20px;
   font-weight: 500;
-  color: #4b5563;
-  line-height: 1.65;
+  font-style: italic;
+  color: #1a1a1a;
+  line-height: 31px;
 }
 
 /* ==========================================================================
-   Our Leadership Philosophy Modal
+   Our Leadership Philosophy Modal (Node 7077-21189)
    ========================================================================== */
 .leadershipWrap {
-  max-width: 1255px;
+  position: relative;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
+  height: 100%;
+}
+
+.leadershipBody {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .qualitiesRow {
+  position: absolute;
+  top: 214px;
+  left: 161px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  padding: 4px 0 12px;
+  gap: 0;
+  padding: 0;
+  margin-bottom: 4px;
+  width: 1484px;
 }
 
 .qualityItem {
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 50px;
   color: #000;
   text-transform: capitalize;
   letter-spacing: 0.01em;
@@ -81,83 +110,127 @@
 
 .qualityDivider {
   color: #23b14d;
-  font-size: 26px;
-  font-weight: 400;
-  margin: 0 16px;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 50px;
+  margin: 0 22px;
   user-select: none;
 }
 
 .principlesGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 52px;
-  row-gap: 34px;
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
 }
 
 .principleItem {
+  position: absolute;
   display: flex;
   align-items: flex-start;
-  gap: 20px;
+  gap: 14px;
+}
+
+.principleRowTop {
+  top: 313px;
+}
+
+.principleRowBottom {
+  top: 407px;
+}
+
+.principleItem:nth-child(1) {
+  left: 228px;
+}
+
+.principleItem:nth-child(2) {
+  left: 977px;
+}
+
+.principleItem:nth-child(3) {
+  left: 216px;
+}
+
+.principleItem:nth-child(4) {
+  left: 975px;
 }
 
 .principleIcon {
-  width: 38px;
-  height: 46px;
+  width: 32px;
+  height: 38px;
   object-fit: contain;
   flex-shrink: 0;
-  margin-top: -3px;
+  margin-top: 2px;
 }
 
 .principleText {
+  width: 680px;
   margin: 0;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 600;
   font-style: italic;
-  color: #111;
-  line-height: 1.35;
+  color: #000;
+  line-height: 28px;
 }
 
 /* ==========================================================================
-   Meet the Team Modal (Node 7077-21264 & 7077-21284)
+   Meet the Team Modal (Node 7077-21284)
    ========================================================================== */
-.meetTeamModalCard {
-  width: min(1580px, calc(100vw - 32px)) !important;
-  height: min(670px, calc(100dvh - 36px)) !important;
-  max-height: 670px !important;
-}
-
-.meetTeamContentWrap {
-  padding: 32px 50px 20px 280px !important;
-}
-
 .teamWrap {
-  display: flex;
-  gap: 40px;
-  max-width: 1255px;
+  position: relative;
   width: 100%;
-  align-items: flex-start;
-  min-height: 320px;
+  height: 100%;
+}
+
+.teamBody {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .teamSidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  width: 190px;
-  flex-shrink: 0;
-  padding-top: 10px;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
 .teamTabBtn {
+  position: absolute;
+  pointer-events: auto;
   background: transparent;
   border: 0;
   text-align: left;
-  font-size: 24px;
-  font-weight: 700;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 31px;
+  font-weight: 600;
   cursor: pointer;
   padding: 0;
-  color: #111827;
+  color: #000000;
+  white-space: nowrap;
+  line-height: 38px;
   transition: color 0.15s ease;
+}
+
+.teamTabBtn:nth-child(1) {
+  left: 377px;
+  top: 163px;
+}
+.teamTabBtn:nth-child(2) {
+  left: 341px;
+  top: 258px;
+}
+.teamTabBtn:nth-child(3) {
+  left: 299px;
+  top: 357px;
+}
+.teamTabBtn:nth-child(4) {
+  left: 227px;
+  top: 470px;
+}
+.teamTabBtn:nth-child(5) {
+  left: 174px;
+  top: 585px;
 }
 
 .teamTabBtn:hover {
@@ -165,186 +238,283 @@
 }
 
 .teamTabActive {
-  color: #23b14d !important;
-  font-weight: 800;
+  color: #23b14d;
+  font-weight: 700;
 }
 
-.teamMembersGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 28px;
-  row-gap: 16px;
-  flex: 1;
-  max-width: 820px;
+.teamMembersContainer {
+  position: absolute;
+  inset: 0;
+}
+
+.teamRowTop {
+  position: static;
+}
+
+.teamRowBottom {
+  position: static;
 }
 
 .memberCard {
+  position: absolute;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 100%;
+  align-items: flex-start;
+  text-align: left;
+  width: 241px;
+  height: 260px;
+}
+
+.teamRowTop .memberCard:nth-child(1) {
+  left: 666px;
+  top: 152px;
+}
+.teamRowTop .memberCard:nth-child(2) {
+  left: 969px;
+  top: 152px;
+}
+.teamRowTop .memberCard:nth-child(3) {
+  left: 1291px;
+  top: 152px;
+}
+.teamRowBottom .memberCard:nth-child(1) {
+  left: 563px;
+  top: 425px;
+}
+.teamRowBottom .memberCard:nth-child(2) {
+  left: 866px;
+  top: 425px;
+}
+.teamRowBottom .memberCard:nth-child(3) {
+  left: 1188px;
+  top: 425px;
 }
 
 .memberFrameWrap {
   position: relative;
-  width: 190px;
-  height: 125px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 241px;
+  height: 190px;
 }
 
 .memberFrameSvg {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  bottom: 0;
+  left: 0;
+  width: 241px;
+  height: 145px;
   z-index: 1;
   pointer-events: none;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
 }
 
 .memberPhoto {
   position: absolute;
-  bottom: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 120px;
-  width: auto;
-  max-width: 100%;
+  bottom: 0;
+  left: 0;
+  width: 241px;
+  height: 190px;
   z-index: 2;
   object-fit: contain;
-  clip-path: polygon(30% -25%, 98% -25%, 68% 100%, 2% 100%);
+  object-position: bottom center;
+  clip-path: polygon(28.2% 0, 100% 0, 71.8% 100%, 0 100%);
   display: block;
 }
 
 .memberInfo {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-top: 6px;
-  width: 100%;
+  align-items: flex-start;
+  text-align: left;
+  margin-top: 10px;
+  margin-left: 0;
+  width: 241px;
 }
 
 .memberName {
   margin: 0;
-  font-size: 14px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 20px;
   font-weight: 800;
   color: #000;
-  line-height: 1.25;
-  text-align: center;
+  line-height: 22px;
+  text-align: left;
   white-space: nowrap;
 }
 
 .memberRole {
-  margin: 3px 0 0;
-  font-size: 11px;
-  font-weight: 700;
+  width: 241px;
+  margin: 4px 0 0 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
   color: #23b14d;
-  line-height: 1.25;
-  text-align: center;
+  line-height: 18px;
+  text-align: left;
 }
 
 /* ==========================================================================
-   Our Culture in Action Modal (Node 7077-21422 & 7077-21502)
+   Our Culture in Action Modal (Node 7077-21422)
    ========================================================================== */
 .cultureGrid {
-  display: flex;
-  align-items: center;
-  gap: 48px;
-  max-width: 1255px;
+  position: relative;
   width: 100%;
+  height: 100%;
+}
+
+.cultureBody {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .culturePointsList {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
+  position: absolute;
+  top: 225px;
+  left: 301px;
+  width: 500px;
+  height: 350px;
 }
 
 .culturePointItem {
+  position: absolute;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
+  transform: translateX(var(--item-offset, 0px));
+}
+
+.culturePointItem:nth-child(1) {
+  top: 0;
+}
+.culturePointItem:nth-child(2) {
+  top: 68px;
+}
+.culturePointItem:nth-child(3) {
+  top: 146px;
+}
+.culturePointItem:nth-child(4) {
+  top: 222px;
+}
+.culturePointItem:nth-child(5) {
+  top: 290px;
 }
 
 .culturePointIcon {
-  width: 38px;
-  height: 46px;
+  width: 32px;
+  height: 38px;
   object-fit: contain;
   flex-shrink: 0;
 }
 
 .culturePointText {
   margin: 0;
-  font-size: 20px;
-  font-weight: 700;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
   font-style: italic;
-  color: #111;
+  color: #000;
   line-height: 1.35;
 }
 
 .cultureImageWrap {
-  position: relative;
-  width: 480px;
-  max-width: 45%;
-  flex-shrink: 0;
+  position: absolute;
+  top: 234px;
+  left: 744px;
+  width: 742px;
+  height: 293px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.cornerBracketBottomLeft {
-  position: absolute;
-  bottom: -16px;
-  left: -20px;
-  width: 46px;
-  height: 56px;
-  z-index: 3;
-  pointer-events: none;
-}
-
-.cornerBracketTopRight {
-  position: absolute;
-  top: -16px;
-  right: -20px;
-  width: 46px;
-  height: 56px;
-  z-index: 3;
-  pointer-events: none;
-}
-
 .cultureImage {
   width: 100%;
-  height: auto;
-  max-height: 320px;
+  height: 100%;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.15));
 }
 
 /* ==========================================================================
-   Mobile & Tablet Responsiveness
+   Mobile & Tablet Responsiveness (< 900px)
    ========================================================================== */
-@media (max-width: 1024px) {
+@media (max-width: 899px) {
+  .whoWeAreBody,
+  .teamBody,
+  .cultureBody,
+  .leadershipBody {
+    height: auto;
+  }
+
   .whoWeAreGrid,
   .cultureGrid {
+    display: flex;
+    position: static;
+    height: auto;
     flex-direction: column;
     gap: 24px;
+  }
+
+  .cultureGrid,
+  .leadershipWrap,
+  .teamWrap {
+    position: static;
+    height: auto;
   }
 
   .whoWeAreImageWrap,
   .cultureImageWrap {
     width: 100%;
     max-width: 100%;
+    flex: none;
+  }
+
+  .whoWeAreImageWrap,
+  .whoWeAreContent {
+    position: static;
+    top: auto;
+    left: auto;
+    height: auto;
+  }
+
+  .whoWeAreContent {
+    width: 100%;
+  }
+
+  .culturePointsList {
+    position: static;
+    display: flex;
+    height: auto;
+    width: 100%;
+    flex: none;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .culturePointItem {
+    position: static;
+    transform: none;
+  }
+
+  .cultureImageWrap {
+    position: static;
+  }
+
+  .principleRowTop,
+  .principleRowBottom {
+    transform: none;
   }
 
   .qualitiesRow {
+    position: static;
     flex-wrap: wrap;
     gap: 16px;
+  }
+
+  .leadershipWrap {
+    width: 100%;
+    margin-left: 0;
+    gap: 20px;
   }
 
   .qualityItem {
@@ -356,8 +526,19 @@
   }
 
   .principlesGrid {
+    position: static;
+    display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .principleItem {
+    position: static;
+  }
+
+  .principleRowTop,
+  .principleRowBottom {
+    transform: none;
   }
 
   .teamWrap {
@@ -367,33 +548,57 @@
   }
 
   .teamSidebar {
+    display: flex;
+    position: static;
+    inset: auto;
     width: 100%;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 12px;
   }
 
   .teamTabBtn {
-    font-size: 15px;
-    padding: 6px 12px;
-    border-left: none;
-    border-bottom: 2px solid transparent;
-    border-radius: 4px;
+    position: static;
+    font-size: 18px;
+    transform: none;
   }
 
-  .teamTabActive {
-    border-left: none;
-    border-bottom: 2px solid #23b14d;
-    padding-left: 12px;
-  }
-
-  .memberCard {
-    flex-direction: column;
-    text-align: center;
+  .teamMembersContainer {
+    position: static;
     width: 100%;
   }
 
-  .memberPhotoFrame {
-    margin: 0 auto;
+  .teamRowTop,
+  .teamRowBottom {
+    display: flex;
+    position: static;
+    transform: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .memberCard {
+    position: static;
+    width: 140px;
+    flex: 0 0 140px;
+  }
+
+  .memberFrameWrap {
+    width: 140px;
+    height: 95px;
+  }
+
+  .memberPhoto {
+    height: 90px;
+  }
+
+  .memberName {
+    font-size: 13px;
+    white-space: normal;
+  }
+
+  .memberRole {
+    font-size: 11px;
   }
 }

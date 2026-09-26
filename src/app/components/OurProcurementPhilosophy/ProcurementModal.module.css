@@ -1,60 +1,113 @@
 .header {
   position: absolute;
-  top: 54px;
+  top: 48px;
   left: 275px;
-  width: 1255px;
-  padding-bottom: 32px;
+  width: 1220px;
+  padding-bottom: 24px;
   border-bottom: 1px solid #9a9a9a;
 }
 
 .title {
-  margin: 0 0 0 38px;
-  color: #050505;
+  margin: 0;
+  color: #000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 30px;
   font-weight: 800;
   line-height: 1.2;
 }
 
+.titleMain {
+  display: block;
+  font-weight: 800;
+}
+
 .subtitle {
   display: block;
-  margin-top: 2px;
+  margin-top: 4px;
   color: #23b14d;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 24px;
   font-weight: 500;
 }
 
 .table {
   position: absolute;
-  top: 202px;
-  left: 300px;
+  top: 178px;
+  left: 80px;
+  width: 1380px;
+  color: #000;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
+
+.tableHeadRow {
   display: grid;
-  grid-template-columns: 270px minmax(0, 1fr);
-  row-gap: 12px;
-  width: 1235px;
-  color: #050505;
+  grid-template-columns: 360px 1fr;
+  gap: 32px;
+  align-items: center;
+  margin-bottom: 14px;
+  margin-left: 175px;
 }
 
 .tableHead {
-  margin: 0 0 4px;
+  margin: 0;
   color: #23b14d;
   font-size: 26px;
   font-weight: 800;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  text-align: left;
+}
+
+.tableBody {
+  display: flex;
+  flex-direction: column;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 32px;
+  align-items: center;
+  min-height: 50px;
+  padding: 2px 0;
+}
+
+.tableRow:nth-child(1) {
+  margin-left: 166px;
+}
+
+.tableRow:nth-child(2) {
+  margin-left: 132px;
+}
+
+.tableRow:nth-child(3) {
+  margin-left: 114px;
+}
+
+.tableRow:nth-child(4) {
+  margin-left: 90px;
+}
+
+.tableRow:nth-child(5) {
+  margin-left: 75px;
 }
 
 .tableCell {
   display: flex;
   align-items: center;
-  min-height: 38px;
   font-size: 22px;
-  line-height: 1.25;
+  line-height: 1.3;
+  margin: 0;
+  text-align: left;
 }
 
 .principle {
-  font-weight: 700;
+  font-weight: 800;
+  color: #000;
 }
 
 .statement {
   font-weight: 600;
+  color: #000;
 }
 
 .contentTitle {
@@ -123,11 +176,10 @@
 }
 
 .bolt {
-  width: 70px;
-  height: 70px;
-  margin-top: -9px;
+  width: 60px;
+  height: 60px;
+  margin-top: -6px;
   object-fit: contain;
-  transform: rotate(26.55deg);
 }
 
 .boltCopy {
@@ -164,14 +216,16 @@
 }
 
 .compromise .imagePanel {
-  top: 232px;
-  left: 933px;
-  width: 707px;
-  height: 279px;
+  top: 215px;
+  left: 955px;
+  width: 713px;
+  height: 282px;
 }
 
 .compromise .imagePanel img {
-  transform: scaleY(-1) rotate(180deg);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .compromise .quote {
@@ -224,8 +278,7 @@
   font-weight: 800;
 }
 
-@media (max-width: 767px) {
-
+@media (max-width: 1024px) {
   .header,
   .contentTitle,
   .rule,
@@ -240,17 +293,18 @@
   }
 
   .header {
-    margin-bottom: 28px;
+    margin-bottom: 24px;
     padding-bottom: 16px;
   }
 
   .title,
   .contentTitle {
-    font-size: 25px;
+    font-size: 24px;
   }
 
   .subtitle {
     font-size: 18px;
+    margin-top: 4px;
   }
 
   .rule {
@@ -275,7 +329,7 @@
 
   .boltItem,
   .boltItem:nth-child(n),
-  .vendor .boltItem+.boltItem {
+  .vendor .boltItem + .boltItem {
     margin-left: 0;
   }
 
@@ -309,18 +363,67 @@
     font-size: 18px;
   }
 
-  .table {
-    grid-template-columns: 1fr;
-    gap: 8px;
+  .tableHeadRow {
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-left: 0 !important;
   }
 
   .tableHead {
-    margin: 10px 0 0;
-    font-size: 21px;
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .tableRow,
+  .tableRow:nth-child(n) {
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+    align-items: start;
+    min-height: auto;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    margin-left: 0 !important;
   }
 
   .tableCell {
-    min-height: 0;
     font-size: 16px;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 640px) {
+  .title,
+  .contentTitle {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+  .tableHeadRow {
+    display: none;
+  }
+
+  .tableRow {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 0;
+  }
+
+  .principle {
+    font-size: 16px;
+    font-weight: 800;
+    color: #23b14d;
+  }
+
+  .statement {
+    font-size: 14px;
+    font-weight: 500;
+    color: #222;
   }
 }

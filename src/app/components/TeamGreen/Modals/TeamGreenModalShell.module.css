@@ -1,14 +1,17 @@
 .overlay {
   position: fixed;
+  z-index: 2147483647;
   inset: 0;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 32px 29px;
+  align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
   box-sizing: border-box;
   animation: fadeIn 0.2s ease-out;
 }
@@ -22,16 +25,27 @@
   }
 }
 
-.modalCard {
+.backdropClose {
+  position: fixed;
+  inset: 0;
+  border: 0;
+  background: transparent;
+  cursor: default;
+}
+
+.stage {
   position: relative;
-  width: min(1866px, 100%);
-  height: min(700px, calc(100dvh - 64px));
-  max-height: 700px;
-  display: flex;
-  flex-direction: column;
-  color: #000;
-  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  z-index: 10;
+  width: calc(var(--modal-width, 1866px) * var(--modal-scale, 1));
+  height: calc(var(--modal-height, 700px) * var(--modal-scale, 1));
+  flex: none;
+  margin: auto;
   animation: scaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.positionedStage {
+  position: relative;
+  margin: auto;
 }
 
 @keyframes scaleIn {
@@ -45,6 +59,18 @@
   }
 }
 
+.modalWindow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--modal-width, 1866px);
+  height: var(--modal-height, 700px);
+  transform: scale(var(--modal-scale, 1));
+  transform-origin: top left;
+  isolation: isolate;
+  filter: drop-shadow(0px 15px 40px rgba(0, 0, 0, 0.25));
+}
+
 /* Background slanted SVG */
 .bgSvg {
   position: absolute;
@@ -54,14 +80,14 @@
   height: 100%;
   pointer-events: none;
   z-index: 0;
-  filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.25));
+  overflow: visible;
 }
 
 /* Close button matching Figma */
 .closeBtn {
   position: absolute;
-  top: 24px;
-  right: 40px;
+  top: 22px;
+  right: 58px;
   width: 44px;
   height: 44px;
   display: flex;
@@ -71,7 +97,7 @@
   border: 0;
   border-radius: 50%;
   cursor: pointer;
-  z-index: 10;
+  z-index: 30;
   color: #303030;
   transition:
     background-color 0.15s ease,
@@ -80,7 +106,7 @@
 
 .closeBtn:hover {
   background: rgba(0, 0, 0, 0.06);
-  transform: scale(1.08);
+  transform: scale(1.1);
 }
 
 .closeBtn:active {
@@ -90,10 +116,10 @@
 /* Content container */
 .contentWrap {
   position: relative;
-  z-index: 2;
+  z-index: 10;
   width: 100%;
   height: 100%;
-  padding: 40px 80px 28px 344px;
+  padding: 40px 60px 24px 310px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -101,119 +127,246 @@
 
 /* Header */
 .header {
-  margin-bottom: 14px;
-  flex-shrink: 0;
+  position: absolute;
+  left: 351px;
+  top: 87px;
+  width: 1284px;
+  max-width: 1284px;
+  z-index: 2;
+}
+
+.titleRow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  width: 1284px;
 }
 
 .title {
-  margin: 0 0 6px;
-  font-size: 34px;
+  margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 30px;
   font-weight: 800;
-  line-height: 1.2;
-  color: #000;
-  letter-spacing: -0.01em;
-}
-
-.headlineRow {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 1.35;
-}
-
-.dash {
-  color: #000;
-  font-weight: 700;
+  color: #000000;
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  white-space: nowrap;
 }
 
 .headlineText {
+  margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
   color: #23b14d;
+  white-space: normal;
+  line-height: 1.35;
 }
 
 .divider {
+  position: absolute;
+  left: 323px;
+  top: 191px;
   width: 1255px;
-  max-width: 100%;
   height: 1.5px;
-  background: linear-gradient(90deg, #23b14d 0%, #fffe50 65%, transparent 100%);
-  margin-top: 14px;
+  background: #23b14d;
+  z-index: 2;
+  border: none;
+  margin: 0;
 }
 
-/* Body */
-.body {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 0;
-  overflow: hidden;
-}
-
-/* Bottom quote */
-.quoteContainer {
-  margin-top: auto;
-  padding-top: 10px;
-  padding-bottom: 10px;
+/* Body content area - spans the entire modal for absolute Figma coordinate placement */
+.bodyArea {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 1255px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.bodyArea > * {
+  pointer-events: auto;
+}
+
+/* Footer Quote area */
+.footerArea {
+  position: absolute;
+  left: 240px;
+  bottom: 35px;
+  width: 1060px;
+  z-index: 2;
   text-align: center;
-  flex-shrink: 0;
 }
 
 .quoteText {
   margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 22px;
+  font-weight: 600;
   font-style: italic;
-  font-weight: 700;
-  line-height: 1.4;
-  color: #000;
+  color: #000000;
+  line-height: 1.35;
+  text-align: center;
 }
 
 .greenHighlight {
   color: #23b14d;
-  font-weight: 700;
+  font-weight: 600;
 }
 
-/* Mobile & Tablet fallback */
-@media (max-width: 1024px) {
+/* Figma frame 7077:21090 — Who We Are */
+.whoWeAre .header {
+  top: 87px;
+  left: 351px;
+}
+
+.whoWeAre .divider {
+  top: 191px;
+  left: 323px;
+  width: 1255px;
+}
+
+.whoWeAre .footerArea {
+  left: 240px;
+  bottom: 35px;
+  width: 1060px;
+}
+
+/* Figma frame 7077:21284 — Meet the Team */
+.team .header {
+  top: 38px;
+  left: 387px;
+}
+
+.team .divider {
+  top: 130px;
+  left: 377px;
+  width: 1255px;
+}
+
+.team .footerArea {
+  left: 220px;
+  bottom: 24px;
+  width: 1293px;
+}
+
+.team .quoteText {
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+/* Figma frame 7077:21189 — Our Leadership Philosophy */
+.leadership .header {
+  top: 87px;
+  left: 351px;
+}
+
+.leadership .divider {
+  top: 285px;
+  left: 223px;
+  width: 1424px;
+}
+
+.leadership .footerArea {
+  left: 240px;
+  bottom: 35px;
+  width: 1060px;
+}
+
+/* Figma frame 7077:21422 — Our Culture in Action */
+.culture .header {
+  top: 87px;
+  left: 351px;
+}
+
+.culture .divider {
+  top: 191px;
+  left: 328px;
+  width: 1174px;
+}
+
+.culture .footerArea {
+  left: 177px;
+  bottom: 32px;
+  width: 1068px;
+}
+
+/* Mobile & Tablet fallback (< 900px) */
+@media (max-width: 899px) {
   .overlay {
-    padding: 24px;
+    display: flex;
+    align-items: flex-start;
+    padding: 16px 12px;
   }
 
-  .modalCard {
-    position: relative;
-    top: auto;
-    left: auto;
+  .stage {
     width: 100%;
     height: auto;
-    max-height: 90vh;
+    max-width: 680px;
+    margin: auto;
+  }
+
+  .modalWindow {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transform: none;
     background: #ffffff;
     border: 2px solid #23b14d;
     border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-    overflow-y: auto;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+    filter: none;
+    overflow: hidden;
+    padding: 28px 20px 24px;
+    box-sizing: border-box;
   }
 
   .bgSvg {
     display: none;
   }
 
-  .contentWrap {
-    padding: 32px 24px;
-    height: auto;
+  .closeBtn {
+    top: 14px;
+    right: 14px;
+    color: #333333;
+  }
+
+  .header {
+    position: static;
+    max-width: 100%;
+    margin-bottom: 12px;
+    padding-right: 32px;
   }
 
   .title {
-    font-size: 24px;
+    font-size: 22px;
+    white-space: normal;
   }
 
-  .headlineRow {
+  .headlineText {
     font-size: 16px;
   }
 
   .divider {
-    max-width: 100%;
+    position: static;
+    width: 100%;
+    margin: 12px 0 16px;
+  }
+
+  .bodyArea {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+
+  .footerArea {
+    position: static;
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
   }
 
   .quoteText {

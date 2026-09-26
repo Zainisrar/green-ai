@@ -329,6 +329,10 @@
     margin-bottom: 18px;
   }
 
+  .lookForItem {
+    margin-left: 0 !important;
+  }
+
   .lookForText {
     font-size: 15px;
     white-space: normal;

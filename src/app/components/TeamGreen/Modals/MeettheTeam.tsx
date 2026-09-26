@@ -107,12 +107,13 @@ const MeettheTeam = ({ isOpen, onClose, data }: Props) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("cto");
 
   const title = "Meet the Team";
-  const headline = "- We don't just work on infrastructure. We work on impact.";
+  const headline =
+    "- We don't just work on infrastructure. We work on impact.”";
   const quoteText =
     data?.quote?.text ||
-    "“I'm here because solar isn't just a job — it's my way to shape the future of PNG.” – Field Technician, Morobe Province";
+    "“Team GREEN doesn't clock in. We show up — because lives depend on it.”";
   const quoteHighlight =
-    data?.quote?.highlightedText || data?.quote?.highlighted || "PNG";
+    data?.quote?.highlightedText || data?.quote?.highlighted || "GREEN";
 
   const getCurrentMembers = (): Array<{
     name: string;
@@ -158,6 +159,64 @@ const MeettheTeam = ({ isOpen, onClose, data }: Props) => {
       ? Array.from({ length: 6 }, (_, i) => rawMembers[i % rawMembers.length])
       : rawMembers.slice(0, 6);
 
+  const topMembers = members.slice(0, 3);
+  const bottomMembers = members.slice(3, 6);
+
+  const renderCard = (member: (typeof members)[0], idx: number) => (
+    <div
+      key={`team-member-${idx}-${member.name}`}
+      className={styles.memberCard}
+    >
+      <div className={styles.memberFrameWrap}>
+        <svg
+          className={styles.memberFrameSvg}
+          viewBox="0 0 241 145"
+          fill="none"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient
+              id={`cardGrad-${idx}`}
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="100%"
+            >
+              <stop offset="0%" stopColor="#FFE500" stopOpacity="0.95" />
+              <stop offset="100%" stopColor="#23D14B" stopOpacity="0.65" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M 67.87 0 L 241 0 L 173.13 145 L 0 145 Z"
+            fill="rgba(255, 255, 255, 0.4)"
+            stroke={`url(#cardGrad-${idx})`}
+            strokeWidth="3"
+            vectorEffect="non-scaling-stroke"
+          />
+        </svg>
+        <img
+          src={member.image}
+          alt={member.name}
+          className={styles.memberPhoto}
+          decoding="async"
+          width={241}
+          height={190}
+          onError={(e) => {
+            e.currentTarget.src =
+              selectedCategory === "cto" || selectedCategory === "engineers"
+                ? "/images/our-team/senthilkumar.png"
+                : "/images/our-team/bernard-george.png";
+          }}
+        />
+      </div>
+      <div className={styles.memberInfo}>
+        <h4 className={styles.memberName}>{member.name}</h4>
+        <p className={styles.memberRole}>{member.role}</p>
+      </div>
+    </div>
+  );
+
   return (
     <TeamGreenModalShell
       isOpen={isOpen}
@@ -166,88 +225,36 @@ const MeettheTeam = ({ isOpen, onClose, data }: Props) => {
       headline={headline}
       quoteText={quoteText}
       quoteHighlight={quoteHighlight}
-      cardClassName={styles.meetTeamModalCard}
-      contentClassName={styles.meetTeamContentWrap}
+      layout="team"
+      width={1906}
+      height={801}
+      bodyClassName={styles.teamBody}
     >
       <div className={styles.teamWrap}>
-        {/* Left Categories Navigation */}
+        {/* Left Categories Navigation with Parallelogram Slant matching Figma */}
         <div className={styles.teamSidebar}>
           {CATEGORIES.map((cat) => (
             <button
               key={cat.key}
               type="button"
               onClick={() => setSelectedCategory(cat.key)}
-              className={`${styles.teamTabBtn} ${selectedCategory === cat.key ? styles.teamTabActive : ""
-                }`}
+              className={`${styles.teamTabBtn} ${
+                selectedCategory === cat.key ? styles.teamTabActive : ""
+              }`}
             >
               {cat.title}
             </button>
           ))}
         </div>
 
-        {/* Right Members Grid (2 rows x 3 columns) */}
-        <div className={styles.teamMembersGrid}>
-          {members.map((member, idx) => (
-            <div
-              // biome-ignore lint/suspicious/noArrayIndexKey: Replicated card slots for 2x3 grid
-              key={`${member.name}-${idx}`}
-              className={styles.memberCard}
-            >
-              <div className={styles.memberFrameWrap}>
-                <svg
-                  className={styles.memberFrameSvg}
-                  viewBox="0 0 326 223"
-                  fill="none"
-                  preserveAspectRatio="none"
-                  aria-hidden="true"
-                >
-                  <defs>
-                    <linearGradient
-                      id={`cardGrad-${idx}`}
-                      x1="100%"
-                      y1="0%"
-                      x2="0%"
-                      y2="100%"
-                    >
-                      <stop
-                        offset="0%"
-                        stopColor="#FFE500"
-                        stopOpacity="0.95"
-                      />
-                      <stop
-                        offset="100%"
-                        stopColor="#23D14B"
-                        stopOpacity="0.65"
-                      />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    d="M313.454 8.5H114.913L12.4538 208.5H211.393L313.454 8.5Z"
-                    fill="rgba(255, 255, 255, 0.4)"
-                    stroke={`url(#cardGrad-${idx})`}
-                    strokeWidth="3.5"
-                  />
-                </svg>
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className={styles.memberPhoto}
-                  decoding="async"
-                  onError={(e) => {
-                    e.currentTarget.src =
-                      selectedCategory === "cto" ||
-                        selectedCategory === "engineers"
-                        ? "/images/our-team/senthilkumar.png"
-                        : "/images/our-team/bernard-george.png";
-                  }}
-                />
-              </div>
-              <div className={styles.memberInfo}>
-                <h4 className={styles.memberName}>{member.name}</h4>
-                <p className={styles.memberRole}>{member.role}</p>
-              </div>
-            </div>
-          ))}
+        {/* Right Members Grid (2 rows x 3 columns with Parallelogram Tilt matching Figma) */}
+        <div className={styles.teamMembersContainer}>
+          <div className={styles.teamRowTop}>
+            {topMembers.map((member, idx) => renderCard(member, idx))}
+          </div>
+          <div className={styles.teamRowBottom}>
+            {bottomMembers.map((member, idx) => renderCard(member, idx + 3))}
+          </div>
         </div>
       </div>
     </TeamGreenModalShell>

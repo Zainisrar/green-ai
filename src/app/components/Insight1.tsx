@@ -243,15 +243,7 @@ const MiningInsightScreen = () => (
       triggerVariant="figmaCanvas"
       figmaPlaceholder="Let’s Talk Energy"
       figmaMicScale={0.82}
-      triggerStyle={{
-        top: "auto",
-        right: 4,
-        bottom: 19,
-        left: "auto",
-        // Same 418px width at Figma's 1920px canvas, scaled proportionally
-        // on narrower viewports instead of remaining oversized.
-        width: "min(21.77vw, 418px)",
-      }}
+      triggerClassName="mining-insight__chatbot"
     />
   </main>
 );

@@ -96,7 +96,7 @@
 .conductTable {
   position: absolute;
   top: 202px;
-  left: 181px;
+  left: 75px;
   width: 1355px;
   border-collapse: separate;
   border-spacing: 0 17px;
@@ -104,7 +104,7 @@
 }
 
 .conductCategoryColumn {
-  width: 370px;
+  width: 390px;
 }
 
 .conductTable th,
@@ -123,7 +123,8 @@
 }
 
 .conductTable thead th:first-child {
-  padding-left: 119px;
+  padding-left: 175px;
+  text-align: left;
 }
 
 .conductTable tbody th,
@@ -134,15 +135,36 @@
 
 .conductTable tbody th {
   font-weight: 700;
-  text-align: right;
-  padding-right: 50px;
+  text-align: left;
+  padding-right: 0;
+  white-space: nowrap;
+}
+
+.conductTable tbody tr:nth-child(1) th {
+  padding-left: 166px;
+}
+
+.conductTable tbody tr:nth-child(2) th {
+  padding-left: 132px;
+}
+
+.conductTable tbody tr:nth-child(3) th {
+  padding-left: 114px;
+}
+
+.conductTable tbody tr:nth-child(4) th {
+  padding-left: 90px;
+}
+
+.conductTable tbody tr:nth-child(5) th {
+  padding-left: 75px;
 }
 
 .conductTable tbody td {
   font-weight: 500;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   .ethosContent,
   .conductContent {
     height: auto;
@@ -204,8 +226,12 @@
     font-size: 17px;
   }
 
-  .conductTable thead th:first-child {
-    padding-left: 0;
+  .conductTable thead th:first-child,
+  .conductTable tbody th,
+  .conductTable tbody tr:nth-child(n) th {
+    padding-left: 0 !important;
+    text-align: left !important;
+    white-space: normal;
   }
 
   .conductTable tbody th,

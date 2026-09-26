@@ -1,0 +1,9 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" viewBox="82.2978 78.5027 1866.1846 699.575" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="clientDialogStroke" x1="82.2978" y1="428.29" x2="1948.48" y2="428.29" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#23B14D" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FFFE50" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+  <path d="M1948.55 78.5027H387.134L82.2978 769.527L1591.04 778.102L1948.55 78.5027Z" fill="#FFFFFF" stroke="url(#clientDialogStroke)" stroke-width="3"/>
+</svg>

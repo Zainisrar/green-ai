@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import CertInfoModal from "./CertInfoModal";
+import styles from "./CertDialogContent.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -10,47 +11,54 @@ interface Props {
 }
 
 const OurCurrentCertifications = ({ isOpen, onClose, title, items }: Props) => {
+  const certifications = items.length ? items : [
+    { certification: "ISO 9001:2015", issuingBody: "SGS / Bureau Veritas", scope: "Quality Management System (QMS)" },
+    { certification: "ISO 14001:2015", issuingBody: "Bureau Veritas", scope: "Environmental Management System (EMS)" },
+    { certification: "ISO 45001:2018", issuingBody: "Bureau Veritas", scope: "Occupational Health & Safety (OHSMS)" },
+    { certification: "ISO 50001:2018", issuingBody: "Bureau Veritas", scope: "Energy Management Systems (EMS)" },
+    { certification: "Clean Energy Council (CEC)", issuingBody: "Australia", scope: "Approved Solar Installer & Designer" },
+    { certification: "NEIA PNG", issuingBody: "National Energy Installation Authority", scope: "Local compliance for energy projects" },
+    { certification: "Green Star Building Cert", issuingBody: "(Pending/Select Sites)", scope: "Energy-efficient facility deployment" },
+    { certification: "GRID-INTEL™ Certified Op", issuingBody: "Internal (Benchmarked to IEC)", scope: "System-level monitoring & smart integration" },
+  ];
   return (
     <CertInfoModal isOpen={isOpen} onClose={onClose}>
-      <div className="mb-6 sm:mb-8">
-        <h2 className="text-2xl font-black text-gray-800 sm:text-3xl">
+      <div className={styles.header}>
+        <h2 className={styles.title}>
           {title || "Our Current Certifications"}
         </h2>
-        <div className="mt-4 h-0.5 w-full bg-gray-300" />
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[560px]">
+        <table className={`${styles.table} ${styles.certTable}`}>
           <thead>
             <tr>
-              <th className="px-4 py-3 text-left text-base font-bold text-[#4CAF50] sm:px-6 sm:py-4 sm:text-lg">
+              <th>
                 Certification
               </th>
-              <th className="px-4 py-3 text-left text-base font-bold text-[#4CAF50] sm:px-6 sm:py-4 sm:text-lg">
+              <th>
                 Issuing Body
               </th>
-              <th className="px-4 py-3 text-left text-base font-bold text-[#4CAF50] sm:px-6 sm:py-4 sm:text-lg">
+              <th>
                 Scope
               </th>
             </tr>
           </thead>
           <tbody>
-            {items?.map((item, idx) => (
+            {certifications.map((item, idx) => (
               <tr key={`${item.certification}-${idx}`}>
-                <td className="px-4 py-3 font-semibold text-gray-800 sm:px-6 sm:py-4">
+                <td>
                   {item.certification}
                 </td>
-                <td className="px-4 py-3 text-gray-700 sm:px-6 sm:py-4">
+                <td>
                   {item.issuingBody}
                 </td>
-                <td className="px-4 py-3 text-gray-700 sm:px-6 sm:py-4">
+                <td>
                   {item.scope}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
     </CertInfoModal>
   );
 };

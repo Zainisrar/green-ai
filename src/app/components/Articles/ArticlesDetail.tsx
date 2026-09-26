@@ -1,10 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useArticleBySlug } from "../../../hooks/useArticleBySlug";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import styles from "./ArticlesDetail.module.css";
 
 interface ArticlesDetailProps {
@@ -29,9 +29,8 @@ const plainText = (content: string) => content.replace(/<[^>]*>/g, " ");
 
 export default function ArticlesDetail({
   slug,
-  canvas = false,
+  canvas,
 }: ArticlesDetailProps) {
-  const router = useRouter();
   const { data: article } = useArticleBySlug(slug);
   const isFigmaArticle = slug === "field-tested-energy";
   const currentArticle = isFigmaArticle
@@ -39,12 +38,12 @@ export default function ArticlesDetail({
     : (article ?? FALLBACK_ARTICLE);
   const content = plainText(currentArticle.content).trim();
 
-  return (
+  const renderView = (isCanvas: boolean) => (
     <main
-      className={`${styles.page} ${canvas ? styles.canvasPage : ""}`}
-      data-node-id="7077:6405"
+      className={`${styles.page} ${isCanvas ? styles.canvasPage : ""}`}
+      data-node-id={isCanvas ? "7077:6405" : "7077:6405-mobile"}
     >
-      <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
+      <SiteHeader layout={isCanvas ? "figmaCanvas" : "viewport"} />
       {/* biome-ignore lint/performance/noImgElement: Figma-positioned local artwork */}
       <img
         className={styles.verticalTitle}
@@ -58,7 +57,7 @@ export default function ArticlesDetail({
           className={styles.back}
           size="sm"
           arrowDirection="left"
-          onClick={() => router.back()}
+          href="/enlighten/insights-articles"
         >
           Back
         </FigmaAngledCta>
@@ -82,13 +81,15 @@ export default function ArticlesDetail({
         <section className={styles.lead}>
           <div className={styles.copy}>
             <p>{content}</p>
-            <FigmaAngledCta
-              className={styles.explore}
-              href={currentArticle.cta.href}
-              size="sm"
-            >
-              {currentArticle.cta.text}
-            </FigmaAngledCta>
+            <div className={styles.leadExploreWrapper}>
+              <FigmaAngledCta
+                className={styles.explore}
+                href={currentArticle.cta.href}
+                size="sm"
+              >
+                {currentArticle.cta.text}
+              </FigmaAngledCta>
+            </div>
           </div>
           {/* biome-ignore lint/performance/noImgElement: CMS image URL is dynamic */}
           <img
@@ -100,25 +101,33 @@ export default function ArticlesDetail({
 
         <section className={styles.body}>
           <h2>Powering PNG&apos;s Health Sector</h2>
-          <p>{content}</p>
-          <FigmaAngledCta
-            className={styles.sectionExplore}
-            href={currentArticle.cta.href}
-            size="sm"
-          >
-            Explore
-          </FigmaAngledCta>
+          <div className={styles.bodyRow}>
+            <p>{content}</p>
+            <div className={styles.sectionExploreWrapper}>
+              <FigmaAngledCta
+                className={styles.sectionExplore}
+                href={currentArticle.cta.href}
+                size="sm"
+              >
+                Explore
+              </FigmaAngledCta>
+            </div>
+          </div>
         </section>
         <section className={styles.body}>
           <h2>PImaga Health Center</h2>
-          <p>{content}</p>
-          <FigmaAngledCta
-            className={styles.sectionExplore}
-            href={currentArticle.cta.href}
-            size="sm"
-          >
-            Explore
-          </FigmaAngledCta>
+          <div className={styles.bodyRow}>
+            <p>{content}</p>
+            <div className={styles.sectionExploreWrapper}>
+              <FigmaAngledCta
+                className={styles.sectionExplore}
+                href={currentArticle.cta.href}
+                size="sm"
+              >
+                Explore
+              </FigmaAngledCta>
+            </div>
+          </div>
         </section>
         <section className={styles.closing}>
           <p>
@@ -131,12 +140,32 @@ export default function ArticlesDetail({
       </article>
 
       <D6Chatbot
-        canvasAnchored
-        triggerVariant="figmaCanvas"
+        canvasAnchored={isCanvas}
+        triggerVariant={isCanvas ? "figmaCanvas" : "default"}
         figmaPlaceholder="Let’s Talk Energy"
         triggerClassName={styles.chatTrigger}
-        triggerStyle={{ top: 1332, left: 1484, width: 418, height: 52 }}
+        triggerStyle={
+          isCanvas
+            ? { top: 1332, left: 1484, width: 418, height: 52 }
+            : undefined
+        }
       />
     </main>
   );
+
+  if (canvas !== undefined) {
+    return renderView(canvas);
+  }
+
+  return (
+    <FigmaPageCanvas
+      desktop={renderView(true)}
+      mobile={renderView(false)}
+      nodeId="7077:6405"
+      designHeight={1450}
+      desktopBreakpoint={1200}
+      scaleToViewport="width"
+    />
+  );
 }
+

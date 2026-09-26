@@ -3,7 +3,11 @@
   width: 1920px;
   height: 970px;
   overflow: hidden;
-  background: #fff;
+  /* Figma node 7077:15858 composes the left diagonal and right photo in one
+     full-canvas image. Use that source directly so no clipped seam can show. */
+  background:
+    #fff url("/images/client-partnerships/bg.jpg") center top / 1920px 970px
+    no-repeat;
   color: #121212;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
@@ -22,7 +26,7 @@
     rgba(35, 209, 75, 0.25) 100%
   );
   clip-path: polygon(311px 0, 326px 0, 0 661px, 0 0);
-  z-index: 1;
+  display: none;
 }
 
 /* ---------- Vertical outlined side title (Raleway 900 70px) ---------- */
@@ -48,23 +52,7 @@
 
 /* ---------- Right photo collage (Mask group at 1063,-59, 1003×2134) ---------- */
 .rightCollage {
-  position: absolute;
-  top: 0;
-  left: 984px;
-  width: 936px;
-  height: 970px;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.rightCollage img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 1003px;
-  height: 989px;
-  object-fit: fill;
-  opacity: 1;
+  display: none;
 }
 
 /* ---------- Header ---------- */
@@ -266,7 +254,20 @@
   z-index: 4;
 }
 
+/* ============================================================
+   DESKTOP-ONLY UTILITY — hides any element on mobile
+   ============================================================ */
+.desktopOnly {
+  /* visible by default (desktop) */
+}
+
+/* Mobile layout — hidden on desktop */
+.mobileLayout {
+  display: none;
+}
+
 @media (max-width: 1200px) {
+  /* ---- page shell ---- */
   .page {
     width: 100%;
     height: auto;
@@ -274,103 +275,166 @@
     overflow: visible;
   }
 
-  .leftPanel {
-    display: none;
+  /* ---- hide ALL desktop-only canvas elements ---- */
+  .desktopOnly {
+    display: none !important;
   }
 
-  .verticalTitle,
-  .rightCollage,
-  .rightQuote,
-  .rightSubQuote,
-  .statementBlock,
-  .bookCta,
-  .prospectusCta,
-  .readMore {
-    display: none;
-  }
-
-  .headerBlock {
-    position: static;
-    padding: 130px 24px 0;
-  }
-
-  .mainTitle {
-    font-size: 34px;
-    line-height: 1.15;
-    white-space: normal;
-  }
-
-  .subHeadline {
-    margin-top: 10px;
-    font-size: 20px;
-    line-height: 1.3;
-    white-space: normal;
-  }
-
-  .description {
-    max-width: none;
-    margin-top: 10px;
-    font-size: 16px;
-    line-height: 1.45;
-  }
-
-  .rowLine {
-    display: none;
-  }
-
-  .rowText {
-    position: static !important;
-    width: 100%;
-    padding: 18px 24px 0;
-  }
-
-  .rowTitle {
-    font-size: 20px;
-    line-height: 1.25;
-    white-space: normal;
-  }
-
-  .rowSubtitle {
-    margin-top: 6px;
-    line-height: 1.4;
-    white-space: normal;
-  }
-
-  .rowCta {
-    position: static !important;
+  /* ---- show mobile layout ---- */
+  .mobileLayout {
     display: flex;
-    width: calc(100% - 48px);
-    margin: 14px 24px 20px;
+    flex-direction: column;
+    padding: 0 0 100px;
+    min-height: 100svh;
+    background: #fff;
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
   }
 
-  .page > .rowText + .rowCta {
-    margin-bottom: 20px;
+  /* ---- mobile hero / header block ---- */
+  .mobileHero {
+    padding: 100px 20px 0;
+    margin-bottom: 28px;
+  }
+
+  .mobileH1 {
+    margin: 0 0 12px;
+    font-size: clamp(26px, 7vw, 36px);
+    font-weight: 800;
+    line-height: 1.15;
+    color: #000;
+    text-transform: uppercase;
+  }
+
+  .mobileTagline {
+    margin: 0 0 12px;
+    font-size: 17px;
+    font-weight: 600;
+    font-style: italic;
+    line-height: 1.3;
+    color: #23b14d;
+  }
+
+  .mobileBlurb {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.55;
+    color: #333;
+  }
+
+  /* ---- menu row list ---- */
+  .mobileRowList {
+    display: flex;
+    flex-direction: column;
+    border-top: 2px solid #23b14d;
+    padding: 0 20px;
+  }
+
+  .mobileRowItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 18px 0;
+    border: 0;
+    border-bottom: 1px solid rgba(35, 177, 77, 0.25);
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+  }
+
+  .mobileRowLeft {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .mobileRowName {
+    font-size: 17px;
+    font-weight: 800;
+    color: #000;
+    line-height: 1.2;
+  }
+
+  .mobileRowNote {
+    font-size: 12px;
+    font-weight: 500;
+    color: #666;
+    line-height: 1.4;
+  }
+
+  .mobileChevron {
+    font-size: 24px;
+    font-weight: 400;
+    color: #23b14d;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  /* ---- bottom CTA bar ---- */
+  .mobileCtaBar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 32px 16px 0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* FigmaAngledCta wrappers — parallel, exact same dimensions, and responsive */
+  .mobileDiscoveryCta,
+  .mobileProspectusCta {
+    width: 100%;
+    max-width: 370px;
+    height: 52px !important;
+    min-height: 52px !important;
+    max-height: 52px !important;
+    padding: 0 20px !important;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobileDiscoveryCta span,
+  .mobileProspectusCta span {
+    white-space: nowrap !important;
+  }
+
+  .mobileDiscoveryCta span {
+    font-size: clamp(12.5px, 3.4vw, 15px);
+  }
+
+  .mobileProspectusCta span {
+    font-size: clamp(11px, 3.1vw, 13.5px);
   }
 }
 
 @media (max-width: 700px) {
-  .headerBlock {
-    padding: 110px 16px 0;
-  }
-
-  .mainTitle {
-    font-size: 30px;
-  }
-
-  .subHeadline {
-    font-size: 18px;
-  }
-
-  .description {
-    font-size: 15px;
-  }
-
-  .rowText {
+  .mobileHero {
+    padding-top: 90px;
     padding-inline: 16px;
   }
 
-  .rowCta {
-    width: calc(100% - 32px);
-    margin-inline: 16px;
+  .mobileH1 {
+    font-size: clamp(22px, 6vw, 30px);
+  }
+
+  .mobileTagline {
+    font-size: 15px;
+  }
+
+  .mobileRowList {
+    padding-inline: 16px;
+  }
+
+  .mobileCtaBar {
+    padding-inline: 16px;
   }
 }

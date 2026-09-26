@@ -1,6 +1,5 @@
 "use client";
 
-import { Fragment } from "react";
 import type { ClientPartnershipsOurClientPartnership } from "../../../lib/api";
 import ClientInfoModal from "./ClientInfoModal";
 import styles from "./ClientPartnershipDialogs.module.css";
@@ -30,13 +29,24 @@ const defaultItems = [
   },
 ];
 
+const renderQuote = (quote: string) =>
+  quote.split(/(deploy|project)/gi).map((part) =>
+    /^(deploy|project)$/i.test(part) ? (
+      <span key={part.toLowerCase()} className={styles.modelQuoteAccent}>
+        {part}
+      </span>
+    ) : (
+      part
+    ),
+  );
+
 const OurClientPartnershipModel = ({ isOpen, onClose, data }: Props) => {
   const title = data?.title ?? "Our Client Partnership Model";
   const subHeadline =
     data?.subHeadline ?? "Aligned by Design. Delivered with Accountability.";
   const description =
     data?.description ??
-    "We co-create value with clients through a model that emphasises";
+    "We co-create value with clients through a model that emphasizes";
   const imgSrc =
     data?.img?.src ??
     "/images/client-partnerships/future-visions-business-technology.png";
@@ -44,29 +54,31 @@ const OurClientPartnershipModel = ({ isOpen, onClose, data }: Props) => {
   const items = data?.items ?? defaultItems;
   const quoteText =
     data?.quote?.text ??
-    "\"Our goal isn't just to deploy. It's to ensure your project is still running — 10 years later.\"";
-  const quoteHighlighted = data?.quote?.highlighted?.split("\n") ?? [
-    "goal",
-    "project",
-  ];
+    "“Our goal isn’t just to deploy. It’s to ensure your project is still running — 10 years later.”";
 
   return (
-    <ClientInfoModal isOpen={isOpen} onClose={onClose}>
-      <div className={styles.model}>
+    <ClientInfoModal
+      isOpen={isOpen}
+      onClose={onClose}
+      contentClassName={styles.modelViewport}
+      geometry="clientPartnership"
+    >
+      <div className={styles.modelWrapper}>
         <header className={styles.dialogHeader}>
           <h2 className={styles.dialogTitle}>{title}</h2>
           <p className={styles.dialogSubtitle}>- {subHeadline}</p>
         </header>
-        <p className={styles.intro}>{description}</p>
+
+        <p className={styles.modelIntro}>{description}</p>
 
         <div className={styles.modelBody}>
           <div className={styles.modelRows}>
             {items.map((item) => (
               <div key={item.title} className={styles.modelRow}>
-                <div className={styles.modelLabel}>{item.title}</div>
-                <div className={styles.modelDescription}>
+                <span className={styles.modelLabel}>{item.title}</span>
+                <span className={styles.modelDescription}>
                   – {item.description}
-                </div>
+                </span>
               </div>
             ))}
           </div>
@@ -79,21 +91,7 @@ const OurClientPartnershipModel = ({ isOpen, onClose, data }: Props) => {
           />
         </div>
 
-        <p className={styles.modelQuote}>
-          {quoteText
-            .split(new RegExp(`(${quoteHighlighted.join("|")})`, "gi"))
-            .map((part) =>
-              quoteHighlighted.some(
-                (h) => h.toLowerCase() === part.toLowerCase(),
-              ) ? (
-                <span key={`highlight-${part}`} className="text-[#4CAF50]">
-                  {part}
-                </span>
-              ) : (
-                <Fragment key={`quote-${part}`}>{part}</Fragment>
-              ),
-            )}
-        </p>
+        <p className={styles.modelQuote}>{renderQuote(quoteText)}</p>
       </div>
     </ClientInfoModal>
   );

@@ -120,14 +120,14 @@ export default function SmartGrid() {
       <div className={styles.actions}>
         <FigmaAngledCta
           onClick={() => setIsDispatchArchitectOpen(true)}
-          style={{ position: "absolute", top: 637, right: 0, width: 341 }}
+          style={{ position: "absolute", top: 637, right: 32, width: 341 }}
         >
           {smartGridData?.callToActions?.[0]?.text ||
             "Talk to Our Dispatch Architects"}
         </FigmaAngledCta>
         <FigmaAngledCta
           onClick={() => setIsStorageReviewOpen(true)}
-          style={{ position: "absolute", top: 718, right: 0, width: 351 }}
+          style={{ position: "absolute", top: 718, right: 32, width: 351 }}
         >
           {smartGridData?.callToActions?.[1]?.text ||
             "Book a Storage System Review"}
@@ -135,7 +135,7 @@ export default function SmartGrid() {
         <FigmaAngledCta
           href={smartGridData?.callToActions?.[2]?.href || "#"}
           icon="download"
-          style={{ position: "absolute", top: 793, right: 0, width: 441 }}
+          style={{ position: "absolute", top: 793, right: 32, width: 441 }}
         >
           {smartGridData?.callToActions?.[2]?.text ||
             "Download Our Smart Grid & Storage Dossier"}
@@ -162,7 +162,11 @@ export default function SmartGrid() {
       <div className={styles.mobileContent}>
         <h1>{title}</h1>
         <h2>{subtitle}</h2>
-        <p>{description}</p>
+        <p>
+          {description.split("GREEN")[0]}
+          <strong>GREEN</strong>
+          {description.split("GREEN")[1]}
+        </p>
         <blockquote>
           <GreenWords text={quote} />
         </blockquote>
@@ -178,6 +182,11 @@ export default function SmartGrid() {
             ))}
           </ul>
         </section>
+        <p className={styles.mobileFailureQuote}>
+          “Where Grids Fail, We <span>Respond.</span>
+          <br /> Where <span>Intelligence</span> Is Needed,
+          <br /> We <span>Lead</span>”
+        </p>
         <p className={styles.mobileStatement}>
           <strong>{statementHeading}</strong> —{" "}
           <span>{statementDescription}</span>
@@ -192,6 +201,23 @@ export default function SmartGrid() {
           <button type="button" onClick={() => setIsStorageReviewOpen(true)}>
             Book a Storage System Review
           </button>
+          <a
+            href={smartGridData?.callToActions?.[2]?.href || "#"}
+            className={styles.mobileDownloadBtn}
+            download
+          >
+            <span>
+              {smartGridData?.callToActions?.[2]?.text ||
+                "Download Our Smart Grid & Storage Dossier"}
+            </span>
+            <img
+              loading="lazy"
+              decoding="async"
+              src="/images/microgrid-solutions/figma-download-icon.png"
+              alt=""
+              aria-hidden="true"
+            />
+          </a>
         </div>
       </div>
       <D6Chatbot />

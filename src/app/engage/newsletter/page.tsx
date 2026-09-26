@@ -5,10 +5,9 @@ export default function NewsletterPage() {
   return (
     <FigmaPageCanvas
       desktop={<NewsletterSignup canvas />}
-      mobile={<NewsletterSignup canvas />}
+      mobile={<NewsletterSignup canvas={false} />}
       nodeId="7077:14996"
       fitCanvasHeight
-      scaleMobileToViewport
     />
   );
 }

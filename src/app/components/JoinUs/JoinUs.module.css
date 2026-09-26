@@ -1,7 +1,7 @@
 .pageShell {
   position: relative;
   min-height: 100svh;
-  overflow: hidden;
+  overflow-x: hidden;
   background: #fff;
   color: #0c0c0c;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
@@ -362,5 +362,298 @@
   .cta,
   .contactCard {
     transition: none;
+  }
+}
+
+/* ============================================================
+   DESKTOP vs MOBILE UTILITIES
+   ============================================================ */
+.desktopOnly {
+  display: block;
+}
+
+.mobileLayout {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .desktopOnly {
+    display: none !important;
+  }
+
+  .mobileLayout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    width: 100%;
+    background: #ffffff;
+    color: #0c0c0c;
+    font-family: var(--font-montserrat), Montserrat, sans-serif;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  /* Hero */
+  .mobileHero {
+    padding: 100px 20px 24px;
+    box-sizing: border-box;
+  }
+
+  .mobileTitle {
+    margin: 0 0 10px;
+    font-size: clamp(28px, 7vw, 40px);
+    font-weight: 800;
+    line-height: 1.15;
+    text-transform: uppercase;
+    color: #050505;
+  }
+
+  .greenText {
+    color: #23b14d;
+    font-weight: 800;
+  }
+
+  .mobileSubHeadline {
+    margin: 0 0 14px;
+    font-size: clamp(16px, 4vw, 20px);
+    font-weight: 600;
+    font-style: italic;
+    color: #23b14d;
+    line-height: 1.4;
+  }
+
+  .mobileDescription {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
+    line-height: 1.6;
+  }
+
+  /* Login Action Buttons */
+  .mobileLoginActions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 20px 32px;
+    box-sizing: border-box;
+  }
+
+  .mobileLoginBtn {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition:
+      filter 160ms ease,
+      transform 160ms ease;
+  }
+
+  .mobileLoginBtn:active {
+    transform: scale(0.98);
+  }
+
+  .mobileLoginImg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Access list */
+  .mobileAccessSection {
+    padding: 0 20px 32px;
+    box-sizing: border-box;
+  }
+
+  .mobileAccessHeading {
+    margin: 0 0 12px;
+    font-size: clamp(18px, 4.5vw, 22px);
+    font-weight: 800;
+    color: #090909;
+    line-height: 1.3;
+  }
+
+  .mobileDivider {
+    width: 100%;
+    height: 2px;
+    background: #23b14d;
+    margin-bottom: 24px;
+  }
+
+  .mobileFeaturesList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .mobileFeatureItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .mobileFeatureIcon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    object-fit: contain;
+    margin-top: -2px;
+  }
+
+  .mobileFeatureContent {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mobileFeatureContent h3 {
+    margin: 0 0 4px;
+    font-size: clamp(15px, 3.8vw, 18px);
+    font-weight: 700;
+    font-style: italic;
+    color: #0c0c0c;
+    line-height: 1.3;
+  }
+
+  .mobileFeatureContent p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: #666;
+    line-height: 1.45;
+  }
+
+  /* Partner Box */
+  .mobilePartnerBox {
+    margin: 0 20px 32px;
+    padding: 20px 18px;
+    border-radius: 8px;
+    background: linear-gradient(
+      135deg,
+      rgba(35, 177, 77, 0.08) 0%,
+      rgba(255, 254, 80, 0.12) 100%
+    );
+    border-left: 4px solid #23b14d;
+    box-sizing: border-box;
+  }
+
+  .mobilePartnerText {
+    margin: 0 0 6px;
+    font-size: clamp(15px, 4vw, 18px);
+    font-weight: 600;
+    font-style: italic;
+    color: #050505;
+    line-height: 1.4;
+  }
+
+  .mobilePartnerSub {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: #23b14d;
+  }
+
+  /* Policy Section */
+  .mobilePolicySection {
+    padding: 0 20px 28px;
+    box-sizing: border-box;
+  }
+
+  .mobilePolicySection h2 {
+    margin: 0 0 8px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #090909;
+  }
+
+  .mobilePolicySection p {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  /* Contact Cards */
+  .mobileContactCards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 0 20px 32px;
+    box-sizing: border-box;
+  }
+
+  .mobileContactCard {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 370px;
+    min-height: 48px;
+    padding: 10px 16px;
+    border: 1.5px solid #d8df00;
+    border-radius: 4px;
+    clip-path: polygon(3% 0, 100% 0, 97% 100%, 0 100%);
+    background: linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.08),
+      rgba(255, 229, 0, 0.1)
+    );
+    color: #0c0c0c;
+    font-size: 14px;
+    font-weight: 600;
+    font-style: italic;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: filter 160ms ease;
+  }
+
+  .mobileContactCard:hover {
+    filter: brightness(1.04);
+  }
+
+  .mobileContactIcon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  /* CTAs */
+  .mobileCtaBar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding: 0 20px 40px;
+    box-sizing: border-box;
+  }
+
+  .mobileCtaBtn {
+    width: 100%;
+    max-width: 370px;
+    height: 52px !important;
+    min-height: 52px !important;
+    max-height: 52px !important;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobileCtaBtn span {
+    white-space: nowrap !important;
+    font-size: clamp(11.5px, 3.1vw, 14px);
+  }
+
+  /* Chat wrapper */
+  .mobileChatWrapper {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 24px;
   }
 }

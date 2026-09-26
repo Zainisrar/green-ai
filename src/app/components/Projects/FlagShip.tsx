@@ -1,15 +1,24 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useState } from "react";
 import { useFlagshipProject } from "../../../hooks/useFlagshipProject";
 import D6Chatbot from "../D6Chatbot";
-import ProductEnquiry from "../Product/Modals/ProductEnquiry";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import styles from "./FlagShip.module.css";
+
+const ProductEnquiry = dynamic(
+  () => import("../Product/Modals/ProductEnquiry"),
+  { ssr: false },
+);
 
 const fallbackProjectData = {
   title:
+    "PNG’s First Utility-Scale Grid-Connected Solar Power Plant, 3MW, Baiyer (2025)",
+  subheadline:
     "PNG’s First Utility-Scale Grid-Connected Solar Power Plant, 3MW, Baiyer (2025)",
   key: {
     title: "This isn't a vision. This is delivery",
@@ -42,7 +51,11 @@ const fallbackProjectData = {
   },
 } as const;
 
-export default function FlagShip() {
+interface FlagShipProps {
+  mode?: "desktop" | "mobile";
+}
+
+export default function FlagShip({ mode }: FlagShipProps = {}) {
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
   const { data } = useFlagshipProject();
   const project = data ?? fallbackProjectData;
@@ -52,7 +65,12 @@ export default function FlagShip() {
   const keySubtitle = project.key.subtitle || fallbackProjectData.key.subtitle;
   const hasStandardKeySubtitle = isStandardKeySubtitle(keySubtitle);
 
-  return (
+  const displayProjectTitle =
+    (project.subheadline && project.title?.toLowerCase() === "flagship projects"
+      ? project.subheadline
+      : project.title) || fallbackProjectData.title;
+
+  const desktop = (
     <main className={styles.page} data-node-id="7077:14937">
       <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
 
@@ -70,7 +88,7 @@ export default function FlagShip() {
       </h1>
 
       <h2 className={styles.projectTitle}>
-        {renderProjectTitle(project.title)}
+        {renderProjectTitle(displayProjectTitle)}
       </h2>
 
       <section className={styles.metrics} aria-label="Flagship project metrics">
@@ -84,7 +102,11 @@ export default function FlagShip() {
               key={label}
             >
               <Image
-                src={fallback.src}
+                src={
+                  "img" in icon && icon.img?.src
+                    ? icon.img.src
+                    : fallback.src
+                }
                 alt={"img" in icon ? icon.img.alt || label : label}
                 width={index === 1 ? 101 : index === 2 ? 105 : 98}
                 height={index === 1 ? 110 : index === 2 ? 80 : 98}
@@ -143,8 +165,10 @@ export default function FlagShip() {
         <p>
           —{" "}
           <span>
-            {project.footer.subheadline ||
-              fallbackProjectData.footer.subheadline}
+            {cleanFooterSubheadline(
+              project.footer.subheadline ||
+                fallbackProjectData.footer.subheadline,
+            )}
           </span>
         </p>
       </section>
@@ -184,27 +208,194 @@ export default function FlagShip() {
           width: 418,
         }}
       />
-
-      <ProductEnquiry
-        productName="Flagship Projects"
-        isOpen={isConsultationOpen}
-        onClose={() => setIsConsultationOpen(false)}
-        titlePrefix="REQUEST A"
-        titleAccent="CONSULTATION"
-        interestLabel="SERVICE NEEDED"
-        interestOptions={[
-          "Flagship Projects",
-          "Solar EPCM",
-          "Hybrid microgrid",
-          "Energy storage",
-          "Grid integration",
-          "O&M and monitoring",
-          "Other",
-        ]}
-        defaultInterest="Flagship Projects"
-        submitButtonText="Submit Request"
-      />
     </main>
+  );
+
+  const mobile = (
+    <main className={styles.mobilePage} data-node-id="7077:14937-mobile">
+      <Image
+        className={styles.mobileBackgroundArt}
+        src="/images/flagship-projects/mainImg.png"
+        alt=""
+        width={1045}
+        height={970}
+        priority
+      />
+
+      <SiteHeader panel="logoOnly" />
+
+      <Image
+        className={styles.mobileVerticalTitle}
+        src="/images/flagship-projects/global.png"
+        alt="Global Snapshot"
+        width={34}
+        height={420}
+      />
+
+      <div className={styles.mobileContent}>
+        <h1 className={styles.mobilePageTitle}>
+          <span>Flagship</span> Projects
+        </h1>
+
+        <h2 className={styles.mobileProjectTitle}>
+          {renderProjectTitle(displayProjectTitle)}
+        </h2>
+
+        <section
+          className={styles.mobileMetrics}
+          aria-label="Flagship project metrics"
+        >
+          {icons.slice(0, 3).map((icon, index) => {
+            const fallback = fallbackProjectData.icons[index];
+            const label = icon.title || fallback.title;
+            const description = icon.description || fallback.description;
+            return (
+              <article className={styles.mobileMetric} key={label}>
+                <Image
+                  src={
+                    "img" in icon && icon.img?.src
+                      ? icon.img.src
+                      : fallback.src
+                  }
+                  alt={"img" in icon ? icon.img.alt || label : label}
+                  width={index === 1 ? 64 : index === 2 ? 68 : 62}
+                  height={index === 1 ? 70 : index === 2 ? 52 : 62}
+                  className={styles.mobileMetricIcon}
+                />
+                <h3>{label}</h3>
+                <p>{formatMetric(description)}</p>
+              </article>
+            );
+          })}
+        </section>
+
+        <section
+          className={styles.mobileKeySection}
+          aria-label="GREEN delivery message"
+        >
+          <Image
+            className={styles.mobileKeyShapeLeft}
+            src="/images/flagship-projects/shape1.png"
+            alt=""
+            width={48}
+            height={69}
+          />
+          <div className={styles.mobileKeyCopy}>
+            <p>
+              {renderKeyTitle(
+                project.key.title || fallbackProjectData.key.title,
+              )}
+            </p>
+            <p>
+              —{" "}
+              <span>
+                {hasStandardKeySubtitle ? "structured, scalable," : keySubtitle}
+              </span>
+            </p>
+            {hasStandardKeySubtitle ? (
+              <p className={styles.mobileKeyContinuation}>
+                <span>and underway</span>.
+              </p>
+            ) : null}
+          </div>
+          <Image
+            className={styles.mobileKeyShapeRight}
+            src="/images/flagship-projects/shape2.png"
+            alt=""
+            width={48}
+            height={70}
+          />
+        </section>
+
+        <p className={styles.mobileDescription}>
+          {renderGreenText(
+            project.description || fallbackProjectData.description,
+          )}
+        </p>
+
+        <section className={styles.mobileFooterMessage}>
+          <p>{project.footer.title || fallbackProjectData.footer.title}</p>
+          <p>
+            —{" "}
+            <span>
+              {cleanFooterSubheadline(
+                project.footer.subheadline ||
+                  fallbackProjectData.footer.subheadline,
+              )}
+            </span>
+          </p>
+        </section>
+
+        <div className={styles.mobileActions}>
+          <FigmaAngledCta
+            className={styles.mobileCtaBtn}
+            onClick={() => setIsConsultationOpen(true)}
+          >
+            Request a Consultation
+          </FigmaAngledCta>
+          <FigmaAngledCta
+            className={styles.mobileCtaBtn}
+            href="/endeavors/project-portfolio"
+          >
+            Explore our global project portfolio
+          </FigmaAngledCta>
+        </div>
+      </div>
+
+      <D6Chatbot />
+    </main>
+  );
+
+  const enquiryModal = (
+    <ProductEnquiry
+      productName="Flagship Projects"
+      isOpen={isConsultationOpen}
+      onClose={() => setIsConsultationOpen(false)}
+      titlePrefix="REQUEST A"
+      titleAccent="CONSULTATION"
+      interestLabel="SERVICE NEEDED"
+      interestOptions={[
+        "Flagship Projects",
+        "Solar EPCM",
+        "Hybrid microgrid",
+        "Energy storage",
+        "Grid integration",
+        "O&M and monitoring",
+        "Other",
+      ]}
+      defaultInterest="Flagship Projects"
+      submitButtonText="Submit Request"
+    />
+  );
+
+  if (mode === "desktop") {
+    return (
+      <>
+        {desktop}
+        {enquiryModal}
+      </>
+    );
+  }
+
+  if (mode === "mobile") {
+    return (
+      <>
+        {mobile}
+        {enquiryModal}
+      </>
+    );
+  }
+
+  return (
+    <>
+      <FigmaPageCanvas
+        desktop={desktop}
+        mobile={mobile}
+        nodeId="7077:14937"
+        fitCanvasHeight
+      />
+      {enquiryModal}
+    </>
   );
 }
 
@@ -260,3 +451,8 @@ function renderGreenText(value: string) {
     part === "GREEN" ? <strong key={part}>{part}</strong> : part,
   );
 }
+
+function cleanFooterSubheadline(value: string) {
+  return value.replace(/^[—–-]\s*/, "");
+}
+

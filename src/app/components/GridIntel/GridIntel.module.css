@@ -124,6 +124,8 @@
 .sections {
   position: absolute;
   inset: 0;
+  pointer-events: none;
+  z-index: 10;
 }
 .sections button {
   position: absolute;
@@ -136,6 +138,12 @@
   font-weight: 800;
   text-align: left;
   cursor: pointer;
+  pointer-events: auto;
+  z-index: 15;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.sections button:hover {
+  filter: brightness(1.08);
 }
 .sections button:nth-child(1) {
   top: 261px;
@@ -203,64 +211,258 @@
 .actions {
   position: absolute;
   inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+.actions > * {
+  pointer-events: auto;
 }
 .chatTrigger {
   z-index: 3;
 }
 .mobilePage {
+  position: relative;
   min-height: 100svh;
   padding-top: 82px;
+  overflow-x: hidden;
+  background: #ffffff;
+  color: #000;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
+
+.mobileBackgroundArt {
+  position: absolute;
+  top: 0;
+  right: -120px;
+  width: 150%;
+  max-width: 720px;
+  height: auto;
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mobileVerticalTitle {
+  position: absolute;
+  top: 100px;
+  left: 6px;
+  width: clamp(24px, 5.5vw, 34px);
+  height: auto;
+  max-height: 560px;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .mobileContent {
-  width: min(100% - 28px, 760px);
-  margin: auto;
-  padding: 34px 0 140px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 18px 140px clamp(38px, 9.5vw, 52px);
+  box-sizing: border-box;
 }
-.mobileContent h1 {
-  margin: 0;
-  font-size: clamp(34px, 9vw, 52px);
+
+.mobilePageTitle {
+  margin: 0 0 10px;
+  font-size: clamp(32px, 8.5vw, 48px);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: #000;
+  letter-spacing: -0.5px;
 }
-.mobileContent h1 span,
-.mobileContent h2,
-.mobileContent blockquote span {
+
+.mobilePageTitle span {
   color: #23b14d;
 }
-.mobileContent h2 {
-  font-size: 22px;
+
+.mobileSubtitle {
+  margin: 0 0 16px;
+  color: #23b14d;
+  font-size: clamp(16px, 4.2vw, 22px);
   font-style: italic;
+  font-weight: 600;
+  line-height: 1.35;
 }
-.mobileContent p {
-  font-size: 14px;
-  line-height: 1.5;
+
+.mobileDescription {
+  margin: 0 0 28px;
+  font-size: clamp(13px, 3.4vw, 14.5px);
+  line-height: 1.6;
+  color: #172033;
+  letter-spacing: 0.2px;
 }
-.mobileContent section {
-  margin: 26px 0;
-  padding: 20px;
-  border-left: 2px solid #9ae98e;
+
+.mobilePlatform {
+  margin: 0 0 26px;
 }
-.mobileContent blockquote {
-  padding: 22px;
-  background: #f8fad9;
-  font-size: 23px;
+
+.mobilePlatform h2 {
+  margin: 0 0 14px;
+  font-size: clamp(18px, 4.8vw, 23px);
+  font-weight: 800;
+  color: #000;
+  line-height: 1.25;
+}
+
+.mobilePlatform p {
+  margin: 0 0 9px;
+  font-size: clamp(13.5px, 3.5vw, 15.5px);
+  font-style: italic;
+  line-height: 1.55;
+  color: #1f2937;
+}
+
+.mobileEnergy {
+  margin: 0 0 32px;
+}
+
+.mobileEnergy h2 {
+  margin: 0;
+  font-size: clamp(17px, 4.5vw, 21px);
+  font-weight: 800;
+  color: #000;
+  line-height: 1.25;
+}
+
+.mobileEnergy h3 {
+  margin: 6px 0 12px;
+  font-size: clamp(14px, 3.8vw, 16.5px);
+  font-style: italic;
+  font-weight: 600;
+  color: #23b14d;
+  line-height: 1.35;
+}
+
+.mobileEnergy p {
+  margin: 0;
+  font-size: clamp(13px, 3.4vw, 14.5px);
+  font-style: italic;
+  line-height: 1.55;
+  color: #374151;
+}
+
+.mobileBracketSection {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 2vw, 14px);
+  margin: 36px 0 16px;
+  padding: 8px 0;
+}
+
+.mobileBracketLeft,
+.mobileBracketRight {
+  width: clamp(28px, 7.5vw, 44px);
+  height: auto;
+  flex-shrink: 0;
+}
+
+.mobileIntelligence {
+  margin: 0;
+  font-size: clamp(18px, 4.8vw, 24px);
   font-style: italic;
   font-weight: 700;
+  text-align: center;
+  line-height: 1.25;
+  color: #000;
 }
-.mobileSections,
-.mobileActions {
-  display: grid;
-  gap: 12px;
-  margin-top: 24px;
+
+.mobileIntelligence span {
+  color: #23b14d;
 }
-.mobileSections button,
-.mobileActions button {
-  min-height: 48px;
-  border: 1px solid #23b14d;
-  background: #fff;
-  font-family: inherit;
+
+.mobileSmarter {
+  margin: 0 0 36px;
+  font-size: clamp(15px, 4vw, 19px);
+  font-style: italic;
   font-weight: 600;
+  line-height: 1.45;
+  text-align: center;
+  color: #172033;
 }
-.mobileActions button {
-  background: linear-gradient(110deg, #75d994, #effc97);
-  clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
+
+.mobileSmarter span {
+  color: #23b14d;
+}
+
+.mobileSections {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 32px 0 36px;
+  width: 100%;
+}
+
+.mobileSectionBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 6px 12px 6px 44px;
+  background: transparent;
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  box-sizing: border-box;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.mobileSectionBtn:hover,
+.mobileSectionBtn:focus-visible {
+  transform: translateX(4px);
+  filter: brightness(1.05);
+}
+
+.mobileSectionImg {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 38px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.mobileSectionActive .mobileSectionImg {
+  width: clamp(210px, 64vw, 290px);
+  height: 44px;
+  object-fit: fill;
+}
+
+.mobileSectionText {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(14px, 3.8vw, 17px);
+  font-weight: 800;
+  color: #000;
+  line-height: 1.25;
+  letter-spacing: -0.2px;
+  white-space: normal;
+}
+
+.mobileSectionActive .mobileSectionText {
+  color: #23b14d;
+}
+
+.mobileActions {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+  margin-top: 24px;
+  margin-bottom: 32px;
+  width: 100%;
+}
+
+.mobileCtaBtn {
+  width: 100%;
 }

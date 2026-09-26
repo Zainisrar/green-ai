@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import SiteHeader from "../SiteHeader/SiteHeader";
@@ -198,6 +199,18 @@ export default function SunsmartProductsFigma() {
           src="/images/product/green-sunsmart.png"
           alt={productName}
         />
+        <Link
+          href="/engineering/products/green-sunshine"
+          className={styles.mobileEmpawaLink}
+        >
+          View GREEN SunShine products
+        </Link>
+        <Link
+          href="/engineering/products/green-em-pawa"
+          className={styles.mobileEmpawaLink}
+        >
+          View GREEN Em’Pawa products
+        </Link>
         <img
           loading="lazy"
           decoding="async"
@@ -225,6 +238,24 @@ export default function SunsmartProductsFigma() {
         </div>
         <h1>{productTitle}</h1>
         <p>{description}</p>
+        <section className={styles.mobileSpecifications}>
+          <h2>Kit Specifications</h2>
+          <div className={styles.mobileSpecGrid}>
+            {specifications.map(([icon, name, detail, duration]) => (
+              <article key={name} className={styles.mobileSpecItem}>
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={`/images/product/${icon}`}
+                  alt=""
+                />
+                <h3>{name}</h3>
+                <p>{detail}</p>
+                {duration !== "--" && <span>{duration}</span>}
+              </article>
+            ))}
+          </div>
+        </section>
         <button
           type="button"
           className={styles.mobileEnquiry}

@@ -423,7 +423,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
               className={
                 canvas
                   ? styles.canvasVertical
-                  : "w-1/10 flex items-center justify-center"
+                  : "hidden lg:flex w-1/10 items-center justify-center"
               }
             >
               <div
@@ -448,7 +448,7 @@ const CommunityImpactLoop = ({ canvas = false }: CommunityImpactLoopProps) => {
               className={
                 canvas
                   ? styles.canvasMain
-                  : "pl-14 lg:pl-24 relative z-20 pr-4 pt-8"
+                  : "px-4 lg:pl-24 relative z-20 pr-4 pt-24 lg:pt-8"
               }
             >
               {/* Main Title */}

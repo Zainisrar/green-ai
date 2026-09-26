@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
 import type { ClientPartnershipsWhatSetsGreenApart } from "../../../lib/api";
 import ClientInfoModal from "./ClientInfoModal";
+import styles from "./ClientPartnershipDialogs.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -41,48 +41,32 @@ const WhatSetsGREENApart = ({ isOpen, onClose, data }: Props) => {
 
   return (
     <ClientInfoModal isOpen={isOpen} onClose={onClose}>
-      <div className="mb-6 sm:mb-8">
-        <h2 className="text-2xl font-black text-gray-800 sm:text-3xl">
-          {title}
-        </h2>
-        <div className="mt-2 flex items-center">
-          <span className="mr-2 text-2xl font-bold text-black">-</span>
-          <h3 className="text-lg font-semibold text-[#4CAF50] sm:text-xl">
-            {subHeadline}
-          </h3>
-        </div>
-        <div className="mt-4 h-0.5 w-full bg-gray-300" />
-      </div>
+      <div className={styles.apartWrapper}>
+        <header className={styles.dialogHeader}>
+          <h2 className={styles.dialogTitle}>{title}</h2>
+          <p className={styles.dialogSubtitle}>- {subHeadline}</p>
+        </header>
 
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-        <div>
-          <h3 className="mb-4 text-xl font-bold text-[#4CAF50] sm:text-center sm:text-2xl">
-            GREEN DELIVERS
-          </h3>
-          <div className="space-y-4">
-            {items.map((item, idx) => (
-              <p
-                key={idx}
-                className="text-base font-medium text-gray-800 sm:text-center sm:text-lg"
-              >
-                {item.greenDelivers}
-              </p>
-            ))}
+        <div className={styles.comparisonGrid}>
+          <div className={styles.comparisonCol}>
+            <h3 className={styles.comparisonHeaderTitle}>GREEN DELIVERS</h3>
+            <div className={styles.comparisonList}>
+              {items.map((item, idx) => (
+                <p key={idx} className={styles.comparisonItem}>
+                  {item.greenDelivers}
+                </p>
+              ))}
+            </div>
           </div>
-        </div>
-        <div>
-          <h3 className="mb-4 text-xl font-bold text-[#4CAF50] sm:text-center sm:text-2xl">
-            OTHERS PROMISE
-          </h3>
-          <div className="space-y-4">
-            {items.map((item, idx) => (
-              <p
-                key={idx}
-                className="text-base font-medium text-gray-800 sm:text-center sm:text-lg"
-              >
-                {item.othersPromise}
-              </p>
-            ))}
+          <div className={styles.comparisonCol}>
+            <h3 className={styles.comparisonHeaderTitle}>OTHERS PROMISE</h3>
+            <div className={styles.comparisonList}>
+              {items.map((item, idx) => (
+                <p key={idx} className={styles.comparisonItem}>
+                  {item.othersPromise}
+                </p>
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -8,52 +8,112 @@ interface MediaKitDownloadProps {
   onClose: () => void;
 }
 
-const ROWS = [
-  // Row 0
+interface DownloadItem {
+  id: string;
+  label: string;
+  file: string;
+  isCol2?: boolean;
+}
+
+const ROWS: DownloadItem[][] = [
+  // Row 0 - starts at x=335px
   [
     {
-      id: "1",
-      label: "Brand Logo Files (PNG, SVG)",
+      id: "brand-logo-1",
+      label: "Brand logo files (PNG, SVG)",
       file: "/media-kit/brand-logos.zip",
     },
     {
-      id: "2",
+      id: "headshots-1",
       label: "Executive Headshots",
       file: "/media-kit/executive-headshots.zip",
     },
     {
-      id: "3",
+      id: "profile-1",
       label: "Company Profile (PDF)",
       file: "/media-kit/company-profile.pdf",
+      isCol2: true,
     },
   ],
-  // Row 1
+  // Row 1 - starts at x=293px (offset -42px)
   [
     {
-      id: "4",
-      label: "Fast Facts & Stats Sheet",
+      id: "facts-1",
+      label: "Fast facts & stats sheet",
       file: "/media-kit/fast-facts-stats-sheet.pdf",
     },
     {
-      id: "5",
-      label: "Approved Images For Press Use",
+      id: "press-images-1",
+      label: "Approved images for press use",
       file: "/media-kit/approved-press-images.zip",
     },
     {
-      id: "6",
+      id: "boilerplate-1",
       label: "Quote Sheet / Boilerplate",
       file: "/media-kit/quote-sheet-boilerplate.pdf",
+      isCol2: true,
+    },
+  ],
+  // Row 2 - starts at x=263px (offset -72px)
+  [
+    {
+      id: "brand-logo-2",
+      label: "Brand logo files (PNG, SVG)",
+      file: "/media-kit/brand-logos.zip",
+    },
+    {
+      id: "headshots-2",
+      label: "Executive Headshots",
+      file: "/media-kit/executive-headshots.zip",
+    },
+    {
+      id: "profile-2",
+      label: "Company Profile (PDF)",
+      file: "/media-kit/company-profile.pdf",
+      isCol2: true,
+    },
+  ],
+  // Row 3 - starts at x=221px (offset -114px)
+  [
+    {
+      id: "facts-2",
+      label: "Fast facts & stats sheet",
+      file: "/media-kit/fast-facts-stats-sheet.pdf",
+    },
+    {
+      id: "press-images-2",
+      label: "Approved images for press use",
+      file: "/media-kit/approved-press-images.zip",
+    },
+    {
+      id: "boilerplate-2",
+      label: "Quote Sheet / Boilerplate",
+      file: "/media-kit/quote-sheet-boilerplate.pdf",
+      isCol2: true,
+    },
+  ],
+  // Row 4 - starts at x=181px (offset -154px)
+  [
+    {
+      id: "brand-logo-3",
+      label: "Brand logo files (PNG, SVG)",
+      file: "/media-kit/brand-logos.zip",
+    },
+    {
+      id: "headshots-3",
+      label: "Executive Headshots",
+      file: "/media-kit/executive-headshots.zip",
+    },
+    {
+      id: "profile-3",
+      label: "Company Profile (PDF)",
+      file: "/media-kit/company-profile.pdf",
+      isCol2: true,
     },
   ],
 ];
 
-const rowClasses = [
-  styles.row0,
-  styles.row1,
-  styles.row2,
-  styles.row3,
-  styles.row4,
-];
+const ROW_OFFSETS = [0, -42, -72, -114, -154];
 
 export default function MediaKitDownload({
   isOpen,
@@ -79,31 +139,36 @@ export default function MediaKitDownload({
         <div className={styles.grid}>
           {ROWS.map((row, index) => (
             <div
-              key={`row-${row[0]?.id || "group"}`}
-              className={`${styles.row} ${rowClasses[index] || ""}`}
+              key={`media-kit-row-${index}`}
+              className={styles.row}
+              style={{
+                transform: `translateX(${ROW_OFFSETS[index]}px)`,
+              }}
             >
               {row.map((item) => (
                 <a
                   key={item.id}
                   href={item.file}
                   download
-                  className={styles.downloadBtn}
+                  aria-label={`Download ${item.label}`}
+                  className={`${styles.downloadBtn} ${item.isCol2 ? styles.col2Btn : ""}`}
                 >
                   <span className={styles.btnLabel}>{item.label}</span>
-                  {/* Download Tray Icon */}
+                  {/* Download Tray Icon matching Figma */}
                   <svg
                     className={styles.downloadIcon}
-                    viewBox="0 0 24 24"
+                    viewBox="0 0 18 18"
                     fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                    xmlns="http://www.w3.org/2000/svg"
                     aria-hidden="true"
                   >
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
+                    <path
+                      d="M9 2.5V11M5.5 7.5L9 11L12.5 7.5M3 11.5V15.5H15V11.5"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </a>
               ))}

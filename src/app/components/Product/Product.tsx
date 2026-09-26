@@ -519,7 +519,7 @@ const Product = ({ slug }: ProductProps) => {
         </div>
 
         {/* Main Content Area */}
-        <div className="  lg:px-8 w-full pt-8">
+        <div className="px-4 sm:px-8 w-full pt-24 lg:pt-8">
           {/* Header Section */}
           <div className=" hidden lg:w-[50%] lg:flex justify-between items-start mb-4">
             <div className="hidden">

@@ -282,66 +282,43 @@
 .deliveryQuote p {
   margin: 0;
 }
-.actions button,
-.actions a {
+.actions {
   position: absolute;
   z-index: 3;
-  display: block;
-  height: 53px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: #000;
-  font:
-    600 16px / 40px var(--font-montserrat),
-    Montserrat,
-    sans-serif;
-  text-decoration: none;
-  cursor: pointer;
-}
-.actions button {
   top: 747px;
-  left: 1651px;
-  width: 271px;
-}
-.actions a {
-  top: 823px;
-  left: 1622px;
-  width: 301px;
-}
-.actions img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 53px;
-}
-.actions span {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 18px;
-  right: 44px;
+  right: 24px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow-wrap: anywhere;
-  font-size: clamp(12px, 1.05vw, 16px);
-  line-height: 1.15;
-  text-align: center;
-  white-space: normal;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 24px;
 }
-.actions b {
-  position: absolute;
-  top: 6px;
-  right: 17px;
-  font-size: 28px;
-  font-weight: 400;
+
+.actions .connectCta {
+  width: auto;
+  min-width: 269px;
+  height: 52px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0 24px 0 32px;
+  box-sizing: border-box;
+}
+
+.actions .downloadCta {
+  width: auto;
+  min-width: 299px;
+  height: 52px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0 24px 0 32px;
+  box-sizing: border-box;
 }
 
 .mobilePage {
   position: relative;
   min-height: 100svh;
-  overflow: hidden;
+  overflow-x: hidden;
   padding-top: 76px;
   background: #fff;
   color: #111;
@@ -357,7 +334,7 @@
 .mobileContent {
   position: relative;
   z-index: 2;
-  padding: 34px 24px 150px;
+  padding: 34px 24px 24px;
 }
 .mobileContent > h1 {
   max-width: 330px;
@@ -429,22 +406,63 @@
   margin: 0;
   font-size: 11px;
 }
-.mobileConnect {
-  display: block;
-  width: 100%;
-  min-height: 53px;
-  margin-top: 30px;
-  padding: 12px 48px 12px 28px;
-  border: 1px solid #23b14d;
-  background: rgb(213 255 180 / 80%);
-  color: #111;
-  font-family: inherit;
-  font-size: clamp(15px, 4.8vw, 22px);
-  font-weight: 700;
-  line-height: 1.2;
-  overflow-wrap: anywhere;
+
+.mobileImpactQuote {
+  margin: 32px auto 20px;
+  padding: 20px 24px;
+  background: #fbfef9;
+  border-left: 4px solid #23b14d;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
   text-align: center;
-  clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
+}
+
+.mobileImpactHeadline {
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 800;
+  font-style: italic;
+  color: #172033;
+}
+
+.mobileImpactHeadline span {
+  color: #23b14d;
+}
+
+.mobileImpactDesc {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #4b5563;
+}
+
+.mobileActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 360px;
+  margin: 32px auto 16px;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.mobileActions .mobileCta {
+  width: 100% !important;
+  max-width: 360px !important;
+  height: 52px !important;
+  min-height: 52px !important;
+  max-height: 52px !important;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: clamp(12px, 3.4vw, 14.5px) !important;
+  font-weight: 600;
+  padding: 0 18px !important;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.mobileActions .mobileCta span {
+  white-space: nowrap !important;
 }
 @media (max-width: 480px) {
   .mobileCards {

@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import styles from "./MediaDialogFrame.module.css";
 
@@ -29,6 +29,7 @@ export default function MediaDialogFrame({
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
   const stageRef = useRef<HTMLElement>(null);
+  const borderGradId = useId();
 
   useEffect(() => {
     setMounted(true);
@@ -46,9 +47,23 @@ export default function MediaDialogFrame({
 
     return () => {
       cancelAnimationFrame(timer);
-      previouslyFocusedRef.current?.focus();
+      if (previouslyFocusedRef.current?.isConnected) {
+        previouslyFocusedRef.current.focus();
+      }
     };
   }, [isOpen, mounted]);
+
+  // Isolate body overflow lock so it does not reset/permanently lock when other dependencies change
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -70,9 +85,6 @@ export default function MediaDialogFrame({
 
     handleResize();
     window.addEventListener("resize", handleResize);
-
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -122,7 +134,6 @@ export default function MediaDialogFrame({
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = prevOverflow;
     };
   }, [isOpen, onClose]);
 
@@ -156,7 +167,7 @@ export default function MediaDialogFrame({
           >
             <defs>
               <linearGradient
-                id="mediaModalBorderGrad"
+                id={borderGradId}
                 x1="0%"
                 y1="0%"
                 x2="100%"
@@ -169,7 +180,7 @@ export default function MediaDialogFrame({
             <path
               d="M 304.84 0 H 1866.2 L 1508.74 699.6 L 0 691.02 Z"
               fill="#ffffff"
-              stroke="url(#mediaModalBorderGrad)"
+              stroke={`url(#${borderGradId})`}
               strokeWidth="3"
               vectorEffect="non-scaling-stroke"
             />

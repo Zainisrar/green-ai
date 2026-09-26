@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import TopNavigation from "../../../components/TopNavigation/TopNavigation";
 import Link from "next/link";

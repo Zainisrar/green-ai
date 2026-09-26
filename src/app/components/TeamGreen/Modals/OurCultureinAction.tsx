@@ -31,10 +31,14 @@ const LOCAL_OUR_CULTURE_IMAGE = "/images/team-green/our-culture.png";
 
 const OurCultureinAction = ({ isOpen, onClose, data }: Props) => {
   const title = data?.title || "Our Culture in Action";
-  const headline = data?.description || "- What defines Team GREEN?";
-  const quoteText =
+  const rawHeadline = data?.description || "What defines Team GREEN?";
+  const cleanHeadline = rawHeadline.replace(/^-\s*/, "").trim();
+  const headline = `- ${cleanHeadline}`;
+
+  const rawQuote =
     data?.quote ||
     "“Team GREEN doesn't clock in. We show up — because lives depend on it.”";
+  const quoteText = rawQuote.startsWith("“") ? rawQuote : `“${rawQuote}”`;
   const quoteHighlight = data?.quoteHighlighted || "GREEN";
 
   const rawPoints =
@@ -55,49 +59,57 @@ const OurCultureinAction = ({ isOpen, onClose, data }: Props) => {
       headline={headline}
       quoteText={quoteText}
       quoteHighlight={quoteHighlight}
+      layout="culture"
+      width={1665}
+      height={691}
+      bodyClassName={styles.cultureBody}
     >
       <div className={styles.cultureGrid}>
-        {/* Culture Points List */}
+        {/* Culture Points List with Slanted Alignment matching Figma */}
         <div className={styles.culturePointsList}>
-          {points.map((point) => (
-            <div key={point} className={styles.culturePointItem}>
-              <img
-                src="/images/why-esg-matters-to-green/green_bolt.png"
-                alt=""
-                className={styles.culturePointIcon}
-                loading="eager"
-                decoding="async"
-              />
-              <p className={styles.culturePointText}>{point}</p>
-            </div>
-          ))}
+          {points.map((point, idx) => {
+            const figmaOffsets = [60, 30, 0, -30, -60];
+            const offset = figmaOffsets[idx] ?? 0;
+            return (
+              <div
+                key={point}
+                className={styles.culturePointItem}
+                style={
+                  {
+                    "--item-offset": `${offset}px`,
+                  } as React.CSSProperties
+                }
+              >
+                <img
+                  src="/images/why-esg-matters-to-green/green_bolt.png"
+                  alt=""
+                  className={styles.culturePointIcon}
+                  loading="eager"
+                  decoding="async"
+                  width={32}
+                  height={38}
+                />
+                <p className={styles.culturePointText}>{point}</p>
+              </div>
+            );
+          })}
         </div>
 
-        {/* Culture Image */}
+        {/* Culture Image matching Figma native drop shadow and slant */}
         <div className={styles.cultureImageWrap}>
-          <img
-            src="/images/handbook/shape.png"
-            alt=""
-            className={styles.cornerBracketBottomLeft}
-            aria-hidden="true"
-          />
           <img
             src={imgSrc}
             alt={title}
             className={styles.cultureImage}
             decoding="async"
+            width={630}
+            height={275}
             onError={(e) => {
               const img = e.currentTarget;
               if (img.dataset.fallbackApplied) return;
               img.dataset.fallbackApplied = "true";
               img.src = LOCAL_OUR_CULTURE_IMAGE;
             }}
-          />
-          <img
-            src="/images/handbook/shape2.png"
-            alt=""
-            className={styles.cornerBracketTopRight}
-            aria-hidden="true"
           />
         </div>
       </div>

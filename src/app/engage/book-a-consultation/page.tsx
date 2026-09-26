@@ -5,10 +5,9 @@ export default function BookAConsultationPage() {
   return (
     <FigmaPageCanvas
       desktop={<BookAConsultation canvas />}
-      mobile={<BookAConsultation canvas />}
+      mobile={<BookAConsultation canvas={false} />}
       nodeId="7077:19924"
       fitCanvasHeight
-      scaleMobileToViewport
     />
   );
 }

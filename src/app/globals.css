@@ -21,20 +21,52 @@ body {
      some Chromium builds still expose a horizontal scrollbar for transformed
      canvas descendants with `clip`. */
   overflow-x: hidden;
-  overscroll-behavior: none;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 
-/* The compact chat CTA belongs after page content on phones. Keeping it fixed
-   caused it to overlap text and form controls while the user scrolled. */
-@media (max-width: 767px) {
+/* Ensure the Let's Talk Energy button is reliably visible on mobile screens at the bottom right corner */
+@media (max-width: 1023px) {
+  .d6-chatbot-trigger,
   .d6-flow-on-mobile {
-    position: relative !important;
-    right: auto !important;
-    bottom: auto !important;
+    position: fixed !important;
+    right: calc(16px + env(safe-area-inset-right, 0px)) !important;
+    bottom: calc(28px + env(safe-area-inset-bottom, 0px)) !important;
     left: auto !important;
-    width: fit-content;
-    margin: 1.5rem auto calc(1.5rem + env(safe-area-inset-bottom));
+    top: auto !important;
+    width: fit-content !important;
+    max-width: calc(100vw - 32px) !important;
+    height: auto !important;
+    margin: 0 !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    z-index: 99999 !important;
+    pointer-events: auto !important;
+    transform: none !important;
   }
+}
+
+/* Remove/hide Let's Talk Energy button when the navigation window is open (mobile & all viewports) */
+body.navigation-open .d6-chatbot-trigger,
+body.navigation-open .d6-flow-on-mobile,
+body.navigation-open .d6-canvas-anchored,
+body.navigation-open .insight-chat,
+body.navigation-open [class*="chatbot-trigger"],
+body:has([aria-label="Site navigation"]) .d6-chatbot-trigger,
+body:has([aria-label="Site navigation"]) .d6-flow-on-mobile,
+body:has([aria-label="Site navigation"]) .d6-canvas-anchored,
+body:has([aria-label="Site navigation"]) .insight-chat,
+body:has([aria-label="Site navigation"]) [class*="chatbot-trigger"],
+body:has([class*="Navigation_drawer"]) .d6-chatbot-trigger,
+body:has([class*="Navigation_drawer"]) .d6-flow-on-mobile,
+body:has([class*="Navigation_drawer"]) .d6-canvas-anchored,
+body:has([class*="Navigation_drawer"]) .insight-chat,
+body:has([class*="Navigation_drawer"]) [class*="chatbot-trigger"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 body {
@@ -354,136 +386,142 @@ body {
   }
 }
 
+.mining-insight__chatbot {
+  top: auto !important;
+  right: 4px !important;
+  bottom: 19px !important;
+  left: auto !important;
+  width: min(21.77vw, 418px) !important;
+  max-width: 418px !important;
+}
+
 @media (max-width: 900px) {
   .mining-insight {
     height: auto;
     min-height: 100svh;
-    overflow-y: auto;
-    padding: 80px 22px 60px;
+    overflow-x: hidden;
+    overflow-y: visible;
+    touch-action: pan-y;
+    padding: 84px 20px 48px;
+    box-sizing: border-box;
   }
   .mining-insight__photo,
   .mining-insight__wash {
     top: 0;
     left: 0;
     width: 100%;
-    height: 42%;
+    height: 380px;
     -webkit-mask-image: none;
     mask-image: none;
-    opacity: 0.28;
-  }
-  .mining-insight__header {
-    height: 70px;
-  }
-  .mining-insight__logo-link {
-    width: 122px;
-    top: 10px;
-  }
-  .mining-insight__nav {
-    gap: 10px;
-    top: 17px;
-    font-size: 8px;
-  }
-  .mining-insight__nav a:nth-child(n + 4) {
-    display: none;
-  }
-  .mining-insight__nav button {
-    width: 28px;
-    height: 28px;
+    opacity: 0.18;
   }
   .mining-insight__left-copy,
   .mining-insight__content {
     position: relative;
     inset: auto;
     width: 100%;
+    max-width: 100%;
   }
   .mining-insight__left-copy {
-    margin-bottom: 38px;
-  }
-  .mining-insight__left-copy h1 {
-    font-size: 58px;
-  }
-  .mining-insight__left-copy {
+    margin-bottom: 32px;
     text-align: left;
   }
-  .mining-insight__left-copy blockquote {
-    width: 92%;
-    margin: 32px 0 0;
-    font-size: 24px;
-  }
-  .mining-insight__content h2 {
-    font-size: 28px;
-  }
-  .mining-insight__content h3 {
-    font-size: 24px;
-  }
-  .mining-insight__facts {
-    column-gap: 10px;
-    row-gap: 0;
-  }
-  .mining-insight__facts article {
-    min-height: 150px;
-  }
-  .mining-insight__facts p {
-    font-size: 13px;
-  }
-  .mining-insight__tag {
-    position: static;
-    margin-top: 40px;
-  }
-}
-
-@media (max-width: 600px) {
-  .mining-insight {
-    padding: 72px 16px 52px;
-  }
-  .mining-insight__photo,
-  .mining-insight__wash {
-    height: 360px;
-  }
-  .mining-insight__nav {
-    right: 12px;
-    gap: 7px;
-  }
-  .mining-insight__nav a {
-    display: none;
-  }
-  .mining-insight__nav button {
-    width: 30px;
-    height: 30px;
-  }
   .mining-insight__left-copy h1 {
-    font-size: clamp(48px, 16vw, 72px);
+    font-size: clamp(38px, 10vw, 64px);
+    line-height: 0.95;
   }
   .mining-insight__left-copy blockquote {
     width: 100%;
-    padding: 18px 26px;
-    font-size: clamp(19px, 6vw, 25px);
+    max-width: 540px;
+    aspect-ratio: auto;
+    margin: 20px 0 0;
+    padding: 18px 22px;
+    font-size: clamp(18px, 4.5vw, 26px);
+    line-height: 1.35;
+    background: linear-gradient(
+      135deg,
+      rgba(35, 177, 77, 0.08) 0%,
+      rgba(255, 255, 255, 0.95) 100%
+    );
+    border-left: 4px solid #23b14d;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
   }
   .mining-insight__content h2 {
-    font-size: clamp(24px, 8vw, 32px);
+    font-size: clamp(22px, 5.5vw, 32px);
+    line-height: 1.2;
   }
   .mining-insight__content h3 {
-    font-size: clamp(19px, 6.5vw, 25px);
+    margin: 8px 0 12px;
+    font-size: clamp(18px, 4.5vw, 24px);
+    line-height: 1.2;
   }
   .mining-insight__description {
     font-size: 14px;
-    line-height: 1.35;
+    line-height: 1.55;
   }
   .mining-insight__facts {
-    grid-template-columns: 1fr;
-    gap: 22px;
-    margin-top: 26px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 24px;
   }
   .mining-insight__facts article {
     min-height: 0;
+    padding: 14px 10px;
+    background: #f8faf8;
+    border: 1px solid #e7ede7;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
   }
   .mining-insight__facts img {
-    width: 82px;
-    height: 82px;
+    width: 44px;
+    height: 44px;
   }
   .mining-insight__facts p {
-    margin-top: 4px;
+    margin-top: 8px;
+    font-size: clamp(11px, 2.8vw, 13px);
+    line-height: 1.35;
+  }
+  .mining-insight__tag {
+    position: static;
+    margin-top: 28px;
     font-size: 14px;
+    display: inline-block;
+  }
+  .mining-insight__chatbot {
+    position: relative !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    max-width: 418px !important;
+    margin: 24px auto 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .mining-insight {
+    padding: 76px 16px 40px;
+  }
+  .mining-insight__facts {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .mining-insight__facts article {
+    flex-direction: row;
+    text-align: left;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 14px;
+  }
+  .mining-insight__facts img {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+  }
+  .mining-insight__facts p {
+    margin-top: 0;
   }
 }
 
@@ -799,7 +837,9 @@ body {
   .solar-home-insight {
     min-height: 100svh;
     height: auto;
-    overflow-y: auto;
+    overflow-x: hidden;
+    overflow-y: visible;
+    touch-action: pan-y;
     padding: 86px 28px 70px;
   }
 
@@ -1267,7 +1307,9 @@ body {
   .urban-insight {
     min-height: 100svh;
     height: auto;
-    overflow-y: auto;
+    overflow-x: hidden;
+    overflow-y: visible;
+    touch-action: pan-y;
     padding: 86px 28px 70px;
   }
   .urban-insight__photo {
@@ -1401,5 +1443,18 @@ body {
   }
   .urban-insight__facts {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Homepage Hero Carousel Desktop Offsets */
+@media (min-width: 768px) {
+  .header-content-area {
+    top: var(--desktop-content-top, 14.74dvh) !important;
+  }
+  .header-description {
+    margin-top: var(--desktop-desc-margin-top, 5.5dvh) !important;
+  }
+  .header-keys-area {
+    top: var(--desktop-keys-top, 37.7dvh) !important;
   }
 }

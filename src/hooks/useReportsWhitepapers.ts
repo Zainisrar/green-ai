@@ -15,6 +15,13 @@ interface ReportData {
   pptx: string;
   createdAt: string;
   updatedAt: string;
+  /**
+   * Optional sidebar classification supplied by the CMS. `groupId` is the
+   * canonical value; the archive flags support older CMS payloads.
+   */
+  groupId?: "2025-current" | "2024" | "2023-primary" | "2023-archive";
+  archived?: boolean;
+  isArchived?: boolean;
 }
 
 const fetchReportsWhitepapers = async (): Promise<ReportData[]> => {

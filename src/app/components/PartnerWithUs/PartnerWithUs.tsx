@@ -18,8 +18,10 @@ const sections = [
   { key: "whyGreen", title: "Why GREEN?" },
   { key: "partnershipTypes", title: "Partnership Types We Support" },
   { key: "whatYouCanExpect", title: "What You Can Expect" },
-  // Section 4 matches the Figma design text verbatim (designer placeholder)
-  { key: "applicationChannels", title: "Abortion Channels Active Coll" },
+  {
+    key: "applicationChannels",
+    title: "Abortion Channels Active Coll",
+  },
   { key: "trustedBy", title: "Trusted By" },
 ];
 
@@ -141,8 +143,8 @@ const PartnerWithUs = ({ canvas = false }: { canvas?: boolean }) => {
 
   return (
     <React.Fragment>
-      <div className="relative">
-        <TopNavigation />
+      <div className="relative min-h-[100svh] bg-white">
+        <SiteHeader layout="viewport" />
 
         <div className="flex h-full">
           {/* Left vertical label */}
@@ -155,7 +157,7 @@ const PartnerWithUs = ({ canvas = false }: { canvas?: boolean }) => {
           </div>
 
           {/* Main content */}
-          <div className="min-w-0 flex-1 px-4 pt-8 sm:px-8">
+          <div className="min-w-0 flex-1 px-4 pt-28 sm:px-8">
             {/* Title block */}
             <div className="mb-8">
               <h1 className="mb-3 text-2xl font-black text-gray-800 lg:text-3xl">
@@ -256,8 +258,7 @@ const PartnerWithUs = ({ canvas = false }: { canvas?: boolean }) => {
           </div>
         </div>
       </div>
-
-      <Chatbot />
+      <D6Chatbot />
 
       {/* Content modals */}
       <WhyGreen

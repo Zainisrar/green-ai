@@ -50,8 +50,7 @@ const phases = [
       "Civil Works",
       "Electrical Works",
       "Mechanical Works",
-      "Installation",
-      "Commissioning",
+      "Installation & Commissioning",
     ],
     description:
       "We provide adaptable, safety-led construction delivery that solves site challenges with accuracy, diligence, and care.",
@@ -79,9 +78,9 @@ const phases = [
       "GREEN Solar supports project performance long after commissioning through tailored operations and maintenance services.",
       "We combine proactive monitoring, practical maintenance, and transparent reporting to protect uptime and maximise the value of every asset.",
     ],
-    backgroundImage: "/images/service/phases/operations-maintenance.png",
-    backgroundPosition: "center center",
-    backgroundOpacity: 0.1,
+    backgroundImage: "/images/service/phases/operations-maintenance-left.png",
+    backgroundPosition: "center 25%",
+    backgroundOpacity: 0.12,
   },
 ];
 
@@ -133,6 +132,16 @@ export default function ServicesD1() {
               opacity: selectedPhase.backgroundOpacity,
             }}
           />
+          {activePhase === 3 && (
+            <div
+              aria-hidden="true"
+              className={styles.operationsMaintenanceRightPanel}
+              style={{
+                backgroundImage:
+                  'url("/images/service/phases/operations-maintenance.png")',
+              }}
+            />
+          )}
           <Image
             className={styles.verticalTitle}
             src="/images/service/services.svg"
@@ -145,29 +154,59 @@ export default function ServicesD1() {
             className={styles.processFlow}
             aria-label="EPCM delivery process"
           >
-            {phases.map((phase, index) => (
-              <div className={styles.flowItem} key={phase.name}>
-                <article className={styles.flowCard}>
-                  <div className={styles.flowCardContent}>
-                    <h2>{phase.flowName}</h2>
-                    <ul>
-                      {phase.points.map((point) => (
-                        <li key={point}>{point}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </article>
-                {index < phases.length - 1 && (
-                  <Image
-                    className={styles.flowArrow}
-                    src="/images/service/arrow.png"
-                    alt=""
-                    width={65}
-                    height={24}
-                  />
-                )}
-              </div>
-            ))}
+            {phases.map((phase, index) => {
+              const totalPoints = phase.points.length;
+              const stepOffset = totalPoints > 3 ? 5.8 : 6.5;
+              const mid = (totalPoints - 1) / 2;
+              return (
+                <div className={styles.flowItem} key={phase.name}>
+                  <article
+                    className={`${styles.flowCard} ${styles[`flowCard_${index}`]} ${activePhase === index ? styles.activeFlowCard : ""}`}
+                    onClick={() => setActivePhase(index)}
+                    role="button"
+                    tabIndex={0}
+                    aria-pressed={activePhase === index}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        setActivePhase(index);
+                      }
+                    }}
+                    aria-label={`Select ${phase.name} phase`}
+                  >
+                    <div className={styles.flowCardContent}>
+                      <h2>{phase.flowName}</h2>
+                      <ul>
+                        {phase.points.map((point, ptIdx) => {
+                          const shift = (mid - ptIdx) * stepOffset;
+                          return (
+                            <li
+                              key={point}
+                              style={
+                                isMobile
+                                  ? undefined
+                                  : { transform: `translateX(${shift}px)` }
+                              }
+                            >
+                              {point}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  </article>
+                  {index < phases.length - 1 && (
+                    <Image
+                      className={`${styles.flowArrow} ${styles[`flowArrow_${index}`]}`}
+                      src="/images/service/arrow.png"
+                      alt=""
+                      width={65}
+                      height={24}
+                    />
+                  )}
+                </div>
+              );
+            })}
           </section>
           <section className={styles.detail} aria-live="polite">
             <h1>{selectedPhase.name}</h1>

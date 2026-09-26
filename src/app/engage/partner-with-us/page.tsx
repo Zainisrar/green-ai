@@ -5,10 +5,9 @@ export default function PartnerWithUsPage() {
   return (
     <FigmaPageCanvas
       desktop={<PartnerWithUs canvas />}
-      mobile={<PartnerWithUs canvas />}
+      mobile={<PartnerWithUs canvas={false} />}
       nodeId="7077:23359"
       fitCanvasHeight
-      scaleMobileToViewport
     />
   );
 }

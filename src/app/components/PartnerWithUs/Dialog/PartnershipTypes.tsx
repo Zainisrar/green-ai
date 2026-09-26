@@ -2,6 +2,7 @@
 
 import React from "react";
 import ClientInfoModal from "@/app/components/ClientPartnerships/Dialog/ClientInfoModal";
+import styles from "./PartnerWithUsDialogs.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -13,60 +14,57 @@ const types = [
     title: "Government Ministries",
     description:
       "Electrification rollouts, health & education infrastructure, climate-aligned energy transitions",
+    icon: "/images/partner/icon-government.png",
   },
   {
     title: "Donor & NGO Programs",
     description:
       "Last-mile energy access, humanitarian logistics, livelihood-linked energy assets",
+    icon: "/images/partner/icon-donor-ngo.png",
   },
   {
     title: "Climate Funds & MDB",
     description:
       "Capital deployment via ready EPCM with transparency & compliance built-in",
+    icon: "/images/partner/icon-climate-funds.png",
   },
   {
     title: "Fossil Fuels Displaced",
     description:
       "Smart microgrids, distributed storage, AI-enabled diagnostics, inclusive energy models",
+    icon: "/images/partner/icon-fossil-fuels.png",
   },
 ];
 
 const PartnershipTypes = ({ isOpen, onClose }: Props) => {
   return (
-    <ClientInfoModal isOpen={isOpen} onClose={onClose} geometry="consultation">
-      <div className="mb-6 sm:mb-8">
-        <h2 className="text-2xl font-black text-gray-800 sm:text-3xl">
-          Partnership Types We Support
-        </h2>
-        <div className="mt-2 flex items-center">
-          <span className="mr-2 text-2xl font-bold text-black">-</span>
-          <h3 className="text-lg font-semibold text-[#4CAF50] sm:text-xl">
-            We don&apos;t just build solar systems — we engineer energy impact.
-          </h3>
-        </div>
-        <div className="mt-4 h-0.5 w-full bg-gray-300" />
-      </div>
+    <ClientInfoModal isOpen={isOpen} onClose={onClose} height={570}>
+      <div className={styles.dialogContainer}>
+        <header className={styles.dialogHeader}>
+          <h2 className={styles.dialogTitle}>Partnership Types We Support</h2>
+          <p className={styles.dialogSubtitle}>
+            - We don&apos;t just build solar systems — we engineer energy
+            impact.
+          </p>
+        </header>
 
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        {types.map((type, idx) => (
-          <div key={idx} className="flex items-start gap-4">
-            <img
-              loading="lazy"
-              decoding="async"
-              src="/images/grid-intel/lighting.png"
-              className="-mt-3 w-12 shrink-0"
-              alt="lighting"
-            />
-            <div>
-              <h4 className="mb-1 text-lg font-bold text-gray-800">
-                {type.title}
-              </h4>
-              <p className="text-sm text-gray-600 sm:text-base">
-                {type.description}
-              </p>
+        <div className={styles.partnershipGrid}>
+          {types.map((type, idx) => (
+            <div key={idx} className={styles.partnershipCard}>
+              <img
+                loading="lazy"
+                decoding="async"
+                src={type.icon}
+                className={styles.partnershipIcon}
+                alt=""
+              />
+              <div>
+                <h3>{type.title}</h3>
+                <p>{type.description}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </ClientInfoModal>
   );

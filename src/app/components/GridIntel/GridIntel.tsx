@@ -182,36 +182,126 @@ export default function GridIntel() {
   );
   const mobile = (
     <main className={styles.mobilePage}>
+      <img
+        loading="lazy"
+        decoding="async"
+        className={styles.mobileBackgroundArt}
+        src="/images/grid-intel/collage_mask.png"
+        alt=""
+        width="1146"
+        height="1015"
+      />
       <SiteHeader panel="logoOnly" />
+      <img
+        loading="lazy"
+        decoding="async"
+        className={styles.mobileVerticalTitle}
+        src="/images/grid-intel/title_gridintel.png"
+        alt=""
+        width="91"
+        height="689"
+      />
       <div className={styles.mobileContent}>
-        <h1>
-          <span>GRID</span>-INTEL
+        <h1 className={styles.mobilePageTitle}>
+          <span>GRID</span>
+          {title.replace(/GRID/i, "")}
         </h1>
-        <h2>{subtitle}</h2>
-        <p>{description}</p>
-        <section>
-          <h3>Energy Intelligence Platform</h3>
+        <p className={styles.mobileSubtitle}>{subtitle}</p>
+        <p className={styles.mobileDescription}>{description}</p>
+        <section className={styles.mobilePlatform}>
+          <h2>
+            {d?.energyIntelligencePlatform?.title ||
+              "Energy Intelligence Platform"}
+          </h2>
           {features.map((x) => (
             <p key={x}>{x}</p>
           ))}
         </section>
-        <blockquote>
-          Built for <span>Intelligence.</span> Backed by Discipline.
-        </blockquote>
-        <div className={styles.mobileSections}>
+        <section className={styles.mobileEnergy}>
+          <h2>{d?.energyYouCanCountOn?.title || "Energy You Can Count On"}</h2>
+          <h3>
+            —{" "}
+            {d?.energyYouCanCountOn?.subtitle ||
+              "Even When the Grid Can’t Be Counted On"}
+          </h3>
+          <p>
+            {d?.energyYouCanCountOn?.description ||
+              "We deliver power infrastructure that anticipates failure, absorbs shocks, and ensures continuity — across any terrain, in any nation, under any grid condition"}
+          </p>
+        </section>
+        <div className={styles.mobileBracketSection}>
+          <img
+            loading="lazy"
+            decoding="async"
+            className={styles.mobileBracketLeft}
+            src="/images/grid-intel/v_7077_7374.png"
+            alt=""
+            width="52"
+            height="65"
+          />
+          <p className={styles.mobileIntelligence}>
+            Built for <span>Intelligence.</span>
+            <br />
+            Backed by Discipline.
+          </p>
+          <img
+            loading="lazy"
+            decoding="async"
+            className={styles.mobileBracketRight}
+            src="/images/grid-intel/v_7077_7375.png"
+            alt=""
+            width="52"
+            height="65"
+          />
+        </div>
+        <p className={styles.mobileSmarter}>
+          Run <span>Smarter.</span>
+          <br />
+          Operate with <span>Confidence.</span>
+          <br />
+          Scale Without <span>Uncertainty.</span>
+        </p>
+        <nav className={styles.mobileSections} aria-label="GRID-INTEL details">
           {SECTIONS.map((x, i) => (
-            <button type="button" key={x} onClick={() => setOpen(i)}>
-              {x}
+            <button
+              type="button"
+              key={x}
+              onClick={() => setOpen(i)}
+              className={`${styles.mobileSectionBtn} ${i === 2 ? styles.mobileSectionActive : ""}`}
+            >
+              <img
+                loading="lazy"
+                decoding="async"
+                src={`/images/grid-intel/v_7077_${[7382, 7377, 7378, 7379, 7380, 7381][i]}.png`}
+                alt=""
+                className={styles.mobileSectionImg}
+              />
+              <span className={styles.mobileSectionText}>{x}</span>
             </button>
           ))}
-        </div>
+        </nav>
         <div className={styles.mobileActions}>
-          <button type="button" onClick={() => setDeep(true)}>
+          <FigmaAngledCta
+            onClick={() => setDeep(true)}
+            className={styles.mobileCtaBtn}
+          >
             Schedule a Technical Deep-Dive
-          </button>
-          <button type="button" onClick={() => setTeam(true)}>
+          </FigmaAngledCta>
+          <FigmaAngledCta
+            onClick={() => setTeam(true)}
+            className={styles.mobileCtaBtn}
+          >
             Engage Our System Architecture Team
-          </button>
+          </FigmaAngledCta>
+          <FigmaAngledCta
+            href={d?.ctaButtons?.[2]?.href || "#"}
+            icon="download"
+            download
+            className={styles.mobileCtaBtn}
+          >
+            {d?.ctaButtons?.[2]?.text ||
+              "Download the GRID-INTEL™ Product Dossier"}
+          </FigmaAngledCta>
         </div>
       </div>
       <D6Chatbot />
@@ -230,7 +320,11 @@ export default function GridIntel() {
         onClose={() => setOpen(null)}
         data={gridIntelData?.whatSolves}
       />
-      <WhyIntel isOpen={open === 2} onClose={() => setOpen(null)} />
+      <WhyIntel
+        isOpen={open === 2}
+        onClose={() => setOpen(null)}
+        data={gridIntelData?.whyDifferent}
+      />
       <Scenerios
         isOpen={open === 3}
         onClose={() => setOpen(null)}

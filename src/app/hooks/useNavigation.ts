@@ -47,6 +47,8 @@ const canonicalNavigationRoutes: Record<string, string> = {
   "client partners": "/ecosystem/client-partnerships",
   "client partner login": "/client-value-engineering",
   "client login": "/client-value-engineering",
+  "collaboration & innovation": "/ecosystem/collaboration-innovation",
+  "collaboration and innovation": "/ecosystem/collaboration-innovation",
   "industries we serve": "/ecosystem/client-partnerships",
   "partner success stories": "/ecosystem/client-partnerships",
   "client testimonials": "/ecosystem/client-partnerships",
@@ -58,17 +60,78 @@ const canonicalNavigationRoutes: Record<string, string> = {
   "future offerings": "/engineering/products",
 };
 
+const ecosystemItemOrder = [
+  "our value chain",
+  "supply partners",
+  "client partners",
+  "client partnerships",
+  "collaboration & innovation",
+  "collaboration and innovation",
+  "industry affiliations & certifications",
+  "community impact loop",
+  "impact measurement & esg",
+  "technology & innovation alliances",
+  "technology and innovation alliances",
+];
+
+const supplyPartnersItemOrder = [
+  "our procurement philosophy",
+  "key supply categories",
+  "become a supplier",
+  "supplier code of conduct / handbook",
+  "supplier code of conduct",
+];
+
 const normalizeNavigationRoutes = (items: NavigationItem[]): NavigationItem[] =>
   items.map((item) => {
-    const canonicalSlug =
-      canonicalNavigationRoutes[item.name.toLowerCase().trim()];
+    const itemName = item.name.toLowerCase().trim();
+    const canonicalSlug = canonicalNavigationRoutes[itemName];
+
+    let children = item.children ? normalizeNavigationRoutes(item.children) : undefined;
+
+    // Guarantee Collaboration & Innovation exists in Ecosystem
+    if (itemName === "ecosystem" && children) {
+      const hasCollab = children.some(
+        (c) =>
+          c.slug === "/ecosystem/collaboration-innovation" ||
+          c.name.toLowerCase().includes("collaboration"),
+      );
+      if (!hasCollab) {
+        children.push({
+          id: 6400,
+          name: "Collaboration & Innovation",
+          slug: "/ecosystem/collaboration-innovation",
+          top: false,
+        });
+      }
+
+      // Sort children to match exact Figma sequence
+      children.sort((a, b) => {
+        const aOrder = ecosystemItemOrder.indexOf(a.name.trim().toLowerCase());
+        const bOrder = ecosystemItemOrder.indexOf(b.name.trim().toLowerCase());
+        return (
+          (aOrder === -1 ? Number.MAX_SAFE_INTEGER : aOrder) -
+          (bOrder === -1 ? Number.MAX_SAFE_INTEGER : bOrder)
+        );
+      });
+    }
+
+    // Sort Supply Partners sub-items to match exact Figma sequence
+    if (itemName === "supply partners" && children) {
+      children.sort((a, b) => {
+        const aOrder = supplyPartnersItemOrder.indexOf(a.name.trim().toLowerCase());
+        const bOrder = supplyPartnersItemOrder.indexOf(b.name.trim().toLowerCase());
+        return (
+          (aOrder === -1 ? Number.MAX_SAFE_INTEGER : aOrder) -
+          (bOrder === -1 ? Number.MAX_SAFE_INTEGER : bOrder)
+        );
+      });
+    }
 
     return {
       ...item,
       ...(canonicalSlug ? { slug: canonicalSlug } : {}),
-      ...(item.children
-        ? { children: normalizeNavigationRoutes(item.children) }
-        : {}),
+      ...(children ? { children } : {}),
     };
   });
 

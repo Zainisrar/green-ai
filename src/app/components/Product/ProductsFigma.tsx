@@ -255,6 +255,24 @@ export default function ProductsFigma() {
         </div>
         <h1>{title}</h1>
         <p>{description}</p>
+        <section className={styles.mobileSpecifications}>
+          <h2>Kit Specifications</h2>
+          <div className={styles.mobileSpecGrid}>
+            {specifications.map(([icon, name, detail, duration]) => (
+              <article key={name} className={styles.mobileSpecItem}>
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={`/images/product/${icon}`}
+                  alt=""
+                />
+                <h3>{name}</h3>
+                <p>{detail}</p>
+                {duration !== "--" && <span>{duration}</span>}
+              </article>
+            ))}
+          </div>
+        </section>
         <button
           type="button"
           className={styles.mobileEnquiry}

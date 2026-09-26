@@ -14,6 +14,7 @@ import type {
 import D6Chatbot from "../D6Chatbot";
 import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import styles from "./GlobalSnapshot.module.css";
 
@@ -60,6 +61,40 @@ const FALLBACK_DESCRIPTION = [
 const FALLBACK_CREDIBILITY =
   "The future of energy is not only about capacity. It is about capability. GREEN Limited brings the credibility of experience, the rigor of engineering, and the discipline of execution to the global energy table. Our teams, systems, and strategies are ready to support governments, industries, and developers facing the energy transition.";
 
+interface LocationLine {
+  primary: string;
+  secondary?: string;
+}
+
+function getGroupedLocations(rawLocations?: string[]): LocationLine[] {
+  if (!rawLocations || rawLocations.length === 0) {
+    return [
+      { primary: "Papua New Guinea" },
+      { primary: "India", secondary: "Australia" },
+      { primary: "Singapore", secondary: "USA" },
+    ];
+  }
+
+  if (rawLocations.some((loc) => loc.includes("|"))) {
+    return rawLocations.map((loc) => {
+      const [p, s] = loc.split("|").map((str) => str.trim());
+      return { primary: p, secondary: s };
+    });
+  }
+
+  const [first, ...remaining] = rawLocations;
+  const grouped: LocationLine[] = [{ primary: first }];
+
+  for (let index = 0; index < remaining.length; index += 2) {
+    grouped.push({
+      primary: remaining[index],
+      secondary: remaining[index + 1],
+    });
+  }
+
+  return grouped;
+}
+
 export default function GlobalSnapshot() {
   const { globalSnapshotData, error } = useGlobalSnapshot();
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
@@ -104,22 +139,52 @@ export default function GlobalSnapshot() {
   const highlightLines = highlightSection?.content.lines?.length
     ? highlightSection.content.lines.slice(0, 4)
     : [
-        "Where Roads End, We Delivered.",
-        "Where Diesel Failed, We Deployed Solar.",
-        "Where Governments Stalled,",
-        "We Executed.",
-      ];
+      "Where Roads End, We Delivered.",
+      "Where Diesel Failed, We Deployed Solar.",
+      "Where Governments Stalled,",
+      "We Executed.",
+    ];
   const features = FALLBACK_FEATURES.map(
     (fallback, index) => framework?.features[index]?.text || fallback,
   );
-  const locations = locationsSection?.locations?.length
-    ? locationsSection.locations.slice(0, 4)
-    : ["Papua New Guinea", "India  |  Australia", "Singapore  |  USA"];
+  const groupedLocations = getGroupedLocations(locationsSection?.locations);
   const credibility = locationsSection?.description || FALLBACK_CREDIBILITY;
   const exploreHref =
     actions?.buttons[0]?.link || "/endeavors/project-portfolio";
   const portfolioHref =
     actions?.buttons[2]?.link || "/endeavors/project-portfolio";
+
+  const frameworkTitleText =
+    framework?.title?.text || "The GREEN Delivery Framework";
+  const frameworkHighlight = framework?.title?.highlight || "GREEN";
+
+  const renderFrameworkTitle = () => {
+    if (frameworkTitleText.includes(frameworkHighlight)) {
+      return frameworkTitleText.split(frameworkHighlight).map((part, i, arr) => (
+        <span key={i}>
+          {part}
+          {i < arr.length - 1 && <strong>{frameworkHighlight}</strong>}
+        </span>
+      ));
+    }
+    return (
+      <>
+        The <strong>{frameworkHighlight}</strong> {frameworkTitleText}
+      </>
+    );
+  };
+
+  const renderCredibility = (text: string) => {
+    const formatted = text.replace(/capacity\.\s*(It is)/i, "capacity.\n$1");
+    return formatted.split("GREEN").map((part, i, arr) => (
+      <span key={i}>
+        {part}
+        {i < arr.length - 1 && (
+          <strong className={styles.greenText}>GREEN</strong>
+        )}
+      </span>
+    ));
+  };
 
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:14856">
@@ -181,20 +246,14 @@ export default function GlobalSnapshot() {
         ))}
       </section>
 
-      <Link
-        className={styles.exploreButton}
+      <FigmaAngledCta
+        className={styles.exploreCta}
         href={exploreHref}
+        size="sm"
         data-node-id="7077:14920"
       >
-        <img
-          loading="lazy"
-          decoding="async"
-          src="/images/global-snapshot/exploreBtn.png"
-          alt=""
-        />
-        <span>{actions?.buttons[0]?.text || "Explore"}</span>
-        <b aria-hidden="true">›</b>
-      </Link>
+        {actions?.buttons[0]?.text || "Explore"}
+      </FigmaAngledCta>
 
       <section className={styles.highlight} data-node-id="7077:14908">
         <img
@@ -218,16 +277,21 @@ export default function GlobalSnapshot() {
 
       <section className={styles.locations} data-node-id="7077:14912">
         <h2>{locationsSection?.title || "Global Delivery Sites"}</h2>
-        {locations.map((location) => (
-          <p key={location}>{location}</p>
+        {groupedLocations.map((loc, idx) => (
+          <p key={idx}>
+            {loc.primary}
+            {loc.secondary && (
+              <>
+                {" "}
+                <span className={styles.locationPipe}>|</span> {loc.secondary}
+              </>
+            )}
+          </p>
         ))}
       </section>
 
       <section className={styles.framework} data-node-id="7077:14909">
-        <h2>
-          The <strong>{framework?.title.highlight || "GREEN"}</strong>{" "}
-          {framework?.title.text || "Delivery Framework"}
-        </h2>
+        <h2>{renderFrameworkTitle()}</h2>
         <div className={styles.featureList}>
           {features.map((feature) => (
             <article key={feature}>
@@ -244,37 +308,25 @@ export default function GlobalSnapshot() {
       </section>
 
       <p className={styles.credibility} data-node-id="7077:14914">
-        {credibility}
+        {renderCredibility(credibility)}
       </p>
 
       <div className={styles.actions}>
-        <button
-          type="button"
+        <FigmaAngledCta
+          className={styles.consultationCta}
           onClick={() => setIsConsultationOpen(true)}
           data-node-id="7077:14892"
         >
-          <img
-            loading="lazy"
-            decoding="async"
-            src="/images/global-snapshot/consulation.png"
-            alt=""
-          />
-          <span>{actions?.buttons[1]?.text || "Request a Consultation"}</span>
-          <b aria-hidden="true">›</b>
-        </button>
-        <Link href={portfolioHref} data-node-id="7077:14886">
-          <img
-            loading="lazy"
-            decoding="async"
-            src="/images/global-snapshot/globalprojectportfolioBtn.png"
-            alt=""
-          />
-          <span>
-            {actions?.buttons[2]?.text ||
-              "Explore our global project portfolio"}
-          </span>
-          <b aria-hidden="true">›</b>
-        </Link>
+          {actions?.buttons[1]?.text || "Request a Consultation"}
+        </FigmaAngledCta>
+        <FigmaAngledCta
+          className={styles.portfolioCta}
+          href={portfolioHref}
+          data-node-id="7077:14886"
+        >
+          {actions?.buttons[2]?.text ||
+            "Explore Our Global Project Portfolio"}
+        </FigmaAngledCta>
       </div>
 
       <D6Chatbot
@@ -331,15 +383,20 @@ export default function GlobalSnapshot() {
         </div>
         <section className={styles.mobileLocations}>
           <h2>{locationsSection?.title || "Global Delivery Sites"}</h2>
-          {locations.map((location) => (
-            <p key={location}>{location}</p>
+          {groupedLocations.map((loc, idx) => (
+            <p key={idx}>
+              {loc.primary}
+              {loc.secondary && (
+                <>
+                  {" "}
+                  <span className={styles.locationPipe}>|</span> {loc.secondary}
+                </>
+              )}
+            </p>
           ))}
         </section>
         <section className={styles.mobileFramework}>
-          <h2>
-            The <strong>{framework?.title.highlight || "GREEN"}</strong>{" "}
-            {framework?.title.text || "Delivery Framework"}
-          </h2>
+          <h2>{renderFrameworkTitle()}</h2>
           {features.map((feature) => (
             <article key={feature}>
               <img
@@ -352,19 +409,23 @@ export default function GlobalSnapshot() {
             </article>
           ))}
         </section>
-        <p className={styles.mobileCredibility}>{credibility}</p>
+        <p className={styles.mobileCredibility}>
+          {renderCredibility(credibility)}
+        </p>
         <div className={styles.mobileActions}>
-          <button
-            type="button"
+          <FigmaAngledCta
             className={styles.mobileConsultation}
             onClick={() => setIsConsultationOpen(true)}
           >
             {actions?.buttons[1]?.text || "Request a Consultation"}
-          </button>
-          <Link className={styles.mobilePortfolio} href={portfolioHref}>
+          </FigmaAngledCta>
+          <FigmaAngledCta
+            className={styles.mobilePortfolio}
+            href={portfolioHref}
+          >
             {actions?.buttons[2]?.text ||
               "Explore our global project portfolio"}
-          </Link>
+          </FigmaAngledCta>
         </div>
       </div>
       <D6Chatbot />

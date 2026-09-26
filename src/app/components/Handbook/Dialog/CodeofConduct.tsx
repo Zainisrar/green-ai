@@ -9,8 +9,37 @@ interface Props {
   items: { category: string; requiredStandard: string }[];
 }
 
+const defaultConductItems = [
+  {
+    category: "Integrity",
+    requiredStandard:
+      "Zero tolerance for bribery, misrepresentation, or falsified credentials",
+  },
+  {
+    category: "Compliance",
+    requiredStandard:
+      "Full alignment with ISO, IEC, PNG national code, and GREEN-specific specs",
+  },
+  {
+    category: "Workforce Ethics",
+    requiredStandard:
+      "No exploitation. No informal labor. Training and fair pay mandatory",
+  },
+  {
+    category: "Environmental",
+    requiredStandard:
+      "Products with RoHS, recyclable elements, and responsible sourcing are prioritized",
+  },
+  {
+    category: "Technical Readiness",
+    requiredStandard:
+      "Vendors must support lifecycle diagnostics and provide API/open data standards",
+  },
+];
+
 const CodeOfConduct = ({ isOpen, onClose, title, items }: Props) => {
   if (!isOpen) return null;
+  const displayItems = items && items.length > 0 ? items : defaultConductItems;
 
   return (
     <HandbookModalFrame
@@ -40,7 +69,7 @@ const CodeOfConduct = ({ isOpen, onClose, title, items }: Props) => {
             </tr>
           </thead>
           <tbody>
-            {items?.map((row) => (
+            {displayItems.map((row) => (
               <tr key={`${row.category}-${row.requiredStandard}`}>
                 <th scope="row">{row.category}</th>
                 <td>{row.requiredStandard}</td>

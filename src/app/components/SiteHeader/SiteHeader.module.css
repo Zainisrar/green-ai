@@ -517,39 +517,95 @@
   }
 }
 
-@media (max-width: 900px) {
-  .header {
+@media (max-width: 1023px) {
+  .header:not(.canvasHeader):not(.productCanvasHeader) {
     --site-header-height: 76px;
-    padding: 0 16px;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: var(--site-header-height) !important;
+    padding: 0 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    z-index: 9999 !important;
+    box-sizing: border-box !important;
   }
 
-  .logo {
+  /* Dedicated header for content pages: solid white background, border, and shadow */
+  .header:not(.canvasHeader):not(.productCanvasHeader).dedicatedHeader {
+    background: #ffffff !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04) !important;
+    backdrop-filter: blur(12px) !important;
+  }
+
+  /* Home page header over hero landscape: transparent by default, frosted when scrolled */
+  .header:not(.canvasHeader):not(.productCanvasHeader).homeHeader {
+    background: transparent !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader).homeHeader.scrolled {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06) !important;
+    backdrop-filter: blur(12px) !important;
+  }
+
+  /* When mobile navigation drawer is open, keep header background transparent so drawer takes over */
+  .header:not(.canvasHeader):not(.productCanvasHeader).navigationOpen {
+    background: transparent !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader) .brandPanel {
+    position: relative;
+    top: auto;
+    left: auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .header:not(.canvasHeader):not(.productCanvasHeader) .logo {
     width: 168px;
   }
 
-  .sunshineLogo img {
+  .header:not(.canvasHeader):not(.productCanvasHeader) .sunshineLogo img {
     padding: 8px 0;
   }
 
-  .sunshineLogo.productLogo {
+  .header:not(.canvasHeader):not(.productCanvasHeader) .sunshineLogo.productLogo {
     width: 168px;
   }
 
-  .navigation {
+  .header:not(.canvasHeader):not(.productCanvasHeader) .navigation {
     gap: 0;
+    margin: 0;
   }
 
-  .navigation a {
+  .header:not(.canvasHeader):not(.productCanvasHeader) .navigation a {
     display: none;
   }
 
-  .menuButton {
-    width: 34px;
-    height: 44px;
+  .header:not(.canvasHeader):not(.productCanvasHeader) .menuButton {
+    display: grid !important;
+    place-items: center !important;
+    width: 34px !important;
+    height: 44px !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    cursor: pointer !important;
   }
 
-  .menuButton img {
-    width: 34px;
-    height: 34px;
+  .header:not(.canvasHeader):not(.productCanvasHeader) .menuButton img {
+    width: 34px !important;
+    height: 34px !important;
   }
 }

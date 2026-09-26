@@ -371,36 +371,48 @@ const EXPANDED_PANELS = [
   },
 ] as const;
 
-/** Mobile (G hidden): one letter per image on the left, its heading at the top-right inside
-   the same diagonal section. Positions are vertical % within the 110vh background. */
+/** Mobile G-R-E-E-N: one letter per image section on the left, its heading at the top-right inside
+   the corresponding diagonal section of mobileBg.png. */
 const MOBILE_PANELS = [
+  {
+    letter: "G",
+    heading: "Future Envisioned",
+    href: "/explore/welcome-to-green",
+    top: "10%",
+    letterTop: "16%",
+    letterLeft: "8%",
+  },
   {
     letter: "R",
     heading: "About GREEN",
-    headingTop: "24%",
-    letterTop: "40%",
-    letterLeft: "10%",
+    href: "/explore/welcome-to-green",
+    top: "27%",
+    letterTop: "16%",
+    letterLeft: "8%",
   },
   {
     letter: "E",
     heading: "Products and Solutions",
-    headingTop: "44%",
-    letterTop: "57%",
-    letterLeft: "10%",
+    href: "/engineering/products",
+    top: "44%",
+    letterTop: "16%",
+    letterLeft: "8%",
   },
   {
     letter: "E",
     heading: "EPC Energy Services",
-    headingTop: "63%",
-    letterTop: "76%",
-    letterLeft: "10%",
+    href: "/energy",
+    top: "62%",
+    letterTop: "16%",
+    letterLeft: "8%",
   },
   {
     letter: "N",
     heading: "Projects and Services",
-    headingTop: "81%",
-    letterTop: "93%",
-    letterLeft: "10%",
+    href: "/endeavors/project-portfolio",
+    top: "79%",
+    letterTop: "16%",
+    letterLeft: "8%",
   },
 ] as const;
 
@@ -530,60 +542,78 @@ const D6Template = (_props: D6TemplateProps) => {
 
   if (isMobile) {
     return (
-      <>
+      <div className="relative w-full min-h-[100svh] overflow-x-hidden bg-[#071d10] font-sans">
+        {/* Header with panel="logoOnly" to prevent duplicate green logo panel */}
         <SiteHeader panel="logoOnly" />
-        {/* Exact image aspect → diagonals land at fixed % on every device (no object-cover crop) */}
-        <div className="relative w-screen overflow-hidden aspect-[360/800]">
-          <img
-            loading="lazy"
-            decoding="async"
-            src="/images/d6/mobileBg.png"
-            alt=""
-            role="presentation"
-            className="absolute inset-0 -z-10 h-full w-full"
-          />
-          <div className="mt-4">
-            <img
-              loading="lazy"
-              decoding="async"
-              src="/images/d6/greenFuture.png"
-              alt=""
 
+        <main className="relative w-full max-w-[500px] mx-auto min-h-[100svh] flex flex-col justify-between overflow-x-hidden pb-4">
+          {/* Background image container preserving diagonal composition */}
+          <div className="relative w-full aspect-[360/800] min-h-[640px] max-h-[920px] shadow-2xl overflow-hidden">
+            <img
+              loading="eager"
+              decoding="async"
+              src="/images/d6/mobileBg.png"
+              alt=""
+              role="presentation"
+              className="absolute inset-0 h-full w-full object-cover object-center pointer-events-none z-0 select-none"
             />
-          </div>
-          {/* G hidden. Each image: one letter on the left, its heading at the top-right inside. */}
-          <div className="pointer-events-none absolute inset-0 z-0">
-            {MOBILE_PANELS.map((p, i) => (
-              <React.Fragment key={`m-${i}`}>
-                <span
-                  className="absolute block font-bold leading-tight text-white"
+            {/* Subtle contrast gradient so white letters and titles are 100% legible over photos */}
+            <div
+              className="absolute inset-0 z-[1] pointer-events-none bg-gradient-to-b from-black/25 via-transparent to-black/40"
+              aria-hidden="true"
+            />
+
+            {/* G-R-E-E-N interactive panels */}
+            <div className="absolute inset-0 z-10 pointer-events-auto">
+              {MOBILE_PANELS.map((p, i) => (
+                <Link
+                  key={`m-${i}`}
+                  href={p.href}
+                  className="absolute left-0 right-0 block px-6 py-2 transition-transform active:scale-[0.98] group"
                   style={{
-                    top: p.headingTop,
-                    left: "52%",
-                    maxWidth: 150,
-                    fontSize: 16,
-                    textShadow: "0px 2px 10px rgba(0,0,0,0.6)",
+                    top: p.top,
+                    height: "16%",
                   }}
+                  aria-label={`${p.letter}: ${p.heading}`}
                 >
-                  {p.heading}
-                </span>
-                <span
-                  className="absolute block font-extrabold italic leading-none text-white"
-                  style={{
-                    top: p.letterTop,
-                    left: p.letterLeft,
-                    fontSize: 56,
-                    textShadow: "0px 2px 12px rgba(0,0,0,0.55)",
-                  }}
-                >
-                  {p.letter}
-                </span>
-              </React.Fragment>
-            ))}
+                  <span
+                    className="absolute block font-extrabold italic leading-none text-white select-none text-[clamp(44px,11vw,58px)] drop-shadow-[0_2px_14px_rgba(0,0,0,0.85)]"
+                    style={{
+                      top: p.letterTop,
+                      left: p.letterLeft,
+                    }}
+                  >
+                    {p.letter}
+                  </span>
+                  <div
+                    className="absolute right-4 text-right max-w-[210px]"
+                    style={{ top: "12%" }}
+                  >
+                    <span className="block font-bold leading-snug text-white text-[clamp(13px,3.6vw,17px)] drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)] group-hover:text-[#9ae98e] transition-colors">
+                      {p.heading}
+                    </span>
+                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#b8f59e] mt-1 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                      Explore <span>→</span>
+                    </span>
+                  </div>
+                </Link>
+              ))}
+
+              {/* COMPANY SNAPSHOTS IN 90 SEC clickable overlay */}
+              <Link
+                href="/global-snapshot"
+                className="absolute right-3 bottom-[2%] z-10 block px-3 py-1.5 rounded-lg active:scale-95 transition-transform"
+                style={{ width: "170px", height: "48px" }}
+                aria-label="Company Snapshots in 90 sec"
+              />
+            </div>
           </div>
-          <D6Chatbot />
-        </div>
-      </>
+
+          <div className="relative z-20 px-4 py-2 flex justify-end">
+            <D6Chatbot />
+          </div>
+        </main>
+      </div>
     );
   }
 

@@ -1,17 +1,17 @@
 "use client";
-import React from "react";
 
-import { useState } from "react";
+import Image from "next/image";
+import React, { useState } from "react";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import styles from "./CollaborationInnovation.module.css";
+import InnovationSpotlight from "./Dialog/InnovationSpotlight";
 import OurPhilosophy from "./Dialog/OurPhilosophy";
 import WhoWeCollaborateWith from "./Dialog/WhoWeCollaborateWith";
-import InnovationSpotlight from "./Dialog/InnovationSpotlight";
 
-// Figma-locked design content (node 7077:18721). Keep the API hook import
-// available for future CMS wiring without changing the pixel geometry.
+// Figma-locked design content (node 7077:18721).
 const FALLBACK = {
   title: "COLLABORATION & INNOVATION",
   subHeadline: "Innovation Begins with Collaboration.",
@@ -40,11 +40,11 @@ const FALLBACK = {
     },
   ],
   quote1: {
-    text: "\u201cOPEN CALL: Tech Startups for Tropicalized BESS 2025\u201d",
+    text: "“OPEN CALL: Tech Startups for Tropicalized BESS 2025”",
     highlighted: "BESS 2025",
   },
   quote2: {
-    text: " Every phase has one owner. GREEN.\n Every project is more than delivered \u2014 it\u2019s engineered for legacy.\n",
+    text: "Every phase has one owner. GREEN.\nEvery project is more than delivered — it’s engineered for legacy.",
     highlighted: "GREEN.",
   },
 };
@@ -57,6 +57,7 @@ export default function CollaborationInnovation({
   canvas = false,
 }: CollaborationInnovationProps) {
   const [openModal, setOpenModal] = useState<string | null>(null);
+  const [isProposalOpen, setIsProposalOpen] = useState(false);
 
   const d = FALLBACK;
 
@@ -93,187 +94,301 @@ export default function CollaborationInnovation({
     ));
 
   return (
-    <main className={styles.page} data-node-id="7077:18721">
+    <main
+      className={`${styles.page} ${canvas ? styles.canvasPage : ""}`}
+      data-node-id="7077:18721"
+    >
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />
 
-      {/* Left green/yellow angled panel (Group 1171277870, 326×662 at -15,-1) */}
-      <div className={styles.leftPanel} aria-hidden="true" />
-      <img
-        loading="lazy"
-        decoding="async"
-        src="/images/collaboration-innovation/logo_green.png"
-        alt="GREEN Future: Envisioned"
-        className={styles.panelLogo}
-      />
+      {/* ── DESKTOP CANVAS (Exact 1920x970 Figma layout) ── */}
+      <div className={styles.desktopCanvas} aria-hidden={!canvas}>
+        {/* Background atom / orbital glow graphic (node 7077:18730, 680x563 at 0,408) */}
+        <div className={styles.bgAtom} aria-hidden="true">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/collaboration-innovation/mainImg.png"
+            alt=""
+          />
+        </div>
 
-      {/* Vertical outlined side title (Raleway 900, 50px, stroke #989898) */}
-      <h2 className={styles.verticalTitle}>COLLABORATION &amp; INNOVATION</h2>
+        {/* Vertical outlined side title (Raleway 900, 50px, stroke #989898) */}
+        <h2 className={styles.verticalTitle}>COLLABORATION &amp; INNOVATION</h2>
 
-      {/* Faint left collage (Mask group at -472,408, 1152×1888) */}
-      <div className={styles.leftCollage} aria-hidden="true">
-        <img
-          loading="lazy"
-          decoding="async"
-          src="/images/collaboration-innovation/collage_main.png"
-          alt=""
-        />
-      </div>
+        {/* Header section */}
+        <div className={styles.headerBlock}>
+          <h1 className={styles.mainTitle}>
+            COLLABORATION &amp;{" "}
+            <span className={styles.greenText}>INNOVATION</span>
+          </h1>
+          <p className={styles.subHeadline}>{d.subHeadline}</p>
+          <p className={styles.description}>
+            {highlightText(
+              d.description.text.replace(/\r?\n/g, " "),
+              d.description.highlighted,
+            )}
+          </p>
+        </div>
 
-      {/* Header section */}
-      <div className={styles.headerBlock}>
-        <h1 className={styles.mainTitle}>
-          COLLABORATION &amp;{" "}
-          <span className={styles.greenText}>INNOVATION</span>
-        </h1>
-        <p className={styles.subHeadline}>{d.subHeadline}</p>
-        <p className={styles.description}>
+        {/* Three slanted feature cards (Vectors 7362 / 7363 / 7364 with card-vector.svg) */}
+        {d.cards.map((card, idx) => {
+          const cardLeft = [588, 972, 1359][idx];
+          const imgLeft = [682, 1063, 1451][idx];
+          const imgTop = [421, 424, 421][idx];
+          const titleX = [774, 1154, 1551][idx];
+          const titleY = [356, 354, 354][idx];
+          const subX = [653, 1053, 1448][idx];
+          const subY = [590, 586, 583][idx];
+          return (
+            <div
+              key={card.key}
+              className={styles.card}
+              style={{ top: [341, 338, 339][idx], left: cardLeft }}
+            >
+              {/* Slanted gradient card boundary & drop shadow from Figma */}
+              <img
+                src="/images/collaboration-innovation/card-vector.svg"
+                alt=""
+                className={styles.cardVectorBg}
+                aria-hidden="true"
+              />
+              <h3
+                className={styles.cardTitle}
+                style={{
+                  position: "absolute",
+                  left: titleX - cardLeft,
+                  top: titleY - [341, 338, 339][idx],
+                }}
+              >
+                {card.title}
+              </h3>
+              <button
+                type="button"
+                className={styles.cardImage}
+                style={{
+                  position: "absolute",
+                  left: imgLeft - cardLeft,
+                  top: imgTop - [341, 338, 339][idx],
+                }}
+                onClick={() => setOpenModal(card.key)}
+                aria-label={`Open ${card.title} popup`}
+              >
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={card.image}
+                  alt={card.title}
+                />
+                <span className={styles.cardImageAccent} aria-hidden="true" />
+              </button>
+              <p
+                className={styles.cardSubtitle}
+                style={{
+                  position: "absolute",
+                  left: subX - cardLeft,
+                  top: subY - [341, 338, 339][idx],
+                }}
+              >
+                {splitLines(card.subtitle)}
+              </p>
+              <FigmaAngledCta
+                size="sm"
+                className={styles.cardCta}
+                onClick={() => setOpenModal(card.key)}
+              >
+                Explore
+              </FigmaAngledCta>
+            </div>
+          );
+        })}
+
+        {/* Bottom-left quote callout (OPEN CALL) */}
+        <button
+          type="button"
+          className={styles.bottomQuote}
+          onClick={() => setIsProposalOpen(true)}
+          aria-label="Open Call: Submit Proposal"
+        >
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/collaboration-innovation/quote_left.png"
+            alt=""
+            className={styles.quoteBracketLeft}
+            aria-hidden="true"
+          />
+          <span className={styles.quoteText}>
+            {highlightText(
+              d.quote1.text.slice(1, d.quote1.text.length - 1),
+              d.quote1.highlighted,
+            )}
+          </span>
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/collaboration-innovation/quote_right.png"
+            alt=""
+            className={styles.quoteBracketRight}
+            aria-hidden="true"
+          />
+        </button>
+
+        {/* Legacy statement */}
+        <p className={styles.legacyQuote}>
           {highlightText(
-            d.description.text.replace(/\r?\n/g, " "),
-            d.description.highlighted,
+            d.quote2.text.replace(/\r?\n/g, " "),
+            d.quote2.highlighted,
           )}
         </p>
-      </div>
 
-      {/* Three slanted feature cards (Vectors 7362 / 7363 / 7364, 527×351) */}
-      {d.cards.map((card, idx) => {
-        const cardLeft = [588, 972, 1359][idx];
-        const imgLeft = [682, 1063, 1451][idx];
-        const imgTop = [421, 424, 421][idx];
-        const titleX = [774, 1154, 1551][idx];
-        const titleY = [356, 354, 354][idx];
-        const subX = [653, 1053, 1448][idx];
-        const subY = [590, 586, 583][idx];
-        const pillX = [832, 1216, 1603][idx];
-        const pillY = [654, 650, 652][idx];
-        return (
-          <div
-            key={card.key}
-            className={styles.card}
-            style={{ top: [341, 338, 339][idx], left: cardLeft }}
-          >
-            <h3
-              className={styles.cardTitle}
-              style={{
-                position: "absolute",
-                left: titleX - cardLeft,
-                top: titleY - [341, 338, 339][idx],
-              }}
-            >
-              {card.title}
-            </h3>
-            <button
-              type="button"
-              className={styles.cardImage}
-              style={{
-                position: "absolute",
-                left: imgLeft - cardLeft,
-                top: imgTop - [341, 338, 339][idx],
-              }}
-              onClick={() => setOpenModal(card.key)}
-              aria-label={`Open ${card.title}`}
-            >
-              <img
-                loading="lazy"
-                decoding="async"
-                src={card.image}
-                alt={card.title}
-              />
-              <span className={styles.cardImageAccent} aria-hidden="true" />
-            </button>
-            <p
-              className={styles.cardSubtitle}
-              style={{
-                position: "absolute",
-                left: subX - cardLeft,
-                top: subY - [341, 338, 339][idx],
-              }}
-            >
-              {splitLines(card.subtitle)}
-            </p>
-            <FigmaAngledCta
-              className={styles.cardCta}
-              style={{
-                position: "absolute",
-                left: pillX - cardLeft,
-                top: pillY - [341, 338, 339][idx],
-              }}
-              onClick={() => setOpenModal(card.key)}
-            >
-              Explore
-            </FigmaAngledCta>
-          </div>
-        );
-      })}
+        {/* Bottom-right CTAs: Proposal opens modal; Framework PDF is direct link/download with NO pop window */}
+        <FigmaAngledCta
+          className={styles.submitCta}
+          style={{ position: "absolute", left: 1498, top: 741 }}
+          onClick={() => setIsProposalOpen(true)}
+        >
+          Submit Proposal / Collaboration Inquiry
+        </FigmaAngledCta>
+        <FigmaAngledCta
+          className={styles.frameworkCta}
+          style={{ position: "absolute", left: 1428, top: 819 }}
+          icon="download"
+          href="/green-innovation-partnership-framework.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          GREEN Innovation Partnership Framework (PDF)
+        </FigmaAngledCta>
 
-      {/* Bottom-left quote with angled brackets (Vectors 7374 / 7375) */}
-      <div className={styles.bottomQuote}>
-        <img
-          loading="lazy"
-          decoding="async"
-          src="/images/collaboration-innovation/quote_left.png"
-          alt=""
-          className={styles.quoteBracketLeft}
-          aria-hidden="true"
-        />
-        <h2 className={styles.quoteText}>
-          {highlightText(
-            d.quote1.text.slice(1, d.quote1.text.length - 1),
-            d.quote1.highlighted,
-          )}
-        </h2>
-        <img
-          loading="lazy"
-          decoding="async"
-          src="/images/collaboration-innovation/quote_right.png"
-          alt=""
-          className={styles.quoteBracketRight}
-          aria-hidden="true"
-        />
-      </div>
-
-      {/* Legacy statement */}
-      <p className={styles.legacyQuote}>
-        {highlightText(
-          d.quote2.text.replace(/\r?\n/g, " "),
-          d.quote2.highlighted,
+        {/* Chatbot */}
+        {canvas ? (
+          <D6Chatbot
+            canvasAnchored
+            triggerVariant="figmaCanvas"
+            triggerStyle={{
+              top: 899,
+              right: "auto",
+              bottom: "auto",
+              left: 1498,
+              width: 418,
+            }}
+          />
+        ) : (
+          <D6Chatbot />
         )}
-      </p>
+      </div>
 
-      {/* Bottom-right CTAs */}
-      <FigmaAngledCta
-        className={styles.submitCta}
-        style={{ position: "absolute", left: 1510, top: 741 }}
-        href="mailto:innovation@green.com.pg?subject=Collaboration%20Proposal"
-      >
-        Submit Proposal / Collaboration Inquiry
-      </FigmaAngledCta>
-      <FigmaAngledCta
-        className={styles.frameworkCta}
-        style={{ position: "absolute", left: 1437, top: 819 }}
-        icon="chevron"
-        href="mailto:innovation@green.com.pg?subject=Innovation%20Partnership%20Framework%20Request"
-      >
-        Request Innovation Partnership Framework
-      </FigmaAngledCta>
+      {/* ── MOBILE RESPONSIVE LAYOUT (< 1024px) ── */}
+      <div className={styles.mobileLayout}>
+        <div className={styles.mobileHero}>
+          <h1 className={styles.mobileTitle}>
+            COLLABORATION &amp;{" "}
+            <span className={styles.greenText}>INNOVATION</span>
+          </h1>
+          <p className={styles.mobileSubtitle}>{d.subHeadline}</p>
+          <p className={styles.mobileDescription}>
+            {highlightText(
+              d.description.text.replace(/\r?\n/g, " "),
+              d.description.highlighted,
+            )}
+          </p>
+        </div>
 
-      {/* Chatbot */}
-      {canvas ? (
-        <D6Chatbot
-          canvasAnchored
-          triggerVariant="figmaCanvas"
-          triggerStyle={{
-            top: 899,
-            right: "auto",
-            bottom: "auto",
-            left: 1498,
-            width: 418,
-          }}
-        />
-      ) : (
+        {/* Open Call Bracketed Quote on Mobile */}
+        <button
+          type="button"
+          className={styles.mobileOpenCall}
+          onClick={() => setIsProposalOpen(true)}
+          aria-label="Open Call: Submit Proposal"
+        >
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/collaboration-innovation/quote_left.png"
+            alt=""
+            className={styles.mobileQuoteBracketLeft}
+            aria-hidden="true"
+          />
+          <span className={styles.mobileOpenCallText}>
+            {highlightText(
+              d.quote1.text.slice(1, d.quote1.text.length - 1),
+              d.quote1.highlighted,
+            )}
+          </span>
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/collaboration-innovation/quote_right.png"
+            alt=""
+            className={styles.mobileQuoteBracketRight}
+            aria-hidden="true"
+          />
+        </button>
+
+        {/* Cards list on Mobile */}
+        <div className={styles.mobileCardsList}>
+          {d.cards.map((card) => (
+            <div key={card.key} className={styles.mobileCard}>
+              <h3 className={styles.mobileCardTitle}>{card.title}</h3>
+              <div
+                className={styles.mobileCardImage}
+                onClick={() => setOpenModal(card.key)}
+                onKeyDown={(e) => e.key === "Enter" && setOpenModal(card.key)}
+                role="button"
+                tabIndex={0}
+              >
+                <img
+                  loading="lazy"
+                  decoding="async"
+                  src={card.image}
+                  alt={card.title}
+                />
+              </div>
+              <p className={styles.mobileCardSubtitle}>
+                {splitLines(card.subtitle)}
+              </p>
+              <FigmaAngledCta
+                size="sm"
+                className={styles.mobileCardCta}
+                onClick={() => setOpenModal(card.key)}
+              >
+                Explore
+              </FigmaAngledCta>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile Legacy Statement */}
+        <p className={styles.mobileLegacy}>
+          {highlightText(
+            d.quote2.text.replace(/\r?\n/g, " "),
+            d.quote2.highlighted,
+          )}
+        </p>
+
+        {/* Mobile CTAs */}
+        <div className={styles.mobileCtas}>
+          <FigmaAngledCta
+            className={styles.mobileSubmitCta}
+            onClick={() => setIsProposalOpen(true)}
+          >
+            Submit Proposal / Collaboration Inquiry
+          </FigmaAngledCta>
+          <FigmaAngledCta
+            className={styles.mobileFrameworkCta}
+            icon="download"
+            href="/green-innovation-partnership-framework.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GREEN Innovation Partnership Framework (PDF)
+          </FigmaAngledCta>
+        </div>
+
         <D6Chatbot />
-      )}
+      </div>
 
-      {/* Modals (keep existing data-driven dialogs functional) */}
+      {/* ── THREE EXPLORE POP WINDOWS (Figma Nodes 7077:18808, 7077:18915, 7077:19015) ── */}
       <OurPhilosophy
         isOpen={openModal === "philosophy"}
         onClose={() => setOpenModal(null)}
@@ -285,6 +400,25 @@ export default function CollaborationInnovation({
       <InnovationSpotlight
         isOpen={openModal === "spotlight"}
         onClose={() => setOpenModal(null)}
+      />
+
+      {/* ── REUSABLE PROPOSAL INQUIRY MODAL (Last PDF button has NO pop window) ── */}
+      <ProductEnquiry
+        isOpen={isProposalOpen}
+        onClose={() => setIsProposalOpen(false)}
+        productName="Collaboration & Innovation"
+        titlePrefix="COLLABORATION"
+        titleAccent="INQUIRY"
+        interestLabel="COLLABORATION INITIATIVE"
+        interestOptions={[
+          "Tech Startups for Tropicalized BESS 2025",
+          "Academic & Research Pilot",
+          "GRID-INTEL™ Integration",
+          "Modular Microgrid Deployment",
+          "Community-Tied Energy Business Models",
+          "General Innovation Proposal",
+        ]}
+        defaultInterest="Tech Startups for Tropicalized BESS 2025"
       />
     </main>
   );

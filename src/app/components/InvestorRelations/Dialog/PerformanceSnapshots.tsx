@@ -49,6 +49,8 @@ export default function PerformanceSnapshots({
       onClose={onClose}
       title={title}
       headline={headline}
+      contentClassName={styles.performanceContent}
+      bodyClassName={styles.performanceBody}
     >
       <div className={styles.tableWrap}>
         <div className={styles.tableHeader}>

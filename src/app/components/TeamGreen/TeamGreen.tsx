@@ -310,7 +310,7 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
         <TopNavigation />
         <div className="flex h-full">
           {/* Left Side - GLOBAL SNAPSHOT Text */}
-          <div className="w-1/6 flex items-center justify-center">
+          <div className="hidden lg:flex w-1/6 items-center justify-center">
             <div className="fixed top-1/2 lg:top-1/4 left-4 lg:left-14">
               <img
                 loading="eager"
@@ -323,7 +323,7 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
           </div>
 
           {/* Main Content Area */}
-          <div className="w-full px-8 pt-8">
+          <div className="w-full px-4 lg:px-8 pt-24 lg:pt-8">
             {/* Main Title */}
             <div className="mb-8">
               <h1 className=" text-2xl lg:text-3xl font-black text-gray-800 mb-4">

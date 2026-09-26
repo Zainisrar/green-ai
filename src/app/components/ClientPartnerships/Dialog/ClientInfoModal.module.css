@@ -1,124 +1,137 @@
-.enquiryWindow {
-  width: min(1688px, calc(100vw - 36px));
+.overlay {
+  position: fixed;
+  z-index: 2147483647;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  box-sizing: border-box;
 }
 
-.enquiryPanel {
+.backdropClose {
+  position: fixed;
+  inset: 0;
+  border: 0;
+  background: transparent;
+  cursor: default;
+}
+
+.stage {
   position: relative;
-  isolation: isolate;
-  border: 0 !important;
-  border-radius: 0;
-  background: linear-gradient(90deg, #23b14d 0%, #fffe50 100%) !important;
-  clip-path: polygon(3.6% 0, 100% 0, 96.4% 100%, 0 100%);
-  padding-right: clamp(1.5rem, 4vw, 4rem) !important;
-  padding-left: clamp(1.5rem, 4vw, 4rem) !important;
+  z-index: 10;
+  width: calc(var(--modal-width, 1866px) * var(--modal-scale, 1));
+  height: calc(var(--modal-height, 700px) * var(--modal-scale, 1));
+  flex: none;
+  margin: auto;
 }
 
-.enquiryPanel::before {
+.modalWindow {
   position: absolute;
-  z-index: 0;
-  inset: 2px;
-  content: "";
-  background: #fff;
-  clip-path: polygon(3.6% 0, 100% 0, 96.4% 100%, 0 100%);
-}
-
-.enquiryPanel > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Supplier detail dialogs — Figma nodes 7077:19448, 19335, 19221, 19570. */
-.supplierWindow {
-  width: min(1866.2px, calc(100vw - 36px));
-  height: 699.6px;
-}
-
-.supplierPanel {
-  height: 699.6px;
-  min-height: 699.6px;
-  margin: 0 !important;
+  top: 0;
+  left: 0;
+  width: var(--modal-width, 1866px);
+  height: var(--modal-height, 700px);
+  transform: scale(var(--modal-scale, 1));
+  transform-origin: top left;
   isolation: isolate;
-  overflow: hidden;
-  border: 0 !important;
-  border-radius: 0;
-  background: linear-gradient(90deg, #23b14d 0%, #fffe50 100%) !important;
-  clip-path: polygon(16.33% 0, 100% 0, 80.84% 100%, 0 100%);
-  padding: 44px 300px 48px 344px !important;
+  filter: drop-shadow(0px 3px 40px rgba(0, 0, 0, 0.25));
 }
 
-.supplierPanel::before {
+.backgroundVector {
   position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
   z-index: 0;
-  inset: 2px;
-  content: "";
-  background: #fff;
-  clip-path: polygon(16.33% 0, 100% 0, 80.84% 100%, 0 100%);
 }
 
-.supplierPanel > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Supplier handbook dialogs — Figma nodes 7077:28940 and 7077:29052.
-   This is intentionally narrower and taller than the supplier-page detail
-   frame, while retaining the same parallel angled sides. */
-.handbookWindow {
-  width: min(1492px, calc(100vw - 36px)) !important;
-  height: 560px;
-  max-width: none !important;
-}
-
-.handbookPanel {
-  height: 560px;
-  min-height: 560px;
-  margin: 0 !important;
-  isolation: isolate;
-  overflow: hidden;
-  border: 0 !important;
-  border-radius: 0;
-  background: linear-gradient(90deg, #23b14d 0%, #fffe50 100%) !important;
-  clip-path: polygon(16.33% 0, 100% 0, 80.84% 100%, 0 100%);
-  padding: 44px 250px 48px 344px !important;
-}
-
-.handbookPanel::before {
+.closeButton {
   position: absolute;
-  z-index: 0;
-  inset: 2px;
-  content: "";
-  background: #fff;
-  clip-path: polygon(16.33% 0, 100% 0, 80.84% 100%, 0 100%);
+  z-index: 30;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 8px;
+  color: #555555;
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.handbookPanel > * {
+.closeButton:hover {
+  color: #000000;
+  transform: scale(1.1);
+}
+
+.closeIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.contentViewport {
   position: relative;
-  z-index: 1;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 46px 120px 48px 344px;
 }
 
-@media (max-width: 767px) {
-  .supplierWindow,
-  .supplierPanel,
-  .handbookWindow,
-  .handbookPanel {
+/* Mobile Fallback (< 900px) */
+@media (max-width: 899px) {
+  .overlay {
+    display: flex;
+    align-items: flex-start;
+    padding: 16px 12px;
+  }
+
+  .stage {
+    position: relative;
+    top: auto;
+    left: auto;
     width: 100%;
     height: auto;
-    min-height: 0;
+    max-width: 680px;
+    margin: auto;
   }
 
-  .handbookWindow {
-    width: 100% !important;
+  .modalWindow {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transform: none;
+    background: #ffffff;
+    border: 2px solid #23b14d;
+    border-radius: 16px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+    filter: none;
+    overflow: hidden;
   }
 
-  .supplierPanel,
-  .supplierPanel::before,
-  .handbookPanel,
-  .handbookPanel::before {
-    clip-path: none;
+  .backgroundVector {
+    display: none;
   }
 
-  .supplierPanel,
-  .handbookPanel {
-    padding: 2rem 1.5rem !important;
+  .closeButton {
+    top: 14px !important;
+    right: 14px !important;
+    color: #333333;
+  }
+
+  .contentViewport {
+    padding: 36px 20px 24px !important;
+    max-height: calc(100dvh - 3rem);
+    overflow-y: auto;
   }
 }

@@ -22,6 +22,8 @@ const FALLBACK_INSIGHT_SLIDES: SlideProps[] = [
       "Therefore, endeavored to provide individuals and communities with sustainable energy solutions. Our mission is to encourage the adoption of renewable energy and contribute to a cleaner, greener future for all..",
     backgroundImage: "/images/insight1/figma/mining-background.png",
     tag: "# Mining Insight 01",
+    descriptionMarginTop: "5.5dvh",
+    keysTop: "35dvh",
     keys: [
       {
         icon: "/images/insight1/figma/renewable-energy.png",
@@ -65,8 +67,8 @@ const FALLBACK_INSIGHT_SLIDES: SlideProps[] = [
       "Delivering access to clean energy, fostering decent work and innovation, promoting sustainable consumption, and driving climate action.",
     backgroundImage: "/images/insight1/figma/slider/slide-2-background.png",
     contentTop: "12.89dvh",
-    descriptionMarginTop: "10.5dvh",
-    keysTop: "37.73dvh",
+    descriptionMarginTop: "6.5dvh",
+    keysTop: "33dvh",
     tag: "# Home Insight 02",
     keys: [
       {
@@ -113,8 +115,8 @@ const FALLBACK_INSIGHT_SLIDES: SlideProps[] = [
       "Delivering access to clean energy, fostering decent work and innovation, promoting sustainable consumption, and driving climate action.",
     backgroundImage: "/images/insight1/figma/slider/slide-3-background.png",
     contentTop: "14.64dvh",
-    descriptionMarginTop: "8.7dvh",
-    keysTop: "36dvh",
+    descriptionMarginTop: "5.5dvh",
+    keysTop: "33dvh",
     tag: "# Urban Insight 03",
     keys: [
       {
@@ -162,7 +164,7 @@ const FALLBACK_INSIGHT_SLIDES: SlideProps[] = [
     backgroundImage: "/images/insight1/figma/slider/slide-4-background.png",
     contentTop: "15.98dvh",
     descriptionMarginTop: "4.5dvh",
-    keysTop: "34.64dvh",
+    keysTop: "33dvh",
     tag: "# Hotel Insight 04",
     keys: [
       {

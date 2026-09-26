@@ -246,3 +246,41 @@
   font-weight: 600;
   clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
 }
+
+.mobileFailureQuote {
+  margin: 28px auto;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  color: #202020;
+}
+
+.mobileFailureQuote span {
+  color: #23b14d;
+}
+
+.mobileDownloadBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 50px;
+  border: 1px solid #23b14d;
+  background: linear-gradient(110deg, #75d994, #effc97);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  color: #000;
+  text-decoration: none;
+  clip-path: polygon(7% 0, 100% 0, 93% 100%, 0 100%);
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+.mobileDownloadBtn img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}

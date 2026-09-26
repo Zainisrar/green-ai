@@ -176,7 +176,7 @@ const GlobalError = ({ error, reset }: ErrorProps) => {
         <div className="absolute bottom-1/4 left-1/3 w-64 h-64 bg-red-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes blob {
           0% {
             transform: translate(0px, 0px) scale(1);

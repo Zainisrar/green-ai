@@ -14,11 +14,11 @@
 
 .maskBg {
   position: absolute;
-  top: 289px;
-  left: -308px;
-  width: 988px;
-  height: 988px;
-  object-fit: cover;
+  top: 0;
+  left: 0;
+  width: 989px;
+  height: 970px;
+  object-fit: fill;
   pointer-events: none;
   z-index: 1;
 }
@@ -146,11 +146,32 @@
   width: 623px;
 }
 
+.cardThumbWrapper {
+  position: relative;
+  width: 325px;
+  height: 150px;
+  flex: 0 0 325px;
+}
+
+.cardBorder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 325px;
+  height: 150px;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .cardThumb {
-  width: 310px;
-  height: 124px;
-  flex: 0 0 310px;
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  width: 305px;
+  height: 126px;
   object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
 }
 
 .cardContent {
@@ -234,7 +255,8 @@
   .maskBg,
   .verticalTitle,
   .leftQuoteBlock,
-  .desktopCtas {
+  .desktopCtas,
+  .cardBorder {
     display: none;
   }
 
@@ -262,6 +284,13 @@
   .card {
     width: 100%;
     flex-direction: column;
+  }
+
+  .cardThumbWrapper {
+    width: 100%;
+    max-width: 340px;
+    height: auto;
+    flex: none;
   }
 
   .cardThumb {
@@ -300,13 +329,17 @@
   .mobileCtas {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 16px;
     margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .mobileCtas button,
   .mobileCtas a {
     width: 100%;
+    max-width: 370px;
     height: 52px;
   }
 }

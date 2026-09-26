@@ -362,7 +362,7 @@ const Chatbot: React.FC<ChatbotProps> = ({ triggerClassName = "" }) => {
 
       {/* Chat Trigger */}
       <div
-        className={`fixed z-[20] right-4 lg:right-6 bottom-4 lg:bottom-5 ${triggerClassName}`}
+        className={`d6-chatbot-trigger fixed z-[50] right-4 lg:right-6 bottom-4 lg:bottom-5 ${triggerClassName}`}
       >
         <Vector7366
           value={promptInputValue}

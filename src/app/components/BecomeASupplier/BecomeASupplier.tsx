@@ -64,7 +64,7 @@ const BecomeASupplier = () => {
           </div>
 
           {/* Main content */}
-          <div className="min-w-0 flex-1 px-4 pt-8 sm:px-8">
+          <div className="min-w-0 flex-1 px-4 pt-24 lg:pt-8 sm:px-8">
             {/* Title block */}
             <div className="mb-8">
               <h1 className="mb-3 text-2xl font-black text-gray-800 lg:text-3xl">

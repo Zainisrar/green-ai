@@ -76,6 +76,102 @@ export default function NewsletterSignup({
 }: NewsletterSignupProps) {
   const [formOpen, setFormOpen] = useState(false);
 
+  if (!canvas) {
+    return (
+      <main className={styles.mobilePage} data-node-id="7077:14996">
+        <SiteHeader layout="viewport" />
+
+        {/* Ambient decorative background */}
+        <div className={styles.mobileBgDecor} aria-hidden="true">
+          <img
+            loading="lazy"
+            decoding="async"
+            src="/images/newsletter/mainImg.png"
+            alt=""
+          />
+        </div>
+
+        {/* Header Hero */}
+        <div className={styles.mobileHero}>
+          <h1 className={styles.mobileTitle}>
+            NEWSLETTER <span className={styles.greenText}>SIGNUP</span>
+          </h1>
+          <p className={styles.mobileSubtitle}>Stay Informed. Stay Energized.</p>
+          <p className={styles.mobileDescription}>
+            Subscribe to{" "}
+            <span className={styles.greenText}>GREEN Insights</span> — your
+            monthly pulse on solar innovation, impact projects, energy access
+            breakthroughs, and exclusive behind-the-scenes content from across
+            PNG and the South Pacific.
+          </p>
+        </div>
+
+        {/* Why Subscribe? */}
+        <h2 className={styles.mobileSectionTitle}>Why Subscribe?</h2>
+        <div className={styles.mobileBenefitsList}>
+          {BENEFIT_ROWS.map((item) => (
+            <div key={item.benefit} className={styles.mobileBenefitCard}>
+              <h3 className={styles.mobileBenefitName}>{item.benefit}</h3>
+              <p className={styles.mobileBenefitDesc}>{item.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* What You'll Receive */}
+        <h2 className={styles.mobileSectionTitle}>
+          What You&rsquo;ll <span className={styles.greenText}>Receive</span>
+        </h2>
+        <div className={styles.mobilePillsGrid}>
+          {[
+            "1 Monthly Email (No Spam)",
+            "Curated Project Highlights",
+            "Thought Leadership Articles",
+            "Tools, Templates, & Free Downloads",
+          ].map((pillText) => (
+            <span key={pillText} className={styles.mobilePillBadge}>
+              {pillText}
+            </span>
+          ))}
+        </div>
+
+        {/* Contact Block */}
+        <div className={styles.mobileContactBox}>
+          <p className={styles.mobileContactLabel}>Contact</p>
+          <a
+            href="mailto:insights@green.com.pg"
+            className={styles.mobileContactEmail}
+          >
+            insights@green.com.pg
+          </a>
+        </div>
+
+        {/* Tagline */}
+        <p className={styles.mobileTagline}>
+          From remote installations to regional milestones — let{" "}
+          <span className={styles.greenText}>GREEN</span> power your inbox with
+          content that matters.
+        </p>
+
+        {/* CTA Button */}
+        <button
+          type="button"
+          className={styles.mobileSignupBtn}
+          onClick={() => setFormOpen(true)}
+        >
+          <span>Sign Up Now</span>
+          <span aria-hidden="true">›</span>
+        </button>
+
+        <D6Chatbot />
+
+        <NewsletterSignupModal
+          isOpen={formOpen}
+          onClose={() => setFormOpen(false)}
+        />
+      </main>
+    );
+  }
+
   return (
     <main className={styles.page} data-node-id="7077:14996">
       <SiteHeader layout={canvas ? "figmaCanvas" : "viewport"} />

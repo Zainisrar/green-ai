@@ -17,6 +17,7 @@ interface InvestorModalShellProps {
   quoteHighlight?: string;
   children: ReactNode;
   contentClassName?: string;
+  bodyClassName?: string;
 }
 
 export default function InvestorModalShell({
@@ -28,6 +29,7 @@ export default function InvestorModalShell({
   quoteHighlight,
   children,
   contentClassName = "",
+  bodyClassName = "",
 }: InvestorModalShellProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const previouslyFocusedElement = useRef<HTMLElement | null>(null);
@@ -195,7 +197,9 @@ export default function InvestorModalShell({
             <div className={styles.divider} />
           </div>
 
-          <div className={styles.body}>{children}</div>
+          <div className={`${styles.body} ${bodyClassName}`.trim()}>
+            {children}
+          </div>
 
           {quoteText ? (
             <div className={styles.quoteContainer}>{renderQuote()}</div>

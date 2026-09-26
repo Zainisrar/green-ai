@@ -370,7 +370,7 @@ const GreenTalentIncubator = ({ canvas = false }: { canvas?: boolean }) => {
       <div className="mb-20 lg:mb-0">
         <TopNavigation />
         <div className="flex h-full">
-          <div className="w-1/10 flex items-center justify-center">
+          <div className="hidden lg:flex w-1/10 items-center justify-center">
             <div className="fixed top-1/2 lg:top-[20%] left-4 lg:left-14">
               <img
                 loading="lazy"
@@ -382,7 +382,7 @@ const GreenTalentIncubator = ({ canvas = false }: { canvas?: boolean }) => {
             </div>
           </div>
 
-          <div className="pl-14 lg:pl-24 relative z-20 pr-4 pt-8">
+          <div className="px-4 lg:pl-24 relative z-20 pr-4 pt-24 lg:pt-8">
             <div className="">
               <div className="mb-8">
                 <h1 className="text-2xl lg:text-3xl font-black text-gray-800 mb-4">

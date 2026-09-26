@@ -81,16 +81,14 @@ const DETAILS_BY_SLUG = {
 
 export default function ExpertiseDetail({ slug }: ExpertiseDetailProps) {
   const router = useRouter();
-  const [desktopScale, setDesktopScale] = useState(1);
+  const [desktopScale, setDesktopScale] = useState({ x: 1, y: 1 });
 
   useEffect(() => {
     const updateScale = () => {
-      setDesktopScale(
-        Math.min(
-          window.innerWidth / DESIGN_WIDTH,
-          window.innerHeight / DESIGN_HEIGHT,
-        ),
-      );
+      setDesktopScale({
+        x: document.documentElement.clientWidth / DESIGN_WIDTH,
+        y: window.innerHeight / DESIGN_HEIGHT,
+      });
     };
 
     updateScale();
@@ -111,7 +109,9 @@ export default function ExpertiseDetail({ slug }: ExpertiseDetailProps) {
           className={styles.canvas}
           data-node-id="7077:3843"
           data-name="Solutions page -D1"
-          style={{ transform: `translateX(-50%) scale(${desktopScale})` }}
+          style={{
+            transform: `scale(${desktopScale.x}, ${desktopScale.y})`,
+          }}
         >
           <SiteHeader layout="figmaCanvas" canvasActiveNavigation />
           <SolutionDetail
@@ -138,6 +138,9 @@ export default function ExpertiseDetail({ slug }: ExpertiseDetailProps) {
       >
         <SiteHeader />
         <div className={styles.mobileHero}>
+          <Link href="/expertise" className={styles.mobileBackBtn}>
+            ← Back to Solutions
+          </Link>
           <p>Solutions</p>
           <h1>
             {detail.title} <span>{detail.highlightedTitle}</span>
@@ -145,6 +148,21 @@ export default function ExpertiseDetail({ slug }: ExpertiseDetailProps) {
           <h2>{detail.subtitle}</h2>
           <img src={detail.images[0].src} alt={detail.images[0].alt} />
           <p>{detail.description}</p>
+
+          {detail.features && detail.features.length > 0 && (
+            <div className={styles.mobileDetailFeatures}>
+              {detail.features.map((feature) => (
+                <article key={feature.title}>
+                  <img src={feature.icon} alt="" />
+                  <div>
+                    <h3>{feature.title}</h3>
+                    <p>{feature.description}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+
           <Link href="/engage/contact-us">Let&apos;s Start</Link>
         </div>
         <D6Chatbot />

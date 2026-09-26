@@ -1,5 +1,6 @@
 .cta {
   --figma-cta-slant: 23px;
+  --figma-cta-height: 52px;
 
   position: relative;
   isolation: isolate;
@@ -10,8 +11,8 @@
   gap: 12px;
   min-width: 0;
   max-width: 100%;
-  height: 52px;
-  padding: 0 20px 0 28px;
+  height: var(--figma-cta-height);
+  padding: 0 24px;
   border: 0;
   background: transparent;
   color: #000;
@@ -23,6 +24,17 @@
     filter 0.15s ease,
     transform 0.15s ease;
 }
+
+.ctaSmall {
+  --figma-cta-slant: 16px;
+  --figma-cta-height: 37px;
+  min-height: 37px;
+  height: var(--figma-cta-height);
+  padding: 0 14px 0 18px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
 
 .cta::before,
 .cta::after {
@@ -136,3 +148,49 @@
   outline: 2px solid #23b14d;
   outline-offset: 3px;
 }
+
+@media (max-width: 900px) {
+  .cta {
+    --figma-cta-slant: 16px;
+    height: auto;
+    min-height: 48px;
+    padding: 8px 24px;
+    font-size: clamp(11.5px, 3.2vw, 13.5px);
+  }
+
+  .inner {
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .label {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    font-size: inherit;
+    text-align: center;
+    white-space: normal !important;
+    word-break: normal;
+    overflow-wrap: break-word;
+    line-height: 1.25;
+  }
+
+  .cta span {
+    white-space: normal !important;
+  }
+
+  .downloadIcon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .arrow {
+    width: 8px;
+    height: 13px;
+    flex-shrink: 0;
+  }
+}
+

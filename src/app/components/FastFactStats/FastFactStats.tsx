@@ -6,6 +6,7 @@ import { useFastFactStats } from "../../../hooks/useFastFactStats";
 import D6Chatbot from "../D6Chatbot";
 import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import styles from "./FastFactStats.module.css";
 
@@ -241,36 +242,21 @@ export default function FastFactStats() {
         )}
       </div>
       <div className={styles.actions}>
-        <button
-          type="button"
+        <FigmaAngledCta
+          className={styles.connectCta}
           onClick={() => setIsConnectOpen(true)}
           data-node-id="7077:6563"
         >
-          <img
-            loading="lazy"
-            decoding="async"
-            src="/images/facts/connectwithgreen.png"
-            alt=""
-          />
-          <span>
-            {impactSummarySection?.cta[0]?.text || "Connect with GREEN"}
-          </span>
-          <b>›</b>
-        </button>
-        <Link
+          {impactSummarySection?.cta[0]?.text || "Connect with GREEN"}
+        </FigmaAngledCta>
+        <FigmaAngledCta
+          className={styles.downloadCta}
           href={impactSummarySection?.cta[1]?.link || "#"}
+          icon="download"
           data-node-id="7077:6569"
         >
-          <img
-            loading="lazy"
-            decoding="async"
-            src="/images/facts/downloadimpactsummary.png"
-            alt=""
-          />
-          <span>
-            {impactSummarySection?.cta[1]?.text || "Download Impact Summary"}
-          </span>
-        </Link>
+          {impactSummarySection?.cta[1]?.text || "Download Impact Summary"}
+        </FigmaAngledCta>
       </div>
       <D6Chatbot
         canvasAnchored
@@ -323,13 +309,29 @@ export default function FastFactStats() {
             </article>
           ))}
         </div>
-        <button
-          type="button"
-          className={styles.mobileConnect}
-          onClick={() => setIsConnectOpen(true)}
-        >
-          {impactSummarySection?.cta[0]?.text || "Connect with GREEN"}
-        </button>
+        <div className={styles.mobileImpactQuote}>
+          <p className={styles.mobileImpactHeadline}>
+            Real <span>Impact.</span> In Real Places.
+          </p>
+          <p className={styles.mobileImpactDesc}>
+            {quoteDescription}
+          </p>
+        </div>
+        <div className={styles.mobileActions}>
+          <FigmaAngledCta
+            className={styles.mobileCta}
+            onClick={() => setIsConnectOpen(true)}
+          >
+            {impactSummarySection?.cta[0]?.text || "Connect with GREEN"}
+          </FigmaAngledCta>
+          <FigmaAngledCta
+            className={styles.mobileCta}
+            href={impactSummarySection?.cta[1]?.link || "#"}
+            icon="download"
+          >
+            {impactSummarySection?.cta[1]?.text || "Download Impact Summary"}
+          </FigmaAngledCta>
+        </div>
       </div>
       <D6Chatbot />
     </main>

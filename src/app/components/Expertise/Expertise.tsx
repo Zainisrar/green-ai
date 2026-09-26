@@ -289,12 +289,13 @@ const HEALTHCARE_FEATURES = [
 
 type ViewMode = "grid" | "slider";
 type SliderScreen = "overview" | "healthcare";
+const DEFAULT_GRID_INDEX = 3; // Powering Corporate — the Figma's initial grid state.
 
 export default function Expertise() {
   const { data: expertiseItems } = useExpertise();
   const [view, setView] = useState<ViewMode>("grid");
   const [sliderScreen, setSliderScreen] = useState<SliderScreen>("overview");
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(DEFAULT_GRID_INDEX);
   const [isSliderDragging, setIsSliderDragging] = useState(false);
   const [desktopScale, setDesktopScale] = useState({ x: 1, y: 1 });
   const sliderViewportRef = useRef<HTMLElement>(null);
@@ -336,6 +337,11 @@ export default function Expertise() {
   };
 
   const currentSliderItem = SLIDER_ITEMS[activeSliderIndex] ?? SLIDER_ITEMS[0];
+  // The carousel can browse images independently. Keep the surrounding slider
+  // content anchored to the solution selected before entering Slider view.
+  const sliderPresentationItem =
+    SLIDER_ITEMS.find((panel) => panel.item === selectedIndex) ??
+    currentSliderItem;
   const activeGalleryItem = GALLERY[selectedIndex % GALLERY.length];
   const fallbackSolution = SOLUTION_COPY[selectedIndex % SOLUTION_COPY.length];
 
@@ -359,10 +365,10 @@ export default function Expertise() {
   let exploreHref: string;
 
   if (view === "slider") {
-    activeTitle = currentSliderItem.title;
-    activeHighlighted = currentSliderItem.highlighted;
-    activeDescription = currentSliderItem.description;
-    exploreHref = currentSliderItem.slug;
+    activeTitle = sliderPresentationItem.title;
+    activeHighlighted = sliderPresentationItem.highlighted;
+    activeDescription = sliderPresentationItem.description;
+    exploreHref = sliderPresentationItem.slug;
   } else {
     const parsed = parseTitle(
       activeExpertise?.title,
@@ -714,7 +720,6 @@ export default function Expertise() {
                             onClick={() => {
                               if (!sliderDidDrag.current) {
                                 setActiveSliderIndex(index);
-                                setSelectedIndex(panel.item);
                               }
                             }}
                             className={`${styles.sliderPanel} ${
@@ -821,6 +826,7 @@ export default function Expertise() {
       </section>
 
       <section className={styles.mobileLayout}>
+        <SiteHeader />
         <div className={styles.mobileHero}>
           <p>Solutions</p>
           <h1>
@@ -832,7 +838,12 @@ export default function Expertise() {
             An Ultimate Target
           </h2>
           <p>{activeDescription}</p>
-          <Link href={exploreHref}>Explore →</Link>
+          <Link
+            href={exploreHref}
+            aria-label={`Explore ${activeTitle} ${activeHighlighted}`}
+          >
+            Explore →
+          </Link>
         </div>
 
         <div className={styles.mobileGallery}>
@@ -844,6 +855,7 @@ export default function Expertise() {
               className={
                 selectedIndex === index ? styles.mobileSelected : undefined
               }
+              aria-label={`Select ${item.label}`}
             >
               <img
                 loading="lazy"
@@ -855,7 +867,9 @@ export default function Expertise() {
             </button>
           ))}
         </div>
-        <D6Chatbot />
+        <div className={styles.mobileChatWrapper}>
+          <D6Chatbot />
+        </div>
       </section>
     </main>
   );

@@ -24,6 +24,10 @@ const securityHeaders = [
 ];
 
 const nextConfig = (phase: string): NextConfig => ({
+  // Produce Next's traced runtime so the production container ships only the
+  // server files it needs instead of the complete development node_modules.
+  output: "standalone",
+
   // Dev and production builds MUST NOT share a distDir.
   //
   // `next dev` overwrites .next with a development artifact that has no
@@ -53,6 +57,9 @@ const nextConfig = (phase: string): NextConfig => ({
     remotePatterns: [
       { protocol: "https", hostname: "greencms.percepco.co.uk" },
       { protocol: "https", hostname: "app-gsolve.green.com.pg" },
+      // Cloudinary is used for some CMS-managed icon/asset URLs (e.g. GlobalSnapshot).
+      // Without this entry, next/image throws a 500 on any res.cloudinary.com src.
+      { protocol: "https", hostname: "res.cloudinary.com" },
     ],
   },
 

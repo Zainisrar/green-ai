@@ -78,13 +78,21 @@ export default function OurProcurementPhilosophy({
         <div className={styles.cardRow}>
           {/* Card 1: Core Principles */}
           <article className={styles.card} data-node-id="7077:21825">
-            <img
-              loading="lazy"
-              decoding="async"
-              src="/images/our-procurement-philosophy/figma-card-1.png"
-              alt="Core Principles"
-              className={styles.cardThumb}
-            />
+            <div className={styles.cardThumbWrapper}>
+              <img
+                src="/images/our-procurement-philosophy/card-border.svg"
+                alt=""
+                className={styles.cardBorder}
+                aria-hidden="true"
+              />
+              <img
+                loading="lazy"
+                decoding="async"
+                src="/images/our-procurement-philosophy/figma-card-1.png"
+                alt="Core Principles"
+                className={styles.cardThumb}
+              />
+            </div>
             <div className={styles.cardContent}>
               <h3>{apiData?.corePrinciples?.title || "Core Principles"}</h3>
               <p>What Guides Our Procurement Decisions</p>
@@ -99,13 +107,21 @@ export default function OurProcurementPhilosophy({
 
           {/* Card 2: What We Won't Compromise */}
           <article className={styles.card} data-node-id="7077:21827">
-            <img
-              loading="lazy"
-              decoding="async"
-              src="/images/our-procurement-philosophy/figma-card-2.png"
-              alt="What We Won’t Compromise"
-              className={styles.cardThumb}
-            />
+            <div className={styles.cardThumbWrapper}>
+              <img
+                src="/images/our-procurement-philosophy/card-border.svg"
+                alt=""
+                className={styles.cardBorder}
+                aria-hidden="true"
+              />
+              <img
+                loading="lazy"
+                decoding="async"
+                src="/images/our-procurement-philosophy/figma-card-2.png"
+                alt="What We Won’t Compromise"
+                className={styles.cardThumb}
+              />
+            </div>
             <div className={styles.cardContent}>
               <h3>
                 {apiData?.whatWeWontCompromise?.title ||
@@ -129,13 +145,21 @@ export default function OurProcurementPhilosophy({
         <div className={styles.cardRow}>
           {/* Card 3: Procurement Aligned with Impact */}
           <article className={styles.card} data-node-id="7077:21826">
-            <img
-              loading="lazy"
-              decoding="async"
-              src="/images/our-procurement-philosophy/figma-card-3.png"
-              alt="Procurement Aligned with Impact"
-              className={styles.cardThumb}
-            />
+            <div className={styles.cardThumbWrapper}>
+              <img
+                src="/images/our-procurement-philosophy/card-border.svg"
+                alt=""
+                className={styles.cardBorder}
+                aria-hidden="true"
+              />
+              <img
+                loading="lazy"
+                decoding="async"
+                src="/images/our-procurement-philosophy/figma-card-3.png"
+                alt="Procurement Aligned with Impact"
+                className={styles.cardThumb}
+              />
+            </div>
             <div className={styles.cardContent}>
               <h3>
                 {apiData?.procurementAlignedImpact?.title ||
@@ -156,13 +180,21 @@ export default function OurProcurementPhilosophy({
 
           {/* Card 4: Strategic Vendor Relationships */}
           <article className={styles.card} data-node-id="7077:21828">
-            <img
-              loading="lazy"
-              decoding="async"
-              src="/images/our-procurement-philosophy/figma-card-4.png"
-              alt="Strategic Vendor Relationships"
-              className={styles.cardThumb}
-            />
+            <div className={styles.cardThumbWrapper}>
+              <img
+                src="/images/our-procurement-philosophy/card-border.svg"
+                alt=""
+                className={styles.cardBorder}
+                aria-hidden="true"
+              />
+              <img
+                loading="lazy"
+                decoding="async"
+                src="/images/our-procurement-philosophy/figma-card-4.png"
+                alt="Strategic Vendor Relationships"
+                className={styles.cardThumb}
+              />
+            </div>
             <div className={styles.cardContent}>
               <h3>
                 {apiData?.strategicVendorRelationships?.title ||
@@ -273,37 +305,29 @@ export default function OurProcurementPhilosophy({
       )}
 
       {/* Reusable Modals & Dialogs */}
-      {apiData?.corePrinciples ? (
-        <CorePrinciples
-          isOpen={isCorePrinciplesOpen}
-          onClose={() => setIsCorePrinciplesOpen(false)}
-          data={apiData.corePrinciples}
-        />
-      ) : null}
+      <CorePrinciples
+        isOpen={isCorePrinciplesOpen}
+        onClose={() => setIsCorePrinciplesOpen(false)}
+        data={apiData?.corePrinciples}
+      />
 
-      {apiData?.whatWeWontCompromise ? (
-        <Compromise
-          isOpen={isCompromiseOpen}
-          onClose={() => setIsCompromiseOpen(false)}
-          data={apiData.whatWeWontCompromise}
-        />
-      ) : null}
+      <Compromise
+        isOpen={isCompromiseOpen}
+        onClose={() => setIsCompromiseOpen(false)}
+        data={apiData?.whatWeWontCompromise}
+      />
 
-      {apiData?.procurementAlignedImpact ? (
-        <Procrument
-          isOpen={isProcrumentOpen}
-          onClose={() => setIsProcrumentOpen(false)}
-          data={apiData.procurementAlignedImpact}
-        />
-      ) : null}
+      <Procrument
+        isOpen={isProcrumentOpen}
+        onClose={() => setIsProcrumentOpen(false)}
+        data={apiData?.procurementAlignedImpact}
+      />
 
-      {apiData?.strategicVendorRelationships ? (
-        <Vendor
-          isOpen={isVendorOpen}
-          onClose={() => setIsVendorOpen(false)}
-          data={apiData.strategicVendorRelationships}
-        />
-      ) : null}
+      <Vendor
+        isOpen={isVendorOpen}
+        onClose={() => setIsVendorOpen(false)}
+        data={apiData?.strategicVendorRelationships}
+      />
 
       <ProductEnquiry
         isOpen={isSubmitInterestOpen}

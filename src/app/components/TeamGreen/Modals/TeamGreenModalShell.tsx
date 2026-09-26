@@ -3,9 +3,11 @@
 import React, {
   type ReactNode,
   useEffect,
-  useEffectEvent,
+  useId,
   useRef,
+  useState,
 } from "react";
+import { createPortal } from "react-dom";
 import styles from "./TeamGreenModalShell.module.css";
 
 interface TeamGreenModalShellProps {
@@ -16,10 +18,46 @@ interface TeamGreenModalShellProps {
   quoteText?: string;
   quoteHighlight?: string;
   children: ReactNode;
-  contentClassName?: string;
   bodyClassName?: string;
   cardClassName?: string;
+  layout?: "whoWeAre" | "leadership" | "team" | "culture";
+  width?: number;
+  height?: number;
 }
+
+interface ModalGeometry {
+  width: number;
+  height: number;
+  path: string;
+  viewBox: string;
+}
+
+const MODAL_CONFIGS: Record<string, ModalGeometry> = {
+  team: {
+    width: 1906,
+    height: 801,
+    path: "M 374.93 0 H 1906.18 L 1531.25 801 H 0 Z",
+    viewBox: "0 0 1906.2 801",
+  },
+  culture: {
+    width: 1665,
+    height: 691,
+    path: "M 323.44 0 H 1665.0 L 1341.56 691 H 0 Z",
+    viewBox: "0 0 1665 691",
+  },
+  leadership: {
+    width: 1866,
+    height: 691,
+    path: "M 323.44 0 H 1866.18 L 1542.74 691 H 0 Z",
+    viewBox: "0 0 1866.2 691",
+  },
+  whoWeAre: {
+    width: 1866,
+    height: 691,
+    path: "M 323.44 0 H 1866.18 L 1542.74 691 H 0 Z",
+    viewBox: "0 0 1866.2 691",
+  },
+};
 
 export default function TeamGreenModalShell({
   isOpen,
@@ -29,68 +67,112 @@ export default function TeamGreenModalShell({
   quoteText,
   quoteHighlight,
   children,
-  contentClassName = "",
   bodyClassName = "",
   cardClassName = "",
+  layout,
+  width: customWidth,
+  height: customHeight,
 }: TeamGreenModalShellProps) {
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const previouslyFocusedElement = useRef<HTMLElement | null>(null);
-  const handleClose = useEffectEvent(onClose);
+  const config = (layout && MODAL_CONFIGS[layout]) || {
+    width: customWidth || 1866,
+    height: customHeight || 700,
+    path: "M 323.44 0 H 1866.18 L 1542.74 691 H 0 Z",
+    viewBox: "0 0 1866.2 691",
+  };
 
+  const modalWidth = config.width;
+  const modalHeight = config.height;
+
+  const [scale, setScale] = useState(1);
+  const [mounted, setMounted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+  const borderGradId = useId();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const updateScale = () => {
+      const mobile = window.innerWidth < 900;
+      setIsMobile(mobile);
+      if (mobile) {
+        setScale(1);
+        return;
+      }
+
+      // Responsive scale based on viewport dimensions
+      const availableWidth = window.innerWidth - 48;
+      const availableHeight = window.innerHeight - 48;
+      const computedScale = Math.min(
+        1,
+        availableWidth / modalWidth,
+        availableHeight / modalHeight,
+      );
+      setScale(Math.max(0.35, computedScale));
+    };
+
+    updateScale();
+    window.addEventListener("resize", updateScale);
+    return () => window.removeEventListener("resize", updateScale);
+  }, [modalWidth, modalHeight]);
+
+  // Manage body scroll lock independently
   useEffect(() => {
     if (!isOpen) return;
 
-    previouslyFocusedElement.current =
-      document.activeElement instanceof HTMLElement
-        ? document.activeElement
-        : null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
-    const focusDialog = requestAnimationFrame(() => {
-      dialogRef.current
-        ?.querySelector<HTMLElement>(
-          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
-        )
-        ?.focus();
-    });
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        handleClose();
-        return;
-      }
-
-      if (event.key !== "Tab") return;
-
-      const focusableElements =
-        dialogRef.current?.querySelectorAll<HTMLElement>(
-          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
-        );
-      if (!focusableElements?.length) {
-        event.preventDefault();
-        dialogRef.current?.focus();
-        return;
-      }
-
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
-      if (event.shiftKey && document.activeElement === firstElement) {
-        event.preventDefault();
-        lastElement.focus();
-      } else if (!event.shiftKey && document.activeElement === lastElement) {
-        event.preventDefault();
-        firstElement.focus();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
     return () => {
-      cancelAnimationFrame(focusDialog);
-      document.removeEventListener("keydown", handleKeyDown);
-      previouslyFocusedElement.current?.focus();
+      document.body.style.overflow = previousOverflow;
     };
   }, [isOpen]);
 
-  if (!isOpen) return null;
+  // Manage focus and keyboard trap
+  useEffect(() => {
+    if (!isOpen) return;
+
+    previouslyFocusedRef.current = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (event.key !== "Tab") return;
+
+      const focusable = dialogRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (!focusable?.length) {
+        event.preventDefault();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      if (previouslyFocusedRef.current?.isConnected) {
+        previouslyFocusedRef.current.focus();
+      }
+    };
+  }, [isOpen, onClose]);
 
   const renderQuote = () => {
     if (!quoteText) return null;
@@ -122,92 +204,120 @@ export default function TeamGreenModalShell({
     );
   };
 
-  return (
-    <div className={styles.overlay}>
+  // Portals must not be added until the component is mounted and explicitly
+  // opened. Without this guard, every Team GREEN dialog renders on page load
+  // and the later dialogs stack on top of the page.
+  if (!mounted || !isOpen) return null;
+
+  return createPortal(
+    <div className={styles.overlay} role="presentation">
+      <button
+        type="button"
+        className={styles.backdropClose}
+        onClick={onClose}
+        aria-label="Close dialog backdrop"
+      />
       <div
         ref={dialogRef}
-        className={`${styles.modalCard} ${cardClassName}`.trim()}
+        className={`${styles.stage} ${cardClassName}`.trim()}
         role="dialog"
         aria-modal="true"
         aria-label={title}
-        tabIndex={-1}
+        style={
+          {
+            "--modal-width": `${modalWidth}px`,
+            "--modal-height": `${modalHeight}px`,
+            "--modal-scale": scale,
+          } as React.CSSProperties
+        }
       >
-        {/* Slanted Card SVG Background matching Figma */}
-        <svg
-          className={styles.bgSvg}
-          viewBox="0 0 1866 700"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="none"
-          aria-hidden="true"
+        <div
+          className={`${styles.modalWindow} ${layout ? styles[layout] : ""}`.trim()}
         >
-          <defs>
-            <linearGradient
-              id="teamGreenModalBorderGrad"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="0%"
+          {/* Slanted Parallelogram SVG Background matching Figma */}
+          {!isMobile && (
+            <svg
+              className={styles.bgSvg}
+              viewBox={config.viewBox}
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
             >
-              <stop offset="0%" stopColor="#23B14D" stopOpacity="0.75" />
-              <stop offset="100%" stopColor="#FFFE50" stopOpacity="0.75" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M265 1.5H1864.5L1600.5 698.5H1.5L265 1.5Z"
-            fill="#FFFFFF"
-            stroke="url(#teamGreenModalBorderGrad)"
-            strokeWidth="3"
-          />
-        </svg>
+              <defs>
+                <linearGradient
+                  id={borderGradId}
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop offset="0%" stopColor="#23B14D" stopOpacity="0.75" />
+                  <stop offset="100%" stopColor="#FFFE50" stopOpacity="0.75" />
+                </linearGradient>
+              </defs>
+              <path
+                d={config.path}
+                fill="#FFFFFF"
+                stroke={`url(#${borderGradId})`}
+                strokeWidth="3"
+                vectorEffect="non-scaling-stroke"
+              />
+            </svg>
+          )}
 
-        {/* Top-Right Close Button matching Figma */}
-        <button
-          type="button"
-          onClick={onClose}
-          className={styles.closeBtn}
-          aria-label="Close modal"
-        >
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
+          {/* Top-Right Close Button matching Figma */}
+          <button
+            ref={closeButtonRef}
+            type="button"
+            onClick={onClose}
+            className={styles.closeBtn}
+            aria-label="Close modal"
           >
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </button>
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
 
-        {/* Content */}
-        <div className={`${styles.contentWrap} ${contentClassName}`.trim()}>
-          <div className={styles.header}>
-            <h2 className={styles.title}>{title}</h2>
-            {headline ? (
-              <div className={styles.headlineRow}>
-                <span className={styles.dash}>-</span>
+          {/* Header */}
+          <header className={styles.header}>
+            <div className={styles.titleRow}>
+              <h2 className={styles.title}>{title}</h2>
+              {headline ? (
                 <span className={styles.headlineText}>
-                  {headline.replace(/^-\s*/, "")}
+                  {headline.startsWith("-") ? headline : `- ${headline}`}
                 </span>
-              </div>
-            ) : null}
-            <div className={styles.divider} />
-          </div>
+              ) : null}
+            </div>
+          </header>
 
-          <div className={`${styles.body} ${bodyClassName}`.trim()}>
+          {/* Gradient Divider */}
+          <div className={styles.divider} aria-hidden="true" />
+
+          {/* Body */}
+          <div className={`${styles.bodyArea} ${bodyClassName}`.trim()}>
             {children}
           </div>
 
+          {/* Bottom Quote */}
           {quoteText ? (
-            <div className={styles.quoteContainer}>{renderQuote()}</div>
+            <footer className={styles.footerArea}>
+              <div className={styles.quoteText}>{renderQuote()}</div>
+            </footer>
           ) : null}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

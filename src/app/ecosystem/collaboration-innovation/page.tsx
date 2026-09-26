@@ -1,12 +1,14 @@
-import React from "react";
 import CollaborationInnovation from "@/app/components/CollaborationInnovation/CollaborationInnovation";
+import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
 
-const page = () => {
+export default function CollaborationInnovationPage() {
   return (
-    <React.Fragment>
-      <CollaborationInnovation canvas />
-    </React.Fragment>
+    <FigmaPageCanvas
+      desktop={<CollaborationInnovation canvas />}
+      mobile={<CollaborationInnovation />}
+      nodeId="7077:18721"
+      fitCanvasHeight
+    />
   );
-};
+}
 
-export default page;

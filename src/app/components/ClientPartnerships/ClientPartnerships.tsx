@@ -123,11 +123,14 @@ export default function ClientPartnerships({
       />
 
       {/* Left green/yellow angled panel (Group 1171277870, 326×662 at -15,-1) */}
-      <div className={styles.leftPanel} aria-hidden="true" />
+      <div
+        className={`${styles.leftPanel} ${styles.desktopOnly}`}
+        aria-hidden="true"
+      />
 
       {/* Vertical outlined side title (Raleway 900 70px, stroke #989898) */}
       <h2
-        className={styles.verticalTitle}
+        className={`${styles.verticalTitle} ${styles.desktopOnly}`}
         aria-hidden="true"
         role="presentation"
       >
@@ -135,7 +138,10 @@ export default function ClientPartnerships({
       </h2>
 
       {/* Right-side photo collage (Mask group at 1063,-59, 1003×2134) */}
-      <div className={styles.rightCollage} aria-hidden="true">
+      <div
+        className={`${styles.rightCollage} ${styles.desktopOnly}`}
+        aria-hidden="true"
+      >
         <img
           loading="lazy"
           decoding="async"
@@ -145,7 +151,7 @@ export default function ClientPartnerships({
       </div>
 
       {/* Header section */}
-      <div className={styles.headerBlock}>
+      <div className={`${styles.headerBlock} ${styles.desktopOnly}`}>
         <h1 className={styles.mainTitle}>CLIENT PARTNERSHIPS</h1>
         <p className={styles.subHeadline}>{d.subHeadline}</p>
         <p className={styles.description}>{d.description}</p>
@@ -155,7 +161,7 @@ export default function ClientPartnerships({
       {d.rows.map((row) => (
         <React.Fragment key={row.key}>
           <div
-            className={styles.rowLine}
+            className={`${styles.rowLine} ${styles.desktopOnly}`}
             style={{
               position: "absolute",
               left: row.lineX,
@@ -166,7 +172,7 @@ export default function ClientPartnerships({
             aria-hidden="true"
           />
           <div
-            className={styles.rowText}
+            className={`${styles.rowText} ${styles.desktopOnly}`}
             style={{ position: "absolute", left: 266, top: row.titleY }}
           >
             <h3 className={styles.rowTitle}>
@@ -194,7 +200,7 @@ export default function ClientPartnerships({
             <p className={styles.rowSubtitle}>{row.subtitle}</p>
           </div>
           <FigmaAngledCta
-            className={styles.rowCta}
+            className={`${styles.rowCta} ${styles.desktopOnly}`}
             size="sm"
             style={{ position: "absolute", left: row.ctaX, top: row.ctaY }}
             href={
@@ -223,11 +229,13 @@ export default function ClientPartnerships({
       ))}
 
       {/* Right-column quote over the collage */}
-      <p className={styles.rightQuote}>{d.quote1}</p>
-      <p className={styles.rightSubQuote}>{d.quote2}</p>
+      <p className={`${styles.rightQuote} ${styles.desktopOnly}`}>{d.quote1}</p>
+      <p className={`${styles.rightSubQuote} ${styles.desktopOnly}`}>
+        {d.quote2}
+      </p>
 
       {/* Bracketed statement (Vectors 7374 / 7375) */}
-      <div className={styles.statementBlock}>
+      <div className={`${styles.statementBlock} ${styles.desktopOnly}`}>
         <img
           loading="lazy"
           decoding="async"
@@ -247,16 +255,16 @@ export default function ClientPartnerships({
         />
       </div>
 
-      {/* Bottom-right CTAs */}
+      {/* Bottom-right CTAs (desktop only) */}
       <FigmaAngledCta
-        className={styles.bookCta}
+        className={`${styles.bookCta} ${styles.desktopOnly}`}
         style={{ position: "absolute", left: 1647, top: 732 }}
         onClick={() => setIsBookCallOpen(true)}
       >
         Book a Discovery Call
       </FigmaAngledCta>
       <FigmaAngledCta
-        className={styles.prospectusCta}
+        className={`${styles.prospectusCta} ${styles.desktopOnly}`}
         style={{ position: "absolute", left: 1516, top: 812 }}
         icon="chevron"
         href="mailto:programs@green.com.pg?subject=Client%20Partnership%20Prospectus%20Request"
@@ -264,19 +272,94 @@ export default function ClientPartnerships({
         Request Client Partnership Prospectus
       </FigmaAngledCta>
       <a
-        className={styles.readMore}
+        className={`${styles.readMore} ${styles.desktopOnly}`}
         href="#read-more"
-        style={{ position: "absolute", left: 1521, top: 799 }}
+        style={{ position: "absolute", left: 1521, top: 789 }}
       >
         Read more
       </a>
+
+      {/* ===== MOBILE-ONLY LAYOUT ===== */}
+      {!canvas && (
+        <div className={styles.mobileLayout}>
+          {/* Hero header */}
+          <div className={styles.mobileHero}>
+            <h1 className={styles.mobileH1}>CLIENT PARTNERSHIPS</h1>
+            <p className={styles.mobileTagline}>{d.subHeadline}</p>
+            <p className={styles.mobileBlurb}>{d.description}</p>
+          </div>
+
+          {/* Clickable rows */}
+          <div className={styles.mobileRowList}>
+            {d.rows.map((row) =>
+              row.key === "clientPartnerLogin" ? (
+                <Link
+                  key={row.key}
+                  href="/client-value-engineering"
+                  className={styles.mobileRowItem}
+                >
+                  <div className={styles.mobileRowLeft}>
+                    <span className={styles.mobileRowName}>{row.title}</span>
+                    <span className={styles.mobileRowNote}>{row.subtitle}</span>
+                  </div>
+                  <span className={styles.mobileChevron} aria-hidden="true">
+                    ›
+                  </span>
+                </Link>
+              ) : (
+                <button
+                  key={row.key}
+                  type="button"
+                  className={styles.mobileRowItem}
+                  onClick={() =>
+                    row.key === "whoWePartnerWith"
+                      ? setIsWhoWePartnerOpen(true)
+                      : row.key === "ourClientPartnership"
+                        ? setIsOurModelOpen(true)
+                        : row.key === "whatSetsGreenApart"
+                          ? setIsWhatSetsOpen(true)
+                          : row.key === "partnershipOnboarding"
+                            ? setIsPartnershipOnboardingOpen(true)
+                            : setIsUseCasesOpen(true)
+                  }
+                >
+                  <div className={styles.mobileRowLeft}>
+                    <span className={styles.mobileRowName}>{row.title}</span>
+                    <span className={styles.mobileRowNote}>{row.subtitle}</span>
+                  </div>
+                  <span className={styles.mobileChevron} aria-hidden="true">
+                    ›
+                  </span>
+                </button>
+              ),
+            )}
+          </div>
+
+          {/* Mobile CTAs — uses same FigmaAngledCta as desktop for exact design parity */}
+          <div className={styles.mobileCtaBar}>
+            <FigmaAngledCta
+              className={styles.mobileDiscoveryCta}
+              onClick={() => setIsBookCallOpen(true)}
+            >
+              Book a Discovery Call
+            </FigmaAngledCta>
+            <FigmaAngledCta
+              className={styles.mobileProspectusCta}
+              icon="chevron"
+              href="mailto:programs@green.com.pg?subject=Client%20Partnership%20Prospectus%20Request"
+            >
+              Request Client Partnership Prospectus
+            </FigmaAngledCta>
+          </div>
+        </div>
+      )}
 
       {/* Chatbot */}
       {canvas ? (
         <D6Chatbot
           canvasAnchored
           triggerVariant="figmaCanvas"
-          figmaPlaceholder="Let’s Talk Energy"
+          figmaPlaceholder="Let's Talk Energy"
           triggerStyle={{
             top: 899,
             right: "auto",

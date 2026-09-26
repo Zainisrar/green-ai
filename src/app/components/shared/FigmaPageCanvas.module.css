@@ -13,6 +13,7 @@
   height: auto;
   min-height: 100svh;
   max-height: none;
+  overflow-x: hidden;
   overflow-y: visible;
   touch-action: pan-y;
 }
@@ -40,6 +41,48 @@
   max-width: 100%;
   min-width: 0;
   min-height: 100svh;
+  height: auto;
+  overflow-x: hidden;
+  overflow-y: visible;
+  touch-action: pan-y;
+  background: #fff;
+}
+
+.ssrWrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
   overflow-x: hidden;
   background: #fff;
 }
+
+.ssrDesktop {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+}
+
+.ssrMobile {
+  display: none;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+@media (max-width: 1023px) {
+  .ssrDesktop {
+    display: none !important;
+  }
+  .ssrMobile {
+    display: block !important;
+  }
+}
+
+@media (max-width: 1200px) {
+  .ssrBreak1200 .ssrDesktop {
+    display: none !important;
+  }
+  .ssrBreak1200 .ssrMobile {
+    display: block !important;
+  }
+}
+

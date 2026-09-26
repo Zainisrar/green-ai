@@ -61,27 +61,30 @@ export default function CorePrinciples({ isOpen, onClose, data }: Props) {
     >
       <section className={styles.header}>
         <h2 className={styles.title}>
-          {title}
+          <span className={styles.titleMain}>{title}</span>
           <span className={styles.subtitle}>— {subtitle}</span>
         </h2>
       </section>
       <section className={styles.table} aria-label={title}>
-        <h3 className={styles.tableHead}>Principle</h3>
-        <h3 className={styles.tableHead}>Statement</h3>
-        {items.flatMap((item) => [
-          <p
-            className={`${styles.tableCell} ${styles.principle}`}
-            key={`${item.principle}-principle`}
-          >
-            {item.principle}
-          </p>,
-          <p
-            className={`${styles.tableCell} ${styles.statement}`}
-            key={`${item.principle}-statement`}
-          >
-            {item.statement}
-          </p>,
-        ])}
+        <div className={styles.tableHeadRow}>
+          <span className={styles.tableHead}>Principle</span>
+          <span className={styles.tableHead}>Statement</span>
+        </div>
+        <div className={styles.tableBody}>
+          {items.map((item) => (
+            <div
+              className={styles.tableRow}
+              key={`${item.principle}-row`}
+            >
+              <span className={`${styles.tableCell} ${styles.principle}`}>
+                {item.principle}
+              </span>
+              <span className={`${styles.tableCell} ${styles.statement}`}>
+                {item.statement}
+              </span>
+            </div>
+          ))}
+        </div>
       </section>
     </HandbookModalFrame>
   );

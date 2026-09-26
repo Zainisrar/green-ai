@@ -32,18 +32,25 @@ export default function FigmaPageCanvas({
   scaleToViewport = "fill",
   scaleMobileToViewport = false,
 }: FigmaPageCanvasProps) {
-  const [viewport, setViewport] = useState({
-    width: DESIGN_WIDTH,
-    height: DESIGN_HEIGHT,
-  });
+  // Initialize with 0 so the SSR pass emits nothing (no viewport width is known
+  // server-side). useLayoutEffect fires synchronously before paint in the browser,
+  // so the correct desktop/mobile branch is rendered before the first visible frame.
+  // This prevents the brief flash of 1920px desktop canvas on mobile devices.
+  const [viewport, setViewport] = useState({ width: 0, height: 0 });
 
   useLayoutEffect(() => {
     const updateViewport = () =>
-      // clientWidth excludes the reserved Windows scrollbar gutter. Using
-      // innerWidth here made a scaled 1920px canvas a few pixels wider than
-      // the document, which showed as a horizontal sliver or clipped edge.
       setViewport({
-        width: document.documentElement.clientWidth,
+        // clientWidth excludes the reserved Windows scrollbar gutter. Using
+        // innerWidth here made a scaled 1920px canvas a few pixels wider than
+        // the document, which showed as a horizontal sliver or clipped edge.
+        width:
+          typeof window !== "undefined" && window.innerWidth
+            ? Math.min(
+                window.innerWidth,
+                document.documentElement.clientWidth || window.innerWidth,
+              )
+            : document.documentElement.clientWidth,
         height: window.innerHeight,
       });
 
@@ -52,12 +59,31 @@ export default function FigmaPageCanvas({
     return () => window.removeEventListener("resize", updateViewport);
   }, []);
 
+  // SSR pass: Emit both desktop and mobile trees with responsive CSS visibility.
+  // This ensures search engine crawlers and users receive full HTML immediately,
+  // before JavaScript executes, without layout flash or hydration mismatch.
+  if (viewport.width === 0) {
+    return (
+      <div
+        className={`${styles.ssrWrapper} ${desktopBreakpoint === 1200 ? styles.ssrBreak1200 : ""}`}
+        data-figma-page-node={nodeId}
+        data-ssr="true"
+      >
+        <div className={styles.ssrDesktop}>{desktop}</div>
+        <div className={styles.ssrMobile}>{mobile}</div>
+      </div>
+    );
+  }
+
   if (viewport.width <= desktopBreakpoint) {
     if (scaleMobileToViewport) {
       const mobileScale = viewport.width / DESIGN_WIDTH;
 
       return (
-        <div className={styles.shell} data-figma-page-node={nodeId}>
+        <div
+          className={`${styles.shell} ${styles.shellScrollable}`}
+          data-figma-page-node={nodeId}
+        >
           <div
             className={styles.canvasSizer}
             aria-hidden="true"

@@ -255,114 +255,208 @@
   border: 0;
 }
 
-@media (max-width: 1200px) {
-  .page {
-    width: 100%;
-    height: auto;
-    min-height: 100svh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding: 100px 22px 140px;
-    background-size: auto 100%;
-  }
+.mobilePage {
+  position: relative;
+  min-height: 100svh;
+  padding-top: 76px;
+  overflow-x: hidden;
+  background: #ffffff;
+  color: #050505;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+}
 
-  .verticalTitle {
-    display: none;
-  }
+.mobileBackgroundArt {
+  position: absolute;
+  top: 0;
+  right: -80px;
+  width: 140%;
+  max-width: 700px;
+  height: auto;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
 
-  .pageTitle,
-  .projectTitle,
-  .metrics,
-  .keyMessage,
-  .description,
-  .footerMessage,
-  .consultationButton,
-  .portfolioButton {
-    position: relative;
-    inset: auto;
-    left: auto;
-    top: auto;
-    width: 100%;
-  }
+.mobileVerticalTitle {
+  position: absolute;
+  top: 90px;
+  left: 6px;
+  width: clamp(20px, 4.5vw, 30px);
+  height: auto;
+  max-height: 520px;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
 
-  .pageTitle {
-    font-size: clamp(30px, 6vw, 56px);
-  }
+.mobileContent {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px 18px 120px clamp(36px, 9vw, 50px);
+  box-sizing: border-box;
+}
 
-  .projectTitle {
-    margin-top: 24px;
-    font-size: clamp(22px, 4vw, 36px);
-  }
+.mobilePageTitle {
+  margin: 0 0 10px;
+  font-size: clamp(30px, 7.5vw, 44px);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: #050505;
+  letter-spacing: -0.5px;
+}
 
-  .metrics {
-    display: grid;
+.mobilePageTitle span {
+  color: #23b14d;
+}
+
+.mobileProjectTitle {
+  margin: 0 0 28px;
+  font-size: clamp(19px, 4.5vw, 26px);
+  font-weight: 700;
+  line-height: 1.25;
+  color: #050505;
+}
+
+.mobileMetrics {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  margin: 28px 0 36px;
+}
+
+@media (min-width: 520px) {
+  .mobileMetrics {
     grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
-    margin-top: 48px;
-  }
-
-  .metric,
-  .metric0,
-  .metric1,
-  .metric2 {
-    position: relative;
-    inset: auto;
-    left: auto;
-    width: auto;
-  }
-
-  .metric h3 {
-    font-size: clamp(14px, 2.4vw, 25px);
-  }
-
-  .metric p {
-    font-size: clamp(22px, 3.2vw, 32px);
-  }
-
-  .keyMessage {
-    min-height: 220px;
-    margin-top: 48px;
-  }
-
-  .description,
-  .footerMessage {
-    margin-top: 34px;
-    font-size: clamp(16px, 2.4vw, 26px);
-  }
-
-  .consultationButton,
-  .portfolioButton {
-    max-width: 350px;
-    margin: 28px 0 0 auto;
+    gap: 16px;
   }
 }
 
-@media (max-width: 640px) {
-  .page {
-    padding-right: 16px;
-    padding-left: 16px;
-  }
-
-  .metrics {
-    grid-template-columns: 1fr;
-  }
-
-  .metric {
-    min-height: 170px;
-  }
-
-  .keyMessage {
-    min-height: 260px;
-  }
-
-  .keyCopy {
-    left: 28px;
-    width: calc(100% - 56px);
-    font-size: 22px;
-  }
-
-  .keyShapeRight {
-    right: 0;
-    left: auto;
-  }
+.mobileMetric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
+
+.mobileMetricIcon {
+  display: block;
+  margin: 0 auto;
+  object-fit: contain;
+  width: auto;
+  height: clamp(52px, 12vw, 68px);
+}
+
+.mobileMetric h3 {
+  margin: 12px 0 0;
+  font-size: clamp(15px, 3.8vw, 19px);
+  font-weight: 500;
+  line-height: 1.3;
+  color: #050505;
+}
+
+.mobileMetric p {
+  margin: 10px 0 0;
+  font-size: clamp(24px, 5.5vw, 30px);
+  font-weight: 800;
+  line-height: 1.2;
+  color: #050505;
+}
+
+.mobileMetric small {
+  font-size: clamp(15px, 3.5vw, 18px);
+  font-weight: 600;
+}
+
+.mobileKeySection {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 32px 0;
+  padding: 8px 0;
+}
+
+.mobileKeyShapeLeft,
+.mobileKeyShapeRight {
+  flex-shrink: 0;
+  width: clamp(34px, 8vw, 48px);
+  height: auto;
+  object-fit: contain;
+}
+
+.mobileKeyCopy {
+  flex: 1;
+  text-align: center;
+  font-size: clamp(16px, 4.2vw, 21px);
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #050505;
+}
+
+.mobileKeyCopy p {
+  margin: 0;
+}
+
+.mobileKeyCopy span {
+  color: #23b14d;
+}
+
+.mobileKeyContinuation {
+  margin-top: 2px !important;
+}
+
+.mobileDescription {
+  margin: 0 0 28px;
+  font-size: clamp(13.5px, 3.4vw, 15px);
+  line-height: 1.65;
+  color: #172033;
+  letter-spacing: 0.2px;
+  text-align: justify;
+}
+
+.mobileDescription strong {
+  color: #23b14d;
+  font-weight: 700;
+}
+
+.mobileFooterMessage {
+  margin: 0 0 32px;
+  font-size: clamp(16px, 4.2vw, 21px);
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #050505;
+}
+
+.mobileFooterMessage p {
+  margin: 0;
+}
+
+.mobileFooterMessage p:first-child {
+  font-weight: 700;
+}
+
+.mobileFooterMessage p:last-child span {
+  color: #23b14d;
+}
+
+.mobileActions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.mobileCtaBtn {
+  width: 100% !important;
+  min-height: 52px;
+  font-size: clamp(13px, 3.5vw, 15px) !important;
+}
+

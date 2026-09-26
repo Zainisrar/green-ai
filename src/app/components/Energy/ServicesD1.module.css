@@ -54,6 +54,35 @@
   transition: background-position 180ms ease-out;
 }
 
+/* Figma positions the O&M artwork as a separate panel on the lower right.
+   The exported image includes the angled transparent edge and faded finish. */
+.operationsMaintenanceBackground {
+  top: 463px;
+  right: auto;
+  bottom: auto;
+  left: 1279.5px;
+  width: 642.5px;
+  height: 508.5px;
+  background-position: center;
+  background-size: 100% 100%;
+  clip-path: none;
+}
+
+.operationsMaintenanceRightPanel {
+  position: absolute;
+  z-index: 1;
+  top: 463px;
+  right: auto;
+  bottom: auto;
+  left: 1279.5px;
+  width: 642.5px;
+  height: 508.5px;
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
 .phaseBackgroundBase {
   position: absolute;
   z-index: 1;
@@ -86,39 +115,93 @@
 }
 
 .processFlow {
-  top: 320px;
-  left: 157px;
-  display: flex;
-  align-items: center;
+  position: absolute;
+  top: 323px;
+  left: 155px;
+  width: 876px;
+  height: 116px;
 }
 
 .flowItem {
-  display: flex;
-  align-items: center;
+  display: contents;
 }
 
 .flowCard {
+  position: absolute;
   box-sizing: border-box;
-  width: 185px;
-  height: 122px;
-  padding: 13px 9px 9px 23px;
-  border: 4px solid #d6ec4d;
+  border: 3px solid transparent;
+  border-image: linear-gradient(135deg, #ffe500 0%, #23d14b 100%) 1;
   background: rgb(255 255 255 / 88%);
   box-shadow: 0 11px 21px rgb(0 0 0 / 14%);
-  transform: skewX(-13deg);
+  transform: skewX(-20.8deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.flowCard:hover {
+  box-shadow: 0 14px 28px rgb(0 0 0 / 22%);
+}
+
+.activeFlowCard {
+  border-image: none !important;
+  border-color: #23b14d !important;
+  box-shadow: 0 12px 28px rgb(35 177 77 / 35%) !important;
+}
+
+
+.flowCard_0 {
+  left: 21.5px;
+  top: 1px;
+  width: 149px;
+  height: 113px;
+  padding: 12px 8px 8px 8px;
+}
+
+.flowCard_1 {
+  left: 207.5px;
+  top: 0px;
+  width: 197px;
+  height: 116px;
+  padding: 12px 6px 8px 6px;
+}
+
+.flowCard_2 {
+  left: 435.5px;
+  top: 4px;
+  width: 197px;
+  height: 110px;
+  padding: 10px 6px 6px 6px;
+}
+
+.flowCard_3 {
+  left: 664.5px;
+  top: 4px;
+  width: 189px;
+  height: 110px;
+  padding: 10px 6px 6px 6px;
 }
 
 .flowCardContent {
-  transform: skewX(13deg);
+  transform: skewX(20.8deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .flowCard h2 {
-  margin: 0 0 12px;
+  margin: 0 0 5px;
   color: #23b14d;
-  font-size: 12px;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 700;
   line-height: 1;
   text-transform: uppercase;
+  text-align: center;
+  width: 100%;
 }
 
 .flowCard ul {
@@ -127,14 +210,37 @@
   color: #1f1f1f;
   font-size: 11px;
   font-weight: 700;
-  line-height: 1.12;
+  line-height: 1.3;
   list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.flowCard li {
+  white-space: nowrap;
 }
 
 .flowArrow {
-  width: 44px;
+  position: absolute;
+  top: 48px;
+  width: 36px;
   height: auto;
-  margin: 0 -1px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.flowArrow_0 {
+  left: 172px;
+}
+
+.flowArrow_1 {
+  left: 400px;
+}
+
+.flowArrow_2 {
+  left: 628px;
 }
 
 .detail {
@@ -382,6 +488,8 @@
   }
   .canvas {
     position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: auto;
     overflow: visible;
@@ -389,24 +497,47 @@
   }
   .page {
     min-height: auto;
-    overflow: visible;
+    overflow-x: hidden;
+    overflow-y: visible;
     background: #fff;
   }
   .background {
-    height: 510px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 580px;
     background-image: url("/images/service/mbImg.png");
     background-size: cover;
+    background-position: center top;
+    pointer-events: none;
+    mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
   }
   .phaseBackground {
+    position: absolute;
     top: 0;
+    left: 0;
     width: 100%;
-    height: 510px;
+    height: 580px;
     clip-path: none;
+    background-size: cover;
+    pointer-events: none;
+    mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
   }
   .phaseBackgroundBase {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 510px;
+    height: 580px;
     clip-path: none;
+    background: rgb(255 255 255 / 85%);
+    pointer-events: none;
+    mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
   }
   .header,
   .processFlow,
@@ -421,163 +552,329 @@
   .header {
     height: 82px;
   }
-  .logo {
-    top: 15px;
-    left: 16px;
-    width: 180px;
-  }
-  .navigation {
-    top: 15px;
-    right: 14px;
-  }
-  .navigation a {
-    display: none;
-  }
-  .navigation button,
-  .navigation button img {
-    width: 35px;
-    height: 44px;
-    margin: 0;
-    transform: none;
-  }
   .verticalTitle {
     display: none;
-    top: auto;
   }
+  .operationsMaintenanceRightPanel {
+    display: none;
+  }
+
+  .heading {
+    order: 1;
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    margin: 20px 0 12px;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  .heading h2 {
+    margin: 0 0 4px;
+    color: #000;
+    font-size: clamp(30px, 8vw, 42px);
+    font-weight: 900;
+    letter-spacing: -0.045em;
+    line-height: 0.95;
+  }
+  .heading p {
+    max-width: 100%;
+    margin: 0;
+    color: #23b14d;
+    font-size: clamp(13.5px, 3.8vw, 17px);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
   .processFlow {
+    order: 2;
+    position: relative;
     top: auto;
     left: auto;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px 12px;
-    padding: 35px 30px 15px;
+    gap: 14px 12px;
+    padding: 6px 16px 14px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    height: auto !important;
+    min-height: 0;
+    margin: 0;
   }
   .flowItem {
     display: block;
+    width: 100%;
+  }
+  .flowCard_0,
+  .flowCard_1,
+  .flowCard_2,
+  .flowCard_3 {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    height: auto !important;
   }
   .flowCard {
-    width: 100%;
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    margin: 0 auto;
     min-width: 0;
-    height: 124px;
-    padding: 14px 12px 10px 24px;
-    border-width: 4px;
+    height: auto;
+    min-height: 122px;
+    padding: 12px 10px 10px 14px;
+    border-width: 2.5px;
+    box-sizing: border-box;
+    transform: skewX(-7deg);
+    transform-origin: center center;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+  }
+  .activeFlowCard {
+    border-image: none !important;
+    border-color: #23b14d !important;
+    background: rgb(255 255 255 / 98%) !important;
+    box-shadow: 0 8px 22px rgb(35 177 77 / 28%) !important;
+    transform: skewX(-7deg) scale(1.02);
+  }
+  .flowCardContent {
+    transform: skewX(7deg);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
   }
   .flowCard h2 {
-    margin-bottom: 12px;
-    font-size: 12px;
+    margin: 0 0 6px;
+    color: #23b14d;
+    font-size: clamp(12px, 3.4vw, 14px);
+    font-weight: 800;
+    line-height: 1.1;
+    text-transform: uppercase;
+    text-align: left;
+    width: 100%;
   }
   .flowCard ul {
-    font-size: 11px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: clamp(10px, 2.8vw, 11.5px);
+    font-weight: 600;
+    line-height: 1.35;
+    color: #222;
+    text-align: left;
+    width: 100%;
+  }
+  .flowCard li {
+    transform: none !important;
+    white-space: normal;
+    word-break: normal;
   }
   .flowArrow {
     display: none;
   }
+
   .detail {
+    order: 3;
+    position: relative;
     top: auto;
     right: auto;
-    width: auto;
-    margin: 45px 26px 0;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    margin: 16px 0 0;
+    padding: 0 20px;
+    box-sizing: border-box;
   }
   .detail h1 {
-    margin-bottom: 18px;
-    font-size: clamp(42px, 12vw, 60px);
+    margin: 0 0 10px;
+    color: #000;
+    font-size: clamp(26px, 7vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
   }
   .detail p {
-    font-size: 15px;
-    line-height: 1.55;
+    margin: 0 0 10px;
+    color: #383838;
+    font-size: clamp(13.5px, 3.5vw, 15px);
+    font-weight: 500;
+    line-height: 1.6;
   }
-  .heading {
-    top: auto;
-    bottom: auto;
-    left: auto;
-    width: auto;
-    margin: 40px 20px 0;
+  .detail p + p {
+    margin-top: 8px;
   }
-  .heading h2 {
-    font-size: clamp(30px, 8vw, 44px);
-  }
-  .heading p {
-    font-size: clamp(18px, 4.5vw, 22px);
-  }
+
   .servicesPanel {
+    order: 4;
+    position: relative;
     top: auto;
     bottom: auto;
     left: auto;
+    right: auto;
     width: calc(100% - 32px);
-    max-width: 440px;
+    max-width: 480px;
     height: auto;
-    min-height: 360px;
-    margin: 28px auto;
+    min-height: 0;
+    margin: 28px auto 16px;
     box-sizing: border-box;
-    padding: 24px 20px 28px 24px;
+    padding: 24px 20px;
+    border-radius: 12px;
     transform: none;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.94) 0%,
+      rgba(246, 248, 230, 0.9) 100%
+    );
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(220, 230, 180, 0.5);
   }
   .servicesPanelContent {
     transform: none;
+    width: 100%;
+    box-sizing: border-box;
   }
   .servicesPanel h2 {
-    margin-bottom: 24px;
-    font-size: 22px;
+    margin: 0 0 18px;
+    color: #222;
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
     transform: none;
   }
   .serviceOptions {
-    --active-line-end: 88px;
-    --active-line-start: 0px;
-    gap: 12px;
-  }
-  .serviceOptions:has(button:nth-child(2).selectedService) {
-    --active-line-end: 124px;
-    --active-line-start: 36px;
-  }
-  .serviceOptions:has(button:nth-child(3).selectedService) {
-    --active-line-end: 160px;
-    --active-line-start: 72px;
-  }
-  .serviceOptions:has(button:nth-child(4).selectedService) {
-    --active-line-end: 196px;
-    --active-line-start: 108px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
   }
   .serviceOptions::before {
-    top: -8px;
-    left: -15px;
+    display: none;
   }
   .servicesPanel .serviceOptions button {
-    --service-row-offset: 0px;
-    font-size: 18px;
-    overflow-wrap: anywhere;
+    --service-row-offset: 0px !important;
+    min-height: 48px;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-size: 16px;
+    text-align: left;
+    overflow-wrap: break-word;
+    word-break: break-word;
     white-space: normal;
+    box-sizing: border-box;
+    background: transparent;
+    cursor: pointer;
+    transform: none !important;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   }
   .serviceOptions .selectedService {
-    min-height: 72px;
+    min-height: 64px;
     margin-bottom: 0;
-    padding-left: 10px;
-    font-size: 20px;
-    transform: none;
+    padding: 12px 14px 12px 14px;
+    font-size: 17px;
+    background: rgba(35, 177, 77, 0.1);
+    border-left: 4px solid #23b14d !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
   }
   .selectedService small {
+    display: block;
+    width: 100%;
     max-width: 100%;
     margin-top: 6px;
     font-size: 13px;
+    line-height: 1.45;
+    color: #444;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    box-sizing: border-box;
   }
+
   .enquiryButton {
+    order: 5;
+    position: relative;
     top: auto;
     right: auto;
     bottom: auto;
-    display: block;
-    margin: 0 22px 105px auto;
+    left: auto;
+    display: flex;
+    justify-content: flex-end;
+    width: calc(100% - 32px);
+    max-width: 480px;
+    margin: 8px auto 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
   }
+  .enquiryButton img {
+    display: block;
+    width: 140px;
+    height: auto;
+  }
+
   .chat {
-    position: absolute;
-    right: 3px;
-    bottom: 0;
+    order: 6;
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 28px;
+    padding: 0 16px;
+    box-sizing: border-box;
+    overflow: hidden;
   }
   .chatTrigger {
-    top: auto;
-    right: 1px;
-    bottom: 2px;
-    width: min(92vw, 462px);
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: min(92vw, 418px) !important;
+    max-width: 100% !important;
   }
   .chatTrigger > div > img {
     width: 100%;
   }
 }
+
+@media (max-width: 359px) {
+  .processFlow {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 6px 12px 14px;
+  }
+  .flowCard {
+    transform: skewX(-5deg);
+  }
+  .flowCardContent {
+    transform: skewX(5deg);
+  }
+}
+

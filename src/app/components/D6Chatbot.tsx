@@ -410,10 +410,10 @@ const D6Chatbot: React.FC<D6ChatbotProps> = ({
 
       {/* Chat Trigger */}
       <div
-        className={`${canvasAnchored ? "absolute" : "fixed"} ${
-          !canvasAnchored && flowOnMobile ? "d6-flow-on-mobile" : ""
+        className={`d6-chatbot-trigger ${canvasAnchored ? "d6-canvas-anchored absolute" : "fixed"} ${
+          flowOnMobile ? "d6-flow-on-mobile" : ""
         } z-[50] ${
-          canvasAnchored ? "" : "right-4 lg:right-6 bottom-4 lg:bottom-5"
+          canvasAnchored ? "" : "right-2 sm:right-4 lg:right-6 bottom-3 sm:bottom-4 lg:bottom-5"
         } ${triggerClassName}`}
         style={
           isFigmaCanvasTrigger

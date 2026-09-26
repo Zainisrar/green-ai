@@ -55,7 +55,7 @@ interface SiteHeaderProps {
   brandClassName?: string;
   productLogo?: boolean;
   compactLogo?: boolean;
-  panel?: "full" | "logoOnly";
+  panel?: "full" | "logoOnly" | "none";
   layout?: "viewport" | "figmaCanvas" | "productCanvas";
   figmaPanelVariant?: "default" | "flagship";
   highlightActive?: boolean;
@@ -111,10 +111,12 @@ export default function SiteHeader({
     return () => window.removeEventListener("scroll", updateHeader);
   }, []);
 
+  const isHomePage = pathname === "/" || pathname?.startsWith("/home");
+
   return (
     <>
       <header
-        className={`${styles.header} ${layout === "figmaCanvas" ? styles.canvasHeader : ""} ${layout === "productCanvas" ? styles.productCanvasHeader : ""} ${canvasActiveNavigation ? styles.canvasActiveNavigation : ""} ${neutralNavigation ? styles.neutralNavigation : ""} ${isScrolled ? styles.scrolled : ""} ${isNavigationOpen ? styles.navigationOpen : ""}`}
+        className={`${styles.header} ${isHomePage ? styles.homeHeader : styles.dedicatedHeader} ${layout === "figmaCanvas" ? styles.canvasHeader : ""} ${layout === "productCanvas" ? styles.productCanvasHeader : ""} ${canvasActiveNavigation ? styles.canvasActiveNavigation : ""} ${neutralNavigation ? styles.neutralNavigation : ""} ${isScrolled ? styles.scrolled : ""} ${isNavigationOpen ? styles.navigationOpen : ""}`}
         data-site-header
         data-node-id={layout !== "viewport" ? "7077:3756" : undefined}
       >
