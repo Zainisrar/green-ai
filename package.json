@@ -7,7 +7,7 @@
     "dev:turbo": "next dev --turbopack --port 5005",
     "build": "next build",
     "start": "next start --port 3001",
-    "lint": "biome check",
+    "lint": "biome lint --diagnostic-level=error",
     "format": "biome format --write",
     "test": "playwright test"
   },

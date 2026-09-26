@@ -129,13 +129,12 @@ export default function ClientPartnerships({
       />
 
       {/* Vertical outlined side title (Raleway 900 70px, stroke #989898) */}
-      <h2
+      <span
         className={`${styles.verticalTitle} ${styles.desktopOnly}`}
         aria-hidden="true"
-        role="presentation"
       >
         CLIENT PARTNERSHIPS
-      </h2>
+      </span>
 
       {/* Right-side photo collage (Mask group at 1063,-59, 1003×2134) */}
       <div

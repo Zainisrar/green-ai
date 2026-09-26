@@ -21,12 +21,52 @@
     "indentStyle": "space",
     "indentWidth": 2
   },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
+    }
+  },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
+      "correctness": {
+        "noUnknownProperty": "off",
+        "noUnknownPseudoClass": "off",
+        "useExhaustiveDependencies": "warn",
+        "noUnreachable": "warn"
+      },
+      "a11y": {
+        "noSvgWithoutTitle": "off",
+        "noStaticElementInteractions": "warn",
+        "useKeyWithClickEvents": "warn",
+        "useButtonType": "warn",
+        "useSemanticElements": "warn",
+        "noRedundantRoles": "off",
+        "noNoninteractiveElementToInteractiveRole": "warn",
+        "noAriaHiddenOnFocusable": "off",
+        "useAriaPropsSupportedByRole": "warn",
+        "useGenericFontNames": "off",
+        "noLabelWithoutControl": "warn",
+        "noRedundantAlt": "warn"
+      },
       "suspicious": {
-        "noUnknownAtRules": "off"
+        "noUnknownAtRules": "off",
+        "noArrayIndexKey": "off",
+        "noDoubleEquals": "warn",
+        "noDuplicateProperties": "off"
+      },
+      "style": {
+        "noDescendingSpecificity": "off"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "off"
+      },
+      "performance": {
+        "noImgElement": "off"
+      },
+      "complexity": {
+        "noImportantStyles": "off"
       }
     },
     "domains": {

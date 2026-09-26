@@ -56,17 +56,16 @@
   );
 }
 
-/* Inner 50% opacity gradient fill over white background matching Figma */
+/* Inner 50% opacity gradient fill matching Figma */
 .cta::after {
   inset: 1px;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(35, 177, 77, 0.5) 0%,
-      rgba(255, 254, 80, 0.5) 100%
-    ),
-    #ffffff;
+  background: linear-gradient(
+    90deg,
+    rgba(35, 177, 77, 0.5) 0%,
+    rgba(255, 254, 80, 0.5) 100%
+  );
   backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   clip-path: polygon(
     var(--figma-cta-slant) 0,
     100% 0,
