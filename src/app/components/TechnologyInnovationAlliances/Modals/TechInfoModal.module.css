@@ -162,17 +162,17 @@
 /* Left Image layout */
 .imageContainerLeft {
   position: absolute;
-  left: 180px;
+  left: 170px;
   top: 227px;
-  width: 637px;
+  width: 580px;
   height: 274px;
 }
 
 .bulletsRight {
   position: absolute;
-  left: 855px;
+  left: 770px;
   top: 243px;
-  width: 860px;
+  width: 900px;
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -181,7 +181,7 @@
 /* Right Image layout */
 .bulletsLeft {
   position: absolute;
-  left: 316px;
+  left: 260px;
   top: 243px;
   width: 680px;
   display: flex;
@@ -193,7 +193,7 @@
   position: absolute;
   left: 969px;
   top: 227px;
-  width: 637px;
+  width: 580px;
   height: 274px;
 }
 
@@ -370,6 +370,7 @@
   .bulletRow {
     min-height: auto;
     gap: 12px;
+    margin-left: 0 !important;
   }
 
   .bulletIcon {

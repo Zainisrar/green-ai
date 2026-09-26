@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import TopNavigation from "../TopNavigation/TopNavigation";
 import Chatbot from "../Chatbot";
 import SiteHeader from "../SiteHeader/SiteHeader";
@@ -13,6 +14,7 @@ import SubmitTestimonial from "./Dialog/SubmitTestimonial";
 import UploadPhotoVideo from "./Dialog/UploadPhotoVideo";
 
 const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
+  const router = useRouter();
   const { data } = useCommunityVoices();
   const [openModal, setOpenModal] = useState<string | null>(null);
 
@@ -58,7 +60,7 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
       {
         title: "Project Showcase",
         image: "/images/community-voices/figma/impact-different.png",
-        onClick: () => setOpenModal("projectShowcase"),
+        onClick: () => router.push("/endeavors/project-portfolio"),
       },
     ];
     return (
@@ -268,7 +270,8 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
                   const onClick = () => {
                     if (idx === 0) setOpenModal("voicesFromField");
                     else if (idx === 1) setOpenModal("whatMakesOurImpact");
-                    else if (idx === 2) setOpenModal("projectShowcase");
+                    else if (idx === 2)
+                      router.push("/endeavors/project-portfolio");
                   };
                   return (
                     <React.Fragment key={idx}>

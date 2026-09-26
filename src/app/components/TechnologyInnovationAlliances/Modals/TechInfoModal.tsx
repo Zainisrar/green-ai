@@ -108,7 +108,11 @@ export default function TechInfoModal({
       }
     >
       {bullets.map((b, idx) => (
-        <div key={`${title}-bullet-${idx}`} className={styles.bulletRow}>
+        <div
+          key={`${title}-bullet-${idx}`}
+          className={styles.bulletRow}
+          style={{ marginLeft: `${-idx * 24}px` }}
+        >
           <img
             src="/images/technology-innovation-alliances/modal_bolt.png"
             alt=""
