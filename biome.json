@@ -1,15 +1,15 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
   "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "useIgnoreFile": true
+    "enabled": false
   },
   "files": {
     "ignoreUnknown": true,
     "includes": [
       "**",
       "!node_modules",
+      "!public",
+      "!figma-mcp",
       "!.next",
       "!.next-dev",
       "!dist",

@@ -101,8 +101,14 @@ export default function TechnologyInnovationAlliances({
     useState(false);
 
   const highlightText = (text: string, highlight: string) => {
-    if (!highlight) return text;
-    const highlightTerms = highlight.trim().split(/\s+/);
+    if (!text) return "";
+    if (!highlight || !highlight.trim()) return text;
+    const highlightTerms = highlight
+      .trim()
+      .split(/\s+/)
+      .map((term) => term.trim())
+      .filter(Boolean);
+    if (highlightTerms.length === 0) return text;
     const pattern = highlightTerms
       .map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
       .join("|");

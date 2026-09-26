@@ -98,11 +98,11 @@ export function ExploreButton({
 export function HeaderButtons() {
   return (
     <div className="flex space-x-6 ">
-      <ReadMoreButton onClick={() => console.log("Read More clicked")}>
+      <ReadMoreButton onClick={() => {}}>
         Read More..
       </ReadMoreButton>
 
-      <ExploreButton onClick={() => console.log("Explore clicked")}>
+      <ExploreButton onClick={() => {}}>
         Explore
       </ExploreButton>
     </div>
