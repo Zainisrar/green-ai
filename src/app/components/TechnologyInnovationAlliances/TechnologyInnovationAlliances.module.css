@@ -210,11 +210,6 @@
   font-weight: 600;
   padding: 0 12px 0 16px;
   pointer-events: auto;
-  background: url("/images/explore-button-bg.png") no-repeat center / 100% 100%;
-}
-.cardCta::before,
-.cardCta::after {
-  display: none;
 }
 
 /* ── Goal note over the collage ── */
