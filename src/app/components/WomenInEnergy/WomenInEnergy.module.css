@@ -194,6 +194,10 @@
   transform: rotate(180deg);
 }
 
+.canvasCard2 .canvasCardFrameEnd {
+  left: 242px;
+}
+
 .canvasCardDescription {
   position: absolute;
   top: 192px;

@@ -168,7 +168,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                 loading="lazy"
                 decoding="async"
                 className={styles.canvasCardFrameStart}
-                src="/images/women-in-energy/shape1.png"
+                src="/images/women-in-energy/figma/quote-frame-right.svg"
                 alt=""
                 aria-hidden="true"
               />
@@ -176,7 +176,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                 loading="lazy"
                 decoding="async"
                 className={styles.canvasCardFrameEnd}
-                src="/images/women-in-energy/shape2.png"
+                src="/images/women-in-energy/figma/quote-frame-right.svg"
                 alt=""
                 aria-hidden="true"
               />
@@ -324,7 +324,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                     <img
                       loading="lazy"
                       decoding="async"
-                      src="/images/women-in-energy/shape1.png"
+                      src="/images/women-in-energy/figma/quote-frame-right.svg"
                       alt="vector"
                       className="w-14"
                     />
@@ -333,9 +333,9 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                     <img
                       loading="lazy"
                       decoding="async"
-                      src="/images/women-in-energy/shape2.png"
+                      src="/images/women-in-energy/figma/quote-frame-right.svg"
                       alt="vector"
-                      className="w-14"
+                      className="w-14 rotate-180"
                     />
                   </div>
                 </div>
@@ -373,7 +373,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                     <img
                       loading="lazy"
                       decoding="async"
-                      src="/images/women-in-energy/shape1.png"
+                      src="/images/women-in-energy/figma/quote-frame-right.svg"
                       alt="vector"
                       className="w-14"
                     />
@@ -382,9 +382,9 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                     <img
                       loading="lazy"
                       decoding="async"
-                      src="/images/women-in-energy/shape2.png"
+                      src="/images/women-in-energy/figma/quote-frame-right.svg"
                       alt="vector"
-                      className="w-14"
+                      className="w-14 rotate-180"
                     />
                   </div>
                 </div>
@@ -422,7 +422,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                     <img
                       loading="lazy"
                       decoding="async"
-                      src="/images/women-in-energy/shape1.png"
+                      src="/images/women-in-energy/figma/quote-frame-right.svg"
                       alt="vector"
                       className="w-14"
                     />
@@ -431,9 +431,9 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                     <img
                       loading="lazy"
                       decoding="async"
-                      src="/images/women-in-energy/shape2.png"
+                      src="/images/women-in-energy/figma/quote-frame-right.svg"
                       alt="vector"
-                      className="w-14"
+                      className="w-14 rotate-180"
                     />
                   </div>
                 </div>
@@ -471,7 +471,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                     <img
                       loading="lazy"
                       decoding="async"
-                      src="/images/women-in-energy/shape1.png"
+                      src="/images/women-in-energy/figma/quote-frame-right.svg"
                       alt="vector"
                       className="w-14"
                     />
@@ -480,9 +480,9 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
                     <img
                       loading="lazy"
                       decoding="async"
-                      src="/images/women-in-energy/shape2.png"
+                      src="/images/women-in-energy/figma/quote-frame-right.svg"
                       alt="vector"
-                      className="w-14"
+                      className="w-14 rotate-180"
                     />
                   </div>
                 </div>
@@ -522,7 +522,7 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
               <img
                 loading="lazy"
                 decoding="async"
-                src="/images/women-in-energy/shape1.png"
+                src="/images/women-in-energy/figma/quote-frame-right.svg"
                 alt="vector"
               />
             </div>
@@ -530,8 +530,9 @@ const WomenInEnergy = ({ canvas = false }: { canvas?: boolean }) => {
               <img
                 loading="lazy"
                 decoding="async"
-                src="/images/women-in-energy/shape2.png"
+                src="/images/women-in-energy/figma/quote-frame-right.svg"
                 alt="vector"
+                className="rotate-180"
               />
             </div>
             <div className=" capitalize lg:text-xl font-bold whitespace-pre-line">
