@@ -434,6 +434,35 @@ const stackHeadline = (text: string) => {
   return <span className="panel-headline-text">{line}</span>;
 };
 
+const splitExpandedTitle = (title: string, fallbackLines: readonly string[]) => {
+  const trimmedTitle = title.trim();
+  if (!trimmedTitle) return [...fallbackLines];
+
+  if (trimmedTitle.includes("\n")) {
+    return trimmedTitle.split("\n").map((line) => line.trim()).filter(Boolean);
+  }
+
+  const lineCount = fallbackLines.length;
+  if (lineCount === 1) return [trimmedTitle];
+
+  const words = trimmedTitle.split(/\s+/);
+  const targetLength = Math.ceil(trimmedTitle.length / lineCount);
+  const lines: string[] = [];
+  let line = "";
+
+  for (const word of words) {
+    const next = line ? `${line} ${word}` : word;
+    if (line && next.length > targetLength && lines.length < lineCount - 1) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = next;
+    }
+  }
+  if (line) lines.push(line);
+  return lines;
+};
+
 const FigmaLayer = ({
   src,
   left,
@@ -462,7 +491,8 @@ const FigmaLayer = ({
 );
 
 const D6Template = (_props: D6TemplateProps) => {
-  const { data: homeSlides } = useHomeSlides();
+  const { data: homeContent } = useHomeSlides();
+  const homeSlides = homeContent?.slides;
   const [isMobile, setIsMobile] = React.useState(false);
   const [viewportScale, setViewportScale] = React.useState({
     x: 1,
@@ -485,13 +515,16 @@ const D6Template = (_props: D6TemplateProps) => {
     heading: homeSlides?.[index]?.headline || panel.heading,
   }));
   const expandedPanels = EXPANDED_PANELS.map((panel, index) => {
-    const cmsTitle = homeSlides?.[index]?.headline;
-    const title = cmsTitle || panel.title;
+    const cmsPanel = homeContent?.expandedPanels[index];
+    const title = cmsPanel?.headline?.trim() || panel.title;
+
     return {
       ...panel,
       title,
-      titleLines: cmsTitle ? cmsTitle.split(/\n/) : panel.titleLines,
-      description: homeSlides?.[index]?.description || panel.description,
+      titleLines: cmsPanel?.headline?.trim()
+        ? splitExpandedTitle(title, panel.titleLines)
+        : panel.titleLines,
+      description: cmsPanel?.description?.trim() || panel.description,
     };
   });
 

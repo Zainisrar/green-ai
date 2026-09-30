@@ -8,6 +8,16 @@ export interface HomeSlide {
   letter: "G" | "R" | "E" | "E" | "N";
 }
 
+export interface ExpandedHomePanelContent {
+  headline?: string;
+  description?: string;
+}
+
+export interface HomeSlideContent {
+  slides: HomeSlide[];
+  expandedPanels: ExpandedHomePanelContent[];
+}
+
 interface HomeApiResponse {
   success: boolean;
   data: HomeData[];
@@ -32,7 +42,7 @@ const HEADLINE_OR = (value: string | undefined, fallback: string) =>
   value?.trim() ? value.trim() : fallback;
 
 /** Five GREEN panels — each heading + description from text1–text5 on the core home entry. */
-export const buildHomeSlides = (items: HomeData[]): HomeSlide[] => {
+export const buildHomeSlides = (items: HomeData[]): HomeSlideContent => {
   const core = bySlug(items, CORE_SLUG);
   const augmentation = bySlug(
     items,
@@ -44,9 +54,9 @@ export const buildHomeSlides = (items: HomeData[]): HomeSlide[] => {
   );
   const netZero = bySlug(items, "/home/net-zero-an-innate-commitment");
 
-  if (!core) return [];
+  if (!core) return { slides: [], expandedPanels: [] };
 
-  return [
+  const slides: HomeSlide[] = [
     {
       id: "g",
       letter: "G",
@@ -96,6 +106,34 @@ export const buildHomeSlides = (items: HomeData[]): HomeSlide[] => {
       ),
     },
   ];
+
+  // Expanded accordion artwork does not follow the G-R-E-E-N slide order.
+  // Bind every state to its CMS field explicitly so its copy remains correct
+  // when records are reordered or their headings change in the CMS.
+  const expandedPanels: ExpandedHomePanelContent[] = [
+    {
+      headline: augmentation?.text2.headline,
+      description: augmentation?.text2.description,
+    },
+    {
+      headline: core.text2.headline,
+      description: core.text2.description,
+    },
+    {
+      headline: augmentation?.text3.headline,
+      description: augmentation?.text3.description,
+    },
+    {
+      headline: engineering?.text4.headline,
+      description: engineering?.text4.description,
+    },
+    {
+      headline: netZero?.text5.headline,
+      description: netZero?.text5.description,
+    },
+  ];
+
+  return { slides, expandedPanels };
 };
 
 export const useHomeSlides = () => {
