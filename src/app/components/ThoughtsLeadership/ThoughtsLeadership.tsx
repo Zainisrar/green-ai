@@ -90,6 +90,8 @@ export default function ThoughtsLeadership({
   const [isDebriefOpen, setIsDebriefOpen] = useState(false);
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
   const mainPage = data?.mainPage;
+  const pageTitle = mainPage?.title?.trim() || "Thought Leadership";
+  const titleParts = pageTitle.match(/^(.*?)(leadership)(.*)$/i);
   const cmsEditorials = data?.editorials?.map((editorial, index) => {
     const writer = editorial.writer;
     const writerName =
@@ -149,10 +151,14 @@ export default function ThoughtsLeadership({
       <div className={styles.content}>
         <header className={styles.intro}>
           <h1>
-            {mainPage?.title ?? (
+            {titleParts ? (
               <>
-                Thought <span>Leadership</span>
+                {titleParts[1]}
+                <span>{titleParts[2]}</span>
+                {titleParts[3]}
               </>
+            ) : (
+              pageTitle
             )}
           </h1>
           <h2>

@@ -24,11 +24,11 @@
   position: relative;
   z-index: 2;
   width: 1132px;
-  margin-left: 254px;
-  padding-top: 94px;
+  margin-left: 253px;
+  padding-top: 89px;
 }
 .intro {
-  margin-left: 8px;
+  margin-left: 0;
 }
 .intro h1,
 .intro h2,
@@ -46,7 +46,7 @@
   font-size: 56px;
   font-weight: 800;
   letter-spacing: -0.04em;
-  line-height: 1;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 .intro h1 span,
@@ -56,41 +56,49 @@
   color: #23b14d;
 }
 .intro h2 {
-  margin-top: 16px;
+  margin-top: 6px;
+  margin-left: 12px;
   font-size: 30px;
   font-style: italic;
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 36px;
 }
 .intro p {
-  margin-top: 9px;
-  font-size: 15px;
-  letter-spacing: -0.01em;
-  line-height: 1.45;
+  width: 1031px;
+  margin-top: 10px;
+  margin-left: 12px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 24px;
 }
 .editorialSection {
   position: relative;
-  margin-top: 34px;
+  margin-top: 26px;
 }
 .editorialSection > h3 {
-  margin-left: 8px;
+  margin-left: 0;
   font-size: 30px;
   font-weight: 800;
-  line-height: 1;
+  line-height: 34px;
 }
 .editorialGrid {
   display: grid;
-  grid-template-columns: repeat(2, 541px);
-  gap: 39px 50px;
+  grid-template-columns: repeat(2, 542px);
+  gap: 36px 50px;
   margin-top: 44px;
 }
 .card {
   position: relative;
-  height: 216px;
+  box-sizing: border-box;
+  height: 217px;
   overflow: hidden;
-  border: 1px solid #e9ef69;
-  background: #fff;
-  box-shadow: 0 6px 12px rgb(0 0 0 / 10%);
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(90deg, rgb(35 177 77 / 50%), rgb(255 254 80 / 50%))
+      border-box;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 25%);
   padding: 7px 12px;
 }
 .cardHeading {
@@ -100,7 +108,7 @@
 }
 .cardHeading img {
   width: 106px;
-  height: 62px;
+  height: 61px;
   flex: 0 0 auto;
   object-fit: cover;
 }
@@ -109,20 +117,24 @@
   font-size: 24px;
   font-weight: 700;
   letter-spacing: -0.02em;
-  line-height: 1.2;
+  line-height: 34px;
 }
 .card p {
-  width: 405px;
-  margin-top: 9px;
-  font-size: 15px;
-  line-height: 1.58;
+  width: 447px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 24px;
 }
 .byline {
   display: grid;
-  gap: 4px;
-  margin-top: 9px;
+  gap: 0;
+  margin-top: 8px;
   font-size: 14px;
-  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 24px;
 }
 .byline strong {
   font-weight: 700;
@@ -134,7 +146,7 @@
   width: 126px;
   height: 31px;
   font:
-    500 12px / 1 var(--font-montserrat),
+    600 12px / 1 var(--font-montserrat),
     Montserrat,
     sans-serif;
 }
@@ -180,7 +192,7 @@
   border: 0;
   background: transparent;
   color: #121212;
-  font: 700 18px / 1 var(--font-montserrat), Montserrat, sans-serif;
+  font: 600 18px / 1 var(--font-montserrat), Montserrat, sans-serif;
   text-align: left;
   white-space: nowrap;
   cursor: pointer;
@@ -247,12 +259,12 @@
 }
 .statement {
   position: absolute;
-  top: 890px;
-  left: 498px;
+  top: 886px;
+  left: 496px;
   font-size: 26px;
   font-style: italic;
   font-weight: 600;
-  line-height: 1;
+  line-height: 36px;
 }
 @media (max-width: 1200px) {
   .page:not(.canvasPage) {

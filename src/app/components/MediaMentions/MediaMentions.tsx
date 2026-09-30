@@ -5,6 +5,7 @@ import { useMediaMentions } from "@/hooks/useMediaMentions";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
+import SubmitMediaRequest from "./Modals/SubmitMediaRequest";
 import styles from "./MediaMentions.module.css";
 
 const highlights = [
@@ -56,6 +57,7 @@ interface MediaMentionsProps {
 export default function MediaMentions({ canvas = false }: MediaMentionsProps) {
   const { data } = useMediaMentions();
   const [openYear, setOpenYear] = useState("2025");
+  const [isMediaRequestOpen, setIsMediaRequestOpen] = useState(false);
   const mainPage = data?.mainPage;
   const cmsHighlights = mainPage?.recentHighlights?.map((highlight, index) => ({
     id: `${highlight.year}-${index}`,
@@ -78,6 +80,8 @@ export default function MediaMentions({ canvas = false }: MediaMentionsProps) {
       .map((item) => ({ id: item.id, label: item.title })),
   }));
   const displayedYears = data ? cmsYears : years;
+  const pageTitle = mainPage?.title?.trim() || "Media & Mentions";
+  const mediaPrefix = pageTitle.match(/^media\b/i)?.[0];
 
   return (
     <main
@@ -95,10 +99,13 @@ export default function MediaMentions({ canvas = false }: MediaMentionsProps) {
       <div className={styles.content}>
         <header className={styles.intro}>
           <h1>
-            {mainPage?.title ?? (
+            {mediaPrefix ? (
               <>
-                <span>Media</span> &amp; Mentions
+                <span>{mediaPrefix}</span>
+                {pageTitle.slice(mediaPrefix.length)}
               </>
+            ) : (
+              pageTitle
             )}
           </h1>
           <h2>
@@ -166,7 +173,7 @@ export default function MediaMentions({ canvas = false }: MediaMentionsProps) {
         </section>
         <FigmaAngledCta
           className={styles.request}
-          href={mainPage?.cta?.[0]?.href || undefined}
+          onClick={() => setIsMediaRequestOpen(true)}
         >
           {mainPage?.cta?.[0]?.text ?? "Submit Media Request"}
         </FigmaAngledCta>
@@ -247,6 +254,10 @@ export default function MediaMentions({ canvas = false }: MediaMentionsProps) {
       ) : (
         <D6Chatbot />
       )}
+      <SubmitMediaRequest
+        isOpen={isMediaRequestOpen}
+        onClose={() => setIsMediaRequestOpen(false)}
+      />
     </main>
   );
 }

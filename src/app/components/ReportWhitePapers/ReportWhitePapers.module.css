@@ -49,10 +49,10 @@
 
 .intro h1 {
   margin: 0;
-  font-size: clamp(36px, 3.2vw, 54px);
+  font-size: clamp(36px, 3.2vw, 56px);
   font-weight: 800;
   letter-spacing: -0.04em;
-  line-height: 1;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 
@@ -67,26 +67,28 @@
 }
 
 .intro h2 {
-  margin: 12px 0 8px;
-  font-size: clamp(20px, 1.7vw, 26px);
-  font-style: italic;
+  margin: 6px 0;
+  font-size: clamp(20px, 1.7vw, 30px);
+  font-style: normal;
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 36px;
 }
 
 .intro p {
   max-width: 1240px;
   margin: 0;
   color: #444;
-  font-size: 15px;
-  line-height: 1.4;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 24px;
 }
 
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 290px;
-  gap: 70px;
-  margin-top: 32px;
+  gap: 30px;
+  margin-top: 35px;
 }
 
 .results {
@@ -182,18 +184,18 @@
 .row h4 {
   min-width: 0;
   margin: 0;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24px;
   color: #000000;
 }
 
 .row > span {
   display: block;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 600;
   color: #23b14d;
-  line-height: 1.2;
+  line-height: 23px;
 }
 
 .actions {
@@ -229,13 +231,42 @@
 .listDownloadBtn img {
   display: block;
   width: auto;
-  height: 38px;
+  height: 35px;
 }
 
 .listViewBtn img {
   display: block;
   width: auto;
-  height: 38px;
+  height: 35px;
+}
+
+/* Figma 7077:5298 desktop list frame. Keep this exact split scoped to the
+   fixed canvas; responsive layouts retain their fluid columns below. */
+.canvasPage .content {
+  width: 1568px;
+  margin: 0 0 0 240px;
+  padding: 96px 36px 40px;
+}
+
+.canvasPage .intro h1 {
+  font-size: 56px;
+}
+
+.canvasPage .layout {
+  grid-template-columns: 1168px 298px;
+  gap: 30px;
+}
+
+.canvasPage .sidebar {
+  padding-left: 40px;
+}
+
+.canvasPage .filters::before {
+  left: 0;
+}
+
+.canvasPage .filters {
+  padding-left: 40px;
 }
 
 .pagination {

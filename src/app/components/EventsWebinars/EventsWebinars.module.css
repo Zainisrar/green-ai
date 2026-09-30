@@ -23,14 +23,14 @@
   z-index: 2;
   width: 1162px;
   margin-left: 276px;
-  padding-top: 102px;
+  padding-top: 96px;
 }
 .intro h1 {
   margin: 0;
-  font-size: 53px;
+  font-size: 56px;
   font-weight: 800;
   letter-spacing: -0.04em;
-  line-height: 1;
+  line-height: 1.2;
   text-transform: uppercase;
 }
 .intro h1 span,
@@ -41,25 +41,25 @@
 }
 .intro h2 {
   color: #121212;
-  margin: 15px 0 8px;
-  font-size: 29px;
+  margin: 6px 0 0;
+  font-size: 30px;
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 .intro p {
-  margin: 0;
-  font-size: 15px;
-  letter-spacing: -0.01em;
-  line-height: 1.45;
+  margin: 6px 0 0;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  line-height: 24px;
 }
 .events {
-  margin-top: 33px;
+  margin-top: 25px;
 }
 .events > h3 {
   margin: 0 0 18px;
   font-size: 30px;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.2;
 }
 .grid {
   display: grid;
@@ -68,10 +68,18 @@
 }
 .card {
   position: relative;
+  box-sizing: border-box;
   height: 242px;
   overflow: hidden;
-  border: 1px solid #e9ef69;
-  background: #fff;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(
+        90deg,
+        rgba(35, 177, 77, 0.5) 0%,
+        rgba(255, 254, 80, 0.5) 100%
+      )
+      border-box;
   box-shadow: 0 7px 13px rgb(0 0 0 / 12%);
 }
 .cardImage {
@@ -98,7 +106,7 @@
 .metadata {
   display: grid;
   gap: 4px;
-  font-size: 9px;
+  font-size: 8px;
   font-weight: 500;
 }
 .metadata span {

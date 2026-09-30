@@ -87,6 +87,8 @@ export default function EventsWebinars({
   );
   const displayedYears = data ? cmsYears : eventYears;
   const mainPage = data?.mainPage;
+  const pageTitle = mainPage?.title?.trim() || "Events & Webinars";
+  const eventsPrefix = pageTitle.match(/^events\b/i)?.[0];
 
   useEffect(() => {
     setExpandedYear((current) =>
@@ -112,10 +114,13 @@ export default function EventsWebinars({
       <div className={styles.content}>
         <header className={styles.intro}>
           <h1>
-            {mainPage?.title ?? (
+            {eventsPrefix ? (
               <>
-                <span>Events</span> &amp; Webinars
+                <span>{eventsPrefix}</span>
+                {pageTitle.slice(eventsPrefix.length)}
               </>
+            ) : (
+              pageTitle
             )}
           </h1>
           <h2>{mainPage?.subHeadline ?? "Where Innovation Meets Action."}</h2>
@@ -200,8 +205,8 @@ export default function EventsWebinars({
                 </h3>
                 {isExpanded && year.events.length > 0 ? (
                   <ul id={panelId} className={styles.yearEvents}>
-                    {year.events.map((event) => (
-                      <li key={event}>{event}</li>
+                    {year.events.map((event, eventIndex) => (
+                      <li key={`${year.id}-${eventIndex}`}>{event}</li>
                     ))}
                   </ul>
                 ) : null}

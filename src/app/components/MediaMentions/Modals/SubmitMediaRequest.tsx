@@ -2,11 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { buildReachUsPayload, submitReachUs } from "@/app/lib/forms";
-import EngineeringFormModal, {
-  formFieldClass,
-  formGridClass,
-} from "@/app/components/shared/EngineeringFormModal";
+import { ProductEnquiryFrame } from "@/app/components/Product/Modals/ProductEnquiry";
 import PhoneInput from "@/app/components/shared/PhoneInput";
+import modalStyles from "@/app/components/SmartGrid/Modals/SmartGridModals.module.css";
 
 interface Props {
   isOpen: boolean;
@@ -123,119 +121,122 @@ const SubmitMediaRequest = ({ isOpen, onClose }: Props) => {
   };
 
   return (
-    <EngineeringFormModal
-      isOpen={isOpen}
+    <ProductEnquiryFrame
+      labelledBy="media-request-title"
       onClose={onClose}
-      title={
-        <>
-          SUBMIT <span className="text-green-600">MEDIA REQUEST</span>
-        </>
-      }
+      closeLabel="Close media request"
+      width={1688}
+      height={665}
     >
-      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-        <div className={formGridClass}>
-          <input
-            type="text"
-            name="fullName"
-            placeholder="FULL NAME"
-            value={formData.fullName}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="EMAIL ID"
-            value={formData.email}
-            onChange={handleInputChange}
-            className={formFieldClass}
-            required
-          />
-        </div>
+      <div className={modalStyles.content}>
+        <header className={modalStyles.dialogHeader}>
+          <h2 id="media-request-title">SUBMIT MEDIA REQUEST</h2>
+        </header>
 
-        <div className={formGridClass}>
-          <PhoneInput
-            phone={formData.phone}
-            onPhoneChange={handleInputChange}
-            dialCode={phoneCountry.dial_code}
-            countryCode={phoneCountry.country_code}
-            onCountryChange={(dial_code, country_code) =>
-              setPhoneCountry({ dial_code, country_code })
-            }
-          />
-          <select
-            name="requestType"
-            value={formData.requestType}
-            onChange={handleInputChange}
-            className={`${formFieldClass} cursor-pointer ${
-              formData.requestType ? "text-gray-700" : "text-gray-500"
-            }`}
-            required
-          >
-            <option value="">REQUEST TYPE</option>
-            <option value="interview">Interview Request</option>
-            <option value="press-release">Press Release</option>
-            <option value="media-kit">Media Kit</option>
-            <option value="speaking">Speaking Engagement</option>
-            <option value="partnership">Media Partnership</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
+        <form className={modalStyles.form} onSubmit={handleSubmit}>
+          <div className={`${modalStyles.row} ${modalStyles.row1}`}>
+            <label
+              className={`${modalStyles.fieldShape} ${modalStyles.activeField}`}
+            >
+              <input
+                type="text"
+                name="fullName"
+                placeholder="FULL NAME"
+                value={formData.fullName}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+            <label className={modalStyles.fieldShape}>
+              <input
+                type="email"
+                name="email"
+                placeholder="EMAIL ID"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+            </label>
+          </div>
 
-        <textarea
-          name="details"
-          placeholder="MESSAGE / DETAILS"
-          value={formData.details}
-          onChange={handleInputChange}
-          rows={3}
-          className={`${formFieldClass} resize-none`}
-        />
+          <div className={`${modalStyles.row} ${modalStyles.row2}`}>
+            <div className={`${modalStyles.fieldShape} ${modalStyles.phoneField}`}>
+              <PhoneInput
+                phone={formData.phone}
+                onPhoneChange={handleInputChange}
+                dialCode={phoneCountry.dial_code}
+                countryCode={phoneCountry.country_code}
+                onCountryChange={(dial_code, country_code) =>
+                  setPhoneCountry({ dial_code, country_code })
+                }
+              />
+            </div>
+            <div className={modalStyles.fieldShape}>
+              <select
+                name="requestType"
+                value={formData.requestType}
+                onChange={handleInputChange}
+                className={formData.requestType ? modalStyles.hasValue : ""}
+                required
+              >
+                <option value="">REQUEST TYPE</option>
+                <option value="interview">Interview Request</option>
+                <option value="press-release">Press Release</option>
+                <option value="media-kit">Media Kit</option>
+                <option value="speaking">Speaking Engagement</option>
+                <option value="partnership">Media Partnership</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
 
-        <div className="flex items-start gap-3">
-          <input
-            type="checkbox"
-            id="media-request-agree"
-            checked={agreed}
-            onChange={(e) => setAgreed(e.target.checked)}
-            className="mt-1 h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
-          />
-          <label
-            htmlFor="media-request-agree"
-            className="text-sm text-gray-700 sm:text-base"
-          >
-            I agree that GREEN may contact me about this request.
-          </label>
-        </div>
+          <div className={`${modalStyles.row} ${modalStyles.row4}`}>
+            <div className={`${modalStyles.fieldShape} ${modalStyles.messageShape}`}>
+              <textarea
+                name="details"
+                placeholder="MESSAGE / DETAILS"
+                value={formData.details}
+                onChange={handleInputChange}
+                rows={3}
+              />
+            </div>
+          </div>
 
-        {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
-        {successMessage && (
-          <p className="text-sm text-green-600">{successMessage}</p>
-        )}
+          <div className={`${modalStyles.agreement} ${modalStyles.row5}`}>
+            <input
+              type="checkbox"
+              id="media-request-agree"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+            />
+            <label htmlFor="media-request-agree">
+              I agree that GREEN may contact me about this request.
+            </label>
+          </div>
 
-        <div className="flex flex-col gap-4 sm:flex-row sm:justify-end sm:gap-6">
-          <button
-            type="button"
-            onClick={resetForm}
-            disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
-          >
-            <span className="block text-sm font-bold text-gray-800 sm:text-base">
-              Reset
-            </span>
-          </button>
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="cursor-pointer -skew-x-[16deg] rounded-md bg-gradient-to-r from-[#23B14D]/70 to-[#FFFE50]/70 px-10 py-3 shadow-md transition hover:brightness-105 disabled:opacity-50"
-          >
-            <span className="block text-sm font-bold text-gray-900 sm:text-base">
-              {isLoading ? "Submitting..." : "Submit Request"}
-            </span>
-          </button>
-        </div>
-      </form>
-    </EngineeringFormModal>
+          {errorMessage && <p className={modalStyles.error}>{errorMessage}</p>}
+          {successMessage && <p className={modalStyles.success}>{successMessage}</p>}
+
+          <div className={`${modalStyles.row} ${modalStyles.row6}`}>
+            <button
+              type="button"
+              onClick={resetForm}
+              disabled={isLoading}
+              className={modalStyles.btnReset}
+            >
+              <span>Reset</span>
+            </button>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={modalStyles.btnSubmit}
+            >
+              <span>{isLoading ? "Submitting..." : "Submit Request"}</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </ProductEnquiryFrame>
   );
 };
 
