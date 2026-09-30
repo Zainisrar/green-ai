@@ -146,6 +146,28 @@
   stroke-width: 1.5px;
 }
 
+/* Match the small Figma Vector 7368 fill used by Partner With Us Explore CTAs. */
+.canvasExploreCta::before {
+  background: linear-gradient(90deg, #23b14d -11.2%, #fffe50 97.7%);
+}
+
+.canvasExploreCta::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.5) -142.5%,
+      rgba(255, 254, 80, 0.5) 97.7%
+    ),
+    #ffffff;
+}
+
+.canvasExploreCta:hover,
+.canvasExploreCta:focus-visible,
+.canvasExploreCta:active {
+  filter: none;
+  transform: none;
+}
+
 .canvasBracketL {
   position: absolute;
   z-index: 2;
@@ -382,6 +404,27 @@
 
 .mobileExploreBtn svg path {
   stroke-width: 1.5px;
+}
+
+.mobileExploreBtn::before {
+  background: linear-gradient(90deg, #23b14d -11.2%, #fffe50 97.7%);
+}
+
+.mobileExploreBtn::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.5) -142.5%,
+      rgba(255, 254, 80, 0.5) 97.7%
+    ),
+    #ffffff;
+}
+
+.mobileExploreBtn:hover,
+.mobileExploreBtn:focus-visible,
+.mobileExploreBtn:active {
+  filter: none;
+  transform: none;
 }
 
 .mobileQuoteBox {

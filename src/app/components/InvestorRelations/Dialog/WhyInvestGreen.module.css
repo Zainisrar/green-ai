@@ -14,25 +14,6 @@
   white-space: normal;
 }
 
-/* Stagger items slightly on desktop to follow the card's diagonal angle */
-@media (min-width: 1130px) {
-  .leftItem1 {
-    transform: translateX(0);
-  }
-  .leftItem2 {
-    transform: translateX(-18px);
-  }
-  .leftItem3 {
-    transform: translateX(-36px);
-  }
-  .rightItem1 {
-    transform: translateX(0);
-  }
-  .rightItem2 {
-    transform: translateX(-24px);
-  }
-}
-
 .iconWrapper {
   width: 52px;
   height: 52px;
@@ -55,6 +36,100 @@
   line-height: 1.35;
   color: #000000;
   white-space: normal;
+}
+
+/* Desktop geometry from Figma 7077:20091. The content is intentionally
+   staggered to follow the angled panel instead of forming a uniform grid. */
+@media (min-width: 1130px) {
+  .whyInvestDivider {
+    margin-left: -38px;
+  }
+
+  .whyInvestBody {
+    position: static;
+  }
+
+  .grid {
+    position: absolute;
+    top: 218px;
+    left: 313px;
+    width: 1255px;
+    height: 390px;
+    display: block;
+    margin: 0;
+  }
+
+  .item {
+    position: absolute;
+    gap: 20px;
+    white-space: nowrap;
+  }
+
+  .leftItem1 {
+    top: 0;
+    left: -31px;
+  }
+
+  .leftItem2 {
+    top: 74px;
+    left: -55px;
+  }
+
+  .leftItem3 {
+    top: 168px;
+    left: -69px;
+  }
+
+  .rightItem1 {
+    top: 0;
+    left: 669px;
+  }
+
+  .rightItem2 {
+    top: 90px;
+    left: 635px;
+  }
+
+  .rightItem1 .itemText {
+    margin-left: 20px;
+  }
+
+  .rightItem2 .itemText {
+    margin-left: 16px;
+  }
+
+  .leftItem1 .iconWrapper {
+    width: 62px;
+    height: 62px;
+  }
+
+  .leftItem1 .icon {
+    width: 62px;
+    height: 62px;
+  }
+
+  .leftItem2 .itemText,
+  .leftItem3 .itemText {
+    margin-left: 16px;
+  }
+
+  .whyInvestQuoteContainer {
+    position: absolute;
+    top: 556px;
+    left: 378px;
+    width: 906px;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+
+  .whyInvestQuoteText {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+    letter-spacing: 0.02em;
+  }
 }
 
 @media (max-width: 1129px) {

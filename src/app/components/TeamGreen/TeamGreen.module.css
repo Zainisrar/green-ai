@@ -12,20 +12,19 @@
 .canvasArtwork {
   position: absolute;
   z-index: 0;
-  top: -191px;
-  left: -307px;
-  width: 1296px;
-  height: 1271px;
+  top: 0;
+  left: 0;
+  width: 989px;
+  height: 970px;
   pointer-events: none;
 }
 
 .canvasArtwork img {
   display: block;
-  width: 1296px;
-  height: 1271px;
+  width: 989px;
+  height: 970px;
   max-width: none;
   object-fit: contain;
-  opacity: 0.92;
 }
 
 .canvasVerticalTitle {
@@ -54,6 +53,7 @@
   font-size: 56px;
   font-weight: 800;
   line-height: 67px;
+  text-transform: uppercase;
 }
 
 .canvasHeader h1 span {
@@ -62,27 +62,35 @@
 
 .canvasHeader h2 {
   width: 1136px;
-  margin: 5px 0 0;
+  margin: 8px 0 0;
   font-size: 30px;
   font-weight: 700;
+  font-style: italic;
   line-height: 36px;
+  color: #23b14d;
 }
 
 .canvasHeader p {
   width: 1072px;
-  margin: 20px 0 0;
+  margin: 18px 0 0;
   font-size: 18px;
   font-weight: 400;
   line-height: 23px;
+  color: #000;
+}
+
+.canvasHeader p span {
+  font-weight: 800;
+  color: #23b14d;
 }
 
 .canvasRows {
   position: absolute;
   z-index: 5;
-  top: 356px;
+  top: 360px;
   left: 735px;
   width: 978px;
-  height: 305px;
+  height: 328px;
 }
 
 .canvasRow {
@@ -91,86 +99,49 @@
   display: grid;
   width: 978px;
   grid-template-columns: 431px 425px 122px;
-  align-items: start;
+  align-items: center;
   border-bottom: 1px solid rgba(35, 177, 77, 0.62);
 }
 
-.canvasRow h3,
-.canvasRow p {
-  margin: 0;
-  font-style: italic;
-}
-
 .canvasRow h3 {
+  margin: 0;
   font-size: 22px;
   font-weight: 800;
   line-height: 32px;
   font-style: normal;
+  color: #000;
 }
 
 .canvasRow p {
-  width: 430px;
+  margin: 0;
+  width: 420px;
   white-space: pre-line;
   font-size: 18px;
   font-weight: 500;
+  font-style: italic;
   line-height: 23px;
+  color: #000;
 }
 
 .canvasRow1 {
   top: 0;
-  height: 56px;
+  height: 65px;
   padding-bottom: 8px;
 }
 .canvasRow2 {
-  top: 84px;
-  height: 62px;
-  padding-bottom: 10px;
+  top: 94px;
+  height: 60px;
+  padding-bottom: 8px;
 }
 .canvasRow3 {
-  top: 174px;
-  height: 44px;
+  top: 183px;
+  height: 61px;
   padding-bottom: 8px;
 }
 .canvasRow4 {
-  top: 248px;
-  height: 44px;
+  top: 267px;
+  height: 61px;
   padding-bottom: 8px;
-}
-
-.canvasRow h3 {
-  transform: translateY(4px);
-}
-.canvasRow1 h3 {
-  width: 173px;
-}
-.canvasRow2 h3 {
-  width: 369px;
-}
-.canvasRow3 h3 {
-  width: 204px;
-}
-.canvasRow4 h3 {
-  width: 291px;
-}
-.canvasRow1 p {
-  width: 341px;
-  transform: translateY(2px);
-}
-.canvasRow2 p {
-  width: 420px;
-  transform: translateY(0);
-}
-.canvasRow3 p {
-  width: 392px;
-  transform: translateY(6px);
-  font-size: 18px;
-  line-height: 20px;
-}
-.canvasRow4 p {
-  width: 353px;
-  transform: translateY(6px);
-  font-size: 18px;
-  line-height: 20px;
 }
 
 .canvasExploreCta {
@@ -184,33 +155,31 @@
   font-weight: 600;
 }
 
+/* Match the Media & Press Explore button fill. */
+.canvasExploreCta::before {
+  background: linear-gradient(90deg, #23b14d -11.2%, #fffe50 97.7%);
+}
+
+.canvasExploreCta::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.5) -142.5%,
+      rgba(255, 254, 80, 0.5) 97.7%
+    ),
+    #ffffff;
+}
+
 .canvasDayQuote {
   position: absolute;
   z-index: 5;
   top: 709px;
   left: 132px;
-  width: 518.5px;
-  height: 99px;
+  width: 521px;
+  height: 102px;
 }
 
-.canvasDayQuote p {
-  position: absolute;
-  top: 28px;
-  left: 72px;
-  width: 396px;
-  margin: 0;
-  font-size: 24px;
-  font-weight: 700;
-  font-style: italic;
-  line-height: 28px;
-  white-space: nowrap;
-}
-
-.canvasDayQuote p span {
-  color: #23b14d;
-}
-
-.canvasDayQuote img:first-child {
+.canvasDayBracketL {
   position: absolute;
   top: 0;
   left: 0;
@@ -218,12 +187,29 @@
   height: 101px;
 }
 
-.canvasDayQuote img:last-child {
+.canvasDayBracketR {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 439px;
   width: 82px;
-  height: 101px;
+  height: 102px;
+}
+
+.canvasDayQuote p {
+  position: absolute;
+  top: 28px;
+  left: 72px;
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 34px;
+  white-space: nowrap;
+  color: #000;
+}
+
+.canvasDayQuote p span {
+  color: #23b14d;
 }
 
 .canvasQuote {
@@ -233,67 +219,58 @@
   left: 264px;
   width: 1293px;
   height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .canvasQuote p {
   margin: 0;
+  text-align: center;
   font-size: 24px;
   font-weight: 600;
+  font-style: italic;
   line-height: 36px;
+  letter-spacing: 0.48px;
   white-space: nowrap;
+  color: #000;
+}
+
+.canvasQuote p span {
+  color: #23b14d;
 }
 
 .canvasCtas {
   position: absolute;
   z-index: 7;
-  top: 724px;
-  right: 13px;
-  display: flex;
-  width: 379px;
-  flex-direction: column;
-  gap: 26px;
+  inset: 0;
+  pointer-events: none;
 }
 
-.canvasCtas > * {
+.canvasWorkCta {
+  position: absolute;
+  top: 724px;
+  left: 1701px;
+  width: 209px;
   height: 52px;
-  flex: 0 0 52px;
+  pointer-events: auto;
   justify-content: center !important;
   gap: 12px;
-  padding: 0 24px 0 32px !important;
+  padding: 0 20px 0 28px !important;
   font-size: 16px;
   font-weight: 600;
 }
 
-.canvasWorkCta {
-  width: 209px;
-  align-self: flex-end;
-  margin-right: -3px;
-}
-
 .canvasBriefCta {
+  position: absolute;
+  top: 802px;
+  left: 1528px;
   width: 379px;
-  margin-left: 0;
-}
-
-@media (max-width: 1200px) {
-  .canvasPage {
-    position: static;
-    width: auto;
-    height: auto;
-    min-height: 0;
-    overflow: visible;
-  }
-
-  .canvasArtwork,
-  .canvasVerticalTitle,
-  .canvasHeader,
-  .canvasRows,
-  .canvasDayQuote,
-  .canvasQuote,
-  .canvasCtas {
-    position: static;
-    width: auto;
-    height: auto;
-    min-height: 0;
-  }
+  height: 52px;
+  pointer-events: auto;
+  justify-content: center !important;
+  gap: 12px;
+  padding: 0 20px 0 28px !important;
+  font-size: 16px;
+  font-weight: 600;
 }

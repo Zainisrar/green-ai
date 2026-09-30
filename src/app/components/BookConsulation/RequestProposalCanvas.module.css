@@ -159,40 +159,53 @@
 
 .quoteWrap {
   position: absolute;
-  width: 440px;
+  top: 533px;
+  left: 1499px;
+  width: 387px;
   height: 230px;
   background: transparent;
+  z-index: 4;
 }
 
 .bracketL {
   position: absolute;
-  top: 59px;
-  left: 0;
-  width: 81px;
-  height: 100px;
+  top: 58px;
+  left: -65px;
+  width: 82px;
+  height: 101px;
+  object-fit: contain;
+  pointer-events: none;
 }
 
 .quote {
   position: absolute;
   top: 0;
-  left: 58px;
+  left: 0;
   width: 387px;
   margin: 0;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 24px;
-  line-height: 30px;
   font-weight: 700;
+  font-style: normal;
+  line-height: 1.5;
+  color: #000;
+  white-space: pre-line;
+  z-index: 1;
 }
 
 .quoteGreen {
   color: #23b14d;
+  font-weight: 800;
 }
 
 .bracketR {
   position: absolute;
-  top: 0;
-  left: 388px;
+  top: -10px;
+  left: 335px;
   width: 82px;
-  height: 101px;
+  height: 102px;
+  object-fit: contain;
+  pointer-events: none;
 }
 
 .emailBox {
@@ -242,9 +255,10 @@
   min-width: 269px;
   height: 52px;
   min-height: 52px;
-  padding: 0;
+  padding: 0 20px;
   gap: 10px;
   justify-content: center;
+  background: transparent !important;
 }
 
 .freeNote {

@@ -66,6 +66,11 @@ export default function InvestmentInstruments({
       title={title}
       quoteText={quoteText}
       quoteHighlight={quoteHighlight}
+      contentClassName={styles.instrumentsContent}
+      bodyClassName={styles.instrumentsBody}
+      dividerClassName={styles.instrumentsDivider}
+      quoteContainerClassName={styles.instrumentsQuoteContainer}
+      quoteTextClassName={styles.instrumentsQuoteText}
     >
       <div className={styles.columnsContainer}>
         <div className={styles.column}>

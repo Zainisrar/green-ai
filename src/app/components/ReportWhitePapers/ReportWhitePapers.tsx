@@ -211,7 +211,7 @@ const YEAR_GROUP_META = [
       "Microgrid Feasibility in Islanded PNG (2025)",
     ],
   },
-  { id: "2024",         year: 2024, figmaCount: 145 },
+  { id: "2024", year: 2024, figmaCount: 145 },
   { id: "2023-primary", year: 2023, figmaCount: 135 },
   { id: "2023-archive", year: 2023, figmaCount: 95 },
 ] as const;
@@ -258,7 +258,12 @@ function buildYearGroups(reports: Report[], isCanvas = false) {
     byGroup.get(id)!.push(report);
   }
 
-  const groups: Array<{ id: string; year: number | string; count: number; items: string[] }> = [];
+  const groups: Array<{
+    id: string;
+    year: number | string;
+    count: number;
+    items: string[];
+  }> = [];
 
   for (const meta of YEAR_GROUP_META) {
     const groupReports = byGroup.get(meta.id) ?? [];
@@ -269,9 +274,12 @@ function buildYearGroups(reports: Report[], isCanvas = false) {
         : groupReports.map((r) => r.title);
 
     groups.push({
-      id:    meta.id,
-      year:  meta.year,
-      count: isCanvas && "figmaCount" in meta ? meta.figmaCount : groupReports.length,
+      id: meta.id,
+      year: meta.year,
+      count:
+        isCanvas && "figmaCount" in meta
+          ? meta.figmaCount
+          : groupReports.length,
       items,
     });
   }
@@ -279,8 +287,8 @@ function buildYearGroups(reports: Report[], isCanvas = false) {
   const otherReports = byGroup.get("other") ?? [];
   if (otherReports.length > 0) {
     groups.push({
-      id:    "other",
-      year:  "Other",
+      id: "other",
+      year: "Other",
       count: otherReports.length,
       items: otherReports.map((r) => r.title),
     });
@@ -379,7 +387,7 @@ export default function ReportWhitePapers({
   }, [previewReport]);
 
   const reports = useMemo<Report[]>(() => {
-    if (canvas || !apiReports?.length) return figmaReports;
+    if (!apiReports?.length) return figmaReports;
 
     return apiReports.map((report) => ({
       id: report.id,
@@ -391,7 +399,7 @@ export default function ReportWhitePapers({
       year: Number.parseInt(report.year, 10) || 2025,
       groupId: reportGroupForApiRecord(report),
     }));
-  }, [apiReports, canvas]);
+  }, [apiReports]);
 
   // List view displays 6 rows per page (Figma 7077:5298).
   // Grid view displays 9 cards in a 3x3 matrix (Figma 7077:5454).
@@ -415,8 +423,8 @@ export default function ReportWhitePapers({
   }, [filteredReports, page, PAGE_SIZE]);
 
   const yearGroups = useMemo(
-    () => buildYearGroups(reports, canvas),
-    [reports, canvas],
+    () => buildYearGroups(reports, canvas && !apiReports?.length),
+    [reports, canvas, apiReports],
   );
 
   const openPreview = (report: Report, invoker: HTMLButtonElement) => {
@@ -473,8 +481,20 @@ export default function ReportWhitePapers({
                 >
                   <svg width="20" height="15" viewBox="0 0 20 15" fill="none">
                     <rect width="20" height="3" rx="1" fill="currentColor" />
-                    <rect y="6" width="20" height="3" rx="1" fill="currentColor" />
-                    <rect y="12" width="20" height="3" rx="1" fill="currentColor" />
+                    <rect
+                      y="6"
+                      width="20"
+                      height="3"
+                      rx="1"
+                      fill="currentColor"
+                    />
+                    <rect
+                      y="12"
+                      width="20"
+                      height="3"
+                      rx="1"
+                      fill="currentColor"
+                    />
                   </svg>
                 </button>
                 <button
@@ -485,10 +505,34 @@ export default function ReportWhitePapers({
                   aria-pressed={view === "grid"}
                 >
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <rect width="7.5" height="7.5" rx="1.5" fill="currentColor" />
-                    <rect x="10.5" width="7.5" height="7.5" rx="1.5" fill="currentColor" />
-                    <rect y="10.5" width="7.5" height="7.5" rx="1.5" fill="currentColor" />
-                    <rect x="10.5" y="10.5" width="7.5" height="7.5" rx="1.5" fill="currentColor" />
+                    <rect
+                      width="7.5"
+                      height="7.5"
+                      rx="1.5"
+                      fill="currentColor"
+                    />
+                    <rect
+                      x="10.5"
+                      width="7.5"
+                      height="7.5"
+                      rx="1.5"
+                      fill="currentColor"
+                    />
+                    <rect
+                      y="10.5"
+                      width="7.5"
+                      height="7.5"
+                      rx="1.5"
+                      fill="currentColor"
+                    />
+                    <rect
+                      x="10.5"
+                      y="10.5"
+                      width="7.5"
+                      height="7.5"
+                      rx="1.5"
+                      fill="currentColor"
+                    />
                   </svg>
                 </button>
               </div>
@@ -549,7 +593,8 @@ export default function ReportWhitePapers({
                       setPage(1);
                     }}
                   >
-                    {group.year} <span className={styles.yearCount}>({group.count})</span>
+                    {group.year}{" "}
+                    <span className={styles.yearCount}>({group.count})</span>
                   </button>
                   {expandedYear === group.id && group.items.length > 0 ? (
                     <ul id={`reports-year-${group.id}`}>

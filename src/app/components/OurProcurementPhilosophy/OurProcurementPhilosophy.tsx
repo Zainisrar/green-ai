@@ -33,6 +33,10 @@ export default function OurProcurementPhilosophy({
     apiData?.mainPage?.description ||
     "GREEN’s procurement approach isn’t driven by cost — it’s driven by consequence. Every product we source carries the weight of performance, reputation, and impact. That’s why we buy smart, selectively, and strategically."
   ).replace(" Every product", "\nEvery product");
+  const pageTitle = apiData?.mainPage?.title || "Our Procurement Philosophy";
+  const quotes = apiData?.mainPage?.quote;
+  const interestCta = apiData?.mainPage?.cta?.[0];
+  const conductCta = apiData?.mainPage?.cta?.[1];
 
   return (
     <main
@@ -62,9 +66,7 @@ export default function OurProcurementPhilosophy({
 
       {/* Top Header Content */}
       <div className={styles.topSection}>
-        <h1 className={styles.mainTitle}>
-          OUR PROCUREMENT <span className={styles.greenText}>PHILOSOPHY</span>
-        </h1>
+        <h1 className={styles.mainTitle}>{pageTitle}</h1>
         <h2>{subHeadline}</h2>
         <p>{description}</p>
       </div>
@@ -95,7 +97,10 @@ export default function OurProcurementPhilosophy({
             </div>
             <div className={styles.cardContent}>
               <h3>{apiData?.corePrinciples?.title || "Core Principles"}</h3>
-              <p>What Guides Our Procurement Decisions</p>
+              <p>
+                {apiData?.corePrinciples?.subHeadline ||
+                  "What Guides Our Procurement Decisions"}
+              </p>
               <FigmaAngledCta
                 className={styles.exploreCta}
                 onClick={() => setIsCorePrinciplesOpen(true)}
@@ -117,8 +122,14 @@ export default function OurProcurementPhilosophy({
               <img
                 loading="lazy"
                 decoding="async"
-                src="/images/our-procurement-philosophy/figma-card-2.png"
-                alt="What We Won’t Compromise"
+                src={
+                  apiData?.whatWeWontCompromise?.img?.src ||
+                  "/images/our-procurement-philosophy/figma-card-2.png"
+                }
+                alt={
+                  apiData?.whatWeWontCompromise?.img?.alt ||
+                  "What We Won’t Compromise"
+                }
                 className={styles.cardThumb}
               />
             </div>
@@ -128,8 +139,8 @@ export default function OurProcurementPhilosophy({
                   "What We Won’t Compromise"}
               </h3>
               <p>
-                If it can&apos;t stand the test of time, it doesn&apos;t belong
-                in a GREEN system.
+                {apiData?.whatWeWontCompromise?.quote?.text ||
+                  "If it can't stand the test of time, it doesn't belong in a GREEN system."}
               </p>
               <FigmaAngledCta
                 className={styles.exploreCta}
@@ -155,8 +166,14 @@ export default function OurProcurementPhilosophy({
               <img
                 loading="lazy"
                 decoding="async"
-                src="/images/our-procurement-philosophy/figma-card-3.png"
-                alt="Procurement Aligned with Impact"
+                src={
+                  apiData?.procurementAlignedImpact?.img?.src ||
+                  "/images/our-procurement-philosophy/figma-card-3.png"
+                }
+                alt={
+                  apiData?.procurementAlignedImpact?.img?.alt ||
+                  "Procurement Aligned with Impact"
+                }
                 className={styles.cardThumb}
               />
             </div>
@@ -166,8 +183,8 @@ export default function OurProcurementPhilosophy({
                   "Procurement Aligned with Impact"}
               </h3>
               <p>
-                We believe that no single player has all the answers.
-                That&apos;s why GREEN seeks out:
+                {apiData?.procurementAlignedImpact?.description ||
+                  "We believe that no single player has all the answers. That's why GREEN seeks out:"}
               </p>
               <FigmaAngledCta
                 className={styles.exploreCta}
@@ -190,8 +207,14 @@ export default function OurProcurementPhilosophy({
               <img
                 loading="lazy"
                 decoding="async"
-                src="/images/our-procurement-philosophy/figma-card-4.png"
-                alt="Strategic Vendor Relationships"
+                src={
+                  apiData?.strategicVendorRelationships?.img?.src ||
+                  "/images/our-procurement-philosophy/figma-card-4.png"
+                }
+                alt={
+                  apiData?.strategicVendorRelationships?.img?.alt ||
+                  "Strategic Vendor Relationships"
+                }
                 className={styles.cardThumb}
               />
             </div>
@@ -201,8 +224,8 @@ export default function OurProcurementPhilosophy({
                   "Strategic Vendor Relationships"}
               </h3>
               <p>
-                We don’t treat vendors as vendors. We treat them as partners in
-                performance.
+                {apiData?.strategicVendorRelationships?.keys?.[0]?.text ||
+                  "We don’t treat vendors as vendors. We treat them as partners in performance."}
               </p>
               <FigmaAngledCta
                 className={styles.exploreCta}
@@ -226,9 +249,8 @@ export default function OurProcurementPhilosophy({
           aria-hidden="true"
         />
         <p className={styles.quoteText}>
-          You Call Them <span className={styles.greenText}>Projects.</span>
-          <br />
-          We Call Them <span className={styles.greenText}>People.</span>
+          {quotes?.map((quote) => quote.text).join("\n") ||
+            "You Call Them Projects. We Call Them People."}
         </p>
         <img
           loading="lazy"
@@ -254,14 +276,14 @@ export default function OurProcurementPhilosophy({
           className={styles.interestBtn}
           onClick={() => setIsSubmitInterestOpen(true)}
         >
-          Submit Interest
+          {interestCta?.text || "Submit Interest"}
         </FigmaAngledCta>
         <FigmaAngledCta
           className={styles.downloadBtn}
-          icon="chevron"
-          href="/ecosystem/supplier-code-of-conduct"
+          icon="download"
+          href={conductCta?.href || "/ecosystem/supplier-code-of-conduct"}
         >
-          View GREEN Supplier Code of Conduct
+          {conductCta?.text || "View GREEN Supplier Code of Conduct"}
         </FigmaAngledCta>
       </div>
 
@@ -269,19 +291,19 @@ export default function OurProcurementPhilosophy({
       <div className={styles.mobileElements}>
         <div className={styles.mobileQuoteBox}>
           <p>
-            “You Call Them <span className={styles.greenText}>Projects.</span>{" "}
-            We Call Them <span className={styles.greenText}>People.</span>”
+            {quotes?.map((quote) => quote.text).join(" ") ||
+              "You Call Them Projects. We Call Them People."}
           </p>
         </div>
         <div className={styles.mobileCtas}>
           <FigmaAngledCta onClick={() => setIsSubmitInterestOpen(true)}>
-            Submit Interest
+            {interestCta?.text || "Submit Interest"}
           </FigmaAngledCta>
           <FigmaAngledCta
-            icon="chevron"
-            href="/ecosystem/supplier-code-of-conduct"
+            icon="download"
+            href={conductCta?.href || "/ecosystem/supplier-code-of-conduct"}
           >
-            View GREEN Supplier Code of Conduct
+            {conductCta?.text || "View GREEN Supplier Code of Conduct"}
           </FigmaAngledCta>
         </div>
       </div>

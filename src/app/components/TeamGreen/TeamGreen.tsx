@@ -1,18 +1,18 @@
 "use client";
 import React from "react";
-import TopNavigation from "../TopNavigation/TopNavigation";
-import SiteHeader from "../SiteHeader/SiteHeader";
-import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
-import D6Chatbot from "../D6Chatbot";
+import { useInteractiveZIndex } from "../../../hooks/useInteractiveZIndex";
+import { useTeamGreen } from "../../../hooks/useTeamGreen";
 import Chatbot from "../Chatbot";
-import styles from "./TeamGreen.module.css";
-import WhoWeAre from "./Modals/WhoWeAre";
-import OurLeadershipPhilosophy from "./Modals/OurLeadershipPhilosophy";
+import D6Chatbot from "../D6Chatbot";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import TopNavigation from "../TopNavigation/TopNavigation";
 import MeettheTeam from "./Modals/MeettheTeam";
 import OurCultureinAction from "./Modals/OurCultureinAction";
+import OurLeadershipPhilosophy from "./Modals/OurLeadershipPhilosophy";
+import WhoWeAre from "./Modals/WhoWeAre";
 import WorkWithUs from "./Modals/WorkWithUs";
-import { useTeamGreen } from "../../../hooks/useTeamGreen";
-import { useInteractiveZIndex } from "../../../hooks/useInteractiveZIndex";
+import styles from "./TeamGreen.module.css";
 
 const TEAM_BRIEF_CTA = {
   href: "mailto:careers.support@green.com.pg?subject=Team%20GREEN%20Brief%20Request",
@@ -163,7 +163,35 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
   const canvasQuoteText = quoteText.startsWith("“")
     ? quoteText
     : `“${quoteText}”`;
-  const canvasRows = [
+  const resolveRowAction = (href: string, title: string) => {
+    // Prefer the stable CTA target. Title matching is only a legacy fallback.
+    const hrefTarget = href.toLowerCase();
+    if (hrefTarget.includes("leadership")) {
+      return () => setIsOurLeadershipPhilosophyOpen(true);
+    }
+    if (hrefTarget.includes("culture")) {
+      return () => setIsOurCultureinActionOpen(true);
+    }
+    if (hrefTarget.includes("meet-the-team")) {
+      return () => setIsMeettheTeamOpen(true);
+    }
+    if (hrefTarget.includes("who-we-are")) {
+      return () => setIsWhoWeAreOpen(true);
+    }
+
+    const titleTarget = title.toLowerCase();
+    if (titleTarget.includes("leadership")) {
+      return () => setIsOurLeadershipPhilosophyOpen(true);
+    }
+    if (titleTarget.includes("culture")) {
+      return () => setIsOurCultureinActionOpen(true);
+    }
+    if (titleTarget.includes("meet the team")) {
+      return () => setIsMeettheTeamOpen(true);
+    }
+    return () => setIsWhoWeAreOpen(true);
+  };
+  const fallbackCanvasRows = [
     {
       label: "Who We Are",
       description: "We don't just work on infrastructure.\nWe work on impact.”",
@@ -185,18 +213,22 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
       onClick: () => setIsOurCultureinActionOpen(true),
     },
   ];
+  const canvasRows = data.mainPage.keys.length
+    ? data.mainPage.keys.slice(0, 4).map((item) => ({
+        label: item.title,
+        description: item.description,
+        buttonText: item.button.text,
+        onClick: resolveRowAction(item.button.href, item.title),
+      }))
+    : fallbackCanvasRows.map((item) => ({ ...item, buttonText: "Explore" }));
+  const canvasArtwork = "/images/team-green/figma-artwork.png";
 
   if (canvas) {
     return (
       <main className={styles.canvasPage} data-node-id="7077:21015">
         <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
         <div className={styles.canvasArtwork} aria-hidden="true">
-          <img
-            loading="eager"
-            decoding="async"
-            src="/images/team-green/mainImg.png"
-            alt=""
-          />
+          <img loading="eager" decoding="async" src={canvasArtwork} alt="" />
         </div>
         <img
           loading="eager"
@@ -207,10 +239,13 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
         />
         <section className={styles.canvasHeader}>
           <h1>
-            Team <span>GREEN</span>
+            {renderHighlightedText(
+              (data.mainPage.title || "TEAM GREEN").toUpperCase(),
+              "GREEN",
+            )}
           </h1>
           <h2>{data.mainPage.subHeadline}</h2>
-          <p>{data.mainPage.description.text}</p>
+          <p>{renderHighlightedText(data.mainPage.description.text, "GREEN")}</p>
         </section>
         <div className={styles.canvasRows}>
           {canvasRows.map((row, index) => (
@@ -219,12 +254,12 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
               key={row.label}
             >
               <h3>{row.label}</h3>
-              <p>{row.description}</p>
+              <p>{renderHighlightedText(row.description, "GREEN")}</p>
               <FigmaAngledCta
                 className={styles.canvasExploreCta}
                 onClick={row.onClick}
               >
-                Explore
+                {row.buttonText}
               </FigmaAngledCta>
             </div>
           ))}
@@ -233,40 +268,53 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
           <img
             loading="lazy"
             decoding="async"
-            src="/images/handbook/shape.png"
+            src="/images/book-consulation/quote-bracket-left.svg"
             alt=""
             aria-hidden="true"
+            className={styles.canvasDayBracketL}
           />
           <p>
-            “A Day with Team <span>GREEN</span>
+            “A Day with Team <span className="text-[#23B14D]">GREEN</span>
           </p>
           <img
             loading="lazy"
             decoding="async"
-            src="/images/handbook/shape2.png"
+            src="/images/book-consulation/quote-bracket-right.svg"
             alt=""
             aria-hidden="true"
+            className={styles.canvasDayBracketR}
           />
         </div>
         <div className={styles.canvasQuote}>
-          <p>{canvasQuoteText}</p>
+          <p>{renderHighlightedText(canvasQuoteText, "GREEN")}</p>
         </div>
         <div className={styles.canvasCtas}>
           <FigmaAngledCta
             className={styles.canvasWorkCta}
-            onClick={() => setIsWorkWithUsOpen(true)}
+            href="/enlist"
           >
-            {data.mainPage.cta[0]?.text || "Work With Us"}
+            {data.mainPage.cta[0]?.text || "Work with Us"}
           </FigmaAngledCta>
           <FigmaAngledCta
             className={styles.canvasBriefCta}
             href={data.mainPage.cta[1]?.href || TEAM_BRIEF_CTA.href}
-            icon="chevron"
+            icon="download"
           >
-            {data.mainPage.cta[1]?.text || TEAM_BRIEF_CTA.text}
+            {data.mainPage.cta[1]?.text || "GREEN People & Culture Brief (PDF)"}
           </FigmaAngledCta>
         </div>
-        <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
+        <D6Chatbot
+          canvasAnchored
+          triggerVariant="figmaCanvas"
+          figmaPlaceholder="Let’s Talk Energy"
+          triggerStyle={{
+            top: 882,
+            right: "auto",
+            bottom: "auto",
+            left: 1489,
+            width: 418,
+          }}
+        />
         <WhoWeAre
           isOpen={isWhoWeAreOpen}
           onClose={() => setIsWhoWeAreOpen(false)}
@@ -302,7 +350,7 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
           <img
             loading="eager"
             decoding="async"
-            src="/images/team-green/mainImg.png"
+            src={canvasArtwork}
             className=" lg:block hidden lg:w-10/12 lg:h-[145vh]"
             alt="img"
           />
@@ -403,7 +451,11 @@ const TeamGreen = ({ canvas = false }: { canvas?: boolean }) => {
                     </div>
                     <div className="text-right flex justify-end">
                       <div {...buttonProps.getContainerProps()}>
-                        <button type="button" onClick={onClick} className="cursor-pointer">
+                        <button
+                          type="button"
+                          onClick={onClick}
+                          className="cursor-pointer"
+                        >
                           <img
                             loading="lazy"
                             decoding="async"

@@ -77,6 +77,9 @@ export default function InvestmentFocusArea({
       onClose={onClose}
       title={title}
       headline={headline}
+      contentClassName={styles.focusContent}
+      bodyClassName={styles.focusBody}
+      dividerClassName={styles.focusDivider}
     >
       <div className={styles.tableWrap}>
         <div className={styles.tableHeader}>

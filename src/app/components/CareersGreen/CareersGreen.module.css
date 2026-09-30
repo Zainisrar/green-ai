@@ -50,7 +50,15 @@
   margin: 0;
   font-size: 56px;
   font-weight: 800;
-  line-height: 57px;
+  line-height: 67px;
+}
+
+.canvasTitle span,
+.canvasDescription > span,
+.canvasDescription strong,
+.canvasRightQuote span,
+.canvasBottomQuote span {
+  color: #23b14d;
 }
 
 .canvasSubtitle {
@@ -60,7 +68,7 @@
   left: 262px;
   width: 859px;
   margin: 0;
-  color: #111;
+  color: #23b14d;
   font-size: 30px;
   font-weight: 600;
   font-style: italic;
@@ -154,6 +162,21 @@
   font-weight: 600;
 }
 
+/* Match the Media & Press Explore button fill. */
+.canvasExploreCta::before {
+  background: linear-gradient(90deg, #23b14d -11.2%, #fffe50 97.7%);
+}
+
+.canvasExploreCta::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.5) -142.5%,
+      rgba(255, 254, 80, 0.5) 97.7%
+    ),
+    #ffffff;
+}
+
 .canvasRow2 .canvasExploreCta {
   left: 818px;
 }
@@ -190,7 +213,7 @@
   height: 24px;
   align-items: center;
   gap: 10px;
-  color: #111;
+  color: #ffffff;
   font-family: Raleway, sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -198,9 +221,13 @@
 }
 
 .canvasReadMore span:last-child {
-  color: #23b14d;
+  color: #ffffff;
   font-size: 24px;
   line-height: 14px;
+}
+
+.canvasReadMore span:first-child {
+  text-decoration: underline;
 }
 
 .canvasBottomQuote {

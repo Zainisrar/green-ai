@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
+import type { TIAModal } from "@/app/hooks/useTechnologyInnovationAlliances";
 import TechInfoModal, { BulletItem } from "./TechInfoModal";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  data?: TIAModal;
 }
 
 const BULLETS: BulletItem[] = [
@@ -35,19 +37,32 @@ const BULLETS: BulletItem[] = [
 export default function CurrentTechnologyCollaborators({
   isOpen,
   onClose,
+  data,
 }: Props) {
+  const bullets =
+    data?.keys?.map((key) => ({ prefix: key.text, text: key.highlighted })) ??
+    BULLETS;
   return (
     <TechInfoModal
       isOpen={isOpen}
       onClose={onClose}
-      title="Current Technology Collaborators"
-      titleDash="- Partnered pilots and prototypes include:"
-      subtitle="We co-create value with clients through a model that emphasizes"
+      title={data?.title ?? "Current Technology Collaborators"}
+      titleDash={`- ${data?.subHeadline ?? "Partnered pilots and prototypes include:"}`}
+      subtitle={
+        data?.description ??
+        "We co-create value with clients through a model that emphasizes"
+      }
       imageSide="left"
-      imageSrc="/images/technology-innovation-alliances/modal_current_collaborators.png"
-      imageAlt="Current Technology Collaborators"
-      bullets={BULLETS}
-      quote="“Our goal : Build a future-proof ecosystem that outperforms today’s limitations.”"
+      imageSrc={
+        data?.img?.src ??
+        "/images/technology-innovation-alliances/modal_current_collaborators.png"
+      }
+      imageAlt={data?.img?.alt ?? "Current Technology Collaborators"}
+      bullets={bullets}
+      quote={
+        data?.quote?.text ??
+        "“Our goal : Build a future-proof ecosystem that outperforms today’s limitations.”"
+      }
     />
   );
 }

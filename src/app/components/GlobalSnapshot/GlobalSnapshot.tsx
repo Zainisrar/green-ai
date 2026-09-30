@@ -131,22 +131,24 @@ export default function GlobalSnapshot() {
   const description = hero?.description?.length
     ? hero.description.slice(0, 2)
     : FALLBACK_DESCRIPTION;
-  const stats = FALLBACK_STATS.map((fallback, index) => ({
-    ...fallback,
-    value: statsSection?.items[index]?.value || fallback.value,
-    label: statsSection?.items[index]?.label || fallback.label,
-  }));
+  const stats = statsSection?.items?.length
+    ? statsSection.items.map((item, index) => ({
+        ...item,
+        image: FALLBACK_STATS[index]?.image || "",
+        alt: FALLBACK_STATS[index]?.alt || item.label,
+      }))
+    : FALLBACK_STATS;
   const highlightLines = highlightSection?.content.lines?.length
     ? highlightSection.content.lines.slice(0, 4)
     : [
-      "Where Roads End, We Delivered.",
-      "Where Diesel Failed, We Deployed Solar.",
-      "Where Governments Stalled,",
-      "We Executed.",
-    ];
-  const features = FALLBACK_FEATURES.map(
-    (fallback, index) => framework?.features[index]?.text || fallback,
-  );
+        "Where Roads End, We Delivered.",
+        "Where Diesel Failed, We Deployed Solar.",
+        "Where Governments Stalled,",
+        "We Executed.",
+      ];
+  const features = framework?.features?.length
+    ? framework.features.map((feature) => feature.text)
+    : FALLBACK_FEATURES;
   const groupedLocations = getGroupedLocations(locationsSection?.locations);
   const credibility = locationsSection?.description || FALLBACK_CREDIBILITY;
   const exploreHref =
@@ -160,12 +162,14 @@ export default function GlobalSnapshot() {
 
   const renderFrameworkTitle = () => {
     if (frameworkTitleText.includes(frameworkHighlight)) {
-      return frameworkTitleText.split(frameworkHighlight).map((part, i, arr) => (
-        <span key={i}>
-          {part}
-          {i < arr.length - 1 && <strong>{frameworkHighlight}</strong>}
-        </span>
-      ));
+      return frameworkTitleText
+        .split(frameworkHighlight)
+        .map((part, i, arr) => (
+          <span key={i}>
+            {part}
+            {i < arr.length - 1 && <strong>{frameworkHighlight}</strong>}
+          </span>
+        ));
     }
     return (
       <>
@@ -324,8 +328,7 @@ export default function GlobalSnapshot() {
           href={portfolioHref}
           data-node-id="7077:14886"
         >
-          {actions?.buttons[2]?.text ||
-            "Explore Our Global Project Portfolio"}
+          {actions?.buttons[2]?.text || "Explore Our Global Project Portfolio"}
         </FigmaAngledCta>
       </div>
 

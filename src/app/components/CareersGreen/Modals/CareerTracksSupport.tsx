@@ -28,15 +28,18 @@ const fallback = [
   ],
 ];
 export default function CareerTracksSupport({ isOpen, onClose, data }: Props) {
-  void data;
-  const rows = fallback.map(([type, description]) => ({ type, description }));
+  const rows = data?.role?.length
+    ? data.role
+    : fallback.map(([type, description]) => ({ type, description }));
   return (
     <CareersModalShell
       isOpen={isOpen}
       onClose={onClose}
       panelClassName={styles.tracksPanel}
     >
-      <h2 className={styles.heading}>Career Tracks We Support</h2>
+      <h2 className={styles.heading}>
+        {data?.title || "Career Tracks We Support"}
+      </h2>
       <div className={styles.rule} />
       <div className={styles.tracksGrid}>
         <div>

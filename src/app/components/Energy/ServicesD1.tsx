@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useEnergyServices } from "../../../hooks/useEnergyServices";
 import D6Chatbot from "../D6Chatbot";
 import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
@@ -10,7 +11,7 @@ import styles from "./ServicesD1.module.css";
 const DESIGN_WIDTH = 1920;
 const DESIGN_HEIGHT = 970;
 
-const phases = [
+const localPhases = [
   {
     name: "Engineering",
     flowName: "Engineering",
@@ -85,6 +86,7 @@ const phases = [
 ];
 
 export default function ServicesD1() {
+  const { energyData } = useEnergyServices();
   const [activePhase, setActivePhase] = useState(0);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -105,6 +107,31 @@ export default function ServicesD1() {
     window.addEventListener("resize", updateScale);
     return () => window.removeEventListener("resize", updateScale);
   }, []);
+
+  const phases = useMemo(() => {
+    const cmsServices = energyData
+      ? [
+          energyData.service1,
+          energyData.service2,
+          energyData.service3,
+          energyData.service4,
+        ]
+      : [];
+
+    return localPhases.map((localPhase, index) => {
+      const cmsService = cmsServices[index];
+      if (!cmsService) return localPhase;
+
+      return {
+        ...localPhase,
+        name: cmsService.title,
+        flowName: cmsService.title,
+        points: cmsService.keys.map((key) => key.text),
+        description: cmsService.shortDescription,
+        detail: [cmsService.description],
+      };
+    });
+  }, [energyData]);
 
   const selectedPhase = phases[activePhase];
   return (
@@ -160,18 +187,11 @@ export default function ServicesD1() {
               const mid = (totalPoints - 1) / 2;
               return (
                 <div className={styles.flowItem} key={phase.name}>
-                  <article
+                  <button
+                    type="button"
                     className={`${styles.flowCard} ${styles[`flowCard_${index}`]} ${activePhase === index ? styles.activeFlowCard : ""}`}
                     onClick={() => setActivePhase(index)}
-                    role="button"
-                    tabIndex={0}
                     aria-pressed={activePhase === index}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" || e.key === " ") {
-                        e.preventDefault();
-                        setActivePhase(index);
-                      }
-                    }}
                     aria-label={`Select ${phase.name} phase`}
                   >
                     <div className={styles.flowCardContent}>
@@ -194,7 +214,7 @@ export default function ServicesD1() {
                         })}
                       </ul>
                     </div>
-                  </article>
+                  </button>
                   {index < phases.length - 1 && (
                     <Image
                       className={`${styles.flowArrow} ${styles[`flowArrow_${index}`]}`}
@@ -210,13 +230,20 @@ export default function ServicesD1() {
           </section>
           <section className={styles.detail} aria-live="polite">
             <h1>{selectedPhase.name}</h1>
-            {selectedPhase.detail.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+            {selectedPhase.detail.map((paragraph, index) => (
+              <p
+                // CMS descriptions support formatted content.
+                dangerouslySetInnerHTML={{ __html: paragraph }}
+                key={`${selectedPhase.name}-${index}`}
+              />
             ))}
           </section>
           <section className={styles.heading} aria-label="EPCM">
-            <h2>EPCM</h2>
-            <p>Integrated Renewable Energy Transformation</p>
+            <h2>{energyData?.headline ?? "EPCM"}</h2>
+            <p>
+              {energyData?.subheadline ??
+                "Integrated Renewable Energy Transformation"}
+            </p>
           </section>
           <section
             className={styles.servicesPanel}
@@ -247,12 +274,8 @@ export default function ServicesD1() {
             onClick={() => setIsEnquiryOpen(true)}
             type="button"
           >
-            <Image
-              src="/images/service/enquiry.svg"
-              alt="Submit an enquiry"
-              width={169}
-              height={52}
-            />
+            <span>{energyData?.cta?.text ?? "Enquiry"}</span>
+            <span aria-hidden="true">›</span>
           </button>
           <div className={styles.chat}>
             <D6Chatbot

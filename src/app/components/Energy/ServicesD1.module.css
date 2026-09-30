@@ -139,7 +139,10 @@
   justify-content: center;
   z-index: 2;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .flowCard:hover {
@@ -151,7 +154,6 @@
   border-color: #23b14d !important;
   box-shadow: 0 12px 28px rgb(35 177 77 / 35%) !important;
 }
-
 
 .flowCard_0 {
   left: 21.5px;
@@ -442,18 +444,27 @@
   right: 8px;
   top: 821px;
   bottom: auto;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 141px;
-  padding: 0;
+  min-height: 52px;
+  padding: 0 20px 0 28px;
   border: 0;
-  background: transparent;
+  background: linear-gradient(110deg, #e4f4bd 0%, #fff768 100%);
+  clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
+  color: #111;
+  font:
+    600 15px / 1 var(--font-montserrat),
+    "Montserrat",
+    sans-serif;
   cursor: pointer;
 }
 
-.enquiryButton img {
-  display: block;
-  width: 100%;
-  height: auto;
+.enquiryButton span:last-child {
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 0.5;
 }
 
 .chat {
@@ -634,7 +645,11 @@
     transform: skewX(-7deg);
     transform-origin: center center;
     cursor: pointer;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease,
+      border-color 0.18s ease,
+      background-color 0.18s ease;
   }
   .activeFlowCard {
     border-image: none !important;
@@ -783,7 +798,10 @@
     background: transparent;
     cursor: pointer;
     transform: none !important;
-    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    transition:
+      background 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
   }
   .serviceOptions .selectedService {
     min-height: 64px;
@@ -819,19 +837,14 @@
     bottom: auto;
     left: auto;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     width: calc(100% - 32px);
     max-width: 480px;
     margin: 8px auto 24px;
-    padding: 0;
+    padding: 0 20px 0 28px;
     border: 0;
-    background: transparent;
+    background: linear-gradient(110deg, #e4f4bd 0%, #fff768 100%);
     cursor: pointer;
-  }
-  .enquiryButton img {
-    display: block;
-    width: 140px;
-    height: auto;
   }
 
   .chat {
@@ -877,4 +890,3 @@
     transform: skewX(5deg);
   }
 }
-

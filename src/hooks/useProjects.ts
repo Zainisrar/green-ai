@@ -36,7 +36,8 @@ export const useProjects = () => {
   return useQuery({
     queryKey: ["projects"],
     queryFn: fetchProjects,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 0,
+    refetchOnMount: "always",
     gcTime: 10 * 60 * 1000, // 10 minutes
   });
 };

@@ -197,7 +197,9 @@
   font-style: italic;
   font-weight: 700;
   line-height: 1.2;
-  white-space: nowrap;
+  /* CMS quotes may be longer than the original canvas label. Keep them
+     inside the decorative frame instead of clipping them at the viewport. */
+  white-space: normal;
 }
 .quoteCornerLeft {
   position: absolute;

@@ -20,7 +20,11 @@ interface ClientInfoModalProps {
     | "supplier"
     | "handbook"
     | "clientPartnership"
-    | "testimonials";
+    | "testimonials"
+    | "partnerWithUs"
+    | "partnerWithUsPartnership"
+    | "partnerWithUsExpect"
+    | "partnerWithUsChannels";
 }
 
 const ClientInfoModal = ({
@@ -114,7 +118,7 @@ const ClientInfoModal = ({
   if (!isOpen || !mounted) return null;
 
   return createPortal(
-    <div className={styles.overlay} role="presentation">
+    <div className={styles.overlay} data-geometry={geometry} role="presentation">
       <button
         type="button"
         className={styles.backdropClose}
@@ -124,6 +128,7 @@ const ClientInfoModal = ({
       <div
         ref={dialogRef}
         className={styles.stage}
+        data-geometry={geometry}
         role="dialog"
         aria-modal="true"
         aria-label="Information dialog"
@@ -133,14 +138,30 @@ const ClientInfoModal = ({
             "--modal-height": `${height}px`,
             "--modal-scale": scale,
             "--modal-left": `${
-              geometry === "testimonials"
+              geometry === "partnerWithUs"
+                ? 29
+                : geometry === "partnerWithUsPartnership"
+                  ? 23
+                  : geometry === "partnerWithUsExpect"
+                    ? 38
+                    : geometry === "partnerWithUsChannels"
+                      ? 38
+                : geometry === "testimonials"
                 ? 31
                 : geometry === "clientPartnership"
                   ? 23
                   : 19
             }px`,
             "--modal-top": `${
-              geometry === "testimonials"
+              geometry === "partnerWithUs"
+                ? 195
+                : geometry === "partnerWithUsPartnership"
+                  ? 174
+                  : geometry === "partnerWithUsExpect"
+                    ? 180
+                    : geometry === "partnerWithUsChannels"
+                      ? 173
+                : geometry === "testimonials"
                 ? 198
                 : geometry === "clientPartnership"
                   ? 138

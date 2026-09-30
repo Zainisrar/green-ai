@@ -174,7 +174,15 @@ export default function OurChainValue({ canvas = false }: OurChainValueProps) {
         >
           Request a Consultation
         </FigmaAngledCta>
-        <FigmaAngledCta className={styles.frameworkBtn}>
+        <FigmaAngledCta
+          className={styles.frameworkBtn}
+          icon="download"
+          href={
+            apiData?.cta?.[1]?.href ||
+            "/green-innovation-partnership-framework.pdf"
+          }
+          download
+        >
           GREEN Project Delivery Framework (PDF)
         </FigmaAngledCta>
       </div>
@@ -193,7 +201,14 @@ export default function OurChainValue({ canvas = false }: OurChainValueProps) {
           <FigmaAngledCta onClick={() => setIsConsultationOpen(true)}>
             Request a Consultation
           </FigmaAngledCta>
-          <FigmaAngledCta>
+          <FigmaAngledCta
+            icon="download"
+            href={
+              apiData?.cta?.[1]?.href ||
+              "/green-innovation-partnership-framework.pdf"
+            }
+            download
+          >
             GREEN Project Delivery Framework (PDF)
           </FigmaAngledCta>
         </div>

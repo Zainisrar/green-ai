@@ -1,17 +1,17 @@
 "use client";
-import React, { useState } from "react";
-import Link from "next/link";
-import SiteHeader from "../SiteHeader/SiteHeader";
+import { useState } from "react";
+import { usePublicEventsVolunteering } from "../../../hooks/usePublicEventsVolunteering";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import FigmaQuoteBrackets from "../FigmaQuoteBrackets/FigmaQuoteBrackets";
-import styles from "./PublicEventVolunteering.module.css";
-import WhyWeEngage from "./Dialog/WhyWeEngage";
+import ProductEnquiry from "../Product/Modals/ProductEnquiry";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import PastHighlights from "./Dialog/PastHighlights";
+import VolunteerSignUp from "./Dialog/VolunteerSignUp";
 import WaystoGetInvolved from "./Dialog/WaystoGetInvolved";
 import WhoCanJoin from "./Dialog/WhoCanJoin";
-import VolunteerSignUp from "./Dialog/VolunteerSignUp";
-import PastHighlights from "./Dialog/PastHighlights";
-import ProductEnquiry from "../Product/Modals/ProductEnquiry";
+import WhyWeEngage from "./Dialog/WhyWeEngage";
+import styles from "./PublicEventVolunteering.module.css";
 
 interface PublicEventVolunteeringProps {
   canvas?: boolean;
@@ -20,25 +20,10 @@ interface PublicEventVolunteeringProps {
 export default function PublicEventVolunteering({
   canvas = false,
 }: PublicEventVolunteeringProps) {
+  const { data: publicEventsResponse } = usePublicEventsVolunteering();
+  const mainPage = publicEventsResponse?.data?.mainPage;
   const [openModal, setOpenModal] = useState<string | null>(null);
   const [isSignUpFormOpen, setIsSignUpFormOpen] = useState(false);
-
-  const highlightText = (text: string, highlight: string, wordCase = true) => {
-    if (!highlight) return text;
-    const parts = text.split(new RegExp(`(${highlight})`, "gi"));
-    return parts.map((part, index) => {
-      const shouldHighlight =
-        part.toLowerCase() === highlight.toLowerCase() ||
-        (wordCase && part.toLowerCase() === highlight.toLowerCase());
-      return shouldHighlight ? (
-        <span key={index} className={styles.highlight}>
-          {part}
-        </span>
-      ) : (
-        part
-      );
-    });
-  };
 
   const rows = [
     {
@@ -127,16 +112,15 @@ export default function PublicEventVolunteering({
         {/* Hero Header */}
         <header className={styles.mobileHero}>
           <h1 className={styles.mobileTitle}>
-            PUBLIC <span className={styles.green}>EVENTS</span> &amp; VOLUNTEERING
+            {mainPage?.title || "Public Events & Volunteering"}
           </h1>
           <p className={styles.mobileSubtitle}>
-            Be Part of the Energy Transition. On the Ground. In the Community.
+            {mainPage?.subHeadline ||
+              "Be Part of the Energy Transition. On the Ground. In the Community."}
           </p>
           <p className={styles.mobileDescription}>
-            From school outreach to community solar cleanups —{" "}
-            <span className={styles.highlight}>GREEN</span> invites individuals,
-            institutions, and future changemakers to participate in hands-on
-            action that matters.
+            {mainPage?.description?.text ||
+              "From school outreach to community solar cleanups — GREEN invites individuals, institutions, and future changemakers to participate in hands-on action that matters."}
           </p>
         </header>
 
@@ -168,9 +152,8 @@ export default function PublicEventVolunteering({
         {/* Bottom Quote Card */}
         <div className={styles.mobileQuoteCard}>
           <h2 className={styles.mobileQuoteText}>
-            You Don’t Need To Be An{" "}
-            <span className={styles.highlight}>Engineer</span> To Power Change.
-            You Just Need To Show Up. We’ll Show You How.
+            {mainPage?.quote?.text ||
+              "You Don’t Need To Be An Engineer To Power Change. You Just Need To Show Up. We’ll Show You How."}
           </h2>
         </div>
 
@@ -268,16 +251,15 @@ export default function PublicEventVolunteering({
       {/* Page header */}
       <header className={styles.pageHeader}>
         <h1 className={styles.pageTitle}>
-          PUBLIC <span className={styles.green}>EVENTS</span> &amp; VOLUNTEERING
+          {mainPage?.title || "Public Events & Volunteering"}
         </h1>
         <p className={styles.subHeadline}>
-          Be Part of the Energy Transition. On the Ground. In the Community.
+          {mainPage?.subHeadline ||
+            "Be Part of the Energy Transition. On the Ground. In the Community."}
         </p>
         <p className={styles.description}>
-          From school outreach to community solar cleanups —{" "}
-          <span className={styles.highlight}>GREEN</span> invites individuals,
-          institutions, and future changemakers to participate in hands-on
-          action that matters.
+          {mainPage?.description?.text ||
+            "From school outreach to community solar cleanups — GREEN invites individuals, institutions, and future changemakers to participate in hands-on action that matters."}
         </p>
       </header>
 
@@ -321,9 +303,8 @@ export default function PublicEventVolunteering({
           rightStyle={{ right: -42, top: -16 }}
         />
         <h2 className={styles.bottomQuoteText}>
-          You Don’t Need To Be An{" "}
-          <span className={styles.highlight}>Engineer</span> To Power Change.
-          You Just Need To Show Up. We’ll Show You How.
+          {mainPage?.quote?.text ||
+            "You Don’t Need To Be An Engineer To Power Change. You Just Need To Show Up. We’ll Show You How."}
         </h2>
       </div>
 

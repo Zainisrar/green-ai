@@ -91,7 +91,7 @@
 .card {
   position: relative;
   display: flex;
-  min-height: 207px;
+  height: 207px;
   flex-direction: column;
   overflow: hidden;
   border: 1px solid #e5ee6a;
@@ -120,10 +120,13 @@
   display: flex;
   flex: 1;
   gap: 16px;
+  min-height: 0;
+  overflow: hidden;
   padding: 0 14px 30px;
 }
 .cardDetails img {
   width: 188px;
+  height: 118px;
   min-width: 188px;
   flex: 0 0 188px;
   object-fit: cover;
@@ -133,6 +136,10 @@
   color: #555;
   font-size: 16px;
   line-height: 1.45;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
 }
 
 .readMore.readMore span {
@@ -175,27 +182,30 @@
 }
 
 .closingMessage {
-  max-width: 900px;
+  width: 1172px;
+  max-width: 100%;
   margin-top: 62px;
 }
 
-.closingMessage h2,
-.closingMessage p {
+.closingMessage h2 {
   margin: 0;
-  font-size: 25px;
-  font-style: italic;
+  font-size: 26px;
+  font-style: normal;
   font-weight: 700;
-  line-height: 1.35;
+  line-height: 36px;
 }
 
-.closingMessage p {
-  margin-top: 5px;
+.greenPhrase {
+  color: #23b14d;
+  font-style: italic;
+  font-weight: 600;
 }
 
 .contribute {
   position: absolute;
-  top: 1681px;
-  left: 1223px;
+  /* Keep the footer action beside the closing copy, after dynamic CMS cards. */
+  right: -76px;
+  bottom: 120px;
   width: 441px;
 }
 

@@ -1,16 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 
-interface EventImage {
+export interface EventImage {
   alt: string;
   src: string;
 }
 
-interface EventCTA {
+export interface EventCTA {
   href: string;
   text: string;
 }
 
-interface UpcomingEvent {
+export interface UpcomingEvent {
   cta: EventCTA;
   slug: string;
   year: string;
@@ -20,17 +20,17 @@ interface UpcomingEvent {
   featuredImg: EventImage;
 }
 
-interface MainPageCTA {
+export interface MainPageCTA {
   href: string;
   text: string;
 }
 
-interface MainPageQuote {
+export interface MainPageQuote {
   text: string;
   highlighted: string;
 }
 
-interface MainPage {
+export interface MainPage {
   cta: MainPageCTA[];
   quote: MainPageQuote;
   title: string;
@@ -38,7 +38,7 @@ interface MainPage {
   subHeadline: string;
 }
 
-interface EventsWebinarsData {
+export interface EventsWebinarsData {
   id: number;
   upcomingEvents: UpcomingEvent[];
   mainPage: MainPage;
@@ -46,7 +46,7 @@ interface EventsWebinarsData {
   updatedAt: string;
 }
 
-interface EventsWebinarsResponse {
+export interface EventsWebinarsResponse {
   success: boolean;
   data: EventsWebinarsData;
 }
@@ -68,7 +68,8 @@ export const useEventsWebinars = () => {
   return useQuery({
     queryKey: ["events-webinars"],
     queryFn: fetchEventsWebinars,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 0,
+    refetchOnMount: "always",
     gcTime: 10 * 60 * 1000, // 10 minutes
   });
 };

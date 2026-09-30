@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTechnologyInnovationAlliances } from "@/app/hooks/useTechnologyInnovationAlliances";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
@@ -96,6 +97,7 @@ interface TechnologyInnovationAlliancesProps {
 export default function TechnologyInnovationAlliances({
   canvas = false,
 }: TechnologyInnovationAlliancesProps) {
+  const { data } = useTechnologyInnovationAlliances();
   const [openModal, setOpenModal] = useState<string | null>(null);
   const [isBecomeTechnologyPartnerOpen, setIsBecomeTechnologyPartnerOpen] =
     useState(false);
@@ -127,7 +129,23 @@ export default function TechnologyInnovationAlliances({
     });
   };
 
-  const d = FALLBACK;
+  const cmsQuotes = data?.mainPage?.quote ?? [];
+  const d = data
+    ? {
+        ...FALLBACK,
+        title: data.mainPage.title,
+        subHeadline: data.mainPage.subHeadline,
+        description: data.mainPage.description,
+        goal: cmsQuotes[0] ?? FALLBACK.goal,
+        quote1: cmsQuotes[1] ?? FALLBACK.quote1,
+        cards: FALLBACK.cards.map((card, index) => ({
+          ...card,
+          title: data.modals[index]?.title?.trim() || card.title,
+          subtitle: data.modals[index]?.subHeadline || card.subtitle,
+          image: data.modals[index]?.img?.src || card.image,
+        })),
+      }
+    : FALLBACK;
   const ctaLinks = {
     innovationFramework:
       "mailto:innovation@green.com.pg?subject=Innovation%20Partnership%20Framework%20Request",
@@ -150,7 +168,10 @@ export default function TechnologyInnovationAlliances({
       />
 
       {/* Right-side solar farm collage background — desktop only */}
-      <div className={`${styles.rightCollage} ${styles.desktopOnly}`} aria-hidden="true">
+      <div
+        className={`${styles.rightCollage} ${styles.desktopOnly}`}
+        aria-hidden="true"
+      >
         <img
           loading="lazy"
           decoding="async"
@@ -161,10 +182,7 @@ export default function TechnologyInnovationAlliances({
 
       {/* Header section — desktop only */}
       <div className={`${styles.headerBlock} ${styles.desktopOnly}`}>
-        <h1 className={styles.mainTitle}>
-          TECHNOLOGY &amp; <span className={styles.greenText}>INNOVATION</span>{" "}
-          ALLIANCES
-        </h1>
+        <h1 className={styles.mainTitle}>{d.title}</h1>
         <p className={styles.subHeadline}>{d.subHeadline}</p>
         <p className={styles.description}>
           {highlightText(d.description.text, d.description.highlighted)}
@@ -266,15 +284,19 @@ export default function TechnologyInnovationAlliances({
         style={{ position: "absolute", left: 1501, top: 746 }}
         onClick={() => setIsBecomeTechnologyPartnerOpen(true)}
       >
-        Become a Technology Partner
+        {data?.mainPage?.cta?.[0]?.text ?? "Become a Technology Partner"}
       </FigmaAngledCta>
       <FigmaAngledCta
         className={`${styles.frameworkCta} ${styles.desktopOnly}`}
         style={{ position: "absolute", left: 1428, top: 824 }}
         icon="download"
-        href="/green-innovation-partnership-framework.pdf"
+        href={
+          data?.mainPage?.cta?.[1]?.href ||
+          "/green-innovation-partnership-framework.pdf"
+        }
       >
-        GREEN Innovation Partnership Framework (PDF)
+        {data?.mainPage?.cta?.[1]?.text ??
+          "GREEN Innovation Partnership Framework (PDF)"}
       </FigmaAngledCta>
 
       {/* ===== MOBILE-ONLY LAYOUT ===== */}
@@ -282,10 +304,7 @@ export default function TechnologyInnovationAlliances({
         <div className={styles.mobileLayout}>
           {/* Hero */}
           <div className={styles.mobileHero}>
-            <h1 className={styles.mobileH1}>
-              TECHNOLOGY &amp;{" "}
-              <span className={styles.greenText}>INNOVATION</span> ALLIANCES
-            </h1>
+            <h1 className={styles.mobileH1}>{d.title}</h1>
             <p className={styles.mobileTagline}>{d.subHeadline}</p>
             <p className={styles.mobileBlurb}>
               {highlightText(d.description.text, d.description.highlighted)}
@@ -371,18 +390,22 @@ export default function TechnologyInnovationAlliances({
       <WhyWePartner
         isOpen={openModal === "whyWePartner"}
         onClose={() => setOpenModal(null)}
+        data={data?.modals?.[0]}
       />
       <CurrentTechnologyCollaborators
         isOpen={openModal === "currentTechnologyCollaborators"}
         onClose={() => setOpenModal(null)}
+        data={data?.modals?.[1]}
       />
       <ResearchCoDevelopment
         isOpen={openModal === "researchCoDevelopment"}
         onClose={() => setOpenModal(null)}
+        data={data?.modals?.[2]}
       />
       <InnovativePartner
         isOpen={openModal === "becomeInnovationPartner"}
         onClose={() => setOpenModal(null)}
+        data={data?.modals?.[3]}
       />
 
       {/* Elements page enquiry component reused for "Become a Technology Partner" */}
@@ -399,4 +422,3 @@ export default function TechnologyInnovationAlliances({
     </main>
   );
 }
-

@@ -121,13 +121,16 @@ export default function EsgCommitments() {
   const [isExploreOpen, setIsExploreOpen] = useState(false);
   const [isAlternateView, setIsAlternateView] = useState(false);
 
-  const sections = FALLBACK_SECTIONS.map((fallback, index) => ({
-    ...fallback,
-    heading: sustainabilityData?.sections?.[index]?.heading || fallback.heading,
-    points: sustainabilityData?.sections?.[index]?.points?.length
-      ? sustainabilityData.sections[index].points
-      : fallback.points,
-  }));
+  const sections = sustainabilityData?.sections?.length
+      ? sustainabilityData.sections.map((section, index) => ({
+        heading: section.heading,
+        intro: section.intro || FALLBACK_SECTIONS[index]?.intro || "",
+        points: section.points,
+        icon: section.icon?.src || FALLBACK_SECTIONS[index]?.icon || "",
+        card: FALLBACK_SECTIONS[index]?.card || "",
+        nodeId: FALLBACK_SECTIONS[index]?.nodeId || "",
+      }))
+    : FALLBACK_SECTIONS;
   const rawSubtitle =
     sustainabilityData?.header?.subtitle ||
     "sustainability is more than a goal—it’s our core operating principle. We integrate Environmental, Social and Governance (ESG) values into everything we do, from product design to energy use, supply chains, and community partnerships.";

@@ -39,6 +39,7 @@ export default function MediaContactInterviewRequests({
       onClose={onClose}
       title="Media Contact & Interview Requests"
       labelledBy="media-contact-title"
+      variant="mediaContact"
     >
       <div className={styles.container}>
         {/* Top 2 Tilted Columns */}

@@ -8,7 +8,11 @@ interface Props {
   data?: {
     title: string;
     description: string;
-    icons: Array<{ title: string; description: string }>;
+    icons: Array<{
+      img: { alt: string; src: string };
+      title: string;
+      description: string;
+    }>;
     quote: { text1: string; text2: string };
   };
 }
@@ -35,12 +39,19 @@ const fallbackItems = [
   ],
 ];
 export default function WhyWorkWithGreen({ isOpen, onClose, data }: Props) {
-  void data;
-  const items = fallbackItems.map(([title, description, src]) => ({
-    title,
-    description,
-    src,
-  }));
+  const items = data?.icons?.length
+    ? data.icons.map((item) => ({
+        title: item.title,
+        description: item.description,
+        src: item.img.src,
+        alt: item.img.alt,
+      }))
+    : fallbackItems.map(([title, description, src]) => ({
+        title,
+        description,
+        src,
+        alt: "",
+      }));
   return (
     <CareersModalShell
       isOpen={isOpen}
@@ -48,16 +59,19 @@ export default function WhyWorkWithGreen({ isOpen, onClose, data }: Props) {
       panelClassName={styles.whyPanel}
     >
       <div className={styles.whyHeading}>
-        <h2 className={styles.heading}>Why Work With GREEN?</h2>
+        <h2 className={styles.heading}>
+          {data?.title || "Why Work With GREEN?"}
+        </h2>
         <p className={styles.whySubheading}>
-          - We engineer energy. But our real asset is people.
+          {data?.description ||
+            "- We engineer energy. But our real asset is people."}
         </p>
       </div>
       <div className={styles.rule} />
       <div className={styles.whyGrid}>
         {items.map((item) => (
           <article className={styles.whyItem} key={item.title}>
-            <img src={item.src} alt="" />
+            <img src={item.src} alt={item.alt} />
             <div>
               <h3>{item.title}</h3>
               <p>{item.description}</p>
@@ -67,10 +81,12 @@ export default function WhyWorkWithGreen({ isOpen, onClose, data }: Props) {
       </div>
       <blockquote className={styles.whyQuote}>
         <p>
-          “At GREEN, I’ve grown faster in two years than I thought possible.
-          Field-tested. Mission-driven. It’s real work.”
+          {data?.quote?.text1 ||
+            "At GREEN, I’ve grown faster in two years than I thought possible. Field-tested. Mission-driven. It’s real work."}
         </p>
-        <footer>— Field Engineer, GREEN Limited</footer>
+        <footer>
+          {data?.quote?.text2 || "— Field Engineer, GREEN Limited"}
+        </footer>
       </blockquote>
     </CareersModalShell>
   );

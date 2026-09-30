@@ -131,6 +131,22 @@
   font-size: 12px;
   font-weight: 600;
 }
+
+/* Match the Media & Press Explore button fill. */
+.canvasRowCta::before {
+  background: linear-gradient(90deg, #23b14d -11.2%, #fffe50 97.7%);
+}
+
+.canvasRowCta::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.5) -142.5%,
+      rgba(255, 254, 80, 0.5) 97.7%
+    ),
+    #ffffff;
+}
+
 .canvasRow1 {
   top: 308px;
   left: 775px;

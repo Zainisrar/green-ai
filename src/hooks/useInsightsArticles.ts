@@ -44,7 +44,8 @@ export const useInsightsArticles = () => {
   return useQuery({
     queryKey: ["insights-articles"],
     queryFn: fetchInsightsArticles,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 0,
+    refetchOnMount: "always",
     gcTime: 10 * 60 * 1000, // 10 minutes
   });
 };

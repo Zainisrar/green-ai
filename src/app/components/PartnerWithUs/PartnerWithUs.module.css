@@ -118,25 +118,39 @@
 .canvasRowCta {
   position: absolute;
   left: 692px;
-  display: grid;
   width: 122px;
-  height: 52px;
-  min-height: 52px;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 0;
-  padding: 0 12px !important;
+  height: 36.884px;
+  min-height: 36.884px;
+  padding: 0 14px 0 18px !important;
   font-size: 13px;
   font-weight: 600;
 }
-.canvasRowCta span {
-  grid-column: 2;
-  text-align: center;
-}
 .canvasRowCta svg {
-  grid-column: 3;
-  justify-self: end;
-  margin: 0;
-  transform: translateX(-8px);
+  margin-left: 0;
+}
+/* Vector 7368's visible fill begins before the left edge of the small Figma
+   Explore control. Keep this treatment local so the larger page CTAs retain
+   their original gradient. */
+.canvasRowCta::before {
+  background: linear-gradient(90deg, #23b14d -11.2%, #fffe50 97.7%);
+}
+.canvasRowCta::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.5) -142.5%,
+      rgba(255, 254, 80, 0.5) 97.7%
+    ),
+    #ffffff;
+}
+.canvasRowCta:hover,
+.canvasRowCta:focus-visible {
+  filter: none;
+  transform: none;
+}
+.canvasRowCta:active {
+  filter: none;
+  transform: translateY(0);
 }
 .canvasRow1 {
   top: 291px;
@@ -258,6 +272,6 @@
 }
 .canvasDownloadCta {
   top: 801px;
-  left: 1452px;
+  left: 1468px;
   width: 449px;
 }

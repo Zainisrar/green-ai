@@ -42,24 +42,17 @@ const FALLBACK_MEMBERS = [
 export default function Team() {
   const { leadershipSection } = useLeadershipTeam();
   const apiMembers = leadershipSection?.members ?? [];
-  const members = FALLBACK_MEMBERS.map((fallback, index) => {
-    const apiSrc = apiMembers[index]?.img?.src;
-    // Cloudinary CMS serves Bernard George as an opaque white JPEG (pjozryznjdixvwopwkos.jpg),
-    // which blocks the continuous yellow stroke of the frame behind his head.
-    // Fall back to the transparent PNG (/images/our-team/bernard-george.png) so the frame is unbroken,
-    // exactly matching Senthilkumar Chockalingam.
-    const isOpaqueJpg = apiSrc
-      ?.toLowerCase()
-      .includes("pjozryznjdixvwopwkos");
-    const image = isOpaqueJpg ? fallback.image : apiSrc || fallback.image;
-
-    return {
-      name: apiMembers[index]?.name || fallback.name,
-      designation: apiMembers[index]?.designation || fallback.designation,
-      image,
-      alt: apiMembers[index]?.img?.alt || fallback.name,
-    };
-  });
+  const members = apiMembers.length
+    ? apiMembers.map((member) => ({
+        name: member.name,
+        designation: member.designation,
+        image: member.img.src,
+        alt: member.img.alt || member.name,
+      }))
+    : FALLBACK_MEMBERS.map((member) => ({
+        ...member,
+        alt: member.name,
+      }));
   const title = leadershipSection?.title || "Leadership Team";
   const titleWords = title.trim().split(/\s+/);
   const titleEnd = titleWords.pop() || "Team";

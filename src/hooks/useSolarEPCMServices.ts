@@ -10,6 +10,8 @@ export const useSolarEPCMServices = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: queryKeys.solarEPCMServices(),
     queryFn: api.getSolarEPCMServices,
+    staleTime: 0,
+    refetchOnMount: "always",
   });
 
   return {

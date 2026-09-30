@@ -161,6 +161,21 @@
   padding: 0 14px 0 18px;
 }
 
+/* Match the Media & Press Explore fill without altering its Figma geometry. */
+.categoryCta::before {
+  background: linear-gradient(90deg, #23b14d -11.2%, #fffe50 97.7%);
+}
+
+.categoryCta::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.5) -142.5%,
+      rgba(255, 254, 80, 0.5) 97.7%
+    ),
+    #fff;
+}
+
 .dividerLine {
   position: absolute;
   height: 1px;

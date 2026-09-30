@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
+import type { TIAModal } from "@/app/hooks/useTechnologyInnovationAlliances";
 import TechInfoModal, { BulletItem } from "./TechInfoModal";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  data?: TIAModal;
 }
 
 const BULLETS: BulletItem[] = [
@@ -15,19 +17,37 @@ const BULLETS: BulletItem[] = [
   { text: "Next-gen panel durability testing under tropical climate extremes" },
 ];
 
-export default function ResearchCoDevelopment({ isOpen, onClose }: Props) {
+export default function ResearchCoDevelopment({
+  isOpen,
+  onClose,
+  data,
+}: Props) {
+  const bullets =
+    data?.keys?.map((key) => ({
+      text: key.text,
+      highlight: key.highlighted,
+    })) ?? BULLETS;
   return (
     <TechInfoModal
       isOpen={isOpen}
       onClose={onClose}
-      title="Research & Co-Development"
-      titleDash="- We believe that no single player has all the answers. That's why GREEN seeks out:"
-      subtitle="We co-create value with clients through a model that emphasizes"
+      title={data?.title ?? "Research & Co-Development"}
+      titleDash={`- ${data?.subHeadline ?? "We believe that no single player has all the answers. That's why GREEN seeks out:"}`}
+      subtitle={
+        data?.description ??
+        "We co-create value with clients through a model that emphasizes"
+      }
       imageSide="right"
-      imageSrc="/images/technology-innovation-alliances/modal_research_co_dev.png"
-      imageAlt="Research & Co-Development"
-      bullets={BULLETS}
-      quote="“Our goal : Build a future-proof ecosystem that outperforms today’s limitations.”"
+      imageSrc={
+        data?.img?.src ??
+        "/images/technology-innovation-alliances/modal_research_co_dev.png"
+      }
+      imageAlt={data?.img?.alt ?? "Research & Co-Development"}
+      bullets={bullets}
+      quote={
+        data?.quote?.text ??
+        "“Our goal : Build a future-proof ecosystem that outperforms today’s limitations.”"
+      }
     />
   );
 }

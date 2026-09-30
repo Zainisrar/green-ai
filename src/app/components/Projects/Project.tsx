@@ -40,6 +40,7 @@ type ProjectSlide = {
   toDateProduction: string;
   consumption: string;
   dailyGeneration: string;
+  timelineYear?: string;
 };
 
 const defaultProjects: ProjectSlide[] = [
@@ -70,6 +71,7 @@ const defaultProjects: ProjectSlide[] = [
     toDateProduction: "10800 kWh",
     consumption: "1298.7 kWh",
     dailyGeneration: "109 kWh",
+    timelineYear: "2025",
   },
   {
     id: 2,
@@ -97,6 +99,7 @@ const defaultProjects: ProjectSlide[] = [
     toDateProduction: "10800 kWh",
     consumption: "1298.7 kWh",
     dailyGeneration: "109 kWh",
+    timelineYear: "2023",
   },
   {
     id: 3,
@@ -124,6 +127,7 @@ const defaultProjects: ProjectSlide[] = [
     toDateProduction: "10800 kWh",
     consumption: "1298.7 kWh",
     dailyGeneration: "109 kWh",
+    timelineYear: "2020",
   },
   {
     id: 4,
@@ -151,6 +155,7 @@ const defaultProjects: ProjectSlide[] = [
     toDateProduction: "10800 kWh",
     consumption: "1298.7 kWh",
     dailyGeneration: "109 kWh",
+    timelineYear: "2025",
   },
 ];
 
@@ -258,33 +263,29 @@ export default function Project() {
     return () => window.removeEventListener("resize", update);
   }, []);
 
-  const projects = useMemo(() => {
+  const projects = useMemo<ProjectSlide[]>(() => {
     if (!apiProjects?.length) return defaultProjects;
 
-    return defaultProjects.map((dp) => {
-      const live = apiProjects.find(
-        (p) =>
-          p.title?.toLowerCase().includes(dp.shortTitle?.toLowerCase() || "") ||
-          dp.title.toLowerCase().includes(p.title?.toLowerCase() || ""),
-      );
-      if (!live) return dp;
-
-      return {
-        ...dp,
-        systems: valueWithoutUnit(live.numberofsystems, "") || dp.systems,
-        days: valueWithoutUnit(live.noofdays, "") || dp.days,
-        totalGeneration: live.totalgeneration || dp.totalGeneration,
-        batteryPercentage:
-          valueWithoutUnit(live.battery, "%") || dp.batteryPercentage,
-        coalA: live.coalA || dp.coalA,
-        emissionReduction: live.emissionreduction || dp.emissionReduction,
-        treesPlanted: live.treesplanted || dp.treesPlanted,
-        capacity: live.capacity || dp.capacity,
-        toDateProduction: live.todateproduct || dp.toDateProduction,
-        consumption: live.consumption || dp.consumption,
-        dailyGeneration: live.totalenergydaily || dp.dailyGeneration,
-      };
-    });
+    return apiProjects.map((project) => ({
+      id: project.id,
+      title: project.title,
+      shortTitle: project.title,
+      image: project.featuredImg,
+      leftPreview: undefined,
+      rightPreview: undefined,
+      systems: valueWithoutUnit(project.numberofsystems, ""),
+      days: valueWithoutUnit(project.noofdays, ""),
+      totalGeneration: project.totalgeneration,
+      batteryPercentage: valueWithoutUnit(project.battery, "%"),
+      coalA: project.coalA,
+      emissionReduction: project.emissionreduction,
+      treesPlanted: project.treesplanted,
+      capacity: project.capacity,
+      toDateProduction: project.todateproduct,
+      consumption: project.consumption,
+      dailyGeneration: project.totalenergydaily,
+      timelineYear: project.createdAt.slice(0, 4),
+    }));
   }, [apiProjects]);
 
   const activeIndex = currentProjectIndex % projects.length;
@@ -321,8 +322,8 @@ export default function Project() {
     setViewMode("in-view");
   };
   const openTimelineProject = (year: string) => {
-    const matchingIndex = projects.findIndex((project) =>
-      project.title.includes(year),
+    const matchingIndex = projects.findIndex(
+      (project) => project.timelineYear === year,
     );
 
     if (matchingIndex >= 0) {
@@ -345,7 +346,15 @@ export default function Project() {
       />
 
       {viewMode === "in-view" ? (
-        <InViewTimeline key={timelineRun} onExplore={openTimelineProject} />
+        <InViewTimeline
+          key={timelineRun}
+          onExplore={openTimelineProject}
+          availableYears={new Set(
+            projects.flatMap((project) =>
+              project.timelineYear ? [project.timelineYear] : [],
+            ),
+          )}
+        />
       ) : (
         <section className={styles.stage} aria-label="Project portfolio">
           <motion.div
@@ -614,7 +623,13 @@ export default function Project() {
   );
 }
 
-function InViewTimeline({ onExplore }: { onExplore: (year: string) => void }) {
+function InViewTimeline({
+  onExplore,
+  availableYears,
+}: {
+  onExplore: (year: string) => void;
+  availableYears: Set<string>;
+}) {
   const step = 5;
 
   return (
@@ -732,12 +747,14 @@ function InViewTimeline({ onExplore }: { onExplore: (year: string) => void }) {
             </h2>
             <p>{card.subtitle}</p>
           </div>
-          <button type="button" onClick={() => onExplore(card.year)}>
-            Explore
-            <span className={styles.exploreArrow} aria-hidden="true">
-              ›
-            </span>
-          </button>
+          {availableYears.has(card.year) ? (
+            <button type="button" onClick={() => onExplore(card.year)}>
+              Explore
+              <span className={styles.exploreArrow} aria-hidden="true">
+                ›
+              </span>
+            </button>
+          ) : null}
         </article>
       ))}
     </section>

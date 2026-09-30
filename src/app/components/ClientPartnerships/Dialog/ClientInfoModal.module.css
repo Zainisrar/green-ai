@@ -15,6 +15,15 @@
   box-sizing: border-box;
 }
 
+.overlay[data-geometry="partnerWithUs"],
+.overlay[data-geometry="partnerWithUsPartnership"],
+.overlay[data-geometry="partnerWithUsExpect"],
+.overlay[data-geometry="partnerWithUsChannels"] {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
 .backdropClose {
   position: fixed;
   inset: 0;
@@ -30,6 +39,18 @@
   height: calc(var(--modal-height, 700px) * var(--modal-scale, 1));
   flex: none;
   margin: auto;
+}
+
+/* The Partner With Us dialog is placed directly on Figma's 1920 × 1023
+   modal canvas rather than vertically centred. */
+.stage[data-geometry="partnerWithUs"],
+.stage[data-geometry="partnerWithUsPartnership"],
+.stage[data-geometry="partnerWithUsExpect"],
+.stage[data-geometry="partnerWithUsChannels"] {
+  position: absolute;
+  top: calc(var(--modal-top) * var(--modal-scale, 1));
+  left: calc(var(--modal-left) * var(--modal-scale, 1));
+  margin: 0;
 }
 
 .modalWindow {
@@ -79,6 +100,21 @@
   height: 24px;
 }
 
+.stage[data-geometry="partnerWithUs"] .closeButton,
+.stage[data-geometry="partnerWithUsPartnership"] .closeButton,
+.stage[data-geometry="partnerWithUsExpect"] .closeButton,
+.stage[data-geometry="partnerWithUsChannels"] .closeButton {
+  padding: 0;
+}
+
+.stage[data-geometry="partnerWithUs"] .closeIcon,
+.stage[data-geometry="partnerWithUsPartnership"] .closeIcon,
+.stage[data-geometry="partnerWithUsExpect"] .closeIcon,
+.stage[data-geometry="partnerWithUsChannels"] .closeIcon {
+  width: 20px;
+  height: 20px;
+}
+
 .contentViewport {
   position: relative;
   z-index: 10;
@@ -86,6 +122,13 @@
   height: 100%;
   box-sizing: border-box;
   padding: 46px 120px 48px 344px;
+}
+
+.stage[data-geometry="partnerWithUs"] .contentViewport,
+.stage[data-geometry="partnerWithUsPartnership"] .contentViewport,
+.stage[data-geometry="partnerWithUsExpect"] .contentViewport,
+.stage[data-geometry="partnerWithUsChannels"] .contentViewport {
+  padding-top: 54px;
 }
 
 /* Mobile Fallback (< 900px) */

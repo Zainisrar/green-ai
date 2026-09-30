@@ -51,6 +51,24 @@ export default function ProductsFigma() {
   const product = products?.find((item) => item.slug === PRODUCT_SLUG);
   const title = product?.title || fallbackTitle;
   const description = product?.description || fallbackDescription;
+  const productGallery = product?.imgs?.length
+    ? product.imgs.map(
+        (image) => [image.src, image.alt || product.title] as const,
+      )
+    : gallery.map(([image, alt]) => [`/images/product/${image}`, alt] as const);
+  const productSpecifications = product?.keys?.length
+    ? product.keys.map((item) => ({
+        icon: item.icon.src,
+        name: item.icon.alt || item.title,
+        detail: item.title,
+        duration: item.description,
+      }))
+    : specifications.map(([icon, name, detail, duration]) => ({
+        icon: `/images/product/${icon}`,
+        name,
+        detail,
+        duration,
+      }));
   const [active, setActive] = useState(0);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
@@ -100,12 +118,12 @@ export default function ProductsFigma() {
           loading="lazy"
           decoding="async"
           className={styles.hero}
-          src={`/images/product/${gallery[active][0]}`}
-          alt={gallery[active][1]}
+          src={productGallery[active]?.[0] || productGallery[0][0]}
+          alt={productGallery[active]?.[1] || productGallery[0][1]}
           data-node-id="7077:12667"
         />
         <div className={styles.thumbnails}>
-          {gallery.map(([image, alt], index) => (
+          {productGallery.map(([image, alt], index) => (
             <button
               key={image}
               type="button"
@@ -118,12 +136,7 @@ export default function ProductsFigma() {
               aria-label={`Show product image ${index + 1}`}
               aria-pressed={active === index}
             >
-              <img
-                loading="lazy"
-                decoding="async"
-                src={`/images/product/${image}`}
-                alt={alt}
-              />
+              <img loading="lazy" decoding="async" src={image} alt={alt} />
             </button>
           ))}
         </div>
@@ -132,7 +145,8 @@ export default function ProductsFigma() {
           className={styles.enquiry}
           onClick={() => setIsEnquiryOpen(true)}
         >
-          Enquiry <span aria-hidden="true">›</span>
+          {product?.ctaButton?.text || "Enquiry"}{" "}
+          <span aria-hidden="true">›</span>
         </button>
       </section>
 
@@ -173,17 +187,17 @@ export default function ProductsFigma() {
           alt=""
         />
         <div className={styles.specificationList}>
-          {specifications.map(([icon, name, detail, duration]) => (
-            <article key={name}>
+          {productSpecifications.map((specification) => (
+            <article key={specification.name}>
               <img
                 loading="lazy"
                 decoding="async"
-                src={`/images/product/${icon}`}
+                src={specification.icon}
                 alt=""
               />
-              <h3>{name}</h3>
-              <p>{detail}</p>
-              <span>{duration}</span>
+              <h3>{specification.name}</h3>
+              <p>{specification.detail}</p>
+              <span>{specification.duration}</span>
             </article>
           ))}
         </div>
@@ -232,11 +246,11 @@ export default function ProductsFigma() {
           loading="lazy"
           decoding="async"
           className={styles.mobileHero}
-          src={`/images/product/${gallery[active][0]}`}
-          alt={gallery[active][1]}
+          src={productGallery[active]?.[0] || productGallery[0][0]}
+          alt={productGallery[active]?.[1] || productGallery[0][1]}
         />
         <div className={styles.mobileThumbnails}>
-          {gallery.map(([image], index) => (
+          {productGallery.map(([image], index) => (
             <button
               key={image}
               type="button"
@@ -244,12 +258,7 @@ export default function ProductsFigma() {
               aria-label={`Show product image ${index + 1}`}
               aria-pressed={active === index}
             >
-              <img
-                loading="lazy"
-                decoding="async"
-                src={`/images/product/${image}`}
-                alt=""
-              />
+              <img loading="lazy" decoding="async" src={image} alt="" />
             </button>
           ))}
         </div>
@@ -258,17 +267,19 @@ export default function ProductsFigma() {
         <section className={styles.mobileSpecifications}>
           <h2>Kit Specifications</h2>
           <div className={styles.mobileSpecGrid}>
-            {specifications.map(([icon, name, detail, duration]) => (
-              <article key={name} className={styles.mobileSpecItem}>
+            {productSpecifications.map((specification) => (
+              <article key={specification.name} className={styles.mobileSpecItem}>
                 <img
                   loading="lazy"
                   decoding="async"
-                  src={`/images/product/${icon}`}
+                  src={specification.icon}
                   alt=""
                 />
-                <h3>{name}</h3>
-                <p>{detail}</p>
-                {duration !== "--" && <span>{duration}</span>}
+                <h3>{specification.name}</h3>
+                <p>{specification.detail}</p>
+                {specification.duration !== "--" && (
+                  <span>{specification.duration}</span>
+                )}
               </article>
             ))}
           </div>
@@ -278,7 +289,7 @@ export default function ProductsFigma() {
           className={styles.mobileEnquiry}
           onClick={() => setIsEnquiryOpen(true)}
         >
-          Enquiry
+          {product?.ctaButton?.text || "Enquiry"}
         </button>
       </div>
       <D6Chatbot />

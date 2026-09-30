@@ -1,21 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 
-interface EditorialImage {
+export interface EditorialImage {
   alt: string;
   src: string;
 }
 
-interface EditorialCTA {
+export interface EditorialCTA {
   href: string;
   text: string;
 }
 
-interface EditorialWriter {
+export interface EditorialWriter {
   name?: string;
   email?: string;
 }
 
-interface Editorial {
+export interface Editorial {
   cta: EditorialCTA;
   title: string;
   writer: EditorialWriter | number;
@@ -24,17 +24,17 @@ interface Editorial {
   featuredImg: EditorialImage;
 }
 
-interface MainPageCTA {
+export interface MainPageCTA {
   href: string;
   text: string;
 }
 
-interface MainPageQuote {
+export interface MainPageQuote {
   text: string;
   highlighted: string;
 }
 
-interface MainPage {
+export interface MainPage {
   cta: MainPageCTA[];
   quote: MainPageQuote;
   title: string;
@@ -43,7 +43,7 @@ interface MainPage {
   editorialsTitle: string;
 }
 
-interface ThoughtLeadershipData {
+export interface ThoughtLeadershipData {
   id: number;
   editorials: Editorial[];
   mainPage: MainPage;
@@ -51,7 +51,7 @@ interface ThoughtLeadershipData {
   updatedAt: string;
 }
 
-interface ThoughtLeadershipResponse {
+export interface ThoughtLeadershipResponse {
   success: boolean;
   data: ThoughtLeadershipData;
 }
@@ -73,7 +73,8 @@ export const useThoughtLeadership = () => {
   return useQuery({
     queryKey: ["thought-leadership"],
     queryFn: fetchThoughtLeadership,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 0,
+    refetchOnMount: "always",
     gcTime: 10 * 60 * 1000, // 10 minutes
   });
 };

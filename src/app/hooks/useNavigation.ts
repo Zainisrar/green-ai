@@ -82,12 +82,20 @@ const supplyPartnersItemOrder = [
   "supplier code of conduct",
 ];
 
-const normalizeNavigationRoutes = (items: NavigationItem[]): NavigationItem[] =>
+const normalizeNavigationRoutes = (
+  items: NavigationItem[],
+  parentName?: string,
+): NavigationItem[] =>
   items.map((item) => {
     const itemName = item.name.toLowerCase().trim();
-    const canonicalSlug = canonicalNavigationRoutes[itemName];
+    const canonicalSlug =
+      itemName === "become a supplier" && parentName === "engage"
+        ? "/engage/become-a-supplier"
+        : canonicalNavigationRoutes[itemName];
 
-    let children = item.children ? normalizeNavigationRoutes(item.children) : undefined;
+    const children = item.children
+      ? normalizeNavigationRoutes(item.children, itemName)
+      : undefined;
 
     // Guarantee Collaboration & Innovation exists in Ecosystem
     if (itemName === "ecosystem" && children) {
@@ -577,7 +585,7 @@ const fallbackNavigation: NavigationItem[] = [
       {
         id: 82,
         name: "Become a Supplier",
-        slug: "/ecosystem/become-a-supplier",
+        slug: "/engage/become-a-supplier",
         top: false,
       },
       {

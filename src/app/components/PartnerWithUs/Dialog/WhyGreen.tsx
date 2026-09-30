@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import ClientInfoModal from "@/app/components/ClientPartnerships/Dialog/ClientInfoModal";
 import styles from "./PartnerWithUsDialogs.module.css";
 
@@ -11,15 +10,15 @@ interface Props {
 
 const points = [
   {
-    title: "100% On-Ground Delivery in PNG",
+    title: "100% on-ground delivery in PNG",
     description: "from concept to commissioning",
   },
   {
-    title: "Proven EPCM Capacity",
+    title: "Proven EPCM capacity",
     description: "design, procurement, project execution, O&M",
   },
   {
-    title: "Certified and Audited",
+    title: "Certified and audited",
     description: "ISO 9001, 14001, 45001; CEC; NEIA-compliant",
   },
   {
@@ -27,7 +26,7 @@ const points = [
     description: "ESG-aligned, gender inclusive, community embedded",
   },
   {
-    title: "Digital by Design",
+    title: "Digital by design",
     description:
       "GRID-INTEL™ platform for monitoring, reporting, and diagnostics",
   },
@@ -35,7 +34,14 @@ const points = [
 
 const WhyGreen = ({ isOpen, onClose }: Props) => {
   return (
-    <ClientInfoModal isOpen={isOpen} onClose={onClose} height={570}>
+    <ClientInfoModal
+      isOpen={isOpen}
+      onClose={onClose}
+      height={700}
+      closeRight={38}
+      closeTop={15}
+      geometry="partnerWithUs"
+    >
       <div className={styles.dialogContainer}>
         <header className={styles.dialogHeader}>
           <h2 className={styles.dialogTitle}>
@@ -53,7 +59,7 @@ const WhyGreen = ({ isOpen, onClose }: Props) => {
               <img
                 loading="lazy"
                 decoding="async"
-                src="/images/why-esg-matters-to-green/green_bolt.png"
+                src="/images/collaboration-innovation/bolt.png"
                 className={styles.whyIcon}
                 alt=""
               />

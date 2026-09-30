@@ -52,8 +52,15 @@ const row2 = [
 
 const TrustedBy = ({ isOpen, onClose }: Props) => {
   return (
-    <ClientInfoModal isOpen={isOpen} onClose={onClose} height={570}>
-      <div className={styles.dialogContainer}>
+    <ClientInfoModal
+      isOpen={isOpen}
+      onClose={onClose}
+      height={700}
+      closeRight={38}
+      closeTop={15}
+      geometry="partnerWithUsChannels"
+    >
+      <div className={`${styles.dialogContainer} ${styles.trustedDialog}`}>
         <header className={styles.dialogHeader}>
           <h2 className={styles.dialogTitle}>Trusted By</h2>
           <p className={styles.dialogSubtitle}>

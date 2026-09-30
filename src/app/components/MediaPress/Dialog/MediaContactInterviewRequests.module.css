@@ -3,7 +3,7 @@
   width: 100%;
   height: 100%;
   padding-left: 292px;
-  padding-top: 25px;
+  padding-top: 83px;
   box-sizing: border-box;
 }
 
@@ -73,7 +73,7 @@
 .pillsRow {
   display: flex;
   gap: 145px;
-  margin-top: 48px;
+  margin-top: 73px;
   margin-left: -70px;
 }
 

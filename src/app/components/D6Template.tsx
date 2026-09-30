@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import React from "react";
+import { useHomeSlides } from "@/hooks/useHomeSlides";
 import D6Chatbot from "./D6Chatbot";
 import SiteHeader from "./SiteHeader/SiteHeader";
 import "../home.css";
@@ -461,6 +462,7 @@ const FigmaLayer = ({
 );
 
 const D6Template = (_props: D6TemplateProps) => {
+  const { data: homeSlides } = useHomeSlides();
   const [isMobile, setIsMobile] = React.useState(false);
   const [viewportScale, setViewportScale] = React.useState({
     x: 1,
@@ -473,6 +475,25 @@ const D6Template = (_props: D6TemplateProps) => {
   const panelCopyTimer = React.useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
+  const panels = PANELS.map((panel, index) => ({
+    ...panel,
+    label: homeSlides?.[index]?.headline || panel.label,
+    description: homeSlides?.[index]?.description || panel.description,
+  }));
+  const mobilePanels = MOBILE_PANELS.map((panel, index) => ({
+    ...panel,
+    heading: homeSlides?.[index]?.headline || panel.heading,
+  }));
+  const expandedPanels = EXPANDED_PANELS.map((panel, index) => {
+    const cmsTitle = homeSlides?.[index]?.headline;
+    const title = cmsTitle || panel.title;
+    return {
+      ...panel,
+      title,
+      titleLines: cmsTitle ? cmsTitle.split(/\n/) : panel.titleLines,
+      description: homeSlides?.[index]?.description || panel.description,
+    };
+  });
 
   React.useEffect(
     () => () => {
@@ -565,7 +586,7 @@ const D6Template = (_props: D6TemplateProps) => {
 
             {/* G-R-E-E-N interactive panels */}
             <div className="absolute inset-0 z-10 pointer-events-auto">
-              {MOBILE_PANELS.map((p, i) => (
+              {mobilePanels.map((p, i) => (
                 <Link
                   key={`m-${i}`}
                   href={p.href}
@@ -717,7 +738,7 @@ const D6Template = (_props: D6TemplateProps) => {
               type="button"
               className="d6-panel-hit"
               onClick={() => activatePanel(index)}
-              aria-label={`Show ${PANELS[index].label}`}
+              aria-label={`Show ${panels[index].label}`}
               aria-expanded={expandedPanel === index}
               style={panelHitGeometry(
                 index,
@@ -733,7 +754,7 @@ const D6Template = (_props: D6TemplateProps) => {
               type="button"
               className="d6-badge absolute select-none"
               onClick={() => activatePanel(i)}
-              aria-label={`Show ${PANELS[i].label}`}
+              aria-label={`Show ${panels[i].label}`}
               aria-expanded={expandedPanel === i}
               aria-disabled={i === 0}
               style={{
@@ -760,7 +781,7 @@ const D6Template = (_props: D6TemplateProps) => {
           <div className="d6-green-corner" style={{ zIndex: 12 }} aria-hidden />
 
           {/* Each panel's heading + description clipped to its own image bounds */}
-          {PANELS.map((panelContent, i) => {
+          {panels.map((panelContent, i) => {
             const panel = FIGMA_LAYERS.panels[i];
             const copy = PANEL_COPY[i];
             const isCollapsedPanel = i > 0 && expandedPanel !== i;
@@ -776,11 +797,11 @@ const D6Template = (_props: D6TemplateProps) => {
               (COLLAPSED_LABEL_LINES[i] * COLLAPSED_LABEL_LINE_HEIGHT) / 2;
             const headlineLeft = isCollapsedPanel
               ? centeredPanelHeadingLeft(
-                i,
-                headlineVisualMidY,
-                isCollapsedAbout ? 190 : copy.headlineWidth,
-                PANEL_EDGES[expandedPanel] ?? PANEL_EDGES[1],
-              ) - panel.left
+                  i,
+                  headlineVisualMidY,
+                  isCollapsedAbout ? 190 : copy.headlineWidth,
+                  PANEL_EDGES[expandedPanel] ?? PANEL_EDGES[1],
+                ) - panel.left
               : copy.headlineLeft;
             const detailHref = isCollapsedAbout
               ? "/explore/welcome-to-green"
@@ -858,26 +879,26 @@ const D6Template = (_props: D6TemplateProps) => {
               aria-live="polite"
               style={
                 {
-                  left: EXPANDED_PANELS[expandedPanel].layout.left,
-                  top: EXPANDED_PANELS[expandedPanel].layout.top,
-                  width: EXPANDED_PANELS[expandedPanel].layout.width,
-                  "--d6-copy-body-width": `${EXPANDED_PANELS[expandedPanel].layout.bodyWidth}px`,
-                  "--d6-copy-body-gap": `${EXPANDED_PANELS[expandedPanel].layout.bodyGap}px`,
-                  "--d6-copy-title-inset": `${EXPANDED_PANELS[expandedPanel].layout.titleInset}px`,
-                  "--d6-copy-title-size": `${EXPANDED_PANELS[expandedPanel].layout.titleSize}px`,
-                  "--d6-copy-title-line-height": `${EXPANDED_PANELS[expandedPanel].layout.titleLineHeight}px`,
-                  "--d6-copy-body-size": `${EXPANDED_PANELS[expandedPanel].layout.bodySize}px`,
-                  "--d6-copy-body-line-height": `${EXPANDED_PANELS[expandedPanel].layout.bodyLineHeight}px`,
+                  left: expandedPanels[expandedPanel].layout.left,
+                  top: expandedPanels[expandedPanel].layout.top,
+                  width: expandedPanels[expandedPanel].layout.width,
+                  "--d6-copy-body-width": `${expandedPanels[expandedPanel].layout.bodyWidth}px`,
+                  "--d6-copy-body-gap": `${expandedPanels[expandedPanel].layout.bodyGap}px`,
+                  "--d6-copy-title-inset": `${expandedPanels[expandedPanel].layout.titleInset}px`,
+                  "--d6-copy-title-size": `${expandedPanels[expandedPanel].layout.titleSize}px`,
+                  "--d6-copy-title-line-height": `${expandedPanels[expandedPanel].layout.titleLineHeight}px`,
+                  "--d6-copy-body-size": `${expandedPanels[expandedPanel].layout.bodySize}px`,
+                  "--d6-copy-body-line-height": `${expandedPanels[expandedPanel].layout.bodyLineHeight}px`,
                 } as React.CSSProperties
               }
             >
               <div>
-                <h2 aria-label={EXPANDED_PANELS[expandedPanel].title}>
-                  {EXPANDED_PANELS[expandedPanel].titleLines.map((line) => (
+                <h2 aria-label={expandedPanels[expandedPanel].title}>
+                  {expandedPanels[expandedPanel].titleLines.map((line) => (
                     <span key={line}>{line}</span>
                   ))}
                 </h2>
-                <p>{EXPANDED_PANELS[expandedPanel].description}</p>
+                <p>{expandedPanels[expandedPanel].description}</p>
               </div>
             </section>
           )}

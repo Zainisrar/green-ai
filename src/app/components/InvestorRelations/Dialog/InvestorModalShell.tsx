@@ -18,6 +18,9 @@ interface InvestorModalShellProps {
   children: ReactNode;
   contentClassName?: string;
   bodyClassName?: string;
+  dividerClassName?: string;
+  quoteContainerClassName?: string;
+  quoteTextClassName?: string;
 }
 
 export default function InvestorModalShell({
@@ -30,6 +33,9 @@ export default function InvestorModalShell({
   children,
   contentClassName = "",
   bodyClassName = "",
+  dividerClassName = "",
+  quoteContainerClassName = "",
+  quoteTextClassName = "",
 }: InvestorModalShellProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const previouslyFocusedElement = useRef<HTMLElement | null>(null);
@@ -93,7 +99,11 @@ export default function InvestorModalShell({
   const renderQuote = () => {
     if (!quoteText) return null;
     if (!quoteHighlight) {
-      return <p className={styles.quoteText}>{quoteText}</p>;
+      return (
+        <p className={`${styles.quoteText} ${quoteTextClassName}`.trim()}>
+          {quoteText}
+        </p>
+      );
     }
     const highlightTerms = quoteHighlight.trim().split(/\s+/);
     const pattern = highlightTerms
@@ -101,18 +111,16 @@ export default function InvestorModalShell({
       .join("|");
     const parts = quoteText.split(new RegExp(`(${pattern})`, "gi"));
     return (
-      <p className={styles.quoteText}>
+      <p className={`${styles.quoteText} ${quoteTextClassName}`.trim()}>
         {parts.map((part, idx) => {
           const isHighlight = highlightTerms.some(
             (term) => part.toLowerCase() === term.toLowerCase(),
           );
           return isHighlight ? (
-            // biome-ignore lint/suspicious/noArrayIndexKey: parts from string split
             <span key={`${part}-${idx}`} className={styles.greenHighlight}>
               {part}
             </span>
           ) : (
-            // biome-ignore lint/suspicious/noArrayIndexKey: parts from string split
             <React.Fragment key={`${part}-${idx}`}>{part}</React.Fragment>
           );
         })}
@@ -194,7 +202,7 @@ export default function InvestorModalShell({
                 </span>
               </div>
             ) : null}
-            <div className={styles.divider} />
+            <div className={`${styles.divider} ${dividerClassName}`.trim()} />
           </div>
 
           <div className={`${styles.body} ${bodyClassName}`.trim()}>
@@ -202,7 +210,11 @@ export default function InvestorModalShell({
           </div>
 
           {quoteText ? (
-            <div className={styles.quoteContainer}>{renderQuote()}</div>
+            <div
+              className={`${styles.quoteContainer} ${quoteContainerClassName}`.trim()}
+            >
+              {renderQuote()}
+            </div>
           ) : null}
         </div>
       </div>

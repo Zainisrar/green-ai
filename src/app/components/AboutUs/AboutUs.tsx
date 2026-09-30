@@ -3,6 +3,7 @@
 import React from "react";
 import { useAboutUs } from "../../../hooks/useAboutUs";
 import { parseAboutUsContent, parseQuoteContent } from "../../utils/htmlParser";
+import { resolveApiAssetUrl } from "../../lib/media";
 import D6Chatbot from "../D6Chatbot";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import styles from "./AboutUs.module.css";
@@ -39,6 +40,9 @@ const AboutUs: React.FC<AboutUsProps> = ({ canvas = false }) => {
     "Transforming Lives with Energy Independence";
   const quote1 = parsedQuote?.firstQuote || "A Transformation - That’s";
   const quote2 = parsedQuote?.secondQuote || "Perspicacious for a";
+  const heroImage =
+    resolveApiAssetUrl(aboutUsData?.bgImg) ||
+    "/images/about-us/figma-masked-bg.png";
 
   if (canvas) {
     return (
@@ -54,7 +58,7 @@ const AboutUs: React.FC<AboutUsProps> = ({ canvas = false }) => {
           <img
             loading="lazy"
             decoding="async"
-            src="/images/about-us/figma-masked-bg.png"
+            src={heroImage}
             alt="Children in sunshine"
             className={styles.leftImage}
           />
@@ -122,7 +126,7 @@ const AboutUs: React.FC<AboutUsProps> = ({ canvas = false }) => {
           <img
             loading="lazy"
             decoding="async"
-            src="/images/about-us/figma-masked-bg.png"
+            src={heroImage}
             alt="Children in sunshine"
             className={styles.mobileHeroImg}
           />

@@ -103,9 +103,9 @@ const PartnerWithUs = ({ canvas = false }: { canvas?: boolean }) => {
         <FigmaAngledCta
           className={styles.canvasDownloadCta}
           onClick={() => setRequestKind("overview")}
-          icon="chevron"
+          icon="download"
         >
-          Request our Partnership Overview
+          Download our Partnership Overview (PDF)
         </FigmaAngledCta>
         <D6Chatbot
           canvasAnchored

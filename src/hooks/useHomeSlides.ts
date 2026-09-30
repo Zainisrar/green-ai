@@ -103,6 +103,7 @@ export const useHomeSlides = () => {
     queryKey: ["home", "slides"],
     queryFn: fetchAllHome,
     select: buildHomeSlides,
-    staleTime: 5 * 60 * 1000,
+    staleTime: 0,
+    refetchOnMount: "always",
   });
 };

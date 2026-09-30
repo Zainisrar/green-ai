@@ -13,6 +13,7 @@ interface MediaDialogFrameProps {
   labelledBy?: string;
   children: React.ReactNode;
   className?: string;
+  variant?: "latestPressReleases" | "mediaContact";
 }
 
 export default function MediaDialogFrame({
@@ -23,6 +24,7 @@ export default function MediaDialogFrame({
   labelledBy = "media-dialog-title",
   children,
   className = "",
+  variant,
 }: MediaDialogFrameProps) {
   const [scale, setScale] = useState(1);
   const [mounted, setMounted] = useState(false);
@@ -149,7 +151,7 @@ export default function MediaDialogFrame({
       />
       <section
         ref={stageRef}
-        className={`${styles.stage} ${className}`}
+        className={`${styles.stage} ${variant ? styles[variant] : ""} ${className}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby={labelledBy}

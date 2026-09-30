@@ -163,7 +163,7 @@ const CommunityVoices = ({ canvas = false }: { canvas?: boolean }) => {
         <FigmaAngledCta
           className={styles.canvasUploadCta}
           onClick={() => setOpenModal("uploadPhotoVideo")}
-          icon="download"
+          icon="upload"
         >
           Upload a Photo / Video
         </FigmaAngledCta>

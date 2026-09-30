@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useMediaMentions } from "@/hooks/useMediaMentions";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
@@ -53,7 +54,30 @@ interface MediaMentionsProps {
 }
 
 export default function MediaMentions({ canvas = false }: MediaMentionsProps) {
+  const { data } = useMediaMentions();
   const [openYear, setOpenYear] = useState("2025");
+  const mainPage = data?.mainPage;
+  const cmsHighlights = mainPage?.recentHighlights?.map((highlight, index) => ({
+    id: `${highlight.year}-${index}`,
+    title: highlight.title,
+    source: highlight.description,
+    image: highlight.featuredImg?.src,
+    year: highlight.year,
+  }));
+  const displayedHighlights = cmsHighlights?.length
+    ? cmsHighlights
+    : visibleHighlights.map((highlight) => ({ ...highlight, year: "2025" }));
+  const cmsYears = Array.from(
+    new Set(displayedHighlights.map((item) => item.year)),
+  ).map((year) => ({
+    id: year,
+    label: year,
+    count: displayedHighlights.filter((item) => item.year === year).length,
+    items: displayedHighlights
+      .filter((item) => item.year === year)
+      .map((item) => ({ id: item.id, label: item.title })),
+  }));
+  const displayedYears = data ? cmsYears : years;
 
   return (
     <main
@@ -71,12 +95,19 @@ export default function MediaMentions({ canvas = false }: MediaMentionsProps) {
       <div className={styles.content}>
         <header className={styles.intro}>
           <h1>
-            <span>Media</span> &amp; Mentions
+            {mainPage?.title ?? (
+              <>
+                <span>Media</span> &amp; Mentions
+              </>
+            )}
           </h1>
-          <h2>Recognized by Impact. Featured for Action.</h2>
+          <h2>
+            {mainPage?.subHeadline ??
+              "Recognized by Impact. Featured for Action."}
+          </h2>
           <p>
-            See where GREEN has been featured — across newsrooms, policy forums,
-            journals, and investor briefings.
+            {mainPage?.description ??
+              "See where GREEN has been featured — across newsrooms, policy forums, journals, and investor briefings."}
           </p>
         </header>
         <section
@@ -85,13 +116,13 @@ export default function MediaMentions({ canvas = false }: MediaMentionsProps) {
         >
           <h3 id="recent-highlights">Recent Highlights</h3>
           <div className={styles.grid}>
-            {visibleHighlights.map((highlight) => (
+            {displayedHighlights.map((highlight) => (
               <article className={styles.card} key={highlight.id}>
                 <img
                   loading="lazy"
                   decoding="async"
                   src={highlight.image}
-                  alt=""
+                  alt={highlight.title}
                 />
                 <div>
                   <h4>{highlight.title}</h4>
@@ -107,7 +138,7 @@ export default function MediaMentions({ canvas = false }: MediaMentionsProps) {
       </div>
       <aside className={styles.sidebar} aria-label="Media mentions by year">
         <section className={styles.yearList}>
-          {years.map((year) => {
+          {displayedYears.map((year) => {
             const isOpen = openYear === year.id;
             const panelId = `year-${year.id}-panel`;
 
@@ -133,8 +164,11 @@ export default function MediaMentions({ canvas = false }: MediaMentionsProps) {
             );
           })}
         </section>
-        <FigmaAngledCta className={styles.request}>
-          Submit Media Request
+        <FigmaAngledCta
+          className={styles.request}
+          href={mainPage?.cta?.[0]?.href || undefined}
+        >
+          {mainPage?.cta?.[0]?.text ?? "Submit Media Request"}
         </FigmaAngledCta>
       </aside>
       <p className={styles.statement}>
@@ -165,7 +199,11 @@ export default function MediaMentions({ canvas = false }: MediaMentionsProps) {
             </linearGradient>
           </defs>
         </svg>
-        Recognized by <em>Impact.</em> <em>Featured for Action.</em>
+        {mainPage?.key?.text ?? (
+          <>
+            Recognized by <em>Impact.</em> <em>Featured for Action.</em>
+          </>
+        )}
         <svg
           className={styles.rightCorner}
           width="82"

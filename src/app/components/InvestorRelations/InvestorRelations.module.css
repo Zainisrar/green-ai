@@ -181,6 +181,30 @@
   padding: 0 12px 0 16px;
 }
 
+/* Match the compact Figma Vector 7368 Explore CTA used across the canvas
+   pages. Keep this treatment local: the larger investor CTAs retain their
+   existing fill and interaction treatment. */
+.rowCta::before {
+  background: linear-gradient(90deg, #23b14d -11.2%, #fffe50 97.7%);
+}
+
+.rowCta::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.5) -142.5%,
+      rgba(255, 254, 80, 0.5) 97.7%
+    ),
+    #ffffff;
+}
+
+.rowCta:hover,
+.rowCta:focus-visible,
+.rowCta:active {
+  filter: none;
+  transform: none;
+}
+
 /* Right quote card */
 .quoteCard {
   position: absolute;
@@ -427,4 +451,3 @@
 .mobileCtaBtn:active {
   transform: scale(0.98);
 }
-

@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 
-interface MediaImage {
+export interface MediaImage {
   alt: string;
   src: string;
 }
 
-interface RecentHighlight {
+export interface RecentHighlight {
   year: string;
   title: string;
   video: string;
@@ -14,17 +14,17 @@ interface RecentHighlight {
   featuredImg: MediaImage;
 }
 
-interface MainPageCTA {
+export interface MainPageCTA {
   href: string;
   text: string;
 }
 
-interface MainPageKey {
+export interface MainPageKey {
   text: string;
   highlighted: string;
 }
 
-interface MainPage {
+export interface MainPage {
   cta: MainPageCTA[];
   key: MainPageKey;
   title: string;
@@ -33,14 +33,14 @@ interface MainPage {
   recentHighlights: RecentHighlight[];
 }
 
-interface MediaMentionsData {
+export interface MediaMentionsData {
   id: number;
   mainPage: MainPage;
   createdAt: string;
   updatedAt: string;
 }
 
-interface MediaMentionsResponse {
+export interface MediaMentionsResponse {
   success: boolean;
   data: MediaMentionsData;
 }
@@ -62,7 +62,8 @@ export const useMediaMentions = () => {
   return useQuery({
     queryKey: ["media-mentions"],
     queryFn: fetchMediaMentions,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 0,
+    refetchOnMount: "always",
     gcTime: 10 * 60 * 1000, // 10 minutes
   });
 };

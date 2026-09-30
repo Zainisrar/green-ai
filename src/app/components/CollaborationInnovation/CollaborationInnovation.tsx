@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
+import { useCollaborationInnovation } from "@/hooks/useCollaborationInnovation";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import ProductEnquiry from "../Product/Modals/ProductEnquiry";
@@ -56,10 +57,52 @@ interface CollaborationInnovationProps {
 export default function CollaborationInnovation({
   canvas = false,
 }: CollaborationInnovationProps) {
+  const { data } = useCollaborationInnovation();
   const [openModal, setOpenModal] = useState<string | null>(null);
   const [isProposalOpen, setIsProposalOpen] = useState(false);
 
-  const d = FALLBACK;
+  const cmsCards = data
+    ? [
+        {
+          title: data.ourPhilosophy.title,
+          subtitle: data.ourPhilosophy.subHeadline,
+          image: data.ourPhilosophy.img?.src,
+        },
+        {
+          title: data.whoWeCelebrateWith.title,
+          subtitle: data.whoWeCelebrateWith.items?.[0]?.engagementScope,
+        },
+        {
+          title: data.innovationSpotlight.title,
+          subtitle: data.innovationSpotlight.keys?.[0]?.description,
+        },
+      ]
+    : [];
+  const d = data
+    ? {
+        ...FALLBACK,
+        title: data.mainPage.title,
+        subHeadline: data.mainPage.subHeadline,
+        description: data.mainPage.description,
+        cards: FALLBACK.cards.map((card, index) => ({
+          ...card,
+          title: cmsCards[index]?.title?.trim() || card.title,
+          subtitle: cmsCards[index]?.subtitle || card.subtitle,
+          image: cmsCards[index]?.image || card.image,
+        })),
+        quote1: data.mainPage.quote?.[0] ?? FALLBACK.quote1,
+        quote2: {
+          text:
+            data.mainPage.quote
+              ?.slice(1)
+              .map((quote) => quote.text)
+              .join("\n") || FALLBACK.quote2.text,
+          highlighted:
+            data.mainPage.quote?.[1]?.highlighted ||
+            FALLBACK.quote2.highlighted,
+        },
+      }
+    : FALLBACK;
 
   const highlightText = (
     text: string,
@@ -113,14 +156,11 @@ export default function CollaborationInnovation({
         </div>
 
         {/* Vertical outlined side title (Raleway 900, 50px, stroke #989898) */}
-        <h2 className={styles.verticalTitle}>COLLABORATION &amp; INNOVATION</h2>
+        <h2 className={styles.verticalTitle}>{d.title}</h2>
 
         {/* Header section */}
         <div className={styles.headerBlock}>
-          <h1 className={styles.mainTitle}>
-            COLLABORATION &amp;{" "}
-            <span className={styles.greenText}>INNOVATION</span>
-          </h1>
+          <h1 className={styles.mainTitle}>{d.title}</h1>
           <p className={styles.subHeadline}>{d.subHeadline}</p>
           <p className={styles.description}>
             {highlightText(
@@ -182,7 +222,9 @@ export default function CollaborationInnovation({
                 <span className={styles.cardImageAccent} aria-hidden="true" />
               </button>
               <p
-                className={styles.cardSubtitle}
+                className={`${styles.cardSubtitle} ${
+                  idx === 2 ? styles.cardSubtitleDense : ""
+                }`}
                 style={{
                   position: "absolute",
                   left: subX - cardLeft,
@@ -247,17 +289,22 @@ export default function CollaborationInnovation({
           style={{ position: "absolute", left: 1498, top: 741 }}
           onClick={() => setIsProposalOpen(true)}
         >
-          Submit Proposal / Collaboration Inquiry
+          {data?.mainPage?.cta?.[0]?.text ??
+            "Submit Proposal / Collaboration Inquiry"}
         </FigmaAngledCta>
         <FigmaAngledCta
           className={styles.frameworkCta}
           style={{ position: "absolute", left: 1428, top: 819 }}
           icon="download"
-          href="/green-innovation-partnership-framework.pdf"
+          href={
+            data?.mainPage?.cta?.[1]?.href ||
+            "/green-innovation-partnership-framework.pdf"
+          }
           target="_blank"
           rel="noopener noreferrer"
         >
-          GREEN Innovation Partnership Framework (PDF)
+          {data?.mainPage?.cta?.[1]?.text ??
+            "GREEN Innovation Partnership Framework (PDF)"}
         </FigmaAngledCta>
 
         {/* Chatbot */}
@@ -281,10 +328,7 @@ export default function CollaborationInnovation({
       {/* ── MOBILE RESPONSIVE LAYOUT (< 1024px) ── */}
       <div className={styles.mobileLayout}>
         <div className={styles.mobileHero}>
-          <h1 className={styles.mobileTitle}>
-            COLLABORATION &amp;{" "}
-            <span className={styles.greenText}>INNOVATION</span>
-          </h1>
+          <h1 className={styles.mobileTitle}>{d.title}</h1>
           <p className={styles.mobileSubtitle}>{d.subHeadline}</p>
           <p className={styles.mobileDescription}>
             {highlightText(
@@ -392,14 +436,17 @@ export default function CollaborationInnovation({
       <OurPhilosophy
         isOpen={openModal === "philosophy"}
         onClose={() => setOpenModal(null)}
+        data={data?.ourPhilosophy}
       />
       <WhoWeCollaborateWith
         isOpen={openModal === "collaborate"}
         onClose={() => setOpenModal(null)}
+        data={data?.whoWeCelebrateWith}
       />
       <InnovationSpotlight
         isOpen={openModal === "spotlight"}
         onClose={() => setOpenModal(null)}
+        data={data?.innovationSpotlight}
       />
 
       {/* ── REUSABLE PROPOSAL INQUIRY MODAL (Last PDF button has NO pop window) ── */}

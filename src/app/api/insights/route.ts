@@ -1,12 +1,22 @@
 import { NextResponse } from "next/server";
 
-const INSIGHTS_API = "https://greencms.percepco.co.uk/api/insights";
+const INSIGHTS_API =
+  process.env.INSIGHTS_API_URL ??
+  "https://greencms.percepco.co.uk/api/insights";
 
 export async function GET() {
   try {
-    const response = await fetch(INSIGHTS_API, {
+    const endpoint = new URL(INSIGHTS_API);
+    if (endpoint.protocol !== "https:") {
+      throw new Error("Insights API must use HTTPS");
+    }
+
+    const response = await fetch(endpoint, {
       headers: {
         Accept: "application/json",
+        ...(process.env.INSIGHTS_API_TOKEN
+          ? { Authorization: `Bearer ${process.env.INSIGHTS_API_TOKEN}` }
+          : {}),
       },
       // CMS content changes infrequently. Caching avoids turning every homepage
       // visit into a cross-origin request while still refreshing the feed.

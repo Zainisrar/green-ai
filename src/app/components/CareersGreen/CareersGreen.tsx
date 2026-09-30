@@ -1,16 +1,16 @@
 "use client";
 import React from "react";
-import TopNavigation from "../TopNavigation/TopNavigation";
-import Chatbot from "../Chatbot";
-import SiteHeader from "../SiteHeader/SiteHeader";
-import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
-import D6Chatbot from "../D6Chatbot";
-import styles from "./CareersGreen.module.css";
 import { useCareersGreen } from "../../../hooks/useCareersGreen";
-import WhyWorkWithGreen from "./Modals/WhyWorkWithGreen";
+import Chatbot from "../Chatbot";
+import D6Chatbot from "../D6Chatbot";
+import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
+import SiteHeader from "../SiteHeader/SiteHeader";
+import TopNavigation from "../TopNavigation/TopNavigation";
+import styles from "./CareersGreen.module.css";
 import CareerTracksSupport from "./Modals/CareerTracksSupport";
-import WhatMakesGreenDifferent from "./Modals/WhatMakesGreenDifferent";
 import OpenRoles from "./Modals/OpenRoles";
+import WhatMakesGreenDifferent from "./Modals/WhatMakesGreenDifferent";
+import WhyWorkWithGreen from "./Modals/WhyWorkWithGreen";
 
 const CareerGreen = ({ canvas = false }: { canvas?: boolean }) => {
   const { data: careersData, error } = useCareersGreen();
@@ -59,7 +59,13 @@ const CareerGreen = ({ canvas = false }: { canvas?: boolean }) => {
     );
   }
   if (canvas) {
-    const canvasRows = [
+    const rowActions = [
+      () => setIsWhyWorkWithGreenOpen(true),
+      () => setIsCareerTracksSupportOpen(true),
+      () => setIsWhatMakesGreenDifferentOpen(true),
+      () => setIsOpenRolesOpen(true),
+    ];
+    const fallbackCanvasRows = [
       {
         label: "Why Work With GREEN?",
         onClick: () => setIsWhyWorkWithGreenOpen(true),
@@ -74,7 +80,16 @@ const CareerGreen = ({ canvas = false }: { canvas?: boolean }) => {
       },
       { label: "Open Roles", onClick: () => setIsOpenRolesOpen(true) },
     ];
-
+    const canvasRows = careersData?.data?.mainPage?.keys?.length
+      ? careersData.data.mainPage.keys.slice(0, 4).map((item, index) => ({
+          label: item.text,
+          buttonText: item.cta?.text || "Explore",
+          onClick: rowActions[index],
+        }))
+      : fallbackCanvasRows.map((item) => ({
+          ...item,
+          buttonText: "Explore",
+        }));
     return (
       <main className={styles.canvasPage} data-node-id="7077:16449">
         <SiteHeader layout="figmaCanvas" figmaPanelVariant="flagship" />
@@ -93,14 +108,16 @@ const CareerGreen = ({ canvas = false }: { canvas?: boolean }) => {
           src="/images/careers-green/industry-affiliations-certifications.png"
           alt="Industry Affiliations & Certifications"
         />
-        <h1 className={styles.canvasTitle}>Careers at GREEN</h1>
+        <h1 className={styles.canvasTitle}>
+          Careers at <span>GREEN</span>
+        </h1>
         <p className={styles.canvasSubtitle}>
           Build More Than a Career. Build the Future of Energy.
         </p>
         <p className={styles.canvasDescription}>
-          GREEN isn’t a job. It’s a calling. If you’re ready to solve real
-          problems, power real communities, and leave systems behind that last —
-          we’re hiring.
+          <span>GREEN</span> isn’t a job. It’s a calling. If you’re ready to
+          solve real problems, power real communities, and leave systems behind
+          that last — <strong>we’re hiring.</strong>
         </p>
         <div className={styles.canvasRows}>
           {canvasRows.map((row, index) => (
@@ -113,29 +130,28 @@ const CareerGreen = ({ canvas = false }: { canvas?: boolean }) => {
                 className={styles.canvasExploreCta}
                 onClick={row.onClick}
               >
-                Explore
+                {row.buttonText}
               </FigmaAngledCta>
             </div>
           ))}
         </div>
         <p className={styles.canvasRightQuote}>
-          We engineer energy.
+          We engineer <span>energy</span>.
           <br />
-          But our real asset is people.
+          But our real asset is <span>people</span>.
         </p>
         <div className={styles.canvasReadMore}>
           <span>Read more</span>
           <span aria-hidden="true">›</span>
         </div>
         <p className={styles.canvasBottomQuote}>
-          “In energy infrastructure, trust is engineered
-          <br />— through compliance, peer validation, and continuous
-          improvement.”
+          “In <span>energy</span> infrastructure, trust is engineered
+          <br />— through compliance, peer validation, and continuous improvement.”
         </p>
         <div className={styles.canvasCtas}>
           <FigmaAngledCta
             className={styles.canvasApplyCta}
-            onClick={() => setIsOpenRolesOpen(true)}
+            href="/enlist"
           >
             Apply Now
           </FigmaAngledCta>
@@ -145,9 +161,9 @@ const CareerGreen = ({ canvas = false }: { canvas?: boolean }) => {
               careersData?.data?.mainPage?.cta?.[1]?.href ||
               "mailto:careers.support@green.com.pg?subject=Careers%20Prospectus%20Request"
             }
-            icon="chevron"
+            icon="download"
           >
-            Request Careers at GREEN Prospectus
+            Careers at GREEN Prospectus (PDF)
           </FigmaAngledCta>
         </div>
         <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
@@ -256,6 +272,7 @@ const CareerGreen = ({ canvas = false }: { canvas?: boolean }) => {
 
                     <div className="text-right">
                       <button
+                        type="button"
                         onClick={() => {
                           if (index === 0) setIsWhyWorkWithGreenOpen(true);
                           else if (index === 1)

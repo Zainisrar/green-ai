@@ -96,9 +96,10 @@ export const useCareersGreen = () => {
   return useQuery({
     queryKey: ["careers-green"],
     queryFn: fetchCareersGreen,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 0,
     gcTime: 10 * 60 * 1000, // 10 minutes
-    refetchOnWindowFocus: false,
+    refetchOnMount: "always",
+    refetchOnWindowFocus: true,
     retry: 3,
   });
 };

@@ -129,29 +129,28 @@ export default function RequestProposalCanvas() {
           <span className={styles.delivText}>{d.text}</span>
         </div>
       ))}
-      <div className={styles.quoteWrap} style={{ top: 533, left: 1441 }}>
+      <div className={styles.quoteWrap}>
         <img
           loading="lazy"
           decoding="async"
           className={styles.bracketL}
-          src="/images/rfp/quote_bracket_l.png"
+          src="/images/book-consulation/quote-bracket-left.svg"
           alt=""
-          width="81"
-          height="100"
+          aria-hidden="true"
         />
         <blockquote className={styles.quote}>
-          &ldquo;Proposals Shouldn&rsquo;t Be Generic. At{" "}
-          <span className={styles.quoteGreen}>GREEN</span>, Every RFP Is A
-          Strategic Partnership In The Making.&rdquo;
+          &ldquo;Proposals Shouldn&rsquo;t Be{"\n"}
+          Generic. At <span className={styles.quoteGreen}>GREEN</span>, Every RFP{"\n"}
+          Is A Strategic Partnership In{"\n"}
+          The Making.&rdquo;
         </blockquote>
         <img
           loading="lazy"
           decoding="async"
           className={styles.bracketR}
-          src="/images/rfp/quote_bracket_r.png"
+          src="/images/book-consulation/quote-bracket-right.svg"
           alt=""
-          width="82"
-          height="101"
+          aria-hidden="true"
         />
       </div>
       <div className={styles.emailBox}>

@@ -7,6 +7,8 @@ export const useClientPartnerships = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: queryKeys.clientPartnerships(),
     queryFn: api.getClientPartnerships,
+    staleTime: 0,
+    refetchOnMount: "always",
   });
 
   return {

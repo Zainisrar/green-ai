@@ -50,10 +50,12 @@ export default function FastFactStats() {
   const economies = blocks[1]?.content.data ?? {};
   const people = blocks[2]?.content.data ?? {};
   const fossil = blocks[3]?.content.data ?? {};
-  const cards = FALLBACK_CARDS.map((fallback, index) => ({
-    ...fallback,
-    ...impactSummarySection?.cards[index],
-  }));
+  const cards = impactSummarySection?.cards?.length
+    ? impactSummarySection.cards.map((card) => ({
+        ...card,
+        detailLines: card.details.split(/\r?\n/),
+      }))
+    : FALLBACK_CARDS;
   const title = fastFactsSection?.title || "FAST FACTS & STATS";
   const subtitle =
     fastFactsSection?.subtitle || "Where We Prove What’s Possible";
@@ -313,9 +315,7 @@ export default function FastFactStats() {
           <p className={styles.mobileImpactHeadline}>
             Real <span>Impact.</span> In Real Places.
           </p>
-          <p className={styles.mobileImpactDesc}>
-            {quoteDescription}
-          </p>
+          <p className={styles.mobileImpactDesc}>{quoteDescription}</p>
         </div>
         <div className={styles.mobileActions}>
           <FigmaAngledCta

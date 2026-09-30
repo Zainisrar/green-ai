@@ -51,7 +51,7 @@ export const useTechnologyInnovationAlliances = () => {
         setError(null);
         const res = await fetch(
           "https://greencms.percepco.co.uk/api/ecosystem/technology-innovation-alliances",
-          { next: { revalidate: 60 } as any },
+          { cache: "no-store" },
         );
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json: TIAResponse = await res.json();

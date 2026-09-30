@@ -35,35 +35,39 @@ export default function KeySupplyCategories({
   const description =
     apiData?.mainPage?.description?.text ||
     "GREEN procures across a disciplined matrix of technologies and components — each category evaluated for compatibility, field performance, grid resilience, and long-term support.";
+  const pageTitle = apiData?.mainPage?.title || "Key Supply Categories";
+  const quote = apiData?.mainPage?.quote;
+  const supplyingCta = apiData?.mainPage?.cta?.[0];
+  const technicalPackCta = apiData?.mainPage?.cta?.[1];
 
   const categories = [
     {
       id: "solar",
-      name: "Solar Generation Equipment",
+      name: apiData?.modals?.[0]?.title || "Solar Generation Equipment",
       className: styles.categoryRow1,
       onExplore: () => setIsSolarOpen(true),
     },
     {
       id: "power",
-      name: "Power Conversion Systems",
+      name: apiData?.modals?.[1]?.title || "Power Conversion Systems",
       className: styles.categoryRow2,
       onExplore: () => setIsPowerOpen(true),
     },
     {
       id: "storage",
-      name: "Energy Storage Systems",
+      name: apiData?.modals?.[2]?.title || "Energy Storage Systems",
       className: styles.categoryRow3,
       onExplore: () => setIsEnergyOpen(true),
     },
     {
       id: "intelligence",
-      name: "System Intelligence & Data",
+      name: apiData?.modals?.[3]?.title || "System Intelligence & Data",
       className: styles.categoryRow4,
       onExplore: () => setIsSystemOpen(true),
     },
     {
       id: "bos",
-      name: "Balance of System (BoS)",
+      name: apiData?.modals?.[4]?.title || "Balance of System (BoS)",
       className: styles.categoryRow5,
       onExplore: () => setIsBalanceOpen(true),
     },
@@ -119,9 +123,7 @@ export default function KeySupplyCategories({
 
       {/* Top Header Content */}
       <div className={styles.topSection}>
-        <h1 className={styles.mainTitle}>
-          KEY <span className={styles.greenText}>SUPPLY</span> CATEGORIES
-        </h1>
+        <h1 className={styles.mainTitle}>{pageTitle}</h1>
         <h2>{subHeadline}</h2>
         <p>{description}</p>
       </div>
@@ -180,10 +182,8 @@ export default function KeySupplyCategories({
           aria-hidden="true"
         />
         <p className={styles.quoteText}>
-          We Don’t Tell Stories To Impress.
-          <br />
-          We Share Stories That Prove What{" "}
-          <span className={styles.greenText}>Energy</span> Can Do.
+          {quote?.text ||
+            "We Don’t Tell Stories To Impress. We Share Stories That Prove What Energy Can Do."}
         </p>
         <img
           loading="lazy"
@@ -201,14 +201,17 @@ export default function KeySupplyCategories({
           className={styles.supplyingCta}
           onClick={() => setIsSupplyingOpen(true)}
         >
-          Supplying to GREEN?
+          {supplyingCta?.text || "Supplying to GREEN?"}
         </FigmaAngledCta>
         <FigmaAngledCta
           className={styles.downloadCta}
           icon="chevron"
-          href="mailto:procurement@green.com.pg?subject=Supply%20Category%20Technical%20Pack%20Request"
+          href={
+            technicalPackCta?.href ||
+            "mailto:procurement@green.com.pg?subject=Supply%20Category%20Technical%20Pack%20Request"
+          }
         >
-          Request Supply Category Technical Pack
+          {technicalPackCta?.text || "Request Supply Category Technical Pack"}
         </FigmaAngledCta>
       </div>
 
@@ -216,19 +219,22 @@ export default function KeySupplyCategories({
       <div className={styles.mobileElements}>
         <div className={styles.mobileQuoteBox}>
           <p>
-            “We Don’t Tell Stories To Impress. We Share Stories That Prove What
-            Energy Can Do.”
+            {quote?.text ||
+              "We Don’t Tell Stories To Impress. We Share Stories That Prove What Energy Can Do."}
           </p>
         </div>
         <div className={styles.mobileCtas}>
           <FigmaAngledCta onClick={() => setIsSupplyingOpen(true)}>
-            Supplying to GREEN?
+            {supplyingCta?.text || "Supplying to GREEN?"}
           </FigmaAngledCta>
           <FigmaAngledCta
             icon="chevron"
-            href="mailto:procurement@green.com.pg?subject=Supply%20Category%20Technical%20Pack%20Request"
+            href={
+              technicalPackCta?.href ||
+              "mailto:procurement@green.com.pg?subject=Supply%20Category%20Technical%20Pack%20Request"
+            }
           >
-            Request Supply Category Technical Pack
+            {technicalPackCta?.text || "Request Supply Category Technical Pack"}
           </FigmaAngledCta>
         </div>
       </div>

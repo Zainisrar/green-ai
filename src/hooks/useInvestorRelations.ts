@@ -99,9 +99,7 @@ export const useInvestorRelations = () => {
         setLoading(true);
         const response = await fetch(
           "https://greencms.percepco.co.uk/api/engage/investor-relations",
-          {
-            next: { revalidate: 60 },
-          },
+          { cache: "no-store" },
         );
 
         if (!response.ok) {

@@ -89,15 +89,15 @@ export default function WhyGreen() {
     parsedContent?.envisionTitle || "Envision and Enlighten lives with";
   const solutionsTitle =
     parsedContent?.solutionsTitle || "GREEN’s Sustainable Energy Solutions";
-  const solutions = FALLBACK_SOLUTIONS.map((fallback, index) => {
-    const apiIcon = whyGreenData?.icons[index];
-    return {
-      ...fallback,
-      title: apiIcon?.text || fallback.title,
-      description: apiIcon?.description || fallback.description,
-      image: apiIcon?.img.src || fallback.image,
-    };
-  });
+  const solutions = whyGreenData?.icons?.length
+    ? whyGreenData.icons.map((icon) => ({
+        title: icon.text,
+        description: icon.description,
+        image: icon.img.src,
+        width: 75,
+        height: 73,
+      }))
+    : FALLBACK_SOLUTIONS;
 
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:4467">

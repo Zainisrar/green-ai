@@ -92,6 +92,10 @@
   color: #000;
 }
 
+.mainTitle span {
+  color: #23b14d;
+}
+
 .subHeadline {
   margin: 18px 0 0;
   font-size: 22px;
@@ -127,10 +131,27 @@
 
 .exploreBtn {
   position: absolute;
-  height: 41px !important;
+  width: 134.088px !important;
+  height: 40.538px !important;
+  min-height: 40.538px !important;
   padding: 0 18px 0 20px !important;
   font-size: 12px !important;
   z-index: 4;
+}
+
+/* Match the Partner With Us Vector 7368 Explore fill exactly. */
+.exploreBtn::before {
+  background: linear-gradient(90deg, #23b14d -11.2%, #fffe50 97.7%);
+}
+
+.exploreBtn::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.5) -142.5%,
+      rgba(255, 254, 80, 0.5) 97.7%
+    ),
+    #ffffff;
 }
 
 .rowLine {
@@ -139,7 +160,7 @@
   height: 0;
   margin: 0;
   border: 0;
-  border-top: 2px solid #23b14d;
+  border-top: 1px solid #23b14d;
   z-index: 2;
 }
 
@@ -169,13 +190,38 @@
 /* ── Right CTAs ── */
 .desktopCtas {
   position: absolute;
-  top: 642px;
-  left: 1536px;
-  width: 382px;
+  top: 695px;
+  right: 3px;
+  width: min(421px, calc(100vw - 16px));
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 24px;
   z-index: 4;
+}
+
+.downloadPressKit {
+  width: 350px;
+  max-width: calc(100% - 35px);
+  margin-left: 35px;
+}
+
+.requestQuote {
+  width: 421px;
+}
+
+
+@media (max-width: 1920px) {
+  .desktopCtas {
+    right: 0;
+  }
+
+  .requestQuote {
+    width: 100%;
+  }
+
+  .downloadPressKit {
+    margin-left: auto;
+  }
 }
 
 .figmaCtaButton {
@@ -225,8 +271,8 @@
 .figmaCtaLabel {
   position: relative;
   z-index: 1;
-  font-size: 17px;
-  font-weight: 800;
+  font-size: 16px;
+  font-weight: 600;
   line-height: 1;
   color: #000000;
   text-align: left;
@@ -409,4 +455,3 @@
     height: 17px;
   }
 }
-

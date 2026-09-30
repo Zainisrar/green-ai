@@ -7,6 +7,15 @@
   color: #000;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
+.page::before {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.32);
+  clip-path: polygon(0 0, 24.1% 0, 4.2% 100%, 0 100%);
+}
 .backgroundArtwork {
   position: absolute;
   z-index: 0;
@@ -154,6 +163,28 @@
   padding: 0 12px 0 17px;
   font-size: 13px;
 }
+
+/* Match the Figma Vector 7368 fill used by the procurement Explore CTAs. */
+.exploreButton::before {
+  background: linear-gradient(90deg, #23b14d -11.2%, #fffe50 97.7%);
+}
+
+.exploreButton::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.5) -142.5%,
+      rgba(255, 254, 80, 0.5) 97.7%
+    ),
+    #ffffff;
+}
+
+.exploreButton:hover,
+.exploreButton:focus-visible,
+.exploreButton:active {
+  filter: none;
+  transform: none;
+}
 .cardOne h2 {
   width: 244px;
 }
@@ -225,22 +256,6 @@
   gap: 12px;
   padding: 0 24px 0 32px;
   font-size: 16px;
-}
-.handbookButton {
-  background:
-    url("/images/become-supplier/figma-download-handbook.svg") center / 100%
-    100% no-repeat;
-}
-.registerButton {
-  background:
-    url("/images/become-supplier/figma-register-inquiry.svg") center / 100% 100%
-    no-repeat;
-}
-.handbookButton::before,
-.handbookButton::after,
-.registerButton::before,
-.registerButton::after {
-  display: none;
 }
 .handbookButton {
   top: 749px;
@@ -402,6 +417,27 @@
   cursor: pointer;
   font-family: inherit;
   transition: all 0.15s ease;
+}
+
+.mobileExploreBtn::before {
+  background: linear-gradient(90deg, #23b14d -11.2%, #fffe50 97.7%);
+}
+
+.mobileExploreBtn::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.5) -142.5%,
+      rgba(255, 254, 80, 0.5) 97.7%
+    ),
+    #ffffff;
+}
+
+.mobileExploreBtn:hover,
+.mobileExploreBtn:focus-visible,
+.mobileExploreBtn:active {
+  filter: none;
+  transform: none;
 }
 
 .mobileExploreBtn:hover,

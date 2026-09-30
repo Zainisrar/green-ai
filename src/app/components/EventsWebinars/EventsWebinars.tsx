@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useEventsWebinars } from "@/hooks/useEventsWebinars";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
@@ -56,11 +57,44 @@ interface EventsWebinarsProps {
 export default function EventsWebinars({
   canvas = false,
 }: EventsWebinarsProps) {
+  const { data } = useEventsWebinars();
   const [expandedYear, setExpandedYear] = useState("2025");
-  const cards = [
-    ...Array(4).fill(upcomingEvents[0]),
-    ...Array(4).fill(upcomingEvents[1]),
-  ];
+  const cards = data?.upcomingEvents?.length
+    ? data.upcomingEvents.map((event) => ({
+        title: event.title,
+        description: event.description,
+        date: event.year,
+        image: event.featuredImg?.src,
+        location: event.location,
+        cta: event.cta,
+        slug: event.slug,
+      }))
+    : upcomingEvents.map((event) => ({
+        ...event,
+        location: "Port Moresby",
+        cta: { href: "", text: "Register Now" },
+        slug: event.title,
+      }));
+  const cmsYears = Array.from(new Set(cards.map((event) => event.date))).map(
+    (year) => ({
+      id: year,
+      label: year,
+      count: cards.filter((event) => event.date === year).length,
+      events: cards
+        .filter((event) => event.date === year)
+        .map((event) => event.title),
+    }),
+  );
+  const displayedYears = data ? cmsYears : eventYears;
+  const mainPage = data?.mainPage;
+
+  useEffect(() => {
+    setExpandedYear((current) =>
+      displayedYears.some((year) => year.id === current)
+        ? current
+        : (displayedYears[0]?.id ?? ""),
+    );
+  }, [data]);
 
   return (
     <main
@@ -78,12 +112,16 @@ export default function EventsWebinars({
       <div className={styles.content}>
         <header className={styles.intro}>
           <h1>
-            <span>Events</span> &amp; Webinars
+            {mainPage?.title ?? (
+              <>
+                <span>Events</span> &amp; Webinars
+              </>
+            )}
           </h1>
-          <h2>Where Innovation Meets Action.</h2>
+          <h2>{mainPage?.subHeadline ?? "Where Innovation Meets Action."}</h2>
           <p>
-            From masterclasses to ministerial panels — GREEN’s events bring
-            people together to solve energy challenges that matter.
+            {mainPage?.description ??
+              "From masterclasses to ministerial panels — GREEN’s events bring people together to solve energy challenges that matter."}
           </p>
         </header>
         <section className={styles.events} aria-labelledby="upcoming-events">
@@ -96,7 +134,7 @@ export default function EventsWebinars({
                   decoding="async"
                   className={styles.cardImage}
                   src={event.image}
-                  alt=""
+                  alt={event.title}
                 />
                 <div className={styles.cardBody}>
                   <h4>{event.title}</h4>
@@ -118,12 +156,16 @@ export default function EventsWebinars({
                         src="/images/events/location.png"
                         alt=""
                       />
-                      Port Moresby
+                      {event.location}
                     </span>
                   </div>
                 </div>
-                <FigmaAngledCta className={styles.register} showArrow={false}>
-                  Register Now
+                <FigmaAngledCta
+                  className={styles.register}
+                  showArrow={false}
+                  href={event.cta.href || undefined}
+                >
+                  {event.cta.text || "Register Now"}
                 </FigmaAngledCta>
               </article>
             ))}
@@ -135,7 +177,7 @@ export default function EventsWebinars({
       </div>
       <aside className={styles.sidebar} aria-label="Events by year">
         <section className={styles.yearList}>
-          {eventYears.map((year) => {
+          {displayedYears.map((year) => {
             const isExpanded = expandedYear === year.id;
             const panelId = `events-year-${year.id}`;
 
@@ -222,11 +264,20 @@ export default function EventsWebinars({
               </linearGradient>
             </defs>
           </svg>
-          Train With <em>Purpose.</em>
-          <br />
-          Certify With <em>Impact.</em>
+          {mainPage?.quote?.text ?? (
+            <>
+              Train With <em>Purpose.</em>
+              <br />
+              Certify With <em>Impact.</em>
+            </>
+          )}
         </p>
-        <FigmaAngledCta className={styles.host}>Host with GREEN</FigmaAngledCta>
+        <FigmaAngledCta
+          className={styles.host}
+          href={mainPage?.cta?.[0]?.href || undefined}
+        >
+          {mainPage?.cta?.[0]?.text ?? "Host with GREEN"}
+        </FigmaAngledCta>
       </aside>
       {canvas ? (
         <D6Chatbot

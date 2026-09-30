@@ -1,16 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useMediaPress } from "../../../hooks/useMediaPress";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import FigmaQuoteBrackets from "../FigmaQuoteBrackets/FigmaQuoteBrackets";
 import SiteHeader from "../SiteHeader/SiteHeader";
+import GreenInTheNews from "./Dialog/GreenInTheNews";
 import LatestPressReleases from "./Dialog/LatestPressReleases";
 import MediaContactInterviewRequests from "./Dialog/MediaContactInterviewRequests";
 import MediaKitDownload from "./Dialog/MediaKitDownload";
-import GreenInTheNews from "./Dialog/GreenInTheNews";
 import OfficialSpokesPeople from "./Dialog/OfficialSpokesPeople";
-import RequestQuoteAppointment from "./Modals/RequestQuoteAppointment";
 import styles from "./MediaPress.module.css";
+import RequestQuoteAppointment from "./Modals/RequestQuoteAppointment";
 
 const CTA_LINKS = {
   pressKit: "mailto:media@green.com.pg?subject=GREEN%20Press%20Kit%20Request",
@@ -66,6 +67,8 @@ interface MediaPressProps {
 }
 
 export default function MediaPress({ canvas = false }: MediaPressProps) {
+  const { data: mediaPressResponse } = useMediaPress();
+  const mainPage = mediaPressResponse?.data?.mainPage;
   const [latestOpen, setLatestOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [kitOpen, setKitOpen] = useState(false);
@@ -107,16 +110,15 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
         {/* Hero Header */}
         <div className={styles.mobileHero}>
           <h1 className={styles.mobileTitle}>
-            MEDIA &amp; <span className={styles.greenText}>PRESS</span>
+            {mainPage?.title || "Media & Press"}
           </h1>
           <p className={styles.mobileSubtitle}>
-            Telling the Energy Story — The Right Way.
+            {mainPage?.subHeadline ||
+              "Telling the Energy Story — The Right Way."}
           </p>
           <p className={styles.mobileDescription}>
-            <span className={styles.greenText}>GREEN</span> Limited is shaping
-            the future of energy access in PNG and the Pacific. For accurate
-            information, interviews, brand assets, and official statements —
-            this is your source.
+            {mainPage?.description?.text ||
+              "GREEN Limited is shaping the future of energy access in PNG and the Pacific. For accurate information, interviews, brand assets, and official statements — this is your source."}
           </p>
         </div>
 
@@ -143,10 +145,8 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
         {/* Bottom quote */}
         <div className={styles.mobileQuoteCard}>
           <p className={styles.mobileQuoteText}>
-            We Don&rsquo;t Tell Stories To Impress.
-            <br />
-            We Share Stories That Prove What{" "}
-            <span className={styles.greenText}>Energy</span> Can Do.
+            {mainPage?.quote?.text ||
+              "We Don’t Tell Stories To Impress. We Share Stories That Prove What Energy Can Do."}
           </p>
         </div>
 
@@ -155,7 +155,6 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
           <a
             href={CTA_LINKS.pressKit}
             className={styles.figmaCtaButton}
-            download="green-press-kit.pdf"
           >
             <img
               loading="lazy"
@@ -273,19 +272,29 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
         />
       </div>
 
-      {/* Header block */}
-      <div className={styles.headerBlock}>
-        <h1 className={styles.mainTitle}>
-          MEDIA &amp; <span className={styles.greenText}>PRESS</span>
+        {/* Header block */}
+        <div className={styles.headerBlock}>
+          <h1 className={styles.mainTitle}>
+            {mainPage?.title?.trim() === "Media & Press" || !mainPage?.title ? (
+              <>
+                Media &amp; <span>Press</span>
+              </>
+            ) : (
+              mainPage.title
+            )}
         </h1>
         <p className={styles.subHeadline}>
-          Telling the Energy Story — The Right Way.
+          {mainPage?.subHeadline || "Telling the Energy Story — The Right Way."}
         </p>
         <p className={styles.description}>
-          <span className={styles.greenText}>GREEN</span> Limited is shaping the
-          future of energy access in PNG and the Pacific. For accurate
-          information, interviews, brand assets, and official statements — this
-          is your source.
+          {mainPage?.description?.text || (
+            <>
+              <span className={styles.greenText}>GREEN</span> Limited is
+              shaping the future of energy access in PNG and the Pacific. For
+              accurate information, interviews, brand assets, and official
+              statements — this is your source.
+            </>
+          )}
         </p>
       </div>
 
@@ -323,10 +332,12 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
           rightStyle={{ right: -34, top: -9 }}
         />
         <p className={styles.quoteText}>
-          We Don&rsquo;t Tell Stories To Impress.
-          <br />
-          We Share Stories That Prove What{" "}
-          <span className={styles.greenText}>Energy</span> Can Do.
+          {mainPage?.quote?.text || (
+            <>
+              We don&apos;t tell stories to impress. We share stories that prove
+              what <span className={styles.greenText}>energy</span> can do.
+            </>
+          )}
         </p>
       </div>
 
@@ -334,8 +345,7 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
       <div className={styles.desktopCtas}>
         <a
           href={CTA_LINKS.pressKit}
-          className={styles.figmaCtaButton}
-          download="green-press-kit.pdf"
+          className={`${styles.figmaCtaButton} ${styles.downloadPressKit}`}
         >
           <img
             loading="lazy"
@@ -356,36 +366,9 @@ export default function MediaPress({ canvas = false }: MediaPressProps) {
           />
         </a>
 
-        <a
-          href={CTA_LINKS.partnershipFramework}
-          className={styles.figmaCtaButton}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            loading="lazy"
-            decoding="async"
-            className={styles.figmaCtaFrame}
-            src="/images/media-press/request-quote-appearance-frame.svg"
-            alt=""
-            aria-hidden="true"
-          />
-          <span className={styles.figmaCtaLabel}>
-            Request Partnership Framework
-          </span>
-          <img
-            loading="lazy"
-            decoding="async"
-            className={styles.figmaCtaArrow}
-            src="/images/media-press/cta-arrow.svg"
-            alt=""
-            aria-hidden="true"
-          />
-        </a>
-
         <button
           type="button"
-          className={styles.figmaCtaButton}
+          className={`${styles.figmaCtaButton} ${styles.requestQuote}`}
           onClick={() => setQuoteOpen(true)}
         >
           <img

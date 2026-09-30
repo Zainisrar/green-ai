@@ -88,7 +88,8 @@ export const useOurProcurementPhilosophy = () => {
   return useQuery<OurProcurementPhilosophyData>({
     queryKey: ["ourProcurementPhilosophy"],
     queryFn: fetchOurProcurementPhilosophy,
-    staleTime: 5 * 60 * 1000, // 5 minutes
+    staleTime: 0,
     gcTime: 10 * 60 * 1000, // 10 minutes
+    refetchOnMount: "always",
   });
 };

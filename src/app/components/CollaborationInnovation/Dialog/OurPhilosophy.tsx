@@ -29,6 +29,9 @@ const OurPhilosophy = ({ isOpen, onClose, data }: Props) => {
     data?.img?.src ??
     "/images/collaboration-innovation/our-philosophy-model.png";
   const imgAlt = data?.img?.alt ?? "Solar Installation";
+  const description =
+    data?.description?.text ??
+    "GREEN’s innovation model is built on trust, experimentation, and field-tested ingenuity. We pursue partnerships that yield measurable results — not just prototypes or press releases.";
 
   return (
     <ClientInfoModal isOpen={isOpen} onClose={onClose}>
@@ -38,23 +41,20 @@ const OurPhilosophy = ({ isOpen, onClose, data }: Props) => {
           <p className={styles.dialogSubtitle}>- {subHeadline}</p>
         </header>
 
-        <p className={styles.philosophyIntro}>
-          <span className={styles.greenText}>GREEN’s</span> innovation model is
-          built on trust, experimentation, and field-tested ingenuity. We
-          pursue partnerships that yield measurable results — not just
-          prototypes or press releases.
-        </p>
+        <p className={styles.philosophyIntro}>{description}</p>
 
         <div className={styles.philosophyBody}>
           <div className={styles.philosophyList}>
             {keys.map((k, idx) => {
               const offsets = [30, 7, -13, -36, -61];
-              const offset = offsets[idx] ?? (30 - idx * 23);
+              const offset = offsets[idx] ?? 30 - idx * 23;
               return (
                 <div
                   key={idx}
                   className={styles.philosophyItem}
-                  style={{ "--item-offset": `${offset}px` } as React.CSSProperties}
+                  style={
+                    { "--item-offset": `${offset}px` } as React.CSSProperties
+                  }
                 >
                   <Image
                     src="/images/collaboration-innovation/bolt.png"

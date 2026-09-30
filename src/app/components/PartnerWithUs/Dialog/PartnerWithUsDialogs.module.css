@@ -9,10 +9,10 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
-  padding-bottom: 18px;
+  gap: 0;
+  padding-bottom: 24px;
   border-bottom: 1px solid rgba(138, 139, 138, 0.4);
-  margin-bottom: 28px;
+  margin-bottom: 40px;
 }
 
 .dialogTitle {
@@ -42,8 +42,8 @@
 .whyList {
   display: flex;
   flex-direction: column;
-  gap: 22px;
-  margin-top: 24px;
+  gap: 43px;
+  margin-top: 0;
   max-width: 1255px;
 }
 
@@ -51,20 +51,6 @@
   display: flex;
   align-items: center;
   gap: 14px;
-}
-
-/* Follow the modal's angled left edge rather than forming a vertical stack. */
-.whyRow:nth-child(2) {
-  transform: translateX(-24px);
-}
-.whyRow:nth-child(3) {
-  transform: translateX(-48px);
-}
-.whyRow:nth-child(4) {
-  transform: translateX(-72px);
-}
-.whyRow:nth-child(5) {
-  transform: translateX(-96px);
 }
 
 .whyIcon {
@@ -80,7 +66,7 @@
   font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 22px;
   font-weight: 500;
-  line-height: 1.35;
+  line-height: 25px;
 }
 
 .whyRow strong {
@@ -88,13 +74,13 @@
 }
 
 .whyFooter {
-  margin: 36px 0 0 0;
+  margin: 71px 0 0 -35px;
   color: #000000;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 24px;
   font-style: italic;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 32px;
 }
 
 .dialogFooterAccent {
@@ -112,10 +98,25 @@
   margin-top: 24px;
 }
 
+.partnershipDialog .partnershipGrid {
+  grid-template-columns: 700px 700px;
+  column-gap: 63px;
+  row-gap: 126px;
+  width: 1463px;
+  max-width: none;
+  margin-top: 31px;
+  margin-left: -101px;
+}
+
 .partnershipCard {
   display: flex;
   align-items: flex-start;
   gap: 24px;
+}
+
+.partnershipDialog .partnershipCard {
+  gap: 30px;
+  align-items: center;
 }
 
 .partnershipIcon {
@@ -123,6 +124,31 @@
   height: 72px;
   flex: 0 0 72px;
   object-fit: contain;
+}
+
+.partnershipDialog .partnershipIcon {
+  width: 96px;
+  height: 96px;
+  flex-basis: 96px;
+  opacity: 0.8;
+}
+
+.partnershipDialog .partnershipCard:nth-child(2) .partnershipIcon {
+  width: 95px;
+  height: 95px;
+  flex-basis: 95px;
+}
+
+.partnershipDialog .partnershipCard:nth-child(3) .partnershipIcon {
+  width: 84px;
+  height: 90px;
+  flex-basis: 84px;
+}
+
+.partnershipDialog .partnershipCard:nth-child(4) .partnershipIcon {
+  width: 96px;
+  height: 103px;
+  flex-basis: 96px;
 }
 
 .partnershipCard h3 {
@@ -134,6 +160,13 @@
   line-height: 1.25;
 }
 
+.partnershipDialog .partnershipCard h3 {
+  margin-bottom: 8px;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 35px;
+}
+
 .partnershipCard p {
   margin: 0;
   color: #000000;
@@ -141,6 +174,12 @@
   font-size: 20px;
   font-weight: 500;
   line-height: 1.4;
+}
+
+.partnershipDialog .partnershipCard p {
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 34px;
 }
 
 /* What You Can Expect */
@@ -153,10 +192,56 @@
   margin-top: 24px;
 }
 
+.expectationsDialog {
+  position: relative;
+  height: 100%;
+}
+
+.expectationsDialog .expectationsGrid {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
 .expectationItem {
   display: flex;
   align-items: center;
   gap: 14px;
+}
+
+.expectationsDialog .expectationItem {
+  position: absolute;
+  gap: 0;
+  align-items: center;
+  transform: none;
+}
+
+.expectationsDialog .expectationItem:nth-child(1) {
+  top: 156px;
+  left: -38px;
+}
+
+.expectationsDialog .expectationItem:nth-child(2) {
+  top: 160px;
+  left: 658px;
+}
+
+.expectationsDialog .expectationItem:nth-child(3) {
+  top: 286px;
+  left: -38px;
+}
+
+.expectationsDialog .expectationItem:nth-child(4) {
+  top: 299px;
+  left: 601px;
+}
+
+.expectationsDialog .expectationItem:nth-child(5) {
+  top: 411px;
+  left: -38px;
 }
 
 .expectationIcon {
@@ -164,6 +249,19 @@
   height: 32px;
   flex: 0 0 32px;
   object-fit: contain;
+}
+
+.expectationsDialog .expectationIcon {
+  width: 70px;
+  height: 70px;
+  flex-basis: 70px;
+  transform: rotate(26.55deg);
+}
+
+.expectationsDialog .expectationItem:nth-child(4) .expectationIcon {
+  width: 63px;
+  height: 63px;
+  flex-basis: 63px;
 }
 
 .expectationItem p {
@@ -174,6 +272,12 @@
   font-weight: 600;
   font-style: italic;
   line-height: 1.35;
+}
+
+.expectationsDialog .expectationItem p {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 30px;
 }
 
 /* Each lower grid row steps with the dialog's slanted left edge. */
@@ -195,6 +299,20 @@
   margin-top: 14px;
 }
 
+.channelsDialog {
+  position: relative;
+  height: 100%;
+}
+
+.channelsDialog .channelsTable {
+  position: absolute;
+  top: 160px;
+  left: -26px;
+  width: 1200px;
+  max-width: none;
+  margin: 0;
+}
+
 .channelsTable th {
   padding: 0 24px 20px 0;
   color: #23b14d;
@@ -204,9 +322,28 @@
   text-align: left;
 }
 
+.channelsDialog .channelsTable th {
+  padding: 0 0 14px;
+  color: #23b14d;
+  font-size: 26px;
+  line-height: 32px;
+}
+
 .channelsTable th:first-child,
 .channelsTable td:first-child {
   width: 539px;
+}
+
+.channelsDialog .channelsTable th:first-child,
+.channelsDialog .channelsTable td:first-child {
+  width: 553px;
+  padding-left: 99px;
+}
+
+.channelsDialog .channelsTable th:nth-child(2),
+.channelsDialog .channelsTable td:nth-child(2) {
+  padding-left: 76px;
+  transform: none;
 }
 
 .channelsTable th:nth-child(2) {
@@ -221,6 +358,19 @@
   font-size: 22px;
   font-weight: 700;
   line-height: 1.35;
+}
+
+.channelsDialog .channelsTable td {
+  padding: 0 0 0 99px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 60px;
+  transform: none;
+}
+
+.channelsDialog .channelsTable td:last-child {
+  padding-left: 76px;
+  font-weight: 600;
 }
 
 .channelsTable td:last-child {
@@ -245,6 +395,10 @@
   transform: translateX(-120px);
 }
 
+.channelsDialog .channelsTable tbody tr td {
+  transform: none;
+}
+
 /* Trusted By */
 .trustedLogos {
   display: flex;
@@ -253,6 +407,75 @@
   margin-top: 36px;
   width: 100%;
   max-width: 1255px;
+}
+
+.trustedDialog {
+  position: relative;
+  height: 100%;
+}
+
+.trustedDialog .trustedLogos {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.trustedDialog .trustedRow1,
+.trustedDialog .trustedRow2 {
+  display: contents;
+}
+
+.trustedDialog .trustedLogo {
+  position: absolute;
+  display: block;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain;
+}
+
+.trustedDialog .trustedRow1 .trustedLogo:nth-child(1) {
+  top: 82px;
+  left: -63px;
+  width: 306px;
+  height: 306px;
+}
+
+.trustedDialog .trustedRow1 .trustedLogo:nth-child(2) {
+  top: 142px;
+  left: 323px;
+  width: 189px;
+  height: 189px;
+}
+
+.trustedDialog .trustedRow1 .trustedLogo:nth-child(3) {
+  top: 157px;
+  left: 620px;
+  width: 290px;
+  height: 174px;
+}
+
+.trustedDialog .trustedRow1 .trustedLogo:nth-child(4) {
+  top: 116px;
+  left: 971px;
+  width: 254px;
+  height: 254px;
+}
+
+.trustedDialog .trustedRow2 .trustedLogo:nth-child(1) {
+  top: 375px;
+  left: -3px;
+  width: 172px;
+  height: 159px;
+}
+
+.trustedDialog .trustedRow2 .trustedLogo:nth-child(2) {
+  top: 386px;
+  left: 315px;
+  width: 449px;
+  height: 140px;
 }
 
 .trustedRow1 {

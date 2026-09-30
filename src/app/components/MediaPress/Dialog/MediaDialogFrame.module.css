@@ -141,6 +141,53 @@
   box-sizing: border-box;
 }
 
+/* The press-release panel has its own Figma composition inside the shared frame. */
+.latestPressReleases .header {
+  left: 344px;
+  top: 54px;
+  right: 300px;
+}
+
+.latestPressReleases .title {
+  font-size: 30px;
+  letter-spacing: 0;
+}
+
+.latestPressReleases .divider {
+  left: 324px;
+  top: 110px;
+  right: auto;
+  width: 1255px;
+}
+
+.latestPressReleases .closeBtn {
+  top: 15px;
+  right: 36px;
+}
+
+.mediaContact .header {
+  left: 344px;
+  top: 54px;
+  right: 300px;
+}
+
+.mediaContact .title {
+  font-size: 30px;
+  letter-spacing: 0;
+}
+
+.mediaContact .divider {
+  left: 324px;
+  top: 110px;
+  right: auto;
+  width: 1255px;
+}
+
+.mediaContact .closeBtn {
+  top: 15px;
+  right: 36px;
+}
+
 /* Responsive fallback for phone screens */
 @media (max-width: 767px) {
   .stage {

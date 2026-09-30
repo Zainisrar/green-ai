@@ -2,6 +2,56 @@
   font-size: 30px;
 }
 
+@media (min-width: 1130px) {
+  .performanceDivider {
+    margin-left: -38px;
+  }
+
+  .performanceBody {
+    position: static;
+    padding-top: 0;
+  }
+
+  .tableWrap {
+    position: absolute;
+    top: 148px;
+    left: 331px;
+    width: 1047px;
+    margin: 0;
+  }
+
+  .tableHeader,
+  .tableRow {
+    grid-template-columns: 590px 1fr;
+    column-gap: 0;
+    transform: none;
+  }
+
+  .tableHeader {
+    margin-bottom: 14px;
+  }
+
+  .tableBody {
+    transform: none;
+  }
+
+  .tableRow,
+  .row0,
+  .row1,
+  .row2,
+  .row3,
+  .row4,
+  .row5 {
+    min-height: 50px;
+    transform: none;
+  }
+
+  .metricCell,
+  .valueCell {
+    line-height: 50px;
+  }
+}
+
 .performanceBody {
   justify-content: flex-start;
   box-sizing: border-box;
@@ -113,4 +163,15 @@
     font-size: 16px;
     color: #23b14d;
   }
+}
+
+@media (min-width: 1130px) {
+  .performanceDivider { margin-left: -38px; }
+  .performanceBody { position: static; padding-top: 0; }
+  .tableWrap { position: absolute; top: 202px; left: 331px; width: 1047px; margin: 0; }
+  .tableHeader, .tableRow { grid-template-columns: 590px 1fr; column-gap: 0; transform: none; }
+  .tableHeader { margin-bottom: 14px; }
+  .tableBody { transform: none; }
+  .tableRow, .row0, .row1, .row2, .row3, .row4, .row5 { min-height: 50px; transform: none; }
+  .metricCell, .valueCell { line-height: 50px; }
 }

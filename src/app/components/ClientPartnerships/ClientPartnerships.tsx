@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import { useState } from "react";
+import { useClientPartnerships } from "@/hooks/useClientPartnerships";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
@@ -106,7 +107,40 @@ interface ClientPartnershipsProps {
 export default function ClientPartnerships({
   canvas = false,
 }: ClientPartnershipsProps) {
-  const d = FALLBACK;
+  const { data } = useClientPartnerships();
+  const cmsSections = data
+    ? [
+        data.whoWePartnerWith,
+        data.ourClientPartnership,
+        data.whatSetsGreenApart,
+        data.useCases,
+      ]
+    : [];
+  const d = data
+    ? {
+        ...FALLBACK,
+        subHeadline: data.mainPage.subHeadline,
+        description: data.mainPage.description,
+        rows: FALLBACK.rows.map((row, index) => {
+          const section = cmsSections[index];
+          return section
+            ? {
+                ...row,
+                title: section.title?.trim() || row.title,
+                subtitle:
+                  ("subHeadline" in section && section.subHeadline) ||
+                  row.subtitle,
+              }
+            : row;
+        }),
+        quote1:
+          data.mainPage.quote1.text1
+            ?.split(/[\r\n\u2028]+/)[0]
+            ?.trim() || FALLBACK.quote1,
+        quote2: data.mainPage.quote1.text2 || FALLBACK.quote2,
+        statement: data.mainPage.quote2 || FALLBACK.statement,
+      }
+    : FALLBACK;
   const [isWhoWePartnerOpen, setIsWhoWePartnerOpen] = useState(false);
   const [isOurModelOpen, setIsOurModelOpen] = useState(false);
   const [isWhatSetsOpen, setIsWhatSetsOpen] = useState(false);
@@ -133,7 +167,7 @@ export default function ClientPartnerships({
         className={`${styles.verticalTitle} ${styles.desktopOnly}`}
         aria-hidden="true"
       >
-        CLIENT PARTNERSHIPS
+        {data?.mainPage?.title ?? "CLIENT PARTNERSHIPS"}
       </span>
 
       {/* Right-side photo collage (Mask group at 1063,-59, 1003×2134) */}
@@ -151,7 +185,9 @@ export default function ClientPartnerships({
 
       {/* Header section */}
       <div className={`${styles.headerBlock} ${styles.desktopOnly}`}>
-        <h1 className={styles.mainTitle}>CLIENT PARTNERSHIPS</h1>
+        <h1 className={styles.mainTitle}>
+          {data?.mainPage?.title ?? "CLIENT PARTNERSHIPS"}
+        </h1>
         <p className={styles.subHeadline}>{d.subHeadline}</p>
         <p className={styles.description}>{d.description}</p>
       </div>
@@ -199,7 +235,13 @@ export default function ClientPartnerships({
             <p className={styles.rowSubtitle}>{row.subtitle}</p>
           </div>
           <FigmaAngledCta
-            className={`${styles.rowCta} ${styles.desktopOnly}`}
+            className={`${styles.rowCta} ${styles.desktopOnly} ${
+              row.cta === "Explore"
+                ? styles.exploreCta
+                : row.key === "clientPartnerLogin"
+                  ? styles.loginCta
+                  : ""
+            }`}
             size="sm"
             style={{ position: "absolute", left: row.ctaX, top: row.ctaY }}
             href={
@@ -260,15 +302,19 @@ export default function ClientPartnerships({
         style={{ position: "absolute", left: 1647, top: 732 }}
         onClick={() => setIsBookCallOpen(true)}
       >
-        Book a Discovery Call
+        {data?.mainPage?.cta?.[0]?.text?.trim() ?? "Book a Discovery Call"}
       </FigmaAngledCta>
       <FigmaAngledCta
         className={`${styles.prospectusCta} ${styles.desktopOnly}`}
         style={{ position: "absolute", left: 1516, top: 812 }}
-        icon="chevron"
-        href="mailto:programs@green.com.pg?subject=Client%20Partnership%20Prospectus%20Request"
+        icon="download"
+        href={
+          data?.mainPage?.cta?.[1]?.href ||
+          "mailto:programs@green.com.pg?subject=Client%20Partnership%20Prospectus%20Request"
+        }
       >
-        Request Client Partnership Prospectus
+        {data?.mainPage?.cta?.[1]?.text ??
+          "Request Client Partnership Prospectus"}
       </FigmaAngledCta>
       <a
         className={`${styles.readMore} ${styles.desktopOnly}`}
@@ -283,7 +329,9 @@ export default function ClientPartnerships({
         <div className={styles.mobileLayout}>
           {/* Hero header */}
           <div className={styles.mobileHero}>
-            <h1 className={styles.mobileH1}>CLIENT PARTNERSHIPS</h1>
+            <h1 className={styles.mobileH1}>
+              {data?.mainPage?.title ?? "CLIENT PARTNERSHIPS"}
+            </h1>
             <p className={styles.mobileTagline}>{d.subHeadline}</p>
             <p className={styles.mobileBlurb}>{d.description}</p>
           </div>
@@ -344,7 +392,7 @@ export default function ClientPartnerships({
             </FigmaAngledCta>
             <FigmaAngledCta
               className={styles.mobileProspectusCta}
-              icon="chevron"
+              icon="download"
               href="mailto:programs@green.com.pg?subject=Client%20Partnership%20Prospectus%20Request"
             >
               Request Client Partnership Prospectus
@@ -375,18 +423,22 @@ export default function ClientPartnerships({
       <WhoWePartnerWith
         isOpen={isWhoWePartnerOpen}
         onClose={() => setIsWhoWePartnerOpen(false)}
+        data={data?.whoWePartnerWith}
       />
       <OurClientPartnershipModel
         isOpen={isOurModelOpen}
         onClose={() => setIsOurModelOpen(false)}
+        data={data?.ourClientPartnership}
       />
       <WhatSetsGREENApart
         isOpen={isWhatSetsOpen}
         onClose={() => setIsWhatSetsOpen(false)}
+        data={data?.whatSetsGreenApart}
       />
       <UseCases
         isOpen={isUseCasesOpen}
         onClose={() => setIsUseCasesOpen(false)}
+        data={data?.useCases}
       />
       <PartnershipOnboarding
         isOpen={isPartnershipOnboardingOpen}

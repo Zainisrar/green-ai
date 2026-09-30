@@ -126,6 +126,21 @@
   font-size: 13px;
 }
 
+/* Match the MediaPress / Partner-With-Us Vector 7368 Explore fill exactly. */
+.rowCta::before {
+  background: linear-gradient(90deg, #23b14d -11.2%, #fffe50 97.7%);
+}
+
+.rowCta::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.5) -142.5%,
+      rgba(255, 254, 80, 0.5) 97.7%
+    ),
+    #ffffff;
+}
+
 .rowDivider {
   position: absolute;
   top: 71px;
@@ -290,6 +305,20 @@
   min-height: 37px;
   padding: 0 12px 0 16px;
   font-size: 12px;
+}
+
+.mobileExploreBtn::before {
+  background: linear-gradient(90deg, #23b14d -11.2%, #fffe50 97.7%);
+}
+
+.mobileExploreBtn::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(35, 177, 77, 0.5) -142.5%,
+      rgba(255, 254, 80, 0.5) 97.7%
+    ),
+    #ffffff;
 }
 
 .mobileRowDivider {

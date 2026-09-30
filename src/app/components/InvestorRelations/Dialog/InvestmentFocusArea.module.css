@@ -4,6 +4,59 @@
   margin: 10px 0 20px;
 }
 
+@media (min-width: 1130px) {
+  .focusContent {
+    padding-top: 96px;
+    padding-left: 336px;
+  }
+
+  .focusDivider {
+    margin-left: -38px;
+  }
+
+  .focusBody {
+    position: static;
+  }
+
+  .tableWrap {
+    position: absolute;
+    top: 171px;
+    left: 264px;
+    width: 1255px;
+    margin: 0;
+  }
+
+  .tableHeader,
+  .tableRow {
+    grid-template-columns: 362px 545px 1fr;
+    column-gap: 0;
+  }
+
+  .tableHeader {
+    margin-bottom: 18px;
+  }
+
+  .tableBody {
+    gap: 0;
+  }
+
+  .tableRow {
+    min-height: 60px;
+  }
+
+  .colHeading {
+    font-size: 26px;
+    font-weight: 800;
+  }
+
+  .focusAreaCell,
+  .capitalUseCell,
+  .returnProfileCell {
+    font-size: 22px;
+    line-height: 60px;
+  }
+}
+
 .tableHeader {
   display: grid;
   grid-template-columns: minmax(0, 300fr) minmax(0, 450fr) minmax(0, 480fr);
@@ -79,4 +132,29 @@
   .returnProfileCell {
     font-size: 16px;
   }
+}
+
+@media (min-width: 1130px) {
+  .focusDivider { margin-left: -38px; }
+  .focusBody { position: static; }
+  .tableWrap {
+    position: absolute;
+    top: 253px;
+    left: 264px;
+    width: 1490px;
+    max-width: none;
+    margin: 0;
+  }
+  .tableHeader { grid-template-columns: 362px 545px 1fr; column-gap: 0; }
+  .tableRow { grid-template-columns: 375px 526px 1fr; column-gap: 0; }
+  .tableHeader { margin-bottom: 18px; }
+  .tableBody { gap: 0; }
+  .tableRow { min-height: 60px; }
+  .tableRow:nth-child(1) { transform: translateX(-25px); }
+  .tableRow:nth-child(2) { transform: translateX(-40px); }
+  .tableRow:nth-child(3) { transform: translateX(-56px); }
+  .tableRow:nth-child(4) { transform: translateX(-78px); }
+  .colHeading { font-size: 26px; font-weight: 800; }
+  .focusAreaCell, .capitalUseCell, .returnProfileCell { font-size: 22px; line-height: 60px; }
+  .returnProfileCell { white-space: nowrap; }
 }

@@ -24,19 +24,19 @@ const steps = [
     left: 423,
   },
   {
-    step: "Step 3",
+    step: "Step\u00a0\u00a03",
     action: "Sign & Accept Supplier Code of Conduct",
     left: 401,
   },
   {
-    step: "Step 4",
+    step: "Step\u00a0\u00a04",
     action: "Upload Documents (Certifications, Catalogs, Past Work)",
     left: 379,
   },
   {
-    step: "Step 5",
+    step: "Step\u00a0\u00a05",
     action: "Await Qualification / Tender Invitations",
-    left: 335,
+    left: 348,
   },
 ];
 

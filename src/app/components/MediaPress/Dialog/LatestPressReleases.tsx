@@ -37,6 +37,7 @@ export default function LatestPressReleases({ isOpen, onClose }: Props) {
       onClose={onClose}
       title="Latest Press Releases"
       labelledBy="latest-press-title"
+      variant="latestPressReleases"
     >
       <div className={styles.container}>
         <div className={styles.cardsRow}>
@@ -45,13 +46,13 @@ export default function LatestPressReleases({ isOpen, onClose }: Props) {
               {/* Image with decorative angled brackets */}
               <div className={styles.imageWrapper}>
                 <img
-                  src="/images/media-press/card-bracket-tr.svg"
+                  src="/images/why-esg-matters-to-green/shape2.png"
                   alt=""
                   aria-hidden="true"
                   className={styles.bracketTr}
                 />
                 <img
-                  src="/images/media-press/card-bracket-bl.svg"
+                  src="/images/why-esg-matters-to-green/shape.png"
                   alt=""
                   aria-hidden="true"
                   className={styles.bracketBl}
@@ -82,8 +83,17 @@ export default function LatestPressReleases({ isOpen, onClose }: Props) {
                   {release.date}
                 </span>
 
-                <button type="button" className={styles.readMoreBtn}>
-                  Read more ›
+                <button
+                  type="button"
+                  className={styles.readMoreBtn}
+                  aria-label={`Read more: ${release.title}`}
+                >
+                  <img
+                    src="/images/media-press/read-more.png"
+                    alt=""
+                    aria-hidden="true"
+                    className={styles.vectorIcon}
+                  />
                 </button>
               </div>
             </article>

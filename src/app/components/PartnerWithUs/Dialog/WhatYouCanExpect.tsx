@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import ClientInfoModal from "@/app/components/ClientPartnerships/Dialog/ClientInfoModal";
 import styles from "./PartnerWithUsDialogs.module.css";
 
@@ -19,8 +18,15 @@ const expectations = [
 
 const WhatYouCanExpect = ({ isOpen, onClose }: Props) => {
   return (
-    <ClientInfoModal isOpen={isOpen} onClose={onClose} height={570}>
-      <div className={styles.dialogContainer}>
+    <ClientInfoModal
+      isOpen={isOpen}
+      onClose={onClose}
+      height={700}
+      closeRight={38}
+      closeTop={15}
+      geometry="partnerWithUsExpect"
+    >
+      <div className={`${styles.dialogContainer} ${styles.expectationsDialog}`}>
         <header className={styles.dialogHeader}>
           <h2 className={styles.dialogTitle}>What You Can Expect</h2>
           <p className={styles.dialogSubtitle}>
@@ -35,7 +41,7 @@ const WhatYouCanExpect = ({ isOpen, onClose }: Props) => {
               <img
                 loading="lazy"
                 decoding="async"
-                src="/images/why-esg-matters-to-green/green_bolt.png"
+                src="/images/collaboration-innovation/bolt.png"
                 className={styles.expectationIcon}
                 alt=""
               />

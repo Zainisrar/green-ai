@@ -4,8 +4,10 @@ import { ApiError } from "./api";
 export const queryClientConfig = {
   defaultOptions: {
     queries: {
-      // Time before data is considered stale
-      staleTime: 60 * 1000, // 1 minute
+      // CMS content must be checked whenever a page mounts so published edits
+      // are visible on the next navigation/reload.
+      staleTime: 0,
+      refetchOnMount: "always" as const,
 
       // Time before inactive queries are garbage collected
       gcTime: 5 * 60 * 1000, // 5 minutes (formerly cacheTime)

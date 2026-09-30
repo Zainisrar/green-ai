@@ -51,6 +51,7 @@ export default function PerformanceSnapshots({
       headline={headline}
       contentClassName={styles.performanceContent}
       bodyClassName={styles.performanceBody}
+      dividerClassName={styles.performanceDivider}
     >
       <div className={styles.tableWrap}>
         <div className={styles.tableHeader}>

@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import ClientInfoModal from "@/app/components/ClientPartnerships/Dialog/ClientInfoModal";
 import styles from "./PartnerWithUsDialogs.module.css";
 
@@ -38,8 +37,15 @@ const types = [
 
 const PartnershipTypes = ({ isOpen, onClose }: Props) => {
   return (
-    <ClientInfoModal isOpen={isOpen} onClose={onClose} height={570}>
-      <div className={styles.dialogContainer}>
+    <ClientInfoModal
+      isOpen={isOpen}
+      onClose={onClose}
+      height={700}
+      closeRight={38}
+      closeTop={15}
+      geometry="partnerWithUsPartnership"
+    >
+      <div className={`${styles.dialogContainer} ${styles.partnershipDialog}`}>
         <header className={styles.dialogHeader}>
           <h2 className={styles.dialogTitle}>Partnership Types We Support</h2>
           <p className={styles.dialogSubtitle}>

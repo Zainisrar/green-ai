@@ -14,12 +14,16 @@
   height: var(--figma-cta-height);
   padding: 0 24px;
   border: 0;
-  background: transparent;
+  background: transparent !important;
   color: #000;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
+  clip-path: polygon(var(--figma-cta-slant) 0,
+      100% 0,
+      calc(100% - var(--figma-cta-slant)) 100%,
+      0 100%);
   transition:
     filter 0.15s ease,
     transform 0.15s ease;
@@ -33,6 +37,19 @@
   padding: 0 14px 0 18px;
   font-size: 12px;
   font-weight: 600;
+  clip-path: polygon(var(--figma-cta-slant) 0,
+      100% 0,
+      calc(100% - var(--figma-cta-slant)) 100%,
+      0 100%);
+}
+
+/* Exact Vector 7368 treatment shared by controls labelled “Explore”. */
+.exploreCta {
+  width: 122px;
+  height: 37px;
+  min-height: 37px;
+  padding: 0 12px 0 17px;
+  font-size: 13px;
 }
 
 
@@ -48,31 +65,25 @@
 /* Outer 1px stroke (100% saturated gradient) */
 .cta::before {
   background: linear-gradient(90deg, #23b14d 0%, #fffe50 100%);
-  clip-path: polygon(
-    var(--figma-cta-slant) 0,
-    100% 0,
-    calc(100% - var(--figma-cta-slant)) 100%,
-    0 100%
-  );
+  clip-path: polygon(var(--figma-cta-slant) 0,
+      100% 0,
+      calc(100% - var(--figma-cta-slant)) 100%,
+      0 100%);
 }
 
 /* Inner 50% opacity gradient fill over white background matching Figma */
 .cta::after {
   inset: 1px;
   background:
-    linear-gradient(
-      90deg,
+    linear-gradient(90deg,
       rgba(35, 177, 77, 0.5) 0%,
-      rgba(255, 254, 80, 0.5) 100%
-    ),
+      rgba(255, 254, 80, 0.5) 100%),
     #ffffff;
   backdrop-filter: blur(15px);
-  clip-path: polygon(
-    var(--figma-cta-slant) 0,
-    100% 0,
-    calc(100% - var(--figma-cta-slant)) 100%,
-    0 100%
-  );
+  clip-path: polygon(var(--figma-cta-slant) 0,
+      100% 0,
+      calc(100% - var(--figma-cta-slant)) 100%,
+      0 100%);
 }
 
 .inner {
@@ -144,6 +155,13 @@
   filter: brightness(0.97);
 }
 
+.exploreCta:hover,
+.exploreCta:focus-visible,
+.exploreCta:active {
+  filter: none;
+  transform: none;
+}
+
 .cta:focus-visible {
   outline: 2px solid #23b14d;
   outline-offset: 3px;
@@ -193,4 +211,3 @@
     flex-shrink: 0;
   }
 }
-

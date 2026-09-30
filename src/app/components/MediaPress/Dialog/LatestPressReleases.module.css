@@ -2,14 +2,14 @@
   position: relative;
   width: 100%;
   height: 100%;
-  padding-left: 290px;
-  padding-top: 36px;
+  padding-left: 307px;
+  padding-top: 110px;
   box-sizing: border-box;
 }
 
 .cardsRow {
   display: flex;
-  gap: 36px;
+  gap: 60px;
   align-items: flex-start;
 }
 
@@ -23,26 +23,26 @@
 
 .imageWrapper {
   position: relative;
-  width: 367px;
-  height: 145px;
+  width: 377px;
+  height: 155px;
 }
 
 .bracketTr {
   position: absolute;
-  top: -12px;
-  right: -8px;
-  width: 79px;
-  height: 98px;
+  top: 0;
+  right: -42px;
+  width: 82px;
+  height: 102px;
   pointer-events: none;
   z-index: 2;
 }
 
 .bracketBl {
   position: absolute;
-  bottom: -12px;
-  left: -8px;
-  width: 79px;
-  height: 98px;
+  bottom: -10px;
+  left: -70px;
+  width: 82px;
+  height: 101px;
   pointer-events: none;
   z-index: 2;
 }
@@ -61,22 +61,22 @@
 }
 
 .cardTitle {
-  margin: 18px 0 0 0;
+  margin: 2px 0 0 0;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 20px;
   font-weight: 700;
   line-height: 1.35;
   color: #080808;
-  width: 360px;
-  min-height: 54px;
+  width: 377px;
+  min-height: 50px;
 }
 
 .metaRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 367px;
-  margin-top: 24px;
+  width: 377px;
+  margin-top: 37px;
 }
 
 .date {
@@ -84,14 +84,14 @@
   align-items: center;
   gap: 8px;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
   color: #171717;
 }
 
 .calendarIcon {
-  width: 18px;
-  height: 18px;
+  width: 21px;
+  height: 21px;
   object-fit: contain;
 }
 
@@ -99,19 +99,31 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 38px;
-  padding: 0 24px;
-  background: linear-gradient(100deg, #c5ed9a 0%, #f7f77a 100%);
-  border: 1px solid #48bd61;
-  clip-path: polygon(9% 0, 100% 0, 91% 100%, 0 100%);
+  width: 172px;
+  height: 36.9px;
+  padding: 0;
+  position: relative;
+  background: transparent;
+  border: 0;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   color: #111111;
   cursor: pointer;
+  overflow: hidden;
   transition:
     filter 160ms ease,
     transform 160ms ease;
+}
+
+.vectorIcon {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 36.9px;
+  max-width: 100%;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .readMoreBtn:hover {
@@ -121,8 +133,8 @@
 
 .viewAllBtn {
   position: absolute;
-  left: 1120px;
-  bottom: 36px;
+  left: 1118px;
+  bottom: 90px;
   background: none;
   border: none;
   padding: 0;
@@ -130,7 +142,7 @@
   font-size: 20px;
   font-weight: 500;
   font-style: italic;
-  color: #69707a;
+  color: #494d4a;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -143,7 +155,7 @@
 }
 
 .viewAllBtn span {
-  font-size: 24px;
+  font-size: 22px;
   font-style: normal;
 }
 

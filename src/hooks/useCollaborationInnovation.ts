@@ -6,6 +6,8 @@ export const useCollaborationInnovation = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: queryKeys.collaborationInnovation(),
     queryFn: api.getCollaborationInnovation,
+    staleTime: 0,
+    refetchOnMount: "always",
   });
 
   return {

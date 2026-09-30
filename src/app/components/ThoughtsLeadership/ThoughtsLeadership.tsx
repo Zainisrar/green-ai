@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useThoughtLeadership } from "@/hooks/useThoughtLeadership";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
@@ -84,9 +85,53 @@ interface ThoughtsLeadershipProps {
 export default function ThoughtsLeadership({
   canvas = false,
 }: ThoughtsLeadershipProps) {
+  const { data } = useThoughtLeadership();
   const [openCategory, setOpenCategory] = useState("opinion");
   const [isDebriefOpen, setIsDebriefOpen] = useState(false);
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
+  const mainPage = data?.mainPage;
+  const cmsEditorials = data?.editorials?.map((editorial, index) => {
+    const writer = editorial.writer;
+    const writerName =
+      typeof writer === "object" && typeof writer?.name === "string"
+        ? writer.name
+        : "GREEN";
+    return {
+      id: `${editorial.title}-${index}`,
+      title: editorial.title,
+      image: editorial.featuredImg?.src,
+      description: editorial.description,
+      author: writerName,
+      role: editorial.categories?.join(", ") || "",
+      cta: editorial.cta,
+    };
+  });
+  const displayedEditorials = cmsEditorials?.length
+    ? cmsEditorials
+    : editorials.map((editorial) => ({
+        ...editorial,
+        cta: { href: "", text: "Read more" },
+      }));
+  const cmsCategories = Array.from(
+    new Set(
+      data?.editorials?.flatMap((editorial) => editorial.categories ?? []) ??
+        [],
+    ),
+  ).map((category) => ({
+    id: category.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+    label: category,
+    count:
+      data?.editorials?.filter((editorial) =>
+        (editorial.categories ?? []).includes(category),
+      ).length ?? 0,
+    items:
+      data?.editorials
+        ?.filter((editorial) =>
+          (editorial.categories ?? []).includes(category),
+        )
+        .map((editorial) => editorial.title) ?? [],
+  }));
+  const displayedCategories = data ? cmsCategories : categories;
 
   return (
     <main
@@ -104,24 +149,30 @@ export default function ThoughtsLeadership({
       <div className={styles.content}>
         <header className={styles.intro}>
           <h1>
-            Thought <span>Leadership</span>
+            {mainPage?.title ?? (
+              <>
+                Thought <span>Leadership</span>
+              </>
+            )}
           </h1>
           <h2>
-            Designed for Complexity. Delivered with Precision. Managed to Scale
+            {mainPage?.subTitle ??
+              "Designed for Complexity. Delivered with Precision. Managed to Scale"}
           </h2>
           <p>
-            From national policy to rural electrification design — GREEN’s
-            leadership voice is shaping the next energy chapter for PNG and the
-            Pacific.
+            {mainPage?.description ??
+              "From national policy to rural electrification design — GREEN’s leadership voice is shaping the next energy chapter for PNG and the Pacific."}
           </p>
         </header>
         <section
           className={styles.editorialSection}
           aria-labelledby="editorials"
         >
-          <h3 id="editorials">Featured Editorials / Speeches</h3>
+          <h3 id="editorials">
+            {mainPage?.editorialsTitle ?? "Featured Editorials / Speeches"}
+          </h3>
           <div className={styles.editorialGrid}>
-            {editorials.map((editorial) => (
+            {displayedEditorials.map((editorial) => (
               <article className={styles.card} key={editorial.id}>
                 <div className={styles.cardHeading}>
                   <img
@@ -137,8 +188,11 @@ export default function ThoughtsLeadership({
                   <strong>By {editorial.author}</strong>
                   <span>— {editorial.role}</span>
                 </div>
-                <FigmaAngledCta className={styles.readMore}>
-                  Read more
+                <FigmaAngledCta
+                  className={styles.readMore}
+                  href={editorial.cta.href || undefined}
+                >
+                  {editorial.cta.text || "Read more"}
                 </FigmaAngledCta>
               </article>
             ))}
@@ -153,7 +207,7 @@ export default function ThoughtsLeadership({
         aria-label="Thought leadership categories"
       >
         <section className={styles.categories}>
-          {categories.map((category) => {
+          {displayedCategories.map((category) => {
             const isOpen = openCategory === category.id;
             const panelId = `${category.id}-panel`;
 
@@ -185,18 +239,23 @@ export default function ThoughtsLeadership({
             className={styles.sidebarCtaBtn}
             onClick={() => setIsDebriefOpen(true)}
           >
-            Request a Technical Debrief
+            {mainPage?.cta?.[0]?.text ?? "Request a Technical Debrief"}
           </FigmaAngledCta>
           <FigmaAngledCta
             className={styles.sidebarCtaBtn}
             onClick={() => setIsConsultationOpen(true)}
           >
-            Book a Discovery Consultation
+            {mainPage?.cta?.[1]?.text ?? "Book a Discovery Consultation"}
           </FigmaAngledCta>
         </div>
       </aside>
       <p className={styles.statement}>
-        We Don’t Just Build <em>Systems.</em> We Build <em>Perspectives.</em>
+        {mainPage?.quote?.text ?? (
+          <>
+            We Don’t Just Build <em>Systems.</em> We Build{" "}
+            <em>Perspectives.</em>
+          </>
+        )}
       </p>
 
       <TechnicalDebrief

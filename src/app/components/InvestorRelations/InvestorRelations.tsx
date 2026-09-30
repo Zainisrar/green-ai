@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useInvestorRelations } from "../../../hooks/useInvestorRelations";
 import D6Chatbot from "../D6Chatbot";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import SiteHeader from "../SiteHeader/SiteHeader";
@@ -12,6 +13,7 @@ import styles from "./InvestorRelations.module.css";
 import SubmitEOI from "./Modals/SubmitEOI";
 
 const FALLBACK = {
+  cta: [],
   title: "INVESTOR RELATIONS",
   subHeadline: "Invest in Resilience. Deliver Real Returns.",
   description: {
@@ -35,6 +37,7 @@ interface InvestorRelationsProps {
 export default function InvestorRelations({
   canvas = false,
 }: InvestorRelationsProps) {
+  const { data: investorRelationsData } = useInvestorRelations();
   const [openModal, setOpenModal] = useState<string | null>(null);
   const [isEoiOpen, setIsEoiOpen] = useState(false);
   const ctaLinks = {
@@ -56,7 +59,6 @@ export default function InvestorRelations({
         (term) => part.toLowerCase() === term.toLowerCase(),
       );
       return shouldHighlight ? (
-        // biome-ignore lint/suspicious/noArrayIndexKey: parts from string split
         <span key={index} className={styles.highlight}>
           {part}
         </span>
@@ -66,15 +68,20 @@ export default function InvestorRelations({
     });
   };
 
-  // Static data (design is fixed in Figma; keep API hook import available for
-  // future CMS wiring without changing the pixel geometry).
-  const d = FALLBACK;
+  const d = investorRelationsData?.mainPage ?? FALLBACK;
+  const titleWords = d.title.trim().split(/\s+/);
+  const titleAccent = titleWords.pop() ?? "";
+  const titlePrefix = titleWords.join(" ");
+  const investorPackCta = d.cta?.[0];
+  const expressionOfInterestCta = d.cta?.[1];
 
   const rows = [
     {
       key: "whyInvestGreen",
-      title: "Why Invest in GREEN?",
+      title:
+        investorRelationsData?.whyInvestGreen.title || "Why Invest in GREEN?",
       subtitle:
+        investorRelationsData?.whyInvestGreen.headline ||
         "Infrastructure without integrity is a risk. With GREEN, resilience is engineered.",
       image: "/images/investor-relations/card1.png",
       x: 291,
@@ -87,8 +94,12 @@ export default function InvestorRelations({
     },
     {
       key: "investmentFocusArea",
-      title: "Our Investment Focus Areas",
-      subtitle: "Financial models and IRR simulations available on request",
+      title:
+        investorRelationsData?.investmentFocusArea.title ||
+        "Our Investment Focus Areas",
+      subtitle:
+        investorRelationsData?.investmentFocusArea.headline ||
+        "Financial models and IRR simulations available on request",
       image: "/images/investor-relations/card2.png",
       x: 414,
       y: 448,
@@ -100,8 +111,12 @@ export default function InvestorRelations({
     },
     {
       key: "performanceSnapshots",
-      title: "Performance Snapshots",
-      subtitle: "Annual Reports and ESG Dashboards available",
+      title:
+        investorRelationsData?.performanceSnapshots.title ||
+        "Performance Snapshots",
+      subtitle:
+        investorRelationsData?.performanceSnapshots.headline ||
+        "Annual Reports and ESG Dashboards available",
       image: "/images/investor-relations/card3.png",
       x: 287,
       y: 577,
@@ -113,8 +128,12 @@ export default function InvestorRelations({
     },
     {
       key: "investmentInstruments",
-      title: "Investment Instruments Supported",
-      subtitle: "Pay-for-performance models (OPEX or carbon-linked)",
+      title:
+        investorRelationsData?.investmentInstruments.title ||
+        "Investment Instruments Supported",
+      subtitle:
+        investorRelationsData?.investmentInstruments.headline ||
+        "Pay-for-performance models (OPEX or carbon-linked)",
       image: "/images/investor-relations/card4.png",
       x: 397,
       y: 705,
@@ -144,7 +163,8 @@ export default function InvestorRelations({
         {/* Hero Section */}
         <div className={styles.mobileHero}>
           <h1 className={styles.mobileTitle}>
-            INVESTOR <span className={styles.greenText}>RELATIONS</span>
+            {titlePrefix}{" "}
+            <span className={styles.greenText}>{titleAccent}</span>
           </h1>
           <p className={styles.subHeadline}>{d.subHeadline}</p>
           <p className={styles.mobileDescription}>
@@ -196,8 +216,13 @@ export default function InvestorRelations({
 
         {/* CTAs */}
         <div className={styles.mobileCtas}>
-          <a href={ctaLinks.investorPack} className={styles.mobileCtaBtn}>
-            <span>Download Investor Pack (PDF)</span>
+          <a
+            href={investorPackCta?.href || ctaLinks.investorPack}
+            className={styles.mobileCtaBtn}
+          >
+            <span>
+              {investorPackCta?.text || "Download Investor Pack (PDF)"}
+            </span>
             <span aria-hidden="true">›</span>
           </a>
 
@@ -206,7 +231,10 @@ export default function InvestorRelations({
             className={styles.mobileCtaBtn}
             onClick={() => setIsEoiOpen(true)}
           >
-            <span>Submit an Expression of Interest (EOI)</span>
+            <span>
+              {expressionOfInterestCta?.text ||
+                "Submit an Expression of Interest (EOI)"}
+            </span>
             <span aria-hidden="true">›</span>
           </button>
         </div>
@@ -263,7 +291,7 @@ export default function InvestorRelations({
       {/* Header section */}
       <div className={styles.headerSection}>
         <h1 className={styles.mainTitle}>
-          INVESTOR <span className={styles.greenText}>RELATIONS</span>
+          {titlePrefix} <span className={styles.greenText}>{titleAccent}</span>
         </h1>
         <p className={styles.subHeadline}>{d.subHeadline}</p>
         <p className={styles.description}>
@@ -365,16 +393,16 @@ export default function InvestorRelations({
         className={styles.downloadCta}
         style={{ position: "absolute", left: 1569, top: 741 }}
         icon="download"
-        href={ctaLinks.investorPack}
+        href={investorPackCta?.href || ctaLinks.investorPack}
       >
-        Download Investor Pack (PDF)
+        {investorPackCta?.text || "Download Investor Pack (PDF)"}
       </FigmaAngledCta>
       <FigmaAngledCta
         className={styles.eoiCta}
         style={{ position: "absolute", left: 1541, top: 819 }}
         onClick={() => setIsEoiOpen(true)}
       >
-        Submit an Expression of Interest
+        {expressionOfInterestCta?.text || "Submit an Expression of Interest"}
       </FigmaAngledCta>
 
       {/* Chatbot */}

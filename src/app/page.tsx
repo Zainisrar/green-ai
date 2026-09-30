@@ -203,12 +203,8 @@ export default function HomePage() {
   const { data: insightsData } = useQuery({
     queryKey: queryKeys.insights(),
     queryFn: api.getInsights,
-    // These previously forced staleTime/gcTime to 0 with refetchOnMount, which
-    // meant every single return to the homepage re-fetched the insights feed
-    // from the CMS and blocked the carousel on a network round trip -- the
-    // cached copy was thrown away the moment the user navigated away.
-    // The shared defaults in lib/queryClient.ts (60s stale, 5min gc) are the
-    // right behaviour for marketing content that changes a few times a week.
+    staleTime: 0,
+    refetchOnMount: "always",
   });
 
   const cmsInsights =
@@ -247,14 +243,24 @@ export default function HomePage() {
             return `# Insight 0${id}`;
           };
 
-          // The CMS previously supplied exported Figma canvases as the image
-          // source for these four stories. Keep CMS links/data fresh, but use
-          // the clean Figma photo fills and responsive content layers instead.
+          // Preserve only layout offsets from the matching Figma slide. All
+          // visible content and media must come from the CMS so edits publish.
           const figmaSlide = FIGMA_SLIDES_BY_SLUG.get(slug);
           if (figmaSlide) {
             return {
               ...figmaSlide,
               id: item.id,
+              title: undefined,
+              headline: item.headline,
+              subheadline: item.subheadline,
+              highlighted: item.highlighted,
+              tag: getCategoryTag(item.id, item.headline),
+              description: item.description,
+              backgroundImage: item.bgImg || figmaSlide.backgroundImage,
+              keys: item.keys.map((key) => ({
+                icon: key.icon,
+                description: key.text,
+              })),
               cta: {
                 button1: item.cta1.text || figmaSlide.cta.button1,
                 link1: item.cta1.link || figmaSlide.cta.link1,

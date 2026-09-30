@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import SupplierModalFrame from "./SupplierModalFrame";
 import styles from "./SupplierDialogs.module.css";
 
@@ -39,7 +38,7 @@ export default function WhatWeLookFor({ isOpen, onClose }: Props) {
               <img
                 loading="lazy"
                 decoding="async"
-                src="/images/technology-innovation-alliances/modal_bolt.png"
+                src="/images/collaboration-innovation/bolt.png"
                 className={styles.lookForBolt}
                 alt=""
                 aria-hidden="true"
@@ -59,7 +58,7 @@ export default function WhatWeLookFor({ isOpen, onClose }: Props) {
               <img
                 loading="lazy"
                 decoding="async"
-                src="/images/technology-innovation-alliances/modal_bolt.png"
+                src="/images/collaboration-innovation/bolt.png"
                 className={styles.lookForBolt}
                 alt=""
                 aria-hidden="true"

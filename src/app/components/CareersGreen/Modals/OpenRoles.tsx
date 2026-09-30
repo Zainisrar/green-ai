@@ -27,7 +27,7 @@ export default function OpenRoles({ isOpen, onClose, data }: Props) {
       onClose={onClose}
       panelClassName={styles.rolesPanel}
     >
-      <h2 className={styles.heading}>Open Roles</h2>
+      <h2 className={styles.heading}>{data?.title || "Open Roles"}</h2>
       <div className={styles.rule} />
       <div className={styles.rolesGrid}>
         {roles.map((role) => (

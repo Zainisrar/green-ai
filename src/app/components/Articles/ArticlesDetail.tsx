@@ -25,7 +25,51 @@ const FALLBACK_ARTICLE = {
   cta: { href: "/enlighten/insights-articles", text: "Explore" },
 };
 
-const plainText = (content: string) => content.replace(/<[^>]*>/g, " ");
+const decodeCommonEntities = (content: string) =>
+  content.replace(
+    /&(nbsp|amp|quot|apos|lt|gt|#39|#x27);/gi,
+    (entity) =>
+      ({
+        "&nbsp;": " ",
+        "&amp;": "&",
+        "&quot;": '"',
+        "&apos;": "'",
+        "&lt;": "<",
+        "&gt;": ">",
+        "&#39;": "'",
+        "&#x27;": "'",
+      })[entity.toLowerCase()] ?? entity,
+  );
+
+const plainText = (content: string) =>
+  content
+    .replace(/<br\s*\/?\s*>/gi, "\n")
+    .replace(/<\/p>/gi, "\n")
+    .replace(/<[^>]*>/g, "")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&(amp|quot|apos|lt|gt|#39|#x27);/gi, (entity) =>
+      decodeCommonEntities(entity),
+    )
+    .replace(/[ \t]+\n/g, "\n")
+    .replace(/\n{2,}/g, "\n")
+    .trim();
+
+const parseArticleContent = (content: string) => {
+  const parts = content.split(/<h2[^>]*>([\s\S]*?)<\/h2>/gi);
+  const intro = plainText(parts[0] ?? "");
+  const sections = [] as Array<{ title: string; content: string }>;
+
+  for (let index = 1; index < parts.length; index += 2) {
+    const title = plainText(parts[index] ?? "");
+    const sectionContent = plainText(parts[index + 1] ?? "");
+
+    if (title && sectionContent) {
+      sections.push({ title, content: sectionContent });
+    }
+  }
+
+  return { intro, sections };
+};
 
 export default function ArticlesDetail({
   slug,
@@ -36,7 +80,15 @@ export default function ArticlesDetail({
   const currentArticle = isFigmaArticle
     ? FALLBACK_ARTICLE
     : (article ?? FALLBACK_ARTICLE);
-  const content = plainText(currentArticle.content).trim();
+  const parsedContent = parseArticleContent(currentArticle.content);
+  const leadContent = parsedContent.intro || plainText(currentArticle.content);
+  const bodySections =
+    parsedContent.sections.length > 0
+      ? parsedContent.sections
+      : [
+          { title: "Powering PNG's Health Sector", content: leadContent },
+          { title: "PImaga Health Center", content: leadContent },
+        ];
 
   const renderView = (isCanvas: boolean) => (
     <main
@@ -80,7 +132,7 @@ export default function ArticlesDetail({
 
         <section className={styles.lead}>
           <div className={styles.copy}>
-            <p>{content}</p>
+            <p>{leadContent}</p>
             <div className={styles.leadExploreWrapper}>
               <FigmaAngledCta
                 className={styles.explore}
@@ -99,36 +151,23 @@ export default function ArticlesDetail({
           />
         </section>
 
-        <section className={styles.body}>
-          <h2>Powering PNG&apos;s Health Sector</h2>
-          <div className={styles.bodyRow}>
-            <p>{content}</p>
-            <div className={styles.sectionExploreWrapper}>
-              <FigmaAngledCta
-                className={styles.sectionExplore}
-                href={currentArticle.cta.href}
-                size="sm"
-              >
-                Explore
-              </FigmaAngledCta>
+        {bodySections.map((section, index) => (
+          <section className={styles.body} key={`${section.title}-${index}`}>
+            <h2>{section.title}</h2>
+            <div className={styles.bodyRow}>
+              <p>{section.content}</p>
+              <div className={styles.sectionExploreWrapper}>
+                <FigmaAngledCta
+                  className={styles.sectionExplore}
+                  href={currentArticle.cta.href}
+                  size="sm"
+                >
+                  Explore
+                </FigmaAngledCta>
+              </div>
             </div>
-          </div>
-        </section>
-        <section className={styles.body}>
-          <h2>PImaga Health Center</h2>
-          <div className={styles.bodyRow}>
-            <p>{content}</p>
-            <div className={styles.sectionExploreWrapper}>
-              <FigmaAngledCta
-                className={styles.sectionExplore}
-                href={currentArticle.cta.href}
-                size="sm"
-              >
-                Explore
-              </FigmaAngledCta>
-            </div>
-          </div>
-        </section>
+          </section>
+        ))}
         <section className={styles.closing}>
           <p>
             Step into the minds of GREEN&apos;s engineers, innovators, and
@@ -168,4 +207,3 @@ export default function ArticlesDetail({
     />
   );
 }
-

@@ -16,7 +16,7 @@ interface FigmaAngledCtaProps
   style?: CSSProperties;
   showArrow?: boolean;
   arrowDirection?: "left" | "right";
-  icon?: "chevron" | "download";
+  icon?: "chevron" | "download" | "upload";
   size?: "sm" | "md" | "lg";
   href?: string;
   download?: string | boolean;
@@ -99,12 +99,38 @@ export default function FigmaAngledCta({
     </svg>
   );
 
+  const uploadSvg = (
+    <svg
+      className={styles.downloadIcon}
+      width={isSmall ? "14" : "18"}
+      height={isSmall ? "14" : "18"}
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M9 13V3M5 7L9 3L13 7M3 12V16H15V12"
+        stroke="currentColor"
+        strokeWidth={isSmall ? "1.5" : "1.8"}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+
   const content = (
     <span
       className={`${styles.inner} ${isSmall ? styles.innerSmall : ""}`.trim()}
     >
       <span className={styles.label}>{children}</span>
-      {showArrow ? (icon === "download" ? downloadSvg : chevronSvg) : null}
+      {showArrow
+        ? icon === "download"
+          ? downloadSvg
+          : icon === "upload"
+            ? uploadSvg
+            : chevronSvg
+        : null}
     </span>
   );
 
@@ -118,7 +144,7 @@ export default function FigmaAngledCta({
     ...props.style,
   };
 
-  const rootClassName = `${styles.cta} ${isSmall ? styles.ctaSmall : ""} ${className}`.trim();
+  const rootClassName = `${styles.cta} ${isSmall ? styles.ctaSmall : ""} ${isExplore ? styles.exploreCta : ""} ${className}`.trim();
 
   if (href) {
     const { type: _type, style: _style, ...anchorProps } =

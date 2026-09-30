@@ -58,17 +58,23 @@ export default function Articles({ canvas = false }: ArticlesProps) {
   const { data: apiArticles } = useInsightsArticles();
 
   const articles = useMemo<ArticleCard[]>(() => {
-    // The Figma overview is a curated editorial layout, not a live feed.
-    if (canvas || !apiArticles?.length) return fallbackArticles;
+    if (!apiArticles?.length) return fallbackArticles;
 
-    return apiArticles.map((article) => ({
+    const cmsArticles = apiArticles.map((article) => ({
       id: article.id,
       title: article.title,
       description: article.description,
       img: article.featuredImg.src,
       href: article.cta.href || `/enlighten/insights-articles/${article.slug}`,
     }));
-  }, [apiArticles, canvas]);
+
+    // The Figma canvas is a three-card grid. When CMS has fewer than three
+    // articles, repeat the available CMS records so the grid remains intact.
+    return Array.from({ length: Math.max(3, cmsArticles.length) }, (_, index) => ({
+      ...cmsArticles[index % cmsArticles.length],
+      id: cmsArticles[index % cmsArticles.length].id * 1000 + index,
+    }));
+  }, [apiArticles]);
 
   return (
     <main
@@ -138,11 +144,13 @@ export default function Articles({ canvas = false }: ArticlesProps) {
           <h2>
             Step into the minds of GREEN&apos;s engineers, innovators, and
             on-ground teams.
+            <br />
+            This is where ideas are not just imagined —{" "}
+            <span className={styles.greenPhrase}>
+              they&apos;re shaped by experience, tested in PNG terrain, and
+              shared to push the industry forward.
+            </span>
           </h2>
-          <p>
-            — they&apos;re shaped by experience, tested in PNG terrain, and
-            shared to push the industry forward.
-          </p>
         </section>
 
         <div className={styles.contribute}>
@@ -161,9 +169,9 @@ export default function Articles({ canvas = false }: ArticlesProps) {
           triggerVariant="figmaCanvas"
           triggerClassName={styles.chatTrigger}
           triggerStyle={{
-            top: 1788,
+            top: "auto",
             right: "auto",
-            bottom: "auto",
+            bottom: 146,
             left: 1498,
             width: 418,
           }}

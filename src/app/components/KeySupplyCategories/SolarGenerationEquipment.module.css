@@ -16,8 +16,6 @@
   font-size: 30px;
   font-weight: 800;
   line-height: normal;
-  transform: skewX(-6deg);
-  transform-origin: left center;
 }
 
 .compactTitle {
@@ -37,7 +35,7 @@
 .headings {
   position: absolute;
   top: 167px;
-  left: 306.5px;
+  left: 300px;
   display: grid;
   grid-template-columns: 384.168px minmax(0, 1fr);
   width: 1000px;
@@ -49,8 +47,6 @@
   font-size: 26px;
   font-weight: 800;
   line-height: normal;
-  transform: skewX(-6deg);
-  transform-origin: left center;
 }
 
 .rows {
@@ -63,16 +59,16 @@
 .row {
   display: grid;
   grid-template-columns: 490.25px minmax(0, 1fr);
-  min-height: 101px;
+  min-height: 135px;
 }
 
 /* Each Figma row follows the diagonal of the Vector 7376 dialog frame. */
 .row:nth-child(2) {
-  margin-left: -40px;
+  margin-left: -64px;
 }
 
 .row:nth-child(3) {
-  margin-left: -80px;
+  margin-left: -101px;
 }
 
 .component,
@@ -80,14 +76,12 @@
   margin: 0;
   font-size: 22px;
   line-height: 35px;
-  font-style: italic;
-  transform: skewX(-6deg);
-  transform-origin: left center;
+  font-style: normal;
 }
 
 .component {
   align-self: start;
-  padding-left: 175px;
+  padding-left: 79px;
   font-weight: 700;
 }
 

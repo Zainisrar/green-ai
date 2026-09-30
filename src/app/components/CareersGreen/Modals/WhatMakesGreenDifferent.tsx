@@ -22,14 +22,18 @@ export default function WhatMakesGreenDifferent({
   onClose,
   data,
 }: Props) {
-  const points = fallback.map(([text1, text2]) => ({ text1, text2 }));
+  const points = data?.keyPoints?.length
+    ? data.keyPoints
+    : fallback.map(([text1, text2]) => ({ text1, text2 }));
   return (
     <CareersModalShell
       isOpen={isOpen}
       onClose={onClose}
       panelClassName={styles.differentPanel}
     >
-      <h2 className={styles.heading}>What Makes GREEN Different</h2>
+      <h2 className={styles.heading}>
+        {data?.title || "What Makes GREEN Different"}
+      </h2>
       <div className={styles.rule} />
       <div className={styles.differentContent}>
         <div className={styles.points}>

@@ -591,6 +591,7 @@ export interface SustainabilityESGSection {
   icon: SustainabilityESGIcon;
   points: string[];
   heading: string;
+  intro?: string;
 }
 
 export interface SustainabilityESGQuote {

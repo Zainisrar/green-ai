@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useSolarEPCMServices } from "@/hooks/useSolarEPCMServices";
 import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import FigmaAngledCta from "../FigmaAngledCta/FigmaAngledCta";
 import D6Chatbot from "../D6Chatbot";
@@ -45,9 +46,30 @@ const features = [
 ];
 
 export default function EpcmServices() {
+  const { epcmData } = useSolarEPCMServices();
   const [isTechnicalDebriefOpen, setIsTechnicalDebriefOpen] = useState(false);
   const [isDiscoveryConsultationOpen, setIsDiscoveryConsultationOpen] =
     useState(false);
+
+  const cmsFeatures = epcmData?.services?.length
+    ? epcmData.services.map((service) => ({
+        name: service.heading,
+        points: service.points,
+      }))
+    : features;
+  const subtitle =
+    epcmData?.header?.subtitle ??
+    "Designed for Complexity. Delivered with Precision. Managed to Scale";
+  const description =
+    epcmData?.introduction?.text ??
+    "At GREEN, EPCM is not coordination — it’s control.\nWe transform technical ambition into clean energy infrastructure through a seamless, standards-driven delivery model.\nFrom feasibility to commissioning, we manage every milestone with zero compromise.";
+  const quote =
+    epcmData?.quote?.text ??
+    "We embed it — into every process, every panel, every kilowatt.";
+  const tagline =
+    epcmData?.tagline?.text ??
+    "You Don’t Engage GREEN to Oversee Solar. You Engage Us to Deliver It.";
+  const ctas = epcmData?.callToActions ?? [];
 
   const desktop = (
     <main className={styles.desktopPage} data-node-id="7077:6595">
@@ -83,20 +105,10 @@ export default function EpcmServices() {
         width="737"
         height="68"
       />
-      <p className={styles.subtitle}>
-        Designed for Complexity. Delivered with Precision. Managed to Scale
-      </p>
-      <p className={styles.description}>
-        At GREEN, EPCM is not coordination — it’s control.
-        <br />
-        We transform technical ambition into clean energy infrastructure through
-        a seamless, standards-driven delivery model.
-        <br />
-        From feasibility to commissioning, we manage every milestone with zero
-        compromise.
-      </p>
+      <p className={styles.subtitle}>{subtitle}</p>
+      <p className={styles.description}>{description}</p>
       <section className={styles.cards}>
-        {features.map((f, i) => (
+        {cmsFeatures.map((f, i) => (
           <div
             key={f.name}
             className={styles.card}
@@ -139,40 +151,34 @@ export default function EpcmServices() {
           height="173"
           style={{ top: -9, left: -2.75 }}
         />
-        <span>
-          We embed it — into every process, every panel, every kilowatt.
-        </span>
+        <span>{quote}</span>
       </blockquote>
       <div className={styles.actions}>
         <FigmaAngledCta
           icon="download"
           style={{ position: "absolute", top: 681, left: 1545, width: 375 }}
         >
-          Download EPCM Capabilities Brief
+          {ctas[0]?.text ?? "Download EPCM Capabilities Brief"}
         </FigmaAngledCta>
         <FigmaAngledCta
           className={styles.sidebarCtaBtn}
           style={{ position: "absolute", top: 752, left: 1621, width: 299 }}
           onClick={() => setIsTechnicalDebriefOpen(true)}
         >
-          Request a Technical Debrief
+          {ctas[1]?.text ?? "Request a Technical Debrief"}
         </FigmaAngledCta>
         <FigmaAngledCta
           className={styles.sidebarCtaBtn}
           style={{ position: "absolute", top: 823, left: 1587, width: 329 }}
           onClick={() => setIsDiscoveryConsultationOpen(true)}
         >
-          Book a Discovery Consultation
+          {ctas[2]?.text ?? "Book a Discovery Consultation"}
         </FigmaAngledCta>
       </div>
       <a className={styles.readMore} href="#epcm-details">
         <span>Read more</span>
       </a>
-      <h2 className={styles.tagline}>
-        You Don’t Engage GREEN to Oversee Solar.
-        <br />
-        You Engage Us to Deliver It.
-      </h2>
+      <h2 className={styles.tagline}>{tagline}</h2>
       <D6Chatbot
         canvasAnchored
         triggerVariant="figmaCanvas"
@@ -195,19 +201,10 @@ export default function EpcmServices() {
         mobile={
           <main className={styles.mobilePage}>
             <SiteHeader layout="viewport" panel="logoOnly" />
-            <h1>Solar EPCM Services</h1>
-            <p className={styles.mobileSubtitle}>
-              Designed for Complexity. Delivered with Precision. Managed to
-              Scale.
-            </p>
-            <p className={styles.mobileDescription}>
-              At GREEN, EPCM is not coordination — it&apos;s control. We
-              transform technical ambition into clean energy infrastructure
-              through a seamless, standards-driven delivery model. From
-              feasibility to commissioning, we manage every milestone with zero
-              compromise.
-            </p>
-            {features.map((f) => (
+            <h1>{epcmData?.header?.title ?? "Solar EPCM Services"}</h1>
+            <p className={styles.mobileSubtitle}>{subtitle}</p>
+            <p className={styles.mobileDescription}>{description}</p>
+            {cmsFeatures.map((f) => (
               <section key={f.name}>
                 <h2>{f.name}</h2>
                 <ul>
@@ -217,20 +214,17 @@ export default function EpcmServices() {
                 </ul>
               </section>
             ))}
-            <blockquote className={styles.mobileQuote}>
-              We embed it — into every process, every panel, every kilowatt.
-            </blockquote>
-            <p className={styles.mobileTagline}>
-              You Don&apos;t Engage GREEN to Oversee Solar.{" "}
-              <strong>You Engage Us to Deliver It.</strong>
-            </p>
+            <blockquote className={styles.mobileQuote}>{quote}</blockquote>
+            <p className={styles.mobileTagline}>{tagline}</p>
             <div className={styles.mobileActions}>
               <a
                 href="#download-epcm-brief"
                 className={styles.mobileDownloadBtn}
                 download
               >
-                <span>Download EPCM Capabilities Brief</span>
+                <span>
+                  {ctas[0]?.text ?? "Download EPCM Capabilities Brief"}
+                </span>
                 <img
                   loading="lazy"
                   decoding="async"
@@ -243,13 +237,13 @@ export default function EpcmServices() {
                 type="button"
                 onClick={() => setIsTechnicalDebriefOpen(true)}
               >
-                Request a Technical Debrief
+                {ctas[1]?.text ?? "Request a Technical Debrief"}
               </button>
               <button
                 type="button"
                 onClick={() => setIsDiscoveryConsultationOpen(true)}
               >
-                Book a Discovery Consultation
+                {ctas[2]?.text ?? "Book a Discovery Consultation"}
               </button>
             </div>
             <D6Chatbot />

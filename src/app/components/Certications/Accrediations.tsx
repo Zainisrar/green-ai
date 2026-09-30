@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useCertificationsAccreditations } from "../../../hooks/useCertificationsAccreditations";
+import { resolveApiAssetUrl } from "../../lib/media";
 import D6Chatbot from "../D6Chatbot";
 import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
@@ -61,10 +62,24 @@ export default function Accrediations() {
   const title = certificationsData?.title || "Certifications & Accreditations";
   const [titleStart = "Certifications", titleEnd = "Accreditations"] =
     title.split(" & ");
-  const certificates = FALLBACK_CERTIFICATES.map((fallback, index) => ({
-    ...fallback,
-    ...certificationsData?.isoSection?.certificates?.[index],
-  }));
+  const certificateImages = certificationsData?.isoSection
+    ? [
+        certificationsData.isoSection.certificate1,
+        certificationsData.isoSection.certificate2,
+        certificationsData.isoSection.certificate3,
+        certificationsData.isoSection.certificate4,
+      ]
+    : [];
+  const certificates = certificationsData?.isoSection?.certificates?.length
+    ? certificationsData.isoSection.certificates.map((certificate, index) => ({
+        ...certificate,
+        image:
+          resolveApiAssetUrl(certificateImages[index]?.src) ||
+          FALLBACK_CERTIFICATES[index]?.image ||
+          "",
+        nodeId: FALLBACK_CERTIFICATES[index]?.nodeId || "",
+      }))
+    : FALLBACK_CERTIFICATES;
   const esgPoints = certificationsData?.esgSection?.points?.length
     ? certificationsData.esgSection.points
     : FALLBACK_ESG_POINTS;

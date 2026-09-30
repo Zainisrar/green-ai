@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import ClientInfoModal from "@/app/components/ClientPartnerships/Dialog/ClientInfoModal";
 import styles from "./PartnerWithUsDialogs.module.css";
 
@@ -25,8 +24,15 @@ const channels = [
 
 const ApplicationChannels = ({ isOpen, onClose }: Props) => {
   return (
-    <ClientInfoModal isOpen={isOpen} onClose={onClose} height={570}>
-      <div className={styles.dialogContainer}>
+    <ClientInfoModal
+      isOpen={isOpen}
+      onClose={onClose}
+      height={700}
+      closeRight={38}
+      closeTop={15}
+      geometry="partnerWithUsChannels"
+    >
+      <div className={`${styles.dialogContainer} ${styles.channelsDialog}`}>
         <header className={styles.dialogHeader}>
           <h2 className={styles.dialogTitle}>Abortion Channels Active Coll</h2>
           <p className={styles.dialogSubtitle}>

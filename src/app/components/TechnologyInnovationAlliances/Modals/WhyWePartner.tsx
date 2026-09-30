@@ -1,11 +1,13 @@
 "use client";
 
 import React from "react";
+import type { TIAModal } from "@/app/hooks/useTechnologyInnovationAlliances";
 import TechInfoModal, { BulletItem } from "./TechInfoModal";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
+  data?: TIAModal;
 }
 
 const BULLETS: BulletItem[] = [
@@ -16,19 +18,33 @@ const BULLETS: BulletItem[] = [
   { text: "Advanced manufacturing or material innovations" },
 ];
 
-export default function WhyWePartner({ isOpen, onClose }: Props) {
+export default function WhyWePartner({ isOpen, onClose, data }: Props) {
+  const bullets =
+    data?.keys?.map((key) => ({
+      text: key.text,
+      highlight: key.highlighted,
+    })) ?? BULLETS;
   return (
     <TechInfoModal
       isOpen={isOpen}
       onClose={onClose}
-      title="Why We Partner"
-      titleDash="- We believe that no single player has all the answers. That's why GREEN seeks out:"
-      subtitle="We co-create value with clients through a model that emphasizes"
+      title={data?.title ?? "Why We Partner"}
+      titleDash={`- ${data?.subHeadline ?? "We believe that no single player has all the answers. That's why GREEN seeks out:"}`}
+      subtitle={
+        data?.description ??
+        "We co-create value with clients through a model that emphasizes"
+      }
       imageSide="right"
-      imageSrc="/images/technology-innovation-alliances/modal_why_we_partner.png"
-      imageAlt="Why We Partner"
-      bullets={BULLETS}
-      quote="“Our goal : Build a future-proof ecosystem that outperforms today’s limitations.”"
+      imageSrc={
+        data?.img?.src ??
+        "/images/technology-innovation-alliances/modal_why_we_partner.png"
+      }
+      imageAlt={data?.img?.alt ?? "Why We Partner"}
+      bullets={bullets}
+      quote={
+        data?.quote?.text ??
+        "“Our goal : Build a future-proof ecosystem that outperforms today’s limitations.”"
+      }
     />
   );
 }

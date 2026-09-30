@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
+import BecomeASupplierFigma from "@/app/components/BecomeASupplier/BecomeASupplierFigma";
 
 export default function BecomeASupplierPage() {
-  redirect("/ecosystem/become-a-supplier");
+  return <BecomeASupplierFigma />;
 }

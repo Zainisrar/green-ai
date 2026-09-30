@@ -71,6 +71,11 @@ export default function WhyInvestGreen({
       headline={headline}
       quoteText={quoteText}
       quoteHighlight={quoteHighlight}
+      contentClassName={styles.whyInvestContent}
+      bodyClassName={styles.whyInvestBody}
+      dividerClassName={styles.whyInvestDivider}
+      quoteContainerClassName={styles.whyInvestQuoteContainer}
+      quoteTextClassName={styles.whyInvestQuoteText}
     >
       <div className={styles.grid}>
         {items.map((item) => (
