@@ -294,9 +294,18 @@
   width: 100%;
   height: 154px;
   padding: 10px 12px 10px 14px;
-  background: #ffffff;
-  border: 2px solid #23b14d;
-  border-image: linear-gradient(135deg, rgba(35, 177, 77, 0.95) 0%, rgba(255, 255, 80, 0.8) 100%) 2;
+  /* Figma 7077:5502 uses a white card fill with a 50% green-to-yellow 2px
+     outer stroke. A layered background retains the stroke on all four edges;
+     border-image leaves uneven corners. */
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(
+        90deg,
+        rgba(35, 177, 77, 0.5) 0%,
+        rgba(255, 254, 80, 0.5) 100%
+      )
+      border-box;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
