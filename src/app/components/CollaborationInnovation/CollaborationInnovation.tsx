@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import React, { useState } from "react";
 import { useCollaborationInnovation } from "@/hooks/useCollaborationInnovation";
 import D6Chatbot from "../D6Chatbot";
@@ -136,6 +135,21 @@ export default function CollaborationInnovation({
       </React.Fragment>
     ));
 
+  const renderTitle = (title: string) => {
+    const upper = title.toUpperCase();
+    if (upper.includes("INNOVATION")) {
+      const parts = upper.split("INNOVATION");
+      return (
+        <>
+          {parts[0]}
+          <span className={styles.titleGreen}>INNOVATION</span>
+          {parts.slice(1).join("INNOVATION")}
+        </>
+      );
+    }
+    return upper;
+  };
+
   return (
     <main
       className={`${styles.page} ${canvas ? styles.canvasPage : ""}`}
@@ -160,8 +174,9 @@ export default function CollaborationInnovation({
 
         {/* Header section */}
         <div className={styles.headerBlock}>
-          <h1 className={styles.mainTitle}>{d.title}</h1>
+          <h1 className={styles.mainTitle}>{renderTitle(d.title)}</h1>
           <p className={styles.subHeadline}>{d.subHeadline}</p>
+
           <p className={styles.description}>
             {highlightText(
               d.description.text.replace(/\r?\n/g, " "),
@@ -328,8 +343,9 @@ export default function CollaborationInnovation({
       {/* ── MOBILE RESPONSIVE LAYOUT (< 1024px) ── */}
       <div className={styles.mobileLayout}>
         <div className={styles.mobileHero}>
-          <h1 className={styles.mobileTitle}>{d.title}</h1>
+          <h1 className={styles.mobileTitle}>{renderTitle(d.title)}</h1>
           <p className={styles.mobileSubtitle}>{d.subHeadline}</p>
+
           <p className={styles.mobileDescription}>
             {highlightText(
               d.description.text.replace(/\r?\n/g, " "),
@@ -374,12 +390,11 @@ export default function CollaborationInnovation({
           {d.cards.map((card) => (
             <div key={card.key} className={styles.mobileCard}>
               <h3 className={styles.mobileCardTitle}>{card.title}</h3>
-              <div
+              <button
+                type="button"
                 className={styles.mobileCardImage}
                 onClick={() => setOpenModal(card.key)}
-                onKeyDown={(e) => e.key === "Enter" && setOpenModal(card.key)}
-                role="button"
-                tabIndex={0}
+                aria-label={`Open ${card.title} popup`}
               >
                 <img
                   loading="lazy"
@@ -387,7 +402,7 @@ export default function CollaborationInnovation({
                   src={card.image}
                   alt={card.title}
                 />
-              </div>
+              </button>
               <p className={styles.mobileCardSubtitle}>
                 {splitLines(card.subtitle)}
               </p>
@@ -416,16 +431,21 @@ export default function CollaborationInnovation({
             className={styles.mobileSubmitCta}
             onClick={() => setIsProposalOpen(true)}
           >
-            Submit Proposal / Collaboration Inquiry
+            {data?.mainPage?.cta?.[0]?.text ??
+              "Submit Proposal / Collaboration Inquiry"}
           </FigmaAngledCta>
           <FigmaAngledCta
             className={styles.mobileFrameworkCta}
             icon="download"
-            href="/green-innovation-partnership-framework.pdf"
+            href={
+              data?.mainPage?.cta?.[1]?.href ||
+              "/green-innovation-partnership-framework.pdf"
+            }
             target="_blank"
             rel="noopener noreferrer"
           >
-            GREEN Innovation Partnership Framework (PDF)
+            {data?.mainPage?.cta?.[1]?.text ??
+              "GREEN Innovation Partnership Framework (PDF)"}
           </FigmaAngledCta>
         </div>
 

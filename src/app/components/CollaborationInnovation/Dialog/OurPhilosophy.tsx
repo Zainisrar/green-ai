@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import type React from "react";
 import ClientInfoModal from "@/app/components/ClientPartnerships/Dialog/ClientInfoModal";
 import type { CollaborationInnovationOurPhilosophy } from "../../../lib/api";
 import styles from "./CollaborationDialogs.module.css";
@@ -33,6 +33,29 @@ const OurPhilosophy = ({ isOpen, onClose, data }: Props) => {
     data?.description?.text ??
     "GREEN’s innovation model is built on trust, experimentation, and field-tested ingenuity. We pursue partnerships that yield measurable results — not just prototypes or press releases.";
 
+  const renderDescription = (text: string, highlight?: string) => {
+    const target = (highlight || "GREEN’s").trim();
+    const pattern = target.replace(/['’]/g, "['’]");
+    const regex = new RegExp(`(${pattern}|GREEN[’']?s?|GREEN)`, "i");
+    const parts = text.split(regex);
+    return parts.map((part, idx) => {
+      const lower = part.toLowerCase();
+      if (
+        lower === target.toLowerCase() ||
+        lower === "green's" ||
+        lower === "green’s" ||
+        lower === "green"
+      ) {
+        return (
+          <span key={idx} className={styles.philosophyGreen}>
+            {part}
+          </span>
+        );
+      }
+      return part;
+    });
+  };
+
   return (
     <ClientInfoModal isOpen={isOpen} onClose={onClose}>
       <div className={styles.philosophyWrapper}>
@@ -41,7 +64,9 @@ const OurPhilosophy = ({ isOpen, onClose, data }: Props) => {
           <p className={styles.dialogSubtitle}>- {subHeadline}</p>
         </header>
 
-        <p className={styles.philosophyIntro}>{description}</p>
+        <p className={styles.philosophyIntro}>
+          {renderDescription(description, data?.description?.highlighted)}
+        </p>
 
         <div className={styles.philosophyBody}>
           <div className={styles.philosophyList}>
@@ -59,8 +84,8 @@ const OurPhilosophy = ({ isOpen, onClose, data }: Props) => {
                   <Image
                     src="/images/collaboration-innovation/bolt.png"
                     alt=""
-                    width={28}
-                    height={28}
+                    width={42}
+                    height={50}
                     className={styles.boltIcon}
                     aria-hidden="true"
                   />

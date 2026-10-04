@@ -84,7 +84,9 @@ export default function Solves({ isOpen, onClose, data }: Props) {
   ) : (
     <>
       <span className={styles.greenHighlight}>GRID-INTEL™</span> turns
-      distributed power systems into orchestrated, intelligent infrastructure.
+      distributed power systems into orchestrated,
+      <br />
+      intelligent infrastructure.
     </>
   );
 
@@ -112,8 +114,8 @@ export default function Solves({ isOpen, onClose, data }: Props) {
                 className={styles.boltIcon}
                 loading="lazy"
                 decoding="async"
-                width={36}
-                height={36}
+                width={56}
+                height={56}
               />
               <p className={styles.solvesBulletText}>{row.col1}</p>
             </div>
@@ -125,8 +127,8 @@ export default function Solves({ isOpen, onClose, data }: Props) {
                 className={styles.boltIcon}
                 loading="lazy"
                 decoding="async"
-                width={36}
-                height={36}
+                width={56}
+                height={56}
               />
               <p className={styles.solvesBulletText}>{row.col2}</p>
             </div>

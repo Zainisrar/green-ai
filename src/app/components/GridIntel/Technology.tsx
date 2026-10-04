@@ -78,9 +78,10 @@ export default function Technology({ isOpen, onClose, data }: Props) {
                   className={styles.boltIcon}
                   loading="lazy"
                   decoding="async"
-                  width={36}
-                  height={36}
+                  width={57}
+                  height={57}
                 />
+
                 <p className={styles.techBulletText}>{text}</p>
               </div>
             ))}

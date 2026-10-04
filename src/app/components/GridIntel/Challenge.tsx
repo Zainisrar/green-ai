@@ -89,8 +89,8 @@ export default function Challenge({ isOpen, onClose, data }: Props) {
                   className={styles.boltIcon}
                   loading="lazy"
                   decoding="async"
-                  width={36}
-                  height={36}
+                  width={70}
+                  height={70}
                 />
                 <p className={styles.challengeBulletText}>{text}</p>
               </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React from "react";
+import type React from "react";
 import ClientInfoModal from "@/app/components/ClientPartnerships/Dialog/ClientInfoModal";
 import type { CollaborationInnovationSpotlight } from "../../../lib/api";
 import styles from "./CollaborationDialogs.module.css";
@@ -41,7 +41,7 @@ const InnovationSpotlight = ({ isOpen, onClose, data }: Props) => {
           <h2 className={styles.dialogTitle}>{title}</h2>
         </header>
 
-        <div className={styles.spotlightWrapper}>
+        <div className={styles.spotlightList}>
           {keys.map((k, idx) => {
             const offsets = [0, -55, -110];
             const offset = offsets[idx] ?? -idx * 55;

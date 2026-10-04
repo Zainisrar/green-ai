@@ -77,9 +77,15 @@
   transition: transform 0.2s ease;
 }
 
+.philosophyGreen {
+  color: #23b14d;
+  font-weight: 700;
+  font-style: italic;
+}
+
 .boltIcon {
-  width: 28px;
-  height: 28px;
+  width: 42px;
+  height: 50px;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -164,6 +170,9 @@
 .spotlightWrapper {
   width: 100%;
   max-width: 1255px;
+}
+
+.spotlightList {
   display: flex;
   flex-direction: column;
   gap: 26px;
@@ -239,6 +248,11 @@
     transform: none;
   }
 
+  .boltIcon {
+    width: 32px;
+    height: 40px;
+  }
+
   .philosophyText {
     font-size: 15px;
   }
@@ -274,7 +288,7 @@
     font-size: 15px;
   }
 
-  .spotlightWrapper {
+  .spotlightList {
     gap: 18px;
     margin-top: 6px;
   }

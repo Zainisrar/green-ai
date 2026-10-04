@@ -90,17 +90,15 @@
 .header {
   position: absolute;
   left: 351px;
-  top: 70px;
+  top: 55px;
   max-width: 1255px;
   z-index: 2;
 }
 
-.titleRow {
+.titleColumn {
   display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 8px 14px;
-  max-width: 1255px;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .mainTitle {
@@ -110,11 +108,24 @@
   font-weight: 800;
   color: #000000;
   letter-spacing: -0.3px;
-  white-space: nowrap;
-  flex-shrink: 0;
+  line-height: 1.2;
 }
 
-.titleDash {
+.subtitleRow {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.subtitleDash {
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  line-height: 1.35;
+}
+
+.subtitleText {
   margin: 0;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 24px;
@@ -150,8 +161,8 @@
 .footerArea {
   position: absolute;
   left: 279px;
-  bottom: 40px;
-  width: 1200px;
+  bottom: 35px;
+  max-width: 850px;
   z-index: 2;
 }
 
@@ -212,7 +223,8 @@
     white-space: normal;
   }
 
-  .titleDash {
+  .subtitleDash,
+  .subtitleText {
     font-size: 16px;
   }
 

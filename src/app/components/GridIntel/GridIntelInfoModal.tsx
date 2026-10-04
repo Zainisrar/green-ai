@@ -1,14 +1,16 @@
 "use client";
 
-import React, { useEffect, useId, useRef, useState } from "react";
+import type React from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import styles from "./GridIntelInfoModal.module.css";
 
 interface GridIntelInfoModalProps {
   isOpen: boolean;
   onClose: () => void;
-  title?: string;
+  title?: React.ReactNode;
   subtitle?: string;
+  hideDivider?: boolean;
   footerQuote?: React.ReactNode;
   footer?: React.ReactNode;
   children: React.ReactNode;
@@ -20,6 +22,7 @@ export default function GridIntelInfoModal({
   onClose,
   title,
   subtitle,
+  hideDivider = false,
   footerQuote,
   footer,
   children,
@@ -152,7 +155,9 @@ export default function GridIntelInfoModal({
         className={`${styles.stage} ${className}`}
         role="dialog"
         aria-modal="true"
-        aria-label={title || "GRID-INTEL Information"}
+        aria-label={
+          typeof title === "string" ? title : "GRID-INTEL Information"
+        }
         style={{ "--modal-scale": scale } as React.CSSProperties}
       >
         <div className={styles.modal}>
@@ -209,22 +214,23 @@ export default function GridIntelInfoModal({
 
           {title && (
             <header className={styles.header}>
-              <div className={styles.titleRow}>
+              <div className={styles.titleColumn}>
                 <h2 className={styles.mainTitle}>{title}</h2>
                 {subtitle && (
-                  <span className={styles.titleDash}>
-                    {subtitle.startsWith("-") || subtitle.startsWith("—") ? (
-                      subtitle
-                    ) : (
-                      `- ${subtitle}`
-                    )}
-                  </span>
+                  <div className={styles.subtitleRow}>
+                    <span className={styles.subtitleDash}>-</span>
+                    <span className={styles.subtitleText}>
+                      {subtitle.replace(/^[-—]\s*/, "")}
+                    </span>
+                  </div>
                 )}
               </div>
             </header>
           )}
 
-          <div className={styles.divider} aria-hidden="true" />
+          {!hideDivider && (
+            <div className={styles.divider} aria-hidden="true" />
+          )}
 
           <div className={styles.bodyArea}>{children}</div>
 

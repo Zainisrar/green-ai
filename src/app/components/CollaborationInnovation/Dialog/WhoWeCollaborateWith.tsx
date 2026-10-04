@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import type React from "react";
 import ClientInfoModal from "@/app/components/ClientPartnerships/Dialog/ClientInfoModal";
 import type { CollaborationInnovationWhoWeCelebrateWith } from "../../../lib/api";
 import styles from "./CollaborationDialogs.module.css";

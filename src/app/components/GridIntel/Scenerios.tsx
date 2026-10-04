@@ -58,8 +58,10 @@ export default function Scenerios({ isOpen, onClose, data }: Props) {
     </>
   ) : (
     <>
-      <span className={styles.greenHighlight}>GRID-INTEL™</span> is deployed
-      where energy failure is unacceptable — and intelligence is essential.
+      <span className={styles.greenHighlight}>GRID-INTEL™</span> Is Deployed
+      Where Energy Failure Is Unacceptable —
+      <br />
+      And Intelligence Is Essential.
     </>
   );
 
@@ -87,13 +89,14 @@ export default function Scenerios({ isOpen, onClose, data }: Props) {
                 className={styles.boltIcon}
                 loading="lazy"
                 decoding="async"
-                width={36}
-                height={36}
+                width={57}
+                height={57}
               />
               <p className={styles.scenariosBulletText}>{text}</p>
             </div>
           ))}
         </div>
+
 
         <SlantedCardImage
           src={data?.image?.src}

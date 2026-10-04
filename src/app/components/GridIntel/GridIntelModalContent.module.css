@@ -25,11 +25,16 @@
 }
 
 .boltIcon {
-  width: 36px;
-  height: 36px;
+  width: 70.3px;
+  height: 70.3px;
   flex-shrink: 0;
   object-fit: contain;
-  transform: rotate(26.5deg);
+}
+
+/* Solves modal uses smaller bolt icons per Figma */
+.solvesCol .boltIcon {
+  width: 56.5px;
+  height: 56.5px;
 }
 
 .bulletText {
@@ -42,13 +47,18 @@
 .challengeLayout {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 350px;
   padding-left: 214px;
   display: flex;
-  align-items: flex-start;
-  gap: 40px;
-  padding-top: 10px;
+  align-items: flex-end;
+  gap: 16px;
   box-sizing: border-box;
+}
+
+.challengeLayout .slantedImageContainer {
+  width: 611px;
+  height: 241px;
+  margin: 0;
 }
 
 .challengeRight {
@@ -58,18 +68,22 @@
 }
 
 .challengeHeading {
-  margin: 0 0 20px;
+  margin: 0 0 14px;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 22px;
   font-weight: 600;
-  line-height: 1.36;
+  line-height: 1.3;
   color: #000000;
 }
 
 .challengeList {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 0;
+}
+
+.challengeList .bulletItem {
+  height: 58px;
 }
 
 .challengeBulletText {
@@ -79,6 +93,7 @@
   font-style: italic;
   color: #000000;
   margin: 0;
+  line-height: 1.25;
 }
 
 /* Solves Modal Layout */
@@ -89,8 +104,8 @@
   padding-left: 309px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
-  padding-top: 15px;
+  gap: 32px;
+  padding-top: 60px;
   box-sizing: border-box;
 }
 
@@ -102,9 +117,14 @@
 }
 
 .solvesCol {
-  width: 640px;
-  max-width: 640px;
+  display: flex;
+  align-items: center;
+  width: auto;
   flex-shrink: 0;
+}
+
+.solvesCol:first-child {
+  width: 640px;
 }
 
 .solvesBulletText {
@@ -113,87 +133,210 @@
   font-weight: 600;
   color: #000000;
   margin: 0;
+  white-space: nowrap;
 }
 
 /* Table Layout (Why Intel) */
+.greenTitleAccent {
+  color: #23b14d;
+}
+
 .tableContainer {
   position: relative;
   width: 100%;
   height: 100%;
-  padding-left: 230px;
-  padding-right: 60px;
-  padding-top: 6px;
   box-sizing: border-box;
+}
+
+/* Desktop Exact Figma Slanted Layout */
+.tableDesktopLayout {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.tableHeaderFeature {
+  position: absolute;
+  left: 333px;
+  top: 0px;
+  width: 184.4px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #23b14d;
+  text-align: left;
+}
+
+.tableHeaderGridIntel {
+  position: absolute;
+  left: 814px;
+  top: 0px;
+  width: 284.9px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #23b14d;
+  text-align: left;
+}
+
+.tableHeaderConventional {
+  position: absolute;
+  left: 1247px;
+  top: 0px;
+  width: 478.3px;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #23b14d;
+  text-align: left;
+}
+
+.predictiveLoadForecasting {
+  position: absolute;
+  left: 193px;
+  top: 56px;
+  width: 493.5px;
+  height: 381.6px;
+  font-size: 20px;
+  line-height: 60px;
+  font-weight: 600;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  color: #000000;
+  white-space: pre-wrap;
+  text-align: left;
+  display: inline-block;
+}
+
+.integratedMultiInputRealTi {
+  position: absolute;
+  left: 686px;
+  top: 56px;
+  width: 480.8px;
+  height: 534.2px;
+  font-size: 20px;
+  line-height: 60px;
+  font-weight: 600;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  color: #000000;
+  white-space: pre-wrap;
+  text-align: left;
+  display: inline-block;
+}
+
+.notAvailableManual {
+  position: absolute;
+  left: 1134px;
+  top: 56px;
+  width: 380.3px;
+  height: 534.2px;
+  font-size: 20px;
+  line-height: 60px;
+  font-weight: 600;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  color: #000000;
+  white-space: pre-wrap;
+  text-align: left;
+  display: inline-block;
+}
+
+/* Mobile Table Layout */
+.tableMobileLayout {
+  display: none;
 }
 
 .tableHeaderRow {
   display: flex;
   align-items: center;
-  gap: 40px;
-  margin-bottom: 20px;
-  transform: translateX(100px);
+  gap: 60px;
+  margin-bottom: 36px;
 }
 
 .tableHeaderCol1 {
-  width: 380px;
+  width: 420px;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 800;
   color: #23b14d;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tableHeaderCol2 {
-  width: 420px;
+  width: 460px;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 800;
   color: #23b14d;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tableHeaderCol3 {
-  width: 420px;
+  width: 460px;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 800;
   color: #23b14d;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tableBody {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 28px;
 }
 
 .tableRow {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 60px;
   transition: transform 0.2s ease;
 }
 
 .tableCellCol1 {
-  width: 380px;
+  width: 420px;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 20px;
   font-weight: 600;
   color: #000000;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tableCellCol2 {
-  width: 420px;
+  width: 460px;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 20px;
   font-weight: 600;
   color: #000000;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tableCellCol3 {
-  width: 420px;
+  width: 460px;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 20px;
   font-weight: 600;
   color: #000000;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 
 /* Scenarios Modal Layout */
 .scenariosLayout {
@@ -204,54 +347,83 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 71px;
-  padding-top: 25px;
+  padding-top: 33px;
   box-sizing: border-box;
 }
 
 .scenariosLeft {
-  width: 670px;
-  max-width: 670px;
+  width: 741px;
+  max-width: 741px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  gap: 8.5px;
+}
+
+.scenariosLeft .bulletItem {
+  height: 56.5px;
+  display: flex;
+  align-items: center;
   gap: 16px;
+}
+
+.scenariosLayout .boltIcon {
+  width: 56.5px;
+  height: 56.5px;
+  flex-shrink: 0;
+  object-fit: contain;
 }
 
 .scenariosBulletText {
   font-family: var(--font-montserrat), Montserrat, sans-serif;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: 500;
   color: #000000;
   margin: 0;
-  line-height: 1.35;
+  line-height: 20px;
+  white-space: nowrap;
 }
+
+.scenariosLayout .slantedImageContainer {
+  width: 620px;
+  height: 245px;
+  margin-top: 30px;
+}
+
 
 /* Technology Stack Layout */
 .techLayout {
   position: relative;
   width: 100%;
   height: 100%;
-  padding-left: 214px;
+  padding-left: 197px;
   display: flex;
   align-items: flex-start;
-  gap: 45px;
-  padding-top: 10px;
+  gap: 72px;
+  padding-top: 3px;
   box-sizing: border-box;
 }
 
+.techLayout .slantedImageContainer {
+  width: 620px;
+  height: 245px;
+  margin-top: 82px;
+  flex-shrink: 0;
+}
+
 .techRight {
-  width: 680px;
-  max-width: 680px;
+  width: 800px;
+  max-width: 800px;
   flex-shrink: 0;
 }
 
 .techSubheading {
-  margin: 0 0 16px;
+  margin: 0 0 14px 0;
   font-family: var(--font-montserrat), Montserrat, sans-serif;
   font-size: 22px;
   font-weight: 700;
   color: #000000;
+  line-height: 1.2;
 }
 
 .techSubheadingGreen {
@@ -261,17 +433,33 @@
 .techList {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 4px;
+}
+
+.techList .bulletItem {
+  height: 56.5px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.techLayout .boltIcon {
+  width: 56.5px;
+  height: 56.5px;
+  flex-shrink: 0;
+  object-fit: contain;
 }
 
 .techBulletText {
   font-family: var(--font-montserrat), Montserrat, sans-serif;
-  font-size: 19px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: 500;
   color: #000000;
   margin: 0;
-  line-height: 1.3;
+  line-height: 20px;
+  white-space: nowrap;
 }
+
 
 /* Product Integration Layout */
 .productLayout {
@@ -282,18 +470,32 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 72px;
-  padding-top: 40px;
+  padding-top: 31px;
   box-sizing: border-box;
 }
 
 .productList {
-  width: 600px;
-  max-width: 600px;
+  width: 693px;
+  max-width: 693px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 32px;
+  margin-top: 13px;
+}
+
+.productList .bulletItem {
+  height: 56.5px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.productLayout .boltIcon {
+  width: 56.5px;
+  height: 56.5px;
+  flex-shrink: 0;
+  object-fit: contain;
 }
 
 .productBulletText {
@@ -302,7 +504,16 @@
   font-weight: 600;
   color: #000000;
   margin: 0;
+  line-height: 50px;
+  white-space: nowrap;
 }
+
+.productLayout .slantedImageContainer {
+  width: 620px;
+  height: 245px;
+  flex-shrink: 0;
+}
+
 
 /* Common text highlight */
 .greenHighlight {
@@ -367,10 +578,39 @@
     gap: 10px;
   }
 
+  .challengeList .bulletItem,
+  .scenariosLeft .bulletItem,
+  .techList .bulletItem,
+  .productList .bulletItem {
+    height: auto;
+    min-height: 36px;
+  }
+
+  .scenariosBulletText,
+  .techBulletText,
+  .productBulletText {
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  .scenariosLayout .slantedImageContainer,
+  .techLayout .slantedImageContainer,
+  .productLayout .slantedImageContainer {
+    margin-top: 0;
+  }
+
+
+
+
   .boltIcon {
+    width: 30px;
+    height: 30px;
+    transform: none;
+  }
+
+  .solvesCol .boltIcon {
     width: 26px;
     height: 26px;
-    transform: none;
   }
 
   .solvesRow {
@@ -381,6 +621,16 @@
   }
 
   /* Table on mobile */
+  .tableDesktopLayout {
+    display: none;
+  }
+
+  .tableMobileLayout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
   .tableContainer {
     overflow-x: auto;
     padding-top: 0;
@@ -390,6 +640,7 @@
     transform: none !important;
     gap: 16px;
     min-width: 580px;
+    margin-bottom: 12px;
   }
 
   .tableHeaderCol1,
@@ -398,6 +649,13 @@
     font-size: 16px;
     width: auto;
     flex: 1;
+    text-align: center;
+  }
+
+  .tableBody {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .tableRow {
@@ -414,5 +672,7 @@
     font-size: 14px;
     width: auto;
     flex: 1;
+    text-align: center;
   }
 }
+

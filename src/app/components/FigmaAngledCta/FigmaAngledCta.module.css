@@ -50,6 +50,18 @@
   min-height: 37px;
   padding: 0 12px 0 17px;
   font-size: 13px;
+  clip-path: none !important;
+}
+
+.exploreCta::before {
+  display: none !important;
+}
+
+.exploreCta::after {
+  inset: 0 !important;
+  clip-path: none !important;
+  background: url("/images/industry-affiliations-certifications/vector-7368.svg") no-repeat center / 100% 100% !important;
+  backdrop-filter: none !important;
 }
 
 
@@ -156,10 +168,14 @@
 }
 
 .exploreCta:hover,
-.exploreCta:focus-visible,
+.exploreCta:focus-visible {
+  filter: brightness(0.96) !important;
+  transform: translateY(-1px);
+}
+
 .exploreCta:active {
-  filter: none;
-  transform: none;
+  filter: brightness(0.92) !important;
+  transform: translateY(0);
 }
 
 .cta:focus-visible {
