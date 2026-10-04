@@ -187,12 +187,12 @@
 }
 
 .cardCta {
-  --figma-cta-slant: 18.84px;
+  --figma-cta-slant: 17.6px;
   --figma-cta-height: 37px;
   position: absolute;
-  left: 244px;
-  top: 314px;
-  width: 123px;
+  left: 236px;
+  top: 310px;
+  width: 122px;
   height: 37px;
   min-height: 37px;
   font-size: 12px;

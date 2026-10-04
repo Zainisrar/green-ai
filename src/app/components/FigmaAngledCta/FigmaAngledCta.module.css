@@ -50,18 +50,28 @@
   min-height: 37px;
   padding: 0 12px 0 17px;
   font-size: 13px;
-  clip-path: none !important;
 }
 
 .exploreCta::before {
-  display: none !important;
+  background: linear-gradient(90deg, #23b14d 0%, #fffe50 100%) !important;
+  clip-path: polygon(var(--figma-cta-slant) 0,
+      100% 0,
+      calc(100% - var(--figma-cta-slant)) 100%,
+      0 100%) !important;
 }
 
 .exploreCta::after {
-  inset: 0 !important;
-  clip-path: none !important;
-  background: url("/images/industry-affiliations-certifications/vector-7368.svg") no-repeat center / 100% 100% !important;
-  backdrop-filter: none !important;
+  inset: 1px !important;
+  background:
+    linear-gradient(90deg,
+      rgba(165, 223, 79, 0.5) 0%,
+      rgba(255, 254, 80, 0.5) 100%),
+    #ffffff !important;
+  backdrop-filter: blur(15px) !important;
+  clip-path: polygon(var(--figma-cta-slant) 0,
+      100% 0,
+      calc(100% - var(--figma-cta-slant)) 100%,
+      0 100%) !important;
 }
 
 
