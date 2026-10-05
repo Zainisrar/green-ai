@@ -19,6 +19,8 @@ interface Props {
   currentPath?: string;
 }
 
+let activeNavigationInstanceId: string | null = null;
+
 export default function Navigation({
   onClose,
   navigationData,
@@ -27,6 +29,7 @@ export default function Navigation({
   featuredChild,
   currentPath,
 }: Props) {
+  const [instanceId] = useState(() => Math.random().toString(36).slice(2));
   const [selectedParent, setSelectedParent] = useState<NavigationItem | null>(
     null,
   );
@@ -39,6 +42,14 @@ export default function Navigation({
   const drawerRef = useRef<HTMLElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const activeSectionRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (activeNavigationInstanceId === instanceId) {
+        activeNavigationInstanceId = null;
+      }
+    };
+  }, [instanceId]);
 
   useEffect(() => {
     document.body.classList.add("navigation-open");
@@ -232,6 +243,11 @@ export default function Navigation({
   // this global dialog at the document root so its responsive breakpoints and
   // viewport units always describe the actual window.
   if (typeof document === "undefined") return null;
+
+  if (activeNavigationInstanceId && activeNavigationInstanceId !== instanceId) {
+    return null;
+  }
+  activeNavigationInstanceId = instanceId;
 
   const hasNestedChildren = Boolean(selectedParent?.children?.length);
 

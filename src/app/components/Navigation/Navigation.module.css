@@ -112,6 +112,7 @@
   width: 300px;
   padding-left: 10px;
   border-left: 2px solid #23b14d;
+  z-index: 5;
 }
 .subNavigation a,
 .subNavigation button,
@@ -198,9 +199,14 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  width: min(330px, calc(100% - 72px));
+  width: max-content;
+  max-width: min(300px, calc(100% - 72px));
+  z-index: 2;
 }
 .nestedNavigation a {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
   color: #303030;
   font:
     700 20px / 1.35 var(--font-montserrat),
@@ -319,6 +325,8 @@
     top: 480px;
     left: 124px;
     gap: 12px;
+    width: max-content;
+    max-width: 215px;
   }
 
   .enlightenDrawer .nestedNavigation {
@@ -483,6 +491,8 @@
     top: clamp(350px, 46vh, 450px);
     left: 124px;
     gap: clamp(12px, 1.6vh, 16px);
+    width: max-content;
+    max-width: 215px;
   }
 
   .enlightenDrawer .nestedNavigation {
@@ -1177,6 +1187,8 @@
     top: clamp(360px, 48vh, 480px);
     left: 124px;
     gap: clamp(12px, 1.6vh, 16px);
+    width: max-content;
+    max-width: 215px;
   }
   .enlightenDrawer .nestedNavigation {
     top: clamp(360px, 48vh, 534px);
