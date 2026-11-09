@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useState, useEffect } from "react";
 
 interface DescriptionWithHighlight {
@@ -108,7 +109,7 @@ export const useGreenTalentIncubator = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://greencms.percepco.co.uk/api/empower/green-talent-incubator",
+          `${CMS_BASE_URL}/api/empower/green-talent-incubator`,
         );
 
         if (!response.ok) {

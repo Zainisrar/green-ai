@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 interface ExpertiseImage {
@@ -45,7 +46,7 @@ interface ExpertiseResponse {
 const fetchExpertiseBySlug = async (
   slug: string,
 ): Promise<ExpertiseDetailData | null> => {
-  const response = await fetch("https://greencms.percepco.co.uk/api/expertise");
+  const response = await fetch(`${CMS_BASE_URL}/api/expertise`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch expertise data");

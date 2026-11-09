@@ -1,4 +1,5 @@
 import Product from "@/app/components/Product/Product";
+import { CMS_BASE_URL } from "@/config/cms";
 import React from "react";
 
 export const revalidate = 3600;
@@ -13,7 +14,7 @@ const FALLBACK_PRODUCT_SLUGS = [
 export async function generateStaticParams() {
   try {
     const res = await fetch(
-      "https://greencms.percepco.co.uk/api/engineering/products",
+      `${CMS_BASE_URL}/api/engineering/products`,
       {
         next: { revalidate: 3600 },
         signal: AbortSignal.timeout(5000),

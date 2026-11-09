@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 interface NavigationItem {
@@ -37,7 +38,7 @@ interface ApiResponse {
 
 const fetchInsightDetails = async (): Promise<ApiResponse> => {
   const response = await fetch(
-    "https://greencms.percepco.co.uk/api/insight-details",
+    `${CMS_BASE_URL}/api/insight-details`,
   );
   if (!response.ok) {
     throw new Error("Failed to fetch insight details");

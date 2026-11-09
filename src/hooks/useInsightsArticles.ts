@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 interface ArticleImage {
@@ -30,7 +31,7 @@ interface ArticleData {
 
 const fetchInsightsArticles = async (): Promise<ArticleData[]> => {
   const response = await fetch(
-    "https://greencms.percepco.co.uk/api/enlighten/insights-articles",
+    `${CMS_BASE_URL}/api/enlighten/insights-articles`,
   );
 
   if (!response.ok) {

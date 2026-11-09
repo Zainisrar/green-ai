@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 "use client";
 import { useQuery } from "@tanstack/react-query";
 
@@ -106,7 +107,7 @@ export const useCommunityVoices = (): UseCommunityVoicesReturn => {
     queryKey: ["community-voices"],
     queryFn: async ({ signal }): Promise<CommunityVoicesData> => {
       const response = await fetch(
-        "https://greencms.percepco.co.uk/api/empower/community-voices",
+        `${CMS_BASE_URL}/api/empower/community-voices`,
         { signal },
       );
       if (!response.ok)

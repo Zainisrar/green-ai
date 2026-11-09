@@ -1,14 +1,14 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { NextResponse } from "next/server";
 
 const INSIGHTS_API =
-  process.env.INSIGHTS_API_URL ??
-  "https://greencms.percepco.co.uk/api/insights";
+  process.env.INSIGHTS_API_URL ?? `${CMS_BASE_URL}/api/insights`;
 
 export async function GET() {
   try {
     const endpoint = new URL(INSIGHTS_API);
-    if (endpoint.protocol !== "https:") {
-      throw new Error("Insights API must use HTTPS");
+    if (endpoint.protocol !== "https:" && endpoint.protocol !== "http:") {
+      throw new Error("Insights API must use HTTP or HTTPS");
     }
 
     const response = await fetch(endpoint, {

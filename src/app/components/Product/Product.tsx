@@ -548,22 +548,23 @@ const Product = ({ slug }: ProductProps) => {
                   loading="lazy"
                   decoding="async"
                   src={
-                    // @ts-expect-error
-                    activeImg[active].imgSrc
+                    activeImg?.[active]?.imgSrc ||
+                    activeImg?.[0]?.imgSrc ||
+                    "/images/product/featuredProduct1.png"
                   }
                   alt={
-                    // @ts-expect-error
-                    activeImg[active].altText
+                    activeImg?.[active]?.altText ||
+                    currentProduct?.title ||
+                    "Product"
                   }
                   className="w-full h-auto object-contain max-h-[420px] lg:max-w-lg"
                 />
               </div>
 
               {/* Product Thumbnails */}
-              <div className="lg:flex-nowrap  space-y-4 lg:space-y-0 justify-center  flex space-x-4 mb-6">
-                {
-                  // @ts-expect-error
-                  activeImg.map((img, index) => (
+              {activeImg && activeImg.length > 1 && (
+                <div className="lg:flex-nowrap space-y-4 lg:space-y-0 justify-center flex space-x-4 mb-6">
+                  {activeImg.map((img: any, index: number) => (
                     <button
                       type="button"
                       key={img.id}
@@ -583,9 +584,9 @@ const Product = ({ slug }: ProductProps) => {
                         className="h-full w-full rounded-[inherit] object-cover"
                       />
                     </button>
-                  ))
-                }
-              </div>
+                  ))}
+                </div>
+              )}
 
               {/* Enquiry Button */}
               <div className="flex justify-end lg:w-[71%]">
@@ -643,7 +644,7 @@ const Product = ({ slug }: ProductProps) => {
                     }}
                     className="grid grid-cols-3 gap-4 text-center text-xs lg:flex lg:flex-wrap lg:justify-start lg:gap-6 lg:text-left"
                   >
-                    {currentProduct?.keys.map((key: any, index: number) => (
+                    {currentProduct?.keys?.map((key: any, index: number) => (
                       <div
                         key={index}
                         className="flex flex-col items-center lg:items-start lg:w-28"
@@ -651,8 +652,8 @@ const Product = ({ slug }: ProductProps) => {
                         <img
                           loading="lazy"
                           decoding="async"
-                          src={key.icon.src}
-                          alt={key.icon.alt}
+                          src={key?.icon?.src || "/images/product/boxKeyImg.png"}
+                          alt={key?.icon?.alt || key?.title || ""}
                           className="w-14 lg:w-24 mb-2"
                         />
                         <p className="font-semibold">{key.title}</p>

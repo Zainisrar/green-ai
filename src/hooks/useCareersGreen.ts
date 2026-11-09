@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 export interface CareersGreenData {
@@ -82,7 +83,7 @@ export interface CareersGreenData {
 
 const fetchCareersGreen = async (): Promise<CareersGreenData> => {
   const response = await fetch(
-    "https://greencms.percepco.co.uk/api/empower/careers-at-green",
+    `${CMS_BASE_URL}/api/empower/careers-at-green`,
   );
 
   if (!response.ok) {

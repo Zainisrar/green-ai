@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useEffect, useState } from "react";
 
 export interface IndustryAffiliationsCertificationsResponse {
@@ -64,7 +65,7 @@ export const useIndustryAffiliationsCertifications = () => {
         setError(null);
 
         const res = await fetch(
-          "https://greencms.percepco.co.uk/api/ecosystem/industry-affiliations-certifications",
+          `${CMS_BASE_URL}/api/ecosystem/industry-affiliations-certifications`,
           { next: { revalidate: 60 } as any },
         );
 

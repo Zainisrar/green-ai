@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 interface CTA {
@@ -74,7 +75,7 @@ interface OurProcurementPhilosophyData {
 const fetchOurProcurementPhilosophy =
   async (): Promise<OurProcurementPhilosophyData> => {
     const response = await fetch(
-      "https://greencms.percepco.co.uk/api/ecosystem/our-procurement-philosophy",
+      `${CMS_BASE_URL}/api/ecosystem/our-procurement-philosophy`,
     );
 
     if (!response.ok) {

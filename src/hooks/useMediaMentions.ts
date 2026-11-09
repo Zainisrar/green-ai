@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 export interface MediaImage {
@@ -47,7 +48,7 @@ export interface MediaMentionsResponse {
 
 const fetchMediaMentions = async (): Promise<MediaMentionsData> => {
   const response = await fetch(
-    "https://greencms.percepco.co.uk/api/enlighten/media-mentions",
+    `${CMS_BASE_URL}/api/enlighten/media-mentions`,
   );
 
   if (!response.ok) {

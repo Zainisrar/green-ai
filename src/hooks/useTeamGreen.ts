@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 export interface TeamGreenData {
@@ -95,7 +96,7 @@ export interface TeamGreenData {
 
 const fetchTeamGreen = async (): Promise<TeamGreenData> => {
   const response = await fetch(
-    "https://greencms.percepco.co.uk/api/empower/team-green",
+    `${CMS_BASE_URL}/api/empower/team-green`,
   );
 
   if (!response.ok) {

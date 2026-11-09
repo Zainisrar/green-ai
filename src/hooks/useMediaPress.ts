@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 interface MediaPressMainPage {
@@ -17,7 +18,7 @@ interface MediaPressResponse {
 
 const fetchMediaPress = async (): Promise<MediaPressResponse> => {
   const response = await fetch(
-    "https://greencms.percepco.co.uk/api/engage/media-press",
+    `${CMS_BASE_URL}/api/engage/media-press`,
     { cache: "no-store" },
   );
   if (!response.ok) {

@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import type { MetadataRoute } from "next";
 import { SITE_URL } from "./lib/seo-config";
 
@@ -113,15 +114,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const dynamicPages = await Promise.all([
     fetchDynamicRoutes(
-      "https://greencms.percepco.co.uk/api/enlighten/insights-articles",
+      `${CMS_BASE_URL}/api/enlighten/insights-articles`,
       "/enlighten/insights-articles",
     ),
     fetchDynamicRoutes(
-      "https://greencms.percepco.co.uk/api/engineering/products",
+      `${CMS_BASE_URL}/api/engineering/products`,
       "/engineering/products",
     ),
     fetchDynamicRoutes(
-      "https://greencms.percepco.co.uk/api/expertise",
+      `${CMS_BASE_URL}/api/expertise`,
       "/expertise",
     ),
   ]);

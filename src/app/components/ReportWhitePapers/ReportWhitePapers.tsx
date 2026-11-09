@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -685,7 +686,7 @@ export default function ReportWhitePapers({
 
 function reportUrl(href: string) {
   return href
-    ? `https://greencms.percepco.co.uk/${href.replace(/^\/+/, "")}`
+    ? `${CMS_BASE_URL}/${href.replace(/^\/+/, "")}`
     : "#";
 }
 

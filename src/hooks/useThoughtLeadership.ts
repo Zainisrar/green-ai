@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 export interface EditorialImage {
@@ -58,7 +59,7 @@ export interface ThoughtLeadershipResponse {
 
 const fetchThoughtLeadership = async (): Promise<ThoughtLeadershipData> => {
   const response = await fetch(
-    "https://greencms.percepco.co.uk/api/enlighten/thought-leadership",
+    `${CMS_BASE_URL}/api/enlighten/thought-leadership`,
   );
 
   if (!response.ok) {

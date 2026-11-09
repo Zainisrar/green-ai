@@ -1,4 +1,6 @@
-const API_ORIGIN = "https://greencms.percepco.co.uk";
+import { CMS_BASE_URL } from "@/config/cms";
+
+const API_ORIGIN = CMS_BASE_URL;
 
 export function resolveApiAssetUrl(src?: string | null): string | undefined {
   if (!src) return undefined;

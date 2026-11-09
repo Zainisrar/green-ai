@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useEffect, useState } from "react";
 
 // TypeScript Interfaces
@@ -98,7 +99,7 @@ export const useInvestorRelations = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://greencms.percepco.co.uk/api/engage/investor-relations",
+          `${CMS_BASE_URL}/api/engage/investor-relations`,
           { cache: "no-store" },
         );
 

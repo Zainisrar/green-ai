@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 "use client";
 import { useEffect, useState } from "react";
 
@@ -86,7 +87,7 @@ export const useImpactMeasurementEsg = () => {
       try {
         setLoading(true);
         const response = await fetch(
-          "https://greencms.percepco.co.uk/api/ecosystem/impact-measurement-esg",
+          `${CMS_BASE_URL}/api/ecosystem/impact-measurement-esg`,
           {
             next: { revalidate: 60 },
           },

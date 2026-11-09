@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import ExpertiseDetail from "../../components/Expertise/ExpertiseDetail";
 
 export const revalidate = 3600;
@@ -9,7 +10,7 @@ const FALLBACK_EXPERTISE_SLUGS = [
 
 export async function generateStaticParams() {
   try {
-    const res = await fetch("https://greencms.percepco.co.uk/api/expertise", {
+    const res = await fetch(`${CMS_BASE_URL}/api/expertise`, {
       next: { revalidate: 3600 },
       signal: AbortSignal.timeout(5000),
     });

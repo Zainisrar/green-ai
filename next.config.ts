@@ -55,6 +55,8 @@ const nextConfig = (phase: string): NextConfig => ({
     // cache instead of re-encoding on every deployment window.
     minimumCacheTTL: 2_592_000,
     remotePatterns: [
+      { protocol: "http", hostname: "217.216.76.178" },
+      { protocol: "http", hostname: "217.216.76.178", port: "4000" },
       { protocol: "https", hostname: "greencms.percepco.co.uk" },
       { protocol: "https", hostname: "app-gsolve.green.com.pg" },
       // Cloudinary is used for some CMS-managed icon/asset URLs (e.g. GlobalSnapshot).

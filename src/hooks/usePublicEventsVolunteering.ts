@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 interface PublicEventsResponse {
@@ -15,7 +16,7 @@ interface PublicEventsResponse {
 
 const fetchPublicEvents = async (): Promise<PublicEventsResponse> => {
   const response = await fetch(
-    "https://greencms.percepco.co.uk/api/engage/public-events-volunteering",
+    `${CMS_BASE_URL}/api/engage/public-events-volunteering`,
     { cache: "no-store" },
   );
   if (!response.ok) {

@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 interface ProjectData {
@@ -22,7 +23,7 @@ interface ProjectData {
 
 const fetchProjects = async (): Promise<ProjectData[]> => {
   const response = await fetch(
-    "https://greencms.percepco.co.uk/api/endeavors/projects",
+    `${CMS_BASE_URL}/api/endeavors/projects`,
   );
 
   if (!response.ok) {

@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Insight1 from "@/app/components/Insight1";
@@ -67,7 +68,7 @@ const fallbackInsight = (slug: string): RawInsight | null =>
 async function getInsight(slug: string): Promise<RawInsight | null> {
   try {
     const response = await fetch(
-      "https://greencms.percepco.co.uk/api/insight-details",
+      `${CMS_BASE_URL}/api/insight-details`,
       { next: { revalidate: 300 }, signal: AbortSignal.timeout(8000) },
     );
     if (!response.ok) return fallbackInsight(slug);
@@ -96,7 +97,7 @@ async function getInsight(slug: string): Promise<RawInsight | null> {
 export async function generateStaticParams() {
   try {
     const response = await fetch(
-      "https://greencms.percepco.co.uk/api/insight-details",
+      `${CMS_BASE_URL}/api/insight-details`,
       { next: { revalidate: 3600 }, signal: AbortSignal.timeout(5000) },
     );
     if (!response.ok) return [{ slug: "solar-mining" }];

@@ -1,6 +1,7 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { NextResponse } from "next/server";
 
-const NAVIGATION_API = "https://greencms.percepco.co.uk/api/navigation";
+const NAVIGATION_API = `${CMS_BASE_URL}/api/navigation`;
 
 export async function GET() {
   try {

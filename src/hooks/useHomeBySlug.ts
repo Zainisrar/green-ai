@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 interface Text1 {
@@ -43,7 +44,7 @@ interface HomeApiResponse {
 }
 
 const fetchHomeBySlug = async (slug: string): Promise<HomeData | null> => {
-  const response = await fetch("https://greencms.percepco.co.uk/api/home");
+  const response = await fetch(`${CMS_BASE_URL}/api/home`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch home data");

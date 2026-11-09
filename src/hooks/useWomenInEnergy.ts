@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 "use client";
 import { useQuery } from "@tanstack/react-query";
 
@@ -104,7 +105,7 @@ export const useWomenInEnergy = (): UseWomenInEnergyReturn => {
     queryKey: ["women-in-energy"],
     queryFn: async ({ signal }): Promise<WomenInEnergyData> => {
       const response = await fetch(
-        "https://greencms.percepco.co.uk/api/empower/women-in-energy",
+        `${CMS_BASE_URL}/api/empower/women-in-energy`,
         { signal },
       );
       if (!response.ok)

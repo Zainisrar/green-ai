@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import type { Metadata } from "next";
 import SupplyPartners from "@/app/components/SupplyParnters/SupplyPartners";
 import FigmaPageCanvas from "@/app/components/shared/FigmaPageCanvas";
@@ -21,7 +22,7 @@ export const revalidate = 3600;
 async function getSupplyPartnersData(): Promise<SupplyPartnersData | null> {
   try {
     const res = await fetch(
-      "https://greencms.percepco.co.uk/api/ecosystem/supply-partners",
+      `${CMS_BASE_URL}/api/ecosystem/supply-partners`,
       {
         next: { revalidate: 3600 },
       }

@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 export interface JoinUsData {
@@ -37,7 +38,7 @@ export interface JoinUsData {
 
 const fetchJoinUs = async (): Promise<JoinUsData> => {
   const response = await fetch(
-    "https://greencms.percepco.co.uk/api/empower/join-us",
+    `${CMS_BASE_URL}/api/empower/join-us`,
   );
 
   if (!response.ok) {

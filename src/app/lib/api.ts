@@ -1,4 +1,5 @@
 // API utility functions for TanStack Query
+import { CMS_BASE_URL } from "@/config/cms";
 
 // Default time (ms) before an in-flight request is aborted so a slow/unreachable
 // backend fails fast and components can fall back instead of hanging forever.
@@ -63,80 +64,72 @@ export async function fetchApi<T>(
 export const api = {
   getInsights: () => fetchApi<InsightsResponse>("/api/insights"),
   getEnergyServices: () =>
-    fetchApi<EnergyServicesResponse>(
-      "https://greencms.percepco.co.uk/api/energy",
-    ),
+    fetchApi<EnergyServicesResponse>(`${CMS_BASE_URL}/api/energy`),
   getAboutUs: () =>
-    fetchApi<AboutUsResponse>(
-      "https://greencms.percepco.co.uk/api/explore/about-us",
-    ),
+    fetchApi<AboutUsResponse>(`${CMS_BASE_URL}/api/explore/about-us`),
   getWhyGreen: () =>
-    fetchApi<WhyGreenResponse>(
-      "https://greencms.percepco.co.uk/api/explore/why-green",
-    ),
+    fetchApi<WhyGreenResponse>(`${CMS_BASE_URL}/api/explore/why-green`),
   getGlobalSnapshot: () =>
     fetchApi<GlobalSnapshotResponse>(
-      "https://greencms.percepco.co.uk/api/explore/global-snapshot",
+      `${CMS_BASE_URL}/api/explore/global-snapshot`,
     ),
   getFastFactStats: () =>
     fetchApi<FastFactStatsResponse>(
-      "https://greencms.percepco.co.uk/api/explore/fast-fact-stats",
+      `${CMS_BASE_URL}/api/explore/fast-fact-stats`,
     ),
   getOurStory: () =>
     fetchApi<OurStoryResponse>(
-      "https://greencms.percepco.co.uk/api/evolution/our-story-milestone",
+      `${CMS_BASE_URL}/api/evolution/our-story-milestone`,
     ),
   getVisionMission: () =>
     fetchApi<VisionMissionResponse>(
-      "https://greencms.percepco.co.uk/api/evolution/vision-mission",
+      `${CMS_BASE_URL}/api/evolution/vision-mission`,
     ),
   getLeadershipTeam: () =>
     fetchApi<LeadershipTeamResponse>(
-      "https://greencms.percepco.co.uk/api/evolution/leadership-team",
+      `${CMS_BASE_URL}/api/evolution/leadership-team`,
     ),
   getCertificationsAccreditations: () =>
     fetchApi<CertificationsAccreditationsResponse>(
-      "https://greencms.percepco.co.uk/api/evolution/certifications-accreditations",
+      `${CMS_BASE_URL}/api/evolution/certifications-accreditations`,
     ),
   getSustainabilityESG: () =>
     fetchApi<SustainabilityESGResponse>(
-      "https://greencms.percepco.co.uk/api/evolution/sustainability-esg-commitments",
+      `${CMS_BASE_URL}/api/evolution/sustainability-esg-commitments`,
     ),
   getSolarEPCMServices: () =>
     fetchApi<SolarEPCMServicesResponse>(
-      "https://greencms.percepco.co.uk/api/engineering/solar-epcm-services",
+      `${CMS_BASE_URL}/api/engineering/solar-epcm-services`,
     ),
   getHybridMicrogridSolutions: () =>
     fetchApi<HybridMicrogridSolutionsResponse>(
-      "https://greencms.percepco.co.uk/api/engineering/hybrid-microgrid-solutions",
+      `${CMS_BASE_URL}/api/engineering/hybrid-microgrid-solutions`,
     ),
   getEnergyStorageSmartGrid: () =>
     fetchApi<EnergyStorageSmartGridResponse>(
-      "https://greencms.percepco.co.uk/api/engineering/energy-storage-smart-grid",
+      `${CMS_BASE_URL}/api/engineering/energy-storage-smart-grid`,
     ),
   getOMMonitoring: () =>
     fetchApi<OMMonitoringResponse>(
-      "https://greencms.percepco.co.uk/api/engineering/om-monitoring",
+      `${CMS_BASE_URL}/api/engineering/om-monitoring`,
     ),
   getGridIntel: () =>
-    fetchApi<GridIntelResponse>(
-      "https://greencms.percepco.co.uk/api/engineering/grid-intel",
-    ),
+    fetchApi<GridIntelResponse>(`${CMS_BASE_URL}/api/engineering/grid-intel`),
   getBecomeSupplier: () =>
     fetchApi<BecomeSupplierResponse>(
-      "https://greencms.percepco.co.uk/api/ecosystem/become-a-supplier",
+      `${CMS_BASE_URL}/api/ecosystem/become-a-supplier`,
     ),
   getClientPartnerships: () =>
     fetchApi<ClientPartnershipsResponse>(
-      "https://greencms.percepco.co.uk/api/ecosystem/client-partnerships",
+      `${CMS_BASE_URL}/api/ecosystem/client-partnerships`,
     ),
   getCollaborationInnovation: () =>
     fetchApi<CollaborationInnovationResponse>(
-      "https://greencms.percepco.co.uk/api/ecosystem/collaboration-innovation",
+      `${CMS_BASE_URL}/api/ecosystem/collaboration-innovation`,
     ),
   getCommunityImpactLoop: () =>
     fetchApi<CommunityImpactLoopResponse>(
-      "https://greencms.percepco.co.uk/api/ecosystem/community-impact-loop",
+      `${CMS_BASE_URL}/api/ecosystem/community-impact-loop`,
     ),
 };
 

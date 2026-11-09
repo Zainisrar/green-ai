@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 interface ValueChainItem {
@@ -38,7 +39,7 @@ interface OurValueChainData {
 
 const fetchOurValueChain = async (): Promise<OurValueChainData> => {
   const response = await fetch(
-    "https://greencms.percepco.co.uk/api/ecosystem/our-value-chain",
+    `${CMS_BASE_URL}/api/ecosystem/our-value-chain`,
   );
 
   if (!response.ok) {

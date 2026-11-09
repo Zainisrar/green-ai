@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import ArticlesDetail from "../../../components/Articles/ArticlesDetail";
 import FigmaPageCanvas from "../../../components/shared/FigmaPageCanvas";
 
@@ -12,7 +13,7 @@ const FALLBACK_ARTICLE_SLUGS = [
 export async function generateStaticParams() {
   try {
     const res = await fetch(
-      "https://greencms.percepco.co.uk/api/enlighten/insights-articles",
+      `${CMS_BASE_URL}/api/enlighten/insights-articles`,
       {
         next: { revalidate: 3600 },
         signal: AbortSignal.timeout(5000),

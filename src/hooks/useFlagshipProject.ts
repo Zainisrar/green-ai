@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 interface FlagshipProjectIcon {
@@ -35,7 +36,7 @@ interface FlagshipProjectData {
 
 const fetchFlagshipProject = async (): Promise<FlagshipProjectData> => {
   const response = await fetch(
-    "https://greencms.percepco.co.uk/api/endeavors/flagship-projects/get",
+    `${CMS_BASE_URL}/api/endeavors/flagship-projects/get`,
   );
 
   if (!response.ok) {

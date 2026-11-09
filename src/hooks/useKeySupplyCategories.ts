@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 interface CTA {
@@ -43,7 +44,7 @@ interface KeySupplyCategoriesData {
 
 const fetchKeySupplyCategories = async (): Promise<KeySupplyCategoriesData> => {
   const response = await fetch(
-    "https://greencms.percepco.co.uk/api/ecosystem/key-supply-categories",
+    `${CMS_BASE_URL}/api/ecosystem/key-supply-categories`,
   );
 
   if (!response.ok) {

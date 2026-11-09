@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { CMS_BASE_URL } from "@/config/cms";
 
 export interface ProductImage {
   alt: string;
@@ -30,9 +31,7 @@ export interface Product {
 }
 
 const fetchProducts = async (): Promise<Product[]> => {
-  const response = await fetch(
-    "https://greencms.percepco.co.uk/api/engineering/products",
-  );
+  const response = await fetch(`${CMS_BASE_URL}/api/engineering/products`);
 
   if (!response.ok) {
     throw new Error("Failed to fetch products");

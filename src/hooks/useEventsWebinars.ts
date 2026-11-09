@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 export interface EventImage {
@@ -53,7 +54,7 @@ export interface EventsWebinarsResponse {
 
 const fetchEventsWebinars = async (): Promise<EventsWebinarsData> => {
   const response = await fetch(
-    "https://greencms.percepco.co.uk/api/enlighten/events-webinars",
+    `${CMS_BASE_URL}/api/enlighten/events-webinars`,
   );
 
   if (!response.ok) {

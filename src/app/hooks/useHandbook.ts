@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useEffect, useState } from "react";
 
 export interface HandbookResponse {
@@ -35,7 +36,7 @@ export const useHandbook = () => {
         setLoading(true);
         setError(null);
         const res = await fetch(
-          "https://greencms.percepco.co.uk/api/ecosystem/handbook",
+          `${CMS_BASE_URL}/api/ecosystem/handbook`,
           { next: { revalidate: 60 } as any },
         );
         if (!res.ok) throw new Error(`HTTP error ${res.status}`);

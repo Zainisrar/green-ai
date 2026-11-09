@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useEffect, useState } from "react";
 
 export interface TIAImage {
@@ -50,7 +51,7 @@ export const useTechnologyInnovationAlliances = () => {
         setLoading(true);
         setError(null);
         const res = await fetch(
-          "https://greencms.percepco.co.uk/api/ecosystem/technology-innovation-alliances",
+          `${CMS_BASE_URL}/api/ecosystem/technology-innovation-alliances`,
           { cache: "no-store" },
         );
         if (!res.ok) throw new Error(`HTTP ${res.status}`);

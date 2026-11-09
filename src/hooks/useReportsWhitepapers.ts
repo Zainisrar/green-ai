@@ -1,3 +1,4 @@
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 interface ReportImage {
@@ -26,7 +27,7 @@ interface ReportData {
 
 const fetchReportsWhitepapers = async (): Promise<ReportData[]> => {
   const response = await fetch(
-    "https://greencms.percepco.co.uk/api/enlighten/reports-whitepapers",
+    `${CMS_BASE_URL}/api/enlighten/reports-whitepapers`,
   );
 
   if (!response.ok) {
