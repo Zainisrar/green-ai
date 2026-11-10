@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import type { ProductKey } from "../../../hooks/useProducts";
 import { useProducts } from "../../../hooks/useProducts";
 import D6Chatbot from "../D6Chatbot";
 import SiteHeader from "../SiteHeader/SiteHeader";
@@ -9,76 +11,94 @@ import FigmaPageCanvas from "../shared/FigmaPageCanvas";
 import ProductEnquiry from "./Modals/ProductEnquiry";
 import ProductBrandSwitcher from "./ProductBrandSwitcher";
 import styles from "./ProductsFigma.module.css";
+import ProductThumbnails from "./ProductThumbnails";
+import {
+  getBrandGallery,
+  type ProductBrand,
+  productBrands,
+} from "./productCatalog";
+import SpecificationIcon from "./SpecificationIcon";
 
-const PRODUCT_SLUG = "lighting-up-and-lifting-up-living-standards";
-
-const gallery = [
-  [
-    "featuredProduct1.png",
-    "GREEN SunShine student study and home-lighting kit",
-  ],
-  ["productImg2-large.png", "GREEN SunShine solar home-lighting system"],
-  [
-    "productImg3-large.png",
-    "GREEN SunShine home system with television and fan",
-  ],
-  ["productImg4-large.png", "GREEN SunShine home and entertainment system"],
-] as const;
-
-const specifications = [
-  ["solarpanel.png", "Solar Panel", "60W Poly-\ncrystalline", "--"],
-  ["controlbox.png", "Control Box", "12.8V/18000mAh\nLiFePO4", "--"],
-  ["ledbulb.png", "LED Bulb", "LED Bulb", "23 hrs / 11 hrs"],
-  ["tv.png", "TV", "DC Television\n32 inch", "16 hrs"],
-  ["fan.png", "Fan", "DC Pedestal Fan\n16 inch", "13 hrs"],
-  ["radio.png", "FM Radio", "Radio with MP3\nplayer", "8 hrs"],
-  ["lantern.png", "Lantern", "3.2V 600mAh\nLiFePO4", "8 hrs"],
-  [
-    "flashlight.png",
-    "Flashlight",
-    "3W/3.7V 1800mAh\nLi-ion battery",
-    "8 hrs / 4 hrs",
-  ],
-  ["USB.png", "USB Cable", "Mobile Charging\ncable", "--"],
-] as const;
-
-const fallbackTitle = "Lighting Up and Lifting Up Living Standards";
-const fallbackDescription =
-  "To lift up living standards sustainably, it is crucial to invest in infrastructure that supports a better quality of life.";
-
-export default function ProductsFigma() {
-  const { data: products } = useProducts();
-  const product = products?.find((item) => item.slug === PRODUCT_SLUG);
-  const title = product?.title || fallbackTitle;
-  const description = product?.description || fallbackDescription;
-  const productGallery = product?.imgs?.length
-    ? product.imgs.map(
-        (image) => [image.src, image.alt || product.title] as const,
-      )
-    : gallery.map(([image, alt]) => [`/images/product/${image}`, alt] as const);
-  const productSpecifications = product?.keys?.length
-    ? product.keys.map((item) => ({
-        icon: item.icon.src,
-        name: item.icon.alt || item.title,
-        detail: item.title,
-        duration: item.description,
-      }))
-    : specifications.map(([icon, name, detail, duration]) => ({
-        icon: `/images/product/${icon}`,
-        name,
-        detail,
-        duration,
-      }));
-  const [active, setActive] = useState(0);
+export default function ProductsFigma({
+  brand = "sunshine",
+}: {
+  brand?: ProductBrand;
+}) {
+  const { data: products, isPending, isError, refetch } = useProducts();
+  const config = productBrands[brand];
+  const productGallery = getBrandGallery(products ?? [], brand);
+  const [selection, setSelection] = useState<string | null>(null);
+  const selectedIndex = productGallery.findIndex(
+    (item) => item.id === selection,
+  );
+  const active = selectedIndex < 0 ? 0 : selectedIndex;
+  const selected = productGallery[active];
+  const product = selected?.product;
+  const title = product?.title ?? "";
+  const description = product?.description ?? "";
+  const heroImage = selected?.image.src;
+  const heroAlt = selected?.image.alt || product?.title || config.name;
+  const productSpecifications = product?.keys ?? [];
+  const selectProduct = (index: number) =>
+    setSelection(productGallery[index].id);
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [expandedSpecification, setExpandedSpecification] =
+    useState<ProductKey | null>(null);
+  const specificationDialog = useRef<HTMLDialogElement>(null);
+  const [specificationPage, setSpecificationPage] = useState({
+    productId: 0,
+    index: 0,
+  });
+  const lastWheelPage = useRef(0);
+  const pageCount = Math.max(1, Math.ceil(productSpecifications.length / 9));
+  const pageIndex =
+    specificationPage.productId === product?.id
+      ? Math.min(specificationPage.index, pageCount - 1)
+      : 0;
+  const visibleSpecifications = productSpecifications.slice(
+    pageIndex * 9,
+    pageIndex * 9 + 9,
+  );
+  const showSpecificationPage = (index: number) =>
+    setSpecificationPage({
+      productId: product?.id ?? 0,
+      index: Math.max(0, Math.min(index, pageCount - 1)),
+    });
+  const enquire = () => {
+    if (product?.ctaButton?.href)
+      window.location.assign(product.ctaButton.href);
+    else setIsEnquiryOpen(true);
+  };
 
   useEffect(() => setHydrated(true), []);
+  useEffect(() => {
+    if (expandedSpecification) specificationDialog.current?.showModal();
+    else specificationDialog.current?.close();
+  }, [expandedSpecification]);
+
+  const catalogStatus = !product ? (
+    <p className={styles.catalogStatus} role="status">
+      {isPending ? (
+        "Loading products…"
+      ) : isError ? (
+        <>
+          Products are temporarily unavailable.{" "}
+          <button type="button" onClick={() => refetch()}>
+            Try again
+          </button>
+        </>
+      ) : (
+        "No products are available yet."
+      )}
+    </p>
+  ) : null;
 
   const desktop = (
     <main
       className={styles.desktop}
-      data-node-id="7077:12660"
+      data-node-id={config.nodeId}
+      data-product-brand={brand}
       data-products-hydrated={hydrated}
     >
       <img
@@ -88,66 +108,69 @@ export default function ProductsFigma() {
         src="/images/product/bg.jpg"
         alt=""
       />
-      <SiteHeader layout="productCanvas" brand="sunshine" productLogo />
-      <ProductBrandSwitcher current="GREEN SunShine" />
+      <SiteHeader
+        layout="productCanvas"
+        brand={brand}
+        productLogo
+        showBrand={false}
+      />
+      <ProductBrandSwitcher current={config.name} />
+      <img
+        className={styles.brandPanel}
+        src={`/images/product/${brand}-brand-panel.png`}
+        alt=""
+      />
       <img
         loading="lazy"
         decoding="async"
-        className={`${styles.productTopBrandLogo} ${styles.sunshineTopBrandLogo}`}
-        src="/images/product/green-sunshine.png"
-        alt="GREEN SunShine"
-        data-node-id="7077:12773"
+        className={`${styles.productTopBrandLogo} ${brand === "sunshine" ? styles.sunshineTopBrandLogo : brand === "empawa" ? styles.empawaTopBrandLogo : styles.sunsmartTopBrandLogo}`}
+        src={`/images/product/green-${brand}.png`}
+        alt={config.name}
+        data-node-id={
+          brand === "sunshine"
+            ? "7077:12773"
+            : brand === "empawa"
+              ? "7077:25765"
+              : "7077:27017"
+        }
       />
       <img
         loading="lazy"
         decoding="async"
         className={styles.pageTitleImg}
-        src="/images/product/title_h1.png"
+        src="/images/product/products-heading-figma.png"
         alt=""
       />
       <img
         loading="lazy"
         decoding="async"
         className={styles.verticalTitle}
-        src="/images/product/product_vert.png"
+        src="/images/product/product-vertical-figma.png"
         alt=""
       />
 
       <section className={styles.gallery} aria-label="Product gallery">
-        <img
-          loading="lazy"
-          decoding="async"
-          className={styles.hero}
-          src={productGallery[active]?.[0] || productGallery[0][0]}
-          alt={productGallery[active]?.[1] || productGallery[0][1]}
-          data-node-id="7077:12667"
+        {heroImage && (
+          <img
+            loading="lazy"
+            decoding="async"
+            className={styles.hero}
+            src={heroImage}
+            alt={heroAlt}
+            data-node-id="7077:12667"
+          />
+        )}
+        <ProductThumbnails
+          items={productGallery}
+          active={active}
+          onSelect={selectProduct}
         />
-        <div className={styles.thumbnails}>
-          {productGallery.map(([image, alt], index) => (
-            <button
-              key={image}
-              type="button"
-              className={
-                active === index
-                  ? styles.activeThumbnail
-                  : styles.inactiveThumbnail
-              }
-              onClick={() => setActive(index)}
-              aria-label={`Show product image ${index + 1}`}
-              aria-pressed={active === index}
-            >
-              <img loading="lazy" decoding="async" src={image} alt={alt} />
-            </button>
-          ))}
-        </div>
-        <button
-          type="button"
-          className={styles.enquiry}
-          onClick={() => setIsEnquiryOpen(true)}
-        >
-          {product?.ctaButton?.text || "Enquiry"}{" "}
-          <span aria-hidden="true">›</span>
-        </button>
+        {catalogStatus}
+        {product?.ctaButton?.text && (
+          <button type="button" className={styles.enquiry} onClick={enquire}>
+            {product.ctaButton.text} <span aria-hidden="true">›</span>
+          </button>
+        )}
       </section>
 
       <section className={styles.story} aria-labelledby="product-story-title">
@@ -157,21 +180,7 @@ export default function ProductsFigma() {
           src="/images/product/boxImg.png"
           alt=""
         />
-        <h2 id="product-story-title">
-          {title === fallbackTitle ? (
-            <>
-              Lighting Up
-              <br />
-              and Lifting Up
-              <br />
-              Living
-              <br />
-              Standards
-            </>
-          ) : (
-            title
-          )}
-        </h2>
+        <h2 id="product-story-title">{title}</h2>
         <p>{description}</p>
       </section>
 
@@ -186,21 +195,63 @@ export default function ProductsFigma() {
           src="/images/product/boxKeyImg.png"
           alt=""
         />
-        <div className={styles.specificationList}>
-          {productSpecifications.map((specification) => (
-            <article key={specification.name}>
-              <img
-                loading="lazy"
-                decoding="async"
-                src={specification.icon}
-                alt=""
-              />
-              <h3>{specification.name}</h3>
-              <p>{specification.detail}</p>
-              <span>{specification.duration}</span>
+        <section
+          className={styles.specificationList}
+          style={{
+            gridTemplateColumns: `repeat(${visibleSpecifications.length || 1}, minmax(0, 1fr))`,
+          }}
+          aria-label="Selected product specifications"
+          aria-live="polite"
+          onWheel={(event) => {
+            if (
+              Math.abs(event.deltaX) <= Math.abs(event.deltaY) ||
+              Math.abs(event.deltaX) < 12 ||
+              Date.now() - lastWheelPage.current < 400
+            )
+              return;
+            lastWheelPage.current = Date.now();
+            showSpecificationPage(pageIndex + Math.sign(event.deltaX));
+          }}
+        >
+          {visibleSpecifications.map((specification) => (
+            <article key={specification.title}>
+              <SpecificationIcon feature={specification} />
+              <h3>
+                <button
+                  type="button"
+                  className={styles.specificationDetails}
+                  onClick={() => setExpandedSpecification(specification)}
+                  aria-label={`View full specification: ${specification.title}`}
+                >
+                  {specification.title}
+                </button>
+              </h3>
+              <p>{specification.description}</p>
             </article>
           ))}
-        </div>
+        </section>
+        {productSpecifications.length > 9 && (
+          <>
+            <button
+              type="button"
+              className={styles.previousSpecifications}
+              aria-label="Previous specifications"
+              disabled={pageIndex === 0}
+              onClick={() => showSpecificationPage(pageIndex - 1)}
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              className={styles.nextSpecifications}
+              aria-label="Next specifications"
+              disabled={pageIndex === pageCount - 1}
+              onClick={() => showSpecificationPage(pageIndex + 1)}
+            >
+              ›
+            </button>
+          </>
+        )}
       </section>
 
       <D6Chatbot
@@ -208,7 +259,7 @@ export default function ProductsFigma() {
         triggerVariant="figmaCanvas"
         figmaPlaceholder="Let's Talk Energy"
         triggerStyle={{
-          top: 899,
+          top: "calc(var(--figma-canvas-height, 970px) - 71px)",
           right: "auto",
           bottom: "auto",
           left: 1498,
@@ -227,70 +278,62 @@ export default function ProductsFigma() {
           loading="lazy"
           decoding="async"
           className={styles.mobileBrand}
-          src="/images/product/green-sunshine.png"
-          alt="GREEN SunShine"
+          src={`/images/product/green-${brand}.png`}
+          alt={config.name}
         />
-        <Link
-          href="/engineering/products/green-em-pawa"
-          className={styles.mobileEmpawaLink}
-        >
-          View GREEN Em’Pawa products
-        </Link>
-        <Link
-          href="/engineering/products/green-sunsmart"
-          className={styles.mobileEmpawaLink}
-        >
-          View GREEN SunSmart products
-        </Link>
-        <img
-          loading="lazy"
-          decoding="async"
-          className={styles.mobileHero}
-          src={productGallery[active]?.[0] || productGallery[0][0]}
-          alt={productGallery[active]?.[1] || productGallery[0][1]}
-        />
-        <div className={styles.mobileThumbnails}>
-          {productGallery.map(([image], index) => (
-            <button
-              key={image}
-              type="button"
-              onClick={() => setActive(index)}
-              aria-label={`Show product image ${index + 1}`}
-              aria-pressed={active === index}
+        {(["sunshine", "empawa", "sunsmart"] as const)
+          .filter((item) => item !== brand)
+          .map((item) => (
+            <Link
+              key={item}
+              href={`/engineering/products/green-${item}`}
+              className={styles.mobileEmpawaLink}
             >
-              <img loading="lazy" decoding="async" src={image} alt="" />
-            </button>
+              View {productBrands[item].name} products
+            </Link>
           ))}
-        </div>
+        {heroImage && (
+          <img
+            loading="lazy"
+            decoding="async"
+            className={styles.mobileHero}
+            src={heroImage}
+            alt={heroAlt}
+          />
+        )}
+        <ProductThumbnails
+          items={productGallery}
+          active={active}
+          onSelect={selectProduct}
+          mobile
+        />
+        {catalogStatus}
         <h1>{title}</h1>
         <p>{description}</p>
         <section className={styles.mobileSpecifications}>
           <h2>Kit Specifications</h2>
           <div className={styles.mobileSpecGrid}>
             {productSpecifications.map((specification) => (
-              <article key={specification.name} className={styles.mobileSpecItem}>
-                <img
-                  loading="lazy"
-                  decoding="async"
-                  src={specification.icon}
-                  alt=""
-                />
-                <h3>{specification.name}</h3>
-                <p>{specification.detail}</p>
-                {specification.duration !== "--" && (
-                  <span>{specification.duration}</span>
-                )}
+              <article
+                key={specification.title}
+                className={styles.mobileSpecItem}
+              >
+                <SpecificationIcon feature={specification} />
+                <h3>{specification.title}</h3>
+                <p>{specification.description}</p>
               </article>
             ))}
           </div>
         </section>
-        <button
-          type="button"
-          className={styles.mobileEnquiry}
-          onClick={() => setIsEnquiryOpen(true)}
-        >
-          {product?.ctaButton?.text || "Enquiry"}
-        </button>
+        {product?.ctaButton?.text && (
+          <button
+            type="button"
+            className={styles.mobileEnquiry}
+            onClick={enquire}
+          >
+            {product.ctaButton.text}
+          </button>
+        )}
       </div>
       <D6Chatbot />
     </main>
@@ -298,12 +341,41 @@ export default function ProductsFigma() {
 
   return (
     <>
-      <FigmaPageCanvas desktop={desktop} mobile={mobile} nodeId="7077:12660" />
+      <FigmaPageCanvas
+        desktop={desktop}
+        mobile={mobile}
+        nodeId={config.nodeId}
+        scaleToViewport="width"
+        fitCanvasHeight
+      />
       <ProductEnquiry
         isOpen={isEnquiryOpen}
         onClose={() => setIsEnquiryOpen(false)}
         productName={title}
       />
+      {hydrated &&
+        createPortal(
+          <dialog
+            ref={specificationDialog}
+            className={styles.specificationDialog}
+            aria-labelledby="full-specification-title"
+            onClose={() => setExpandedSpecification(null)}
+          >
+            <button
+              type="button"
+              className={styles.closeSpecification}
+              aria-label="Close specification"
+              onClick={() => specificationDialog.current?.close()}
+            >
+              ×
+            </button>
+            <h2 id="full-specification-title">
+              {expandedSpecification?.title}
+            </h2>
+            <p>{expandedSpecification?.description}</p>
+          </dialog>,
+          document.body,
+        )}
     </>
   );
 }

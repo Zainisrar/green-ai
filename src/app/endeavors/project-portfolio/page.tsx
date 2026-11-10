@@ -7,6 +7,7 @@ export default function ProjectPortfolioPage() {
       desktop={<Project />}
       mobile={<Project />}
       nodeId="7077:7011"
+      desktopBreakpoint={1200}
     />
   );
 }

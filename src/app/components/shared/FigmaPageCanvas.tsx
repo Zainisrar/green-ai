@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { useLayoutEffect, useState } from "react";
 import styles from "./FigmaPageCanvas.module.css";
 
@@ -112,28 +112,35 @@ export default function FigmaPageCanvas({
     );
   }
 
-  // Scrollable width-fitting mode for long multi-section Figma pages
-  if (scaleToViewport === "width" && !fitCanvasHeight) {
+  // Viewport-height layouts can re-anchor their controls without stretching
+  // products or typography. Long pages retain the scrollable width-fit mode.
+  if (scaleToViewport === "width") {
     const scale = viewport.width / DESIGN_WIDTH;
+    const canvasHeight = fitCanvasHeight
+      ? viewport.height / scale
+      : designHeight;
     return (
       <div
-        className={`${styles.shell} ${styles.shellScrollable}`}
+        className={`${styles.shell} ${fitCanvasHeight ? "" : styles.shellScrollable}`}
         data-figma-page-node={nodeId}
       >
         <div
           className={styles.canvasSizer}
           aria-hidden="true"
-          style={{ height: designHeight * scale }}
+          style={{ height: canvasHeight * scale }}
         />
         <div
           className={styles.canvas}
           data-figma-responsive="desktop"
-          style={{
-            top: 0,
-            left: 0,
-            height: designHeight,
-            transform: `scale(${scale})`,
-          }}
+          style={
+            {
+              top: 0,
+              left: 0,
+              height: canvasHeight,
+              "--figma-canvas-height": `${canvasHeight}px`,
+              transform: `scale(${scale})`,
+            } as CSSProperties
+          }
         >
           {desktop}
         </div>
@@ -152,10 +159,10 @@ export default function FigmaPageCanvas({
           className={styles.canvas}
           data-figma-responsive="desktop"
           style={{
-            top: "50%",
-            left: "50%",
+            top: (viewport.height - designHeight * scale) / 2,
+            left: (viewport.width - DESIGN_WIDTH * scale) / 2,
             height: designHeight,
-            transform: `translate(-50%, -50%) scale(${scale})`,
+            transform: `scale(${scale})`,
           }}
         >
           {desktop}

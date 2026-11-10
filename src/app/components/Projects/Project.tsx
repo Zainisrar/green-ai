@@ -2,8 +2,8 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
-import { useProjects } from "@/hooks/useProjects";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { type ProjectPhotograph, useProjects } from "@/hooks/useProjects";
 import D6Chatbot from "../D6Chatbot";
 import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
@@ -32,135 +32,23 @@ type ProjectSlide = {
   systems: string;
   days: string;
   totalGeneration: string;
-  batteryPercentage: string;
+  batteryStorage: string;
+  siteName: string;
+  clientName: string;
+  projectScope: string;
+  completionYear: string;
+  listedCapacity: string;
+  sourceNote?: string;
   coalA: string;
   emissionReduction: string;
   treesPlanted: string;
   capacity: string;
   toDateProduction: string;
   consumption: string;
-  dailyGeneration: string;
   timelineYear?: string;
+  gallery: ProjectPhotograph[];
+  population?: string;
 };
-
-const defaultProjects: ProjectSlide[] = [
-  {
-    id: 1,
-    title:
-      "PNG’s First Utility-Scale Grid-Connected Solar Power Plant, 3MW, Baiyer (2025)",
-    shortTitle: "Baiyer Solar Plant 2025",
-    image: "/images/projects/mask_7077_7014_baiyer.png",
-    leftPreview: {
-      title: "Pimaga Health Centre 2023",
-      image: "/images/projects/mask_7077_7170_pimaga.png",
-      projectIndex: 1,
-    },
-    rightPreview: {
-      title: "Mongal Health Centre 2020",
-      image: "/images/projects/mask_7077_7960_mongal.png",
-      projectIndex: 2,
-    },
-    systems: "1",
-    days: "265",
-    totalGeneration: "1000 kWh",
-    batteryPercentage: "68",
-    coalA: "3.37",
-    emissionReduction: "8.78",
-    treesPlanted: "603",
-    capacity: "93.15 kWh",
-    toDateProduction: "10800 kWh",
-    consumption: "1298.7 kWh",
-    dailyGeneration: "109 kWh",
-    timelineYear: "2025",
-  },
-  {
-    id: 2,
-    title: "Pimaga Health Centre 2023",
-    shortTitle: "Pimaga Health Centre 2023",
-    image: "/images/projects/mask_7077_7170_pimaga.png",
-    leftPreview: {
-      title: "Mongol Health Centre 2020",
-      image: "/images/projects/mask_7077_7960_mongal.png",
-      projectIndex: 2,
-    },
-    rightPreview: {
-      title: "Baiyer Solar Plant 2025",
-      image: "/images/projects/mask_7077_7014_baiyer.png",
-      projectIndex: 0,
-    },
-    systems: "1",
-    days: "265",
-    totalGeneration: "1000 kWh",
-    batteryPercentage: "68",
-    coalA: "3.37",
-    emissionReduction: "8.78",
-    treesPlanted: "603",
-    capacity: "93.15 kWh",
-    toDateProduction: "10800 kWh",
-    consumption: "1298.7 kWh",
-    dailyGeneration: "109 kWh",
-    timelineYear: "2023",
-  },
-  {
-    id: 3,
-    title: "Mongal Health Centre 2020",
-    shortTitle: "Mongal Health Centre 2020",
-    image: "/images/projects/mask_7077_7960_mongal.png",
-    leftPreview: {
-      title: "Baiyer Solar Plant 2025",
-      image: "/images/projects/mask_7077_7014_baiyer.png",
-      projectIndex: 0,
-    },
-    rightPreview: {
-      title: "Wildlife Conservation Society 2025",
-      image: "/images/projects/mask_7077_7327_wildlife.png",
-      projectIndex: 3,
-    },
-    systems: "1",
-    days: "265",
-    totalGeneration: "1000 kWh",
-    batteryPercentage: "68",
-    coalA: "3.37",
-    emissionReduction: "8.78",
-    treesPlanted: "603",
-    capacity: "93.15 kWh",
-    toDateProduction: "10800 kWh",
-    consumption: "1298.7 kWh",
-    dailyGeneration: "109 kWh",
-    timelineYear: "2020",
-  },
-  {
-    id: 4,
-    title: "Wildlife Conservation Society 2025",
-    shortTitle: "Wildlife Conservation Society 2025",
-    image: "/images/projects/mask_7077_7327_wildlife.png",
-    leftPreview: {
-      title: "Baiyer Solar Plant 2025",
-      image: "/images/projects/mask_7077_7014_baiyer.png",
-      projectIndex: 0,
-    },
-    rightPreview: {
-      title: "Mongal Health Centre 2020",
-      image: "/images/projects/mask_7077_7960_mongal.png",
-      projectIndex: 2,
-    },
-    systems: "1",
-    days: "265",
-    totalGeneration: "1000 kWh",
-    batteryPercentage: "68",
-    coalA: "3.37",
-    emissionReduction: "8.78",
-    treesPlanted: "603",
-    capacity: "93.15 kWh",
-    toDateProduction: "10800 kWh",
-    consumption: "1298.7 kWh",
-    dailyGeneration: "109 kWh",
-    timelineYear: "2025",
-  },
-];
-
-const valueWithoutUnit = (value: string | undefined, unit: string) =>
-  value?.replace(unit, "").trim() || "—";
 
 type PreviewLabel = {
   name: string;
@@ -168,23 +56,6 @@ type PreviewLabel = {
 };
 
 const formatPreviewTitle = (title: string): PreviewLabel => {
-  const t = title.toLowerCase();
-  if (t.includes("baiyer")) {
-    return { name: "Baiyer Solar Plant", year: "2025" };
-  }
-  if (t.includes("pimaga")) {
-    return { name: "Pimaga Health Centre", year: "2023" };
-  }
-  if (t.includes("mongal") || t.includes("mongol")) {
-    return { name: "Mongal Health Centre", year: "2020" };
-  }
-  if (t.includes("kagua")) {
-    return { name: "Kagua Health Centre", year: "2020" };
-  }
-  if (t.includes("wildlife")) {
-    return { name: "Wildlife Conservation Society", year: "2025" };
-  }
-
   const match = title.match(/^(.*?)[\s,]+(\d{4})\)?$/);
   if (match) {
     return { name: match[1].trim(), year: match[2] };
@@ -192,69 +63,17 @@ const formatPreviewTitle = (title: string): PreviewLabel => {
   return { name: title, year: "" };
 };
 
-const timelineCards = [
-  {
-    year: "2007",
-    title: "PNG’s First Solar Street Light",
-    subtitle: "at NCD",
-    position: "card2007",
-    visibleAt: 1,
-  },
-  {
-    year: "2010",
-    title: "PNG’s First Solar-Powered Hospital with Lighting",
-    subtitle:
-      "Mutzing, Atzunas, Chuya, Markham Valley, Walium, Mosa, Malala, Mulau, Kaiapit, and Narawapum",
-    position: "card2010",
-    visibleAt: 2,
-  },
-  {
-    year: "2011",
-    title: "PNG’s First Solar-Powered Rural Electrification islands",
-    subtitle: "such as Kairuru, Musu, Wallis, Tarawai, Koli, Vokeo",
-    position: "card2011",
-    visibleAt: 2,
-  },
-  {
-    year: "2012",
-    title: "PNG’s First Solar-Powered Rural Government Office",
-    subtitle: "such as Simbai, Middle Ramu District",
-    position: "card2012",
-    visibleAt: 3,
-  },
-  {
-    year: "2020",
-    title:
-      "PNG’s First Solar-Powered Health Facilities with Full Biomedical Functioning,",
-    subtitle: "Kagua, Mongol, Munihu, Kandep, Laigaim, Yango, Tambitanis",
-    position: "card2020",
-    visibleAt: 4,
-  },
-  {
-    year: "2024",
-    title:
-      "PNG’s First largest Solar Powered Home Lighting Kits for 20,000 Houses",
-    subtitle: "Gulf Province",
-    position: "card2024",
-    visibleAt: 5,
-  },
-  {
-    year: "2023",
-    title: "PNG’s First Solar-Powered Minigrid",
-    subtitle: "at Pimaga Rural Hospital including staff houses",
-    position: "card2023",
-    visibleAt: 5,
-  },
-] as const;
-
 export default function Project() {
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+  const [isDashboard, setIsDashboard] = useState(false);
+  const [isFactsOpen, setIsFactsOpen] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [isStartOpen, setIsStartOpen] = useState(false);
   const [viewMode, setViewMode] = useState<"in-view" | "slide">("slide");
   const [timelineRun, setTimelineRun] = useState(0);
   const [isDesktop, setIsDesktop] = useState(true);
-  const { data: apiProjects } = useProjects();
+  const { data: apiProjects, isPending, isError, refetch } = useProjects();
 
   useEffect(() => {
     const update = () => setIsDesktop(window.innerWidth > 1200);
@@ -264,32 +83,67 @@ export default function Project() {
   }, []);
 
   const projects = useMemo<ProjectSlide[]>(() => {
-    if (!apiProjects?.length) return defaultProjects;
+    if (!apiProjects?.length) return [];
 
     return apiProjects.map((project) => ({
       id: project.id,
       title: project.title,
       shortTitle: project.title,
       image: project.featuredImg,
+      gallery: project.gallery ?? [],
+      population: project.population,
       leftPreview: undefined,
       rightPreview: undefined,
-      systems: valueWithoutUnit(project.numberofsystems, ""),
-      days: valueWithoutUnit(project.noofdays, ""),
+      systems: project.numberofsystems,
+      days: project.noofdays,
       totalGeneration: project.totalgeneration,
-      batteryPercentage: valueWithoutUnit(project.battery, "%"),
+      batteryStorage: project.battery,
+      siteName: project.siteName ?? "",
+      clientName: project.clientName ?? "",
+      projectScope: project.projectScope ?? "",
+      completionYear: project.completionYear ?? "",
+      listedCapacity: project.listedCapacity ?? "",
+      sourceNote: project.sourceNote,
       coalA: project.coalA,
       emissionReduction: project.emissionreduction,
       treesPlanted: project.treesplanted,
       capacity: project.capacity,
       toDateProduction: project.todateproduct,
       consumption: project.consumption,
-      dailyGeneration: project.totalenergydaily,
-      timelineYear: project.createdAt.slice(0, 4),
+      timelineYear: /^\d{4}$/.test(project.completionYear ?? "")
+        ? project.completionYear
+        : undefined,
     }));
   }, [apiProjects]);
 
+  if (!projects.length) {
+    return (
+      <main className={styles.page}>
+        <SiteHeader layout={isDesktop ? "figmaCanvas" : "viewport"} />
+        <p className={styles.loadStatus} role="status">
+          {isPending
+            ? "Loading projects…"
+            : isError
+              ? "Projects are temporarily unavailable."
+              : "No projects are available yet."}
+          {isError && (
+            <button type="button" onClick={() => refetch()}>
+              Try again
+            </button>
+          )}
+        </p>
+      </main>
+    );
+  }
+
   const activeIndex = currentProjectIndex % projects.length;
   const currentProject = projects[activeIndex];
+  const gallery = currentProject.gallery.length
+    ? currentProject.gallery
+    : currentProject.image
+      ? [{ url: currentProject.image, alt: currentProject.title }]
+      : [];
+  const selectedPhoto = gallery[photoIndex % (gallery.length || 1)];
 
   const currentLeftPreview = currentProject.leftPreview || {
     title:
@@ -306,6 +160,7 @@ export default function Project() {
   };
 
   const moveProject = (amount: number) => {
+    setPhotoIndex(0);
     setViewMode("slide");
     if (amount < 0 && currentProject.leftPreview) {
       setCurrentProjectIndex(currentProject.leftPreview.projectIndex);
@@ -320,11 +175,10 @@ export default function Project() {
   const openInView = () => {
     setTimelineRun((run) => run + 1);
     setViewMode("in-view");
+    setIsDashboard(false);
   };
-  const openTimelineProject = (year: string) => {
-    const matchingIndex = projects.findIndex(
-      (project) => project.timelineYear === year,
-    );
+  const openTimelineProject = (id: number) => {
+    const matchingIndex = projects.findIndex((project) => project.id === id);
 
     if (matchingIndex >= 0) {
       setCurrentProjectIndex(matchingIndex);
@@ -333,7 +187,10 @@ export default function Project() {
   };
 
   return (
-    <main className={styles.page} data-node-id="7077:7011">
+    <main
+      className={`${styles.page} ${isDashboard ? styles.dashboard : ""}`}
+      data-node-id={isDashboard ? "7077:8123" : "7077:7011"}
+    >
       <SiteHeader layout={isDesktop ? "figmaCanvas" : "viewport"} />
 
       <Image
@@ -349,73 +206,150 @@ export default function Project() {
         <InViewTimeline
           key={timelineRun}
           onExplore={openTimelineProject}
-          availableYears={new Set(
-            projects.flatMap((project) =>
-              project.timelineYear ? [project.timelineYear] : [],
-            ),
-          )}
+          projects={projects}
         />
       ) : (
         <section className={styles.stage} aria-label="Project portfolio">
           <motion.div
             className={styles.mainPhoto}
             animate={{
-              scale: isProjectsOpen ? 0.958 : 1,
+              scale: isProjectsOpen && !isDashboard ? 0.958 : 1,
             }}
             transition={springTransition}
           >
-            <img
-              loading="eager"
-              decoding="async"
-              src={currentProject.image}
-              alt={currentProject.title}
-              className={styles.figmaMainPhoto}
-            />
+            {currentProject.image ? (
+              <img
+                loading="eager"
+                decoding="async"
+                src={
+                  isDashboard
+                    ? selectedPhoto?.url || currentProject.image
+                    : currentProject.image
+                }
+                alt={
+                  isDashboard
+                    ? selectedPhoto?.alt || currentProject.title
+                    : currentProject.title
+                }
+                className={styles.figmaMainPhoto}
+                style={
+                  isDesktop && isDashboard && selectedPhoto?.dashboardFrame
+                    ? {
+                        position: "absolute",
+                        objectFit: "fill",
+                        left: `${selectedPhoto.dashboardFrame.left}%`,
+                        top: `${selectedPhoto.dashboardFrame.top}%`,
+                        width: `${selectedPhoto.dashboardFrame.width}%`,
+                        height: `${selectedPhoto.dashboardFrame.height}%`,
+                      }
+                    : undefined
+                }
+              />
+            ) : (
+              <div className={styles.photoPlaceholder}>
+                Project photograph not supplied
+              </div>
+            )}
             <div className={styles.photoShade} />
           </motion.div>
 
           <div className={styles.titlePanel}>
             <h1>{currentProject.title}</h1>
+            <button
+              type="button"
+              className={styles.dashboardButton}
+              onClick={() => {
+                setIsDashboard(!isDashboard);
+                setIsProjectsOpen(true);
+                setPhotoIndex(0);
+              }}
+              aria-label={
+                isDashboard
+                  ? "Back to project slides"
+                  : "Open project dashboard"
+              }
+            >
+              {isDashboard ? "↙" : "↗"}
+            </button>
           </div>
 
-          <motion.button
-            type="button"
-            className={styles.collapseButton}
-            onClick={() => setIsProjectsOpen((open) => !open)}
-            aria-expanded={isProjectsOpen}
-            aria-label={
-              isProjectsOpen
-                ? "Collapse project details"
-                : "Expand project details"
-            }
-            initial={false}
-            animate={{
-              rotate: isProjectsOpen ? 180 : 0,
-              top: isProjectsOpen ? 389 : 865,
-              left: isProjectsOpen ? 1006 : 844,
-            }}
-            transition={springTransition}
-          >
-            <svg
-              width="59"
-              height="34"
-              viewBox="0 0 59 34"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              aria-hidden="true"
+          {!isDashboard && (
+            <motion.button
+              type="button"
+              className={styles.collapseButton}
+              onClick={() => setIsProjectsOpen((open) => !open)}
+              aria-expanded={isProjectsOpen}
+              aria-label={
+                isProjectsOpen
+                  ? "Collapse project details"
+                  : "Expand project details"
+              }
+              initial={false}
+              animate={{
+                rotate: isProjectsOpen ? 180 : 0,
+                top: isDesktop ? (isProjectsOpen ? 389 : 865) : 170,
+                left: isDesktop
+                  ? isProjectsOpen
+                    ? 1006
+                    : 844
+                  : "calc(50% - 32px)",
+              }}
+              transition={springTransition}
             >
-              <path
-                d="M5 29L29.5 5L54 29"
-                stroke="white"
-                strokeWidth="8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+              <svg
+                width="59"
+                height="34"
+                viewBox="0 0 59 34"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 29L29.5 5L54 29"
+                  stroke="white"
+                  strokeWidth="8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </motion.button>
+          )}
+
+          {isDashboard && (
+            <fieldset
+              className={styles.heroMetrics}
+              aria-label="Project overview"
+            >
+              <HeroMetric
+                icon="/images/projects/overview-population.png"
+                label={
+                  currentProject.population
+                    ? "Total Population"
+                    : "Project Capacity"
+                }
+                value={currentProject.population || currentProject.capacity}
               />
-            </svg>
-          </motion.button>
+              <HeroMetric
+                icon="/images/projects/overview-generation.png"
+                label="Total Power Generation"
+                value={currentProject.totalGeneration}
+              />
+              <HeroMetric
+                icon="/images/projects/overview-storage.png"
+                label={
+                  <>
+                    Total Storage
+                    <br />
+                    Battery Capacity
+                  </>
+                }
+                value={currentProject.batteryStorage}
+              />
+            </fieldset>
+          )}
 
           <AnimatePresence>
-            {isProjectsOpen && (
+            {(isProjectsOpen || isDashboard) && (
               <motion.section
                 className={styles.statsPanel}
                 aria-label="Project performance data"
@@ -424,87 +358,10 @@ export default function Project() {
                 exit={{ opacity: 0, y: 562 }}
                 transition={springTransition}
               >
-                <div className={styles.primaryStats}>
-                  <Stat label="No. of systems" value={currentProject.systems} />
-                  <Stat label="No. of days" value={currentProject.days} />
-                  <Stat
-                    label="Total Generation"
-                    value={currentProject.totalGeneration}
-                    large
-                  />
-                  <div className={styles.battery}>
-                    <span>
-                      <Image
-                        src="/images/projects/batteryPercentage.png"
-                        width={26}
-                        height={27}
-                        alt=""
-                      />
-                    </span>
-                    <strong>{currentProject.batteryPercentage}%</strong>
-                  </div>
-                </div>
-                <div className={styles.impactStats}>
-                  <Impact
-                    icon="/images/projects/coal.png"
-                    label="Coal A"
-                    value={currentProject.coalA}
-                  />
-                  <span className={styles.divider}>/</span>
-                  <Impact
-                    icon="/images/projects/co2.png"
-                    label={
-                      <>
-                        Emission
-                        <br />
-                        reduction
-                      </>
-                    }
-                    value={currentProject.emissionReduction}
-                  />
-                  <span className={styles.divider}>/</span>
-                  <Impact
-                    icon="/images/projects/tree.png"
-                    label="Trees Planted"
-                    value={currentProject.treesPlanted}
-                  />
-                  <Impact
-                    icon="/images/projects/capacity.png"
-                    label="Capacity"
-                    value={currentProject.capacity}
-                  />
-                  <Impact
-                    icon="/images/projects/totalProduction.png"
-                    label="To date Production"
-                    value={currentProject.toDateProduction}
-                  />
-                  <Impact
-                    icon="/images/projects/consumption.png"
-                    label="Consumption"
-                    value={currentProject.consumption}
-                  />
-                </div>
-                <div className={styles.chartRow}>
-                  <div className={styles.periods}>
-                    {["Day", "Week", "Month", "Year"].map((period) => (
-                      <button type="button" key={period}>
-                        {period}
-                      </button>
-                    ))}
-                  </div>
-                  <div className={styles.graph}>
-                    <p>
-                      Total Generation daily : {currentProject.dailyGeneration}
-                    </p>
-                    <Image
-                      src="/images/projects/graph.png"
-                      alt="Daily energy generation graph"
-                      width={342}
-                      height={148}
-                    />
-                    <span>Today</span>
-                  </div>
-                </div>
+                <ProjectPerformance
+                  project={currentProject}
+                  onDetails={() => setIsFactsOpen(true)}
+                />
               </motion.section>
             )}
           </AnimatePresence>
@@ -533,19 +390,65 @@ export default function Project() {
 
       {viewMode === "slide" && (
         <>
-          <ProjectPreview
-            title={currentLeftPreview.title}
-            image={currentLeftPreview.image}
-            direction="previous"
-            onClick={() => moveProject(-1)}
-          />
-          <ProjectPreview
-            title={currentRightPreview.title}
-            image={currentRightPreview.image}
-            direction="next"
-            onClick={() => moveProject(1)}
-          />
+          {!isDashboard && (
+            <>
+              <ProjectPreview
+                title={currentLeftPreview.title}
+                image={currentLeftPreview.image}
+                direction="previous"
+                onClick={() => moveProject(-1)}
+              />
+              <ProjectPreview
+                title={currentRightPreview.title}
+                image={currentRightPreview.image}
+                direction="next"
+                onClick={() => moveProject(1)}
+              />
+            </>
+          )}
 
+          {isDashboard && (
+            <aside
+              className={styles.mediaRail}
+              aria-label="Project photography"
+            >
+              <div className={styles.galleryGrid}>
+                {gallery.map((photo, index) => (
+                  <button
+                    key={`${photo.url}-${index}`}
+                    type="button"
+                    aria-label={`View project photograph ${index + 1}`}
+                    aria-pressed={photoIndex === index}
+                    onClick={() => setPhotoIndex(index)}
+                  >
+                    <img src={photo.url} alt={photo.alt} />
+                  </button>
+                ))}
+              </div>
+              {selectedPhoto && (
+                <figure className={styles.galleryPreview}>
+                  <img src={selectedPhoto.url} alt={selectedPhoto.alt} />
+                  <figcaption>{currentProject.clientName}</figcaption>
+                </figure>
+              )}
+              <div className={styles.dashboardNavigation}>
+                <button
+                  type="button"
+                  onClick={() => moveProject(-1)}
+                  aria-label="Previous project"
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  onClick={() => moveProject(1)}
+                  aria-label="Next project"
+                >
+                  ›
+                </button>
+              </div>
+            </aside>
+          )}
           <button
             type="button"
             className={`${styles.mobileArrow} ${styles.mobilePrevious}`}
@@ -601,6 +504,11 @@ export default function Project() {
       ) : (
         <D6Chatbot />
       )}
+      <ProjectFacts
+        project={currentProject}
+        open={isFactsOpen}
+        onClose={() => setIsFactsOpen(false)}
+      />
       <ProductEnquiry
         isOpen={isStartOpen}
         onClose={() => setIsStartOpen(false)}
@@ -623,140 +531,218 @@ export default function Project() {
   );
 }
 
+function HeroMetric({
+  icon,
+  label,
+  value,
+}: {
+  icon: string;
+  label: React.ReactNode;
+  value: string;
+}) {
+  return (
+    <div className={styles.heroMetric}>
+      <Image src={icon} alt="" width={110} height={110} />
+      <span>{label}</span>
+      <strong>{value}</strong>
+    </div>
+  );
+}
+
+function ProjectPerformance({
+  project,
+  onDetails,
+}: {
+  project: ProjectSlide;
+  onDetails: () => void;
+}) {
+  return (
+    <div className={styles.statsInner}>
+      <div className={styles.primaryStats}>
+        <Stat label="No. of systems" value={project.systems} />
+        <Stat label="No. of days" value={project.days} />
+        <Stat label="Total Generation" value={project.totalGeneration} large />
+        <fieldset className={styles.battery} aria-label="Battery storage">
+          <span>
+            <Image
+              src="/images/projects/batteryPercentage.png"
+              loading="eager"
+              alt=""
+              width={26}
+              height={27}
+            />
+          </span>
+          <strong>{project.batteryStorage}</strong>
+        </fieldset>
+      </div>
+      <div className={styles.impactStats}>
+        <Impact
+          icon="/images/projects/coal.png"
+          label="Coal avoided"
+          value={project.coalA}
+        />
+        <Impact
+          icon="/images/projects/co2.png"
+          label={
+            <>
+              Emission
+              <br />
+              reduction
+            </>
+          }
+          value={project.emissionReduction}
+        />
+        <Impact
+          icon="/images/projects/tree.png"
+          label="Trees planted"
+          value={project.treesPlanted}
+        />
+        <Impact
+          icon="/images/projects/capacity.png"
+          label="Capacity"
+          value={project.capacity}
+        />
+        <Impact
+          icon="/images/projects/totalProduction.png"
+          label="To date Production"
+          value={project.toDateProduction}
+        />
+        <Impact
+          icon="/images/projects/consumption.png"
+          label="Consumption"
+          value={project.consumption}
+        />
+      </div>
+      <div className={styles.chartRow}>
+        <fieldset
+          className={styles.periods}
+          aria-label="Generation history period"
+        >
+          {["Day", "Week", "Month", "Year"].map((period) => (
+            <button
+              key={period}
+              type="button"
+              disabled
+              title="Generation history is unavailable"
+            >
+              {period}
+            </button>
+          ))}
+        </fieldset>
+        <div className={styles.historyEmpty}>
+          <span>Generation history</span>
+          <p>No generation history available</p>
+          <div className={styles.historyAxes} aria-hidden="true" />
+        </div>
+      </div>
+      <button
+        className={styles.sourceDetailsButton}
+        type="button"
+        onClick={onDetails}
+      >
+        Project details <span aria-hidden="true">↗</span>
+      </button>
+    </div>
+  );
+}
+
+function ProjectFacts({
+  project,
+  open,
+  onClose,
+}: {
+  project: ProjectSlide;
+  open: boolean;
+  onClose: () => void;
+}) {
+  const dialog = useRef<HTMLDialogElement>(null);
+  useEffect(() => {
+    if (open) dialog.current?.showModal();
+    else dialog.current?.close();
+  }, [open]);
+  return (
+    <dialog
+      ref={dialog}
+      className={styles.factsDialog}
+      aria-label="Project details"
+      onCancel={onClose}
+      onClose={onClose}
+    >
+      <header>
+        <h2>{project.title}</h2>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close project details"
+        >
+          ×
+        </button>
+      </header>
+      <dl className={styles.projectFacts}>
+        <dt>Site name</dt>
+        <dd>{project.siteName}</dd>
+        <dt>Client</dt>
+        <dd>{project.clientName}</dd>
+        <dt>Year of completion / status</dt>
+        <dd>{project.completionYear}</dd>
+        <dt>Listed project capacity</dt>
+        <dd>{project.listedCapacity || "Not provided"}</dd>
+        <dt>Project scope</dt>
+        <dd>{project.projectScope}</dd>
+        {project.sourceNote && (
+          <>
+            <dt>Source note</dt>
+            <dd>{project.sourceNote}</dd>
+          </>
+        )}
+      </dl>
+    </dialog>
+  );
+}
+
 function InViewTimeline({
   onExplore,
-  availableYears,
+  projects,
 }: {
-  onExplore: (year: string) => void;
-  availableYears: Set<string>;
+  onExplore: (id: number) => void;
+  projects: ProjectSlide[];
 }) {
-  const step = 5;
-
+  const groups = new Map<string, ProjectSlide[]>();
+  for (const project of projects) {
+    const year = project.completionYear || "Completion not provided";
+    groups.set(year, [...(groups.get(year) ?? []), project]);
+  }
   return (
     <section
       className={styles.inViewStage}
-      data-step={step}
-      aria-label="PNG project milestone map"
+      data-step="5"
+      aria-label="Project completion timeline"
     >
       <Image
         className={styles.pngMap}
         src="/images/projects/png-map-figma.png"
-        alt="Map of Papua New Guinea showing GREEN project locations"
-        width={2048}
-        height={756}
-        priority
+        alt="Papua New Guinea"
+        width={1920}
+        height={709}
+        sizes="100vw"
       />
-
-      <div
-        className={`${styles.mapPin} ${styles.pin2007}`}
-        aria-hidden="true"
-      />
-      <span
-        className={`${styles.connector} ${styles.connector2007}`}
-        aria-hidden="true"
-      />
-
-      <div
-        className={`${styles.revealGroup} ${step >= 2 ? styles.isVisible : ""}`}
-      >
-        <div
-          className={`${styles.mapPin} ${styles.pin2010}`}
-          aria-hidden="true"
-        />
-        <div
-          className={`${styles.mapPin} ${styles.pin2011}`}
-          aria-hidden="true"
-        />
-        <span
-          className={`${styles.connector} ${styles.connector2010}`}
-          aria-hidden="true"
-        />
-        <span
-          className={`${styles.connector} ${styles.connector2011}`}
-          aria-hidden="true"
-        />
+      <div className={styles.cmsTimelineCards}>
+        {[...groups.entries()].map(([year, entries]) => (
+          <article className={styles.cmsTimelineCard} key={year}>
+            <h2>{year}</h2>
+            <ul>
+              {entries.map((project) => (
+                <li key={project.id}>
+                  <button type="button" onClick={() => onExplore(project.id)}>
+                    {project.title}
+                    <span aria-hidden="true"> ›</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))}
       </div>
-
-      <div
-        className={`${styles.revealGroup} ${step >= 3 ? styles.isVisible : ""}`}
-      >
-        <div
-          className={`${styles.mapPin} ${styles.pin2012}`}
-          aria-hidden="true"
-        />
-        <span
-          className={`${styles.connector} ${styles.connector2012Vertical}`}
-          aria-hidden="true"
-        />
-        <span
-          className={`${styles.connector} ${styles.connector2012Horizontal}`}
-          aria-hidden="true"
-        />
-      </div>
-
-      <div
-        className={`${styles.revealGroup} ${step >= 4 ? styles.isVisible : ""}`}
-      >
-        <div
-          className={`${styles.mapPin} ${styles.pin2020}`}
-          aria-hidden="true"
-        />
-        <span
-          className={`${styles.connector} ${styles.connector2020}`}
-          aria-hidden="true"
-        />
-      </div>
-
-      <div
-        className={`${styles.revealGroup} ${step >= 5 ? styles.isVisible : ""}`}
-      >
-        <div
-          className={`${styles.mapPin} ${styles.pin2024}`}
-          aria-hidden="true"
-        />
-        <div
-          className={`${styles.mapPin} ${styles.pin2023}`}
-          aria-hidden="true"
-        />
-        <span
-          className={`${styles.connector} ${styles.connector2024Vertical}`}
-          aria-hidden="true"
-        />
-        <span
-          className={`${styles.connector} ${styles.connector2024Horizontal}`}
-          aria-hidden="true"
-        />
-        <span
-          className={`${styles.connector} ${styles.connector2023Vertical}`}
-          aria-hidden="true"
-        />
-        <span
-          className={`${styles.connector} ${styles.connector2023Horizontal}`}
-          aria-hidden="true"
-        />
-      </div>
-
-      {timelineCards.map((card) => (
-        <article
-          className={`${styles.timelineCard} ${styles[card.position]} ${step >= card.visibleAt ? styles.isVisible : ""}`}
-          key={card.year}
-        >
-          <div className={styles.timelineCopy}>
-            <h2>
-              {card.year} - {card.title}
-            </h2>
-            <p>{card.subtitle}</p>
-          </div>
-          {availableYears.has(card.year) ? (
-            <button type="button" onClick={() => onExplore(card.year)}>
-              Explore
-              <span className={styles.exploreArrow} aria-hidden="true">
-                ›
-              </span>
-            </button>
-          ) : null}
-        </article>
-      ))}
     </section>
   );
 }
@@ -789,7 +775,7 @@ function Impact({
 }) {
   return (
     <div className={styles.impact}>
-      <Image src={icon} alt="" width={34} height={28} />
+      <Image src={icon} alt="" width={34} height={28} loading="eager" />
       <span>{label}</span>
       <strong>{value}</strong>
     </div>
@@ -828,18 +814,20 @@ function ProjectPreview({
     >
       {/* 1. Back Layer: Clear unblurred framed photo */}
       <span className={styles.previewBackFrame}>
-        <img loading="lazy" decoding="async" src={image} alt="" />
+        {image && <img loading="lazy" decoding="async" src={image} alt="" />}
       </span>
 
       {/* 2. Front Layer: Frosted glass blurred card */}
       <span className={styles.previewFrontCard}>
-        <img
-          loading="lazy"
-          decoding="async"
-          src={image}
-          alt=""
-          className={styles.previewFrontImg}
-        />
+        {image && (
+          <img
+            loading="lazy"
+            decoding="async"
+            src={image}
+            alt=""
+            className={styles.previewFrontImg}
+          />
+        )}
         <span className={styles.previewCaption}>
           <span>{name}</span>
           {year && <span className={styles.previewYear}>{year}</span>}

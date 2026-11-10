@@ -1,6 +1,7 @@
-import Product from "@/app/components/Product/Product";
-import { CMS_BASE_URL } from "@/config/cms";
 import React from "react";
+import Product from "@/app/components/Product/Product";
+import ProductsFigma from "@/app/components/Product/ProductsFigma";
+import { CMS_BASE_URL } from "@/config/cms";
 
 export const revalidate = 3600;
 
@@ -13,13 +14,10 @@ const FALLBACK_PRODUCT_SLUGS = [
 
 export async function generateStaticParams() {
   try {
-    const res = await fetch(
-      `${CMS_BASE_URL}/api/engineering/products`,
-      {
-        next: { revalidate: 3600 },
-        signal: AbortSignal.timeout(5000),
-      },
-    );
+    const res = await fetch(`${CMS_BASE_URL}/api/engineering/products`, {
+      next: { revalidate: 3600 },
+      signal: AbortSignal.timeout(5000),
+    });
     if (!res.ok) return FALLBACK_PRODUCT_SLUGS.map((slug) => ({ slug }));
     const data = await res.json();
     const slugs = Array.isArray(data)
@@ -43,6 +41,10 @@ interface PageProps {
 const page = async ({ params }: PageProps) => {
   const { slug } = await params;
 
+  if (slug === "lighting-up-and-lifting-up-living-standards") {
+    return <ProductsFigma />;
+  }
+
   return (
     <React.Fragment>
       <Product slug={slug} />
@@ -51,4 +53,3 @@ const page = async ({ params }: PageProps) => {
 };
 
 export default page;
-

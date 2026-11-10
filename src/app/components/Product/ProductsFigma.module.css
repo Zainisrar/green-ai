@@ -2,7 +2,7 @@
 .desktop {
   position: relative;
   width: 1920px;
-  height: 970px;
+  height: var(--figma-canvas-height, 970px);
   overflow: hidden;
   background: #fff;
   color: #202020;
@@ -13,14 +13,17 @@
   z-index: 0;
   inset: 0;
   width: 1920px;
-  height: 970px;
+  height: var(--figma-canvas-height, 970px);
+  /* Render the brand marks separately so this decorative backdrop can fill
+     the viewport without changing logo proportions. */
+  clip-path: polygon(40% 0, 100% 0, 100% 100%, 40% 100%);
 }
 .pageTitleImg {
   position: absolute;
   z-index: 2;
   top: 90px;
   left: 286px;
-  width: 223px;
+  width: 241px;
   height: 36px;
   max-width: none;
 }
@@ -44,46 +47,18 @@
   top: 103px;
   width: 190px;
 }
-.sunsmartPrimaryBrand {
+.brandPanel {
   position: absolute;
   z-index: 4;
-  top: 0;
-  left: 0;
-  display: grid;
-  width: 320px;
-  height: 112px;
-  padding: 14px 32px 12px 20px;
-  background: linear-gradient(120deg, #d6fac5 0%, #f8f98a 100%);
-  clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
-  place-items: center;
+  top: -19px;
+  left: -6px;
+  width: 336px;
+  height: 506.5px;
+  max-width: none;
+  pointer-events: none;
 }
-.sunsmartPrimaryBrand img {
-  /* The panel narrows toward its lower-right diagonal. Keep the full
-     SunSmart mark inside that safe area at the rendered Figma scale. */
-  width: 205px;
-  height: auto;
-  max-height: 70px;
-  object-fit: contain;
-}
-.empawaPrimaryBrand {
-  position: absolute;
-  z-index: 4;
-  top: 0;
-  left: 0;
-  display: grid;
-  width: 320px;
-  height: 112px;
-  padding: 14px 32px 12px 20px;
-  background: linear-gradient(120deg, #d6fac5 0%, #f8f98a 100%);
-  clip-path: polygon(0 0, 100% 0, 82% 100%, 0 100%);
-  place-items: center;
-}
-.empawaPrimaryBrand img {
-  /* The Em’Pawa bolt extends furthest right, so it needs the same inset. */
-  width: 205px;
-  height: auto;
-  max-height: 70px;
-  object-fit: contain;
+.desktop[data-product-brand="sunsmart"] .brandPanel {
+  top: -25px;
 }
 .productBrandSwitcher {
   position: absolute;
@@ -98,17 +73,17 @@
   cursor: pointer;
   pointer-events: auto;
 }
-.sunshineBrandLink {
+.primaryBrandLink {
   top: 0;
   width: 320px;
   height: 126px;
 }
-.empawaBrandLink {
+.secondaryBrandLink {
   top: 128px;
   width: 190px;
   height: 66px;
 }
-.sunsmartBrandLink {
+.tertiaryBrandLink {
   top: 202px;
   width: 205px;
   height: 68px;
@@ -123,11 +98,13 @@
 .verticalTitle {
   position: absolute;
   z-index: 2;
-  top: 418px;
-  left: 31px;
-  width: 72px;
-  height: 517px;
+  bottom: 28px;
+  left: 32px;
+  width: 113px;
+  height: min(523px, calc(var(--figma-canvas-height, 970px) - 447px));
   max-width: none;
+  object-fit: contain;
+  object-position: left bottom;
 }
 .gallery {
   position: absolute;
@@ -136,11 +113,72 @@
 }
 .hero {
   position: absolute;
-  top: 126px;
+  box-sizing: border-box;
+  top: 127px;
   left: 166px;
   width: 704px;
-  height: 624px;
+  height: calc(var(--figma-canvas-height, 970px) - 346px);
+  /* Catalogue images have different amounts of built-in whitespace. Reserve
+     space inside the gallery so even tightly cropped products clear the title. */
+  padding: 32px 24px 24px;
   object-fit: contain;
+}
+.desktop[data-product-brand="empawa"] .hero {
+  top: 187.5px;
+  left: 299.2px;
+  width: 457.7px;
+  height: calc(var(--figma-canvas-height, 970px) - 477px);
+}
+.desktop[data-product-brand="sunsmart"] .hero {
+  top: 246px;
+  left: 215.1px;
+  width: 653.1px;
+  height: calc(var(--figma-canvas-height, 970px) - 462px);
+}
+.galleryControls {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.previousProducts,
+.nextProducts {
+  position: absolute;
+  z-index: 3;
+  top: calc(var(--figma-canvas-height, 970px) - 194px);
+  width: 44px;
+  height: 60px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #202020;
+  font-size: 48px;
+  line-height: 1;
+  cursor: pointer;
+  pointer-events: auto;
+}
+.previousProducts {
+  left: 184px;
+}
+.nextProducts {
+  left: 827px;
+}
+.galleryControls button:focus-visible,
+.mobileGalleryControls button:focus-visible,
+.specificationList:focus-visible {
+  outline: 2px solid #23b14d;
+  outline-offset: 3px;
+}
+.catalogStatus {
+  position: absolute;
+  top: 850px;
+  left: 239px;
+  width: 550px;
+  color: #303030;
+  font-size: 16px;
+}
+.catalogStatus button {
+  cursor: pointer;
+  text-decoration: underline;
 }
 .thumbnails {
   position: absolute;
@@ -151,8 +189,10 @@
 .thumbnails button {
   position: absolute;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
   box-sizing: border-box;
-  padding: 0;
+  padding: 6px;
   overflow: hidden;
   border: 1px solid transparent;
   border-radius: 16px;
@@ -163,25 +203,54 @@
   pointer-events: auto;
 }
 .thumbnails button > img {
+  display: block;
+  min-width: 0;
+  min-height: 0;
   width: 100%;
   height: 100%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 }
 .thumbnails button:nth-of-type(1) {
-  top: 760px;
+  top: calc(var(--figma-canvas-height, 970px) - 210px);
   left: 239px;
 }
 .thumbnails button:nth-of-type(2) {
-  top: 764px;
+  top: calc(var(--figma-canvas-height, 970px) - 206px);
   left: 401px;
 }
 .thumbnails button:nth-of-type(3) {
-  top: 760px;
+  top: calc(var(--figma-canvas-height, 970px) - 210px);
   left: 548px;
 }
 .thumbnails button:nth-of-type(4) {
-  top: 760px;
+  top: calc(var(--figma-canvas-height, 970px) - 210px);
   left: 694px;
+}
+.desktop[data-product-brand="sunsmart"] .thumbnails button {
+  top: calc(var(--figma-canvas-height, 970px) - 239px);
+  width: 148px;
+  height: 116px;
+}
+.desktop[data-product-brand="sunsmart"] .thumbnails button:nth-of-type(1) {
+  left: 178px;
+}
+.desktop[data-product-brand="sunsmart"] .thumbnails button:nth-of-type(2) {
+  left: 354px;
+}
+.desktop[data-product-brand="sunsmart"] .thumbnails button:nth-of-type(3) {
+  left: 530px;
+}
+.desktop[data-product-brand="sunsmart"] .thumbnails button:nth-of-type(4) {
+  left: 693px;
+}
+.desktop[data-product-brand="sunsmart"] .previousProducts {
+  left: 126px;
+}
+.desktop[data-product-brand="sunsmart"] .nextProducts,
+.desktop[data-product-brand="sunsmart"] .previousProducts {
+  top: calc(var(--figma-canvas-height, 970px) - 219px);
 }
 .thumbnails .inactiveThumbnail {
   width: 84px;
@@ -200,7 +269,7 @@
 }
 .enquiry {
   position: absolute;
-  top: 886px;
+  top: calc(var(--figma-canvas-height, 970px) - 84px);
   left: 658px;
   width: 169px;
   height: 52px;
@@ -226,7 +295,7 @@
 .story {
   position: absolute;
   z-index: 2;
-  top: 178px;
+  top: calc(178px + (var(--figma-canvas-height, 970px) - 970px) / 2);
   left: 1057px;
   width: 815px;
   height: 430px;
@@ -244,74 +313,171 @@
   width: 388px;
   margin: 0;
   color: #303030;
-  font-size: 38px;
+  font-size: 48px;
   font-style: italic;
-  font-weight: 800;
-  line-height: 51px;
+  font-weight: 700;
+  line-height: 50px;
 }
 .story p {
   position: absolute;
-  top: 308px;
+  top: 309px;
   left: 140px;
   width: 437px;
   margin: 0;
   color: #303030;
-  font-size: 14px;
-  line-height: 24px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 26px;
+  max-height: 100px;
+  overflow-y: auto;
 }
 .specifications {
   position: absolute;
   z-index: 2;
-  top: 739px;
+  top: calc(var(--figma-canvas-height, 970px) - 231px);
   left: 891px;
   width: 1002px;
-  height: 182px;
+  height: 181.5px;
 }
 .specificationPanel {
   position: absolute;
   top: -26px;
   left: -30px;
   width: 1059px;
-  height: 242px;
+  height: 241.5px;
   max-width: none;
 }
 .specificationList {
   position: absolute;
   top: 34px;
-  left: 75px;
+  left: 62px;
   display: grid;
-  width: 872px;
-  grid-template-columns: repeat(9, minmax(0, 1fr));
+  width: 882px;
   gap: 0;
+  height: 126px;
+  overflow: visible;
 }
 .specificationList article {
+  position: relative;
   min-width: 0;
+  height: 126px;
+  padding: 0 8px;
   color: #111;
   text-align: center;
+  overflow-wrap: anywhere;
 }
-.specificationList article > img {
+.specificationList article > img,
+.specificationList article > svg {
   display: block;
   width: 32px;
-  height: 25px;
-  margin: 0 auto 6px;
+  height: 28px;
+  margin: 0 auto;
   object-fit: contain;
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / 45%));
 }
 .specificationList h3 {
+  position: absolute;
+  top: 32px;
+  right: 8px;
+  left: 8px;
   margin: 0;
   font-size: 12px;
   font-weight: 600;
-  line-height: 15px;
+  font-family: var(--font-raleway), Raleway, sans-serif;
+  text-shadow: 0 2px 6px rgb(0 0 0 / 45%);
+  line-height: 14px;
+  height: 28px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
-.specificationList p,
-.specificationList span {
-  display: block;
-  margin: 10px 0 0;
-  white-space: pre-line;
+.specificationList p {
+  position: absolute;
+  top: 60px;
+  right: 8px;
+  left: 8px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  max-height: 36px;
+  margin: 0;
+  white-space: normal;
   font-size: 10px;
-  line-height: 11px;
+  line-height: 12px;
 }
-.specificationList span {
-  margin-top: 9px;
+.specificationDetails {
+  border: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.specificationDetails:focus-visible {
+  outline: 2px solid #23b14d;
+}
+.previousSpecifications,
+.nextSpecifications {
+  position: absolute;
+  top: 59px;
+  width: 24px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #303030;
+  font-size: 28px;
+  cursor: pointer;
+}
+.previousSpecifications {
+  left: 32px;
+}
+.nextSpecifications {
+  right: 30px;
+}
+.previousSpecifications:disabled,
+.nextSpecifications:disabled {
+  visibility: hidden;
+}
+.specificationDialog {
+  position: fixed;
+  inset: 0;
+  width: min(480px, calc(100vw - 32px));
+  max-height: 80svh;
+  margin: auto;
+  padding: 32px;
+  border: 1px solid #d4ecc9;
+  border-radius: 12px;
+  background: #fff;
+  color: #202020;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
+  box-shadow: 0 16px 60px #0003;
+}
+.specificationDialog::backdrop {
+  background: #0005;
+}
+.specificationDialog h2 {
+  margin: 0 28px 16px 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+.specificationDialog p {
+  margin: 0;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+.closeSpecification {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
 }
 .mobile {
   min-height: 100svh;
@@ -347,6 +513,31 @@
   display: block;
   width: 100%;
   margin: 24px auto 12px;
+  height: 350px;
+  object-fit: contain;
+}
+.mobileGalleryControls {
+  position: relative;
+  padding: 0 28px;
+}
+.mobileGalleryControls .previousProducts,
+.mobileGalleryControls .nextProducts {
+  top: 50%;
+  width: 28px;
+  height: 44px;
+  font-size: 36px;
+  transform: translateY(-50%);
+}
+.mobileGalleryControls .previousProducts {
+  left: 0;
+}
+.mobileGalleryControls .nextProducts {
+  right: 0;
+  left: auto;
+}
+.mobile .catalogStatus {
+  position: static;
+  width: auto;
 }
 .mobileThumbnails {
   display: grid;
@@ -429,11 +620,13 @@
   border: 1px solid #eef3eb;
 }
 
-.mobileSpecItem img {
+.mobileSpecItem img,
+.mobileSpecItem > svg {
   width: 32px;
   height: 28px;
   object-fit: contain;
   margin-bottom: 6px;
+  filter: drop-shadow(0 2px 3px rgb(0 0 0 / 45%));
 }
 
 .mobileSpecItem h3 {
