@@ -20,10 +20,12 @@
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  clip-path: polygon(var(--figma-cta-slant) 0,
-      100% 0,
-      calc(100% - var(--figma-cta-slant)) 100%,
-      0 100%);
+  clip-path: polygon(
+    var(--figma-cta-slant) 0,
+    100% 0,
+    calc(100% - var(--figma-cta-slant)) 100%,
+    0 100%
+  );
   transition:
     filter 0.15s ease,
     transform 0.15s ease;
@@ -37,10 +39,12 @@
   padding: 0 14px 0 18px;
   font-size: 12px;
   font-weight: 600;
-  clip-path: polygon(var(--figma-cta-slant) 0,
-      100% 0,
-      calc(100% - var(--figma-cta-slant)) 100%,
-      0 100%);
+  clip-path: polygon(
+    var(--figma-cta-slant) 0,
+    100% 0,
+    calc(100% - var(--figma-cta-slant)) 100%,
+    0 100%
+  );
 }
 
 /* Exact Vector 7368 treatment shared by controls labelled “Explore”. */
@@ -54,26 +58,31 @@
 
 .exploreCta::before {
   background: linear-gradient(90deg, #23b14d 0%, #fffe50 100%) !important;
-  clip-path: polygon(var(--figma-cta-slant) 0,
-      100% 0,
-      calc(100% - var(--figma-cta-slant)) 100%,
-      0 100%) !important;
+  clip-path: polygon(
+    var(--figma-cta-slant) 0,
+    100% 0,
+    calc(100% - var(--figma-cta-slant)) 100%,
+    0 100%
+  ) !important;
 }
 
 .exploreCta::after {
   inset: 1px !important;
   background:
-    linear-gradient(90deg,
+    linear-gradient(
+      90deg,
       rgba(165, 223, 79, 0.5) 0%,
-      rgba(255, 254, 80, 0.5) 100%),
+      rgba(255, 254, 80, 0.5) 100%
+    ),
     #ffffff !important;
   backdrop-filter: blur(15px) !important;
-  clip-path: polygon(var(--figma-cta-slant) 0,
-      100% 0,
-      calc(100% - var(--figma-cta-slant)) 100%,
-      0 100%) !important;
+  clip-path: polygon(
+    var(--figma-cta-slant) 0,
+    100% 0,
+    calc(100% - var(--figma-cta-slant)) 100%,
+    0 100%
+  ) !important;
 }
-
 
 .cta::before,
 .cta::after {
@@ -87,25 +96,31 @@
 /* Outer 1px stroke (100% saturated gradient) */
 .cta::before {
   background: linear-gradient(90deg, #23b14d 0%, #fffe50 100%);
-  clip-path: polygon(var(--figma-cta-slant) 0,
-      100% 0,
-      calc(100% - var(--figma-cta-slant)) 100%,
-      0 100%);
+  clip-path: polygon(
+    var(--figma-cta-slant) 0,
+    100% 0,
+    calc(100% - var(--figma-cta-slant)) 100%,
+    0 100%
+  );
 }
 
 /* Inner 50% opacity gradient fill over white background matching Figma */
 .cta::after {
   inset: 1px;
   background:
-    linear-gradient(90deg,
+    linear-gradient(
+      90deg,
       rgba(35, 177, 77, 0.5) 0%,
-      rgba(255, 254, 80, 0.5) 100%),
+      rgba(255, 254, 80, 0.5) 100%
+    ),
     #ffffff;
   backdrop-filter: blur(15px);
-  clip-path: polygon(var(--figma-cta-slant) 0,
-      100% 0,
-      calc(100% - var(--figma-cta-slant)) 100%,
-      0 100%);
+  clip-path: polygon(
+    var(--figma-cta-slant) 0,
+    100% 0,
+    calc(100% - var(--figma-cta-slant)) 100%,
+    0 100%
+  );
 }
 
 .inner {
@@ -236,4 +251,40 @@
     height: 13px;
     flex-shrink: 0;
   }
+}
+
+/* Clip only the decorative fills. The control and its content remain intact. */
+.cta {
+  clip-path: none !important;
+  overflow: visible;
+}
+.outline {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.exploreCta .smallArrow,
+.exploreCta .arrow {
+  width: var(--figma-cta-icon-size, 18px);
+  height: var(--figma-cta-icon-size, 18px);
+}
+.cta:focus-visible {
+  outline: 2px solid #168334;
+  outline-offset: 3px;
+}
+
+/* Page-level arrow rules must not resize the full button outline. */
+.outline {
+  width: 100% !important;
+  height: 100% !important;
+}
+.exploreCta .smallArrow,
+.exploreCta .arrow {
+  width: var(--figma-cta-icon-size, 18px) !important;
+  height: var(--figma-cta-icon-size, 18px) !important;
 }

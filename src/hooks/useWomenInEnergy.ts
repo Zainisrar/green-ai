@@ -1,5 +1,6 @@
-import { CMS_BASE_URL } from "@/config/cms";
 "use client";
+
+import { CMS_BASE_URL } from "@/config/cms";
 import { useQuery } from "@tanstack/react-query";
 
 // Main Page Interfaces

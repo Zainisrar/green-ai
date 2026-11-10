@@ -7,6 +7,10 @@ export interface ProjectPhotograph {
   dashboardFrame?: { left: number; top: number; width: number; height: number };
 }
 
+export interface ProjectMotionFrame extends ProjectPhotograph {
+  photoIndex: number;
+}
+
 export interface ProjectDetails {
   sourceNumber: number;
   slug: string;
@@ -18,6 +22,7 @@ export interface ProjectDetails {
   dashboardTitle: string;
   sourceNote?: string;
   gallery?: ProjectPhotograph[];
+  dashboardSequence?: ProjectMotionFrame[];
   population?: string;
 }
 

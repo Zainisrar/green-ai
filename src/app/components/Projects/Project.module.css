@@ -450,47 +450,32 @@
   line-height: 1.17;
 }
 
-.timelineCard button {
+.timelineCard .mapExploreButton {
+  --figma-cta-slant: 11px;
+  --figma-cta-height: 24px;
+  --figma-cta-icon-size: 14px;
   position: absolute;
   right: 8.5%;
-  bottom: -1px;
-  display: flex;
+  bottom: 0;
   width: 24.4%;
-  height: 2.25vh;
-  min-height: 21px;
-  padding: 0 0.55vw 0 1vw;
-  border: 1px solid transparent;
-  border-image: linear-gradient(100deg, #27d963, #e8dd00) 1;
-  background: linear-gradient(
-    100deg,
-    rgb(207 255 215 / 0.82),
-    rgb(255 251 207 / 0.85)
-  );
+  height: 24px;
+  min-height: 24px;
+  padding: 0 13px;
   color: #161616;
-  cursor: pointer;
-  align-items: center;
-  justify-content: space-between;
   font:
-    italic 700 clamp(9px, 0.68vw, 14px) / 1 Arial,
+    italic 700 12px / 1 Arial,
     sans-serif;
-  clip-path: polygon(12% 0, 100% 0, 91% 100%, 0 100%);
 }
-
-.card2007 button {
+.card2007 .mapExploreButton,
+.card2023 .mapExploreButton {
   width: 33%;
 }
-
-.card2012 button {
+.card2012 .mapExploreButton {
   width: 28%;
 }
-
-.card2020 button,
-.card2024 button {
+.card2020 .mapExploreButton,
+.card2024 .mapExploreButton {
   width: 22%;
-}
-
-.card2023 button {
-  width: 33%;
 }
 
 .exploreArrow {
@@ -755,17 +740,22 @@
   cursor: pointer;
 }
 .dashboardButton {
-  position: absolute;
-  top: 12px;
-  right: 26px;
-  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
   border: 0;
-  color: #202020;
-  font-size: 24px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  text-align: inherit;
   cursor: pointer;
 }
+
 .titlePanel:has(.dashboardButton) {
-  padding-right: 64px;
+  padding-right: 44px;
 }
 .titlePanel:has(.dashboardButton) h1 {
   width: 100%;
@@ -823,15 +813,21 @@
 }
 .dashboard .verticalTitle {
   top: 410px;
+  left: 32px;
+  width: 117px;
   height: 539px;
-  opacity: 0.7;
+  opacity: 1;
+  font-family: var(--font-montserrat), Montserrat, sans-serif;
 }
 .dashboard .titlePanel {
   top: 127px;
   left: 294px;
   width: 1203px;
   min-height: 96px;
-  padding: 5px 66px 8px 46px;
+  display: flex;
+  align-items: center;
+  padding: 4px 46px;
+  clip-path: polygon(3% 0, 100% 0, 97% 100%, 0 100%);
   background: #e6e2e24d;
 }
 .dashboard .titlePanel h1 {
@@ -904,16 +900,19 @@
   height: 535px;
 }
 .galleryGrid {
+  position: absolute;
+  top: 0;
+  left: 90px;
   display: grid;
-  grid-template-columns: repeat(2, 154px);
-  gap: 24px 0;
-  justify-content: end;
+  grid-template-columns: repeat(2, 129px);
+  gap: 26px 0;
 }
 .galleryGrid button {
+  position: relative;
   padding: 0;
   border: 0;
   background: transparent;
-  width: 154px;
+  width: 154.5px;
   height: 94px;
   cursor: pointer;
   clip-path: polygon(32% 0, 100% 0, 68% 100%, 0 100%);
@@ -931,8 +930,8 @@
 }
 .galleryPreview {
   position: absolute;
-  top: 306px;
-  left: 12px;
+  top: 307px;
+  left: 13px;
   width: 331px;
   margin: 0;
 }
@@ -940,7 +939,7 @@
   width: 331px;
   height: 186px;
   object-fit: cover;
-  border-bottom: 4px solid #23b14d;
+  border-bottom: 3px solid #23b14d;
 }
 .galleryPreview figcaption {
   margin-top: 5px;
@@ -950,18 +949,89 @@
 }
 .dashboardNavigation {
   position: absolute;
-  bottom: -4px;
-  left: 145px;
+  top: 505px;
+  left: 132px;
   display: flex;
-  gap: 20px;
+  align-items: center;
+  gap: 12px;
 }
 .dashboardNavigation button {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 2px;
   border: 0;
   background: transparent;
-  color: #202020;
+  color: #111;
   cursor: pointer;
-  font-size: 28px;
 }
+.dashboardNavigation svg {
+  width: 20px;
+  height: 20px;
+}
+.galleryPlayOverlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  padding: 8px;
+  border: 1px solid #2229;
+  border-radius: 50%;
+  background: #ffffff20;
+  color: #2229;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+.galleryPlayOverlay svg {
+  width: 24px;
+  height: 24px;
+}
+.galleryProgress {
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 4px;
+  margin: 0;
+  padding: 0;
+  appearance: none;
+  background: #23b14d;
+  cursor: pointer;
+}
+.galleryProgress::-webkit-slider-thumb {
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 50%;
+  background: #23b14d;
+}
+.galleryProgress::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 50%;
+  background: #23b14d;
+}
+.sourceDetailsButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  width: max-content;
+  white-space: nowrap;
+  font-size: 11px;
+  line-height: 16px;
+}
+.sourceDetailsButton svg {
+  width: 14px;
+  height: 14px;
+  flex: none;
+}
+
 .dashboard .viewToggle {
   bottom: 21px;
 }
@@ -1002,64 +1072,12 @@
   left: 320px;
   max-width: 60%;
 }
-.cmsTimelineCards {
-  position: absolute;
-  top: 140px;
-  right: 80px;
-  width: 850px;
-  max-height: 650px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  padding: 8px;
-  overflow: auto;
-}
-.cmsTimelineCard {
-  padding: 20px;
-  border: 1px solid #cde5bf;
-  border-radius: 8px;
-  background: #fffffff0;
-}
-.cmsTimelineCard h2 {
-  margin: 0 0 10px;
-  color: #238442;
-  font-size: 20px;
-  font-weight: 700;
-}
-.cmsTimelineCard ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.cmsTimelineCard li + li {
-  margin-top: 10px;
-}
-.cmsTimelineCard button {
-  padding: 0;
-  border: 0;
-  background: none;
-  color: #202020;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-}
 
 @media (max-width: 1200px) {
-  .cmsTimelineCards {
-    top: 140px;
-    right: 5%;
-    width: 90%;
-    max-height: 650px;
-  }
   .loadStatus {
     top: 140px;
     left: 24px;
     max-width: calc(100% - 48px);
-  }
-}
-@media (max-width: 540px) {
-  .cmsTimelineCards {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -1742,13 +1760,9 @@
     display: block;
     margin: 14px auto 0;
   }
-  .dashboardButton {
-    font-size: 21px;
-    right: 18px;
-    top: 8px;
-  }
+
   .titlePanel:has(.dashboardButton) {
-    padding-right: 43px;
+    padding-right: 24px;
   }
   .dashboard .mainPhoto {
     left: 5%;
@@ -1809,6 +1823,7 @@
     height: 300px;
   }
   .dashboard .galleryGrid {
+    position: static;
     grid-template-columns: repeat(2, 1fr);
     justify-content: center;
     gap: 10px;
@@ -1861,8 +1876,9 @@
 }
 @media (min-width: 1201px) {
   .dashboard .sourceDetailsButton {
-    left: 69%;
-    bottom: 42px;
+    left: auto;
+    right: 230px;
+    bottom: 18px;
   }
   .statsInner .primaryStats {
     width: 68%;
@@ -1885,4 +1901,196 @@
   .dashboard .titlePanel {
     padding-left: clamp(24px, 6vw, 64px);
   }
+}
+
+.thumbnailBorder {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.dashboardTitleArrow {
+  width: 24px;
+  height: 24px;
+  flex: none;
+}
+.dashboardButton > span {
+  min-width: 0;
+}
+.dashboardButton:focus-visible {
+  outline: 2px solid #158332;
+  outline-offset: 5px;
+}
+.previewMissingPhoto {
+  margin-top: 12px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* Retain the Figma map composition while paging CMS records into its seven callout slots. */
+.mapCallouts {
+  position: absolute;
+  inset: 0;
+}
+.cmsMapTimeline .timelineCard {
+  min-height: 98px;
+}
+.cmsMapTimeline .timelineCopy {
+  padding: 12px 48px 34px;
+}
+.cmsMapTimeline .timelineCard h2 {
+  font-size: 18px;
+  line-height: 1.15;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+.cmsMapTimeline .timelineCard p {
+  font-size: 13px;
+  line-height: 1.25;
+}
+.cmsMapTimeline .timelineCard button {
+  height: 24px;
+  min-height: 24px;
+  font-size: 12px;
+}
+
+@media (max-width: 1200px) {
+  .cmsMapTimeline {
+    position: relative;
+    min-height: 100svh;
+    padding: 140px 20px 100px;
+    overflow: visible;
+  }
+  .cmsMapTimeline .pngMap {
+    position: fixed;
+    top: 180px;
+    left: 0;
+    width: 100%;
+    opacity: 0.65;
+  }
+  .mapCallouts {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .cmsMapTimeline .timelineCard {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    min-height: 140px;
+  }
+  .cmsMapTimeline .timelineCopy {
+    padding: 16px 28px 36px;
+  }
+  .cmsMapTimeline .timelineCard h2 {
+    font-size: 15px;
+  }
+  .cmsMapTimeline .timelineCard p {
+    font-size: 12px;
+  }
+  .cmsMapTimeline .timelineCard button {
+    width: 100px;
+  }
+  .page:has(.cmsMapTimeline) .viewToggle {
+    display: grid;
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin: 0 auto 24px;
+    transform: none;
+  }
+}
+@media (max-width: 540px) {
+  .mapCallouts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1200px) {
+  .viewToggle {
+    display: grid;
+    left: calc(50% - 103px);
+    bottom: 95px;
+  }
+}
+
+.photoLayers {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+.photoLayers > img {
+  display: block;
+}
+.galleryPreview > .photoLayers {
+  position: relative;
+  width: 331px;
+  height: 186px;
+  border-bottom: 3px solid #23b14d;
+}
+.galleryPreview .photoPlaceholder {
+  padding: 12px;
+  font-size: 12px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .photoLayers > img {
+    animation: none;
+    transition: none;
+  }
+}
+.galleryPreview .photoLayers img {
+  border: 0;
+}
+
+.mapScene {
+  position: absolute;
+  inset: 0;
+}
+.cmsMapTimeline .timelineCard {
+  transition: none;
+}
+
+@media (max-width: 1200px) {
+  .mapScene {
+    position: relative;
+  }
+}
+
+/* Figma's dashboard photograph includes a 20% grey paint above the image. */
+.dashboard .photoShade {
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: rgb(128 125 125 / 20%);
+  pointer-events: none;
+}
+
+/* Put the angled card on its own layer so it cannot cut the CTA's border. */
+.timelineCard {
+  clip-path: none;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  filter: drop-shadow(0 6px 5px rgb(0 0 0 / 18%));
+}
+.timelineCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgb(226 226 226 / 92%);
+  background: linear-gradient(
+    112deg,
+    rgb(247 247 247 / 97%),
+    rgb(235 235 235 / 84%)
+  );
+  clip-path: polygon(7.5% 0, 100% 0, 91.5% 100%, 0 100%);
+  pointer-events: none;
+}
+.timelineCopy {
+  position: relative;
 }

@@ -1,6 +1,6 @@
-import { CMS_BASE_URL } from "@/config/cms";
 "use client";
 
+import { CMS_BASE_URL } from "@/config/cms";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useReportsWhitepapers } from "../../../hooks/useReportsWhitepapers";
 import D6Chatbot from "../D6Chatbot";

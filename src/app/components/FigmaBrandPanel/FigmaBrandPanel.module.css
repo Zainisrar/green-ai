@@ -33,6 +33,21 @@
   max-width: none;
 }
 
+.projectPanel .rectangle img {
+  height: 116.68312%;
+}
+
+/* Figma 7077:8275 uses an 80% gradient over a blurred photograph.
+   An external SVG cannot sample the page behind it for background blur. */
+.projectPanel .rectangle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
 .logo {
   position: absolute;
   z-index: 1;

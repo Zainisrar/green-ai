@@ -5,7 +5,7 @@ interface FigmaBrandPanelProps {
   className?: string;
   compactLogo?: boolean;
   fixedCanvasSize?: boolean;
-  variant?: "default" | "flagship";
+  variant?: "default" | "flagship" | "project";
   showPanel?: boolean;
 }
 
@@ -24,15 +24,22 @@ export default function FigmaBrandPanel({
 }: FigmaBrandPanelProps) {
   return (
     <div
-      className={`${styles.panel} ${fixedCanvasSize ? styles.fixedCanvasPanel : ""} ${variant === "flagship" ? styles.flagshipPanel : ""} ${className}`.trim()}
-      data-node-id="7077:3753"
+      className={`${styles.panel} ${fixedCanvasSize ? styles.fixedCanvasPanel : ""} ${variant === "flagship" ? styles.flagshipPanel : variant === "project" ? styles.projectPanel : ""} ${className}`.trim()}
+      data-node-id={variant === "project" ? "7077:8274" : "7077:3753"}
     >
       {showPanel ? (
-        <div className={styles.rectangle} data-node-id="7077:3754">
+        <div
+          className={styles.rectangle}
+          data-node-id={variant === "project" ? "7077:8275" : "7077:3754"}
+        >
           <img
             loading="lazy"
             decoding="async"
-            src={`${ASSET_ROOT}/rectangle.svg`}
+            src={
+              variant === "project"
+                ? "/images/projects/brand-panel-figma.svg"
+                : `${ASSET_ROOT}/rectangle.svg`
+            }
             alt=""
             width="394"
             height="590.5"
@@ -44,7 +51,7 @@ export default function FigmaBrandPanel({
         href="/home/renewable-energy-the-core"
         className={`${styles.logo} ${compactLogo ? styles.compactLogo : ""}`}
         aria-label="GREEN home"
-        data-node-id="7077:3755"
+        data-node-id={variant === "project" ? "7077:8276" : "7077:3755"}
       >
         <img
           loading="lazy"

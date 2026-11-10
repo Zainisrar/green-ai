@@ -3,18 +3,22 @@
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { type ProjectPhotograph, useProjects } from "@/hooks/useProjects";
+import {
+  type ProjectMotionFrame,
+  type ProjectPhotograph,
+  useProjects,
+} from "@/hooks/useProjects";
 import D6Chatbot from "../D6Chatbot";
 import ProductEnquiry from "../Product/Modals/ProductEnquiry";
 import SiteHeader from "../SiteHeader/SiteHeader";
 import styles from "./Project.module.css";
+import ProjectGallery from "./ProjectGallery";
+import ProjectPhoto from "./ProjectPhoto";
+import ProjectTimeline from "./ProjectTimeline";
+import { projectLayoutSpring } from "./projectMotion";
+import useProjectPlayback from "./useProjectPlayback";
 
-const springTransition = {
-  type: "spring" as const,
-  mass: 1,
-  stiffness: 100,
-  damping: 15,
-};
+const springTransition = projectLayoutSpring;
 
 type ProjectPreviewInfo = {
   title: string;
@@ -47,6 +51,7 @@ type ProjectSlide = {
   consumption: string;
   timelineYear?: string;
   gallery: ProjectPhotograph[];
+  dashboardSequence?: ProjectMotionFrame[];
   population?: string;
 };
 
@@ -67,7 +72,6 @@ export default function Project() {
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const [isDashboard, setIsDashboard] = useState(false);
   const [isFactsOpen, setIsFactsOpen] = useState(false);
-  const [photoIndex, setPhotoIndex] = useState(0);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [isStartOpen, setIsStartOpen] = useState(false);
   const [viewMode, setViewMode] = useState<"in-view" | "slide">("slide");
@@ -89,8 +93,12 @@ export default function Project() {
       id: project.id,
       title: project.title,
       shortTitle: project.title,
-      image: project.featuredImg,
+      image:
+        project.featuredImg?.trim() ||
+        project.gallery?.find((photo) => photo.url?.trim())?.url ||
+        "",
       gallery: project.gallery ?? [],
+      dashboardSequence: project.dashboardSequence,
       population: project.population,
       leftPreview: undefined,
       rightPreview: undefined,
@@ -116,10 +124,22 @@ export default function Project() {
     }));
   }, [apiProjects]);
 
+  const activeIndex = projects.length
+    ? currentProjectIndex % projects.length
+    : 0;
+  const currentProject = projects[activeIndex];
+  const playback = useProjectPlayback(
+    currentProject,
+    isDashboard && viewMode === "slide",
+  );
+
   if (!projects.length) {
     return (
       <main className={styles.page}>
-        <SiteHeader layout={isDesktop ? "figmaCanvas" : "viewport"} />
+        <SiteHeader
+          layout={isDesktop ? "figmaCanvas" : "viewport"}
+          figmaPanelVariant="project"
+        />
         <p className={styles.loadStatus} role="status">
           {isPending
             ? "Loading projects…"
@@ -136,15 +156,6 @@ export default function Project() {
     );
   }
 
-  const activeIndex = currentProjectIndex % projects.length;
-  const currentProject = projects[activeIndex];
-  const gallery = currentProject.gallery.length
-    ? currentProject.gallery
-    : currentProject.image
-      ? [{ url: currentProject.image, alt: currentProject.title }]
-      : [];
-  const selectedPhoto = gallery[photoIndex % (gallery.length || 1)];
-
   const currentLeftPreview = currentProject.leftPreview || {
     title:
       projects[(activeIndex - 1 + projects.length) % projects.length].title,
@@ -160,7 +171,7 @@ export default function Project() {
   };
 
   const moveProject = (amount: number) => {
-    setPhotoIndex(0);
+    playback.selectPhoto(0);
     setViewMode("slide");
     if (amount < 0 && currentProject.leftPreview) {
       setCurrentProjectIndex(currentProject.leftPreview.projectIndex);
@@ -190,88 +201,133 @@ export default function Project() {
     <main
       className={`${styles.page} ${isDashboard ? styles.dashboard : ""}`}
       data-node-id={isDashboard ? "7077:8123" : "7077:7011"}
+      data-motion-step={playback.step}
+      data-playback-ready={playback.ready}
     >
-      <SiteHeader layout={isDesktop ? "figmaCanvas" : "viewport"} />
-
-      <Image
-        className={styles.verticalTitle}
-        src="/images/projects/title_proj.png"
-        alt=""
-        width={113}
-        height={485}
-        priority
+      <SiteHeader
+        layout={isDesktop ? "figmaCanvas" : "viewport"}
+        figmaPanelVariant="project"
       />
 
+      {isDashboard ? (
+        <svg
+          className={styles.verticalTitle}
+          viewBox="0 0 117 539"
+          aria-hidden="true"
+          data-node-id="7077:8233"
+        >
+          <text
+            transform="translate(0 539) rotate(-90)"
+            x="0"
+            y="92"
+            fill="#e8e8e8"
+            fillOpacity="0.3"
+            stroke="#303030"
+            strokeOpacity="0.4"
+            strokeWidth="1"
+            fontSize="96"
+            fontWeight="900"
+          >
+            PROJECTS
+          </text>
+        </svg>
+      ) : (
+        <Image
+          className={styles.verticalTitle}
+          src="/images/projects/title_proj.png"
+          alt=""
+          width={113}
+          height={485}
+          priority
+        />
+      )}
+
       {viewMode === "in-view" ? (
-        <InViewTimeline
+        <ProjectTimeline
           key={timelineRun}
           onExplore={openTimelineProject}
           projects={projects}
+          desktop={isDesktop}
         />
       ) : (
         <section className={styles.stage} aria-label="Project portfolio">
           <motion.div
             className={styles.mainPhoto}
-            animate={{
-              scale: isProjectsOpen && !isDashboard ? 0.958 : 1,
-            }}
-            transition={springTransition}
+            initial={false}
+            animate={
+              isDesktop
+                ? {
+                    scale: isProjectsOpen && !isDashboard ? 0.958 : 1,
+                    left: isDashboard ? 0 : 355,
+                    width: isDashboard ? 1728 : 1295,
+                    clipPath: isDashboard
+                      ? "polygon(0% 0%, 100% 0%, 74% 100%, 0% 100%)"
+                      : "polygon(38.7% 0%, 100% 0%, 66% 100%, 0% 100%)",
+                  }
+                : { scale: 1 }
+            }
+            transition={
+              playback.reducedMotion ? { duration: 0 } : springTransition
+            }
           >
-            {currentProject.image ? (
-              <img
-                loading="eager"
-                decoding="async"
-                src={
-                  isDashboard
-                    ? selectedPhoto?.url || currentProject.image
-                    : currentProject.image
-                }
-                alt={
-                  isDashboard
-                    ? selectedPhoto?.alt || currentProject.title
-                    : currentProject.title
-                }
-                className={styles.figmaMainPhoto}
-                style={
-                  isDesktop && isDashboard && selectedPhoto?.dashboardFrame
-                    ? {
-                        position: "absolute",
-                        objectFit: "fill",
-                        left: `${selectedPhoto.dashboardFrame.left}%`,
-                        top: `${selectedPhoto.dashboardFrame.top}%`,
-                        width: `${selectedPhoto.dashboardFrame.width}%`,
-                        height: `${selectedPhoto.dashboardFrame.height}%`,
-                      }
+            <ProjectPhoto
+              photo={
+                isDashboard
+                  ? playback.photo
+                  : currentProject.image
+                    ? { url: currentProject.image, alt: currentProject.title }
                     : undefined
-                }
-              />
-            ) : (
-              <div className={styles.photoPlaceholder}>
-                Project photograph not supplied
-              </div>
-            )}
+              }
+              framed={isDesktop && isDashboard}
+            />
+
             <div className={styles.photoShade} />
           </motion.div>
 
-          <div className={styles.titlePanel}>
-            <h1>{currentProject.title}</h1>
-            <button
-              type="button"
-              className={styles.dashboardButton}
-              onClick={() => {
-                setIsDashboard(!isDashboard);
-                setIsProjectsOpen(true);
-                setPhotoIndex(0);
-              }}
-              aria-label={
-                isDashboard
-                  ? "Back to project slides"
-                  : "Open project dashboard"
-              }
-            >
-              {isDashboard ? "↙" : "↗"}
-            </button>
-          </div>
+          <motion.div
+            className={styles.titlePanel}
+            layout
+            transition={
+              playback.reducedMotion ? { duration: 0 } : springTransition
+            }
+          >
+            <h1 aria-label={currentProject.title}>
+              <button
+                type="button"
+                className={styles.dashboardButton}
+                onClick={() => {
+                  setIsDashboard(!isDashboard);
+                  setIsProjectsOpen(true);
+                  playback.selectPhoto(0);
+                }}
+                aria-label={
+                  isDashboard
+                    ? "Back to project slides"
+                    : "Open project dashboard"
+                }
+              >
+                <svg
+                  className={styles.dashboardTitleArrow}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d={
+                      isDashboard
+                        ? "M20 12H4m7-7-7 7 7 7"
+                        : "M5 19 19 5M6 5h13v13"
+                    }
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <span>{currentProject.title}</span>
+              </button>
+            </h1>
+          </motion.div>
 
           {!isDashboard && (
             <motion.button
@@ -294,7 +350,9 @@ export default function Project() {
                     : 844
                   : "calc(50% - 32px)",
               }}
-              transition={springTransition}
+              transition={
+                playback.reducedMotion ? { duration: 0 } : springTransition
+              }
             >
               <svg
                 width="59"
@@ -354,9 +412,22 @@ export default function Project() {
                 className={styles.statsPanel}
                 aria-label="Project performance data"
                 initial={{ opacity: 0, y: 562 }}
-                animate={{ opacity: 1, y: 0 }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  ...(isDesktop
+                    ? {
+                        top: isDashboard ? 454 : 442,
+                        left: isDashboard ? 204 : 427,
+                        width: isDashboard ? 1280 : 993.5,
+                        height: isDashboard ? 495 : 465,
+                      }
+                    : {}),
+                }}
                 exit={{ opacity: 0, y: 562 }}
-                transition={springTransition}
+                transition={
+                  playback.reducedMotion ? { duration: 0 } : springTransition
+                }
               >
                 <ProjectPerformance
                   project={currentProject}
@@ -408,46 +479,13 @@ export default function Project() {
           )}
 
           {isDashboard && (
-            <aside
-              className={styles.mediaRail}
-              aria-label="Project photography"
-            >
-              <div className={styles.galleryGrid}>
-                {gallery.map((photo, index) => (
-                  <button
-                    key={`${photo.url}-${index}`}
-                    type="button"
-                    aria-label={`View project photograph ${index + 1}`}
-                    aria-pressed={photoIndex === index}
-                    onClick={() => setPhotoIndex(index)}
-                  >
-                    <img src={photo.url} alt={photo.alt} />
-                  </button>
-                ))}
-              </div>
-              {selectedPhoto && (
-                <figure className={styles.galleryPreview}>
-                  <img src={selectedPhoto.url} alt={selectedPhoto.alt} />
-                  <figcaption>{currentProject.clientName}</figcaption>
-                </figure>
-              )}
-              <div className={styles.dashboardNavigation}>
-                <button
-                  type="button"
-                  onClick={() => moveProject(-1)}
-                  aria-label="Previous project"
-                >
-                  ‹
-                </button>
-                <button
-                  type="button"
-                  onClick={() => moveProject(1)}
-                  aria-label="Next project"
-                >
-                  ›
-                </button>
-              </div>
-            </aside>
+            <ProjectGallery
+              photos={playback.photos}
+              selectedIndex={playback.selectedIndex}
+              onSelect={playback.selectPhoto}
+              playing={playback.playing}
+              onTogglePlaying={playback.togglePlaying}
+            />
           )}
           <button
             type="button"
@@ -486,7 +524,9 @@ export default function Project() {
             x: isProjectsOpen ? -7 : 0,
             y: isProjectsOpen ? -4 : 0,
           }}
-          transition={springTransition}
+          transition={
+            playback.reducedMotion ? { duration: 0 } : springTransition
+          }
         >
           <D6Chatbot
             canvasAnchored
@@ -640,7 +680,14 @@ function ProjectPerformance({
         type="button"
         onClick={onDetails}
       >
-        Project details <span aria-hidden="true">↗</span>
+        Project details{" "}
+        <svg aria-hidden="true" viewBox="0 0 20 20" fill="none">
+          <path
+            d="M4 16 16 4M5 4h11v11"
+            stroke="currentColor"
+            strokeWidth="1.2"
+          />
+        </svg>
       </button>
     </div>
   );
@@ -700,53 +747,6 @@ function ProjectFacts({
   );
 }
 
-function InViewTimeline({
-  onExplore,
-  projects,
-}: {
-  onExplore: (id: number) => void;
-  projects: ProjectSlide[];
-}) {
-  const groups = new Map<string, ProjectSlide[]>();
-  for (const project of projects) {
-    const year = project.completionYear || "Completion not provided";
-    groups.set(year, [...(groups.get(year) ?? []), project]);
-  }
-  return (
-    <section
-      className={styles.inViewStage}
-      data-step="5"
-      aria-label="Project completion timeline"
-    >
-      <Image
-        className={styles.pngMap}
-        src="/images/projects/png-map-figma.png"
-        alt="Papua New Guinea"
-        width={1920}
-        height={709}
-        sizes="100vw"
-      />
-      <div className={styles.cmsTimelineCards}>
-        {[...groups.entries()].map(([year, entries]) => (
-          <article className={styles.cmsTimelineCard} key={year}>
-            <h2>{year}</h2>
-            <ul>
-              {entries.map((project) => (
-                <li key={project.id}>
-                  <button type="button" onClick={() => onExplore(project.id)}>
-                    {project.title}
-                    <span aria-hidden="true"> ›</span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function Stat({
   label,
   value,
@@ -802,6 +802,8 @@ function ProjectPreview({
   onClick: () => void;
 }) {
   const isPrevious = direction === "previous";
+  const [failedImage, setFailedImage] = useState<string>();
+  const hasImage = Boolean(image && failedImage !== image);
   const { name, year } = formatPreviewTitle(title);
   const fullLabel = year ? `${name} ${year}` : name;
 
@@ -814,23 +816,37 @@ function ProjectPreview({
     >
       {/* 1. Back Layer: Clear unblurred framed photo */}
       <span className={styles.previewBackFrame}>
-        {image && <img loading="lazy" decoding="async" src={image} alt="" />}
+        {hasImage && (
+          <img
+            loading="eager"
+            decoding="async"
+            src={image}
+            alt=""
+            onError={() => setFailedImage(image)}
+          />
+        )}
       </span>
 
       {/* 2. Front Layer: Frosted glass blurred card */}
       <span className={styles.previewFrontCard}>
-        {image && (
+        {hasImage && (
           <img
-            loading="lazy"
+            loading="eager"
             decoding="async"
             src={image}
             alt=""
             className={styles.previewFrontImg}
+            onError={() => setFailedImage(image)}
           />
         )}
         <span className={styles.previewCaption}>
           <span>{name}</span>
           {year && <span className={styles.previewYear}>{year}</span>}
+          {!hasImage && (
+            <span className={styles.previewMissingPhoto}>
+              Photograph not available
+            </span>
+          )}
         </span>
       </span>
 

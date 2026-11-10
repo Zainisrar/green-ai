@@ -57,7 +57,7 @@ interface SiteHeaderProps {
   compactLogo?: boolean;
   panel?: "full" | "logoOnly" | "none";
   layout?: "viewport" | "figmaCanvas" | "productCanvas";
-  figmaPanelVariant?: "default" | "flagship";
+  figmaPanelVariant?: "default" | "flagship" | "project";
   highlightActive?: boolean;
   canvasActiveNavigation?: boolean;
   neutralNavigation?: boolean;
