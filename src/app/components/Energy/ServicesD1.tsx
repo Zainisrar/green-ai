@@ -60,7 +60,7 @@ const localPhases = [
       "Our team is adept at overcoming unforeseen obstacles such as inclement weather and supply chain problems. We provide solutions, as opposed to problems. We accomplish your goals with accuracy, diligence, and care, ensuring the security of our teams and the prosperity of the communities we serve.",
     ],
     backgroundImage: "/images/service/phases/construction.png",
-    backgroundPosition: "center center",
+    backgroundPosition: "-1480px -146px",
     backgroundOpacity: 0.1,
   },
   {
@@ -80,8 +80,8 @@ const localPhases = [
       "We combine proactive monitoring, practical maintenance, and transparent reporting to protect uptime and maximise the value of every asset.",
     ],
     backgroundImage: "/images/service/phases/operations-maintenance-left.png",
-    backgroundPosition: "center 25%",
-    backgroundOpacity: 0.12,
+    backgroundPosition: "-15px -1px",
+    backgroundOpacity: 0.1,
   },
 ];
 
@@ -134,6 +134,7 @@ export default function ServicesD1() {
   }, [energyData]);
 
   const selectedPhase = phases[activePhase];
+  const hasAlignedArtwork = activePhase === 2 || activePhase === 3;
   return (
     <main className={styles.page}>
       {isMobile ? <SiteHeader /> : null}
@@ -148,24 +149,28 @@ export default function ServicesD1() {
           {!isMobile && (
             <SiteHeader layout="figmaCanvas" canvasActiveNavigation />
           )}
-          <div className={styles.background} aria-hidden="true" />
-          <div aria-hidden="true" className={styles.phaseBackgroundBase} />
+          <div
+            className={`${styles.background} ${hasAlignedArtwork ? styles.alignedBackground : ""}`}
+            aria-hidden="true"
+          />
+          {!hasAlignedArtwork && (
+            <div aria-hidden="true" className={styles.phaseBackgroundBase} />
+          )}
           <div
             aria-hidden="true"
-            className={styles.phaseBackground}
+            className={`${styles.phaseBackground} ${activePhase === 2 ? styles.constructionBackground : ""} ${activePhase === 3 ? styles.operationsMaintenanceBackground : ""}`}
             style={{
               backgroundImage: `url("${selectedPhase.backgroundImage}")`,
               backgroundPosition: selectedPhase.backgroundPosition,
               opacity: selectedPhase.backgroundOpacity,
             }}
           />
-          {activePhase === 3 && (
+          {hasAlignedArtwork && (
             <div
               aria-hidden="true"
               className={styles.operationsMaintenanceRightPanel}
               style={{
-                backgroundImage:
-                  'url("/images/service/phases/operations-maintenance.png")',
+                backgroundImage: `url("/images/service/phases/${activePhase === 2 ? "construction-right" : "operations-maintenance-right-figma"}.webp")`,
               }}
             />
           )}

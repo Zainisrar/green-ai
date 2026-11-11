@@ -145,6 +145,18 @@ export default function SolutionDetail({
               aria-pressed={index === activeImage}
             >
               <img loading="lazy" decoding="async" src={thumbnail.src} alt="" />
+              <svg
+                className={styles.detailThumbnailOutline}
+                viewBox="0 0 152 99"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M33 1H150.5L119 98H1.5L33 1Z"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+              </svg>
             </button>
           ))}
         </div>
@@ -169,7 +181,12 @@ export default function SolutionDetail({
           ))}
         </div>
 
-        <div className={styles.detailCategories}>
+        <div
+          className={styles.detailCategories}
+          data-node-id="7077:3923"
+          role="group"
+          aria-label="Solution menu"
+        >
           <button
             type="button"
             className={styles.detailCategoryActive}
@@ -186,7 +203,11 @@ export default function SolutionDetail({
           </button>
           {categories.map((category) => (
             <button type="button" key={category.id}>
-              {category.label}
+              <span>
+                {category.label.split(" ")[0]}
+                <br />
+                {category.label.split(" ").slice(1).join(" ")}
+              </span>
             </button>
           ))}
         </div>

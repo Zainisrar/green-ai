@@ -54,18 +54,30 @@
   transition: background-position 180ms ease-out;
 }
 
-/* Figma positions the O&M artwork as a separate panel on the lower right.
-   The exported image includes the angled transparent edge and faded finish. */
+.alignedBackground {
+  background-image: none;
+}
+
+/* These images have independent bounds in the 1920 × 970 Figma frames.
+   Preserve their crop inside the shared angled mask instead of using cover. */
+.constructionBackground,
 .operationsMaintenanceBackground {
-  top: 463px;
-  right: auto;
-  bottom: auto;
-  left: 1279.5px;
-  width: 642.5px;
-  height: 508.5px;
-  background-position: center;
-  background-size: 100% 100%;
-  clip-path: none;
+  width: 1920px;
+  clip-path: polygon(
+    -257px 1014.5px,
+    -54.5px -33.5px,
+    1244.5px -11px,
+    784.256px 1014.5px
+  );
+  transition: none;
+}
+
+.constructionBackground {
+  background-size: 4000px 2250px;
+}
+
+.operationsMaintenanceBackground {
+  background-size: 1192px 1149px;
 }
 
 .operationsMaintenanceRightPanel {
@@ -537,6 +549,10 @@
     pointer-events: none;
     mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+  }
+  .constructionBackground,
+  .operationsMaintenanceBackground {
+    background-position: center top !important;
   }
   .phaseBackgroundBase {
     position: absolute;

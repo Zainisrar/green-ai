@@ -47,6 +47,10 @@
   filter: grayscale(0.25) contrast(0.72);
 }
 
+.sliderBackdrop {
+  display: none;
+}
+
 .heroHeading {
   position: absolute;
   z-index: 2;
@@ -72,7 +76,7 @@
   left: 252px;
   width: 900px;
   font-size: 40px;
-  letter-spacing: -0.8px;
+  letter-spacing: 0;
   z-index: 5;
   white-space: nowrap;
 }
@@ -82,12 +86,12 @@
   z-index: 5;
   top: 226px;
   left: 252px;
-  width: 1040px;
+  width: 1152px;
   margin: 0;
   color: #303030;
   font-size: 14px;
   font-weight: 400;
-  line-height: 20px;
+  line-height: 24px;
 }
 
 .verticalLabel {
@@ -189,8 +193,50 @@
 }
 
 .galleryCard {
-  width: 198px;
-  height: 140px;
+  width: var(--card-width, 198px);
+  height: var(--card-height, 140px);
+  z-index: var(--card-layer, 1);
+  transform: translate(var(--card-x, 0px), var(--card-y, 0px));
+  transition:
+    width 300ms ease,
+    height 300ms ease,
+    transform 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.galleryCard::after {
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-image: linear-gradient(#23d14b, #fffd50) 1;
+  opacity: var(--card-highlight, 0);
+  content: "";
+  pointer-events: none;
+  transition: opacity 300ms ease;
+}
+
+.galleryCard:focus-visible {
+  --card-width: 255.52px;
+  --card-height: 171px;
+  --card-x: -28.76px;
+  --card-y: -15.5px;
+  --card-layer: 5;
+  --card-highlight: 1;
+  outline: none;
+  box-shadow: 10px 10px 10px 6px rgb(0 0 0 / 25%);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .galleryCard:hover {
+    --card-width: 255.52px;
+    --card-height: 171px;
+    --card-x: -28.76px;
+    --card-y: -15.5px;
+    --card-layer: 5;
+    --card-highlight: 1;
+    outline: none;
+    box-shadow: 10px 10px 10px 6px rgb(0 0 0 / 25%);
+  }
 }
 
 .galleryCardSelected {
@@ -206,10 +252,13 @@
   object-fit: cover;
 }
 
-.galleryCard > span {
+.galleryCardShade {
   position: absolute;
   inset: 0;
   background: rgb(0 0 0 / 20%);
+  opacity: calc(1 - var(--card-highlight, 0));
+  pointer-events: none;
+  transition: opacity 300ms ease;
 }
 
 .selectedCard {
@@ -222,6 +271,16 @@
   box-shadow:
     10px 10px 10px 6px rgb(0 0 0 / 25%),
     0 0 16px rgb(255 254 80 / 55%);
+}
+
+.selectedCard:focus-visible {
+  --card-highlight: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .selectedCard:hover {
+    --card-highlight: 1;
+  }
 }
 
 .selectedLabel {
@@ -237,6 +296,12 @@
   font-weight: 600;
   line-height: 40px;
   text-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+  opacity: var(--card-highlight, 0);
+  transform: translateY(calc((1 - var(--card-highlight, 0)) * 6px));
+  pointer-events: none;
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease;
 }
 
 .selectedLabel img {
@@ -334,7 +399,7 @@
   padding: 0;
   overflow: hidden;
   border: 0;
-  background: #fff;
+  background: #e9e9e9;
   cursor: pointer;
   box-shadow: 0 7.656px 65.08px rgb(0 0 0 / 10%);
 }
@@ -415,6 +480,10 @@
   height: 529.097px;
 }
 
+.sliderAssetTelecom img {
+  object-fit: cover;
+}
+
 .sliderAssetResidence {
   top: 37.979px;
   left: -78.055px;
@@ -493,9 +562,9 @@
 .sliderWatermark {
   position: absolute;
   z-index: 5;
-  top: 850px;
-  left: 35px;
-  width: 440px;
+  top: 870px;
+  left: 43px;
+  width: 559px;
   height: auto;
   max-width: none;
   transform: none;
@@ -636,25 +705,44 @@
 }
 
 .detailThumbnails button {
+  position: relative;
   box-sizing: border-box;
   width: 132px;
   height: 86px;
   padding: 0;
-  border: 3px solid transparent;
+  border: 0;
   background: transparent;
-  clip-path: polygon(22% 0, 100% 0, 78% 100%, 0 100%);
+  overflow: visible;
   cursor: pointer;
   opacity: 0.38;
 }
 
 .detailThumbnails button img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  clip-path: polygon(22% 0, 100% 0, 78% 100%, 0 100%);
+}
+
+.detailThumbnailOutline {
+  position: absolute;
+  top: -7px;
+  left: -10px;
+  width: 152px;
+  height: 99px;
+  max-width: none;
+  color: #23b14d;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .detailThumbnails .detailThumbnailActive {
-  border-color: #23b14d;
+  opacity: 1;
+}
+
+.detailThumbnailActive .detailThumbnailOutline,
+.detailThumbnails button:focus-visible .detailThumbnailOutline {
   opacity: 1;
 }
 
@@ -733,35 +821,62 @@
 
 .detailCategories {
   position: absolute;
-  top: 673px;
-  left: -22px;
+  top: 669px;
+  left: -23px;
   display: flex;
-  height: 144px;
+  align-items: flex-start;
+  gap: 6.75px;
+  box-sizing: border-box;
+  width: 506.21px;
+  height: 156.44px;
+  padding: 4.1px 3.48px;
+  background: #fafafa;
 }
 
 .detailCategories button {
   position: relative;
-  width: 77px;
+  flex: 0 0 66.96px;
+  height: 143.35px;
   padding: 0;
   border: 0;
-  border-left: 5px solid #f7f7f7;
+  border-radius: 10px;
   background: #fff;
+  color: #000;
   font: inherit;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 14px;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
+  line-height: 17.07px;
   cursor: pointer;
 }
 
+.detailCategories button > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 110px;
+  text-align: center;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.detailCategories button:focus-visible {
+  outline: 2px solid #23b14d;
+  outline-offset: 2px;
+}
+
 .detailCategories .detailCategoryActive {
-  width: 204px;
+  flex-basis: 202.11px;
+  height: 137.97px;
   overflow: hidden;
   border: 0;
-  border-radius: 8px;
-  writing-mode: horizontal-tb;
-  transform: none;
+  box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
+}
+
+.detailCategoryActive::after {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 20%);
+  content: "";
+  pointer-events: none;
 }
 
 .detailCategoryActive img {
@@ -770,15 +885,17 @@
   object-fit: cover;
 }
 
-.detailCategoryActive span {
+.detailCategories .detailCategoryActive > span {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 12px 8px;
-  background: linear-gradient(transparent, rgb(0 0 0 / 72%));
+  z-index: 1;
+  top: 12.72px;
+  left: 8.29px;
+  width: auto;
   color: #fff;
-  font-size: 13px;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: left;
+  transform: none;
 }
 
 .detailStartButton {
@@ -808,6 +925,13 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .galleryCard,
+  .galleryCard::after,
+  .galleryCardShade,
+  .selectedLabel {
+    transition: none;
+  }
+
   .sliderAsset {
     animation: none;
     will-change: auto;
@@ -840,6 +964,10 @@
   margin: 0;
   padding: 0;
   border: 0;
+}
+
+.sliderViewSwitch button:first-of-type {
+  min-width: 109px;
 }
 
 .srOnly {

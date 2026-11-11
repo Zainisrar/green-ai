@@ -337,11 +337,7 @@ export default function Expertise() {
   };
 
   const currentSliderItem = SLIDER_ITEMS[activeSliderIndex] ?? SLIDER_ITEMS[0];
-  // The carousel can browse images independently. Keep the surrounding slider
-  // content anchored to the solution selected before entering Slider view.
-  const sliderPresentationItem =
-    SLIDER_ITEMS.find((panel) => panel.item === selectedIndex) ??
-    currentSliderItem;
+  const sliderPresentationItem = currentSliderItem;
   const activeGalleryItem = GALLERY[selectedIndex % GALLERY.length];
   const fallbackSolution = SOLUTION_COPY[selectedIndex % SOLUTION_COPY.length];
 
@@ -477,7 +473,10 @@ export default function Expertise() {
               sliderScreen === "healthcare" ? styles.overviewHidden : undefined
             }
           >
-            <div className={styles.leftBackdrop} aria-hidden="true">
+            <div
+              className={`${styles.leftBackdrop} ${view === "slider" ? styles.sliderBackdrop : ""}`}
+              aria-hidden="true"
+            >
               <img
                 loading="lazy"
                 decoding="async"
@@ -587,7 +586,20 @@ export default function Expertise() {
                           src={item.src}
                           alt={item.alt}
                         />
-                        <span aria-hidden="true" />
+                        <span
+                          className={styles.galleryCardShade}
+                          aria-hidden="true"
+                        />
+                        <span
+                          className={styles.selectedLabel}
+                          aria-hidden="true"
+                        >
+                          <img
+                            src={`${ASSET_ROOT}/selected-label.svg`}
+                            alt=""
+                          />
+                          <b>{item.label}</b>
+                        </span>
                       </button>
                     );
                   })}
@@ -777,7 +789,9 @@ export default function Expertise() {
               </div>
             ) : null}
 
-            <fieldset className={styles.viewSwitch}>
+            <fieldset
+              className={`${styles.viewSwitch} ${view === "slider" ? styles.sliderViewSwitch : ""}`}
+            >
               <legend className={styles.srOnly}>Choose gallery view</legend>
               <button
                 type="button"
@@ -794,21 +808,12 @@ export default function Expertise() {
                 onClick={() => {
                   setSliderScreen("overview");
                   setView("slider");
-                  const matchingSliderIndex = SLIDER_ITEMS.findIndex(
-                    (panel) => panel.item === selectedIndex,
-                  );
-                  const targetIndex =
-                    matchingSliderIndex >= 0 ? matchingSliderIndex : 0;
-                  setActiveSliderIndex(targetIndex);
+                  setActiveSliderIndex(0);
                   requestAnimationFrame(() => {
                     if (sliderViewportRef.current) {
                       sliderViewportRef.current.scrollTo({
-                        left: targetIndex * SLIDER_CARD_STEP,
-                        behavior: window.matchMedia(
-                          "(prefers-reduced-motion: reduce)",
-                        ).matches
-                          ? "auto"
-                          : "smooth",
+                        left: 0,
+                        behavior: "instant",
                       });
                     }
                   });
@@ -821,7 +826,11 @@ export default function Expertise() {
             </fieldset>
           </div>
 
-          <D6Chatbot canvasAnchored triggerVariant="figmaCanvas" />
+          <D6Chatbot
+            canvasAnchored
+            triggerVariant="figmaCanvas"
+            triggerStyle={view === "slider" ? { top: 856 } : undefined}
+          />
         </div>
       </section>
 
